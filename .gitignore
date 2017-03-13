@@ -1,0 +1,6 @@
+.project
+.classpath
+node_modules
+.settings/
+src/main/webapp/dist/app.js
+
