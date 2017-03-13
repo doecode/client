@@ -2,7 +2,7 @@ const path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  context: __dirname + "/src/main/webapp",
+  context: __dirname,
   entry: {
     javascript: "./app/index.jsx"
   },
@@ -45,7 +45,7 @@ pathRewrite: {
     ],
   },
   plugins: [new HtmlWebpackPlugin({
-	template: 'index.html',
+	template: 'dist/index.html',
 	inject: 'body'
 	})]
 }
