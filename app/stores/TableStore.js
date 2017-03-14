@@ -1,0 +1,45 @@
+import {observable} from 'mobx';
+
+export default class TableStore {
+
+    @observable developer = {
+        first_name: '',
+        middle_name: '',
+        last_name: '',
+        email: '',
+        affiliations: '',
+        place: 0
+    }
+    
+    @observable current = {
+    	arrName : '',
+    	type : '',
+    	label : ''
+    }
+
+    @observable showModal = false;
+    
+    @observable isEdit = false;
+    
+    @observable previousPlace = -1;
+    
+
+    clear() {
+      for (var field in this[current.type])
+          this[current.type][field] = "";
+    }
+    
+    makeCurrentCopy() {
+    	return Object.assign({}, this[current.type]);
+    }
+    
+    copyIntoCurrent(data) {
+    	this[current.type] = data;
+    }
+    
+    setCurrentField(field, value) {
+    	this[current.type][field] = value;
+    }
+    
+    
+}

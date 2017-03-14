@@ -12,11 +12,11 @@ export default class AgentsTable extends React.Component {
 
   rowClick(gridRow, event) {
     if (!this.props.finished) {
-	  var dev = Object.assign({},gridRow.props.data);
-	  this.props.developerStore.developer = dev;
-	  this.props.developerStore.previousPlace = dev.place;
-	  this.props.developerStore.showModal = true;
-	  this.props.developerStore.isEdit = true;
+	  var data = Object.assign({},gridRow.props.data);
+	  this.props.tableStore.copyIntoCurrent(data);
+	  this.props.tableStore.previousPlace = data.place;
+	  this.props.tableStore.showModal = true;
+	  this.props.tableStore.isEdit = true;
   }
 
   }
@@ -72,8 +72,8 @@ export default class AgentsTable extends React.Component {
 	return(
 
 <div className="form-group form-group-sm col-sm-12">
-        <h2 className="no-margin-left">Developers</h2>
-        <Griddle results = {this.props.developers} columns={columns} columnMetadata={configureMetadata} showSettings={true} showFilter={true} onRowClick={this.rowClick} />
+        <h2 className="no-margin-left">this.props.tableStore.current.label</h2>
+        <Griddle results = {this.props.arr} columns={columns} columnMetadata={configureMetadata} showSettings={true} showFilter={true} onRowClick={this.rowClick} />
 </div>
 );
   }

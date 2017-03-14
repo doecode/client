@@ -1,12 +1,12 @@
 import React from 'react';
 import AgentsModal from './AgentsModal';
 import AgentsTable from './AgentsTable';
-import Developer from '../stores/Developer';
+import TableStore from '../stores/TableStore';
 import {observer} from 'mobx-react';
 import Promise from 'promise';
 
 
-const developerStore = new Developer();
+const tableStore = new TableStore();
 
 @observer
 export default class AgentsStep extends React.Component {
@@ -26,14 +26,20 @@ export default class AgentsStep extends React.Component {
 
 	  render() {
 
+		  
 		    const metadata = this.props.metadataStore.metadata;
-		    const developers = metadata.developers.slice();
-		    const devsLength = developers.length;
+		    const myCurrent = {
+		        	"arrName" : "developers",
+		        	"type" : "developer",
+		        	"label" : "developer"
+		        }
+		    tableStore.current = myCurrent;
+		    const arr = metadata[tableStore.current.arrName].slice();
+		    const arrLength = arr.length;
 		    return (
 		    <div>
-		      <h3> (Developers associated with {metadata.repository_link}) </h3>
-		      <AgentsTable developers={developers} developerStore={developerStore} finished={false} />
-		      <AgentsModal developerStore={developerStore} metadataStore={this.props.metadataStore} devsLength={devsLength} />
+		      <AgentsTable arr={arr} tableStore={tableStore} finished={false} />
+		      <AgentsModal tableStore={tableStore} metadataStore={this.props.metadataStore} arrLength={arrLength} />
 		    </div>
 		      );
 		  }

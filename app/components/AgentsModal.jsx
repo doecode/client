@@ -15,27 +15,27 @@ export default class AgentsModal extends React.Component {
     }
 
     close() {
-        this.props.developerStore.showModal = false;
-        this.props.developerStore.clear();
+        this.props.tableStore.showModal = false;
+        this.props.tableStore.clear();
     }
 
     open() {
-        this.props.developerStore.isEdit = false;
-        this.props.developerStore.showModal = true;
-        this.props.developerStore.clear();
+        this.props.tableStore.isEdit = false;
+        this.props.tableStore.showModal = true;
+        this.props.tableStore.clear();
 
     }
 
-    onModalChange(id, value) {
-        this.props.developerStore.developer[id] = value;
+    onModalChange(field, value) {
+        this.props.tableStore.setCurrentField(field,value);
     }
 
     handleSave(event) {
 
-        var dev = Object.assign({}, this.props.developerStore.developer);
+        var dev = this.props.tableStore.makeCurrentCopy();
 
         if (this.props.developerStore.isEdit) {
-        	this.props.metadataStore.modifyDeveloper(dev, this.props.developerStore.previousPlace);
+        	this.props.metadataStore.modifyDeveloper(dev, this.props.tableStore.previousPlace);
     	} else {
             this.props.metadataStore.addToDevelopers(dev);
     	}
@@ -43,8 +43,7 @@ export default class AgentsModal extends React.Component {
     }
 
     handleDelete(event) {
-        var dev = Object.assign({}, this.props.developerStore.developer);
-		this.props.metadataStore.removeDeveloper(dev);
+		this.props.metadataStore.removeDeveloper(this.props.tableStore.makeCurrentCopy());
         this.close();
     }
 
