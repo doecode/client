@@ -13,19 +13,19 @@ export default class AccessStep extends React.Component{
 	    this.isValidated = this._isValidated.bind(this);
 	    this.generateAccessLimitationOptions = this.generateAccessLimitationOptions.bind(this);
 	}
-	
+
 	_isValidated() {
-		
+
 	}
-	
-	
+
+
 	generateAccessLimitationOptions(accessLimitations) {
 		let options = [];
 		const firstOptions = [
 			{label: '1. Unlimited Announcement (Available to US and Non-US public)', value: 'UNL'},
 			{label: '2. Opennet', value: 'OPN'}
 		];
-		
+
 		const secondOptions = [
 			{label: '3. Copyrighted Material', value: 'CPY'},
 			{label: '4. Small Business Innovation Research (SBIR) Data', value: 'SBIR'},
@@ -40,45 +40,45 @@ export default class AccessStep extends React.Component{
 			{label: '6g. Program-Determined Use Only (enter exemption number below) - OUO', value: 'PDOUO'},
 			{label: '7. Naval Nuclear Propulsion Info (NNPI) - Limitations/Unclassified Control Info', value: 'NNPI'},
 		];
-		
+
 		if (accessLimitations.length == 0) {
 			options = firstOptions.concat(secondOptions);
 		} else if (accessLimitations.indexOf('UNL') > -1 || accessLimitations.indexOf('OPN') > -1) {
 			options = firstOptions;
 		} else {
 			options = secondOptions;
-			
+
 		}
-		
-		
+
+
 		return options;
 	}
-	
+
 	hasSubLimitations(accessLimitations) {
 	    const subLimitations = ["ECI", "SSI", "PROT", "PAT", "PROP","AT","PDOUO"];
 	    for (var i = 0; i < subLimitations.length; i++) {
 	    	if (accessLimitations.indexOf(subLimitations[i]) > -1)
 	    		return true;
 	    }
-	    
+
 	    return false;
 	}
-	
+
 	onAccessLimitationsChange(value) {
-	    
+
 		if (value.trim())
 			this.props.metadataStore.metadata.access_limitations = value.split(',');
 		else
 			this.props.metadataStore.metadata.access_limitations = [];
-	   
+
 		const accessArray = this.props.metadataStore.metadata.access_limitations.slice();
-	    
+
 
 	    if (this.hasSubLimitations(accessArray) && accessArray.indexOf('OUO') == -1)
 	    	this.props.metadataStore.metadata.access_limitations.push('OUO');
-	    	
+
 	}
-	
+
 	onLicensesChange(value) {
 
 		if (value.trim())
@@ -86,11 +86,11 @@ export default class AccessStep extends React.Component{
 		else
 			this.props.metadataStore.metadata.licenses = [];
 	}
-	
-	
-	
+
+
+
 	render() {
-		
+
 		const licenses = [
 			{label: 'None', value: 'None'},
 			{label: 'Apache License 2.0', value: 'Apache License 2.0'},
@@ -107,11 +107,9 @@ export default class AccessStep extends React.Component{
 			{label: 'Mozilla Public License 2.0', value: 'Mozilla Public License 2.0'},
 			{label: 'The Unlicense', value: 'The Unlicense'}
 			];
-		
+
 		let accessLimitationOptions = this.generateAccessLimitationOptions(this.props.metadataStore.metadata.access_limitations);
 		
-		console.log(this.props.metadataStore.metadata.licenses.slice());
-		console.log(this.props.metadataStore.metadata.access_limitations.slice())
 		return(
 		<div className="form-group">
 			<div className="col-sm-offset-2 col-sm-8">
@@ -125,6 +123,6 @@ export default class AccessStep extends React.Component{
 		</div>
 		);
 	}
-	
-	
+
+
 }

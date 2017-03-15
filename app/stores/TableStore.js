@@ -10,7 +10,7 @@ export default class TableStore {
         affiliations: '',
         place: 0
     }
-    
+
     @observable current = {
     	arrName : '',
     	type : '',
@@ -18,28 +18,28 @@ export default class TableStore {
     }
 
     @observable showModal = false;
-    
+
     @observable isEdit = false;
-    
+
     @observable previousPlace = -1;
-    
+
 
     clear() {
-      for (var field in this[current.type])
-          this[current.type][field] = "";
+      for (var field in this[this.current.type])
+          this[this.current.type][field] = "";
     }
-    
+
     makeCurrentCopy() {
-    	return Object.assign({}, this[current.type]);
+    	return Object.assign({}, this[this.current.type]);
     }
-    
+
     copyIntoCurrent(data) {
-    	this[current.type] = data;
+    	this[this.current.type] = data;
     }
-    
+
     setCurrentField(field, value) {
-    	this[current.type][field] = value;
+    	this[this.current.type][field] = value;
     }
-    
-    
+
+
 }

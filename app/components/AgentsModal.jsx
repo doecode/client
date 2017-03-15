@@ -34,7 +34,7 @@ export default class AgentsModal extends React.Component {
 
         var dev = this.props.tableStore.makeCurrentCopy();
 
-        if (this.props.developerStore.isEdit) {
+        if (this.props.tableStore.isEdit) {
         	this.props.metadataStore.modifyDeveloper(dev, this.props.tableStore.previousPlace);
     	} else {
             this.props.metadataStore.addToDevelopers(dev);
@@ -48,9 +48,9 @@ export default class AgentsModal extends React.Component {
     }
 
     render() {
-        const developer = this.props.developerStore.developer;
-        const showModal = this.props.developerStore.showModal;
-        const isEdit = this.props.developerStore.isEdit;
+        const developer = this.props.tableStore.developer;
+        const showModal = this.props.tableStore.showModal;
+        const isEdit = this.props.tableStore.isEdit;
 
         return (
             <div className="form-group form-group-sm">
@@ -82,7 +82,7 @@ export default class AgentsModal extends React.Component {
                                     <div className="form-group form-group-sm row">
                                         <TextField field="email" label="Email" elementType="input" value={developer.email} onChange={this.onModalChange}/>
                                     </div>
-                                    
+
                                     <div className="form-group form-group-sm row">
                                         <TextField field="affiliations" label="Affiliations" elementType="input" value={developer.affiliations} onChange={this.onModalChange}/>
                                     </div>

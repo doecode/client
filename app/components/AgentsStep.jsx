@@ -13,6 +13,15 @@ export default class AgentsStep extends React.Component {
 
 	constructor(props) {
 		    super(props);
+
+				const myCurrent = {
+							"arrName" : "developers",
+							"type" : "developer",
+							"label" : "Developers"
+			 }
+				tableStore.current = myCurrent;
+
+
 		    this.isValidated = this._isValidated.bind(this);
 		  }
 
@@ -26,15 +35,11 @@ export default class AgentsStep extends React.Component {
 
 	  render() {
 
-		  
+
 		    const metadata = this.props.metadataStore.metadata;
-		    const myCurrent = {
-		        	"arrName" : "developers",
-		        	"type" : "developer",
-		        	"label" : "developer"
-		        }
-		    tableStore.current = myCurrent;
-		    const arr = metadata[tableStore.current.arrName].slice();
+
+
+		    const arr = metadata.developers.slice();
 		    const arrLength = arr.length;
 		    return (
 		    <div>
