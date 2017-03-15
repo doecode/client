@@ -32,14 +32,14 @@ export default class AgentsTable extends React.Component {
     	  },
     	  {
     	    "columnName": "first_name",
-    	    "order": 3,
+    	    "order": 2,
     	    "locked": false,
     	    "visible": true,
     	    "displayName": "First Name"
     	  },
     	  {
     	    "columnName": "middle_name",
-    	    "order": 4,
+    	    "order": 3,
     	    "locked": false,
     	    "visible": true,
     	    "displayName": "Middle Name"
@@ -47,33 +47,38 @@ export default class AgentsTable extends React.Component {
     	  },
     	  {
     	    "columnName": "last_name",
-    	    "order": 5,
+    	    "order": 4,
     	    "locked": false,
     	    "visible": true,
     	    "displayName": "Last Name"
     	  },
     	  {
     	    "columnName": "email",
-    	    "order": 6,
+    	    "order": 5,
     	    "locked": false,
     	    "visible": true,
     	    "displayName": "Email"
     	  },
     	  {
       	    "columnName": "affiliations",
-      	    "order": 7,
+      	    "order": 6,
       	    "locked": false,
       	    "visible": true,
       	    "displayName": "Affiliations"
-      	  }]
-
-        const columns = ["place", "first_name", "middle_name", "last_name", "email", "affiliations"];
+      	  }, 
+      	  {
+        	    "columnName": "contributor_type",
+          	    "order": 7,
+          	    "locked": false,
+          	    "visible": true,
+          	    "displayName": "Contributor Type"
+          }
+      	  ]
 
 	return(
 
 <div className="form-group form-group-sm col-sm-12">
-        <h2 className="no-margin-left">{this.props.tableStore.current.label}</h2>
-        <Griddle results = {this.props.arr} columns={columns} columnMetadata={configureMetadata} showSettings={true} showFilter={true} onRowClick={this.rowClick} />
+        <Griddle results = {this.props.arr} columnMetadata={configureMetadata} showSettings={true} showFilter={true} onRowClick={this.rowClick} />
 </div>
 );
   }

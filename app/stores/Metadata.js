@@ -43,47 +43,47 @@ export default class Metadata {
     	
     }
 
-    addToDevelopers(developer) {
-        developer.place = this.metadata.developers.length + 1;
-        this.metadata.developers.push(developer);
+    addToArray(arrName, data) {
+        data.place = this.metadata[arrName].length + 1;
+        this.metadata[arrName].push(data);
     }
 
-    removeDeveloper(developer) {
-        const deletedPlace = developer.place;
-        const index = this.metadata.developers.findIndex(item => item.place === developer.place);
-        this.metadata.developers.splice(index, 1);
+    removeFromArray(arrName,data) {
+        const deletedPlace = data.place;
+        const index = this.metadata[data].findIndex(item => item.place === data.place);
+        this.metadata[arrName].splice(index, 1);
 
-        for (var i = 0; i < this.metadata.developers.length; i++) {
+        for (var i = 0; i < this.metadata[arrName].length; i++) {
 
-            if (this.metadata.developers[i].place > deletedPlace)
-                this.metadata.developers[i].place--;
+            if (this.metadata[arrName][i].place > deletedPlace)
+                this.metadata[arrName][i].place--;
             }
         }
 
-    modifyDeveloper(developer, previousPlace) {
+    modifyArrayElement(arrName,data, previousPlace) {
         var index;
-        if (developer.place != previousPlace) {
-            index = this.updateDeveloperPlaceAndReturnIndex(developer, previousPlace);
+        if (data.place != previousPlace) {
+            index = this.updateElementPlaceAndReturnIndex(arrName, data, previousPlace);
         } else {
-            index = this.metadata.developers.findIndex(item => item.place === developer.place);
+            index = this.metadata[arrName].findIndex(item => item.place === data.place);
         }
 
         if (index > -1)
-            this.metadata.developers[index] = developer;
+            this.metadata[arrName][index] = data;
         }
 
-    updateDeveloperPlaceAndReturnIndex(developer, previousPlace) {
+    updateElementPlaceAndReturnIndex(arrName, data, previousPlace) {
         var index = -1;
-        const newPlace = developer.place;
+        const newPlace = data.place;
         const check = newPlace > previousPlace;
 
-        for (var i = 0; i < this.metadata.developers.length; i++) {
-            if (check && this.metadata.developers[i].place <= newPlace && this.metadata.developers[i].place > previousPlace) {
-                this.metadata.developers[i].place--;
-            } else if (!check && this.metadata.developers[i].place >= newPlace && this.metadata.developers[i].place < previousPlace) {
-                this.metadata.developers[i].place++;
-            } else if (this.metadata.developers[i].place == previousPlace) {
-                this.metadata.developers[i].place = newPlace;
+        for (var i = 0; i < this.metadata[arrName].length; i++) {
+            if (check && this.metadata[arrName][i].place <= newPlace && this.metadata[arrName][i].place > previousPlace) {
+                this.metadata[arrName][i].place--;
+            } else if (!check && this.metadata[arrName][i].place >= newPlace && this.metadata[arrName][i].place < previousPlace) {
+                this.metadata[arrName][i].place++;
+            } else if (this.metadata[arrName][i].place == previousPlace) {
+                this.metadata[arrName][i].place = newPlace;
                 index = i;
             }
         }

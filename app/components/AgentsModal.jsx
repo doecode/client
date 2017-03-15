@@ -1,6 +1,7 @@
 import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import TextField from './TextField';
+import DevsModalContent from '../TableComponents/DevsModalContent'
 import {observer} from "mobx-react";
 
 @observer
@@ -33,61 +34,44 @@ export default class AgentsModal extends React.Component {
     handleSave(event) {
 
         var dev = this.props.tableStore.makeCurrentCopy();
+        const arrName = this.props.tableStore.current.arrName; 
 
         if (this.props.tableStore.isEdit) {
-        	this.props.metadataStore.modifyDeveloper(dev, this.props.tableStore.previousPlace);
+        	this.props.metadataStore.modifyDeveloper(arrName,dev, this.props.tableStore.previousPlace);
     	} else {
-            this.props.metadataStore.addToDevelopers(dev);
+            this.props.metadataStore.addToArray(arrName,dev);
     	}
         this.close();
     }
 
     handleDelete(event) {
-		this.props.metadataStore.removeDeveloper(this.props.tableStore.makeCurrentCopy());
+        const arrName = this.props.tableStore.current.arrName; 
+		this.props.metadataStore.removeDeveloper(arrName,this.props.tableStore.makeCurrentCopy());
         this.close();
     }
 
     render() {
-        const developer = this.props.tableStore.developer;
         const showModal = this.props.tableStore.showModal;
         const isEdit = this.props.tableStore.isEdit;
+    	let content = null;
+    	if (this.props.contentType === 'Devs') {
+    		content = <DevsModalContent tableStore={this.props.tableStore} isEdit={isEdit}/>
+    	}
+
 
         return (
             <div className="form-group form-group-sm">
                 <div className="col-xs-offset-5">
                     <Button bsStyle="primary" bsSize="large" onClick={this.open}>
-                        Add Developer
+                        Add {this.props.tableStore.current.label}
                     </Button>
 
                     <Modal show={showModal} onHide={this.close} bsSize="large">
                         <Modal.Header closeButton>
-                            <Modal.Title>Manage Developer</Modal.Title>
+                            <Modal.Title>Manage {this.props.tableStore.current.label}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <div className="container-fluid">
-                                <div className="form-horizontal">
-                                    {isEdit && <div className="form-group form-group-sm row">
-                                        <TextField field="place" label="Place" elementType="input" value={developer.place} onChange={this.onModalChange}/>
-                                    </div>
-}
-                                    <div className="form-group form-group-sm row">
-                                        <TextField field="first_name" label="First Name" elementType="input" value={developer.first_name} onChange={this.onModalChange}/>
-                                    </div>
-                                    <div className="form-group form-group-sm row">
-                                        <TextField field="middle_name" label="Middle Name" elementType="input" value={developer.middle_name} onChange={this.onModalChange}/>
-                                    </div>
-                                    <div className="form-group form-group-sm row">
-                                        <TextField field="last_name" label="Last Name" elementType="input" value={developer.last_name} onChange={this.onModalChange}/>
-                                    </div>
-                                    <div className="form-group form-group-sm row">
-                                        <TextField field="email" label="Email" elementType="input" value={developer.email} onChange={this.onModalChange}/>
-                                    </div>
-
-                                    <div className="form-group form-group-sm row">
-                                        <TextField field="affiliations" label="Affiliations" elementType="input" value={developer.affiliations} onChange={this.onModalChange}/>
-                                    </div>
-                                </div>
-                            </div>
+                            {content}
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.close}>Close</Button>
