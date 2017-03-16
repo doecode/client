@@ -7,6 +7,7 @@ import AgentsStep from './AgentsStep';
 import MetadataStep from './MetadataStep';
 import AccessStep from './AccessStep';
 import ConfirmStep from './ConfirmStep';
+import RIsStep from './RIsStep';
 import StepZilla from 'react-stepzilla';
 
 import css from '../css/main.css';
@@ -66,6 +67,7 @@ export default class DOECodeWizard extends React.Component {
         		{name: 'Metadata', component: <MetadataStep metadataStore={metadataStore}  autopopulate={this.autopopulate}/> },
         		{name: 'Licenses & Access Limitations', component: <AccessStep metadataStore={metadataStore}/>},
         		{name: 'Developers', component: <AgentsStep metadataStore={metadataStore} getSubmitPromise={this.getSubmitPromise}/>},
+            {name: 'Related Identifiers', component: <RIsStep metadataStore={metadataStore}/>},
         		{name: 'Confirmation', component: <ConfirmStep metadataStore={metadataStore}/> }
         		];
         return (
@@ -77,4 +79,3 @@ export default class DOECodeWizard extends React.Component {
         );
     }
 }
-

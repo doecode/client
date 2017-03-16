@@ -5,17 +5,17 @@ import {observer} from "mobx-react";
 
 @observer
 export default class DevsModalContent extends React.Component {
-	
+
 	constructor(props) {
 		super(props);
 		this.onModalChange = this.onModalChange.bind(this);
 	}
-	
+
     onModalChange(field, value) {
         this.props.tableStore.setCurrentField(field,value);
     }
-    
-	
+
+
 	render() {
         const dev = this.props.tableStore.currentData();
         const contributorTypes = {
@@ -24,11 +24,11 @@ export default class DevsModalContent extends React.Component {
         	"Data Collector": "DataCollector"
         }
 		return(
-			
+
             <div className="container-fluid">
                 <div className="form-horizontal">
                     {this.props.isEdit && <div className="form-group form-group-sm row">
-                        <TextField field="place" label="Place" elementType="input" value={dev.place} onChange={this.onModalChange}/>
+                        <TextField field="place" label="#" elementType="input" value={dev.place} onChange={this.onModalChange}/>
                     </div>
                     }
                     <div className="form-group form-group-sm row">
@@ -47,16 +47,16 @@ export default class DevsModalContent extends React.Component {
                     <div className="form-group form-group-sm row">
                         <TextField field="affiliations" label="Affiliations" elementType="input" value={dev.affiliations} onChange={this.onModalChange}/>
                     </div>
-                      
+
                     {dev.contributor_type !== undefined &&
                     <div className="form-group form-group-sm row">
-                    <TextField options={contributorTypes} field="contributor_type" label="Contributor Type" elementType="select" value={dev.contributor_type} onChange={this.onModalChange}/>        		    
+                    <TextField options={contributorTypes} field="contributor_type" label="Contributor Type" elementType="select" value={dev.contributor_type} onChange={this.onModalChange}/>
                     </div>
                     }
-        		    
+
                 </div>
             </div>
 		);
 	}
-	
+
 }

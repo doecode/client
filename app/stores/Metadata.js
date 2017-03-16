@@ -11,14 +11,13 @@ export default class Metadata {
         "acronym": '',
         "doi": '',
         "description": '',
-        "related_identifiers": '',
         "country_of_origin": '',
         "developers": [],
         "contributors": [],
         "sponsoring_organizations" : [],
         "contributing_organizations" : [],
         "research_organizations" : [],
-        "identifiers" : [],
+        "related_identifiers" : [],
         "date_of_issuance" : "",
         "keywords": '',
         "disclaimers": '',
@@ -31,16 +30,16 @@ export default class Metadata {
         "other_special_requirements": '',
         "related_software": '',
         "access_limitations": []
-        
+
     }
 
     @observable finished = false;
-    
+
     updateMetadata(data) {
     	const oldRepo = new String(this.metadata.repository_link);
     	data.repository_link = oldRepo;
     	this.metadata = data;
-    	
+
     }
 
     addToArray(arrName, data) {
@@ -50,7 +49,7 @@ export default class Metadata {
 
     removeFromArray(arrName,data) {
         const deletedPlace = data.place;
-        const index = this.metadata[data].findIndex(item => item.place === data.place);
+        const index = this.metadata[arrName].findIndex(item => item.place === data.place);
         this.metadata[arrName].splice(index, 1);
 
         for (var i = 0; i < this.metadata[arrName].length; i++) {

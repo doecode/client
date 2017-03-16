@@ -10,7 +10,7 @@ export default class TableStore {
         affiliations: '',
         place: 0
     }
-    
+
     @observable contributor = {
             first_name: '',
             middle_name: '',
@@ -18,7 +18,14 @@ export default class TableStore {
             email: '',
             affiliations: '',
             contributor_type: '',
-            place: 0	
+            place: 0
+    }
+
+    @observable relatedIdentifier = {
+      place: 0,
+      identifier_type : '',
+      relation_type : '',
+      identifier : ''
     }
 
     @observable current = {
@@ -32,7 +39,7 @@ export default class TableStore {
     @observable isEdit = false;
 
     @observable previousPlace = -1;
-    
+
 
     clear() {
       for (var field in this[this.current.type])
@@ -42,7 +49,7 @@ export default class TableStore {
     makeCurrentCopy() {
     	return Object.assign({}, this[this.current.type]);
     }
-    
+
     currentData() {
     	return this[this.current.type];
     }

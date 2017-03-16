@@ -2,6 +2,7 @@ import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import TextField from './TextField';
 import DevsModalContent from '../TableComponents/DevsModalContent'
+import RIsModalContent from '../TableComponents/RIsModalContent'
 import {observer} from "mobx-react";
 
 @observer
@@ -34,10 +35,10 @@ export default class AgentsModal extends React.Component {
     handleSave(event) {
 
         var dev = this.props.tableStore.makeCurrentCopy();
-        const arrName = this.props.tableStore.current.arrName; 
+        const arrName = this.props.tableStore.current.arrName;
 
         if (this.props.tableStore.isEdit) {
-        	this.props.metadataStore.modifyDeveloper(arrName,dev, this.props.tableStore.previousPlace);
+        	this.props.metadataStore.modifyArrayElement(arrName,dev, this.props.tableStore.previousPlace);
     	} else {
             this.props.metadataStore.addToArray(arrName,dev);
     	}
@@ -45,8 +46,8 @@ export default class AgentsModal extends React.Component {
     }
 
     handleDelete(event) {
-        const arrName = this.props.tableStore.current.arrName; 
-		this.props.metadataStore.removeDeveloper(arrName,this.props.tableStore.makeCurrentCopy());
+        const arrName = this.props.tableStore.current.arrName;
+		this.props.metadataStore.removeFromArray(arrName,this.props.tableStore.makeCurrentCopy());
         this.close();
     }
 
@@ -56,7 +57,9 @@ export default class AgentsModal extends React.Component {
     	let content = null;
     	if (this.props.contentType === 'Devs') {
     		content = <DevsModalContent tableStore={this.props.tableStore} isEdit={isEdit}/>
-    	}
+    	} else if (this.props.contentType === 'RIs') {
+        content = <RIsModalContent tableStore={this.props.tableStore} isEdit={isEdit}/>
+      }
 
 
         return (
