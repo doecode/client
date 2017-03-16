@@ -34,6 +34,8 @@ export default class SimpleInputs extends React.Component {
 	     </select>
 	  } else if (elementType === 'textarea') {
 		 input = <textarea type="text" className="form-control" value={this.props.value} onChange={this.handleChange} />
+	  } else if (elementType === 'radio') {
+			 input = <input type="radio" checked={this.props.checked} name={this.props.field} value={this.props.value} onChange={this.handleChange} />
 	  }
 	  return(
       <div>

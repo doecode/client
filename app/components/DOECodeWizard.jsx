@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {doAjax, appendQueryString} from '../utils/utils';
 import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
+import EntryStep from './EntryStep';
 import AgentsStep from './AgentsStep';
 import MetadataStep from './MetadataStep';
 import AccessStep from './AccessStep';
@@ -64,7 +65,8 @@ export default class DOECodeWizard extends React.Component {
 
         const steps =
         	[
-        		{name: 'Metadata', component: <MetadataStep metadataStore={metadataStore}  autopopulate={this.autopopulate}/> },
+        		{name: 'Repository Information', component: <EntryStep metadataStore={metadataStore}  autopopulate={this.autopopulate}/> },
+        		{name: 'Product Description', component: <MetadataStep metadataStore={metadataStore}/>},
         		{name: 'Licenses & Access Limitations', component: <AccessStep metadataStore={metadataStore}/>},
         		{name: 'Developers', component: <AgentsStep metadataStore={metadataStore} getSubmitPromise={this.getSubmitPromise}/>},
             {name: 'Related Identifiers', component: <RIsStep metadataStore={metadataStore}/>},

@@ -34,13 +34,13 @@ export default class AgentsModal extends React.Component {
 
     handleSave(event) {
 
-        var dev = this.props.tableStore.makeCurrentCopy();
+        var data = this.props.tableStore.makeCurrentCopy();
         const arrName = this.props.tableStore.current.arrName;
 
         if (this.props.tableStore.isEdit) {
-        	this.props.metadataStore.modifyArrayElement(arrName,dev, this.props.tableStore.previousPlace);
+        	this.props.metadataStore.modifyArrayElement(arrName,data, this.props.tableStore.previousPlace);
     	} else {
-            this.props.metadataStore.addToArray(arrName,dev);
+            this.props.metadataStore.addToArray(arrName,data);
     	}
         this.close();
     }

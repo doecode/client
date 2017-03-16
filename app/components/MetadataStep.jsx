@@ -39,13 +39,6 @@ export default class MetadataStep extends React.Component {
 	            <div className="container-fluid">
                 <form id="react_form" className="form-horizontal col-sm-offset-2 col-sm-8">
                 <div className="form-group form-group-sm row">
-                <TextField displayOnly={finished} field="repository_link" label="Repository Link" elementType="input" value={metadata.repository_link} onChange={this.onFieldChange}/>
-								{!finished &&
-								<button className="btn btn-primary btn-sm" onClick={this.props.autopopulate}> Autopopulate </button>
-								}
-                </div>
-                <hr></hr>
-                <div className="form-group form-group-sm row">
                 <TextField displayOnly={finished} field="software_title" label="Software Title" elementType="input" value={metadata.software_title} onChange={this.onFieldChange}/>
                 <TextField displayOnly={finished} field="acronym" label="Acronym or Short Title" elementType="input" value={metadata.acronym} onChange={this.onFieldChange}/>
                 </div>

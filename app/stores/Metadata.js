@@ -32,6 +32,8 @@ export default class Metadata {
         "access_limitations": []
 
     }
+    
+    @observable availabilitySelected = 'OS';
 
     @observable finished = false;
 

@@ -16,7 +16,7 @@ export default class TextField extends React.Component {
         {this.props.label}
       </label>
       <div className={divStyle}>
-        <SimpleInputs field={this.props.field} elementType={this.props.elementType} displayOnly={this.props.displayOnly} value={this.props.value} onChange={this.props.onChange} options={this.props.options}/>
+        <SimpleInputs field={this.props.field} checked={this.props.checked} elementType={this.props.elementType} displayOnly={this.props.displayOnly} value={this.props.value} onChange={this.props.onChange} options={this.props.options}/>
       </div>
       </div>
     );
