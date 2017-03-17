@@ -7,6 +7,7 @@ export default class TableStore {
         middle_name: '',
         last_name: '',
         email: '',
+        orcid: '',
         affiliations: '',
         place: 0
     }
@@ -16,8 +17,18 @@ export default class TableStore {
             middle_name: '',
             last_name: '',
             email: '',
+            orcid: '',
             affiliations: '',
             contributor_type: '',
+            place: 0
+    }
+    
+    @observable sponsoring_organization = {
+            organization_name: '',
+            email: '',
+            orcid: '',
+            primary_award: '',
+            award_numbers: '',
             place: 0
     }
 

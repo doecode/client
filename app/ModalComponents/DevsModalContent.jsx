@@ -43,6 +43,10 @@ export default class DevsModalContent extends React.Component {
                     <div className="form-group form-group-sm row">
                         <TextField field="email" label="Email" elementType="input" value={dev.email} onChange={this.onModalChange}/>
                     </div>
+                        
+                    <div className="form-group form-group-sm row">
+                        <TextField field="orcid" label="ORCID" elementType="input" value={dev.orcid} onChange={this.onModalChange}/>
+                    </div>
 
                     <div className="form-group form-group-sm row">
                         <TextField field="affiliations" label="Affiliations" elementType="input" value={dev.affiliations} onChange={this.onModalChange}/>

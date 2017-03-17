@@ -5,6 +5,7 @@ import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
 import EntryStep from './EntryStep';
 import AgentsStep from './AgentsStep';
+import OrgsStep from './OrgsStep';
 import MetadataStep from './MetadataStep';
 import AccessStep from './AccessStep';
 import ConfirmStep from './ConfirmStep';
@@ -69,7 +70,8 @@ export default class DOECodeWizard extends React.Component {
         		{name: 'Product Description', component: <MetadataStep metadataStore={metadataStore}/>},
         		{name: 'Licenses & Access Limitations', component: <AccessStep metadataStore={metadataStore}/>},
         		{name: 'Developers', component: <AgentsStep metadataStore={metadataStore} getSubmitPromise={this.getSubmitPromise}/>},
-            {name: 'Related Identifiers', component: <RIsStep metadataStore={metadataStore}/>},
+        		{name: 'Organizations', component: <OrgsStep metadataStore={metadataStore}/>},
+        		{name: 'Related Identifiers', component: <RIsStep metadataStore={metadataStore}/>},
         		{name: 'Confirmation', component: <ConfirmStep metadataStore={metadataStore}/> }
         		];
         return (

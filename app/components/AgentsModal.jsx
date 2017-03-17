@@ -1,8 +1,9 @@
 import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import TextField from './TextField';
-import DevsModalContent from '../TableComponents/DevsModalContent'
-import RIsModalContent from '../TableComponents/RIsModalContent'
+import DevsModalContent from '../ModalComponents/DevsModalContent'
+import RIsModalContent from '../ModalComponents/RIsModalContent'
+import OrgsModalContent from '../ModalComponents/OrgsModalContent'
 import {observer} from "mobx-react";
 
 @observer
@@ -59,7 +60,9 @@ export default class AgentsModal extends React.Component {
     		content = <DevsModalContent tableStore={this.props.tableStore} isEdit={isEdit}/>
     	} else if (this.props.contentType === 'RIs') {
         content = <RIsModalContent tableStore={this.props.tableStore} isEdit={isEdit}/>
-      }
+    	} else if(this.props.contentType === 'Orgs') {
+    		content = <OrgsModalContent tableStore={this.props.tableStore} isEdit={isEdit}/>
+    	}
 
 
         return (

@@ -23,10 +23,14 @@ export default class AgentsTable extends React.Component {
 
   render() {
 
+	  let columns = [];
+	  if (this.props.columns)
+		  columns = this.props.columns;
+	  
 	return(
 
 <div className="form-group form-group-sm col-sm-12">
-        <Griddle results = {this.props.arr} columnMetadata={this.props.config} showSettings={true} showFilter={true} onRowClick={this.rowClick} />
+        <Griddle results = {this.props.arr} columnMetadata={this.props.config} columns={columns} showSettings={true} showFilter={true} onRowClick={this.rowClick} />
 </div>
 );
   }
