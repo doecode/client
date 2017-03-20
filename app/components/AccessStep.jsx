@@ -118,7 +118,7 @@ export default class AccessStep extends React.Component{
 			</div>
 			<div className="col-sm-offset-2 col-sm-8">
 				<h2 className="section-heading">Intellectual Property/Distribution Limitations</h2>
-				<Select multi simpleValue placeholder="Select your license(s)" options={accessLimitationOptions} value={this.props.metadataStore.metadata.access_limitations.slice()} onChange={this.onAccessLimitationsChange}/>
+				<Select multi simpleValue placeholder="Select all that apply" options={accessLimitationOptions} value={this.props.metadataStore.metadata.access_limitations.slice()} onChange={this.onAccessLimitationsChange}/>
 			</div>
 		</div>
 		);

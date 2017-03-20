@@ -28,7 +28,7 @@ export default class TableStore {
             email: '',
             orcid: '',
             primary_award: '',
-            award_numbers: '',
+            award_numbers: [],
             place: 0
     }
 

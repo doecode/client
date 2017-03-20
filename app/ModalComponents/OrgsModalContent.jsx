@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from '../components/TextField'
+import Select from 'react-select';
 import {observer} from "mobx-react";
 
 
@@ -9,6 +10,7 @@ export default class OrgsModalContent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onModalChange = this.onModalChange.bind(this);
+		this.onAwardsChange = this.onAwardsChange.bind(this);
 	}
 
     onModalChange(field, value) {
@@ -16,10 +18,12 @@ export default class OrgsModalContent extends React.Component {
     }
     
     onAwardsChange(value) {
-		if (value.trim())
-			this.props.tableStore.setCurrentField("award_numbers",value)
-		else
-			this.props.tableStore.setCurrentField("award_numbers",[]);
+    		console.log(value);
+    		console.log(this.props.tableStore.makeCurrentCopy().award_numbers);
+    		if (value.trim())
+    			this.props.tableStore.setCurrentField("award_numbers",value);
+    		else
+    			this.props.tableStore.setCurrentField("award_numbers",[]);
     }
 
 
@@ -30,6 +34,10 @@ export default class OrgsModalContent extends React.Component {
         	"Contact Person": "ContactPerson",
         	"Data Collector": "DataCollector"
         };
+        
+		const awards = [
+			{label: 'None', value: ''},
+			];
         
 		return(
 
@@ -51,10 +59,23 @@ export default class OrgsModalContent extends React.Component {
                         <TextField field="orcid" label="ORCID" elementType="input" value={data.orcid} onChange={this.onModalChange}/>
                     </div>
                         
+                    {data.primary_award !== undefined &&
                     <div className="form-group form-group-sm row">
-                        <TextField field="primary_award" label="Primary Award" elementType="input" value={data.primary} onChange={this.onModalChange}/>
+                        <TextField field="primary_award" label="Primary Award" elementType="input" value={data.primary_award} onChange={this.onModalChange}/>
                     </div>
-
+                        
+                    }
+                    
+                    {data.primary_award !== undefined &&
+                    <div className="form-group form-group-sm row">
+                    <label className="col-sm-2 control-label">
+                    Additional Awards
+                    </label>
+                    <div className="col-sm-4">
+                    	<Select allowCreate multi simpleValue placeholder="Enter any additional awards" onChange={this.onAwardsChange} value={data.award_numbers.slice()} />
+                    </div>
+                    </div>
+                    }
 
                     {data.contributor_type !== undefined &&
                     <div className="form-group form-group-sm row">
