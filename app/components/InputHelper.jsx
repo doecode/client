@@ -1,16 +1,23 @@
 import React from 'react';
 import Select from 'react-select';
+import DatePicker from 'react-datepicker';
 import 'react-select/dist/react-select.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default class InputHelper extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
  }
 
   handleChange(event) {
     this.props.onChange(this.props.field,event.target.value);
+  }
+  
+  handleDateChange(date) {
+	  this.props.onChange(this.props.field,date);
   }
   
   handleSelectChange(value) {
@@ -45,6 +52,8 @@ export default class InputHelper extends React.Component {
 		 input = <textarea type="text" className="form-control" value={this.props.value} onChange={this.handleChange} />
 	  } else if (elementType === 'radio') {
 			 input = <input type="radio" checked={this.props.checked} name={this.props.field} value={this.props.value} onChange={this.handleChange} />
+	  } else if (elementType === 'date') {
+		  input = <DatePicker selected={this.props.value} onChange={this.handleDateChange}/>
 	  }
 	  
 	  return(

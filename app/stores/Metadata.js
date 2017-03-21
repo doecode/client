@@ -1,4 +1,5 @@
 import {observable} from 'mobx';
+import moment from 'moment';
 
 export default class Metadata {
     @observable metadata = {
@@ -18,7 +19,7 @@ export default class Metadata {
         "contributing_organizations" : [],
         "research_organizations" : [],
         "related_identifiers" : [],
-        "date_of_issuance" : "",
+        "date_of_issuance" : moment(),
         "keywords": '',
         "disclaimers": '',
         "licenses": [],

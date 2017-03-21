@@ -30,8 +30,8 @@ export default class MetadataStep extends React.Component {
 		
 		
 		return (
-	            <div className="container-fluid">
-                <form id="react_form" className="form-horizontal col-sm-offset-2 col-sm-8">
+	            <div className="container-fluid form-horizontal">
+
                 
                 <div className="form-group form-group-sm row">
                 	<InputHelper field="software_title" label="Software Title" elementType="input" value={metadata.software_title} onChange={this.onFieldChange}/>
@@ -39,16 +39,21 @@ export default class MetadataStep extends React.Component {
                 
                 
                 <div className="form-group form-group-sm row">
-                	<InputHelper field="software_title" label="Software Title" elementType="input" value={metadata.software_title} onChange={this.onFieldChange}/>                
+                	<InputHelper field="acronym" label="Short Title or Acronym" elementType="input" value={metadata.acronym} onChange={this.onFieldChange}/>                
                 </div>
                 
                 <div className="form-group form-group-sm row">
                 	<InputHelper field="doi" label="DOI" elementType="input" value={metadata.doi} onChange={this.onFieldChange}/>              
                 </div>
                 
+                	
+                <div className="form-group form-group-sm row">
+                	<InputHelper field="date_of_issuance" label="Date of Issuance" elementType="date" value={metadata.date_of_issuance} onChange={this.onFieldChange}/>
+                </div>
                 <div className="form-group form-group-sm row">
                 	<InputHelper field="description" label="Description/Abstract" elementType="input" value={metadata.description} onChange={this.onFieldChange}/>
                 </div>
+                	
                 	
                 <hr/>	
                 <div className="form-group form-group-sm row">
@@ -72,7 +77,7 @@ export default class MetadataStep extends React.Component {
                 <InputHelper field="recipient_email" label="Recipient Email" elementType="input" value={metadata.recipient_email} onChange={this.onFieldChange}/>
                 </div>
 
-                </form>
+               
                 </div>
 		);
 	}

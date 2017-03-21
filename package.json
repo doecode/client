@@ -48,6 +48,7 @@
     "griddle-react": "0.6.1",
     "mobx": "^3.0.2",
     "mobx-react": "^4.1.0",
+    "moment": "^2.18.0",
     "promise": "^7.1.1",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
