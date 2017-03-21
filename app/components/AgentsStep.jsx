@@ -105,6 +105,13 @@ export default class AgentsStep extends React.Component {
 					 "displayName": "Email"
 				 },
 				 {
+					 "columnName": "orcid",
+					 "order": 6,
+					 "locked": false,
+					 "visible": true,
+					 "displayName": "ORCID"
+				 },
+				 {
 						 "columnName": "affiliations",
 						 "order": 6,
 						 "locked": false,

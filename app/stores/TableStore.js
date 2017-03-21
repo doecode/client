@@ -31,6 +31,21 @@ export default class TableStore {
             award_numbers: [],
             place: 0
     }
+    
+    @observable research_organization = {
+            organization_name: '',
+            email: '',
+            orcid: '',
+            place: 0
+    }
+    
+    @observable contributing_organization = {
+            organization_name: '',
+            email: '',
+            orcid: '',
+            contributor_type: '',
+            place: 0
+    }
 
     @observable relatedIdentifier = {
       place: 0,

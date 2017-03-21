@@ -1,5 +1,5 @@
 import React from 'react';
-import TextField from './TextField';
+import InputHelper from './InputHelper';
 import EntryStepStore from '../stores/EntryStepStore';
 import {observer} from "mobx-react";
 
@@ -64,7 +64,7 @@ export default class EntryStep extends React.Component {
 
                 
           <div className="form-group form-group-sm row">
-           <TextField field="repository_link" label="Repository Link" elementType="input" value={metadata.repository_link} onChange={this.onFieldChange}/>
+           <InputHelper field="repository_link" label="Repository Link" elementType="input" value={metadata.repository_link} onChange={this.onFieldChange}/>
 			<button className="btn btn-primary btn-sm" onClick={this.props.autopopulate}> Autopopulate </button>								
 		  </div>
 		  
@@ -73,15 +73,15 @@ export default class EntryStep extends React.Component {
 		  </div>
 		  
 		  <div className="form-group form-group-sm row">
-		  <TextField checked={entryStore.availabilitySelected=== 'OS'} elementType="radio" label="Open Source, Publicly Available" field="availability" value="OS" onChange={this.onRadioChange}/>	  
+		  <InputHelper checked={entryStore.availabilitySelected=== 'OS'} elementType="radio" label="Open Source, Publicly Available" field="availability" value="OS" onChange={this.onRadioChange}/>	  
 		  </div>
 		  
 		  <div className="form-group form-group-sm row">
-		  <TextField checked={entryStore.availabilitySelected === 'ON'} elementType="radio" label= "Open Source, Not Publicly Available" field="availability" value="ON" onChange={this.onRadioChange}/>	  
+		  <InputHelper checked={entryStore.availabilitySelected === 'ON'} elementType="radio" label= "Open Source, Not Publicly Available" field="availability" value="ON" onChange={this.onRadioChange}/>	  
 		  </div>
 		  
 		  <div className="form-group form-group-sm row">
-		  <TextField checked={entryStore.availabilitySelected === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange}/>	  
+		  <InputHelper checked={entryStore.availabilitySelected === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange}/>	  
 		  </div>
 		  
 		  {entryStore.showFile &&
