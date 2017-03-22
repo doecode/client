@@ -1,6 +1,4 @@
 import {observable} from 'mobx';
-import moment from 'moment';
-
 export default class Metadata {
     @observable metadata = {
         "code_id": 0,
@@ -19,7 +17,7 @@ export default class Metadata {
         "contributing_organizations" : [],
         "research_organizations" : [],
         "related_identifiers" : [],
-        "date_of_issuance" : moment(),
+        "date_of_issuance" : '',
         "keywords": '',
         "disclaimers": '',
         "licenses": [],
@@ -34,7 +32,6 @@ export default class Metadata {
 
     }
     
-    @observable availabilitySelected = 'OS';
 
     @observable finished = false;
 

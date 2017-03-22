@@ -69,10 +69,10 @@ export default class DOECodeWizard extends React.Component {
         		{name: 'Repository Information', component: <EntryStep metadataStore={metadataStore}  autopopulate={this.autopopulate}/> },
         		{name: 'Product Description', component: <MetadataStep metadataStore={metadataStore}/>},
         		{name: 'Licenses & Access Limitations', component: <AccessStep metadataStore={metadataStore}/>},
-        		{name: 'Developers', component: <AgentsStep metadataStore={metadataStore} getSubmitPromise={this.getSubmitPromise}/>},
+        		{name: 'Developers & Contributors', component: <AgentsStep metadataStore={metadataStore} getSubmitPromise={this.getSubmitPromise}/>},
         		{name: 'Organizations', component: <OrgsStep metadataStore={metadataStore}/>},
-        		{name: 'Related Identifiers', component: <RIsStep metadataStore={metadataStore}/>},
-        		{name: 'Confirmation', component: <ConfirmStep metadataStore={metadataStore}/> }
+        		{name: 'Identifiers', component: <RIsStep metadataStore={metadataStore}/>},
+        		{name: 'Summary', component: <ConfirmStep metadataStore={metadataStore}/> }
         		];
         return (
 

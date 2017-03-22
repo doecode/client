@@ -32,6 +32,13 @@ export default class MetadataStep extends React.Component {
 		return (
 	            <div className="container-fluid form-horizontal">
 
+	            {metadata.repository_link &&
+	            	
+	            <div className="form-group form-group-sm row">
+            		<InputHelper field="repository_link" label="Repository Link: " elementType="display" value={metadata.repository_link}/>
+            	</div>
+	            }
+	            
                 
                 <div className="form-group form-group-sm row">
                 	<InputHelper field="software_title" label="Software Title" elementType="input" value={metadata.software_title} onChange={this.onFieldChange}/>
@@ -48,10 +55,12 @@ export default class MetadataStep extends React.Component {
                 
                 	
                 <div className="form-group form-group-sm row">
-                	<InputHelper field="date_of_issuance" label="Date of Issuance" elementType="date" value={metadata.date_of_issuance} onChange={this.onFieldChange}/>
+                	<InputHelper field="description" label="Description/Abstract" elementType="textarea" value={metadata.description} onChange={this.onFieldChange}/>
                 </div>
-                <div className="form-group form-group-sm row">
-                	<InputHelper field="description" label="Description/Abstract" elementType="input" value={metadata.description} onChange={this.onFieldChange}/>
+                	
+                	
+               <div className="form-group form-group-sm row">
+                	<InputHelper divStyle="col-sm-10" field="date_of_issuance" label="Date of Issuance" elementType="date" value={metadata.date_of_issuance} onChange={this.onFieldChange}/>
                 </div>
                 	
                 	
@@ -66,16 +75,6 @@ export default class MetadataStep extends React.Component {
                 <InputHelper field="site_accession_number" label="Site Accession Number" elementType="input" value={metadata.site_accession_number} onChange={this.onFieldChange}/>
                 </div>
                 
-                <hr/>
-
-                <div className="form-group form-group-sm row">
-                <InputHelper field="recipient_name" label="Recipient Name" elementType="input" value={metadata.recipient_name} onChange={this.onFieldChange}/>
-                <InputHelper field="recipient_org" label="Recipient Organization" elementType="input" value={metadata.recipient_org} onChange={this.onFieldChange}/>
-                </div>
-                <div className="form-group form-group-sm row">
-                <InputHelper field="recipient_phone" label="Recipient Phone Number" elementType="input" value={metadata.recipient_phone} onChange={this.onFieldChange}/>
-                <InputHelper field="recipient_email" label="Recipient Email" elementType="input" value={metadata.recipient_email} onChange={this.onFieldChange}/>
-                </div>
 
                
                 </div>
