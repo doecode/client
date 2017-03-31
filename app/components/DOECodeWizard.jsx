@@ -11,7 +11,7 @@ import AccessStep from './AccessStep';
 import ConfirmStep from './ConfirmStep';
 import RIsStep from './RIsStep';
 import StepZilla from 'react-stepzilla';
-import {PanelGroup, Panel} from 'react-bootstrap';
+import {PanelGroup, Panel, ButtonGroup, Button, ButtonToolbar} from 'react-bootstrap';
 
 import css from '../css/main.css';
 
@@ -31,7 +31,7 @@ export default class DOECodeWizard extends React.Component {
         		{name: 'Repository Information', component: <EntryStep metadataStore={metadataStore}  autopopulate={this.autopopulate}/> },
         		{name: 'Product Description', component: <MetadataStep metadataStore={metadataStore}/>},
         		{name: 'Licenses & Access Limitations', component: <AccessStep metadataStore={metadataStore}/>},
-        		{name: 'Developers & Contributors', component: <AgentsStep metadataStore={metadataStore} getSubmitPromise={this.getSubmitPromise}/>},
+        		{name: 'Developers & Contributors', component: <AgentsStep metadataStore={metadataStore} />},
         		{name: 'Organizations', component: <OrgsStep metadataStore={metadataStore}/>},
         		{name: 'Identifiers', component: <RIsStep metadataStore={metadataStore}/>},
         		{name: 'Summary', component: <ConfirmStep metadataStore={metadataStore}/> }
@@ -77,28 +77,48 @@ export default class DOECodeWizard extends React.Component {
     }
 
     render() {
-        const finished = metadataStore.finished;
 
-        const eins = 1;
-        const zwei = 2;
         let content = <PanelGroup defaultActiveKey="1" accordion>
         {steps.map(function(obj) {
         return <Panel header={obj.name} eventKey={obj.key} key={obj.key}> {obj.component} </Panel>
         })
         }
         </PanelGroup>
-        
-        
-        
-
-
-        
         return (
 
 
-            <div>
+      <div>
+
+      	<div container="fluid">
+      	<div className="row">
+        
+        <div className="col-sm-4">
+		<Button bsStyle="info" bsSize="large" >
+		Save Your Progress
+		</Button>
+		</div>
+		
+        <div className="col-sm-offset-4 col-sm-4">
+        <ButtonToolbar>
+		<Button bsSize="large" >
+		Publish 
+		</Button>
+		<Button bsStyle="primary" bsSize="large" >
+		Publish and Submit 
+		</Button>
+		</ButtonToolbar>
+		</div>
+		
+		</div>
+		</div>
+
+
             {content}
-            </div>
+
+
+            
+
+    </div>
             
         );
     }
