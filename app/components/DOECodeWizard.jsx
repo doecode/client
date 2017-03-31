@@ -11,18 +11,33 @@ import AccessStep from './AccessStep';
 import ConfirmStep from './ConfirmStep';
 import RIsStep from './RIsStep';
 import StepZilla from 'react-stepzilla';
+import {PanelGroup, Panel} from 'react-bootstrap';
 
 import css from '../css/main.css';
 
 const metadataStore = new Metadata();
+let steps = [];
 
 @observer
 export default class DOECodeWizard extends React.Component {
     constructor(props) {
         super(props);
+
         this.getSubmitPromise = this.getSubmitPromise.bind(this);
         this.parseLoadResponse = this.parseLoadResponse.bind(this);
         this.autopopulate = this.autopopulate.bind(this);
+        steps =
+        	[
+        		{name: 'Repository Information', component: <EntryStep metadataStore={metadataStore}  autopopulate={this.autopopulate}/> },
+        		{name: 'Product Description', component: <MetadataStep metadataStore={metadataStore}/>},
+        		{name: 'Licenses & Access Limitations', component: <AccessStep metadataStore={metadataStore}/>},
+        		{name: 'Developers & Contributors', component: <AgentsStep metadataStore={metadataStore} getSubmitPromise={this.getSubmitPromise}/>},
+        		{name: 'Organizations', component: <OrgsStep metadataStore={metadataStore}/>},
+        		{name: 'Identifiers', component: <RIsStep metadataStore={metadataStore}/>},
+        		{name: 'Summary', component: <ConfirmStep metadataStore={metadataStore}/> }
+        		];
+        for (var i = 0; i < steps.length; i++)
+        	steps[i].key = "" + (i+1);
     }
 
     autopopulate(event) {
@@ -64,22 +79,27 @@ export default class DOECodeWizard extends React.Component {
     render() {
         const finished = metadataStore.finished;
 
-        const steps =
-        	[
-        		{name: 'Repository Information', component: <EntryStep metadataStore={metadataStore}  autopopulate={this.autopopulate}/> },
-        		{name: 'Product Description', component: <MetadataStep metadataStore={metadataStore}/>},
-        		{name: 'Licenses & Access Limitations', component: <AccessStep metadataStore={metadataStore}/>},
-        		{name: 'Developers & Contributors', component: <AgentsStep metadataStore={metadataStore} getSubmitPromise={this.getSubmitPromise}/>},
-        		{name: 'Organizations', component: <OrgsStep metadataStore={metadataStore}/>},
-        		{name: 'Identifiers', component: <RIsStep metadataStore={metadataStore}/>},
-        		{name: 'Summary', component: <ConfirmStep metadataStore={metadataStore}/> }
-        		];
+        const eins = 1;
+        const zwei = 2;
+        let content = <PanelGroup defaultActiveKey="1" accordion>
+        {steps.map(function(obj) {
+        return <Panel header={obj.name} eventKey={obj.key} key={obj.key}> {obj.component} </Panel>
+        })
+        }
+        </PanelGroup>
+        
+        
+        
+
+
+        
         return (
 
 
-            <div className='step-progress'>
-            	<StepZilla steps={steps} dontValidate={false} preventEnterSubmission={true} prevBtnOnLastStep={false} stepsNavigation={false} nextTextOnFinalAction={"Submit"}/>
+            <div>
+            {content}
             </div>
+            
         );
     }
 }
