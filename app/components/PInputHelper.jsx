@@ -34,9 +34,9 @@ export default class InputHelper extends React.Component {
 		let retArray = [];
 	  	if (value.trim())
 	  		retArray = value.split(',');
-	  	this.props.onChange(this.props.field,retArray);
+	  	this.props.dataStore[this.props.field] = retArray;
 	  } else {
-		  this.props.onChange(this.props.field,value);
+		  this.props.dataStore[this.props.field] = value;
 	  }
   }
 

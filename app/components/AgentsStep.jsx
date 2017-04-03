@@ -54,8 +54,6 @@ export default class AgentsStep extends React.Component {
 
 		];
 
-		console.log(key);
-		console.log(currentOpts[key]);
 	    tableStore.current = currentOpts[key];
 	    console.log(tableStore.current);
 	    this.setState({"key" : key});
