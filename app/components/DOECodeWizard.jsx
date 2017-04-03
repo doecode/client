@@ -62,7 +62,6 @@ export default class DOECodeWizard extends React.Component {
 		        contentType: "application/json; charset=utf-8",
 		        success: function(data) {
 		        	console.log(data);
-                    metadataStore.finished = true;
                     metadataStore.metadata.code_id = data.metadata.code_id;
 		        	resolve();
 
@@ -89,7 +88,7 @@ export default class DOECodeWizard extends React.Component {
 
       <div>
 
-      	<div container="fluid">
+      	<div>
       	<div className="row">
         
         <div className="col-sm-4">

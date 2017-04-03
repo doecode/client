@@ -14,7 +14,7 @@ export default class ConfirmStep extends React.Component {
 			const metadata = this.props.metadataStore.metadata;
 		    return (
 		    <div>
-		    <h2> The summary page</h2>
+		    <h2> The summary panel</h2>
 		    </div>
 		      );
 		  }

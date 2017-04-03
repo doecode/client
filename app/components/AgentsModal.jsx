@@ -12,7 +12,6 @@ export default class AgentsModal extends React.Component {
         super(props);
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
-        this.onModalChange = this.onModalChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
     }
@@ -26,11 +25,6 @@ export default class AgentsModal extends React.Component {
         this.props.tableStore.isEdit = false;
         this.props.tableStore.showModal = true;
         this.props.tableStore.clear();
-
-    }
-
-    onModalChange(field, value) {
-        this.props.tableStore.setCurrentField(field,value);
     }
 
     handleSave(event) {

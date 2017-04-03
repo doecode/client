@@ -33,13 +33,15 @@ export default class Metadata {
     }
     
 
-    @observable finished = false;
-
     updateMetadata(data) {
     	const oldRepo = new String(this.metadata.repository_link);
     	data.repository_link = oldRepo;
     	this.metadata = data;
 
+    }
+    
+    updateField(field,data) {
+    	this.metadata[field] = data;
     }
 
     addToArray(arrName, data) {

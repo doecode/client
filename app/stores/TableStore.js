@@ -87,6 +87,10 @@ export default class TableStore {
     setCurrentField(field, value) {
     	this[this.current.type][field] = value;
     }
+    
+    updateField(field,value) {
+    	setCurrentField(field,value);
+    }
 
 
 }
