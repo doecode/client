@@ -21,7 +21,7 @@ export default class InputHelper extends React.Component {
   }
   
   handleDateChange(date) {
-	  this.props.onChange(this.props.field,date);
+		this.props.dataStore[this.props.field] = date;
   }
   
   handleRadioChange(event) {
