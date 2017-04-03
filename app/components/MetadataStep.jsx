@@ -7,8 +7,6 @@ export default class MetadataStep extends React.Component {
 
 	constructor(props) {
 		super(props);
-
-		this.onFieldChange = this.onFieldChange.bind(this);
 		this.isValidated = this._isValidated.bind(this);
 	}
 
@@ -17,14 +15,6 @@ export default class MetadataStep extends React.Component {
 
 		return true;
 	}
-
-    onFieldChange(id, value) {
-        this.props.metadataStore.metadata[id] = value;
-
-    }
-
-
-
 
 	render() {
 		const metadata = this.props.metadataStore.metadata;
@@ -39,45 +29,45 @@ export default class MetadataStep extends React.Component {
 	            <div>
 	            {metadata.repository_link &&
 	            <div className="form-group form-group-sm row">
-	        		<InputHelper field="repository_link" label="Repository Link: " elementType="display" value={metadata.repository_link}/>
+	        		<InputHelper field="repository_link" label="Repository Link: " elementType="display" />
 	        	</div>
 	            }
 	            
 	            
 	            
 	    	    <div className="form-group form-group-sm row">
-	            	<InputHelper field="software_title" label="Software Title" elementType="input" value={metadata.software_title} onChange={this.onFieldChange}/>
+	            	<InputHelper field="software_title" label="Software Title" elementType="input"  />
 	            </div>
 	            
 	            
 	            <div className="form-group form-group-sm row">
-	            	<InputHelper field="acronym" label="Short Title or Acronym" elementType="input" value={metadata.acronym} onChange={this.onFieldChange}/>                
+	            	<InputHelper field="acronym" label="Short Title or Acronym" elementType="input"  />                
 	            </div>
 	            
 	            <div className="form-group form-group-sm row">
-	            	<InputHelper field="doi" label="DOI" elementType="input" value={metadata.doi} onChange={this.onFieldChange}/>              
+	            	<InputHelper field="doi" label="DOI" elementType="input"  />              
 	            </div>
 	            
 	            	
 	            <div className="form-group form-group-sm row">
-	            	<InputHelper field="description" label="Description/Abstract" elementType="textarea" value={metadata.description} onChange={this.onFieldChange}/>
+	            	<InputHelper field="description" label="Description/Abstract" elementType="textarea"  />
 	            </div>
 	            	
 	            	
 	           <div className="form-group form-group-sm row">
-	            	<InputHelper divStyle="col-sm-10" field="date_of_issuance" label="Date of Issuance" elementType="date" value={metadata.date_of_issuance} onChange={this.onFieldChange}/>
+	            	<InputHelper divStyle="col-sm-10" field="date_of_issuance" label="Date of Issuance" elementType="date"  />
 	            </div>
 	            	
 	            	
 	            <hr/>	
 	            <div className="form-group form-group-sm row">
-	            <InputHelper field="keywords" label="Keywords" elementType="input" value={metadata.keywords} onChange={this.onFieldChange}/>
-	            <InputHelper field="other_special_requirements" label="Other Special Requirements" elementType="input" value={metadata.other_special_requirements} onChange={this.onFieldChange}/>
+	            <InputHelper field="keywords" label="Keywords" elementType="input"  />
+	            <InputHelper field="other_special_requirements" label="Other Special Requirements" elementType="input"  />
 	            </div>
 	            
 	            <div className="form-group form-group-sm row">
-	            <InputHelper field="related_software" label="Related Software" elementType="input" value={metadata.related_software} onChange={this.onFieldChange}/>
-	            <InputHelper field="site_accession_number" label="Site Accession Number" elementType="input" value={metadata.site_accession_number} onChange={this.onFieldChange}/>
+	            <InputHelper field="related_software" label="Related Software" elementType="input"  />
+	            <InputHelper field="site_accession_number" label="Site Accession Number" elementType="input"  />
 	            </div>
 	            
 	            </div>
