@@ -1,7 +1,7 @@
 import React from 'react';
 import InputHelper from './InputHelper';
 import EntryStepStore from '../stores/EntryStepStore';
-import {observer} from "mobx-react";
+import {observer,Provider} from "mobx-react";
 
 const entryStore = new EntryStepStore();
 
@@ -62,7 +62,8 @@ export default class EntryStep extends React.Component {
         </div>
         <hr></hr>
 
-                
+        <Provider dataStore={metadata}>
+        <div>        
           <div className="form-group form-group-sm row">
            <InputHelper field="repository_link" label="Repository Link" elementType="input" value={metadata.repository_link} onChange={this.onFieldChange}/>
 			<button className="btn btn-primary btn-sm" onClick={this.props.autopopulate}> Autopopulate </button>								
@@ -90,6 +91,9 @@ export default class EntryStep extends React.Component {
 		  		<input type="file" className="form-control-file" id="project_file" name="project_file"/>
 		  	  </div>
 		  }
+		  
+		  </div>
+		  </Provider>
 		  
 	   </div>
 		);

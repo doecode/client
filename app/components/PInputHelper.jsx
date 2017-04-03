@@ -63,7 +63,7 @@ export default class InputHelper extends React.Component {
 		 input = <textarea className="form-control" value={this.props.dataStore[this.props.field]} onChange={this.handleChange} />
 	  } 
 	  else if (elementType === 'radio') {
-			 input = <input type="radio" checked={this.props.checked} name={this.props.field} value={this.props.dataStore[this.props.field]} onChange={this.handleRadioChange} />
+			 input = <input type="radio" checked={this.props.checked} name={this.props.field} value={this.props.value} onChange={this.handleRadioChange} />
 	  } 
 	  else if (elementType === 'date') {
 		  input = <DatePicker placeholderText="Click to select a date" selected={this.props.dataStore[this.props.field]} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>
