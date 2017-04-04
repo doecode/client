@@ -1,5 +1,5 @@
 import React from 'react';
-import InputHelper from '../components/PInputHelper'
+import InputHelper from '../components/InputHelper'
 import {observer,Provider} from "mobx-react";
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';

@@ -192,3 +192,7 @@ div#root ol.progtrckr {
 div#root ol.progtrckr li.progtrckr-todo:before {
 		background-color: #f2f2f2;
 }
+
+.required a {
+	color: #990000 !important
+}

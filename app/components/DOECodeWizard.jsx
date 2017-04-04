@@ -79,7 +79,10 @@ export default class DOECodeWizard extends React.Component {
 
         let content = <PanelGroup defaultActiveKey="1" accordion>
         {steps.map(function(obj) {
-        return <Panel header={obj.name} eventKey={obj.key} key={obj.key}> {obj.component} </Panel>
+        
+        let heading = obj.name;
+        let panelStyle = "default";
+        return <Panel header={heading} bsStyle={panelStyle} eventKey={obj.key} key={obj.key}> {obj.component} </Panel>
         })
         }
         </PanelGroup>
