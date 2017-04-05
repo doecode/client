@@ -1,7 +1,8 @@
 import React from 'react';
 import InputHelper from './InputHelper';
 import EntryStepStore from '../stores/EntryStepStore';
-import {observer,Provider} from "mobx-react";
+import {observer,Provider} from 'mobx-react';
+import Dropzone from 'react-dropzone';
 
 const entryStore = new EntryStepStore();
 
@@ -10,21 +11,15 @@ export default class EntryStep extends React.Component {
 
 	constructor(props) {
 		super(props);
-
-		this.onFieldChange = this.onFieldChange.bind(this);
 		this.onRadioChange = this.onRadioChange.bind(this);
-		this.isValidated = this._isValidated.bind(this);
-		
-		
+		this.onDrop = this.onDrop.bind(this);		
+	}
+
+
+	onDrop(files) {
+		console.log('Received files: ', files);
 	}
 	
-
-	_isValidated() {
-		//adding validations later
-
-		return true;
-	}
-
     onFieldChange(field, value) {
         this.props.metadataStore.metadata[field] = value;
     }
@@ -34,14 +29,11 @@ export default class EntryStep extends React.Component {
     	entryStore.availabilitySelected = value;
     	if (value === 'OS') {
     		this.props.metadataStore.metadata.open_source = true;
-    		entryStore.showFile = false;
     	} else if (value === 'ON') {
     		this.props.metadataStore.metadata.open_source = true;
-    		entryStore.showFile = true;
     	} else if (value === 'CS') {
     		this.props.metadataStore.metadata.open_source = false;
     		this.props.metadataStore.metadata.repository_link = "";
-    		entryStore.showFile = true;
     	}
     }
 
@@ -53,21 +45,9 @@ export default class EntryStep extends React.Component {
 		return (
 				
         <div className="container-fluid">
-        <div className="form-group form-group-sm row">
-        <h1> Create a new software record </h1>
-        </div>
-        
-        <div className="form-group form-group-sm row">
-        <h3> A software record will contain related metadata for the submitted software. </h3>
-        </div>
-        <hr></hr>
 
         <Provider dataStore={metadata}>
         <div>        
-          <div className="form-group form-group-sm row">
-           <InputHelper field="repository_link" label="Repository Link" elementType="input" value={metadata.repository_link} onChange={this.onFieldChange}/>
-			<button className="btn btn-primary btn-sm" onClick={this.props.autopopulate}> Autopopulate </button>								
-		  </div>
 		  
 		  <div className="form-group form-group-sm row">
 		  <h3>Please describe the availability of your software: </h3>
@@ -85,11 +65,26 @@ export default class EntryStep extends React.Component {
 		  <InputHelper checked={entryStore.availabilitySelected === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange}/>	  
 		  </div>
 		  
-		  {entryStore.showFile &&
-			  <div className="form-group form-group-sm row">
-		  		<label htmlFor="project_file">Software File Upload</label>
-		  		<input type="file" className="form-control-file" id="project_file" name="project_file"/>
-		  	  </div>
+		  {(entryStore.availabilitySelected === 'OS' || entryStore.availabilitySelected === 'ON') &&
+		  
+			 
+          <div className="form-group form-group-sm row">
+          <InputHelper field="repository_link" label="Repository Link" elementType="input" />
+			<button className="btn btn-primary btn-sm" onClick={this.props.autopopulate}> Autopopulate </button>								
+		  </div>
+		  }
+		  
+		  {(entryStore.availabilitySelected === 'ON' || entryStore.availabilitySelected === 'CS') &&
+		<div className="form-group form-group-sm row">
+		  <label className="col-sm-2">
+		  File Upload
+	      </label>
+		  <div className="col-sm-4">
+		  		<Dropzone onDrop={this.onDrop}>
+		  		<h2> Drag files here or click to browse. </h2>
+		  		</Dropzone>
+		  </div>
+		  </div>
 		  }
 		  
 		  </div>

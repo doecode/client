@@ -101,18 +101,26 @@ export default class DOECodeWizard extends React.Component {
 		</div>
 		
         <div className="col-sm-offset-4 col-sm-4">
-        <ButtonToolbar>
-		<Button bsSize="large" >
-		Publish 
-		</Button>
-		<Button bsStyle="primary" bsSize="large" >
+        <ButtonToolbar justified>
+		<Button bsStyle="primary pull-right" bsSize="large" >
 		Publish and Submit 
 		</Button>
+		<Button bsStyle="default pull-right" bsSize="large" >
+		Publish 
+		</Button>
+
 		</ButtonToolbar>
 		</div>
 		
 		</div>
 		</div>
+		
+        <div className="form-group form-group-sm row">
+        <div className="col-sm-offset-4">
+        <h1> Create a new software record </h1>
+        </div>
+        </div>
+
 
 
             {content}
