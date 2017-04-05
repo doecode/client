@@ -16,7 +16,6 @@ export default class InputHelper extends React.Component {
  }
 
   handleChange(event) {
-
 		this.props.dataStore[this.props.field] = event.target.value;
   }
   
@@ -29,7 +28,6 @@ export default class InputHelper extends React.Component {
   }
   
   handleSelectChange(value) {
-		console.log(value);
 	  if (this.props.multi) {
 
 		let retArray = [];

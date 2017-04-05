@@ -10,8 +10,7 @@ import MetadataStep from './MetadataStep';
 import AccessStep from './AccessStep';
 import ConfirmStep from './ConfirmStep';
 import RIsStep from './RIsStep';
-import StepZilla from 'react-stepzilla';
-import {PanelGroup, Panel, ButtonGroup, Button, ButtonToolbar} from 'react-bootstrap';
+import {PanelGroup, Panel} from 'react-bootstrap';
 
 import css from '../css/main.css';
 
@@ -94,25 +93,16 @@ export default class DOECodeWizard extends React.Component {
       	<div>
       	<div className="row">
         
-        <div className="col-sm-4">
-		<Button bsStyle="info" bsSize="large" >
+        <div className="col-sm-12">
+		<button type="button" className="btn btn-info btn-lg pull-right">
 		Save Your Progress
-		</Button>
+		</button>
 		</div>
 		
-        <div className="col-sm-offset-4 col-sm-4">
-        <ButtonToolbar>
-		<Button bsStyle="primary pull-right" bsSize="large" >
-		Publish and Submit 
-		</Button>
-		<Button bsStyle="default pull-right" bsSize="large" >
-		Publish 
-		</Button>
 
-		</ButtonToolbar>
-		</div>
 		
 		</div>
+		
 		</div>
 		
         <div className="form-group form-group-sm row">
@@ -124,7 +114,22 @@ export default class DOECodeWizard extends React.Component {
 
 
             {content}
+       <div className="row">
+       
+		<div className="col-sm-10">
+		<button type="button" className="btn btn-lg btn-default pull-right">
+		Publish 
+		</button>
+		</div>
+		
+       <div className="col-sm-2">
+		<button type="button" className="btn btn-primary btn-lg pull-right">
+		Publish and Submit 
+		</button>
+		</div>
+		
 
+	  </div>
 
             
 
