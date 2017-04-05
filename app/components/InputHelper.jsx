@@ -29,8 +29,9 @@ export default class InputHelper extends React.Component {
   }
   
   handleSelectChange(value) {
-	  
+		console.log(value);
 	  if (this.props.multi) {
+
 		let retArray = [];
 	  	if (value.trim())
 	  		retArray = value.split(',');
@@ -44,7 +45,6 @@ export default class InputHelper extends React.Component {
 	  const labelStyle = this.props.labelStyle != undefined ? this.props.labelStyle : "col-sm-2 control-label";
 	  const divStyle = this.props.divStyle != undefined ? this.props.divStyle : "col-sm-4 ";
 
-	  
 	  let input = null;
 	  const elementType = this.props.elementType;
 
@@ -56,7 +56,11 @@ export default class InputHelper extends React.Component {
 	  } 
 	  else if (elementType === 'select') {
 	    let ph = this.props.placeholder ? this.props.placeholder : "Select any that apply";
-      	input = <Select allowCreate={this.props.allowCreate} multi={this.props.multi} options={this.props.options} simpleValue placeholder={ph} onChange={this.handleSelectChange} value={this.props.dataStore[this.props.field]} />
+	    let val = this.props.dataStore[this.props.field];
+	    if (this.props.multi)
+	    	val = val.slice();
+
+      	input = <Select allowCreate={this.props.allowCreate} multi={this.props.multi} options={this.props.options} simpleValue placeholder={ph} onChange={this.handleSelectChange} value={val} />
 	  } 
 	  else if (elementType === 'textarea') {
 		 

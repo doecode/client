@@ -101,7 +101,7 @@ export default class DOECodeWizard extends React.Component {
 		</div>
 		
         <div className="col-sm-offset-4 col-sm-4">
-        <ButtonToolbar justified>
+        <ButtonToolbar>
 		<Button bsStyle="primary pull-right" bsSize="large" >
 		Publish and Submit 
 		</Button>
