@@ -54,7 +54,7 @@ export default class EntryStep extends React.Component {
 				
         <div className="container-fluid">
 
-        <Provider dataStore={metadata}>
+        <Provider dataStore={this.props.metadataStore}>
         <div>        
 		  
 		  <div className="form-group form-group-sm row">
@@ -78,7 +78,7 @@ export default class EntryStep extends React.Component {
 			 
           <div className="form-group form-group-sm row">
           <InputHelper field="repository_link" label="Repository Link" elementType="input" />
-			<button className="btn btn-primary btn-sm" onClick={this.props.autopopulate}> Autopopulate </button>								
+		  <button className="btn btn-primary btn-sm" onClick={this.props.autopopulate}> Autopopulate </button>								
 		  </div>
 		  }
 		  

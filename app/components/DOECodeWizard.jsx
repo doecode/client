@@ -81,15 +81,8 @@ export default class DOECodeWizard extends React.Component {
         
         let heading = obj.name;
         let panelStyle = "default";
-        return <Panel header={heading} bsStyle={panelStyle} eventKey={obj.key} key={obj.key}> {obj.component} </Panel>
-        })
-        }
-        </PanelGroup>
-        return (
-
-
-      <div>
-
+        return <Panel header={heading} bsStyle={panelStyle} eventKey={obj.key} key={obj.key}> 
+        
       	<div>
       	<div className="row">
         
@@ -99,11 +92,24 @@ export default class DOECodeWizard extends React.Component {
 		</button>
 		</div>
 		
+		
+		</div>
+		
+		</div>
+		
+        {obj.component} 
+        
+        </Panel>
+        })
+        }
+        </PanelGroup>
+        return (
 
+
+      <div>
 		
-		</div>
-		
-		</div>
+
+
 		
         <div className="form-group form-group-sm row">
         <div className="col-sm-offset-4">

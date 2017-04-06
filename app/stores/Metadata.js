@@ -1,4 +1,7 @@
 import {observable} from 'mobx';
+import Validation from '../utils/Validation';
+
+const validation = new Validation();
 export default class Metadata {
     @observable metadata = {
         "code_id": 0,
@@ -60,6 +63,8 @@ export default class Metadata {
 	        "recipient_phone": {required:true, completed:false, hasError:false, validations: ["Phone"], Panel: 7, errorMessage: ''},
 	        "recipient_org": {required:true, completed:false, hasError:false, validations: [], Panel: 7, errorMessage: ''},   
    }
+   
+
     
 
     updateMetadata(data) {
@@ -68,9 +73,29 @@ export default class Metadata {
     	this.metadata = data;
 
     }
+   
+   validateOnBlur(field, value) {
+	   console.log("howdy");
+	   const validationObj = this.validateMetadata[field];
+	   validation.validate(value,validationObj); 	   
+   }
     
     updateField(field,data) {
     	this.metadata[field] = data;
+    }
+    
+    
+    getValue(field) {
+    	return this.metadata[field];
+    }
+    
+    getValidationStatus(field) {
+    	let retVal = "";
+    	const validationObj = this.validateMetadata[field];
+    	
+    	if (validationObj)
+    		retVal = validationObj.errorMessage;
+    	return retVal;
     }
 
     addToArray(arrName, data) {

@@ -91,6 +91,14 @@ export default class TableStore {
     updateField(field,value) {
     	setCurrentField(field,value);
     }
+    
+    getValue(field,value) {
+    	return this[this.current.type][field];
+    }
+    
+    getValidationStatus(field) {
+    	return "";
+    }
 
 
 }

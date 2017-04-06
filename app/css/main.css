@@ -196,3 +196,20 @@ div#root ol.progtrckr li.progtrckr-todo:before {
 .required a {
 	color: #990000 !important
 }
+
+.field-error-wrapper {
+     display: inline-block;
+     position: relative;
+}
+
+.field-error {
+border: 1px solid #a94442;	
+
+}
+
+.field-error .Select-control {
+	border: 1px solid #a94442;	
+}
+
+
+

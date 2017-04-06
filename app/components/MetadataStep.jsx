@@ -1,5 +1,5 @@
 import React from 'react';
-import InputHelper from './VInputHelper';
+import InputHelper from './InputHelper';
 import {observer,Provider} from "mobx-react";
 
 @observer
@@ -18,49 +18,49 @@ export default class MetadataStep extends React.Component {
 	            <div className="container-fluid form-horizontal">
 	            
 	            
-	            <Provider dataStore={metadata}>
+	            <Provider dataStore={this.props.metadataStore}>
 	            <div>
 	            {metadata.repository_link &&
 	            <div className="form-group form-group-sm row">
-	        		<InputHelper field="repository_link" label="Repository Link: " elementType="display" value={metadata.repository_link}/>
+	        		<InputHelper field="repository_link" label="Repository Link: " elementType="display" />
 	        	</div>
 	            }
 	            
 	            
 	            
 	    	    <div className="form-group form-group-sm row">
-	            	<InputHelper field="software_title" label="Software Title" elementType="input" value={metadata.software_title} />
+	            	<InputHelper field="software_title" label="Software Title" elementType="input" />
 	            </div>
 	            
 	            
 	            <div className="form-group form-group-sm row">
-	            	<InputHelper field="acronym" label="Short Title or Acronym" elementType="input" value={metadata.acronym} />                
+	            	<InputHelper field="acronym" label="Short Title or Acronym" elementType="input"  />                
 	            </div>
 	            
 	            <div className="form-group form-group-sm row">
-	            	<InputHelper field="doi" label="DOI" elementType="input" value={metadata.doi} />              
+	            	<InputHelper field="doi" label="DOI" elementType="input"  />              
 	            </div>
 	            
 	            	
 	            <div className="form-group form-group-sm row">
-	            	<InputHelper field="description" label="Description/Abstract" elementType="textarea" value={metadata.description} />
+	            	<InputHelper field="description" label="Description/Abstract" elementType="textarea" />
 	            </div>
 	            	
 	            	
 	           <div className="form-group form-group-sm row">
-	            	<InputHelper divStyle="col-sm-10" field="date_of_issuance" label="Date of Issuance" elementType="date" value={metadata.date_of_issuance} />
+	            	<InputHelper divStyle="col-sm-10" field="date_of_issuance" label="Date of Issuance" elementType="date"  />
 	            </div>
 	            	
 	            	
 	            <hr/>	
 	            <div className="form-group form-group-sm row">
 	            <InputHelper field="keywords" label="Keywords" elementType="input" value={metadata.keywords} />
-	            <InputHelper field="other_special_requirements" label="Other Special Requirements" elementType="input" value={metadata.other_special_requirements} />
+	            <InputHelper field="other_special_requirements" label="Other Special Requirements" elementType="input" />
 	            </div>
 	            
 	            <div className="form-group form-group-sm row">
-	            <InputHelper field="related_software" label="Related Software" elementType="input" value={metadata.related_software} />
-	            <InputHelper field="site_accession_number" label="Site Accession Number" elementType="input" value={metadata.site_accession_number} />
+	            <InputHelper field="related_software" label="Related Software" elementType="input" />
+	            <InputHelper field="site_accession_number" label="Site Accession Number" elementType="input"  />
 	            </div>
 	            
 	            </div>
