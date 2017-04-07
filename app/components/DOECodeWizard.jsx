@@ -86,8 +86,10 @@ export default class DOECodeWizard extends React.Component {
         if (panelStatus.hasRequired) {
              if (panelStatus.remainingRequired > 0)
                   heading += " (" + panelStatus.remainingRequired + " Required Field(s) Remaining)";
-             else
+             else {
                  heading += " (All Required Fields Completed) ";
+                 panelStyle = "success";
+             }
         }
 
 
@@ -97,7 +99,12 @@ export default class DOECodeWizard extends React.Component {
              else
                  heading += " (All Optional Fields Completed) ";
         }
-
+        
+        if (panelStatus.errors) {
+        	
+        	heading += " This section has errors. "
+        	panelStyle = "danger";
+        }
         return <Panel header={heading} bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
 
       	<div>
@@ -113,6 +120,12 @@ export default class DOECodeWizard extends React.Component {
 		</div>
 
 		</div>
+		
+        {panelStatus.errors &&
+        <div className="error-color">
+        <h3> <b> {panelStatus.errors} </b> </h3>
+        </div>
+        }
 
         {obj.component}
 

@@ -75,6 +75,7 @@ export default class Metadata {
      if (obj.Panel == panelNumber) {
 
      panelStatus.errors += obj.errorMessage;
+     
 
      if (obj.required) {
        panelStatus.hasRequired = true;
@@ -129,6 +130,10 @@ export default class Metadata {
     	if (validationObj)
     		retVal = validationObj.errorMessage;
     	return retVal;
+    }
+    
+    getValidationInfo(field) {
+ 	   return this.validateMetadata[field];
     }
 
     addToArray(arrName, data) {

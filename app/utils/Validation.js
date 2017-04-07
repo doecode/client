@@ -86,11 +86,13 @@ validate(value,validationObj) {
 	  if (filtered.length == 0)
 		  return errors;
 	  
+	  return errors;
+	  /*
 	  return new Promise((resolve,reject) => {
 		    resolve(errors);
 
 		});
-	  
+	  */
 	 /* return new Promise((resolve,reject) => {
 		    $.ajax({
 		        url: "/api/validate",

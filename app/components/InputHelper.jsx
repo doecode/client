@@ -58,14 +58,19 @@ export default class InputHelper extends React.Component {
 	  let input = null;
 	  const elementType = this.props.elementType;
 
-	  const error = this.props.dataStore.getValidationStatus(this.props.field);
-	  const errorStyle = error ? "has-error" : "";
+	  let validationInfo = this.props.dataStore.getValidationInfo(this.props.field);
+	  if (!validationInfo)
+		  validationInfo = {"errorMessage" : "", "required" : false};
+	  
+	  const error = validationInfo.errorMessage;
+	  const errorStyle = error ? "has-error has-feedback" : "";
 
 	  if (elementType === 'display') {
 		  input = this.props.dataStore.getValue(this.props.field);
 	  }
 	  else if (elementType === 'input') {
 		input = <input type="text" className="form-control" value={this.props.dataStore.getValue(this.props.field)} onChange={this.handleChange} onBlur={this.handleBlur} />
+	  
 	  }
 	  else if (elementType === 'select') {
 	    let ph = this.props.placeholder ? this.props.placeholder : "Select any that apply";
@@ -86,17 +91,26 @@ export default class InputHelper extends React.Component {
 		  input = <DatePicker placeholderText="Click to select a date" selected={this.props.dataStore.getValue(this.props.field)} onChange={this.handleDateChange} onBlur={this.handleDateBlur} showMonthDropdown showYearDropdown dropdownMode="select"/>
 	  }
 
+	  let label = "";
+	  
+	  if (this.props.label)
+		  label = validationInfo.required ? "* " + this.props.label : this.props.label;
 
 
 	  return(
       <div className={errorStyle}>
-      {this.props.label &&
+      {label &&
       <label className={labelStyle}>
-        {this.props.label}
+        {label}
       </label>
       }
       <div className={divStyle}>
         {input}
+        {error &&
+        <span className="error-color">
+        <b>{error} </b>
+        </span>
+        }
       </div>
       </div>
     );
