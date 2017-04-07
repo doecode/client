@@ -78,27 +78,44 @@ export default class DOECodeWizard extends React.Component {
 
         let content = <PanelGroup defaultActiveKey="1" accordion>
         {steps.map(function(obj) {
-        
+
         let heading = obj.name;
         let panelStyle = "default";
-        return <Panel header={heading} bsStyle={panelStyle} eventKey={obj.key} key={obj.key}> 
-        
+
+        const panelStatus = metadataStore.getPanelStatus(obj.key);
+        if (panelStatus.hasRequired) {
+             if (panelStatus.remainingRequired > 0)
+                  heading += " (" + panelStatus.remainingRequired + " Required Field(s) Remaining)";
+             else
+                 heading += " (All Required Fields Completed) ";
+        }
+
+
+        if (panelStatus.hasOptional) {
+             if (panelStatus.remainingOptional > 0)
+                  heading += " (" + panelStatus.remainingOptional + " Optional Field(s) Remaining)";
+             else
+                 heading += " (All Optional Fields Completed) ";
+        }
+
+        return <Panel header={heading} bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
+
       	<div>
       	<div className="row">
-        
+
         <div className="col-sm-12">
 		<button type="button" className="btn btn-info btn-lg pull-right">
 		Save Your Progress
 		</button>
 		</div>
-		
-		
+
+
 		</div>
-		
+
 		</div>
-		
-        {obj.component} 
-        
+
+        {obj.component}
+
         </Panel>
         })
         }
@@ -107,10 +124,10 @@ export default class DOECodeWizard extends React.Component {
 
 
       <div>
-		
 
 
-		
+
+
         <div className="form-group form-group-sm row">
         <div className="col-sm-offset-4">
         <h1> Create a new software record </h1>
@@ -121,26 +138,26 @@ export default class DOECodeWizard extends React.Component {
 
             {content}
        <div className="row">
-       
+
 		<div className="col-sm-10">
 		<button type="button" className="btn btn-lg btn-default pull-right">
-		Publish 
+		Publish
 		</button>
 		</div>
-		
+
        <div className="col-sm-2">
 		<button type="button" className="btn btn-primary btn-lg pull-right">
-		Publish and Submit 
+		Publish and Submit
 		</button>
 		</div>
-		
+
 
 	  </div>
 
-            
+
 
     </div>
-            
+
         );
     }
 }

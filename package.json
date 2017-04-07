@@ -59,6 +59,7 @@
     "react-select": "0.9.1",
     "react-stepzilla": "^4.0.0",
     "request": "^2.79.0",
-    "request-promise": "^4.1.1"
+    "request-promise": "^4.1.1",
+    "validator": "^7.0.0"
   }
 }

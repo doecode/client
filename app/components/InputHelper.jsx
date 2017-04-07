@@ -14,25 +14,31 @@ export default class InputHelper extends React.Component {
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+    this.handleDateBlur = this.handleDateBlur.bind(this);
  }
 
-  
+
   handleBlur(event) {
 	  this.props.dataStore.validateOnBlur(this.props.field,event.target.value);
   }
-  
+
+  handleDateBlur() {
+
+    this.props.dataStore.validateOnBlur(this.props.field,this.props.dataStore.getValue(this.props.field));
+  }
+
   handleChange(event) {
 	  this.props.dataStore.updateField(this.props.field,event.target.value);
   }
-  
+
   handleDateChange(date) {
 		this.props.dataStore.updateField(this.props.field,date);
   }
-  
+
   handleRadioChange(event) {
 	  this.props.onChange(this.props.field,event.target.value);
   }
-  
+
   handleSelectChange(value) {
 	  if (this.props.multi) {
 
@@ -51,7 +57,7 @@ export default class InputHelper extends React.Component {
 
 	  let input = null;
 	  const elementType = this.props.elementType;
-	  
+
 	  const error = this.props.dataStore.getValidationStatus(this.props.field);
 	  const errorStyle = error ? "has-error" : "";
 
@@ -60,7 +66,7 @@ export default class InputHelper extends React.Component {
 	  }
 	  else if (elementType === 'input') {
 		input = <input type="text" className="form-control" value={this.props.dataStore.getValue(this.props.field)} onChange={this.handleChange} onBlur={this.handleBlur} />
-	  } 
+	  }
 	  else if (elementType === 'select') {
 	    let ph = this.props.placeholder ? this.props.placeholder : "Select any that apply";
 	    let val = this.props.dataStore.getValue(this.props.field);
@@ -68,23 +74,23 @@ export default class InputHelper extends React.Component {
 	    	val = val.slice();
 	    const errorClass = error ? "field-error" : ""
       	input = <Select className={errorClass} allowCreate={this.props.allowCreate} multi={this.props.multi} options={this.props.options} simpleValue placeholder={ph} onChange={this.handleSelectChange} value={val} />
-	  } 
+	  }
 	  else if (elementType === 'textarea') {
-		 
-		 input = <textarea className="form-control" value={this.props.dataStore.getValue(this.props.field)} onChange={this.handleChange} />
-	  } 
+
+		 input = <textarea className="form-control" value={this.props.dataStore.getValue(this.props.field)} onChange={this.handleChange} onBlur={this.handleBlur} />
+	  }
 	  else if (elementType === 'radio') {
 			 input = <input type="radio" checked={this.props.checked} name={this.props.field} value={this.props.value} onChange={this.handleRadioChange} />
-	  } 
-	  else if (elementType === 'date') {
-		  input = <DatePicker placeholderText="Click to select a date" selected={this.props.dataStore.getValue(this.props.field)} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>
 	  }
-	  
+	  else if (elementType === 'date') {
+		  input = <DatePicker placeholderText="Click to select a date" selected={this.props.dataStore.getValue(this.props.field)} onChange={this.handleDateChange} onBlur={this.handleDateBlur} showMonthDropdown showYearDropdown dropdownMode="select"/>
+	  }
 
-	  
+
+
 	  return(
       <div className={errorStyle}>
-      {this.props.label && 
+      {this.props.label &&
       <label className={labelStyle}>
         {this.props.label}
       </label>
