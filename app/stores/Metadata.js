@@ -74,7 +74,8 @@ export default class Metadata {
      const obj = this.validateMetadata[field];
      if (obj.Panel == panelNumber) {
 
-     panelStatus.errors += obj.errorMessage;
+     if (obj.errorMessage)
+    	 panelStatus.errors += obj.errorMessage + " ";
      
 
      if (obj.required) {

@@ -8,6 +8,7 @@ import AgentsStep from './AgentsStep';
 import OrgsStep from './OrgsStep';
 import MetadataStep from './MetadataStep';
 import AccessStep from './AccessStep';
+import RecipientStep from './RecipientStep';
 import ConfirmStep from './ConfirmStep';
 import RIsStep from './RIsStep';
 import {PanelGroup, Panel} from 'react-bootstrap';
@@ -33,6 +34,7 @@ export default class DOECodeWizard extends React.Component {
         		{name: 'Developers & Contributors', component: <AgentsStep metadataStore={metadataStore} />},
         		{name: 'Organizations', component: <OrgsStep metadataStore={metadataStore}/>},
         		{name: 'Identifiers', component: <RIsStep metadataStore={metadataStore}/>},
+        		{name: 'Recipient Information', component: <RecipientStep metadataStore={metadataStore}/>},
         		{name: 'Summary', component: <ConfirmStep metadataStore={metadataStore}/> }
         		];
         for (var i = 0; i < steps.length; i++)
@@ -102,7 +104,7 @@ export default class DOECodeWizard extends React.Component {
         
         if (panelStatus.errors) {
         	
-        	heading += " This section has errors. "
+        	heading += " This section contains errors. "
         	panelStyle = "danger";
         }
         return <Panel header={heading} bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
