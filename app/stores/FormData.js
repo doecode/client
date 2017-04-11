@@ -1,38 +1,33 @@
 import {observable} from 'mobx';
+import uniqid from 'uniqid';
 import Validation from '../utils/Validation';
 
 const validation = new Validation();
 export default class Metadata {
 	
-	constructor(data,validation) {
-		this.data = data;
-		this.validation = validation;
+	constructor(schema) {
+		this.schema = schema;
+		this.id = uniqid();
+		
 	}
    
    getValue(field) {
-    	return this.data[field];
+    	return this.schema[field].value;
    }
     
     
-   updateField(field,data) {
-    	this.data[field] = data;
+   setValue(field,data) {
+    	this.schema[field].value = data;
     }
    
-   getValidationStatus(field) {
-   	let retVal = "";
-   	const validationObj = this.validateMetadata[field];
-   	
-   	if (validationObj)
-   		return
-   	
-   	return false;
+   getFieldInfo(field) {
+   	return this.schema[field];
    }
    
 
     
-   validateOnBlur(field, value) {
-	   const validationObj = this.validation[field];
-	   validation.validate(value,validationObj); 	   
+   validateOnBlur(field) {
+	   validation.validate(this.getValue(field),this.schema[field]); 	   
    }
     
 
@@ -48,15 +43,20 @@ export default class Metadata {
 
     removeFromArray(arrName,data) {
         const deletedPlace = data.place;
-        const index = this.metadata[arrName].findIndex(item => item.place === data.place);
+        const index = this.metadata[arrName].findIndex(item => item.id === data.id);
         this.metadata[arrName].splice(index, 1);
 
-        for (var i = 0; i < this.metadata[arrName].length; i++) {
+        if (data.place) {
+            const deletedPlace = data.place;
+            for (var i = 0; i < this.metadata[arrName].length; i++) {
 
-            if (this.metadata[arrName][i].place > deletedPlace)
-                this.metadata[arrName][i].place--;
+            	if (this.metadata[arrName][i].place > deletedPlace)
+            		this.metadata[arrName][i].place--;
+            
             }
+        
         }
+    }
 
     modifyArrayElement(arrName,data, previousPlace) {
         var index;
