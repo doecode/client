@@ -3,91 +3,139 @@ import uniqid from 'uniqid';
 import Validation from '../utils/Validation';
 
 const validation = new Validation();
-export default class Metadata {
+export default class FormData {
 	
-	constructor(schema) {
-		this.schema = schema;
-		this.id = uniqid();
+	constructor(props) {
+		this.fieldMap = props.fieldMap;
+		this.infoSchema = props.infoSchema;
+		if (props.parent) {
+			this.id = uniqid();
+			this.hasParent = true;
+			this.parentInvalids = props.parentInfo.invalids;
+			this.parentError = props.parentInfo.error;
+			this.parentLabel = props.parentInfo.label;
+			this.parentArray = props.parentArray;
+			
+		}
+		
+		if (this.fieldMap.place !== undefined)
+			this.previousPlace = this.fieldMap.place
 		
 	}
    
    getValue(field) {
-    	return this.schema[field].value;
+    	return this.fieldMap[field].value;
    }
     
     
    setValue(field,data) {
-    	this.schema[field].value = data;
+    	this.fieldMap[field].value = data;
     }
    
    getFieldInfo(field) {
-   	return this.schema[field];
-   }
-   
-
-    
-   validateOnBlur(field) {
-	   validation.validate(this.getValue(field),this.schema[field]); 	   
+   	return this.infoSchema[field];
    }
     
 
-    
-    
-
-
-
-    addToArray(arrName, data) {
-        data.place = this.metadata[arrName].length + 1;
-        this.metadata[arrName].push(data);
+    addToArray(data) {
+    	if (data.place !== undefined)
+    		data.place = this.parentArray.length + 1;
+    	
+        this.parentArray.push(data);
     }
 
-    removeFromArray(arrName,data) {
-        const deletedPlace = data.place;
-        const index = this.metadata[arrName].findIndex(item => item.id === data.id);
-        this.metadata[arrName].splice(index, 1);
+    removeFromArray(data) {
+        const index = this.parentArray.findIndex(item => item.id === data.id);
+        this.parentArray.splice(index, 1);
 
-        if (data.place) {
+        if (data.place !== undefined) {
             const deletedPlace = data.place;
-            for (var i = 0; i < this.metadata[arrName].length; i++) {
+            const end = parentArray.length;
+            for (var i = 0; i < end; i++) {
 
-            	if (this.metadata[arrName][i].place > deletedPlace)
-            		this.metadata[arrName][i].place--;
+            	if (this.parentArray[i].place > deletedPlace)
+            		this.parentArray[i].place--;
             
             }
         
         }
     }
 
-    modifyArrayElement(arrName,data, previousPlace) {
-        var index;
-        if (data.place != previousPlace) {
-            index = this.updateElementPlaceAndReturnIndex(arrName, data, previousPlace);
-        } else {
-            index = this.metadata[arrName].findIndex(item => item.place === data.place);
+    modifyArrayElement(data) {
+        
+    	if (data.place !== undefined && data.place !== this.previousPlace) {
+            this.updateElementPlaceAndReturnIndex(data);
         }
+        
+        const index = this.parentArray.findIndex(item => item.id === data.id);
+        
 
         if (index > -1)
-            this.metadata[arrName][index] = data;
+            this.parentArray[index] = data;
         }
 
-    updateElementPlaceAndReturnIndex(arrName, data, previousPlace) {
-        var index = -1;
+    updateElementPlaceAndReturnIndex(data) {
         const newPlace = data.place;
-        const check = newPlace > previousPlace;
-
-        for (var i = 0; i < this.metadata[arrName].length; i++) {
-            if (check && this.metadata[arrName][i].place <= newPlace && this.metadata[arrName][i].place > previousPlace) {
-                this.metadata[arrName][i].place--;
-            } else if (!check && this.metadata[arrName][i].place >= newPlace && this.metadata[arrName][i].place < previousPlace) {
-                this.metadata[arrName][i].place++;
-            } else if (this.metadata[arrName][i].place == previousPlace) {
-                this.metadata[arrName][i].place = newPlace;
-                index = i;
+        const check = newPlace > this.previousPlace;
+        const end = parentArray.length;
+        for (var i = 0; i < end; i++) {
+            if (check && this.parentArray[i].place <= newPlace && this.parentArray[i].place > previousPlace) {
+                this.parentArray[i].place--;
+            } else if (!check && this.parentArray[i].place >= newPlace && this.parentArray[i].place < previousPlace) {
+                this.parentArray[i].place++;
+            } else if (this.parentArray[i].place == previousPlace) {
+                this.parentArray[i].place = newPlace;
             }
         }
+        this.previousPlace = newPlace;
 
-        return index;
 
     }
+    
+    
+    validateField(field) {
+ 	   validation.validate(this.getValue(field), this.getFieldInfo(field), validationCallback); 	   
+    }
+    
+    validationCallback(information, errors) {
+ 	   information.error = errors;
+ 	   
+ 	   if (errors)
+ 		   information.completed = false;
+ 	   else {
+ 		   information.completed = true;
+ 		   if (this.hasParent) {
+ 			   if (this.parentInvalids.length  > 0) {
+ 			   const index = this.parentInvalids.findIndex(item => item.id === this.id);
+ 			   this.parentInvalids.splice(index,1);
+ 			   
+ 			   if (this.parentInvalids.length == 0)
+ 				   this.parent.error = '';
+ 			   }
+ 		   }
+ 			   
+ 	   }
+ 		   
+    }
+    
+    getSchemaErrors() {
+    	let errors = [];
+    	
+    	for (var field in this.schema) {
+    		const information = this.getFieldInfo(field);
+    		
+    		if (information.error)
+    			errors.push(field);
+    		else if (information.required && !information.completed) {
+    			errors.push(field);
+    			information.error = field + " is required.";
+    		}
+    		
+    	}
+    	
+    	   	
+    	return errors;
+    }
+    
 
 }
