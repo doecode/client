@@ -1,9 +1,9 @@
 import {observable} from 'mobx';
 import uniqid from 'uniqid';
-import Validation from '../utils/Validation';
+import Validation from '../utils/VValidation';
 
 const validation = new Validation();
-export default class FormData {
+export default class BaseData {
 	
 	constructor(props) {
 		this.fieldMap = props.fieldMap;
@@ -20,6 +20,8 @@ export default class FormData {
 		
 		if (this.fieldMap.place !== undefined)
 			this.previousPlace = this.fieldMap.place
+			
+	    this.validationCallback = this.validationCallback.bind(this);
 		
 	}
    
@@ -94,7 +96,21 @@ export default class FormData {
     
     
     validateField(field) {
- 	   validation.validate(this.getValue(field), this.getFieldInfo(field), validationCallback); 	   
+       const info = this.getFieldInfo(field);
+       
+       if (!info)
+    	   return;
+       
+       const value = this.getValue(field);
+       
+       if (value.length === 0) {
+		   info.completed = false;
+		   info.error = '';
+	   } else {
+	 	   validation.validate(value, info, validationCallback);
+	   }
+    
+ 	   
     }
     
     validationCallback(information, errors) {
@@ -135,6 +151,14 @@ export default class FormData {
     	
     	   	
     	return errors;
+    }
+    
+    getInfoSchema() {
+    	return this.infoSchema
+    }
+    
+    getData() {
+    	return this.fieldMap;
     }
     
 

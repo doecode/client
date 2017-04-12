@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import {doAjax, appendQueryString} from '../utils/utils';
 import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
+import VMetadata from '../stores/VMetadata';
 import EntryStep from './EntryStep';
 import AgentsStep from './AgentsStep';
 import OrgsStep from './OrgsStep';
-import MetadataStep from './MetadataStep';
+import MetadataStep from './VMetadataStep';
 import AccessStep from './AccessStep';
 import RecipientStep from './RecipientStep';
 import ConfirmStep from './ConfirmStep';
@@ -16,6 +17,7 @@ import {PanelGroup, Panel} from 'react-bootstrap';
 import css from '../css/main.css';
 
 const metadataStore = new Metadata();
+const vMetadata = new VMetadata();
 let steps = [];
 
 @observer
@@ -29,7 +31,7 @@ export default class DOECodeWizard extends React.Component {
         steps =
         	[
         		{name: 'Repository Information', component: <EntryStep metadataStore={metadataStore}  autopopulate={this.autopopulate}/> },
-        		{name: 'Product Description', component: <MetadataStep metadataStore={metadataStore}/>},
+        		{name: 'Product Description', component: <MetadataStep metadataStore={vMetadata}/>},
         		{name: 'Licenses & Access Limitations', component: <AccessStep metadataStore={metadataStore}/>},
         		{name: 'Developers & Contributors', component: <AgentsStep metadataStore={metadataStore} />},
         		{name: 'Organizations', component: <OrgsStep metadataStore={metadataStore}/>},
