@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import {doAjax, appendQueryString} from '../utils/utils';
 import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
-import VMetadata from '../stores/VMetadata';
-import MetadataStore from '../stores/MetadataStore';
 import EntryStep from './EntryStep';
 import AgentsStep from './AgentsStep';
 import OrgsStep from './OrgsStep';
-import MetadataStep from './VMetadataStep';
+import MetadataStep from './MetadataStep';
 import AccessStep from './AccessStep';
 import RecipientStep from './RecipientStep';
 import ConfirmStep from './ConfirmStep';
@@ -17,10 +15,7 @@ import {PanelGroup, Panel} from 'react-bootstrap';
 
 import css from '../css/main.css';
 
-const metadataStore = new Metadata();
-const metadataStoreZwei = new MetadataStore();        
-const mProps = {fieldMap: metadataStoreZwei.metadata, infoSchema: metadataStoreZwei.metadataInfoSchema};
-const vMetadata = new VMetadata(mProps);
+const metadata = new Metadata();      
 
 let steps = [];
 
@@ -36,15 +31,20 @@ export default class DOECodeWizard extends React.Component {
 
         steps =
         	[
-        		{name: 'Repository Information', component: <EntryStep metadataStore={metadataStore}  autopopulate={this.autopopulate}/> },
-        		{name: 'Product Description', component: <MetadataStep metadataStore={vMetadata}/>},
-        		{name: 'Licenses & Access Limitations', component: <AccessStep metadataStore={metadataStore}/>},
-        		{name: 'Developers & Contributors', component: <AgentsStep metadataStore={metadataStore} />},
-        		{name: 'Organizations', component: <OrgsStep metadataStore={metadataStore}/>},
-        		{name: 'Identifiers', component: <RIsStep metadataStore={metadataStore}/>},
-        		{name: 'Recipient Information', component: <RecipientStep metadataStore={metadataStore}/>},
-        		{name: 'Summary', component: <ConfirmStep metadataStore={metadataStore}/> }
+        		{name: 'Repository Information', component: <EntryStep metadata={metadata}  autopopulate={this.autopopulate}/> },
+        		{name: 'Product Description', component: <MetadataStep metadata={metadata}/>},
+        		{name: 'Licenses & Access Limitations', component: <AccessStep metadata={metadata}/>},
+        		{name: 'Developers & Contributors', component: <AgentsStep metadata={metadata} />}
+
         		];
+        
+        /*
+         *         		{name: 'Developers & Contributors', component: <AgentsStep metadata={metadata} />},
+        		{name: 'Organizations', component: <OrgsStep metadata={metadata}/>},
+        		{name: 'Identifiers', component: <RIsStep metadata={metadata}/>},
+        		{name: 'Recipient Information', component: <RecipientStep metadata={metadata}/>},
+        		{name: 'Summary', component: <ConfirmStep metadata={metadata}/> }
+         */
         for (var i = 0; i < steps.length; i++)
         	steps[i].key = "" + (i+1);
     }
@@ -92,7 +92,7 @@ export default class DOECodeWizard extends React.Component {
         let heading = obj.name;
         let panelStyle = "default";
 
-        const panelStatus = vMetadata.getPanelStatus(obj.key);
+        const panelStatus = metadata.getPanelStatus(obj.key);
         if (panelStatus.hasRequired) {
              if (panelStatus.remainingRequired > 0)
                   heading += " (" + panelStatus.remainingRequired + " Required Field(s) Remaining)";

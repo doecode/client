@@ -10,7 +10,7 @@ export default class MetadataStep extends React.Component {
 	}
 
 	render() {
-		const metadata = this.props.metadataStore.metadata;
+		const metadata = this.props.metadata;
 		
 		
 		return (
@@ -18,9 +18,9 @@ export default class MetadataStep extends React.Component {
 	            <div className="container-fluid form-horizontal">
 	            
 	            
-	            <Provider dataStore={this.props.metadataStore}>
+	            <Provider dataStore={metadata}>
 	            <div>
-	            {metadata.repository_link &&
+	            {metadata.getValue("repository_link") &&
 	            <div className="form-group form-group-sm row">
 	        		<InputHelper field="repository_link" label="Repository Link: " elementType="display" />
 	        	</div>
@@ -54,7 +54,7 @@ export default class MetadataStep extends React.Component {
 	            	
 	            <hr/>	
 	            <div className="form-group form-group-sm row">
-	            <InputHelper field="keywords" label="Keywords" elementType="input" value={metadata.keywords} />
+	            <InputHelper field="keywords" label="Keywords" elementType="input" />
 	            <InputHelper field="other_special_requirements" label="Other Special Requirements" elementType="input" />
 	            </div>
 	            

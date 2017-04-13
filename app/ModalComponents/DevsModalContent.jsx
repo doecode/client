@@ -13,7 +13,7 @@ export default class DevsModalContent extends React.Component {
 	}
     
 	render() {
-        const dev = this.props.tableStore.currentData();
+        const dev = this.props.data;
         
 		const contributorTypes = [
 			{label: 'Contact Person', value: 'ContactPerson'},
@@ -25,35 +25,35 @@ export default class DevsModalContent extends React.Component {
             <Provider dataStore={dev}>
             <div>     
                 <div className="form-horizontal">
-                    {this.props.isEdit && <div className="form-group form-group-sm row">
+                    {dev.getValue("place") > -1 && <div className="form-group form-group-sm row">
                         <InputHelper field="place" label="#" elementType="input" value={dev.place} />
                     </div>
                     }
                     <div className="form-group form-group-sm row">
-                        <InputHelper field="first_name" label="First Name" elementType="input" value={dev.first_name} />
+                        <InputHelper field="first_name" label="First Name" elementType="input" />
                     </div>
                     <div className="form-group form-group-sm row">
-                        <InputHelper field="middle_name" label="Middle Name" elementType="input" value={dev.middle_name} />
+                        <InputHelper field="middle_name" label="Middle Name" elementType="input"  />
                     </div>
                     <div className="form-group form-group-sm row">
-                        <InputHelper field="last_name" label="Last Name" elementType="input" value={dev.last_name} />
+                        <InputHelper field="last_name" label="Last Name" elementType="input"  />
                     </div>
                     <div className="form-group form-group-sm row">
-                        <InputHelper field="email" label="Email" elementType="input" value={dev.email} />
+                        <InputHelper field="email" label="Email" elementType="input"  />
                     </div>
                         
                     <div className="form-group form-group-sm row">
-                        <InputHelper field="orcid" label="ORCID" elementType="input" value={dev.orcid} />
+                        <InputHelper field="orcid" label="ORCID" elementType="input"  />
                     </div>
 
                     <div className="form-group form-group-sm row">
-                        <InputHelper field="affiliations" label="Affiliations" elementType="input" value={dev.affiliations} />
+                        <InputHelper field="affiliations" label="Affiliations" elementType="input"  />
                     </div>
 
                         
-                    {dev.contributor_type !== undefined &&
+                    {dev.getValue("contributor_type") !== undefined &&
                     <div className="form-group form-group-sm row">
-                        <InputHelper field="contributor_type" label="Contributor Type" elementType="select" value={dev.contributor_type} options={contributorTypes} />
+                        <InputHelper field="contributor_type" label="Contributor Type" elementType="select"  options={contributorTypes} />
                     </div>
                         }
                         

@@ -20,28 +20,25 @@ export default class EntryStep extends React.Component {
 
 	onDrop(files) {
 		console.log('Received files: ', files);
-		this.props.metadataStore.files = files;
+		this.props.metadata.setValue("files", files);
 	}
 	
 	deleteFile() {
-		this.props.metadataStore.files = [];
+		this.props.metadata.setValue("files", []);
 	}
 	
-    onFieldChange(field, value) {
-        this.props.metadataStore.metadata[field] = value;
-    }
     
     onRadioChange(field,value) {
     	let stateObj = this.state;
     	entryStore.availabilitySelected = value;
     	if (value === 'OS') {
-    		this.props.metadataStore.metadata.open_source = true;
-    		this.props.metadataStore.files = [];
+    		this.props.metadata.setValue("open_source", true);
+    		this.props.metadata.setValue("files", []);
     	} else if (value === 'ON') {
-    		this.props.metadataStore.metadata.open_source = true;
+    		this.props.metadata.setValue("open_source", true);
     	} else if (value === 'CS') {
-    		this.props.metadataStore.metadata.open_source = false;
-    		this.props.metadataStore.metadata.repository_link = "";
+    		this.props.metadata.setValue("open_source", false);
+    		this.props.metadata.setValue("repository_link", "");
     	}
     }
 
@@ -49,12 +46,14 @@ export default class EntryStep extends React.Component {
 
 
 	render() {
-		const metadata = this.props.metadataStore.metadata;
+		const metadata = this.props.metadata;
+		const repository_link = metadata.getValue("repository_link");
+		const files = metadata.getValue("files");
 		return (
 				
         <div className="container-fluid">
 
-        <Provider dataStore={this.props.metadataStore}>
+        <Provider dataStore={metadata}>
         <div>        
 		  
 		  <div className="form-group form-group-sm row">
@@ -73,7 +72,7 @@ export default class EntryStep extends React.Component {
 		  <InputHelper checked={entryStore.availabilitySelected === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange}/>	  
 		  </div>
 		  
-		  {(entryStore.availabilitySelected === 'OS' || entryStore.availabilitySelected === 'ON') && this.props.metadataStore.files.length === 0 &&
+		  {(entryStore.availabilitySelected === 'OS' || entryStore.availabilitySelected === 'ON') && files.length === 0 &&
 		  
 			 
           <div className="form-group form-group-sm row">
@@ -82,7 +81,7 @@ export default class EntryStep extends React.Component {
 		  </div>
 		  }
 		  
-		  {(entryStore.availabilitySelected === 'ON' || entryStore.availabilitySelected === 'CS') && !metadata.repository_link &&
+		  {(entryStore.availabilitySelected === 'ON' || entryStore.availabilitySelected === 'CS') && !repository_link &&
 		<div className="form-group form-group-sm row">
 		  <label className="col-sm-2">
 		  File Upload
@@ -97,14 +96,14 @@ export default class EntryStep extends React.Component {
 		  
 		  }
 		  
-		  {this.props.metadataStore.files.length > 0 &&
+		  {files.length > 0 &&
 		 <div className="form-group form-group-sm row">
 		 <label className="col-sm-2">
 		 Uploaded File
 		 </label>
 		 <div className="col-sm-4">
 
-		 {this.props.metadataStore.files[0].name}
+		 {files[0].name}
 		 </div>
 		 <div className="col-sm-4">
 		 <Button bsStyle="danger" active onClick={this.deleteFile}> Delete File </Button>

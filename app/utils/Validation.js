@@ -5,59 +5,54 @@ export default class Validation {
 
 
 
-validate(value,validationObj) {
-	   let errors = "";
+validate(value,validationObj, validationCallback, parentArraySize) {
 	   
-	   if (!validationObj)
-		   return;
-	   
-	   if (value.length === 0) {
-		   validationObj.completed = false;
-		   validationObj.hasError = false;
-		   validationObj.errorMessage = "";
-	   } else {
-		   errors = this.validateByTypes(value,validationObj.validations);
-		   
-		   console.log(errors);
-		   
-		   if (errors) {
-			   validationObj.errorMessage = errors;
-			   validationObj.hasError = true;
-			   validationObj.completed = false;
-		   } else {
-			   validationObj.errorMessage = "";
-			   validationObj.hasError = false;
-			   validationObj.completed = true;
-		   }
-		   
-	   }
-  }
-  
-  validateByTypes(value, validations) {
-	    if (validations.length === 0)
-	    	return "";
-	    else {	    	
-	    	let errors = this.validateInClient(value, validations);
-	    	return this.validateOnServer(value,validations, errors);	    	 
-	    }
-  }
-  
-  validateInClient(value,validations) {
-	  let errors = ""
+	 let errors = "";
+	  const validations = validationObj.validations;
+	  const valLength = validations.length;
+	  for (var i = 0; i < valLength; i++) {
 
-	  for (var i = 0; i < validations.length; i++) {
-		  const validation = validations[i];
-		  if (validation === "Phone") {
+		  if (validations[i] === "Phone") {
 			  errors += this.validatePhone(value)
-		  } else if (validation === "Email") {
+		  } else if (validations[i] === "Email") {
 			  errors += this.validateEmail(value);
-		  } else if (validation === "URL") {
+		  } else if (validations[i] === "URL") {
 			  errors += this.validateURL(value);
-		  }
+		  }    	 
+	    
 	  }
 	  
-	  return errors;
+	  const filtered = validations.filter(this.needsServer);
+	  
+	  //if (filtered.length == 0)
+		  validationCallback(validationObj, errors);
+		  
+			 /* 
+			doAjax("POST","/api/validate" , successCallback, validations)
+		    $.ajax({
+		        url: "/api/validate",
+		        cache: false,
+		        method: 'POST',
+		        dataType: 'json',
+		        data: JSON.stringify(obj),
+		        contentType: "application/json; charset=utf-8",
+		        success: function(data) {
+		        	console.log(data);
+		        	validateCallback(validationObj, errors);
+		        },
+		        error: function(x,y,z) {
+		        }
+		      });
+
+		 */
   }
+
+  needsServer(value) {
+	  const asyncValidations = ["Award", "DOI"];
+
+	  return asyncValidations.indexOf(value) > -1;
+  }
+  
   
   validatePhone(value) {
 	  let errors = "";
@@ -69,7 +64,7 @@ validate(value,validationObj) {
   validateEmail(value) {
 	  let errors = "";
 	  if (!validator.isEmail(value))
-		  errors += value + " is not a valid phone email.";
+		  errors += value + " is not a valid email.";
 	  return errors;
   }
   
@@ -80,45 +75,8 @@ validate(value,validationObj) {
 	  return errors;
   }
   
-  validateOnServer(value, validations,errors) {
-	  const filtered = validations.filter(this.inAsync);
-	  
-	  if (filtered.length == 0)
-		  return errors;
-	  
-	  return errors;
-	  /*
-	  return new Promise((resolve,reject) => {
-		    resolve(errors);
-
-		});
-	  */
-	 /* return new Promise((resolve,reject) => {
-		    $.ajax({
-		        url: "/api/validate",
-		        cache: false,
-		        method: 'POST',
-		        dataType: 'json',
-		        data: JSON.stringify(obj),
-		        contentType: "application/json; charset=utf-8",
-		        success: function(data) {
-		        	console.log(data);
-		        	resolve(errors + data.errors);
-		        },
-		        error: function(x,y,z) {
-		        	reject("Internal Server Error");
-		        }
-		      });
-
-		});*/
-	  
-  }
   
-  inAsync(value) {
-	  const asyncValidations = ["Award", "DOI"];
 
-	  return asyncValidations.indexOf(value) > -1;
-  }
   
   
 }

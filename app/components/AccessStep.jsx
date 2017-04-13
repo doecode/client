@@ -66,32 +66,34 @@ export default class AccessStep extends React.Component{
 
 	onAccessLimitationsChange(value) {
 
+		let access_limitations = this.props.metadata.getValue("access_limitations")
 		if (value.trim())
-			this.props.metadataStore.metadata.access_limitations = value.split(',');
+			access_limitations = value.split(',');
 		else
-			this.props.metadataStore.metadata.access_limitations = [];
+			access_limitations = [];
 
-		const accessArray = this.props.metadataStore.metadata.access_limitations.slice();
+		const accessArray = access_limitations.slice();
 
 
 	    if (this.hasSubLimitations(accessArray) && accessArray.indexOf('OUO') == -1)
-	    	this.props.metadataStore.metadata.access_limitations.push('OUO');
+	    	access_limitations.push('OUO');
 
+	    this.props.metadata.setValue("access_limitations", access_limitations)
 	}
 
 	onLicensesChange(value) {
 
 		if (value.trim())
-			this.props.metadataStore.metadata.licenses = value.split(',');
+			this.props.metadata.setValue("licenses",value.split(','));
 		else
-			this.props.metadataStore.metadata.licenses = [];
+			this.props.metadata.setValue("licenses",[])
 	}
 
 
 
 	render() {
 
-		const licenses = [
+		const licenseOptions = [
 			{label: 'None', value: 'None'},
 			{label: 'Apache License 2.0', value: 'Apache License 2.0'},
 			{label: 'GNU General Public License v3.0', value: 'GNU General Public License v3.0'},
@@ -108,17 +110,21 @@ export default class AccessStep extends React.Component{
 			{label: 'The Unlicense', value: 'The Unlicense'}
 			];
 
-		let accessLimitationOptions = this.generateAccessLimitationOptions(this.props.metadataStore.metadata.access_limitations);
+		const metadata = this.props.metadata;
+		const access_limitations = metadata.getValue("access_limitations");
+		const licenses = metadata.getValue("licenses");
+		let accessLimitationOptions = this.generateAccessLimitationOptions(access_limitations);
+
 		
 		return(
 		<div className="form-group">
 			<div className="col-sm-offset-2 col-sm-8">
 				<h2 className="section-heading">Licenses</h2>
-				<Select multi simpleValue placeholder="Select your license(s)" options={licenses} value={this.props.metadataStore.metadata.licenses.slice()} onChange={this.onLicensesChange}/>
+				<Select multi simpleValue placeholder="Select your license(s)" options={licenseOptions} value={licenses.slice()} onChange={this.onLicensesChange}/>
 			</div>
 			<div className="col-sm-offset-2 col-sm-8">
 				<h2 className="section-heading">Intellectual Property/Distribution Limitations</h2>
-				<Select multi simpleValue placeholder="Select all that apply" options={accessLimitationOptions} value={this.props.metadataStore.metadata.access_limitations.slice()} onChange={this.onAccessLimitationsChange}/>
+				<Select multi simpleValue placeholder="Select all that apply" options={accessLimitationOptions} value={access_limitations.slice()} onChange={this.onAccessLimitationsChange}/>
 			</div>
 		</div>
 		);

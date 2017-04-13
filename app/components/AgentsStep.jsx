@@ -2,6 +2,8 @@ import React from 'react';
 import AgentsModal from './AgentsModal';
 import AgentsTable from './AgentsTable';
 import TableStore from '../stores/TableStore';
+import Developer from '../stores/Developer';
+import Contributor from '../stores/Contributor';
 import {observer} from 'mobx-react';
 import {Tabs, Tab} from 'react-bootstrap';
 import Promise from 'promise';
@@ -41,18 +43,7 @@ export default class AgentsStep extends React.Component {
 
 	onTabSelect(key) {
 
-		const currentOpts = [{
-			"arrName" : "developers",
-			"type" : "developer",
-			"label" : "Developers"
-		},
-		{
-			"arrName" : "contributors",
-			"type" : "contributor",
-			"label" : "Contributors"
-		}
 
-		];
 
 	    tableStore.current = currentOpts[key];
 	    console.log(tableStore.current);
@@ -125,11 +116,23 @@ export default class AgentsStep extends React.Component {
 						}
 					];
 
-		    const arr = this.props.metadataStore.metadata[tableStore.current.arrName].slice();
-		    const arrLength = arr.length;
+			const opts = ["developers", "contributors"];
+			const currentParent = opts[this.state.key];
+			const metadata = this.props.metadata;
+			const currentArray = metadata.getAsArray(currentParent);
+			const childProps = {id: tableStore.currentId, parentArray: metadata.getValue(currentParent), parentInfo: metadata.getFieldInfo(currentParent)};
+			
+	        
+	    	let data = null;
+	    	
+	    	if (currentParent === 'developers')
+	    		data = new Developer(childProps);
+	    	else if (currentParent === 'contributors')
+	    		data = new Contributor(childProps);
+			
 		    const content = <div>
-		      <AgentsTable arr={arr} tableStore={tableStore} config={tableConfig} finished={false} />
-		      <AgentsModal tableStore={tableStore} metadataStore={this.props.metadataStore} arrLength={arrLength} contentType="Devs" />
+		      <AgentsTable arr={currentArray} tableStore={tableStore} config={tableConfig} finished={false} />
+		      <AgentsModal tableStore={tableStore} data={data} metadata={this.props.metadata} contentType="Devs" />
 		    </div>
 		    return (
 		       <div>

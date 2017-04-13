@@ -19,20 +19,20 @@ export default class InputHelper extends React.Component {
 
 
   handleBlur(event) {
-	  this.props.dataStore.validateOnBlur(this.props.field,event.target.value);
+	  this.props.dataStore.validateField(this.props.field);
   }
 
   handleDateBlur() {
 
-    this.props.dataStore.validateOnBlur(this.props.field,this.props.dataStore.getValue(this.props.field));
+    this.props.dataStore.validateField(this.props.field);
   }
 
   handleChange(event) {
-	  this.props.dataStore.updateField(this.props.field,event.target.value);
+	  this.props.dataStore.setValue(this.props.field,event.target.value);
   }
 
   handleDateChange(date) {
-		this.props.dataStore.updateField(this.props.field,date);
+		this.props.dataStore.setValue(this.props.field,date);
   }
 
   handleRadioChange(event) {
@@ -58,11 +58,13 @@ export default class InputHelper extends React.Component {
 	  let input = null;
 	  const elementType = this.props.elementType;
 
-	  let validationInfo = this.props.dataStore.getValidationInfo(this.props.field);
+	  let validationInfo = this.props.dataStore.getFieldInfo(this.props.field);
 	  if (!validationInfo)
-		  validationInfo = {"errorMessage" : "", "required" : false};
+		  validationInfo = {"error" : "", "required" : false};
 	  
-	  const error = validationInfo.errorMessage;
+		  
+	  
+	  const error = validationInfo.error;
 	  const errorStyle = error ? "has-error has-feedback" : "";
 
 	  if (elementType === 'display') {

@@ -65,6 +65,8 @@ export default class TableStore {
     @observable isEdit = false;
 
     @observable previousPlace = -1;
+    
+    @observable currentId = "";
 
 
     clear() {

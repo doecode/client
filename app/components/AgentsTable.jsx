@@ -11,13 +11,13 @@ export default class AgentsTable extends React.Component {
 
 
   rowClick(gridRow, event) {
-    if (!this.props.finished) {
-	  var data = Object.assign({},gridRow.props.data);
-	  this.props.tableStore.copyIntoCurrent(data);
-	  this.props.tableStore.previousPlace = data.place;
+	  //var data = Object.assign({},gridRow.props.data);
+	  //this.props.tableStore.copyIntoCurrent(data);
+	  //this.props.tableStore.previousPlace = data.place;
+	  this.props.tableStore.currentId = gridRow.props.data.id;
 	  this.props.tableStore.showModal = true;
 	  this.props.tableStore.isEdit = true;
-  }
+  
 
   }
 
