@@ -1,4 +1,3 @@
-import {observable} from 'mobx';
 import uniqid from 'uniqid';
 import Validation from '../utils/VValidation';
 
@@ -11,9 +10,8 @@ export default class BaseData {
 		if (props.parent) {
 			this.id = uniqid();
 			this.hasParent = true;
-			this.parentInvalids = props.parentInfo.invalids;
-			this.parentError = props.parentInfo.error;
-			this.parentLabel = props.parentInfo.label;
+			this.parentInfo = props.parentInfo
+			this.parentLabel = this.parentInfo.label;
 			this.parentArray = props.parentArray;
 			
 		}
@@ -26,12 +24,12 @@ export default class BaseData {
 	}
    
    getValue(field) {
-    	return this.fieldMap[field].value;
+    	return this.fieldMap[field];
    }
     
     
    setValue(field,data) {
-    	this.fieldMap[field].value = data;
+    	this.fieldMap[field] = data;
     }
    
    getFieldInfo(field) {
@@ -107,7 +105,7 @@ export default class BaseData {
 		   info.completed = false;
 		   info.error = '';
 	   } else {
-	 	   validation.validate(value, info, validationCallback);
+	 	   validation.validate(value, info, this.validationCallback);
 	   }
     
  	   
@@ -121,12 +119,12 @@ export default class BaseData {
  	   else {
  		   information.completed = true;
  		   if (this.hasParent) {
- 			   if (this.parentInvalids.length  > 0) {
- 			   const index = this.parentInvalids.findIndex(item => item.id === this.id);
- 			   this.parentInvalids.splice(index,1);
+ 			   if (this.parentInfo.invalids.length  > 0) {
+ 			   const index = this.parentInfo.invalids.findIndex(item => item.id === this.id);
+ 			   this.parentInfo.invalids.splice(index,1);
  			   
- 			   if (this.parentInvalids.length == 0)
- 				   this.parent.error = '';
+ 			   if (this.parentInfo.invalids.length == 0)
+ 				   this.parentInfo.error = '';
  			   }
  		   }
  			   

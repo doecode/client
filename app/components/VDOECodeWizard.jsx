@@ -4,6 +4,7 @@ import {doAjax, appendQueryString} from '../utils/utils';
 import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
 import VMetadata from '../stores/VMetadata';
+import MetadataStore from '../stores/MetadataStore';
 import EntryStep from './EntryStep';
 import AgentsStep from './AgentsStep';
 import OrgsStep from './OrgsStep';
@@ -17,7 +18,10 @@ import {PanelGroup, Panel} from 'react-bootstrap';
 import css from '../css/main.css';
 
 const metadataStore = new Metadata();
-const vMetadata = new VMetadata();
+const metadataStoreZwei = new MetadataStore();        
+const mProps = {fieldMap: metadataStoreZwei.metadata, infoSchema: metadataStoreZwei.metadataInfoSchema};
+const vMetadata = new VMetadata(mProps);
+
 let steps = [];
 
 @observer
@@ -28,6 +32,8 @@ export default class DOECodeWizard extends React.Component {
         this.getSubmitPromise = this.getSubmitPromise.bind(this);
         this.parseLoadResponse = this.parseLoadResponse.bind(this);
         this.autopopulate = this.autopopulate.bind(this);
+        
+
         steps =
         	[
         		{name: 'Repository Information', component: <EntryStep metadataStore={metadataStore}  autopopulate={this.autopopulate}/> },
@@ -86,7 +92,7 @@ export default class DOECodeWizard extends React.Component {
         let heading = obj.name;
         let panelStyle = "default";
 
-        const panelStatus = metadataStore.getPanelStatus(obj.key);
+        const panelStatus = vMetadata.getPanelStatus(obj.key);
         if (panelStatus.hasRequired) {
              if (panelStatus.remainingRequired > 0)
                   heading += " (" + panelStatus.remainingRequired + " Required Field(s) Remaining)";

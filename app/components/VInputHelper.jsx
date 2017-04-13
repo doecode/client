@@ -58,9 +58,11 @@ export default class InputHelper extends React.Component {
 	  let input = null;
 	  const elementType = this.props.elementType;
 
-	  let validationInfo = this.props.dataStore.getInfo(this.props.field);
+	  let validationInfo = this.props.dataStore.getFieldInfo(this.props.field);
 	  if (!validationInfo)
 		  validationInfo = {"error" : "", "required" : false};
+	  
+		  
 	  
 	  const error = validationInfo.error;
 	  const errorStyle = error ? "has-error has-feedback" : "";

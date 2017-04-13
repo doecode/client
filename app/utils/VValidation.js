@@ -11,12 +11,12 @@ validate(value,validationObj, validationCallback) {
 	  const validations = validationObj.validations;
 	  const valLength = validations.length;
 	  for (var i = 0; i < valLength; i++) {
-		  validation  = validations[i];
-		  if (validation === "Phone") {
+
+		  if (validations[i] === "Phone") {
 			  errors += this.validatePhone(value)
-		  } else if (validation === "Email") {
+		  } else if (validations[i] === "Email") {
 			  errors += this.validateEmail(value);
-		  } else if (validation === "URL") {
+		  } else if (validations[i] === "URL") {
 			  errors += this.validateURL(value);
 		  }    	 
 	    
@@ -25,7 +25,7 @@ validate(value,validationObj, validationCallback) {
 	  const filtered = validations.filter(this.needsServer);
 	  
 	  //if (filtered.length == 0)
-		  validateCallback(validationObj, errors);
+		  validationCallback(validationObj, errors);
 		  
 			 /* 
 			doAjax("POST","/api/validate" , successCallback, validations)

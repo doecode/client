@@ -1,4 +1,4 @@
-import DOECodeWizard from './components/DOECodeWizard';
+import DOECodeWizard from './components/VDOECodeWizard';
 import Splash from './splash/Splash';
 import React from 'react';
 import ReactDOM from 'react-dom';

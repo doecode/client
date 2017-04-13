@@ -1,5 +1,5 @@
 import React from 'react';
-import InputHelper from './InputHelper';
+import InputHelper from './VInputHelper';
 import {observer,Provider} from "mobx-react";
 
 @observer
@@ -20,7 +20,7 @@ export default class MetadataStep extends React.Component {
 	            
 	            <Provider dataStore={metadata}>
 	            <div>
-	            {metadata.getValue(repository_link) &&
+	            {metadata.getValue("repository_link") &&
 	            <div className="form-group form-group-sm row">
 	        		<InputHelper field="repository_link" label="Repository Link: " elementType="display" />
 	        	</div>
