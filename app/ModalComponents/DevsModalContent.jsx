@@ -11,10 +11,9 @@ export default class DevsModalContent extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-    
+
 	render() {
-        const dev = this.props.data;
-        
+
 		const contributorTypes = [
 			{label: 'Contact Person', value: 'ContactPerson'},
 			{label: 'Data Collector', value: 'DataCollector'}
@@ -22,11 +21,11 @@ export default class DevsModalContent extends React.Component {
 		return(
 
             <div className="container-fluid">
-            <Provider dataStore={dev}>
-            <div>     
+            <Provider dataStore={this.props.data}>
+            <div>
                 <div className="form-horizontal">
-                    {dev.getValue("place") > -1 && <div className="form-group form-group-sm row">
-                        <InputHelper field="place" label="#" elementType="input" value={dev.place} />
+                    {this.props.data.getValue("place") > -1 && <div className="form-group form-group-sm row">
+                        <InputHelper field="place" label="#" elementType="input" />
                     </div>
                     }
                     <div className="form-group form-group-sm row">
@@ -41,7 +40,7 @@ export default class DevsModalContent extends React.Component {
                     <div className="form-group form-group-sm row">
                         <InputHelper field="email" label="Email" elementType="input"  />
                     </div>
-                        
+
                     <div className="form-group form-group-sm row">
                         <InputHelper field="orcid" label="ORCID" elementType="input"  />
                     </div>
@@ -50,13 +49,13 @@ export default class DevsModalContent extends React.Component {
                         <InputHelper field="affiliations" label="Affiliations" elementType="input"  />
                     </div>
 
-                        
-                    {dev.getValue("contributor_type") !== undefined &&
+
+                    {this.props.data.getValue("contributor_type") !== undefined &&
                     <div className="form-group form-group-sm row">
                         <InputHelper field="contributor_type" label="Contributor Type" elementType="select"  options={contributorTypes} />
                     </div>
                         }
-                        
+
 
 
                 </div>

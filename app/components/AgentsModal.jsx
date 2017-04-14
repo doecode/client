@@ -19,6 +19,7 @@ export default class AgentsModal extends React.Component {
     close() {
         this.props.tableStore.showModal = false;
         this.props.tableStore.currentId = "";
+        this.props.tableStore.data = {};
     }
 
     open() {
@@ -40,19 +41,12 @@ export default class AgentsModal extends React.Component {
         const showModal = this.props.tableStore.showModal;
         const currentParent = this.props.currentParent;
 
-    		
-    	let content = null;
-    	if (this.props.contentType === 'Devs') {
-    		content = <DevsModalContent data={this.props.data} />
-    	} else if (this.props.contentType === 'RIs') {
-        content = <RIsModalContent tableStore={this.props.tableStore} isEdit={isEdit}/>
-    	} else if(this.props.contentType === 'Orgs') {
-    		content = <OrgsModalContent tableStore={this.props.tableStore} isEdit={isEdit}/>
-    	}
-    	
 
-    	
-    	
+
+
+
+
+
 
 
         return (

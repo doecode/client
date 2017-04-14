@@ -22,7 +22,7 @@ export default class TableStore {
             contributor_type: '',
             place: 0
     }
-    
+
     @observable sponsoring_organization = {
             organization_name: '',
             email: '',
@@ -31,14 +31,14 @@ export default class TableStore {
             award_numbers: [],
             place: 0
     }
-    
+
     @observable research_organization = {
             organization_name: '',
             email: '',
             orcid: '',
             place: 0
     }
-    
+
     @observable contributing_organization = {
             organization_name: '',
             email: '',
@@ -65,8 +65,10 @@ export default class TableStore {
     @observable isEdit = false;
 
     @observable previousPlace = -1;
-    
+
     @observable currentId = "";
+
+    @observable data = {};
 
 
     clear() {
@@ -89,15 +91,15 @@ export default class TableStore {
     setCurrentField(field, value) {
     	this[this.current.type][field] = value;
     }
-    
+
     updateField(field,value) {
     	setCurrentField(field,value);
     }
-    
+
     getValue(field,value) {
     	return this[this.current.type][field];
     }
-    
+
     getValidationStatus(field) {
     	return "";
     }

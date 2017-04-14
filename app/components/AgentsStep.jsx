@@ -121,15 +121,19 @@ export default class AgentsStep extends React.Component {
 			const metadata = this.props.metadata;
 			const currentArray = metadata.getAsArray(currentParent);
 			const childProps = {id: tableStore.currentId, parentArray: metadata.getValue(currentParent), parentInfo: metadata.getFieldInfo(currentParent)};
-			
-	        
+
+
+	    if (!tableStore.currentId) {
 	    	let data = null;
-	    	
+
 	    	if (currentParent === 'developers')
 	    		data = new Developer(childProps);
 	    	else if (currentParent === 'contributors')
 	    		data = new Contributor(childProps);
-			
+
+			  tableStore.data = data;
+				}
+
 		    const content = <div>
 		      <AgentsTable arr={currentArray} tableStore={tableStore} config={tableConfig} finished={false} />
 		      <AgentsModal tableStore={tableStore} data={data} metadata={this.props.metadata} contentType="Devs" />
