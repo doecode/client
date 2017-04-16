@@ -6,7 +6,7 @@ import Metadata from '../stores/Metadata';
 import EntryStep from './EntryStep';
 import AgentsStep from './AgentsStep';
 import OrgsStep from './OrgsStep';
-import MetadataStep from './MetadataStep';
+import MetadataPanel from './MetadataPanel';
 import AccessStep from './AccessStep';
 import RecipientStep from './RecipientStep';
 import ConfirmStep from './ConfirmStep';
@@ -15,7 +15,7 @@ import {PanelGroup, Panel} from 'react-bootstrap';
 
 import css from '../css/main.css';
 
-const metadata = new Metadata();      
+const metadata = new Metadata();
 
 let steps = [];
 
@@ -27,17 +27,15 @@ export default class DOECodeWizard extends React.Component {
         this.getSubmitPromise = this.getSubmitPromise.bind(this);
         this.parseLoadResponse = this.parseLoadResponse.bind(this);
         this.autopopulate = this.autopopulate.bind(this);
-        
+
 
         steps =
         	[
-        		{name: 'Repository Information', component: <EntryStep metadata={metadata}  autopopulate={this.autopopulate}/> },
-        		{name: 'Product Description', component: <MetadataStep metadata={metadata}/>},
-        		{name: 'Licenses & Access Limitations', component: <AccessStep metadata={metadata}/>},
-        		{name: 'Developers & Contributors', component: <AgentsStep metadata={metadata} />}
+        		{name: 'Repository Information', component: <ConfirmStep /> },
+        		{name: 'Product Description', component: <MetadataPanel metadata={metadata}/>},
 
         		];
-        
+
         /*
          *         		{name: 'Developers & Contributors', component: <AgentsStep metadata={metadata} />},
         		{name: 'Organizations', component: <OrgsStep metadata={metadata}/>},
@@ -84,7 +82,11 @@ export default class DOECodeWizard extends React.Component {
 		});
     }
 
+
+
     render() {
+
+      const info = metadata.infoSchema;
 
         let content = <PanelGroup defaultActiveKey="1" accordion>
         {steps.map(function(obj) {
@@ -92,7 +94,8 @@ export default class DOECodeWizard extends React.Component {
         let heading = obj.name;
         let panelStyle = "default";
 
-        const panelStatus = metadata.getPanelStatus(obj.key);
+
+        const panelStatus = metadata.getPanelStatus(info,obj.key);
         if (panelStatus.hasRequired) {
              if (panelStatus.remainingRequired > 0)
                   heading += " (" + panelStatus.remainingRequired + " Required Field(s) Remaining)";
@@ -109,9 +112,9 @@ export default class DOECodeWizard extends React.Component {
              else
                  heading += " (All Optional Fields Completed) ";
         }
-        
+
         if (panelStatus.errors) {
-        	
+
         	heading += " This section contains errors. "
         	panelStyle = "danger";
         }
@@ -130,7 +133,7 @@ export default class DOECodeWizard extends React.Component {
 		</div>
 
 		</div>
-		
+
         {panelStatus.errors &&
         <div className="error-color">
         <h3> <b> {panelStatus.errors} </b> </h3>

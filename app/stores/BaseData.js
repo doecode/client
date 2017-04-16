@@ -1,4 +1,3 @@
-import uniqid from 'uniqid';
 import Validation from '../utils/Validation';
 
 const validation = new Validation();
@@ -8,34 +7,10 @@ export default class BaseData {
 		this.fieldMap = props.fieldMap;
 		this.infoSchema = props.infoSchema;
 
-		this.emptyInfoSchema = Object.assign({}, this.infoSchema);
-		this.emptyFieldMap = Object.assign({}, this.fieldMap);
+		this.fieldMapSnapShot = Object.assign({}, this.fieldMap);
+		this.infoSchemaSnapShot = Object.assign({}, this.infoSchema);
 
-		if (props.isChild) {
-
-			this.parentInfo = props.parentInfo
-			//this.parentLabel = this.parentInfo.label;
-			this.parentArray = props.parentArray;
-
-			if (!props.id) {
-				this.fieldMap.id = uniqid()
-
-			}
-			else {
-				const index = props.parentArray.find(item => item.id === props.id);
-				loadValues(props.parentArray[index]);
-				this.edit = true;
-
-			}
-
-
-			//if (this.fieldMap.place !== undefined)
-				//this.previousPlace = this.fieldMap.place
-		}
-
-
-
-	    this.validationCallback = this.validationCallback.bind(this);
+	  this.validationCallback = this.validationCallback.bind(this);
 
 	}
 
@@ -47,9 +22,6 @@ export default class BaseData {
    	this.fieldMap[field] = data;
    }
 
-   getValues() {
-	   return this.fieldMap;
-   }
 
    getAsArray(field) {
 	   return this.fieldMap[field].slice();
@@ -64,96 +36,6 @@ export default class BaseData {
 		 for (var field in data)
 		 		this.fieldMap[field] = data[field];
 	 }
-
-	 clearValues() {
-		 for (var field in this.emptyFieldMap)
-		     this.fieldMap[field] = this.emptyFieldMap[field];
-	 }
-
-	 clearInfoSchema() {
-		 for (var field in this.emptyInfoSchema)
-				 this.fieldMap[field] = this.emptyInfoSchema[field];
-	 }
-
-
-   saveToParentArray() {
-	   if (this.edit)
-		   this.addToParentArray();
-	   else
-		   this.modifyElementInParentArray()
-
-		 clearValues();
-		 clearInfoSchema();
-	   this.parentInfo.completed = true;
-   }
-    addToParentArray() {
-    	//if (this.getValue("place") !== undefined)
-    		//this.setValue("place",this.parentArray.length + 1);
-
-        this.parentArray.push(Object.assign({}, this.fieldMap));
-    }
-
-    modifyElementInParentArray() {
- /*       const newPlace = this.getValue("place");
-    	if (newPlace !== undefined && newPlace !== this.previousPlace) {
-            this.updateElementPlaceAndReturnIndex();
-        } */
-
-        const index = this.parentArray.findIndex(item => item.id === data.id);
-
-
-        if (index > -1)
-            this.parentArray[index] = Object.assign({}, this.fieldMap);
-        }
-
-  /*  updateElementPlaceAndReturnIndex(data) {
-        const newPlace = this.getValue("place");
-        //if it is outside the bounds, reset to old value and return
-        if (isNaN(newPlace) || newPlace > 0 || newPlace < end) {
-        	this.setValue("place",this.previousPlace);
-        	return;
-        }
-
-        const check = newPlace > this.previousPlace;
-        const end = parentArray.length;
-
-
-        for (var i = 0; i < end; i++) {
-            if (check && this.parentArray[i].place <= newPlace && this.parentArray[i].place > previousPlace) {
-                this.parentArray[i].place--;
-            } else if (!check && this.parentArray[i].place >= newPlace && this.parentArray[i].place < previousPlace) {
-                this.parentArray[i].place++;
-            } else if (this.parentArray[i].place == previousPlace) {
-                this.parentArray[i].place = newPlace;
-            }
-        }
-        this.previousPlace = newPlace;
-
-
-    } */
-
-    removeFromParentArray(data) {
-        const index = this.parentArray.findIndex(item => item.id === data.id);
-        this.parentArray.splice(index, 1);
-
-        /*
-        if (data.place !== undefined) {
-            const deletedPlace = data.place;
-            const end = parentArray.length;
-            for (var i = 0; i < end; i++) {
-
-            	if (this.parentArray[i].place > deletedPlace)
-            		this.parentArray[i].place--;
-
-            }
-
-        }
-        */
-
-        if (this.parentArray.length == 0)
-        	this.parentInfo.completed = false;
-    }
-
 
     validateField(field) {
        const info = this.getFieldInfo(field);
@@ -184,15 +66,6 @@ export default class BaseData {
  		   information.completed = false;
  	   else {
  		   information.completed = true;
- 		   if (this.hasParent) {
- 			   if (this.parentInfo.invalids.length  > 0) {
- 			   const index = this.parentInfo.invalids.findIndex(item => item.id === this.id);
- 			   this.parentInfo.invalids.splice(index,1);
-
- 			   if (this.parentInfo.invalids.length == 0)
- 				   this.parentInfo.error = '';
- 			   }
- 		   }
 
  	   }
 
@@ -217,12 +90,32 @@ export default class BaseData {
     	return errors;
     }
 
+		clear() {
+			clearValues();
+			clearInfoSchema();
+		}
+
+		clearValues() {
+			for (var field in this.fieldMap)
+					this.fieldMap[field] = fieldMapSnapShot[field];
+		}
+
+		clearInfoSchema() {
+			for (var field in this.infoSchema)
+					this.fieldMap[field] = this.infoSchemaSnapShot[field];
+		}
+
+
     getInfoSchema() {
     	return this.infoSchema
     }
 
+		getFieldMap() {
+		 return this.fieldMap;
+		}
+
     getData() {
-    	return this.fieldMap;
+			return Object.assign({}, this.fieldMap);
     }
 
 

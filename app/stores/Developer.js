@@ -2,11 +2,11 @@ import BaseData from './BaseData';
 import {observable} from 'mobx';
 
 export default class Developer extends BaseData {
-    constructor(props) {
+    constructor() {
     	const developerStore = new DeveloperStore();
-    	const mProps = {fieldMap: developerStore.developer, infoSchema: developerStore.developerInfoSchema, parentInfo: props.parentInfo, parentArray: props.parentArray, isChild: true, id: props.id};
-        super(mProps);
-    	
+    	const props = {fieldMap: developerStore.developer, infoSchema: developerStore.developerInfoSchema};
+      super(props);
+
     }
 }
 
@@ -21,7 +21,7 @@ class DeveloperStore {
             place: -1,
             id: ''
         }
-    
+
     @observable developerInfoSchema = {
 
 		   	"first_name": {required:true, completed:false, validations: [""], error: ''},

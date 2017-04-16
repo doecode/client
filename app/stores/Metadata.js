@@ -1,30 +1,115 @@
 import BaseData from './BaseData';
+import uniqid from 'uniqid';
 import {observable} from 'mobx';
+import MetadataStore from './MetadataStore';
 
 
 
 export default class Metadata extends BaseData {
-    
+
     constructor() {
-    	const metadataStore = new MetadataStore();
-    	const props = {fieldMap: metadataStore.metadata, infoSchema: metadataStore.metadataInfoSchema};
+    	const props = {fieldMap: MetadataStore.metadata, infoSchema: MetadataStore.metadataInfoSchema};
         super(props);
-    	
+
     }
 
 
-   getPanelStatus(panelNumber) {
+    saveToArray(field, data) {
+      if (this.edit)
+        this.addToParentArray(field,data);
+      else
+        this.modifyElementInParentArray(field,data)
+
+      this.infoSchema[field].completed = true;
+    }
+
+     addToArray(field,data) {
+       //if (this.getValue("place") !== undefined)
+         //this.setValue("place",this.parentArray.length + 1);
+
+         this.fieldMap[field].push(data);
+     }
+
+     modifyElementInArray(data) {
+  /*       const newPlace = this.getValue("place");
+       if (newPlace !== undefined && newPlace !== this.previousPlace) {
+             this.updateElementPlaceAndReturnIndex();
+         } */
+
+         const index = this.fieldMap[field].findIndex(item => item.id === data.id);
+
+
+         if (index > -1)
+             this.fieldMap[field][index] = data;
+
+
+         const invIndex = this.infoSchema[field].invalids.findIndex(item => item.id === this.id);
+         this.infoSchema[field].invalids.splice(index,1);
+
+         if (this.infoSchema[field].invalids.length == 0)
+           this.infoSchema[field].error = '';
+
+            }
+
+   /*  updateElementPlaceAndReturnIndex(data) {
+         const newPlace = this.getValue("place");
+         //if it is outside the bounds, reset to old value and return
+         if (isNaN(newPlace) || newPlace > 0 || newPlace < end) {
+           this.setValue("place",this.previousPlace);
+           return;
+         }
+
+         const check = newPlace > this.previousPlace;
+         const end = parentArray.length;
+
+
+         for (var i = 0; i < end; i++) {
+             if (check && this.parentArray[i].place <= newPlace && this.parentArray[i].place > previousPlace) {
+                 this.parentArray[i].place--;
+             } else if (!check && this.parentArray[i].place >= newPlace && this.parentArray[i].place < previousPlace) {
+                 this.parentArray[i].place++;
+             } else if (this.parentArray[i].place == previousPlace) {
+                 this.parentArray[i].place = newPlace;
+             }
+         }
+         this.previousPlace = newPlace;
+
+
+     } */
+
+     removeFromArray(field,data) {
+         const index = this.parentArray.findIndex(item => item.id === data.id);
+         this.fieldMap[field].splice(index, 1);
+
+         /*
+         if (data.place !== undefined) {
+             const deletedPlace = data.place;
+             const end = parentArray.length;
+             for (var i = 0; i < end; i++) {
+
+               if (this.parentArray[i].place > deletedPlace)
+                 this.parentArray[i].place--;
+
+             }
+
+         }
+         */
+
+         if (this.fieldMap[field].length == 0)
+           this.infoSchema[field].completed = false;
+     }
+
+   getPanelStatus(infoSchema,panelNumber) {
 
      let panelStatus = {"remainingRequired" : 0, "remainingOptional": 0, "errors" : "", "hasRequired" : false, "hasOptional" : false}
-     const infoSchema = this.getInfoSchema();
      for (var field in infoSchema) {
      const obj = this.getFieldInfo(field);
-     
+
      if (obj.Panel == panelNumber) {
 
      if (obj.errorMessage)
     	 panelStatus.errors += obj.errorMessage + " ";
-     
+
 
      if (obj.required) {
        panelStatus.hasRequired = true;
@@ -60,72 +145,4 @@ export default class Metadata extends BaseData {
 
 
 
-}
-
-class MetadataStore {
-	
-	
-    @observable metadata = {
-            "code_id": 0,
-            "open_source": '',
-            "repository_link": '',
-            "software_title": '',
-            "acronym": '',
-            "doi": '',
-            "description": '',
-            "country_of_origin": '',
-            "date_of_issuance" : '',
-            "keywords": '',
-            "site_accession_number": '',
-            "other_special_requirements": '',
-            "related_software": '',
-            "licenses": [],
-            "access_limitations": [],
-            "developers": [],
-            "contributors": [],
-            "sponsoring_organizations" : [],
-            "contributing_organizations" : [],
-            "research_organizations" : [],
-            "related_identifiers" : [],
-            "recipient_name": '',
-            "recipient_email": '',
-            "recipient_phone": '',
-            "recipient_org": '',
-            "files": []
-        }
-	
-	
-    /*
-    "files": {required:false, completed:false, hasError:false, validations: [], Panel: 1, errorMessage: ''},
-	        "country_of_origin": {required:true, completed:false, hasError:false, validations: [], Panel: 2, errorMessage: ''},
-"licenses": {required:true, completed:false, hasError:false, validations: [], Panel: 3, errorMessage: ''},
-    "access_limitations": {required:false, completed:false, hasError:false, validations: [], Panel: 3, errorMessage: ''},	        
-  	        "sponsoring_organizations" : {required:true, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
-  	        "contributing_organizations" : {required:false, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
-  	        "research_organizations" : {required:true, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
-  	        "related_identifiers" : {required:false, completed:false, hasError:false, validations: [], Panel: 6, errorMessage: ''},
-  	        	        "recipient_name": {required:true, completed:false, validations: [], Panel: 7, errorMessage: ''},
-	        "recipient_email": {required:true, completed:false, validations: ["Email"], Panel: 7, errorMessage: ''},
-	        "recipient_phone": {required:true, completed:false, validations: ["Phone"], Panel: 7, errorMessage: ''},
-	        "recipient_org": {required:true, completed:false, validations: [], Panel: 7, errorMessage: ''},
-*/
-    @observable metadataInfoSchema = {
-
-		   	"repository_link": {required:true, completed:false, validations: ["URL"], Panel: 1, error: ''},
-	        "software_title": {required:true, completed:false, validations: [], Panel: 2, error: ''},
-	        "acronym": {required:false, completed:false, validations: [], Panel: 2, error: ''},
-	        "doi": {required:false, completed:false, validations: ["DOI"], Panel: 2, error: ''},
-	        "description": {required:true, completed:false, validations: [], Panel: 2, error: ''},
-	        "developers": {required:true, completed:false, hasError:false, validations: [], Panel: 4, errorMessage: ''},
-  	        "contributors": {required:true, completed:false, hasError:false, validations: [], Panel: 4, errorMessage: ''},
-	        "date_of_issuance" : {required:true, completed:false, validations: [], Panel: 2, error: ''},
-	        "keywords": {required:false, completed:false, validations: [], Panel: 2, error: ''},
-	        "site_accession_number": {required:false, completed:false, validations: [], Panel: 2, error: ''},
-	        "other_special_requirements": {required:false, completed:false, validations: [], Panel: 2, error: ''},
-	        "related_software": {required:false, completed:false, validations: [], Panel: 2, error: ''},
-
-
-   }
-	
-	
 }
