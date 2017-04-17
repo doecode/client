@@ -17,20 +17,7 @@ export default class AgentsStep extends React.Component {
 
 	constructor(props) {
 		    super(props);
-			const currentOpts = [{
-				"arrName" : "developers",
-				"type" : "developer",
-				"label" : "Developers"
-			},
-			{
-				"arrName" : "contributors",
-				"type" : "contributor",
-				"label" : "Contributors"
-			}
-
-			];
 			this.state = {"key" : 0};
-			tableStore.current = currentOpts[0];
 
 		    this.isValidated = this._isValidated.bind(this);
 		    this.onTabSelect = this.onTabSelect.bind(this);
@@ -43,11 +30,6 @@ export default class AgentsStep extends React.Component {
 	}
 
 	onTabSelect(key) {
-
-
-
-	    tableStore.current = currentOpts[key];
-	    console.log(tableStore.current);
 	    this.setState({"key" : key});
 
 	}
@@ -122,6 +104,11 @@ export default class AgentsStep extends React.Component {
 			const metadata = this.props.metadata;
 			const currentArray = metadata.getValue(currentParent);
 			const data = getChildData(currentParent);
+			
+			if (tableStore.currentId) {
+				const index = currentArray.findIndex(item => item.id === tableStore.currentId);
+				data.loadValues(currentArray[index]);
+			}
 
 		    const content = <div>
 		      <AgentsTable arr={currentArray.slice()} tableStore={tableStore} config={tableConfig} finished={false} />

@@ -14,11 +14,13 @@ export default class AgentsModal extends React.Component {
         this.close = this.close.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.state = {errors: ''};
     }
 
     close() {
         this.props.tableStore.showModal = false;
         this.props.data.clear();
+        this.setState({errors: ''});
     }
 
     open() {
@@ -34,8 +36,9 @@ export default class AgentsModal extends React.Component {
         	this.props.metadata.saveToArray(this.props.dataType,this.props.data.getData());
             this.close();
         }
-        else
-        	console.log("Do something");
+        else {
+            this.setState({errors: "The following fields contain errors: " + errors.join(", ")});
+        }
 
     }
 
@@ -71,6 +74,11 @@ export default class AgentsModal extends React.Component {
                             <Modal.Title>Manage Whatever</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
+                         {this.state.errors &&
+                         <div className="error-color">
+                         <h2>{this.state.errors}</h2>
+                         </div>
+                         }
                             {content}
                         </Modal.Body>
                         <Modal.Footer>

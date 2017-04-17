@@ -40,12 +40,14 @@ export default class Field extends React.Component {
   }
 
   handleSelectChange(value) {
+	  console.log("Making change to the following " + value);
 	  if (this.props.properties.multi) {
 
 		let retArray = [];
-	  	if (value.trim())
+	  	if (value.trim()) 
 	  		retArray = value.split(',');
-	  	this.props.linkedData.setValue(this.props.properties.fieldretArray);
+	  	
+	  	this.props.linkedData.setValue(this.props.properties.field,retArray);
 	  } else {
 		  this.props.linkedData.setValue(this.props.properties.field,value);
 	  }
@@ -95,11 +97,11 @@ export default class Field extends React.Component {
 	  }
 	  else if (elementType === 'select') {
 	    let ph = this.props.properties.placeholder ? this.props.properties.placeholder : "Select any that apply";
-	    let val = val;
 	    if (this.props.properties.multi)
 	    	val = val.slice();
+	    console.log(val);
 	    const errorClass = error ? "field-error" : ""
-      	input = <Select className={errorClass} allowCreate={this.props.properties.allowCreate} multi={this.props.properties.multi} options={this.props.options} simpleValue placeholder={ph} onChange={this.handleSelectChange} value={val} />
+      	input = <Select className={errorClass} allowCreate={this.props.properties.allowCreate} multi={this.props.properties.multi} options={this.props.properties.options} simpleValue placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} value={val} />
 	  }
 	  else if (elementType === 'textarea') {
 
@@ -126,7 +128,7 @@ export default class Field extends React.Component {
         {input}
         {error &&
         <span className="error-color">
-        <b>{error} </b>
+        <strong>{error} </strong>
         </span>
         }
       </div>

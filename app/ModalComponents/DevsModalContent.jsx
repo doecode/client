@@ -5,6 +5,7 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import {getChildField} from '../utils/utils';
 import DeveloperField from '../field/DeveloperField';
+import ContributorField from '../field/ContributorField';
 
 
 @observer
@@ -16,12 +17,17 @@ export default class DevsModalContent extends React.Component {
 
 	render() {
 
+		const fields = {
+				"developers" : DeveloperField,
+				"contributors" : ContributorField
+		};
 		const contributorTypes = [
 			{label: 'Contact Person', value: 'ContactPerson'},
 			{label: 'Data Collector', value: 'DataCollector'}
 			];
 		
-		const SpecificField = DeveloperField;
+		console.log(this.props.type);
+		const SpecificField = fields[this.props.type];
 		return(
 
             <div className="container-fluid">

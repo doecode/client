@@ -114,7 +114,7 @@ class MetadataStore {
 	        "email": {required:false, completed:false, validations: ["Email"], error: ''},
 	        "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
 	        "affiliations" : {required:false, completed:false, validations: [], error: ''},
-	        "contributor_type" : {required:false, completed:false, validations: [], error: ''}
+	        "contributor_type" : {required:true, completed:false, validations: [], error: ''}
 	        
 
    }
