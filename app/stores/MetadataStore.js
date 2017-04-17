@@ -3,7 +3,7 @@ import {observable} from 'mobx';
 class MetadataStore {
 
 
-    @observable metadata = {
+	@observable metadata = {
             "code_id": 0,
             "open_source": '',
             "repository_link": '',
@@ -30,14 +30,14 @@ class MetadataStore {
             "recipient_phone": '',
             "recipient_org": '',
             "files": []
-        }
+        };
+    
 
 
     /*
     "files": {required:false, completed:false, hasError:false, validations: [], Panel: 1, errorMessage: ''},
 	        "country_of_origin": {required:true, completed:false, hasError:false, validations: [], Panel: 2, errorMessage: ''},
-"licenses": {required:true, completed:false, hasError:false, validations: [], Panel: 3, errorMessage: ''},
-    "access_limitations": {required:false, completed:false, hasError:false, validations: [], Panel: 3, errorMessage: ''},
+
   	        "sponsoring_organizations" : {required:true, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
   	        "contributing_organizations" : {required:false, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
   	        "research_organizations" : {required:true, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
@@ -47,21 +47,75 @@ class MetadataStore {
 	        "recipient_phone": {required:true, completed:false, validations: ["Phone"], Panel: 7, errorMessage: ''},
 	        "recipient_org": {required:true, completed:false, validations: [], Panel: 7, errorMessage: ''},
 */
-    @observable metadataInfoSchema = {
+	@observable metadataInfoSchema = {
 
 		   	"repository_link": {required:true, completed:false, validations: ["URL"], Panel: 1, error: ''},
 	        "software_title": {required:true, completed:false, validations: [], Panel: 2, error: ''},
 	        "acronym": {required:false, completed:false, validations: [], Panel: 2, error: ''},
 	        "doi": {required:false, completed:false, validations: ["DOI"], Panel: 2, error: ''},
 	        "description": {required:true, completed:false, validations: [], Panel: 2, error: ''},
+	        "licenses": {required:true, completed:false, hasError:false, validations: [], Panel: 3, errorMessage: ''},
+	        "access_limitations": {required:false, completed:false, hasError:false, validations: [], Panel: 3, errorMessage: ''},
 	        "developers": {required:true, completed:false, hasError:false, validations: [], Panel: 4, errorMessage: ''},
-  	        "contributors": {required:true, completed:false, hasError:false, validations: [], Panel: 4, errorMessage: ''},
+  	        "contributors": {required:false, completed:false, hasError:false, validations: [], Panel: 4, errorMessage: ''},
 	        "date_of_issuance" : {required:true, completed:false, validations: [], Panel: 2, error: ''},
 	        "keywords": {required:false, completed:false, validations: [], Panel: 2, error: ''},
 	        "site_accession_number": {required:false, completed:false, validations: [], Panel: 2, error: ''},
 	        "other_special_requirements": {required:false, completed:false, validations: [], Panel: 2, error: ''},
 	        "related_software": {required:false, completed:false, validations: [], Panel: 2, error: ''},
 
+
+   }
+    
+    
+	@observable developer = {
+            first_name: '',
+            middle_name: '',
+            last_name: '',
+            email: '',
+            orcid: '',
+            affiliations: '',
+            place: -1,
+            id: ''
+        }
+    
+
+	@observable developerInfoSchema = {
+
+		   	"first_name": {required:true, completed:false, validations: [""], error: ''},
+	        "middle_name": {required:false, completed:false, validations: [], error: ''},
+	        "last_name": {required:true, completed:false, validations: [], error: ''},
+	        "email": {required:false, completed:false, validations: ["Email"], error: ''},
+	        "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
+	        "affiliations" : {required:false, completed:false, validations: [], error: ''},
+
+   }
+    
+    
+	@observable contributor = {
+            first_name: '',
+            middle_name: '',
+            last_name: '',
+            email: '',
+            orcid: '',
+            affiliations: '',
+            contributor_type: '',
+            place: -1,
+            id: ''
+    }
+    
+    
+    
+	@observable contributorInfoSchema = {
+
+		   	"first_name": {required:true, completed:false, validations: [""], error: ''},
+	        "middle_name": {required:false, completed:false, validations: [], error: ''},
+	        "last_name": {required:true, completed:false, validations: [], error: ''},
+	        "email": {required:false, completed:false, validations: ["Email"], error: ''},
+	        "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
+	        "affiliations" : {required:false, completed:false, validations: [], error: ''},
+	        "contributor_type" : {required:false, completed:false, validations: [], error: ''}
+	        
 
    }
 

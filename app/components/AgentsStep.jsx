@@ -7,6 +7,7 @@ import Contributor from '../stores/Contributor';
 import {observer} from 'mobx-react';
 import {Tabs, Tab} from 'react-bootstrap';
 import Promise from 'promise';
+import {getChildData} from '../utils/utils'
 
 
 const tableStore = new TableStore();
@@ -119,24 +120,12 @@ export default class AgentsStep extends React.Component {
 			const opts = ["developers", "contributors"];
 			const currentParent = opts[this.state.key];
 			const metadata = this.props.metadata;
-			const currentArray = metadata.getAsArray(currentParent);
-			const childProps = {id: tableStore.currentId, parentArray: metadata.getValue(currentParent), parentInfo: metadata.getFieldInfo(currentParent)};
-
-
-	    if (!tableStore.currentId) {
-	    	let data = null;
-
-	    	if (currentParent === 'developers')
-	    		data = new Developer(childProps);
-	    	else if (currentParent === 'contributors')
-	    		data = new Contributor(childProps);
-
-			  tableStore.data = data;
-				}
+			const currentArray = metadata.getValue(currentParent);
+			const data = getChildData(currentParent);
 
 		    const content = <div>
-		      <AgentsTable arr={currentArray} tableStore={tableStore} config={tableConfig} finished={false} />
-		      <AgentsModal tableStore={tableStore} data={data} metadata={this.props.metadata} contentType="Devs" />
+		      <AgentsTable arr={currentArray.slice()} tableStore={tableStore} config={tableConfig} finished={false} />
+		      <AgentsModal tableStore={tableStore} dataType={currentParent} data={data} metadata={this.props.metadata} contentType="Devs" />
 		    </div>
 		    return (
 		       <div>

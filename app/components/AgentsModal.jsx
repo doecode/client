@@ -18,8 +18,7 @@ export default class AgentsModal extends React.Component {
 
     close() {
         this.props.tableStore.showModal = false;
-        this.props.tableStore.currentId = "";
-        this.props.tableStore.data = {};
+        this.props.data.clear();
     }
 
     open() {
@@ -27,13 +26,21 @@ export default class AgentsModal extends React.Component {
     }
 
     handleSave(event) {
+    	
+    	
+        const errors = this.props.data.checkForSchemaErrors();
+        
+        if (errors.length === 0) {
+        	this.props.metadata.saveToArray(this.props.dataType,this.props.data.getData());
+            this.close();
+        }
+        else
+        	console.log("Do something");
 
-    	this.props.data.saveToParentArray()
-        this.close();
     }
 
     handleDelete(event) {
-    	this.props.data.removeFromParentArray()
+    	this.props.metadata.removeFromArray(this.props.dataType,this.props.data.getData());
         this.close();
     }
 
@@ -42,7 +49,10 @@ export default class AgentsModal extends React.Component {
         const currentParent = this.props.currentParent;
 
 
-
+        let content = null;
+        if (this.props.contentType === 'Devs') {
+        content = <DevsModalContent type={this.props.dataType} data={this.props.data}/>
+        }
 
 
 

@@ -1,5 +1,10 @@
 
-  function doAjax(methodType, url, successCallback, data, errorCallback) {
+import Contributor from '../stores/Contributor';
+import Developer from '../stores/Developer';
+import DeveloperField from '../field/DeveloperField';
+import ContributorField from '../field/ContributorField';
+
+function doAjax(methodType, url, successCallback, data, errorCallback) {
 
 
     $.ajax({
@@ -28,7 +33,26 @@
       return url;
   }
   
+  function getChildData(type) {
+	  if (type === 'developers')
+		  return new Developer();
+	  else if (type === 'contributors')
+		  return new Contributor();
+  }
+  
+  function getChildField(type) {
+	  const fields = {
+	   "developers" : DeveloperField,
+	   "contributors" : ContributorField
+	  }
+	  
+	  return fields[type];
+  }
+  
+  
 
 
 export {doAjax};
 export {appendQueryString};
+export {getChildData};
+export {getChildField};

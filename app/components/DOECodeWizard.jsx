@@ -31,9 +31,10 @@ export default class DOECodeWizard extends React.Component {
 
         steps =
         	[
-        		{name: 'Repository Information', component: <ConfirmStep /> },
+        		{name: 'Repository Information', component: <EntryStep metadata={metadata} autopopulate={this.autopopulate}/> },
         		{name: 'Product Description', component: <MetadataPanel metadata={metadata}/>},
-
+        		{name: 'Licenses & Access Limitations', component: <AccessStep metadata={metadata} />},
+        		{name: 'Developers & Contributors', component: <AgentsStep metadata={metadata} />},
         		];
 
         /*

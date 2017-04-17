@@ -1,5 +1,5 @@
 import React from 'react';
-import InputHelper from './InputHelper';
+import MetadataField from '../field/MetadataField';
 import EntryStepStore from '../stores/EntryStepStore';
 import {observer,Provider} from 'mobx-react';
 import {Button} from 'react-bootstrap';
@@ -61,22 +61,22 @@ export default class EntryStep extends React.Component {
 		  </div>
 		  
 		  <div className="form-group form-group-sm row">
-		  <InputHelper checked={entryStore.availabilitySelected=== 'OS'} elementType="radio" label="Open Source, Publicly Available" field="availability" value="OS" onChange={this.onRadioChange}/>	  
+		  <MetadataField checked={entryStore.availabilitySelected=== 'OS'} elementType="radio" label="Open Source, Publicly Available" field="availability" value="OS" onChange={this.onRadioChange}/>	  
 		  </div>
 		  
 		  <div className="form-group form-group-sm row">
-		  <InputHelper checked={entryStore.availabilitySelected === 'ON'} elementType="radio" label= "Open Source, Not Publicly Available" field="availability" value="ON" onChange={this.onRadioChange}/>	  
+		  <MetadataField checked={entryStore.availabilitySelected === 'ON'} elementType="radio" label= "Open Source, Not Publicly Available" field="availability" value="ON" onChange={this.onRadioChange}/>	  
 		  </div>
 		  
 		  <div className="form-group form-group-sm row">
-		  <InputHelper checked={entryStore.availabilitySelected === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange}/>	  
+		  <MetadataField checked={entryStore.availabilitySelected === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange}/>	  
 		  </div>
 		  
 		  {(entryStore.availabilitySelected === 'OS' || entryStore.availabilitySelected === 'ON') && files.length === 0 &&
 		  
 			 
           <div className="form-group form-group-sm row">
-          <InputHelper field="repository_link" label="Repository Link" elementType="input" />
+          <MetadataField field="repository_link" label="Repository Link" elementType="input" />
 		  <button className="btn btn-primary btn-sm" onClick={this.props.autopopulate}> Autopopulate </button>								
 		  </div>
 		  }

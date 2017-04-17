@@ -12,6 +12,8 @@ export default class AccessStep extends React.Component{
 		this.hasSubLimitations = this.hasSubLimitations.bind(this);
 	    this.isValidated = this._isValidated.bind(this);
 	    this.generateAccessLimitationOptions = this.generateAccessLimitationOptions.bind(this);
+	    this.licenseBlur = this.licenseBlur.bind(this);
+	    this.accessBlur = this.accessBlur.bind(this);
 	}
 
 	_isValidated() {
@@ -19,6 +21,13 @@ export default class AccessStep extends React.Component{
 	}
 
 
+	licenseBlur() {
+		this.props.metadata.validateField('licenses');
+	}
+	
+	accessBlur() {
+		this.props.metadata.validateField('access_limitations');
+	}
 	generateAccessLimitationOptions(accessLimitations) {
 		let options = [];
 		const firstOptions = [
@@ -120,11 +129,11 @@ export default class AccessStep extends React.Component{
 		<div className="form-group">
 			<div className="col-sm-offset-2 col-sm-8">
 				<h2 className="section-heading">Licenses</h2>
-				<Select multi simpleValue placeholder="Select your license(s)" options={licenseOptions} value={licenses.slice()} onChange={this.onLicensesChange}/>
+				<Select multi simpleValue placeholder="Select your license(s)" options={licenseOptions} value={licenses.slice()} onChange={this.onLicensesChange} onBlur={this.licenseBlur}/>
 			</div>
 			<div className="col-sm-offset-2 col-sm-8">
 				<h2 className="section-heading">Intellectual Property/Distribution Limitations</h2>
-				<Select multi simpleValue placeholder="Select all that apply" options={accessLimitationOptions} value={access_limitations.slice()} onChange={this.onAccessLimitationsChange}/>
+				<Select multi simpleValue placeholder="Select all that apply" options={accessLimitationOptions} value={access_limitations.slice()} onChange={this.onAccessLimitationsChange} onBlur={this.accessBlur}/>
 			</div>
 		</div>
 		);

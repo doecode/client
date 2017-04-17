@@ -47,7 +47,7 @@ export default class MetadataPanel extends React.Component {
 
 
 	           <div className="form-group form-group-sm row">
-	            	<MetadataField divStyle="col-sm-10" field="date_of_issuance" label="Date of Issuance" elementType="date"  />
+	            	<MetadataField  field="date_of_issuance" label="Date of Issuance" elementType="date"  />
 	            </div>
 
 

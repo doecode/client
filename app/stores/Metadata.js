@@ -1,6 +1,5 @@
 import BaseData from './BaseData';
 import uniqid from 'uniqid';
-import {observable} from 'mobx';
 import MetadataStore from './MetadataStore';
 
 
@@ -15,10 +14,10 @@ export default class Metadata extends BaseData {
 
 
     saveToArray(field, data) {
-      if (this.edit)
-        this.addToParentArray(field,data);
+      if (!data.id)
+        this.addToArray(field,data);
       else
-        this.modifyElementInParentArray(field,data)
+        this.modifyElementInArray(field,data)
 
       this.infoSchema[field].completed = true;
     }
@@ -26,7 +25,7 @@ export default class Metadata extends BaseData {
      addToArray(field,data) {
        //if (this.getValue("place") !== undefined)
          //this.setValue("place",this.parentArray.length + 1);
-
+    	 data.id = uniqid();
          this.fieldMap[field].push(data);
      }
 

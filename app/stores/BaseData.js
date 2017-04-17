@@ -7,9 +7,8 @@ export default class BaseData {
 		this.fieldMap = props.fieldMap;
 		this.infoSchema = props.infoSchema;
 
-		this.fieldMapSnapShot = Object.assign({}, this.fieldMap);
-		this.infoSchemaSnapShot = Object.assign({}, this.infoSchema);
-
+		this.fieldMapSnapshot = props.fieldMapSnapshot;
+		this.infoSchemaSnapshot = props.infoSchemaSnapshot;
 	  this.validationCallback = this.validationCallback.bind(this);
 
 	}
@@ -39,10 +38,6 @@ export default class BaseData {
 
     validateField(field) {
        const info = this.getFieldInfo(field);
-       let parentSize = 0;
-
-       if (this.hasParent)
-    	   parentSize = this.parentArray.length;
 
        if (!info)
     	   return;
@@ -74,8 +69,8 @@ export default class BaseData {
     checkForSchemaErrors() {
     	let errors = [];
 
-    	for (var field in this.schema) {
-    		const information = this.getFieldInfo(field);
+    	for (var field in this.infoSchema) {
+    		const information = this.infoSchema[field];
 
     		if (information.error)
     			errors.push(field);
@@ -90,20 +85,22 @@ export default class BaseData {
     	return errors;
     }
 
+	clearValues() {
+		console.log(this.fieldMapSnapShot);
+		for (var field in this.fieldMap)
+				this.fieldMap[field] = this.fieldMapSnapshot[field];
+	}
+
+	clearInfoSchema() {
+		for (var field in this.infoSchema)
+				this.infoSchema[field] = this.infoSchemaSnapshot[field];
+	}
 		clear() {
-			clearValues();
-			clearInfoSchema();
+			this.clearValues();
+			this.clearInfoSchema();
 		}
 
-		clearValues() {
-			for (var field in this.fieldMap)
-					this.fieldMap[field] = fieldMapSnapShot[field];
-		}
 
-		clearInfoSchema() {
-			for (var field in this.infoSchema)
-					this.fieldMap[field] = this.infoSchemaSnapShot[field];
-		}
 
 
     getInfoSchema() {
