@@ -49,7 +49,6 @@ export default class AgentsModal extends React.Component {
 
     render() {
         const showModal = this.props.tableStore.showModal;
-        const currentParent = this.props.currentParent;
 
 
         let content = null;

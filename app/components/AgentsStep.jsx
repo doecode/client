@@ -109,6 +109,7 @@ export default class AgentsStep extends React.Component {
 				const index = currentArray.findIndex(item => item.id === tableStore.currentId);
 				data.loadValues(currentArray[index]);
 			}
+			
 
 		    const content = <div>
 		      <AgentsTable arr={currentArray.slice()} tableStore={tableStore} config={tableConfig} finished={false} />

@@ -22,18 +22,12 @@ export default class Metadata extends BaseData {
       this.infoSchema[field].completed = true;
     }
 
-     addToArray(field,data) {
-       //if (this.getValue("place") !== undefined)
-         //this.setValue("place",this.parentArray.length + 1);
+    addToArray(field,data) {
     	 data.id = uniqid();
          this.fieldMap[field].push(data);
      }
 
-     modifyElementInArray(data) {
-  /*       const newPlace = this.getValue("place");
-       if (newPlace !== undefined && newPlace !== this.previousPlace) {
-             this.updateElementPlaceAndReturnIndex();
-         } */
+    modifyElementInArray(data) {
 
          const index = this.fieldMap[field].findIndex(item => item.id === data.id);
 
@@ -41,62 +35,37 @@ export default class Metadata extends BaseData {
          if (index > -1)
              this.fieldMap[field][index] = data;
 
+         removeFromInvalids(field,data.id);
 
-         const invIndex = this.infoSchema[field].invalids.findIndex(item => item.id === this.id);
-         this.infoSchema[field].invalids.splice(index,1);
+         
 
-         if (this.infoSchema[field].invalids.length == 0)
-           this.infoSchema[field].error = '';
-
-            }
-
-   /*  updateElementPlaceAndReturnIndex(data) {
-         const newPlace = this.getValue("place");
-         //if it is outside the bounds, reset to old value and return
-         if (isNaN(newPlace) || newPlace > 0 || newPlace < end) {
-           this.setValue("place",this.previousPlace);
-           return;
-         }
-
-         const check = newPlace > this.previousPlace;
-         const end = parentArray.length;
+    }
 
 
-         for (var i = 0; i < end; i++) {
-             if (check && this.parentArray[i].place <= newPlace && this.parentArray[i].place > previousPlace) {
-                 this.parentArray[i].place--;
-             } else if (!check && this.parentArray[i].place >= newPlace && this.parentArray[i].place < previousPlace) {
-                 this.parentArray[i].place++;
-             } else if (this.parentArray[i].place == previousPlace) {
-                 this.parentArray[i].place = newPlace;
-             }
-         }
-         this.previousPlace = newPlace;
-
-
-     } */
-
-     removeFromArray(field,data) {
+    removeFromArray(field,data) {
+    	 const id = data.id;
          const index = this.parentArray.findIndex(item => item.id === data.id);
          this.fieldMap[field].splice(index, 1);
 
-         /*
-         if (data.place !== undefined) {
-             const deletedPlace = data.place;
-             const end = parentArray.length;
-             for (var i = 0; i < end; i++) {
-
-               if (this.parentArray[i].place > deletedPlace)
-                 this.parentArray[i].place--;
-
-             }
-
-         }
-         */
-
          if (this.fieldMap[field].length == 0)
            this.infoSchema[field].completed = false;
+         
+         removeFromInvalids(field,id)
+         
+         
      }
+    
+    removeFromInvalids(field, id) {
+    	
+    	if (this.infoSchema[field].invalids.length > 0) {
+    	const invIndex = this.infoSchema[field].invalids.findIndex(item => item.id === id);
+        this.infoSchema[field].invalids.splice(invIndex,1);
+
+        if (this.infoSchema[field].invalids.length == 0)
+          this.infoSchema[field].error = '';
+        
+    	}
+    }
 
    getPanelStatus(infoSchema,panelNumber) {
 
