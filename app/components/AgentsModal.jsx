@@ -19,6 +19,7 @@ export default class AgentsModal extends React.Component {
 
     close() {
         this.props.tableStore.showModal = false;
+        this.props.tableStore.currentId = "";
         this.props.data.clear();
         this.setState({errors: ''});
     }
@@ -59,8 +60,6 @@ export default class AgentsModal extends React.Component {
 
 
 
-
-
         return (
             <div className="form-group form-group-sm">
                 <div className="col-xs-offset-5">
@@ -82,9 +81,9 @@ export default class AgentsModal extends React.Component {
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.close}>Close</Button>
-                            {this.props.data.edit && <Button bsStyle="danger" onClick={this.handleDelete}>Delete</Button>
+                            {this.props.tableStore.currentId && <Button bsStyle="danger" onClick={this.handleDelete}>Delete</Button>
 }
-                            <Button bsStyle="primary" onClick={this.handleSave}>Save and close</Button>
+                            <Button bsStyle="primary" onClick={this.handleSave}  >Save and close</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>

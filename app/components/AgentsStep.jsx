@@ -105,6 +105,7 @@ export default class AgentsStep extends React.Component {
 			const currentArray = metadata.getValue(currentParent);
 			const data = getChildData(currentParent);
 			
+			
 			if (tableStore.currentId) {
 				const index = currentArray.findIndex(item => item.id === tableStore.currentId);
 				data.loadValues(currentArray[index]);

@@ -35,7 +35,8 @@ export default class Metadata extends BaseData {
          if (index > -1)
              this.fieldMap[field][index] = data;
 
-         removeFromInvalids(field,data.id);
+         if (this.infoSchema[field].invalids !== undefined)
+        	 this.removeFromInvalids(field,data.id);
 
          
 
@@ -43,14 +44,14 @@ export default class Metadata extends BaseData {
 
 
     removeFromArray(field,data) {
-    	 const id = data.id;
-         const index = this.parentArray.findIndex(item => item.id === data.id);
+         const index = this.fieldMap[field].findIndex(item => item.id === data.id);
          this.fieldMap[field].splice(index, 1);
 
          if (this.fieldMap[field].length == 0)
            this.infoSchema[field].completed = false;
          
-         removeFromInvalids(field,id)
+         if (this.infoSchema[field].invalids !== undefined)
+        	 this.removeFromInvalids(field,data.id);
          
          
      }
