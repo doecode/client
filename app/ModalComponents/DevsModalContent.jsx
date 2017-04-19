@@ -17,17 +17,14 @@ export default class DevsModalContent extends React.Component {
 
 	render() {
 
-		const fields = {
-				"developers" : DeveloperField,
-				"contributors" : ContributorField
-		};
+
 		const contributorTypes = [
 			{label: 'Contact Person', value: 'ContactPerson'},
 			{label: 'Data Collector', value: 'DataCollector'}
 			];
-		
+
 		console.log(this.props.type);
-		const SpecificField = fields[this.props.type];
+		const SpecificField = this.props.SpecificField;
 		return(
 
             <div className="container-fluid">

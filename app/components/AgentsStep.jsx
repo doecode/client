@@ -2,6 +2,7 @@ import React from 'react';
 import AgentsModal from './AgentsModal';
 import AgentsTable from './AgentsTable';
 import TableStore from '../stores/TableStore';
+import EditableDataTable from './EditableDataTable';
 import Developer from '../stores/Developer';
 import Contributor from '../stores/Contributor';
 import {observer} from 'mobx-react';
@@ -100,22 +101,26 @@ export default class AgentsStep extends React.Component {
 					];
 
 			const opts = ["developers", "contributors"];
-			const currentParent = opts[this.state.key];
-			const metadata = this.props.metadata;
+			const parentName = opts[this.state.key];
+			const contentType = "Devs";
+
+			/*const metadata = this.props.metadata;
 			const currentArray = metadata.getValue(currentParent);
 			const data = getChildData(currentParent);
-			
-			
+
+
 			if (tableStore.currentId) {
 				const index = currentArray.findIndex(item => item.id === tableStore.currentId);
 				data.loadValues(currentArray[index]);
 			}
-			
 
-		    const content = <div>
+
+		      const content = <div>
 		      <AgentsTable arr={currentArray.slice()} tableStore={tableStore} config={tableConfig} finished={false} />
 		      <AgentsModal tableStore={tableStore} dataType={currentParent} data={data} metadata={this.props.metadata} contentType="Devs" />
-		    </div>
+		    </div> */
+
+				const content = <EditableDataTable contentType={contentType} config={tableConfig} parentName={parentName}/>
 		    return (
 		       <div>
 		      <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="devsStepTabs">

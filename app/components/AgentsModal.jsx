@@ -5,7 +5,9 @@ import DevsModalContent from '../ModalComponents/DevsModalContent'
 import RIsModalContent from '../ModalComponents/RIsModalContent'
 import OrgsModalContent from '../ModalComponents/OrgsModalContent'
 import {observer} from "mobx-react";
+import Metadata from '../stores/Metadata';
 
+const metadata = new Metadata();
 @observer
 export default class AgentsModal extends React.Component {
     constructor(props) {
@@ -29,12 +31,12 @@ export default class AgentsModal extends React.Component {
     }
 
     handleSave(event) {
-    	
-    	
+
+
         const errors = this.props.data.checkForSchemaErrors();
-        
+
         if (errors.length === 0) {
-        	this.props.metadata.saveToArray(this.props.dataType,this.props.data.getData());
+        	  metadata.saveToArray(this.props.dataType,this.props.data.getData());
             this.close();
         }
         else {
@@ -44,19 +46,12 @@ export default class AgentsModal extends React.Component {
     }
 
     handleDelete(event) {
-    	this.props.metadata.removeFromArray(this.props.dataType,this.props.data.getData());
+    	  metadata.removeFromArray(this.props.dataType,this.props.data.getData());
         this.close();
     }
 
     render() {
         const showModal = this.props.tableStore.showModal;
-
-
-        let content = null;
-        if (this.props.contentType === 'Devs') {
-        content = <DevsModalContent type={this.props.dataType} data={this.props.data}/>
-        }
-
 
 
 
@@ -77,7 +72,7 @@ export default class AgentsModal extends React.Component {
                          <h2>{this.state.errors}</h2>
                          </div>
                          }
-                            {content}
+                            {this.props.content}
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.close}>Close</Button>
