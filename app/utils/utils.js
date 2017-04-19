@@ -4,6 +4,7 @@ import Developer from '../stores/Developer';
 import SponsoringOrganization from '../stores/SponsoringOrganization';
 import ResearchOrganization from '../stores/ResearchOrganization';
 import ContributingOrganization from '../stores/ContributingOrganization';
+import RelatedIdentifier from '../stores/RelatedIdentifier';
 
 function doAjax(methodType, url, successCallback, data, errorCallback) {
 
@@ -46,6 +47,8 @@ function getChildData(type) {
         return new ContributingOrganization();
     } else if (type === 'research_organizations') {
         return new ResearchOrganization();
+    } else if (type === 'related_identifiers') {
+    	return new RelatedIdentifier();
     }
 
 }

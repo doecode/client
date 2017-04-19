@@ -64,6 +64,7 @@ class MetadataStore {
             "sponsoring_organizations" : {required:true, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
             "contributing_organizations" : {required:false, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
             "research_organizations" : {required:false, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
+  	        "related_identifiers" : {required:false, completed:false, hasError:false, validations: [], Panel: 6, errorMessage: ''},
 
 
 
@@ -84,7 +85,7 @@ class MetadataStore {
 
 	@observable developerInfoSchema = {
 
-		   	"first_name": {required:true, completed:false, validations: [""], error: ''},
+		   	"first_name": {required:true, completed:false, validations: [], error: ''},
 	        "middle_name": {required:false, completed:false, validations: [], error: ''},
 	        "last_name": {required:true, completed:false, validations: [], error: ''},
 	        "email": {required:false, completed:false, validations: ["Email"], error: ''},
@@ -110,7 +111,7 @@ class MetadataStore {
 
 	@observable contributorInfoSchema = {
 
-		   	"first_name": {required:true, completed:false, validations: [""], error: ''},
+		   	"first_name": {required:true, completed:false, validations: [], error: ''},
 	        "middle_name": {required:false, completed:false, validations: [], error: ''},
 	        "last_name": {required:true, completed:false, validations: [], error: ''},
 	        "email": {required:false, completed:false, validations: ["Email"], error: ''},
@@ -133,7 +134,7 @@ class MetadataStore {
 
    @observable sponsoringOrganizationInfoSchema = {
 
-         "organization_name": {required:true, completed:false, validations: [""], error: ''},
+         "organization_name": {required:true, completed:false, validations: [], error: ''},
           "email": {required:false, completed:false, validations: ["Email"], error: ''},
           "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
           "primary_award" : {required:true, completed:false, validations: [], error: ''},
@@ -149,7 +150,7 @@ class MetadataStore {
 
    @observable researchOrganizationInfoSchema = {
 
-         "organization_name": {required:true, completed:false, validations: [""], error: ''},
+         "organization_name": {required:true, completed:false, validations: [], error: ''},
           "email": {required:false, completed:false, validations: ["Email"], error: ''},
           "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
      }
@@ -164,11 +165,25 @@ class MetadataStore {
 
    @observable contributingOrganizationInfoSchema = {
 
-         "organization_name": {required:true, completed:false, validations: [""], error: ''},
+         "organization_name": {required:true, completed:false, validations: [], error: ''},
           "email": {required:false, completed:false, validations: ["Email"], error: ''},
           "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
           "contributor_type" : {required:true, completed:false, validations: [], error: ''}
      }
+	
+    @observable relatedIdentifier = {
+		      identifier_type : '',
+		      relation_type : '',
+		      identifier : '',
+		      id: ''
+    }
+	
+	@observable relatedIdentifierInfoSchema = {
+
+	         "identifier_type": {required:true, completed:false, validations: [], error: ''},
+	          "relation_type": {required:true, completed:false, validations: [], error: ''},
+	          "identifier": {required:false, completed:false, validations: [], error: ''}
+	     }
 
 
 }

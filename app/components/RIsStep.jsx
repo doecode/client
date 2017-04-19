@@ -3,6 +3,7 @@ import AgentsModal from './AgentsModal';
 import AgentsTable from './AgentsTable';
 import TableStore from '../stores/TableStore';
 import {observer} from 'mobx-react';
+import EditableDataTable from './EditableDataTable';
 
 
 const tableStore = new TableStore();
@@ -12,19 +13,8 @@ export default class RIsStep extends React.Component {
 
 	constructor(props) {
 		    super(props);
-			const currentOpt = {
-				"arrName" : "related_identifiers",
-				"type" : "relatedIdentifier",
-				"label" : "Related Identifiers"
-			};
-			tableStore.current = currentOpt;
-
-		    this.isValidated = this._isValidated.bind(this);
 		  }
 
-	_isValidated() {
-
-	}
 
 	  render() {
 
@@ -61,14 +51,14 @@ export default class RIsStep extends React.Component {
 				 }
 					];
 
-		    const arr = this.props.metadataStore.metadata[tableStore.current.arrName].slice();
-		    const arrLength = arr.length;
+			const parentName = "related_identifiers";
+			const contentType = "RIs";
+			let columns = ["identifier_type","relation_type","identifier"];
 
 		    return (
 		       <div>
-             <h2> {tableStore.current.label} </h2>
-             <AgentsTable arr={arr} tableStore={tableStore} config={tableConfig} finished={false} />
-   		      <AgentsModal tableStore={tableStore} metadataStore={this.props.metadataStore} arrLength={arrLength} contentType="RIs" />
+             <h2> Related Identifiers </h2>
+             <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
 		      </div>
 		      );
 		  }

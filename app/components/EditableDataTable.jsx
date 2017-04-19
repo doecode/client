@@ -7,16 +7,6 @@ import Metadata from '../stores/Metadata';
 import {observer} from 'mobx-react';
 import {getChildData} from '../utils/utils'
 
-import DeveloperField from '../field/DeveloperField';
-import ContributorField from '../field/ContributorField';
-import SponsoringOrganizationField from '../field/SponsoringOrganizationField';
-import ContributingOrganizationField from '../field/ContributingOrganizationField';
-import ResearchOrganizationField from '../field/ResearchOrganizationField';
-
-
-import DevsModalContent from '../ModalComponents/DevsModalContent'
-import RIsModalContent from '../ModalComponents/RIsModalContent'
-import OrgsModalContent from '../ModalComponents/OrgsModalContent'
 
 import Griddle from 'griddle-react';
 
@@ -41,6 +31,7 @@ export default class EditableDataTable extends React.Component {
 	  const index = currentArray.findIndex(item => item.id === gridRow.props.data.id);
 	  data.loadValues(currentArray[index]);
   	  tableStore.showModal = this.props.parentName;
+  	  tableStore.isEdit = true;
     }
     
 

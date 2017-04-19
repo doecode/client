@@ -35,7 +35,8 @@ export default class DOECodeWizard extends React.Component {
         		{name: 'Product Description', component: <MetadataPanel metadata={metadata}/>},
         		{name: 'Licenses & Access Limitations', component: <AccessStep metadata={metadata} />},
         		{name: 'Developers & Contributors', component: <AgentsStep />},
-            {name: 'Organizations', component: <OrgsStep />},
+        		{name: 'Organizations', component: <OrgsStep />},
+        		{name: 'Identifiers', component: <RIsStep />},
         		];
 
         /*

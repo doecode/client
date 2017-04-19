@@ -1,6 +1,5 @@
 import React from 'react';
-import InputHelper from '../components/InputHelper'
-import {observer, Provider} from "mobx-react";
+import {observer} from "mobx-react";
 
 
 @observer
@@ -12,7 +11,6 @@ export default class RIsModalContent extends React.Component {
 
 
 	render() {
-        const ri = this.props.tableStore.currentData();
         
 		const identifierTypes = [
 			{label: 'DOI', value: 'DOI'},
@@ -24,30 +22,23 @@ export default class RIsModalContent extends React.Component {
 			{label: 'Contains', value: 'Contains'}
 			];
 
+		const SpecificField = this.props.SpecificField;
 
 		return(
 
             <div className="container-fluid">
-                <Provider dataStore={ri}>
-                <div>
                 <div className="form-horizontal">
-                    {this.props.isEdit && <div className="form-group form-group-sm row">
-                        <InputHelper field="place" label="#" elementType="input"/>
-                    </div>
-                    }
                     <div className="form-group form-group-sm row">
-                        <InputHelper field="identifier_type" label="Identifier Type" elementType="select" options={identifierTypes}/>
+                        <SpecificField field="identifier_type" label="Identifier Type" elementType="select" options={identifierTypes}/>
                     </div>
                     <div className="form-group form-group-sm row">
-                        <InputHelper field="relation_type" label="Relation Type" elementType="select" options={relationTypes}  />
+                        <SpecificField field="relation_type" label="Relation Type" elementType="select" options={relationTypes}  />
                     </div>
                     <div className="form-group form-group-sm row">
-                        <InputHelper field="identifier" label="Identifier" elementType="input"/>
+                        <SpecificField field="identifier" label="Identifier" elementType="input"/>
                     </div>
 
                 </div>
-                </div>
-                </Provider>
             </div>
 		);
 	}

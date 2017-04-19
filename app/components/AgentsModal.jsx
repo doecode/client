@@ -11,6 +11,7 @@ import ContributorField from '../field/ContributorField';
 import SponsoringOrganizationField from '../field/SponsoringOrganizationField';
 import ContributingOrganizationField from '../field/ContributingOrganizationField';
 import ResearchOrganizationField from '../field/ResearchOrganizationField';
+import RelatedIdentifierField from '../field/RelatedIdentifierField';
 
 
 import {observer} from "mobx-react";
@@ -25,17 +26,16 @@ export default class AgentsModal extends React.Component {
         this.close = this.close.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        this.state = {errors: ''};
     }
 
     close() {
         this.props.tableStore.showModal = "";
-        this.props.tableStore.currentId = "";
+        this.props.tableStore.isEdit = false;
         this.props.data.clear();
-        this.props.tableStore.errors = "";
     }
 
     open() {
+        this.props.tableStore.isEdit = true;
         this.props.tableStore.showModal = this.props.dataType;
     }
 
@@ -64,7 +64,8 @@ export default class AgentsModal extends React.Component {
             "contributors" : ContributorField,
             "sponsoring_organizations" : SponsoringOrganizationField,
             "contributing_organizations" : ContributingOrganizationField,
-            "research_organizations" : ResearchOrganizationField
+            "research_organizations" : ResearchOrganizationField,
+            "related_identifiers" : RelatedIdentifierField
         };
 
         const SpecificField = fields[this.props.dataType];
@@ -74,6 +75,8 @@ export default class AgentsModal extends React.Component {
         content = <DevsModalContent SpecificField={SpecificField} data={this.props.data}/>
       } else if (this.props.contentType === 'Orgs') {
         content = <OrgsModalContent SpecificField={SpecificField} data={this.props.data}/>
+      } else if (this.props.contentType === 'RIs') {
+    	content = <RIsModalContent SpecificField={SpecificField} data={this.props.data}/>  
       }
 
        const disabled = !this.props.data.validateSchema();
@@ -107,7 +110,7 @@ export default class AgentsModal extends React.Component {
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.close}>Close</Button>
-                            {this.props.tableStore.currentId && <Button bsStyle="danger" onClick={this.handleDelete}>Delete</Button>
+                            {this.props.tableStore.isEdit && <Button bsStyle="danger" onClick={this.handleDelete}>Delete</Button>
 }
                             
                             <Button bsStyle="primary" onClick={this.handleSave} disabled={disabled} >Save and Close</Button>

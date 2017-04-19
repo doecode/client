@@ -60,17 +60,9 @@ export default class TableStore {
     	label : ''
     }
 
-    @observable showModal = false;
+    @observable showModal = "";
 
     @observable isEdit = false;
-
-    @observable previousPlace = -1;
-
-    @observable currentId = "";
-    
-    @observable errors = "";
-
-    @observable data = {};
 
 
     clear() {
