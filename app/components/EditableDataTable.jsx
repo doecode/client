@@ -34,9 +34,15 @@ export default class EditableDataTable extends React.Component {
 
 
     rowClick(gridRow, event) {
-  	  tableStore.currentId = gridRow.props.data.id;
+
+	  const parentName = this.props.parentName;
+	  const currentArray = metadata.getValue(parentName);
+	  const data = getChildData(parentName);
+	  const index = currentArray.findIndex(item => item.id === gridRow.props.data.id);
+	  data.loadValues(currentArray[index]);
   	  tableStore.showModal = this.props.parentName;
     }
+    
 
 	  render() {
 
@@ -48,11 +54,6 @@ export default class EditableDataTable extends React.Component {
 			const currentArray = metadata.getValue(parentName);
 			const data = getChildData(parentName);
 
-
-			if (tableStore.currentId) {
-				const index = currentArray.findIndex(item => item.id === tableStore.currentId);
-				data.loadValues(currentArray[index]);
-			}
 		    return (
           <div>
             <div className="form-group form-group-sm col-sm-12">

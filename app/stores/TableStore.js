@@ -67,6 +67,8 @@ export default class TableStore {
     @observable previousPlace = -1;
 
     @observable currentId = "";
+    
+    @observable errors = "";
 
     @observable data = {};
 

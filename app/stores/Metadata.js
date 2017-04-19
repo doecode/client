@@ -27,7 +27,7 @@ export default class Metadata extends BaseData {
          this.fieldMap[field].push(data);
      }
 
-    modifyElementInArray(data) {
+    modifyElementInArray(field,data) {
 
          const index = this.fieldMap[field].findIndex(item => item.id === data.id);
 

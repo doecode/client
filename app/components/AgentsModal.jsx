@@ -32,7 +32,7 @@ export default class AgentsModal extends React.Component {
         this.props.tableStore.showModal = "";
         this.props.tableStore.currentId = "";
         this.props.data.clear();
-        this.setState({errors: ''});
+        this.props.tableStore.errors = "";
     }
 
     open() {
@@ -42,20 +42,16 @@ export default class AgentsModal extends React.Component {
     handleSave(event) {
 
 
-        const errors = this.props.data.checkForSchemaErrors();
-
-        if (errors.length === 0) {
-        	  metadata.saveToArray(this.props.dataType,this.props.data.getData());
+        if (this.props.data.validateSchema(true)) {
+        	 metadata.saveToArray(this.props.dataType,this.props.data.getData());
             this.close();
         }
-        else {
-            this.setState({errors: "The following fields contain errors: " + errors.join(", ")});
-        }
+        
 
     }
 
     handleDelete(event) {
-    	  metadata.removeFromArray(this.props.dataType,this.props.data.getData());
+    	metadata.removeFromArray(this.props.dataType,this.props.data.getData());
         this.close();
     }
 
@@ -80,7 +76,15 @@ export default class AgentsModal extends React.Component {
         content = <OrgsModalContent SpecificField={SpecificField} data={this.props.data}/>
       }
 
-       console.log(content);
+       const disabled = !this.props.data.validateSchema();
+       let errorMessage = "";
+       
+       const errors = this.props.data.checkForSchemaErrors();
+       
+
+       if (errors.length > 0)
+    	   errorMessage = "The following fields contain errors: " + errors.join(", ");
+       
 
         return (
             <div className="form-group form-group-sm">
@@ -94,9 +98,9 @@ export default class AgentsModal extends React.Component {
                             <Modal.Title>Manage Whatever</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                         {this.state.errors &&
+                         {errorMessage &&
                          <div className="error-color">
-                         <h2>{this.state.errors}</h2>
+                         <h2>{errorMessage}</h2>
                          </div>
                          }
                             {content}
@@ -105,7 +109,8 @@ export default class AgentsModal extends React.Component {
                             <Button onClick={this.close}>Close</Button>
                             {this.props.tableStore.currentId && <Button bsStyle="danger" onClick={this.handleDelete}>Delete</Button>
 }
-                            <Button bsStyle="primary" onClick={this.handleSave}  >Save and close</Button>
+                            
+                            <Button bsStyle="primary" onClick={this.handleSave} disabled={disabled} >Save and Close</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>

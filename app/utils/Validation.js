@@ -5,7 +5,7 @@ export default class Validation {
 
 
 
-validate(value,validationObj, validationCallback, parentArraySize) {
+validate(value,validationObj, validationCallback, parentArraySizel) {
 	   
 	 let errors = "";
 	  const validations = validationObj.validations;

@@ -31,10 +31,13 @@ export default class BaseData {
    	return this.infoSchema[field];
    }
 
-	 loadValues(data) {
-		 for (var field in data)
+   loadValues(data) {
+		 for (var field in data) {
 		 		this.fieldMap[field] = data[field];
-	 }
+		 		if (data[field].length > 0 && this.infoSchema[field]) 
+		 			this.infoSchema[field].completed = true;
+		 }
+   }
 
     validateField(field) {
        const info = this.getFieldInfo(field);
@@ -66,19 +69,35 @@ export default class BaseData {
 
     }
 
+    validateSchema(update) {
+    	let isValid = true;
+
+    	for (var field in this.infoSchema) {
+    		const information = this.infoSchema[field];
+
+    		if (information.error) {
+    			isValid = false;
+    		}
+    		else if (information.required && !information.completed) {
+    			if (update)
+    				information.error = field + " is required.";
+    			
+    			isValid = false;
+    		}
+
+    	}
+
+
+    	return isValid;
+    }
+    
     checkForSchemaErrors() {
     	let errors = [];
 
     	for (var field in this.infoSchema) {
     		const information = this.infoSchema[field];
-
     		if (information.error)
     			errors.push(field);
-    		else if (information.required && !information.completed) {
-    			errors.push(field);
-    			information.error = field + " is required.";
-    		}
-
     	}
 
 
@@ -86,7 +105,6 @@ export default class BaseData {
     }
 
 	clearValues() {
-		console.log(this.fieldMapSnapShot);
 		for (var field in this.fieldMap)
 				this.fieldMap[field] = this.fieldMapSnapshot[field];
 	}

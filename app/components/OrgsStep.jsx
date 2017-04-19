@@ -73,7 +73,7 @@ export default class OrgsStep extends React.Component {
 			const parentName = opts[this.state.key];
 			const contentType = "Orgs";
 			let columns = ["organization_name","email","orcid"];
-			if (parentName === 'sponsoring_organization')
+			if (parentName === 'sponsoring_organizations')
 				columns.push("primary_award")
 
 

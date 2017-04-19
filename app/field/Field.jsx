@@ -99,7 +99,6 @@ export default class Field extends React.Component {
 	    let ph = this.props.properties.placeholder ? this.props.properties.placeholder : "Select any that apply";
 	    if (this.props.properties.multi)
 	    	val = val.slice();
-	    console.log(val);
 	    const errorClass = error ? "field-error" : ""
       	input = <Select className={errorClass} allowCreate={this.props.properties.allowCreate} multi={this.props.properties.multi} options={this.props.properties.options} simpleValue placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} value={val} />
 	  }
