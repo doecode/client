@@ -5,6 +5,7 @@ export default class ResearchOrganization extends BaseData {
     constructor() {
 
       const defaultResearchOrganization = {
+   		   	  DOE : true,    	
               organization_name: '',
               email: '',
               orcid: '',

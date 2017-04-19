@@ -5,6 +5,7 @@ export default class SponsoringOrganization extends BaseData {
     constructor() {
 
       const defaultSponsoringOrganization = {
+   		   	  DOE : true,    		  
               organization_name: '',
               email: '',
               orcid: '',

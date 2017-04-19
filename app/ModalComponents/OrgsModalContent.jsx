@@ -29,6 +29,9 @@ export default class OrgsModalContent extends React.Component {
                 <div className="form-horizontal">
 
                     <div className="form-group form-group-sm row">
+                    <SpecificField field="DOE" label="DOE Organization?" elementType="checkbox"  />
+                    </div>
+                    <div className="form-group form-group-sm row">
                         <SpecificField divStyle="col-sm-6" field="organization_name" label="Name" elementType="select" allowCreate={true} placeholder="Enter or select from the list your organization" options={orgNames}   />
                     </div>
 

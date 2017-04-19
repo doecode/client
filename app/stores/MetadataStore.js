@@ -123,6 +123,7 @@ class MetadataStore {
 
 
    @observable sponsoringOrganization = {
+		   DOE : true,
            organization_name: '',
            email: '',
            orcid: '',
@@ -133,7 +134,8 @@ class MetadataStore {
 
    @observable sponsoringOrganizationInfoSchema = {
 
-         "organization_name": {required:true, completed:false, validations: [], error: ''},
+			
+          "organization_name": {required:true, completed:false, validations: [], error: ''},
           "email": {required:false, completed:false, validations: ["Email"], error: ''},
           "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
           "primary_award" : {required:true, completed:false, validations: [], error: ''},
@@ -141,6 +143,7 @@ class MetadataStore {
      }
 
    @observable researchOrganization = {
+ 		   DOE : true,    	
            organization_name: '',
            email: '',
            orcid: '',
@@ -155,6 +158,7 @@ class MetadataStore {
      }
 
    @observable contributingOrganization = {
+ 		   DOE : true,    	
            organization_name: '',
            email: '',
            orcid: '',

@@ -9,6 +9,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 export default class Field extends React.Component {
   constructor(props) {
     super(props);
+    this.toggleCheckbox = this.toggleCheckbox.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
@@ -18,6 +19,11 @@ export default class Field extends React.Component {
  }
 
 
+  toggleCheckbox(event) {
+	  const newVal = !(this.props.linkedData.getValue(this.props.properties.field));
+	  this.props.linkedData.setValue(this.props.properties.field, newVal);
+  }
+  
   handleBlur(event) {
 	  this.props.linkedData.validateField(this.props.properties.field);
   }
@@ -92,7 +98,9 @@ export default class Field extends React.Component {
 	  }
 	  else if (elementType === 'input') {
 		input = <input type="text" className="form-control" value={val} onChange={this.handleChange} onBlur={this.handleBlur} />
-
+	  } 
+	  else if (elementType === 'checkbox') {
+		  input = <input type="checkbox" className="" checked={val} onChange={this.toggleCheckbox} />
 	  }
 	  else if (elementType === 'select') {
 	    let ph = this.props.properties.placeholder ? this.props.properties.placeholder : "Select any that apply";
