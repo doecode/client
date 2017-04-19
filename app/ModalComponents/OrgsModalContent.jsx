@@ -21,6 +21,7 @@ export default class OrgsModalContent extends React.Component {
 		];
 
 				const SpecificField = this.props.SpecificField;
+				const data = this.props.data;
 
 
 		return(
@@ -43,16 +44,28 @@ export default class OrgsModalContent extends React.Component {
                         <SpecificField divStyle="col-sm-6" field="orcid" label="ORCID" elementType="input"  />
                     </div>
 
-                    {this.props.data.getValue("primary_award") !== undefined &&
+                    {data.getValue("primary_award") !== undefined &&
                     <div className="form-group form-group-sm row">
                         <SpecificField divStyle="col-sm-6" field="primary_award" label="Primary Award" elementType="input"  />
                     </div>
 
                     }
 
-                    {this.props.data.getValue("primary_award") !== undefined &&
+                    {this.props.data.getValue("award_numbers") !== undefined &&
                     <div className="form-group form-group-sm row">
                     <SpecificField divStyle="col-sm-6" field="award_numbers" label="Additional Awards" elementType="select" allowCreate={true} multi={true} placeholder="Enter any additional awards"   />
+                    </div>
+                    }
+                    
+                    {this.props.data.getValue("br_codes") !== undefined &&
+                    <div className="form-group form-group-sm row">
+                    <SpecificField divStyle="col-sm-6" field="br_codes" label="B&R Codes" elementType="select" allowCreate={true} multi={true} placeholder="Enter B&R Codes"   />
+                    </div>
+                    }
+                    
+                    {this.props.data.getValue("fwp_numbers") !== undefined &&
+                    <div className="form-group form-group-sm row">
+                    <SpecificField divStyle="col-sm-6" field="fwp_numbers" label="FWP Numbers" elementType="select" allowCreate={true} multi={true} placeholder="Enter FWP Numbers"   />
                     </div>
                     }
 

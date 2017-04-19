@@ -129,6 +129,8 @@ class MetadataStore {
            orcid: '',
            primary_award: '',
            award_numbers: [],
+           fwp_numbers: [],
+           br_codes: [],
            id: ''
    }
 
@@ -139,7 +141,9 @@ class MetadataStore {
           "email": {required:false, completed:false, validations: ["Email"], error: ''},
           "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
           "primary_award" : {required:true, completed:false, validations: [], error: ''},
-          "award_numbers" : {required:false, completed:false, validations: [], error: ''}
+          "award_numbers" : {required:false, completed:false, validations: [], error: ''},
+          "br_codes" : {required:false, completed:false, validations: [], error: ''},
+          "fwp_numbers" : {required:false, completed:false, validations: [], error: ''},
      }
 
    @observable researchOrganization = {
