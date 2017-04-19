@@ -38,12 +38,6 @@ class MetadataStore {
     "files": {required:false, completed:false, hasError:false, validations: [], Panel: 1, errorMessage: ''},
 	        "country_of_origin": {required:true, completed:false, hasError:false, validations: [], Panel: 2, errorMessage: ''},
 
-
-  	        "related_identifiers" : {required:false, completed:false, hasError:false, validations: [], Panel: 6, errorMessage: ''},
-  	        	        "recipient_name": {required:true, completed:false, validations: [], Panel: 7, errorMessage: ''},
-	        "recipient_email": {required:true, completed:false, validations: ["Email"], Panel: 7, errorMessage: ''},
-	        "recipient_phone": {required:true, completed:false, validations: ["Phone"], Panel: 7, errorMessage: ''},
-	        "recipient_org": {required:true, completed:false, validations: [], Panel: 7, errorMessage: ''},
 */
 	@observable metadataInfoSchema = {
 
@@ -52,19 +46,23 @@ class MetadataStore {
 	        "acronym": {required:false, completed:false, validations: [], Panel: 2, error: ''},
 	        "doi": {required:false, completed:false, validations: ["DOI"], Panel: 2, error: ''},
 	        "description": {required:true, completed:false, validations: [], Panel: 2, error: ''},
-          "date_of_issuance" : {required:true, completed:false, validations: [], Panel: 2, error: ''},
-          "keywords": {required:false, completed:false, validations: [], Panel: 2, error: ''},
-          "site_accession_number": {required:false, completed:false, validations: [], Panel: 2, error: ''},
-          "other_special_requirements": {required:false, completed:false, validations: [], Panel: 2, error: ''},
-          "related_software": {required:false, completed:false, validations: [], Panel: 2, error: ''},
-	        "licenses": {required:true, completed:false, hasError:false, validations: [], Panel: 3, errorMessage: ''},
-	        "access_limitations": {required:false, completed:false, hasError:false, validations: [], Panel: 3, errorMessage: ''},
-	        "developers": {required:true, completed:false, hasError:false, validations: [], Panel: 4, errorMessage: ''},
-  	        "contributors": {required:false, completed:false, hasError:false, validations: [], Panel: 4, errorMessage: ''},
-            "sponsoring_organizations" : {required:true, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
-            "contributing_organizations" : {required:false, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
-            "research_organizations" : {required:false, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
-  	        "related_identifiers" : {required:false, completed:false, hasError:false, validations: [], Panel: 6, errorMessage: ''},
+            "date_of_issuance" : {required:true, completed:false, validations: [], Panel: 2, error: ''},
+            "keywords": {required:false, completed:false, validations: [], Panel: 2, error: ''},
+            "site_accession_number": {required:false, completed:false, validations: [], Panel: 2, error: ''},
+            "other_special_requirements": {required:false, completed:false, validations: [], Panel: 2, error: ''},
+            "related_software": {required:false, completed:false, validations: [], Panel: 2, error: ''},
+	        "licenses": {required:true, completed:false, hasError:false, validations: [], Panel: 3, error: ''},
+	        "access_limitations": {required:false, completed:false, hasError:false, validations: [], Panel: 3, error: ''},
+	        "developers": {required:true, completed:false, hasError:false, validations: [], Panel: 4, error: ''},
+  	        "contributors": {required:false, completed:false, hasError:false, validations: [], Panel: 4, error: ''},
+            "sponsoring_organizations" : {required:true, completed:false, hasError:false, validations: [], Panel: 5, error: ''},
+            "contributing_organizations" : {required:false, completed:false, hasError:false, validations: [], Panel: 5, error: ''},
+            "research_organizations" : {required:false, completed:false, hasError:false, validations: [], Panel: 5, error: ''},
+  	        "related_identifiers" : {required:false, completed:false, hasError:false, validations: [], Panel: 6, error: ''},
+  	        "recipient_name": {required:true, completed:false, validations: [], Panel: 7, error: ''},
+  	        "recipient_email": {required:true, completed:false, validations: ["Email"], Panel: 7, error: ''},
+  	        "recipient_phone": {required:true, completed:false, validations: ["Phone"], Panel: 7, error: ''},
+  	        "recipient_org": {required:true, completed:false, validations: [], Panel: 7, error: ''},
 
 
 

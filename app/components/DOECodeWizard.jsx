@@ -37,6 +37,7 @@ export default class DOECodeWizard extends React.Component {
         		{name: 'Developers & Contributors', component: <AgentsStep />},
         		{name: 'Organizations', component: <OrgsStep />},
         		{name: 'Identifiers', component: <RIsStep />},
+        		{name: 'Recipient Information', component: <RecipientStep />},
         		];
 
         /*
