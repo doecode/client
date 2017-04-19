@@ -9,6 +9,10 @@ import {getChildData} from '../utils/utils'
 
 import DeveloperField from '../field/DeveloperField';
 import ContributorField from '../field/ContributorField';
+import SponsoringOrganizationField from '../field/SponsoringOrganizationField';
+import ContributingOrganizationField from '../field/ContributingOrganizationField';
+import ResearchOrganizationField from '../field/ResearchOrganizationField';
+
 
 import DevsModalContent from '../ModalComponents/DevsModalContent'
 import RIsModalContent from '../ModalComponents/RIsModalContent'
@@ -49,25 +53,12 @@ export default class EditableDataTable extends React.Component {
 				const index = currentArray.findIndex(item => item.id === tableStore.currentId);
 				data.loadValues(currentArray[index]);
 			}
-
-      const fields = {
-          "developers" : DeveloperField,
-          "contributors" : ContributorField
-      };
-
-      const SpecificField = fields[parentName];
-
-      let content = null;
-      if (this.props.contentType === 'Devs') {
-      content = <DevsModalContent SpecificField={SpecificField} data={data}/>
-      }
-
 		    return (
           <div>
             <div className="form-group form-group-sm col-sm-12">
                     <Griddle results = {currentArray.slice()} columnMetadata={this.props.config} columns={columns} showSettings={true} showFilter={true} onRowClick={this.rowClick} />
             </div>
-           <AgentsModal dataType={parentName} tableStore={tableStore} data={data} content={content}  />
+           <AgentsModal dataType={parentName} tableStore={tableStore} data={data} contentType={this.props.contentType}  />
          </div>
 		      );
 		  }

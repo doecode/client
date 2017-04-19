@@ -31,16 +31,14 @@ class MetadataStore {
             "recipient_org": '',
             "files": []
         };
-    
+
 
 
     /*
     "files": {required:false, completed:false, hasError:false, validations: [], Panel: 1, errorMessage: ''},
 	        "country_of_origin": {required:true, completed:false, hasError:false, validations: [], Panel: 2, errorMessage: ''},
 
-  	        "sponsoring_organizations" : {required:true, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
-  	        "contributing_organizations" : {required:false, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
-  	        "research_organizations" : {required:true, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
+
   	        "related_identifiers" : {required:false, completed:false, hasError:false, validations: [], Panel: 6, errorMessage: ''},
   	        	        "recipient_name": {required:true, completed:false, validations: [], Panel: 7, errorMessage: ''},
 	        "recipient_email": {required:true, completed:false, validations: ["Email"], Panel: 7, errorMessage: ''},
@@ -54,20 +52,24 @@ class MetadataStore {
 	        "acronym": {required:false, completed:false, validations: [], Panel: 2, error: ''},
 	        "doi": {required:false, completed:false, validations: ["DOI"], Panel: 2, error: ''},
 	        "description": {required:true, completed:false, validations: [], Panel: 2, error: ''},
+          "date_of_issuance" : {required:true, completed:false, validations: [], Panel: 2, error: ''},
+          "keywords": {required:false, completed:false, validations: [], Panel: 2, error: ''},
+          "site_accession_number": {required:false, completed:false, validations: [], Panel: 2, error: ''},
+          "other_special_requirements": {required:false, completed:false, validations: [], Panel: 2, error: ''},
+          "related_software": {required:false, completed:false, validations: [], Panel: 2, error: ''},
 	        "licenses": {required:true, completed:false, hasError:false, validations: [], Panel: 3, errorMessage: ''},
 	        "access_limitations": {required:false, completed:false, hasError:false, validations: [], Panel: 3, errorMessage: ''},
 	        "developers": {required:true, completed:false, hasError:false, validations: [], Panel: 4, errorMessage: ''},
   	        "contributors": {required:false, completed:false, hasError:false, validations: [], Panel: 4, errorMessage: ''},
-	        "date_of_issuance" : {required:true, completed:false, validations: [], Panel: 2, error: ''},
-	        "keywords": {required:false, completed:false, validations: [], Panel: 2, error: ''},
-	        "site_accession_number": {required:false, completed:false, validations: [], Panel: 2, error: ''},
-	        "other_special_requirements": {required:false, completed:false, validations: [], Panel: 2, error: ''},
-	        "related_software": {required:false, completed:false, validations: [], Panel: 2, error: ''},
+            "sponsoring_organizations" : {required:true, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
+            "contributing_organizations" : {required:false, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
+            "research_organizations" : {required:false, completed:false, hasError:false, validations: [], Panel: 5, errorMessage: ''},
+
 
 
    }
-    
-    
+
+
 	@observable developer = {
             first_name: '',
             middle_name: '',
@@ -78,7 +80,7 @@ class MetadataStore {
             place: -1,
             id: ''
         }
-    
+
 
 	@observable developerInfoSchema = {
 
@@ -90,8 +92,8 @@ class MetadataStore {
 	        "affiliations" : {required:false, completed:false, validations: [], error: ''},
 
    }
-    
-    
+
+
 	@observable contributor = {
             first_name: '',
             middle_name: '',
@@ -103,9 +105,9 @@ class MetadataStore {
             place: -1,
             id: ''
     }
-    
-    
-    
+
+
+
 	@observable contributorInfoSchema = {
 
 		   	"first_name": {required:true, completed:false, validations: [""], error: ''},
@@ -115,9 +117,58 @@ class MetadataStore {
 	        "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
 	        "affiliations" : {required:false, completed:false, validations: [], error: ''},
 	        "contributor_type" : {required:true, completed:false, validations: [], error: ''}
-	        
+
 
    }
+
+
+   @observable sponsoringOrganization = {
+           organization_name: '',
+           email: '',
+           orcid: '',
+           primary_award: '',
+           award_numbers: [],
+           id: ''
+   }
+
+   @observable sponsoringOrganizationSchema = {
+
+         "organization_name:": {required:true, completed:false, validations: [""], error: ''},
+          "email": {required:false, completed:false, validations: ["Email"], error: ''},
+          "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
+          "primary_award" : {required:true, completed:false, validations: [], error: ''},
+          "award_numbers" : {required:false, completed:false, validations: [], error: ''}
+     }
+
+   @observable researchOrganization = {
+           organization_name: '',
+           email: '',
+           orcid: '',
+           id: ''
+   }
+
+   @observable researchOrganizationSchema = {
+
+         "organization_name:": {required:true, completed:false, validations: [""], error: ''},
+          "email": {required:false, completed:false, validations: ["Email"], error: ''},
+          "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
+     }
+
+   @observable contributingOrganization = {
+           organization_name: '',
+           email: '',
+           orcid: '',
+           contributor_type: '',
+           id: ''
+   }
+
+   @observable contributingOrganizationSchema = {
+
+         "organization_name:": {required:true, completed:false, validations: [""], error: ''},
+          "email": {required:false, completed:false, validations: ["Email"], error: ''},
+          "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
+          "contributor_type" : {required:true, completed:false, validations: [], error: ''}
+     }
 
 
 }

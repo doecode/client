@@ -4,8 +4,6 @@ import {observer,Provider} from "mobx-react";
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import {getChildField} from '../utils/utils';
-import DeveloperField from '../field/DeveloperField';
-import ContributorField from '../field/ContributorField';
 
 
 @observer
@@ -23,7 +21,6 @@ export default class DevsModalContent extends React.Component {
 			{label: 'Data Collector', value: 'DataCollector'}
 			];
 
-		console.log(this.props.type);
 		const SpecificField = this.props.SpecificField;
 		return(
 

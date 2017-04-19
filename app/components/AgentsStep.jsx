@@ -104,21 +104,6 @@ export default class AgentsStep extends React.Component {
 			const parentName = opts[this.state.key];
 			const contentType = "Devs";
 
-			/*const metadata = this.props.metadata;
-			const currentArray = metadata.getValue(currentParent);
-			const data = getChildData(currentParent);
-
-
-			if (tableStore.currentId) {
-				const index = currentArray.findIndex(item => item.id === tableStore.currentId);
-				data.loadValues(currentArray[index]);
-			}
-
-
-		      const content = <div>
-		      <AgentsTable arr={currentArray.slice()} tableStore={tableStore} config={tableConfig} finished={false} />
-		      <AgentsModal tableStore={tableStore} dataType={currentParent} data={data} metadata={this.props.metadata} contentType="Devs" />
-		    </div> */
 
 				const content = <EditableDataTable contentType={contentType} config={tableConfig} parentName={parentName}/>
 		    return (

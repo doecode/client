@@ -1,8 +1,9 @@
 
 import Contributor from '../stores/Contributor';
 import Developer from '../stores/Developer';
-import DeveloperField from '../field/DeveloperField';
-import ContributorField from '../field/ContributorField';
+import SponsoringOrganization from '../stores/SponsoringOrganization';
+import ResearchOrganization from '../stores/ResearchOrganization';
+import ContributingOrganization from '../stores/ContributingOrganization';
 
 function doAjax(methodType, url, successCallback, data, errorCallback) {
 
@@ -32,27 +33,26 @@ function doAjax(methodType, url, successCallback, data, errorCallback) {
     else
       return url;
   }
-  
-  function getChildData(type) {
-	  if (type === 'developers')
-		  return new Developer();
-	  else if (type === 'contributors')
-		  return new Contributor();
-  }
-  
-  function getChildField(type) {
-	  const fields = {
-	   "developers" : DeveloperField,
-	   "contributors" : ContributorField
-	  }
-	  
-	  return fields[type];
-  }
-  
-  
+
+function getChildData(type) {
+
+    if (type === 'developers') {
+        return new Developer();
+    } else if (type === 'contributors') {
+        return new Contributor();
+    } else if (type === 'sponsoring_organizations') {
+        return new SponsoringOrganization();
+    } else if (type === 'contributing_organizations') {
+        return new ContributingOrganization();
+    } else if (type === 'research_organizations') {
+        return new ResearchOrganization();
+    }
+
+}
+
+
 
 
 export {doAjax};
 export {appendQueryString};
 export {getChildData};
-export {getChildField};

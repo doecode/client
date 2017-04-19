@@ -1,10 +1,9 @@
 import BaseData from './BaseData';
-import {observable} from 'mobx';
 import MetadataStore from './MetadataStore';
 
 export default class Contributor extends BaseData {
     constructor() {
-    	
+
     	const  defaultContributor = {
                 first_name: '',
                 middle_name: '',
@@ -16,9 +15,9 @@ export default class Contributor extends BaseData {
                 place: -1,
                 id: ''
         }
-        
-        
-        
+
+
+
     	const defaultContributorInfoSchema = {
 
     		   	"first_name": {required:true, completed:false, validations: [""], error: ''},
@@ -28,11 +27,11 @@ export default class Contributor extends BaseData {
     	        "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
     	        "affiliations" : {required:false, completed:false, validations: [], error: ''},
     	        "contributor_type" : {required:true, completed:false, validations: [], error: ''}
-    	        
+
 
        }
     	const props = {fieldMap: MetadataStore.contributor, infoSchema: MetadataStore.contributorInfoSchema, fieldMapSnapshot: defaultContributor, infoSchemaSnapshot: defaultContributorInfoSchema};
         super(props);
-    	
+
     }
 }

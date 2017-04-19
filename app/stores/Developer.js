@@ -1,10 +1,9 @@
 import BaseData from './BaseData';
-import {observable} from 'mobx';
 import MetadataStore from './MetadataStore';
 
 export default class Developer extends BaseData {
     constructor() {
-    	
+
     	const defaultDeveloper = {
                 first_name: '',
                 middle_name: '',
@@ -15,7 +14,7 @@ export default class Developer extends BaseData {
                 place: -1,
                 id: ''
             }
-        
+
 
     	const defaultDeveloperInfoSchema = {
 
@@ -32,4 +31,3 @@ export default class Developer extends BaseData {
 
     }
 }
-

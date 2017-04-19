@@ -4,6 +4,15 @@ import InputHelper from './InputHelper';
 import DevsModalContent from '../ModalComponents/DevsModalContent'
 import RIsModalContent from '../ModalComponents/RIsModalContent'
 import OrgsModalContent from '../ModalComponents/OrgsModalContent'
+
+
+import DeveloperField from '../field/DeveloperField';
+import ContributorField from '../field/ContributorField';
+import SponsoringOrganizationField from '../field/SponsoringOrganizationField';
+import ContributingOrganizationField from '../field/ContributingOrganizationField';
+import ResearchOrganizationField from '../field/ResearchOrganizationField';
+
+
 import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
 
@@ -54,6 +63,24 @@ export default class AgentsModal extends React.Component {
         const showModal = this.props.tableStore.showModal;
 
 
+        const fields = {
+            "developers" : DeveloperField,
+            "contributors" : ContributorField,
+            "sponsoring_organizations" : SponsoringOrganizationField,
+            "contributing_organizations" : ContributingOrganizationField,
+            "research_organizations" : ResearchOrganizationField
+        };
+
+        const SpecificField = fields[this.props.dataType];
+
+        let content = null;
+        if (this.props.contentType === 'Devs') {
+        content = <DevsModalContent SpecificField={SpecificField} data={this.props.data}/>
+       } else if (this.props.contentType === 'Orgs') {
+        content = <OrgsModalContent SpecificField={SpecificField} data={this.props.data}/>
+       }
+
+       console.log(content);
 
         return (
             <div className="form-group form-group-sm">
@@ -72,7 +99,7 @@ export default class AgentsModal extends React.Component {
                          <h2>{this.state.errors}</h2>
                          </div>
                          }
-                            {this.props.content}
+                            {content}
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.close}>Close</Button>
