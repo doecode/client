@@ -36,7 +36,7 @@ class MetadataStore {
 
     /*
     "files": {required:false, completed:false, hasError:false, validations: [], Panel: 1, errorMessage: ''},
-	        "country_of_origin": {required:true, completed:false, hasError:false, validations: [], Panel: 2, errorMessage: ''},
+	        "country_of_origin": {required:true, completed:true, hasError:false, validations: [], Panel: 2, errorMessage: ''},
 
 */
 	@observable metadataInfoSchema = {
@@ -47,12 +47,13 @@ class MetadataStore {
 	        "doi": {required:false, completed:false, validations: ["DOI"], Panel: 2, error: ''},
 	        "description": {required:true, completed:false, validations: [], Panel: 2, error: ''},
             "date_of_issuance" : {required:true, completed:false, validations: [], Panel: 2, error: ''},
+	        "country_of_origin": {required:true, completed:false, validations: [], Panel: 2, error: ''},
             "keywords": {required:false, completed:false, validations: [], Panel: 2, error: ''},
             "site_accession_number": {required:false, completed:false, validations: [], Panel: 2, error: ''},
             "other_special_requirements": {required:false, completed:false, validations: [], Panel: 2, error: ''},
             "related_software": {required:false, completed:false, validations: [], Panel: 2, error: ''},
 	        "licenses": {required:true, completed:false, hasError:false, validations: [], Panel: 3, error: ''},
-	        "access_limitations": {required:false, completed:false, hasError:false, validations: [], Panel: 3, error: ''},
+	        "access_limitations": {required:true, completed:false, hasError:false, validations: [], Panel: 3, error: ''},
 	        "developers": {required:true, completed:false, hasError:false, validations: [], Panel: 4, error: ''},
   	        "contributors": {required:false, completed:false, hasError:false, validations: [], Panel: 4, error: ''},
             "sponsoring_organizations" : {required:true, completed:false, hasError:false, validations: [], Panel: 5, error: ''},

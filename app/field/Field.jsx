@@ -40,7 +40,6 @@ export default class Field extends React.Component {
   }
 
   handleSelectChange(value) {
-	  console.log("Making change to the following " + value);
 	  if (this.props.properties.multi) {
 
 		let retArray = [];

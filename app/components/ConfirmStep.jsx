@@ -1,6 +1,4 @@
 import React from 'react';
-import AgentsTable from './AgentsTable';
-import MetadataStep from './MetadataStep';
 
 export default class ConfirmStep extends React.Component {
 

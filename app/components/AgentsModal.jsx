@@ -35,7 +35,7 @@ export default class AgentsModal extends React.Component {
     }
 
     open() {
-        this.props.tableStore.isEdit = true;
+        this.props.tableStore.isEdit = false;
         this.props.tableStore.showModal = this.props.dataType;
     }
 

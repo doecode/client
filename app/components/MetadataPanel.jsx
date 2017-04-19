@@ -11,6 +11,15 @@ export default class MetadataPanel extends React.Component {
 
 	render() {
 		const metadata = this.props.metadata;
+		
+		const countries = [
+			{label: 'United States', value: 'United States'},
+			{label: 'Canada', value: 'Canada'},
+			{label: 'France', value: 'France'},
+			{label: 'Switzerland', value: 'Switzerland'},
+			{label: 'United Kingdom', value: 'United Kingdom'}
+			];
+
 
 
 		return (
@@ -50,6 +59,9 @@ export default class MetadataPanel extends React.Component {
 	            	<MetadataField  field="date_of_issuance" label="Date of Issuance" elementType="date"  />
 	            </div>
 
+	 	        <div className="form-group form-group-sm row">
+	            	<MetadataField  field="country_of_origin" label="Country of Origin" options={countries} elementType="select"  />
+	            </div>
 
 	            <hr/>
 	            <div className="form-group form-group-sm row">
