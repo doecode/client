@@ -44,9 +44,9 @@ export default class Field extends React.Component {
 	  if (this.props.properties.multi) {
 
 		let retArray = [];
-	  	if (value.trim()) 
+	  	if (value.trim())
 	  		retArray = value.split(',');
-	  	
+
 	  	this.props.linkedData.setValue(this.props.properties.field,retArray);
 	  } else {
 		  this.props.linkedData.setValue(this.props.properties.field,value);
@@ -56,8 +56,8 @@ export default class Field extends React.Component {
   render() {
     const field = this.props.properties.field;
     const info = this.props.linkedData.getFieldInfo(field);
-	  const labelStyle = this.props.properties.labelStyle != undefined ? this.props.labelStyle : "col-sm-2 control-label";
-	  const divStyle = this.props.properties.divStyle != undefined ? this.props.divStyle : "col-sm-4 ";
+	  const labelStyle = this.props.properties.labelStyle != undefined ? this.props.properties.labelStyle : "col-sm-2 control-label";
+	  const divStyle = this.props.properties.divStyle != undefined ? this.props.properties.divStyle : "col-sm-4 ";
 
     const elementType = this.props.properties.elementType;
 

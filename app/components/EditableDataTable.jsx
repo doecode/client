@@ -35,7 +35,7 @@ export default class EditableDataTable extends React.Component {
 
     rowClick(gridRow, event) {
   	  tableStore.currentId = gridRow.props.data.id;
-  	  tableStore.showModal = true;
+  	  tableStore.showModal = this.props.parentName;
     }
 
 	  render() {

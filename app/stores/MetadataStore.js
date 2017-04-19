@@ -131,9 +131,9 @@ class MetadataStore {
            id: ''
    }
 
-   @observable sponsoringOrganizationSchema = {
+   @observable sponsoringOrganizationInfoSchema = {
 
-         "organization_name:": {required:true, completed:false, validations: [""], error: ''},
+         "organization_name": {required:true, completed:false, validations: [""], error: ''},
           "email": {required:false, completed:false, validations: ["Email"], error: ''},
           "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
           "primary_award" : {required:true, completed:false, validations: [], error: ''},
@@ -147,9 +147,9 @@ class MetadataStore {
            id: ''
    }
 
-   @observable researchOrganizationSchema = {
+   @observable researchOrganizationInfoSchema = {
 
-         "organization_name:": {required:true, completed:false, validations: [""], error: ''},
+         "organization_name": {required:true, completed:false, validations: [""], error: ''},
           "email": {required:false, completed:false, validations: ["Email"], error: ''},
           "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
      }
@@ -162,9 +162,9 @@ class MetadataStore {
            id: ''
    }
 
-   @observable contributingOrganizationSchema = {
+   @observable contributingOrganizationInfoSchema = {
 
-         "organization_name:": {required:true, completed:false, validations: [""], error: ''},
+         "organization_name": {required:true, completed:false, validations: [""], error: ''},
           "email": {required:false, completed:false, validations: ["Email"], error: ''},
           "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
           "contributor_type" : {required:true, completed:false, validations: [], error: ''}

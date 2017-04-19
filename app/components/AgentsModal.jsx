@@ -29,14 +29,14 @@ export default class AgentsModal extends React.Component {
     }
 
     close() {
-        this.props.tableStore.showModal = false;
+        this.props.tableStore.showModal = "";
         this.props.tableStore.currentId = "";
         this.props.data.clear();
         this.setState({errors: ''});
     }
 
     open() {
-        this.props.tableStore.showModal = true;
+        this.props.tableStore.showModal = this.props.dataType;
     }
 
     handleSave(event) {
@@ -76,9 +76,9 @@ export default class AgentsModal extends React.Component {
         let content = null;
         if (this.props.contentType === 'Devs') {
         content = <DevsModalContent SpecificField={SpecificField} data={this.props.data}/>
-       } else if (this.props.contentType === 'Orgs') {
+      } else if (this.props.contentType === 'Orgs') {
         content = <OrgsModalContent SpecificField={SpecificField} data={this.props.data}/>
-       }
+      }
 
        console.log(content);
 
@@ -89,7 +89,7 @@ export default class AgentsModal extends React.Component {
                         Add Whatever
                     </Button>
 
-                    <Modal show={showModal} onHide={this.close} bsSize="large">
+                    <Modal show={this.props.dataType === this.props.tableStore.showModal} onHide={this.close} bsSize="large">
                         <Modal.Header closeButton>
                             <Modal.Title>Manage Whatever</Modal.Title>
                         </Modal.Header>

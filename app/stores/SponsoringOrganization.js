@@ -15,7 +15,7 @@ export default class SponsoringOrganization extends BaseData {
 
       const defaultSponsoringOrganizationSchema = {
 
-            "organization_name:": {required:true, completed:false, validations: [""], error: ''},
+            "organization_name": {required:true, completed:false, validations: [""], error: ''},
              "email": {required:false, completed:false, validations: ["Email"], error: ''},
              "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
              "primary_award" : {required:true, completed:false, validations: [], error: ''},

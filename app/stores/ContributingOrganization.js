@@ -14,7 +14,7 @@ export default class ContributingOrganization extends BaseData {
 
       const defaultContributingOrganizationSchema = {
 
-            "organization_name:": {required:true, completed:false, validations: [""], error: ''},
+            "organization_name": {required:true, completed:false, validations: [""], error: ''},
              "email": {required:false, completed:false, validations: ["Email"], error: ''},
              "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
              "contributor_type" : {required:true, completed:false, validations: [], error: ''}
