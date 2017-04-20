@@ -34,6 +34,19 @@ function doAjax(methodType, url, successCallback, data, errorCallback) {
     else
       return url;
   }
+  
+  function getQueryParam(paramName) {
+      var query = window.location.search.substring(1);
+      var vars = query.split("&");
+      for (var i = 0; i < vars.length; i++) {
+           var pair = vars[i].split("=");
+           if (pair[0].toLowerCase() === paramName.toLowerCase()) {
+                return pair[1];
+           }
+      }
+      
+      return false;
+ }
 
 function getChildData(type) {
 
@@ -58,4 +71,5 @@ function getChildData(type) {
 
 export {doAjax};
 export {appendQueryString};
+export {getQueryParam};
 export {getChildData};

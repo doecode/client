@@ -1,6 +1,8 @@
 import BaseData from './BaseData';
 import uniqid from 'uniqid';
 import MetadataStore from './MetadataStore';
+import {toJS} from 'mobx';
+import moment from 'moment';
 
 
 const parents = ["developers", "contributors", "sponsoring_organizations", "research_organizations", "contributing_organizations", "related_identifiers"];
@@ -108,7 +110,7 @@ deserializeData(data) {
 
     for (var field in data) {
 
-        if (data[field].length > 0) {
+        if (this.fieldMap[field] !== undefined && data[field].length > 0) {
 
             if (parents.indexOf(field) > -1) {
                 const end = data[field].length;
@@ -117,29 +119,39 @@ deserializeData(data) {
                 }
             }
 
+            console.log(field);
+            
+            if (field === 'date_of_issuance') {
+            	if (data.date_of_issuance !== undefined) {
+            		data.date_of_issuance = moment(data.date_of_issuance, "YYYY-MM-DD");
+            	}
+            } 
             if (field === 'sponsoring_organizations') {
                 if (data.sponsoring_organizations !== undefined) {
-                    deserializeSponsoringOrganization(data);
+                    this.deserializeSponsoringOrganization(data);
                 }
             }
 
+            
             this.fieldMap[field] = data[field];
-            this.infoSchema[field].completed = true;
+            if (this.infoSchema[field])
+            	this.infoSchema[field].completed = true;
         }
     }
 }
 
 deserializeSponsoringOrganization(data) {
-    const sponsoringOrganizations = data.sponsoringOrganizations;
+    const sponsoringOrganizations = data.sponsoring_organizations;
     const end = sponsoringOrganizations.length;
     for (var i = 0; i < end; i++) {
 
         const fundingIDs = sponsoringOrganizations.funding_identifiers;
+        const awardNumbers = [];
+        const brCodes = [];
+        const fwpNumbers = [];
         //delete data.sponsoring_organizations[i].funding_identifiers;
         if (fundingIDs !== undefined) {
-            const awardNumbers = [];
-            const brCodes = [];
-            const fwpNumbers = [];
+
             const fundingLength = fundingIDs.length;
             for (var x = 0; x < fundingLength; x++) {
                 if (fundingIDs[x].identifier_type === 'AwardNumber') {
@@ -154,9 +166,9 @@ deserializeSponsoringOrganization(data) {
 
         }
 
-        data.sponsoringOrganizations[i].award_numbers = awardNumbers.join(',');
-        data.sponsoringOrganizations[i].br_codes = brCodes.join(',');
-        data.sponsoringOrganizations[i].fwp_numbers = fwpNumbers.join(',');
+        data.sponsoring_organizations[i].award_numbers = awardNumbers.join(',');
+        data.sponsoring_organizations[i].br_codes = brCodes.join(',');
+        data.sponsoring_organizations[i].fwp_numbers = fwpNumbers.join(',');
     }
 }
     updateMetadata(data) {
@@ -172,29 +184,45 @@ deserializeSponsoringOrganization(data) {
       const end = data.sponsoring_organizations.length;
 
       for (var i = 0; i < end; i++) {
-          const fundingIdentiiers = [];
-          const helper = {awardNumbers : [], brCodes: [], fwpNumbers: []};
-          const awardNumbers = data.sponsoring_organizations[i].award_numbers.split(',');
+    	  const sponsor = data.sponsoring_organizations[i];
+          let fundingIdentifiers = [];
+          let awardNumbers = [];
+          let brCodes = [];
+          let fwpNumbers = [];
+          
+          const awardString = sponsor.award_numbers;
+          const brString = sponsor.br_codes;
+          const fwpString = sponsor.fwp_numbers;
+          
+          
+          if (awardString)
+        	  awardNumbers = data.sponsoring_organizations[i].award_numbers.split(',');
+          
           if (awardNumbers.indexOf(data.sponsoring_organizations[i].primary_award) < 0)
         	  awardNumbers.push(data.sponsoring_organizations[i].primary_award);
-          const brCodes = data.sponsoring_organizations[i].br_codes.split(',');
-          const fwpNumbers = data.sponsoring_organizations[i].fwp_numbers.split(',');
+          if (brString)
+        	  brCodes = data.sponsoring_organizations[i].br_codes.split(',');
+          
+          if (fwpString)
+        	  fwpNumbers = data.sponsoring_organizations[i].fwp_numbers.split(',');
 
           for (var x = 0; x < awardNumbers.length; x++) {
-            fundingIdentifiers.add({identifier_type: "AwardNumber", identifier_value: awardNumbers[x] })
+            fundingIdentifiers.push({identifier_type: "AwardNumber", identifier_value: awardNumbers[x] })
           }
 
           for (var x = 0; x < brCodes.length; x++) {
-            fundingIdentifiers.add({identifier_type: "BRCode", identifier_value: brCodes[x] })
+            fundingIdentifiers.push({identifier_type: "BRCode", identifier_value: brCodes[x] })
           }
 
           for (var x = 0; x < fwpNumbers.length; x++) {
-            fundingIdentifiers.add({identifier_type: "FWPNumber", identifier_value: fwpNumbers[x] })
+            fundingIdentifiers.push({identifier_type: "FWPNumber", identifier_value: fwpNumbers[x] })
           }
 
           data.sponsoring_organizations[i].funding_identifiers = fundingIdentifiers;
 
       }
+      
+      return data;
 
     }
 

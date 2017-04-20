@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {doAjax, appendQueryString} from '../utils/utils';
+import {doAjax, appendQueryString, getQueryParam} from '../utils/utils';
 import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
 import EntryStep from './EntryStep';
@@ -28,6 +28,11 @@ export default class DOECodeWizard extends React.Component {
         this.parseSaveResponse = this.parseSaveResponse.bind(this);
         this.parsePublishResponse = this.parsePublishResponse.bind(this);
         this.autopopulate = this.autopopulate.bind(this);
+        this.save = this.save.bind(this);
+        this.publish = this.publish.bind(this);
+        this.submit = this.submit.bind(this);
+        this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
+
 
 
         steps =
@@ -51,6 +56,19 @@ export default class DOECodeWizard extends React.Component {
         for (var i = 0; i < steps.length; i++)
         	steps[i].key = "" + (i+1);
     }
+        		
+    componentDidMount() {
+        const codeID = getQueryParam("code_id");
+        if (codeID) {
+        	doAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse);
+        }
+    }
+    
+    parseReceiveResponse(data) {
+    	
+    	console.log(data);
+    	metadata.deserializeData(data.metadata);
+    }
 
     autopopulate(event) {
     	doAjax('GET', "/api/metadata/autopopulate?repo=" + metadata.getValue('repository_link'),this.parseLoadResponse);
@@ -63,6 +81,8 @@ export default class DOECodeWizard extends React.Component {
     }
 
     save() {
+    
+    	  
     	doAjax('POST', '/api/metadata/',this.parseSaveResponse, metadata.serializeData());
     }
     
@@ -71,6 +91,8 @@ export default class DOECodeWizard extends React.Component {
     }
     
     publish() {
+    	
+    	console.log(metadata.serializeData());
     	doAjax('POST', '/api/metadata/publish',this.parsePublishResponse, metadata.serializeData());
     }
     
@@ -91,6 +113,8 @@ export default class DOECodeWizard extends React.Component {
     render() {
 
       const info = metadata.infoSchema;
+      const disabled = !metadata.validateSchema();
+      const self = this;
 
         let content = <PanelGroup defaultActiveKey="1" accordion>
         {steps.map(function(obj) {
@@ -128,7 +152,7 @@ export default class DOECodeWizard extends React.Component {
       	<div className="row">
 
         <div className="col-sm-12">
-		<button type="button" className="btn btn-info btn-lg pull-right">
+		<button type="button" className="btn btn-info btn-lg pull-right" onClick={self.save}>
 		Save Your Progress
 		</button>
 		</div>
@@ -170,13 +194,13 @@ export default class DOECodeWizard extends React.Component {
        <div className="row">
 
 		<div className="col-sm-10">
-		<button type="button" className="btn btn-lg btn-default pull-right">
+		<button type="button" className="btn btn-lg btn-default pull-right" disabled={disabled} onClick={this.publish}>
 		Publish
 		</button>
 		</div>
 
        <div className="col-sm-2">
-		<button type="button" className="btn btn-primary btn-lg pull-right">
+		<button type="button" className="btn btn-primary btn-lg pull-right" disabled={disabled} onClick={this.submit}>
 		Publish and Submit
 		</button>
 		</div>
