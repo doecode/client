@@ -30,7 +30,7 @@
     min-height: 350px;
     padding: 10px;
   }
-  
+
   .footer-buttons {
     margin-top: 10px;
   }
@@ -184,11 +184,11 @@ div#root .progtrckr {
 		border-top: 1px solid #ddd;
 		background-color: #f2f2f2;
 }
-	
+
 div#root ol.progtrckr {
 		padding-bottom: 10px;
 }
-	
+
 div#root ol.progtrckr li.progtrckr-todo:before {
 		background-color: #f2f2f2;
 }
@@ -203,17 +203,18 @@ div#root ol.progtrckr li.progtrckr-todo:before {
 }
 
 .field-error {
-border: 1px solid #a94442;	
+border: 1px solid #a94442;
 
 }
 
 .field-error .Select-control {
-	border: 1px solid #a94442;	
+	border: 1px solid #a94442;
 }
 
 .error-color {
 	color: #a94442;
 }
 
-
-
+.LabelColumn {
+  width: 150px;
+}

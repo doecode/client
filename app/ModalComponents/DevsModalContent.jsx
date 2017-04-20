@@ -22,10 +22,6 @@ export default class DevsModalContent extends React.Component {
 
             <div className="container-fluid">
                 <div className="form-horizontal">
-                    {this.props.data.getValue("place") > -1 && <div className="form-group form-group-sm row">
-                        <SpecificField field="place" label="#" elementType="input" />
-                    </div>
-                    }
                     <div className="form-group form-group-sm row">
                         <SpecificField field="first_name" label="First Name" elementType="input" />
                     </div>

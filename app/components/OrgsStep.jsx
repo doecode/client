@@ -66,15 +66,41 @@ export default class OrgsStep extends React.Component {
 					 "locked": false,
 					 "visible": true,
 					 "displayName": "Primary Award"
-				 }
+				 },
+				 {
+					 "columnName": "award_numbers",
+					 "order": 6,
+					 "locked": false,
+					 "visible": true,
+					 "displayName": "Additional Awards"
+				 },
+				 {
+					 "columnName": "br_codes",
+					 "order": 7,
+					 "locked": false,
+					 "visible": true,
+					 "displayName": "B&R Codes"
+				 },
+				 {
+					 "columnName": "fwp_numbers",
+					 "order": 8,
+					 "locked": false,
+					 "visible": true,
+					 "displayName": "FWP Numbers"
+				 },
+
 				];
 
 			const opts = ["sponsoring_organizations", "research_organizations", "contributing_organizations"];
 			const parentName = opts[this.state.key];
 			const contentType = "Orgs";
 			let columns = ["organization_name","email","orcid"];
-			if (parentName === 'sponsoring_organizations')
-				columns.push("primary_award")
+			if (parentName === 'sponsoring_organizations') {
+				columns.push("primary_award");
+				columns.push("award_numbers")
+				columns.push("br_codes");
+				columns.push("fwp_numbers")
+			}
 
 
       const content = <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>

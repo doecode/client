@@ -128,26 +128,26 @@ class MetadataStore {
            email: '',
            orcid: '',
            primary_award: '',
-           award_numbers: [],
-           fwp_numbers: [],
-           br_codes: [],
+           award_numbers: '',
+           fwp_numbers: '',
+           br_codes: '',
            id: ''
    }
 
    @observable sponsoringOrganizationInfoSchema = {
 
-			
+
           "organization_name": {required:true, completed:false, validations: [], error: ''},
           "email": {required:false, completed:false, validations: ["Email"], error: ''},
           "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
-          "primary_award" : {required:true, completed:false, validations: [], error: ''},
-          "award_numbers" : {required:false, completed:false, validations: [], error: ''},
+          "primary_award" : {required:true, completed:false, validations: ["Award"], error: ''},
+          "award_numbers" : {required:false, completed:false, validations: [""], error: ''},
           "br_codes" : {required:false, completed:false, validations: [], error: ''},
           "fwp_numbers" : {required:false, completed:false, validations: [], error: ''},
      }
 
    @observable researchOrganization = {
- 		   DOE : true,    	
+ 		   DOE : true,
            organization_name: '',
            email: '',
            orcid: '',
@@ -162,7 +162,7 @@ class MetadataStore {
      }
 
    @observable contributingOrganization = {
- 		   DOE : true,    	
+ 		   DOE : true,
            organization_name: '',
            email: '',
            orcid: '',
@@ -177,14 +177,14 @@ class MetadataStore {
           "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
           "contributor_type" : {required:true, completed:false, validations: [], error: ''}
      }
-	
+
     @observable relatedIdentifier = {
 		      identifier_type : '',
 		      relation_type : '',
 		      identifier : '',
 		      id: ''
     }
-	
+
 	@observable relatedIdentifierInfoSchema = {
 
 	         "identifier_type": {required:true, completed:false, validations: [], error: ''},

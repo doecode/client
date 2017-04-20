@@ -23,7 +23,7 @@ export default class Field extends React.Component {
 	  const newVal = !(this.props.linkedData.getValue(this.props.properties.field));
 	  this.props.linkedData.setValue(this.props.properties.field, newVal);
   }
-  
+
   handleBlur(event) {
 	  this.props.linkedData.validateField(this.props.properties.field);
   }
@@ -46,16 +46,8 @@ export default class Field extends React.Component {
   }
 
   handleSelectChange(value) {
-	  if (this.props.properties.multi) {
 
-		let retArray = [];
-	  	if (value.trim())
-	  		retArray = value.split(',');
-
-	  	this.props.linkedData.setValue(this.props.properties.field,retArray);
-	  } else {
 		  this.props.linkedData.setValue(this.props.properties.field,value);
-	  }
   }
 
   render() {
@@ -98,14 +90,12 @@ export default class Field extends React.Component {
 	  }
 	  else if (elementType === 'input') {
 		input = <input type="text" className="form-control" value={val} onChange={this.handleChange} onBlur={this.handleBlur} />
-	  } 
+	  }
 	  else if (elementType === 'checkbox') {
 		  input = <input type="checkbox" className="" checked={val} onChange={this.toggleCheckbox} />
 	  }
 	  else if (elementType === 'select') {
 	    let ph = this.props.properties.placeholder ? this.props.properties.placeholder : "Select any that apply";
-	    if (this.props.properties.multi)
-	    	val = val.slice();
 	    const errorClass = error ? "field-error" : ""
       	input = <Select className={errorClass} allowCreate={this.props.properties.allowCreate} multi={this.props.properties.multi} options={this.props.properties.options} simpleValue placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} value={val} />
 	  }
