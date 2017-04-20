@@ -34,7 +34,7 @@ export default class BaseData {
    loadValues(data) {
 		 for (var field in data) {
 		 		this.fieldMap[field] = data[field];
-		 		if (data[field].length > 0 && this.infoSchema[field]) 
+		 		if (data[field].length > 0 && this.infoSchema[field])
 		 			this.infoSchema[field].completed = true;
 		 }
    }
@@ -81,7 +81,7 @@ export default class BaseData {
     		else if (information.required && !information.completed) {
     			if (update)
     				information.error = field + " is required.";
-    			
+
     			isValid = false;
     		}
 
@@ -90,7 +90,7 @@ export default class BaseData {
 
     	return isValid;
     }
-    
+
     checkForSchemaErrors() {
     	let errors = [];
 
@@ -132,6 +132,22 @@ export default class BaseData {
     getData() {
 			return Object.assign({}, this.fieldMap);
     }
+
+getCompletedData() {
+    const completedData = {};
+
+    for (var field in this.fieldMap) {
+        if (this.infoSchema[field] !== undefined) {
+            if (this.infoSchema[field].completed) {
+                completedData[field] = fieldMap
+            }
+        } else {
+            completedData[field] = fieldMap
+        }
+
+    }
+		return completedData;
+}
 
 
 }
