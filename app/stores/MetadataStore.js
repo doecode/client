@@ -77,7 +77,6 @@ class MetadataStore {
             email: '',
             orcid: '',
             affiliations: '',
-            place: -1,
             id: ''
         }
 
@@ -102,7 +101,6 @@ class MetadataStore {
             orcid: '',
             affiliations: '',
             contributor_type: '',
-            place: -1,
             id: ''
     }
 
@@ -189,7 +187,7 @@ class MetadataStore {
 
 	         "identifier_type": {required:true, completed:false, validations: [], error: ''},
 	          "relation_type": {required:true, completed:false, validations: [], error: ''},
-	          "identifier": {required:false, completed:false, validations: [], error: ''}
+	          "identifier": {required:true, completed:false, validations: [], error: ''}
 	     }
 
 

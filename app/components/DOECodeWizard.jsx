@@ -24,8 +24,9 @@ export default class DOECodeWizard extends React.Component {
     constructor(props) {
         super(props);
 
-        this.getSubmitPromise = this.getSubmitPromise.bind(this);
         this.parseLoadResponse = this.parseLoadResponse.bind(this);
+        this.parseSaveResponse = this.parseSaveResponse.bind(this);
+        this.parsePublishResponse = this.parsePublishResponse.bind(this);
         this.autopopulate = this.autopopulate.bind(this);
 
 
@@ -61,30 +62,29 @@ export default class DOECodeWizard extends React.Component {
         metadata.updateMetadata(responseData.metadata);
     }
 
-    getSubmitPromise() {
-      var self = this;
-		return new Promise((resolve,reject) => {
-		    $.ajax({
-		        url: "/api/metadata",
-		        cache: false,
-		        method: 'POST',
-		        dataType: 'json',
-		        data: JSON.stringify(metadataStore.metadata),
-		        contentType: "application/json; charset=utf-8",
-		        success: function(data) {
-		        	console.log(data);
-                    metadataStore.metadata.code_id = data.metadata.code_id;
-		        	resolve();
-
-		        },
-		        error: function(x,y,z) {
-		        	console.log("got an error");
-		        	reject();
-		        }
-		      });
-
-		});
+    save() {
+    	doAjax('POST', '/api/metadata/',this.parseSaveResponse, metadata.serializeData());
     }
+    
+    parseSaveResponse(data) {
+        console.log(data);
+    }
+    
+    publish() {
+    	doAjax('POST', '/api/metadata/publish',this.parsePublishResponse, metadata.serializeData());
+    }
+    
+    submit() {
+    	doAjax('POST', '/api/metadata/submit',this.parsePublishResponse, metadata.serializeData());
+    }
+    
+    parsePublishResponse(data) {
+    	console.log(data);
+    }
+    
+    
+    
+    
 
 
 

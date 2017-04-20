@@ -16,7 +16,7 @@ export default class RelatedIdentifier extends BaseData {
 
    	         "identifier_type": {required:true, completed:false, validations: [], error: ''},
    	          "relation_type": {required:true, completed:false, validations: [], error: ''},
-   	          "identifier": {required:false, completed:false, validations: [], error: ''}
+   	          "identifier": {required:true, completed:false, validations: [], error: ''}
    	     };
       
     	const props = {fieldMap: MetadataStore.relatedIdentifier, infoSchema: MetadataStore.relatedIdentifierInfoSchema, fieldMapSnapshot: defaultRelatedIdentifier, infoSchemaSnapshot: defaultRelatedIdentifierInfoSchema};

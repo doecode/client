@@ -12,7 +12,6 @@ export default class Contributor extends BaseData {
                 orcid: '',
                 affiliations: '',
                 contributor_type: '',
-                place: -1,
                 id: ''
         }
 

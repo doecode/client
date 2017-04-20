@@ -175,6 +175,8 @@ deserializeSponsoringOrganization(data) {
           const fundingIdentiiers = [];
           const helper = {awardNumbers : [], brCodes: [], fwpNumbers: []};
           const awardNumbers = data.sponsoring_organizations[i].award_numbers.split(',');
+          if (awardNumbers.indexOf(data.sponsoring_organizations[i].primary_award) < 0)
+        	  awardNumbers.push(data.sponsoring_organizations[i].primary_award);
           const brCodes = data.sponsoring_organizations[i].br_codes.split(',');
           const fwpNumbers = data.sponsoring_organizations[i].fwp_numbers.split(',');
 

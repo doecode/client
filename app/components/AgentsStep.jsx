@@ -44,7 +44,7 @@ export default class AgentsStep extends React.Component {
 					 "columnName": "place",
 					 "order": 1,
 					 "locked": false,
-					 "visible": true,
+					 "visible": false,
 					 "displayName": "#"
 
 				 },
@@ -97,7 +97,17 @@ export default class AgentsStep extends React.Component {
 								 "locked": false,
 								 "visible": true,
 								 "displayName": "Contributor Type"
-						}
+						},
+						
+						 {
+								 "columnName": "id",
+									 "order": 9,
+									 "locked": false,
+									 "visible": false,
+									 "displayName": "id"
+							},
+							
+						
 					];
 
 
@@ -111,7 +121,7 @@ export default class AgentsStep extends React.Component {
 			const contentType = "Devs";
 
 
-				const content = <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
+				const content = <EditableDataTable columns={[]} contentType={contentType} config={tableConfig} parentName={parentName}/>
 		    return (
 		       <div>
 		      <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="devsStepTabs">
