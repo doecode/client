@@ -86,26 +86,32 @@ export default class AgentsStep extends React.Component {
 				 },
 				 {
 						 "columnName": "affiliations",
-						 "order": 6,
+						 "order": 7,
 						 "locked": false,
 						 "visible": true,
 						 "displayName": "Affiliations"
 					 },
 					 {
 							 "columnName": "contributor_type",
-								 "order": 7,
+								 "order": 8,
 								 "locked": false,
 								 "visible": true,
 								 "displayName": "Contributor Type"
 						}
 					];
 
+
 			const opts = ["developers", "contributors"];
 			const parentName = opts[this.state.key];
+			
+			const columns = ["first_name", "last_name", "email", "orcid", "affiliations"];
+			if (parentName === 'contributors')
+				columns.push("contributor_type");
+			
 			const contentType = "Devs";
 
 
-				const content = <EditableDataTable contentType={contentType} config={tableConfig} parentName={parentName}/>
+				const content = <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
 		    return (
 		       <div>
 		      <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="devsStepTabs">

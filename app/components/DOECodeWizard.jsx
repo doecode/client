@@ -52,13 +52,13 @@ export default class DOECodeWizard extends React.Component {
     }
 
     autopopulate(event) {
-    	doAjax('GET', "/api/metadata/autopopulate?repo=" + metadataStore.metadata.repository_link,this.parseLoadResponse);
+    	doAjax('GET', "/api/metadata/autopopulate?repo=" + metadata.getValue('repository_link'),this.parseLoadResponse);
     	event.preventDefault();
     }
 
 
     parseLoadResponse(responseData) {
-        metadataStore.updateMetadata(responseData.metadata);
+        metadata.updateMetadata(responseData.metadata);
     }
 
     getSubmitPromise() {

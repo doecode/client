@@ -160,9 +160,9 @@ deserializeSponsoringOrganization(data) {
     }
 }
     updateMetadata(data) {
-    	const oldRepo = new String(this.metadata.repository_link);
-      deserializeData(data);
-      fieldMap.repository_link = oldRepo;
+    	const oldRepo = new String(this.fieldMap.repository_link);
+      this.deserializeData(data);
+      this.fieldMap.repository_link = oldRepo;
 
     }
 

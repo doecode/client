@@ -139,10 +139,10 @@ getCompletedData() {
     for (var field in this.fieldMap) {
         if (this.infoSchema[field] !== undefined) {
             if (this.infoSchema[field].completed) {
-                completedData[field] = fieldMap
+                completedData[field] = this.fieldMap[field];
             }
         } else {
-            completedData[field] = fieldMap
+            completedData[field] = this.fieldMap[field];
         }
 
     }
