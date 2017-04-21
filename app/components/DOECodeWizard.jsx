@@ -36,7 +36,7 @@ export default class DOECodeWizard extends React.Component {
         this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
         this.parseErrorResponse = this.parseErrorResponse.bind(this);
 
-        this.state= {"loading" : ""};
+        this.state= {"loading" : false, "loadingMessage" : "", "editLoad" : false};
 
 
 
@@ -66,25 +66,26 @@ export default class DOECodeWizard extends React.Component {
     }
 
   parseErrorResponse() {
-    this.setState({"loading" : ""});
+    this.setState({"loading" : false, "loadingMessage" : ""});
   }
 
     componentDidMount() {
         const codeID = getQueryParam("code_id");
         if (codeID) {
-          this.setState({"loading" : "Loading"});
+            this.setState({"loading" : true, "loadingMessage" : "Loading"});
         	doAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
         }
+    	
     }
 
     parseReceiveResponse(data) {
 
     	metadata.deserializeData(data.metadata);
-      this.setState({"loading" : ""});
+        this.setState({"loading" : false, "loadingMessage" : ""});
     }
 
     autopopulate(event) {
-      this.setState({"loading" : "Loading"});
+        this.setState({"loading" : true, "loadingMessage" : "Loading"});
     	doAjax('GET', "/api/metadata/autopopulate?repo=" + metadata.getValue('repository_link'),this.parseLoadResponse, undefined, this.parseErrorResponse);
     	event.preventDefault();
     }
@@ -92,27 +93,28 @@ export default class DOECodeWizard extends React.Component {
 
     parseLoadResponse(responseData) {
         metadata.updateMetadata(responseData.metadata);
-        this.setState({"loading" : ""});
+        this.setState({"loading" : false, "loadingMessage" : ""});
     }
 
     save() {
 
-    this.setState({"loading" : "Saving"});
+        this.setState({"loading" : true, "loadingMessage" : "Saving"});
     	doAjax('POST', '/api/metadata/',this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
     }
 
     parseSaveResponse(data) {
-        this.setState({"loading" : ""});
+        this.setState({"loading" : false, "loadingMessage" : ""});
+        metadata.setValue("code_id", data.metadata.code_id);
     }
 
     publish() {
-          this.setState({"loading" : "Publishing"});
+        this.setState({"loading" : true, "loadingMessage" : "Publishing"});
     	doAjax('POST', '/api/metadata/publish',this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
     }
 
     submit() {
-                this.setState({"loading" : "Submitting"});
-    	doAjax('POST', '/api/metadata/submit',this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
+        this.setState({"loading" : true, "loadingMessage" : "Submitting"});
+    	doAjax('POST', '/api/metadata/submit',this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
     }
 
     parsePublishResponse(data) {
@@ -120,7 +122,12 @@ export default class DOECodeWizard extends React.Component {
     }
 
     parseSubmitResponse(data) {
-      window.location.href = "confirm?code_id=" + data.metadata.code_id + "&minntedDoi=" + data.metadata.doi;
+    	
+      let url = "confirm?code_id=" + data.metadata.code_id;
+    	  url += "&mintedDoi=" + data.metadata.doi;
+      
+      window.location.href = url;
+
     }
 
 
@@ -133,6 +140,13 @@ export default class DOECodeWizard extends React.Component {
 
       const info = metadata.infoSchema;
       const disabled = !metadata.validateSchema();
+      const codeID = metadata.getValue("code_id");
+      
+      let headerText = "Create a New Software Record";
+      
+      if (codeID !== undefined && codeID > 0)
+    	  headerText = "Editing Software Record #" + codeID;
+      
       const self = this;
 
         let content = <PanelGroup defaultActiveKey="1" accordion>
@@ -203,7 +217,8 @@ export default class DOECodeWizard extends React.Component {
 
         <div className="form-group form-group-sm row">
         <div className="col-sm-offset-4">
-        <h1> Create a new software record </h1>
+        
+        <h1> {headerText} </h1>
         </div>
 
         </div>
@@ -231,7 +246,7 @@ export default class DOECodeWizard extends React.Component {
 
     <Modal show={this.state.loading} >
         <Modal.Header closeButton>
-            <Modal.Title>{this.state.loading}</Modal.Title>
+            <Modal.Title>{this.state.loadingMessage}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="loader"></div>

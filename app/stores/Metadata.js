@@ -119,7 +119,6 @@ deserializeData(data) {
                 }
             }
 
-            console.log(field);
             
             if (field === 'date_of_issuance') {
             	if (data.date_of_issuance !== undefined) {
@@ -181,7 +180,9 @@ deserializeSponsoringOrganization(data) {
     serializeData() {
       const data = this.getCompletedData();
 
-      const end = data.sponsoring_organizations.length;
+      let end = 0;
+      if (data.sponsoring_organizations)
+          end = data.sponsoring_organizations.length;
 
       for (var i = 0; i < end; i++) {
     	  const sponsor = data.sponsoring_organizations[i];

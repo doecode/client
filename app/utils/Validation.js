@@ -24,13 +24,20 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 	  
 	  const filtered = validations.filter(this.needsServer);
 	  
-	  //if (filtered.length == 0)
+	  if (filtered.length == 0) {
 		  validationCallback(validationObj, errors);
-		  
-			 /* 
-			doAjax("POST","/api/validate" , successCallback, validations)
+		  return;
+	  }
+	  let obj = {};
+	  let values = [];
+	  values.push(value);
+	  
+	  obj.values = values;
+	  obj.validations = validations;
+		
+	  console.log(obj);
 		    $.ajax({
-		        url: "/api/validate",
+		        url: "/api/validation",
 		        cache: false,
 		        method: 'POST',
 		        dataType: 'json',
@@ -38,13 +45,18 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 		        contentType: "application/json; charset=utf-8",
 		        success: function(data) {
 		        	console.log(data);
-		        	validateCallback(validationObj, errors);
+		        	
+		        	for (var i = 0; i < data.errors.length; i++)
+		        		errors += data.errors[i];
+		        	validationCallback(validationObj, errors);
 		        },
 		        error: function(x,y,z) {
+		        	console.log("howdy");
+		        	validationCallback(validationObj, "Field encountered Network issue");
 		        }
 		      });
 
-		 */
+		 
   }
 
   needsServer(value) {

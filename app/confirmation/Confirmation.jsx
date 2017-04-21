@@ -37,7 +37,7 @@ export default class Splash extends React.Component {
 
 render() {
 
-    const ymlDownload = "/api/metadata/yml/" + this.state.codeID;
+    const ymlDownload = "/api/metadata/" + this.state.codeID;
     return (
         <div className="container-fluid">
 
@@ -52,7 +52,7 @@ render() {
 
                 {this.state.mintedDoi &&
                 <h2>
-                    Minted DOI: {this.state.mintedDoi}
+                    DOI: {this.state.mintedDoi}
                 </h2>
 }
                 <h2>

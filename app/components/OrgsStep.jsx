@@ -103,7 +103,7 @@ export default class OrgsStep extends React.Component {
 			}
 
 
-      const content = <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
+      const content = <EditableDataTable contentType={contentType} config={tableConfig} parentName={parentName}/>
 		    return (
 		       <div>
 		      <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="orgsStepTabs">
