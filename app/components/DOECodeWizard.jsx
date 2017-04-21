@@ -72,7 +72,7 @@ export default class DOECodeWizard extends React.Component {
     componentDidMount() {
         const codeID = getQueryParam("code_id");
         if (codeID) {
-            this.setState({"loading" : true, "loadingMessage" : "Loading"});
+  //          this.setState({"loading" : true, "loadingMessage" : "Loading"});
         	doAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
         }
     	
