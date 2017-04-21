@@ -5,6 +5,7 @@ import TableStore from '../stores/TableStore';
 import EditableDataTable from './EditableDataTable';
 import Developer from '../stores/Developer';
 import Contributor from '../stores/Contributor';
+import Metadata from '../stores/Metadata';
 import {observer} from 'mobx-react';
 import {Tabs, Tab} from 'react-bootstrap';
 import Promise from 'promise';
@@ -12,6 +13,7 @@ import {getChildData} from '../utils/utils'
 
 
 const tableStore = new TableStore();
+const metadata = new Metadata();
 
 @observer
 export default class AgentsStep extends React.Component {
@@ -98,7 +100,7 @@ export default class AgentsStep extends React.Component {
 								 "visible": true,
 								 "displayName": "Contributor Type"
 						},
-						
+
 						 {
 								 "columnName": "id",
 									 "order": 9,
@@ -106,26 +108,27 @@ export default class AgentsStep extends React.Component {
 									 "visible": false,
 									 "displayName": "id"
 							},
-							
-						
+
+
 					];
 
 
 			const opts = ["developers", "contributors"];
 			const parentName = opts[this.state.key];
-			
+
 			const columns = ["first_name", "last_name", "email", "orcid", "affiliations"];
 			if (parentName === 'contributors')
 				columns.push("contributor_type");
-			
+
 			const contentType = "Devs";
 
 
 				const content = <EditableDataTable columns={[]} contentType={contentType} config={tableConfig} parentName={parentName}/>
 		    return (
 		       <div>
+
 		      <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="devsStepTabs">
-		      <Tab eventKey={0} title="Developers"> {content} </Tab>
+		      <Tab eventKey={0} title="* Developers"> {content} </Tab>
 		      <Tab eventKey={1} title="Contributors"> {content} </Tab>
 		      </Tabs>
 		      </div>

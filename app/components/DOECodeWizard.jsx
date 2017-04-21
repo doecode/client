@@ -39,7 +39,7 @@ export default class DOECodeWizard extends React.Component {
         	[
         		{name: 'Repository Information', component: <EntryStep metadata={metadata} autopopulate={this.autopopulate}/> },
         		{name: 'Product Description', component: <MetadataPanel metadata={metadata}/>},
-        		{name: 'Licenses & Access Limitations', component: <AccessStep metadata={metadata} />},
+
         		{name: 'Developers & Contributors', component: <AgentsStep />},
         		{name: 'Organizations', component: <OrgsStep />},
         		{name: 'Identifiers', component: <RIsStep />},
@@ -47,7 +47,10 @@ export default class DOECodeWizard extends React.Component {
         		];
 
         /*
-         *         		{name: 'Developers & Contributors', component: <AgentsStep metadata={metadata} />},
+
+         *
+        		{name: 'Licenses & Access Limitations', component: <AccessStep metadata={metadata} />},
+         {name: 'Developers & Contributors', component: <AgentsStep metadata={metadata} />},
         		{name: 'Organizations', component: <OrgsStep metadata={metadata}/>},
         		{name: 'Identifiers', component: <RIsStep metadata={metadata}/>},
         		{name: 'Recipient Information', component: <RecipientStep metadata={metadata}/>},
@@ -56,16 +59,16 @@ export default class DOECodeWizard extends React.Component {
         for (var i = 0; i < steps.length; i++)
         	steps[i].key = "" + (i+1);
     }
-        		
+
     componentDidMount() {
         const codeID = getQueryParam("code_id");
         if (codeID) {
         	doAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse);
         }
     }
-    
+
     parseReceiveResponse(data) {
-    	
+
     	console.log(data);
     	metadata.deserializeData(data.metadata);
     }
@@ -81,32 +84,32 @@ export default class DOECodeWizard extends React.Component {
     }
 
     save() {
-    
-    	  
+
+
     	doAjax('POST', '/api/metadata/',this.parseSaveResponse, metadata.serializeData());
     }
-    
+
     parseSaveResponse(data) {
         console.log(data);
     }
-    
+
     publish() {
-    	
+
     	console.log(metadata.serializeData());
     	doAjax('POST', '/api/metadata/publish',this.parsePublishResponse, metadata.serializeData());
     }
-    
+
     submit() {
     	doAjax('POST', '/api/metadata/submit',this.parsePublishResponse, metadata.serializeData());
     }
-    
+
     parsePublishResponse(data) {
     	console.log(data);
     }
-    
-    
-    
-    
+
+
+
+
 
 
 
@@ -186,6 +189,7 @@ export default class DOECodeWizard extends React.Component {
         <div className="col-sm-offset-4">
         <h1> Create a new software record </h1>
         </div>
+
         </div>
 
 

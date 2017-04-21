@@ -107,8 +107,8 @@ export default class OrgsStep extends React.Component {
 		    return (
 		       <div>
 		      <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="orgsStepTabs">
-		      <Tab eventKey={0} title="Sponsoring Organizations"> {content} </Tab>
-		      <Tab eventKey={1} title="Research Organizations"> {content} </Tab>
+		      <Tab eventKey={0} title="* Sponsoring Organizations"> {content} </Tab>
+		      <Tab eventKey={1} title="* Research Organizations"> {content} </Tab>
 		      <Tab eventKey={2} title="Contributing Organizations"> {content} </Tab>
 		      </Tabs>
 		      </div>

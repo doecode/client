@@ -31,6 +31,12 @@ export default class BaseData {
    	return this.infoSchema[field];
    }
 
+	 isCompleted(field) {
+		 if (this.infoSchema[field])
+		 	   return this.infoSchema[field].completed;
+		 return true;
+	 }
+
    loadValues(data) {
 		 for (var field in data) {
 		 		this.fieldMap[field] = data[field];

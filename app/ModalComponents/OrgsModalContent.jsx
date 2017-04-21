@@ -33,45 +33,45 @@ export default class OrgsModalContent extends React.Component {
                     <SpecificField field="DOE" label="DOE Organization?" elementType="checkbox"  />
                     </div>
                     <div className="form-group form-group-sm row">
-                        <SpecificField divStyle="col-sm-6" field="organization_name" label="Name" elementType="select" allowCreate={true} placeholder="Enter or select from the list your organization" options={orgNames}   />
+                        <SpecificField divStyle="col-sm-8" field="organization_name" label="Name" elementType="select" allowCreate={true} placeholder="Enter or select from the list your organization" options={orgNames}   />
                     </div>
 
                     <div className="form-group form-group-sm row">
-                        <SpecificField divStyle="col-sm-6" field="email" label="Email" elementType="input"  />
+                        <SpecificField divStyle="col-sm-8" field="email" label="Email" elementType="input"  />
                     </div>
 
                     <div className="form-group form-group-sm row">
-                        <SpecificField divStyle="col-sm-6" field="orcid" label="ORCID" elementType="input"  />
+                        <SpecificField divStyle="col-sm-8" field="orcid" label="ORCID" elementType="input"  />
                     </div>
 
                     {data.getValue("primary_award") !== undefined &&
                     <div className="form-group form-group-sm row">
-                        <SpecificField divStyle="col-sm-6" field="primary_award" label="Primary Award" elementType="input"  />
+                        <SpecificField divStyle="col-sm-8" field="primary_award" label="Primary Award" elementType="input"  />
                     </div>
 
                     }
 
                     {this.props.data.getValue("award_numbers") !== undefined &&
                     <div className="form-group form-group-sm row">
-                    <SpecificField divStyle="col-sm-6" field="award_numbers" label="Additional Awards" elementType="select" allowCreate={true} multi={true} placeholder="Enter any additional awards"   />
+                    <SpecificField divStyle="col-sm-8" field="award_numbers" label="Additional Awards" elementType="select" allowCreate={true} multi={true} placeholder="Enter any additional awards"   />
                     </div>
                     }
-                    
+
                     {this.props.data.getValue("br_codes") !== undefined &&
                     <div className="form-group form-group-sm row">
-                    <SpecificField divStyle="col-sm-6" field="br_codes" label="B&R Codes" elementType="select" allowCreate={true} multi={true} placeholder="Enter B&R Codes"   />
+                    <SpecificField divStyle="col-sm-8" field="br_codes" label="B&R Codes" elementType="select" allowCreate={true} multi={true} placeholder="Enter B&R Codes"   />
                     </div>
                     }
-                    
+
                     {this.props.data.getValue("fwp_numbers") !== undefined &&
                     <div className="form-group form-group-sm row">
-                    <SpecificField divStyle="col-sm-6" field="fwp_numbers" label="FWP Numbers" elementType="select" allowCreate={true} multi={true} placeholder="Enter FWP Numbers"   />
+                    <SpecificField divStyle="col-sm-8" field="fwp_numbers" label="FWP Numbers" elementType="select" allowCreate={true} multi={true} placeholder="Enter FWP Numbers"   />
                     </div>
                     }
 
                     {this.props.data.getValue("contributor_type") !== undefined &&
                     <div className="form-group form-group-sm row">
-                    <SpecificField divStyle="col-sm-6" options={contributorTypes} field="contributor_type" label="Contributor Type" elementType="select"  />
+                    <SpecificField divStyle="col-sm-8" options={contributorTypes} field="contributor_type" label="Contributor Type" elementType="select"  />
                     </div>
                     }
 

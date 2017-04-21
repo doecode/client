@@ -221,6 +221,5 @@ border: 1px solid #a94442;
 
 .req:before{
   content: "* ";
-  color: red;
   position:relative;
 }

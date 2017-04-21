@@ -47,8 +47,16 @@ export default class Field extends React.Component {
 
   handleSelectChange(value) {
 
-		  this.props.linkedData.setValue(this.props.properties.field,value);
-  }
+    if (this.props.properties.isArray) {
+        if (value.trim()) {
+            this.props.linkedData.setValue(this.props.properties.field, value.split(','));
+        } else {
+            this.props.linkedData.setValue(this.props.properties.field, []);
+        }
+    } else {
+        this.props.linkedData.setValue(this.props.properties.field, value);
+    }
+}
 
   render() {
     const field = this.props.properties.field;
@@ -99,6 +107,9 @@ export default class Field extends React.Component {
 	  else if (elementType === 'select') {
 	    let ph = this.props.properties.placeholder ? this.props.properties.placeholder : "Select any that apply";
 	    const errorClass = error ? "field-error" : ""
+
+      if (this.props.properties.isArray)
+            val = val.slice();
       	input = <Select className={errorClass} allowCreate={this.props.properties.allowCreate} multi={this.props.properties.multi} options={this.props.properties.options} simpleValue placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} value={val} />
 	  }
 	  else if (elementType === 'textarea') {
