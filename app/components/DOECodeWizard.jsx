@@ -12,6 +12,7 @@ import RecipientStep from './RecipientStep';
 import ConfirmStep from './ConfirmStep';
 import RIsStep from './RIsStep';
 import {PanelGroup, Panel} from 'react-bootstrap';
+import {Modal} from 'react-bootstrap';
 
 import css from '../css/main.css';
 
@@ -27,11 +28,15 @@ export default class DOECodeWizard extends React.Component {
         this.parseLoadResponse = this.parseLoadResponse.bind(this);
         this.parseSaveResponse = this.parseSaveResponse.bind(this);
         this.parsePublishResponse = this.parsePublishResponse.bind(this);
+        this.parseSubmitResponse = this.parseSubmitResponse.bind(this);
         this.autopopulate = this.autopopulate.bind(this);
         this.save = this.save.bind(this);
         this.publish = this.publish.bind(this);
         this.submit = this.submit.bind(this);
         this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
+        this.parseErrorResponse = this.parseErrorResponse.bind(this);
+
+        this.state= {"loading" : ""};
 
 
 
@@ -60,51 +65,62 @@ export default class DOECodeWizard extends React.Component {
         	steps[i].key = "" + (i+1);
     }
 
+  parseErrorResponse() {
+    this.setState({"loading" : ""});
+  }
+
     componentDidMount() {
         const codeID = getQueryParam("code_id");
         if (codeID) {
-        	doAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse);
+          this.setState({"loading" : "Loading"});
+        	doAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
         }
     }
 
     parseReceiveResponse(data) {
 
-    	console.log(data);
     	metadata.deserializeData(data.metadata);
+      this.setState({"loading" : ""});
     }
 
     autopopulate(event) {
-    	doAjax('GET', "/api/metadata/autopopulate?repo=" + metadata.getValue('repository_link'),this.parseLoadResponse);
+      this.setState({"loading" : "Loading"});
+    	doAjax('GET', "/api/metadata/autopopulate?repo=" + metadata.getValue('repository_link'),this.parseLoadResponse, undefined, this.parseErrorResponse);
     	event.preventDefault();
     }
 
 
     parseLoadResponse(responseData) {
         metadata.updateMetadata(responseData.metadata);
+        this.setState({"loading" : ""});
     }
 
     save() {
 
-
-    	doAjax('POST', '/api/metadata/',this.parseSaveResponse, metadata.serializeData());
+    this.setState({"loading" : "Saving"});
+    	doAjax('POST', '/api/metadata/',this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
     }
 
     parseSaveResponse(data) {
-        console.log(data);
+        this.setState({"loading" : ""});
     }
 
     publish() {
-
-    	console.log(metadata.serializeData());
-    	doAjax('POST', '/api/metadata/publish',this.parsePublishResponse, metadata.serializeData());
+          this.setState({"loading" : "Publishing"});
+    	doAjax('POST', '/api/metadata/publish',this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
     }
 
     submit() {
-    	doAjax('POST', '/api/metadata/submit',this.parsePublishResponse, metadata.serializeData());
+                this.setState({"loading" : "Submitting"});
+    	doAjax('POST', '/api/metadata/submit',this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
     }
 
     parsePublishResponse(data) {
-    	console.log(data);
+    	window.location.href = "confirm?code_id=" + data.metadata.code_id;
+    }
+
+    parseSubmitResponse(data) {
+      window.location.href = "confirm?code_id=" + data.metadata.code_id + "&minntedDoi=" + data.metadata.doi;
     }
 
 
@@ -211,6 +227,16 @@ export default class DOECodeWizard extends React.Component {
 
 
 	  </div>
+
+
+    <Modal show={this.state.loading} >
+        <Modal.Header closeButton>
+            <Modal.Title>{this.state.loading}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="loader"></div>
+        </Modal.Body>
+    </Modal>
 
 
 
