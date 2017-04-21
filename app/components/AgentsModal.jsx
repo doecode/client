@@ -46,7 +46,7 @@ export default class AgentsModal extends React.Component {
         	 metadata.saveToArray(this.props.dataType,this.props.data.getData());
             this.close();
         }
-        
+
 
     }
 
@@ -68,7 +68,17 @@ export default class AgentsModal extends React.Component {
             "related_identifiers" : RelatedIdentifierField
         };
 
+        const labels = {
+          "developers" : "Developers",
+          "contributors" : "Contributors",
+          "sponsoring_organizations" : "Sponsoring Organizations",
+          "contributing_organizations" : "Contributing Organizations",
+          "research_organizations" : "Research Organizations",
+          "related_identifiers" : "Related Identifiers"
+        }
+
         const SpecificField = fields[this.props.dataType];
+        const label = labels[this.props.dataType];
 
         let content = null;
         if (this.props.contentType === 'Devs') {
@@ -76,29 +86,29 @@ export default class AgentsModal extends React.Component {
       } else if (this.props.contentType === 'Orgs') {
         content = <OrgsModalContent SpecificField={SpecificField} data={this.props.data}/>
       } else if (this.props.contentType === 'RIs') {
-    	content = <RIsModalContent SpecificField={SpecificField} data={this.props.data}/>  
+    	content = <RIsModalContent SpecificField={SpecificField} data={this.props.data}/>
       }
 
        const disabled = !this.props.data.validateSchema();
        let errorMessage = "";
-       
+
        const errors = this.props.data.checkForSchemaErrors();
-       
+
 
        if (errors.length > 0)
     	   errorMessage = "The following fields contain errors: " + errors.join(", ");
-       
+
 
         return (
             <div className="form-group form-group-sm">
                 <div className="col-xs-offset-5">
                     <Button bsStyle="primary" bsSize="large" onClick={this.open}>
-                        Add Whatever
+                        Add {label}
                     </Button>
 
                     <Modal show={this.props.dataType === this.props.tableStore.showModal} onHide={this.close} bsSize="large">
                         <Modal.Header closeButton>
-                            <Modal.Title>Manage Whatever</Modal.Title>
+                            <Modal.Title>Manage {label}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                          {errorMessage &&
@@ -112,7 +122,7 @@ export default class AgentsModal extends React.Component {
                             <Button onClick={this.close}>Close</Button>
                             {this.props.tableStore.isEdit && <Button bsStyle="danger" onClick={this.handleDelete}>Delete</Button>
 }
-                            
+
                             <Button bsStyle="primary" onClick={this.handleSave} disabled={disabled} >Save and Close</Button>
                         </Modal.Footer>
                     </Modal>

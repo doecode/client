@@ -53,7 +53,7 @@ export default class Field extends React.Component {
   render() {
     const field = this.props.properties.field;
     const info = this.props.linkedData.getFieldInfo(field);
-	  const labelStyle = this.props.properties.labelStyle != undefined ? this.props.properties.labelStyle : "col-sm-2 control-label";
+	  let labelStyle = this.props.properties.labelStyle != undefined ? this.props.properties.labelStyle : "col-sm-2 control-label";
 	  const divStyle = this.props.properties.divStyle != undefined ? this.props.properties.divStyle : "col-sm-4 ";
 
     const elementType = this.props.properties.elementType;
@@ -76,7 +76,9 @@ export default class Field extends React.Component {
       error = info.error;
     }
 
-    label = required ? "* " + label : label;
+    if (required)
+         labelStyle += " req ";
+
 
 
 

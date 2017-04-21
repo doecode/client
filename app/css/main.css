@@ -218,3 +218,9 @@ border: 1px solid #a94442;
 .LabelColumn {
   width: 150px;
 }
+
+.req:before{
+  content: "* ";
+  color: red;
+  position:relative;
+}
