@@ -12,7 +12,7 @@ export default class Splash extends React.Component {
     }
 
     deposit() {
-        window.location.href = 'wizard.html';
+        window.location.href = 'wizard';
     }
 
     open() {

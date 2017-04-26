@@ -11,7 +11,8 @@
     "build-splash": "browserify src/main/webapp/splash/splash.js -o src/main/webapp/bundles/splashbundle.js -d",
     "build": "webpack --display-error-details",
     "deploy": "webpack-dev-server --inline --hot --history-api-fallback",
-    "deploy-test": "webpack-dev-server --config webpack.test.config.js --host 0.0.0.0 --port 18081 --inline --history-api-fallback"
+    "deploy-static" : "webpack-dev-server --inline --history-api-fallback",
+    "deploy-test": "webpack-dev-server --config webpack.test.config.js --host 0.0.0.0 --port 18081 --inline --history-api-fallback &"
   },
   "keywords": [],
   "author": "",

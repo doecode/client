@@ -110,7 +110,7 @@ deserializeData(data) {
 
     for (var field in data) {
 
-        if (this.fieldMap[field] !== undefined && data[field].length > 0) {
+        if (this.fieldMap[field] !== undefined && data[field] !== undefined && !(Array.isArray(data[field]) && data[field].length === 0)) {
 
             if (parents.indexOf(field) > -1) {
                 const end = data[field].length;
@@ -120,16 +120,12 @@ deserializeData(data) {
             }
 
             
-            if (field === 'date_of_issuance') {
-            	if (data.date_of_issuance !== undefined) {
+            if (field === 'date_of_issuance') 
             		data.date_of_issuance = moment(data.date_of_issuance, "YYYY-MM-DD");
-            	}
-            } 
-            if (field === 'sponsoring_organizations') {
-                if (data.sponsoring_organizations !== undefined) {
+             
+            if (field === 'sponsoring_organizations') 
                     this.deserializeSponsoringOrganization(data);
-                }
-            }
+            
 
             
             this.fieldMap[field] = data[field];
@@ -165,9 +161,11 @@ deserializeSponsoringOrganization(data) {
 
         }
 
+        
         data.sponsoring_organizations[i].award_numbers = awardNumbers.join(',');
         data.sponsoring_organizations[i].br_codes = brCodes.join(',');
         data.sponsoring_organizations[i].fwp_numbers = fwpNumbers.join(',');
+        
     }
 }
     updateMetadata(data) {
