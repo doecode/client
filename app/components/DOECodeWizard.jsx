@@ -92,7 +92,9 @@ export default class DOECodeWizard extends React.Component {
 
 
     parseLoadResponse(responseData) {
-        metadata.updateMetadata(responseData.metadata);
+    	
+    	if (responseData !== undefined)
+    		metadata.updateMetadata(responseData.metadata);
         this.setState({"loading" : false, "loadingMessage" : ""});
     }
 
@@ -157,14 +159,14 @@ export default class DOECodeWizard extends React.Component {
 
 
         const panelStatus = metadata.getPanelStatus(info,obj.key);
-        if (panelStatus.hasRequired) {
+
              if (panelStatus.remainingRequired > 0)
                   heading += " (" + panelStatus.remainingRequired + " Required Field(s) Remaining)";
              else {
                  heading += " (All Required Fields Completed) ";
                  panelStyle = "success";
              }
-        }
+        
 
 
         if (panelStatus.hasOptional) {
