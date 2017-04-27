@@ -140,7 +140,7 @@ deserializeSponsoringOrganization(data) {
     const end = sponsoringOrganizations.length;
     for (var i = 0; i < end; i++) {
 
-        const fundingIDs = sponsoringOrganizations.funding_identifiers;
+        const fundingIDs = sponsoringOrganizations[i].funding_identifiers;
         const awardNumbers = [];
         const brCodes = [];
         const fwpNumbers = [];
@@ -149,12 +149,13 @@ deserializeSponsoringOrganization(data) {
 
             const fundingLength = fundingIDs.length;
             for (var x = 0; x < fundingLength; x++) {
+            	let val = new String(fundingIDs[x].identifier_value);
                 if (fundingIDs[x].identifier_type === 'AwardNumber') {
-                    awardNumbers.push(fundingIDs[x].identifier_value)
+                    awardNumbers.push(val)
                 } else if (fundingIDs[x].identifier_type === 'BRCode') {
-                    brCodes.push(fundingIDs[x].identifier_value);
+                    brCodes.push(val);
                 } else if (fundingIDs[x].identifier_type === 'FWPNumber') {
-                    fwpNumbers.push(fundingIDs[x].identifier_value);
+                    fwpNumbers.push(val);
                 }
 
             }
@@ -165,6 +166,7 @@ deserializeSponsoringOrganization(data) {
         data.sponsoring_organizations[i].award_numbers = awardNumbers.join(',');
         data.sponsoring_organizations[i].br_codes = brCodes.join(',');
         data.sponsoring_organizations[i].fwp_numbers = fwpNumbers.join(',');
+        data.sponsoring_organizations[i].funding_identifiers = [];
         
     }
 }
@@ -197,8 +199,8 @@ deserializeSponsoringOrganization(data) {
           if (awardString)
         	  awardNumbers = data.sponsoring_organizations[i].award_numbers.split(',');
           
-          if (awardNumbers.indexOf(data.sponsoring_organizations[i].primary_award) < 0)
-        	  awardNumbers.push(data.sponsoring_organizations[i].primary_award);
+          //if (awardNumbers.indexOf(data.sponsoring_organizations[i].primary_award) < 0)
+        	  //awardNumbers.push(data.sponsoring_organizations[i].primary_award);
           if (brString)
         	  brCodes = data.sponsoring_organizations[i].br_codes.split(',');
           

@@ -37,7 +37,7 @@ export default class Splash extends React.Component {
 
 render() {
 
-    const ymlDownload = "/api/metadata/" + this.state.codeID;
+    const ymlDownload = "/api/metadata/yaml/" + this.state.codeID;
     return (
         <div className="container-fluid">
 
@@ -56,7 +56,7 @@ render() {
                 </h2>
 }
                 <h2>
-                    <a target="_blank" href={ymlDownload}>
+                    <a target="_blank" type="text/yaml" href={ymlDownload}>
                         Download Metadata.yml
                     </a>
                 </h2>
