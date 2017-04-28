@@ -53,7 +53,7 @@ export default class BaseData {
 
        const value = this.getValue(field);
 
-       if (value.length === 0) {
+       if (value === null || value.length === 0) {
 		   info.completed = false;
 		   info.error = '';
 	   } else {

@@ -39,6 +39,7 @@ export default class Field extends React.Component {
 
   handleDateChange(date) {
 		this.props.linkedData.setValue(this.props.properties.field,date);
+		this.props.linkedData.validateField(this.props.properties.field);
   }
 
   handleRadioChange(event) {
@@ -120,7 +121,7 @@ export default class Field extends React.Component {
 			 input = <input type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange} />
 	  }
 	  else if (elementType === 'date') {
-		  input = <DatePicker placeholderText="Click to select a date" selected={val} onChange={this.handleDateChange} onBlur={this.handleDateBlur} showMonthDropdown showYearDropdown dropdownMode="select"/>
+		  input = <DatePicker placeholderText="Click to select a date" selected={val} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>
 	  }
 
 
