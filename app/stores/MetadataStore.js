@@ -178,7 +178,7 @@ class MetadataStore {
     @observable relatedIdentifier = {
 		      identifier_type : '',
 		      relation_type : '',
-		      identifier : '',
+		      identifier_value : '',
 		      id: ''
     }
 
