@@ -43,7 +43,7 @@ export default class RIsStep extends React.Component {
 
 				 },
 				 {
-					 "columnName": "identifier",
+					 "columnName": "identifier_value",
 					 "order": 4,
 					 "locked": false,
 					 "visible": true,
@@ -53,7 +53,7 @@ export default class RIsStep extends React.Component {
 
 			const parentName = "related_identifiers";
 			const contentType = "RIs";
-			let columns = ["identifier_type","relation_type","identifier"];
+			let columns = ["identifier_type","relation_type","identifier_value"];
 
 		    return (
 		       <div>

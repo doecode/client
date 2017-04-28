@@ -186,7 +186,7 @@ class MetadataStore {
 
 	         "identifier_type": {required:true, completed:false, validations: [], error: ''},
 	          "relation_type": {required:true, completed:false, validations: [], error: ''},
-	          "identifier": {required:true, completed:false, validations: [], error: ''}
+	          "identifier_value": {required:true, completed:false, validations: [], error: ''}
 	     }
 
 
