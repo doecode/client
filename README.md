@@ -1,10 +1,7 @@
 # DOE Code Client
 The Client side implementation of DOECode
 
-Prerequisites 
-Node
-NPM
-DOE Code Server running locally at localhost:8080
+Prerequisites: Node, NPM, DOE Code Server running locally at localhost:8080
 
 Build Steps
 1. From the client root folder, enter the command "npm update".
