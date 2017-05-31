@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {getQueryParam} from '../utils/utils';
 import {Button} from 'react-bootstrap';
 
-export default class Splash extends React.Component {
+export default class Confirmation extends React.Component {
     constructor(props) {
         super(props);
 
