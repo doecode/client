@@ -62,8 +62,8 @@ export default class Field extends React.Component {
   render() {
     const field = this.props.properties.field;
     const info = this.props.linkedData.getFieldInfo(field);
-	  let labelStyle = this.props.properties.labelStyle != undefined ? this.props.properties.labelStyle : "col-sm-2 control-label";
-	  const divStyle = this.props.properties.divStyle != undefined ? this.props.properties.divStyle : "col-sm-4 ";
+	  let labelStyle = this.props.properties.labelStyle != undefined ? this.props.properties.labelStyle : "control-label";
+	  const divStyle = this.props.properties.divStyle != undefined ? this.props.properties.divStyle : "";
 
     const elementType = this.props.properties.elementType;
 
@@ -91,7 +91,8 @@ export default class Field extends React.Component {
 
 
 
-	 const errorStyle = error ? "has-error has-feedback" : "";
+     let wrapperStyle = "col-xs-8";
+	 wrapperStyle = error ? wrapperStyle + " has-error has-feedback" : wrapperStyle;
 
 	 let input = null;
 
@@ -118,7 +119,11 @@ export default class Field extends React.Component {
 		 input = <textarea className="form-control" value={val} onChange={this.handleChange} onBlur={this.handleBlur} />
 	  }
 	  else if (elementType === 'radio') {
-			 input = <input type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange} />
+			 return (
+					 <div className={wrapperStyle}>
+					 <label><input type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange} /> {label}</label>
+					 </div>
+					 );
 	  }
 	  else if (elementType === 'date') {
 		  input = <DatePicker placeholderText="Click to select a date" selected={val} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>
@@ -128,7 +133,7 @@ export default class Field extends React.Component {
 
 
 	  return(
-      <div className={errorStyle}>
+      <div className={wrapperStyle}>
       {label &&
       <label className={labelStyle}>
         {label}

@@ -4,6 +4,7 @@ import InputHelper from './InputHelper';
 import DevsModalContent from '../ModalComponents/DevsModalContent'
 import RIsModalContent from '../ModalComponents/RIsModalContent'
 import OrgsModalContent from '../ModalComponents/OrgsModalContent'
+import ContributorsModalContent from '../ModalComponents/ContributorsModalContent'
 
 
 import DeveloperField from '../field/DeveloperField';
@@ -87,6 +88,8 @@ export default class AgentsModal extends React.Component {
         content = <OrgsModalContent SpecificField={SpecificField} data={this.props.data}/>
       } else if (this.props.contentType === 'RIs') {
     	content = <RIsModalContent SpecificField={SpecificField} data={this.props.data}/>
+      } else if (this.props.contentType == 'Contributors') {
+    	content =  <ContributorsModalContent SpecificField={SpecificField} data={this.props.data}/>
       }
 
        const disabled = !this.props.data.validateSchema();

@@ -83,15 +83,18 @@ export default class EntryStep extends React.Component {
 		  
 		  {(entryStore.availabilitySelected === 'ON' || entryStore.availabilitySelected === 'CS') && !repository_link &&
 		<div className="form-group form-group-sm row">
-		  <label className="col-sm-2">
+		<div className="col-xs-8">
+		  <label className="form-label">
 		  File Upload
 	      </label>
-		  <div className="col-sm-4">
+		  <div >
 		  		<Dropzone onDrop={this.onDrop}>
 		  		<h2> Drag files here or click to browse. </h2>
 		  		</Dropzone>
 		  </div>
-		  </div>
+		  
+		</div>
+		</div>
 		 
 		  
 		  }

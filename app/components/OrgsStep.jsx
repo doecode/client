@@ -45,45 +45,29 @@ export default class OrgsStep extends React.Component {
 					 "displayName": "Name"
 				 },
 				 {
-					 "columnName": "email",
-					 "order": 3,
-					 "locked": false,
-					 "visible": true,
-					 "displayName": "Email"
-
-				 },
-				 {
-					 "columnName": "orcid",
-					 "order": 4,
-					 "locked": false,
-					 "visible": true,
-					 "displayName": "ORCID"
-
-				 },
-				 {
 					 "columnName": "primary_award",
-					 "order": 5,
+					 "order": 3,
 					 "locked": false,
 					 "visible": true,
 					 "displayName": "Primary Award"
 				 },
 				 {
 					 "columnName": "award_numbers",
-					 "order": 6,
+					 "order": 4,
 					 "locked": false,
 					 "visible": true,
 					 "displayName": "Additional Awards"
 				 },
 				 {
 					 "columnName": "br_codes",
-					 "order": 7,
+					 "order": 5,
 					 "locked": false,
 					 "visible": true,
 					 "displayName": "B&R Codes"
 				 },
 				 {
 					 "columnName": "fwp_numbers",
-					 "order": 8,
+					 "order": 6,
 					 "locked": false,
 					 "visible": true,
 					 "displayName": "FWP Numbers"
@@ -91,10 +75,10 @@ export default class OrgsStep extends React.Component {
 
 				];
 
-			const opts = ["sponsoring_organizations", "research_organizations", "contributing_organizations"];
+			const opts = ["sponsoring_organizations", "research_organizations"];
 			const parentName = opts[this.state.key];
 			const contentType = "Orgs";
-			let columns = ["organization_name","email","orcid"];
+			let columns = ["organization_name"];
 			if (parentName === 'sponsoring_organizations') {
 				columns.push("primary_award");
 				columns.push("award_numbers")
@@ -109,7 +93,6 @@ export default class OrgsStep extends React.Component {
 		      <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="orgsStepTabs">
 		      <Tab eventKey={0} title="* Sponsoring Organizations"> {content} </Tab>
 		      <Tab eventKey={1} title="* Research Organizations"> {content} </Tab>
-		      <Tab eventKey={2} title="Contributing Organizations"> {content} </Tab>
 		      </Tabs>
 		      </div>
 		      );

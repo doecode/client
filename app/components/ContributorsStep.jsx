@@ -16,7 +16,7 @@ const tableStore = new TableStore();
 const metadata = new Metadata();
 
 @observer
-export default class AgentsStep extends React.Component {
+export default class ContributorsStep extends React.Component {
 
 	constructor(props) {
 		    super(props);
@@ -93,10 +93,25 @@ export default class AgentsStep extends React.Component {
 						 "visible": true,
 						 "displayName": "Affiliations"
 					 },
+					 {
+						 "columnName": "organization_name",
+							 "order": 8,
+							 "locked": false,
+							 "visible": true,
+							 "displayName": "Organization Name"
+					},
+					 {
+							 "columnName": "contributor_type",
+								 "order": 9,
+								 "locked": false,
+								 "visible": true,
+								 "displayName": "Contributor Type"
+						},
+						
 
 						 {
 								 "columnName": "id",
-									 "order": 8,
+									 "order": 10,
 									 "locked": false,
 									 "visible": false,
 									 "displayName": "id"
@@ -106,22 +121,20 @@ export default class AgentsStep extends React.Component {
 					];
 
 
-			const opts = ["developers"];
+			const opts = ["contributors", "contributing_organizations"];
 			const parentName = opts[this.state.key];
 
-			const columns = ["first_name", "last_name", "email", "orcid", "affiliations"];
-
-
-			const contentType = "Devs";
+			const contentType = "Contributors";
 
 
 				const content = <EditableDataTable columns={[]} contentType={contentType} config={tableConfig} parentName={parentName}/>
 		    return (
 		       <div>
 
-		      <h2> Developers </h2>
-		      {content} 
-		      
+		      <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="devsStepTabs">
+		      <Tab eventKey={0} title="Contributors"> {content} </Tab>
+		      <Tab eventKey={1} title="Contributing Organizations"> {content} </Tab>
+		      </Tabs>
 		      </div>
 		      );
 		  }

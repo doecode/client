@@ -7,6 +7,8 @@ import EntryStep from './EntryStep';
 import AgentsStep from './AgentsStep';
 import OrgsStep from './OrgsStep';
 import MetadataPanel from './MetadataPanel';
+import SupplementalInfoStep from './SupplementalInfoStep';
+import ContributorsStep from './ContributorsStep';
 import AccessStep from './AccessStep';
 import RecipientStep from './RecipientStep';
 import ConfirmStep from './ConfirmStep';
@@ -18,7 +20,8 @@ import css from '../css/main.css';
 
 const metadata = new Metadata();
 
-let steps = [];
+let publishSteps = [];
+let submitSteps = [];
 
 @observer
 export default class DOECodeWizard extends React.Component {
@@ -35,22 +38,25 @@ export default class DOECodeWizard extends React.Component {
         this.submit = this.submit.bind(this);
         this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
         this.parseErrorResponse = this.parseErrorResponse.bind(this);
+        this.buildPanel = this.buildPanel.bind(this);
 
         this.state= {"loading" : false, "loadingMessage" : "", "editLoad" : false};
 
 
 
-        steps =
-        	[
-        		{name: 'Repository Information', component: <EntryStep metadata={metadata} autopopulate={this.autopopulate}/> },
-        		{name: 'Product Description', component: <MetadataPanel metadata={metadata}/>},
+        publishSteps = [
+        {name: 'Repository Information', component: <EntryStep metadata={metadata} autopopulate={this.autopopulate}/> },
+        {name: 'Product Description', component: <MetadataPanel metadata={metadata}/>},
+        {name: 'Developers', component: <AgentsStep />},
+        ];
 
-        		{name: 'Developers & Contributors', component: <AgentsStep />},
-        		{name: 'Organizations', component: <OrgsStep />},
-        		{name: 'Identifiers', component: <RIsStep />},
-        		{name: 'Recipient Information', component: <RecipientStep />},
-        		];
-
+       submitSteps = [
+   		{name: 'Supplemental Product Information', component: <SupplementalInfoStep/>},
+   		{name: 'Sponsors and Research Organizations', component: <OrgsStep />},
+   		{name: 'Contributors and Contributing Organizations', component: <ContributorsStep/>},
+   		{name: 'Identifiers', component: <RIsStep />},
+   		{name: 'Contact Information', component: <RecipientStep />}
+       ];
         /*
 
          *
@@ -61,8 +67,12 @@ export default class DOECodeWizard extends React.Component {
         		{name: 'Recipient Information', component: <RecipientStep metadata={metadata}/>},
         		{name: 'Summary', component: <ConfirmStep metadata={metadata}/> }
          */
-        for (var i = 0; i < steps.length; i++)
-        	steps[i].key = "" + (i+1);
+        let i = 0;
+        for (i = 0; i < publishSteps.length; i++)
+        	publishSteps[i].key = "" + (i+1);
+        
+        for (var x = 0; x < submitSteps.length; x++)
+        	submitSteps[x].key = "" + (x+1);
     }
 
   parseErrorResponse() {
@@ -132,9 +142,63 @@ export default class DOECodeWizard extends React.Component {
 
     }
 
+    buildPanel(obj) {
+        let heading = obj.name;
+        let panelStyle = "default";
 
 
+        const panelStatus = metadata.getPanelStatus(obj.name);
 
+             if (panelStatus.remainingRequired > 0) {
+                  heading += " (" + panelStatus.remainingRequired + " Required Field(s) Remaining)";
+             }
+             else {
+                 heading += " (All Required Fields Completed) ";
+                 panelStyle = "success";
+             }
+        
+
+
+        if (panelStatus.hasOptional) {
+             if (panelStatus.remainingOptional > 0) {
+                  heading += " (" + panelStatus.remainingOptional + " Optional Field(s) Remaining)";
+             }
+             else {
+                 heading += " (All Optional Fields Completed) ";
+             }
+        }
+
+        if (panelStatus.errors) {
+
+        	heading += " This section contains errors. "
+        	panelStyle = "danger";
+        }
+        return <Panel header={heading} bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
+
+      	<div>
+      	<div className="row">
+
+        <div className="col-sm-12">
+		<button type="button" className="btn btn-info btn-lg pull-right" onClick={this.save}>
+		Save Your Progress
+		</button>
+		</div>
+
+
+		</div>
+
+		</div>
+
+        {panelStatus.errors &&
+        <div className="error-color">
+        <h3> <strong> {panelStatus.errors} </strong> </h3>
+        </div>
+        }
+
+        {obj.component}
+
+        </Panel>
+        }
 
 
 
@@ -151,64 +215,54 @@ export default class DOECodeWizard extends React.Component {
       
       const self = this;
 
-        let content = <PanelGroup defaultActiveKey="1" accordion>
-        {steps.map(function(obj) {
-
-        let heading = obj.name;
-        let panelStyle = "default";
-
-
-        const panelStatus = metadata.getPanelStatus(info,obj.key);
-
-             if (panelStatus.remainingRequired > 0)
-                  heading += " (" + panelStatus.remainingRequired + " Required Field(s) Remaining)";
-             else {
-                 heading += " (All Required Fields Completed) ";
-                 panelStyle = "success";
-             }
+        const publishHeader = <strong> Fields Required to Publish this Record on DOE Code </strong> ;
+        const publishPanels = publishSteps.map(this.buildPanel);
         
-
-
-        if (panelStatus.hasOptional) {
-             if (panelStatus.remainingOptional > 0)
-                  heading += " (" + panelStatus.remainingOptional + " Optional Field(s) Remaining)";
-             else
-                 heading += " (All Optional Fields Completed) ";
-        }
-
-        if (panelStatus.errors) {
-
-        	heading += " This section contains errors. "
-        	panelStyle = "danger";
-        }
-        return <Panel header={heading} bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
-
-      	<div>
-      	<div className="row">
-
-        <div className="col-sm-12">
-		<button type="button" className="btn btn-info btn-lg pull-right" onClick={self.save}>
-		Save Your Progress
+        const submitHeader = <strong> Additional Fields Required to Submit to E-Link </strong>;
+        const submitPanels = submitSteps.map(this.buildPanel);
+        
+        let content = <div>
+        
+        <Panel bsStyle="default" header={publishHeader}>
+        	
+        <PanelGroup defaultActiveKey="1" accordion>
+        {publishPanels}
+        
+        </PanelGroup>
+       
+        <div className="row">
+        
+		<div className="col-sm-12">
+		<button type="button" className="btn btn-lg btn-default pull-right" disabled={disabled} onClick={this.publish}>
+		Publish Record on DOE Code
 		</button>
 		</div>
-
-
 		</div>
-
-		</div>
-
-        {panelStatus.errors &&
-        <div className="error-color">
-        <h3> <b> {panelStatus.errors} </b> </h3>
-        </div>
-        }
-
-        {obj.component}
-
         </Panel>
-        })
-        }
+        
+        
+        <Panel bsStyle="default" header={submitHeader}>
+    	
+        <PanelGroup accordion>
+        {submitPanels}
+        
         </PanelGroup>
+        
+        <div className="row">
+
+
+
+        <div className="col-sm-12">
+ 		<button type="button" className="btn btn-primary btn-lg pull-right" disabled={disabled} onClick={this.submit}>
+ 		Publish Record and Submit
+ 		</button>
+ 		</div>
+
+
+ 	    </div>
+        </Panel>
+        </div>
+        
         return (
 
 
@@ -224,26 +278,8 @@ export default class DOECodeWizard extends React.Component {
         </div>
 
         </div>
+        {content}
 
-
-
-            {content}
-       <div className="row">
-
-		<div className="col-sm-10">
-		<button type="button" className="btn btn-lg btn-default pull-right" disabled={disabled} onClick={this.publish}>
-		Publish
-		</button>
-		</div>
-
-       <div className="col-sm-2">
-		<button type="button" className="btn btn-primary btn-lg pull-right" disabled={disabled} onClick={this.submit}>
-		Publish and Submit
-		</button>
-		</div>
-
-
-	  </div>
 
 
     <Modal show={this.state.loading} >

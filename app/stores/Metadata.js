@@ -70,13 +70,13 @@ export default class Metadata extends BaseData {
     	}
     }
 
-   getPanelStatus(infoSchema,panelNumber) {
+   getPanelStatus(panelName) {
 
      let panelStatus = {"remainingRequired" : 0, "remainingOptional": 0, "errors" : "", "hasRequired" : false, "hasOptional" : false}
-     for (var field in infoSchema) {
+     for (var field in this.infoSchema) {
      const obj = this.getFieldInfo(field);
 
-     if (obj.Panel == panelNumber) {
+     if (obj.Panel == panelName) {
 
      if (obj.errorMessage)
     	 panelStatus.errors += obj.errorMessage + " ";

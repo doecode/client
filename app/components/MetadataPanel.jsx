@@ -12,14 +12,6 @@ export default class MetadataPanel extends React.Component {
 	render() {
 		const metadata = this.props.metadata;
 
-		const countries = [
-			{label: 'United States', value: 'United States'},
-			{label: 'Canada', value: 'Canada'},
-			{label: 'France', value: 'France'},
-			{label: 'Switzerland', value: 'Switzerland'},
-			{label: 'United Kingdom', value: 'United Kingdom'}
-			];
-
 			const licenseOptions = [
 				{label: 'None', value: 'None'},
 				{label: 'Apache License 2.0', value: 'Apache License 2.0'},
@@ -59,10 +51,6 @@ export default class MetadataPanel extends React.Component {
 
 
 	            <div className="form-group form-group-sm row">
-	            	<MetadataField field="acronym" label="Short Title or Acronym" elementType="input"  />
-	            </div>
-
-	            <div className="form-group form-group-sm row">
 	            	<MetadataField field="doi" label="DOI" elementType="input"  />
 	            </div>
 
@@ -71,30 +59,9 @@ export default class MetadataPanel extends React.Component {
 	            	<MetadataField field="description" label="Description/Abstract" elementType="textarea" />
 	            </div>
 
-
-	           <div className="form-group form-group-sm row">
-	            	<MetadataField  field="date_of_issuance" label="Date of Issuance" elementType="date"  />
-	            </div>
-
-	 	        <div className="form-group form-group-sm row">
-	            	<MetadataField  field="country_of_origin" label="Country of Origin" options={countries} elementType="select"  />
-	            </div>
-
-	            <hr/>
 	            <div className="form-group form-group-sm row">
-	            <MetadataField field="keywords" label="Keywords" elementType="input" />
-	            <MetadataField field="other_special_requirements" label="Other Special Requirements" elementType="input" />
-	            </div>
-
-	            <div className="form-group form-group-sm row">
-	            <MetadataField field="related_software" label="Related Software" elementType="input" />
-	            <MetadataField field="site_accession_number" label="Site Accession Number" elementType="input"  />
-	            </div>
-
-							<hr/>
-	            <div className="form-group form-group-sm row">
-							<MetadataField divStyle="col-sm-6" field="licenses" label="Licenses" elementType="select" options={licenseOptions} isArray={true} multi={true} placeholder="Select your license(s)"   />
-						  </div>
+							<MetadataField field="licenses" label="Licenses" elementType="select" options={licenseOptions} isArray={true} multi={true} placeholder="Select your license(s)"   />
+			    </div>
 
                 </div>
 		);
