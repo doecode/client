@@ -205,7 +205,8 @@ export default class DOECodeWizard extends React.Component {
     render() {
 
       const info = metadata.infoSchema;
-      const disabled = !metadata.validateSchema();
+      const submitDisabled = !metadata.validateSchema();
+      const publishDisabled = !metadata.validatePublishedFields();
       const codeID = metadata.getValue("code_id");
       
       let headerText = "Create a New Software Record";
@@ -215,7 +216,14 @@ export default class DOECodeWizard extends React.Component {
       
       const self = this;
 
-        const publishHeader = <strong> Fields Required to Publish this Record on DOE Code </strong> ;
+        const publishHeader = <div> <strong> Fields Required to Publish this Record on DOE Code </strong> 
+
+		<button type="button" className="btn btn-sm btn-primary pull-right" disabled={publishDisabled} onClick={this.publish}>
+		Publish Record on DOE Code
+		</button>
+        </div>
+        
+        ;
         const publishPanels = publishSteps.map(this.buildPanel);
         
         const submitHeader = <strong> Additional Fields Required to Submit to E-Link </strong>;
@@ -230,14 +238,7 @@ export default class DOECodeWizard extends React.Component {
         
         </PanelGroup>
        
-        <div className="row">
-        
-		<div className="col-sm-12">
-		<button type="button" className="btn btn-lg btn-default pull-right" disabled={disabled} onClick={this.publish}>
-		Publish Record on DOE Code
-		</button>
-		</div>
-		</div>
+
         </Panel>
         
         
@@ -253,7 +254,7 @@ export default class DOECodeWizard extends React.Component {
 
 
         <div className="col-sm-12">
- 		<button type="button" className="btn btn-primary btn-lg pull-right" disabled={disabled} onClick={this.submit}>
+ 		<button type="button" className="btn btn-primary btn-lg pull-right" disabled={submitDisabled} onClick={this.submit}>
  		Publish Record and Submit
  		</button>
  		</div>

@@ -6,6 +6,7 @@ import moment from 'moment';
 
 
 const parents = ["developers", "contributors", "sponsoring_organizations", "research_organizations", "contributing_organizations", "related_identifiers"];
+const publishedPanels = ["Repository Information", "Product Description", "Developers"];
 export default class Metadata extends BaseData {
 
     constructor() {
@@ -225,6 +226,26 @@ deserializeSponsoringOrganization(data) {
       
       return data;
 
+    }
+    
+    validatePublishedFields() {
+    	let isValid = true;
+
+    	for (var field in this.infoSchema) {
+    		const information = this.infoSchema[field];
+
+    		if (information.error) {
+    			isValid = false;
+    		}
+    		else if (publishedPanels.indexOf(information.Panel) > -1 && information.required && !information.completed) {
+
+    			isValid = false;
+    		}
+
+    	}
+
+
+    	return isValid;
     }
 
 

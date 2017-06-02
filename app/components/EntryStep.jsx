@@ -49,6 +49,8 @@ export default class EntryStep extends React.Component {
 		const metadata = this.props.metadata;
 		const repository_link = metadata.getValue("repository_link");
 		const files = metadata.getValue("files");
+		
+		const urlLabel = entryStore.availabilitySelected == 'OS' ? 'Repository Link' : 'Landing Page';
 		return (
 				
         <div className="container-fluid">
@@ -74,12 +76,23 @@ export default class EntryStep extends React.Component {
 		  
 		  {(entryStore.availabilitySelected === 'OS' || entryStore.availabilitySelected === 'ON') && files.length === 0 &&
 		  
-			 
           <div className="form-group form-group-sm row">
-          <MetadataField field="repository_link" label="Repository Link" elementType="input" />
-		  <button className="btn btn-primary btn-sm" onClick={this.props.autopopulate}> Autopopulate </button>								
-		  </div>
+          <MetadataField field="repository_link" label={urlLabel} elementType="input" />
+						
+		  </div>	  
+		  
 		  }
+		  
+		  {entryStore.availabilitySelected === 'OS' &&
+			  
+	          <div className="form-group form-group-sm row">
+	          <div className="col-xs-8">
+			  <button className="btn btn-primary btn-sm" onClick={this.props.autopopulate}> Autopopulate from Repository</button>	
+			  </div>
+	          </div>
+		  
+		  }
+		  
 		  
 		  {(entryStore.availabilitySelected === 'ON' || entryStore.availabilitySelected === 'CS') && !repository_link &&
 		<div className="form-group form-group-sm row">
