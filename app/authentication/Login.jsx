@@ -10,18 +10,18 @@ export default class Login extends React.Component {
 		this.login = this.login.bind(this);
 		this.parseLoginResponse = this.parseLoginResponse.bind(this);
 		this.parseError = this.parseError.bind(this);
-		
+
 	}
-	
-	
+
+
 	check() {
-		
+
 	    $.ajax({
 	        url: "/api/authentication/check",
 	        cache: false,
 	        method: "GET",
 	        beforeSend: function(request) {
-	        	request.setRequestHeader("Authorization", "Bearer " + document.cookie);
+	        	request.setRequestHeader("X-XSRF-TOKEN", sessionStorage.xsrfToken);
 	        },
 	        contentType: "application/json; charset=utf-8",
 	        success: this.parseCheck,
@@ -29,50 +29,50 @@ export default class Login extends React.Component {
 	      });
 		//doAjax('GET', "/api/authentication/check", this.parseCheck);
 	}
-	
+
 	parseCheck() {
 		console.log("Checked")
-	} 
-	
+	}
+
 	login() {
 		const obj = {"nothing" : "nothing"};
     	doAjax('POST', '/api/login/login',this.parseLoginResponse, obj, this.parseError);
 	}
-	
+
 	parseLoginResponse(data) {
-		document.cookie = data.accessToken;
+		sessionStorage.xsrfToken = data.accessToken;
 		console.log("Logged in");
 	}
-	
+
 	parseError() {
 		console.log("I'm being called");
 	}
-	
+
 	render() {
-		
+
 		return(
 		<div className="container">
-		
+
 		<input type="hidden" name="rememberMe" value="false"/>
-		
+
 	    <div className="form-group form-group-sm row">
 	    <input type="text" name="username"/>
 	    </div>
-	    
+
 	    <div className="form-group form-group-sm row">
 	    <input type="password" name="password"/>
 	    </div>
-		
-		
+
+
 		<button type="button" className="btn btn-primary btn-lg" onClick={this.login}>
 		Login
 		</button>
-		
+
 		<button type="button" className="btn btn-lg" onClick={this.check}>
 		Check
 		</button>
-		
+
 		</div>);
-		
+
 	}
 }
