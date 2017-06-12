@@ -36,11 +36,22 @@ export default class Login extends React.Component {
 
 	login() {
 		const obj = {"nothing" : "nothing"};
-    	doAjax('POST', '/api/login/login',this.parseLoginResponse, obj, this.parseError);
+    	
+	    $.ajax({
+	        url: "/api/login/login",
+	        cache: false,
+	        method: "POST",
+            dataType: 'json',
+            data: JSON.stringify(obj),
+	        contentType: "application/json; charset=utf-8",
+	        success: this.parseLoginResponse,
+	        error: this.parseError
+	      });
+    	
 	}
 
 	parseLoginResponse(data) {
-		sessionStorage.xsrfToken = data.accessToken;
+		sessionStorage.xsrfToken = data.xsrfToken;
 		console.log("Logged in");
 	}
 
