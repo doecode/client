@@ -7,6 +7,8 @@ export default class Login extends React.Component {
 		super(props);
 		this.check = this.check.bind(this);
 		this.parseCheck = this.parseCheck.bind(this);
+		this.register = this.register.bind(this);
+		this.parseRegister = this.parseRegister.bind(this);
 		this.login = this.login.bind(this);
 		this.parseLoginResponse = this.parseLoginResponse.bind(this);
 		this.parseError = this.parseError.bind(this);
@@ -35,10 +37,10 @@ export default class Login extends React.Component {
 	}
 
 	login() {
-		const obj = {"nothing" : "nothing"};
+		const obj = {"email" : "random3@ornl.gov", "password" : "password"};
     	
 	    $.ajax({
-	        url: "/api/login/login",
+	        url: "/api/user/login",
 	        cache: false,
 	        method: "POST",
             dataType: 'json',
@@ -53,6 +55,26 @@ export default class Login extends React.Component {
 	parseLoginResponse(data) {
 		sessionStorage.xsrfToken = data.xsrfToken;
 		console.log("Logged in");
+	}
+	
+	register() {
+		const obj = {"email" : "random3@ornl.gov", "password" : "password", "confirm_password": "password"};
+    	
+	    $.ajax({
+	        url: "/api/user/register",
+	        cache: false,
+	        method: "POST",
+            dataType: 'json',
+            data: JSON.stringify(obj),
+	        contentType: "application/json; charset=utf-8",
+	        success: this.parseRegister,
+	        error: this.parseError
+	      });
+    	
+	}
+	
+	parseRegister(data) {
+		console.log("Api Key is: " + data.apiKey);
 	}
 
 	parseError() {
@@ -81,6 +103,10 @@ export default class Login extends React.Component {
 
 		<button type="button" className="btn btn-lg" onClick={this.check}>
 		Check
+		</button>
+		
+		<button type="button" className="btn btn-lg btn-success" onClick={this.register}>
+		Register
 		</button>
 
 		</div>);
