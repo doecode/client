@@ -25,9 +25,10 @@ export default class Login extends React.Component {
 	}
 
 	login() {
-		const obj = {"email" : "random3@ornl.gov", "password" : "password"};
+		const obj = {"email" : "doecodedev3@mailinator.com", "password" : "password"};
     	
-	    $.ajax({
+		doAjax("POST", "/api/user/login", this.parseLoginResponse, obj, this.parseError);
+	    /*$.ajax({
 	        url: "/api/user/login",
 	        cache: false,
 	        method: "POST",
@@ -36,7 +37,7 @@ export default class Login extends React.Component {
 	        contentType: "application/json; charset=utf-8",
 	        success: this.parseLoginResponse,
 	        error: this.parseError
-	      });
+	      });*/
     	
 	}
 
@@ -46,7 +47,7 @@ export default class Login extends React.Component {
 	}
 	
 	register() {
-		const obj = {"email" : "random3@ornl.gov", "password" : "password", "confirm_password": "password"};
+		const obj = {"email" : "doecodedev3@mailinator.com", "password" : "password", "confirm_password": "password"};
     	
 	    $.ajax({
 	        url: "/api/user/register",

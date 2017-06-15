@@ -2,6 +2,7 @@ import DOECodeWizard from './components/DOECodeWizard';
 import Confirmation from './confirmation/Confirmation';
 import WorkflowManagement from './user/WorkflowManagement';
 import Login from './authentication/Login';
+import ConfirmUser from './authentication/ConfirmUser';
 import Splash from './splash/Splash';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -21,7 +22,7 @@ class DOECodeRouter extends React.Component {
 			<Route path="/confirm" component={Confirmation}/>
 			<Route path="/projects" component={WorkflowManagement}/>
 			<Route path="/login" component={Login}/>
-
+			<Route path = "/confirmuser" component={ConfirmUser}/>
 		</Router>
 		);
 	}
