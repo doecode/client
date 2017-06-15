@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {doAjax, appendQueryString, getQueryParam} from '../utils/utils';
+import {doAjax, doAuthenticatedAjax, appendQueryString, getQueryParam} from '../utils/utils';
 
 export default class Login extends React.Component {
 	constructor(props) {
@@ -17,19 +17,7 @@ export default class Login extends React.Component {
 
 
 	check() {
-
-	    $.ajax({
-	        url: "/api/authentication/check",
-	        cache: false,
-	        method: "GET",
-	        beforeSend: function(request) {
-	        	request.setRequestHeader("X-XSRF-TOKEN", sessionStorage.xsrfToken);
-	        },
-	        contentType: "application/json; charset=utf-8",
-	        success: this.parseCheck,
-	        error: this.parseError
-	      });
-		//doAjax('GET', "/api/authentication/check", this.parseCheck);
+		doAuthenticatedAjax('GET', "/api/authentication/check", this.parseCheck, undefined, this.parseError);
 	}
 
 	parseCheck() {
@@ -53,7 +41,7 @@ export default class Login extends React.Component {
 	}
 
 	parseLoginResponse(data) {
-		sessionStorage.xsrfToken = data.xsrfToken;
+		localStorage.xsrfToken = data.xsrfToken;
 		console.log("Logged in");
 	}
 	

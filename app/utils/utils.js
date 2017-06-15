@@ -22,6 +22,25 @@ function doAjax(methodType, url, successCallback, data, errorCallback) {
 
   }
 
+function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallback) {
+
+
+    $.ajax({
+      url: url,
+      cache: false,
+      method: methodType,
+      beforeSend: function(request) {
+      	request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+      },
+      dataType: 'json',
+      data: JSON.stringify(data),
+      contentType: "application/json; charset=utf-8",
+      success: successCallback,
+      error: errorCallback
+    });
+
+  }
+
   function appendQueryString(url) {
 
     var ampOrQuestion = "?";
