@@ -62,6 +62,7 @@
     "react-router": "^3.0.2",
     "react-select": "0.9.1",
     "react-stepzilla": "^4.0.0",
+    "redial": "^0.5.0",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
     "uniqid": "https://registry.npmjs.org/uniqid/-/uniqid-4.1.1.tgz",

@@ -12,6 +12,8 @@ export default class Login extends React.Component {
 		this.login = this.login.bind(this);
 		this.parseLoginResponse = this.parseLoginResponse.bind(this);
 		this.parseError = this.parseError.bind(this);
+		
+		this.state = {"email" : "", "password" : ""}
 
 	}
 
@@ -25,7 +27,7 @@ export default class Login extends React.Component {
 	}
 
 	login() {
-		const obj = {"email" : "doecodedev3@mailinator.com", "password" : "password"};
+		const obj = {"email" : this.state.email, "password" : this.state.email};
     	
 		doAjax("POST", "/api/user/login", this.parseLoginResponse, obj, this.parseError);
 	    /*$.ajax({
@@ -69,6 +71,14 @@ export default class Login extends React.Component {
 	parseError() {
 		console.log("I'm being called");
 	}
+	
+	changeEmail(event) {
+		this.setState({"email": event.target.value});
+	}
+	
+	changePassword(event) {
+		this.setState({"password": event.target.value});
+	}
 
 	render() {
 
@@ -77,12 +87,19 @@ export default class Login extends React.Component {
 
 		<input type="hidden" name="rememberMe" value="false"/>
 
+
 	    <div className="form-group form-group-sm row">
-	    <input type="text" name="username"/>
+		<label >
+        Email
+        </label>
+	    <input type="text" name="username" value={this.state.email} onChange={this.email}/>
 	    </div>
 
 	    <div className="form-group form-group-sm row">
-	    <input type="password" name="password"/>
+		<label >
+        Password
+        </label>
+	    <input type="password" name="password" value={this.state.password} onChange={this.changePassword}/>
 	    </div>
 
 
