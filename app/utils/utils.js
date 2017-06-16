@@ -89,6 +89,7 @@ function getChildData(type) {
 
 
 export {doAjax};
+export {doAuthenticatedAjax};
 export {appendQueryString};
 export {getQueryParam};
 export {getChildData};

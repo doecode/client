@@ -12,6 +12,8 @@ export default class Login extends React.Component {
 		this.login = this.login.bind(this);
 		this.parseLoginResponse = this.parseLoginResponse.bind(this);
 		this.parseError = this.parseError.bind(this);
+		this.changeEmail = this.changeEmail.bind(this);
+		this.changePassword = this.changePassword.bind(this);
 		
 		this.state = {"email" : "", "password" : ""}
 
@@ -27,7 +29,7 @@ export default class Login extends React.Component {
 	}
 
 	login() {
-		const obj = {"email" : this.state.email, "password" : this.state.email};
+		const obj = {"email" : this.state.email, "password" : this.state.password};
     	
 		doAjax("POST", "/api/user/login", this.parseLoginResponse, obj, this.parseError);
 	    /*$.ajax({
@@ -73,7 +75,9 @@ export default class Login extends React.Component {
 	}
 	
 	changeEmail(event) {
+		console.log(event.target.value);
 		this.setState({"email": event.target.value});
+		console.log(this.state.email)
 	}
 	
 	changePassword(event) {
@@ -83,23 +87,29 @@ export default class Login extends React.Component {
 	render() {
 
 		return(
-		<div className="container">
-
-		<input type="hidden" name="rememberMe" value="false"/>
-
-
-	    <div className="form-group form-group-sm row">
-		<label >
+		<div className="container-fluid form-horizontal">
+		
+	    <div className="form-group-xs row">
+	    <div className="col-xs-4">
+		<label className="control-label">
         Email
         </label>
-	    <input type="text" name="username" value={this.state.email} onChange={this.email}/>
+        <div>
+	    <input className="form-control" type="text" name="username" value={this.state.email} onChange={this.changeEmail}/>
+	    </div>
+	    </div>
 	    </div>
 
-	    <div className="form-group form-group-sm row">
-		<label >
+	    <div className="form-group-xs row">
+	    <div className="col-xs-4">
+		<label className="control-label">
         Password
         </label>
-	    <input type="password" name="password" value={this.state.password} onChange={this.changePassword}/>
+	    
+	    <div>
+	    <input className="form-control" type="password" name="password" value={this.state.password} onChange={this.changePassword}/>
+	    </div>
+	    </div>
 	    </div>
 
 
