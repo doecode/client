@@ -18,6 +18,9 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 			  errors += this.validateEmail(value);
 		  } else if (validations[i] === "URL") {
 			  errors += this.validateURL(value);
+		  } else if (validations[i] === "BR") {
+			  console.log(value);
+			  errors += this.validateBR(value);
 		  }    	 
 	    
 	  }
@@ -87,6 +90,25 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 	  return errors;
   }
   
+  
+  
+  validateBR(value) {
+	  const brRegex = /[A-Za-z]{2}\d{7}/g;
+	  let badCodes = [];
+	  const allCodes = value.split(",");
+	  let errors = "";
+	  
+	  for (let i = 0; i < allCodes.length; i++) {
+	  if (allCodes[i].length != 9 || !allCodes[i].match(brRegex)[0]) {
+		  badCodes.push(allCodes[i]);
+	  }
+	  }
+	  
+	  if (badCodes.length > 0) {
+		  errors = "The following B&R Codes are invalid: " + badCodes.join(", ");
+	  }
+	  return errors;
+  }
   
 
   

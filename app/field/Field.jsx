@@ -62,12 +62,14 @@ export default class Field extends React.Component {
   render() {
     const field = this.props.properties.field;
     const info = this.props.linkedData.getFieldInfo(field);
-	  let labelStyle = this.props.properties.labelStyle != undefined ? this.props.properties.labelStyle : "control-label";
-	  const divStyle = this.props.properties.divStyle != undefined ? this.props.properties.divStyle : "";
-
+	let labelStyle = this.props.properties.labelStyle != undefined ? this.props.properties.labelStyle : "control-label";
+	const divStyle = this.props.properties.divStyle != undefined ? this.props.properties.divStyle : "";
+	const messageNode = this.props.properties.messageNode;
     const elementType = this.props.properties.elementType;
 
 
+    let completed = false;
+    let disabled = this.props.properties.disabled ? this.props.properties.disabled : false;
     let label = this.props.properties.label;
     let val = this.props.linkedData.getValue(field);
     let required = false;
@@ -76,13 +78,17 @@ export default class Field extends React.Component {
     if (this.props.properties.value !== undefined)
           val = this.props.properties.value;
 
+    //console.log("Handle Change",this.props.properties.handleChange);
+    //console.log(this.handleChange);
+    const handleChange = this.props.properties.handleChange ? this.props.properties.handleChange : this.handleChange;
 
-
+    //console.log(handleChange);
 
 
     if (info) {
       required = info.required;
       error = info.error;
+      completed = info.completed;
     }
 
     if (required)
@@ -93,6 +99,7 @@ export default class Field extends React.Component {
 
      let wrapperStyle = "col-xs-8";
 	 wrapperStyle = error ? wrapperStyle + " has-error has-feedback" : wrapperStyle;
+	 
 
 	 let input = null;
 
@@ -101,7 +108,11 @@ export default class Field extends React.Component {
 		  input = val;
 	  }
 	  else if (elementType === 'input') {
-		input = <input type="text" className="form-control" value={val} onChange={this.handleChange} onBlur={this.handleBlur} />
+		if (!disabled) {
+			input = <input type="text" className="form-control" value={val} onChange={handleChange} onBlur={this.handleBlur} />
+		} else {
+			input = <input type="text" className="form-control" value={val} onChange={handleChange} onBlur={this.handleBlur} disabled />
+		}
 	  }
 	  else if (elementType === 'checkbox') {
 		  input = <input type="checkbox" className="" checked={val} onChange={this.toggleCheckbox} />
@@ -141,12 +152,14 @@ export default class Field extends React.Component {
       }
       <div className={divStyle}>
         {input}
+        
         {error &&
         <span className="error-color">
         <strong>{error} </strong>
         </span>
         }
       </div>
+      {messageNode}
       </div>
     );
   }

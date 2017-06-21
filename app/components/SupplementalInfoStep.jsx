@@ -30,10 +30,6 @@ export default class SupplementalInfoStep extends React.Component {
 	            </div>
 
 
-	           <div className="form-group form-group-sm row">
-	            	<MetadataField  field="date_of_issuance" label="Date of Issuance" elementType="date"  />
-	            </div>
-
 	 	        <div className="form-group form-group-sm row">
 	            	<MetadataField  field="country_of_origin" label="Country of Origin" options={countries} elementType="select"  />
 	            </div>

@@ -20,7 +20,10 @@ export default class BaseData {
    setValue(field,data) {
    	this.fieldMap[field] = data;
    }
-
+   
+   setRequired(field,required) {
+	   this.infoSchema[field].required = required;
+   }
 
    getAsArray(field) {
 	   return this.fieldMap[field].slice();
@@ -29,6 +32,11 @@ export default class BaseData {
 
    getFieldInfo(field) {
    	return this.infoSchema[field];
+   }
+   
+   
+   clearErrors(field) {
+	   this.infoSchema[field].error = '';
    }
 
 	 isCompleted(field) {

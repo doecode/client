@@ -8,7 +8,12 @@ export default class WorkflowManagement extends React.Component {
     constructor(props) {
         super(props);
         this.buildDisplay = this.buildDisplay.bind(this);
+        this.addRecord = this.addRecord.bind(this);
 
+    }
+    
+    addRecord() {
+    	window.location.href = '/wizard';
     }
 
     buildDisplay(obj) {
@@ -20,13 +25,13 @@ export default class WorkflowManagement extends React.Component {
 
       return <li className="list-group-item">
       <div className="form-group form-group-xs">
-        ID: {obj.code_id}
+       <strong>ID:</strong> {obj.code_id}
       </div>
       <div className="form-group form-group-xs">
-        Title: {title}
+      <strong>Title:</strong> {title}
       </div>
       <div className="form-group form-group-xs">
-        Current Status: {currentState}
+      <strong>Current Status:</strong> {currentState}
       </div>
       <div className="form-group form-group-xs ">
         <a href={editUrl}>Edit Record </a>
@@ -55,7 +60,7 @@ export default class WorkflowManagement extends React.Component {
 
                 <div className="col-sm-12">
 
-                  <button style={marginStyle} type="button" className="btn btn-success btn-lg pull-right">
+                  <button style={marginStyle} type="button" className="btn btn-success btn-lg pull-right" onClick={this.addRecord}>
                       Add New Record
                   </button>
 
@@ -64,7 +69,7 @@ export default class WorkflowManagement extends React.Component {
                 <div className="col-sm-12">
                     <div className="panel panel-default">
                         <div className="panel-heading">
-                            Your Records
+                            <strong>Your Records</strong>
                         </div>
 
                         <ul style={overflowStyle} className="list-group">

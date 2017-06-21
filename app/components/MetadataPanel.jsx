@@ -13,7 +13,7 @@ export default class MetadataPanel extends React.Component {
 		const metadata = this.props.metadata;
 
 			const licenseOptions = [
-				{label: 'None', value: 'None'},
+				{label: 'Proprietary', value: 'Proprietary'},
 				{label: 'Apache License 2.0', value: 'Apache License 2.0'},
 				{label: 'GNU General Public License v3.0', value: 'GNU General Public License v3.0'},
 				{label: 'MIT License', value: 'MIT License'},

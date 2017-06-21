@@ -7,6 +7,7 @@ import EntryStep from './EntryStep';
 import AgentsStep from './AgentsStep';
 import OrgsStep from './OrgsStep';
 import MetadataPanel from './MetadataPanel';
+import DOIPanel from './DOIPanel';
 import SupplementalInfoStep from './SupplementalInfoStep';
 import ContributorsStep from './ContributorsStep';
 import AccessStep from './AccessStep';
@@ -48,11 +49,12 @@ export default class DOECodeWizard extends React.Component {
         {name: 'Repository Information', component: <EntryStep metadata={metadata} autopopulate={this.autopopulate}/> },
         {name: 'Product Description', component: <MetadataPanel metadata={metadata}/>},
         {name: 'Developers', component: <AgentsStep />},
+        {name: 'DOI and Release Date', component: <DOIPanel metadata={metadata}/>}
         ];
 
        submitSteps = [
    		{name: 'Supplemental Product Information', component: <SupplementalInfoStep/>},
-   		{name: 'Sponsors and Research Organizations', component: <OrgsStep />},
+   		{name: 'Organizations', component: <OrgsStep />},
    		{name: 'Contributors and Contributing Organizations', component: <ContributorsStep/>},
    		{name: 'Identifiers', component: <RIsStep />},
    		{name: 'Contact Information', component: <RecipientStep />}
@@ -150,11 +152,18 @@ export default class DOECodeWizard extends React.Component {
         const panelStatus = metadata.getPanelStatus(obj.name);
 
              if (panelStatus.remainingRequired > 0) {
-                  heading += " (" + panelStatus.remainingRequired + " Required Field(s) Remaining)";
+                  heading += " (Required Fields Remaining: " + panelStatus.remainingString + ")";
              }
              else {
-                 heading += " (All Required Fields Completed) ";
-                 panelStyle = "success";
+            	 
+            	 if (panelStatus.hasRequired) {
+            		 heading += " (All Required Fields Completed) ";
+                     panelStyle = "success";
+            	 } else {
+            		 heading += " (No Required Fields) ";
+                     panelStyle = "success";
+            	 }
+
              }
         
 
@@ -164,7 +173,10 @@ export default class DOECodeWizard extends React.Component {
                   heading += " (" + panelStatus.remainingOptional + " Optional Field(s) Remaining)";
              }
              else {
+            	 
+            	 if (panelStatus.hasOptional) {
                  heading += " (All Optional Fields Completed) ";
+            	 } 
              }
         }
 

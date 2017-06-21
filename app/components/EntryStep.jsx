@@ -30,16 +30,29 @@ export default class EntryStep extends React.Component {
     
     onRadioChange(field,value) {
     	let stateObj = this.state;
-    	entryStore.availabilitySelected = value;
+    	this.props.metadata.setValue("accessibility",value);
     	if (value === 'OS') {
     		this.props.metadata.setValue("open_source", true);
     		this.props.metadata.setValue("files", []);
+    		this.props.metadata.setValue("landing_page", "");
+    		this.props.metadata.setRequired("repository_link", "pub");
+    		this.props.metadata.setRequired("landing_page", "");
+
     	} else if (value === 'ON') {
     		this.props.metadata.setValue("open_source", true);
+    		this.props.metadata.setValue("repository_link", "");
+    		this.props.metadata.setRequired("repository_link", "");
+    		this.props.metadata.setRequired("landing_page", "pub");
     	} else if (value === 'CS') {
     		this.props.metadata.setValue("open_source", false);
     		this.props.metadata.setValue("repository_link", "");
+    		this.props.metadata.setRequired("repository_link", "");
+    		this.props.metadata.setRequired("landing_page", "pub");
     	}
+    	
+    	//hacky way of setting complete status for both to false
+	    this.props.metadata.validateField("repository_link");
+	    this.props.metadata.validateField("landing_page");
     }
 
 
@@ -49,13 +62,12 @@ export default class EntryStep extends React.Component {
 		const metadata = this.props.metadata;
 		const repository_link = metadata.getValue("repository_link");
 		const files = metadata.getValue("files");
+		const accessibility = metadata.getValue("accessibility");
 		
-		const urlLabel = entryStore.availabilitySelected == 'OS' ? 'Repository Link' : 'Landing Page';
 		return (
 				
         <div className="container-fluid">
 
-        <Provider dataStore={metadata}>
         <div>        
 		  
 		  <div className="form-group form-group-sm row">
@@ -63,27 +75,28 @@ export default class EntryStep extends React.Component {
 		  </div>
 		  
 		  <div className="form-group form-group-sm row">
-		  <MetadataField checked={entryStore.availabilitySelected=== 'OS'} elementType="radio" label="Open Source, Publicly Available" field="availability" value="OS" onChange={this.onRadioChange}/>	  
+		  <MetadataField checked={accessibility=== 'OS'} elementType="radio" label="Open Source, Publicly Available" field="availability" value="OS" onChange={this.onRadioChange}/>	  
 		  </div>
 		  
 		  <div className="form-group form-group-sm row">
-		  <MetadataField checked={entryStore.availabilitySelected === 'ON'} elementType="radio" label= "Open Source, Not Publicly Available" field="availability" value="ON" onChange={this.onRadioChange}/>	  
+		  <MetadataField checked={accessibility === 'ON'} elementType="radio" label= "Open Source, Not Publicly Available" field="availability" value="ON" onChange={this.onRadioChange}/>	  
 		  </div>
 		  
 		  <div className="form-group form-group-sm row">
-		  <MetadataField checked={entryStore.availabilitySelected === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange}/>	  
+		  <MetadataField checked={accessibility === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange}/>	  
 		  </div>
 		  
-		  {(entryStore.availabilitySelected === 'OS' || entryStore.availabilitySelected === 'ON') && files.length === 0 &&
+		  {accessibility === 'OS' &&
 		  
           <div className="form-group form-group-sm row">
-          <MetadataField field="repository_link" label={urlLabel} elementType="input" />
+          <MetadataField field="repository_link" label="Repository Link" elementType="input" />
 						
 		  </div>	  
 		  
 		  }
 		  
-		  {entryStore.availabilitySelected === 'OS' &&
+		  
+		  {accessibility === 'OS' &&
 			  
 	          <div className="form-group form-group-sm row">
 	          <div className="col-xs-8">
@@ -93,8 +106,16 @@ export default class EntryStep extends React.Component {
 		  
 		  }
 		  
+		  {(accessibility === 'ON' || accessibility === 'CS')  &&
+			  
+	          <div className="form-group form-group-sm row">
+	          <MetadataField field="landing_page" label="Landing Page" elementType="input" />							
+			  </div>	  
+			  
+		  }
 		  
-		  {(entryStore.availabilitySelected === 'ON' || entryStore.availabilitySelected === 'CS') && !repository_link &&
+		  
+		  {(accessibility === 'ON' || accessibility === 'CS') &&
 		<div className="form-group form-group-sm row">
 		<div className="col-xs-8">
 		  <label className="form-label">
@@ -130,8 +151,7 @@ export default class EntryStep extends React.Component {
 		  }
 		  
 		  </div>
-		  </Provider>
-		  
+
 	   </div>
 		);
 	}

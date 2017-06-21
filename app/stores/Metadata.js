@@ -73,9 +73,11 @@ export default class Metadata extends BaseData {
 
    getPanelStatus(panelName) {
 
-     let panelStatus = {"remainingRequired" : 0, "remainingOptional": 0, "errors" : "", "hasRequired" : false, "hasOptional" : false}
+     let panelStatus = {"remainingRequired" : 0, "remainingString" : "", "remainingOptional": 0, "errors" : "", "hasRequired" : false, "hasOptional" : false}
+     let incompleteRequiredFields = [];
      for (var field in this.infoSchema) {
      const obj = this.getFieldInfo(field);
+
 
      if (obj.Panel == panelName) {
 
@@ -85,8 +87,10 @@ export default class Metadata extends BaseData {
 
      if (obj.required) {
        panelStatus.hasRequired = true;
-       if (!obj.completed)
+       if (!obj.completed) {
            panelStatus.remainingRequired++;
+           incompleteRequiredFields.push(obj.label);
+       }
 
      } else {
        panelStatus.hasOptional = true;
@@ -100,6 +104,9 @@ export default class Metadata extends BaseData {
 
 
      }
+     
+     if (incompleteRequiredFields.length > 0)
+    	 panelStatus.remainingString = incompleteRequiredFields.join(", ");
 
      return panelStatus;
    }
