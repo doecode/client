@@ -127,8 +127,8 @@ deserializeData(data) {
             }
 
 
-            if (field === 'date_of_issuance')
-            		data.date_of_issuance = moment(data.date_of_issuance, "YYYY-MM-DD");
+            if (field === 'release_date')
+            		data.release_date = moment(data.release_date, "YYYY-MM-DD");
 
             if (field === 'sponsoring_organizations')
                     this.deserializeSponsoringOrganization(data);
