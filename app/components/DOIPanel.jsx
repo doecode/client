@@ -31,22 +31,31 @@ export default class DOIPanel extends React.Component {
 		if (reserved) {
 			//they are unreserving the DOI, so set doi,infix, and status to empty and add the validations back
 		  const doiInfo = this.props.metadata.getFieldInfo("doi");
+		  const infixInfo = this.props.metadata.getFieldInfo("doi_infix");
 			this.props.metadata.setValue("doi", "");
 			this.props.metadata.setValue("doi_infix", "");
 			this.props.metadata.setValue("doi_status", "");
 
 			doiInfo.completed = false;
 			doiInfo.error = '';
+			infixInfo.completed = false;
+			infixInfo.error = '';
+			infixInfo.Panel = "";
 			//this.props.metadata.setValidations("doi", ["DOI"]);
 		} else {
 			//reserve a new DOI in correct format, disabling validations first to let our own DOI pass through
 			//this.props.metadata.setValidations([]);
 			//this.props.metadata.clearErrors("doi");
 			const doiInfo = this.props.metadata.getFieldInfo("doi");
+			const infixInfo = this.props.metadata.getFieldInfo("doi_infix");
 			this.props.metadata.setValue("doi", this._prefix + "DOECode/" + uniqid());
 			this.props.metadata.setValue("doi_status", "RES");
 			doiInfo.completed = true;
 			doiInfo.error = '';
+			infixInfo.completed = false;
+			infixInfo.error = '';
+			infixInfo.Panel = "DOI and Release Date"
+			
 
 
 		}

@@ -40,8 +40,9 @@ export default class DOECodeWizard extends React.Component {
         this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
         this.parseErrorResponse = this.parseErrorResponse.bind(this);
         this.buildPanel = this.buildPanel.bind(this);
+        this.showAdditionalFields = this.showAdditionalFields.bind(this);
 
-        this.state= {"loading" : false, "loadingMessage" : "", "editLoad" : false, "published" : false};
+        this.state= {"loading" : false, "loadingMessage" : "", "editLoad" : false, "published" : false, "showAll" : false};
 
 
 
@@ -82,12 +83,12 @@ export default class DOECodeWizard extends React.Component {
     this.setState({"loading" : false, "loadingMessage" : ""});
   }
 
-    componentDidMount() {
+ componentDidMount() {
         const workflowStatus = getQueryParam("workflow");
 
         console.log(workflowStatus);
         if (workflowStatus && workflowStatus === "published") {
-            this.setState({"published" : true});
+            this.setState({"published" : true, "showAll" : true});
         } else {
            metadata.requireOnlyPublishedFields();
         }
@@ -99,6 +100,12 @@ export default class DOECodeWizard extends React.Component {
         }
 
     }
+ 
+ showAdditionalFields() {
+	 
+	 console.log("Called");
+	 this.setState({"showAll" : true});
+ }
 
     parseReceiveResponse(data) {
 
@@ -243,10 +250,17 @@ export default class DOECodeWizard extends React.Component {
         const publishPanels = publishSteps.map(this.buildPanel);
 
         const submitHeader = <strong> Additional Fields Required to Submit to E-Link </strong>;
-        const submitPanels = submitSteps.map(this.buildPanel);
+        
+        let submitPanels = null;
+        
+        if (this.state.showAll) {
+        	submitPanels = submitSteps.map(this.buildPanel);
+        }
+        
         const marginStyle = {
           'margin-bottom' : '5px'
         };
+        
 
         let button = null;
 
@@ -271,10 +285,21 @@ export default class DOECodeWizard extends React.Component {
         let content = <div>
         {button}
         <PanelGroup defaultActiveKey="1" accordion>
-        {publishPanels}
+        {publishPanels}        
         {submitPanels}
+        
+        
         </PanelGroup>
-        {button}
+        {!this.state.showAll &&
+        <div className="form-group-xs row text-center">
+        <div className="col-xs-offset-3 col-xs-6">
+        <button type="button" className="btn btn-info btn-lg" onClick={this.showAdditionalFields}>
+        <span className="glyphicon glyphicon-plus"></span> Show Additional Optional Fields
+        </button>
+        </div>
+        </div>
+        }
+        
         </div>
 
         return (
@@ -286,9 +311,9 @@ export default class DOECodeWizard extends React.Component {
 
 
         <div className="form-group form-group-sm row">
-        <div className="col-sm-offset-4">
+        <div className="col-xs-offset-3 col-xs-6">
 
-        <h1> {headerText} </h1>
+        <h1 className="text-center"> {headerText} </h1>
         </div>
 
         </div>

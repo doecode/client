@@ -51,7 +51,7 @@ class MetadataStore {
 	        "licenses": {required:"pub", label: "Licenses", completed:false, hasError:false, validations: [], Panel: "Product Description", error: ''},
 	        "developers": {required:"pub", label: "Developers", completed:false, hasError:false, validations: [], Panel: "Developers", error: ''},
 	        "doi": {required:"", completed:false, validations: ["DOI"], Panel: "DOI and Release Date", error: ''},
-	        "doi_infix" : {required:"", completed:false, validations: [""], Panel: "DOI and Release Date", error: ''},
+	        "doi_infix" : {required:"", completed:false, validations: [""], Panel: "", error: ''},
             "release_date" : {required:"sub", label: "Release Date", completed:false, validations: [], Panel: "DOI and Release Date", error: ''},
             "sponsoring_organizations" : {required:"sub", label: "Sponsoring Organizations", completed:false, hasError:false, validations: [], Panel: "Organizations", error: ''},
             "research_organizations" : {required:"sub", label: "Research Organizations", completed:false, hasError:false, validations: [], Panel: "Organizations", error: ''},
