@@ -97,9 +97,14 @@ export default class Field extends React.Component {
 
 
 
-     let wrapperStyle = "col-xs-8";
-	 wrapperStyle = error ? wrapperStyle + " has-error has-feedback" : wrapperStyle;
-	 
+     let wrapperStyle = "form-group form-group-sm row";
+
+     if (error) {
+       wrapperStyle += " has-error has-feedback"
+     } else if (completed) {
+       wrapperStyle += " has-success has-feedback"
+     }
+
 
 	 let input = null;
 
@@ -131,9 +136,11 @@ export default class Field extends React.Component {
 	  }
 	  else if (elementType === 'radio') {
 			 return (
-					 <div className={wrapperStyle}>
+           <div className="form-group form-group-sm row">
+					 <div className="col-xs-8">
 					 <label><input type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange} /> {label}</label>
 					 </div>
+            </div>
 					 );
 	  }
 	  else if (elementType === 'date') {
@@ -145,6 +152,7 @@ export default class Field extends React.Component {
 
 	  return(
       <div className={wrapperStyle}>
+      <div className="col-xs-8">
       {label &&
       <label className={labelStyle}>
         {label}
@@ -152,7 +160,7 @@ export default class Field extends React.Component {
       }
       <div className={divStyle}>
         {input}
-        
+
         {error &&
         <span className="error-color">
         <strong>{error} </strong>
@@ -160,7 +168,11 @@ export default class Field extends React.Component {
         }
       </div>
       {messageNode}
+      {completed && (elementType === 'input' || elementType === 'textarea') &&
+      <span className="glyphicon glyphicon-ok form-control-feedback"></span>
+      }
       </div>
+    </div>
     );
   }
 

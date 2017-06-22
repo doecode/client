@@ -34,34 +34,13 @@ export default class MetadataPanel extends React.Component {
 		return (
 
 	            <div className="container-fluid form-horizontal">
-
-
-
 	            {metadata.getValue("repository_link") &&
-	            <div className="form-group form-group-sm row">
 	        		<MetadataField field="repository_link" label="Repository Link: " elementType="display" />
-	        	</div>
 	            }
 
-
-
-	    	    <div className="form-group form-group-sm row">
 	            	<MetadataField field="software_title" label="Software Title" elementType="input" />
-	            </div>
-
-
-	            <div className="form-group form-group-sm row">
-	            	<MetadataField field="doi" label="DOI" elementType="input"  />
-	            </div>
-
-
-	            <div className="form-group form-group-sm row">
 	            	<MetadataField field="description" label="Description/Abstract" elementType="textarea" />
-	            </div>
-
-	            <div className="form-group form-group-sm row">
-							<MetadataField field="licenses" label="Licenses" elementType="select" options={licenseOptions} isArray={true} multi={true} placeholder="Select your license(s)"   />
-			    </div>
+							  <MetadataField field="licenses" label="Licenses" elementType="select" options={licenseOptions} isArray={true} multi={true} placeholder="Select your license(s)"   />
 
                 </div>
 		);

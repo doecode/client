@@ -10,34 +10,15 @@ export default class RecipientStep extends React.Component {
 	}
 
 	render() {
-		
-		return (
-				
-	            <div className="container-fluid form-horizontal">
-	            
-	            
-	            
-	            
-	    	    <div className="form-group form-group-sm row">
-	            	<MetadataField field="recipient_name" label="Name" elementType="input" />
-	            </div>
-	            
-	            
-	            <div className="form-group form-group-sm row">
-	            	<MetadataField field="recipient_email" label="Email" elementType="input"  />                
-	            </div>
-	            
-	            <div className="form-group form-group-sm row">
-	            	<MetadataField field="recipient_phone" label="Phone" elementType="input"  />              
-	            </div>
-	            
-	            	
-	            <div className="form-group form-group-sm row">
-	            	<MetadataField field="recipient_org" label="Organization" elementType="input" />
-	            </div>
 
-               
-                </div>
+		return (
+
+	            <div className="container-fluid form-horizontal">
+	            	<MetadataField field="recipient_name" label="Name" elementType="input" />
+	            	<MetadataField field="recipient_email" label="Email" elementType="input"  />
+	            	<MetadataField field="recipient_phone" label="Phone" elementType="input"  />
+	            	<MetadataField field="recipient_org" label="Organization" elementType="input" />
+             </div>
 		);
 	}
 

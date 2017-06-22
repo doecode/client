@@ -20,7 +20,7 @@ export default class BaseData {
    setValue(field,data) {
    	this.fieldMap[field] = data;
    }
-   
+
    setRequired(field,required) {
 	   this.infoSchema[field].required = required;
    }
@@ -33,8 +33,8 @@ export default class BaseData {
    getFieldInfo(field) {
    	return this.infoSchema[field];
    }
-   
-   
+
+
    clearErrors(field) {
 	   this.infoSchema[field].error = '';
    }
@@ -127,10 +127,11 @@ export default class BaseData {
 		for (var field in this.infoSchema)
 				this.infoSchema[field] = this.infoSchemaSnapshot[field];
 	}
-		clear() {
+
+	clear() {
 			this.clearValues();
 			this.clearInfoSchema();
-		}
+	}
 
 
 
