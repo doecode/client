@@ -41,7 +41,7 @@ export default class DOECodeWizard extends React.Component {
         this.parseErrorResponse = this.parseErrorResponse.bind(this);
         this.buildPanel = this.buildPanel.bind(this);
 
-        this.state= {"loading" : false, "loadingMessage" : "", "editLoad" : false};
+        this.state= {"loading" : false, "loadingMessage" : "", "editLoad" : false, "published" : false};
 
 
 
@@ -72,9 +72,10 @@ export default class DOECodeWizard extends React.Component {
         let i = 0;
         for (i = 0; i < publishSteps.length; i++)
         	publishSteps[i].key = "" + (i+1);
-        
-        for (var x = 0; x < submitSteps.length; x++)
-        	submitSteps[x].key = "" + (x+1);
+
+        let x = 0;
+        for (x = 0; x < submitSteps.length; x++)
+        	submitSteps[x].key = "" + (x+i+1);
     }
 
   parseErrorResponse() {
@@ -82,12 +83,21 @@ export default class DOECodeWizard extends React.Component {
   }
 
     componentDidMount() {
+        const workflowStatus = getQueryParam("workflow");
+
+        console.log(workflowStatus);
+        if (workflowStatus && workflowStatus === "published") {
+            this.setState({"published" : true});
+        } else {
+           metadata.requireOnlyPublishedFields();
+        }
+
         const codeID = getQueryParam("code_id");
         if (codeID) {
   //          this.setState({"loading" : true, "loadingMessage" : "Loading"});
         	doAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
         }
-    	
+
     }
 
     parseReceiveResponse(data) {
@@ -104,7 +114,7 @@ export default class DOECodeWizard extends React.Component {
 
 
     parseLoadResponse(responseData) {
-    	
+
     	if (responseData !== undefined)
     		metadata.updateMetadata(responseData.metadata);
         this.setState({"loading" : false, "loadingMessage" : ""});
@@ -132,16 +142,12 @@ export default class DOECodeWizard extends React.Component {
     }
 
     parsePublishResponse(data) {
-    	window.location.href = "confirm?code_id=" + data.metadata.code_id;
+    	window.location.href = "confirm?workflow=published&code_id=" + data.metadata.code_id;
     }
 
     parseSubmitResponse(data) {
-    	
-      let url = "confirm?code_id=" + data.metadata.code_id;
-    	  url += "&mintedDoi=" + data.metadata.doi;
-      
-      window.location.href = url;
 
+      window.location.href = "confirm?workflow=submitted&code_id=" + data.metadata.code_id;
     }
 
     buildPanel(obj) {
@@ -155,7 +161,7 @@ export default class DOECodeWizard extends React.Component {
                   heading += " (Required Fields Remaining: " + panelStatus.remainingString + ")";
              }
              else {
-            	 
+
             	 if (panelStatus.hasRequired) {
             		 heading += " (All Required Fields Completed) ";
                      panelStyle = "success";
@@ -165,7 +171,7 @@ export default class DOECodeWizard extends React.Component {
             	 }
 
              }
-        
+
 
 
         if (panelStatus.hasOptional) {
@@ -173,10 +179,10 @@ export default class DOECodeWizard extends React.Component {
                   heading += " (" + panelStatus.remainingOptional + " Optional Field(s) Remaining)";
              }
              else {
-            	 
+
             	 if (panelStatus.hasOptional) {
                  heading += " (All Optional Fields Completed) ";
-            	 } 
+            	 }
              }
         }
 
@@ -220,62 +226,57 @@ export default class DOECodeWizard extends React.Component {
       const submitDisabled = !metadata.validateSchema();
       const publishDisabled = !metadata.validatePublishedFields();
       const codeID = metadata.getValue("code_id");
-      
+
       let headerText = "Create a New Software Record";
-      
+
       if (codeID !== undefined && codeID > 0)
     	  headerText = "Editing Software Record #" + codeID;
-      
+
       const self = this;
 
-        const publishHeader = <div> <strong> Fields Required to Publish this Record on DOE Code </strong> 
+        const publishHeader = <div> <strong> Fields Required to Publish this Record on DOE Code </strong>
 
-		<button type="button" className="btn btn-sm btn-primary pull-right" disabled={publishDisabled} onClick={this.publish}>
-		Publish Record on DOE Code
-		</button>
+
         </div>
-        
+
         ;
         const publishPanels = publishSteps.map(this.buildPanel);
-        
+
         const submitHeader = <strong> Additional Fields Required to Submit to E-Link </strong>;
         const submitPanels = submitSteps.map(this.buildPanel);
-        
+        const marginStyle = {
+          'margin-bottom' : '5px'
+        };
+
+        let button = null;
+
+        if (this.state.published) {
+        button =             <div className="form-group-xs row">
+                            <div className="col-sm-12">
+                                <button style={marginStyle} type="button" className="btn btn-primary btn-lg pull-right" disabled={submitDisabled} onClick={this.submit}>
+                                    Submit Record to E-Link
+                                </button>
+                            </div>
+                        </div>
+        } else {
+          button =           <div className="form-group-xs row">
+                          <div className="col-sm-12">
+                              <button style={marginStyle} type="button" className="btn btn-lg btn-primary pull-right" disabled={publishDisabled} onClick={this.publish}>
+                                  Publish Record
+                              </button>
+                          </div>
+                      </div>
+        }
+
         let content = <div>
-        
-        <Panel bsStyle="default" header={publishHeader}>
-        	
+        {button}
         <PanelGroup defaultActiveKey="1" accordion>
         {publishPanels}
-        
-        </PanelGroup>
-       
-
-        </Panel>
-        
-        
-        <Panel bsStyle="default" header={submitHeader}>
-    	
-        <PanelGroup accordion>
         {submitPanels}
-        
         </PanelGroup>
-        
-        <div className="row">
-
-
-
-        <div className="col-sm-12">
- 		<button type="button" className="btn btn-primary btn-lg pull-right" disabled={submitDisabled} onClick={this.submit}>
- 		Publish Record and Submit
- 		</button>
- 		</div>
-
-
- 	    </div>
-        </Panel>
+        {button}
         </div>
-        
+
         return (
 
 
@@ -286,7 +287,7 @@ export default class DOECodeWizard extends React.Component {
 
         <div className="form-group form-group-sm row">
         <div className="col-sm-offset-4">
-        
+
         <h1> {headerText} </h1>
         </div>
 

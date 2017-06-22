@@ -15,7 +15,7 @@ export default class Splash extends React.Component {
           mintedDoi = "";
         }
 
-        this.state = {"mintedDoi" : mintedDoi, "codeID" : getQueryParam("code_id"), "submissionType" : getQueryParam("submissionType")};
+        this.state = {"mintedDoi" : mintedDoi, "codeID" : getQueryParam("code_id"), "workflow" : getQueryParam("workflow")};
 
       }
 
@@ -25,7 +25,7 @@ export default class Splash extends React.Component {
       }
 
       editRecord() {
-                window.location.href = "wizard?code_id=" + this.state.codeID;
+                window.location.href = "wizard?workflow=" + this.state.workflow + "&code_id=" + this.state.codeID;
       }
 
 
@@ -38,6 +38,8 @@ export default class Splash extends React.Component {
 render() {
 
     const ymlDownload = "/api/metadata/yaml/" + this.state.codeID;
+
+
     return (
         <div className="container-fluid">
 
@@ -62,11 +64,13 @@ render() {
                 </h2>
             </div>
             <div className="form-group form-group-sm row">
+              {this.state.workflow === "published" &&
                 <div className="col-sm-3">
                     <button type="button" className="btn btn-success btn-lg" onClick={this.editRecord}>
-                        Edit Record #{this.state.codeID}
+                        Continue to E-Link Submission
                     </button>
                 </div>
+              }
                 <div className="col-sm-3">
                     <button type="button" className="btn btn-primary btn-lg" onClick={this.newRecord}>
                         Create New Record

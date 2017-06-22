@@ -254,6 +254,19 @@ deserializeSponsoringOrganization(data) {
     	return isValid;
     }
 
+    requireOnlyPublishedFields() {
+      for (var field in this.infoSchema) {
+        const information = this.infoSchema[field];
+
+        if (information.required == "sub") {
+            information.required = "";
+        }
+
+
+
+      }
+    }
+
 
 
 
