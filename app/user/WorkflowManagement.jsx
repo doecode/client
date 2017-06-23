@@ -43,7 +43,7 @@ export default class WorkflowManagement extends React.Component {
             }
           ];
         
-        this.state = { rows: this.createRows(1000), filters: {}, sortColumn: null, sortDirection: null };
+        this.state = { rows: [], filters: {}, sortColumn: null, sortDirection: null };
 
     }
     
@@ -57,16 +57,20 @@ export default class WorkflowManagement extends React.Component {
     parseReceiveResponse(data) {
         let rows = [];
         console.log(data);
-        const records = data.records;
+        const records = data.records.records;
         for (let i = 0; i < records.length; i++) {
         	
         const record = records[i];
-        let editUrl = "/wizard?code_id=" + id;
+        let editUrl = "/wizard?code_id=" + record.code_id;
         
         let editMessage = "Continue to E-Link Submission";
         
-        if (record.workflow_status === 'SAVED')
-        	editMessage = "Continue to Publish Record"
+        if (record.workflow_status === 'Saved') {
+        	editMessage = "Continue to Publish Record";
+        }
+        else if (record.workflow_status === 'Published') {
+        	editUrl += "&workflow=published";
+        }
         
           rows.push({
             id: record.code_id,
