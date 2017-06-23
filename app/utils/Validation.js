@@ -99,7 +99,7 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 	  let errors = "";
 	  
 	  for (let i = 0; i < allCodes.length; i++) {
-	  if (allCodes[i].length != 9 || !allCodes[i].match(brRegex)[0]) {
+	  if (allCodes[i].length != 9 || allCodes[i].match(brRegex).length !== 1) {
 		  badCodes.push(allCodes[i]);
 	  }
 	  }
