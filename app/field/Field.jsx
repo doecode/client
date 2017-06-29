@@ -81,6 +81,8 @@ export default class Field extends React.Component {
     //console.log("Handle Change",this.props.properties.handleChange);
     //console.log(this.handleChange);
     const handleChange = this.props.properties.handleChange ? this.props.properties.handleChange : this.handleChange;
+    
+    const handleBlur = this.props.properties.handleBlur ? this.props.properties.handleBlur : this.handleChange;
 
     //console.log(handleChange);
 
@@ -118,6 +120,9 @@ export default class Field extends React.Component {
 		} else {
 			input = <input type="text" className="form-control" value={val} onChange={handleChange} onBlur={this.handleBlur} disabled />
 		}
+	  } 
+	  else if (elementType === 'password') {
+			input = <input type="password" className="form-control" value={val} onChange={handleChange} onBlur={this.handleBlur} />
 	  }
 	  else if (elementType === 'checkbox') {
 		  input = <input type="checkbox" className="" checked={val} onChange={this.toggleCheckbox} />

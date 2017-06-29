@@ -21,7 +21,7 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 		  } else if (validations[i] === "BR") {
 			  console.log(value);
 			  errors += this.validateBR(value);
-		  }    	 
+		  }
 	    
 	  }
 	  
@@ -109,6 +109,7 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 	  }
 	  return errors;
   }
+  
   
 
   

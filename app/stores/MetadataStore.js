@@ -180,6 +180,19 @@ class MetadataStore {
 	          "relation_type": {required:true, completed:false, validations: [], error: ''},
 	          "identifier_value": {required:true, completed:false, validations: [], error: ''}
 	     }
+	
+    @observable user = {
+ 		   	  email : '',
+ 		   	  password: '',
+ 		   	  confirm_password: ''
+    }
+
+    @observable userSchema = {
+
+          "email": {required:true, completed:false, validations: ["Email"], error: ''},
+          "password" : {required:true, completed:false, validations: [], error: ''},
+          "confirm_password" : {required:true, completed:false, validations: ["PWMatch"], error: ''}
+      }
 
 
 }
