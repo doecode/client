@@ -57,7 +57,6 @@ export default class EntryStep extends React.Component {
 				landingPageInfo.Panel = "Repository Information";
     	}
 
-    	//hacky way of setting complete status for both to false
 			repoLinkInfo.completed = false;
 			landingPageInfo.completed = false;
     }
