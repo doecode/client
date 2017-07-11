@@ -66,7 +66,7 @@ export default class Field extends React.Component {
 	const divStyle = this.props.properties.divStyle != undefined ? this.props.properties.divStyle : "";
 	const messageNode = this.props.properties.messageNode;
     const elementType = this.props.properties.elementType;
-
+    const noval = this.props.properties.noval;
 
     let completed = false;
     let disabled = this.props.properties.disabled ? this.props.properties.disabled : false;
@@ -101,12 +101,14 @@ export default class Field extends React.Component {
 
      let wrapperStyle = "form-group form-group-sm row";
 
+     if (!noval) {
      if (error) {
        wrapperStyle += " has-error has-feedback"
      } else if (completed) {
        wrapperStyle += " has-success has-feedback"
      }
-
+     
+     }
 
 	 let input = null;
 

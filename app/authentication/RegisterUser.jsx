@@ -6,7 +6,7 @@ import {doAjax, doAuthenticatedAjax, appendQueryString, getQueryParam} from '../
 
 const userData = new UserData();
 
-export default class Login extends React.Component {
+export default class RegisterUser extends React.Component {
 	constructor(props) {
 		super(props);
 		this.register = this.register.bind(this);
@@ -15,8 +15,9 @@ export default class Login extends React.Component {
 		this.checkPassword = this.checkPassword.bind(this);
 		this.updateEmailAndCheckPassword = this.updateEmailAndCheckPassword.bind(this);
 		this.updatePasswordAndCheckPassword = this.updatePasswordAndCheckPassword.bind(this);
+		this.updateConfirmAndCheckPassword = this.updateConfirmAndCheckPassword.bind(this);
 		
-		this.state = {longEnough : false, hasSpecial : false, hasNumber: false,  upperAndLower: false, containsName: false}
+		this.state = {longEnough : false, hasSpecial : false, hasNumber: false,  upperAndLower: false, containsName: false, matches: false}
 
 	}
 	
@@ -30,9 +31,15 @@ export default class Login extends React.Component {
 		this.checkPassword();
 	}
 	
+	updateConfirmAndCheckPassword(event) {
+		userData.setValue("confirm_password", event.target.value);
+		this.checkPassword();
+	}
+	
 	checkPassword() {
 		const password = userData.getValue("password")
 		const email = userData.getValue("email");
+		const confirm = userData.getValue("confirm_password");
 		const minLength = 8;
 		const specialCharacterRegex = /[^a-zA-Z\d\s]/g;
 		const lowerRegex = /[a-z]/g;
@@ -44,8 +51,8 @@ export default class Login extends React.Component {
 		newState.hasSpecial = specialCharacterRegex.test(password);
 		newState.hasNumber = numberRegex.test(password);
 		newState.upperAndLower = upperRegex.test(password) && lowerRegex.test(password);
-		newState.containsName = email && password.indexOf(email) > -1;
-		
+		newState.containsName = password !== '' && password.indexOf(email) > -1;
+		newState.matches = password !== '' && (password === confirm);
 		this.setState(newState);
 		
 		
@@ -56,19 +63,7 @@ export default class Login extends React.Component {
 
 
 	register() {
-		const obj = {"email" : "doecodedev3@mailinator.com", "password" : "password", "confirm_password": "password"};
-    	
-	    $.ajax({
-	        url: "/api/user/register",
-	        cache: false,
-	        method: "POST",
-            dataType: 'json',
-            data: JSON.stringify(userData.user),
-	        contentType: "application/json; charset=utf-8",
-	        success: this.parseRegister,
-	        error: this.parseError
-	      });
-    	
+    	doAjax('POST',"/api/user/register", this.parseRegister, userData.getData(), this.parseError)    	
 	}
 	
 	parseRegister(data) {
@@ -81,20 +76,18 @@ export default class Login extends React.Component {
 	
 
 	render() {
-
-		//this.state = {longEnough : false, hasSpecial : false, hasNumber: false,  upperAndLower: false, containsName: false}
-		const checkMark = <span className="glyphicon glyphicon-ok"></span>;
 		let status = 
         <div>
-        <p>All fields are required unless otherwise specified.</p>
+        <p>All fields are required.</p>
         <p>Passwords must:</p>
         <ul>
        
-            <li>Be at least 8 characters long. {this.state.longEnough &&<span className="glyphicon glyphicon-ok"></span> }</li>
-            <li>Contain at least one special character. {this.state.hasSpecial &&<span className="glyphicon glyphicon-ok"></span> }  </li>
-            <li>Contain at least one number character. {this.state.hasNumber &&<span className="glyphicon glyphicon-ok"></span> } </li>
-            <li>Not contain the login name. {!this.state.containsName &&<span className="glyphicon glyphicon-ok"></span> }</li>
-            <li>Contain a mixture of upper and lowercase letters. {this.state.upperAndLower &&<span className="glyphicon glyphicon-ok"></span> } </li>
+            <li>Be at least 8 characters long. {this.state.longEnough &&<span className="glyphicon glyphicon-ok green"></span> }</li>
+            <li>Contain at least one special character. {this.state.hasSpecial &&<span className="glyphicon glyphicon-ok green"></span> }  </li>
+            <li>Contain at least one number character. {this.state.hasNumber &&<span className="glyphicon glyphicon-ok green"></span> } </li>
+            <li>Not contain the login name. {!this.state.containsName &&<span className="glyphicon glyphicon-ok green"></span> }</li>
+            <li>Contain a mixture of upper and lowercase letters. {this.state.upperAndLower &&<span className="glyphicon glyphicon-ok green"></span> } </li>
+            <li>Password must match Confirm Password. {this.state.matches &&<span className="glyphicon glyphicon-ok green"></span> } </li>
         </ul>
     </div>;          
 		return(
@@ -102,8 +95,8 @@ export default class Login extends React.Component {
 		
 		<div className="col-md-8">
     	<UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword}/>
-    	<UserField field="password" label="Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} />
-    	<UserField field="confirm_password" label="Confirm Password" elementType="password" />	
+    	<UserField noval={true} field="password" label="Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} />
+    	<UserField noval={true} field="confirm_password" label="Confirm Password" elementType="password" handleChange={this.updateConfirmAndCheckPassword}/>	
     		<button type="button" className="btn btn-lg btn-success" onClick={this.register}>
     		Register
     		</button>
