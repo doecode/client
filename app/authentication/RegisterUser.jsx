@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import UserData from '../stores/UserData';
 import UserField from '../field/UserField';
+import Validation from '../utils/Validation';
 import {doAjax, doAuthenticatedAjax, appendQueryString, getQueryParam} from '../utils/utils';
 
 const userData = new UserData();
+const validation = new Validation();
 
 export default class RegisterUser extends React.Component {
 	constructor(props) {
@@ -17,7 +19,7 @@ export default class RegisterUser extends React.Component {
 		this.updatePasswordAndCheckPassword = this.updatePasswordAndCheckPassword.bind(this);
 		this.updateConfirmAndCheckPassword = this.updateConfirmAndCheckPassword.bind(this);
 		
-		this.state = {longEnough : false, hasSpecial : false, hasNumber: false,  upperAndLower: false, containsName: false, matches: false}
+		this.state = {longEnough : false, hasSpecial : false, hasNumber: false,  upperAndLower: false, containsName: false, matches: false, validEmail: false, success: false}
 
 	}
 	
@@ -51,8 +53,9 @@ export default class RegisterUser extends React.Component {
 		newState.hasSpecial = specialCharacterRegex.test(password);
 		newState.hasNumber = numberRegex.test(password);
 		newState.upperAndLower = upperRegex.test(password) && lowerRegex.test(password);
-		newState.containsName = password !== '' && password.indexOf(email) > -1;
+		newState.containsName = password.indexOf(email) > -1;
 		newState.matches = password !== '' && (password === confirm);
+		newState.validEmail = validation.validateEmail(email) === "";
 		this.setState(newState);
 		
 		
@@ -67,7 +70,7 @@ export default class RegisterUser extends React.Component {
 	}
 	
 	parseRegister(data) {
-		console.log("Api Key is: " + data.apiKey);
+		this.setState({"success" : true});
 	}
 
 	parseError() {
@@ -76,8 +79,31 @@ export default class RegisterUser extends React.Component {
 	
 
 	render() {
-		let status = 
+		
+		const validPassword = this.state.longEnough && this.state.hasSpecial && this.state.hasNumber && this.state.upperAndLower && this.state.matches &&
+		!this.state.containsName && this.state.validEmail;
+	
+		let content = null;
+		
+		if (this.state.success) {
+		content =
+		<div>
+		<p>Thank you for registering with DOE Code. A confirmation email has been sent to the provided email. The confirmation will expire in 30 minutes.</p>		
+		</div>;
+		} else {
+		content =
         <div>
+        
+        <div className="col-md-8">
+    	<UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword}/>
+    	<UserField noval={true} field="password" label="Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} />
+    	<UserField noval={true} field="confirm_password" label="Confirm Password" elementType="password" handleChange={this.updateConfirmAndCheckPassword}/>	
+    		<button type="button" className="btn btn-lg btn-success" disabled={!validPassword} onClick={this.register}>
+    		Register
+    		</button>
+    	</div>
+    	
+    	<div className="col-md-4">
         <p>All fields are required.</p>
         <p>Passwords must:</p>
         <ul>
@@ -89,24 +115,13 @@ export default class RegisterUser extends React.Component {
             <li>Contain a mixture of upper and lowercase letters. {this.state.upperAndLower &&<span className="glyphicon glyphicon-ok green"></span> } </li>
             <li>Password must match Confirm Password. {this.state.matches &&<span className="glyphicon glyphicon-ok green"></span> } </li>
         </ul>
+        </div>
     </div>;          
+    }
 		return(
 		<div className="container-fluid form-horizontal">
 		
-		<div className="col-md-8">
-    	<UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword}/>
-    	<UserField noval={true} field="password" label="Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} />
-    	<UserField noval={true} field="confirm_password" label="Confirm Password" elementType="password" handleChange={this.updateConfirmAndCheckPassword}/>	
-    		<button type="button" className="btn btn-lg btn-success" onClick={this.register}>
-    		Register
-    		</button>
-    	</div>
-    	
-    	<div className="col-md-4">
-        {status}
-          
-        
-        </div>
+		{content}
     	
 		
 
