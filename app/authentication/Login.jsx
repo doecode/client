@@ -22,7 +22,7 @@ export default class Login extends React.Component {
 
 	parseLoginResponse(data) {
 		localStorage.xsrfToken = data.xsrfToken;
-		console.log("Logged in");
+		window.location.href = "/projects";
 	}
 
 	parseError() {
