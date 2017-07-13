@@ -11,8 +11,13 @@ const searchData = new SearchData();
 export default class AdvancedSearch extends React.Component {
     constructor(props) {
     super(props);
+    this.search = this.search.bind(this);
     }
  
+    search() {
+    console.log(JSON.stringify(searchData.getData()));	
+    }
+    
  	render() {	
  		
 		const orgNames = [
@@ -39,7 +44,7 @@ export default class AdvancedSearch extends React.Component {
     <SearchField field="all_fields" label="All Fields" elementType="input" />
 	<SearchField field="software_title" label="Software Title" elementType="input" />
 	<SearchField field="developers_contributors" label="Developers/Contributors" elementType="input" />
-	<SearchField field="bib_data" label="Bibliographic Data" elementType="input" />	
+	<SearchField field="biblio_data" label="Bibliographic Data" elementType="input" />	
 	<SearchField field="identifiers" label="Identifier Numbers" elementType="input" />	
 	<SearchField field="date_earliest" label="Earliest Release Date" elementType="date" />	
 	<SearchField field="date_latest" label="Latest Release Date" elementType="date" />
@@ -48,6 +53,9 @@ export default class AdvancedSearch extends React.Component {
  	<SearchField  field="sponsoring_organization" label="Sponsoring Organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={orgNames}   />
     <SearchField field="sort" label="Sort" elementType="select" options={sortOptions}  />	
 	
+	<button type="button" className="btn btn-lg btn-primary" onClick={this.search}>
+    <span className="glyphicon glyphicon-search"></span>  Search
+	</button>
     </div>
  	
  	);

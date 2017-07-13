@@ -8,7 +8,7 @@ class SearchStore {
 				all_fields : '',
 				software_title: '',
 				developers_contributors: '',
-				bib_data: '',
+				biblio_data: '',
 				identifiers: '',
 				date_earliest: '',
 				date_latest: '',
