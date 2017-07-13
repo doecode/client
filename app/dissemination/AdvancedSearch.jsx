@@ -32,9 +32,9 @@ export default class AdvancedSearch extends React.Component {
 		];
 		
 		const sortOptions = [
-			{label: 'Relevance (highest to lowest)', value: 'relevance'},
-			{label: 'Publication Date (newest to oldest)', value: 'pub_date_desc'},
-			{label: 'Publication Date (oldest to newest)', value: 'pub_date_asc'}
+			{label: 'Relevance', value: 'score desc'},
+			{label: 'Publication Date (newest to oldest)', value: 'releaseDate desc'},
+			{label: 'Publication Date (oldest to newest)', value: 'releaseDate asc'}
 		];
  	//console.log(searchData.getData());
  	return(

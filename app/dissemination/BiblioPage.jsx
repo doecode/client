@@ -15,12 +15,15 @@ export default class BiblioPage extends React.Component {
 
 
 
-      componentDidMount() {
+    componentDidMount() {
              const codeID = getQueryParam("code_id");
+             console.log(codeID);
              if (codeID) {
+            	 console.log("Calling");
        //          this.setState({"loading" : true, "loadingMessage" : "Loading"});
-             	//doAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
-              console.log(codeID)
+             	doAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
+             } else {
+            	 console.log("This page is invalid...");
              }
 
          }
@@ -29,11 +32,13 @@ export default class BiblioPage extends React.Component {
          parseReceiveResponse(data) {
 
              metadata.deserializeData(data.metadata);
-             this.setState({"loading" : false, "loadingMessage" : ""});
+         	console.log(JSON.stringify(metadata.getData()));	
+             //this.setState({"loading" : false, "loadingMessage" : ""});
          }
 
          parseErrorResponse() {
-           this.setState({"loading" : false, "loadingMessage" : ""});
+        	 console.log("Error?");
+           //this.setState({"loading" : false, "loadingMessage" : ""});
          }
 
          generateContent(header) {
@@ -47,7 +52,7 @@ export default class BiblioPage extends React.Component {
            }
 
            return <div key={header}>
-             <dl>
+             <dl className="row">
                <dt className="col-sm-3">
                  {header}:
                </dt>
