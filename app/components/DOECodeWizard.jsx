@@ -100,9 +100,9 @@ export default class DOECodeWizard extends React.Component {
         }
 
     }
- 
+
  showAdditionalFields() {
-	 
+
 	 console.log("Called");
 	 this.setState({"showAll" : true});
  }
@@ -139,6 +139,8 @@ export default class DOECodeWizard extends React.Component {
     }
 
     publish() {
+      console.log(metadata.getData());
+
         this.setState({"loading" : true, "loadingMessage" : "Publishing"});
     	doAjax('POST', '/api/metadata/publish',this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
     }
@@ -250,17 +252,17 @@ export default class DOECodeWizard extends React.Component {
         const publishPanels = publishSteps.map(this.buildPanel);
 
         const submitHeader = <strong> Additional Fields Required to Submit to E-Link </strong>;
-        
+
         let submitPanels = null;
-        
+
         if (this.state.showAll) {
         	submitPanels = submitSteps.map(this.buildPanel);
         }
-        
+
         const marginStyle = {
           'margin-bottom' : '5px'
         };
-        
+
 
         let button = null;
 
@@ -285,10 +287,10 @@ export default class DOECodeWizard extends React.Component {
         let content = <div>
         {button}
         <PanelGroup defaultActiveKey="1" accordion>
-        {publishPanels}        
+        {publishPanels}
         {submitPanels}
-        
-        
+
+
         </PanelGroup>
         {!this.state.showAll &&
         <div className="form-group-xs row text-center">
@@ -299,7 +301,7 @@ export default class DOECodeWizard extends React.Component {
         </div>
         </div>
         }
-        
+
         </div>
 
         return (
