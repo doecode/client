@@ -5,6 +5,7 @@ import Login from './authentication/Login';
 import RegisterUser from './authentication/RegisterUser';
 import ConfirmUser from './authentication/ConfirmUser';
 import Splash from './splash/Splash';
+import AdvancedSearch from './dissemination/AdvancedSearch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, browserHistory,IndexRoute} from 'react-router';
@@ -25,6 +26,7 @@ class DOECodeRouter extends React.Component {
 			<Route path="/register" component={RegisterUser}/>
 			<Route path="/login" component={Login}/>
 			<Route path = "/confirmuser" component={ConfirmUser}/>
+			<Route path="/search" component={AdvancedSearch}/>
 		</Router>
 		);
 	}

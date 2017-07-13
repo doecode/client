@@ -6,10 +6,12 @@ export default class BaseData {
 	constructor(props) {
 		this.fieldMap = props.fieldMap;
 		this.infoSchema = props.infoSchema;
-
+		if (!props.infoSchema)
+			this.infoSchema = {};
 		this.fieldMapSnapshot = props.fieldMapSnapshot;
 		this.infoSchemaSnapshot = props.infoSchemaSnapshot;
 	  this.validationCallback = this.validationCallback.bind(this);
+	  
 
 	}
 

@@ -40,7 +40,7 @@ export default class MetadataPanel extends React.Component {
 
 	            	<MetadataField field="software_title" label="Software Title" elementType="input" />
 	            	<MetadataField field="description" label="Description/Abstract" elementType="textarea" />
-							  <MetadataField field="licenses" label="Licenses" elementType="select" options={licenseOptions} isArray={true} multi={true} placeholder="Select your license(s)"   />
+					<MetadataField field="licenses" label="Licenses" elementType="select" options={licenseOptions} isArray={true} multi={true} placeholder="Select your license(s)"   />
 
                 </div>
 		);
