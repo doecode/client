@@ -237,6 +237,21 @@ border: 1px solid #a94442;
 	color: green;
 }
 
+.biblio-description {
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #cccccc;
+}
+
+.citation-details-div dl {
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.citation-details-div dl:nth-child(2n+1){
+	background-color: #ebebeb;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

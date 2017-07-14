@@ -61,9 +61,9 @@ export default class BiblioPage extends React.Component {
              textContent = <span>{metadata.getValue(obj.field)}</span>;
            }
 
-           return <div key={header}>
-             <dl className="row">
-               <dt className="col-sm-3">
+           return (
+             <dl key={header} className="row">
+               <dt className="col-sm-3 text-right">
                  {header}:
                </dt>
                <dd className="col-sm-9">
@@ -71,9 +71,8 @@ export default class BiblioPage extends React.Component {
 
                </dd>
 
-             </dl>
+             </dl>);
 
-           </div>;
          }
 
       render() {
@@ -94,12 +93,24 @@ export default class BiblioPage extends React.Component {
         ];
 
         const fieldsContent = fields.map(this.generateContent);
+        
+        let descriptionContent = null;
+        const description = metadata.getValue("description");
+        
+        if (description) {
+        	descriptionContent =
+        		<div className="col-sm-12 biblio-description">
+        		{description}
+        		</div>;
+        }
 
         return(
 
           <div className="container-fluid">
-
-            {fieldsContent}
+          	{descriptionContent}
+          	<div className="col-sm-12 citation-details-div">
+          		{fieldsContent}
+            </div>
           </div>
         )
 
