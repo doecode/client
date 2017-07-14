@@ -2,7 +2,7 @@ import {observable} from 'mobx';
 
 
 class SearchStore {
-	
+
 	constructor() {
 		this.defaultSearchData = {
 				all_fields : '',
@@ -15,14 +15,14 @@ class SearchStore {
 				availability: '',
 				research_organization: '',
 				sponsoring_organization: '',
-				sort: 'relevance'
-				
+				sort: 'score desc'
+
 			}
-			
+
 		this.searchData = observable(this.defaultSearchData);
-			
+
 	}
-	
+
 
 }
 
