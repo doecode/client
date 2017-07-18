@@ -1,6 +1,5 @@
 import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
-import InputHelper from './InputHelper';
 import DevsModalContent from '../ModalComponents/DevsModalContent'
 import RIsModalContent from '../ModalComponents/RIsModalContent'
 import OrgsModalContent from '../ModalComponents/OrgsModalContent'

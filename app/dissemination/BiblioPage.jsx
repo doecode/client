@@ -93,10 +93,10 @@ export default class BiblioPage extends React.Component {
         ];
 
         const fieldsContent = fields.map(this.generateContent);
-        
+
         let descriptionContent = null;
         const description = metadata.getValue("description");
-        
+
         if (description) {
         	descriptionContent =
         		<div className="col-sm-12 biblio-description">
@@ -104,9 +104,18 @@ export default class BiblioPage extends React.Component {
         		</div>;
         }
 
+
+        const titleContent = <div className="col-sm-12">
+
+          <h2>
+          {metadata.getValue("software_title")}
+          </h2>
+        </div>;
+
         return(
 
           <div className="container-fluid">
+            {titleContent}
           	{descriptionContent}
           	<div className="col-sm-12 citation-details-div">
           		{fieldsContent}

@@ -1,4 +1,5 @@
 import Validation from '../utils/Validation';
+import {mobx} from "mobx";
 
 const validation = new Validation();
 export default class BaseData {
@@ -11,7 +12,7 @@ export default class BaseData {
 		this.fieldMapSnapshot = props.fieldMapSnapshot;
 		this.infoSchemaSnapshot = props.infoSchemaSnapshot;
 	  this.validationCallback = this.validationCallback.bind(this);
-	  
+
 
 	}
 
@@ -147,7 +148,7 @@ export default class BaseData {
 		}
 
     getData() {
-			return Object.assign({}, this.fieldMap);
+			return mobx.toJS(this.fieldMap);
     }
 
 getCompletedData() {
