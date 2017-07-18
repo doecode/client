@@ -20,6 +20,7 @@ class DOECodeRouter extends React.Component {
 
 	render() {
 		return (
+
 		<Router history={browserHistory}>
 			<Route path="/" component={Wrapper}>
 				<IndexRoute component={Splash}/>

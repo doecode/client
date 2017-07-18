@@ -19,6 +19,7 @@ export default class BiblioPage extends React.Component {
 
     componentDidMount() {
              const codeID = getQueryParam("code_id");
+             console.log(codeID);
           /*   console.log(codeID);
              if (codeID) {
             	 console.log("Calling");
