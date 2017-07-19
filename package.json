@@ -1,11 +1,12 @@
 {
   "name": "client",
   "version": "1.0.0",
-  "description": "A DOE Code prototype showcasing react.",
+  "description": "A DOE Code prototype showcasing react. ",
   "main": "index.js",
   "scripts": {
     "build": "webpack --display-error-details",
-    "deploy-prod": "webpack --config webpack.prod.config.js && node server.js",
+    "deploy-express": "webpack --config webpack.prod.config.js && node server.js http://lxappdev2:18080/doecode/services",
+    "deploy-aws" : "webpack --config webpack.prod.config.js && node server.js http://default-environment.yq3jrcgnkz.us-gov-west-1.elasticbeanstalk.com/services/",
     "deploy": "webpack-dev-server --inline --hot --history-api-fallback",
     "deploy-static": "webpack-dev-server --inline --history-api-fallback",
     "deploy-test": "webpack-dev-server --config webpack.test.config.js --host 0.0.0.0 --port 18081 --inline --history-api-fallback &"
