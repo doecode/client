@@ -15,6 +15,8 @@ class SearchStore {
 				availability: '',
 				research_organization: '',
 				sponsoring_organization: '',
+				start: 0,
+				rows: 10,
 				sort: 'score desc'
 
 			}
