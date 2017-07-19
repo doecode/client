@@ -15,14 +15,13 @@ export default class ResultsPage extends React.Component {
 
   componentDidMount() {
     //console.log(JSON.stringify(searchData.getData()));
-    console.log("Mounting...")
     const searchData = JSON.parse(window.sessionStorage.latestSearch);
-    console.log(searchData);
+
     doAjax('POST', '/api/search/',this.parseSearchResponse, searchData, this.parseErrorResponse);
   }
 
   parseSearchResponse(data) {
-    console.log(data);
+    console.log(JSON.stringify(data));
 
     this.setState({"results" : data.response});
 
@@ -34,12 +33,11 @@ export default class ResultsPage extends React.Component {
 
   buildContent(obj) {
     return (
-      <div key={obj.codeId}>
-      <div className="search-result-row rounded" >
+
+      <div className="panel panel-default" key={obj.codeId}>
         <SearchItem data={obj}/>
       </div>
-      <br/>
-    </div>
+
     )
   }
 
