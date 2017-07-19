@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {observer} from "mobx-react";
+import {doAjax} from '../utils/utils';
 import SearchData from '../stores/SearchData';
 import SearchField from '../field/SearchField';
 
@@ -15,8 +16,11 @@ export default class AdvancedSearch extends React.Component {
     }
 
     search() {
-    console.log(JSON.stringify(searchData.getData()));
+    window.sessionStorage.latestSearch = searchData.getData();
+    window.location.href = "/results";
     }
+
+    //parseSearchResponse
 
  	render() {
 

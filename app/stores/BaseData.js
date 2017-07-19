@@ -1,5 +1,5 @@
 import Validation from '../utils/Validation';
-import {mobx} from "mobx";
+import {toJS} from "mobx";
 
 const validation = new Validation();
 export default class BaseData {
@@ -148,7 +148,7 @@ export default class BaseData {
 		}
 
     getData() {
-			return mobx.toJS(this.fieldMap);
+			return toJS(this.fieldMap);
     }
 
 getCompletedData() {
