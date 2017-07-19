@@ -34,9 +34,11 @@ export default class ResultsPage extends React.Component {
   buildContent(obj) {
     return (
 
-      <div className="panel panel-default" key={obj.codeId}>
+
+      <div className="panel panel-default search-result-row" key={obj.codeId}>
         <SearchItem data={obj}/>
       </div>
+
 
     )
   }
@@ -48,7 +50,7 @@ export default class ResultsPage extends React.Component {
          content = this.state.results.docs.map(this.buildContent);
    }
     return(
-    <div>
+    <div className="container-fluid">
       {content}
     </div>);
   }

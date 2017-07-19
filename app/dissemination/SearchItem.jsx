@@ -23,7 +23,7 @@ export default class SearchItem extends React.Component {
 
         return (
 
-            <div className="col-xs-12">
+            <div className="col-xs-12 panel-body">
               <div className="row">
                 <div className="col-sm-8">
                   <div>
