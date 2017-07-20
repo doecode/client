@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {getQueryParam, doAjax} from '../utils/utils';
+import {getQueryParam, doAuthenticatedAjax} from '../utils/utils';
 import ReactDataGrid from 'react-data-grid';
 import {Toolbar, Data} from 'react-data-grid-addons';
 
@@ -15,7 +15,7 @@ export default class WorkflowManagement extends React.Component {
         this.handleFilterChange = this.handleFilterChange.bind(this);
         this.onClearFilters = this.onClearFilters.bind(this);
         this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
-        
+
         this._columns = [
             {
               key: 'id',
@@ -42,36 +42,36 @@ export default class WorkflowManagement extends React.Component {
               name: 'Modify Record'
             }
           ];
-        
+
         this.state = { rows: [], filters: {}, sortColumn: null, sortDirection: null };
 
     }
-    
+
     componentDidMount() {
 
-        doAjax('GET', "api/metadata/projects", this.parseReceiveResponse, undefined, this.parseErrorResponse);
-        
+        doAuthenticatedAjax('GET', "api/metadata/projects", this.parseReceiveResponse, undefined, this.parseErrorResponse);
+
 
     }
-    
+
     parseReceiveResponse(data) {
         let rows = [];
         console.log(data);
         const records = data.records.records;
         for (let i = 0; i < records.length; i++) {
-        	
+
         const record = records[i];
         let editUrl = "/wizard?code_id=" + record.code_id;
-        
+
         let editMessage = "Continue to E-Link Submission";
-        
+
         if (record.workflow_status === 'Saved') {
         	editMessage = "Continue to Publish Record";
         }
         else if (record.workflow_status === 'Published') {
         	editUrl += "&workflow=published";
         }
-        
+
           rows.push({
             id: record.code_id,
             title: record.software_title,
@@ -80,23 +80,23 @@ export default class WorkflowManagement extends React.Component {
           <div className="col-xs-5">
           <a href="/wizard" className="btn btn-success btn-sm">
 		<span className="glyphicon glyphicon-pencil"></span> {editMessage}
-	</a> 
-          </div> 
-            <div className="col-xs-2"> 
+	</a>
+          </div>
+            <div className="col-xs-2">
             <a  href="/registerdoi" className="btn btn-info btn-sm">
   		<span className="glyphicon glyphicon-pencil"></span> Register DOI
   	</a> </div></div>
           });
         }
-        
-        
+
+
         this.setState({rows : rows});
     }
-    
+
     parseErrorResponse() {
     	console.log("Encountered error");
     }
-    
+
 
       getRandomDate(start, end) {
         return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toLocaleDateString();
@@ -113,9 +113,9 @@ export default class WorkflowManagement extends React.Component {
           <div className="col-xs-5">
           <a href="/wizard" className="btn btn-success btn-sm">
 		<span className="glyphicon glyphicon-pencil"></span> Continue to E-Link Submission
-	</a> 
-          </div> 
-            <div className="col-xs-2"> 
+	</a>
+          </div>
+            <div className="col-xs-2">
             <a  href="/registerdoi" className="btn btn-info btn-sm">
   		<span className="glyphicon glyphicon-pencil"></span> Register DOI
   	</a> </div></div>
@@ -160,11 +160,11 @@ export default class WorkflowManagement extends React.Component {
           const marginStyle = {
                   'margin-bottom' : '5px'
                 };
-                
-      
+
+
         return  (
         		<div>
-        		
+
         		<div className="form-group-xs row">
                 <div className="col-sm-12">
                     <a href="/wizard" style={marginStyle} type="button" className="btn btn-success btn-lg pull-right" >
@@ -182,10 +182,10 @@ export default class WorkflowManagement extends React.Component {
             toolbar={<Toolbar enableFilter={true}/>}
             onAddFilter={this.handleFilterChange}
             onClearFilters={this.onClearFilters} />
-        </div>    
+        </div>
         );
-          
+
          }
-      
+
 
 }
