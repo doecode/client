@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {doAjax, appendQueryString, getQueryParam} from '../utils/utils';
+import {doAjax, doAuthenticatedAjax, appendQueryString, getQueryParam} from '../utils/utils';
 import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
 import EntryStep from './EntryStep';
@@ -96,7 +96,7 @@ export default class DOECodeWizard extends React.Component {
         const codeID = getQueryParam("code_id");
         if (codeID) {
   //          this.setState({"loading" : true, "loadingMessage" : "Loading"});
-        	doAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
+        	doAuthenticatedAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
         }
 
     }
@@ -130,7 +130,7 @@ export default class DOECodeWizard extends React.Component {
     save() {
 
         this.setState({"loading" : true, "loadingMessage" : "Saving"});
-    	doAjax('POST', '/api/metadata/',this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
+    	doAuthenticatedAjax('POST', '/api/metadata/',this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
     }
 
     parseSaveResponse(data) {
@@ -142,12 +142,12 @@ export default class DOECodeWizard extends React.Component {
       console.log(metadata.getData());
 
         this.setState({"loading" : true, "loadingMessage" : "Publishing"});
-    	doAjax('POST', '/api/metadata/publish',this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
+    	doAuthenticatedAjax('POST', '/api/metadata/publish',this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
     }
 
     submit() {
         this.setState({"loading" : true, "loadingMessage" : "Submitting"});
-    	doAjax('POST', '/api/metadata/submit',this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
+    	doAuthenticatedAjax('POST', '/api/metadata/submit',this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
     }
 
     parsePublishResponse(data) {
