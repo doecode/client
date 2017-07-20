@@ -78,7 +78,7 @@ export default class WorkflowManagement extends React.Component {
             status: record.workflow_status,
             edit: <div className="form-group-xs row">
           <div className="col-xs-5">
-          <a href="/wizard" className="btn btn-success btn-sm">
+          <a href={editUrl} className="btn btn-success btn-sm">
 		<span className="glyphicon glyphicon-pencil"></span> {editMessage}
 	</a>
           </div>
