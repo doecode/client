@@ -37,7 +37,7 @@ export default class Confirmation extends React.Component {
 
 render() {
 
-    const ymlDownload = "/api/metadata/yaml/" + this.state.codeID;
+    const ymlDownload = "/api/metadata/"+ this.state.codeID + "?format=yaml";
 
 
     return (
