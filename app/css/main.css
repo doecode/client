@@ -93,6 +93,34 @@ border: 1px solid #a94442;
   padding-bottom: 5px;
 }
 
+.col {
+  -webkit-flex-basis: 0;
+      -ms-flex-preferred-size: 0;
+          flex-basis: 0;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  max-width: 100%;
+}
+
+.white {
+  color: white;
+}
+
+.mb-1 {
+  margin-bottom: 1rem!important;
+}
+
+.mt-1 {
+    margin-top: 1rem!important;
+}
+
+.mt-3 {
+  margin-top: 3rem!important;
+}
+
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
