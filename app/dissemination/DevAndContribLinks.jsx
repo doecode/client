@@ -9,11 +9,16 @@ export default class DevAndContribLinks extends React.Component {
         this.createLink = this.createLink.bind(this);
       }
 
-      createLink(name) {
-        
+      createLink(name, index, array) {
+
         return (
           <span key={name}>
-            <SearchLink field="developers_contributors" value={name.trim()}/>;&nbsp;
+            <SearchLink field="developers_contributors" value={name.trim()}/>
+            { index != array.length -1 &&
+            <span>
+            ;&nbsp;
+            </span>
+            }
           </span>
         );
 

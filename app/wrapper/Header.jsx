@@ -31,31 +31,26 @@ export default class Header extends React.Component {
     render() {
 
         const inputStyle = {
-            "paddingLeft": "5px",
-            "fontSize": "20px",
-            "paddingTop": "20px",
-            "paddingBottom": "20px",
-            "marginTop": "5px"
+            "fontSize": "20px"
         };
 
-        const labelStyle = {
-            "fontSize": "19px"
-        };
         return (
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
 
                   <div className="mt-1">
                     <div className="col-xs-offset-1 col-xs-3">
-                        <img className="img-responsive" src="https://www.osti.gov/doecode/images/DOEcode_logo_300px_72ppi.png" alt="DOECode" width="300"/>
+                        <a href="/">
+                          <img className="img-responsive" src="https://www.osti.gov/doecode/images/DOEcode_logo_300px_72ppi.png" alt="DOECode" width="300"/>
+                        </a>
                     </div>
                     <div className="col-xs-4">
-                        <label for="allSearch" className="sr-only" style={labelStyle}>Search Published Software Entries</label>
+                        <label htmlFor="allSearch" className="sr-only">Search DOE Code for Published Software Entries</label>
                         <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} id="allSearch" className="form-control" style={inputStyle} placeholder="Search DOE Code for Published Software Entries"></input>
 
                     </div>
                     <div className="col-xs-4">
-                      <button type="button" className="btn btn-lg btn-success" onClick={this.search}>
+                      <button type="button" className="btn btn-success" onClick={this.search}>
                         <span className="glyphicon glyphicon-search"></span>  Search
                       </button>
                     </div>

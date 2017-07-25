@@ -91,6 +91,15 @@ border: 1px solid #a94442;
   font-size: 12px;
   padding-top: 5px;
   padding-bottom: 5px;
+  color: green;
+}
+
+.search-result-release-date {
+  font-size:14px;
+}
+
+.search-result-doi {
+  font-size:15px;
 }
 
 .col {

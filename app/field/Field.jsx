@@ -81,7 +81,7 @@ export default class Field extends React.Component {
     //console.log("Handle Change",this.props.properties.handleChange);
     //console.log(this.handleChange);
     const handleChange = this.props.properties.handleChange ? this.props.properties.handleChange : this.handleChange;
-    
+
     const handleBlur = this.props.properties.handleBlur ? this.props.properties.handleBlur : this.handleChange;
 
     //console.log(handleChange);
@@ -107,7 +107,7 @@ export default class Field extends React.Component {
      } else if (completed) {
        wrapperStyle += " has-success has-feedback"
      }
-     
+
      }
 
 	 let input = null;
@@ -122,7 +122,7 @@ export default class Field extends React.Component {
 		} else {
 			input = <input type="text" className="form-control" value={val} onChange={handleChange} onBlur={this.handleBlur} disabled />
 		}
-	  } 
+	  }
 	  else if (elementType === 'password') {
 			input = <input type="password" className="form-control" value={val} onChange={handleChange} onBlur={this.handleBlur} />
 	  }
@@ -144,7 +144,7 @@ export default class Field extends React.Component {
 	  else if (elementType === 'radio') {
 			 return (
            <div className="form-group form-group-sm row">
-					 <div className="col-xs-8">
+					 <div className="col-xs-8 col-md-4">
 					 <label><input type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange} /> {label}</label>
 					 </div>
             </div>
@@ -159,7 +159,7 @@ export default class Field extends React.Component {
 
 	  return(
       <div className={wrapperStyle}>
-      <div className="col-xs-8">
+      <div className="col-xs-8 col-md-4">
       {label &&
       <label className={labelStyle}>
         {label}
@@ -175,7 +175,7 @@ export default class Field extends React.Component {
         }
       </div>
       {messageNode}
-      {completed && (elementType === 'input' || elementType === 'textarea') &&
+      {completed && (elementType === 'input' || elementType === 'textarea') && !noval &&
       <span className="glyphicon glyphicon-ok form-control-feedback"></span>
       }
       </div>
