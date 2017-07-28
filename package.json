@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --display-error-details",
     "deploy-express": "webpack --config webpack.prod.config.js && node server.js http://lxappdev2:18080/doecode/services 18081",
-    "deploy-aws" : "webpack --config webpack.prod.config.js && node server.js http://default-environment.yq3jrcgnkz.us-gov-west-1.elasticbeanstalk.com/services/ 8080",
+    "deploy-aws": "webpack --config webpack.prod.config.js && node server.js http://default-environment.yq3jrcgnkz.us-gov-west-1.elasticbeanstalk.com/services/ 8080",
     "deploy": "webpack-dev-server --inline --hot --history-api-fallback",
     "deploy-static": "webpack-dev-server --inline --history-api-fallback",
     "deploy-test": "webpack-dev-server --config webpack.test.config.js --host 0.0.0.0 --port 18081 --inline --history-api-fallback &"
@@ -57,6 +57,7 @@
     "react-datepicker": "^0.40.0",
     "react-dom": "^15.4.2",
     "react-dropzone": "^3.12.2",
+    "react-paginate": "^4.4.3",
     "react-router": "^3.0.2",
     "react-select": "0.9.1",
     "react-stepzilla": "^4.0.0",

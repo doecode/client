@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchItem from './SearchItem';
+import ReactPaginate from 'react-paginate';
 import {doAjax, getQueryParam} from '../utils/utils';
+import SearchData from '../stores/SearchData';
+
+const searchData = new SearchData();
 
 export default class ResultsPage extends React.Component {
     constructor(props) {
@@ -9,15 +13,16 @@ export default class ResultsPage extends React.Component {
       this.parseSearchResponse = this.parseSearchResponse.bind(this);
       this.parseErrorResponse = this.parseErrorResponse.bind(this);
       this.buildContent = this.buildContent.bind(this);
+      this.handlePageClick = this.handlePageClick.bind(this);
       this.state = {results: undefined};
     }
 
 
   componentDidMount() {
     //console.log(JSON.stringify(searchData.getData()));
-    const searchData = JSON.parse(window.sessionStorage.latestSearch);
+    const latestSearch = JSON.parse(window.sessionStorage.latestSearch);
 
-    doAjax('POST', '/api/search/',this.parseSearchResponse, searchData, this.parseErrorResponse);
+    doAjax('POST', '/api/search/',this.parseSearchResponse, latestSearch, this.parseErrorResponse);
   }
 
   parseSearchResponse(data) {
@@ -43,6 +48,11 @@ export default class ResultsPage extends React.Component {
     )
   }
 
+  handlePageClick(data) {
+    let selected = data.selected;
+    console.log(selected);
+  }
+
   render() {
     let content = null;
     if (this.state.results !== undefined) {
@@ -51,7 +61,23 @@ export default class ResultsPage extends React.Component {
    }
     return(
     <div className="container-fluid">
+
+      <div className=" col-xs-offset-2 col-xs-10">
+        <ReactPaginate previousLabel={"previous"}
+               nextLabel={"next"}
+               breakLabel={<a href="#">...</a>}
+               breakClassName={"break-me"}
+               pageCount={20}
+               marginPagesDisplayed={2}
+               pageRangeDisplayed={5}
+               onPageChange={this.handlePageClick}
+               containerClassName={"pagination"}
+               subContainerClassName={"pages pagination"}
+activeClassName={"active"} />
+      </div>
+      <div className=" col-xs-offset-2 col-xs-10">
       {content}
+      </div>
     </div>);
   }
 
