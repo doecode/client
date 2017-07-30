@@ -29,7 +29,7 @@ export default class DOECodeWizard extends React.Component {
     constructor(props) {
         super(props);
 
-        this.parseLoadResponse = this.parseLoadResponse.bind(this);
+        this.parseAutopopulateResponse = this.parseAutopopulateResponse.bind(this);
         this.parseSaveResponse = this.parseSaveResponse.bind(this);
         this.parsePublishResponse = this.parsePublishResponse.bind(this);
         this.parseSubmitResponse = this.parseSubmitResponse.bind(this);
@@ -39,10 +39,11 @@ export default class DOECodeWizard extends React.Component {
         this.submit = this.submit.bind(this);
         this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
         this.parseErrorResponse = this.parseErrorResponse.bind(this);
+        this.setActivePanel = this.setActivePanel.bind(this);
         this.buildPanel = this.buildPanel.bind(this);
         this.showAdditionalFields = this.showAdditionalFields.bind(this);
 
-        this.state= {"loading" : false, "loadingMessage" : "", "editLoad" : false, "published" : false, "showAll" : false};
+        this.state= {"loading" : false, "loadingMessage" : "", "editLoad" : false, "published" : false, "showAll" : false, "activePanel" : 1};
 
 
 
@@ -79,104 +80,131 @@ export default class DOECodeWizard extends React.Component {
         	submitSteps[x].key = "" + (x+i+1);
     }
 
-  parseErrorResponse() {
-    this.setState({"loading" : false, "loadingMessage" : ""});
-  }
+parseErrorResponse(jqXhr, exception) {
 
- componentDidMount() {
-        const workflowStatus = getQueryParam("workflow");
+    if (jqXhr.status === 401) {
+        window.sessionStorage.lastLocation = window.location.href;
+        window.sessionStorage.lastRecord = JSON.stringify(metadata.getData());
+        window.location.href = '/login?redirect=true';
 
-        console.log(workflowStatus);
-        if (workflowStatus && workflowStatus === "published") {
-            this.setState({"published" : true, "showAll" : true});
-        } else {
-           metadata.requireOnlyPublishedFields();
-        }
-
-        const codeID = getQueryParam("code_id");
-        if (codeID) {
-  //          this.setState({"loading" : true, "loadingMessage" : "Loading"});
-        	doAuthenticatedAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
-        }
-
+    } else if (jqXhr.status === 403) {
+        window.location.href = '/forbidden';
+    } else {
+        window.location.href = '/error';
     }
 
- showAdditionalFields() {
+}
 
-	 console.log("Called");
+componentDidMount() {
+    const workflowStatus = getQueryParam("workflow");
+
+    console.log(workflowStatus);
+    if (workflowStatus && workflowStatus === "published") {
+        this.setState({"published": true, "showAll": true});
+    } else {
+        metadata.requireOnlyPublishedFields();
+    }
+
+    const codeID = getQueryParam("code_id");
+
+    if (window.sessionStorage.lastRecord) {
+        //do an authenticated ajax against our allowed endpoing to check if valid and then do this in the success response...
+        metadata.loadValues(JSON.parse(window.sessionStorage.lastRecord));
+        window.sessionStorage.lastRecord = "";
+
+    } else if (codeID) {
+        this.setState({"loading" : true, "loadingMessage" : "Loading"});
+        doAuthenticatedAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse);
+    }
+
+    //else, do an authenticated check...
+
+}
+
+ showAdditionalFields() {
 	 this.setState({"showAll" : true});
  }
 
-    parseReceiveResponse(data) {
+parseReceiveResponse(data) {
+    metadata.deserializeData(data.metadata);
+    this.setState({"loading": false, "loadingMessage": ""});
+}
 
-    	metadata.deserializeData(data.metadata);
-        this.setState({"loading" : false, "loadingMessage" : ""});
+autopopulate(event) {
+    this.setState({"loading": true, "loadingMessage": "Loading"});
+    doAjax('GET', "/api/metadata/autopopulate?repo=" + metadata.getValue('repository_link'), this.parseAutopopulateResponse);
+    event.preventDefault();
+}
+
+parseAutopopulateResponse(responseData) {
+
+    if (responseData !== undefined) {
+        metadata.updateMetadata(responseData.metadata);
+      }
+    this.setState({"loading": false, "loadingMessage": ""});
+}
+
+save() {
+
+    this.setState({"loading": true, "loadingMessage": "Saving"});
+    doAuthenticatedAjax('POST', '/api/metadata/', this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
+}
+
+parseSaveResponse(data) {
+    this.setState({"loading": false, "loadingMessage": ""});
+    metadata.setValue("code_id", data.metadata.code_id);
+}
+
+publish() {
+    console.log(metadata.getData());
+
+    this.setState({"loading": true, "loadingMessage": "Publishing"});
+    doAuthenticatedAjax('POST', '/api/metadata/publish', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
+}
+
+submit() {
+    this.setState({"loading": true, "loadingMessage": "Submitting"});
+    doAuthenticatedAjax('POST', '/api/metadata/submit', this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
+}
+
+parsePublishResponse(data) {
+    window.location.href = "confirm?workflow=published&code_id=" + data.metadata.code_id;
+}
+
+parseSubmitResponse(data) {
+
+    window.location.href = "confirm?workflow=submitted&code_id=" + data.metadata.code_id;
+}
+
+setActivePanel(currentKey) {
+    console.log(currentKey);
+    console.log(this.state.activePanel);
+    if (currentKey == this.state.activePanel) {
+        this.setState({"activePanel": -1});
+    } else {
+        this.setState({"activePanel": currentKey});
     }
-
-    autopopulate(event) {
-        this.setState({"loading" : true, "loadingMessage" : "Loading"});
-    	doAjax('GET', "/api/metadata/autopopulate?repo=" + metadata.getValue('repository_link'),this.parseLoadResponse, undefined, this.parseErrorResponse);
-    	event.preventDefault();
-    }
-
-
-    parseLoadResponse(responseData) {
-
-    	if (responseData !== undefined)
-    		metadata.updateMetadata(responseData.metadata);
-        this.setState({"loading" : false, "loadingMessage" : ""});
-    }
-
-    save() {
-
-        this.setState({"loading" : true, "loadingMessage" : "Saving"});
-    	doAuthenticatedAjax('POST', '/api/metadata/',this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
-    }
-
-    parseSaveResponse(data) {
-        this.setState({"loading" : false, "loadingMessage" : ""});
-        metadata.setValue("code_id", data.metadata.code_id);
-    }
-
-    publish() {
-      console.log(metadata.getData());
-
-        this.setState({"loading" : true, "loadingMessage" : "Publishing"});
-    	doAuthenticatedAjax('POST', '/api/metadata/publish',this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
-    }
-
-    submit() {
-        this.setState({"loading" : true, "loadingMessage" : "Submitting"});
-    	doAuthenticatedAjax('POST', '/api/metadata/submit',this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
-    }
-
-    parsePublishResponse(data) {
-    	window.location.href = "confirm?workflow=published&code_id=" + data.metadata.code_id;
-    }
-
-    parseSubmitResponse(data) {
-
-      window.location.href = "confirm?workflow=submitted&code_id=" + data.metadata.code_id;
-    }
+}
 
     buildPanel(obj) {
-        let heading = obj.name;
+        let requiredText = "";
+        let optionalText = "";
         let panelStyle = "default";
 
 
         const panelStatus = metadata.getPanelStatus(obj.name);
 
              if (panelStatus.remainingRequired > 0) {
-                  heading += " (Required Fields Remaining: " + panelStatus.remainingString + ")";
+                  requiredText += " (Required Fields Remaining: " + panelStatus.remainingString + ")";
              }
              else {
 
             	 if (panelStatus.hasRequired) {
-            		 heading += " (All Required Fields Completed) ";
-                     panelStyle = "success";
+            		 requiredText += " (All Required Fields Completed) ";
+                     //panelStyle = "success";
             	 } else {
-            		 heading += " (No Required Fields) ";
-                     panelStyle = "success";
+            		 requiredText += " (No Required Fields) ";
+                     //panelStyle = "success";
             	 }
 
              }
@@ -185,21 +213,34 @@ export default class DOECodeWizard extends React.Component {
 
         if (panelStatus.hasOptional) {
              if (panelStatus.remainingOptional > 0) {
-                  heading += " (" + panelStatus.remainingOptional + " Optional Field(s) Remaining)";
+                  optionalText += " (" + panelStatus.remainingOptional + " Optional Field(s) Remaining)";
              }
              else {
 
             	 if (panelStatus.hasOptional) {
-                 heading += " (All Optional Fields Completed) ";
+                 optionalText += " (All Optional Fields Completed) ";
             	 }
              }
         }
 
-        if (panelStatus.errors) {
-
-        	heading += " This section contains errors. "
-        	panelStyle = "danger";
+        const heading = <div> {obj.name}
+        {requiredText}
+        {panelStatus.hasRequired && panelStatus.remainingRequired == 0 &&
+        <span className="green glyphicon glyphicon-ok"></span>
         }
+        {optionalText}
+        {panelStatus.hasOptional && panelStatus.remainingOptional == 0 &&
+        <span className="green glyphicon glyphicon-ok"></span>
+        }
+        {this.state.activePanel == obj.key &&
+        <span className="pull-right glyphicon glyphicon-chevron-down"></span>
+        }
+
+        {this.state.activePanel != obj.key &&
+        <span className="pull-right glyphicon glyphicon-chevron-right"></span>
+        }
+      </div>;
+
         return <Panel header={heading} bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
 
       	<div>
@@ -286,7 +327,7 @@ export default class DOECodeWizard extends React.Component {
 
         let content = <div>
         {button}
-        <PanelGroup defaultActiveKey="1" accordion>
+        <PanelGroup defaultActiveKey="1" accordion onSelect={this.setActivePanel}>
         {publishPanels}
         {submitPanels}
 
@@ -302,7 +343,7 @@ export default class DOECodeWizard extends React.Component {
         </div>
         }
 
-        </div>
+      </div>;
 
         return (
 

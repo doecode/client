@@ -5,6 +5,12 @@ import ReactDataGrid from 'react-data-grid';
 import {Toolbar, Data} from 'react-data-grid-addons';
 
 
+const EmptyRowsView = React.createClass({
+  render() {
+    return (<p>No records to show.</p>);
+  }
+});
+
 export default class WorkflowManagement extends React.Component {
     constructor(props) {
         super(props);
@@ -49,7 +55,7 @@ export default class WorkflowManagement extends React.Component {
 
     componentDidMount() {
 
-        doAuthenticatedAjax('GET', "api/metadata/projects", this.parseReceiveResponse, undefined, this.parseErrorResponse);
+        doAuthenticatedAjax('GET', "api/metadata/projects", this.parseReceiveResponse);
 
 
     }
@@ -91,10 +97,6 @@ export default class WorkflowManagement extends React.Component {
 
 
         this.setState({rows : rows});
-    }
-
-    parseErrorResponse() {
-    	console.log("Encountered error");
     }
 
 
@@ -162,6 +164,9 @@ export default class WorkflowManagement extends React.Component {
                 };
 
 
+
+
+
         return  (
         		<div>
 
@@ -181,7 +186,10 @@ export default class WorkflowManagement extends React.Component {
             maxHeight={400}
             toolbar={<Toolbar enableFilter={true}/>}
             onAddFilter={this.handleFilterChange}
-            onClearFilters={this.onClearFilters} />
+            onClearFilters={this.onClearFilters}
+            emptyRowsView={EmptyRowsView}
+           />
+
         </div>
         );
 

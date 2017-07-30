@@ -25,10 +25,17 @@ export default class Login extends React.Component {
 
 	}
 
-	parseLoginResponse(data) {
-		localStorage.xsrfToken = data.xsrfToken;
-		window.location.href = "/projects";
-	}
+parseLoginResponse(data) {
+    localStorage.xsrfToken = data.xsrfToken;
+    if (window.sessionStorage.lastLocation) {
+        let url = window.sessionStorage.lastLocation;
+        window.sessionStorage.lastLocation = "";
+        window.location.href = url;
+    } else {
+        window.location.href = "/projects";
+    }
+
+}
 
 	parseError() {
 		console.log("I'm being called");

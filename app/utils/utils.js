@@ -7,7 +7,12 @@ import ContributingOrganization from '../stores/ContributingOrganization';
 import RelatedIdentifier from '../stores/RelatedIdentifier';
 
 function doAjax(methodType, url, successCallback, data, errorCallback) {
-
+   let errorCall = errorCallback;
+   if (errorCall === undefined) {
+     errorCall = (jqXhr, exception) => {
+         window.location.href = '/error';
+     }
+   }
 
     $.ajax({
       url: url,
@@ -17,14 +22,26 @@ function doAjax(methodType, url, successCallback, data, errorCallback) {
       data: JSON.stringify(data),
       contentType: "application/json; charset=utf-8",
       success: successCallback,
-      error: errorCallback
+      error: errorCall
     });
 
   }
 
 function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallback) {
 
-
+  let errorCall = errorCallback;
+  if (errorCall === undefined) {
+    errorCall = (jqXhr, exception) => {
+      if (jqXhr.status == 401) {
+        window.sessionStorage.lastLocation = window.location.href;
+        window.location.href = '/login?redirect=true';
+      } else if (jqXhr.status == 403) {
+        window.location.href = '/forbidden'
+      } else {
+        window.location.href = '/error';
+      }
+    }
+  }
     $.ajax({
       url: url,
       cache: false,
@@ -36,7 +53,7 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
       data: JSON.stringify(data),
       contentType: "application/json; charset=utf-8",
       success: successCallback,
-      error: errorCallback
+      error: errorCall
     });
 
   }
@@ -53,7 +70,7 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
     else
       return url;
   }
-  
+
   function getQueryParam(paramName) {
       var query = window.location.search.substring(1);
       var vars = query.split("&");
@@ -63,7 +80,7 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
                 return pair[1];
            }
       }
-      
+
       return false;
  }
 
