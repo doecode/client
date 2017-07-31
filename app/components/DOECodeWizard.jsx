@@ -26,42 +26,67 @@ let submitSteps = [];
 
 @observer
 export default class DOECodeWizard extends React.Component {
-    constructor(props) {
-        super(props);
+constructor(props) {
+    super(props);
 
-        this.parseAutopopulateResponse = this.parseAutopopulateResponse.bind(this);
-        this.parseSaveResponse = this.parseSaveResponse.bind(this);
-        this.parsePublishResponse = this.parsePublishResponse.bind(this);
-        this.parseSubmitResponse = this.parseSubmitResponse.bind(this);
-        this.autopopulate = this.autopopulate.bind(this);
-        this.save = this.save.bind(this);
-        this.publish = this.publish.bind(this);
-        this.submit = this.submit.bind(this);
-        this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
-        this.parseErrorResponse = this.parseErrorResponse.bind(this);
-        this.setActivePanel = this.setActivePanel.bind(this);
-        this.buildPanel = this.buildPanel.bind(this);
-        this.showAdditionalFields = this.showAdditionalFields.bind(this);
+    this.parseAutopopulateResponse = this.parseAutopopulateResponse.bind(this);
+    this.parseSaveResponse = this.parseSaveResponse.bind(this);
+    this.parsePublishResponse = this.parsePublishResponse.bind(this);
+    this.parseSubmitResponse = this.parseSubmitResponse.bind(this);
+    this.autopopulate = this.autopopulate.bind(this);
+    this.save = this.save.bind(this);
+    this.publish = this.publish.bind(this);
+    this.submit = this.submit.bind(this);
+    this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
+    this.parseErrorResponse = this.parseErrorResponse.bind(this);
+    this.setActivePanel = this.setActivePanel.bind(this);
+    this.buildPanel = this.buildPanel.bind(this);
+    this.showAdditionalFields = this.showAdditionalFields.bind(this);
 
-        this.state= {"loading" : false, "loadingMessage" : "", "editLoad" : false, "published" : false, "showAll" : false, "activePanel" : 1};
+    this.state = {
+        "loading": false,
+        "loadingMessage": "",
+        "editLoad": false,
+        "published": false,
+        "showAll": false,
+        "activePanel": 1
+    };
 
+    publishSteps = [
+        {
+            name: 'Repository Information',
+            component: <EntryStep metadata={metadata} autopopulate={this.autopopulate}/>
+        }, {
+            name: 'Product Description',
+            component: <MetadataPanel metadata={metadata}/>
+        }, {
+            name: 'Developers',
+            component: <AgentsStep/>
+        }, {
+            name: 'DOI and Release Date',
+            component: <DOIPanel metadata={metadata}/>
+        }
+    ];
 
-
-        publishSteps = [
-        {name: 'Repository Information', component: <EntryStep metadata={metadata} autopopulate={this.autopopulate}/> },
-        {name: 'Product Description', component: <MetadataPanel metadata={metadata}/>},
-        {name: 'Developers', component: <AgentsStep />},
-        {name: 'DOI and Release Date', component: <DOIPanel metadata={metadata}/>}
-        ];
-
-       submitSteps = [
-   		{name: 'Supplemental Product Information', component: <SupplementalInfoStep/>},
-   		{name: 'Organizations', component: <OrgsStep />},
-   		{name: 'Contributors and Contributing Organizations', component: <ContributorsStep/>},
-   		{name: 'Identifiers', component: <RIsStep />},
-   		{name: 'Contact Information', component: <RecipientStep />}
-       ];
-        /*
+    submitSteps = [
+        {
+            name: 'Supplemental Product Information',
+            component: <SupplementalInfoStep/>
+        }, {
+            name: 'Organizations',
+            component: <OrgsStep/>
+        }, {
+            name: 'Contributors and Contributing Organizations',
+            component: <ContributorsStep/>
+        }, {
+            name: 'Identifiers',
+            component: <RIsStep/>
+        }, {
+            name: 'Contact Information',
+            component: <RecipientStep/>
+        }
+    ];
+    /*
 
          *
         		{name: 'Licenses & Access Limitations', component: <AccessStep metadata={metadata} />},
@@ -71,13 +96,13 @@ export default class DOECodeWizard extends React.Component {
         		{name: 'Recipient Information', component: <RecipientStep metadata={metadata}/>},
         		{name: 'Summary', component: <ConfirmStep metadata={metadata}/> }
          */
-        let i = 0;
-        for (i = 0; i < publishSteps.length; i++)
-        	publishSteps[i].key = "" + (i+1);
+    let i = 0;
+    for (i = 0; i < publishSteps.length; i++)
+        publishSteps[i].key = "" + (i + 1);
 
-        let x = 0;
-        for (x = 0; x < submitSteps.length; x++)
-        	submitSteps[x].key = "" + (x+i+1);
+    let x = 0;
+    for (x = 0; x < submitSteps.length; x++)
+        submitSteps[x].key = "" + (x + i + 1);
     }
 
 parseErrorResponse(jqXhr, exception) {
@@ -186,7 +211,7 @@ setActivePanel(currentKey) {
     }
 }
 
-    buildPanel(obj) {
+buildPanel(obj) {
         let requiredText = "";
         let optionalText = "";
         let panelStyle = "default";
@@ -201,12 +226,9 @@ setActivePanel(currentKey) {
 
             	 if (panelStatus.hasRequired) {
             		 requiredText += " (All Required Fields Completed) ";
-                     //panelStyle = "success";
             	 } else {
             		 requiredText += " (No Required Fields) ";
-                     //panelStyle = "success";
             	 }
-
              }
 
 
@@ -265,7 +287,7 @@ setActivePanel(currentKey) {
 
         {obj.component}
 
-        </Panel>
+      </Panel>;
         }
 
 

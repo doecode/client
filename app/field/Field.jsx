@@ -15,7 +15,6 @@ export default class Field extends React.Component {
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
-    this.handleDateBlur = this.handleDateBlur.bind(this);
  }
 
 
@@ -28,13 +27,11 @@ export default class Field extends React.Component {
 	  this.props.linkedData.validateField(this.props.properties.field);
   }
 
-  handleDateBlur() {
-
-    this.props.linkedData.validateField(this.props.properties.field);
-  }
-
   handleChange(event) {
 	  this.props.linkedData.setValue(this.props.properties.field,event.target.value);
+    if (this.props.properties.changeCallback !== undefined) {
+        this.props.properties.changeCallback();
+    }
   }
 
   handleDateChange(date) {
@@ -56,6 +53,10 @@ export default class Field extends React.Component {
         }
     } else {
         this.props.linkedData.setValue(this.props.properties.field, value);
+    }
+
+    if (this.props.properties.changeCallback !== undefined) {
+        this.props.properties.changeCallback();
     }
 }
 
