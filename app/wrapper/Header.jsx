@@ -61,7 +61,7 @@ export default class Header extends React.Component {
                                 <a href="#">Software Policy</a>
                             </li>
                             <li>
-                                <a href="/wizard">Submit Sofware/Code</a>
+                                <a href="/publish">Submit Sofware/Code</a>
                             </li>
                             <li>
                                 <a href="#">About</a>

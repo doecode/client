@@ -25,7 +25,8 @@ class DOECodeRouter extends React.Component {
 		<Router history={browserHistory}>
 			<Route path="/" component={Wrapper}>
 				<IndexRoute component={Splash}/>
-				<Route path="/wizard" component={DOECodeWizard}/>
+				<Route path="/publish" component={DOECodeWizard}/>
+				<Route path="/submit" component={DOECodeWizard}/>
 				<Route path="/confirm" component={Confirmation}/>
 				<Route path="/projects" component={WorkflowManagement}/>
 				<Route path="/register" component={RegisterUser}/>

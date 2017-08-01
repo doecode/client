@@ -124,8 +124,8 @@ componentDidMount() {
     const workflowStatus = getQueryParam("workflow");
 
     console.log(workflowStatus);
-    if (workflowStatus && workflowStatus === "published") {
-        this.setState({"published": true, "showAll": true});
+    if (window.location.pathname == '/submit') {
+        this.setState({"showAll": true});
     } else {
         metadata.requireOnlyPublishedFields();
     }
@@ -329,7 +329,7 @@ buildPanel(obj) {
 
         let button = null;
 
-        if (this.state.published) {
+        if (window.location.pathname == '/submit') {
         button =             <div className="form-group-xs row">
                             <div className="col-sm-12">
                                 <button style={marginStyle} type="button" className="btn btn-primary btn-lg pull-right" disabled={submitDisabled} onClick={this.submit}>

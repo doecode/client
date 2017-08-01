@@ -67,15 +67,16 @@ export default class WorkflowManagement extends React.Component {
         for (let i = 0; i < records.length; i++) {
 
         const record = records[i];
-        let editUrl = "/wizard?code_id=" + record.code_id;
+        let editUrl = "/submit?code_id=" + record.code_id;
 
         let editMessage = "Continue to E-Link Submission";
 
         if (record.workflow_status === 'Saved') {
         	editMessage = "Continue to Publish Record";
+          editUrl = "/publish?code_id=" + record.code_id;
         }
         else if (record.workflow_status === 'Published') {
-        	editUrl += "&workflow=published";
+          editUrl = "/submit?code_id=" + record.code_id;
         }
 
           rows.push({
@@ -98,33 +99,6 @@ export default class WorkflowManagement extends React.Component {
 
         this.setState({rows : rows});
     }
-
-
-      getRandomDate(start, end) {
-        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toLocaleDateString();
-      }
-
-      createRows(numberOfRows) {
-        let rows = [];
-        for (let i = 1; i < numberOfRows; i++) {
-          rows.push({
-            id: i,
-            title: 'Task ' + i,
-            status: ['Saved', 'Published', 'Submitted'][Math.floor((Math.random() * 3) + 1)],
-            edit: <div className="form-group-xs row">
-          <div className="col-xs-5">
-          <a href="/wizard" className="btn btn-success btn-sm">
-		<span className="glyphicon glyphicon-pencil"></span> Continue to E-Link Submission
-	</a>
-          </div>
-            <div className="col-xs-2">
-            <a  href="/registerdoi" className="btn btn-info btn-sm">
-  		<span className="glyphicon glyphicon-pencil"></span> Register DOI
-  	</a> </div></div>
-          });
-        }
-        return rows;
-      }
 
       getRows() {
         return Data.Selectors.getRows(this.state);
@@ -172,7 +146,7 @@ export default class WorkflowManagement extends React.Component {
 
         		<div className="form-group-xs row">
                 <div className="col-sm-12">
-                    <a href="/wizard" style={marginStyle} type="button" className="btn btn-success btn-lg pull-right" >
+                    <a href="/publish" style={marginStyle} type="button" className="btn btn-success btn-lg pull-right" >
                        Add New Record
                     </a>
                 </div>

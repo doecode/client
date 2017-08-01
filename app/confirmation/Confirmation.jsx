@@ -21,11 +21,11 @@ export default class Confirmation extends React.Component {
 
 
       newRecord() {
-        window.location.href = 'wizard';
+        window.location.href = '/publish';
       }
 
       editRecord() {
-                window.location.href = "wizard?workflow=" + this.state.workflow + "&code_id=" + this.state.codeID;
+      window.location.href = "/submit?code_id=" + this.state.codeID;
       }
 
 
