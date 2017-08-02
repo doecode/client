@@ -9,9 +9,11 @@ import AdvancedSearch from './dissemination/AdvancedSearch';
 import ResultsPage from './dissemination/ResultsPage';
 import BiblioPage from './dissemination/BiblioPage';
 import Wrapper from './wrapper/Wrapper';
+import Header from './wrapper/Header';
+import Footer from './wrapper/Footer';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, browserHistory,IndexRoute} from 'react-router';
+import {BrowserRouter as Router, Route, browserHistory,IndexRoute} from 'react-router-dom';
 
 class DOECodeRouter extends React.Component {
 
@@ -22,22 +24,23 @@ class DOECodeRouter extends React.Component {
 	render() {
 		return (
 
-		<Router history={browserHistory}>
-			<Route path="/" component={Wrapper}>
-				<IndexRoute component={Splash}/>
-				<Route path="/publish" component={DOECodeWizard}/>
-				<Route path="/submit" component={DOECodeWizard}/>
-				<Route path="/confirm" component={Confirmation}/>
-				<Route path="/projects" component={WorkflowManagement}/>
-				<Route path="/register" component={RegisterUser}/>
-				<Route path="/login" component={Login}/>
-				<Route path = "/confirmuser" component={ConfirmUser}/>
-				<Route path="/search" component={AdvancedSearch}/>
-				<Route path="/results" component={ResultsPage}/>
-				<Route path="/biblio" component={BiblioPage}/>
-		 </Route>
+		<Router basename="/doecode" history={browserHistory}>
+		<div>
+			<Header/>
+		 <Route exact path="/" component={Splash}/>
+		 <Route path="/publish" component={DOECodeWizard}/>
+		 <Route path="/submit" component={DOECodeWizard}/>
+		 <Route path="/confirm" component={Confirmation}/>
+		 <Route path="/projects" component={WorkflowManagement}/>
+		 <Route path="/register" component={RegisterUser}/>
+		 <Route path="/login" component={Login}/>
+		 <Route path = "/confirmuser" component={ConfirmUser}/>
+		 <Route path="/search" component={AdvancedSearch}/>
+		 <Route path="/results" component={ResultsPage}/>
+		 <Route path="/biblio" component={BiblioPage}/>
+		 <Footer/>
 
-
+	 	</div>
 		</Router>
 		);
 	}

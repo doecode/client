@@ -124,7 +124,7 @@ componentDidMount() {
     const workflowStatus = getQueryParam("workflow");
 
     console.log(workflowStatus);
-    if (window.location.pathname == '/submit') {
+    if (window.location.pathname == '/doecode/submit') {
         this.setState({"showAll": true});
     } else {
         metadata.requireOnlyPublishedFields();
@@ -326,7 +326,7 @@ buildPanel(obj) {
 
         let button = null;
 
-        if (window.location.pathname == '/submit') {
+        if (window.location.pathname == '/doecode/submit') {
         button =             <div className="form-group-xs row">
                             <div className="col-sm-12">
                                 <button style={marginStyle} type="button" className="btn btn-primary btn-lg pull-right" disabled={submitDisabled} onClick={this.submit}>
