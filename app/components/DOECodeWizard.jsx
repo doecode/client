@@ -193,12 +193,12 @@ submit() {
 }
 
 parsePublishResponse(data) {
-    window.location.href = "/doecode/doecode/confirm?workflow=published&code_id=" + data.metadata.code_id;
+    window.location.href = "/doecode/confirm?workflow=published&code_id=" + data.metadata.code_id;
 }
 
 parseSubmitResponse(data) {
 
-    window.location.href = "/doecode/doecode/confirm?workflow=submitted&code_id=" + data.metadata.code_id;
+    window.location.href = "/doecode/confirm?workflow=submitted&code_id=" + data.metadata.code_id;
 }
 
 setActivePanel(currentKey) {
