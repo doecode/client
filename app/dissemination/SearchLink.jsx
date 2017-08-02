@@ -15,7 +15,7 @@ export default class SearchLink extends React.Component {
         searchData.setValue("start", 0);
         searchData.setValue(this.props.field,this.props.value);
         window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
-        window.location.href = "/results";
+        window.location.href = "/doecode/results";
 
       }
 

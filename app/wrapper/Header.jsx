@@ -21,7 +21,7 @@ export default class Header extends React.Component {
     searchData.setValue("start", 0);
     searchData.setValue("all_fields", this.state.all_fields);
     window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
-    window.location.href = "/results";
+    window.location.href = "/doecode/results";
     }
 
 
@@ -40,7 +40,7 @@ export default class Header extends React.Component {
 
                   <div className="mt-1">
                     <div className="col-xs-offset-1 col-xs-3">
-                        <a href="/">
+                        <a href="/doecode">
                           <img className="img-responsive" src="https://www.osti.gov/doecode/images/DOEcode_logo_300px_72ppi.png" alt="DOECode" width="300"/>
                         </a>
                     </div>
@@ -61,7 +61,7 @@ export default class Header extends React.Component {
                                 <a href="#">Software Policy</a>
                             </li>
                             <li>
-                                <a href="/publish">Submit Sofware/Code</a>
+                                <a href="/doecode/publish">Submit Sofware/Code</a>
                             </li>
                             <li>
                                 <a href="#">About</a>

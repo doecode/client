@@ -10,7 +10,7 @@ function doAjax(methodType, url, successCallback, data, errorCallback) {
    let errorCall = errorCallback;
    if (errorCall === undefined) {
      errorCall = (jqXhr, exception) => {
-         window.location.href = '/error';
+         window.location.href = '/doecode/error';
      }
    }
 
@@ -34,11 +34,11 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
     errorCall = (jqXhr, exception) => {
       if (jqXhr.status == 401) {
         window.sessionStorage.lastLocation = window.location.href;
-        window.location.href = '/login?redirect=true';
+        window.location.href = '/doecode/login?redirect=true';
       } else if (jqXhr.status == 403) {
-        window.location.href = '/forbidden'
+        window.location.href = '/doecode/forbidden'
       } else {
-        window.location.href = '/error';
+        window.location.href = '/doecode/error';
       }
     }
   }

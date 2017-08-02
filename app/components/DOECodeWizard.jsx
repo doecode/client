@@ -110,12 +110,12 @@ parseErrorResponse(jqXhr, exception) {
     if (jqXhr.status === 401) {
         window.sessionStorage.lastLocation = window.location.href;
         window.sessionStorage.lastRecord = JSON.stringify(metadata.getData());
-        window.location.href = '/login?redirect=true';
+        window.location.href = '/doecode/login?redirect=true';
 
     } else if (jqXhr.status === 403) {
-        window.location.href = '/forbidden';
+        window.location.href = '/doecode/forbidden';
     } else {
-        window.location.href = '/error';
+        window.location.href = '/doecode/error';
     }
 
 }
@@ -193,12 +193,12 @@ submit() {
 }
 
 parsePublishResponse(data) {
-    window.location.href = "confirm?workflow=published&code_id=" + data.metadata.code_id;
+    window.location.href = "/doecode/doecode/confirm?workflow=published&code_id=" + data.metadata.code_id;
 }
 
 parseSubmitResponse(data) {
 
-    window.location.href = "confirm?workflow=submitted&code_id=" + data.metadata.code_id;
+    window.location.href = "/doecode/doecode/confirm?workflow=submitted&code_id=" + data.metadata.code_id;
 }
 
 setActivePanel(currentKey) {

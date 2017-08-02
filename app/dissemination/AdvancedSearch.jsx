@@ -18,7 +18,7 @@ export default class AdvancedSearch extends React.Component {
     search() {
     searchData.setValue("start", 0);
     window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
-    window.location.href = "/results";
+    window.location.href = "/doecode/results";
     }
 
     //parseSearchResponse

@@ -32,7 +32,7 @@ parseLoginResponse(data) {
         window.sessionStorage.lastLocation = "";
         window.location.href = url;
     } else {
-        window.location.href = "/projects";
+        window.location.href = "/doecode/projects";
     }
 
 }
