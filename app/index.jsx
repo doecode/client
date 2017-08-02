@@ -25,8 +25,9 @@ class DOECodeRouter extends React.Component {
 		return (
 
 		<Router basename="/doecode" history={browserHistory}>
-		<div className="container">
+		<div>
 			<Header/>
+		 <div className="container">
 		 <Route exact path="/" component={Splash}/>
 		 <Route path="/publish" component={DOECodeWizard}/>
 		 <Route path="/submit" component={DOECodeWizard}/>
@@ -38,6 +39,7 @@ class DOECodeRouter extends React.Component {
 		 <Route path="/search" component={AdvancedSearch}/>
 		 <Route path="/results" component={ResultsPage}/>
 		 <Route path="/biblio" component={BiblioPage}/>
+	 </div>
 		 <Footer/>
 
 	 	</div>
