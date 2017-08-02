@@ -14,14 +14,14 @@ export default class DOIPanel extends React.Component {
 	}
 
 	handleInfix(event) {
-		const infix = event.target.value;
+		let infix = event.target.value;
 		this.props.metadata.setValue("doi_infix", infix);
 		const doi = this.props.metadata.getValue("doi");
-		const id = doi.substr(doi.lastIndexOf('/'), doi.length-1);
-		let doeInfix = "DOECode.";
-		if (!infix)
-			doeInfix = "DOECode";
-		this.props.metadata.setValue("doi", this._prefix + doeInfix + infix + id);
+		const id = doi.substr(doi.lastIndexOf('/') + 1, doi.length-1);
+		console.log(id);
+		if (infix)
+					infix += "/";
+		this.props.metadata.setValue("doi", this._prefix + infix + id);
 	}
 
 	handleReserve() {
@@ -48,14 +48,14 @@ export default class DOIPanel extends React.Component {
 			//this.props.metadata.clearErrors("doi");
 			const doiInfo = this.props.metadata.getFieldInfo("doi");
 			const infixInfo = this.props.metadata.getFieldInfo("doi_infix");
-			this.props.metadata.setValue("doi", this._prefix + "DOECode/" + uniqid());
+			this.props.metadata.setValue("doi", this._prefix + uniqid());
 			this.props.metadata.setValue("doi_status", "RES");
 			doiInfo.completed = true;
 			doiInfo.error = '';
 			infixInfo.completed = false;
 			infixInfo.error = '';
 			infixInfo.Panel = "DOI and Release Date"
-			
+
 
 
 		}

@@ -92,6 +92,13 @@ export default class Field extends React.Component {
       required = info.required;
       error = info.error;
       completed = info.completed;
+
+      if (required) {
+            label += " (Required Field)";
+          }
+      else {
+            label += " (Optional Field)";
+      }
     }
 
     if (required)

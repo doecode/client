@@ -251,9 +251,6 @@ buildPanel(obj) {
         <span className="green glyphicon glyphicon-ok"></span>
         }
         {optionalText}
-        {panelStatus.hasOptional && panelStatus.remainingOptional == 0 &&
-        <span className="green glyphicon glyphicon-ok"></span>
-        }
         {this.state.activePanel == obj.key &&
         <span className="pull-right glyphicon glyphicon-chevron-down"></span>
         }
@@ -348,13 +345,14 @@ buildPanel(obj) {
         }
 
         let content = <div>
-        {button}
+
         <PanelGroup defaultActiveKey="1" accordion onSelect={this.setActivePanel}>
         {publishPanels}
         {submitPanels}
 
 
         </PanelGroup>
+        {button}
         {!this.state.showAll &&
         <div className="form-group-xs row text-center">
         <div className="col-xs-offset-3 col-xs-6">
