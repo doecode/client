@@ -157,7 +157,7 @@ parseReceiveResponse(data) {
 
 autopopulate(event) {
     this.setState({"loading": true, "loadingMessage": "Loading"});
-    doAjax('GET', "/api/metadata/autopopulate?repo=" + metadata.getValue('repository_link'), this.parseAutopopulateResponse);
+    doAjax('GET', "/doecode/api/metadata/autopopulate?repo=" + metadata.getValue('repository_link'), this.parseAutopopulateResponse);
     event.preventDefault();
 }
 
@@ -172,7 +172,7 @@ parseAutopopulateResponse(responseData) {
 save() {
 
     this.setState({"loading": true, "loadingMessage": "Saving"});
-    doAuthenticatedAjax('POST', '/api/metadata/', this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
+    doAuthenticatedAjax('POST', '/doecode/api/metadata/', this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
 }
 
 parseSaveResponse(data) {
@@ -184,12 +184,12 @@ publish() {
     console.log(metadata.getData());
 
     this.setState({"loading": true, "loadingMessage": "Publishing"});
-    doAuthenticatedAjax('POST', '/api/metadata/publish', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
+    doAuthenticatedAjax('POST', '/doecode/api/metadata/publish', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
 }
 
 submit() {
     this.setState({"loading": true, "loadingMessage": "Submitting"});
-    doAuthenticatedAjax('POST', '/api/metadata/submit', this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
+    doAuthenticatedAjax('POST', '/doecode/api/metadata/submit', this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
 }
 
 parsePublishResponse(data) {

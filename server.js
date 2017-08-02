@@ -10,7 +10,7 @@ var app = express();
 app.use(compression());
 
 //set up our proxy to the server
-app.use('/api', proxy({target: process.argv[2], changeOrigin: true, pathRewrite: { '^/api' : ''}}));
+app.use('/doecode/api', proxy({target: process.argv[2], changeOrigin: true, pathRewrite: { '^/doecode/api' : ''}}));
 
 // serve our static stuff like index.css
 app.use(express.static(path.join(__dirname, 'dist')));

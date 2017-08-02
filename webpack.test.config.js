@@ -19,12 +19,12 @@ module.exports = {
 
 devServer: {
 proxy: {
-'/api/*': {
+'/doecode/api/*': {
 target: 'http://lxappdev2:18080/doecode/services',
 secure: false,
 changeOrigin: true,
 pathRewrite: {
-'^/api' : ''
+'^/doecode/api' : ''
 }
 }
 }

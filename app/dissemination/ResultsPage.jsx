@@ -24,7 +24,7 @@ export default class ResultsPage extends React.Component {
     //console.log(JSON.stringify(searchData.getData()));
     searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
     console.log(searchData.getData());
-    doAjax('POST', '/api/search/',this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
+    doAjax('POST', '/doecode/api/search/',this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
   }
 
   parseSearchResponse(data) {
@@ -56,13 +56,13 @@ export default class ResultsPage extends React.Component {
  refreshSearch() {
       searchData.setValue("start",Math.floor(searchData.getValue("start")/searchData.getValue("rows")) * searchData.getValue("rows"));
       window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
-      doAjax('POST', '/api/search/',this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
+      doAjax('POST', '/doecode/api/search/',this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
  }
 
   handlePageClick(data) {
     searchData.setValue("start", searchData.getValue("rows") * data.selected);
     window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
-    doAjax('POST', '/api/search/',this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
+    doAjax('POST', '/doecode/api/search/',this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
   }
 
   render() {

@@ -66,7 +66,7 @@ export default class RegisterUser extends React.Component {
 
 
 	register() {
-    	doAjax('POST',"/api/user/register", this.parseRegister, userData.getData(), this.parseError)
+    	doAjax('POST',"/doecode/api/user/register", this.parseRegister, userData.getData(), this.parseError)
 	}
 
 	parseRegister(data) {
@@ -88,7 +88,7 @@ export default class RegisterUser extends React.Component {
 		if (this.state.success) {
 		content =
 		<div>
-		<p>Thank you for registering with DOE Code.</p>		
+		<p>Thank you for registering with DOE Code.</p>
 		</div>;
 		} else {
 		content =

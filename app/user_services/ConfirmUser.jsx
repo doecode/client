@@ -13,7 +13,7 @@ export default class ConfirmUser extends React.Component {
 
 
     componentDidMount() {
-		doAjax('GET', appendQueryString("/api/user/confirm"), this.parseConfirm, undefined, this.parseError);
+		doAjax('GET', appendQueryString("/doecode/api/user/confirm"), this.parseConfirm, undefined, this.parseError);
     }
 
 	parseConfirm(data) {

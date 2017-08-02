@@ -40,7 +40,7 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 		
 	  console.log(obj);
 		    $.ajax({
-		        url: "/api/validation",
+		        url: "/doecode/api/validation",
 		        cache: false,
 		        method: 'POST',
 		        dataType: 'json',
