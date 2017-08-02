@@ -25,7 +25,7 @@ class DOECodeRouter extends React.Component {
 		return (
 
 		<Router basename="/doecode" history={browserHistory}>
-		<div>
+		<div className="container">
 			<Header/>
 		 <Route exact path="/" component={Splash}/>
 		 <Route path="/publish" component={DOECodeWizard}/>

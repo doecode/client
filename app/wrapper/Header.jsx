@@ -36,7 +36,7 @@ export default class Header extends React.Component {
 
         return (
             <nav className="navbar navbar-default">
-                <div className="container-fluid">
+                <div className="container">
 
                   <div className="mt-1">
                     <div className="col-xs-offset-1 col-xs-3">
