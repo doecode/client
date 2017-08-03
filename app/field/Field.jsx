@@ -65,7 +65,9 @@ export default class Field extends React.Component {
     const info = this.props.linkedData.getFieldInfo(field);
 	let labelStyle = this.props.properties.labelStyle != undefined ? this.props.properties.labelStyle : "control-label";
 	const divStyle = this.props.properties.divStyle != undefined ? this.props.properties.divStyle : "";
+        const inputStyle = this.props.properties.inputStyle != undefined ? "form-control " + this.props.properties.inputStyle : "form-control";
 	const messageNode = this.props.properties.messageNode;
+        const wrapperStyleExtra = this.props.properties.wrapperStyleExtra != undefined ? this.props.properties.wrapperStyleExtra : "";
     const elementType = this.props.properties.elementType;
     const noval = this.props.properties.noval;
 
@@ -107,7 +109,7 @@ export default class Field extends React.Component {
 
 
 
-     let wrapperStyle = "form-group form-group-sm row";
+     let wrapperStyle = "form-group row" + wrapperStyleExtra;
 
      if (!noval) {
      if (error) {
@@ -126,16 +128,16 @@ export default class Field extends React.Component {
 	  }
 	  else if (elementType === 'input') {
 		if (!disabled) {
-			input = <input type="text" className="form-control" value={val} onChange={handleChange} onBlur={this.handleBlur} />
+			input = <input type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} />
 		} else {
-			input = <input type="text" className="form-control" value={val} onChange={handleChange} onBlur={this.handleBlur} disabled />
+			input = <input type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} disabled />
 		}
 	  }
 	  else if (elementType === 'password') {
-			input = <input type="password" className="form-control" value={val} onChange={handleChange} onBlur={this.handleBlur} />
+			input = <input type="password" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} />
 	  }
 	  else if (elementType === 'checkbox') {
-		  input = <input type="checkbox" className="" checked={val} onChange={this.toggleCheckbox} />
+		  input = <input type="checkbox" className={inputStyle} checked={val} onChange={this.toggleCheckbox} />
 	  }
 	  else if (elementType === 'select') {
 	    let ph = this.props.properties.placeholder ? this.props.properties.placeholder : "Select any that apply";
@@ -150,13 +152,13 @@ export default class Field extends React.Component {
 	  }
 	  else if (elementType === 'textarea') {
 
-		 input = <textarea className="form-control" value={val} onChange={this.handleChange} onBlur={this.handleBlur} />
+		 input = <textarea className={inputStyle} value={val} onChange={this.handleChange} onBlur={this.handleBlur} />
 	  }
 	  else if (elementType === 'radio') {
 			 return (
            <div className="form-group form-group-sm row">
-					 <div className="col-xs-8 col-md-4">
-					 <label><input type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange} /> {label}</label>
+					 <div>
+					 <label><input  type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange} /> {label}</label>
 					 </div>
             </div>
 					 );
@@ -170,7 +172,7 @@ export default class Field extends React.Component {
 
 	  return(
       <div className={wrapperStyle}>
-      <div className="col-xs-8 col-md-4">
+      <div className="">
       {label &&
       <label className={labelStyle}>
         {label}

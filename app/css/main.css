@@ -167,6 +167,25 @@ html h3 {
     text-align: center;
 }
 
+.footer-link{
+    color:white;
+}
+
+.not-so-wide-row{
+    margin-right:0px !important;
+    margin-left:0px !important;
+}
+
+.large-control-label label.control-label{
+    font-size:23px;
+}
+
+.header-signin-links{
+    color:white;
+    padding-top:8px;
+}
+
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

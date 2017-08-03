@@ -82,7 +82,7 @@ export default class ResultsPage extends React.Component {
 
    console.log("Page: " + (searchData.getValue("start")/searchData.getValue("rows") + 1));
     return(
-    <div className="row">
+    <div className="row not-so-wide-row">
         {/*Sidebar*/}
         <div className="col-xs-2">
             

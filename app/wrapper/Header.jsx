@@ -32,6 +32,11 @@ export default class Header extends React.Component {
         return (
         <nav className="navbar navbar-default main-header" >
             <div className="container-fluid">
+                <div className="pull-right hidden-xs hidden-sm visible-md visible-lg header-signin-links">
+                    <a className="nav-menu-item" href="/doecode/login"><span className="fa fa-user"></span> Sign In</a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a className="nav-menu-item" href="/doecode/#"><span className="fa fa-envelope-o"></span> Contact Us</a>
+                </div>
                 <div className='container hidden-xs hidden-sm visible-md visible-lg'>
                     <br/>
                     <br/>
@@ -88,6 +93,12 @@ export default class Header extends React.Component {
                                     <li className='visible-xs visible-sm hidden-md hidden-lg'>
                                         <label htmlFor="allSearch" className="sr-only">Search DOE Code for Published Software Entries</label>
                                         <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box"  placeholder="Search DOE Code for Published Software Entries"/>
+                                    </li>
+                                    <li className='visible-xs visible-sm hidden-md hidden-lg'>
+                                        <a className="nav-menu-item" href="/doecode/login"><span className="fa fa-user"></span> Login</a>
+                                    </li>
+                                    <li className='visible-xs visible-sm hidden-md hidden-lg'>
+                                        <a className="nav-menu-item" href="/doecode/#"><span className="fa fa-envelope-o"></span> Contact Us</a>
                                     </li>
                                 </ul>
                             </div>
