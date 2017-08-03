@@ -45,6 +45,10 @@
     "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
+    "babel-core": "https://registry.npmjs.org/babel-core/-/babel-core-6.21.0.tgz",
+    "babel-loader": "https://registry.npmjs.org/babel-loader/-/babel-loader-6.4.1.tgz",
+    "compression": "https://registry.npmjs.org/compression/-/compression-1.6.2.tgz",
+    "express": "https://registry.npmjs.org/express/-/express-4.15.2.tgz",
     "griddle-react": "0.8.1",
     "mobx": "^3.0.2",
     "mobx-react": "4.1.3",
