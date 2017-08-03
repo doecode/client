@@ -67,6 +67,8 @@ export default class WorkflowManagement extends React.Component {
         for (let i = 0; i < records.length; i++) {
 
         const record = records[i];
+        const publishUrl = "/doecode/publish?code_id=" + record.code_id;
+        const submitUrl = "/doecode/submit?code_id=" + record.code_id;
         let editUrl = "/submit?code_id=" + record.code_id;
 
         let editMessage = "Continue to E-Link Submission";
@@ -84,14 +86,14 @@ export default class WorkflowManagement extends React.Component {
             title: record.software_title,
             status: record.workflow_status,
             edit: <div className="form-group-xs row">
-          <div className="col-xs-5">
-          <a href={editUrl} className="btn btn-success btn-sm">
-		<span className="glyphicon glyphicon-pencil"></span> {editMessage}
+          <div className="col-xs-3">
+          <a href={publishUrl} className="btn btn-success btn-sm">
+		<span className="glyphicon glyphicon-pencil"></span> Update Metadata
 	</a>
           </div>
             <div className="col-xs-2">
-            <a  href="/registerdoi" className="btn btn-info btn-sm">
-  		<span className="glyphicon glyphicon-pencil"></span> Register DOI
+            <a  href={submitUrl} className="btn btn-info btn-sm">
+  		<span className="glyphicon glyphicon-pencil"></span> Submit to E-Link
   	</a> </div></div>
           });
         }
@@ -143,7 +145,7 @@ export default class WorkflowManagement extends React.Component {
 
         return  (
         		<div>
-
+            <h2> Manage My Projects </h2>
         		<div className="form-group-xs row">
                 <div className="col-sm-12">
                     <a href="/doecode/publish" style={marginStyle} type="button" className="btn btn-success btn-lg pull-right" >

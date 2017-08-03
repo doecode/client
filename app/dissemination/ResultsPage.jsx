@@ -89,7 +89,7 @@ export default class ResultsPage extends React.Component {
                 {/*Row count*/}
                 <div className="col-xs-2"></div>
                 <div className="col-xs-8 center-text">
-                    <SearchField field="rows" label="Rows" elementType="select" options={rowOptions} changeCallback={this.refreshSearch}  />
+                    <SearchField field="rows" label="Rows" elementType="select" options={rowOptions} changeCallback={this.refreshSearch} clearable={false}  />
                 </div>
                 <div className="col-xs-2"></div>
             </div>
@@ -141,7 +141,7 @@ export default class ResultsPage extends React.Component {
         </div>
         {/*Empty sidebar*/}
     </div>
-    
+
     );
   }
 

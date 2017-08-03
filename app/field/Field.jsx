@@ -140,7 +140,8 @@ export default class Field extends React.Component {
 		  input = <input type="checkbox" className={inputStyle} checked={val} onChange={this.toggleCheckbox} />
 	  }
 	  else if (elementType === 'select') {
-	    let ph = this.props.properties.placeholder ? this.props.properties.placeholder : "Select any that apply";
+	    const ph = this.props.properties.placeholder ? this.props.properties.placeholder : "Select any that apply";
+      const clearable = this.props.properties.clearable !== undefined ? this.props.properties.clearable : true;
 	    const errorClass = error ? "field-error" : ""
 
       let simple = true;
@@ -148,7 +149,7 @@ export default class Field extends React.Component {
             val = val.slice();
             simple = false;
       }
-      	input = <Select className={errorClass} allowCreate={this.props.properties.allowCreate} multi={this.props.properties.multi} options={this.props.properties.options} simpleValue delimiter={"\n"} placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} value={val} />
+      	input = <Select className={errorClass} clearable={clearable} allowCreate={this.props.properties.allowCreate} multi={this.props.properties.multi} options={this.props.properties.options} simpleValue delimiter={"\n"} placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} value={val} />
 	  }
 	  else if (elementType === 'textarea') {
 

@@ -42,6 +42,7 @@ constructor(props) {
     this.setActivePanel = this.setActivePanel.bind(this);
     this.buildPanel = this.buildPanel.bind(this);
     this.showAdditionalFields = this.showAdditionalFields.bind(this);
+    this.panelSelect = this.panelSelect.bind(this);
 
     this.state = {
         "loading": false,
@@ -49,7 +50,8 @@ constructor(props) {
         "editLoad": false,
         "published": false,
         "showAll": false,
-        "activePanel": 1
+        "activePanel": 1,
+        "activePanels" : [true,true,true,true,true,true,true,true,true]
     };
 
     publishSteps = [
@@ -242,6 +244,12 @@ setActivePanel(currentKey) {
     }
 }
 
+panelSelect(currentKey) {
+  let activePanels = this.state.activePanels;
+  activePanels[currentKey - 1] = !activePanels[currentKey - 1];
+  this.setState({"activePanels" : activePanels});
+}
+
 buildPanel(obj) {
         let requiredText = "";
         let optionalText = "";
@@ -251,59 +259,54 @@ buildPanel(obj) {
         const panelStatus = metadata.getPanelStatus(obj.name);
 
              if (panelStatus.remainingRequired > 0) {
-                  requiredText += " (Required Fields Remaining: " + panelStatus.remainingString + ")";
+                  requiredText += " (Fields Required) ";
              }
              else {
 
             	 if (panelStatus.hasRequired) {
             		 requiredText += " (All Required Fields Completed) ";
-            	 } else {
-            		 requiredText += " (No Required Fields) ";
             	 }
              }
 
-
-
-        if (panelStatus.hasOptional) {
-             if (panelStatus.remainingOptional > 0) {
-                  optionalText += " (" + panelStatus.remainingOptional + " Optional Field(s) Remaining)";
+/*
+             if (panelStatus.remainingOptional > 0 && panelStatus.hasOptional) {
+                  requiredText += " (Optional Fields) ";
              }
              else {
 
-            	 if (panelStatus.hasOptional) {
-                 optionalText += " (All Optional Fields Completed) ";
-            	 }
+              if (panelStatus.hasOptional) {
+                requiredText += " (All Required Fields Completed) ";
+              }
              }
+             */
+
+        let arrowBool = this.state.activePanel == obj.key;
+
+        console.log(this.state.activePanels);
+        if (window.location.pathname == '/doecode/submit') {
+              arrowBool = this.state.activePanels[obj.key - 1];
         }
 
+        console.log(arrowBool);
         const heading = <div> {obj.name}
         {requiredText}
         {panelStatus.hasRequired && panelStatus.remainingRequired == 0 &&
         <span className="green glyphicon glyphicon-ok"></span>
         }
-        {optionalText}
-        {this.state.activePanel == obj.key &&
+        {arrowBool &&
         <span className="pull-right glyphicon glyphicon-chevron-down"></span>
         }
 
-        {this.state.activePanel != obj.key &&
+        {!arrowBool &&
         <span className="pull-right glyphicon glyphicon-chevron-right"></span>
         }
       </div>;
 
-        return <Panel header={heading} bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
+        const expandedBool = window.location.pathname == '/doecode/submit';
+        return <Panel header={heading} defaultExpanded={expandedBool} onSelect={this.panelSelect} collapsible bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
 
       	<div>
-      	<div className="row">
 
-        <div className="col-sm-12">
-		<button type="button" className="btn btn-info btn-lg pull-right" onClick={this.save}>
-		Save Your Progress
-		</button>
-		</div>
-
-
-		</div>
 
 		</div>
 
@@ -346,9 +349,9 @@ buildPanel(obj) {
 
         let submitPanels = null;
 
-        if (this.state.showAll) {
-        	submitPanels = submitSteps.map(this.buildPanel);
-        }
+
+        submitPanels = submitSteps.map(this.buildPanel);
+
 
         const marginStyle = {
           'margin-bottom' : '5px'
@@ -359,40 +362,53 @@ buildPanel(obj) {
 
         if (window.location.pathname == '/doecode/submit') {
         button =             <div className="form-group-xs row">
-                            <div className="col-sm-12">
+
+                            <div className="col-sm-9">
+                                <button type="button" className="btn btn-info btn-lg pull-right" onClick={this.save}>
+                                    Save Your Progress
+                                  </button>
+                            </div>
+                            <div className="col-sm-3">
                                 <button style={marginStyle} type="button" className="btn btn-primary btn-lg pull-right" disabled={submitDisabled} onClick={this.submit}>
                                     Submit Record to E-Link
                                 </button>
                             </div>
+
+
+
+
+
+
                         </div>
         } else {
           button =           <div className="form-group-xs row">
-                          <div className="col-sm-12">
+
+                          <div className="col-sm-10">
+                              <button type="button" className="btn btn-info btn-lg pull-right" onClick={this.save}>
+                                  Save Your Progress
+                              </button>
+                          </div>
+                          <div className="col-sm-2">
                               <button style={marginStyle} type="button" className="btn btn-lg btn-primary pull-right" disabled={publishDisabled} onClick={this.publish}>
                                   Publish Record
                               </button>
                           </div>
+
+
                       </div>
         }
 
+        const accordionBool = window.location.pathname == '/doecode/publish';
+
         let content = <div>
 
-        <PanelGroup defaultActiveKey="1" accordion onSelect={this.setActivePanel}>
+        <PanelGroup defaultActiveKey="1" accordion={accordionBool} onSelect={this.setActivePanel}>
         {publishPanels}
         {submitPanels}
 
 
         </PanelGroup>
         {button}
-        {!this.state.showAll &&
-        <div className="form-group-xs row text-center">
-        <div className="col-xs-offset-3 col-xs-6">
-        <button type="button" className="btn btn-info btn-lg" onClick={this.showAdditionalFields}>
-        <span className="glyphicon glyphicon-plus"></span> Show Additional Optional Fields
-        </button>
-        </div>
-        </div>
-        }
 
       </div>;
 
