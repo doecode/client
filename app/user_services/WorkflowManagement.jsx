@@ -55,7 +55,7 @@ export default class WorkflowManagement extends React.Component {
 
     componentDidMount() {
 
-        doAuthenticatedAjax('GET', "api/metadata/projects", this.parseReceiveResponse);
+        doAuthenticatedAjax('GET', "/doecode/api/metadata/projects", this.parseReceiveResponse);
 
 
     }
@@ -146,7 +146,7 @@ export default class WorkflowManagement extends React.Component {
 
         		<div className="form-group-xs row">
                 <div className="col-sm-12">
-                    <a href="/publish" style={marginStyle} type="button" className="btn btn-success btn-lg pull-right" >
+                    <a href="/doecode/publish" style={marginStyle} type="button" className="btn btn-success btn-lg pull-right" >
                        Add New Record
                     </a>
                 </div>

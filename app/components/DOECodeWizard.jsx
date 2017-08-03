@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {doAjax, doAuthenticatedAjax, appendQueryString, getQueryParam} from '../utils/utils';
+import {doAjax, checkIsAuthenticated, doAuthenticatedAjax, appendQueryString, getQueryParam} from '../utils/utils';
 import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
 import EntryStep from './EntryStep';
@@ -134,12 +134,15 @@ componentDidMount() {
 
     if (window.sessionStorage.lastRecord) {
         //do an authenticated ajax against our allowed endpoing to check if valid and then do this in the success response...
+        checkIsAuthenticated();
         metadata.loadValues(JSON.parse(window.sessionStorage.lastRecord));
         window.sessionStorage.lastRecord = "";
 
     } else if (codeID) {
         this.setState({"loading" : true, "loadingMessage" : "Loading"});
-        doAuthenticatedAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse);
+        doAuthenticatedAjax('GET', "/doecode/api/metadata/" + codeID, this.parseReceiveResponse);
+    } else {
+        checkIsAuthenticated();
     }
 
     //else, do an authenticated check...

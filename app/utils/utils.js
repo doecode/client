@@ -27,21 +27,17 @@ function doAjax(methodType, url, successCallback, data, errorCallback) {
 
   }
 
+
 function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallback) {
 
-  let errorCall = errorCallback;
-  if (errorCall === undefined) {
-    errorCall = (jqXhr, exception) => {
-      if (jqXhr.status == 401) {
-        window.sessionStorage.lastLocation = window.location.href;
-        window.location.href = '/doecode/login?redirect=true';
-      } else if (jqXhr.status == 403) {
-        window.location.href = '/doecode/forbidden'
-      } else {
-        window.location.href = '/doecode/error';
-      }
-    }
+  if (errorCallback === undefined) {
+    errorCallback = handleError;
   }
+
+  if (successCallback === undefined) {
+    successCallback = ()=> {};
+  }
+
     $.ajax({
       url: url,
       cache: false,
@@ -53,9 +49,39 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
       data: JSON.stringify(data),
       contentType: "application/json; charset=utf-8",
       success: successCallback,
-      error: errorCall
+      error: errorCallback
     });
 
+  }
+
+  function checkIsAuthenticated() {
+
+    const successCallback = () => {};
+
+    $.ajax({
+      url: '/doecode/api/user/authenticated',
+      cache: false,
+      method: 'GET',
+      beforeSend: function(request) {
+        request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+      },
+      success: successCallback,
+      error: handleError
+    });
+  }
+
+  function handleError(jqXhr, exception) {
+    console.log("Hmm");
+    console.log(jqXhr.status);
+    if (jqXhr.status == 401) {
+      window.sessionStorage.lastLocation = window.location.href;
+      window.location.href = '/doecode/login?redirect=true';
+    } else if (jqXhr.status == 403) {
+      window.location.href = '/doecode/forbidden'
+    } else {
+      //window.location.href = '/doecode/error';
+      console.log("Hey");
+    }
   }
 
   function appendQueryString(url) {
@@ -107,6 +133,7 @@ function getChildData(type) {
 
 export {doAjax};
 export {doAuthenticatedAjax};
+export {checkIsAuthenticated};
 export {appendQueryString};
 export {getQueryParam};
 export {getChildData};

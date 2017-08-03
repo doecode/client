@@ -19,10 +19,7 @@ export default class Login extends React.Component {
 	}
 
 	login() {
-		console.log(userData.getData());
 		doAjax("POST", "/doecode/api/user/login", this.parseLoginResponse, userData.getData());
-
-
 	}
 
 parseLoginResponse(data) {

@@ -25,7 +25,7 @@ export default class BiblioPage extends React.Component {
              if (codeID) {
             	 console.log("Calling");
        //          this.setState({"loading" : true, "loadingMessage" : "Loading"});
-             	doAjax('GET', "api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
+             	doAjax('GET', "/doecode/api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
              } else {
             	 console.log("This page is invalid...");
              }
