@@ -140,7 +140,7 @@ componentDidMount() {
 
     } else if (codeID) {
         this.setState({"loading" : true, "loadingMessage" : "Loading"});
-        doAuthenticatedAjax('GET', "/doecode/api/metadata/" + codeID, this.parseReceiveResponse);
+        doAuthenticatedAjax('GET', "/doecode/api/metadata/edit/" + codeID, this.parseReceiveResponse);
     } else {
         checkIsAuthenticated();
     }
