@@ -82,9 +82,18 @@ export default class ResultsPage extends React.Component {
 
    console.log("Page: " + (searchData.getValue("start")/searchData.getValue("rows") + 1));
     return(
-    <div className="container-fluid">
-
-      <div className=" col-xs-offset-2 col-xs-4">
+    <div className="row">
+        {/*Sidebar*/}
+        <div className="col-xs-2">
+            
+        </div>
+        
+                 {/*Center Content*/}
+        <div className="col-xs-8">
+            
+            <div className='row'>
+            {/*previous next*/}
+      <div className="col-md-6 col-xs-12 center-text">
         <ReactPaginate previousLabel={"previous"}
                nextLabel={"next"}
                breakLabel={<a href="#">...</a>}
@@ -98,13 +107,23 @@ export default class ResultsPage extends React.Component {
                subContainerClassName={"pages pagination"}
 activeClassName={"active"} />
       </div>
-      <div className="col-xs-6">
+            {/*Row count*/}
+      <div className="col-md-6 col-xs-12 center-text">
         <SearchField field="rows" label="Rows" elementType="select" options={rowOptions} changeCallback={this.refreshSearch}  />
       </div>
-      <div className=" col-xs-offset-2 col-xs-10">
+            </div>
+            {/*Actual search results*/}
+            <div className="row">
+      <div className="col-xs-12">
       {content}
       </div>
-    </div>);
+            </div>
+        </div>
+                 {/*Empty sidebar*/}
+        <div className="col-xs-2"></div>
+    </div>
+    
+    );
   }
 
 }

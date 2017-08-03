@@ -15,6 +15,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, browserHistory,IndexRoute} from 'react-router-dom';
 
+import css from './css/main.css';
 class DOECodeRouter extends React.Component {
 
 	constructor(props) {

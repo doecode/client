@@ -29,53 +29,74 @@ export default class Header extends React.Component {
 
 
     render() {
-
-        const inputStyle = {
-            "fontSize": "20px"
-        };
-
         return (
-            <nav className="navbar navbar-default">
-                <div className="container">
-
-                  <div className="mt-1">
-                    <div className="col-xs-offset-1 col-xs-3">
-                        <a href="/doecode">
-                          <img className="img-responsive" src="https://www.osti.gov/doecode/images/DOEcode_logo_300px_72ppi.png" alt="DOECode" width="300"/>
-                        </a>
+        <nav className="navbar navbar-default main-header" >
+            <div className="container-fluid">
+                <div className='container hidden-xs hidden-sm visible-md visible-lg'>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div className='row'>
+                        <div className="col-xs-4 right-text">
+                            <a href="/doecode">
+                                <img src="https://www.osti.gov/doecode/images/DOEcode_logo_300px_72ppi.png" alt="DOECode" width="300"/>
+                            </a>
+                        </div>
+                        <div className="col-xs-6">
+                            <label htmlFor="allSearch" className="sr-only">Search DOE Code for Published Software Entries</label>
+                            <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box input-lg"  placeholder="Search DOE Code for Published Software Entries"/>
+                        </div>
+                        <div className="col-xs-2">
+                            <button type="button" className="btn btn-success btn-lg" onClick={this.search}>
+                                <span className="glyphicon glyphicon-search"></span>  Search
+                            </button>
+                        </div>
                     </div>
-                    <div className="col-xs-4">
-                        <label htmlFor="allSearch" className="sr-only">Search DOE Code for Published Software Entries</label>
-                        <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} id="allSearch" className="form-control" style={inputStyle} placeholder="Search DOE Code for Published Software Entries"></input>
-
-                    </div>
-                    <div className="col-xs-4">
-                      <button type="button" className="btn btn-success" onClick={this.search}>
-                        <span className="glyphicon glyphicon-search"></span>  Search
-                      </button>
-                    </div>
-                  </div>
-                    <div className="col-xs-offset-1 col-xs-9">
-                        <ul className="nav navbar-nav">
-                            <li>
-                                <a href="#">Software Policy</a>
-                            </li>
-                            <li>
-                                <a href="/doecode/publish">Submit Sofware/Code</a>
-                            </li>
-                            <li>
-                                <a href="#">About</a>
-                            </li>
-                            <li>
-                                <a href="#">Communications/Resources</a>
-                            </li>
-                            <li>
-                                <a href="#">FAQs</a>
-                            </li>
-                        </ul>
+                    <br/>
+                    <br/>
+                </div>
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col-xs-12'>
+                            <div className="navbar-header">
+                                <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#header-nav-collapse">
+                                    <span className="icon-bar"></span>
+                                    <span className="icon-bar"></span>
+                                    <span className="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div className="collapse navbar-collapse" id='header-nav-collapse'>
+                                <ul className='nav navbar-nav nav-menu'>
+                                    <li className='nav-menu-item-special'>
+                                        <a className='nav-menu-item' href="/doecode/">Home</a>
+                                    </li>
+                                    <li>
+                                        <a className='nav-menu-item' href="#">Software Policy</a>
+                                    </li>
+                                    <li>
+                                        <a className='nav-menu-item' href="/doecode/publish"><span className="fa fa-sign-in"></span> Submit Sofware/Code</a>
+                                    </li>
+                                    <li>
+                                        <a className='nav-menu-item' href="#"><span className="fa fa-building-o"></span> About</a>
+                                    </li>
+                                    <li>
+                                        <a className='nav-menu-item' href="#">Communications/Resources</a>
+                                    </li>
+                                    <li>
+                                        <a className='nav-menu-item' href="#"><span className="fa fa-question"></span> FAQs</a>
+                                    </li>
+                                    <li className='visible-xs visible-sm hidden-md hidden-lg'>
+                                        <label htmlFor="allSearch" className="sr-only">Search DOE Code for Published Software Entries</label>
+                                        <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box"  placeholder="Search DOE Code for Published Software Entries"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </nav>
+            </div>
+        </nav>
+
         );
 
     }

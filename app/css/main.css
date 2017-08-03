@@ -1,50 +1,50 @@
-  /* local page styles */
-  html h1 {
+/* local page styles */
+html h1 {
     font-size: 26px;
     margin-left: 10px;
-  }
-  html h2 {
+}
+html h2 {
     font-size: 22px;
     margin-left: 10px;
-  }
-  html h3 {
+}
+html h3 {
     font-size: 14px;
     margin-left: 10px;
-  }
+}
 
 .no-margin-left{
-margin-left: 0;
+    margin-left: 0;
 }
 
 .required a {
-	color: #990000 !important
+    color: #990000 !important
 }
 
 .field-error-wrapper {
-     display: inline-block;
-     position: relative;
+    display: inline-block;
+    position: relative;
 }
 
 .field-error {
-border: 1px solid #a94442;
+    border: 1px solid #a94442;
 
 }
 
 .field-error .Select-control {
-	border: 1px solid #a94442;
+    border: 1px solid #a94442;
 }
 
 .error-color {
-	color: #a94442;
+    color: #a94442;
 }
 
 .LabelColumn {
-  width: 150px;
+    width: 150px;
 }
 
 .req:before{
-  content: "* ";
-  position:relative;
+    content: "* ";
+    position:relative;
 }
 
 .loader {
@@ -57,30 +57,30 @@ border: 1px solid #a94442;
 }
 
 .green {
-	color: green;
+    color: green;
 }
 
 .biblio-description {
-	padding-right: 10px;
-	padding-left: 10px;
-	padding-bottom: 15px;
-	border-bottom: 1px solid #cccccc;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #cccccc;
 }
 
 .citation-details-div dl {
-	padding-top:5px;
-	padding-bottom:5px;
+    padding-top:5px;
+    padding-bottom:5px;
 }
 .citation-details-div dl:nth-child(2n+1){
-	background-color: #ebebeb;
+    background-color: #ebebeb;
 }
 
 .search-result-title {
-  font-size: 17px;
+    font-size: 17px;
 }
 
 .search-result-row{
-	overflow: auto;
+    overflow: auto;
 }
 
 .rounded{
@@ -88,37 +88,37 @@ border: 1px solid #a94442;
 }
 
 .search-result-author {
-  font-size: 12px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  color: green;
+    font-size: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: green;
 }
 
 .search-result-release-date {
-  font-size:14px;
+    font-size:14px;
 }
 
 .search-result-doi {
-  font-size:15px;
+    font-size:15px;
 }
 
 .col {
-  -webkit-flex-basis: 0;
-      -ms-flex-preferred-size: 0;
-          flex-basis: 0;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  max-width: 100%;
+    -webkit-flex-basis: 0;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
 }
 
 .white {
-  color: white;
+    color: white;
 }
 
 .mb-1 {
-  margin-bottom: 1rem!important;
+    margin-bottom: 1rem!important;
 }
 
 .mt-1 {
@@ -126,12 +126,91 @@ border: 1px solid #a94442;
 }
 
 .mt-3 {
-  margin-top: 3rem!important;
+    margin-top: 3rem!important;
 }
 
+.center-text{
+    text-align:center !important;
+}
 
+.right-text{
+    text-align:right;
+}
+
+.main-header{
+    background-image: linear-gradient(rgb(30, 111, 146), rgb(1, 53, 88) 100%);
+}
+
+.search-box{
+    font-size: 20px;
+}
+
+.nav-menu{
+
+}
+
+.nav-menu-item{
+    padding-left:25px !important;
+    padding-right:25px !important;
+    padding-top:10px !important;
+    padding-bottom:10px !important;
+    color:white !important;
+    font-size:16px !important;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+
+/*!!!!!!!MEDIA QUERIES!!!!!!*/
+@media only screen and (min-width : 320px) {
+    .nav-menu li{
+        border-right:none;
+    }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+    .nav-menu li{
+        border-right:none;
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    .nav-menu li{
+        border-right:none;
+    }
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    .nav-menu li{
+        border-right:1px solid rgba(255,255,255,0.2);
+    }
+    .nav-menu-item-special{
+        border-left:1px solid rgba(255,255,255,0.2);
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    .nav-menu li{
+        border-right:1px solid rgba(255,255,255,0.2);
+    }
+    .nav-menu-item-special{
+        border-left:1px solid rgba(255,255,255,0.2);
+    }
 }

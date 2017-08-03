@@ -16,8 +16,7 @@ import ConfirmStep from './ConfirmStep';
 import RIsStep from './RIsStep';
 import {PanelGroup, Panel} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
-
-import css from '../css/main.css';
+/*import css from '../css/main.css';*/
 
 const metadata = new Metadata();
 
