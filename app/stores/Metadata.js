@@ -117,6 +117,11 @@ deserializeData(data) {
 
     for (var field in data) {
 
+      if (field === 'file_name' && data[field]) {
+        this.fieldMap['files'] = data[field];
+        this.infoSchema['files'].completed = true;
+      }
+
         if (this.fieldMap[field] !== undefined && data[field] !== undefined && !(Array.isArray(data[field]) && data[field].length === 0)) {
 
             if (parents.indexOf(field) > -1) {

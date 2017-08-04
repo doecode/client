@@ -181,10 +181,10 @@ save() {
 
     this.setState({"loading": true, "loadingMessage": "Saving"});
 
-    if (metadata.getValue("accessibility") == 'OS' || metadata.getValues("files").length == 0) {
+    if (metadata.getValue("accessibility") == 'OS' || (Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length == 0)) {
       doAuthenticatedAjax('POST', '/doecode/api/metadata/', this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
     } else {
-      doMultipartSubmission('/doecode/api/metadata/',this.parseSaveResponse);
+      this.doMultipartSubmission('/doecode/api/metadata/',this.parseSaveResponse);
   }
 }
 
@@ -192,19 +192,21 @@ publish() {
     console.log(metadata.getData());
 
     this.setState({"loading": true, "loadingMessage": "Publishing"});
-    if (metadata.getValue("accessibility") == 'OS' || metadata.getValues("files").length == 0) {
+    const justFileName = !Array.isArray(metadata.getValue("files").slice());
+    if (metadata.getValue("accessibility") == 'OS' || justFileName || metadata.getValue("files").length == 0) {
       doAuthenticatedAjax('POST', '/doecode/api/metadata/publish', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
     } else {
-      doMultipartSubmission('/doecode/api/metadata/publish',this.parsePublishResponse);
+      this.doMultipartSubmission('/doecode/api/metadata/publish',this.parsePublishResponse);
   }
 }
 
 submit() {
     this.setState({"loading": true, "loadingMessage": "Submitting"});
-    if (metadata.getValue("accessibility") == 'OS') {
+    const justFileName = !Array.isArray(metadata.getValue("files").slice());
+    if (metadata.getValue("accessibility") == 'OS' || justFileName) {
       doAuthenticatedAjax('POST', '/doecode/api/metadata/submit', this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
   } else {
-      doMultipartSubmission('/doecode/api/metadata/submit',this.parseSubmitResponse);
+      this.doMultipartSubmission('/doecode/api/metadata/submit',this.parseSubmitResponse);
   }
 }
 

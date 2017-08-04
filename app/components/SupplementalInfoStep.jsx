@@ -33,11 +33,9 @@ export default class SupplementalInfoStep extends React.Component {
 	render() {
 
 		const files = metadata.getValue("files");
-		let fileName = "";
-		if (Array.isArray(files)) {
+		let fileName = files;
+		if (Array.isArray(files.slice()) && files.length > 0) {
 		fileName = files[0].name;
-		} else {
-			fileName = files;
 		}
 		const accessibility = metadata.getValue("accessibility");
 
