@@ -36,7 +36,7 @@ export default class Header extends React.Component {
                 <div className="pull-right hidden-xs hidden-sm visible-md visible-lg header-signin-links">
                     <a className="nav-menu-item" href="/doecode/login"><span className="fa fa-user"></span> Sign In</a>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a className="nav-menu-item" href="/doecode/#"><span className="fa fa-envelope-o"></span> Contact Us</a>
+                    <a className="nav-menu-item" href="/doecode/contact"><span className="fa fa-envelope-o"></span> Contact Us</a>
                 </div>
                 <div className='container hidden-xs hidden-sm visible-md visible-lg'>
                     <br/>
@@ -95,7 +95,7 @@ export default class Header extends React.Component {
                                         <a className="nav-menu-item" href="/doecode/login"><span className="fa fa-user"></span> Login</a>
                                     </li>
                                     <li className='visible-xs visible-sm hidden-md hidden-lg'>
-                                        <a className="nav-menu-item" href="/doecode/#"><span className="fa fa-envelope-o"></span> Contact Us</a>
+                                        <a className="nav-menu-item" href="/doecode/contact"><span className="fa fa-envelope-o"></span> Contact Us</a>
                                     </li>
                                     {/*
                                     <li className='visible-xs visible-sm hidden-md hidden-lg'>

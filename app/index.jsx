@@ -12,9 +12,9 @@ import AboutPage from './static_content/AboutPage';
 import CommuncationsPage from './static_content/CommunicationsPage';
 import PolicyPage from './static_content/PolicyPage';
 import FAQPage from './static_content/FAQPage';
+import ContactPage from './static_content/ContactPage';
 import Header from './wrapper/Header';
 import Footer from './wrapper/Footer';
-import Push from './wrapper/Push';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, browserHistory,IndexRoute} from 'react-router-dom';
@@ -49,8 +49,9 @@ class DOECodeRouter extends React.Component {
                                 <Route path="/communcations" component={CommuncationsPage}/>
                                 <Route path="/policy" component={PolicyPage}/>
                                 <Route path="/faq" component={FAQPage}/>
+                                <Route path="/contact" component={ContactPage}/>
                             </div>
-                            <Push/>
+                            
                         </div>
                         <Footer/>
                     </div>

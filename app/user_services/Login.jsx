@@ -53,24 +53,29 @@ parseLoginResponse(data) {
 	render() {
 
 		return(
-                <div className="main-page-wrapper">
-                    <div className="row not-so-wide-row">
-                        <div className="col-md-4"></div>
-                        <div className="col-md-4 col-xs-12 center-text">
-                            <div className='form-horizontal large-control-label'>
-                                <UserField noval={true} field="email" label="Email Address" elementType="input" inputStyle=" input-lg "/>
-                                <UserField noval={true} field="password" label="Password" elementType="password" inputStyle=" input-lg "/>
-                                <br/>
-                                <br/>
-                                <button type="button" className="btn btn-primary btn-lg" onClick={this.login}>
-                                    Login
-                                </button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button type="button" className="btn btn-success btn-lg" onClick={this.register}>Register</button>
-                            </div>
+               
+                <div className="row not-so-wide-row">
+                    <div className="col-md-4"></div>
+                    <div className="col-md-4 col-xs-12 center-text">
+                        <br/>
+                        <br/>
+                        <h2 className="static-content-title">Login</h2>
+                        <br/>
+                        <br/>
+                        <div className='form-horizontal large-control-label'>
+                            <UserField noval={true} field="email" label="Email Address" elementType="input" inputStyle=" input-lg "/>
+                            <UserField noval={true} field="password" label="Password" elementType="password" inputStyle=" input-lg "/>
+                            <br/>
+                            <br/>
+                            <button type="button" className="btn btn-primary btn-lg" onClick={this.login}>
+                                Login
+                            </button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button" className="btn btn-success btn-lg" onClick={this.register}>Register</button>
                         </div>
-                        <div className="col-md-4"></div>
+                        
                     </div>
+                    <div className="col-md-4"></div>
                 </div>
                 );
 

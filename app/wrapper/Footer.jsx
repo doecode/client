@@ -9,7 +9,7 @@ export default class Footer extends React.Component {
     render() {
         return (
 
-            <div className="footer footer-bottom">
+            <footer className="footer footer-bottom">
                 <div className="container">
                     <div className="row">
                         <div className="col text-center">
@@ -24,7 +24,7 @@ export default class Footer extends React.Component {
                         <a href="#" className="footer-link">Contact Us</a>
                     </div>
                 </div>
-            </div>
+            </footer>
         
         );
     }

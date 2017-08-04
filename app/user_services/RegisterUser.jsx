@@ -58,10 +58,6 @@ export default class RegisterUser extends React.Component {
 		newState.validEmail = validation.validateEmail(email) === "";
 		this.setState(newState);
 
-
-
-
-
 	}
 
 
@@ -92,39 +88,36 @@ export default class RegisterUser extends React.Component {
 		</div>;
 		} else {
 		content =
-        <div>
-
-        <div className="col-md-8">
-    	<UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword}/>
-    	<UserField noval={true} field="password" label="Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} />
-    	<UserField noval={true} field="confirm_password" label="Confirm Password" elementType="password" handleChange={this.updateConfirmAndCheckPassword}/>
-    		<button type="button" className="btn btn-lg btn-success" disabled={!validPassword} onClick={this.register}>
-    		Register
-    		</button>
-    	</div>
-
-    	<div className="col-md-4">
-        <p>All fields are required.</p>
-        <p>Passwords must:</p>
-        <ul>
-
-            <li>Be at least 8 characters long. {this.state.longEnough &&<span className="glyphicon glyphicon-ok green"></span> }</li>
-            <li>Contain at least one special character. {this.state.hasSpecial &&<span className="glyphicon glyphicon-ok green"></span> }  </li>
-            <li>Contain at least one number character. {this.state.hasNumber &&<span className="glyphicon glyphicon-ok green"></span> } </li>
-            <li>Not contain the login name. {!this.state.containsName &&<span className="glyphicon glyphicon-ok green"></span> }</li>
-            <li>Contain a mixture of upper and lowercase letters. {this.state.upperAndLower &&<span className="glyphicon glyphicon-ok green"></span> } </li>
-            <li>Password must match Confirm Password. {this.state.matches &&<span className="glyphicon glyphicon-ok green"></span> } </li>
-        </ul>
-        </div>
-    </div>;
+                <div className="row not-so-wide-row">
+                    <div className="col-md-1"> </div>
+                    <div className="col-md-5 col-xs-12">
+                        <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword}/>
+                        <UserField noval={true} field="password" label="Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} />
+                        <UserField noval={true} field="confirm_password" label="Confirm Password" elementType="password" handleChange={this.updateConfirmAndCheckPassword}/>
+                        <button type="button" className="btn btn-lg btn-success" disabled={!validPassword} onClick={this.register}>
+                            Register
+                        </button>
+                        <br/>
+                    </div>
+                    <div className="col-md-2"> </div>
+                    <div className="col-md-4 col-xs-12">
+                        <p>All fields are required.</p>
+                        <p>Passwords must:</p>
+                        <ul>
+                            <li>Be at least 8 characters long. {this.state.longEnough &&<span className="glyphicon glyphicon-ok green"></span> }</li>
+                            <li>Contain at least one special character. {this.state.hasSpecial &&<span className="glyphicon glyphicon-ok green"></span> }  </li>
+                            <li>Contain at least one number character. {this.state.hasNumber &&<span className="glyphicon glyphicon-ok green"></span> } </li>
+                            <li>Not contain the login name. {!this.state.containsName &&<span className="glyphicon glyphicon-ok green"></span> }</li>
+                            <li>Contain a mixture of upper and lowercase letters. {this.state.upperAndLower &&<span className="glyphicon glyphicon-ok green"></span> } </li>
+                            <li>Password must match Confirm Password. {this.state.matches &&<span className="glyphicon glyphicon-ok green"></span> } </li>
+                        </ul>
+                    </div>
+                </div>;
     }
 		return(
 		<div className="container-fluid form-horizontal">
 
 		{content}
-
-
-
 
 		</div>);
 

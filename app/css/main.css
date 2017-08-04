@@ -198,13 +198,14 @@ html, body{
     margin:0 ;
 }
 
+
 .wrapper{
-    min-height:100% ;
-    margin-bottom:-124px ;
+    
+    min-height: calc(100vh - 124px/*height of footer*/);
 }
 
-.footer, .push{
-    height:124px ;
+.footer{
+    height:124px;
 }
 
 .static-content{
