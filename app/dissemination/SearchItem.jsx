@@ -33,7 +33,7 @@ export default class SearchItem extends React.Component {
         if (softwareTitle === undefined)
             return (null);
 
-        const biblioUrl = "/biblio?code_id=" + data.codeId;
+        const biblioUrl = "/doecode/biblio?code_id=" + data.codeId;
 
         return (
 
