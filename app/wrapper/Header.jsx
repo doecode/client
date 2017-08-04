@@ -30,6 +30,7 @@ export default class Header extends React.Component {
 
     render() {
         return (
+        
         <nav className="navbar navbar-default main-header" >
             <div className="container-fluid">
                 <div className="pull-right hidden-xs hidden-sm visible-md visible-lg header-signin-links">
@@ -73,26 +74,22 @@ export default class Header extends React.Component {
                             <div className="collapse navbar-collapse" id='header-nav-collapse'>
                                 <ul className='nav navbar-nav nav-menu'>
                                     <li className='nav-menu-item-special'>
-                                        <a className='nav-menu-item' href="/doecode/">Home</a>
+                                        <a className='nav-menu-item' href="/doecode/"><span className='fa fa-home'></span> Home</a>
                                     </li>
                                     <li>
-                                        <a className='nav-menu-item' href="#">Software Policy</a>
+                                        <a className='nav-menu-item' href="/doecode/policy"><span className='fa fa-folder-open-o'></span> Software Policy</a>
                                     </li>
                                     <li>
                                         <a className='nav-menu-item' href="/doecode/publish"><span className="fa fa-sign-in"></span> Submit Sofware/Code</a>
                                     </li>
                                     <li>
-                                        <a className='nav-menu-item' href="#"><span className="fa fa-building-o"></span> About</a>
+                                        <a className='nav-menu-item' href="/doecode/about"><span className="fa fa-building-o"></span> About</a>
                                     </li>
                                     <li>
-                                        <a className='nav-menu-item' href="#">Communications/Resources</a>
+                                        <a className='nav-menu-item' href="/doecode/communcations"><span className='fa fa-newspaper-o'></span> Communications/Resources</a>
                                     </li>
                                     <li>
-                                        <a className='nav-menu-item' href="#"><span className="fa fa-question"></span> FAQs</a>
-                                    </li>
-                                    <li className='visible-xs visible-sm hidden-md hidden-lg'>
-                                        <label htmlFor="allSearch" className="sr-only">Search DOE Code for Published Software Entries</label>
-                                        <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box"  placeholder="Search DOE Code for Published Software Entries"/>
+                                        <a className='nav-menu-item' href="/doecode/faq"><span className="fa fa-question"></span> FAQs</a>
                                     </li>
                                     <li className='visible-xs visible-sm hidden-md hidden-lg'>
                                         <a className="nav-menu-item" href="/doecode/login"><span className="fa fa-user"></span> Login</a>
@@ -100,6 +97,12 @@ export default class Header extends React.Component {
                                     <li className='visible-xs visible-sm hidden-md hidden-lg'>
                                         <a className="nav-menu-item" href="/doecode/#"><span className="fa fa-envelope-o"></span> Contact Us</a>
                                     </li>
+                                    {/*
+                                    <li className='visible-xs visible-sm hidden-md hidden-lg'>
+                                        <label htmlFor="allSearch" className="sr-only">Search DOE Code for Published Software Entries</label>
+                                        <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box"  placeholder="Search DOE Code for Published Software Entries"/>
+                                    </li>
+                                    */}
                                 </ul>
                             </div>
                         </div>

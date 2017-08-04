@@ -8,7 +8,8 @@ export default class Footer extends React.Component {
 
     render() {
         return (
-            <div className="footer-bottom">
+
+            <div className="footer footer-bottom">
                 <div className="container">
                     <div className="row">
                         <div className="col text-center">

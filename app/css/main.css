@@ -185,6 +185,37 @@ html h3 {
     padding-top:8px;
 }
 
+.footer-bottom{
+    background-color:#013558;
+}
+
+.padblock{
+    padding: 0 35px;
+}
+
+html, body{
+    height:100% ;
+    margin:0 ;
+}
+
+.wrapper{
+    min-height:100% ;
+    margin-bottom:-124px ;
+}
+
+.footer, .push{
+    height:124px ;
+}
+
+.static-content{
+    font-size:19px;
+}
+
+.static-content-title{
+    font-weight:500;
+    font-size:42px;
+    margin-left:0px;
+}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
