@@ -37,6 +37,7 @@ constructor(props) {
     this.save = this.save.bind(this);
     this.publish = this.publish.bind(this);
     this.submit = this.submit.bind(this);
+    this.doMultipartSubmission = this.doMultipartSubmission.bind(this);
     this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
     this.parseErrorResponse = this.parseErrorResponse.bind(this);
     this.setActivePanel = this.setActivePanel.bind(this);
@@ -173,10 +174,46 @@ parseAutopopulateResponse(responseData) {
     this.setState({"loading": false, "loadingMessage": ""});
 }
 
+
+
+
 save() {
 
     this.setState({"loading": true, "loadingMessage": "Saving"});
-    doAuthenticatedAjax('POST', '/doecode/api/metadata/', this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
+
+    if (metadata.getValue("accessibility") == 'OS' || metadata.getValues("files").length == 0) {
+      doAuthenticatedAjax('POST', '/doecode/api/metadata/', this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
+    } else {
+      doMultipartSubmission('/doecode/api/metadata/',this.parseSaveResponse);
+  }
+}
+
+publish() {
+    console.log(metadata.getData());
+
+    this.setState({"loading": true, "loadingMessage": "Publishing"});
+    if (metadata.getValue("accessibility") == 'OS' || metadata.getValues("files").length == 0) {
+      doAuthenticatedAjax('POST', '/doecode/api/metadata/publish', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
+    } else {
+      doMultipartSubmission('/doecode/api/metadata/publish',this.parsePublishResponse);
+  }
+}
+
+submit() {
+    this.setState({"loading": true, "loadingMessage": "Submitting"});
+    if (metadata.getValue("accessibility") == 'OS') {
+      doAuthenticatedAjax('POST', '/doecode/api/metadata/submit', this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
+  } else {
+      doMultipartSubmission('/doecode/api/metadata/submit',this.parseSubmitResponse);
+  }
+}
+
+doMultipartSubmission(url, successCallback) {
+  const files = metadata.getValue("files");
+  let formData = new FormData();
+  formData.append('file', files[0]);
+  formData.append('metadata', JSON.stringify(metadata.serializeData()));
+  doAuthenticatedMultipartRequest(url,formData, successCallback, this.parseErrorResponse);
 }
 
 parseSaveResponse(data) {
@@ -184,25 +221,6 @@ parseSaveResponse(data) {
     metadata.setValue("code_id", data.metadata.code_id);
 }
 
-publish() {
-    console.log(metadata.getData());
-
-    //this.setState({"loading": true, "loadingMessage": "Publishing"});
-    if (metadata.getValue("accessibility") == 'OS') {
-    doAuthenticatedAjax('POST', '/doecode/api/metadata/publish', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
-    } else {
-      const files = metadata.getValue("files");
-      let formData = new FormData();
-      formData.append('file', files[0]);
-      formData.append('metadata', JSON.stringify(metadata.serializeData()));
-      doAuthenticatedMultipartRequest('/doecode/api/metadata/publish',formData, this.parsePublishResponse, this.parseErrorResponse)
-  }
-}
-
-submit() {
-    this.setState({"loading": true, "loadingMessage": "Submitting"});
-    doAuthenticatedAjax('POST', '/doecode/api/metadata/submit', this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
-}
 
 parsePublishResponse(data) {
     window.location.href = "/doecode/confirm?workflow=published&code_id=" + data.metadata.code_id;

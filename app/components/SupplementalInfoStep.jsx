@@ -33,6 +33,12 @@ export default class SupplementalInfoStep extends React.Component {
 	render() {
 
 		const files = metadata.getValue("files");
+		let fileName = "";
+		if (Array.isArray(files)) {
+		fileName = files[0].name;
+		} else {
+			fileName = files;
+		}
 		const accessibility = metadata.getValue("accessibility");
 
 		const countries = [
@@ -79,7 +85,7 @@ export default class SupplementalInfoStep extends React.Component {
 							 </label>
 							 <div className="col-sm-4">
 
-							 {files[0].name}
+							 {fileName}
 							 </div>
 							 <div className="col-sm-4">
 							 <Button bsStyle="danger" active onClick={this.deleteFile}> Delete File </Button>
