@@ -79,10 +79,10 @@ export default class BiblioPage extends React.Component {
 
            return (
              <dl key={header} className="row">
-               <dt className="col-sm-3 text-right">
+               <dt className="col-md-3 col-xs-12 biblio-page-header">
                  {header}:
                </dt>
-               <dd className="col-sm-9">
+               <dd className="col-md-9 col-xs-12">
                  {textContent}
 
                </dd>
@@ -116,28 +116,31 @@ export default class BiblioPage extends React.Component {
 
         if (description) {
         	descriptionContent =
-        		<div className="col-sm-12 biblio-description">
+        		<div className="col-xs-12 biblio-description">
         		{description}
         		</div>;
         }
 
 
-        const titleContent = <div className="col-sm-12">
-
-          <h2>
+        const titleContent = <div className="col-xs-12">
+          <h2 className="static-content-title">
           {metadata.getValue("software_title")}
           </h2>
         </div>;
 
         return(
 
-          <div className="container-fluid">
-            {titleContent}
-          	{descriptionContent}
-          	<div className="col-sm-12 citation-details-div">
-          		{fieldsContent}
+        <div className="row not-so-wide-row">
+            <div className="col-md-1"></div>
+            <div className="col-md-10 col-xs-12">
+                {titleContent}
+                {descriptionContent}
+                <div className="citation-details-div static-content">
+                    {fieldsContent}
+                </div>
             </div>
-          </div>
+            <div className="col-md-1"></div>
+        </div>
         )
 
       }

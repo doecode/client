@@ -89,8 +89,8 @@ export default class RegisterUser extends React.Component {
 		} else {
 		content =
                 <div className="row not-so-wide-row">
-                    <div className="col-md-1"> </div>
-                    <div className="col-md-5 col-xs-12">
+                    <div className="col-md-3"> </div>
+                    <div className="col-md-3 col-xs-12">
                         <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword}/>
                         <UserField noval={true} field="password" label="Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} />
                         <UserField noval={true} field="confirm_password" label="Confirm Password" elementType="password" handleChange={this.updateConfirmAndCheckPassword}/>
@@ -99,8 +99,7 @@ export default class RegisterUser extends React.Component {
                         </button>
                         <br/>
                     </div>
-                    <div className="col-md-2"> </div>
-                    <div className="col-md-4 col-xs-12">
+                    <div className="col-md-3 col-xs-12">
                         <p>All fields are required.</p>
                         <p>Passwords must:</p>
                         <ul>
@@ -112,6 +111,7 @@ export default class RegisterUser extends React.Component {
                             <li>Password must match Confirm Password. {this.state.matches &&<span className="glyphicon glyphicon-ok green"></span> } </li>
                         </ul>
                     </div>
+                    <div className="col-md-3"> </div>
                 </div>;
     }
 		return(

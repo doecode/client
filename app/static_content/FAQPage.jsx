@@ -12,8 +12,8 @@ export default class Splash extends React.Component {
 
         return (
         <div className="row not-so-wide-row">
-            <div className="col-md-1"></div>
-            <div className="col-md-10 col-xs-12 static-content">
+            <div className="col-md-3"></div>
+            <div className="col-md-6 col-xs-12 static-content">
                 <h2 className="static-content-title">FAQ's</h2>
                 <br/>
                 <p>
@@ -38,7 +38,7 @@ export default class Splash extends React.Component {
                     pellentesque felis, at efficitur velit elementum vitae. Morbi vulputate, sapien nec varius feugiat, arcu orci fringilla justo, et commodo metus sem id eros. 
                 </p>
             </div>
-            <div className="col-md-1"></div>
+            <div className="col-md-3"></div>
         </div>
         );
     }

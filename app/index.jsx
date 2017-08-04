@@ -33,7 +33,7 @@ class DOECodeRouter extends React.Component {
                     <div>
                         <div className="wrapper">
                             <Header/>
-                            <div className="container">
+                            <div>
                                 <Route exact path="/" component={Splash}/>
                                 <Route path="/publish" component={DOECodeWizard}/>
                                 <Route path="/submit" component={DOECodeWizard}/>

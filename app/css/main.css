@@ -193,21 +193,18 @@ html h3 {
     padding: 0 35px;
 }
 
+/*VVVV MAKES THE FOOTER WORK VVVVV*/
 html, body{
     height:100% ;
     margin:0 ;
 }
-
-
-.wrapper{
-    
+.wrapper{    
     min-height: calc(100vh - 124px/*height of footer*/);
 }
-
 .footer{
     height:124px;
 }
-
+/*^^^^MAKES THE FOOTER WORK^^^^*/
 .static-content{
     font-size:19px;
 }
@@ -216,6 +213,14 @@ html, body{
     font-weight:500;
     font-size:42px;
     margin-left:0px;
+}
+
+.contact-img{
+    opacity:0.3;
+}
+
+.biblio-page-header{
+    text-align: right;
 }
 
 @keyframes spin {
@@ -229,12 +234,18 @@ html, body{
     .nav-menu li{
         border-right:none;
     }
+    .biblio-page-header{
+        text-align: center;
+    }
 }
 
 /* Extra Small Devices, Phones */ 
 @media only screen and (min-width : 480px) {
     .nav-menu li{
         border-right:none;
+    }
+    .biblio-page-header{
+        text-align: center;
     }
 }
 
@@ -243,7 +254,9 @@ html, body{
     .nav-menu li{
         border-right:none;
     }
-
+    .biblio-page-header{
+        text-align: center;
+    }
 }
 
 /* Medium Devices, Desktops */
@@ -254,6 +267,9 @@ html, body{
     .nav-menu-item-special{
         border-left:1px solid rgba(255,255,255,0.2);
     }
+    .biblio-page-header{
+        text-align: right;
+    }
 }
 
 /* Large Devices, Wide Screens */
@@ -263,5 +279,8 @@ html, body{
     }
     .nav-menu-item-special{
         border-left:1px solid rgba(255,255,255,0.2);
+    }
+    .biblio-page-header{
+        text-align: right;
     }
 }
