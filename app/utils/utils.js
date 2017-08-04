@@ -10,7 +10,8 @@ function doAjax(methodType, url, successCallback, data, errorCallback) {
    let errorCall = errorCallback;
    if (errorCall === undefined) {
      errorCall = (jqXhr, exception) => {
-         window.location.href = '/doecode/error';
+       console.log("Error...");
+        // window.location.href = '/doecode/error';
      }
    }
 
@@ -25,6 +26,31 @@ function doAjax(methodType, url, successCallback, data, errorCallback) {
       error: errorCall
     });
 
+  }
+
+  function doAuthenticatedMultipartRequest(url,formData, successCallback, errorCallback) {
+
+    if (errorCallback === undefined) {
+      errorCallback = handleError;
+    }
+
+    if (successCallback === undefined) {
+      successCallback = ()=> {console.log("Success")};
+    }
+
+    $.ajax({
+      url: url,
+      processData: false,
+      contentType: false,
+      method: 'POST',
+      beforeSend: function(request) {
+        request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+      },
+      dataType: 'json',
+      data: formData,
+      success: successCallback,
+      error: errorCallback
+    });
   }
 
 
@@ -79,7 +105,6 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
     } else if (jqXhr.status == 403) {
       window.location.href = '/doecode/forbidden'
     } else {
-      //window.location.href = '/doecode/error';
       console.log("Hey");
     }
   }
@@ -134,6 +159,7 @@ function getChildData(type) {
 export {doAjax};
 export {doAuthenticatedAjax};
 export {checkIsAuthenticated};
+export {doAuthenticatedMultipartRequest}
 export {appendQueryString};
 export {getQueryParam};
 export {getChildData};

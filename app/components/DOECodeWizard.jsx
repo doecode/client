@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {doAjax, checkIsAuthenticated, doAuthenticatedAjax, appendQueryString, getQueryParam} from '../utils/utils';
+import {doAjax, checkIsAuthenticated, doAuthenticatedAjax, appendQueryString, getQueryParam, doAuthenticatedMultipartRequest} from '../utils/utils';
 import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
 import EntryStep from './EntryStep';
@@ -115,7 +115,8 @@ parseErrorResponse(jqXhr, exception) {
     } else if (jqXhr.status === 403) {
         window.location.href = '/doecode/forbidden';
     } else {
-        window.location.href = '/doecode/error';
+        //window.location.href = '/doecode/error';
+        console.log("Error...")
     }
 
 }
@@ -186,8 +187,16 @@ parseSaveResponse(data) {
 publish() {
     console.log(metadata.getData());
 
-    this.setState({"loading": true, "loadingMessage": "Publishing"});
+    //this.setState({"loading": true, "loadingMessage": "Publishing"});
+    if (metadata.getValue("accessibility") == 'OS') {
     doAuthenticatedAjax('POST', '/doecode/api/metadata/publish', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
+    } else {
+      const files = metadata.getValue("files");
+      let formData = new FormData();
+      formData.append('file', files[0]);
+      formData.append('metadata', JSON.stringify(metadata.serializeData()));
+      doAuthenticatedMultipartRequest('/doecode/api/metadata/publish',formData, this.parsePublishResponse, this.parseErrorResponse)
+  }
 }
 
 submit() {
