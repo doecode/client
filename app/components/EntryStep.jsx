@@ -23,32 +23,48 @@ export default class EntryStep extends React.Component {
     	metadata.setValue("accessibility",value);
 			const landingPageInfo = metadata.getFieldInfo("landing_page");
 			const repoLinkInfo = metadata.getFieldInfo("repository_link");
+			const fileInfo = metadata.getFieldInfo("files");
     	if (value === 'OS') {
     		metadata.setValue("open_source", true);
     		metadata.setValue("files", []);
     		metadata.setValue("landing_page", "");
 				repoLinkInfo.required = "pub";
+			  repoLinkInfo.Panel = "Repository Information";
 				landingPageInfo.required = "";
-				repoLinkInfo.Panel = "Repository Information";
 				landingPageInfo.Panel = "";
+				landingPageInfo.completed = false;
+				fileInfo.required = "";
+				fileInfo.Panel = "";
+				fileInfo.completed = false;
+
     	} else if (value === 'ON') {
     		metadata.setValue("open_source", true);
     		metadata.setValue("repository_link", "");
 				repoLinkInfo.required = "";
-				landingPageInfo.required = "pub";
+				repoLinkInfo.completed = false;
 				repoLinkInfo.Panel = "";
+				landingPageInfo.required = "pub";
 				landingPageInfo.Panel = "Repository Information";
+				if (window.location.pathname == '/doecode/submit') {
+							fileInfo.required = "sub";
+				}
+				fileInfo.Panel = "Supplemental Product Information";
+
     	} else if (value === 'CS') {
     		metadata.setValue("open_source", false);
     		metadata.setValue("repository_link", "");
 				repoLinkInfo.required = "";
-				landingPageInfo.required = "pub";
 				repoLinkInfo.Panel = "";
+				repoLinkInfo.completed = false;
+				landingPageInfo.required = "pub";
 				landingPageInfo.Panel = "Repository Information";
+				if (window.location.pathname == '/doecode/submit') {
+							fileInfo.required = "sub";
+				}
+				fileInfo.Panel = "Supplemental Product Information";
     	}
 
-			repoLinkInfo.completed = false;
-			landingPageInfo.completed = false;
+
     }
 
 

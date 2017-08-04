@@ -46,7 +46,8 @@ class MetadataStore {
 
 		   	"repository_link": {required:"pub", label: "Repository Link", completed:false, validations: ["URL"], Panel: "Repository Information", error: ''},
 		   	"landing_page": {required:"", label: "Landing Page", completed:false, validations: ["URL"], Panel: "", error: ''},
-	        "software_title": {required:"pub", label: "Software Title", completed:false, validations: [], Panel: "Product Description", error: ''},
+				"files" : {required:"", label: "File Upload", completed: false, Panel: "", error: ''},
+					"software_title": {required:"pub", label: "Software Title", completed:false, validations: [], Panel: "Product Description", error: ''},
 	        "description": {required:"pub", label: "Description/Abstract", completed:false, validations: [], Panel: "Product Description", error: ''},
 	        "licenses": {required:"pub", label: "Licenses", completed:false, hasError:false, validations: [], Panel: "Product Description", error: ''},
 	        "developers": {required:"pub", label: "Developers", completed:false, hasError:false, validations: [], Panel: "Developers", error: ''},
@@ -180,7 +181,7 @@ class MetadataStore {
 	          "relation_type": {required:true, completed:false, validations: [], error: ''},
 	          "identifier_value": {required:true, completed:false, validations: [], error: ''}
 	     }
-	
+
     @observable user = {
  		   	  email : '',
  		   	  password: '',
