@@ -4,6 +4,7 @@ import {Button} from 'react-bootstrap';
 import MetadataField from '../field/MetadataField';
 import {observer,Provider} from "mobx-react";
 import Metadata from '../stores/Metadata';
+import staticLists from '../staticJson/staticLists';
 
 const metadata = new Metadata();
 
@@ -47,13 +48,14 @@ export default class SupplementalInfoStep extends React.Component {
 			{label: 'United Kingdom', value: 'United Kingdom'}
 			];
 
+		console.log(staticLists);
 
 
 		return (
 
 	            <div className="container-fluid form-horizontal">
 	            	<MetadataField field="acronym" label="Short Title or Acronym" elementType="input"  />
-	            	<MetadataField  field="country_of_origin" label="Country of Origin" options={countries} elementType="select"  />
+	            	<MetadataField  field="country_of_origin" label="Country of Origin" options={staticLists.countries} elementType="select"  />
 	            	<MetadataField field="keywords" label="Keywords" elementType="input" />
 	            	<MetadataField field="other_special_requirements" label="Other Special Requirements" elementType="input" />
 	              <MetadataField field="site_accession_number" label="Site Accession Number" elementType="input"  />

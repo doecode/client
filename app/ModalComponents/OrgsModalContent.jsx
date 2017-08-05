@@ -1,4 +1,5 @@
 import React from 'react';
+import staticLists from '../staticJson/staticLists';
 import {observer} from "mobx-react";
 
 
@@ -11,13 +12,19 @@ export default class OrgsModalContent extends React.Component {
 
 	render() {
 
-		const orgNames = [
-			{label: 'USDOE', value: 'USDOE'},
-			{label: 'USDOE Advanced Research Projects Agency - Energy (ARPA-E)', value: 'USDOE Advanced Research Projects Agency - Energy (ARPA-E)'}
-		];
+		let orgNames = [];
 
 				const SpecificField = this.props.SpecificField;
 				const data = this.props.data;
+
+
+
+				if (this.props.type == 'sponsoring_organizations') {
+					orgNames = staticLists.sponsorOrgs;
+				} else if (this.props.type == 'research_organizations') {
+					orgNames = staticLists.researchOrgs;
+				}
+
 
 
 		return(

@@ -84,7 +84,7 @@ export default class AgentsModal extends React.Component {
         if (this.props.contentType === 'Devs') {
         content = <DevsModalContent SpecificField={SpecificField} data={this.props.data}/>
       } else if (this.props.contentType === 'Orgs') {
-        content = <OrgsModalContent SpecificField={SpecificField} data={this.props.data}/>
+        content = <OrgsModalContent SpecificField={SpecificField} data={this.props.data} type={this.props.dataType}/>
       } else if (this.props.contentType === 'RIs') {
     	content = <RIsModalContent SpecificField={SpecificField} data={this.props.data}/>
       } else if (this.props.contentType == 'Contributors') {

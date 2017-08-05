@@ -4,6 +4,7 @@ import {observer} from "mobx-react";
 import {doAjax} from '../utils/utils';
 import SearchData from '../stores/SearchData';
 import SearchField from '../field/SearchField';
+import staticLists from '../staticJson/staticLists';
 
 const searchData = new SearchData();
 
@@ -54,8 +55,8 @@ export default class AdvancedSearch extends React.Component {
 	<SearchField field="date_earliest" label="Earliest Release Date" elementType="date" />
 	<SearchField field="date_latest" label="Latest Release Date" elementType="date" />
 	<SearchField field="availability" label="Code Availability" elementType="select" options={availabilities} placeholder="Software's availability"  />
- 	<SearchField  field="research_organization" label="Research Organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={orgNames}   />
- 	<SearchField  field="sponsoring_organization" label="Sponsoring Organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={orgNames}   />
+ 	<SearchField  field="research_organization" label="Research Organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={staticLists.researchOrgs}   />
+ 	<SearchField  field="sponsoring_organization" label="Sponsoring Organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={staticLists.sponsorOrgs}   />
     <SearchField field="sort" label="Sort" elementType="select" options={sortOptions}  />
 
 	<button type="button" className="btn btn-lg btn-primary" onClick={this.search}>
