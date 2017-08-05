@@ -80,7 +80,7 @@ class MetadataStore {
             last_name: '',
             email: '',
             orcid: '',
-            affiliations: '',
+            affiliations: [],
             id: ''
         }
 
@@ -103,7 +103,7 @@ class MetadataStore {
             last_name: '',
             email: '',
             orcid: '',
-            affiliations: '',
+            affiliations: [],
             contributor_type: '',
             id: ''
     }

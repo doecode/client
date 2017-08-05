@@ -1,4 +1,5 @@
 import React from 'react';
+import staticLists from '../staticJson/staticLists';
 import {observer} from "mobx-react";
 
 
@@ -17,6 +18,8 @@ export default class DevsModalContent extends React.Component {
 			{label: 'Data Collector', value: 'DataCollector'}
 			];
 
+
+
 		const SpecificField = this.props.SpecificField;
 		return(
 
@@ -27,7 +30,7 @@ export default class DevsModalContent extends React.Component {
                         <SpecificField field="last_name" label="Last Name" elementType="input"  />
                         <SpecificField field="email" label="Email" elementType="input"  />
                         <SpecificField field="orcid" label="ORCID" elementType="input"  />
-                        <SpecificField field="affiliations" label="Affiliations" elementType="input"  />
+												<SpecificField field="affiliations" label="Affiliations" elementType="select" options={staticLists.affiliations} allowCreate={true}  isArray={true} multi={true} placeholder="Enter any licenses"   />
 
                     {this.props.data.getValue("contributor_type") !== undefined &&
                         <SpecificField field="contributor_type" label="Contributor Type" elementType="select"  options={contributorTypes} />

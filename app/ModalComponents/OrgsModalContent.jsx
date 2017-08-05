@@ -38,15 +38,15 @@ export default class OrgsModalContent extends React.Component {
                     }
 
                     {this.props.data.getValue("award_numbers") !== undefined &&
-                    <SpecificField field="award_numbers" label="Additional Awards" elementType="select" allowCreate={true} multi={true} placeholder="Enter any additional awards"   />
+                    <SpecificField field="award_numbers" label="Additional Awards" elementType="select" allowCreate={true} isArray={true} multi={true} placeholder="Enter any additional awards"   />
                     }
 
                     {this.props.data.getValue("br_codes") !== undefined &&
-                    <SpecificField field="br_codes" label="B&R Codes" elementType="select" allowCreate={true} multi={true} placeholder="Enter B&R Codes"   />
+                    <SpecificField field="br_codes" label="B&R Codes" elementType="select" allowCreate={true} isArray={true} multi={true} placeholder="Enter B&R Codes"   />
                     }
 
                     {this.props.data.getValue("fwp_numbers") !== undefined &&
-                    <SpecificField field="fwp_numbers" label="FWP Numbers" elementType="select" allowCreate={true} multi={true} placeholder="Enter FWP Numbers"   />
+                    <SpecificField field="fwp_numbers" label="FWP Numbers" elementType="select" allowCreate={true} isArray={true} multi={true} placeholder="Enter FWP Numbers"   />
                     }
 
             </div>

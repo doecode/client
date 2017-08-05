@@ -1,12 +1,12 @@
 import validator from 'validator';
 export default class Validation {
-	
+
 
 
 
 
 validate(value,validationObj, validationCallback, parentArraySizel) {
-	   
+
 	 let errors = "";
 	  const validations = validationObj.validations;
 	  const valLength = validations.length;
@@ -22,11 +22,11 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 			  console.log(value);
 			  errors += this.validateBR(value);
 		  }
-	    
+
 	  }
-	  
+
 	  const filtered = validations.filter(this.needsServer);
-	  
+
 	  if (filtered.length == 0) {
 		  validationCallback(validationObj, errors);
 		  return;
@@ -34,10 +34,10 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 	  let obj = {};
 	  let values = [];
 	  values.push(value);
-	  
+
 	  obj.values = values;
 	  obj.validations = validations;
-		
+
 	  console.log(obj);
 		    $.ajax({
 		        url: "/doecode/api/validation",
@@ -48,7 +48,7 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 		        contentType: "application/json; charset=utf-8",
 		        success: function(data) {
 		        	console.log(data);
-		        	
+
 		        	for (var i = 0; i < data.errors.length; i++)
 		        		errors += data.errors[i];
 		        	validationCallback(validationObj, errors);
@@ -59,7 +59,7 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 		        }
 		      });
 
-		 
+
   }
 
   needsServer(value) {
@@ -67,51 +67,51 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 
 	  return asyncValidations.indexOf(value) > -1;
   }
-  
-  
+
+
   validatePhone(value) {
 	  let errors = "";
 	  if (!validator.isMobilePhone(value, 'en-US'))
 		  errors += value + " is not a valid phone number.";
 	  return errors;
   }
-  
+
   validateEmail(value) {
 	  let errors = "";
 	  if (!validator.isEmail(value))
 		  errors += value + " is not a valid email.";
 	  return errors;
   }
-  
+
   validateURL(value) {
 	  let errors = "";
 	  if (!validator.isURL(value))
 		  errors += value + " is not a valid URL.";
 	  return errors;
   }
-  
-  
-  
+
+
+
   validateBR(value) {
 	  const brRegex = /[A-Za-z]{2}\d{7}/g;
 	  let badCodes = [];
-	  const allCodes = value.split(",");
+	  const allCodes = value.slice();
 	  let errors = "";
-	  
+
 	  for (let i = 0; i < allCodes.length; i++) {
 	  if (allCodes[i].length != 9 || allCodes[i].match(brRegex).length !== 1) {
 		  badCodes.push(allCodes[i]);
 	  }
 	  }
-	  
+
 	  if (badCodes.length > 0) {
 		  errors = "The following B&R Codes are invalid: " + badCodes.join(", ");
 	  }
 	  return errors;
   }
-  
-  
 
-  
-  
+
+
+
+
 }
