@@ -257,7 +257,7 @@ buildPanel(obj) {
 
 
         const panelStatus = metadata.getPanelStatus(obj.name);
-
+        const required_status = panelStatus.remainingRequired>0 ? 'required-field-span':'';
              if (panelStatus.remainingRequired > 0) {
                   requiredText += " (Fields Required) ";
              }
@@ -288,8 +288,8 @@ buildPanel(obj) {
         }
 
         console.log(arrowBool);
-        const heading = <div> {obj.name}
-        {requiredText}
+        const heading = <div> <span className={required_status}>{obj.name}
+                {requiredText}</span>
         {panelStatus.hasRequired && panelStatus.remainingRequired == 0 &&
         <span className="green glyphicon glyphicon-ok"></span>
         }
