@@ -80,7 +80,7 @@ export default class Header extends React.Component {
                                         <a className='nav-menu-item' href="/doecode/policy"><span className='fa fa-folder-open-o'></span> Software Policy</a>
                                     </li>
                                     <li>
-                                        <a className='nav-menu-item' href="/doecode/publish"><span className="fa fa-sign-in"></span> Submit Sofware/Code</a>
+                                        <a className='nav-menu-item' href="/doecode/publish"><span className="fa fa-sign-in"></span> Submit Software/Code</a>
                                     </li>
                                     <li>
                                         <a className='nav-menu-item' href="/doecode/about"><span className="fa fa-building-o"></span> About</a>

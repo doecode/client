@@ -53,7 +53,6 @@ export default class ResultsPage extends React.Component {
     )
   }
 
-
  refreshSearch() {
       searchData.setValue("start",Math.floor(searchData.getValue("start")/searchData.getValue("rows")) * searchData.getValue("rows"));
       window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
@@ -88,16 +87,13 @@ export default class ResultsPage extends React.Component {
         <div className="col-xs-2">
             <div className="row">
                 {/*Row count*/}
-                <div className="col-xs-2"></div>
-                <div className="col-xs-8 center-text">
+                <div className="col-xs-1"></div>
+                <div className="col-xs-10 center-text">
                     <SearchField field="rows" label="Rows" elementType="select" options={rowOptions} changeCallback={this.refreshSearch} clearable={false}  />
                 </div>
-                <div className="col-xs-2"></div>
+                <div className="col-xs-1"></div>
             </div>
             <div className="row center-text">
-                <div class="col-xs-12">
-                    <label>Sort</label>
-                </div>
                 <div className="col-xs-1"></div>
                 <div className="col-md-10 col-xs-12">
                     <SearchField field="sort" label="Sort" elementType="select" options={staticContstants.searchSortOptions} clearable={false}/>
@@ -114,7 +110,7 @@ export default class ResultsPage extends React.Component {
 
             <div className="row center-text">
                 {/*previous next*/}
-                <div className="col-xs-12 center-text">
+                <div className="col-xs-6 center-text">
                     <ReactPaginate previousLabel={"previous"}
                                    nextLabel={"next"}
                                    breakLabel={<a href="#">...</a>}
@@ -128,7 +124,10 @@ export default class ResultsPage extends React.Component {
                         subContainerClassName={"pages pagination"}
                         activeClassName={"active"} />
                 </div>
-
+                <div className='col-xs-6 right-text'>
+                    Showing <strong>{searchData.getValue("start")+1}-
+                        {(searchData.getValue("rows")+searchData.getValue("start")>this.state.numFound)?this.state.numFound:searchData.getValue("rows")+searchData.getValue("start")}</strong> of <strong>{this.state.numFound}</strong> results
+                </div>
             </div>
             {/*Actual search results*/}
             <div className="row">
