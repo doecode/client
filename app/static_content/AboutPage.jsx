@@ -40,6 +40,7 @@ export default class Splash extends React.Component {
 
                 <p>ESTSC and DOE Code are managed and operated by DOE OSTI.</p>
                 <br/>
+                <br/>
             </div>
             <div className="col-md-3"></div>
         </div>

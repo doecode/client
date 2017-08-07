@@ -27,7 +27,8 @@ export default class Splash extends React.Component {
 
         return (
         <div className="row not-so-wide-row">
-            <div className="col-xs-12">
+            <div className="col-md-3"></div>
+            <div className="col-md-6 col-xs-12 static-content">
                 <div className="row">
                     <div className="col-md-1"></div>
                     <div className="col-md-4 col-xs-12">
@@ -104,6 +105,7 @@ export default class Splash extends React.Component {
                     </Modal.Footer>
                 </Modal>
             </div>
+            <div className="col-md-3"></div>
         </div>
         );
     }

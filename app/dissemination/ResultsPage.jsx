@@ -85,42 +85,61 @@ export default class ResultsPage extends React.Component {
     <div className="row not-so-wide-row">
         {/*Sidebar*/}
         <div className="col-xs-2">
-            
+            <div className="row">
+                {/*Row count*/}
+                <div className="col-xs-2"></div>
+                <div className="col-xs-8 center-text">
+                    <SearchField field="rows" label="Rows" elementType="select" options={rowOptions} changeCallback={this.refreshSearch}  />
+                </div>
+                <div className="col-xs-2"></div>
+            </div>
+            <div className="row center-text">
+                <div class="col-xs-12">
+                    <label>Sort</label>
+                </div>
+                <div className="col-xs-1"></div>
+                <div className="col-md-10 col-xs-12">
+                    <select className="form-control">
+                        <option>Sort By Relevance</option>
+                        <option>Sort By Developer</option>
+                    </select>
+                </div>
+                <div className="col-xs-1"></div>
+            </div>
+            <div className="row">
+
+            </div>
         </div>
-        
-                 {/*Center Content*/}
-        <div className="col-xs-8">
-            
-            <div className='row'>
-            {/*previous next*/}
-      <div className="col-md-6 col-xs-12 center-text">
-        <ReactPaginate previousLabel={"previous"}
-               nextLabel={"next"}
-               breakLabel={<a href="#">...</a>}
-               breakClassName={"break-me"}
-               pageCount={Math.ceil(this.state.numFound/searchData.getValue("rows"))}
-               marginPagesDisplayed={2}
-               pageRangeDisplayed={3}
-               forcePage={(searchData.getValue("start")/searchData.getValue("rows"))}
-               onPageChange={this.handlePageClick}
-               containerClassName={"pagination"}
-               subContainerClassName={"pages pagination"}
-activeClassName={"active"} />
-      </div>
-            {/*Row count*/}
-      <div className="col-md-6 col-xs-12 center-text">
-        <SearchField field="rows" label="Rows" elementType="select" options={rowOptions} changeCallback={this.refreshSearch}  />
-      </div>
+
+        {/*Center Content*/}
+        <div className="col-xs-10">
+
+            <div className="row center-text">
+                {/*previous next*/}
+                <div className="col-xs-12 center-text">
+                    <ReactPaginate previousLabel={"previous"}
+                                   nextLabel={"next"}
+                                   breakLabel={<a href="#">...</a>}
+                        breakClassName={"break-me"}
+                        pageCount={Math.ceil(this.state.numFound/searchData.getValue("rows"))}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={3}
+                        forcePage={(searchData.getValue("start")/searchData.getValue("rows"))}
+                        onPageChange={this.handlePageClick}
+                        containerClassName={"pagination"}
+                        subContainerClassName={"pages pagination"}
+                        activeClassName={"active"} />
+                </div>
+
             </div>
             {/*Actual search results*/}
             <div className="row">
-      <div className="col-xs-12">
-      {content}
-      </div>
+                <div className="col-xs-12">
+                    {content}
+                </div>
             </div>
         </div>
-                 {/*Empty sidebar*/}
-        <div className="col-xs-2"></div>
+        {/*Empty sidebar*/}
     </div>
     
     );

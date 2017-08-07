@@ -45,7 +45,7 @@ export default class Header extends React.Component {
                     <div className='row'>
                         <div className="col-xs-4 right-text">
                             <a href="/doecode">
-                                <img src="https://www.osti.gov/doecode/images/DOEcode_logo_300px_72ppi.png" alt="DOECode" width="300"/>
+                                <img src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" width="300"/>
                             </a>
                         </div>
                         <div className="col-xs-6">
