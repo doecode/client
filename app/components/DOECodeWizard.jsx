@@ -328,6 +328,9 @@ buildPanel(obj) {
       const info = metadata.infoSchema;
       const submitDisabled = !metadata.validateSchema();
       const publishDisabled = !metadata.validatePublishedFields();
+
+      const publishClass = publishDisabled ? "btn btn-lg pull-right doecode-wizard-btn" : "btn btn-primary btn-lg pull-right doecode-wizard-btn"
+      const submitClass = submitDisabled ? "btn btn-lg pull-right doecode-wizard-btn" : "btn btn-primary btn-lg pull-right doecode-wizard-btn"
       const codeID = metadata.getValue("code_id");
 
       let headerText = "Create a New Software Record";
@@ -349,8 +352,9 @@ buildPanel(obj) {
 
         let submitPanels = null;
 
-
-        submitPanels = submitSteps.map(this.buildPanel);
+        if (this.state.showAll) {
+          submitPanels = submitSteps.map(this.buildPanel);
+        }
 
 
         const marginStyle = {
@@ -369,7 +373,7 @@ buildPanel(obj) {
                                   </button>
                             </div>
                             <div className="col-sm-3">
-                                <button type="button" className="btn btn-primary btn-lg pull-right doecode-wizard-btn" disabled={submitDisabled} onClick={this.submit}>
+                                <button style={marginStyle} type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
                                     Submit Record to E-Link
                                 </button>
                             </div>
@@ -389,7 +393,7 @@ buildPanel(obj) {
                               </button>
                           </div>
                           <div className="col-sm-2">
-                              <button type="button" className="btn btn-lg btn-primary pull-right doecode-wizard-btn" disabled={publishDisabled} onClick={this.publish}>
+                              <button style={marginStyle} type="button" className={publishClass} disabled={publishDisabled} onClick={this.publish}>
                                   Publish Record
                               </button>
                           </div>
@@ -404,39 +408,57 @@ buildPanel(obj) {
 
         <PanelGroup defaultActiveKey="1" accordion={accordionBool} onSelect={this.setActivePanel}>
         {publishPanels}
+
         {submitPanels}
 
-
         </PanelGroup>
+
+        {!this.state.showAll &&
+        <div className="form-group-xs row text-center">
+          <div className="col-xs-offset-3 col-xs-6">
+            <button type="button" className="btn" onClick={this.showAdditionalFields}>
+              <span className="glphicon glyphicon-plus"></span> Show More Optional Fields
+            </button>
+          </div>
+        </div>
+        }
+
         {button}
+
 
       </div>;
 
         return (
 
 
-        <div className="row not-so-wide-row">
-            <div className="col-md-3"></div>
-            <div className="col-md-6 col-xs-12">
-                <div className="form-group form-group-sm row">
-                    <div className="col-md-3"></div>
-                    <div className="col-md-6 col-xs-12">
-                        <h1 className="text-center"> {headerText} </h1>
-                    </div>
-                    <div className="col-md-3"></div>
-                </div>
-                {content}
-                <Modal show={this.state.loading} >
-                    <Modal.Header closeButton>
-                        <Modal.Title>{this.state.loadingMessage}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className="loader"></div>
-                    </Modal.Body>
-                </Modal>
-            </div>
-            <div className="col-md-3"></div>
+      <div>
+
+
+
+
+        <div className="form-group form-group-sm row">
+        <div className="col-xs-offset-3 col-xs-6">
+
+        <h1 className="text-center"> {headerText} </h1>
         </div>
+
+        </div>
+        {content}
+
+
+
+    <Modal show={this.state.loading} >
+        <Modal.Header closeButton>
+            <Modal.Title>{this.state.loadingMessage}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="loader"></div>
+        </Modal.Body>
+    </Modal>
+
+
+
+    </div>
 
         );
     }
