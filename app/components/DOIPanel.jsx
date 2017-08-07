@@ -78,26 +78,31 @@ export default class DOIPanel extends React.Component {
 
 		return (
 
-	            <div className="container-fluid form-horizontal">
-	            	<MetadataField field="doi" label="DOI" elementType="input" disabled={reserving}  messageNode={messageNode}/>
-	            {!registered &&
+                <div className="container-fluid form-horizontal">
+                    <div className="row">
+                        <div className="col-md-8 col-xs-12">
+                            <MetadataField field="doi" label="DOI" elementType="input" disabled={reserving}  messageNode={messageNode}/>
+                            {!registered &&
 
-			    <div className="form-group form-group-sm row">
-		          <div className="col-xs-8">
-	            	<button type="button" className={buttonClass} onClick={this.handleReserve}>
-	            		<span className="glyphicon glyphicon-pencil"></span> Reserve DOI
-	            	</button>
-	              </div>
-	            </div>
-	            }
+                            <div className="form-group form-group-sm row">
+                                <div className="col-xs-8">
+                                    <button type="button" className={buttonClass} onClick={this.handleReserve}>
+                                        <span className="glyphicon glyphicon-pencil"></span> Reserve DOI
+                                    </button>
+                                </div>
+                            </div>
+                            }
 
-	            {reserving &&
+                            {reserving &&
 
-	            	<MetadataField field="doi_infix" label="DOI Infix" elementType="input" handleChange={this.handleInfix}  />
+                            <MetadataField field="doi_infix" label="DOI Infix" elementType="input" handleChange={this.handleInfix}  />
 
 
-	            }
-	            	<MetadataField  field="release_date" label="Release Date" elementType="date"  />
+                            }
+                            <MetadataField  field="release_date" label="Release Date" elementType="date"  />
+                        </div>
+                        <div className="col-md-4"></div>
+                    </div>
                 </div>
 		);
 	}

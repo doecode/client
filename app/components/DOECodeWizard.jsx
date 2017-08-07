@@ -369,7 +369,7 @@ buildPanel(obj) {
                                   </button>
                             </div>
                             <div className="col-sm-3">
-                                <button style={marginStyle} type="button" className="btn btn-primary btn-lg pull-right" disabled={submitDisabled} onClick={this.submit}>
+                                <button type="button" className="btn btn-primary btn-lg pull-right doecode-wizard-btn" disabled={submitDisabled} onClick={this.submit}>
                                     Submit Record to E-Link
                                 </button>
                             </div>
@@ -389,7 +389,7 @@ buildPanel(obj) {
                               </button>
                           </div>
                           <div className="col-sm-2">
-                              <button style={marginStyle} type="button" className="btn btn-lg btn-primary pull-right" disabled={publishDisabled} onClick={this.publish}>
+                              <button type="button" className="btn btn-lg btn-primary pull-right doecode-wizard-btn" disabled={publishDisabled} onClick={this.publish}>
                                   Publish Record
                               </button>
                           </div>

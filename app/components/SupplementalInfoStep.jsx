@@ -53,47 +53,51 @@ export default class SupplementalInfoStep extends React.Component {
 
 		return (
 
-	            <div className="container-fluid form-horizontal">
-	            	<MetadataField field="acronym" label="Short Title or Acronym" elementType="input"  />
-	            	<MetadataField  field="country_of_origin" label="Country of Origin" options={staticLists.countries} elementType="select"  />
-	            	<MetadataField field="keywords" label="Keywords" elementType="input" />
-	            	<MetadataField field="other_special_requirements" label="Other Special Requirements" elementType="input" />
-	              <MetadataField field="site_accession_number" label="Site Accession Number" elementType="input"  />
+                <div className="container-fluid form-horizontal">
+                    <div className="row">
+                        <div className="col-md-8 col-xs-12">
+                            <MetadataField field="acronym" label="Short Title or Acronym" elementType="input"  />
+                            <MetadataField  field="country_of_origin" label="Country of Origin" options={staticLists.countries} elementType="select" />
+                            <MetadataField field="keywords" label="Keywords" elementType="input" />
+                            <MetadataField field="other_special_requirements" label="Other Special Requirements" elementType="input" />
+                            <MetadataField field="site_accession_number" label="Site Accession Number" elementType="input"  />
 
-								{(accessibility === 'ON' || accessibility === 'CS') &&
-							<div className="form-group form-group-sm row">
-							<div className="col-xs-8">
-								<label className="form-label">
-								File Upload
-									</label>
-								<div >
-										<Dropzone onDrop={this.onDrop}>
-										<h2> Drag files here or click to browse. </h2>
-										</Dropzone>
-								</div>
+                            {(accessibility === 'ON' || accessibility === 'CS') &&
+                            <div className="form-group form-group-sm row">
+                                <div className="col-xs-8">
+                                    <label className="form-label">
+                                        File Upload
+                                    </label>
+                                    <div >
+                                        <Dropzone onDrop={this.onDrop}>
+                                            <h2> Drag files here or click to browse. </h2>
+                                        </Dropzone>
+                                    </div>
 
-							</div>
-							</div>
+                                </div>
+                            </div>
 
 
-								}
+                            }
 
-								{files.length > 0 &&
-							 <div className="form-group form-group-sm row">
-							 <label className="col-sm-2">
-							 Uploaded File
-							 </label>
-							 <div className="col-sm-4">
+                            {files.length > 0 &&
+                            <div className="form-group form-group-sm row">
+                                <label className="col-sm-2">
+                                    Uploaded File
+                                </label>
+                                <div className="col-sm-4">
 
-							 {fileName}
-							 </div>
-							 <div className="col-sm-4">
-							 <Button bsStyle="danger" active onClick={this.deleteFile}> Delete File </Button>
-							 </div>
+                                    {fileName}
+                                </div>
+                                <div className="col-sm-4">
+                                    <Button bsStyle="danger" active onClick={this.deleteFile}> Delete File </Button>
+                                </div>
 
-							 </div>
+                            </div>
 
-								}
+                            }
+                        </div>
+                    </div>
                 </div>
 		);
 	}

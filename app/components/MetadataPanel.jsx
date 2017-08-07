@@ -54,18 +54,24 @@ export default class MetadataPanel extends React.Component {
 
 
 		return (
+                <div className="container-fluid form-horizontal">
+                    <div className="row">
+                        <div className="col-md-8 col-xs-12">
+                            <div className="form-horizontal">
+                                {metadata.getValue("repository_link") &&
+                                <MetadataField field="repository_link" label="Repository Link: " elementType="display" />
+                                }
 
-	            <div className="container-fluid form-horizontal">
-	            {metadata.getValue("repository_link") &&
-	        		<MetadataField field="repository_link" label="Repository Link: " elementType="display" />
-	            }
-
-	            	<MetadataField field="software_title" label="Software Title" elementType="input" />
-	            	<MetadataField field="description" label="Description/Abstract" elementType="textarea" />
-					<MetadataField field="licenses" label="Licenses" elementType="select" changeCallback={this.checkForProp} options={licenseOptions} isArray={true} multi={true} placeholder="Select your license(s)" />
-					{propInfo.required &&
-						<MetadataField field="proprietary_url" label="Proprietary URL" elementType="input" />
-					}
+                                <MetadataField field="software_title" label="Software Title" elementType="input" />
+                                <MetadataField field="description" label="Description/Abstract" elementType="textarea" />
+                                <MetadataField field="licenses" label="Licenses" elementType="select" changeCallback={this.checkForProp} options={licenseOptions} isArray={true} multi={true} placeholder="Select your license(s)" />
+                                {propInfo.required &&
+                                <MetadataField field="proprietary_url" label="Proprietary URL" elementType="input" />
+                                }
+                            </div>
+                        </div>
+                        <div className="col-md-4"></div>
+                    </div>
                 </div>
 		);
 	}

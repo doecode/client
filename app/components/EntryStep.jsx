@@ -75,38 +75,44 @@ export default class EntryStep extends React.Component {
 
 		return (
 
-        <div className="container-fluid form-horizontal">
+                <div className="container-fluid form-horizontal">
 
-		  <div className="form-group form-group-sm row">
-		  <h3>Please describe the availability of your software: </h3>
-		  </div>
+                    <div className="form-group form-group-sm row">
+                        <div className="col-xs-12">
+                            <h3>Please describe the availability of your software: </h3>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-xs-12">    
+                            <MetadataField checked={accessibility=== 'OS'} elementType="radio" label="Open Source, Publicly Available" field="availability" value="OS" onChange={this.onRadioChange}/>
+                            <MetadataField checked={accessibility === 'ON'} elementType="radio" label= "Open Source, Not Publicly Available" field="availability" value="ON" onChange={this.onRadioChange}/>
+                            <MetadataField checked={accessibility === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange}/>
+                        </div>
+                    </div>
+                    {accessibility === 'OS' &&
+                    <div className="row">
+                        <div className="col-md-8 col-xs-12">
+                        <MetadataField field="repository_link" label="Repository Link" elementType="input" />
+                        </div>
+                        <div className="col-md-4">
+                            
+                        </div>
+                    </div>
+                    }
 
+                    {accessibility === 'OS' &&
+                    <div className="form-group form-group-sm row">
+                        <div className="col-xs-12">
+                            <button className="btn btn-primary btn-sm" onClick={this.props.autopopulate}> Autopopulate from Repository</button>
+                        </div>
+                    </div>
+                    }
 
-		  <MetadataField checked={accessibility=== 'OS'} elementType="radio" label="Open Source, Publicly Available" field="availability" value="OS" onChange={this.onRadioChange}/>
-		  <MetadataField checked={accessibility === 'ON'} elementType="radio" label= "Open Source, Not Publicly Available" field="availability" value="ON" onChange={this.onRadioChange}/>
-		  <MetadataField checked={accessibility === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange}/>
+                    {(accessibility === 'ON' || accessibility === 'CS')  &&
+                    <MetadataField field="landing_page" label="Landing Page" elementType="input" />
+                    }
 
-		  {accessibility === 'OS' &&
-          <MetadataField field="repository_link" label="Repository Link" elementType="input" />
-
-		  }
-
-
-		  {accessibility === 'OS' &&
-
-	          <div className="form-group form-group-sm row">
-	          <div className="col-xs-8">
-			  <button className="btn btn-primary btn-sm" onClick={this.props.autopopulate}> Autopopulate from Repository</button>
-			  </div>
-	          </div>
-
-		  }
-
-		  {(accessibility === 'ON' || accessibility === 'CS')  &&
-	          <MetadataField field="landing_page" label="Landing Page" elementType="input" />
-		  }
-
-	   </div>
+                </div>
 		);
 	}
 

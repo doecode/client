@@ -89,12 +89,19 @@ export default class OrgsStep extends React.Component {
 
       const content = <EditableDataTable contentType={contentType} config={tableConfig} parentName={parentName}/>
 		    return (
-		       <div>
-		      <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="orgsStepTabs">
-		      <Tab eventKey={0} title="* Sponsoring Organizations"> {content} </Tab>
-		      <Tab eventKey={1} title="* Research Organizations"> {content} </Tab>
-		      </Tabs>
-		      </div>
+                    <div className="container-fluid form-horizontal">
+                        <div className="row">
+                            <div className="col-md-9 col-xs-12">
+                                <div className="form-horizontal">
+                                    <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="orgsStepTabs">
+                                        <Tab eventKey={0} title="* Sponsoring Organizations"> {content} </Tab>
+                                        <Tab eventKey={1} title="* Research Organizations"> {content} </Tab>
+                                    </Tabs>
+                                </div>
+                            </div>
+                            <div className="col-md-3"></div>
+                        </div>
+                    </div>
 		      );
 		  }
 }

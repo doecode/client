@@ -56,10 +56,17 @@ export default class RIsStep extends React.Component {
 			let columns = ["identifier_type","relation_type","identifier_value"];
 
 		    return (
-		       <div>
-             <h2> Related Identifiers </h2>
-             <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
-		      </div>
+                    <div className="container-fluid form-horizontal">
+                        <div className="row">
+                            <div className="col-md-9 col-xs-12">
+                                <div className="form-horizontal">
+                                    <h2> Related Identifiers </h2>
+                                    <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
+                                </div>
+                            </div>
+                            <div className="col-md-3"></div>
+                        </div>
+                    </div>
 		      );
 		  }
 }

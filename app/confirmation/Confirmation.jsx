@@ -41,45 +41,45 @@ render() {
 
 
     return (
-        <div className="container-fluid">
+    <div className="container-fluid">
 
-            <div className="form-group form-group-sm row">
+        <div className="form-group form-group-sm row">
 
-                <h1>
-                    Record Successfully Published to DOE Code</h1>
-                <h2>
-                    DOE Code ID: #{this.state.codeID}
+            <h1>
+                Record Successfully Published to DOE Code</h1>
+            <h2>
+                DOE Code ID: #{this.state.codeID}
 
-                </h2>
+            </h2>
 
-                {this.state.mintedDoi &&
-                <h2>
-                    DOI: {this.state.mintedDoi}
-                </h2>
-}
-                <h2>
-                    <a target="_blank" type="text/yaml" href={ymlDownload}>
-                        Download Metadata.yml
-                    </a>
-                </h2>
+            {this.state.mintedDoi &&
+            <h2>
+                DOI: {this.state.mintedDoi}
+            </h2>
+            }
+            <h2>
+                <a target="_blank" type="text/yaml" href={ymlDownload}>
+                    Download Metadata.yml
+                </a>
+            </h2>
+        </div>
+        <div className="form-group form-group-sm row">
+            {this.state.workflow === "published" &&
+            <div className="col-sm-3">
+                <button type="button" className="btn btn-success btn-lg" onClick={this.editRecord}>
+                    Continue to E-Link Submission
+                </button>
             </div>
-            <div className="form-group form-group-sm row">
-              {this.state.workflow === "published" &&
-                <div className="col-sm-3">
-                    <button type="button" className="btn btn-success btn-lg" onClick={this.editRecord}>
-                        Continue to E-Link Submission
-                    </button>
-                </div>
-              }
-                <div className="col-sm-3">
-                    <button type="button" className="btn btn-primary btn-lg" onClick={this.newRecord}>
-                        Create New Record
-                    </button>
-                </div>
-
+            }
+            <div className="col-sm-3">
+                <button type="button" className="btn btn-primary btn-lg" onClick={this.newRecord}>
+                    Create New Record
+                </button>
             </div>
 
         </div>
+
+    </div>
     );
 }
 

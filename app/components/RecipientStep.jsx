@@ -12,13 +12,19 @@ export default class RecipientStep extends React.Component {
 	render() {
 
 		return (
-
-	            <div className="container-fluid form-horizontal">
-	            	<MetadataField field="recipient_name" label="Name" elementType="input" />
-	            	<MetadataField field="recipient_email" label="Email" elementType="input"  />
-	            	<MetadataField field="recipient_phone" label="Phone" elementType="input"  />
-	            	<MetadataField field="recipient_org" label="Organization" elementType="input" />
-             </div>
+                <div className="container-fluid form-horizontal">
+                    <div className="row">
+                        <div className="col-md-8 col-xs-12">
+                            <div className="form-horizontal">
+                                <MetadataField field="recipient_name" label="Name" elementType="input" />
+                                <MetadataField field="recipient_email" label="Email" elementType="input"  />
+                                <MetadataField field="recipient_phone" label="Phone" elementType="input"  />
+                                <MetadataField field="recipient_org" label="Organization" elementType="input" />
+                            </div>
+                        </div>
+                        <div className="col-md-4"></div>
+                    </div>
+                </div>
 		);
 	}
 
