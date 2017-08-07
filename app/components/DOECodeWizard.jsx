@@ -368,7 +368,7 @@ buildPanel(obj) {
         button =             <div className="form-group-xs row">
 
                             <div className="col-sm-9">
-                                <button type="button" className="btn btn-info btn-lg pull-right" onClick={this.save}>
+                                <button type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
                                     Save Your Progress
                                   </button>
                             </div>
@@ -388,7 +388,7 @@ buildPanel(obj) {
           button =           <div className="form-group-xs row">
 
                           <div className="col-sm-10">
-                              <button type="button" className="btn btn-info btn-lg pull-right" onClick={this.save}>
+                              <button type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
                                   Save Your Progress
                               </button>
                           </div>
@@ -431,33 +431,27 @@ buildPanel(obj) {
         return (
 
 
-      <div>
-
-
-
-
-        <div className="form-group form-group-sm row">
-        <div className="col-xs-offset-3 col-xs-6">
-
-        <h1 className="text-center"> {headerText} </h1>
-        </div>
-
-        </div>
-        {content}
-
-
-
-    <Modal show={this.state.loading} >
-        <Modal.Header closeButton>
-            <Modal.Title>{this.state.loadingMessage}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="loader"></div>
-        </Modal.Body>
-    </Modal>
-
-
-
+    <div className="row not-so-wide-row">
+            <div className="col-md-3"></div>
+             <div className="col-md-6 col-xs-12">
+                 <div className="form-group form-group-sm row">
+                     <div className="col-md-3"></div>
+                     <div className="col-md-6 col-xs-12">
+                         <h1 className="text-center"> {headerText} </h1>
+                     </div>
+                     <div className="col-md-3"></div>
+                 </div>
+                 {content}
+                 <Modal show={this.state.loading} >
+                     <Modal.Header closeButton>
+                         <Modal.Title>{this.state.loadingMessage}</Modal.Title>
+                     </Modal.Header>
+                     <Modal.Body>
+                         <div className="loader"></div>
+                     </Modal.Body>
+                 </Modal>
+             </div>
+             <div className="col-md-3"></div>
     </div>
 
         );
