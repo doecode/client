@@ -414,10 +414,10 @@ buildPanel(obj) {
         </PanelGroup>
 
         {!this.state.showAll &&
-        <div className="form-group-xs row text-center">
-          <div className="col-xs-offset-3 col-xs-6">
+        <div >
+          <div>
             <button type="button" className="btn" onClick={this.showAdditionalFields}>
-              <span className="glphicon glyphicon-plus"></span> Show More Optional Fields
+              <span className="glphicon glyphicon-plus"></span> Show Additional Optional Fields
             </button>
           </div>
         </div>
