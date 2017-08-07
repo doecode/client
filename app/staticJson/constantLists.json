@@ -1,0 +1,30 @@
+{
+    "availabilities": [
+        {
+            "label": "Open Source, Publicly Available",
+            "value": "OS"
+        },
+        {
+            "label": "Open Source, Not Publicly Available",
+            "value": "ON"
+        },
+        {
+            "label": "Closed Source",
+            "value": "CS"
+        }
+    ],
+    "searchSortOptions": [
+        {
+            "label": "Relevance",
+            "value": "score desc"
+        },
+        {
+            "label": "Publication Date (newest to oldest)",
+            "value": "releaseDate desc"
+        },
+        {
+            "label": "Publication Date (oldest to newest)",
+            "value": "releaseDate asc"
+        }
+    ]
+}

@@ -5,6 +5,7 @@ import ReactPaginate from 'react-paginate';
 import {doAjax, getQueryParam} from '../utils/utils';
 import SearchData from '../stores/SearchData';
 import SearchField from '../field/SearchField';
+import staticContstants from '../staticJson/constantLists';
 
 const searchData = new SearchData();
 
@@ -99,10 +100,7 @@ export default class ResultsPage extends React.Component {
                 </div>
                 <div className="col-xs-1"></div>
                 <div className="col-md-10 col-xs-12">
-                    <select className="form-control">
-                        <option>Sort By Relevance</option>
-                        <option>Sort By Developer</option>
-                    </select>
+                    <SearchField field="sort" label="Sort" elementType="select" options={staticContstants.searchSortOptions} clearable={false}/>
                 </div>
                 <div className="col-xs-1"></div>
             </div>
