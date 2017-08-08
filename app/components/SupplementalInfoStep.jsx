@@ -48,7 +48,14 @@ export default class SupplementalInfoStep extends React.Component {
 			{label: 'United Kingdom', value: 'United Kingdom'}
 			];
 
-		console.log(staticLists);
+			const acceptedFileTypes = ".zip,.tar,.tar.gz,.tar.bz2,.jar,.war"
+			let fileLabelText = "File Upload (Optional Field)";
+
+			if (window.location.pathname == '/doecode/submit') {
+					 fileLabelText = "File Upload (Required Field)";
+			}
+
+
 
 
 		return (
@@ -64,12 +71,12 @@ export default class SupplementalInfoStep extends React.Component {
 
                             {(accessibility === 'ON' || accessibility === 'CS') &&
                             <div className="form-group form-group-sm row">
-                                <div className="col-xs-8">
-                                    <label className="form-label">
-                                        File Upload
+                                <div>
+                                    <label htmlFor="file_upload" className="form-label">
+                                    {fileLabelText}
                                     </label>
                                     <div >
-                                        <Dropzone onDrop={this.onDrop}>
+                                        <Dropzone name="file_upload" accept={acceptedFileTypes} onDrop={this.onDrop}>
                                             <h2> Drag files here or click to browse. </h2>
                                         </Dropzone>
                                     </div>
