@@ -128,16 +128,16 @@ export default class Field extends React.Component {
 	  }
 	  else if (elementType === 'input') {
 		if (!disabled) {
-			input = <input type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} />
+			input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} />
 		} else {
-			input = <input type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} disabled />
+			input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} disabled />
 		}
 	  }
 	  else if (elementType === 'password') {
-			input = <input type="password" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} />
+			input = <input name={field} type="password" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} />
 	  }
 	  else if (elementType === 'checkbox') {
-		  input = <input type="checkbox" className={inputStyle} checked={val} onChange={this.toggleCheckbox} />
+		  input = <input name={field} type="checkbox" className={inputStyle} checked={val} onChange={this.toggleCheckbox} />
 	  }
 	  else if (elementType === 'select') {
 	    const ph = this.props.properties.placeholder ? this.props.properties.placeholder : "Select any that apply";
@@ -149,23 +149,23 @@ export default class Field extends React.Component {
             val = val.slice();
             simple = false;
       }
-      	input = <Select className={errorClass} clearable={clearable} allowCreate={this.props.properties.allowCreate} multi={this.props.properties.multi} options={this.props.properties.options} simpleValue delimiter={"\n"} placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} value={val} />
+      	input = <Select name={field} className={errorClass} clearable={clearable} allowCreate={this.props.properties.allowCreate} multi={this.props.properties.multi} options={this.props.properties.options} simpleValue delimiter={"\n"} placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} value={val} />
 	  }
 	  else if (elementType === 'textarea') {
 
-		 input = <textarea className={inputStyle} value={val} onChange={this.handleChange} onBlur={this.handleBlur} />
+		 input = <textarea name={field} className={inputStyle} value={val} onChange={this.handleChange} onBlur={this.handleBlur} />
 	  }
 	  else if (elementType === 'radio') {
 			 return (
            <div className="form-group form-group-sm row">
 					 <div>
-					 <label><input  type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange} /> {label}</label>
+					 <label htmlFor={field}><input  type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange} /> {label}</label>
 					 </div>
             </div>
 					 );
 	  }
 	  else if (elementType === 'date') {
-		  input = <DatePicker placeholderText="Click to select a date" selected={val} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>
+		  input = <DatePicker name={field} placeholderText="Click to select a date" selected={val} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>
 	  }
 
 
@@ -175,7 +175,7 @@ export default class Field extends React.Component {
       <div className={wrapperStyle}>
       <div className="">
       {label &&
-      <label className={labelStyle}>
+      <label htmlFor={field} className={labelStyle}>
         {label}
       </label>
       }
