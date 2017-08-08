@@ -1,7 +1,7 @@
 import React from 'react';
 import staticLists from '../staticJson/staticLists';
 import {observer} from "mobx-react";
-
+import staticContstants from '../staticJson/constantLists';
 
 @observer
 export default class ContributorsModalContent extends React.Component {
@@ -11,13 +11,6 @@ export default class ContributorsModalContent extends React.Component {
 	}
 
 	render() {
-
-
-		const contributorTypes = [
-			{label: 'Contact Person', value: 'ContactPerson'},
-			{label: 'Data Collector', value: 'DataCollector'}
-			];
-
 		const SpecificField = this.props.SpecificField;
 		return(
 
@@ -44,7 +37,7 @@ export default class ContributorsModalContent extends React.Component {
         </div>
 				}
 
-                        <SpecificField field="contributor_type" label="Contributor Type" elementType="select"  options={contributorTypes} />
+                        <SpecificField field="contributor_type" label="Contributor Type" elementType="select"  options={staticContstants.contributorTypes} />
             </div>
 		);
 	}
