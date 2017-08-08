@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -24,9 +25,9 @@ export default class Header extends React.Component {
     window.location.href = "/doecode/results";
     }
 
-
-
-
+    doAdvancedSearch(){
+        window.location.href="/doecode/search";
+    }
 
     render() {
         return (
@@ -49,8 +50,13 @@ export default class Header extends React.Component {
                             </a>
                         </div>
                         <div className="col-xs-6">
-                            <label htmlFor="allSearch" className="sr-only">Search DOE Code for Published Software Entries</label>
-                            <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box input-lg"  placeholder="Search DOE Code for Published Software Entries"/>
+                            <div className='input-group'>
+                                <label htmlFor="allSearch" className="sr-only">Search DOE Code for Published Software Entries</label>
+                                <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box input-lg"  placeholder="Search DOE Code for Published Software Entries"/>
+                                <span className='input-group-btn'>
+                                    <button className='btn btn-default btn-lg adv-search-button' type='button'><span className="fa fa-cog"></span></button>
+                                </span>
+                            </div>
                         </div>
                         <div className="col-xs-2">
                             <button type="button" className="btn btn-success btn-lg" onClick={this.search}>
@@ -86,7 +92,7 @@ export default class Header extends React.Component {
                                         <a className='nav-menu-item' href="/doecode/about"><span className="fa fa-building-o"></span> About</a>
                                     </li>
                                     <li>
-                                        <a className='nav-menu-item' href="/doecode/communcations"><span className='fa fa-newspaper-o'></span> Communications/Resources</a>
+                                        <a className='nav-menu-item' href="/doecode/communcations"><span className='fa fa-newspaper-o'></span> News/Resources</a>
                                     </li>
                                     <li>
                                         <a className='nav-menu-item' href="/doecode/faq"><span className="fa fa-question"></span> FAQs</a>
