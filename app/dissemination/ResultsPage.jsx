@@ -43,13 +43,9 @@ export default class ResultsPage extends React.Component {
 
   buildContent(obj) {
     return (
-
-
       <div className="panel panel-default search-result-row" key={obj.codeId}>
         <SearchItem data={obj}/>
       </div>
-
-
     )
   }
 
