@@ -135,37 +135,36 @@ export default class WorkflowManagement extends React.Component {
       }
 
       render() {
-          const marginStyle = {
-                  'margin-bottom' : '5px'
-                };
-
-
-
-
 
         return  (
-        		<div>
-            <h2> Manage My Projects </h2>
-        		<div className="form-group-xs row">
-                <div className="col-sm-12">
-                    <a href="/doecode/publish" style={marginStyle} type="button" className="btn btn-success btn-lg pull-right" >
-                       Add New Record
-                    </a>
+        
+        <div className="row not-so-wide-row">
+            <div className="col-md-3"></div>
+            <div className="col-md-6 col-xs-12 static-content">
+                <h2 className="static-content-title">Manage My Projects</h2>
+                <div className="form-group-xs row">
+                    <div className="col-sm-12">
+                        <a href="/doecode/publish" type="button" className="btn btn-success btn-lg pull-right workflow-publish-btn" >
+                            Add New Record
+                        </a>
+                    </div>
                 </div>
+                <ReactDataGrid
+                    onGridSort={this.handleGridSort}
+                    enableCellSelect={true}
+                    columns={this._columns}
+                    rowGetter={this.rowGetter}
+                    rowsCount={this.getSize()}
+                    maxHeight={400}
+                    toolbar={<Toolbar enableFilter={true}/>}
+                    onAddFilter={this.handleFilterChange}
+                    onClearFilters={this.onClearFilters}
+                    emptyRowsView={EmptyRowsView}
+                    />
+                    <br/>
+                    <br/>
             </div>
-          <ReactDataGrid
-            onGridSort={this.handleGridSort}
-            enableCellSelect={true}
-            columns={this._columns}
-            rowGetter={this.rowGetter}
-            rowsCount={this.getSize()}
-            maxHeight={400}
-            toolbar={<Toolbar enableFilter={true}/>}
-            onAddFilter={this.handleFilterChange}
-            onClearFilters={this.onClearFilters}
-            emptyRowsView={EmptyRowsView}
-           />
-
+            <div className="col-md-3"></div>
         </div>
         );
 
