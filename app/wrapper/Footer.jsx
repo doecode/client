@@ -19,8 +19,6 @@ export default class Footer extends React.Component {
                     <div className="row text-center mt-1 mb-1 white">
                         <a href="#" className="footer-link">Website Policies / Important Links</a>
                         &nbsp;•&nbsp;
-                        <a href="#" className="footer-link">Site Map</a>
-                        &nbsp;•&nbsp;
                         <a href="#" className="footer-link">Contact Us</a>
                     </div>
                 </div>
