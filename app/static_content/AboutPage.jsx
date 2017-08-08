@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Modal, Button} from 'react-bootstrap';
 
-export default class Splash extends React.Component {
+export default class About extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -47,3 +47,4 @@ export default class Splash extends React.Component {
         );
     }
 }
+

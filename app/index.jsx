@@ -9,10 +9,11 @@ import AdvancedSearch from './dissemination/AdvancedSearch';
 import ResultsPage from './dissemination/ResultsPage';
 import BiblioPage from './dissemination/BiblioPage';
 import AboutPage from './static_content/AboutPage';
-import CommuncationsPage from './static_content/CommunicationsPage';
+import CommunicationsPage from './static_content/CommunicationsPage';
 import PolicyPage from './static_content/PolicyPage';
 import FAQPage from './static_content/FAQPage';
 import ContactPage from './static_content/ContactPage';
+import Disclaimer from './static_content/Disclaimer';
 import Header from './wrapper/Header';
 import Footer from './wrapper/Footer';
 import React from 'react';
@@ -46,12 +47,12 @@ class DOECodeRouter extends React.Component {
                                 <Route path="/results" component={ResultsPage}/>
                                 <Route path="/biblio" component={BiblioPage}/>
                                 <Route path="/about" component={AboutPage}/>
-                                <Route path="/communcations" component={CommuncationsPage}/>
+                                <Route path="/communications" component={CommunicationsPage}/>
                                 <Route path="/policy" component={PolicyPage}/>
                                 <Route path="/faq" component={FAQPage}/>
                                 <Route path="/contact" component={ContactPage}/>
+                                <Route path="/disclaimer" component={Disclaimer}/>
                             </div>
-                            
                         </div>
                         <Footer/>
                     </div>
@@ -62,3 +63,33 @@ class DOECodeRouter extends React.Component {
 
 ReactDOM.render(
     <DOECodeRouter/>, document.getElementById('root'));
+
+    var highlightHeader = function(navName){
+           $("#header-nav-"+navName).addClass('active-menu-item');
+        $("#header-nav-"+navName+" > a").removeClass('nav-menu-item-text');
+        $("#header-nav-"+navName+" > a").addClass('active-menu-item-text');
+    };
+    $(document).ready(function(){
+        var href = location.href;
+        var current_location = href.match(/([^\/]*)\/*$/)[1];
+        console.log(current_location);
+        var headerName = "";
+        switch(current_location){
+            case "policy":
+                headerName = "policy";
+                break;
+            case "publish":
+                headerName = "submit";
+                break;
+            case "about":
+                headerName = "about";
+                break;
+            case "communications":
+                headerName = "resources";
+                break;
+            case "faq":
+                headerName = "faqs";
+                break;
+        }
+        highlightHeader(headerName);
+    });

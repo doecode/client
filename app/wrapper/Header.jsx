@@ -35,7 +35,7 @@ export default class Header extends React.Component {
         <nav className="navbar navbar-default main-header" >
             <div className="container-fluid">
                 <div className="pull-right hidden-xs hidden-sm visible-md visible-lg header-signin-links">
-                    <a className="nav-menu-item" href="/doecode/login"><span className="fa fa-user"></span> Sign In</a>
+                    <a className="nav-menu-item signin-btn" href="/doecode/login"><span className="fa fa-user"></span> Sign In</a>
                 </div>
                 <span id="hideable-header">
                     <div className='container hidden-xs hidden-sm visible-md visible-lg'>
@@ -78,32 +78,29 @@ export default class Header extends React.Component {
                                 </div>
                                 <div className="collapse navbar-collapse" id='header-nav-collapse'>
                                     <ul className='nav navbar-nav nav-menu'>
-                                        <li className='nav-menu-item-special'>
-                                            <a className='nav-menu-item' href="/doecode/"><span className='fa fa-home'></span> Home</a>
+                                        <li id='header-nav-home' className='nav-menu-item-special'>
+                                            <a className='nav-menu-item nav-menu-item-text' href="/doecode/"><span className='fa fa-home'></span> Home</a>
                                         </li>
-                                        <li>
-                                            <a className='nav-menu-item' href="/doecode/policy"><span className='fa fa-folder-open-o'></span> Software Policy</a>
+                                        <li id='header-nav-policy'>
+                                            <a className='nav-menu-item nav-menu-item-text' href="/doecode/policy"><span className='fa fa-folder-open-o'></span> Software Policy</a>
                                         </li>
-                                        <li>
-                                            <a className='nav-menu-item' href="/doecode/publish"><span className="fa fa-sign-in"></span> Submit Software/Code</a>
+                                        <li id='header-nav-submit'>
+                                            <a className='nav-menu-item nav-menu-item-text' href="/doecode/publish"><span className="fa fa-sign-in"></span> Submit Software/Code</a>
                                         </li>
-                                        <li>
-                                            <a className='nav-menu-item' href="/doecode/about"><span className="fa fa-building-o"></span> About</a>
+                                        <li id='header-nav-about'>
+                                            <a className='nav-menu-item nav-menu-item-text' href="/doecode/about"><span className="fa fa-building-o"></span> About</a>
                                         </li>
-                                        <li>
-                                            <a className='nav-menu-item' href="/doecode/communcations"><span className='fa fa-newspaper-o'></span> News/Resources</a>
+                                        <li id='header-nav-resources'>
+                                            <a className='nav-menu-item nav-menu-item-text' href="/doecode/communications"><span className='fa fa-newspaper-o'></span> News/Resources</a>
                                         </li>
-                                        <li>
-                                            <a className='nav-menu-item' href="/doecode/faq"><span className="fa fa-question"></span> FAQs</a>
+                                        <li id='header-nav-faqs'>
+                                            <a className='nav-menu-item nav-menu-item-text' href="/doecode/faq"><span className="fa fa-question"></span> FAQs</a>
                                         </li>
-                                        <li className='visible-xs visible-sm hidden-md hidden-lg'>
-                                            <a className="nav-menu-item" href="/doecode/login"><span className="fa fa-user"></span> Login</a>
-                                        </li>
-                                        <li className='visible-xs visible-sm hidden-md hidden-lg'>
-                                            <a className="nav-menu-item" href="/doecode/contact"><span className="fa fa-envelope-o"></span> Contact Us</a>
+                                        <li id='header-nav-login' className='visible-xs visible-sm hidden-md hidden-lg'>
+                                            <a className="nav-menu-item nav-menu-item-text" href="/doecode/login"><span className="fa fa-user"></span> Login</a>
                                         </li>
                                         {/*
-                                        <li className='visible-xs visible-sm hidden-md hidden-lg'>
+                                        <li id='header-nav-' className='visible-xs visible-sm hidden-md hidden-lg'>
                                             <label htmlFor="allSearch" className="sr-only">Search DOE Code for Published Software Entries</label>
                                             <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box"  placeholder="Search DOE Code for Published Software Entries"/>
                                         </li>
