@@ -50,7 +50,9 @@ export default class BiblioPage extends React.Component {
          generateContent(obj) {
 
            let textContent = null;
-           const header = obj.header
+           let show_val = true;
+           const header = obj.header;
+           
            if (header === "Developers/Contributors") {
             let devs = metadata.getValue("developers");
             let contributors = metadata.getValue("contributors");
@@ -61,34 +63,48 @@ export default class BiblioPage extends React.Component {
                 names.push(contributors[i].last_name + ", " + contributors[i].first_name);
 
             textContent = <span> <DevAndContribLinks devsAndContributors={names}/></span>;
+            show_val = names.length>0;
+            
           } else if (header === "Licenses") {
             const licenses = metadata.getValue("licenses");
             textContent = <span>{licenses.join("; ")}</span>;
+            
           } else if (header.indexOf("Organizations") > -1) {
             const items = metadata.getValue(obj.field);
             let names = [];
             for (var i = 0; i < items.length; i++)
                 names.push(items[i].organization_name);
             textContent =<span> {names.join("; ")} </span>;
+            show_val = names.length > 0;
+            
           } else if (header === "Release Date") {
             console.log(metadata.getValue("release_date"));
             textContent =<span> {metadata.getValue("release_date")._i} </span>;
+            show_val = metadata.getValue("release_date") != '';
+            
           } else {
              textContent = <span>{metadata.getValue(obj.field)}</span>;
+             show_val = metadata.getValue(obj.field);
            }
 
+           if(show_val){
            return (
-             <dl key={header} className="row">
-               <dt className="col-md-3 col-xs-12 biblio-page-header">
-                 {header}:
-               </dt>
-               <dd className="col-md-9 col-xs-12">
-                 {textContent}
+           <div className='biblio-row'>
+               <dl key={header} className="row">
+                   <dt className="col-md-3 col-xs-12 biblio-page-header">
+                       {header}:
+                   </dt>
+                   <dd className="col-md-9 col-xs-12">
+                       {textContent}
 
-               </dd>
-
-             </dl>);
-
+                   </dd>
+               </dl>
+           </div>
+           );
+}else{
+    return(null
+    );
+}
          }
 
       render() {
@@ -121,25 +137,35 @@ export default class BiblioPage extends React.Component {
         		</div>;
         }
 
-
-        const titleContent = <div className="col-xs-12">
-          <h2 className="static-content-title">
-          {metadata.getValue("software_title")}
-          </h2>
-        </div>;
-
         return(
-
         <div className="row not-so-wide-row">
-            <div className="col-md-1"></div>
-            <div className="col-md-10 col-xs-12">
-                {titleContent}
-                {descriptionContent}
-                <div className="citation-details-div static-content">
-                    {fieldsContent}
+            <div className="col-xs-12">
+                {/*Breadcrumb trail*/}
+                <div className="row">
+                </div>
+                {/*Title*/}
+                <div className="row">
+                    <div className="col-xs-12 center-text">
+                        <h2 className="biblio-title">
+                            {metadata.getValue("software_title")}
+                        </h2>
+                    </div>
+                </div>
+                {/*Description and other Data*/}
+                <div className="row">
+                    <div className="col-md-10 col-xs-12">
+                        <div className="row">
+                            {descriptionContent}
+                        </div>
+                        <div className="row">
+                            <div className="citation-details-div static-content col-xs-12">
+                                {fieldsContent}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-2"></div>
                 </div>
             </div>
-            <div className="col-md-1"></div>
         </div>
         )
 

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchItem from './SearchItem';
@@ -89,6 +90,7 @@ export default class ResultsPage extends React.Component {
                 </div>
                 <div className="col-xs-1"></div>
             </div>
+            {/*Sort*/}
             <div className="row center-text">
                 <div className="col-xs-1"></div>
                 <div className="col-md-10 col-xs-12">
@@ -96,8 +98,25 @@ export default class ResultsPage extends React.Component {
                 </div>
                 <div className="col-xs-1"></div>
             </div>
+            <br/>
+            <br/>
+            <br/>
+            {/*Text Availability*/}
             <div className="row">
-
+                <div className="col-xs-1"></div>
+                <div className="col-md-10 col-xs-12">
+                    <label className="filter-header">Author</label>
+                    <br/>
+                    <dl className="dl-horizontal">
+                        <dt className="left-text"><label>John Smith</label></dt>
+                        <dd className="right-text"><input type="checkbox"/></dd>
+                        <dt className="left-text"><label>Jane Doe</label></dt>
+                        <dd className="right-text"><input type="checkbox"/></dd>
+                        <dt className="left-text"><label>Jolita Hancock</label></dt>
+                        <dd className="right-text"><input type="checkbox"/></dd>
+                    </dl>
+                </div>
+                <div className="col-xs-1"></div>
             </div>
         </div>
 
@@ -106,7 +125,7 @@ export default class ResultsPage extends React.Component {
 
             <div className="row center-text">
                 {/*previous next*/}
-                <div className="col-xs-6 center-text">
+                <div className="col-xs-6 col-md-12 center-text">
                     <ReactPaginate previousLabel={"previous"}
                                    nextLabel={"next"}
                                    breakLabel={<a href="#">...</a>}
@@ -120,7 +139,7 @@ export default class ResultsPage extends React.Component {
                         subContainerClassName={"pages pagination"}
                         activeClassName={"active"} />
                 </div>
-                <div className='col-xs-6 right-text'>
+                <div className='col-xs-6 col-md-12 right-text'>
                     Showing <strong>{searchData.getValue("start")+1}-
                         {(searchData.getValue("rows")+searchData.getValue("start")>this.state.numFound)?this.state.numFound:searchData.getValue("rows")+searchData.getValue("start")}</strong> of <strong>{this.state.numFound}</strong> results
                 </div>
