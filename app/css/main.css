@@ -150,18 +150,6 @@ html h3 {
     font-size: 20px;
 }
 
-.nav-menu{
-
-}
-
-.nav-menu-item{
-    padding-left:25px !important;
-    padding-right:25px !important;
-    padding-top:10px !important;
-    padding-bottom:10px !important;
-    color:white !important;
-    font-size:16px !important;
-}
 
 .navbar .navbar-nav {
     display: inline-block;
@@ -255,6 +243,38 @@ html, body{
 
 .biblio-title{
     font-weight:300;
+}
+
+.nav-menu{
+
+}
+
+.nav-menu-item{
+    padding-left:25px !important;
+    padding-right:25px !important;
+    padding-top:10px !important;
+    padding-bottom:10px !important;
+}
+
+.nav-menu-item-text{
+    color:white !important;
+    font-size:16px !important;
+}
+
+.active-menu-item{
+    color:black !important;
+    background-color:white;
+    border-radius:3px;
+}
+
+.active-menu-item-text{
+    color:black !important;
+    font-size:16px !important;
+}
+
+.signin-btn{
+    font-size:13px;
+    color:white !important;
 }
 
 @keyframes spin {

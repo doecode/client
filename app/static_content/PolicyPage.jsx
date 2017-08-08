@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Modal, Button} from 'react-bootstrap';
 
-export default class Splash extends React.Component {
+export default class Policy extends React.Component {
     constructor(props) {
         super(props);
     }
 
 
     render() {
-
         return (
         <div className="row not-so-wide-row">
             <div className="col-md-3"></div>
