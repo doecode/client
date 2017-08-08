@@ -13,14 +13,14 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.json'] 
+    extensions: ['.js', '.jsx', '.json']
   },
 
 
 devServer: {
 proxy: {
 '/doecode/api/*': {
-target: 'http://localhost:8080/doecode/services',
+target: 'http://lxappdev2:8080/doecodeapi/services',
 secure: false,
 changeOrigin: true,
 pathRewrite: {
