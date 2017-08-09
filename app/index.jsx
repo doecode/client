@@ -44,9 +44,9 @@ class DOECodeRouter extends React.Component {
                                 <Route path="/confirm" component={Confirmation}/>
                                 <Route path="/projects" component={WorkflowManagement}/>
                                 <Route path="/register" component={RegisterUser}/>
-																<Route path="/account" component={EditUser}/>
-																<Route path="/admin" component={ApproveRoles}/>
-																<Route path="/changepassword" component={ChangePassword}/>
+                                <Route path="/account" component={EditUser}/>
+                                <Route path="/admin" component={ApproveRoles}/>
+                                <Route path="/changepassword" component={ChangePassword}/>
                                 <Route path="/login" component={Login}/>
                                 <Route path="/confirmuser" component={ConfirmUser}/>
                                 <Route path="/search" component={AdvancedSearch}/>
@@ -70,32 +70,3 @@ class DOECodeRouter extends React.Component {
 ReactDOM.render(
     <DOECodeRouter/>, document.getElementById('root'));
 
-    var highlightHeader = function(navName){
-           $("#header-nav-"+navName).addClass('active-menu-item');
-        $("#header-nav-"+navName+" > a").removeClass('nav-menu-item-text');
-        $("#header-nav-"+navName+" > a").addClass('active-menu-item-text');
-    };
-    $(document).ready(function(){
-        var href = location.href;
-        var current_location = href.match(/([^\/]*)\/*$/)[1];
-        console.log(current_location);
-        var headerName = "";
-        switch(current_location){
-            case "policy":
-                headerName = "policy";
-                break;
-            case "publish":
-                headerName = "submit";
-                break;
-            case "about":
-                headerName = "about";
-                break;
-            case "communications":
-                headerName = "resources";
-                break;
-            case "faq":
-                headerName = "faqs";
-                break;
-        }
-        highlightHeader(headerName);
-    });

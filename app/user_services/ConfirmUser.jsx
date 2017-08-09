@@ -31,16 +31,19 @@ export default class ConfirmUser extends React.Component {
 
     render() {
     	return (
-        <div>
-        {this.state.showSuccess &&
-        <h2>Thank you for registering with DOE Code. Your account has been confirmed.
-        </h2>
-        }
+        <div className="row not-so-wide-row">
+            <div className="col-md-3"> </div>
+            <div className="col-md-3 col-xs-12 center-text">
+                {this.state.showSuccess &&
+                <h2>Thank you for registering with DOE Code. Your account has been confirmed.
+                </h2>
+                }
 
-        {this.state.showError &&
-        <h2>The confirmation code provided does not exist or has expired. To register a new account click <a href="/register"> here</a>. </h2>
-        }
-
+                {this.state.showError &&
+                <h2>The confirmation code provided does not exist or has expired. To register a new account click <a href="/register"> here</a>. </h2>
+                }
+            </div>
+            <div className="col-md-3"> </div>
         </div>
     	)
     }

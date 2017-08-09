@@ -83,9 +83,13 @@ export default class RegisterUser extends React.Component {
 
 		if (this.state.success) {
 		content =
-		<div>
-		<p>Thank you for registering with DOE Code.</p>
-		</div>;
+                <div className="row not-so-wide-row">
+                    <div className="col-md-3"> </div>
+                    <div className="col-md-3 col-xs-12 center-text">
+                        <p>Thank you for registering with DOE Code.</p>
+                    </div>
+                    <div className="col-md-3"> </div>
+                </div>;
 		} else {
 		content =
                 <div className="row not-so-wide-row">
