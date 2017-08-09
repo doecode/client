@@ -5,6 +5,7 @@ import ReactPaginate from 'react-paginate';
 import {doAjax, getQueryParam} from '../utils/utils';
 import SearchData from '../stores/SearchData';
 import SearchField from '../field/SearchField';
+import Sidebar from './Sidebar';
 import staticContstants from '../staticJson/constantLists';
 
 const searchData = new SearchData();
@@ -101,7 +102,7 @@ export default class ResultsPage extends React.Component {
                 <div className="col-xs-1"></div>
             </div>
             <div className="row">
-
+            <Sidebar parseSearchResponse={this.parseSearchResponse} parseErrorResponse={this.parseErrorResponse}/>
             </div>
         </div>
 
