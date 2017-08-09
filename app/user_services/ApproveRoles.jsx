@@ -25,6 +25,7 @@ export default class ApproveRoles extends React.Component {
         this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
         this.approve = this.approve.bind(this);
         this.disapprove = this.disapprove.bind(this);
+        this.parseApproval = this.parseApproval.bind(this);
 
         this._columns = [
             {
@@ -51,26 +52,30 @@ export default class ApproveRoles extends React.Component {
 
     componentDidMount() {
 
-        //doAuthenticatedAjax('GET', "/doecode/api/user/requests", this.parseReceiveResponse);
-        const data = {"requests" : [{"user" : "email@ORNL.com", "requested_role" : "ORNL"}]}
-        this.parseReceiveResponse(data);
+        doAuthenticatedAjax('GET', "/doecode/api/user/requests", this.parseReceiveResponse);
+      //  const data = {"requests" : [{"user" : "email@ORNL.com", "requested_role" : "ORNL"}]}
+      //  this.parseReceiveResponse(data);
 
     }
 
     approve(email) {
       userData.setValue("email", email)
-      //doAuthenticatedAjax('POST', "/doecode/api/user/approve", this.parseReceiveResponse);
+      doAuthenticatedAjax('POST', "/doecode/api/user/approve", this.parseApproval, userData.getData());
     }
 
     disapprove(email) {
       userData.setValue("email", email)
-      //doAuthenticatedAjax('POST', "/doecode/api/user/approve", this.parseReceiveResponse);
+      doAuthenticatedAjax('POST', "/doecode/api/user/approve", this.parseApproval, userData.getData());
+    }
+
+    parseApproval() {
+      window.location.reload();
     }
 
     parseReceiveResponse(data) {
         let rows = [];
         console.log(data);
-        const requests = data.requests;
+        const requests = data.requests.requests;
         const approveClick = this.approve.bind(this,1);
         for (let i = 0; i < requests.length; i++) {
 
@@ -134,14 +139,7 @@ export default class ApproveRoles extends React.Component {
         <div className="row not-so-wide-row">
             <div className="col-md-3"></div>
             <div className="col-md-6 col-xs-12 static-content">
-                <h2 className="static-content-title">Manage My Projects</h2>
-                <div className="form-group-xs row">
-                    <div className="col-sm-12">
-                        <a href="/doecode/publish" type="button" className="btn btn-success btn-lg pull-right workflow-publish-btn" >
-                            Add New Record
-                        </a>
-                    </div>
-                </div>
+                <h2 className="static-content-title">Approve Roles</h2>
                 <ReactDataGrid
                     onGridSort={this.handleGridSort}
                     enableCellSelect={true}

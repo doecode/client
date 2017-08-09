@@ -24,6 +24,7 @@ export default class EditUser extends React.Component {
   }
 
   parseLoad(data) {
+		 console.log(data);
      userData.setValue("email", data.email);
   }
 
