@@ -26,19 +26,30 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, browserHistory,IndexRoute} from 'react-router-dom';
 
 import css from './css/main.css';
+let outtermost_class_name = "";
+let is_homepage = false;
 class DOECodeRouter extends React.Component {
 
 	constructor(props) {
 		super(props);
+                /*If we're on the homepage, we have some different work to do*/
+                const current_page = location.href.match(/([^\/]*)\/*$/)[1];
+                
+                if(current_page==='' || current_page==='/' || current_page==='doecode'){
+                    outtermost_class_name='homepage-outtermost-style';
+                    is_homepage = true;
+                }
 	}
 
 	render() {
 		return (
 
                 <Router basename="/doecode" history={browserHistory}>
-                    <div>
+                    <div className={outtermost_class_name}>
                         <div className="wrapper">
+                            {!is_homepage &&
                             <Header/>
+                            }
                             <div>
                                 <Route exact path="/" component={Splash}/>
                                 <Route path="/publish" component={DOECodeWizard}/>
@@ -65,7 +76,7 @@ class DOECodeRouter extends React.Component {
                                 <Route path="/disclaimer" component={Disclaimer}/>
                             </div>
                         </div>
-                        <Footer/>
+                        <Footer is_homepage={is_homepage}/>
                     </div>
                 </Router>
 		);

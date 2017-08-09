@@ -1,15 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+let footer_classes = "";
 export default class Footer extends React.Component {
     constructor(props) {
         super(props);
+        console.log(this.props.is_homepage);
+        footer_classes = (this.props.is_homepage==true)?"footer":"footer footer-bottom";
     }
 
     render() {
         return (
 
-            <footer className="footer footer-bottom">
+            <footer className={footer_classes}>
                 <div className="container">
                     <div className="row">
                         <div className="col text-center">
@@ -18,7 +21,7 @@ export default class Footer extends React.Component {
                     </div>
                     <div className="row text-center mt-1 mb-1 white">
                         <a href="/doecode/disclaimer" className="footer-link">Website Policies / Important Links</a>
-                        &nbsp;•&nbsp;
+                        &nbsp;&bull;&nbsp;
                         <a href="/doecode/contact" className="footer-link">Contact Us</a>
                     </div>
                 </div>

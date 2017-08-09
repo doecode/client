@@ -16,7 +16,7 @@ export default class MetadataPanel extends React.Component {
 	checkForProp() {
 
 		const licenses = metadata.getValue("licenses");
-    const hasProp = licenses.indexOf('Proprietary') > -1;
+    const hasProp = licenses.indexOf('Other') > -1;
 
 		const propInfo = metadata.getFieldInfo("proprietary_url");
 		if (hasProp) {
@@ -35,7 +35,7 @@ export default class MetadataPanel extends React.Component {
 
 		  const propInfo = metadata.getFieldInfo("proprietary_url");
 			const licenseOptions = [
-				{label: 'Proprietary', value: 'Proprietary'},
+				{label: 'Other', value: 'Other'},
 				{label: 'Apache License 2.0', value: 'Apache License 2.0'},
 				{label: 'GNU General Public License v3.0', value: 'GNU General Public License v3.0'},
 				{label: 'MIT License', value: 'MIT License'},

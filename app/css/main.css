@@ -146,10 +146,13 @@ html h3 {
     background-image: linear-gradient(rgb(30, 111, 146), rgb(1, 53, 88) 100%);
 }
 
+.homepage-outtermost-style{
+    background-image: linear-gradient(rgb(30, 111, 146), rgb(1, 53, 88) 100%);
+}
+
 .search-box{
     font-size: 20px;
 }
-
 
 .navbar .navbar-nav {
     display: inline-block;
@@ -285,6 +288,26 @@ html, body{
     margin-bottom:5px;
 }
 
+.header-subtext{
+    color:white;
+}
+
+.icon-row{
+    color:white;
+}
+
+.icon-row a{
+        color:white !important;
+}
+
+.icon-row a.icon-row-icon{
+    font-size:50px;
+}
+
+.clickable{
+    cursor:pointer;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -299,6 +322,9 @@ html, body{
     .biblio-page-header{
         text-align: center;
     }
+    .homepage-signin-bar{
+        text-align:center;
+    }
 }
 
 /* Extra Small Devices, Phones */
@@ -309,6 +335,9 @@ html, body{
     .biblio-page-header{
         text-align: center;
     }
+    .homepage-signin-bar{
+        text-align:center;
+    }
 }
 
 /* Small Devices, Tablets */
@@ -318,6 +347,9 @@ html, body{
     }
     .biblio-page-header{
         text-align: center;
+    }
+    .homepage-signin-bar{
+        text-align:center;
     }
 }
 
@@ -332,6 +364,9 @@ html, body{
     .biblio-page-header{
         text-align: right;
     }
+    .homepage-signin-bar{
+        text-align:right;
+    }
 }
 
 /* Large Devices, Wide Screens */
@@ -345,6 +380,7 @@ html, body{
     .biblio-page-header{
         text-align: right;
     }
+<<<<<<< HEAD
 }
 
 .progtrckr {
@@ -477,4 +513,9 @@ ol.progtrckr li.progtrckr-done:before {
 
 ol.progtrckr li.progtrckr-done:hover:before {
   color: #333;
+}
+
+.homepage-signin-bar{
+        text-align:right;
+    }
 }
