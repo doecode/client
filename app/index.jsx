@@ -70,31 +70,3 @@ class DOECodeRouter extends React.Component {
 ReactDOM.render(
     <DOECodeRouter/>, document.getElementById('root'));
 
-    var highlightHeader = function(navName){
-           $("#header-nav-"+navName).addClass('active-menu-item');
-        $("#header-nav-"+navName+" > a").removeClass('nav-menu-item-text');
-        $("#header-nav-"+navName+" > a").addClass('active-menu-item-text');
-    };
-    $(document).ready(function(){
-        var href = location.href;
-        var current_location = href.match(/([^\/]*)\/*$/)[1];
-        var headerName = "";
-        switch(current_location){
-            case "policy":
-                headerName = "policy";
-                break;
-            case "publish":
-                headerName = "submit";
-                break;
-            case "about":
-                headerName = "about";
-                break;
-            case "communications":
-                headerName = "resources";
-                break;
-            case "faq":
-                headerName = "faqs";
-                break;
-        }
-        highlightHeader(headerName);
-    });
