@@ -44,9 +44,9 @@ class DOECodeRouter extends React.Component {
                                 <Route path="/confirm" component={Confirmation}/>
                                 <Route path="/projects" component={WorkflowManagement}/>
                                 <Route path="/register" component={RegisterUser}/>
-																<Route path="/account" component={EditUser}/>
-																<Route path="/admin" component={ApproveRoles}/>
-																<Route path="/changepassword" component={ChangePassword}/>
+                                <Route path="/account" component={EditUser}/>
+                                <Route path="/admin" component={ApproveRoles}/>
+                                <Route path="/changepassword" component={ChangePassword}/>
                                 <Route path="/login" component={Login}/>
                                 <Route path="/confirmuser" component={ConfirmUser}/>
                                 <Route path="/search" component={AdvancedSearch}/>
@@ -78,7 +78,6 @@ ReactDOM.render(
     $(document).ready(function(){
         var href = location.href;
         var current_location = href.match(/([^\/]*)\/*$/)[1];
-        console.log(current_location);
         var headerName = "";
         switch(current_location){
             case "policy":

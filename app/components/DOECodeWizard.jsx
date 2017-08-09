@@ -329,8 +329,8 @@ buildPanel(obj) {
       const submitDisabled = !metadata.validateSchema();
       const publishDisabled = !metadata.validatePublishedFields();
 
-      const publishClass = publishDisabled ? "btn btn-lg pull-right doecode-wizard-btn" : "btn btn-primary btn-lg pull-right doecode-wizard-btn"
-      const submitClass = submitDisabled ? "btn btn-lg pull-right doecode-wizard-btn" : "btn btn-primary btn-lg pull-right doecode-wizard-btn"
+      const publishClass = publishDisabled ? "btn btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "btn btn-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style "
+      const submitClass = submitDisabled ? "btn btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "btn btn-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style "
       const codeID = metadata.getValue("code_id");
 
       let headerText = "Create a New Software Record";
@@ -357,11 +357,6 @@ buildPanel(obj) {
         }
 
 
-        const marginStyle = {
-          'margin-bottom' : '5px'
-        };
-
-
         let button = null;
 
         if (window.location.pathname == '/doecode/submit') {
@@ -373,16 +368,10 @@ buildPanel(obj) {
                                   </button>
                             </div>
                             <div className="col-sm-3">
-                                <button style={marginStyle} type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
+                                <button type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
                                     Submit Record to E-Link
                                 </button>
                             </div>
-
-
-
-
-
-
                         </div>
         } else {
           button =           <div className="form-group-xs row">
@@ -393,7 +382,7 @@ buildPanel(obj) {
                               </button>
                           </div>
                           <div className="col-sm-2">
-                              <button style={marginStyle} type="button" className={publishClass} disabled={publishDisabled} onClick={this.publish}>
+                              <button  type="button" className={publishClass} disabled={publishDisabled} onClick={this.publish}>
                                   Publish Record
                               </button>
                           </div>
