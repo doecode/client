@@ -40,14 +40,6 @@ export default class SupplementalInfoStep extends React.Component {
 		}
 		const accessibility = metadata.getValue("accessibility");
 
-		const countries = [
-			{label: 'United States', value: 'United States'},
-			{label: 'Canada', value: 'Canada'},
-			{label: 'France', value: 'France'},
-			{label: 'Switzerland', value: 'Switzerland'},
-			{label: 'United Kingdom', value: 'United Kingdom'}
-			];
-
 			const acceptedFileTypes = ".zip,.tar,.tar.gz,.tar.bz2,.jar,.war"
 			let fileLabelText = "File Upload (Optional Field)";
 

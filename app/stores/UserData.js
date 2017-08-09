@@ -1,5 +1,5 @@
 import BaseData from './BaseData';
-import MetadataStore from './MetadataStore';
+import UserStore from './UserStore';
 
 export default class UserData extends BaseData {
     constructor() {
@@ -7,7 +7,8 @@ export default class UserData extends BaseData {
       const defaultUser = {
    		   	  email : '',
    		   	  password: '',
-   		   	  confirm_password: ''
+   		   	  confirm_password: '',
+            pending_role: ''
       }
 
       const defaultUserSchema = {
@@ -17,7 +18,7 @@ export default class UserData extends BaseData {
              "confirm_password" : {required:true, completed:false, validations: [""], error: ''}
         }
 
-    	const props = {fieldMap: MetadataStore.user, infoSchema: MetadataStore.userSchema, fieldMapSnapshot: defaultUser, infoSchemaSnapshot: defaultUserSchema};
+    	const props = {fieldMap: UserStore.user, infoSchema: UserStore.userSchema, fieldMapSnapshot: UserStore.defaultUser, infoSchemaSnapshot: UserStore.defaultUserSchema};
       super(props);
 
     }

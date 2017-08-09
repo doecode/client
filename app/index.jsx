@@ -3,6 +3,9 @@ import Confirmation from './confirmation/Confirmation';
 import WorkflowManagement from './user_services/WorkflowManagement';
 import Login from './user_services/Login';
 import RegisterUser from './user_services/RegisterUser';
+import EditUser from './user_services/EditUser';
+import ApproveRoles from './user_services/ApproveRoles';
+import ChangePassword from './user_services/ChangePassword';
 import ConfirmUser from './user_services/ConfirmUser';
 import Splash from './splash/Splash';
 import AdvancedSearch from './dissemination/AdvancedSearch';
@@ -41,6 +44,9 @@ class DOECodeRouter extends React.Component {
                                 <Route path="/confirm" component={Confirmation}/>
                                 <Route path="/projects" component={WorkflowManagement}/>
                                 <Route path="/register" component={RegisterUser}/>
+																<Route path="/account" component={EditUser}/>
+																<Route path="/admin" component={ApproveRoles}/>
+																<Route path="/changepassword" component={ChangePassword}/>
                                 <Route path="/login" component={Login}/>
                                 <Route path="/confirmuser" component={ConfirmUser}/>
                                 <Route path="/search" component={AdvancedSearch}/>

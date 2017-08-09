@@ -70,6 +70,7 @@ export default class Field extends React.Component {
         const wrapperStyleExtra = this.props.properties.wrapperStyleExtra != undefined ? this.props.properties.wrapperStyleExtra : "";
     const elementType = this.props.properties.elementType;
     const noval = this.props.properties.noval;
+    const noExtraLabelText = this.props.properties.noExtraLabelText;
 
     let completed = false;
     let disabled = this.props.properties.disabled ? this.props.properties.disabled : false;
@@ -94,13 +95,6 @@ export default class Field extends React.Component {
       required = info.required;
       error = info.error;
       completed = info.completed;
-
-      if (required) {
-            label += " (Required Field)";
-          }
-      else {
-            label += " (Optional Field)";
-      }
     }
 
     if (required)
@@ -112,12 +106,23 @@ export default class Field extends React.Component {
      let wrapperStyle = "form-group row" + wrapperStyleExtra;
 
      if (!noval) {
+
+
      if (error) {
        wrapperStyle += " has-error has-feedback"
      } else if (completed) {
        wrapperStyle += " has-success has-feedback"
      }
 
+   }
+
+     if (!noExtraLabelText) {
+       if (required) {
+             label += " (Required Field)";
+           }
+       else {
+             label += " (Optional Field)";
+       }
      }
 
 	 let input = null;
