@@ -78,6 +78,7 @@ export default class RegisterUser extends React.Component {
 
 		const validPassword = this.state.longEnough && this.state.hasSpecial && this.state.hasNumber && this.state.upperAndLower && this.state.matches &&
 		!this.state.containsName && this.state.validEmail;
+                const emailSmalltext = "If you are an employee at a DOE National Laboratory, please register using your official .gov email address.";
 
 		let content = null;
 
@@ -85,8 +86,11 @@ export default class RegisterUser extends React.Component {
 		content =
                 <div className="row not-so-wide-row">
                     <div className="col-md-3"> </div>
-                    <div className="col-md-3 col-xs-12 center-text">
-                        <p>Thank you for registering with DOE Code.</p>
+                    <div className="col-md-6 col-xs-12 center-text">
+                        <p>
+                            A confirmation email has been sent to the email address you used to register your DOE Code account. Please follow the instructions 
+                            in that email to being using DOE Code.
+                        </p>
                     </div>
                     <div className="col-md-3"> </div>
                 </div>;
@@ -95,16 +99,17 @@ export default class RegisterUser extends React.Component {
                 <div className="row not-so-wide-row">
                     <div className="col-md-3"> </div>
                     <div className="col-md-3 col-xs-12">
-                        <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword}/>
-                        <UserField noval={true} field="password" label="Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} />
-                        <UserField noval={true} field="confirm_password" label="Confirm Password" elementType="password" handleChange={this.updateConfirmAndCheckPassword}/>
+                        <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword} noExtraLabelText smallText={emailSmalltext}/>
+                        <small></small>
+                        <UserField noval={true} field="password" label="Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} noExtraLabelText/>
+                        <UserField noval={true} field="confirm_password" label="Confirm Password" elementType="password" handleChange={this.updateConfirmAndCheckPassword} noExtraLabelText/>
                         <button type="button" className="btn btn-lg btn-success" disabled={!validPassword} onClick={this.register}>
                             Register
                         </button>
                         <br/>
                     </div>
                     <div className="col-md-3 col-xs-12">
-                        <p>All fields are required.</p>
+                        <p><strong>All fields are required.</strong></p>
                         <p>Passwords must:</p>
                         <ul>
                             <li>Be at least 8 characters long. {this.state.longEnough &&<span className="glyphicon glyphicon-ok green"></span> }</li>

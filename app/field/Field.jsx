@@ -72,6 +72,7 @@ export default class Field extends React.Component {
         const inputStyle = this.props.properties.inputStyle != undefined ? "form-control " + this.props.properties.inputStyle : "form-control";
 	const messageNode = this.props.properties.messageNode;
         const wrapperStyleExtra = this.props.properties.wrapperStyleExtra != undefined ? this.props.properties.wrapperStyleExtra : "";
+        const smallBelowText = this.props.properties.smallText != undefined ? this.props.properties.smallText : "";
     const elementType = this.props.properties.elementType;
     const noval = this.props.properties.noval;
     const noExtraLabelText = this.props.properties.noExtraLabelText;
@@ -137,7 +138,9 @@ export default class Field extends React.Component {
 	  }
 	  else if (elementType === 'input') {
 		if (!disabled) {
-			input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} />
+                input = <span><input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} />
+                    <small>{smallBelowText}</small>
+                </span>
 		} else {
 			input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} disabled />
 		}
@@ -146,7 +149,7 @@ export default class Field extends React.Component {
 			input = <input name={field} type="password" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} />
 	  }
 	  else if (elementType === 'checkbox') {
-		  input = <input name={field} type="checkbox" className={inputStyle} checked={val} onChange={this.toggleCheckbox} />
+		  input = <input name={field} type="checkbox" checked={val} onChange={this.toggleCheckbox} />
 	  }
 	  else if (elementType === 'select') {
 	    const ph = this.props.properties.placeholder ? this.props.properties.placeholder : "Select any that apply";
@@ -181,28 +184,28 @@ export default class Field extends React.Component {
 
 
 	  return(
-      <div className={wrapperStyle}>
-      <div className="">
-      {label &&
-      <label htmlFor={field} className={labelStyle}>
-        {label}
-      </label>
-      }
-      <div className={divStyle}>
-        {input}
+          <div className={wrapperStyle}>
+              <div className="">
+                  {label &&
+                  <label htmlFor={field} className={labelStyle}>
+                      {label}
+                  </label>
+                  }
+                  <div className={divStyle}>
+                      {input}
 
-        {error &&
-        <span className="error-color">
-        <strong>{error} </strong>
-        </span>
-        }
-      </div>
-      {messageNode}
-      {completed && (elementType === 'input' || elementType === 'textarea') && !noval &&
-      <span className="glyphicon glyphicon-ok form-control-feedback"></span>
-      }
-      </div>
-    </div>
+                      {error &&
+                      <span className="error-color">
+                          <strong>{error} </strong>
+                      </span>
+                      }
+                  </div>
+                  {messageNode}
+                  {completed && (elementType === 'input' || elementType === 'textarea') && !noval &&
+                  <span className="glyphicon glyphicon-ok form-control-feedback"></span>
+                  }
+              </div>
+          </div>
     );
   }
 

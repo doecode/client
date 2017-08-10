@@ -144,6 +144,8 @@ html h3 {
 
 .main-header{
     background-image: linear-gradient(rgb(30, 111, 146), rgb(1, 53, 88) 100%);
+    box-shadow:none !important;
+    border-color:#FFFFFF !important;
 }
 
 .homepage-outtermost-style{
@@ -249,7 +251,7 @@ html, body{
 }
 
 .nav-menu{
-
+    margin-bottom:-5px !important;
 }
 
 .nav-menu-item{
@@ -267,7 +269,6 @@ html, body{
 .active-menu-item{
     color:black !important;
     background-color:white;
-    border-radius:3px;
 }
 
 .active-menu-item-text{
@@ -325,6 +326,9 @@ html, body{
     .homepage-signin-bar{
         text-align:center;
     }
+    .nav-menu{
+        margin-bottom:0px;
+    }
 }
 
 /* Extra Small Devices, Phones */
@@ -338,6 +342,9 @@ html, body{
     .homepage-signin-bar{
         text-align:center;
     }
+     .nav-menu{
+        margin-bottom:0px;
+    }
 }
 
 /* Small Devices, Tablets */
@@ -350,6 +357,9 @@ html, body{
     }
     .homepage-signin-bar{
         text-align:center;
+    }
+     .nav-menu{
+        margin-bottom:0px;
     }
 }
 
@@ -367,6 +377,7 @@ html, body{
     .homepage-signin-bar{
         text-align:right;
     }
+     
 }
 
 /* Large Devices, Wide Screens */

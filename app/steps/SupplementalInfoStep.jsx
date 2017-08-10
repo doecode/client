@@ -67,18 +67,21 @@ export default class SupplementalInfoStep extends React.Component {
                             <div className="form-group form-group-sm row">
                                 <div className="col-xs-8">
                                     <label htmlFor="file_upload" className={filesInfo.error ? "has-error error-color field-error form-label" : "form-label"}>
-                                        File Upload
+                                           File Upload
                                     </label>
-                                    <div >
+                                    &nbsp;&nbsp;
+                                    <small>Supported file types: .zip, .tar, .tar.gz, .tar.gz2, .war</small>
+                                    <div>
                                         <Dropzone name="file_upload" accept={acceptedFileTypes} onDrop={this.onDrop}>
                                             <h2> Drag files here or click to browse. </h2>
                                         </Dropzone>
                                     </div>
-																		{filesInfo.error &&
-														        <span className="error-color">
-														        <strong>{filesInfo.error} </strong>
-														        </span>
-														        }
+                                    
+                                    {filesInfo.error &&
+                                    <span className="error-color">
+                                        <strong>{filesInfo.error} </strong>
+                                    </span>
+                                    }
                                 </div>
                             </div>
 

@@ -40,8 +40,8 @@ export default class Communications extends React.Component {
                 <div className="padblock">              
                     <h4>Selected Articles and Presentations</h4>
                     <ul>
-                        <li>05/03/2017 <a href="docs/billings_stip_20170503.pdf">The New Energy Science and Technology Software Center</a> presented at the DOE Scientific and Technical Information Program (STIP) Annual Working Meeting (Jay Jay Billings, Oak Ridge National Laboratory (ORNL))</li>
-                        <li>04/21/2017 <a href="docs/DOE_Code_Code4LibSE_2017.pptx.zip">DOE Code Metadata</a> by Katie Knight, Oak Ridge National Laboratory, <a href="https://wiki.code4lib.org/Southeast_2017#Code4LibSE_2017_Emory_Meeting">Code4LibSE 2017 Emory Meeting</a></li>
+                        <li>05/03/2017 <a href="https://www.osti.gov/doecode/docs/billings_stip_20170503.pdf">The New Energy Science and Technology Software Center</a> presented at the DOE Scientific and Technical Information Program (STIP) Annual Working Meeting (Jay Jay Billings, Oak Ridge National Laboratory (ORNL))</li>
+                        <li>04/21/2017 <a href="http://www.osti.gov/doecode/docs/DOE_Code_Code4LibSE_2017.pptx.zip">DOE Code Metadata</a> by Katie Knight, Oak Ridge National Laboratory, <a href="https://wiki.code4lib.org/Southeast_2017#Code4LibSE_2017_Emory_Meeting">Code4LibSE 2017 Emory Meeting</a></li>
                         <li>03/01/2017 Poster presented at SIAM CSE17 PP108 Minisymposterium: <a href="https://figshare.com/articles/billings_doecode_siamcse2017_20170301_jpg/4730203">Software Productivity and Sustainability for CSE and Data Science</a> by Jay Jay Billings, Oak Ridge National Laboratory</li>
                     </ul>
 
