@@ -13,10 +13,12 @@ import ContributorsStep from './ContributorsStep';
 import AccessStep from './AccessStep';
 import RecipientStep from './RecipientStep';
 import ConfirmStep from './ConfirmStep';
+import Confirmation from '../confirmation/Confirmation';
 import RIsStep from './RIsStep';
 import {PanelGroup, Panel} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
 import StepZilla from 'react-stepzilla';
+import InterfaceStep from './InterfaceStep';
 /*import css from '../css/main.css';*/
 
 
@@ -24,7 +26,6 @@ const metadata = new Metadata();
 
 let publishSteps = [];
 let submitSteps = [];
-let steps = [];
 
 @observer
 export default class DOECodeSubmissionInterface extends React.Component {
@@ -42,88 +43,61 @@ constructor(props) {
     this.doMultipartSubmission = this.doMultipartSubmission.bind(this);
     this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
     this.parseErrorResponse = this.parseErrorResponse.bind(this);
-    this.setActivePanel = this.setActivePanel.bind(this);
-    this.buildPanel = this.buildPanel.bind(this);
-    this.showAdditionalFields = this.showAdditionalFields.bind(this);
-    this.panelSelect = this.panelSelect.bind(this);
 
     this.state = {
         "loading": false,
         "loadingMessage": "",
         "editLoad": false,
-        "published": false,
-        "showAll": false,
-        "activePanel": 1,
-        "activePanels" : [true,true,true,true,true,true,true,true,true]
+        "published": false
     };
 
-    steps = [
+    publishSteps = [
           {
-              name: 'Repository Information TLS',
-              component: <EntryStep metadata={metadata} autopopulate={this.autopopulate}/>
+              name: 'Step 1',
+              component: <InterfaceStep name="Repository Information" panel={<EntryStep metadata={metadata} autopopulate={this.autopopulate}/>} />
           }, {
-              name: 'Product Description',
-              component: <MetadataPanel metadata={metadata}/>
+              name: 'Step 2',
+              component: <InterfaceStep name="Product Description" panel={<MetadataPanel metadata={metadata}/>} />
           }, {
-              name: 'Developers',
-              component: <AgentsStep/>
+              name: 'Step 3',
+              component: <InterfaceStep name="Developers" panel={<AgentsStep/>} />
           }, {
-              name: 'DOI and Release Date',
-              component: <DOIPanel metadata={metadata}/>
+              name: 'Step 4',
+              component: <InterfaceStep name="DOI and Release Date" panel={<DOIPanel metadata={metadata}/>} />
           }
     ];
 
-    publishSteps = [
-        {
-            name: 'Repository Information TLS',
-            component: <EntryStep metadata={metadata} autopopulate={this.autopopulate}/>
-        }, {
-            name: 'Product Description',
-            component: <MetadataPanel metadata={metadata}/>
-        }, {
-            name: 'Developers',
-            component: <AgentsStep/>
-        }, {
-            name: 'DOI and Release Date',
-            component: <DOIPanel metadata={metadata}/>
-        }
-    ];
-
     submitSteps = [
-        {
-            name: 'Supplemental Product Information',
-            component: <SupplementalInfoStep/>
-        }, {
-            name: 'Organizations',
-            component: <OrgsStep/>
-        }, {
-            name: 'Contributors and Contributing Organizations',
-            component: <ContributorsStep/>
-        }, {
-            name: 'Identifiers',
-            component: <RIsStep/>
-        }, {
-            name: 'Contact Information',
-            component: <RecipientStep/>
-        }
+          {
+              name: 'Step 1',
+              component: <InterfaceStep name="Repository Information" panel={<EntryStep metadata={metadata} autopopulate={this.autopopulate}/>} />
+          }, {
+              name: 'Step 2',
+              component: <InterfaceStep name="Product Description" panel={<MetadataPanel metadata={metadata}/>} />
+          }, {
+              name: 'Step 3',
+              component: <InterfaceStep name="Developers" panel={<AgentsStep/>} />
+          }, {
+              name: 'Step 4',
+              component: <InterfaceStep name="DOI and Release Date" panel={<DOIPanel metadata={metadata}/>} />
+          }, {
+              name: 'Step 5',
+              component: <InterfaceStep name="Supplemental Product Information" panel={<SupplementalInfoStep/>} />
+          }, {
+              name: 'Step 6',
+              component: <InterfaceStep name="Organizations" panel={<OrgsStep/>} />
+          }, {
+              name: 'Step 7',
+              component: <InterfaceStep name="Contributors and Contributing Organizations" panel={<ContributorsStep/>} />
+          }, {
+              name: 'Step 8',
+              component: <InterfaceStep name="Identifiers" panel={<RIsStep/>} />
+          }, {
+              name: 'Step 9',
+              component: <InterfaceStep name="Contact Information" panel={<RecipientStep/>} />
+          }
     ];
-    /*
 
-         *
-        		{name: 'Licenses & Access Limitations', component: <AccessStep metadata={metadata} />},
-         {name: 'Developers & Contributors', component: <AgentsStep metadata={metadata} />},
-        		{name: 'Organizations', component: <OrgsStep metadata={metadata}/>},
-        		{name: 'Identifiers', component: <RIsStep metadata={metadata}/>},
-        		{name: 'Recipient Information', component: <RecipientStep metadata={metadata}/>},
-        		{name: 'Summary', component: <ConfirmStep metadata={metadata}/> }
-         */
-    let i = 0;
-    for (i = 0; i < publishSteps.length; i++)
-        publishSteps[i].key = "" + (i + 1);
-
-    let x = 0;
-    for (x = 0; x < submitSteps.length; x++)
-        submitSteps[x].key = "" + (x + i + 1);
     }
 
 parseErrorResponse(jqXhr, exception) {
@@ -146,7 +120,7 @@ componentDidMount() {
     const workflowStatus = getQueryParam("workflow");
 
     console.log(workflowStatus);
-    if (window.location.pathname == '/doecode/submit') {
+    if (window.location.pathname == '/doecode/submit2') {
         this.setState({"showAll": true});
     } else {
         metadata.requireOnlyPublishedFields();
@@ -171,10 +145,6 @@ componentDidMount() {
 
 }
 
- showAdditionalFields() {
-	 this.setState({"showAll" : true});
- }
-
 parseReceiveResponse(data) {
     metadata.deserializeData(data.metadata);
     this.setState({"loading": false, "loadingMessage": ""});
@@ -198,7 +168,6 @@ parseAutopopulateResponse(responseData) {
 
 
 save() {
-
     this.setState({"loading": true, "loadingMessage": "Saving"});
 
     if (metadata.getValue("accessibility") == 'OS' || (Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length == 0)) {
@@ -243,7 +212,6 @@ parseSaveResponse(data) {
     metadata.setValue("code_id", data.metadata.code_id);
 }
 
-
 parsePublishResponse(data) {
     window.location.href = "/doecode/confirm?workflow=published&code_id=" + data.metadata.code_id;
 }
@@ -252,93 +220,6 @@ parseSubmitResponse(data) {
 
     window.location.href = "/doecode/confirm?workflow=submitted&code_id=" + data.metadata.code_id;
 }
-
-setActivePanel(currentKey) {
-    console.log(currentKey);
-    console.log(this.state.activePanel);
-    if (currentKey == this.state.activePanel) {
-        this.setState({"activePanel": -1});
-    } else {
-        this.setState({"activePanel": currentKey});
-    }
-}
-
-panelSelect(currentKey) {
-  let activePanels = this.state.activePanels;
-  activePanels[currentKey - 1] = !activePanels[currentKey - 1];
-  this.setState({"activePanels" : activePanels});
-}
-
-buildPanel(obj) {
-        let requiredText = "";
-        let optionalText = "";
-        let panelStyle = "default";
-
-
-        const panelStatus = metadata.getPanelStatus(obj.name);
-        const required_status = panelStatus.remainingRequired>0 ? 'required-field-span':'';
-             if (panelStatus.remainingRequired > 0) {
-                  requiredText += " (Fields Required) ";
-             }
-             else {
-
-            	 if (panelStatus.hasRequired) {
-            		 requiredText += " (All Required Fields Completed) ";
-            	 }
-             }
-
-/*
-             if (panelStatus.remainingOptional > 0 && panelStatus.hasOptional) {
-                  requiredText += " (Optional Fields) ";
-             }
-             else {
-
-              if (panelStatus.hasOptional) {
-                requiredText += " (All Required Fields Completed) ";
-              }
-             }
-             */
-
-        let arrowBool = this.state.activePanel == obj.key;
-
-        console.log(this.state.activePanels);
-        if (window.location.pathname == '/doecode/submit') {
-              arrowBool = this.state.activePanels[obj.key - 1];
-        }
-
-        console.log(arrowBool);
-        const heading = <div> <span className={required_status}>{obj.name}
-                {requiredText}</span>
-        {panelStatus.hasRequired && panelStatus.remainingRequired == 0 &&
-        <span className="green glyphicon glyphicon-ok"></span>
-        }
-        {arrowBool &&
-        <span className="pull-right glyphicon glyphicon-chevron-down"></span>
-        }
-
-        {!arrowBool &&
-        <span className="pull-right glyphicon glyphicon-chevron-right"></span>
-        }
-      </div>;
-
-        const expandedBool = window.location.pathname == '/doecode/submit';
-        return <Panel header={heading} defaultExpanded={expandedBool} onSelect={this.panelSelect} collapsible bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
-
-      	<div>
-
-
-		</div>
-
-        {panelStatus.errors &&
-        <div className="error-color">
-        <h3> <strong> {panelStatus.errors} </strong> </h3>
-        </div>
-        }
-
-        {obj.component}
-
-      </Panel>;
-        }
 
 
 
@@ -357,33 +238,15 @@ buildPanel(obj) {
       if (codeID !== undefined && codeID > 0)
     	  headerText = "Editing Software Record #" + codeID;
 
-      const self = this;
-
-        const publishHeader = <div> <strong> Fields Required to Publish this Record on DOE Code </strong>
-
-
-        </div>
-
-        ;
-        const publishPanels = publishSteps.map(this.buildPanel);
-
-        const submitHeader = <strong> Additional Fields Required to Submit to E-Link </strong>;
-
-        let submitPanels = null;
-
-        if (this.state.showAll) {
-          submitPanels = submitSteps.map(this.buildPanel);
-        }
-
 
         const marginStyle = {
-          'margin-bottom' : '5px'
+          'marginBottom' : '5px'
         };
 
 
         let button = null;
 
-        if (window.location.pathname == '/doecode/submit') {
+        if (window.location.pathname == '/doecode/submit2') {
         button =             <div className="form-group-xs row">
 
                             <div className="col-sm-9">
@@ -396,11 +259,6 @@ buildPanel(obj) {
                                     Submit Record to E-Link
                                 </button>
                             </div>
-
-
-
-
-
 
                         </div>
         } else {
@@ -421,13 +279,35 @@ buildPanel(obj) {
                       </div>
         }
 
-        const accordionBool = window.location.pathname == '/doecode/publish';
 
-        let content =
+          let content;
 
+        if (window.location.pathname == '/doecode/submit2') {
+          content =
+          <div>
                 <div className="step-progress">
-                    <StepZilla steps={steps}/>
-                </div>;
+                    <StepZilla
+                      steps={submitSteps}
+                      preventEnterSubmission={true}
+                      stepsNavigation={false}
+                      startAtStep={4}
+                    />
+                </div>
+          </div>
+        }
+        else {
+          content =
+          <div>
+                <div className="step-progress">
+                    <StepZilla
+                      steps={publishSteps}
+                      preventEnterSubmission={true}
+                      stepsNavigation={false}
+                    />
+                </div>
+          </div>
+        };
+
         return (
 
 
@@ -450,6 +330,10 @@ buildPanel(obj) {
                          <div className="loader"></div>
                      </Modal.Body>
                  </Modal>
+                <div className="pub-btns">
+                  <hr/>
+                 {button}
+                 </div>
              </div>
              <div className="col-md-3"></div>
     </div>

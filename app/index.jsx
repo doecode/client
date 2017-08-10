@@ -2,6 +2,7 @@ import DOECodeWizard from './components/DOECodeWizard';
 import DOECodeSubmissionInterface from './components/DOECodeSubmissionInterface';
 import Confirmation from './confirmation/Confirmation';
 import WorkflowManagement from './user_services/WorkflowManagement';
+import WorkflowManagement2 from './user_services/WorkflowManagement2';
 import Login from './user_services/Login';
 import RegisterUser from './user_services/RegisterUser';
 import EditUser from './user_services/EditUser';
@@ -43,8 +44,10 @@ class DOECodeRouter extends React.Component {
                                 <Route path="/publish" component={DOECodeWizard}/>
                                 <Route path="/publish2" component={DOECodeSubmissionInterface}/>
                                 <Route path="/submit" component={DOECodeWizard}/>
+                                <Route path="/submit2" component={DOECodeSubmissionInterface}/>
                                 <Route path="/confirm" component={Confirmation}/>
                                 <Route path="/projects" component={WorkflowManagement}/>
+                                <Route path="/projects2" component={WorkflowManagement2}/>
                                 <Route path="/register" component={RegisterUser}/>
                                 <Route path="/account" component={EditUser}/>
                                 <Route path="/admin" component={ApproveRoles}/>

@@ -45,7 +45,7 @@ export default class EntryStep extends React.Component {
 				repoLinkInfo.Panel = "";
 				landingPageInfo.required = "pub";
 				landingPageInfo.Panel = "Repository Information";
-				if (window.location.pathname == '/doecode/submit') {
+				if (window.location.pathname == '/doecode/submit' || window.location.pathname == '/doecode/submit2') {
 							fileInfo.required = "sub";
 				}
 				fileInfo.Panel = "Supplemental Product Information";
@@ -58,7 +58,7 @@ export default class EntryStep extends React.Component {
 				repoLinkInfo.completed = false;
 				landingPageInfo.required = "pub";
 				landingPageInfo.Panel = "Repository Information";
-				if (window.location.pathname == '/doecode/submit') {
+				if (window.location.pathname == '/doecode/submit' || window.location.pathname == '/doecode/submit2') {
 							fileInfo.required = "sub";
 				}
 				fileInfo.Panel = "Supplemental Product Information";
@@ -83,7 +83,7 @@ export default class EntryStep extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-xs-12">    
+                        <div className="col-xs-12">
                             <MetadataField checked={accessibility=== 'OS'} elementType="radio" label="Open Source, Publicly Available" field="availability" value="OS" onChange={this.onRadioChange}/>
                             <MetadataField checked={accessibility === 'ON'} elementType="radio" label= "Open Source, Not Publicly Available" field="availability" value="ON" onChange={this.onRadioChange}/>
                             <MetadataField checked={accessibility === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange}/>
@@ -95,7 +95,7 @@ export default class EntryStep extends React.Component {
                         <MetadataField field="repository_link" label="Repository Link" elementType="input" />
                         </div>
                         <div className="col-md-4">
-                            
+
                         </div>
                     </div>
                     }

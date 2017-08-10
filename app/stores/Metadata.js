@@ -80,8 +80,8 @@ export default class Metadata extends BaseData {
 
      if (obj.Panel == panelName) {
 
-     if (obj.errorMessage)
-    	 panelStatus.errors += obj.errorMessage + " ";
+     if (obj.error)
+    	 panelStatus.errors += obj.error + " ";
 
 
      if (obj.required) {
@@ -110,6 +110,21 @@ export default class Metadata extends BaseData {
      return panelStatus;
    }
 
+  markPanelRequired(panelName) {
+    for (var field in this.infoSchema) {
+    const obj = this.getFieldInfo(field);
+
+
+    if (obj.Panel == panelName) {
+
+    if (obj.required && !obj.completed)
+      obj.error = "Valid input is required.";
+    }
+
+
+    }
+  }
+
 
 
 
@@ -137,6 +152,21 @@ deserializeData(data) {
 
             if (field === 'sponsoring_organizations')
                     this.deserializeSponsoringOrganization(data);
+
+            if (field === 'accessibility') {
+
+              if (data[field] != 'OS') {
+                this.infoSchema['files'].required = 'sub';
+                  this.infoSchema['files'].Panel = 'Supplemental Product Information';
+              }
+            }
+
+            if (field === 'landing_page') {
+              if (data[field] != 'OS') {
+                  this.infoSchema['landing_page'].required = 'pub';
+                  this.infoSchema['landing_page'].Panel = 'Repository Information';
+              }
+            }
 
 
 
