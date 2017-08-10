@@ -60,7 +60,7 @@ export default class Splash extends React.Component {
     
 const icon_row1 = [
     <IconRowIcon container_classes='col-md-4 col-xs-6'  destination='/doecode/policy' text='Software Policy' icon_classes='fa fa-folder-open-o' key="policy"/>,
-    <IconRowIcon container_classes='col-md-4 col-xs-6' destination='/doecode/publish' text='Submit Software/Code' icon_classes='fa fa-sign-in' key="publish"/>,
+    <IconRowIcon container_classes='col-md-4 col-xs-6' destination='/doecode/projects' text='Submit Software/Code' icon_classes='fa fa-sign-in' key="publish"/>,
     <IconRowIcon container_classes='col-md-4 col-xs-12' destination='#' text='Repository Services' icon_classes='fa fa-home clickable' key="repoServices"/>
 ];
 const icon_row2 = [
@@ -106,8 +106,8 @@ const icon_row2 = [
                             <div className='col-md-1'></div>
                             <div className="col-md-8 col-xs-12">
                                 <div className='input-group'>
-                                    <label htmlFor="allSearch" className="sr-only">Search DOE Code for Published Software Entries</label>
-                                    <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box input-lg"  placeholder="Search DOE Code for Published Software Entries"/>
+                                    <label htmlFor="allSearch" className="sr-only">Search DOE CODE for Published Software Entries</label>
+                                    <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box input-lg"  placeholder="Search DOE CODE for Published Software Entries"/>
                                     <span className='input-group-btn'>
                                         <button onClick={this.doAdvancedSearch} className='btn btn-default btn-lg adv-search-button' type='button'><span className="fa fa-cog"></span></button>
                                     </span>
@@ -150,7 +150,7 @@ const icon_row2 = [
                                         <h1> OR </h1>
                                     </div>
                                     <div className="col-sm-5">
-                                        Create a new project on our internal <a href="http://lxdevrepo.osti.gov/">DOE Code repository</a> where you can
+                                        Create a new project on our internal <a href="http://lxdevrepo.osti.gov/">DOE CODE repository</a> where you can
                                         control access to the project.
                                     </div>
                                 </div>

@@ -12,8 +12,8 @@ export default class Contact extends React.Component {
 
         return (
         <div className="row not-so-wide-row">
-            <div className="col-md-1"></div>
-            <div className="col-md-10 col-xs-12 static-content">
+            <div className="col-md-3"></div>
+            <div className="col-md-6 col-xs-12 static-content">
                 <h2 className="static-content-title">Contacts</h2>
                 <br/>
                 <div className="row">
@@ -25,7 +25,7 @@ export default class Contact extends React.Component {
                             <div className="col-xs-12 contact-page-header"><strong>EMAIL</strong></div>
                             <div className="col-xs-12">
                                 <p>
-                                    <a href="mailto:scitechcomments@osti.gov?subject=Comments or Suggestions">scitechcomments@osti.gov</a>
+                                    <a href="mailto:doecode@osti.gov?subject=Comments or Suggestions">doecode@osti.gov</a>
                                 </p>
                                 <p> NOTE: Email messages are answered Monday - Friday, 9 a.m. - 4 p.m. We do our best to respond within 48 hours. </p>
                             </div>
@@ -42,7 +42,7 @@ export default class Contact extends React.Component {
                         <div className="row">
                             <div className="col-xs-12 contact-page-header"><strong>PHONE</strong></div>
                             <div className="col-xs-12">
-                                555-555-5555
+                                865-241-6435
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@ export default class Contact extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-1"></div>
+                <div className="col-md-3"></div>
             </div>
         </div>
         );

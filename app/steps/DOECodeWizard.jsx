@@ -340,7 +340,7 @@ buildPanel(obj) {
 
       const self = this;
 
-        const publishHeader = <div> <strong> Fields Required to Publish this Record on DOE Code </strong>
+        const publishHeader = <div> <strong> Fields Required to Publish this Record on DOE CODE </strong>
 
 
         </div>

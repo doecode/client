@@ -64,6 +64,9 @@ export default class Field extends React.Component {
     }
 }
 
+ emptyFunction(){
+}
+
   render() {
     const field = this.props.properties.field;
     const info = this.props.linkedData.getFieldInfo(field);
@@ -71,6 +74,8 @@ export default class Field extends React.Component {
 	const divStyle = this.props.properties.divStyle != undefined ? this.props.properties.divStyle : "";
         const inputStyle = this.props.properties.inputStyle != undefined ? "form-control " + this.props.properties.inputStyle : "form-control";
 	const messageNode = this.props.properties.messageNode;
+        const onKeypressFunction = this.props.properties.keypressMethod != undefined ? this.props.properties.keypressMethod : this.emptyFunction;
+        
         const wrapperStyleExtra = this.props.properties.wrapperStyleExtra != undefined ? this.props.properties.wrapperStyleExtra : "";
         const smallBelowText = this.props.properties.smallText != undefined ? this.props.properties.smallText : "";
     const elementType = this.props.properties.elementType;
@@ -94,7 +99,6 @@ export default class Field extends React.Component {
     const handleBlur = this.props.properties.handleBlur ? this.props.properties.handleBlur : this.handleChange;
 
     //console.log(handleChange);
-
 
     if (info) {
       required = info.required;
@@ -138,7 +142,7 @@ export default class Field extends React.Component {
 	  }
 	  else if (elementType === 'input') {
 		if (!disabled) {
-                input = <span><input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} />
+                input = <span><input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction}/>
                     <small>{smallBelowText}</small>
                 </span>
 		} else {
@@ -146,7 +150,7 @@ export default class Field extends React.Component {
 		}
 	  }
 	  else if (elementType === 'password') {
-			input = <input name={field} type="password" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} />
+			input = <input name={field} type="password" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction}/>
 	  }
 	  else if (elementType === 'checkbox') {
 		  input = <input name={field} type="checkbox" checked={val} onChange={this.toggleCheckbox} />

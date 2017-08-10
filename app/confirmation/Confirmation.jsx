@@ -46,9 +46,9 @@ render() {
         <div className="form-group form-group-sm row">
 
             <h1>
-                Record Successfully Published to DOE Code</h1>
+                Record Successfully Published to DOE CODE</h1>
             <h2>
-                DOE Code ID: #{this.state.codeID}
+                DOE CODE ID: #{this.state.codeID}
 
             </h2>
 

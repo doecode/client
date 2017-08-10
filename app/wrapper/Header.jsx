@@ -52,8 +52,8 @@ export default class Header extends React.Component {
                         </div>
                         <div className="col-xs-6">
                             <div className='input-group'>
-                                <label htmlFor="allSearch" className="sr-only">Search DOE Code for Published Software Entries</label>
-                                <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box input-lg"  placeholder="Search DOE Code for Published Software Entries"/>
+                                <label htmlFor="allSearch" className="sr-only">Search DOE CODE for Published Software Entries</label>
+                                <input onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box input-lg"  placeholder="Search DOE CODE for Published Software Entries"/>
                                 <span className='input-group-btn'>
                                     <button onClick={this.doAdvancedSearch} className='btn btn-default btn-lg adv-search-button' type='button'><span className="fa fa-cog"></span></button>
                                 </span>

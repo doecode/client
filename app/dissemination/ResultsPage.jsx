@@ -25,12 +25,10 @@ export default class ResultsPage extends React.Component {
   componentDidMount() {
     //console.log(JSON.stringify(searchData.getData()));
     searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
-    console.log(searchData.getData());
     doAjax('POST', '/doecode/api/search/',this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
   }
 
   parseSearchResponse(data) {
-    console.log(JSON.stringify(data));
 
     this.setState({"results" : data.response});
     this.setState({"numFound" : data.response.numFound});
@@ -38,7 +36,7 @@ export default class ResultsPage extends React.Component {
   }
 
   parseErrorResponse() {
-    console.log("Error....")
+    console.log("Error....");
   }
 
 
@@ -81,7 +79,6 @@ export default class ResultsPage extends React.Component {
          content = this.state.results.docs.map(this.buildContent);
    }
 
-   console.log("Page: " + (searchData.getValue("start")/searchData.getValue("rows") + 1));
     return(
     <div className="row not-so-wide-row">
         {/*Sidebar*/}

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import UserData from '../stores/UserData';
 import UserField from '../field/UserField';
 import Validation from '../utils/Validation';
+import SignupBadRequest from '../fragments/SignupBadRequest';
+import SuccessfulSignup from '../fragments/SuccessfulSignup';
 import {doAjax, doAuthenticatedAjax, appendQueryString, getQueryParam} from '../utils/utils';
 
 const userData = new UserData();
@@ -19,7 +21,18 @@ export default class RegisterUser extends React.Component {
 		this.updatePasswordAndCheckPassword = this.updatePasswordAndCheckPassword.bind(this);
 		this.updateConfirmAndCheckPassword = this.updateConfirmAndCheckPassword.bind(this);
 
-		this.state = {longEnough : false, hasSpecial : false, hasNumber: false,  upperAndLower: false, containsName: false, matches: false, validEmail: false, success: false}
+
+		this.state = {longEnough : false,
+                              hasSpecial : false,
+                              hasNumber: false,  
+                              upperAndLower: false, 
+                              containsName: false, 
+                              matches: false, 
+                              validEmail: false, 
+                              signupSuccess: false,
+                              badRequest : false,
+                              badRequestErrors:[]
+                              }
 
 	}
 
@@ -62,15 +75,25 @@ export default class RegisterUser extends React.Component {
 
 
 	register() {
-    	doAjax('POST',"/doecode/api/user/register", this.parseRegister, userData.getData(), this.parseError)
+            doAjax('POST',"/doecode/api/user/register", this.parseRegister, userData.getData(), this.parseError)
 	}
 
 	parseRegister(data) {
-		this.setState({"success" : true});
+		this.setState({"signupSuccess" : true});
 	}
 
-	parseError() {
-		console.log("I'm being called");
+	parseError(data) {
+            var errorMessages = [];
+            var keyIndex =0;
+            console.log(data);
+            data.responseJSON.errors.forEach(function(row){
+                errorMessages.push({
+                    error:row,
+                    key:(keyIndex+"-badRequest")
+                });
+                keyIndex++
+            });
+		this.setState({"badRequest":true,"badRequestErrors":errorMessages});
 	}
 
 
@@ -79,26 +102,23 @@ export default class RegisterUser extends React.Component {
 		const validPassword = this.state.longEnough && this.state.hasSpecial && this.state.hasNumber && this.state.upperAndLower && this.state.matches &&
 		!this.state.containsName && this.state.validEmail;
                 const emailSmalltext = "If you are an employee at a DOE National Laboratory, please register using your official .gov email address.";
-
+                
 		let content = null;
 
-		if (this.state.success) {
-		content =
-                <div className="row not-so-wide-row">
-                    <div className="col-md-3"> </div>
-                    <div className="col-md-6 col-xs-12 center-text">
-                        <p>
-                            A confirmation email has been sent to the email address you used to register your DOE Code account. Please follow the instructions 
-                            in that email to being using DOE Code.
-                        </p>
-                    </div>
-                    <div className="col-md-3"> </div>
-                </div>;
+		if (this.state.signupSuccess) {
+	       	  content =<SuccessfulSignup />;
 		} else {
-		content =
+                content =         
                 <div className="row not-so-wide-row">
                     <div className="col-md-3"> </div>
                     <div className="col-md-3 col-xs-12">
+                        {this.state.badRequest &&
+                        <div>    
+                            <SignupBadRequest errors={this.state.badRequestErrors}/>
+                            <br/>
+                        </div>
+                         }
+                        
                         <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword} noExtraLabelText smallText={emailSmalltext}/>
                         <small></small>
                         <UserField noval={true} field="password" label="Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} noExtraLabelText/>
@@ -107,6 +127,7 @@ export default class RegisterUser extends React.Component {
                             Register
                         </button>
                         <br/>
+                        
                     </div>
                     <div className="col-md-3 col-xs-12">
                         <p><strong>All fields are required.</strong></p>
@@ -122,12 +143,11 @@ export default class RegisterUser extends React.Component {
                     </div>
                     <div className="col-md-3"> </div>
                 </div>;
-    }
+                }
+                
 		return(
 		<div className="container-fluid form-horizontal">
-
-		{content}
-
+                    {content}
 		</div>);
 
 	}

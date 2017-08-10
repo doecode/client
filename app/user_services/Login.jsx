@@ -13,9 +13,8 @@ export default class Login extends React.Component {
 		this.parseError = this.parseError.bind(this);
 		this.changeEmail = this.changeEmail.bind(this);
 		this.changePassword = this.changePassword.bind(this);
-
+                this.triggerLogin = this.triggerLogin.bind(this);
 		this.state = {"email" : "", "password" : ""}
-
 	}
 
 	login() {
@@ -38,6 +37,12 @@ parseLoginResponse(data) {
 
 }
 
+        triggerLogin(event){
+            if(event.key==='Enter'){
+                this.login();
+            }
+        }
+        
 	parseError() {
 		console.log("I'm being called");
 	}
@@ -63,8 +68,8 @@ parseLoginResponse(data) {
                         <br/>
                         <br/>
                         <div className='form-horizontal large-control-label'>
-                            <UserField noval={true} field="email" label="Email Address" elementType="input" inputStyle=" input-lg " />
-                            <UserField noval={true} field="password" label="Password" elementType="password" inputStyle=" input-lg " />
+                            <UserField noval={true} field="email" label="Email Address" elementType="input" inputStyle=" input-lg " keypressMethod={this.triggerLogin} />
+                            <UserField noval={true} field="password" label="Password" elementType="password" inputStyle=" input-lg " keypressMethod={this.triggerLogin} />
                             <br/>
                             <br/>
                             <button type="button" className="btn btn-primary btn-lg" onClick={this.login}>
