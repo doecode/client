@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Modal, Button} from 'react-bootstrap';
-import SigninStatus from '../components/SigninStatus';
-import LinkIconRow from '../components/LinkIconRow';
-import IconRowIcon from '../components/IconRowIcon';
+import SigninStatus from '../fragments/SigninStatus';
+import LinkIconRow from '../fragments/LinkIconRow';
+import IconRowIcon from '../fragments/IconRowIcon';
 
 /*Search stuff. TODO modularize once we decide on a look for the search data*/
 import SearchData from '../stores/SearchData';
@@ -68,7 +68,6 @@ const icon_row2 = [
     <IconRowIcon container_classes='col-md-4 col-xs-6' destination='/doecode/communications' text='News/Resources' icon_classes='fa fa-newspaper-o' key="comms"/>,
     <IconRowIcon container_classes='col-md-4 col-xs-12' destination='/doecode/faq' text='FAQs' icon_classes='fa fa-question' key="faq"/>
 ];
-const is_logged_in = (localStorage.xsrfToken !== undefined && localStorage.xsrfToken !== null && localStorage.xsrfToken !== "");
         return (
         
         <div className="row not-so-wide-row">
@@ -77,7 +76,7 @@ const is_logged_in = (localStorage.xsrfToken !== undefined && localStorage.xsrfT
                 <div className="row">
                     <div className="col-xs-12 homepage-signin-bar">
                         <br/>
-                        <SigninStatus is_logged_in={is_logged_in} />
+                        <SigninStatus />
                     </div>
                 </div>
                 <br/>

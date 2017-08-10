@@ -1,5 +1,5 @@
-import DOECodeWizard from './components/DOECodeWizard';
-import DOECodeSubmissionInterface from './components/DOECodeSubmissionInterface';
+import DOECodeWizard from './steps/DOECodeWizard';
+import DOECodeSubmissionInterface from './steps/DOECodeSubmissionInterface';
 import Confirmation from './confirmation/Confirmation';
 import WorkflowManagement from './user_services/WorkflowManagement';
 import WorkflowManagement2 from './user_services/WorkflowManagement2';

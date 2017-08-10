@@ -44,7 +44,7 @@ function doAjax(methodType, url, successCallback, data, errorCallback) {
       contentType: false,
       method: 'POST',
       beforeSend: function(request) {
-        request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+        request.setRequestHeader("X-XSRF-TOKEN", sessionStorage.xsrfToken);
       },
       dataType: 'json',
       data: formData,
@@ -69,7 +69,7 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
       cache: false,
       method: methodType,
       beforeSend: function(request) {
-      	request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+      	request.setRequestHeader("X-XSRF-TOKEN", sessionStorage.xsrfToken);
       },
       dataType: 'json',
       data: JSON.stringify(data),
@@ -89,7 +89,7 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
       cache: false,
       method: 'GET',
       beforeSend: function(request) {
-        request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+        request.setRequestHeader("X-XSRF-TOKEN", sessionStorage.xsrfToken);
       },
       success: successCallback,
       error: handleError

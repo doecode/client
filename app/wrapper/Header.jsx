@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import SearchData from '../stores/SearchData';
-import NavigationBar from '../components/NavigationBar';
-import SigninStatus from '../components/SigninStatus';
+import NavigationBar from '../fragments/NavigationBar';
+import SigninStatus from '../fragments/SigninStatus';
 
 const searchData = new SearchData();
 let navbar_classes = "";
@@ -33,13 +33,12 @@ export default class Header extends React.Component {
     }
 
     render() {
-        const is_logged_in = (localStorage.xsrfToken !== undefined && localStorage.xsrfToken !== null && localStorage.xsrfToken !== "");
         return (
         
         <nav className="navbar navbar-default main-header" >
             <div className="container-fluid">
                 <div className="pull-right hidden-xs hidden-sm visible-md visible-lg header-signin-links">
-                    <SigninStatus is_logged_in={is_logged_in} />
+                    <SigninStatus />
                 </div>
                 <div className='container hidden-xs hidden-sm visible-md visible-lg'>
                     <br/>
