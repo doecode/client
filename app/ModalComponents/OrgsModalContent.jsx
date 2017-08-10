@@ -1,6 +1,9 @@
 import React from 'react';
 import staticLists from '../staticJson/staticLists';
 import {observer} from "mobx-react";
+import SponsoringOrganization from '../stores/SponsoringOrganization';
+
+const sponsoringOrganization = new SponsoringOrganization();
 
 
 @observer
@@ -8,6 +11,18 @@ export default class OrgsModalContent extends React.Component {
 
 	constructor(props) {
 		super(props);
+	}
+
+	toggleCallback() {
+		  const awardInfo = sponsoringOrganization.getFieldInfo("primary_award");
+			if (sponsoringOrganization.getValue("DOE")) {
+				 awardInfo.validations = ["Award"];
+				 awardInfo.required = true;
+			} else {
+				awardInfo.validations = [];
+				awardInfo.required = false;
+			}
+			sponsoringOrganization.validateField("primary_award");
 	}
 
 	render() {
@@ -31,7 +46,7 @@ export default class OrgsModalContent extends React.Component {
 
             <div className="container-fluid form-horizontal">
 
-                    <SpecificField field="DOE" label="DOE Organization?" elementType="checkbox"  />
+                    <SpecificField field="DOE" label="DOE Organization?" elementType="checkbox" toggleCallback={this.toggleCallback}  />
                     <SpecificField  field="organization_name" label="Name" elementType="select" allowCreate={true} placeholder="Enter or select from the list your organization" options={orgNames}   />
                     {data.getValue("primary_award") !== undefined &&
                     <SpecificField  field="primary_award" label="Primary Award" elementType="input"  />

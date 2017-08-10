@@ -21,6 +21,10 @@ export default class Field extends React.Component {
   toggleCheckbox(event) {
 	  const newVal = !(this.props.linkedData.getValue(this.props.properties.field));
 	  this.props.linkedData.setValue(this.props.properties.field, newVal);
+
+    if (this.props.properties.toggleCallback !== undefined) {
+      this.props.properties.toggleCallback();
+    }
   }
 
   handleBlur(event) {
@@ -97,8 +101,7 @@ export default class Field extends React.Component {
       completed = info.completed;
     }
 
-    if (required)
-         labelStyle += " req ";
+
 
 
 
@@ -119,6 +122,7 @@ export default class Field extends React.Component {
      if (!noExtraLabelText) {
        if (required) {
              label += " (Required Field)";
+             labelStyle += " req ";
            }
        else {
              label += " (Optional Field)";
