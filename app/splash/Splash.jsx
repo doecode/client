@@ -43,11 +43,11 @@ export default class Splash extends React.Component {
     }
 
     search() {
-    searchData.clearValues();
-    searchData.setValue("start", 0);
-    searchData.setValue("all_fields", this.state.all_fields);
-    window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
-    window.location.href = "/doecode/results";
+        searchData.clearValues();
+        searchData.setValue("start", 0);
+        searchData.setValue("all_fields", this.state.all_fields);
+        window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
+        window.location.href = "/doecode/results";
     }
 
     doAdvancedSearch(){
@@ -61,7 +61,7 @@ export default class Splash extends React.Component {
 const icon_row1 = [
     <IconRowIcon container_classes='col-md-4 col-xs-6'  destination='/doecode/policy' text='Software Policy' icon_classes='fa fa-folder-open-o' key="policy"/>,
     <IconRowIcon container_classes='col-md-4 col-xs-6' destination='/doecode/publish' text='Submit Software/Code' icon_classes='fa fa-sign-in' key="publish"/>,
-    <IconRowIcon container_classes='col-md-4 col-xs-12'  text='Repository Services' icon_classes='fa fa-home clickable' key="repoServices"/>
+    <IconRowIcon container_classes='col-md-4 col-xs-12' destination='#' text='Repository Services' icon_classes='fa fa-home clickable' key="repoServices"/>
 ];
 const icon_row2 = [
     <IconRowIcon container_classes='col-md-4 col-xs-6' destination='/doecode/about' text='About' icon_classes='fa fa-building-o' key="about"/>,
@@ -76,6 +76,7 @@ const is_logged_in = (localStorage.xsrfToken !== undefined && localStorage.xsrfT
                 {/*Signin Stuff*/}
                 <div className="row">
                     <div className="col-xs-12 homepage-signin-bar">
+                        <br/>
                         <SigninStatus is_logged_in={is_logged_in} />
                     </div>
                 </div>

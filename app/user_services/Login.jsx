@@ -63,8 +63,8 @@ parseLoginResponse(data) {
                         <br/>
                         <br/>
                         <div className='form-horizontal large-control-label'>
-                            <UserField noval={true} field="email" label="Email Address" elementType="input" inputStyle=" input-lg "/>
-                            <UserField noval={true} field="password" label="Password" elementType="password" inputStyle=" input-lg "/>
+                            <UserField noval={true} field="email" label="Email Address" elementType="input" inputStyle=" input-lg " />
+                            <UserField noval={true} field="password" label="Password" elementType="password" inputStyle=" input-lg " />
                             <br/>
                             <br/>
                             <button type="button" className="btn btn-primary btn-lg" onClick={this.login}>

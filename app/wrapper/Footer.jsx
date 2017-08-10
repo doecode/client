@@ -5,7 +5,6 @@ let footer_classes = "";
 export default class Footer extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props.is_homepage);
         footer_classes = (this.props.is_homepage==true)?"footer":"footer footer-bottom";
     }
 
