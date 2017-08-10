@@ -7,6 +7,7 @@
     "build": "webpack --display-error-details",
     "deploy-express": "webpack --config webpack.prod.config.js && node server.js http://lxappdev2:18080/doecodeapi/services 18081",
     "deploy-dev": "webpack --config webpack.prod.config.js && node server.js http://lxappdev2:8080/doecodeapi/services 8081",
+    "deploy-pm2-dev" : "webpack --config webpack.prod.config.js && pm2 start server.js -- http://lxapdev2:8080/doecodeapi/services 8081",
     "deploy-aws": "webpack --config webpack.prod.config.js && node server.js http://default-environment.yq3jrcgnkz.us-gov-west-1.elasticbeanstalk.com/services/ 8080",
     "deploy-scan": "webpack --config webpack.prod.config.js && node server.js http://lxappscan1:18080/doecodeapi/services 18081",
     "deploy": "webpack-dev-server --inline --hot --history-api-fallback"
