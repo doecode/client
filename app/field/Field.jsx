@@ -77,7 +77,6 @@ export default class Field extends React.Component {
         const onKeypressFunction = this.props.properties.keypressMethod != undefined ? this.props.properties.keypressMethod : this.emptyFunction;
         
         const wrapperStyleExtra = this.props.properties.wrapperStyleExtra != undefined ? this.props.properties.wrapperStyleExtra : "";
-        const smallBelowText = this.props.properties.smallText != undefined ? this.props.properties.smallText : "";
     const elementType = this.props.properties.elementType;
     const noval = this.props.properties.noval;
     const noExtraLabelText = this.props.properties.noExtraLabelText;
@@ -142,10 +141,9 @@ export default class Field extends React.Component {
 	  }
 	  else if (elementType === 'input') {
 		if (!disabled) {
-                input = <span><input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction}/>
-                    <small>{smallBelowText}</small>
-                </span>
-		} else {
+                input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction}/>
+                
+          } else {
 			input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} disabled />
 		}
 	  }

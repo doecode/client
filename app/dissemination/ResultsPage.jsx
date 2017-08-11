@@ -58,7 +58,7 @@ export default class ResultsPage extends React.Component {
     window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
     doAjax('POST', '/doecode/api/search/',this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
   }
-
+  
   render() {
 
 
@@ -67,15 +67,19 @@ export default class ResultsPage extends React.Component {
          content = this.state.results.docs.map(this.buildContent);
    }
 
+   /*Got to make the pagination status*/
+   let pagStartVal = searchData.getValue("start")+1;
+   let pagEndVal = (searchData.getValue("rows")+searchData.getValue("start")>this.state.numFound)?this.state.numFound:searchData.getValue("rows")+searchData.getValue("start");
+   
     return(
     <div className="row not-so-wide-row">
-        {/*Sidebar*/}
-            <Sidebar parseSearchResponse={this.parseSearchResponse} parseErrorResponse={this.parseErrorResponse} refreshSearch={this.refreshSearch} sidebarClass="col-xs-2"/>
+        {/*Sidebar. It's gonna be a col-md-2*/}
+        <Sidebar parseSearchResponse={this.parseSearchResponse} parseErrorResponse={this.parseErrorResponse} refreshSearch={this.refreshSearch} sidebarClass="col-md-2 col-xs-12"/>
         {/*Center Content*/}
-        <div className="col-xs-10">
+        <div className="col-md-10 col-xs-12">
             <div className="row center-text">
                 {/*previous next*/}
-                <div className="col-xs-6 center-text">
+                <div className="col-xs-12 center-text">
                     <ReactPaginate previousLabel={"previous"}
                                    nextLabel={"next"}
                                    breakLabel={<a href="#">...</a>}
@@ -89,11 +93,12 @@ export default class ResultsPage extends React.Component {
                         subContainerClassName={"pages pagination"}
                         activeClassName={"active"} />
                 </div>
-                <div className='col-xs-6 right-text'>
-                    Showing <strong>{searchData.getValue("start")+1}-
-                        {(searchData.getValue("rows")+searchData.getValue("start")>this.state.numFound)?this.state.numFound:searchData.getValue("rows")+searchData.getValue("start")}</strong> of <strong>{this.state.numFound}</strong> results
-                </div>
             </div>
+            {/*Pagination Status*/}
+            <div className='row right-text'>
+                Showing <strong>{pagStartVal}-{pagEndVal}</strong> of <strong>{this.state.numFound}</strong> results
+            </div>
+            <br/>
             {/*Actual search results*/}
             <div className="row">
                 <div className="col-xs-12">
@@ -101,7 +106,6 @@ export default class ResultsPage extends React.Component {
                 </div>
             </div>
         </div>
-        {/*Empty sidebar*/}
     </div>
 
     );

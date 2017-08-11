@@ -101,7 +101,7 @@ export default class RegisterUser extends React.Component {
 
 		const validPassword = this.state.longEnough && this.state.hasSpecial && this.state.hasNumber && this.state.upperAndLower && this.state.matches &&
 		!this.state.containsName && this.state.validEmail;
-                const emailSmalltext = "If you are an employee at a DOE National Laboratory, please register using your official .gov email address.";
+                const emailSmalltext =<span>If you are an employee at a DOE National Laboratory, please register using your official .gov email address.</span>;
                 
 		let content = null;
 
@@ -119,8 +119,7 @@ export default class RegisterUser extends React.Component {
                         </div>
                          }
                         
-                        <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword} noExtraLabelText smallText={emailSmalltext}/>
-                        <small></small>
+                        <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword} noExtraLabelText messageNode={emailSmalltext}/>
                         <UserField noval={true} field="password" label="Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} noExtraLabelText/>
                         <UserField noval={true} field="confirm_password" label="Confirm Password" elementType="password" handleChange={this.updateConfirmAndCheckPassword} noExtraLabelText/>
                         <button type="button" className="btn btn-lg btn-success" disabled={!validPassword} onClick={this.register}>

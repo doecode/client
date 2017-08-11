@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import UserData from '../stores/UserData';
 import UserField from '../field/UserField';
 import Validation from '../utils/Validation';
-import {doAjax, doAuthenticatedAjax, appendQueryString, getQueryParam} from '../utils/utils';
+import {doAjax, doAuthenticatedAjax, checkIsAuthenticated, appendQueryString, getQueryParam} from '../utils/utils';
 
 const userData = new UserData();
 const validation = new Validation();
@@ -20,7 +20,7 @@ export default class EditUser extends React.Component {
 	}
 
   componentDidMount() {
-      doAuthenticatedAjax('GET',"/doecode/api/user/load", this.parseLoad);
+      checkIsAuthenticated();
   }
 
   parseLoad(data) {

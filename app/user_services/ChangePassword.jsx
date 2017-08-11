@@ -22,10 +22,6 @@ export default class EditUser extends React.Component {
 
 	}
 
-  componentDidMount() {
-    userData.setValue("email", "asdf");
-      doAuthenticatedAjax('GET',"/doecode/api/user/load", this.parseLoad);
-  }
 
   parseLoad(data) {
      userData.setValue("email", data.email);
@@ -82,11 +78,11 @@ export default class EditUser extends React.Component {
                     <div className="col-md-3"> </div>
 
                     <div className="col-md-3 col-xs-12">
-                      <UserField noExtraLabelText noval field="password" label="New Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} />
-                      <UserField noExtraLabelText noval field="confirm_password" label="Confirm New Password" elementType="password" handleChange={this.updateConfirmAndCheckPassword}/>
-                      <button type="button" className="btn btn-lg btn-success" disabled={!validPassword} onClick={this.changePassword}>
-                          Change Password
-                      </button>
+                        <UserField noExtraLabelText noval field="password" label="New Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} />
+                        <UserField noExtraLabelText noval field="confirm_password" label="Confirm New Password" elementType="password" handleChange={this.updateConfirmAndCheckPassword}/>
+                        <button type="button" className="btn btn-lg btn-success" disabled={!validPassword} onClick={this.changePassword}>
+                            Change Password
+                        </button>
                     </div>
                     <div className="col-md-3 col-xs-12">
                         <p>All fields are required.</p>
@@ -102,12 +98,13 @@ export default class EditUser extends React.Component {
                     </div>
                     <div className="col-md-3"> </div>
                 </div>;
-		return(
-		<div className="container-fluid form-horizontal">
+                
+                return(
+                <div className="container-fluid form-horizontal">
 
-		{content}
+                    {content}
 
-  </div>);
+                </div>);
 
 	}
 }

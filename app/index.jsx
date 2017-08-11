@@ -21,6 +21,8 @@ import PolicyPage from './static_content/PolicyPage';
 import FAQPage from './static_content/FAQPage';
 import ContactPage from './static_content/ContactPage';
 import Disclaimer from './static_content/Disclaimer';
+import ForbiddenPage from './static_content/ForbiddenPage';
+import LogoutPage from './static_content/LogoutPage';
 import Header from './wrapper/Header';
 import Footer from './wrapper/Footer';
 import React from 'react';
@@ -76,6 +78,8 @@ class DOECodeRouter extends React.Component {
                                 <Route path="/faq" component={FAQPage}/>
                                 <Route path="/contact" component={ContactPage}/>
                                 <Route path="/disclaimer" component={Disclaimer}/>
+                                <Route path="/forbidden" component={ForbiddenPage}/>
+                                <Route path="/logout" component={LogoutPage}/>
                             </div>
                         </div>
                         <Footer is_homepage={is_homepage}/>

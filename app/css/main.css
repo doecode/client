@@ -280,6 +280,9 @@ html, body{
     font-size:13px;
     color:white !important;
 }
+.signin-btn button,span{
+    color:white !important;
+}
 
 .workflow-publish-btn{
     margin-bottom:5px;

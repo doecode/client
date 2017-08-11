@@ -101,6 +101,7 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
     console.log(jqXhr.status);
     if (jqXhr.status == 401) {
       window.sessionStorage.lastLocation = window.location.href;
+      sessionStorage.xsrfToken = "";/*What we get rid of to show that they aren't logged in*/
       window.location.href = '/doecode/login?redirect=true';
     } else if (jqXhr.status == 403) {
       window.location.href = '/doecode/forbidden'
