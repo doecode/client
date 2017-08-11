@@ -75,14 +75,16 @@ export default class ApproveRoles extends React.Component {
     parseReceiveResponse(data) {
         let rows = [];
         console.log(data);
-        const requests = data.requests.requests;
+        const requests = data.requests;
         const approveClick = this.approve.bind(this,1);
         for (let i = 0; i < requests.length; i++) {
 
         const request = requests[i];
+
+        for (let x = 0; x < request.requested_roles.length; x++) {
           rows.push({
             user: request.user,
-            requested_role: request.requested_role,
+            requested_role: request.requested_roles[x],
             approval: <div className="form-group-xs row">
           <div className="col-xs-3">
           <a onClick={() => this.approve(request.user)} className="btn btn-success btn-sm">
@@ -94,6 +96,11 @@ export default class ApproveRoles extends React.Component {
   		<span className="glyphicon glyphicon-remove"></span> Disapprove
   	</a> </div></div>
           });
+
+        }
+
+
+
         }
 
 
