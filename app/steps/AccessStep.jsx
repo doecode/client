@@ -2,6 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import {observer} from "mobx-react";
 import 'react-select/dist/react-select.css';
+import staticContstants from '../staticJson/constantLists';
 
 @observer
 export default class AccessStep extends React.Component{
@@ -102,22 +103,6 @@ export default class AccessStep extends React.Component{
 
 	render() {
 
-		const licenseOptions = [
-			{label: 'None', value: 'None'},
-			{label: 'Apache License 2.0', value: 'Apache License 2.0'},
-			{label: 'GNU General Public License v3.0', value: 'GNU General Public License v3.0'},
-			{label: 'MIT License', value: 'MIT License'},
-			{label: 'BSD 2-clause "Simplified" License', value: 'BSD 2-clause "Simplified" License'},
-			{label: 'BSD 3-clause "New" or "Revised" License', value: 'BSD 3-clause "New" or "Revised" License'},
-			{label: 'Eclipse Public License 1.0', value: 'Eclipse Public License 1.0'},
-			{label: 'GNU Affero General Public License v3.0', value: 'GNU Affero General Public License v3.0'},
-			{label: 'GNU General Public License v2.0', value: 'GNU General Public License v2.0'},
-			{label: 'GNU General Public License v2.1', value: 'GNU General Public License v2.1'},
-			{label: 'GNU Lesser General Public License v2.1', value: 'GNU Lesser General Public License v2.1'},
-			{label: 'GNU Lesser General Public License v3.0', value: 'GNU Lesser General Public License v3.0'},
-			{label: 'Mozilla Public License 2.0', value: 'Mozilla Public License 2.0'},
-			{label: 'The Unlicense', value: 'The Unlicense'}
-			];
 
 		const metadata = this.props.metadata;
 		const access_limitations = metadata.getValue("access_limitations");
@@ -129,7 +114,7 @@ export default class AccessStep extends React.Component{
 		<div className="form-group">
 			<div className="col-sm-offset-2 col-sm-8">
 				<h2 className="section-heading">Licenses</h2>
-				<Select multi simpleValue placeholder="Select your license(s)" options={licenseOptions} value={licenses.slice()} onChange={this.onLicensesChange} onBlur={this.licenseBlur}/>
+				<Select multi simpleValue placeholder="Select your license(s)" options={staticContstants.licenseOptions} value={licenses.slice()} onChange={this.onLicensesChange} onBlur={this.licenseBlur}/>
 			</div>
 			<div className="col-sm-offset-2 col-sm-8">
 				<h2 className="section-heading">Intellectual Property/Distribution Limitations</h2>

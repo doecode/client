@@ -2,15 +2,18 @@
     "availabilities": [
         {
             "label": "Open Source, Publicly Available",
-            "value": "OS"
+            "value": "OS",
+            "key": "availabilities-OS"
         },
         {
             "label": "Open Source, Not Publicly Available",
-            "value": "ON"
+            "value": "ON",
+            "key": "availabilities-ON"
         },
         {
             "label": "Closed Source",
-            "value": "CS"
+            "value": "CS",
+            "key": "availabilities-CS"
         }
     ],
     "searchSortOptions": [
@@ -115,6 +118,96 @@
         {
             "label": "Work Package Leader",
             "value": "WorkPackageLeader"
+        }
+    ],
+    "licenseOptions": [
+        {
+            "label": "Other",
+            "value": "Other",
+            "key": "license-other"
+        },
+        {
+            "label": "Apache License 2.0",
+            "value": "Apache License 2.0",
+            "key": "license-apache"
+        },
+        {
+            "label": "GNU General Public License v3.0",
+            "value": "GNU General Public License v3.0",
+            "key": "license-gnu3"
+        },
+        {
+            "label": "MIT License",
+            "value": "MIT License",
+            "key": "license-mit"
+        },
+        {
+            "label": "BSD 2-clause \"Simplified\" License",
+            "value": "BSD 2-clause \"Simplified\" License",
+            "key": "license-bsd2"
+        },
+        {
+            "label": "BSD 3-clause \"New\" or \"Revised\" License",
+            "value": "BSD 3-clause \"New\" or \"Revised\" License",
+            "key": "license-bsd3"
+        },
+        {
+            "label": "Eclipse Public License 1.0",
+            "value": "Eclipse Public License 1.0",
+            "key": "license-eclipse1"
+        },
+        {
+            "label": "GNU Affero General Public License v3.0",
+            "value": "GNU Affero General Public License v3.0",
+            "key": "license-gnuaffero3"
+        },
+        {
+            "label": "GNU General Public License v2.0",
+            "value": "GNU General Public License v2.0",
+            "key": "license-gnupublic2"
+        },
+        {
+            "label": "GNU General Public License v2.1",
+            "value": "GNU General Public License v2.1",
+            "key": "license-gnupublic21"
+        },
+        {
+            "label": "GNU Lesser General Public License v2.1",
+            "value": "GNU Lesser General Public License v2.1",
+            "key": "license-gnulesser21"
+        },
+        {
+            "label": "GNU Lesser General Public License v3.0",
+            "value": "GNU Lesser General Public License v3.0",
+            "key": "license-gnuless3"
+        },
+        {
+            "label": "Mozilla Public License 2.0",
+            "value": "Mozilla Public License 2.0",
+            "key": "license-moz2"
+        },
+        {
+            "label": "The Unlicense",
+            "value": "The Unlicense",
+            "key": "license-unlicense"
+        }
+    ],
+    "rowOptions": [
+        {
+            "label": "10",
+            "value": 10
+        },
+        {
+            "label": "25",
+            "value": 25
+        },
+        {
+            "label": "50",
+            "value": 50
+        },
+        {
+            "label": "100",
+            "value": 100
         }
     ]
 }

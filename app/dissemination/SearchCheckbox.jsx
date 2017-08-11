@@ -13,11 +13,7 @@ export default class SearchCheckbox extends React.Component {
       
       this.setState({"checked" : newState});
       
-      console.log(newState);
-      //console.log(this.props.name + " is checked: " + this.state.checked);
-      //console.log(this.props.name + " has value: " + this.props.value);
-      
-      this.props.toggleCallback(newState, this.props.value);
+      this.props.toggleCallback(newState, this.props.value, this.props.type);
       }
       
       render() {

@@ -23,7 +23,6 @@ export default class ResultsPage extends React.Component {
 
 
   componentDidMount() {
-    //console.log(JSON.stringify(searchData.getData()));
     searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
     doAjax('POST', '/doecode/api/search/',this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
   }
@@ -42,13 +41,9 @@ export default class ResultsPage extends React.Component {
 
   buildContent(obj) {
     return (
-
-
       <div className="panel panel-default search-result-row" key={obj.codeId}>
         <SearchItem data={obj}/>
       </div>
-
-
     )
   }
 
@@ -66,46 +61,18 @@ export default class ResultsPage extends React.Component {
 
   render() {
 
-    const rowOptions = [
-      {label: '10', value: 10},
-      {label: '25', value: 25},
-      {label: '50', value: 50},
-      {label: '100', value: 100}
-    ];
 
     let content = null;
     if (this.state.results !== undefined) {
-         console.log(this.state.results.docs);
          content = this.state.results.docs.map(this.buildContent);
    }
 
     return(
     <div className="row not-so-wide-row">
         {/*Sidebar*/}
-        <div className="col-xs-2">
-            <div className="row">
-                {/*Row count*/}
-                <div className="col-xs-1"></div>
-                <div className="col-xs-10 center-text">
-                    <SearchField field="rows" label="Rows" elementType="select" options={rowOptions} changeCallback={this.refreshSearch} clearable={false}  />
-                </div>
-                <div className="col-xs-1"></div>
-            </div>
-            <div className="row center-text">
-                <div className="col-xs-1"></div>
-                <div className="col-md-10 col-xs-12">
-                    <SearchField field="sort" label="Sort" elementType="select" options={staticContstants.searchSortOptions} clearable={false}/>
-                </div>
-                <div className="col-xs-1"></div>
-            </div>
-            <div className="row">
-            <Sidebar parseSearchResponse={this.parseSearchResponse} parseErrorResponse={this.parseErrorResponse}/>
-            </div>
-        </div>
-
+            <Sidebar parseSearchResponse={this.parseSearchResponse} parseErrorResponse={this.parseErrorResponse} refreshSearch={this.refreshSearch} sidebarClass="col-xs-2"/>
         {/*Center Content*/}
         <div className="col-xs-10">
-
             <div className="row center-text">
                 {/*previous next*/}
                 <div className="col-xs-6 center-text">

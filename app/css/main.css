@@ -309,90 +309,6 @@ html, body{
     cursor:pointer;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-
-/*!!!!!!!MEDIA QUERIES!!!!!!*/
-@media only screen and (min-width : 320px) {
-    .nav-menu li{
-        border-right:none;
-    }
-    .biblio-page-header{
-        text-align: center;
-    }
-    .homepage-signin-bar{
-        text-align:center;
-    }
-    .nav-menu{
-        margin-bottom:0px;
-    }
-}
-
-/* Extra Small Devices, Phones */
-@media only screen and (min-width : 480px) {
-    .nav-menu li{
-        border-right:none;
-    }
-    .biblio-page-header{
-        text-align: center;
-    }
-    .homepage-signin-bar{
-        text-align:center;
-    }
-     .nav-menu{
-        margin-bottom:0px;
-    }
-}
-
-/* Small Devices, Tablets */
-@media only screen and (min-width : 768px) {
-    .nav-menu li{
-        border-right:none;
-    }
-    .biblio-page-header{
-        text-align: center;
-    }
-    .homepage-signin-bar{
-        text-align:center;
-    }
-     .nav-menu{
-        margin-bottom:0px;
-    }
-}
-
-/* Medium Devices, Desktops */
-@media only screen and (min-width : 992px) {
-    .nav-menu li{
-        border-right:1px solid rgba(255,255,255,0.2);
-    }
-    .nav-menu-item-special{
-        border-left:1px solid rgba(255,255,255,0.2);
-    }
-    .biblio-page-header{
-        text-align: right;
-    }
-    .homepage-signin-bar{
-        text-align:right;
-    }
-     
-}
-
-/* Large Devices, Wide Screens */
-@media only screen and (min-width : 1200px) {
-    .nav-menu li{
-        border-right:1px solid rgba(255,255,255,0.2);
-    }
-    .nav-menu-item-special{
-        border-left:1px solid rgba(255,255,255,0.2);
-    }
-    .biblio-page-header{
-        text-align: right;
-    }
-
-}
 
 .progtrckr {
   text-align: center;
@@ -528,4 +444,98 @@ ol.progtrckr li.progtrckr-done:hover:before {
 
 .homepage-signin-bar{
         text-align:right;
+}
+
+.search-sidebar-filter-title{
+    font-size:18px !important;
+    font-weight: bold !important;
+}
+
+.search-sidebar-text label{
+    font-weight:300;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/*!!!!!!!MEDIA QUERIES!!!!!!*/
+@media only screen and (min-width : 320px) {
+    .nav-menu li{
+        border-right:none;
+    }
+    .biblio-page-header{
+        text-align: center;
+    }
+    .homepage-signin-bar{
+        text-align:center;
+    }
+    .nav-menu{
+        margin-bottom:0px;
+    }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+    .nav-menu li{
+        border-right:none;
+    }
+    .biblio-page-header{
+        text-align: center;
+    }
+    .homepage-signin-bar{
+        text-align:center;
+    }
+     .nav-menu{
+        margin-bottom:0px;
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    .nav-menu li{
+        border-right:none;
+    }
+    .biblio-page-header{
+        text-align: center;
+    }
+    .homepage-signin-bar{
+        text-align:center;
+    }
+     .nav-menu{
+        margin-bottom:0px;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    .nav-menu li{
+        border-right:1px solid rgba(255,255,255,0.2);
+    }
+    .nav-menu-item-special{
+        border-left:1px solid rgba(255,255,255,0.2);
+    }
+    .biblio-page-header{
+        text-align: right;
+    }
+    .homepage-signin-bar{
+        text-align:right;
+    }
+     
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    .nav-menu li{
+        border-right:1px solid rgba(255,255,255,0.2);
+    }
+    .nav-menu-item-special{
+        border-left:1px solid rgba(255,255,255,0.2);
+    }
+    .biblio-page-header{
+        text-align: right;
+    }
+
 }
