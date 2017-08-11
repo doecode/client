@@ -10,63 +10,71 @@ const validation = new Validation();
 
 export default class EditUser extends React.Component {
 	constructor(props) {
-		super(props);
-    this.changePassword = this.changePassword.bind(this);
-    this.parseChangePassword = this.parseChangePassword.bind(this);
-		this.parseLoad = this.parseLoad.bind(this);
-		this.checkPassword = this.checkPassword.bind(this);
-		this.updatePasswordAndCheckPassword = this.updatePasswordAndCheckPassword.bind(this);
-		this.updateConfirmAndCheckPassword = this.updateConfirmAndCheckPassword.bind(this);
+	    super(props);
+	    this.changePassword = this.changePassword.bind(this);
+	    this.parseChangePassword = this.parseChangePassword.bind(this);
+	    this.parseLoad = this.parseLoad.bind(this);
+	    this.checkPassword = this.checkPassword.bind(this);
+	    this.updatePasswordAndCheckPassword = this.updatePasswordAndCheckPassword.bind(this);
+	    this.updateConfirmAndCheckPassword = this.updateConfirmAndCheckPassword.bind(this);
 
-		this.state = {longEnough : false, hasSpecial : false, hasNumber: false,  upperAndLower: false, containsName: false, matches: false, success: false}
+	    this.state = {
+	        longEnough: false,
+	        hasSpecial: false,
+	        hasNumber: false,
+	        upperAndLower: false,
+	        containsName: false,
+	        matches: false,
+	        success: false
+	    }
 
 	}
 
 
-  parseLoad(data) {
-     userData.setValue("email", data.email);
-  }
+	parseLoad(data) {
+	    userData.setValue("email", data.email);
+	}
 
 	updatePasswordAndCheckPassword(event) {
-		userData.setValue("password", event.target.value);
-		this.checkPassword();
+	    userData.setValue("password", event.target.value);
+	    this.checkPassword();
 	}
 
 	updateConfirmAndCheckPassword(event) {
-		userData.setValue("confirm_password", event.target.value);
-		this.checkPassword();
+	    userData.setValue("confirm_password", event.target.value);
+	    this.checkPassword();
 	}
 
 	checkPassword() {
-		const password = userData.getValue("password")
-		const email = userData.getValue("email");
-		const confirm = userData.getValue("confirm_password");
-		const minLength = 8;
-		const specialCharacterRegex = /[^a-zA-Z\d\s]/g;
-		const lowerRegex = /[a-z]/g;
-		const upperRegex = /[A-Z]/g;
-		const numberRegex = /[\d]/g;
-		let newState = Object.assign({},this.state);
+	    const password = userData.getValue("password")
+	    const email = userData.getValue("email");
+	    const confirm = userData.getValue("confirm_password");
+	    const minLength = 8;
+	    const specialCharacterRegex = /[^a-zA-Z\d\s]/g;
+	    const lowerRegex = /[a-z]/g;
+	    const upperRegex = /[A-Z]/g;
+	    const numberRegex = /[\d]/g;
+	    let newState = Object.assign({}, this.state);
 
-		newState.longEnough = password.length >= minLength;
-		newState.hasSpecial = specialCharacterRegex.test(password);
-		newState.hasNumber = numberRegex.test(password);
-		newState.upperAndLower = upperRegex.test(password) && lowerRegex.test(password);
-		newState.containsName = password.indexOf(email) > -1;
-		newState.matches = password !== '' && (password === confirm);
-		this.setState(newState);
-    console.log(newState);
+	    newState.longEnough = password.length >= minLength;
+	    newState.hasSpecial = specialCharacterRegex.test(password);
+	    newState.hasNumber = numberRegex.test(password);
+	    newState.upperAndLower = upperRegex.test(password) && lowerRegex.test(password);
+	    newState.containsName = password.indexOf(email) > -1;
+	    newState.matches = password !== '' && (password === confirm);
+	    this.setState(newState);
+	    console.log(newState);
 
 	}
 
 
-  changePassword() {
-      doAuthenticatedAjax('POST',"/doecode/api/user/changepassword", this.parseRegister, userData.getData())
-  }
+	changePassword() {
+	    doAuthenticatedAjax('POST', "/doecode/api/user/changepassword", this.parseRegister, userData.getData())
+	}
 
-  parseChangePassword(data) {
-        console.log(data);
-  }
+	parseChangePassword(data) {
+	    console.log(data);
+	}
 
 	render() {
 

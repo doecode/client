@@ -27,6 +27,7 @@ export default class Login extends React.Component {
 
 parseLoginResponse(data) {
     sessionStorage.xsrfToken = data.xsrfToken;
+    sessionStorage.user_email = data.email;
     if (window.sessionStorage.lastLocation) {
         let url = window.sessionStorage.lastLocation;
         window.sessionStorage.lastLocation = "";

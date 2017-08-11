@@ -455,6 +455,20 @@ ol.progtrckr li.progtrckr-done:hover:before {
     font-weight:300;
 }
 
+.account-panel-header{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.account-panel-body{
+    margin-right:10px;
+    margin-left:10px;
+}
+
+.account-loading-image{
+    width:70px;
+    height:50px
+}
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
