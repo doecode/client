@@ -45,7 +45,7 @@ export default class EntryStep extends React.Component {
 				repoLinkInfo.Panel = "";
 				landingPageInfo.required = "pub";
 				landingPageInfo.Panel = "Repository Information";
-				if (window.location.pathname == '/doecode/submit' || window.location.pathname == '/doecode/submit2') {
+				if (this.props.page == 'submit') {
 							fileInfo.required = "sub";
 				}
 				fileInfo.Panel = "Supplemental Product Information";
@@ -58,7 +58,7 @@ export default class EntryStep extends React.Component {
 				repoLinkInfo.completed = false;
 				landingPageInfo.required = "pub";
 				landingPageInfo.Panel = "Repository Information";
-				if (window.location.pathname == '/doecode/submit' || window.location.pathname == '/doecode/submit2') {
+				if (this.props.page == 'submit') {
 							fileInfo.required = "sub";
 				}
 				fileInfo.Panel = "Supplemental Product Information";

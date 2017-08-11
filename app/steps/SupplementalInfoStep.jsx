@@ -45,7 +45,7 @@ export default class SupplementalInfoStep extends React.Component {
 			const acceptedFileTypes = ".zip,.tar,.tar.gz,.tar.bz2,.jar,.war"
 			let fileLabelText = "File Upload (Optional Field)";
 
-			if (window.location.pathname == '/doecode/submit') {
+			if (this.props.page == '/doecode/submit') {
 					 fileLabelText = "File Upload (Required Field)";
 			}
 
@@ -76,7 +76,7 @@ export default class SupplementalInfoStep extends React.Component {
                                             <h2> Drag files here or click to browse. </h2>
                                         </Dropzone>
                                     </div>
-                                    
+
                                     {filesInfo.error &&
                                     <span className="error-color">
                                         <strong>{filesInfo.error} </strong>

@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom';
 import {doAjax, checkIsAuthenticated, doAuthenticatedAjax, appendQueryString, getQueryParam, doAuthenticatedMultipartRequest} from '../utils/utils';
 import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
-import EntryStep from './EntryStep';
-import AgentsStep from './AgentsStep';
-import OrgsStep from './OrgsStep';
-import MetadataPanel from './MetadataPanel';
-import DOIPanel from './DOIPanel';
-import SupplementalInfoStep from './SupplementalInfoStep';
-import ContributorsStep from './ContributorsStep';
-import AccessStep from './AccessStep';
-import RecipientStep from './RecipientStep';
-import ConfirmStep from './ConfirmStep';
-import RIsStep from './RIsStep';
+import EntryStep from '../steps/EntryStep';
+import AgentsStep from '../steps/AgentsStep';
+import OrgsStep from '../steps/OrgsStep';
+import MetadataPanel from '../steps/MetadataPanel';
+import DOIPanel from '../steps/DOIPanel';
+import SupplementalInfoStep from '../steps/SupplementalInfoStep';
+import ContributorsStep from '../steps/ContributorsStep';
+import AccessStep from '../steps/AccessStep';
+import RecipientStep from '../steps/RecipientStep';
+import ConfirmStep from '../steps/ConfirmStep';
+import RIsStep from '../steps/RIsStep';
 import {PanelGroup, Panel} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
 /*import css from '../css/main.css';*/
@@ -57,7 +57,7 @@ constructor(props) {
     publishSteps = [
         {
             name: 'Repository Information',
-            component: <EntryStep metadata={metadata} autopopulate={this.autopopulate}/>
+            component: <EntryStep metadata={metadata} autopopulate={this.autopopulate} page={this.props.page}/>
         }, {
             name: 'Product Description',
             component: <MetadataPanel metadata={metadata}/>
@@ -73,7 +73,7 @@ constructor(props) {
     submitSteps = [
         {
             name: 'Supplemental Product Information',
-            component: <SupplementalInfoStep/>
+            component: <SupplementalInfoStep page={this.props.page}/>
         }, {
             name: 'Organizations',
             component: <OrgsStep/>
@@ -124,10 +124,7 @@ parseErrorResponse(jqXhr, exception) {
 }
 
 componentDidMount() {
-    const workflowStatus = getQueryParam("workflow");
-
-    console.log(workflowStatus);
-    if (window.location.pathname == '/doecode/submit') {
+    if (this.props.page == 'submit') {
         this.setState({"showAll": true});
     } else {
         metadata.requireOnlyPublishedFields();
@@ -147,8 +144,6 @@ componentDidMount() {
     } else {
         checkIsAuthenticated();
     }
-
-    //else, do an authenticated check...
 
 }
 
@@ -235,8 +230,7 @@ parseSubmitResponse(data) {
 }
 
 setActivePanel(currentKey) {
-    console.log(currentKey);
-    console.log(this.state.activePanel);
+
     if (currentKey == this.state.activePanel) {
         this.setState({"activePanel": -1});
     } else {
@@ -282,12 +276,10 @@ buildPanel(obj) {
 
         let arrowBool = this.state.activePanel == obj.key;
 
-        console.log(this.state.activePanels);
-        if (window.location.pathname == '/doecode/submit') {
+        if (this.props.page == 'submit') {
               arrowBool = this.state.activePanels[obj.key - 1];
         }
 
-        console.log(arrowBool);
         const heading = <div> <span className={required_status}>{obj.name}
                 {requiredText}</span>
         {panelStatus.hasRequired && panelStatus.remainingRequired == 0 &&
@@ -302,7 +294,7 @@ buildPanel(obj) {
         }
       </div>;
 
-        const expandedBool = window.location.pathname == '/doecode/submit';
+        const expandedBool = this.props.page == 'submit';
         return <Panel header={heading} defaultExpanded={expandedBool} onSelect={this.panelSelect} collapsible bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
 
       	<div>
@@ -359,7 +351,7 @@ buildPanel(obj) {
 
         let button = null;
 
-        if (window.location.pathname == '/doecode/submit') {
+        if (this.props.page == 'submit') {
         button =             <div className="form-group-xs row">
 
                             <div className="col-sm-9">
@@ -391,7 +383,7 @@ buildPanel(obj) {
                       </div>
         }
 
-        const accordionBool = window.location.pathname == '/doecode/publish';
+        const accordionBool = this.props.page == '/doecode/publish';
 
         let content = <div>
 

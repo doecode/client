@@ -3,22 +3,22 @@ import ReactDOM from 'react-dom';
 import {doAjax, checkIsAuthenticated, doAuthenticatedAjax, appendQueryString, getQueryParam, doAuthenticatedMultipartRequest} from '../utils/utils';
 import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
-import EntryStep from './EntryStep';
-import AgentsStep from './AgentsStep';
-import OrgsStep from './OrgsStep';
-import MetadataPanel from './MetadataPanel';
-import DOIPanel from './DOIPanel';
-import SupplementalInfoStep from './SupplementalInfoStep';
-import ContributorsStep from './ContributorsStep';
-import AccessStep from './AccessStep';
-import RecipientStep from './RecipientStep';
-import ConfirmStep from './ConfirmStep';
+import EntryStep from '../steps/EntryStep';
+import AgentsStep from '../steps/AgentsStep';
+import OrgsStep from '../steps/OrgsStep';
+import MetadataPanel from '../steps/MetadataPanel';
+import DOIPanel from '../steps/DOIPanel';
+import SupplementalInfoStep from '../steps/SupplementalInfoStep';
+import ContributorsStep from '../steps/ContributorsStep';
+import AccessStep from '../steps/AccessStep';
+import RecipientStep from '../steps/RecipientStep';
+import ConfirmStep from '../steps/ConfirmStep';
 import Confirmation from '../confirmation/Confirmation';
-import RIsStep from './RIsStep';
+import RIsStep from '../steps/RIsStep';
 import {PanelGroup, Panel} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
 import StepZilla from 'react-stepzilla';
-import InterfaceStep from './InterfaceStep';
+import InterfaceStep from '../steps/InterfaceStep';
 /*import css from '../css/main.css';*/
 
 
@@ -54,7 +54,7 @@ constructor(props) {
     publishSteps = [
           {
               name: 'Step 1',
-              component: <InterfaceStep name="Repository Information" panel={<EntryStep metadata={metadata} autopopulate={this.autopopulate}/>} />
+              component: <InterfaceStep name="Repository Information" panel={<EntryStep metadata={metadata} autopopulate={this.autopopulate} page={this.props.page}/>} />
           }, {
               name: 'Step 2',
               component: <InterfaceStep name="Product Description" panel={<MetadataPanel metadata={metadata}/>} />
@@ -70,7 +70,7 @@ constructor(props) {
     submitSteps = [
           {
               name: 'Step 1',
-              component: <InterfaceStep name="Repository Information" panel={<EntryStep metadata={metadata} autopopulate={this.autopopulate}/>} />
+              component: <InterfaceStep name="Repository Information" panel={<EntryStep metadata={metadata} autopopulate={this.autopopulate} page={this.props.page}/>} />
           }, {
               name: 'Step 2',
               component: <InterfaceStep name="Product Description" panel={<MetadataPanel metadata={metadata}/>} />
@@ -82,7 +82,7 @@ constructor(props) {
               component: <InterfaceStep name="DOI and Release Date" panel={<DOIPanel metadata={metadata}/>} />
           }, {
               name: 'Step 5',
-              component: <InterfaceStep name="Supplemental Product Information" panel={<SupplementalInfoStep/>} />
+              component: <InterfaceStep name="Supplemental Product Information" panel={<SupplementalInfoStep page={this.props.page}/>} />
           }, {
               name: 'Step 6',
               component: <InterfaceStep name="Organizations" panel={<OrgsStep/>} />
@@ -120,7 +120,7 @@ componentDidMount() {
     const workflowStatus = getQueryParam("workflow");
 
     console.log(workflowStatus);
-    if (window.location.pathname == '/doecode/submit2') {
+    if (this.props.page == 'submit') {
         this.setState({"showAll": true});
     } else {
         metadata.requireOnlyPublishedFields();
@@ -246,7 +246,7 @@ parseSubmitResponse(data) {
 
         let button = null;
 
-        if (window.location.pathname == '/doecode/submit2') {
+        if (this.props.page == 'submit') {
         button =             <div className="form-group-xs row">
 
                             <div className="col-sm-9">
@@ -282,7 +282,7 @@ parseSubmitResponse(data) {
 
           let content;
 
-        if (window.location.pathname == '/doecode/submit2') {
+        if (this.props.page == 'submit') {
           content =
           <div>
                 <div className="step-progress">
