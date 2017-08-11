@@ -13,14 +13,14 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.json'] 
+    extensions: ['.js', '.jsx', '.json']
   },
 
 
 devServer: {
 proxy: {
 '/doecode/api/*': {
-target: 'http://lxappdev2:18080/doecode/services',
+target: 'http://localhost:8080/doecodeapi/services',
 secure: false,
 changeOrigin: true,
 pathRewrite: {
@@ -36,7 +36,7 @@ pathRewrite: {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: [ "babel-loader"],
+        loaders: ["react-hot-loader","babel-loader"],
       },
       {
 	test: /\.css$/,
