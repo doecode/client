@@ -33,6 +33,7 @@ class MetadataStore {
             "recipient_email": '',
             "recipient_phone": '',
             "recipient_org": '',
+						"file_name": '',
             "files": []
         };
 
@@ -47,7 +48,7 @@ class MetadataStore {
 
 		   	"repository_link": {required:"pub", label: "Repository Link", completed:false, validations: ["URL"], Panel: "Repository Information", error: ''},
 		   	"landing_page": {required:"", label: "Landing Page", completed:false, validations: ["URL"], Panel: "", error: ''},
-				"files" : {required:"", label: "File Upload", completed: false, Panel: "", error: ''},
+				"file_name" : {required:"", label: "File Upload", completed: false, validations: [], Panel: "", error: ''},
 					"software_title": {required:"pub", label: "Software Title", completed:false, validations: [], Panel: "Product Description", error: ''},
 	        "description": {required:"pub", label: "Description/Abstract", completed:false, validations: [], Panel: "Product Description", error: ''},
 	        "licenses": {required:"pub", label: "Licenses", completed:false, hasError:false, validations: [], Panel: "Product Description", error: ''},

@@ -188,8 +188,7 @@ publish() {
     console.log(metadata.getData());
 
     this.setState({"loading": true, "loadingMessage": "Publishing"});
-    const justFileName = !Array.isArray(metadata.getValue("files").slice());
-    if (metadata.getValue("accessibility") == 'OS' || justFileName || metadata.getValue("files").length == 0) {
+    if (metadata.getValue("accessibility") == 'OS' || metadata.getValue("files").length == 0) {
       doAuthenticatedAjax('POST', '/doecode/api/metadata/publish', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
     } else {
       this.doMultipartSubmission('/doecode/api/metadata/publish',this.parsePublishResponse);
@@ -198,8 +197,7 @@ publish() {
 
 submit() {
     this.setState({"loading": true, "loadingMessage": "Submitting"});
-    const justFileName = !Array.isArray(metadata.getValue("files").slice());
-    if (metadata.getValue("accessibility") == 'OS' || justFileName) {
+    if (metadata.getValue("accessibility") == 'OS' || metadata.getValue("files").length == 0) {
       doAuthenticatedAjax('POST', '/doecode/api/metadata/submit', this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
   } else {
       this.doMultipartSubmission('/doecode/api/metadata/submit',this.parseSubmitResponse);
@@ -383,7 +381,7 @@ buildPanel(obj) {
                       </div>
         }
 
-        const accordionBool = this.props.page == '/doecode/publish';
+        const accordionBool = this.props.page == 'publish';
 
         let content = <div>
 

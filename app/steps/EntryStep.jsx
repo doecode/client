@@ -23,7 +23,7 @@ export default class EntryStep extends React.Component {
     	metadata.setValue("accessibility",value);
 			const landingPageInfo = metadata.getFieldInfo("landing_page");
 			const repoLinkInfo = metadata.getFieldInfo("repository_link");
-			const fileInfo = metadata.getFieldInfo("files");
+			const fileInfo = metadata.getFieldInfo("file_name");
     	if (value === 'OS') {
     		metadata.setValue("open_source", true);
     		metadata.setValue("files", []);

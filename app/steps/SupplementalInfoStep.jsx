@@ -20,34 +20,34 @@ export default class SupplementalInfoStep extends React.Component {
 	onDrop(files) {
 		console.log('Received files: ', files);
 		metadata.setValue("files", files);
-	  const fileInfo = metadata.getFieldInfo("files");
-		fileInfo.completed = true;
+	  metadata.setValue("file_name",files[0].name);
+		metadata.validateField("file_name");
 	}
 
 	deleteFile() {
 		metadata.setValue("files", []);
-		const fileInfo = metadata.getFieldInfo("files");
-		fileInfo.completed = false;
+		metadata.setValue("file_name", "");
+		metadata.validateField("file_name");
 	}
 
 
 	render() {
 
 		const files = metadata.getValue("files");
-		const filesInfo = metadata.getFieldInfo("files");
+		const filesInfo = metadata.getFieldInfo("file_name");
 
-		let fileName = files;
-		if (Array.isArray(files.slice()) && files.length > 0) {
-		fileName = files[0].name;
-		}
+		const fileName = metadata.getValue("file_name");
 		const accessibility = metadata.getValue("accessibility");
 
-			const acceptedFileTypes = ".zip,.tar,.tar.gz,.tar.bz2,.jar,.war"
-			let fileLabelText = "File Upload (Optional Field)";
+	  const acceptedFileTypes = ".zip,.tar,.tar.gz,.tar.bz2,.jar,.war"
 
-			if (this.props.page == '/doecode/submit') {
+		let fileLabelText = "File Upload (Optional Field)";
+
+		if (this.props.page == 'submit') {
 					 fileLabelText = "File Upload (Required Field)";
-			}
+		}
+
+		const fileLabelStyle = {"paddingLeft" : "0px"};
 
 
 
@@ -65,9 +65,9 @@ export default class SupplementalInfoStep extends React.Component {
 
                             {(accessibility === 'ON' || accessibility === 'CS') &&
                             <div className="form-group form-group-sm row">
-                                <div className="col-xs-8">
+                                <div>
                                     <label htmlFor="file_upload" className={filesInfo.error ? "has-error error-color field-error form-label" : "form-label"}>
-                                           File Upload
+                                           {fileLabelText}
                                     </label>
                                     &nbsp;&nbsp;
                                     <small>Supported file types: .zip, .tar, .tar.gz, .tar.gz2, .war</small>
@@ -88,16 +88,16 @@ export default class SupplementalInfoStep extends React.Component {
 
                             }
 
-                            {files.length > 0 &&
+                            {filesInfo.completed &&
                             <div className="form-group form-group-sm row">
-                                <label className="col-sm-2">
+                                <label className="col-sm-4" style={fileLabelStyle}>
                                     Uploaded File
                                 </label>
-                                <div className="col-sm-4">
+                                <div className="col-sm-6">
 
                                     {fileName}
                                 </div>
-                                <div className="col-sm-4">
+                                <div className="col-sm-2">
                                     <Button bsStyle="danger" active onClick={this.deleteFile}> Delete File </Button>
                                 </div>
 

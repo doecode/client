@@ -22,6 +22,7 @@ export default class Metadata extends BaseData {
         this.modifyElementInArray(field,data)
 
       this.infoSchema[field].completed = true;
+      this.infoSchema[field].error = '';
     }
 
     addToArray(field,data) {
@@ -117,13 +118,15 @@ export default class Metadata extends BaseData {
 
     if (obj.Panel == panelName) {
 
-    if (obj.required && !obj.completed)
+      if (obj.required && !obj.completed) {
       obj.error = "Valid input is required.";
-    }
+      }
 
 
+
+      }
     }
-  }
+}
 
 
 
@@ -131,11 +134,6 @@ export default class Metadata extends BaseData {
 deserializeData(data) {
 
     for (var field in data) {
-
-      if (field === 'file_name' && data[field]) {
-        this.fieldMap['files'] = data[field];
-        this.infoSchema['files'].completed = true;
-      }
 
         if (this.fieldMap[field] !== undefined && data[field] !== undefined && !(Array.isArray(data[field]) && data[field].length === 0)) {
 
@@ -156,8 +154,8 @@ deserializeData(data) {
             if (field === 'accessibility') {
 
               if (data[field] != 'OS') {
-                this.infoSchema['files'].required = 'sub';
-                  this.infoSchema['files'].Panel = 'Supplemental Product Information';
+                this.infoSchema['file_name'].required = 'sub';
+                  this.infoSchema['file_name'].Panel = 'Supplemental Product Information';
               }
             }
 
