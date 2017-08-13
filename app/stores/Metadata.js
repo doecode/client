@@ -131,6 +131,68 @@ export default class Metadata extends BaseData {
 
 
 
+loadRecordFromServer(data,page) {
+//deserializeData
+this.deserializeData(data);
+this.applyValidations();
+if (page === 'publish') {
+  this.validatePublishedFields();
+}
+this.validateAll();
+//validate all
+
+}
+
+loadRecordFromSessionStorage(data, page) {
+  this.loadValues(data);
+  this.applyValidations();
+  if (page === 'publish') {
+    this.validatePublishedFields();
+  }
+  this.validateAll();
+  //validate all
+
+}
+
+applyValidations() {
+
+  for (var field in this.fieldMap) {
+
+    if (field === 'accessibility' && data[field] != 'OS') {
+        this.infoSchema["repository_link"].required = "";
+        this.infoSchema["repository_link"].Panel = "";
+        this.infoSchema['file_name'].required = 'sub';
+        this.infoSchema['file_name'].Panel = 'Supplemental Product Information';
+        this.infoSchema['landing_page'].required = 'pub';
+        this.infoSchema['landing_page'].Panel = 'Repository Information';
+    }
+
+    if (field === 'doi_status' && data[field] == 'RES') {
+    this.infoSchema["doi_infix"].Panel = "DOI and Release Date"
+    }
+
+    if (field === 'licenses' && data[field].indexOf('Other') > -1) {
+      this.infoSchema['proprietary_url'].required = "pub";
+      this.infoSchema['proprietary_url'].Panel = "Product Description";
+    }
+  }
+}
+
+validateAll() {
+  for (var field in this.infoSchema) {
+
+    //for now, just set to true if an element exists. This will need to eventually run through all children and push to invalids if an error is encountered.
+    if (parents.indexOf(field) > -1 && data[field].length != 0) {
+        this.infoSchema[field].completed = true;
+    } else {
+        this.validateField(field);
+    }
+
+  }
+
+}
+
+
 deserializeData(data) {
 
     for (var field in data) {
@@ -144,29 +206,11 @@ deserializeData(data) {
                 }
             }
 
-
             if (field === 'release_date')
             		data.release_date = moment(data.release_date, "YYYY-MM-DD");
 
             if (field === 'sponsoring_organizations')
                     this.deserializeSponsoringOrganization(data);
-
-            if (field === 'accessibility') {
-
-              if (data[field] != 'OS') {
-                this.infoSchema['file_name'].required = 'sub';
-                  this.infoSchema['file_name'].Panel = 'Supplemental Product Information';
-              }
-            }
-
-            if (field === 'landing_page') {
-              if (data[field] != 'OS') {
-                  this.infoSchema['landing_page'].required = 'pub';
-                  this.infoSchema['landing_page'].Panel = 'Repository Information';
-              }
-            }
-
-
 
             this.fieldMap[field] = data[field];
             if (this.infoSchema[field])

@@ -41,11 +41,8 @@ export default class DOIPanel extends React.Component {
 			infixInfo.completed = false;
 			infixInfo.error = '';
 			infixInfo.Panel = "";
-			//this.props.metadata.setValidations("doi", ["DOI"]);
 		} else {
 			//reserve a new DOI in correct format, disabling validations first to let our own DOI pass through
-			//this.props.metadata.setValidations([]);
-			//this.props.metadata.clearErrors("doi");
 			const doiInfo = this.props.metadata.getFieldInfo("doi");
 			const infixInfo = this.props.metadata.getFieldInfo("doi_infix");
 			this.props.metadata.setValue("doi", this._prefix + uniqid());

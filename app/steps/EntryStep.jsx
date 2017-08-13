@@ -37,9 +37,8 @@ export default class EntryStep extends React.Component {
 				fileInfo.Panel = "";
 				fileInfo.completed = false;
 
-    	} else if (value === 'ON') {
-    		metadata.setValue("open_source", true);
-    		metadata.setValue("repository_link", "");
+    	} else {
+				metadata.setValue("repository_link", "");
 				repoLinkInfo.required = "";
 				repoLinkInfo.completed = false;
 				repoLinkInfo.Panel = "";
@@ -49,20 +48,14 @@ export default class EntryStep extends React.Component {
 							fileInfo.required = "sub";
 				}
 				fileInfo.Panel = "Supplemental Product Information";
+			}
 
-    	} else if (value === 'CS') {
-    		metadata.setValue("open_source", false);
-    		metadata.setValue("repository_link", "");
-				repoLinkInfo.required = "";
-				repoLinkInfo.Panel = "";
-				repoLinkInfo.completed = false;
-				landingPageInfo.required = "pub";
-				landingPageInfo.Panel = "Repository Information";
-				if (this.props.page == 'submit') {
-							fileInfo.required = "sub";
-				}
-				fileInfo.Panel = "Supplemental Product Information";
-    	}
+			if (value === 'CS') {
+				metadata.setValue("open_source", false);
+			} else {
+				metadata.setValue("open_source", true);
+			}
+
 
 
     }
