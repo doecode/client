@@ -63,7 +63,7 @@ export default class WorkflowManagement extends React.Component {
     parseReceiveResponse(data) {
         let rows = [];
         console.log(data);
-        const records = data.records.records;
+        const records = data.records;
         for (let i = 0; i < records.length; i++) {
 
         const record = records[i];
@@ -137,7 +137,7 @@ export default class WorkflowManagement extends React.Component {
       render() {
 
         return  (
-        
+
         <div className="row not-so-wide-row">
             <div className="col-md-3"></div>
             <div className="col-md-6 col-xs-12 static-content">
