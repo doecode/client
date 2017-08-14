@@ -11,7 +11,7 @@ const EmptyRowsView = React.createClass({
   }
 });
 
-export default class WorkflowManagement2 extends React.Component {
+export default class ApprovalManagement extends React.Component {
     constructor(props) {
         super(props);
         this.getRows = this.getRows.bind(this);
@@ -21,6 +21,8 @@ export default class WorkflowManagement2 extends React.Component {
         this.handleFilterChange = this.handleFilterChange.bind(this);
         this.onClearFilters = this.onClearFilters.bind(this);
         this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
+
+        this.wizardVersion = (Number.isInteger(parseInt(this.props.wizardVersion)) && this.props.wizardVersion > 0) ? this.props.wizardVersion : "";
 
         this._columns = [
             {
@@ -45,7 +47,7 @@ export default class WorkflowManagement2 extends React.Component {
             },
             {
               key: 'edit',
-              name: 'Modify Record'
+              name: 'View Record'
             }
           ];
 
@@ -55,44 +57,27 @@ export default class WorkflowManagement2 extends React.Component {
 
     componentDidMount() {
 
-        doAuthenticatedAjax('GET', "/doecode/api/metadata/projects", this.parseReceiveResponse);
+        doAuthenticatedAjax('GET', "/doecode/api/metadata/projects/pending", this.parseReceiveResponse);
 
     }
 
     parseReceiveResponse(data) {
         let rows = [];
         console.log(data);
-        const records = data.records.records;
+        const records = data.records;
         for (let i = 0; i < records.length; i++) {
 
         const record = records[i];
-        const publishUrl = "/doecode/publish2?code_id=" + record.code_id;
-        const submitUrl = "/doecode/submit2?code_id=" + record.code_id;
-        let editUrl = "/submit2?code_id=" + record.code_id;
-
-        let editMessage = "Continue to E-Link Submission";
-
-        if (record.workflow_status === 'Saved') {
-        	editMessage = "Continue to Publish Record";
-          editUrl = "/publish2?code_id=" + record.code_id;
-        }
-        else if (record.workflow_status === 'Published') {
-          editUrl = "/submit2?code_id=" + record.code_id;
-        }
+        const submitUrl = "/doecode/submit" + this.wizardVersion + "?code_id=" + record.code_id;
 
           rows.push({
             id: record.code_id,
             title: record.software_title,
             status: record.workflow_status,
             edit: <div className="form-group-xs row">
-          <div className="col-xs-3">
-          <a href={publishUrl} className="btn btn-success btn-sm">
-		<span className="glyphicon glyphicon-pencil"></span> Update Metadata
-	</a>
-          </div>
             <div className="col-xs-2">
             <a  href={submitUrl} className="btn btn-info btn-sm">
-  		<span className="glyphicon glyphicon-pencil"></span> Submit to E-Link
+  		<span className="glyphicon glyphicon-pencil"></span> View for Approval
   	</a> </div></div>
           });
         }
@@ -100,7 +85,6 @@ export default class WorkflowManagement2 extends React.Component {
 
         this.setState({rows : rows});
     }
-
       getRows() {
         return Data.Selectors.getRows(this.state);
       }
@@ -134,37 +118,36 @@ export default class WorkflowManagement2 extends React.Component {
       }
 
       render() {
-          const marginStyle = {
-                  'margin-bottom' : '5px'
-                };
-
-
-
-
 
         return  (
-        		<div>
-            <h2> Manage My Projects </h2>
-        		<div className="form-group-xs row">
-                <div className="col-sm-12">
-                    <a href="/doecode/publish2" style={marginStyle} type="button" className="btn btn-success btn-lg pull-right" >
-                       Add New Record
-                    </a>
-                </div>
-            </div>
-          <ReactDataGrid
-            onGridSort={this.handleGridSort}
-            enableCellSelect={true}
-            columns={this._columns}
-            rowGetter={this.rowGetter}
-            rowsCount={this.getSize()}
-            maxHeight={400}
-            toolbar={<Toolbar enableFilter={true}/>}
-            onAddFilter={this.handleFilterChange}
-            onClearFilters={this.onClearFilters}
-            emptyRowsView={EmptyRowsView}
-           />
 
+        <div className="row not-so-wide-row">
+            <div className="col-md-3"></div>
+            <div className="col-md-6 col-xs-12 static-content">
+                <h2 className="static-content-title">Approve Projects</h2>
+                <div className="form-group-xs row">
+                    <div className="col-sm-12">
+                        <a href={"/doecode/publish" + this.wizardVersion} type="button" className="btn btn-success btn-lg pull-right workflow-publish-btn" >
+                            Add New Record
+                        </a>
+                    </div>
+                </div>
+                <ReactDataGrid
+                    onGridSort={this.handleGridSort}
+                    enableCellSelect={true}
+                    columns={this._columns}
+                    rowGetter={this.rowGetter}
+                    rowsCount={this.getSize()}
+                    maxHeight={400}
+                    toolbar={<Toolbar enableFilter={true}/>}
+                    onAddFilter={this.handleFilterChange}
+                    onClearFilters={this.onClearFilters}
+                    emptyRowsView={EmptyRowsView}
+                    />
+                    <br/>
+                    <br/>
+            </div>
+            <div className="col-md-3"></div>
         </div>
         );
 

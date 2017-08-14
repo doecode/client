@@ -22,6 +22,8 @@ export default class WorkflowManagement extends React.Component {
         this.onClearFilters = this.onClearFilters.bind(this);
         this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
 
+        this.wizardVersion = (Number.isInteger(parseInt(this.props.wizardVersion)) && this.props.wizardVersion > 0) ? this.props.wizardVersion : "";
+
         this._columns = [
             {
               key: 'id',
@@ -57,7 +59,6 @@ export default class WorkflowManagement extends React.Component {
 
         doAuthenticatedAjax('GET', "/doecode/api/metadata/projects", this.parseReceiveResponse);
 
-
     }
 
     parseReceiveResponse(data) {
@@ -67,18 +68,18 @@ export default class WorkflowManagement extends React.Component {
         for (let i = 0; i < records.length; i++) {
 
         const record = records[i];
-        const publishUrl = "/doecode/publish?code_id=" + record.code_id;
-        const submitUrl = "/doecode/submit?code_id=" + record.code_id;
-        let editUrl = "/submit?code_id=" + record.code_id;
+        const publishUrl = "/doecode/publish" + this.wizardVersion + "?code_id=" + record.code_id;
+        const submitUrl = "/doecode/submit" + this.wizardVersion + "?code_id=" + record.code_id;
+        let editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
 
         let editMessage = "Continue to E-Link Submission";
 
         if (record.workflow_status === 'Saved') {
         	editMessage = "Continue to Publish Record";
-          editUrl = "/publish?code_id=" + record.code_id;
+          editUrl = "/publish" + this.wizardVersion + "?code_id=" + record.code_id;
         }
         else if (record.workflow_status === 'Published') {
-          editUrl = "/submit?code_id=" + record.code_id;
+          editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
         }
 
           rows.push({
@@ -101,7 +102,6 @@ export default class WorkflowManagement extends React.Component {
 
         this.setState({rows : rows});
     }
-
       getRows() {
         return Data.Selectors.getRows(this.state);
       }
@@ -144,7 +144,7 @@ export default class WorkflowManagement extends React.Component {
                 <h2 className="static-content-title">Manage My Projects</h2>
                 <div className="form-group-xs row">
                     <div className="col-sm-12">
-                        <a href="/doecode/publish" type="button" className="btn btn-success btn-lg pull-right workflow-publish-btn" >
+                        <a href={"/doecode/publish" + this.wizardVersion} type="button" className="btn btn-success btn-lg pull-right workflow-publish-btn" >
                             Add New Record
                         </a>
                     </div>

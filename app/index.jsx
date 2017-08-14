@@ -4,7 +4,7 @@ import SubmitSubmissionInterface from './form/SubmitSubmissionInterface';
 import PublishSubmissionInterface from './form/PublishSubmissionInterface';
 import Confirmation from './confirmation/Confirmation';
 import WorkflowManagement from './user_services/WorkflowManagement';
-import WorkflowManagement2 from './user_services/WorkflowManagement2';
+import ApprovalManagement from './user_services/ApprovalManagement';
 import Login from './user_services/Login';
 import RegisterUser from './user_services/RegisterUser';
 import EditUser from './user_services/EditUser';
@@ -64,7 +64,8 @@ class DOECodeRouter extends React.Component {
                                 <Route path="/submit2" component={SubmitSubmissionInterface}/>
                                 <Route path="/confirm" component={Confirmation}/>
                                 <Route path="/projects" component={WorkflowManagement}/>
-                                <Route path="/projects2" component={WorkflowManagement2}/>
+                                <Route path="/projects2" render={()=><WorkflowManagement wizardVersion="2"/>}/>
+                                <Route path="/approve" component={ApprovalManagement}/>
                                 <Route path="/register" component={RegisterUser}/>
                                 <Route path="/account" component={EditUser}/>
                                 <Route path="/admin" component={ApproveRoles}/>
