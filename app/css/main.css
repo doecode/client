@@ -442,8 +442,12 @@ ol.progtrckr li.progtrckr-done:hover:before {
   color: #333;
 }
 
-.homepage-signin-bar{
-        text-align:right;
+.login-dropdown-text li{
+    text-align:center;
+}
+
+.login-dropdown-btn{
+    color:white !important;
 }
 
 .search-sidebar-filter-title{
@@ -469,6 +473,8 @@ ol.progtrckr li.progtrckr-done:hover:before {
     width:70px;
     height:50px
 }
+
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

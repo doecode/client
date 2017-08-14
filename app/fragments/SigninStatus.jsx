@@ -27,7 +27,18 @@ export default class SigninStatus extends React.Component{
     return(
     <div>
         {this.is_logged_in &&
-        <span className='signin-btn nav-menu-item'><button type='button' className="btn btn-link signin-btn" onClick={this.logout}><span className='fa fa-sign-out signin-btn'></span> Logout</button></span>
+        <div className="dropdown">
+            <button className="btn btn-link dropdown-toggle login-dropdown-btn" type="button" id="accountSigninDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                {sessionStorage.user_email}
+                <span className="caret"></span>
+            </button>
+            <ul className="dropdown-menu dropdown-menu-right login-dropdown-text" aria-labelledby="accountSigninDropdown">
+                <li><a href="/doecode/projects">My Projects</a></li>
+                <li><a href="/doecode/account">Account</a></li>
+                <li role="separator" className="divider"></li>
+                <li className="clickable"><a onClick={this.logout}><span className='fa fa-sign-out'></span> Logout</a></li>
+            </ul>
+        </div>
         }
         {!this.is_logged_in &&
         <a className="nav-menu-item signin-btn" href="/doecode/login"><span className="fa fa-sign-in"></span> Sign In</a>

@@ -74,9 +74,11 @@ const icon_row2 = [
             <div className="col-xs-12">
                 {/*Signin Stuff*/}
                 <div className="row">
-                    <div className="col-xs-12 homepage-signin-bar">
-                        <br/>
-                        <SigninStatus />
+                    <div className="col-xs-12">
+                        <div className="pull-right">
+                            <br/>
+                            <SigninStatus />
+                        </div>
                     </div>
                 </div>
                 <br/>
@@ -132,7 +134,7 @@ const icon_row2 = [
                         <br/>
                         <LinkIconRow icon_row_data={icon_row2} />
                         <br/>
-                        
+
                         {/*Modal to do a thing*/}
                         <Modal show={this.state.showModal} onHide={this.close} bsSize="large">
                             <Modal.Header closeButton>
