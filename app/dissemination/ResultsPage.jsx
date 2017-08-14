@@ -7,6 +7,7 @@ import SearchData from '../stores/SearchData';
 import SearchField from '../field/SearchField';
 import Sidebar from './Sidebar';
 import staticContstants from '../staticJson/constantLists';
+import BreadcrumbTrail from '../fragments/BreadcrumbTrail';
 
 const searchData = new SearchData();
 
@@ -70,9 +71,26 @@ export default class ResultsPage extends React.Component {
    /*Got to make the pagination status*/
    let pagStartVal = searchData.getValue("start")+1;
    let pagEndVal = (searchData.getValue("rows")+searchData.getValue("start")>this.state.numFound)?this.state.numFound:searchData.getValue("rows")+searchData.getValue("start");
+   let pageNum = Math.ceil(searchData.getValue("start")/searchData.getValue("rows"))+1;
+
+   const breadcrumbList = [
+    {key:'brdcrmb1',
+    value: <span><a href='/doecode'>DOE CODE </a> / </span>},
+    {key:'brdcrmb2',
+     value:'Search Results / '},
+    {key:'brdcrmb3',
+     value: 'Page ' + pageNum + ' of ' + Math.ceil(this.state.numFound / searchData.getValue("rows"))
+     }
+   ];
+   
    
     return(
     <div className="row not-so-wide-row">
+        {/*Breadcrumb trail*/}
+        <div className='col-xs-12'>
+            <BreadcrumbTrail list={breadcrumbList}/>
+            <br/>
+        </div>
         {/*Sidebar. It's gonna be a col-md-2*/}
         <Sidebar parseSearchResponse={this.parseSearchResponse} parseErrorResponse={this.parseErrorResponse} refreshSearch={this.refreshSearch} sidebarClass="col-md-2 col-xs-12"/>
         {/*Center Content*/}
@@ -96,7 +114,9 @@ export default class ResultsPage extends React.Component {
             </div>
             {/*Pagination Status*/}
             <div className='row right-text'>
+                <div className='col-xs-12'>
                 Showing <strong>{pagStartVal}-{pagEndVal}</strong> of <strong>{this.state.numFound}</strong> results
+                </div>
             </div>
             <br/>
             {/*Actual search results*/}

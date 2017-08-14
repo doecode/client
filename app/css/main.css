@@ -77,11 +77,12 @@ html h3 {
 }
 
 .search-result-title {
-    font-size: 17px;
+    font-size: 18px;
 }
 
 .search-result-row{
     overflow: auto;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 .rounded{
@@ -92,7 +93,9 @@ html h3 {
     font-size: 12px;
     padding-top: 5px;
     padding-bottom: 5px;
-    color: green;
+}
+.search-result-author a{
+    color:green;
 }
 
 .search-result-release-date {
@@ -146,6 +149,7 @@ html h3 {
     background-image: linear-gradient(rgb(30, 111, 146), rgb(1, 53, 88) 100%);
     box-shadow:none !important;
     border-color:#FFFFFF !important;
+    margin-bottom:0px;
 }
 
 .homepage-outtermost-style{
@@ -254,6 +258,7 @@ html, body{
     margin-bottom:-5px !important;
 }
 
+
 .nav-menu-item{
     padding-left:25px !important;
     padding-right:25px !important;
@@ -298,7 +303,7 @@ html, body{
 }
 
 .icon-row a{
-        color:white !important;
+    color:white !important;
 }
 
 .icon-row a.icon-row-icon{
@@ -311,135 +316,135 @@ html, body{
 
 
 .progtrckr {
-  text-align: center;
-  padding-bottom: 16px;
+    text-align: center;
+    padding-bottom: 16px;
 }
 
 .interface-step {
-  text-align: center;
-  padding-bottom: 16px;
+    text-align: center;
+    padding-bottom: 16px;
 }
 
 .interface-group {
-  padding: 25px;
-  border: 5px solid #f3f3f3;
+    padding: 25px;
+    border: 5px solid #f3f3f3;
 }
 
 hr {
-  border: 0;
-  clear:both;
-  display:block;
-  width: 96%;
-  background-color: grey;
-  height: 1px;
+    border: 0;
+    clear:both;
+    display:block;
+    width: 96%;
+    background-color: grey;
+    height: 1px;
 }
 
 .pub-btns {
-  border: 0;
-  padding-top: 10px;
-  clear:both;
-  display:block;
+    border: 0;
+    padding-top: 10px;
+    clear:both;
+    display:block;
 }
 
 .footer-buttons {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 ol.progtrckr {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 }
 
 ol.progtrckr li {
-  display: inline-block;
-  text-align: center;
-  line-height: 4.5rem;
-  cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    line-height: 4.5rem;
+    cursor: pointer;
 }
 
 ol.progtrckr li span {
-  padding: 0 1.5rem;
+    padding: 0 1.5rem;
 }
 
 @media (max-width: 650px) {
-  .progtrckr li span {
-    display: none;
-  }
+    .progtrckr li span {
+        display: none;
+    }
 }
 .progtrckr em {
-  display: none;
-  font-weight: 700;
-  padding-left: 1rem;
+    display: none;
+    font-weight: 700;
+    padding-left: 1rem;
 }
 
 @media (max-width: 650px) {
-  .progtrckr em {
-    display: inline;
-  }
+    .progtrckr em {
+        display: inline;
+    }
 }
 
 ol.progtrckr li.progtrckr-todo {
-  color: silver;
-  border-bottom: 4px solid silver;
+    color: silver;
+    border-bottom: 4px solid silver;
 }
 
 ol.progtrckr li.progtrckr-doing {
-  color: black;
-  border-bottom: 4px solid #013558;
+    color: black;
+    border-bottom: 4px solid #013558;
 }
 
 ol.progtrckr li.progtrckr-done {
-  color: black;
-  border-bottom: 4px solid #5cb85c;
+    color: black;
+    border-bottom: 4px solid #5cb85c;
 }
 
 ol.progtrckr li:after {
-  content: "\00a0\00a0";
+    content: "\00a0\00a0";
 }
 
 ol.progtrckr li:before {
-  position: relative;
-  bottom: -3.7rem;
-  float: left;
-  left: 50%;
+    position: relative;
+    bottom: -3.7rem;
+    float: left;
+    left: 50%;
 }
 
 ol.progtrckr li.progtrckr-todo:before {
-  content: "\039F";
-  color: silver;
-  background-color: white;
-  width: 1.2em;
-  line-height: 1.4em;
+    content: "\039F";
+    color: silver;
+    background-color: white;
+    width: 1.2em;
+    line-height: 1.4em;
 }
 
 ol.progtrckr li.progtrckr-todo:hover:before {
-  color: #ff4500;
+    color: #ff4500;
 }
 
 ol.progtrckr li.progtrckr-doing:before {
-  content: "\2022";
-  color: white;
-  background-color: #013558;
-  width: 1.2em;
-  line-height: 1.2em;
-  border-radius: 1.2em;
+    content: "\2022";
+    color: white;
+    background-color: #013558;
+    width: 1.2em;
+    line-height: 1.2em;
+    border-radius: 1.2em;
 }
 
 ol.progtrckr li.progtrckr-doing:hover:before {
-  color: #ff4500;
+    color: #ff4500;
 }
 
 ol.progtrckr li.progtrckr-done:before {
-  content: "\2713";
-  color: white;
-  background-color: #5cb85c;
-  width: 1.2em;
-  line-height: 1.2em;
-  border-radius: 1.2em;
+    content: "\2713";
+    color: white;
+    background-color: #5cb85c;
+    width: 1.2em;
+    line-height: 1.2em;
+    border-radius: 1.2em;
 }
 
 ol.progtrckr li.progtrckr-done:hover:before {
-  color: #333;
+    color: #333;
 }
 
 .login-dropdown-text li{
@@ -448,6 +453,11 @@ ol.progtrckr li.progtrckr-done:hover:before {
 
 .login-dropdown-btn{
     color:white !important;
+}
+
+.login-accounts-btn{
+    font-size:25px;
+    color:white;
 }
 
 .search-sidebar-filter-title{
@@ -472,6 +482,13 @@ ol.progtrckr li.progtrckr-done:hover:before {
 .account-loading-image{
     width:70px;
     height:50px
+}
+
+.breadcrumbTrail{
+    font-size:16px;
+}
+.breadcrumbTrail a{
+    font-size:16px;
 }
 
 
@@ -508,7 +525,7 @@ ol.progtrckr li.progtrckr-done:hover:before {
     .homepage-signin-bar{
         text-align:center;
     }
-     .nav-menu{
+    .nav-menu{
         margin-bottom:0px;
     }
 }
@@ -524,7 +541,7 @@ ol.progtrckr li.progtrckr-done:hover:before {
     .homepage-signin-bar{
         text-align:center;
     }
-     .nav-menu{
+    .nav-menu{
         margin-bottom:0px;
     }
 }
@@ -543,7 +560,7 @@ ol.progtrckr li.progtrckr-done:hover:before {
     .homepage-signin-bar{
         text-align:right;
     }
-     
+
 }
 
 /* Large Devices, Wide Screens */

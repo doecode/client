@@ -1,16 +1,19 @@
 import React from 'react';
 
-export default class BreadcrumbTrail extends React.component{
+export default class BreadcrumbTrail extends React.Component{
     constructor(props){
         super(props);
+        this.listLength = this.props.list.length;
     }
     
     render(){
-        return(
-        <div>
-            <a href={this.props.homepage}>{this.props.homepage_title}</a> / <a href={this.props.searchpage}>{this.props.searchpage_title}</a> 
-           
-        </div>
-        );
+     let is_less_than=true;
+    return(
+       
+    <div className='breadcrumbTrail'>
+        {this.props.list.map((item, index)=>
+        <span key={item.key}>{item.value}</span>
+        )}
+    </div>);
     }
 }
