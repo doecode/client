@@ -45,7 +45,7 @@ export default class Sidebar extends React.Component {
             <div className="row">
                 <div className="col-xs-1"></div>
                 <div className="col-xs-10 center-text">
-                    <SearchField field="rows" label="Rows" elementType="select" options={staticContstants.rowOptions} changeCallback={this.props.refreshSearch} clearable={false}  />
+                    <SearchField field="rows" label="Rows" elementType="select" options={staticContstants.rowOptions} noExtraLabelText changeCallback={this.props.refreshSearch} clearable={false}  />
                 </div>
                 <div className="col-xs-1"></div>
             </div>
@@ -53,7 +53,7 @@ export default class Sidebar extends React.Component {
             <div className="row center-text">
                 <div className="col-xs-1"></div>
                 <div className="col-md-10 col-xs-12">
-                    <SearchField field="sort" label="Sort" elementType="select" options={staticContstants.searchSortOptions} clearable={false}/>
+                    <SearchField field="sort" label="Sort" elementType="select" options={staticContstants.searchSortOptions} noExtraLabelText clearable={false}/>
                 </div>
                 <div className="col-xs-1"></div>
             </div>

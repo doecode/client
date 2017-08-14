@@ -25,10 +25,18 @@ export default class SearchItem extends React.Component {
             releaseDate =data.releaseDate.substring(0,data.releaseDate.indexOf("T"));
 
 
+            console.log("Search data: "+JSON.stringify(data));
         const devsAndContributors = data._names;
+        let devContribList = [];
+        
         if (devsAndContributors === undefined){
             return (null);
+        }else{
+            devsAndContributors.forEach(function(item){
+                devContribList.push(item.replace('(undefined),','').replace(' (undefined)','').replace(' null','').replace('null ',''))
+            });
         }
+        
         const softwareTitle = data.softwareTitle;
         if (softwareTitle === undefined){
             return (null);
@@ -48,7 +56,7 @@ export default class SearchItem extends React.Component {
                     </div>
 
                     <div className="search-result-author">
-                        <DevAndContribLinks devsAndContributors={devsAndContributors}/>
+                        <DevAndContribLinks devsAndContributors={devContribList}/>
                     </div>
 
 

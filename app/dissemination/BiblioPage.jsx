@@ -109,7 +109,7 @@ export default class BiblioPage extends React.Component {
 
       render() {
 
-        console.log("rendering");
+        
         metadata.deserializeData(this.state.data);
         const fields = [{header : "Developers/Contributors", field : "N/A"},
         {header : "Release Date", field : "N/A"},

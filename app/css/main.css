@@ -150,6 +150,8 @@ html h3 {
     box-shadow:none !important;
     border-color:#FFFFFF !important;
     margin-bottom:0px;
+    border-radius: 0px !important;
+    border:none;
 }
 
 .homepage-outtermost-style{
@@ -486,6 +488,7 @@ ol.progtrckr li.progtrckr-done:hover:before {
 
 .breadcrumbTrail{
     font-size:16px;
+    margin-top:5px
 }
 .breadcrumbTrail a{
     font-size:16px;

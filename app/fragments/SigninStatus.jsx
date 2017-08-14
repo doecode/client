@@ -33,7 +33,7 @@ export default class SigninStatus extends React.Component{
                 <span className="caret"></span>
             </button>
             <ul className="dropdown-menu dropdown-menu-right login-dropdown-text" aria-labelledby="accountSigninDropdown">
-                <li><a href="/doecode/projects"><span classname='fa fa-code'></span> My Projects</a></li>
+                <li><a href="/doecode/projects"><span className='fa fa-code'></span> My Projects</a></li>
                 <li><a href="/doecode/account"><span className='fa fa-user-circle'></span> Account</a></li>
                 <li role="separator" className="divider"></li>
                 <li className="clickable"><a onClick={this.logout}><span className='fa fa-sign-out'></span> Logout</a></li>
