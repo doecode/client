@@ -1,5 +1,7 @@
 const path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   context: __dirname,
@@ -32,5 +34,11 @@ module.exports = {
 	use: ['style-loader','css-loader']
       }
     ],
-  }
+  },
+
+  plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new UglifyJSPlugin(),
+    new webpack.DefinePlugin({'process.env.NODE_ENV': '"production"'})
+  ]
 }
