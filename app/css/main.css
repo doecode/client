@@ -226,6 +226,9 @@ html, body{
     min-height: calc(100vh - 124px/*height of footer*/);
     background-color:#F9F9F9;
 }
+.homepage-wrapper{
+    min-height: calc(100vh - 124px/*height of footer*/);
+}
 .footer{
     height:124px;
 }

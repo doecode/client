@@ -29,18 +29,21 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, browserHistory,IndexRoute} from 'react-router-dom';
 
 import css from './css/main.css';
-let outtermost_class_name = "";
-let is_homepage = false;
+
 class DOECodeRouter extends React.Component {
 
 	constructor(props) {
 		super(props);
                 /*If we're on the homepage, we have some different work to do*/
                 const current_page = location.href.match(/([^\/]*)\/*$/)[1];
+                this.outtermost_class_name="";
+                this.is_homepage = false;
+                this.wrapper_class = " wrapper ";
 
                 if(current_page==='' || current_page==='/' || current_page==='doecode'){
-                    outtermost_class_name='homepage-outtermost-style';
-                    is_homepage = true;
+                    this.outtermost_class_name='homepage-outtermost-style';
+                    this.is_homepage = true;
+                    this.wrapper_class=" homepage-wrapper ";
                 }
 	}
 
@@ -48,9 +51,9 @@ class DOECodeRouter extends React.Component {
 		return (
 
                 <Router basename="/doecode" history={browserHistory}>
-                    <div className={outtermost_class_name}>
-                        <div className="wrapper">
-                            {!is_homepage &&
+                    <div className={this.outtermost_class_name}>
+                        <div className={this.wrapper_class}>
+                            {!this.is_homepage &&
                             <Header/>
                             }
                             <div>
@@ -80,7 +83,7 @@ class DOECodeRouter extends React.Component {
                                 <Route path="/logout" component={LogoutPage}/>
                             </div>
                         </div>
-                        <Footer is_homepage={is_homepage}/>
+                        <Footer is_homepage={this.is_homepage}/>
                     </div>
                 </Router>
 		);
