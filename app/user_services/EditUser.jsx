@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import UserData from '../stores/UserData';
 import UserField from '../field/UserField';
 import Validation from '../utils/Validation';
-import Password from '../fragments/Password';
+import UserEditFields from '../fragments/UserEditFields';
 import {doAjax, doAuthenticatedAjax, checkIsAuthenticated, appendQueryString, getQueryParam} from '../utils/utils';
 
 const userData = new UserData();
@@ -14,104 +14,103 @@ export default class EditUser extends React.Component {
 	    super(props);
 	    this.updateUser = this.updateUser.bind(this);
 	    this.parseUpdateUser = this.parseUpdateUser.bind(this);
-	    this.parseLoad = this.parseLoad.bind(this);
-            this.updatePassword = this.updatePassword.bind(this);
+            this.parseRequestAdmin = this.parseRequestAdmin.bind(this);
+            this.parseRequestAdminError = this.parseRequestAdminError.bind(this);
             this.getAPIKey = this.getAPIKey.bind(this);
             this.parseAPI = this.parseAPI.bind(this);
+            this.requestAdmin = this.requestAdmin.bind(this);
 
 	    this.state = {
 	        updateUserSuccess: false,
                 apiKeySuccess : false,
                 apiKeyValue : "",
-                showLoading : false
+                showLoading : false,
+                requestAdminStatus:false,
+                requestAdminMessage:""
 	    }
 
 	}
 
 	componentDidMount() {
 	    checkIsAuthenticated();
-	    userData.setValue("email", sessionStorage.user_email);
 	}
 
-	parseLoad(data) {
-	    console.log(data);
-	    userData.setValue("email", data.email);
-	}
-
+        /*Updating user*/
 	updateUser() {
-	    doAuthenticatedAjax('POST', "/doecode/api/user/update", this.parseRegister, userData.getData());
+            console.log("Updating User");
+	    //doAuthenticatedAjax('POST', "/doecode/api/user/update", this.parseRegister, userData.getData());
 	}
         
-        updatePassword(){
-            
-        }
-
-	parseUpdateUser(data) {
+        parseUpdateUser(data) {
 	    console.log(data);
 	}
+
+        /*Request admin Privilege*/
+        requestAdmin(){
+            doAuthenticatedAjax('GET', "/doecode/api/user/requestadmin", this.parseRequestAdmin, null, this.parseRequestAdminError);
+        }
         
+        parseRequestAdmin(data){
+            console.log("REquest success: "+data);
+        }
+        
+        parseRequestAdminError(data){
+            console.log("Request error: "+data);
+        }
+        
+        /*Getting API Key*/
         getAPIKey(){
-        doAuthenticatedAjax('POST', "/doecode/api/user/newapikey", this.parseAPI, userData.getData());
+            doAuthenticatedAjax('POST', "/doecode/api/user/newapikey", this.parseAPI, userData.getData());
                 this.setState({
 	        "showLoading": true,
 	    });
         }
         
         parseAPI(data){
-        this.setState({
+            this.setState({
 	        "showLoading": false,
 	    });
-            console.log(JSON.stringify(data));
         }
 
 	render() {
-
-    const opts = [
-      {label: 'Oak Ridge National Lab', value: 'ORNL'},
-      {label: 'Office of Scientific and Technical Information', value: 'OSTI'}
-      ];
-
+        const accountSavePass = <span><span className="fa fa-floppy-o"></span> Save</span>;
                 return(
                 <div className="row not-so-wide-row">
                     <div className="col-md-3"> </div>
                     <div className="col-md-6 col-xs-12">
+                        <br/>
                         {/*Change Password*/}
                         <div className="row">
                             <div className='col-xs-12'>
                                 <div className="panel panel-default">
-                                    <div className="panel-heading account-panel-header">Change Password</div>
+                                    <div className="panel-heading account-panel-header center-text">Change Password</div>
                                     <div className="panel-body">
-                                        <Password button_text='Save Changes' button_action={this.updatePassword} show_email={false} />
+                                        <UserEditFields button_text={accountSavePass} button_action={this.updateUser} show_email={false} show_nonPass_fields={true}/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {/*Request Administrative Role*/}
                         <div className="row">
-                            <div className="col-xs-12">
+                            <div className="col-md-6 col-xs-12">
                                 <div className="panel panel-default">
-                                    <div className="panel-heading account-panel-header">User Role</div>
-                                    <div className="panel-body account-panel-body">
-                                        <UserField noExtraLabelText noval field="pending_role" label="Request Administrative Role" options={opts} elementType="select" />
-                                        <br/>
-                                        <button type="button" className="btn btn-lg btn-success" onClick={this.updateUser}>
-                                            Update User
+                                    <div className="panel-heading account-panel-header center-text">Administrative Role</div>
+                                    <div className="panel-body account-panel-body center-text">
+                                        <button type="button" className="btn btn-lg btn-success" onClick={this.requestAdmin}>
+                                            <span className="fa fa-unlock-alt"></span> Request Role
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {/*Request API Key*/}
-                        <div className="row">
-                            <div className='col-xs-12'>
+                            <div className='col-md-6 col-xs-12'>
                                 <div className="panel panel-default">
-                                    <div className="panel-heading account-panel-header">API Key</div>
-                                    <div className="panel-body">
+                                    <div className="panel-heading account-panel-header center-text">API Key</div>
+                                    <div className="panel-body center-text">
                                         {this.state.apiKeySuccess &&
                                         <label>{this.state.apiKeyValue}</label>
                                         }
                                         {this.state.showLoading &&
-                                            <img className='account-loading-image' src="https://m.popkey.co/163fce/Llgbv_s-200x150.gif"/>
+                                        <img className='account-loading-image' src="https://m.popkey.co/163fce/Llgbv_s-200x150.gif"/>
                                         }
                                         <button type="button" className='btn btn-lg btn-success' onClick={this.getAPIKey}><span className='fa fa-key'></span> Generate Key</button>
                                     </div>

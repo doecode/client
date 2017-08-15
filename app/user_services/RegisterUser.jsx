@@ -5,7 +5,7 @@ import UserField from '../field/UserField';
 import Validation from '../utils/Validation';
 import SignupBadRequest from '../fragments/SignupBadRequest';
 import SuccessfulSignup from '../fragments/SuccessfulSignup';
-import Password from '../fragments/Password';
+import UserEditFields from '../fragments/UserEditFields';
 import {doAjax, doAuthenticatedAjax, appendQueryString, getQueryParam} from '../utils/utils';
 
 const userData = new UserData();
@@ -62,11 +62,15 @@ export default class RegisterUser extends React.Component {
 		} else {
                 content =<div className='row not-so-wide-row'>
                     <div className='col-xs-12'>
+                        <div className="center-text">
+                            <h2 className="static-content-title">Registration</h2>
+                        </div>
                         {/*Error messages*/}
                         {this.state.badRequest &&
                         <div className='row'>
                             <div className="col-md-3"> </div>
                             <div className="col-md-3 col-xs-12">
+                                <br/>
                                 <SignupBadRequest errors={this.state.badRequestErrors}/>
                                 <br/>
                             </div>
@@ -77,7 +81,7 @@ export default class RegisterUser extends React.Component {
                         <div className='row'>
                             <div className='col-md-3'></div>
                             <div className='col-md-6 col-xs-12'>
-                                <Password button_text='Register' button_action={this.register} text_below_email={emailSmalltext} show_email={true}/>
+                                <UserEditFields button_text='Register' button_action={this.register} text_below_email={emailSmalltext} show_email={true} show_nonPass_fields={true}/>
                             </div>
                             <div className='col-md-3'></div>
                         </div>

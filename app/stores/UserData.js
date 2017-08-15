@@ -5,17 +5,22 @@ export default class UserData extends BaseData {
     constructor() {
 
       const defaultUser = {
+          firstName:'',
+          lastName:'',
    		   	  email : '',
    		   	  password: '',
    		   	  confirm_password: '',
-            pending_role: ''
+            pending_role: '',
+            contractNumber:''
       }
 
       const defaultUserSchema = {
-
+            "firstName":{required:true, completed:false, validations: [], error: ''},
+            "lastName":{required:true, completed:false, validations: [], error: ''},
             "email": {required:true, completed:false, validations: ["Email"], error: ''},
              "password" : {required:true, completed:false, validations: [], error: ''},
-             "confirm_password" : {required:true, completed:false, validations: [""], error: ''}
+             "confirm_password" : {required:true, completed:false, validations: [""], error: ''},
+             "contractNumber":{required:false, completed:false, validations: [], error: ''},
         }
 
     	const props = {fieldMap: UserStore.user, infoSchema: UserStore.userSchema, fieldMapSnapshot: UserStore.defaultUser, infoSchemaSnapshot: UserStore.defaultUserSchema};
