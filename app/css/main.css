@@ -66,6 +66,26 @@ html h3 {
     padding-left: 10px;
     padding-bottom: 15px;
     border-bottom: 1px solid #cccccc;
+    font-size:16px;
+}
+.biblio-title-container{
+    border-bottom:1px solid #CCCCCC;
+    margin-bottom:15px;
+}
+
+.biblio-title{
+    font-weight:300;
+    font-size:31px;
+}
+
+.biblio-sidebar-title{
+    color: #aaaab8;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.citation-details-div{
+    font-size:16px;
 }
 
 .citation-details-div dl {
@@ -204,6 +224,7 @@ html, body{
 }
 .wrapper{
     min-height: calc(100vh - 124px/*height of footer*/);
+    background-color:#F9F9F9;
 }
 .footer{
     height:124px;
@@ -252,9 +273,7 @@ html, body{
     color:white;
 }
 
-.biblio-title{
-    font-weight:300;
-}
+
 
 .nav-menu{
     margin-bottom:-5px !important;
@@ -494,6 +513,21 @@ ol.progtrckr li.progtrckr-done:hover:before {
     font-size:16px;
 }
 
+.biblio-sidebar-collapse-panel{
+    border-color: #F9F9F9;
+    box-shadow:none !important;
+}
+
+.biblio-sidebar-collapse-heading{
+    background-color:#FFFFFF !important;
+    background-image:none !important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.biblio-sidebar-collapse-item{
+    background-color: #F9F9F9;
+    border-top:none !important;
+}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }

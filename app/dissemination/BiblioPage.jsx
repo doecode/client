@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import {doAjax, appendQueryString, getQueryParam} from '../utils/utils';
 import DevAndContribLinks from './DevAndContribLinks';
 import Metadata from '../stores/Metadata';
+import BreadcrumbTrail from '../fragments/BreadcrumbTrail';
+import BiblioSidebar from './BiblioSidebar';
 
 const metadata = new Metadata();
 
@@ -15,9 +17,6 @@ export default class BiblioPage extends React.Component {
         this.state = {data : undefined}
 
       }
-
-
-
     componentDidMount() {
              const codeID = getQueryParam("code_id");
              console.log(codeID);
@@ -34,12 +33,7 @@ export default class BiblioPage extends React.Component {
 
 
          parseReceiveResponse(data) {
-
-           console.log(data);
-             //metadata.deserializeData(data.metadata);
-         	//console.log(JSON.stringify(metadata.getData()));
             this.setState({"data" : data.metadata});
-             //this.setState({"loading" : false, "loadingMessage" : ""});
          }
 
          parseErrorResponse() {
@@ -136,19 +130,32 @@ export default class BiblioPage extends React.Component {
         		{description}
         		</div>;
         }
-
+   const breadcrumbList = [
+    {key:'brdcrmb1',
+    value: <span><a href='/doecode'>DOE CODE </a> / </span>},
+    {key:'brdcrmb2',
+    value:<span><a href='/doecode/results'>Search Results</a> / </span>},
+    {key:'brdcrmb3',
+    value: <span>{metadata.getValue("software_title")}</span>
+     }
+   ];
+   
         return(
         <div className="row not-so-wide-row">
             <div className="col-xs-12">
                 {/*Breadcrumb trail*/}
                 <div className="row">
+                    <div className='col-xs-12'>
+                        <BreadcrumbTrail list={breadcrumbList}/>
+                    </div>
                 </div>
                 {/*Title*/}
                 <div className="row">
-                    <div className="col-xs-12 center-text">
-                        <h2 className="biblio-title">
+                    <div className="col-xs-12 center-text biblio-title-container">
+                        <div className="biblio-title">
                             {metadata.getValue("software_title")}
-                        </h2>
+                        </div>
+                        <br/>
                     </div>
                 </div>
                 {/*Description and other Data*/}
@@ -158,12 +165,13 @@ export default class BiblioPage extends React.Component {
                             {descriptionContent}
                         </div>
                         <div className="row">
-                            <div className="citation-details-div static-content col-xs-12">
+                            <div className="citation-details-div col-xs-12">
                                 {fieldsContent}
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-2"></div>
+                    {/*Sidebar on the right*/}
+                    <BiblioSidebar sidebarClass=' col-md-2 col-xs-12'/>
                 </div>
             </div>
         </div>
