@@ -10,116 +10,115 @@ const userData = new UserData();
 const validation = new Validation();
 
 export default class EditUser extends React.Component {
-	constructor(props) {
-	    super(props);
-	    this.updateUser = this.updateUser.bind(this);
-	    this.parseUpdateUser = this.parseUpdateUser.bind(this);
-            this.parseRequestAdmin = this.parseRequestAdmin.bind(this);
-            this.parseRequestAdminError = this.parseRequestAdminError.bind(this);
-            this.getAPIKey = this.getAPIKey.bind(this);
-            this.parseAPI = this.parseAPI.bind(this);
-            this.requestAdmin = this.requestAdmin.bind(this);
+  constructor(props) {
+    super(props);
+    this.updateUser = this.updateUser.bind(this);
+    this.parseUpdateUser = this.parseUpdateUser.bind(this);
+    this.parseRequestAdmin = this.parseRequestAdmin.bind(this);
+    this.parseRequestAdminError = this.parseRequestAdminError.bind(this);
+    this.getAPIKey = this.getAPIKey.bind(this);
+    this.parseAPI = this.parseAPI.bind(this);
+    this.requestAdmin = this.requestAdmin.bind(this);
 
-	    this.state = {
-	        updateUserSuccess: false,
-                apiKeySuccess : false,
-                apiKeyValue : "",
-                showLoading : false,
-                requestAdminStatus:false,
-                requestAdminMessage:""
-	    }
+    this.state = {
+      updateUserSuccess: false,
+      apiKeySuccess: false,
+      apiKeyValue: "",
+      showLoading: false,
+      requestAdminStatus: false,
+      requestAdminMessage: ""
+    }
 
-	}
+  }
 
-	componentDidMount() {
-	    checkIsAuthenticated();
-	}
+  componentDidMount() {
+    checkIsAuthenticated();
+  }
 
-        /*Updating user*/
-	updateUser() {
-            console.log("Updating User");
-	    //doAuthenticatedAjax('POST', "/doecode/api/user/update", this.parseRegister, userData.getData());
-	}
-        
-        parseUpdateUser(data) {
-	    console.log(data);
-	}
+  /*Updating user*/
+  updateUser() {
+    console.log("Updating User");
+    //doAuthenticatedAjax('POST', "/doecode/api/user/update", this.parseRegister, userData.getData());
+  }
 
-        /*Request admin Privilege*/
-        requestAdmin(){
-            doAuthenticatedAjax('GET', "/doecode/api/user/requestadmin", this.parseRequestAdmin, null, this.parseRequestAdminError);
-        }
-        
-        parseRequestAdmin(data){
-            console.log("REquest success: "+data);
-        }
-        
-        parseRequestAdminError(data){
-            console.log("Request error: "+data);
-        }
-        
-        /*Getting API Key*/
-        getAPIKey(){
-            doAuthenticatedAjax('POST', "/doecode/api/user/newapikey", this.parseAPI, userData.getData());
-                this.setState({
-	        "showLoading": true,
-	    });
-        }
-        
-        parseAPI(data){
-            this.setState({
-	        "showLoading": false,
-	    });
-        }
+  parseUpdateUser(data) {
+    console.log(data);
+  }
 
-	render() {
-        const accountSavePass = <span><span className="fa fa-floppy-o"></span> Save</span>;
-                return(
-                <div className="row not-so-wide-row">
-                    <div className="col-md-3"> </div>
-                    <div className="col-md-6 col-xs-12">
-                        <br/>
-                        {/*Change Password*/}
-                        <div className="row">
-                            <div className='col-xs-12'>
-                                <div className="panel panel-default">
-                                    <div className="panel-heading account-panel-header center-text">Change Password</div>
-                                    <div className="panel-body">
-                                        <UserEditFields button_text={accountSavePass} button_action={this.updateUser} show_email={false} show_nonPass_fields={true}/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {/*Request Administrative Role*/}
-                        <div className="row">
-                            <div className="col-md-6 col-xs-12">
-                                <div className="panel panel-default">
-                                    <div className="panel-heading account-panel-header center-text">Administrative Role</div>
-                                    <div className="panel-body account-panel-body center-text">
-                                        <button type="button" className="btn btn-lg btn-success" onClick={this.requestAdmin}>
-                                            <span className="fa fa-unlock-alt"></span> Request Role
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='col-md-6 col-xs-12'>
-                                <div className="panel panel-default">
-                                    <div className="panel-heading account-panel-header center-text">API Key</div>
-                                    <div className="panel-body center-text">
-                                        {this.state.apiKeySuccess &&
-                                        <label>{this.state.apiKeyValue}</label>
-                                        }
-                                        {this.state.showLoading &&
-                                        <img className='account-loading-image' src="https://m.popkey.co/163fce/Llgbv_s-200x150.gif"/>
-                                        }
-                                        <button type="button" className='btn btn-lg btn-success' onClick={this.getAPIKey}><span className='fa fa-key'></span> Generate Key</button>
-                                    </div>
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-                    <div className="col-md-3"> </div>
-                </div>);
+  /*Request admin Privilege*/
+  requestAdmin() {
+    doAuthenticatedAjax('GET', "/doecode/api/user/requestadmin", this.parseRequestAdmin, null, this.parseRequestAdminError);
+  }
 
-	}
+  parseRequestAdmin(data) {
+    console.log("REquest success: " + data);
+  }
+
+  parseRequestAdminError(data) {
+    console.log("Request error: " + data);
+  }
+
+  /*Getting API Key*/
+  getAPIKey() {
+    doAuthenticatedAjax('POST', "/doecode/api/user/newapikey", this.parseAPI, userData.getData());
+    this.setState({"showLoading": true});
+  }
+
+  parseAPI(data) {
+    this.setState({"showLoading": false});
+  }
+
+  render() {
+    const accountSavePass = <span>
+      <span className="fa fa-floppy-o"></span>
+      Save</span>;
+    return (
+      <div className="row not-so-wide-row">
+        <div className="col-md-3"></div>
+        <div className="col-md-6 col-xs-12">
+          <br/> {/*Change Password*/}
+          <div className="row">
+            <div className='col-xs-12'>
+              <div className="panel panel-default">
+                <div className="panel-heading account-panel-header center-text">Change Password</div>
+                <div className="panel-body">
+                  <UserEditFields button_text={accountSavePass} button_action={this.updateUser} show_email={false} show_nonPass_fields={true}/>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/*Request Administrative Role*/}
+          <div className="row">
+            <div className="col-md-6 col-xs-12">
+              <div className="panel panel-default">
+                <div className="panel-heading account-panel-header center-text">Administrative Role</div>
+                <div className="panel-body account-panel-body center-text">
+                  <button type="button" className="btn btn-lg btn-success" onClick={this.requestAdmin}>
+                    <span className="fa fa-unlock-alt"></span>
+                    Request Role
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className='col-md-6 col-xs-12'>
+              <div className="panel panel-default">
+                <div className="panel-heading account-panel-header center-text">API Key</div>
+                <div className="panel-body center-text">
+                  {this.state.apiKeySuccess && <label>{this.state.apiKeyValue}</label>
+}
+                  {this.state.showLoading && <img className='account-loading-image' src="https://m.popkey.co/163fce/Llgbv_s-200x150.gif"/>
+}
+                  <button type="button" className='btn btn-lg btn-success' onClick={this.getAPIKey}>
+                    <span className='fa fa-key'></span>
+                    Generate Key</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3"></div>
+      </div>
+    );
+
+  }
 }
