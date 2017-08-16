@@ -36,6 +36,7 @@ constructor(props) {
     this.save = this.save.bind(this);
     this.publish = this.publish.bind(this);
     this.submit = this.submit.bind(this);
+    this.approve = this.approve.bind(this);
     this.doMultipartSubmission = this.doMultipartSubmission.bind(this);
     this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
     this.parseErrorResponse = this.parseErrorResponse.bind(this);
@@ -51,7 +52,8 @@ constructor(props) {
         "published": false,
         "showAll": false,
         "activePanel": 1,
-        "activePanels" : [true,true,true,true,true,true,true,true,true]
+        "activePanels" : [true,true,true,true,true,true,true,true,true],
+        "workflowStatus": ""
     };
 
     publishSteps = [
@@ -124,7 +126,7 @@ parseErrorResponse(jqXhr, exception) {
 }
 
 componentDidMount() {
-    if (this.props.page == 'submit') {
+    if (this.props.page == 'submit' || this.props.page == 'approve') {
         this.setState({"showAll": true});
     } else {
         metadata.requireOnlyPublishedFields();
@@ -152,6 +154,7 @@ componentDidMount() {
  }
 
 parseReceiveResponse(data) {
+    this.setState({"workflowStatus": data.metadata.workflow_status});
     metadata.deserializeData(data.metadata);
     this.setState({"loading": false, "loadingMessage": ""});
 }
@@ -204,6 +207,13 @@ submit() {
   }
 }
 
+approve() {
+    const codeID = getQueryParam("code_id");
+
+    this.setState({"loading": true, "loadingMessage": "Approving"});
+    doAuthenticatedAjax('GET', '/doecode/api/metadata/approve?code_id='+codeID, this.parseApproveResponse, metadata.serializeData(), this.parseErrorResponse);
+}
+
 doMultipartSubmission(url, successCallback) {
   const files = metadata.getValue("files");
   let formData = new FormData();
@@ -223,8 +233,11 @@ parsePublishResponse(data) {
 }
 
 parseSubmitResponse(data) {
-
     window.location.href = "/doecode/confirm?workflow=submitted&code_id=" + data.metadata.code_id;
+}
+
+parseApproveResponse(data) {
+    window.location.href = "/doecode/pending";
 }
 
 setActivePanel(currentKey) {
@@ -274,7 +287,7 @@ buildPanel(obj) {
 
         let arrowBool = this.state.activePanel == obj.key;
 
-        if (this.props.page == 'submit') {
+        if (this.props.page == 'submit' || this.props.page == 'approve') {
               arrowBool = this.state.activePanels[obj.key - 1];
         }
 
@@ -292,13 +305,14 @@ buildPanel(obj) {
         }
       </div>;
 
-        const expandedBool = this.props.page == 'submit';
-        return <Panel header={heading} defaultExpanded={expandedBool} onSelect={this.panelSelect} collapsible bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
+        const expandedBool = this.props.page == 'submit' || this.props.page == 'approve';
+
+
+        if (this.props.page == 'approve') {
+        return <Panel header={heading} defaultExpanded={expandedBool} onSelect={this.panelSelect} bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
 
       	<div>
-
-
-		</div>
+		    </div>
 
         {panelStatus.errors &&
         <div className="error-color">
@@ -308,8 +322,24 @@ buildPanel(obj) {
 
         {obj.component}
 
-      </Panel>;
+        </Panel>
+        } else {
+        return <Panel header={heading} defaultExpanded={expandedBool} onSelect={this.panelSelect} collapsible bsStyle={panelStyle} eventKey={obj.key} key={obj.key}>
+
+      	<div>
+		    </div>
+
+        {panelStatus.errors &&
+        <div className="error-color">
+        <h3> <strong> {panelStatus.errors} </strong> </h3>
+        </div>
         }
+
+        {obj.component}
+
+        </Panel>
+        };
+    }
 
 
 
@@ -319,14 +349,15 @@ buildPanel(obj) {
       const submitDisabled = !metadata.validateSchema();
       const publishDisabled = !metadata.validatePublishedFields();
 
-      const publishClass = publishDisabled ? "btn btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "btn btn-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style "
-      const submitClass = submitDisabled ? "btn btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "btn btn-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style "
+      const publishClass = publishDisabled ? "btn btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "btn btn-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
+      const approveClass = "btn btn-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
+      const submitClass = submitDisabled ? "btn btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "btn btn-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
       const codeID = metadata.getValue("code_id");
 
       let headerText = "Create a New Software Record";
 
       if (codeID !== undefined && codeID > 0)
-    	  headerText = "Editing Software Record #" + codeID;
+    	  headerText = (this.props.page == 'approve' ? "Approving" : "Editing") + " Software Record #" + codeID;
 
       const self = this;
 
@@ -349,29 +380,41 @@ buildPanel(obj) {
 
         let button = null;
 
+        const colSize1 = this.props.page == 'submit' ? "col-sm-9" : "col-sm-10";
+        const colSizeTemp = this.props.page == 'submit' ? "col-sm-3" : "col-sm-2";
+        const colSize2 = !(this.state.workflowStatus != "Published" && this.state.workflowStatus != "Approved") ? "col-sm-12" : colSizeTemp;
+
+        let saveBtn = (this.state.workflowStatus != "Published" && this.state.workflowStatus != "Approved" &&
+          <div className={colSize1}>
+              <button type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
+                  Save Your Progress
+                </button>
+          </div>
+        );
+
         if (this.props.page == 'submit') {
         button =             <div className="form-group-xs row">
-
-                            <div className="col-sm-9">
-                                <button type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
-                                    Save Your Progress
-                                  </button>
-                            </div>
-                            <div className="col-sm-3">
+                            {saveBtn}
+                            <div className={colSize2}>
                                 <button type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
                                     Submit Record to E-Link
                                 </button>
                             </div>
                         </div>
-        } else {
+        } else if (this.props.page == 'approve') {
           button =           <div className="form-group-xs row">
 
-                          <div className="col-sm-10">
-                              <button type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
-                                  Save Your Progress
+                          <div className="col-sm-12">
+                              <button  type="button" className={approveClass} onClick={this.approve}>
+                                  Approve Record
                               </button>
                           </div>
-                          <div className="col-sm-2">
+
+                      </div>
+        } else {
+          button =           <div className="form-group-xs row">
+                          {saveBtn}
+                          <div className={colSize2}>
                               <button  type="button" className={publishClass} disabled={publishDisabled} onClick={this.publish}>
                                   Publish Record
                               </button>
@@ -379,12 +422,14 @@ buildPanel(obj) {
 
 
                       </div>
-        }
+        };
 
         const accordionBool = this.props.page == 'publish';
 
-        let content = <div>
+        const disableForm = this.props.page == 'approve';
 
+        let coreForm =
+        <div>
         <PanelGroup defaultActiveKey="1" accordion={accordionBool} onSelect={this.setActivePanel}>
         {publishPanels}
 
@@ -401,11 +446,29 @@ buildPanel(obj) {
           </div>
         </div>
         }
+        </div>;
 
+        let coreContent = null;
+
+        if (disableForm) {
+          coreContent =
+          <div>
+          <form><fieldset disabled>
+          {coreForm}
+          </fieldset></form>
+          </div>;
+        } else {
+          coreContent =
+          <div>
+          {coreForm}
+          </div>;
+        };
+
+
+        let content = <div>
+        {coreContent}
         {button}
-
-
-      </div>;
+        </div>;
 
         return (
 

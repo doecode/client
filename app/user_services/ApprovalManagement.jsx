@@ -68,7 +68,7 @@ export default class ApprovalManagement extends React.Component {
         for (let i = 0; i < records.length; i++) {
 
         const record = records[i];
-        const submitUrl = "/doecode/submit" + this.wizardVersion + "?code_id=" + record.code_id;
+        const approveUrl = "/doecode/approve" + this.wizardVersion + "?code_id=" + record.code_id;
 
           rows.push({
             id: record.code_id,
@@ -76,7 +76,7 @@ export default class ApprovalManagement extends React.Component {
             status: record.workflow_status,
             edit: <div className="form-group-xs row">
             <div className="col-xs-2">
-            <a  href={submitUrl} className="btn btn-info btn-sm">
+            <a  href={approveUrl} className="btn btn-info btn-sm">
   		<span className="glyphicon glyphicon-pencil"></span> View for Approval
   	</a> </div></div>
           });
@@ -125,13 +125,6 @@ export default class ApprovalManagement extends React.Component {
             <div className="col-md-3"></div>
             <div className="col-md-6 col-xs-12 static-content">
                 <h2 className="static-content-title">Approve Projects</h2>
-                <div className="form-group-xs row">
-                    <div className="col-sm-12">
-                        <a href={"/doecode/publish" + this.wizardVersion} type="button" className="btn btn-success btn-lg pull-right workflow-publish-btn" >
-                            Add New Record
-                        </a>
-                    </div>
-                </div>
                 <ReactDataGrid
                     onGridSort={this.handleGridSort}
                     enableCellSelect={true}

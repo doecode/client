@@ -75,7 +75,7 @@ export default class Field extends React.Component {
         const inputStyle = this.props.properties.inputStyle != undefined ? "form-control " + this.props.properties.inputStyle : "form-control";
 	const messageNode = this.props.properties.messageNode;
         const onKeypressFunction = this.props.properties.keypressMethod != undefined ? this.props.properties.keypressMethod : this.emptyFunction;
-        
+
         const wrapperStyleExtra = this.props.properties.wrapperStyleExtra != undefined ? this.props.properties.wrapperStyleExtra : "";
     const elementType = this.props.properties.elementType;
     const noval = this.props.properties.noval;
@@ -142,7 +142,7 @@ export default class Field extends React.Component {
 	  else if (elementType === 'input') {
 		if (!disabled) {
                 input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction}/>
-                
+
           } else {
 			input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} disabled />
 		}

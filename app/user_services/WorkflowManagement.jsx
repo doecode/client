@@ -82,20 +82,26 @@ export default class WorkflowManagement extends React.Component {
           editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
         }
 
+        let pendingStatus = (
+          record.workflow_status == "Published" && <div className="col-xs-4"><span className="pending">Pending Approval</span></div>
+        );
+
           rows.push({
             id: record.code_id,
             title: record.software_title,
             status: record.workflow_status,
             edit: <div className="form-group-xs row">
-          <div className="col-xs-3">
+          <div className="col-xs-4">
           <a href={publishUrl} className="btn btn-success btn-sm">
 		<span className="glyphicon glyphicon-pencil"></span> Update Metadata
 	</a>
           </div>
-            <div className="col-xs-2">
+            <div className="col-xs-4">
             <a  href={submitUrl} className="btn btn-info btn-sm">
   		<span className="glyphicon glyphicon-pencil"></span> Submit to E-Link
-  	</a> </div></div>
+  	</a> </div>
+    {pendingStatus}
+    </div>
           });
         }
 

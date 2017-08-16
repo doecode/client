@@ -86,7 +86,7 @@ export default class EntryStep extends React.Component {
                     <div className="row">
                         <div className="col-md-8 col-xs-12">
                             <MetadataField field="repository_link" label="Repository Link" elementType="input" messageNode="Git Repositories Only"/>
-                            
+
                         </div>
                         <div className="col-md-4">
 
