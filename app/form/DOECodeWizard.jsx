@@ -37,6 +37,7 @@ constructor(props) {
     this.publish = this.publish.bind(this);
     this.submit = this.submit.bind(this);
     this.approve = this.approve.bind(this);
+    this.closeErrorModal = this.closeErrorModal.bind(this);
     this.doMultipartSubmission = this.doMultipartSubmission.bind(this);
     this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
     this.parseErrorResponse = this.parseErrorResponse.bind(this);
@@ -48,6 +49,8 @@ constructor(props) {
     this.state = {
         "loading": false,
         "loadingMessage": "",
+        "error": false,
+        "errorMessage": "",
         "editLoad": false,
         "published": false,
         "showAll": false,
@@ -109,19 +112,35 @@ constructor(props) {
         submitSteps[x].key = "" + (x + i + 1);
     }
 
+closeErrorModal() {
+  this.setState({"error": false, "errorMessage": ""});
+}
+
 parseErrorResponse(jqXhr, exception) {
+console.log(jqXhr);
+if (jqXhr.status === 401) {
+    window.sessionStorage.lastLocation = window.location.href;
+    window.sessionStorage.lastRecord = JSON.stringify(metadata.getData());
+    window.location.href = '/doecode/login?redirect=true';
 
-    if (jqXhr.status === 401) {
-        window.sessionStorage.lastLocation = window.location.href;
-        window.sessionStorage.lastRecord = JSON.stringify(metadata.getData());
-        window.location.href = '/doecode/login?redirect=true';
+} else if (jqXhr.status === 403) {
+    window.location.href = '/doecode/forbidden';
+} else {
+    //window.location.href = '/doecode/error';
 
-    } else if (jqXhr.status === 403) {
-        window.location.href = '/doecode/forbidden';
-    } else {
-        //window.location.href = '/doecode/error';
-        console.log("Error...")
+    let x = 0;
+    let msg = "";
+    for (x = 0; x < jqXhr.responseJSON.errors.length; x++) {
+        msg += (msg == "" ? "" : "; ") + jqXhr.responseJSON.errors[x];
     }
+
+    if (msg == "")
+      msg = "Internal Server Error: " + jqXhr.status;
+
+    this.setState({"loading": false, "loadingMessage": ""});
+    this.setState({"error": true, "errorMessage": msg});
+    console.log("Error...");
+}
 
 }
 
@@ -490,6 +509,29 @@ buildPanel(obj) {
                      </Modal.Header>
                      <Modal.Body>
                          <div className="loader"></div>
+                     </Modal.Body>
+                 </Modal>
+                 <Modal show={this.state.error} >
+                     <Modal.Header closeButton>
+                         <Modal.Title>ERROR</Modal.Title>
+                     </Modal.Header>
+                     <Modal.Body>
+                         <div className="loaderText">
+                          <div className="row">
+                            <div className="col-md-4 col-xs-12">
+                                <div className="loaderError"></div>
+                            </div>
+                            <div className="col-md-8 col-xs-12">
+                              <div className="loaderText">{this.state.errorMessage}</div>
+                              <br />
+                              <div>
+                                <button type="button" className="btn btn-lg pull-right" onClick={this.closeErrorModal}>
+                                  Close
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                         </div>
                      </Modal.Body>
                  </Modal>
              </div>
