@@ -5,7 +5,7 @@ import ResearchOrganization from '../stores/ResearchOrganization';
 import ContributingOrganization from '../stores/ContributingOrganization';
 import RelatedIdentifier from '../stores/RelatedIdentifier';
 
-function doAjax(methodType, url, successCallback, data, errorCallback) {
+function doAjax(methodType, url, successCallback, data, errorCallback, dataType) {
   let errorCall = errorCallback;
   if (errorCall === undefined) {
     errorCall = (jqXhr, exception) => {
@@ -14,11 +14,15 @@ function doAjax(methodType, url, successCallback, data, errorCallback) {
     }
   }
 
+  if (dataType === undefined) {
+    dataType = "json";
+  }
+
   $.ajax({
     url: url,
     cache: false,
     method: methodType,
-    dataType: 'json',
+    dataType: dataType,
     data: JSON.stringify(data),
     contentType: "application/json; charset=utf-8",
     success: successCallback,

@@ -25,25 +25,32 @@ export default class RegisterUser extends React.Component {
   }
 
   register() {
-    doAjax('POST', "/doecode/api/user/register", this.parseRegister, userData.getData(), this.parseError)
+    doAjax('POST', "/doecode/api/user/register", this.parseRegister, userData.getData(), this.parseError, "html")
   }
 
   parseRegister(data) {
-    console.log("Success");
     this.setState({"signupSuccess": true});
   }
 
   parseError(data) {
-    console.log("Error"+JSON.stringify(data));
+    var responseText = JSON.parse(data.responseText);
     var errorMessages = [];
     var keyIndex = 0;
-    data.responseJSON.errors.forEach(function(row) {
-      errorMessages.push({
-        error: row,
-        key: (keyIndex + "-badRequest")
+    //Now, we determine what's going on
+    if (data.status == 400) {
+      responseText.errors.forEach(function(item){
+        errorMessages.push({
+          error:item,
+          key:(keyIndex+"-badRequest")
+        });
+        keyIndex++;
       });
-      keyIndex++
-    });
+    } else {
+        errorMessages.push({
+          error:"A server error has occurred that is preventing registration from functioning properly.",
+          key:"0-badRequest"
+        });
+    }
     this.setState({"badRequest": true, "badRequestErrors": errorMessages});
   }
 
@@ -79,7 +86,8 @@ export default class RegisterUser extends React.Component {
             <div className='col-md-3'></div>
           </div>
         </div>
-      </div>}
+      </div>
+    }
 
     return (
       <div className="container-fluid form-horizontal">

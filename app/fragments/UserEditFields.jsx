@@ -33,10 +33,8 @@ export default class UserEditFields extends React.Component {
       matches: false,
       validEmail: false,
       showContractNumber: false,
-      registerNeedsContractNumber: false,
-      contractNumberFilledOut: false
+      registerNeedsContractNumber: false
     }
-
   }
 
   updateFirstNameAndCheckPassword(event) {
@@ -53,7 +51,7 @@ export default class UserEditFields extends React.Component {
     userData.setValue("email", event.target.value);
     this.checkPassword();
 
-    if (this.props.doContractCheck!==undefined && this.state.validEmail && event.target.value.trim() != '' && event.target.value.trim().length>4) {
+    if (this.state.validEmail && event.target.value.trim()) {
       var post_obj = {
         "email": event.target.value
       };
@@ -76,7 +74,6 @@ export default class UserEditFields extends React.Component {
 
   handleContractCheck(event) {
     if (event.target.value.trim() !== '') {
-      this.setState({contractNumberFilledOut: true});
       userData.setValue("contract_number",event.target.value);
     }
   }
@@ -116,7 +113,7 @@ export default class UserEditFields extends React.Component {
   }
 
   render() {
-    const validPassword = this.state.longEnough && this.state.hasSpecial && this.state.hasNumber && this.state.upperAndLower && this.state.matches && !this.state.containsName && this.state.validEmail && this.state.containsFirstName && this.state.containsLastName && ((this.state.registerNeedsContractNumber && this.state.contractNumberFilledOut) || !this.state.registerNeedsContractNumber);
+    const validPassword = this.state.longEnough && this.state.hasSpecial && this.state.hasNumber && this.state.upperAndLower && this.state.matches && !this.state.containsName && this.state.validEmail && this.state.containsFirstName && this.state.containsLastName && ((this.state.registerNeedsContractNumber && userData.getValue("contract_number")!=='') || !this.state.registerNeedsContractNumber);
     return (
       <div className="row">
         <div className='col-xs-12'>
@@ -135,9 +132,10 @@ export default class UserEditFields extends React.Component {
               <div className="col-md-6"></div>
             </div>
             {/*Contract number field. Only shows up in certain scenarios*/}
-            {this.state.showContractNumber && <div className="row">
+            {this.state.showContractNumber &&
+              <div className="row">
               <div className="col-md-6 col-xs-12">
-                <UserField field='contractNumber' label='Contract Number' elementType='input' handleChange={this.handleContractCheck} noExtraLabelText/>
+                <UserField field='contract_number' label='Contract Number' elementType='input' handleChange={this.handleContractCheck} noExtraLabelText/>
               </div>
               <div className='col-md-6'></div>
             </div>}

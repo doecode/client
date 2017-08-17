@@ -11,7 +11,7 @@ class UserStore {
           email : '',
           password: '',
           confirm_password: '',
-          contractNumber:''
+          contract_number:''
     }
 
     this.defaultUserSchema = {
@@ -20,7 +20,7 @@ class UserStore {
           "email": {required:true, completed:false, validations: ["Email"], error: ''},
           "password" : {required:true, completed:false, validations: [], error: ''},
           "confirm_password" : {required:true, completed:false, validations: ["PWMatch"], error: ''},
-          "contractNumber":{required:false, completed:false, validations: [], error: ''}
+          "contract_number":{required:false, completed:false, validations: [], error: ''}
       }
 
 		this.user = observable(this.defaultUser);
