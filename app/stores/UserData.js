@@ -5,8 +5,8 @@ export default class UserData extends BaseData {
     constructor() {
 
       const defaultUser = {
-          firstName:'',
-          lastName:'',
+          first_name:'',
+          last_name:'',
    		   	  email : '',
    		   	  password: '',
    		   	  confirm_password: '',
@@ -15,8 +15,8 @@ export default class UserData extends BaseData {
       }
 
       const defaultUserSchema = {
-            "firstName":{required:true, completed:false, validations: [], error: ''},
-            "lastName":{required:true, completed:false, validations: [], error: ''},
+            "first_name":{required:true, completed:false, validations: [], error: ''},
+            "last_name":{required:true, completed:false, validations: [], error: ''},
             "email": {required:true, completed:false, validations: ["Email"], error: ''},
              "password" : {required:true, completed:false, validations: [], error: ''},
              "confirm_password" : {required:true, completed:false, validations: [""], error: ''},

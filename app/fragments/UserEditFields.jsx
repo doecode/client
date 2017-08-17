@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import UserData from '../stores/UserData';
 import UserField from '../field/UserField';
 import Validation from '../utils/Validation';
+import {doAjax} from '../utils/utils';
 
 const userData = new UserData();
 const validation = new Validation();
@@ -33,19 +34,18 @@ export default class UserEditFields extends React.Component {
       validEmail: false,
       showContractNumber: false,
       registerNeedsContractNumber: false,
-      hasDoneContractNumberCheck: false,
       contractNumberFilledOut: false
     }
 
   }
 
   updateFirstNameAndCheckPassword(event) {
-    userData.setValue("firstName", event.target.value);
+    userData.setValue("first_name", event.target.value);
     this.checkPassword();
   }
 
   updateLastNameAndCheckPassword(event) {
-    userData.setValue("lastName", event.target.value);
+    userData.setValue("last_name", event.target.value);
     this.checkPassword();
   }
 
@@ -53,8 +53,8 @@ export default class UserEditFields extends React.Component {
     userData.setValue("email", event.target.value);
     this.checkPassword();
 
-    if (!this.state.hasDoneContractNumberCheck && event.target.value.trim() != '') {
-      let post_obj = {
+    if (this.props.doContractCheck!==undefined && this.state.validEmail && event.target.value.trim() != '' && event.target.value.trim().length>4) {
+      var post_obj = {
         "email": event.target.value
       };
       doAjax('POST', '/doecode/api/user/getsitecode', this.handleContractNeedCheck, post_obj, this.handleContractNeedCheckError);
@@ -62,20 +62,22 @@ export default class UserEditFields extends React.Component {
   }
 
   handleContractNeedCheck(data) {
-    let new_state = {
-      registerNeedsContractNumber: data.site_code === 'CONTR',
-      hasDoneContractNumberCheck: true
+    var needingDatContractNumber = data.site_code === 'CONTR';
+    var new_state = {
+      registerNeedsContractNumber: needingDatContractNumber,
+      showContractNumber:needingDatContractNumber
     };
     this.setState(new_state);
   }
 
   handleContractNeedCheckError(data) {
-    console.log(JSON.stringify(data));
+    console.log("Contract check error: "+ JSON.stringify(data));
   }
 
   handleContractCheck(event) {
     if (event.target.value.trim() !== '') {
       this.setState({contractNumberFilledOut: true});
+      userData.setValue("contract_number",event.target.value);
     }
   }
 
@@ -107,8 +109,8 @@ export default class UserEditFields extends React.Component {
     newState.containsName = password.indexOf(email) > -1;
     newState.matches = password !== '' && (password === confirm);
     newState.validEmail = validation.validateEmail(email) === "";
-    newState.containsFirstName = userData.getValue("firstName").trim() != '';
-    newState.containsLastName = userData.getValue("lastName").trim() != '';
+    newState.containsFirstName = userData.getValue("first_name").trim() != '';
+    newState.containsLastName = userData.getValue("last_name").trim() != '';
     this.setState(newState);
 
   }
@@ -118,45 +120,42 @@ export default class UserEditFields extends React.Component {
     return (
       <div className="row">
         <div className='col-xs-12'>
+          {/*Non Password Fields that aren't email*/}
           {this.props.show_nonPass_fields && <span>
             <div className='row'>
               <div className='col-md-6 col-xs-12'>
-                <UserField field='firstName' label='First Name' elementType='input' handleChange={this.updateFirstNameAndCheckPassword} noExtraLabelText/>
+                <UserField field='first_name' label='First Name' elementType='input' handleChange={this.updateFirstNameAndCheckPassword} noExtraLabelText/>
               </div>
               <div className="col-md-6"></div>
             </div>
             <div className="row">
               <div className='col-md-6 col-xs-12'>
-                <UserField field='lastName' label='Last Name' elementType='input' handleChange={this.updateLastNameAndCheckPassword} noExtraLabelText/>
+                <UserField field='last_name' label='Last Name' elementType='input' handleChange={this.updateLastNameAndCheckPassword} noExtraLabelText/>
               </div>
               <div className="col-md-6"></div>
             </div>
+            {/*Contract number field. Only shows up in certain scenarios*/}
             {this.state.showContractNumber && <div className="row">
               <div className="col-md-6 col-xs-12">
                 <UserField field='contractNumber' label='Contract Number' elementType='input' handleChange={this.handleContractCheck} noExtraLabelText/>
               </div>
               <div className='col-md-6'></div>
-            </div>
-}
-          </span>
-}
+            </div>}
+          </span>}
+          {/*Email*/}
           {this.props.show_email && <div className='row'>
             <div className="col-md-6 col-xs-12">
               <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword} noExtraLabelText messageNode={this.props.text_below_email}/>
             </div>
             <div className="col-md-6"></div>
-          </div>
-}
-
+          </div>}
+          {/*Passwords*/}
+          {this.props.show_password &&
           <div className='row'>
             <div className="col-md-6 col-xs-12">
               <UserField noval={true} field="password" label="Password" elementType="password" handleChange={this.updatePasswordAndCheckPassword} noExtraLabelText/>
               <UserField noval={true} field="confirm_password" label="Confirm Password" elementType="password" handleChange={this.updateConfirmAndCheckPassword} noExtraLabelText/>
-              <button type="button" className="btn btn-lg btn-success" disabled={!validPassword} onClick={this.props.button_action}>
-                {this.props.button_text}
-              </button>
               <br/>
-
             </div>
             <div className="col-md-6 col-xs-12">
               <br/>
@@ -177,6 +176,14 @@ export default class UserEditFields extends React.Component {
                 </li>
               </ul>
             </div>
+          </div>}
+          {/*The button that actually does the things*/}
+          <div className="row">
+            <div className="col-xs-12">
+            <button type="button" className="btn btn-lg btn-success" disabled={!validPassword} onClick={this.props.button_action}>
+              {this.props.button_text}
+            </button>
+          </div>
           </div>
         </div>
       </div>

@@ -8,9 +8,6 @@ export default class SigninStatus extends React.Component {
     this.parseErrorResponse = this.parseErrorResponse.bind(this);
     this.logout = this.logout.bind(this);
     this.is_logged_in = (localStorage.user_email !== undefined && localStorage.user_email !== null && localStorage.user_email !== "");
-    console.log("current"+moment().format("YYYY-MM-DD HH:mm"));
-    console.log("Is expired "+moment(localStorage.token_expiration).format("YYYY-MM-DD HH:mm"));
-    console.log(moment().isBefore(moment(localStorage.token_expiration)));
   }
 
   logout() {
@@ -20,8 +17,8 @@ export default class SigninStatus extends React.Component {
   parseLogout(data) {
     localStorage.xsrfToken = "";
     localStorage.user_email = "";
-    localStorage.firstName = "";
-    localStorage.lastName = "";
+    localStorage.first_name = "";
+    localStorage.last_name = "";
     localStorage.token_expiration = "";
     window.location.href = '/doecode/logout';
   }
@@ -57,9 +54,10 @@ export default class SigninStatus extends React.Component {
             </li>
           </ul>
         </div>}
-        {!this.is_logged_in && <a className="nav-menu-item signin-btn" href="/doecode/login">
-          <span className="fa fa-sign-in"></span>
-          Sign In</a>}
+        {!this.is_logged_in &&
+          <a className="nav-menu-item signin-btn" href="/doecode/login">
+            <span className="fa fa-sign-in"></span>&nbsp;Sign In
+        </a>}
       </div>
     );
   }

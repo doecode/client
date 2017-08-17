@@ -72,6 +72,7 @@ export default class EditUser extends React.Component {
     const accountSavePass = <span>
       <span className="fa fa-floppy-o"></span>
       Save</span>;
+
     return (
       <div className="row not-so-wide-row">
         <div className="col-md-3"></div>
@@ -82,7 +83,13 @@ export default class EditUser extends React.Component {
               <div className="panel panel-default">
                 <div className="panel-heading account-panel-header center-text">Change Password</div>
                 <div className="panel-body">
-                  <UserEditFields button_text={accountSavePass} button_action={this.updateUser} show_email={false} show_nonPass_fields={true}/>
+                  <div className="row">
+                    <div className="col-md-1"></div>
+                    <div className="col-md-10 col-xs-12">
+                      <UserEditFields button_text={accountSavePass} button_action={this.updateUser} show_email={false} show_nonPass_fields={true} show_password={true}/>
+                    </div>
+                    <div className="col-md-1"></div>
+                  </div>
                 </div>
               </div>
             </div>

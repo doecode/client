@@ -29,10 +29,12 @@ export default class RegisterUser extends React.Component {
   }
 
   parseRegister(data) {
+    console.log("Success");
     this.setState({"signupSuccess": true});
   }
 
   parseError(data) {
+    console.log("Error"+JSON.stringify(data));
     var errorMessages = [];
     var keyIndex = 0;
     data.responseJSON.errors.forEach(function(row) {
@@ -67,19 +69,17 @@ export default class RegisterUser extends React.Component {
               <br/>
             </div>
             <div className='col-md-6'></div>
-          </div>
-}
+          </div>}
           {/*The actual email, password, etc things*/}
           <div className='row'>
             <div className='col-md-3'></div>
             <div className='col-md-6 col-xs-12'>
-              <UserEditFields button_text='Register' button_action={this.register} text_below_email={emailSmalltext} show_email={true} show_nonPass_fields={true}/>
+              <UserEditFields button_text='Register' button_action={this.register} text_below_email={emailSmalltext} show_email={true} show_nonPass_fields={true} show_password={true} doContractCheck/>
             </div>
             <div className='col-md-3'></div>
           </div>
         </div>
-      </div>;
-    }
+      </div>}
 
     return (
       <div className="container-fluid form-horizontal">

@@ -103,8 +103,8 @@ function handleError(jqXhr, exception) {
     window.sessionStorage.lastLocation = window.location.href;
     localStorage.xsrfToken = "";
     localStorage.user_email = "";
-    localStorage.firstName = "";
-    localStorage.lastName = "";
+    localStorage.first_name = "";
+    localStorage.last_name = "";
     window.location.href = '/doecode/login?redirect=true';
   } else if (jqXhr.status == 403) {
     window.location.href = '/doecode/forbidden'
