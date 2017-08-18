@@ -17,7 +17,7 @@ export default class Splash extends React.Component {
         this.deposit = this.deposit.bind(this);
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
-        
+
         /*Search stuff. TODO modularize once we decide on a look for the search data*/
                this.state = {all_fields : searchData.getValue("all_fields")};
         this.onAllFieldsChange = this.onAllFieldsChange.bind(this);
@@ -36,7 +36,7 @@ export default class Splash extends React.Component {
     close() {
         this.setState({showModal:false});
     }
-    
+
     /*Search stuff. TODO modularize once we decide on a look for the search data*/
     onAllFieldsChange(event) {
       this.setState({"all_fields" : event.target.value});
@@ -55,9 +55,9 @@ export default class Splash extends React.Component {
     }
     /*Search stuff. TODO modularize once we decide on a look for the search data*/
 
-    
+
     render() {
-    
+
 const icon_row1 = [
     <IconRowIcon container_classes='col-md-4 col-xs-6'  destination='/doecode/policy' text='Software Policy' icon_classes='fa fa-folder-open-o' key="policy"/>,
     <IconRowIcon container_classes='col-md-4 col-xs-6' destination='/doecode/projects' text='Submit Software/Code' icon_classes='fa fa-sign-in' key="publish"/>,
@@ -69,7 +69,7 @@ const icon_row2 = [
     <IconRowIcon container_classes='col-md-4 col-xs-12' destination='/doecode/faq' text='FAQs' icon_classes='fa fa-question' key="faq"/>
 ];
         return (
-        
+
         <div className="row not-so-wide-row">
             <div className="col-xs-12">
                 {/*Signin Stuff*/}
@@ -122,8 +122,6 @@ const icon_row2 = [
                             </div>
                             <div className='col-md-1'></div>
                         </div>
-                        <br/>
-                        <br/>
                         <br/>
                         <br/>
                         <br/>
