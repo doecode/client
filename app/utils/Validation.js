@@ -12,11 +12,11 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 	  const valLength = validations.length;
 	  for (var i = 0; i < valLength; i++) {
 
-		  if (validations[i] === "Phone") {
+		  if (validations[i] === "phonenumber") {
 			  errors += this.validatePhone(value)
-		  } else if (validations[i] === "Email") {
+		  } else if (validations[i] === "email") {
 			  errors += this.validateEmail(value);
-		  } else if (validations[i] === "URL") {
+		  } else if (validations[i] === "url") {
 			  errors += this.validateURL(value);
 		  } else if (validations[i] === "BR") {
 			  console.log(value);
@@ -31,26 +31,38 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 		  validationCallback(validationObj, errors);
 		  return;
 	  }
-	  let obj = {};
-	  let values = [];
-	  values.push(value);
 
-	  obj.values = values;
-	  obj.validations = validations;
 
-	  console.log(obj);
+	  let json = [];
+
+		const filteredLength = filtered.length;
+		for (var i = 0; i < filteredLength; i++) {
+			let obj = {};
+
+			obj.value = value;
+			obj.type = validations[i];
+
+			json.push(obj);
+	  }
+
+		console.log(json);
 		    $.ajax({
 		        url: "/doecode/api/validation",
 		        cache: false,
 		        method: 'POST',
 		        dataType: 'json',
-		        data: JSON.stringify(obj),
+		        data: JSON.stringify(json),
 		        contentType: "application/json; charset=utf-8",
 		        success: function(data) {
 		        	console.log(data);
 
-		        	for (var i = 0; i < data.errors.length; i++)
-		        		errors += data.errors[i];
+		        	for (var i = 0; i < data.length; i++) {
+								console.log(data[i]);
+								let error = data[i].error;
+
+								if (error != "")
+		        			errors += error;
+							}
 		        	validationCallback(validationObj, errors);
 		        },
 		        error: function(x,y,z) {
@@ -63,7 +75,7 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
   }
 
   needsServer(value) {
-	  const asyncValidations = ["Award", "DOI"];
+	  const asyncValidations = ["awardnumber", "doi", "repositorylink"];
 
 	  return asyncValidations.indexOf(value) > -1;
   }

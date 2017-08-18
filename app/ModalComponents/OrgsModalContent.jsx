@@ -16,7 +16,7 @@ export default class OrgsModalContent extends React.Component {
 	toggleCallback() {
 		  const awardInfo = sponsoringOrganization.getFieldInfo("primary_award");
 			if (sponsoringOrganization.getValue("DOE")) {
-				 awardInfo.validations = ["Award"];
+				 awardInfo.validations = ["awardnumber"];
 				 awardInfo.required = true;
 			} else {
 				awardInfo.validations = [];

@@ -46,15 +46,15 @@ class MetadataStore {
 */
 	@observable metadataInfoSchema = {
 
-		   	"repository_link": {required:"pub", label: "Repository Link", completed:false, validations: ["URL"], Panel: "Repository Information", error: ''},
-		   	"landing_page": {required:"", label: "Landing Page", completed:false, validations: ["URL"], Panel: "", error: ''},
+		   	"repository_link": {required:"pub", label: "Repository Link", completed:false, validations: ["repositorylink"], Panel: "Repository Information", error: ''},
+		   	"landing_page": {required:"", label: "Landing Page", completed:false, validations: ["url"], Panel: "", error: ''},
 				"file_name" : {required:"", label: "File Upload", completed: false, validations: [], Panel: "", error: ''},
 					"software_title": {required:"pub", label: "Software Title", completed:false, validations: [], Panel: "Product Description", error: ''},
 	        "description": {required:"pub", label: "Description/Abstract", completed:false, validations: [], Panel: "Product Description", error: ''},
 	        "licenses": {required:"pub", label: "Licenses", completed:false, hasError:false, validations: [], Panel: "Product Description", error: ''},
-					"proprietary_url": {required: "", label: "Proprietary URL", completed:false, hasError:false, validations: ["URL"], Panel: "", error: ''},
+					"proprietary_url": {required: "", label: "Proprietary URL", completed:false, hasError:false, validations: ["url"], Panel: "", error: ''},
 	        "developers": {required:"pub", label: "Developers", completed:false, hasError:false, validations: [], Panel: "Developers", error: ''},
-	        "doi": {required:"", completed:false, validations: ["DOI"], Panel: "DOI and Release Date", error: ''},
+	        "doi": {required:"", completed:false, validations: ["doi"], Panel: "DOI and Release Date", error: ''},
 	        "doi_infix" : {required:"", completed:false, validations: [""], Panel: "", error: ''},
             "release_date" : {required:"sub", label: "Release Date", completed:false, validations: [], Panel: "DOI and Release Date", error: ''},
             "sponsoring_organizations" : {required:"sub", label: "Sponsoring Organizations", completed:false, hasError:false, validations: [], Panel: "Organizations", error: ''},
@@ -68,8 +68,8 @@ class MetadataStore {
             "other_special_requirements": {required:"", completed:false, validations: [], Panel: "Supplemental Product Information", error: ''},
   	        "related_identifiers" : {required:"", completed:false, hasError:false, validations: [], Panel: "Identifiers", error: ''},
   	        "recipient_name": {required:"sub", label: "Name", completed:false, validations: [], Panel: "Contact Information", error: ''},
-  	        "recipient_email": {required:"sub", label: "Email", completed:false, validations: ["Email"], Panel: "Contact Information", error: ''},
-  	        "recipient_phone": {required:"sub", label: "Phone", completed:false, validations: ["Phone"], Panel: "Contact Information", error: ''},
+  	        "recipient_email": {required:"sub", label: "Email", completed:false, validations: ["email"], Panel: "Contact Information", error: ''},
+  	        "recipient_phone": {required:"sub", label: "Phone", completed:false, validations: ["phonenumber"], Panel: "Contact Information", error: ''},
   	        "recipient_org": {required:"sub", label: "Organization", completed:false, validations: [], Panel: "Contact Information", error: ''},
 
 
@@ -93,7 +93,7 @@ class MetadataStore {
 		   	"first_name": {required:true, completed:false, validations: [], error: ''},
 	        "middle_name": {required:false, completed:false, validations: [], error: ''},
 	        "last_name": {required:true, completed:false, validations: [], error: ''},
-	        "email": {required:false, completed:false, validations: ["Email"], error: ''},
+	        "email": {required:false, completed:false, validations: ["email"], error: ''},
 	        "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
 	        "affiliations" : {required:false, completed:false, validations: [], error: ''},
 
@@ -118,7 +118,7 @@ class MetadataStore {
 		   	"first_name": {required:true, completed:false, validations: [], error: ''},
 	        "middle_name": {required:false, completed:false, validations: [], error: ''},
 	        "last_name": {required:true, completed:false, validations: [], error: ''},
-	        "email": {required:false, completed:false, validations: ["Email"], error: ''},
+	        "email": {required:false, completed:false, validations: ["email"], error: ''},
 	        "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
 	        "affiliations" : {required:false, completed:false, validations: [], error: ''},
 	        "contributor_type" : {required:true, completed:false, validations: [], error: ''}
@@ -138,10 +138,8 @@ class MetadataStore {
    }
 
    @observable sponsoringOrganizationInfoSchema = {
-
-
           "organization_name": {required:true, completed:false, validations: [], error: ''},
-          "primary_award" : {required:true, completed:false, validations: ["Award"], error: ''},
+          "primary_award" : {required:true, completed:false, validations: ["awardnumber"], error: ''},
           "award_numbers" : {required:false, completed:false, validations: [""], error: ''},
           "br_codes" : {required:false, completed:false, validations: ["BR"], error: ''},
           "fwp_numbers" : {required:false, completed:false, validations: [], error: ''},
@@ -193,7 +191,7 @@ class MetadataStore {
 
     @observable userSchema = {
 
-          "email": {required:true, completed:false, validations: ["Email"], error: ''},
+          "email": {required:true, completed:false, validations: ["email"], error: ''},
           "password" : {required:true, completed:false, validations: [], error: ''},
           "confirm_password" : {required:true, completed:false, validations: ["PWMatch"], error: ''}
       }

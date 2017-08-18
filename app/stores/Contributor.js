@@ -22,7 +22,7 @@ export default class Contributor extends BaseData {
     		   	"first_name": {required:true, completed:false, validations: [""], error: ''},
     	        "middle_name": {required:false, completed:false, validations: [], error: ''},
     	        "last_name": {required:true, completed:false, validations: [], error: ''},
-    	        "email": {required:false, completed:false, validations: ["Email"], error: ''},
+    	        "email": {required:false, completed:false, validations: ["email"], error: ''},
     	        "orcid": {required:false, completed:false, validations: ["Orcid"], error: ''},
     	        "affiliations" : {required:false, completed:false, validations: [], error: ''},
     	        "contributor_type" : {required:true, completed:false, validations: [], error: ''}
