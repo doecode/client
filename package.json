@@ -50,6 +50,7 @@
     "babel-loader": "^7.1.1",
     "compression": "^1.7.0",
     "express": "^4.15.3",
+    "google-libphonenumber": "^3.0.0",
     "griddle-react": "0.8.1",
     "mobx": "^3.0.2",
     "mobx-react": "4.1.3",

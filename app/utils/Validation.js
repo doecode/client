@@ -1,6 +1,6 @@
 import validator from 'validator';
+import googlei8 from 'google-libphonenumber';
 export default class Validation {
-
 
 
 
@@ -82,8 +82,22 @@ validate(value,validationObj, validationCallback, parentArraySizel) {
 
 
   validatePhone(value) {
+		var PNF = googlei8.PhoneNumberFormat;
+		var phoneUtil = googlei8.PhoneNumberUtil.getInstance();
+
+		let isValid = false;
+
+		try {
+		  var numberObj = phoneUtil.parse(value, "US");
+			//console.log("Number: " + JSON.stringify(numberObj));
+			isValid = phoneUtil.isValidNumber(numberObj, 'US');
+		} catch (e) {
+		  console.log("Unable to parse and validate number: " + e.toString());
+		}
+
+
 	  let errors = "";
-	  if (!validator.isMobilePhone(value, 'en-US'))
+	  if (!isValid)
 		  errors += value + " is not a valid phone number.";
 	  return errors;
   }
