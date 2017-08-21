@@ -246,12 +246,10 @@ deserializeSponsoringOrganization(data) {
 
         }
 
-
-        data.sponsoring_organizations[i].award_numbers = awardNumbers.join(',');
-        data.sponsoring_organizations[i].br_codes = brCodes.join(',');
-        data.sponsoring_organizations[i].fwp_numbers = fwpNumbers.join(',');
+        data.sponsoring_organizations[i].award_numbers = awardNumbers;
+        data.sponsoring_organizations[i].br_codes = brCodes;
+        data.sponsoring_organizations[i].fwp_numbers = fwpNumbers;
         data.sponsoring_organizations[i].funding_identifiers = [];
-
     }
 }
     updateMetadata(data) {
@@ -271,25 +269,11 @@ deserializeSponsoringOrganization(data) {
       for (var i = 0; i < end; i++) {
     	  const sponsor = data.sponsoring_organizations[i];
           let fundingIdentifiers = [];
-          let awardNumbers = [];
-          let brCodes = [];
-          let fwpNumbers = [];
 
-          const awardString = sponsor.award_numbers;
-          const brString = sponsor.br_codes;
-          const fwpString = sponsor.fwp_numbers;
+          const awardNumbers = sponsor.award_numbers;
+          const brCodes = sponsor.br_codes;
+          const fwpNumbers = sponsor.fwp_numbers;
 
-
-          if (awardString)
-        	  awardNumbers = data.sponsoring_organizations[i].award_numbers.split(',');
-
-          //if (awardNumbers.indexOf(data.sponsoring_organizations[i].primary_award) < 0)
-        	  //awardNumbers.push(data.sponsoring_organizations[i].primary_award);
-          if (brString)
-        	  brCodes = data.sponsoring_organizations[i].br_codes.split(',');
-
-          if (fwpString)
-        	  fwpNumbers = data.sponsoring_organizations[i].fwp_numbers.split(',');
 
           for (var x = 0; x < awardNumbers.length; x++) {
             fundingIdentifiers.push({identifier_type: "AwardNumber", identifier_value: awardNumbers[x] })

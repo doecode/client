@@ -8,9 +8,9 @@ export default class SponsoringOrganization extends BaseData {
 		   DOE : true,
            organization_name: '',
            primary_award: '',
-           award_numbers: '',
-           fwp_numbers: '',
-           br_codes: '',
+           award_numbers: [],
+           fwp_numbers: [],
+           br_codes: [],
            id: ''
    }
 

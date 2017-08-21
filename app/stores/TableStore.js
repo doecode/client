@@ -8,7 +8,7 @@ export default class TableStore {
         last_name: '',
         email: '',
         orcid: '',
-        affiliations: '',
+        affiliations: [],
         place: 0
     }
 
@@ -18,7 +18,7 @@ export default class TableStore {
             last_name: '',
             email: '',
             orcid: '',
-            affiliations: '',
+            affiliations: [],
             contributor_type: '',
             place: 0
     }

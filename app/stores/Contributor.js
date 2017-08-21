@@ -10,7 +10,7 @@ export default class Contributor extends BaseData {
                 last_name: '',
                 email: '',
                 orcid: '',
-                affiliations: '',
+                affiliations: [],
                 contributor_type: '',
                 id: ''
         }

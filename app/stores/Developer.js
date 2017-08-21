@@ -10,7 +10,7 @@ export default class Developer extends BaseData {
                 last_name: '',
                 email: '',
                 orcid: '',
-                affiliations: '',
+                affiliations: [],
                 id: ''
             }
 
