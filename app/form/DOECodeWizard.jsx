@@ -159,7 +159,8 @@ componentDidMount() {
     if (window.sessionStorage.lastRecord) {
         //do an authenticated ajax against our allowed endpoing to check if valid and then do this in the success response...
         checkIsAuthenticated();
-        metadata.loadValues(JSON.parse(window.sessionStorage.lastRecord));
+        //metadata.loadValues(JSON.parse(window.sessionStorage.lastRecord));
+        metadata.loadRecordFromSessionStorage(JSON.parse(window.sessionStorage.lastRecord), this.props.page);
         window.sessionStorage.lastRecord = "";
 
     } else if (codeID) {
@@ -177,7 +178,8 @@ componentDidMount() {
 
 parseReceiveResponse(data) {
     this.setState({"workflowStatus": data.metadata.workflow_status});
-    metadata.deserializeData(data.metadata);
+    //metadata.deserializeData(data.metadata);
+    metadata.loadRecordFromServer(data.metadata, this.props.page)
     this.setState({"loading": false, "loadingMessage": ""});
 }
 

@@ -138,8 +138,6 @@ this.applyValidations();
 if (page === 'publish') {
   this.validatePublishedFields();
 }
-this.validateAll();
-//validate all
 
 }
 
@@ -149,14 +147,12 @@ loadRecordFromSessionStorage(data, page) {
   if (page === 'publish') {
     this.validatePublishedFields();
   }
-  this.validateAll();
-  //validate all
 
 }
 
 applyValidations() {
-
-  for (var field in this.fieldMap) {
+  const data = this.fieldMap;
+  for (var field in data) {
 
     if (field === 'accessibility' && data[field] != 'OS') {
         this.infoSchema["repository_link"].required = "";
@@ -176,20 +172,6 @@ applyValidations() {
       this.infoSchema['proprietary_url'].Panel = "Product Description";
     }
   }
-}
-
-validateAll() {
-  for (var field in this.infoSchema) {
-
-    //for now, just set to true if an element exists. This will need to eventually run through all children and push to invalids if an error is encountered.
-    if (parents.indexOf(field) > -1 && data[field].length != 0) {
-        this.infoSchema[field].completed = true;
-    } else {
-        this.validateField(field);
-    }
-
-  }
-
 }
 
 
@@ -305,7 +287,6 @@ deserializeSponsoringOrganization(data) {
     			isValid = false;
     		}
     		else if (information.required === "pub" && !information.completed) {
-
     			isValid = false;
     		}
 
