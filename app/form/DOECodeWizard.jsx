@@ -130,8 +130,11 @@ if (jqXhr.status === 401) {
 
     let x = 0;
     let msg = "";
-    for (x = 0; x < jqXhr.responseJSON.errors.length; x++) {
-        msg += (msg == "" ? "" : "; ") + jqXhr.responseJSON.errors[x];
+
+    if (jqXhr.responseJSON && jqXhr.responseJSON.errors) {
+      for (x = 0; x < jqXhr.responseJSON.errors.length; x++) {
+          msg += (msg == "" ? "" : "; ") + jqXhr.responseJSON.errors[x];
+      }
     }
 
     if (msg == "")
@@ -230,7 +233,7 @@ approve() {
     const codeID = getQueryParam("code_id");
 
     this.setState({"loading": true, "loadingMessage": "Approving"});
-    doAuthenticatedAjax('GET', '/doecode/api/metadata/approve?code_id='+codeID, this.parseApproveResponse, metadata.serializeData(), this.parseErrorResponse);
+    doAuthenticatedAjax('GET', '/doecode/api/metadata/approve?code_id='+codeID, this.parseApproveResponse, null, this.parseErrorResponse);
 }
 
 doMultipartSubmission(url, successCallback) {
