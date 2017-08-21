@@ -77,7 +77,7 @@ export default class ApprovalManagement extends React.Component {
             edit: <div className="form-group-xs row">
             <div className="col-xs-2">
             <a  href={approveUrl} className="btn btn-info btn-sm">
-  		<span className="glyphicon glyphicon-pencil"></span> View for Approval
+  		<span className="fa fa-pencil"></span> View for Approval
   	</a> </div></div>
           });
         }

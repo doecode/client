@@ -88,12 +88,12 @@ export default class ApproveRoles extends React.Component {
             approval: <div className="form-group-xs row">
           <div className="col-xs-3">
           <a onClick={() => this.approve(request.user)} className="btn btn-success btn-sm">
-		<span className="glyphicon glyphicon-ok"></span> Approve
+		<span className="fa fa-check"></span> Approve
 	</a>
           </div>
             <div className="col-xs-2">
             <a  onClick={() => this.disapprove(request.user)} className="btn btn-danger btn-sm">
-  		<span className="glyphicon glyphicon-remove"></span> Disapprove
+  		<span className="fa fa-times"></span> Disapprove
   	</a> </div></div>
           });
 

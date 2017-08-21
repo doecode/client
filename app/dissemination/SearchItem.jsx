@@ -68,7 +68,7 @@ export default class SearchItem extends React.Component {
 
                     {doi !== undefined &&
                     <div className="search-result-doi">
-                        <span className="glyphicon glyphicon-link"></span> DOI: <a href={doiUrl}>{doi}</a>
+                        <span className="fa fa-link"></span> DOI: <a href={doiUrl}>{doi}</a>
                     </div>
                     }
                     

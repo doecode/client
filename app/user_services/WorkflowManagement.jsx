@@ -93,12 +93,12 @@ export default class WorkflowManagement extends React.Component {
             edit: <div className="form-group-xs row">
           <div className="col-xs-4">
           <a href={publishUrl} className="btn btn-success btn-sm">
-		<span className="glyphicon glyphicon-pencil"></span> Update Metadata
+		<span className="fa fa-pencil"></span> Update Metadata
 	</a>
           </div>
             <div className="col-xs-4">
             <a  href={submitUrl} className="btn btn-info btn-sm">
-  		<span className="glyphicon glyphicon-pencil"></span> Submit to E-Link
+  		<span className="fa fa-pencil"></span> Submit to E-Link
   	</a> </div>
     {pendingStatus}
     </div>

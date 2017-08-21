@@ -34,7 +34,7 @@ export default class Header extends React.Component {
 
     render() {
         return (
-        
+
         <nav className="navbar navbar-default main-header" >
             <div className="container-fluid">
                 <div className="pull-right hidden-xs hidden-sm visible-md visible-lg header-signin-links">
@@ -59,9 +59,9 @@ export default class Header extends React.Component {
                                 </span>
                             </div>
                         </div>
-                        <div className="col-xs-2">
+                        <div className="col-xs-2 search-btn-container">
                             <button type="button" className="btn btn-success btn-lg" onClick={this.search}>
-                                <span className="glyphicon glyphicon-search"></span>  Search
+                                <span className="fa fa-search"></span>
                             </button>
                         </div>
                     </div>

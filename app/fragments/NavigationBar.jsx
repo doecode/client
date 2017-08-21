@@ -6,7 +6,7 @@ export default class NavgationBar extends React.Component{
         super(props);
         this.current_page = ("/doecode/"+location.href.match(/([^\/]*)\/*$/)[1]);
     }
-    
+
     render(){
         return(
         <div className='container'>
@@ -24,7 +24,7 @@ export default class NavgationBar extends React.Component{
                             <NavBarItem current_page={this.current_page} destination="/doecode/" special="true" fa_icon="fa fa-home" display_name="Home"/>
                             <NavBarItem current_page={this.current_page} destination="/doecode/policy" special="true" fa_icon="fa fa-folder-open-o" display_name="Software Policy"/>
                             <NavBarItem current_page={this.current_page} destination="/doecode/projects" special="true" fa_icon="fa fa-sign-in" display_name="Submit Software/Code"/>
-                            <NavBarItem current_page={this.current_page} destination="/doecode/about" special="true" fa_icon="fa fa-building-o" display_name="About"/>
+                            <NavBarItem current_page={this.current_page} destination="/doecode/about" special="true" fa_icon="fa fa-info" display_name="About"/>
                             <NavBarItem current_page={this.current_page} destination="/doecode/communications" special="true" fa_icon="fa fa-newspaper-o" display_name="News/Resources"/>
                             <NavBarItem current_page={this.current_page} destination="/doecode/faq" special="true" fa_icon="fa fa-question" display_name="FAQs"/>
                         </ul>

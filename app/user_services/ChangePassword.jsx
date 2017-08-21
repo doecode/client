@@ -96,12 +96,12 @@ export default class EditUser extends React.Component {
                         <p>All fields are required.</p>
                         <p>Passwords must:</p>
                         <ul>
-                            <li>Be at least 8 characters long. {this.state.longEnough &&<span className="glyphicon glyphicon-ok green"></span> }</li>
-                            <li>Contain at least one special character. {this.state.hasSpecial &&<span className="glyphicon glyphicon-ok green"></span> }  </li>
-                            <li>Contain at least one number character. {this.state.hasNumber &&<span className="glyphicon glyphicon-ok green"></span> } </li>
-                            <li>Not contain the login name. {!this.state.containsName &&<span className="glyphicon glyphicon-ok green"></span> }</li>
-                            <li>Contain a mixture of upper and lowercase letters. {this.state.upperAndLower &&<span className="glyphicon glyphicon-ok green"></span> } </li>
-                            <li>Password must match Confirm Password. {this.state.matches &&<span className="glyphicon glyphicon-ok green"></span> } </li>
+                            <li>Be at least 8 characters long. {this.state.longEnough &&<span className="fa fa-check green"></span> }</li>
+                            <li>Contain at least one special character. {this.state.hasSpecial &&<span className="fa fa-check green"></span> }  </li>
+                            <li>Contain at least one number character. {this.state.hasNumber &&<span className="fa fa-check green"></span> } </li>
+                            <li>Not contain the login name. {!this.state.containsName &&<span className="fa fa-check green"></span> }</li>
+                            <li>Contain a mixture of upper and lowercase letters. {this.state.upperAndLower &&<span className="fa fa-check green"></span> } </li>
+                            <li>Password must match Confirm Password. {this.state.matches &&<span className="fa fa-check green"></span> } </li>
                         </ul>
                     </div>
                     <div className="col-md-3"> </div>

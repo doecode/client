@@ -64,7 +64,7 @@ export default class AdvancedSearch extends React.Component {
                         <div className="row">
                             <div className="col-xs-12">
                                 <button type="button" className="btn btn-lg btn-primary" onClick={this.search}>
-                                    <span className="glyphicon glyphicon-search"></span>  Search
+                                    <span className="fa fa-search"></span>  Search
                                 </button>
                             </div>
                             <br/>

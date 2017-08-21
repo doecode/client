@@ -313,14 +313,14 @@ buildPanel(obj) {
         const heading = <div> <span className={required_status}>{obj.name}
                 {requiredText}</span>
         {panelStatus.hasRequired && panelStatus.remainingRequired == 0 &&
-        <span className="green glyphicon glyphicon-ok"></span>
+        <span className="green fa fa-check"></span>
         }
         {arrowBool &&
-        <span className="pull-right glyphicon glyphicon-chevron-down"></span>
+        <span className="pull-right fa fa-chevron-down"></span>
         }
 
         {!arrowBool &&
-        <span className="pull-right glyphicon glyphicon-chevron-right"></span>
+        <span className="pull-right fa fa-chevron-right"></span>
         }
       </div>;
 
@@ -460,7 +460,7 @@ buildPanel(obj) {
         <div >
           <div>
             <button type="button" className="btn" onClick={this.showAdditionalFields}>
-              <span className="glphicon glyphicon-plus"></span> Show Additional Optional Fields
+              <span className="fa fa-plus-square-o"></span> Show Additional Optional Fields
             </button>
           </div>
         </div>

@@ -204,7 +204,7 @@ export default class Field extends React.Component {
                   </div>
                   {messageNode}
                   {completed && (elementType === 'input' || elementType === 'textarea') && !noval &&
-                  <span className="glyphicon glyphicon-ok form-control-feedback"></span>
+                  <span className="fa fa-check form-control-feedback"></span>
                   }
               </div>
           </div>

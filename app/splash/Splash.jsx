@@ -117,7 +117,7 @@ const icon_row2 = [
                             </div>
                             <div className="col-md-2 col-xs-12">
                                 <button type="button" className="btn btn-success btn-lg" onClick={this.search}>
-                                    <span className="glyphicon glyphicon-search"></span>  Search
+                                    <span className="fa fa-search"></span>  Search
                                 </button>
                             </div>
                             <div className='col-md-1'></div>

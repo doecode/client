@@ -84,7 +84,7 @@ export default class DOIPanel extends React.Component {
                             <div className="form-group form-group-sm row">
                                 <div className="col-xs-8">
                                     <button type="button" className={buttonClass} onClick={this.handleReserve}>
-                                        <span className="glyphicon glyphicon-pencil"></span> Reserve DOI
+                                        <span className="fa fa-pencil"></span> Reserve DOI
                                     </button>
                                 </div>
                             </div>
