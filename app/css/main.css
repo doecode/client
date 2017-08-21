@@ -401,22 +401,22 @@ html, body {
 }
 
 .wrapper {
-  min-height: calc(100vh - 195px);
+  min-height: calc(100vh - 205px);
   /*height of footer*/
   background-color: #F9F9F9;
 }
 
 .homepage-wrapper {
-  min-height: calc(100vh - 195px);
+  min-height: calc(100vh - 205px);
   /*height of footer*/
 }
 
 .footer {
-  height: 195px;
+  height: 205px;
 }
 
 .footer-homepage {
-  height: 195px;
+  height: 205px;
 }
 
 .footer-bottom {
