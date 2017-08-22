@@ -4,13 +4,13 @@ import SponsoringOrganization from '../stores/SponsoringOrganization';
 import ResearchOrganization from '../stores/ResearchOrganization';
 import ContributingOrganization from '../stores/ContributingOrganization';
 import RelatedIdentifier from '../stores/RelatedIdentifier';
+import moment from 'moment';
 
 function doAjax(methodType, url, successCallback, data, errorCallback, dataType) {
   let errorCall = errorCallback;
   if (errorCall === undefined) {
     errorCall = (jqXhr, exception) => {
       console.log("Error...");
-      // window.location.href = '/doecode/error';
     }
   }
 
@@ -33,10 +33,6 @@ function doAjax(methodType, url, successCallback, data, errorCallback, dataType)
 
 function doAuthenticatedMultipartRequest(url, formData, successCallback, errorCallback) {
 
-  if (errorCallback === undefined) {
-    errorCallback = handleError;
-  }
-
   if (successCallback === undefined) {
     successCallback = () => {
       console.log("Success")
@@ -53,16 +49,16 @@ function doAuthenticatedMultipartRequest(url, formData, successCallback, errorCa
     },
     dataType: 'json',
     data: formData,
-    success: successCallback,
-    error: errorCallback
+    success: function(data){
+      handleAuthenticatedSuccess(data,successCallback);
+    },
+    error: function(jqXhr, exception) {
+      handleAuthenticatedError(jqXhr, exception, errorCallback);
+    }
   });
 }
 
 function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallback) {
-
-  if (errorCallback === undefined) {
-    errorCallback = handleError;
-  }
 
   if (successCallback === undefined) {
     successCallback = () => {};
@@ -78,8 +74,12 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
     dataType: 'json',
     data: JSON.stringify(data),
     contentType: "application/json; charset=utf-8",
-    success: successCallback,
-    error: errorCallback
+    success: function(data){
+      handleAuthenticatedSuccess(data,successCallback);
+    },
+    error: function(jqXhr, exception) {
+      handleAuthenticatedError(jqXhr, exception, errorCallback);
+    }
   });
 
 }
@@ -96,25 +96,32 @@ function checkIsAuthenticated() {
       request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
     },
     success: successCallback,
-    error: handleError
+    error: handleAuthenticatedError
   });
 }
 
-function handleError(jqXhr, exception) {
-  console.log("Hmm");
-  console.log(jqXhr.status);
+function handleAuthenticatedSuccess(data, callback) {
+    localStorage.token_expiration = moment().add(30,'minutes').format("YYYY-MM-DD HH:mm");
+    callback(data);
+}
+
+function handleAuthenticatedError(jqXhr, exception, callback) {
   if (jqXhr.status == 401) {
     window.sessionStorage.lastLocation = window.location.href;
-    localStorage.xsrfToken = "";
-    localStorage.user_email = "";
-    localStorage.first_name = "";
-    localStorage.last_name = "";
+    clearLoginLocalstorage();
     window.location.href = '/doecode/login?redirect=true';
   } else if (jqXhr.status == 403) {
     window.location.href = '/doecode/forbidden'
-  } else {
-    console.log("Hey");
+  } else if (callback !== undefined) {
+    callback(jqXhr,exception);
   }
+}
+
+function clearLoginLocalstorage() {
+  localStorage.xsrfToken = "";
+  localStorage.user_email = "";
+  localStorage.first_name = "";
+  localStorage.last_name = "";
 }
 
 function appendQueryString(url) {
