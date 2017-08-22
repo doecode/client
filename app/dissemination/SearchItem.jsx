@@ -8,7 +8,7 @@ export default class SearchItem extends React.Component {
     constructor(props) {
         super(props);
       }
-      
+
       render() {
 
         const data = this.props.data;
@@ -24,11 +24,9 @@ export default class SearchItem extends React.Component {
         if (data.releaseDate !== undefined)
             releaseDate =data.releaseDate.substring(0,data.releaseDate.indexOf("T"));
 
-
-            console.log("Search data: "+JSON.stringify(data));
         const devsAndContributors = data._names;
         let devContribList = [];
-        
+
         if (devsAndContributors === undefined){
             return (null);
         }else{
@@ -36,13 +34,13 @@ export default class SearchItem extends React.Component {
                 devContribList.push(item.replace('(undefined),','').replace(' (undefined)','').replace(' null','').replace('null ',''))
             });
         }
-        
+
         const softwareTitle = data.softwareTitle;
         if (softwareTitle === undefined){
             return (null);
         }
         const biblioUrl = "/doecode/biblio?code_id=" + data.codeId;
-        
+
 
         return (
 
@@ -62,7 +60,7 @@ export default class SearchItem extends React.Component {
 
                     {releaseDate !== undefined &&
                     <div className="search-result-release-date">
-                        Publication Date: {releaseDate}
+                        Release Date: {releaseDate}
                     </div>
                     }
 
@@ -71,7 +69,7 @@ export default class SearchItem extends React.Component {
                         <span className="fa fa-link"></span> DOI: <a href={doiUrl}>{doi}</a>
                     </div>
                     }
-                    
+
                     {data.description !== undefined &&
                         <SearchRowDescription text={data.description}/>
                     }

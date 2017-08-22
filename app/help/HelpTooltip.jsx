@@ -1,0 +1,367 @@
+import React from 'react';
+
+export default class HelpTooltip extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    let returnData = null;
+
+    if (this.props.item == "Autopopulate") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Provide the URL for your software record and the available metadata fields will be automatically populated with the information provided.</span>
+        );
+    } else if (this.props.item == "ClosedSource") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Software that is not Open Source and for which access must be granted by contacting a licensing official. Software is often Close Source because it is proprietary, sensitive, or has otherwise been deemed necessary for a limited distribution. A landing page URL is required for submitting Closed Source code, the URL should provide interested parties additional information on how they can obtain access to the code.</span>
+        );
+    } else if (this.props.item == "ContactInformation") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Provide the name, email address, phone number and organization of the submitter. This contact information will serve as the point of contact for DOE if there are questions about the submitted software. Contact information will not be shared in public output products.</span>
+        );
+    } else if (this.props.item == "Contributor") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>The name of a person or institution that has contributed to the software (code, documentation, tests, ideas, project guidance, etc.), but is not listed as a developer. Separate multiple contributors with a semicolon.</span>
+        );
+    } else if (this.props.item == "ContributorDOEOrg") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Check the box if the contributing organization is associated within the Department of Energy.</span>
+        );
+    } else if (this.props.item == "ContributorName") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>The name of the contributing organization. If the contributing organization is within the Department of Energy, please select from the list of DOE organizations. Other contributor organization names will be freeform.</span>
+        );
+    } else if (this.props.item == "ContributorOrg") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Other organizations which provided support to the project. May be entered in place of naming individual software developers. Separate multiple contributing organizations with a semicolon.</span>
+        );
+    } else if (this.props.item == "ContributorType") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>When adding a contributor, use contributor type to define the role of the contributor. A drop-down menu is provided. For definitions of each contributor type, please see
+            &nbsp;<a href='https://schema.datacite.org/meta/kernel-4.0/'>DataCite</a>.</span>
+        );
+    } else if (this.props.item == "CountryOfOrigin") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Identify the country of origin for the software. Default is the United States.</span>
+        );
+    } else if (this.props.item == "DescriptionAbstract") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Provide a clear, concise, and publicly releasable description of the software, including the purpose, function, and capabilities. Text should be spell checked, limited to 2000 characters and follow input standards for special characters.
+            <strong>DO NOT INCLUDE SENSITIVE INFORMATION IN THE DESCRIPTION/ABSTRACT.</strong>
+          </span>
+        );
+    } else if (this.props.item == "Developers") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>A person concerned with facets of the software development process, including the research, design, programming, and testing of computer software. When there are multiple developers, the primary software developer should be listed first. “NONE” is an option when necessary.</span>
+        );
+    } else if (this.props.item == "DigitalObjectIdentifer") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>A unique persistent identifier that references a digital object and provides long-term access; DOIs remain stable even if the underlying address or URL for the content changes. If a DOI has not yet been minted for the software, OSTI will mint a persistent identifier (see Reserve DOI), in the form of a DOI, for the software</span>
+        );
+    } else if (this.props.item == "DOIInfix") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>A DOI contains 3 components. The prefix, which is assigned by the registration agency, begins with 10.xxx; the infix, which can contain intelligence, such as the name of the journal, repository or project; the suffix, which is assigned by the allocation agency. Example: 10.00000/OSTIDOE CODE/170000</span>
+        );
+    } else if (this.props.item == "Identifier") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Provide the Digital Object Identifier (DOI) or URL for the related item(s).</span>
+        );
+    } else if (this.props.item == "IdentifierType") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Identifiers used must be Digital Object Identifiers (DOIs) or URLs.</span>
+        );
+    } else if (this.props.item == "Keywords") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>
+            A list of words or phrases that describe the software. Keywords aide in the online search and discovery of information about the software. More than one keyword may be entered. Separate terms with a semicolon.
+          </span>
+        );
+    } else if (this.props.item == "License") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Select the appropriate license from the drop-down menu of available options. Descriptions of Licenses are available (<a href='https://opensource.org/licenses/alphabetical'>here</a>)</span>
+        );
+    } else if (this.props.item == "OpenSourceNotPublic") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Code is Open Source, but is not yet available on a public site. Interested users can contact the developer(s) or responsibly parties for information regarding access and (re)use. A URL is required for submitting Open Source, not publicly available, the URL is typically a landing page where interested parties can find out more information about obtaining access to the code.</span>
+        );
+    } else if (this.props.item == "OpenSourcePublic") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Software that can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See Open Source Initiative for more information and definitions.</span>
+        );
+    } else if (this.props.item == "OtherSpecialRequirements") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Information regarding hardware or software requirements.
+          </span>
+        );
+    } else if (this.props.item == "PublishRecord") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>After required fields are completed, submit record to DOE Code</span>
+        );
+    } else if (this.props.item == "RelatedIdentifier") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>DOI or URL identifiers of related resources. Referencing other documents, datasets, or software that relate to the submitted software allows users to follow these vital links and to better understand the scope of your research. Separate multiple identifiers with a semicolon.</span>
+        );
+    } else if (this.props.item == "RelationType") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Provide, with controlled vocabulary, the relationship of the resource being registered and the related resource. The Relation Type field also allows you to define how the submitted software is related to the DOI you enter and the document you are submitting. For definitions of each relation type controlled vocabulary see
+            &nbsp;<a href='https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf'>this</a>.</span>
+        );
+    } else if (this.props.item == "ReleaseDate") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Select the date you would like your software’s DOI released</span>
+        );
+    } else if (this.props.item == "RepositoryInfo") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>You must provide a URL in order to proceed. If you do not have a URL, please go to&nbsp;
+            <a href='#'>DOE Code</a>&nbsp;
+            and select Create a Repository.</span>
+        );
+    } else if (this.props.item == "RepositoryLink") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Unique URL which leads to the landing page of the software</span>
+        );
+    } else if (this.props.item == "ResearchOrg") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>The research organization, such as a DOE national laboratory or university, which had primary responsibility for developing the software. Separate multiple primary research organizations with a semicolon.</span>
+        );
+    } else if (this.props.item == "ResearchOrgDOEOrg") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Check the box if the research organization is associated within the Department of Energy.</span>
+        );
+    } else if (this.props.item == "ResearchOrgName") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>The name of the research organization. If the research organization is within the Department of Energy, please select from the list of DOE organizations. Other research organization names will be freeform.</span>
+        );
+    } else if (this.props.item == "ReserveDoi") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>If a DOI has not yet been minted for the software, use Reserve DOE so that OSTI will assign a persistent identifier. However, do not yet release the software. Software will be released on the date chosen.</span>
+        );
+    } else if (this.props.item == "SaveProgress") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>An incomplete record can be saved at any time, for future completion and publish</span>
+        );
+    } else if (this.props.item == "ShortTitle") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Abbreviated title or acronym for the software.</span>
+        );
+    } else if (this.props.item == "SiteAccessionNumber") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>The accession or other identifying numbers assigned by the submitting site, university, or repository’s database, records, etc.
+          </span>
+        );
+    } else if (this.props.item == "SoftwareTitle") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>The title of the software.</span>
+        );
+    } else if (this.props.item == "SponsoringOrg") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>The sponsoring or funding office of the software product.
+          </span>
+        );
+    } else if (this.props.item == "SponsorOrgAdditionalRewards") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Other award/contract numbers that represent funding contributed to the project, including other DOE awards or awards from other government agencies, foundations, etc. Separate multiple award numbers with a semicolon.</span>
+        );
+    } else if (this.props.item == "SponsorOrgBRClassification") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>A Budget and Reporting (B&R) code is given to a project by the Department of Energy. The structure of a B&R code parallels approved DOE PPAs (Program, Project or Activities). The code is used for executing the budget; reporting actual obligations, costs, and revenues; and controlling and measuring actual versus budgeted performance. Separate multiple codes with a semicolon.</span>
+        );
+    } else if (this.props.item == "SponsorOrgContractNumber") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>DOE award/contract number that is largely responsible for funding the project.</span>
+        );
+    } else if (this.props.item == "SponsorOrgDOEOrg") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>
+            Check the box if the code is sponsored by an organization within the Department of Energy.</span>
+        );
+    } else if (this.props.item == "SponsorOrgFWPNum") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>Field Work Proposal number. A number given to a proposal from a DOE laboratory by the Department of Energy.
+          </span>
+        );
+    } else if (this.props.item == "SponsorOrgName") {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>
+            The name of the sponsoring or funding organization. If the sponsoring or funding organization is from the Department of Energy, please choose from the list of DOE organizations. Other sponsoring organization names will be freeform. Separate multiple sponsor names with a semicolon.</span>
+        );
+    }
+    /*Okay, the text we just got, we'll do something with it now*/
+    return (
+      <span>
+    {this.props.justText !== undefined && <span>
+          {returnData}
+        </span>
+    }
+    {this.props.justText === undefined && <span>
+          Moo
+        </span>
+    }</span>
+  );
+  }
+}

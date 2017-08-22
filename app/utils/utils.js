@@ -114,6 +114,8 @@ function handleAuthenticatedError(jqXhr, exception, callback) {
     window.location.href = '/doecode/forbidden'
   } else if (callback !== undefined) {
     callback(jqXhr,exception);
+  }else{
+    window.location.href='/doecode/errorPage';
   }
 }
 

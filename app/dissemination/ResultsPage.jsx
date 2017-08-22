@@ -29,10 +29,8 @@ export default class ResultsPage extends React.Component {
   }
 
   parseSearchResponse(data) {
-
     this.setState({"results" : data.response});
     this.setState({"numFound" : data.response.numFound});
-
   }
 
   parseErrorResponse() {
@@ -59,7 +57,7 @@ export default class ResultsPage extends React.Component {
     window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
     doAjax('POST', '/doecode/api/search/',this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
   }
-  
+
   render() {
 
 
@@ -82,8 +80,8 @@ export default class ResultsPage extends React.Component {
      value: 'Page ' + pageNum + ' of ' + Math.ceil(this.state.numFound / searchData.getValue("rows"))
      }
    ];
-   
-   
+
+
     return(
     <div className="row not-so-wide-row">
         {/*Breadcrumb trail*/}
