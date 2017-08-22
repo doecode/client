@@ -1,5 +1,5 @@
 import React from 'react';
-import {doAjax} from '../utils/utils';
+import {doAjax,clearLoginLocalstorage} from '../utils/utils';
 import moment from 'moment';
 
 export default class SigninStatus extends React.Component {
@@ -15,11 +15,7 @@ export default class SigninStatus extends React.Component {
   }
 
   parseLogout(data) {
-    localStorage.xsrfToken = "";
-    localStorage.user_email = "";
-    localStorage.first_name = "";
-    localStorage.last_name = "";
-    localStorage.token_expiration = "";
+    clearLoginLocalstorage();
     window.location.href = '/doecode/logout';
   }
 

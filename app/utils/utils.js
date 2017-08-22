@@ -124,6 +124,7 @@ function clearLoginLocalstorage() {
   localStorage.user_email = "";
   localStorage.first_name = "";
   localStorage.last_name = "";
+  localStorage.token_expiration = "";
 }
 
 function appendQueryString(url) {
@@ -177,3 +178,4 @@ export {doAuthenticatedMultipartRequest}
 export {appendQueryString};
 export {getQueryParam};
 export {getChildData};
+export {clearLoginLocalstorage};

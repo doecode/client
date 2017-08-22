@@ -28,6 +28,7 @@ import Footer from './wrapper/Footer';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import HelpPage from './help/HelpPage';
+import ForgotPassword from './user_services/ForgotPassword';
 import {BrowserRouter as Router, Route, browserHistory, IndexRoute} from 'react-router-dom';
 
 import bootstrapcss from './css/bootstrap.min.css';
@@ -87,6 +88,7 @@ class DOECodeRouter extends React.Component {
               <Route path="/forbidden" component={ForbiddenPage}/>
               <Route path="/logout" component={LogoutPage}/>
               <Route path="/help" component={HelpPage}/>
+              <Route path="/forgot-password" component={ForgotPassword}/>
             </div>
           </div>
           <Footer is_homepage={this.is_homepage}/>
