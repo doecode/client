@@ -107,7 +107,7 @@ export default class ContributorsStep extends React.Component {
 								 "visible": true,
 								 "displayName": "Contributor Type"
 						},
-						
+
 
 						 {
 								 "columnName": "id",
@@ -125,17 +125,26 @@ export default class ContributorsStep extends React.Component {
 			const parentName = opts[this.state.key];
 
 			const contentType = "Contributors";
+			let columns = [];
+
+			if (parentName === 'contributors')
+				columns = ["first_name", "last_name"];
+			else
+				columns = ["organization_name"];
+
+			columns.push("contributor_type");
 
 
-				const content = <EditableDataTable columns={[]} contentType={contentType} config={tableConfig} parentName={parentName}/>
+				const contentC = parentName === 'contributors' && <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
+				const contentCO = parentName === 'contributing_organizations' && <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
 		    return (
                     <div className="container-fluid form-horizontal">
                         <div className="row">
                             <div className="col-md-9 col-xs-12">
                                 <div className="form-horizontal">
                                     <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="devsStepTabs">
-                                        <Tab eventKey={0} title="Contributors"> {content} </Tab>
-                                        <Tab eventKey={1} title="Contributing Organizations"> {content} </Tab>
+                                        <Tab eventKey={0} title="Contributors"> {contentC} </Tab>
+                                        <Tab eventKey={1} title="Contributing Organizations"> {contentCO} </Tab>
                                     </Tabs>
                                 </div>
                             </div>

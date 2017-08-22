@@ -24,16 +24,16 @@ export default class EditableDataTable extends React.Component {
 
 
     rowClick(gridRow, event) {
+  	  const parentName = this.props.parentName;
+  	  const currentArray = metadata.getValue(parentName);
+  	  const data = getChildData(parentName);
+  	  const index = currentArray.findIndex(item => item.id === gridRow.props.data.id);
+  	  data.loadValues(currentArray[index]);
 
-	  const parentName = this.props.parentName;
-	  const currentArray = metadata.getValue(parentName);
-	  const data = getChildData(parentName);
-	  const index = currentArray.findIndex(item => item.id === gridRow.props.data.id);
-	  data.loadValues(currentArray[index]);
   	  tableStore.showModal = this.props.parentName;
   	  tableStore.isEdit = true;
     }
-    
+
 
 	  render() {
 

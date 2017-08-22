@@ -48,8 +48,8 @@ export default class Field extends React.Component {
   }
 
   handleSelectChange(value) {
-
     if (this.props.properties.isArray) {
+        // comes in as string, no matter what simpleValue is set to on Select component
         if (value.trim()) {
             this.props.linkedData.setValue(this.props.properties.field, value.split("\n"));
         } else {
@@ -70,6 +70,7 @@ export default class Field extends React.Component {
   render() {
     const field = this.props.properties.field;
     const info = this.props.linkedData.getFieldInfo(field);
+
 	let labelStyle = this.props.properties.labelStyle != undefined ? this.props.properties.labelStyle : "control-label";
 	const divStyle = this.props.properties.divStyle != undefined ? this.props.properties.divStyle : "";
         const inputStyle = this.props.properties.inputStyle != undefined ? "form-control " + this.props.properties.inputStyle : "form-control";
@@ -158,12 +159,12 @@ export default class Field extends React.Component {
       const clearable = this.props.properties.clearable !== undefined ? this.props.properties.clearable : true;
 	    const errorClass = error ? "field-error" : ""
 
-      let simple = true;
       if (this.props.properties.isArray) {
-            val = val.slice();
-            simple = false;
+        // Passing array to SELECT doesn't appear to work, so send it as delimited string instead.
+        val = val.join("\n");
       }
-      	input = <Select name={field} className={errorClass} clearable={clearable} allowCreate={this.props.properties.allowCreate} multi={this.props.properties.multi} options={this.props.properties.options} simpleValue delimiter={"\n"} placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} value={val} />
+
+      input = <Select name={field} className={errorClass} clearable={clearable} allowCreate={this.props.properties.allowCreate} multi={this.props.properties.multi} options={this.props.properties.options} simpleValue delimiter={"\n"} placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} value={val} />
 	  }
 	  else if (elementType === 'textarea') {
 

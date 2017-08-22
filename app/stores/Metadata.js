@@ -210,7 +210,7 @@ deserializeSponsoringOrganization(data) {
         const awardNumbers = [];
         const brCodes = [];
         const fwpNumbers = [];
-        //delete data.sponsoring_organizations[i].funding_identifiers;
+
         if (fundingIDs !== undefined) {
 
             const fundingLength = fundingIDs.length;
@@ -231,7 +231,8 @@ deserializeSponsoringOrganization(data) {
         data.sponsoring_organizations[i].award_numbers = awardNumbers;
         data.sponsoring_organizations[i].br_codes = brCodes;
         data.sponsoring_organizations[i].fwp_numbers = fwpNumbers;
-        data.sponsoring_organizations[i].funding_identifiers = [];
+
+        delete data.sponsoring_organizations[i].funding_identifiers;
     }
 }
     updateMetadata(data) {

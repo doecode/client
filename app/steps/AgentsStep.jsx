@@ -109,20 +109,20 @@ export default class AgentsStep extends React.Component {
 			const opts = ["developers"];
 			const parentName = opts[this.state.key];
 
-			const columns = ["first_name", "last_name", "email", "orcid", "affiliations"];
+			const columns = ["first_name", "last_name", "affiliations"];
 
 
 			const contentType = "Devs";
 
 
-				const content = <EditableDataTable columns={[]} contentType={contentType} config={tableConfig} parentName={parentName}/>
+				const content = <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
 		    return (
 
                     <div className="container-fulid form-horizontal">
                         <div className="row">
                             <div className="col-md-9 col-xs-12">
                                 <h2> Developers </h2>
-                                {content} 
+                                {content}
                             </div>
                             <div className="col-md-3"></div>
                         </div>

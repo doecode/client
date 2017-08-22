@@ -49,7 +49,7 @@ export default class OrgsStep extends React.Component {
 					 "order": 3,
 					 "locked": false,
 					 "visible": true,
-					 "displayName": "Primary Award"
+					 "displayName": "Primary Award Number"
 				 },
 				 {
 					 "columnName": "award_numbers",
@@ -81,21 +81,19 @@ export default class OrgsStep extends React.Component {
 			let columns = ["organization_name"];
 			if (parentName === 'sponsoring_organizations') {
 				columns.push("primary_award");
-				columns.push("award_numbers")
-				columns.push("br_codes");
-				columns.push("fwp_numbers")
 			}
 
+			  const contentSO = parentName === 'sponsoring_organizations' && <EditableDataTable contentType={contentType} columns={columns} config={tableConfig} parentName={parentName}/>
+				const contentRO = parentName === 'research_organizations' && <EditableDataTable contentType={contentType} columns={columns} config={tableConfig} parentName={parentName}/>
 
-      const content = <EditableDataTable contentType={contentType} config={tableConfig} parentName={parentName}/>
 		    return (
                     <div className="container-fluid form-horizontal">
                         <div className="row">
                             <div className="col-md-9 col-xs-12">
                                 <div className="form-horizontal">
                                     <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="orgsStepTabs">
-                                        <Tab eventKey={0} title="* Sponsoring Organizations"> {content} </Tab>
-                                        <Tab eventKey={1} title="* Research Organizations"> {content} </Tab>
+                                        <Tab eventKey={0} title="* Sponsoring Organizations"> {contentSO} </Tab>
+                                        <Tab eventKey={1} title="* Research Organizations"> {contentRO} </Tab>
                                     </Tabs>
                                 </div>
                             </div>
