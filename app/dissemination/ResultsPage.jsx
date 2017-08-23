@@ -25,6 +25,8 @@ export default class ResultsPage extends React.Component {
 
   componentDidMount() {
     searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
+    console.log(JSON.stringify(searchData.getValue("licenses")));
+    console.log(JSON.stringify(searchData.getValue("accessibility")));
     doAjax('POST', '/doecode/api/search/',this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
   }
 
@@ -80,7 +82,6 @@ export default class ResultsPage extends React.Component {
      value: 'Page ' + pageNum + ' of ' + Math.ceil(this.state.numFound / searchData.getValue("rows"))
      }
    ];
-
 
     return(
     <div className="row not-so-wide-row">
