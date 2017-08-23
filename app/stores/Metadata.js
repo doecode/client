@@ -238,8 +238,7 @@ deserializeSponsoringOrganization(data) {
     updateMetadata(data) {
     	const oldRepo = new String(this.fieldMap.repository_link);
       this.deserializeData(data);
-      this.fieldMap.repository_link = oldRepo;
-
+      this.fieldMap.repository_link = oldRepo.toString();
     }
 
     serializeData() {
