@@ -60,7 +60,7 @@ export default class Field extends React.Component {
     }
 
     if (this.props.properties.changeCallback !== undefined) {
-        this.props.properties.changeCallback();
+        this.props.properties.changeCallback(value);
     }
 }
 
@@ -92,24 +92,15 @@ export default class Field extends React.Component {
     if (this.props.properties.value !== undefined)
           val = this.props.properties.value;
 
-    //console.log("Handle Change",this.props.properties.handleChange);
-    //console.log(this.handleChange);
     const handleChange = this.props.properties.handleChange ? this.props.properties.handleChange : this.handleChange;
 
     const handleBlur = this.props.properties.handleBlur ? this.props.properties.handleBlur : this.handleChange;
-
-    //console.log(handleChange);
 
     if (info) {
       required = info.required;
       error = info.error;
       completed = info.completed;
     }
-
-
-
-
-
 
      let wrapperStyle = "form-group row" + wrapperStyleExtra;
 
