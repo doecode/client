@@ -171,6 +171,14 @@ function getChildData(type) {
 
 }
 
+function setLoggedInAttributes(data){
+  localStorage.xsrfToken = data.xsrfToken;
+  localStorage.user_email = data.email;
+  localStorage.first_name = data.first_name;
+  localStorage.last_name = data.last_name;
+  localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
+}
+
 export {doAjax};
 export {doAuthenticatedAjax};
 export {checkIsAuthenticated};
@@ -179,3 +187,4 @@ export {appendQueryString};
 export {getQueryParam};
 export {getChildData};
 export {clearLoginLocalstorage};
+export {setLoggedInAttributes};

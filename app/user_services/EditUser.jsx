@@ -19,6 +19,8 @@ export default class EditUser extends React.Component {
     this.getAPIKey = this.getAPIKey.bind(this);
     this.parseAPI = this.parseAPI.bind(this);
     this.requestAdmin = this.requestAdmin.bind(this);
+    this.parseLoginResponse = this.parseLoginResponse.bind(this);
+    this.parseLoginError = this.parseLoginError.bind(this);
 
     this.state = {
       updateUserSuccess: false,
@@ -32,7 +34,26 @@ export default class EditUser extends React.Component {
   }
 
   componentDidMount() {
-    checkIsAuthenticated();
+    var passcode = getQueryParam("passcode");
+    if (passcode.trim() != '') {
+      //add things for logging in and stuff
+      doAjax("POST", "/doecode/api/user/login", this.parseLoginResponse, {
+        "confirmation_code": passcode
+      }, this.parseLoginError);
+    } else {
+      checkIsAuthenticated();
+    }
+  }
+
+  parseLoginResponse(data) {
+    console.log("Goot")
+    setLoggedInAttributes(data);
+    window.location.href = "/doecode/projects";
+  }
+
+  parseLoginError() {
+    console.log("Not goot");
+    window.location.href="/doecode/error";
   }
 
   /*Updating user*/

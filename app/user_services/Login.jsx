@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {doAjax, doAuthenticatedAjax, appendQueryString, getQueryParam} from '../utils/utils';
+import {doAjax, doAuthenticatedAjax, appendQueryString, getQueryParam, setLoggedInAttributes} from '../utils/utils';
 import UserData from '../stores/UserData';
 import UserField from '../field/UserField';
 import moment from 'moment';
@@ -31,12 +31,7 @@ export default class Login extends React.Component {
   }
 
   parseLoginResponse(data) {
-    localStorage.xsrfToken = data.xsrfToken;
-    localStorage.user_email = data.email;
-    localStorage.first_name = data.first_name;
-    localStorage.last_name = data.last_name;
-    localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
-
+    setLoggedInAttributes(data);
     if (window.sessionStorage.lastLocation) {
       let url = window.sessionStorage.lastLocation;
       window.sessionStorage.lastLocation = "";
@@ -57,7 +52,7 @@ export default class Login extends React.Component {
   }
 
   forgotPassword() {
-    window.location.href='/doecode/forgot-password'
+    window.location.href = '/doecode/forgot-password'
   }
 
   render() {
@@ -88,7 +83,6 @@ export default class Login extends React.Component {
             <p>Don't have an account?</p>
             <button type="button" className="btn btn-success btn-lg" onClick={this.register}>Register</button>
           </div>
-
         </div>
         <div className="col-md-4"></div>
       </div>
