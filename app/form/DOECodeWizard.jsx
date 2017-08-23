@@ -474,7 +474,8 @@ buildPanel(obj) {
 
         let coreContent = null;
 
-        if (disableForm) {
+        // this was "if isDisabled", but for now unlock with "if false"
+        if (false) {
           coreContent =
           <div>
           <form><fieldset disabled>
