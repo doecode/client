@@ -11,6 +11,7 @@ import RegisterUser from './user_services/RegisterUser';
 import EditUser from './user_services/EditUser';
 import ApproveRoles from './user_services/ApproveRoles';
 import ConfirmUser from './user_services/ConfirmUser';
+import ForgotPassword from './user_services/ForgotPassword';
 import Splash from './splash/Splash';
 import AdvancedSearch from './dissemination/AdvancedSearch';
 import ResultsPage from './dissemination/ResultsPage';
@@ -25,10 +26,10 @@ import ForbiddenPage from './static_content/ForbiddenPage';
 import LogoutPage from './static_content/LogoutPage';
 import Header from './wrapper/Header';
 import Footer from './wrapper/Footer';
+import HelpPage from './help/HelpPage';
+import ErrorPage from './error/ErrorPage';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import HelpPage from './help/HelpPage';
-import ForgotPassword from './user_services/ForgotPassword';
 import {BrowserRouter as Router, Route, browserHistory, IndexRoute} from 'react-router-dom';
 
 import bootstrapcss from './css/bootstrap.min.css';
@@ -58,8 +59,7 @@ class DOECodeRouter extends React.Component {
       <Router basename="/doecode" history={browserHistory}>
         <div className={this.outtermost_class_name}>
           <div className={this.wrapper_class}>
-            {!this.is_homepage && <Header/>
-}
+            {!this.is_homepage && <Header/>}
             <div>
               <Route exact path="/" component={Splash}/>
               <Route path="/publish" component={PublishForm}/>
@@ -89,6 +89,7 @@ class DOECodeRouter extends React.Component {
               <Route path="/logout" component={LogoutPage}/>
               <Route path="/help" component={HelpPage}/>
               <Route path="/forgot-password" component={ForgotPassword}/>
+              <Route path="/error" component={ErrorPage}/>
             </div>
           </div>
           <Footer is_homepage={this.is_homepage}/>

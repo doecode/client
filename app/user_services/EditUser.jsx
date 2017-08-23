@@ -4,7 +4,14 @@ import UserData from '../stores/UserData';
 import UserField from '../field/UserField';
 import Validation from '../utils/Validation';
 import UserEditFields from '../fragments/UserEditFields';
-import {doAjax, doAuthenticatedAjax, checkIsAuthenticated, appendQueryString, getQueryParam} from '../utils/utils';
+import {
+  doAjax,
+  doAuthenticatedAjax,
+  checkIsAuthenticated,
+  appendQueryString,
+  getQueryParam,
+  setLoggedInAttributes
+} from '../utils/utils';
 
 const userData = new UserData();
 const validation = new Validation();
@@ -35,7 +42,7 @@ export default class EditUser extends React.Component {
 
   componentDidMount() {
     var passcode = getQueryParam("passcode");
-    if (passcode.trim() != '') {
+    if (passcode) {
       //add things for logging in and stuff
       doAjax("POST", "/doecode/api/user/login", this.parseLoginResponse, {
         "confirmation_code": passcode
@@ -46,14 +53,16 @@ export default class EditUser extends React.Component {
   }
 
   parseLoginResponse(data) {
-    console.log("Goot")
     setLoggedInAttributes(data);
-    window.location.href = "/doecode/projects";
+    window.location.href = "/doecode/account";
   }
 
-  parseLoginError() {
-    console.log("Not goot");
-    window.location.href="/doecode/error";
+  parseLoginError(data) {
+    var errorMessage = "";
+    data.responseJSON.errors.forEach(function(item) {
+      errorMessage += (item + "\n");
+    });
+    window.location.href = "/doecode/error?message=" + errorMessage;
   }
 
   /*Updating user*/
