@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+//const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
@@ -38,7 +38,7 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new UglifyJSPlugin(),
+    //new UglifyJSPlugin(),
     new webpack.DefinePlugin({'process.env.NODE_ENV': '"production"'})
   ]
 }

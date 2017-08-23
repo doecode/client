@@ -22,7 +22,7 @@ export default class WorkflowManagement extends React.Component {
         this.onClearFilters = this.onClearFilters.bind(this);
         this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
 
-        this.wizardVersion = (Number.isInteger(parseInt(this.props.wizardVersion)) && this.props.wizardVersion > 0) ? this.props.wizardVersion : "";
+        this.wizardVersion = ($.isNumeric(parseInt(this.props.wizardVersion)) && this.props.wizardVersion > 0) ? this.props.wizardVersion : "";
 
         this._columns = [
             {
