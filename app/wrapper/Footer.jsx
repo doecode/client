@@ -30,22 +30,22 @@ export default class Footer extends React.Component {
                 <a href="/doecode/contact"><span className="fa fa-comments-o"></span>&nbsp;Contact Us</a>
               </li>
               <li className={this.footer_link}>
-                <a href="#">
+                <a target="_blank" href="https://www.facebook.com/ostigov">
                   <span className="fa fa-facebook"></span>
                 </a>
               </li>
               <li className={this.footer_link}>
-                <a href="#">
+                <a target="_blank" href="https://twitter.com/OSTIgov">
                   <span className="fa fa-twitter"></span>
                 </a>
               </li>
               <li className={this.footer_link}>
-                <a href="#">
+                <a target="_blank" href="https://plus.google.com/+OstiGov">
                   <span className="fa fa-google-plus"></span>
                 </a>
               </li>
               <li className={this.footer_link}>
-                <a href="#">
+                <a target="_blank" href="https://www.youtube.com/user/ostigov">
                   <span className="fa fa-youtube-play"></span>
                 </a>
               </li>

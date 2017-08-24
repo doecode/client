@@ -33,7 +33,7 @@ export default class ConfirmUser extends React.Component {
     	return (
         <div className="row not-so-wide-row">
             <div className="col-md-3"> </div>
-            <div className="col-md-3 col-xs-12 center-text">
+            <div className="col-md-6 col-xs-12 center-text">
                 {this.state.showSuccess &&
                 <h2>Thank you for registering with DOE CODE. Your account has been confirmed.
                 </h2>

@@ -15,15 +15,7 @@ export default class Sidebar extends React.Component {
     searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
     this.licenseList = searchData.getValue("licenses");
     this.accessibilityList = searchData.getValue("accessibility");
-    //console.log(JSON.stringify(searchData.getValue("licenses")));
-    //console.log(JSON.stringify(searchData.getValue("accessibility")));
-  }
-
-  componentDidMount() {
-    this.accessibilityList.forEach(function(item){
-      console.log(item);
-      console.log("Things in accessibilty");
-    });
+    this.sortListValue = searchData.getValue("sort");
   }
 
   sidebarCallback(checked, value, type) {

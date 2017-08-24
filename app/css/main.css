@@ -789,8 +789,17 @@ ol.progtrckr li.progtrckr-done:hover:before {
   margin-left: -25px;
 }
 
+/*Puts the roboto font frickin everywhere*/
 html, button, body, input, select, textarea, p {
   font-family: 'Roboto', sans-serif !important;
+}
+
+.biblio-sub-dl{
+  font-size:14px;
+}
+
+.biblio-sub-dl dt{
+  font-weight: normal;
 }
 
 @keyframes spin {
