@@ -18,7 +18,7 @@ export default class DevAndContribLinks extends React.Component {
 
   createLink(name, index, array) {
     return (
-      <span key={name}>
+      <span key={name+this.props.groupType+index}>
         <SearchLink field="developers_contributors" value={name.trim()}/> {index != array.length - 1 && <span>
           ;&nbsp;
         </span>}
@@ -60,7 +60,7 @@ export default class DevAndContribLinks extends React.Component {
         });
       });
     }
-    const afiliationsList = affiliations_list.map((item,index) => <li key={index}>
+    const afiliationsList = affiliations_list.map((item,index) => <li key={this.props.groupType +"-"+index}>
       {item}
     </li>);
 

@@ -56,7 +56,7 @@ export default class BiblioPage extends React.Component {
         names.push(devs[i].last_name + ", " + devs[i].first_name);
       }
 
-      textContent = <span><DevAndContribLinks devsAndContributorsObj={devs} devsAndContributors={names}/></span>;
+      textContent = <span><DevAndContribLinks groupType="developer" devsAndContributorsObj={devs} devsAndContributors={names}/></span>;
       show_val = names.length > 0;
 
     } else if (header == "Contributors") {
@@ -65,7 +65,7 @@ export default class BiblioPage extends React.Component {
       for (var i = 0; i < contributors.length; i++) {
         contributorNames.push(contributors[i].last_name + ", " + contributors[i].first_name);
       }
-      textContent = <span><DevAndContribLinks devsAndContributorsObj={contributors} devsAndContributors={contributorNames}/></span>;
+      textContent = <span><DevAndContribLinks groupType="contributor" devsAndContributorsObj={contributors} devsAndContributors={contributorNames}/></span>;
       show_val = contributorNames.length > 0;
 
     } else if (header == "Licenses") {
@@ -129,7 +129,6 @@ export default class BiblioPage extends React.Component {
   render() {
 
     metadata.deserializeData(this.state.data);
-console.log(JSON.stringify(this.state.data));
     const fieldsContent = staticContstants.biblioFieldsList.map(this.generateContent);
 
     let descriptionContent = null;
@@ -186,7 +185,7 @@ console.log(JSON.stringify(this.state.data));
               </div>
             </div>
             {/*Sidebar on the right*/}
-            <BiblioSidebar sidebarClass=' col-md-2 col-xs-12'/>
+            <BiblioSidebar pageData={metadata} sidebarClass=' col-md-2 col-xs-12'/>
           </div>
         </div>
       </div>

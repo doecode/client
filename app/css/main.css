@@ -259,9 +259,27 @@ html h3 {
 }
 
 .biblio-sidebar-title {
-  color: #aaaab8;
+  color: #828297;
   font-size: 16px;
   font-weight: bold;
+}
+
+.biblio-sidebar-subtitle {
+  color: #9999aa;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.biblio-sidebar-traditional-anchor {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.biblio-sidebar-row {
+  border-bottom: 1px solid #DDDDDD;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 .citation-details-div {
@@ -547,18 +565,18 @@ html, body {
 .signin-btn {
   font-size: 13px;
   color: white;
-  text-decoration-line:none !important;
+  text-decoration-line: none !important;
 }
 
 .signin-btn:hover {
   color: #5E5E5E !important;
 }
 
-.signin-btn-container{
-  padding-right:8px;
-  padding-left:8px;
+.signin-btn-container {
+  padding-right: 8px;
+  padding-left: 8px;
   padding-top: 5px;
-  padding-bottom:5px;
+  padding-bottom: 5px;
 }
 
 .signin-btn-container:hover {
@@ -789,16 +807,18 @@ ol.progtrckr li.progtrckr-done:hover:before {
   margin-left: -25px;
 }
 
+
 /*Puts the roboto font frickin everywhere*/
+
 html, button, body, input, select, textarea, p {
   font-family: 'Roboto', sans-serif !important;
 }
 
-.biblio-sub-dl{
-  font-size:14px;
+.biblio-sub-dl {
+  font-size: 14px;
 }
 
-.biblio-sub-dl dt{
+.biblio-sub-dl dt {
   font-weight: normal;
 }
 

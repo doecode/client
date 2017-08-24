@@ -125,6 +125,17 @@ function clearLoginLocalstorage() {
   localStorage.first_name = "";
   localStorage.last_name = "";
   localStorage.token_expiration = "";
+  localStorage.roles = "";
+}
+
+
+function setLoggedInAttributes(data){
+  localStorage.xsrfToken = data.xsrfToken;
+  localStorage.user_email = data.email;
+  localStorage.first_name = data.first_name;
+  localStorage.last_name = data.last_name;
+  localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
+  localStorage.roles = JSON.stringify(data.roles);
 }
 
 function appendQueryString(url) {
@@ -171,13 +182,6 @@ function getChildData(type) {
 
 }
 
-function setLoggedInAttributes(data){
-  localStorage.xsrfToken = data.xsrfToken;
-  localStorage.user_email = data.email;
-  localStorage.first_name = data.first_name;
-  localStorage.last_name = data.last_name;
-  localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
-}
 
 export {doAjax};
 export {doAuthenticatedAjax};
