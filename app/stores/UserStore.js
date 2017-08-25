@@ -11,7 +11,9 @@ class UserStore {
           email : '',
           password: '',
           confirm_password: '',
-          contract_number:''
+          contract_number:'',
+					active_state:false,
+					roles_list:[]
     }
 
     this.defaultUserSchema = {
@@ -20,15 +22,15 @@ class UserStore {
           "email": {required:true, completed:false, validations: ["email"], error: ''},
           "password" : {required:true, completed:false, validations: [], error: ''},
           "confirm_password" : {required:true, completed:false, validations: ["PWMatch"], error: ''},
-          "contract_number":{required:false, completed:false, validations: [], error: ''}
+          "contract_number":{required:false, completed:false, validations: [], error: ''},
+					"active_state":{required:true, completed:false, validations:[], error:''},
+					"roles_list":{required:false, completed:false, validations:[], error:''}
       }
 
 		this.user = observable(this.defaultUser);
     this.userSchema = observable(this.defaultUserSchema);
 
 	}
-
-
 }
 
 const singleton = new UserStore();

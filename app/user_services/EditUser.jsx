@@ -60,7 +60,6 @@ export default class EditUser extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Your mom");
     var passcode = getQueryParam("passcode");
     if (passcode) {
       //add things for logging in and stuff

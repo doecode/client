@@ -14,7 +14,7 @@ export default class SigninStatus extends React.Component {
     if (localStorage.roles) {
       var rolesArray = JSON.parse(localStorage.roles);
       this.has_osti_role = rolesArray.indexOf("OSTI") > -1;
-      this.has_admin_role = rolesArray.indexOf("ADMIN") > -1;
+      this.has_admin_role = rolesArray.indexOf("OSTI") > -1;
     }
   }
 

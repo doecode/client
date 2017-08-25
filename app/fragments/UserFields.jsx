@@ -19,7 +19,7 @@ export default class UserFields extends React.Component {
     this.handleContractCheck = this.handleContractCheck.bind(this);
 
     this.state = {
-      showContractNumber: false,
+      showContractNumber: this.props.showContractNumAlways!==undefined,
     }
   }
 
