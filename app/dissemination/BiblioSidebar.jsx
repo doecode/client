@@ -13,7 +13,6 @@ export default class BiblioSidebar extends React.Component {
       ? "https://dx.doi.org/" + fieldMapdata.doi
       : "";
 
-console.log(JSON.stringify(fieldMapdata));
     var fulltextURL = "";
     var fulltextMsg = "";
 

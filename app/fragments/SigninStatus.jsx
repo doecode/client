@@ -1,5 +1,5 @@
 import React from 'react';
-import {doAjax, clearLoginLocalstorage} from '../utils/utils';
+import {doAjax, clearLoginLocalstorage, checkIsAuthenticated} from '../utils/utils';
 import moment from 'moment';
 
 export default class SigninStatus extends React.Component {
@@ -8,11 +8,24 @@ export default class SigninStatus extends React.Component {
     this.parseErrorResponse = this.parseErrorResponse.bind(this);
     this.logout = this.logout.bind(this);
 
-    this.is_logged_in = (localStorage.user_email !== undefined && localStorage.user_email !== null && localStorage.user_email !== "");
+    //Make sure that the token still hasn't expired
+    this.is_logged_in = (localStorage.token_expiration != "" && moment(localStorage.token_expiration, "YYYY-MM-DD HH:mm").isAfter(moment()));
 
     if (localStorage.roles) {
       var rolesArray = JSON.parse(localStorage.roles);
-      this.has_osti_role = rolesArray.indexOf("OSTI")>-1;
+      this.has_osti_role = rolesArray.indexOf("OSTI") > -1;
+    }
+  }
+
+  componentDidMount() {
+    if (this.is_logged_in) {
+      var duration = moment.duration(moment(localStorage.token_expiration, "YYYY-MM-DD HH:mm").diff(moment()));
+      if (duration < 2) {
+        checkIsAuthenticated();
+      }
+    } else if (!this.is_logged_in && localStorage.token_expiration != '') {
+      clearLoginLocalstorage();
+      window.location.href = '/doecode/logout';
     }
   }
 
@@ -49,8 +62,7 @@ export default class SigninStatus extends React.Component {
             {this.has_osti_role && <li>
               <a href="/doecode/pending">
                 <span className='fa fa-clock-o'></span>&nbsp; Pending Approval</a>
-            </li>
-}
+            </li>}
             <li role="separator" className="divider"></li>
             <li className="clickable">
               <a onClick={this.logout}>

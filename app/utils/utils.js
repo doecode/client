@@ -49,8 +49,8 @@ function doAuthenticatedMultipartRequest(url, formData, successCallback, errorCa
     },
     dataType: 'json',
     data: formData,
-    success: function(data){
-      handleAuthenticatedSuccess(data,successCallback);
+    success: function(data) {
+      handleAuthenticatedSuccess(data, successCallback);
     },
     error: function(jqXhr, exception) {
       handleAuthenticatedError(jqXhr, exception, errorCallback);
@@ -74,8 +74,8 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
     dataType: 'json',
     data: JSON.stringify(data),
     contentType: "application/json; charset=utf-8",
-    success: function(data){
-      handleAuthenticatedSuccess(data,successCallback);
+    success: function(data) {
+      handleAuthenticatedSuccess(data, successCallback);
     },
     error: function(jqXhr, exception) {
       handleAuthenticatedError(jqXhr, exception, errorCallback);
@@ -86,7 +86,9 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
 
 function checkIsAuthenticated() {
 
-  const successCallback = () => {};
+  const successCallback = () => {
+    localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
+  };
 
   $.ajax({
     url: '/doecode/api/user/authenticated',
@@ -101,8 +103,8 @@ function checkIsAuthenticated() {
 }
 
 function handleAuthenticatedSuccess(data, callback) {
-    localStorage.token_expiration = moment().add(30,'minutes').format("YYYY-MM-DD HH:mm");
-    callback(data);
+  localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
+  callback(data);
 }
 
 function handleAuthenticatedError(jqXhr, exception, callback) {
@@ -113,9 +115,9 @@ function handleAuthenticatedError(jqXhr, exception, callback) {
   } else if (jqXhr.status == 403) {
     window.location.href = '/doecode/forbidden'
   } else if (callback !== undefined) {
-    callback(jqXhr,exception);
-  }else{
-    window.location.href='/doecode/errorPage';
+    callback(jqXhr, exception);
+  } else {
+    window.location.href = '/doecode/errorPage';
   }
 }
 
@@ -128,14 +130,18 @@ function clearLoginLocalstorage() {
   localStorage.roles = "";
 }
 
-
-function setLoggedInAttributes(data){
+function setLoggedInAttributes(data) {
   localStorage.xsrfToken = data.xsrfToken;
   localStorage.user_email = data.email;
   localStorage.first_name = data.first_name;
   localStorage.last_name = data.last_name;
   localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
   localStorage.roles = JSON.stringify(data.roles);
+}
+
+function resetLoggedInAttributesUserData(data){
+  localStorage.first_name = data.first_name;
+  localStorage.last_name = data.last_name;
 }
 
 function appendQueryString(url) {
@@ -182,6 +188,29 @@ function getChildData(type) {
 
 }
 
+function checkPassword(data) {
+  //const password = data.getValue("password");
+  const password = data.password;
+  //const email = data.getValue("email");
+  const email = data.email;
+  //const confirm = data.getValue("confirm_password");
+  const confirm = data.confirm_password;
+  const minLength = 8;
+  const specialCharacterRegex = /[^a-zA-Z\d\s]/g;
+  const lowerRegex = /[a-z]/g;
+  const upperRegex = /[A-Z]/g;
+  const numberRegex = /[\d]/g;
+
+  var newState = {};
+  newState.longEnough = password.length >= minLength;
+  newState.hasSpecial = specialCharacterRegex.test(password);
+  newState.hasNumber = numberRegex.test(password);
+  newState.upperAndLower = upperRegex.test(password) && lowerRegex.test(password);
+  newState.containsName = password.indexOf(email) > -1;
+  newState.matches = password !== '' && (password === confirm);
+
+  return newState;
+}
 
 export {doAjax};
 export {doAuthenticatedAjax};
@@ -192,3 +221,5 @@ export {getQueryParam};
 export {getChildData};
 export {clearLoginLocalstorage};
 export {setLoggedInAttributes};
+export {checkPassword};
+export {resetLoggedInAttributesUserData};
