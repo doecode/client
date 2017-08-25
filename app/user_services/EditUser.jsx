@@ -60,6 +60,7 @@ export default class EditUser extends React.Component {
   }
 
   componentDidMount() {
+    console.log("Your mom");
     var passcode = getQueryParam("passcode");
     if (passcode) {
       //add things for logging in and stuff
@@ -67,6 +68,7 @@ export default class EditUser extends React.Component {
         "confirmation_code": passcode
       }, this.parseLoginError);
     } else {
+      console.log("Checking authenticated");
       checkIsAuthenticated();
     }
   }
@@ -276,6 +278,7 @@ export default class EditUser extends React.Component {
                   <button type="button" className='btn btn-lg btn-success' onClick={this.getAPIKey}>
                     <span className='fa fa-key'></span>
                     Generate Key</button>
+                    <PageMessageBox classValue="center-text has-error" showMessage={true} items={['You will need to log out after generating a new API key']} keyPrefix='password'/>
                 </div>
               </div>
             </div>

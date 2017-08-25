@@ -20,7 +20,6 @@ export default class UserFields extends React.Component {
 
     this.state = {
       showContractNumber: false,
-      registerNeedsContractNumber: false
     }
   }
 
@@ -46,7 +45,6 @@ export default class UserFields extends React.Component {
   handleContractNeedCheck(data) {
     var needingDatContractNumber = data.site_code === 'CONTR';
     var new_state = {
-      registerNeedsContractNumber: needingDatContractNumber,
       showContractNumber: needingDatContractNumber
     };
     this.setState(new_state);
@@ -63,19 +61,35 @@ export default class UserFields extends React.Component {
   }
 
   render() {
+    const emailSmalltext = <span>If you are an employee at a DOE National Laboratory, please register using your official .gov email address.</span>;
     return (
       <div className='row'>
         <div className='col-xs-12'>
+          {/*First Name*/}
           <div className='row'>
             <div className="col-xs-12">
               <UserField field='first_name' label='First Name' elementType='input' handleChange={this.updateFirstNameAndCheckPassword} noExtraLabelText/>
             </div>
           </div>
+          {/*Last Name*/}
           <div className="row">
             <div className="col-xs-12">
               <UserField field='last_name' label='Last Name' elementType='input' handleChange={this.updateLastNameAndCheckPassword} noExtraLabelText/>
             </div>
           </div>
+          {/*Contract Number*/}
+          {this.state.showContractNumber && <div className="row">
+            <div className="col-xs-12">
+              <UserField field='contract_number' label='Contract Number' elementType='input' handleChange={this.handleContractCheck} noExtraLabelText/>
+            </div>
+          </div>}
+          {/*Email Address*/}
+          {this.props.show_email && <div className='row'>
+            <div className="col-xs-12">
+              <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword} noExtraLabelText messageNode={emailSmalltext}/>
+            </div>
+
+          </div>}
         </div>
       </div>
     );

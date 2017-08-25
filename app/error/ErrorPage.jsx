@@ -5,7 +5,8 @@ export default class ErrorPage extends React.Component {
   constructor(props) {
     super(props);
     var error = decodeURI(getQueryParam("message"));
-    if (error === undefined || error === null || error == '') {
+
+    if (error=='false') {
       error = "An error has occurred";
     }
     this.errorMessage = error;
