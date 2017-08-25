@@ -12,6 +12,7 @@ import EditUser from './user_services/EditUser';
 import ApproveRoles from './user_services/ApproveRoles';
 import ConfirmUser from './user_services/ConfirmUser';
 import ForgotPassword from './user_services/ForgotPassword';
+import UserAdmin from './user_services/UserAdmin';
 import Splash from './splash/Splash';
 import AdvancedSearch from './dissemination/AdvancedSearch';
 import ResultsPage from './dissemination/ResultsPage';
@@ -90,6 +91,7 @@ class DOECodeRouter extends React.Component {
               <Route path="/help" component={HelpPage}/>
               <Route path="/forgot-password" component={ForgotPassword}/>
               <Route path="/error" component={ErrorPage}/>
+              <Route path="/user-admin" component={UserAdmin}/>
             </div>
           </div>
           <Footer is_homepage={this.is_homepage}/>

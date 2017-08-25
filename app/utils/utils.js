@@ -102,6 +102,25 @@ function checkIsAuthenticated() {
   });
 }
 
+function checkHasRole(role, successCallback) {
+  if (successCallback === undefined) {
+    successCallback = () => {
+      localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
+    };
+  }
+
+  $.ajax({
+    url: '/doecode/api/user/role/' + role,
+    cache: false,
+    method: 'GET',
+    beforeSend: function(request) {
+      request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+    },
+    success: successCallback,
+    error: handleAuthenticatedError
+  });
+}
+
 function handleAuthenticatedSuccess(data, callback) {
   localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
   callback(data);
@@ -139,7 +158,7 @@ function setLoggedInAttributes(data) {
   localStorage.roles = JSON.stringify(data.roles);
 }
 
-function resetLoggedInAttributesUserData(data){
+function resetLoggedInAttributesUserData(data) {
   localStorage.first_name = data.first_name;
   localStorage.last_name = data.last_name;
 }
@@ -215,6 +234,7 @@ function checkPassword(data) {
 export {doAjax};
 export {doAuthenticatedAjax};
 export {checkIsAuthenticated};
+export {checkHasRole};
 export {doAuthenticatedMultipartRequest}
 export {appendQueryString};
 export {getQueryParam};
