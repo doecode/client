@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import UserData from '../stores/UserData';
 import UserField from '../field/UserField';
 import Validation from '../utils/Validation';
-import UserEditFields from '../fragments/UserEditFields';
 import UserFields from '../fragments/UserFields';
 import PasswordFields from '../fragments/PasswordFields';
 import PageMessageBox from '../fragments/PageMessageBox';
