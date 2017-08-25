@@ -36,18 +36,14 @@ export default class ForgotPassword extends React.Component {
   }
 
   forgotPassword() {
-    if (this.state.emailAddress !== '') {
-      this.setState({"message": "", "showMessage": false});
-      doAjax('POST', '/doecode/api/user/forgotpassword', this.parseForgotPassword, {
-        'email': this.state.emailAddress
-      }, this.parseForgotPasswordError, 'json');
-    } else {
-      this.setState({"message": "You need to enter an email before clicking submit", "showMessage": true, "messageClass": "has-error"});
-    }
+    this.setState({"message": "", "showMessage": false});
+    doAjax('POST', '/doecode/api/user/forgotpassword', this.parseForgotPassword, {
+      'email': this.state.emailAddress
+    }, this.parseForgotPasswordError, 'json');
   }
 
   parseForgotPassword() {
-    this.setState({"showConfirmationMessage": true, confirmationMessage: "An email containing a reset link has been sent to you. A winner is you."});
+    this.setState({"showConfirmationMessage": true, confirmationMessage: "An email containing a reset link has been sent to you."});
   }
   parseForgotPasswordError(data) {
     var errorMsg = "";
@@ -74,8 +70,8 @@ export default class ForgotPassword extends React.Component {
                   <label className="control-label">{this.state.message}</label>
                 </div>}
                 <span>
-                  <label className='static-content-title' for='email-address'>Please enter your email address to recover your password</label>
-                  <input type='text' id='email-address' className='form-control input-lg' onBlur={this.updateEmailAddress} onKeyPress={this.triggerForgotPassword}/>
+                  <label className='static-content-title' htmlFor='email-address'>Please enter your email address to recover your password</label>
+                  <input type='text' id='email-address' className='form-control input-lg' onChange={this.updateEmailAddress} onKeyPress={this.triggerForgotPassword}/>
                   <br/>
                 </span>
               </div>

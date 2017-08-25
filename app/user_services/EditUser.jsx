@@ -53,7 +53,8 @@ export default class EditUser extends React.Component {
       apiKeyClass: '',
       showLoading: false,
       requestAdminStatus: false,
-      requestAdminMessage: ""
+      requestAdminMessage: "",
+      showPasswordChangeMessage:false
     }
 
   }
@@ -67,14 +68,13 @@ export default class EditUser extends React.Component {
         "confirmation_code": passcode
       }, this.parseLoginError);
     } else {
-      console.log("Checking authenticated");
       checkIsAuthenticated();
     }
   }
 
   parseLoginResponse(data) {
     setLoggedInAttributes(data);
-    window.location.href = "/doecode/account";
+    this.setState({showPasswordChangeMessage:true});
   }
 
   parseLoginError(data) {
@@ -184,7 +184,7 @@ export default class EditUser extends React.Component {
   }
 
   parseAPI(data) {
-    var apiKeyMessage = ['New API Key',data.apiKey];
+    var apiKeyMessage = ['New API Key', data.apiKey];
     this.setState({showAPIKeyMessage: true, apiKeyMsg: apiKeyMessage, apiKeyClass: 'center-text has-success'});
   }
 
@@ -205,6 +205,13 @@ export default class EditUser extends React.Component {
           <br/>
           <div className='row'>
             <div className='col-xs-12'>
+              <div className='row'>
+                <div className='col-md-3'></div>
+                <div className='col-md-6 col-xs-12'>
+                  <PageMessageBox classValue='has-error center-text' showMessage={this.state.showPasswordChangeMessage} items={['Please Change Your Password']} keyPrefix='psswd'/>
+                </div>
+                <div className='col-md-3'></div>
+              </div>
               <div className="panel panel-default">
                 <div className="panel-heading account-panel-header center-text">User Information</div>
                 <div className="panel-body account-panel-body center-text">
@@ -277,7 +284,7 @@ export default class EditUser extends React.Component {
                   <button type="button" className='btn btn-lg btn-success' onClick={this.getAPIKey}>
                     <span className='fa fa-key'></span>
                     Generate Key</button>
-                    <PageMessageBox classValue="center-text has-error" showMessage={true} items={['You will need to log out after generating a new API key']} keyPrefix='password'/>
+                  <PageMessageBox classValue="center-text has-error" showMessage={true} items={['You will need to log out after generating a new API key']} keyPrefix='password'/>
                 </div>
               </div>
             </div>
