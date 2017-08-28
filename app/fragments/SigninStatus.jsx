@@ -14,7 +14,6 @@ export default class SigninStatus extends React.Component {
     if (localStorage.roles) {
       var rolesArray = JSON.parse(localStorage.roles);
       this.has_osti_role = rolesArray.indexOf("OSTI") > -1;
-      this.has_admin_role = rolesArray.indexOf("OSTI") > -1;
     }
   }
 
@@ -64,7 +63,7 @@ export default class SigninStatus extends React.Component {
               <a href="/doecode/pending">
                 <span className='fa fa-clock-o'></span>&nbsp; Pending Approval</a>
             </li>}
-            {this.has_admin_role && <li>
+            {this.has_osti_role && <li>
               <a href='/doecode/user-admin'><span className='fa fa-user-plus'></span>&nbsp; User Admin</a>
             </li>}
             <li role="separator" className="divider"></li>

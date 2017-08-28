@@ -10,7 +10,11 @@ export default class SigninStatus extends React.Component {
   constructor(props) {
     super(props);
     this.loadUserData = this.loadUserData.bind(this);
+    this.saveUserData = this.saveUserData.bind(this);
+    this.parseSaveUserData = this.parseSaveUserData.bind(this);
+    this.parseSaveUserDataError = this.parseSaveUserDataError.bind(this);
 
+    this.roles_list = [];
     this.state = {
       showUserFields: false,
       userList: [
@@ -33,15 +37,28 @@ export default class SigninStatus extends React.Component {
   }
 
   loadUserData(event) {
-    console.log(event.target.value);
     if (event.target.value != '') {
+      //Go to API and look user data up
       this.setState({showUserFields: true});
     } else {
       this.setState({showUserFields: false});
     }
   }
 
+  saveUserData(){
+
+  }
+
+  parseSaveUserData(){
+
+  }
+
+  parseSaveUserDataError(){
+
+  }
+
   render() {
+    var userFieldsData =  (this.state.singleUserData) ? {}:{};
     return (
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
@@ -78,7 +95,7 @@ export default class SigninStatus extends React.Component {
               <div className='row'>
                 <div className='col-md-4'></div>
                 <div className='col-md-4'>
-                  <UserFields showContractNumAlways show_email={false}/>
+                  <UserFields passedInData={userFieldsData} showContractNumAlways show_email={false}/>
                 </div>
                 <div className='col-md-4'></div>
               </div>
@@ -92,12 +109,22 @@ export default class SigninStatus extends React.Component {
                 </div>
                 <div className='col-md-2'></div>
               </div>
+              {/*Active state and stuff*/}
               <div className='row'>
                 <div className='col-md-4'></div>
-                <div className='col-md-4'>
+                <div className='col-md-4 col-xs-12'>
                   <div>
-                    <UserStatuses requestedAdmin={true} rolesList={[]}/>
+                    <UserStatuses rolesList={this.roles_list}/>
                   </div>
+                </div>
+                <div className='col-md-4'></div>
+              </div>
+              {/*Save Button*/}
+              <br/>
+              <div className='row'>
+                <div className='col-md-4'></div>
+                <div className='col-md-4 col-xs-12'>
+                  <button type='button' className='btn btn-success btn-lg' onClick={this.saveUserData}><span className='fa fa-floppy-o'></span>&nbsp;Save</button>
                 </div>
                 <div className='col-md-4'></div>
               </div>

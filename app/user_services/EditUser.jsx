@@ -54,7 +54,7 @@ export default class EditUser extends React.Component {
       showLoading: false,
       requestAdminStatus: false,
       requestAdminMessage: "",
-      showPasswordChangeMessage:false
+      showPasswordChangeMessage: false
     }
 
   }
@@ -68,12 +68,14 @@ export default class EditUser extends React.Component {
       }, this.parseLoginError);
     } else {
       checkIsAuthenticated();
+      userData.setValue("first_name", localStorage.first_name);
+      userData.setValue("last_name", localStorage.last_name);
     }
   }
 
   parseLoginResponse(data) {
     setLoggedInAttributes(data);
-    this.setState({showPasswordChangeMessage:true});
+    this.setState({showPasswordChangeMessage: true});
   }
 
   parseLoginError(data) {
@@ -204,6 +206,30 @@ export default class EditUser extends React.Component {
           <br/>
           <div className='row'>
             <div className='col-xs-12'>
+              <div className="panel panel-default">
+                <div className="panel-heading account-panel-header center-text">Password</div>
+                <div className="panel-body account-panel-body">
+                  <div className='row'>
+                    <div className='col-md-1'></div>
+                    <div className='col-md-11'>
+                      <div>
+                        <PageMessageBox classValue={this.state.updatePasswordClass} showMessage={this.state.showUpdatePasswordMessage} items={this.state.updatePasswordMsg} keyPrefix='password'/>
+                        <PasswordFields/>
+                      </div>
+                    </div>
+                  </div>
+                  <br/>
+                  <div className='row center-text'>
+                    <div className='col-xs-12'>
+                      <button type='button' className='btn btn-success btn-lg' onClick={this.sendChangePasswordRequest}>Change Password</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-xs-12'>
               <div className='row'>
                 <div className='col-md-3'></div>
                 <div className='col-md-6 col-xs-12'>
@@ -228,30 +254,6 @@ export default class EditUser extends React.Component {
                   <div className='row'>
                     <div className='col-xs-12'>
                       <button type='button' className='btn btn-success btn-lg' onClick={this.updateUser}>Update User</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='row'>
-            <div className='col-xs-12'>
-              <div className="panel panel-default">
-                <div className="panel-heading account-panel-header center-text">Password</div>
-                <div className="panel-body account-panel-body">
-                  <div className='row'>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-11'>
-                      <div>
-                        <PageMessageBox classValue={this.state.updatePasswordClass} showMessage={this.state.showUpdatePasswordMessage} items={this.state.updatePasswordMsg} keyPrefix='password'/>
-                        <PasswordFields/>
-                      </div>
-                    </div>
-                  </div>
-                  <br/>
-                  <div className='row center-text'>
-                    <div className='col-xs-12'>
-                      <button type='button' className='btn btn-success btn-lg' onClick={this.sendChangePasswordRequest}>Change Password</button>
                     </div>
                   </div>
                 </div>
@@ -283,6 +285,7 @@ export default class EditUser extends React.Component {
                   <button type="button" className='btn btn-lg btn-success' onClick={this.getAPIKey}>
                     <span className='fa fa-key'></span>
                     Generate Key</button>
+                    <br/>
                   <PageMessageBox classValue="center-text has-error" showMessage={true} items={['You will need to log out after generating a new API key']} keyPrefix='password'/>
                 </div>
               </div>

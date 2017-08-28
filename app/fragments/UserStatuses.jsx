@@ -20,21 +20,29 @@ export default class UserStatuses extends React.Component {
   }
 
   render() {
+    var usrData = (this.props.passedInData != undefined)
+      ? this.props.passedInData
+      : {
+        adminPrivRequest: false,
+        isActive: false,
+        role: ''
+      };
     return (
       <span>
         <div className="checkbox">
-          <label htmlFor='active-state'><input type="checkbox" checked={this.props.isActive} onChange={this.handleActiveToggle} id='active-state' value="activeState"/>Is Active?</label>
+          <label htmlFor='active-state'><input type="checkbox" checked={usrData.isActive} onChange={this.handleActiveToggle} id='active-state' value="activeState"/>Is Active?</label>
         </div>
-        {this.props.requestedAdmin && <div className="alert alert-info alert-dismissable">
+        {this.props.adminPrivRequest && <div className="alert alert-info alert-dismissable">
           <a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>
           This user has requested administrative privileges
         </div>}
+        <br/>
         <div className='form-group'>
           <div className='row'>
-            <label className='control-label col-xs-1' htmlFor='user-admin-box'>Users:</label>
+            <label className='control-label col-xs-1' htmlFor='user-admin-box'>Roles:</label>
             <div className='col-xs-11'>
-              <select className='form-control' id='roles-box' onChange={this.setRolesData}>
-                <option></option>
+              <select className='form-control' value={usrData.role} id='roles-box' onChange={this.setRolesData}>
+                <option value=''></option>
                 {this.props.rolesList.map((row, index) => <option key={'roles-' + index}></option>)}
               </select>
             </div>

@@ -18,8 +18,18 @@ export default class UserFields extends React.Component {
     this.handleContractNeedCheckError = this.handleContractNeedCheckError.bind(this);
     this.handleContractCheck = this.handleContractCheck.bind(this);
 
+    //If we were passed any data, let's go ahead and populate it now
+    if (this.props.passedInData != undefined) {
+      userData.setValue("first_name", this.props.passedInData.first_name);
+      userData.setValue("last_name", this.props.passedInData.last_name);
+      if (this.props.passedInData.contract_number) {
+        userData.setValue("contract_number", this.props.passedInData.contract_number);
+      }
+      userData.setValue("email", this.props.passedInData.email);
+    }
+
     this.state = {
-      showContractNumber: this.props.showContractNumAlways!==undefined,
+      showContractNumber: this.props.showContractNumAlways !== undefined
     }
   }
 
@@ -88,7 +98,6 @@ export default class UserFields extends React.Component {
             <div className="col-xs-12">
               <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword} noExtraLabelText messageNode={emailSmalltext}/>
             </div>
-
           </div>}
         </div>
       </div>
