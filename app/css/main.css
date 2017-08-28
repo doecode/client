@@ -296,12 +296,38 @@ html h3 {
 }
 
 .search-result-title {
-  font-size: 18px;
+  font-size: 24px;
+}
+
+.search-results-list {
+  font-size: 16px;
+}
+
+.search-result-sub-row {
+  margin-top: -14.5px;
+  padding-left: 0px;
+}
+
+.search-results-count {
+  font-size: 32px !important;
+  font-weight: 300 !important;
 }
 
 .search-result-row {
   overflow: auto;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  border-color: #F9F9F9;
+  background-color: #F9F9F9 !important;
+  padding-top: 7px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.search-result-row:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+
+.search-for-sidebar-row {
+  border-bottom: 1px solid #ddd;
 }
 
 .rounded {
@@ -315,15 +341,28 @@ html h3 {
 }
 
 .search-result-author a {
-  color: green;
+  color: #7cb342;
+  font-size: 13.6px;
 }
 
 .search-result-release-date {
   font-size: 14px;
 }
 
+.search-result-description {
+  font-size: 16px;
+}
+
 .search-result-doi {
   font-size: 15px;
+}
+
+.sidebar {
+  //border-right: 1px solid #ddd;
+}
+
+.all-search-results-row {
+  border-left: 1px solid #ddd;
 }
 
 .col {
@@ -755,12 +794,22 @@ ol.progtrckr li.progtrckr-done:hover:before {
 }
 
 .search-sidebar-filter-title {
-  font-size: 18px !important;
+  font-size: 16px !important;
   font-weight: bold !important;
+  margin-left: 0px !important;
+  color: #777;
+  font-weight: 300 !important;
+}
+
+.search-sidebar-text {
+  color: black !important;
+  font-size: 16px !important;
 }
 
 .search-sidebar-text label {
-  font-weight: 300;
+  font-weight: 400;
+  font-size: 13.6px;
+  color: black !important
 }
 
 .account-panel-header {

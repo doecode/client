@@ -20,9 +20,8 @@ export default class SearchCheckbox extends React.Component {
 
     return (
       <span>
-        <input name={this.props.name} type="checkbox" checked={this.state.checked} onChange={this.toggleCheckbox}/>
+        <input className='styled-checkbox' name={this.props.name} type="checkbox" checked={this.state.checked} onChange={this.toggleCheckbox}/>
       </span>
-
     );
   }
 

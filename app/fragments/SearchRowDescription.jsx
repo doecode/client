@@ -7,11 +7,11 @@ export default class SearchRowDescription extends React.Component{
             is_open:false
         }
         this.toggleOpenState = this.toggleOpenState.bind(this);
-        
+
         const description = this.props.text;
         const descriptionWords = description.split(" ");
         this.needsToggle = descriptionWords.length>100;
-        
+
         if(this.needsToggle){
             this.descriptionPt1=descriptionWords.slice(0,100).join(' ');
             this.descriptionPt2=descriptionWords.slice(100,descriptionWords.length).join(' ');
@@ -19,17 +19,16 @@ export default class SearchRowDescription extends React.Component{
             this.descriptionPt1=description;
         }
     }
-    
+
     toggleOpenState(){
         this.setState(
             {'is_open' : !this.state.is_open}
         );
     }
-  
+
     render(){
     return(
-    <div>
-        <blockquote>
+        <div className='search-result-description'>
             <span>
                 {this.descriptionPt1}
             </span>
@@ -52,7 +51,6 @@ export default class SearchRowDescription extends React.Component{
                 </span>
                 }
             </span>
-        </blockquote>
-    </div>);
+        </div>);
     }
 }
