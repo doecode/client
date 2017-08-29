@@ -6,6 +6,7 @@ import SearchData from '../stores/SearchData';
 import SearchField from '../field/SearchField';
 import staticLists from '../staticJson/staticLists';
 import staticContstants from '../staticJson/constantLists';
+import AdvancedSearchButton from './AdvancedSearchButton';
 
 const searchData = new SearchData();
 
@@ -13,17 +14,9 @@ const searchData = new SearchData();
 export default class AdvancedSearch extends React.Component {
   constructor(props) {
     super(props);
-    this.search = this.search.bind(this);
-  }
-
-  search() {
-    searchData.setValue("start", 0);
-    window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
-    window.location.href = "/doecode/results";
   }
 
   render() {
-
     return (
       <div className="row not-so-wide-row">
         <div className="col-md-3"></div>
@@ -59,11 +52,8 @@ export default class AdvancedSearch extends React.Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col-xs-12">
-                  <button type="button" className="btn btn-lg btn-primary" onClick={this.search}>
-                    <span className="fa fa-search"></span>
-                    Search
-                  </button>
+                <div className="col-xs-12 no-col-padding-left">
+                  <AdvancedSearchButton/>
                 </div>
                 <br/>
               </div>
