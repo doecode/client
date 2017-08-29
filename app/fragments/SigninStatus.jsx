@@ -63,9 +63,12 @@ export default class SigninStatus extends React.Component {
               <a href="/doecode/pending">
                 <span className='fa fa-clock-o'></span>&nbsp; Pending Approval</a>
             </li>}
+            {/*
             {this.has_osti_role && <li>
-              <a href='/doecode/user-admin'><span className='fa fa-user-plus'></span>&nbsp; User Admin</a>
+              <a href='/doecode/user-admin'>
+                <span className='fa fa-user-plus'></span>&nbsp; User Admin</a>
             </li>}
+          */}
             <li role="separator" className="divider"></li>
             <li className="clickable">
               <a onClick={this.logout}>

@@ -91,7 +91,7 @@ class DOECodeRouter extends React.Component {
               <Route path="/help" component={HelpPage}/>
               <Route path="/forgot-password" component={ForgotPassword}/>
               <Route path="/error" component={ErrorPage}/>
-              <Route path="/user-admin" component={UserAdmin}/>
+              {/*<Route path="/user-admin" component={UserAdmin}/>*/}
             </div>
           </div>
           <Footer is_homepage={this.is_homepage}/>
