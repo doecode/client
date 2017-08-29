@@ -174,12 +174,12 @@ html h3 {
   color: #990000 !important
 }
 
-.no-col-padding-left{
-  padding-left:0px;
+.no-col-padding-left {
+  padding-left: 0px;
 }
 
-.no-col-padding-right{
-  padding-right:0px;
+.no-col-padding-right {
+  padding-right: 0px;
 }
 
 .no-margin-left {
@@ -303,9 +303,13 @@ html h3 {
   background-color: #ebebeb;
 }
 
+.biblio-row>dl {
+  margin-bottom: 0px;
+}
+
 .search-result-title {
   font-size: 24px;
-  font-weight:300;
+  font-weight: 300;
 }
 
 .search-results-list {
@@ -326,7 +330,7 @@ html h3 {
 .search-results-count {
   font-size: 32px !important;
   font-weight: 300 !important;
-  margin-left:0px !important;
+  margin-left: 0px !important;
 }
 
 .search-result-row {
@@ -361,9 +365,9 @@ html h3 {
 
 .search-result-release-date {
   font-size: 14px;
-  text-align:left;
+  text-align: left;
   padding-top: 5px;
-padding-bottom: 5px;
+  padding-bottom: 5px;
 }
 
 .search-result-description {
@@ -886,6 +890,20 @@ html, button, body, input, select, textarea, p {
 
 .biblio-sub-dl dt {
   font-weight: normal;
+}
+
+.search-checkbox {
+  width: 14px;
+  height: 14px;
+  background-color: #e6e6e6;
+}
+
+.search-checkbox:hover {
+  background-color: #CCCCCC
+}
+
+.search-checkbox-box {
+  display: none;
 }
 
 @keyframes spin {

@@ -53,7 +53,9 @@ export default class BiblioPage extends React.Component {
       let devs = metadata.getValue("developers");
       let names = []
       for (var i = 0; i < devs.length; i++) {
-        names.push(devs[i].last_name + ", " + devs[i].first_name);
+        if (!(devs[i].last_name == 'None' && devs[i].first_name == 'None')) {
+          names.push(devs[i].last_name + ", " + devs[i].first_name);
+        }
       }
 
       textContent = <span><DevAndContribLinks groupType="developer" devsAndContributorsObj={devs} devsAndContributors={names}/></span>;
@@ -73,7 +75,7 @@ export default class BiblioPage extends React.Component {
       textContent = <span><LicensesItem items={licenses} proprietary_url={metadata.getValue("proprietary_url")}/></span>;
       show_val = licenses.length > 0;
 
-    }  else if (header == "Release Date") {
+    } else if (header == "Release Date") {
       textContent = <span>
         {metadata.getValue("release_date")._i}
       </span>;
@@ -165,12 +167,14 @@ export default class BiblioPage extends React.Component {
           </div>
           {/*Title*/}
           <div className="row">
-            <div className="col-xs-12 center-text biblio-title-container">
+            <div className='col-md-2'></div>
+            <div className="col-md-8 col-xs-12 center-text biblio-title-container">
               <div className="biblio-title">
                 {metadata.getValue("software_title")}
               </div>
               <br/>
             </div>
+            <div className='col-md-2'></div>
           </div>
           {/*Description and other Data*/}
           <div className="row">
@@ -179,7 +183,7 @@ export default class BiblioPage extends React.Component {
                 {descriptionContent}
               </div>
               <div className="row">
-                <div className="citation-details-div col-xs-12">
+                <div className="citation-details-div col-xs-12  no-col-padding-left no-col-padding-right">
                   {fieldsContent}
                 </div>
               </div>
