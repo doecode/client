@@ -444,7 +444,9 @@ html h3 {
 }
 
 .search-box {
-  font-size: 20px;
+  font-size: 16px;
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
 }
 
 .navbar .navbar-nav {
@@ -597,7 +599,7 @@ html, body {
 }
 
 .adv-search-button-icon {
-  font-size: 20px;
+  font-size: 15px;
   color: #7EAE49;
 }
 
@@ -681,7 +683,7 @@ html, body {
 }
 
 .icon-row a.icon-row-icon {
-  font-size: 50px;
+  font-size: 38px;
 }
 
 .clickable {
@@ -889,8 +891,16 @@ ol.progtrckr li.progtrckr-done:hover:before {
   border-top: none !important;
 }
 
-.search-btn-container {
-  margin-left: -25px;
+.search-btn-container {}
+
+.search-btn {
+  background-color: #7EAE49;
+  background-image: none;
+  width: 61px;
+}
+
+.search-btn:hover {
+  background-color: #7DAD49 !important;
 }
 
 
@@ -929,14 +939,14 @@ html, button, body, input, select, textarea, p {
   position: absolute;
   left: 0px;
   right: 0px;
-  top: 45px;
+  top: 34px;
   z-index: 2;
   margin-right: 14px;
   margin-left: 14px;
 }
 
-.adv-search-dropdown-title-row{
-    border-bottom: 1px solid #cccccc;
+.adv-search-dropdown-title-row {
+  border-bottom: 1px solid #cccccc;
 }
 
 @keyframes spin {
