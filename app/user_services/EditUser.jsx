@@ -113,7 +113,6 @@ export default class EditUser extends React.Component {
       ],
       updatePasswordClass: 'has-success center-text'
     });
-    console.log(JSON.stringify(data));
     setTimeout(function() {
       window.location.href = '/doecode/account';
     }, 2000);
@@ -206,6 +205,13 @@ export default class EditUser extends React.Component {
           <br/>
           <div className='row'>
             <div className='col-xs-12'>
+              <div className='row'>
+                <div className='col-md-3'></div>
+                <div className='col-md-6 col-xs-12'>
+                  <PageMessageBox classValue='has-error center-text' showMessage={this.state.showPasswordChangeMessage} items={['Please Change Your Password']} keyPrefix='psswd'/>
+                </div>
+                <div className='col-md-3'></div>
+              </div>
               <div className="panel panel-default">
                 <div className="panel-heading account-panel-header center-text">Password</div>
                 <div className="panel-body account-panel-body">
@@ -230,13 +236,6 @@ export default class EditUser extends React.Component {
           </div>
           <div className='row'>
             <div className='col-xs-12'>
-              <div className='row'>
-                <div className='col-md-3'></div>
-                <div className='col-md-6 col-xs-12'>
-                  <PageMessageBox classValue='has-error center-text' showMessage={this.state.showPasswordChangeMessage} items={['Please Change Your Password']} keyPrefix='psswd'/>
-                </div>
-                <div className='col-md-3'></div>
-              </div>
               <div className="panel panel-default">
                 <div className="panel-heading account-panel-header center-text">User Information</div>
                 <div className="panel-body account-panel-body center-text">
@@ -285,7 +284,7 @@ export default class EditUser extends React.Component {
                   <button type="button" className='btn btn-lg btn-success' onClick={this.getAPIKey}>
                     <span className='fa fa-key'></span>
                     Generate Key</button>
-                    <br/>
+                  <br/>
                   <PageMessageBox classValue="center-text has-error" showMessage={true} items={['You will need to log out after generating a new API key']} keyPrefix='password'/>
                 </div>
               </div>

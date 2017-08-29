@@ -41,39 +41,49 @@ export default class SearchItem extends React.Component {
     }
     const biblioUrl = "/doecode/biblio?code_id=" + data.codeId;
 
+    var releaseDateDisplay = (releaseDate !== undefined)
+      ? <span className='search-result-release-date text-muted'>&nbsp;&nbsp;
+          <time>Release Date {releaseDate}</time>
+        </span>
+      : <span></span>;
     return (
-      <div className="col-xs-12 search-result-sub-row">
-        <div className="row">
-          <div className="col-xs-12">
-            <div>
-              {this.props.ResultNumber != undefined && <span>{this.props.ResultNumber}</span>}
-              <a href={biblioUrl} className="search-result-title">
-                {softwareTitle}
-              </a>
-            </div>
+      <div>
+        <div className='col-xs-1 search-result-count-column'>
+          {this.props.listNumber}.
+        </div>
+        <div className="col-xs-11 search-result-sub-row">
+          <div className="row">
+            <div className="col-xs-12">
+              <div>
 
-            <div className="search-result-author">
-              <DevAndContribLinks devsAndContributors={devContribList}/>
-            </div>
+                <a href={biblioUrl} className="search-result-title">
+                  {softwareTitle}
+                </a>
+              </div>
 
-            {doi !== undefined && <div className="search-result-doi">
-              <span className="fa fa-link"></span>
-              DOI:
-              <a href={doiUrl}>{doi}</a>
-            </div>}
+              <div className='row'>
+                <div className="search-result-author col-md-8 col-xs-12">
+                  <DevAndContribLinks devsAndContributors={devContribList} searchPage releaseDate={releaseDateDisplay}/>
+                </div>
 
-            {data.description !== undefined && <SearchRowDescription text={data.description}/>}
+              </div>
+              {doi !== undefined && <div className="search-result-doi">
+                <span className="fa fa-link"></span>
+                DOI:
+                <a href={doiUrl}>{doi}</a>
+              </div>}
 
-            {data.repositoryLink && <div className='right-text'>
+              {data.description !== undefined && <SearchRowDescription text={data.description}/>}
+
+              {data.repositoryLink && <div className='right-text'>
+                <br/>
+                <a target='_blank' href={data.repositoryLink}>Repository Link</a>
+              </div>}
               <br/>
-              <a target='_blank' href={data.repositoryLink}>Repository Link</a>
-            </div>}
-            <br/>
-            
+            </div>
           </div>
         </div>
       </div>
-
     );
   }
 

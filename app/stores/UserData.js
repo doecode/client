@@ -12,8 +12,9 @@ export default class UserData extends BaseData {
    		   	  confirm_password: '',
             pending_role: '',
             contract_number:'',
-            active_state:false,
-            roles_list:[]
+            active:false,
+            roles_list:[],
+            pending_roles:[]
       }
 
       const defaultUserSchema = {
@@ -23,8 +24,9 @@ export default class UserData extends BaseData {
              "password" : {required:true, completed:false, validations: [], error: ''},
              "confirm_password" : {required:true, completed:false, validations: [""], error: ''},
              "contract_number":{required:false, completed:false, validations: [], error: ''},
-             "active_state":{required:true, completed:false, validations:[], error:''},
-             "roles_list":{required:false, completed:false, validations:[], error:''}
+             "active":{required:true, completed:false, validations:[], error:''},
+             "roles_list":{required:false, completed:false, validations:[], error:''},
+             "pending_roles":{required:false, completed:false, validations:[],error:''}
         }
 
     	const props = {fieldMap: UserStore.user, infoSchema: UserStore.userSchema, fieldMapSnapshot: UserStore.defaultUser, infoSchemaSnapshot: UserStore.defaultUserSchema};

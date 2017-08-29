@@ -12,8 +12,9 @@ class UserStore {
           password: '',
           confirm_password: '',
           contract_number:'',
-					active_state:false,
-					roles_list:[]
+					active:false,
+					roles_list:[],
+					pending_roles:[]
     }
 
     this.defaultUserSchema = {
@@ -23,8 +24,9 @@ class UserStore {
           "password" : {required:true, completed:false, validations: [], error: ''},
           "confirm_password" : {required:true, completed:false, validations: ["PWMatch"], error: ''},
           "contract_number":{required:false, completed:false, validations: [], error: ''},
-					"active_state":{required:true, completed:false, validations:[], error:''},
-					"roles_list":{required:false, completed:false, validations:[], error:''}
+					"active":{required:true, completed:false, validations:[], error:''},
+					"roles_list":{required:false, completed:false, validations:[], error:''},
+					"pending_roles":{required:false, completed:false, validations:[],error:''}
       }
 
 		this.user = observable(this.defaultUser);

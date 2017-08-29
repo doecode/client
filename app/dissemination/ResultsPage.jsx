@@ -74,7 +74,8 @@ export default class ResultsPage extends React.Component {
         value: 'Page ' + pageNum + ' of ' + Math.ceil(this.state.numFound / searchData.getValue("rows"))
       }
     ];
-    var searchDescription = <SearchResultsDescription />
+    var searchDescription = <SearchResultsDescription/>;
+    var searchNumCounter = pagStartVal;
     return (
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
@@ -97,15 +98,11 @@ export default class ResultsPage extends React.Component {
             <div className="col-md-6 col-xs-12 all-search-results-row">
               <br/>
               <div className="row">
-                <div className="col-xs-12">
+                <div className="col-xs-12 no-col-padding-left">
                   {this.state.results != undefined && <div>
-                    <ol start={pagStartVal} className='search-results-list'>
-                      {this.state.results.docs.map((row, index) => <li key={row.codeId}>
-                          <div className='search-result-row'>
-                            <SearchItem data={row}/>
-                          </div>
-                      </li>)}
-                    </ol>
+                    {this.state.results.docs.map((row, index) => <div className='search-result-row' key={index}>
+                      <SearchItem listNumber={searchNumCounter++} data={row}/>
+                    </div>)}
                   </div>}
                 </div>
               </div>

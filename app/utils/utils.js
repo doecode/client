@@ -102,22 +102,21 @@ function checkIsAuthenticated() {
   });
 }
 
-function checkHasRole(role, successCallback) {
-  if (successCallback === undefined) {
-    successCallback = () => {
-      localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
-    };
-  }
+function checkHasRole(role) {
 
   $.ajax({
-    url: '/doecode/api/user/role/' + role,
+    url: '/doecode/api/user/role/OSTI',
     cache: false,
     method: 'GET',
     beforeSend: function(request) {
       request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
     },
-    success: successCallback,
-    error: handleAuthenticatedError
+    success: function(){
+      localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
+    },
+    error: function(jqXhr,exception){
+      handleAuthenticatedError(jqXhr,exception);
+    }
   });
 }
 
@@ -133,7 +132,8 @@ function handleAuthenticatedError(jqXhr, exception, callback) {
     window.location.href = '/doecode/login?redirect=true';
   } else if (jqXhr.status == 403) {
     window.location.href = '/doecode/forbidden'
-  } else if (callback !== undefined) {
+
+  } else if (callback != undefined) {
     callback(jqXhr, exception);
   } else {
     window.location.href = '/doecode/errorPage';

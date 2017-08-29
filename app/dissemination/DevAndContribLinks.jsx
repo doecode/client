@@ -18,7 +18,7 @@ export default class DevAndContribLinks extends React.Component {
 
   createLink(name, index, array) {
     return (
-      <span key={name+this.props.groupType+index}>
+      <span key={name + this.props.groupType + index}>
         <SearchLink field="developers_contributors" value={name.trim()}/> {index != array.length - 1 && <span>
           ;&nbsp;
         </span>}
@@ -48,7 +48,22 @@ export default class DevAndContribLinks extends React.Component {
   }
 
   render() {
-    const content = this.props.devsAndContributors.map(this.createLink);
+    var devContribPropsList = this.props.devsAndContributors;
+    //Use a temporary list that will contain what we'll keep
+    var tempPropsList = [];
+    //Strip out all "None, None" entries
+    devContribPropsList.forEach(function(row) {
+      if (row.trim() != 'None, None') {
+        tempPropsList.push(row);
+      }
+    });
+    devContribPropsList = tempPropsList;
+
+    //If we're on the search page, and there are more than 3 items in the array, let's take out only 3, and show ... for the rest
+    if (this.props.searchPage !== undefined && devContribPropsList.length > 3) {
+      devContribPropsList = devContribPropsList.slice(0, 3);
+    }
+    const content = devContribPropsList.map(this.createLink);
     let affiliations_list = [];
 
     if (this.props.devsAndContributorsObj !== undefined) {
@@ -60,7 +75,7 @@ export default class DevAndContribLinks extends React.Component {
         });
       });
     }
-    const afiliationsList = affiliations_list.map((item,index) => <li key={this.props.groupType +"-"+index}>
+    const afiliationsList = affiliations_list.map((item, index) => <li key={this.props.groupType + "-" + index}>
       {item}
     </li>);
 
@@ -68,6 +83,8 @@ export default class DevAndContribLinks extends React.Component {
       <div>
         <div>
           {content}
+          {(this.props.searchPage && this.props.devsAndContributors.length > 3) && <span>;&nbsp;&hellip;</span>}
+          {this.props.releaseDate}
         </div>
         <div>
           {affiliations_list.length > 0 && <div>

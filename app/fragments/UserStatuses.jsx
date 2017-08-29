@@ -8,10 +8,15 @@ export default class UserStatuses extends React.Component {
   constructor(props) {
     super(props);
     this.handleActiveToggle = this.handleActiveToggle.bind(this);
+    console.log("Is active: " + userData.getValue("active"));
+    this.state = {
+      activeChecked: userData.getValue("active")
+    }
   }
 
   handleActiveToggle(event) {
-    userData.setValue("active_state", event.target.checked);
+    userData.setValue("active", event.target.checked);
+    this.setState({activeChecked: event.target.checked});
   }
 
   /*At the moment only one role is allowed at a time. IF this changes, change this code*/
@@ -24,28 +29,21 @@ export default class UserStatuses extends React.Component {
       ? this.props.passedInData
       : {
         adminPrivRequest: false,
-        isActive: false,
         role: ''
       };
     return (
       <span>
         <div className="checkbox">
-          <label htmlFor='active-state'><input type="checkbox" checked={usrData.isActive} onChange={this.handleActiveToggle} id='active-state' value="activeState"/>Is Active?</label>
+          <label htmlFor='active-state'><input type="checkbox" checked={this.state.activeChecked} onChange={this.handleActiveToggle} id='active-state'/>Is Active?</label>
         </div>
-        {this.props.adminPrivRequest && <div className="alert alert-info alert-dismissable">
-          <a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>
-          This user has requested administrative privileges
-        </div>}
-        <br/>
         <div className='form-group'>
           <div className='row'>
-            <label className='control-label col-xs-1' htmlFor='user-admin-box'>Roles:</label>
-            <div className='col-xs-11'>
-              <select className='form-control' value={usrData.role} id='roles-box' onChange={this.setRolesData}>
-                <option value=''></option>
-                {this.props.rolesList.map((row, index) => <option key={'roles-' + index}></option>)}
-              </select>
-            </div>
+            <label className='control-label' htmlFor='user-admin-box'>Roles:</label>
+            <br/>
+            <select className='form-control' value={usrData.role} id='roles-box' onChange={this.setRolesData}>
+              <option value=''></option>
+              {this.props.rolesList.map((row, index) => <option key={'roles-' + index}></option>)}
+            </select>
           </div>
         </div>
       </span>
