@@ -8,7 +8,6 @@ export default class UserStatuses extends React.Component {
   constructor(props) {
     super(props);
     this.handleActiveToggle = this.handleActiveToggle.bind(this);
-    console.log("Is active: " + userData.getValue("active"));
     this.state = {
       activeChecked: userData.getValue("active")
     }
@@ -21,7 +20,7 @@ export default class UserStatuses extends React.Component {
 
   /*At the moment only one role is allowed at a time. IF this changes, change this code*/
   setRolesData(event) {
-    userData.setValue("roles_list", [event.target.value]);
+    userData.setValue("roles", [event.target.value]);
   }
 
   render() {
@@ -32,7 +31,7 @@ export default class UserStatuses extends React.Component {
         role: ''
       };
     return (
-      <span>
+      <div>
         <div className="checkbox">
           <label htmlFor='active-state'><input type="checkbox" checked={this.state.activeChecked} onChange={this.handleActiveToggle} id='active-state'/>Is Active?</label>
         </div>
@@ -42,11 +41,11 @@ export default class UserStatuses extends React.Component {
             <br/>
             <select className='form-control' value={usrData.role} id='roles-box' onChange={this.setRolesData}>
               <option value=''></option>
-              {this.props.rolesList.map((row, index) => <option key={'roles-' + index}></option>)}
+              {this.props.rolesList.map((row, index) => <option key={'roles-' + index}>{row}</option>)}
             </select>
           </div>
         </div>
-      </span>
+      </div>
     )
   }
 }

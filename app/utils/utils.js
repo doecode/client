@@ -105,17 +105,17 @@ function checkIsAuthenticated() {
 function checkHasRole(role) {
 
   $.ajax({
-    url: '/doecode/api/user/role/OSTI',
+    url: '/doecode/api/user/hasrole/' + role,
     cache: false,
     method: 'GET',
     beforeSend: function(request) {
       request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
     },
-    success: function(){
+    success: function() {
       localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
     },
-    error: function(jqXhr,exception){
-      handleAuthenticatedError(jqXhr,exception);
+    error: function(jqXhr, exception) {
+      handleAuthenticatedError(jqXhr, exception);
     }
   });
 }
@@ -206,13 +206,21 @@ function getChildData(type) {
   }
 
 }
+/*Sees whether or not the arrays contain the same stuff, regardless of order*/
+function doArraysContainSame(array1, array2) {
+  var containsSame = true;
+  array1.forEach(function(item) {
+    if (array2.indexOf(item) < 0) {
+      containsSame = false;
+      return false;
+    }
+  });
+  return containsSame;
+}
 
 function checkPassword(data) {
-  //const password = data.getValue("password");
   const password = data.password;
-  //const email = data.getValue("email");
   const email = data.email;
-  //const confirm = data.getValue("confirm_password");
   const confirm = data.confirm_password;
   const minLength = 8;
   const specialCharacterRegex = /[^a-zA-Z\d\s]/g;
@@ -243,3 +251,4 @@ export {clearLoginLocalstorage};
 export {setLoggedInAttributes};
 export {checkPassword};
 export {resetLoggedInAttributesUserData};
+export {doArraysContainSame};

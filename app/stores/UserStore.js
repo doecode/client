@@ -13,7 +13,7 @@ class UserStore {
           confirm_password: '',
           contract_number:'',
 					active:false,
-					roles_list:[],
+					roles:[],
 					pending_roles:[]
     }
 
@@ -25,7 +25,7 @@ class UserStore {
           "confirm_password" : {required:true, completed:false, validations: ["PWMatch"], error: ''},
           "contract_number":{required:false, completed:false, validations: [], error: ''},
 					"active":{required:true, completed:false, validations:[], error:''},
-					"roles_list":{required:false, completed:false, validations:[], error:''},
+					"roles":{required:false, completed:false, validations:[], error:''},
 					"pending_roles":{required:false, completed:false, validations:[],error:''}
       }
 

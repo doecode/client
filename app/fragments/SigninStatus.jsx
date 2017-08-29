@@ -25,7 +25,7 @@ export default class SigninStatus extends React.Component {
       }
     } else if (!this.is_logged_in && localStorage.token_expiration != '') {
       clearLoginLocalstorage();
-      window.location.href = '/doecode/logout';
+      //window.location.href = '/doecode/logout';
     }
   }
 

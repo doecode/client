@@ -178,7 +178,8 @@ export default class BiblioPage extends React.Component {
           </div>
           {/*Description and other Data*/}
           <div className="row">
-            <div className="col-md-10 col-xs-12">
+            <div className='col-md-2'></div>
+            <div className="col-md-8 col-xs-12">
               <div className="row">
                 {descriptionContent}
               </div>

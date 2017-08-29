@@ -5,7 +5,7 @@ import UserStatuses from '../fragments/UserStatuses'
 import UserData from '../stores/UserData';
 import PageMessageBox from '../fragments/PageMessageBox';
 import BootstrapAlertMsg from '../fragments/BootstrapAlertMsg';
-import {doAjax, doAuthenticatedAjax, checkIsAuthenticated, checkHasRole} from '../utils/utils';
+import {doAjax, doAuthenticatedAjax, checkIsAuthenticated, checkHasRole, doArraysContainSame} from '../utils/utils';
 
 const userData = new UserData();
 export default class SigninStatus extends React.Component {
@@ -20,7 +20,7 @@ export default class SigninStatus extends React.Component {
     this.parseLoadUserData = this.parseLoadUserData.bind(this);
     this.parseLoadUserDataError = this.parseLoadUserDataError.bind(this);
 
-    this.roles_list = [];
+    this.roles_list = ['OSTI', 'ADMIN', 'CONTR'];
     this.state = {
       showUserFields: false,
       showUserListLoadError: false,
@@ -29,12 +29,13 @@ export default class SigninStatus extends React.Component {
       showUserSaveError: false,
       userSaveError: [],
       showUserLoadError: false,
-      userLoadError: []
+      userLoadError: [],
+      original_user_data: {}
     }
   }
 
   componentDidMount() {
-    //checkHasRole('OSTI');
+    checkHasRole('OSTI');
     //Populate the users list
     doAuthenticatedAjax("GET", '/doecode/api/user/users', this.parseUserListData, null, this.parseUserListDataError);
   }
@@ -60,41 +61,95 @@ export default class SigninStatus extends React.Component {
       //Go to API and look user data up
       doAuthenticatedAjax('GET', '/doecode/api/user/' + event.target.value, this.parseLoadUserData, null, this.parseLoadUserDataError);
     } else {
-      this.setState({showUserFields: false});
+      this.setState({showUserFields: false, original_user_data: {}, showUserSaveError: false, showUserListLoadError: false, showUserSaveError: false});
     }
   }
 
   parseLoadUserData(data) {
+    console.log("User data: " + JSON.stringify(data));
     userData.loadValues(data);
-    this.setState({showUserFields: true});
+    this.setState({showUserFields: true, original_user_data: data});
   }
 
   parseLoadUserDataError(data) {
     this.setState({showUserFields: false, showUserLoadError: true, userLoadError: ['Error in loading user data']});
   }
 
-  saveUserData() {}
+  saveUserData() {
+    var post_data = {};
+    var changes_made = false;
 
-  parseSaveUserData() {}
+    //Let's go through and see if any changes were made
+    for (var key in this.state.original_user_data) {
+      //Get old and new values
+      var original_val = this.state.original_user_data[key];
+      var new_val = userData.getValue(key);
+
+      //See if there's a discrpency in the values
+      if (!Array.isArray(original_val) && original_val !== new_val) {
+        post_data[key] = new_val;
+        changes_made = true;
+
+      } else if (Array.isArray(original_val) && !doArraysContainSame(original_val, new_val)) {
+        post_data[key] = new_val;
+
+        changes_made = true;
+      }
+    }
+
+    //Now we check password stuff
+    if (userData.getValue("password") || userData.getValue("confirm_password")) {
+      post_data.password = userData.getValue("password");
+      post_data.confirm_password = userData.getValue("confirm_password");
+    }
+
+    console.log(JSON.stringify(post_data));
+    if (changes_made) {
+      doAuthenticatedAjax('POST', '/doecode/api/user/update/' + this.state.original_user_data.email, this.parseSaveUserData, post_data, this.parseSaveUserDataError);
+    } else {
+      this.setState({showUserSaveError: true, userSaveError: ['No changes were made']});
+      window.scrollTo(0, 0);
+    }
+  }
+
+  parseSaveUserData(data) {
+    console.log("SUccess");
+    console.log(JSON.stringify(data));
+  }
 
   parseSaveUserDataError() {
-    this.setState({userSaveError: true, userSaveError: ['Error in saving user data']});
+    console.log("You failed, like your mom");
+    this.setState({userSaveError: true, userSaveError: ['Error in saving user data'], original_user_data: {}});
   }
 
   render() {
-
+    //Data we'll pass in to the UserStatuses component
+    var passedInUserData = {};
     var requestedAdmin = (userData.getValue("pending_roles").indexOf('OSTI') > -1);
+    passedInUserData.adminPrivRequest = requestedAdmin;
+    //If they had any roles, grab those too
+    if (userData.getValue("roles").length > 0) {
+      passedInUserData.role = userData.getValue("roles")[0];
+    } else {
+      passedInUserData.role = '';
+    }
+
+    console.log(JSON.stringify(userData.getValue("roles")));
+    console.log(JSON.stringify(passedInUserData));
+
     return (
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
           {/*Title*/}
           <div className='row'>
             <div className='col-xs-12 center-text'>
+              <br/>
               <PageMessageBox classValue='has-error center-text' showMessage={this.state.showUserLoadError} items={this.state.userLoadError} keyprefix='userDataLoaderr'/>
               <PageMessageBox classValue='has-error center-text' showMessage={this.state.showUserListLoadError} items={this.state.userListLoadError} keyPrefix='userlisterr'/>
               <PageMessageBox classValue='has-error center-text' showMessage ={this.state.showUserSaveError} items={this.state.userSaveError} keyPrefix='usrSavErr'/>
               <h2 className="static-content-title">User Administration</h2>
             </div>
+
           </div>
           {/*User Select Box*/}
           <div className='row'>
@@ -115,7 +170,13 @@ export default class SigninStatus extends React.Component {
             </div>
             <div className='col-md-4'></div>
           </div>
-          <br/>
+          <div className='row'>
+            <div className='col-md-2'></div>
+            <div className='col-md-8 col-xs-12'>
+              <hr/>
+            </div>
+            <div className='col-md-2'></div>
+          </div>
           <br/>
           <div>
             {this.state.showUserFields && <div>
@@ -139,7 +200,7 @@ export default class SigninStatus extends React.Component {
               <div className='row'>
                 <div className='col-md-4'></div>
                 <div className='col-md-4 col-xs-12'>
-                  <UserStatuses adminPrivRequest={requestedAdmin} rolesList={this.roles_list}/>
+                  <UserStatuses adminPrivRequest={requestedAdmin} passedInData={passedInUserData} rolesList={this.roles_list}/>
                 </div>
                 <div className='col-md-4'></div>
               </div>

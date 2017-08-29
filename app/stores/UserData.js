@@ -13,7 +13,7 @@ export default class UserData extends BaseData {
             pending_role: '',
             contract_number:'',
             active:false,
-            roles_list:[],
+            roles:[],
             pending_roles:[]
       }
 
@@ -25,7 +25,7 @@ export default class UserData extends BaseData {
              "confirm_password" : {required:true, completed:false, validations: [""], error: ''},
              "contract_number":{required:false, completed:false, validations: [], error: ''},
              "active":{required:true, completed:false, validations:[], error:''},
-             "roles_list":{required:false, completed:false, validations:[], error:''},
+             "roles":{required:false, completed:false, validations:[], error:''},
              "pending_roles":{required:false, completed:false, validations:[],error:''}
         }
 
