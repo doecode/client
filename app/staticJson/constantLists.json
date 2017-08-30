@@ -1,11 +1,11 @@
 {
   "availabilities": [{
-      "label": "Open Source, Publicly Available",
+      "label": "Open Source, Publicly Available Repository",
       "value": "OS",
       "key": "availabilities-OS"
     },
     {
-      "label": "Open Source, Not Publicly Available",
+      "label": "Open Source, Not Publicly Available Repository",
       "value": "ON",
       "key": "availabilities-ON"
     },

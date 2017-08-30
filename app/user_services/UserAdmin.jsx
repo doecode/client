@@ -116,7 +116,7 @@ export default class SigninStatus extends React.Component {
 
     //Now we check password stuff
     if (userData.getValue("password") || userData.getValue("confirm_password")) {
-      post_data.password = userData.getValue("password");
+      post_data.new_password = userData.getValue("password");
       post_data.confirm_password = userData.getValue("confirm_password");
       changes_made = true;
     }

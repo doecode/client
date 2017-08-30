@@ -70,8 +70,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>When adding a contributor, use contributor type to define the role of the contributor. A drop-down menu is provided. For definitions of each contributor type, please see
-            &nbsp;<a href='https://schema.datacite.org/meta/kernel-4.0/'>DataCite</a>.</span>
+          <span>When adding a contributor, use contributor type to define the role of the contributor. A drop-down menu is provided. For definitions of each contributor type, please see &nbsp;<a href='https://schema.datacite.org/meta/kernel-4.0/'>DataCite</a>.</span>
         );
     } else if (this.props.item == "CountryOfOrigin") {
       returnData = (this.props.shortVersion !== undefined)
@@ -196,8 +195,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Provide, with controlled vocabulary, the relationship of the resource being registered and the related resource. The Relation Type field also allows you to define how the submitted software is related to the DOI you enter and the document you are submitting. For definitions of each relation type controlled vocabulary see
-            &nbsp;<a href='https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf'>this</a>.</span>
+          <span>Provide, with controlled vocabulary, the relationship of the resource being registered and the related resource. The Relation Type field also allows you to define how the submitted software is related to the DOI you enter and the document you are submitting. For definitions of each relation type controlled vocabulary see &nbsp;<a href='https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf'>this</a>.</span>
         );
     } else if (this.props.item == "ReleaseDate") {
       returnData = (this.props.shortVersion !== undefined)
@@ -214,8 +212,7 @@ export default class HelpTooltip extends React.Component {
         )
         : (
           <span>You must provide a URL in order to proceed. If you do not have a URL, please go to&nbsp;
-            <a href='#'>DOE Code</a>&nbsp;
-            and select Create a Repository.</span>
+            <a href='#'>DOE Code</a>&nbsp; and select Create a Repository.</span>
         );
     } else if (this.props.item == "RepositoryLink") {
       returnData = (this.props.shortVersion !== undefined)
@@ -223,7 +220,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Unique URL which leads to the landing page of the software</span>
+          <span>If you select Open Source, publically available you must provide a unique URL which leads to the actual code repository. Please ensure you are providing the direct URL to the actual repository. As an example, the direct repository URL for DOE CODE is https://www.github.com/doecode/doecode whereas the project landing page is https://www.github.com/doecode.</span>
         );
     } else if (this.props.item == "ResearchOrg") {
       returnData = (this.props.shortVersion !== undefined)
@@ -354,14 +351,14 @@ export default class HelpTooltip extends React.Component {
     /*Okay, the text we just got, we'll do something with it now*/
     return (
       <span>
-    {this.props.justText !== undefined && <span>
+        {this.props.justText !== undefined && <span>
           {returnData}
         </span>
-    }
-    {this.props.justText === undefined && <span>
+}
+        {this.props.justText === undefined && <span>
           Moo
         </span>
-    }</span>
-  );
+}</span>
+    );
   }
 }

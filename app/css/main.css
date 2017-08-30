@@ -953,6 +953,11 @@ html, button, body, input, select, textarea, p {
   border-bottom: 1px solid #cccccc;
 }
 
+/*HELP PAGE*/
+.help-page-software-availability{
+  padding-left:30px;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
