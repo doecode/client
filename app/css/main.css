@@ -847,7 +847,7 @@ ol.progtrckr li.progtrckr-done:hover:before {
 
 .search-sidebar-text label {
   font-weight: 400;
-  font-size: 13.6px;
+  font-size: 13px;
   color: black !important
 }
 
@@ -957,6 +957,11 @@ html, button, body, input, select, textarea, p {
 .help-page-software-availability{
   padding-left:30px;
 }
+
+.help-page-subtitle{
+  font-size:20px;
+}
+
 
 @keyframes spin {
   0% {

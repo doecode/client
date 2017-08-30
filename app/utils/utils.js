@@ -243,6 +243,10 @@ function checkPassword(data) {
   return newState;
 }
 
+function getIsLoggedIn(){
+   return (localStorage.token_expiration != "" && moment(localStorage.token_expiration, "YYYY-MM-DD HH:mm").isAfter(moment()));
+}
+
 export {doAjax};
 export {doAuthenticatedAjax};
 export {checkIsAuthenticated};
@@ -256,3 +260,4 @@ export {setLoggedInAttributes};
 export {checkPassword};
 export {resetLoggedInAttributesUserData};
 export {doArraysContainSame};
+export {getIsLoggedIn};

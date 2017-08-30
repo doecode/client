@@ -31,6 +31,7 @@ export default class Login extends React.Component {
   }
 
   parseLoginResponse(data) {
+
     setLoggedInAttributes(data);
     if (window.sessionStorage.lastLocation) {
       let url = window.sessionStorage.lastLocation;

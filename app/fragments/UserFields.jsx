@@ -35,10 +35,7 @@ export default class UserFields extends React.Component {
     userData.setValue("email", event.target.value);
 
     if ((validation.validateEmail(event.target.value) === "") && event.target.value.trim()) {
-      var post_obj = {
-        "email": event.target.value
-      };
-      doAjax('POST', '/doecode/api/user/getsitecode', this.handleContractNeedCheck, post_obj, this.handleContractNeedCheckError);
+      doAjax('GET', '/doecode/api/user/getsitecode/' + event.target.value, this.handleContractNeedCheck, null, this.handleContractNeedCheckError);
     }
   }
 
@@ -55,9 +52,7 @@ export default class UserFields extends React.Component {
   }
 
   handleContractCheck(event) {
-    if (event.target.value.trim() !== '') {
-      userData.setValue("contract_number", event.target.value);
-    }
+    userData.setValue("contract_number", event.target.value);
   }
 
   render() {

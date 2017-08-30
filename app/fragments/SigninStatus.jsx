@@ -1,5 +1,5 @@
 import React from 'react';
-import {doAjax, clearLoginLocalstorage, checkIsAuthenticated} from '../utils/utils';
+import {doAjax, clearLoginLocalstorage, checkIsAuthenticated, getIsLoggedIn} from '../utils/utils';
 import moment from 'moment';
 
 export default class SigninStatus extends React.Component {
@@ -9,7 +9,7 @@ export default class SigninStatus extends React.Component {
     this.logout = this.logout.bind(this);
 
     //Make sure that the token still hasn't expired
-    this.is_logged_in = (localStorage.token_expiration != "" && moment(localStorage.token_expiration, "YYYY-MM-DD HH:mm").isAfter(moment()));
+    this.is_logged_in = getIsLoggedIn();
 
     if (localStorage.roles) {
       var rolesArray = JSON.parse(localStorage.roles);
@@ -67,7 +67,7 @@ export default class SigninStatus extends React.Component {
               <a href='/doecode/user-admin'>
                 <span className='fa fa-user-plus'></span>&nbsp; User Admin</a>
             </li>}
-          
+
             <li role="separator" className="divider"></li>
             <li className="clickable">
               <a onClick={this.logout}>

@@ -14,7 +14,8 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Provide the URL for your software record and the available metadata fields will be automatically populated with the information provided.</span>
+          <span>
+            If a valid repository URL is provided this function will attempt to automatically populate metadata fields based on information provided in the repository. DOE CODE also provides functionality to allow users to auto-populate metadata by placing a specifically formatted YAML file their repository’s root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly. For detailed information and an example file please see: https://github.com/doecode/doecode/tree/master/metadata-schema.</span>
         );
     } else if (this.props.item == "ClosedSource") {
       returnData = (this.props.shortVersion !== undefined)
@@ -154,7 +155,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Code is Open Source, but is not yet available on a public site. Interested users can contact the developer(s) or responsibly parties for information regarding access and (re)use. A URL is required for submitting Open Source, not publicly available, the URL is typically a landing page where interested parties can find out more information about obtaining access to the code.</span>
+          <span>Code is Open Source, but is not yet available on a public site. Interested users can contact the developer(s) or responsibly parties for information regarding access and (re)use. A URL is required for submitting Open Source, no publicly available, the URL is typically a landing page where interested parties can find out more information about obtaining access to the code.</span>
         );
     } else if (this.props.item == "OpenSourcePublic") {
       returnData = (this.props.shortVersion !== undefined)
@@ -347,18 +348,36 @@ export default class HelpTooltip extends React.Component {
           <span>
             The name of the sponsoring or funding organization. If the sponsoring or funding organization is from the Department of Energy, please choose from the list of DOE organizations. Other sponsoring organization names will be freeform. Separate multiple sponsor names with a semicolon.</span>
         );
+    } else if (this.props.item == 'LandingPage') {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>
+            If you select&nbsp;
+            <strong>Open Source</strong>,&nbsp;
+            <strong>no publicly available repository</strong>&nbsp; OR&nbsp;
+            <strong>Closed Source</strong>&nbsp; you must provide a unique URL which leads to the landing page of the software. The landing page should provide information regarding how to access the source code, point of contact, and licensing information.
+          </span>
+        );
+    } else if (this.props.item == 'FileUpload') {
+      returnData = (this.props.shortVersion !== undefined)
+        ? (
+          <span></span>
+        )
+        : (
+          <span>
+            f you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing of your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, .tar.gz2, and .war.</span>
+        );
     }
     /*Okay, the text we just got, we'll do something with it now*/
     return (
       <span>
         {this.props.justText !== undefined && <span>
           {returnData}
-        </span>
-}
-        {this.props.justText === undefined && <span>
-          Moo
-        </span>
-}</span>
+        </span>}
+      </span>
     );
   }
 }

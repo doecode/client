@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBarItem from './NavigationBarItem';
+import {getIsLoggedIn} from '../utils/utils';
 
 export default class NavgationBar extends React.Component{
     constructor(props) {
