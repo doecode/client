@@ -209,12 +209,16 @@ function getChildData(type) {
 /*Sees whether or not the arrays contain the same stuff, regardless of order*/
 function doArraysContainSame(array1, array2) {
   var containsSame = true;
-  array1.forEach(function(item) {
-    if (array2.indexOf(item) < 0) {
-      containsSame = false;
-      return false;
-    }
-  });
+  if (array1.length == array2.length) {
+    array1.forEach(function(item) {
+      if (array2.indexOf(item) < 0) {
+        containsSame = false;
+        return false;
+      }
+    });
+  } else {
+    containsSame = false;
+  }
   return containsSame;
 }
 

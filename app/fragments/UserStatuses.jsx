@@ -8,8 +8,10 @@ export default class UserStatuses extends React.Component {
   constructor(props) {
     super(props);
     this.handleActiveToggle = this.handleActiveToggle.bind(this);
+    this.setRolesData = this.setRolesData.bind(this);
     this.state = {
-      activeChecked: userData.getValue("active")
+      activeChecked: userData.getValue("active"),
+      chosenRole: this.props.passedInData.role
     }
   }
 
@@ -20,16 +22,12 @@ export default class UserStatuses extends React.Component {
 
   /*At the moment only one role is allowed at a time. IF this changes, change this code*/
   setRolesData(event) {
+    this.setState({chosenRole: event.target.value});
     userData.setValue("roles", [event.target.value]);
   }
 
   render() {
-    var usrData = (this.props.passedInData != undefined)
-      ? this.props.passedInData
-      : {
-        adminPrivRequest: false,
-        role: ''
-      };
+
     return (
       <div>
         <div className="checkbox">
@@ -39,9 +37,9 @@ export default class UserStatuses extends React.Component {
           <div className='row'>
             <label className='control-label' htmlFor='user-admin-box'>Roles:</label>
             <br/>
-            <select className='form-control' value={usrData.role} id='roles-box' onChange={this.setRolesData}>
+            <select className='form-control' value={this.state.chosenRole} id='roles-box' onChange={this.setRolesData}>
               <option value=''></option>
-              {this.props.rolesList.map((row, index) => <option key={'roles-' + index}>{row}</option>)}
+              {this.props.rolesList.map((row, index) => <option key={'roles-' + index} value={row.value}>{row.label}</option>)}
             </select>
           </div>
         </div>

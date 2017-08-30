@@ -19,8 +19,21 @@ export default class SigninStatus extends React.Component {
     this.parseUserListDataError = this.parseUserListDataError.bind(this);
     this.parseLoadUserData = this.parseLoadUserData.bind(this);
     this.parseLoadUserDataError = this.parseLoadUserDataError.bind(this);
+    this.refreshPageUI = this.refreshPageUI.bind(this);
 
-    this.roles_list = ['OSTI', 'ADMIN', 'CONTR'];
+    this.roles_list = ['OSTI'];
+    this.roles_list = [
+      {
+        label: 'OSTI',
+        value: 'OSTI'
+      }, {
+        label: 'Administrator',
+        value: 'ADMIN'
+      }, {
+        label: 'Contractor',
+        value: 'CONTR'
+      }
+    ];
     this.state = {
       showUserFields: false,
       showUserListLoadError: false,
@@ -30,7 +43,9 @@ export default class SigninStatus extends React.Component {
       userSaveError: [],
       showUserLoadError: false,
       userLoadError: [],
-      original_user_data: {}
+      original_user_data: {},
+      showUserSaveSuccess: false,
+      userSaveMessage: []
     }
   }
 
@@ -57,16 +72,18 @@ export default class SigninStatus extends React.Component {
   }
 
   loadUserData(event) {
+    this.refreshPageUI();
     if (event.target.value != '') {
       //Go to API and look user data up
       doAuthenticatedAjax('GET', '/doecode/api/user/' + event.target.value, this.parseLoadUserData, null, this.parseLoadUserDataError);
-    } else {
-      this.setState({showUserFields: false, original_user_data: {}, showUserSaveError: false, showUserListLoadError: false, showUserSaveError: false});
     }
   }
 
+  refreshPageUI() {
+    this.setState({showUserFields: false, original_user_data: {}, showUserSaveError: false, showUserListLoadError: false, showUserSaveError: false});
+  }
+
   parseLoadUserData(data) {
-    console.log("User data: " + JSON.stringify(data));
     userData.loadValues(data);
     this.setState({showUserFields: true, original_user_data: data});
   }
@@ -92,18 +109,18 @@ export default class SigninStatus extends React.Component {
 
       } else if (Array.isArray(original_val) && !doArraysContainSame(original_val, new_val)) {
         post_data[key] = new_val;
-
         changes_made = true;
       }
+
     }
 
     //Now we check password stuff
     if (userData.getValue("password") || userData.getValue("confirm_password")) {
       post_data.password = userData.getValue("password");
       post_data.confirm_password = userData.getValue("confirm_password");
+      changes_made = true;
     }
 
-    console.log(JSON.stringify(post_data));
     if (changes_made) {
       doAuthenticatedAjax('POST', '/doecode/api/user/update/' + this.state.original_user_data.email, this.parseSaveUserData, post_data, this.parseSaveUserDataError);
     } else {
@@ -113,12 +130,21 @@ export default class SigninStatus extends React.Component {
   }
 
   parseSaveUserData(data) {
-    console.log("SUccess");
-    console.log(JSON.stringify(data));
+    this.setState({
+      showUserSaveSuccess: true,
+      userSaveMessage: [
+        'Save successful', 'Page will refresh in 3 seconds'
+      ],
+      showUserSaveError: false,
+      userSaveError: []
+    });
+    window.scrollTo(0, 0);
+    setTimeout(function() {
+      window.location.href = '/doecode/user-admin';
+    }, 3000);
   }
 
   parseSaveUserDataError() {
-    console.log("You failed, like your mom");
     this.setState({userSaveError: true, userSaveError: ['Error in saving user data'], original_user_data: {}});
   }
 
@@ -134,9 +160,7 @@ export default class SigninStatus extends React.Component {
       passedInUserData.role = '';
     }
 
-    console.log(JSON.stringify(userData.getValue("roles")));
-    console.log(JSON.stringify(passedInUserData));
-
+    //  console.log("Passed in role: "+passedInUserData.role);
     return (
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
@@ -144,6 +168,7 @@ export default class SigninStatus extends React.Component {
           <div className='row'>
             <div className='col-xs-12 center-text'>
               <br/>
+              <PageMessageBox classValue='has-success center-text' showMessage={this.state.showUserSaveSuccess} items={this.state.userSaveMessage} keyprefix='successfulsave-'/>
               <PageMessageBox classValue='has-error center-text' showMessage={this.state.showUserLoadError} items={this.state.userLoadError} keyprefix='userDataLoaderr'/>
               <PageMessageBox classValue='has-error center-text' showMessage={this.state.showUserListLoadError} items={this.state.userListLoadError} keyPrefix='userlisterr'/>
               <PageMessageBox classValue='has-error center-text' showMessage ={this.state.showUserSaveError} items={this.state.userSaveError} keyPrefix='usrSavErr'/>

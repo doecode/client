@@ -15,6 +15,18 @@ export default class SearchBar extends React.Component {
     this.search = this.search.bind(this);
     this.doAdvancedSearch = this.doAdvancedSearch.bind(this);
     this.triggerSearch = this.triggerSearch.bind(this);
+
+    if (this.props.largerBar !== undefined) {
+      this.searchBarStyles = "form-control input-lg search-box";
+      this.advSearchButtonStyles = "btn btn-default btn-lg adv-search-button";
+      this.searchButtonStyles = "btn btn-success search-btn btn-lg";
+      this.advDropdownStyles = "adv-search-dropdown adv-search-dropdown-lg row";
+    } else {
+      this.searchBarStyles = "form-control search-box";
+      this.advSearchButtonStyles = "btn btn-default adv-search-button";
+      this.searchButtonStyles = "btn btn-success search-btn";
+      this.advDropdownStyles="adv-search-dropdown row";
+    }
   }
   onAllFieldsChange(event) {
     this.setState({"all_fields": event.target.value});
@@ -34,7 +46,7 @@ export default class SearchBar extends React.Component {
     });
   }
 
-  triggerSearch(event){
+  triggerSearch(event) {
     console.log("triggered");
     if (event.key === 'Enter') {
       this.search();
@@ -47,15 +59,15 @@ export default class SearchBar extends React.Component {
         <div className={this.props.searchbarSize}>
           <div className='input-group'>
             <label htmlFor="allSearch" className="sr-only">Search DOE CODE for Published Software Entries</label>
-            <input id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className="form-control search-box" placeholder="Search DOE CODE for Published Software Entries"/>
+            <input id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className={this.searchBarStyles} placeholder="Search DOE CODE for Published Software Entries"/>
             <span className='input-group-btn'>
-              <button onClick={this.doAdvancedSearch} className='btn btn-default adv-search-button' type='button'>
+              <button onClick={this.doAdvancedSearch} className={this.advSearchButtonStyles} type='button'>
                 <span className="fa fa-caret-down adv-search-button-icon"></span>
               </button>
             </span>
           </div>
           {/*Advanced search dropdown*/}
-          {this.state.show_dropdown && <div className='adv-search-dropdown row'>
+          {this.state.show_dropdown && <div className={this.advDropdownStyles}>
             <div className='col-xs-12 '>
               <div className='row adv-search-dropdown-title-row'>
                 <div className='col-xs-12 no-col-padding-left'>
@@ -93,7 +105,7 @@ export default class SearchBar extends React.Component {
           </div>}
         </div>
         <div className="col-xs-2 search-btn-container text-left no-col-padding-left">
-          <button type="button" className="btn btn-success search-btn" onClick={this.search}>
+          <button type="button" className={this.searchButtonStyles} onClick={this.search}>
             <span className="fa fa-search"></span>
           </button>
         </div>

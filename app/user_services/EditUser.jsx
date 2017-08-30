@@ -156,7 +156,7 @@ export default class EditUser extends React.Component {
     });
     setTimeout(function() {
       window.location.href = '/doecode/account';
-    }, 2000);
+    }, 3000);
   }
 
   parseUpdateUserError(data) {
@@ -198,6 +198,9 @@ export default class EditUser extends React.Component {
 
     const accountSaveUser = <span>
       <span className="fa fa-floppy-o"></span>&nbsp; Save User</span>;
+
+    //var showAdminRole = (localStorage.roles && JSON.parse(localStorage.roles).indexOf("CONTR")<0);
+
     return (
       <div className="row not-so-wide-row">
         <div className="col-md-3"></div>
@@ -260,7 +263,7 @@ export default class EditUser extends React.Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-6 col-xs-12">
+            {/*<div className="col-md-6 col-xs-12">
               <div className="panel panel-default">
                 <div className="panel-heading account-panel-header center-text">Administrative Role</div>
                 <div className="panel-body account-panel-body center-text">
@@ -273,17 +276,17 @@ export default class EditUser extends React.Component {
                   </button>
                 </div>
               </div>
-            </div>
+            </div>*/}
             <div className='col-md-6 col-xs-12'>
               <div className="panel panel-default">
-                <div className="panel-heading account-panel-header center-text">API Key</div>
+                <div className="panel-heading account-panel-header center-text">Generate New API Key</div>
                 <div className="panel-body center-text">
                   <div>
                     <PageMessageBox classValue={this.state.apiKeyClass} showMessage={this.state.showAPIKeyMessage} items={this.state.apiKeyMsg} keyPrefix='apikey'/>
                   </div>
                   <button type="button" className='btn btn-lg btn-success' onClick={this.getAPIKey}>
-                    <span className='fa fa-key'></span>
-                    Generate Key</button>
+                    <span className='fa fa-key'></span>&nbsp;Generate</button>
+                  <br/>
                   <br/>
                   <PageMessageBox classValue="center-text has-error" showMessage={true} items={['You will need to log out after generating a new API key']} keyPrefix='password'/>
                 </div>

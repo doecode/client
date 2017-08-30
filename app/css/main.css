@@ -939,10 +939,14 @@ html, button, body, input, select, textarea, p {
   position: absolute;
   left: 0px;
   right: 0px;
-  top: 34px;
+  top:35px;
   z-index: 2;
   margin-right: 14px;
   margin-left: 14px;
+}
+
+.adv-search-dropdown-lg{
+  top: 45px;
 }
 
 .adv-search-dropdown-title-row {
