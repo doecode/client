@@ -50,7 +50,7 @@ export default class MetadataPanel extends React.Component {
                                 <MetadataField field="description" label="Description/Abstract" elementType="textarea" />
                                 <MetadataField field="licenses" label="Licenses" elementType="select" changeCallback={this.checkForProp} options={staticContstants.licenseOptions} isArray={true} multi={true} placeholder="Select your license(s)" />
                                 {propInfo.required &&
-                                <MetadataField field="proprietary_url" label="Proprietary URL" elementType="input" />
+                                <MetadataField field="proprietary_url" label="License URL" elementType="input" />
                                 }
                             </div>
                         </div>

@@ -120,7 +120,7 @@ export default class Field extends React.Component {
              label += " (Required Field)";
              labelStyle += " req ";
            }
-       else {
+       else if (elementType !== 'radio') {
              label += " (Optional Field)";
        }
      }

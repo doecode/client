@@ -52,7 +52,7 @@ class MetadataStore {
 					"software_title": {required:"pub", label: "Software Title", completed:false, validations: [], Panel: "Product Description", error: ''},
 	        "description": {required:"pub", label: "Description/Abstract", completed:false, validations: [], Panel: "Product Description", error: ''},
 	        "licenses": {required:"pub", label: "Licenses", completed:false, hasError:false, validations: [], Panel: "Product Description", error: ''},
-					"proprietary_url": {required: "", label: "Proprietary URL", completed:false, hasError:false, validations: ["url"], Panel: "", error: ''},
+					"proprietary_url": {required: "", label: "License URL", completed:false, hasError:false, validations: ["url"], Panel: "", error: ''},
 	        "developers": {required:"pub", label: "Developers", completed:false, hasError:false, validations: [], Panel: "Developers", error: ''},
 	        "doi": {required:"", completed:false, validations: ["doi"], Panel: "DOI and Release Date", error: ''},
 	        "doi_infix" : {required:"", completed:false, validations: [""], Panel: "", error: ''},
