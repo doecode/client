@@ -15,7 +15,8 @@ export default class HelpTooltip extends React.Component {
         )
         : (
           <span>
-            If a valid repository URL is provided this function will attempt to automatically populate metadata fields based on information provided in the repository. DOE CODE also provides functionality to allow users to auto-populate metadata by placing a specifically formatted YAML file their repository’s root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly. For detailed information and an example file please see: https://github.com/doecode/doecode/tree/master/metadata-schema.</span>
+            If a valid repository URL is provided this function will attempt to automatically populate metadata fields based on information provided in the repository. DOE CODE also provides functionality to allow users to auto-populate metadata by placing a specifically formatted YAML file their repository's root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly. For detailed information and an example file please see:
+            <a target='_blank' href='https://github.com/doecode/doecode/tree/master/metadata-schema'>https://github.com/doecode/doecode/tree/master/metadata-schema</a>.</span>
         );
     } else if (this.props.item == "ClosedSource") {
       returnData = (this.props.shortVersion !== undefined)
@@ -39,7 +40,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>The name of a person or institution that has contributed to the software (code, documentation, tests, ideas, project guidance, etc.), but is not listed as a developer. Separate multiple contributors with a semicolon.</span>
+          <span>The name of a person or institution that has contributed to the software (code, documentation, tests, ideas, project guidance, etc.), but is not listed as a developer.</span>
         );
     } else if (this.props.item == "ContributorDOEOrg") {
       returnData = (this.props.shortVersion !== undefined)
@@ -63,7 +64,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Other organizations which provided support to the project. May be entered in place of naming individual software developers. Separate multiple contributing organizations with a semicolon.</span>
+          <span>Other organizations which provided support to the project. May be entered in place of naming individual software developers.</span>
         );
     } else if (this.props.item == "ContributorType") {
       returnData = (this.props.shortVersion !== undefined)
@@ -105,7 +106,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>A unique persistent identifier that references a digital object and provides long-term access; DOIs remain stable even if the underlying address or URL for the content changes. If a DOI has not yet been minted for the software, OSTI will mint a persistent identifier (see Reserve DOI), in the form of a DOI, for the software</span>
+          <span>A unique persistent identifier that references a digital object and provides long-term access; DOIs remain stable even if the underlying address or URL for the content changes. If a DOI has not yet been minted for the software, OSTI will mint a persistent identifier, in the form of a DOI, for the software upon submission.</span>
         );
     } else if (this.props.item == "DOIInfix") {
       returnData = (this.props.shortVersion !== undefined)
@@ -147,7 +148,9 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Select the appropriate license from the drop-down menu of available options. Descriptions of Licenses are available (<a href='https://opensource.org/licenses/alphabetical'>here</a>)</span>
+          <span>Select the appropriate license from the drop-down menu of available options. Descriptions of Licenses are available
+            <a href='https://opensource.org/licenses/alphabetical'>here</a>
+          </span>
         );
     } else if (this.props.item == "OpenSourceNotPublic") {
       returnData = (this.props.shortVersion !== undefined)
@@ -155,7 +158,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Code is Open Source, but is not yet available on a public site. Interested users can contact the developer(s) or responsibly parties for information regarding access and (re)use. A URL is required for submitting Open Source, no publicly available, the URL is typically a landing page where interested parties can find out more information about obtaining access to the code.</span>
+          <span>Code is Open Source, but is not yet available on a public site. Interested users can contact the developer(s) or responsibly parties for information regarding access and (re)use. A URL is required for submitting Open Source, no publicly available repository, the URL is typically a landing page where interested parties can find out more information about obtaining access to the code.</span>
         );
     } else if (this.props.item == "OpenSourcePublic") {
       returnData = (this.props.shortVersion !== undefined)
@@ -163,7 +166,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Software that can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See Open Source Initiative for more information and definitions.</span>
+          <span>Software that can be used, changed and shared (in modified or unmodified form) by anyone. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See Open Source Initiative for more information and definitions.</span>
         );
     } else if (this.props.item == "OtherSpecialRequirements") {
       returnData = (this.props.shortVersion !== undefined)
@@ -188,7 +191,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>DOI or URL identifiers of related resources. Referencing other documents, datasets, or software that relate to the submitted software allows users to follow these vital links and to better understand the scope of your research. Separate multiple identifiers with a semicolon.</span>
+          <span>DOI or URL identifiers of related resources. Referencing other documents, datasets, or software that relate to the submitted software allows users to follow these vital links and to better understand the scope of your research.</span>
         );
     } else if (this.props.item == "RelationType") {
       returnData = (this.props.shortVersion !== undefined)
@@ -204,7 +207,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Select the date you would like your software’s DOI released</span>
+          <span>Select the date you would like your software's DOI released.</span>
         );
     } else if (this.props.item == "RepositoryInfo") {
       returnData = (this.props.shortVersion !== undefined)
@@ -229,7 +232,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>The research organization, such as a DOE national laboratory or university, which had primary responsibility for developing the software. Separate multiple primary research organizations with a semicolon.</span>
+          <span>The research organization, such as a DOE national laboratory or university, which had primary responsibility for developing the software.</span>
         );
     } else if (this.props.item == "ResearchOrgDOEOrg") {
       returnData = (this.props.shortVersion !== undefined)
@@ -237,7 +240,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Check the box if the research organization is associated within the Department of Energy.</span>
+          <span>Check the box if the research organization is associated with the Department of Energy.</span>
         );
     } else if (this.props.item == "ResearchOrgName") {
       returnData = (this.props.shortVersion !== undefined)
@@ -253,7 +256,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>If a DOI has not yet been minted for the software, use Reserve DOE so that OSTI will assign a persistent identifier. However, do not yet release the software. Software will be released on the date chosen.</span>
+          <span>If a DOI has not yet been minted for the software, use Reserve DOE so that OSTI will assign a persistent identifier before you submit. Please note, your reserved DOI will not be registered with DataCite until a Release Date is provided.</span>
         );
     } else if (this.props.item == "SaveProgress") {
       returnData = (this.props.shortVersion !== undefined)
@@ -277,7 +280,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>The accession or other identifying numbers assigned by the submitting site, university, or repository’s database, records, etc.
+          <span>The accession or other identifying numbers assigned by the submitting site, university, or repository's database, records, etc.
           </span>
         );
     } else if (this.props.item == "SoftwareTitle") {
@@ -311,7 +314,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>A Budget and Reporting (B&R) code is given to a project by the Department of Energy. The structure of a B&R code parallels approved DOE PPAs (Program, Project or Activities). The code is used for executing the budget; reporting actual obligations, costs, and revenues; and controlling and measuring actual versus budgeted performance. Separate multiple codes with a semicolon.</span>
+          <span>A Budget and Reporting (B&amp;R) code is given to a project by the Department of Energy. The structure of a B&amp;R code parallels approved DOE PPAs (Program, Project or Activities). The code is used for executing the budget; reporting actual obligations, costs, and revenues; and controlling and measuring actual versus budgeted performance. Separate multiple codes with a semicolon.</span>
         );
     } else if (this.props.item == "SponsorOrgContractNumber") {
       returnData = (this.props.shortVersion !== undefined)
@@ -368,7 +371,7 @@ export default class HelpTooltip extends React.Component {
         )
         : (
           <span>
-            f you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing of your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, .tar.gz2, and .war.</span>
+            If you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing of your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, .tar.gz2, and .war.</span>
         );
     }
     /*Okay, the text we just got, we'll do something with it now*/

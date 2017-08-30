@@ -26,14 +26,17 @@ export default class HelpPage extends React.Component {
             Individual software records are directly submitted by the developer or the developing organization.
             <br/>
             <br/>
-            DOE CODE offers two paths for users to provide code. Users can (1) publish code to DOE CODE, and (2) submit code to the Department of Energy for official review and release through DOE CODE. See the "How do I publish code to DOE CODE?” and "How do I submit code to the Department of Energy through DOE CODE?" FAQs for more details.
+            DOE CODE offers two paths for users to provide code. Users can (1)
+            <strong>publish</strong>
+            code to DOE CODE, and (2)
+            <strong>submit</strong>
+            code to the Department of Energy for official review and release through DOE CODE. See the "How do I publish code to DOE CODE?” and "How do I submit code to the Department of Energy through DOE CODE?" FAQs for more details.
           </p>
           <br/>
           <strong className='help-page-subtitle'>Repository Information</strong>
           <br/>
           <br/>
-          <strong>Software Availability -</strong>&nbsp;
-          Please describe the availability of your software:
+          <strong>Software Availability -</strong>&nbsp; Please describe the availability of your software:
           <div className='help-page-software-availability'>
             <br/>
             <div className="row">
@@ -209,10 +212,10 @@ export default class HelpPage extends React.Component {
                 <br/>
                 <li>
                   <strong>
-                    B&R Classification Code(s)-</strong>&nbsp;<HelpToolTip item="SponsorOrgBRClassification" justText/></li>
+                    B&amp;R Code(s) -</strong>&nbsp;<HelpToolTip item="SponsorOrgBRClassification" justText/></li>
                 <br/>
                 <li>
-                  <strong>FWP Number -</strong>&nbsp;<HelpToolTip item="SponsorOrgFWPNum" justText/></li>
+                  <strong>FWP Numbers -</strong>&nbsp;<HelpToolTip item="SponsorOrgFWPNum" justText/></li>
               </ul>
             </div>
           </div>
@@ -280,22 +283,22 @@ export default class HelpPage extends React.Component {
               <br/>
               <ul>
                 <li>
-                  <strong>Identifier Type-</strong>&nbsp;<HelpToolTip item="IdentifierType" justText/>
+                  <strong>Identifier Type -</strong>&nbsp;<HelpToolTip item="IdentifierType" justText/>
                 </li>
                 <li>
-                  <strong>Relation Type-</strong>&nbsp;<HelpToolTip item="RelationType" justText/>
+                  <strong>Relation Type -</strong>&nbsp;<HelpToolTip item="RelationType" justText/>
                 </li>
                 <li>
-                  <strong>Identifier(s)-</strong>&nbsp;<HelpToolTip item="Identifier" justText/>
+                  <strong>Identifier(s) -</strong>&nbsp;<HelpToolTip item="Identifier" justText/>
                 </li>
               </ul>
             </div>
           </div>
           <br/>
+          <hr/>
           <br/>
           <strong className='help-page-subtitle'>Contact Information</strong>
           <br/>
-          <hr/>
           <br/>
           <div className="row">
             <div className="col-xs-12">

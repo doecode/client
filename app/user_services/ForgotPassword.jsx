@@ -43,7 +43,7 @@ export default class ForgotPassword extends React.Component {
   }
 
   parseForgotPassword() {
-    this.setState({"showConfirmationMessage": true, confirmationMessage: "An email containing a reset link has been sent to you."});
+    this.setState({"showConfirmationMessage": true, confirmationMessage: "If there is an account associated with the email address you entered and it is active, an email will be sent with further instructions on changing your password. If you do not receive an email, please contact doecode@osti.gov"});
   }
   parseForgotPasswordError(data) {
     var errorMsg = "";
