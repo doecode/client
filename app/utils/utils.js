@@ -164,7 +164,6 @@ function resetLoggedInAttributesUserData(data) {
 }
 
 function appendQueryString(url) {
-
   var ampOrQuestion = "?";
   if (url.indexOf('?') > 0)
     ampOrQuestion = "&";

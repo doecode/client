@@ -39,7 +39,7 @@ export default class SearchItem extends React.Component {
     if (softwareTitle === undefined) {
       return (null);
     }
-    const biblioUrl = "/doecode/biblio?code_id=" + data.codeId;
+    const biblioUrl = "/doecode/biblio/" + data.codeId;
 
     var releaseDateDisplay = (releaseDate !== undefined)
       ? <span className='search-result-release-date text-muted'>&nbsp;&nbsp;

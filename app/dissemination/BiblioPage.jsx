@@ -25,7 +25,10 @@ export default class BiblioPage extends React.Component {
 
   }
   componentDidMount() {
-    const codeID = getQueryParam("code_id");
+    //const codeID = getQueryParam("code_id");
+    //Grabs number at end of string
+    var patt = new RegExp(/(\d+)$/);
+    const codeID = patt.exec(window.location.href)[0];
     if (codeID) {
       doAjax('GET', "/doecode/api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
     } else {
@@ -40,7 +43,6 @@ export default class BiblioPage extends React.Component {
 
   parseErrorResponse() {
     console.log("Error?");
-    //this.setState({"loading" : false, "loadingMessage" : ""});
   }
 
   generateContent(obj) {
