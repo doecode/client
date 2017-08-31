@@ -1,5 +1,7 @@
 import React from 'react';
 import MetadataListAuthors from './MetadataListAuthors';
+import DelimitedDisplayList from './DelimitedDisplayList';
+import OrgMetadataDL from './OrgMetadataDL';
 
 export default class MetadataList extends React.Component {
   constructor(props) {
@@ -7,60 +9,86 @@ export default class MetadataList extends React.Component {
   }
 
   render() {
+    const delimiter = <span>,&nbsp;</span>;
     var metadataList = this.props.data;
+    const dtClass= 'col-xs-4';
+    const ddClass = 'col-xs-8';
+
     return (
-      <div className="row not-so-wide-row">
+      <div className="row">
         <div className='col-xs-12'>
           <dl className='row'>
             {metadataList.developers && <span>
-              <dt className='col-xs-5'>Developers</dt>
-              <dd className='col-xs-7'>
+              <dt className={dtClass}>Developers</dt>
+              <dd className={ddClass}>
                 <MetadataListAuthors items={metadataList.developers} prefix='developers-'/>
               </dd>
             </span>}
             {metadataList.release_date && <span>
-              <dt className='col-xs-5'>Release Date</dt>
-              <dd className='col-xs-7'>{metadataList.release_date}</dd>
+              <dt className={dtClass}>Release Date</dt>
+              <dd className={ddClass}>{metadataList.release_date}</dd>
             </span>}
             {metadataList.accessibility && <span>
-              <dt className='col-xs-5'>Code Availability</dt>
-              <dd className='col-xs-7'></dd>
+              <dt className={dtClass}>Code Availability</dt>
+              <dd className={ddClass}>{metadataList.accessibility}</dd>
             </span>}
-            {metadataList.licenses && <span>
-              <dt className='col-xs-5'>License</dt>
-              <dd className='col-xs-7'></dd>
+            {(metadataList.licenses && metadataList.licenses.length > 0) && <span>
+              <dt className={dtClass}>License</dt>
+              <dd className={ddClass}><DelimitedDisplayList items={metadataList.licenses} keyprefix='licenses-' delimiter={delimiter}/></dd>
             </span>}
             {metadataList.site_accession_number && <span>
-              <dt className='col-xs-5'>Site Accession Number</dt>
-              <dd className='col-xs-7'></dd>
+              <dt className={dtClass}>Site Accession Number</dt>
+              <dd className={ddClass}>{metadataList.site_accession_number}</dd>
             </span>}
-            {metadataList.research_organizations && <span>
-              <dt className='col-xs-5'>Research Organizations</dt>
-              <dd className='col-xs-7'></dd>
+            {(metadataList.research_organizations && metadataList.research_organizations.length > 0) && <span>
+              <dt className={dtClass}>Research Organizations</dt>
+              <dd className={ddClass}>{metadataList.research_organizations.map((row, index) => <div className='row' key={index}>
+                  <div className='col-xs-12'>
+                    {row.organization_name}&nbsp;&nbsp;
+                  </div>
+                  <div className='col-md-6 col-xs-1'></div>
+                  <div className='col-md-6 col-xs-11'>
+                    <OrgMetadataDL data={row}/>
+                  </div>
+                </div>)}</dd>
             </span>}
-            {metadataList.contributors && <span>
-              <dt className='col-xs-5'>Contributors</dt>
-              <dd className='col-xs-7'></dd>
+            {(metadataList.contributors && metadataList.contributors.length > 0) && <span>
+              <dt className={dtClass}>Contributors</dt>
+              <dd className={ddClass}><MetadataListAuthors items={metadataList.contributors} prefix='contributors-'/></dd>
             </span>}
-            {metadataList.contributing_organizations && <span>
-              <dt className='col-xs-5'>Contributing Organizations</dt>
-              <dd className='col-xs-7'></dd>
+            {(metadataList.contributing_organizations && metadataList.contributing_organizations.length > 0) && <span>
+              <dt className={dtClass}>Contributing Organizations</dt>
+              <dd className={ddClass}>{metadataList.contributing_organizations.map((row, index) => <div className='row' key={index}>
+                  <div className='col-md-6 col-xs-12'>
+                    {row.organization_name}&nbsp;&nbsp;
+                  </div>
+                  <div className='col-md-6 col-xs-12'>
+                    <OrgMetadataDL data={row}/>
+                  </div>
+                </div>)}</dd>
             </span>}
-            {metadataList.sponsoring_organization && <span>
-              <dt className='col-xs-5'>Sponsoring Organizations</dt>
-              <dd className='col-xs-7'></dd>
+            {(metadataList.sponsoring_organization && metadataList.sponsoring_organization.length > 0) && <span>
+              <dt className={dtClass}>Sponsoring Organizations</dt>
+              <dd className={ddClass}>{metadataList.sponsoring_organization.map((row, index) => <div className='row' key={index}>
+                  <div className='col-md-6 col-xs-12'>
+                    {row.organization_name}&nbsp;&nbsp;
+                  </div>
+                  <div className='col-md-6 col-xs-12'>
+                    <OrgMetadataDL data={row}/>
+                  </div>
+                </div>)}</dd>
             </span>}
             {metadataList.country_of_origin && <span>
-              <dt className='col-xs-5'>Country of Origin</dt>
-              <dd className='col-xs-7'></dd>
+              <dt className={dtClass}>Country of Origin</dt>
+              <dd className={ddClass}>{metadataList.country_of_origin}</dd>
             </span>}
             {metadataList.other_special_requirements && <span>
-              <dt className='col-xs-5'>Other Special Requirements</dt>
-              <dd className='col-xs-7'></dd>
+              <dt className={dtClass}>Other Special Requirements</dt>
+              <dd className={ddClass}>{metadataList.other_special_requirements}</dd>
             </span>}
             {metadataList.keywords && <span>
-              <dt className='col-xs-5'>Keywords</dt>
-              <dd className='col-xs-7'></dd>
+              <dt className={dtClass}>Keywords</dt>
+              <dd className={ddClass}>{metadataList.keywords}</dd>
             </span>}
 
           </dl>

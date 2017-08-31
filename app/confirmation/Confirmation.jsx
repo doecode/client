@@ -23,7 +23,7 @@ export default class Confirmation extends React.Component {
       "mintedDoi": mintedDoi,
       "codeID": getQueryParam("code_id"),
       "workflow": getQueryParam("workflow"),
-      "metadata":{}
+      "metadata": {}
     };
   }
 
@@ -33,7 +33,7 @@ export default class Confirmation extends React.Component {
 
   parseMetadataCall(data) {
     console.log("SUccess in metadata");
-    this.setState({metadata:data.metadata});
+    this.setState({metadata: data.metadata, loadedDOI: data.metadata.doi});
   }
 
   parseMetadataCallError() {
@@ -62,9 +62,17 @@ export default class Confirmation extends React.Component {
               <h2>
                 DOE CODE ID: #{this.state.codeID}
               </h2>
-              {this.state.mintedDoi && <h2>
-                DOI: {this.state.mintedDoi}
-              </h2>}
+              {this.state.mintedDoi && <div>
+                <h2>
+                  Minted DOI: {this.state.mintedDoi}
+                </h2>
+              </div>}
+
+              {this.state.loadedDOI && <div>
+                <h2>
+                  DOI: {this.state.loadedDOI}
+                </h2>
+              </div>}
               <h2>
                 <a target="_blank" type="text/yaml" href={ymlDownload}>
                   Download Metadata.yml
@@ -86,7 +94,7 @@ export default class Confirmation extends React.Component {
           </div>
           <br/>
           <br/>
-          <div className='row'>
+          <div className='row static-content'>
             <div className='col-xs-12'>
               <MetadataList data={this.state.metadata}/>
             </div>
