@@ -16,7 +16,7 @@ export default class HelpPage extends React.Component {
       <div className="row not-so-wide-row">
         <div className="col-md-3"></div>
         <div className="col-md-6 col-xs-12 static-content">
-          <h2 className="static-content-title center-text">Help</h2>
+          <h2 className="static-content-title">Help</h2>
           {/*THE VALUES FOR item MAP TO THE BIG IF ELSE STATEMENT IN THE HelpTooltip MODULE*/}
           <br/>
           <strong className='help-page-subtitle'>How is Software Submitted</strong>

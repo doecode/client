@@ -62,9 +62,16 @@ export default class Splash extends React.Component {
 
   render() {
 
-    const icon_row1 = [ < IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/policy' text = 'Software Policy' icon_classes = 'fa fa-folder-open-o' key = "policy" />, < IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/projects' text = 'Submit Software/Code' icon_classes = 'fa fa-sign-in' key = "publish" />, < IconRowIcon container_classes = 'col-md-4 col-xs-12' destination = '#' text = 'Repository Services' icon_classes = 'fa fa-home clickable' key = "repoServices" />
+    const icon_row1 = [
+    <IconRowIcon container_classes= 'col-md-4 col-xs-6' destination= '/doecode/projects' text= 'Submit Software/Code' icon_classes= 'fa fa-sign-in' key= "publish"/>,
+    <IconRowIcon container_classes = 'col-md-4 col-xs-12' destination = '/doecode/repository-services' text = 'Repository Services' icon_classes = 'fa fa-home clickable' key = "repoServices" />,
+    <IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/about' text = 'About' icon_classes = 'fa fa-building-o' key = "about" />
+
     ];
-    const icon_row2 = [ < IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/about' text = 'About' icon_classes = 'fa fa-building-o' key = "about" />, < IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/communications' text = 'News/Resources' icon_classes = 'fa fa-newspaper-o' key = "comms" />, < IconRowIcon container_classes = 'col-md-4 col-xs-12' destination = '/doecode/faq' text = 'FAQs' icon_classes = 'fa fa-question' key = "faq" />
+    const icon_row2 = [
+      <IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/policy' text = 'Software Policy' icon_classes = 'fa fa-folder-open-o' key = "policy"/>,
+    <IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/communications' text = 'News/Resources' icon_classes = 'fa fa-newspaper-o' key = "comms" />,
+    <IconRowIcon container_classes = 'col-md-4 col-xs-12' destination = '/doecode/faq' text = 'FAQs' icon_classes = 'fa fa-question' key = "faq" />
     ];
     return (
 
@@ -114,37 +121,6 @@ export default class Splash extends React.Component {
               <br/>
               <br/>
               <LinkIconRow icon_row_data={icon_row2}/>
-              <br/> {/*Modal to do a thing*/}
-              <Modal show={this.state.showModal} onHide={this.close} bsSize="large">
-                <Modal.Header closeButton>
-                  <Modal.Title>Create a New Repository</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <div className="row">
-                    <div className="col-sm-5">
-                      Create a new project as part of one of our open source communities below:
-                      <ul>
-                        <li>
-                          <a href="https://github.com/doecode/">GitHub</a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="col-sm-2">
-                      <h1>
-                        OR
-                      </h1>
-                    </div>
-                    <div className="col-sm-5">
-                      Create a new project on our internal
-                      <a href="http://lxdevrepo.osti.gov/">DOE CODE repository</a>
-                      where you can control access to the project.
-                    </div>
-                  </div>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button onClick={this.close}>Close</Button>
-                </Modal.Footer>
-              </Modal>
             </div>
             <div className="col-md-3"></div>
           </div>

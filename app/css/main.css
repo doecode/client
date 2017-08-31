@@ -615,8 +615,8 @@ html, body {
 }
 
 .nav-menu-item {
-  padding-left: 25px !important;
-  padding-right: 25px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
   padding-top: 10px !important;
   padding-bottom: 10px !important;
 }
@@ -962,6 +962,13 @@ html, button, body, input, select, textarea, p {
   font-size:20px;
 }
 
+.faq-page-subtitle{
+    color:#476E91;
+}
+
+.repository-services-img-link{
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
 
 @keyframes spin {
   0% {

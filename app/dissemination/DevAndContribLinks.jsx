@@ -67,9 +67,9 @@ export default class DevAndContribLinks extends React.Component {
     let affiliations_list = [];
 
     if (this.props.devsAndContributorsObj !== undefined) {
-      this.props.devsAndContributorsObj.forEach(function(item) {
-        item.affiliations.forEach(function(item) {
-          if (affiliations_list.indexOf(item) < 0) {
+      this.props.devsAndContributorsObj.forEach(function(row) {
+        row.affiliations.forEach(function(item) {
+          if (item && affiliations_list.indexOf(item) < 0) {
             affiliations_list.push(item);
           }
         });
