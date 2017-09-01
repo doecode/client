@@ -42,8 +42,8 @@ export default class Field extends React.Component {
   }
 
   handleDateChange(date) {
-		this.props.linkedData.setValue(this.props.properties.field,date);
-		this.props.linkedData.validateField(this.props.properties.field);
+		this.props.linkedData.setValue(this.props.properties.field, (date == null ? "" : date));
+    this.props.linkedData.validateField(this.props.properties.field);
   }
 
   handleRadioChange(event) {

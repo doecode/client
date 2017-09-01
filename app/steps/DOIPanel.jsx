@@ -48,13 +48,11 @@ export default class DOIPanel extends React.Component {
 			this.props.metadata.setValue("doi", this._prefix + uniqid());
 			this.props.metadata.setValue("doi_status", "RES");
 			doiInfo.completed = true;
+			doiInfo.ever_completed = true;
 			doiInfo.error = '';
 			infixInfo.completed = false;
 			infixInfo.error = '';
 			infixInfo.Panel = "DOI and Release Date"
-
-
-
 		}
 	}
 

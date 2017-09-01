@@ -171,9 +171,9 @@ save() {
     this.setState({"loading": true, "loadingMessage": "Saving"});
 
     if (metadata.getValue("accessibility") == 'OS' || (Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length == 0)) {
-      doAuthenticatedAjax('POST', '/doecode/api/metadata/', this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
+      doAuthenticatedAjax('POST', '/doecode/api/metadata/save', this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
     } else {
-      this.doMultipartSubmission('/doecode/api/metadata/',this.parseSaveResponse);
+      this.doMultipartSubmission('/doecode/api/metadata/save',this.parseSaveResponse);
   }
 }
 

@@ -43,8 +43,10 @@ export default class BaseData {
    loadValues(data) {
 		 for (var field in data) {
 		 		this.fieldMap[field] = data[field];
-		 		if (data[field].length > 0 && this.infoSchema[field])
+		 		if (data[field].length > 0 && this.infoSchema[field]) {
 		 			this.infoSchema[field].completed = true;
+			 		this.infoSchema[field].ever_completed = true;
+				}
 		 }
    }
 
@@ -73,7 +75,7 @@ export default class BaseData {
  		   information.completed = false;
  	   else {
  		   information.completed = true;
-
+	 		 information.ever_completed = true;
  	   }
 
     }
@@ -148,7 +150,7 @@ getCompletedData() {
 
     for (var field in this.fieldMap) {
         if (this.infoSchema[field] !== undefined) {
-            if (this.infoSchema[field].completed) {
+            if (this.infoSchema[field].completed || (this.infoSchema[field].ever_completed && this.fieldMap[field] == "")) {
                 completedData[field] = this.fieldMap[field];
             }
         } else {

@@ -22,6 +22,7 @@ export default class Metadata extends BaseData {
         this.modifyElementInArray(field,data)
 
       this.infoSchema[field].completed = true;
+      this.infoSchema[field].ever_completed = true;
       this.infoSchema[field].error = '';
     }
 
@@ -195,8 +196,10 @@ deserializeData(data) {
                     this.deserializeSponsoringOrganization(data);
 
             this.fieldMap[field] = data[field];
-            if (this.infoSchema[field])
+            if (this.infoSchema[field]) {
             	this.infoSchema[field].completed = true;
+              this.infoSchema[field].ever_completed = true;
+            }
         }
     }
 }
