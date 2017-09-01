@@ -19,7 +19,7 @@ export default class HelpPage extends React.Component {
           <h2 className="static-content-title">Help</h2>
           {/*THE VALUES FOR item MAP TO THE BIG IF ELSE STATEMENT IN THE HelpTooltip MODULE*/}
           <br/>
-          <strong className='help-page-subtitle'>How is Software Submitted</strong>
+          <strong className='help-page-subtitle'>How is Software Submitted?</strong>
           <br/>
           <br/>
           <p>
@@ -27,10 +27,8 @@ export default class HelpPage extends React.Component {
             <br/>
             <br/>
             DOE CODE offers two paths for users to provide code. Users can (1)
-            <strong>publish</strong>
-            code to DOE CODE, and (2)
-            <strong>submit</strong>
-            code to the Department of Energy for official review and release through DOE CODE. See the "How do I publish code to DOE CODE?” and "How do I submit code to the Department of Energy through DOE CODE?" FAQs for more details.
+            <strong>publish</strong>&nbsp;code to DOE CODE, and (2)&nbsp;
+            <strong>submit</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. See the "How do I publish code to DOE CODE?” and "How do I submit code to the Department of Energy through DOE CODE?" FAQs for more details.
           </p>
           <br/>
           <strong className='help-page-subtitle'>Repository Information</strong>
@@ -41,13 +39,13 @@ export default class HelpPage extends React.Component {
             <br/>
             <div className="row">
               <div className='col-xs-12'>
-                <strong>Open Source, publicly available repository-</strong>&nbsp;<HelpToolTip item="OpenSourcePublic" justText/>
+                <strong>Open Source, publicly available repository&nbsp;-</strong>&nbsp;<HelpToolTip item="OpenSourcePublic" justText/>
               </div>
             </div>
             <br/>
             <div className="row">
               <div className='col-xs-12'>
-                <strong>Open Source, no publicly available repository-</strong>&nbsp;<HelpToolTip item="OpenSourceNotPublic" justText/>
+                <strong>Open Source, no publicly available repository&nbsp;-</strong>&nbsp;<HelpToolTip item="OpenSourceNotPublic" justText/>
               </div>
             </div>
             <br/>

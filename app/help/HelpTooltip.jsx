@@ -72,7 +72,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>When adding a contributor, use contributor type to define the role of the contributor. A drop-down menu is provided. For definitions of each contributor type, please see &nbsp;<a href='https://schema.datacite.org/meta/kernel-4.0/'>DataCite</a>.</span>
+          <span>When adding a contributor, use contributor type to define the role of the contributor. A drop-down menu is provided. For definitions of each contributor type, please see&nbsp;<a href='https://schema.datacite.org/meta/kernel-4.0/'>DataCite</a>.</span>
         );
     } else if (this.props.item == "CountryOfOrigin") {
       returnData = (this.props.shortVersion !== undefined)
@@ -148,7 +148,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Select the appropriate license from the drop-down menu of available options. Descriptions of Licenses are available
+          <span>Select the appropriate license from the drop-down menu of available options. Descriptions of Licenses are available&nbsp;
             <a href='https://opensource.org/licenses/alphabetical'>here</a>
           </span>
         );
@@ -207,7 +207,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Select the date you would like your software's DOI released.</span>
+          <span>Select the software release date.</span>
         );
     } else if (this.props.item == "RepositoryInfo") {
       returnData = (this.props.shortVersion !== undefined)
@@ -306,7 +306,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Other award/contract numbers that represent funding contributed to the project, including other DOE awards or awards from other government agencies, foundations, etc. Separate multiple award numbers with a semicolon.</span>
+          <span>Other award/contract numbers that represent funding contributed to the project, including other DOE awards or awards from other government agencies, foundations, etc.</span>
         );
     } else if (this.props.item == "SponsorOrgBRClassification") {
       returnData = (this.props.shortVersion !== undefined)
@@ -349,7 +349,7 @@ export default class HelpTooltip extends React.Component {
         )
         : (
           <span>
-            The name of the sponsoring or funding organization. If the sponsoring or funding organization is from the Department of Energy, please choose from the list of DOE organizations. Other sponsoring organization names will be freeform. Separate multiple sponsor names with a semicolon.</span>
+            The name of the sponsoring or funding organization. If the sponsoring or funding organization is from the Department of Energy, please choose from the list of DOE organizations. Other sponsoring organization names will be freeform.</span>
         );
     } else if (this.props.item == 'LandingPage') {
       returnData = (this.props.shortVersion !== undefined)

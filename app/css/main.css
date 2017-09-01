@@ -266,6 +266,10 @@ html h3 {
   font-size: 31px;
 }
 
+.biblio-sidebar {
+  padding-left: 30px;
+}
+
 .biblio-sidebar-title {
   color: #828297;
   font-size: 16px;
@@ -288,6 +292,22 @@ html h3 {
   border-bottom: 1px solid #DDDDDD;
   padding-bottom: 10px;
   padding-top: 10px;
+}
+
+.biblio-sidebar-collapse-panel {
+  border-color: #F9F9F9;
+  box-shadow: none !important;
+}
+
+.biblio-sidebar-collapse-heading {
+  background-color: #FFFFFF !important;
+  background-image: none !important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.biblio-sidebar-collapse-item {
+  background-color: #F9F9F9;
+  border-top: none !important;
 }
 
 .citation-details-div {
@@ -875,22 +895,6 @@ ol.progtrckr li.progtrckr-done:hover:before {
   font-size: 16px;
 }
 
-.biblio-sidebar-collapse-panel {
-  border-color: #F9F9F9;
-  box-shadow: none !important;
-}
-
-.biblio-sidebar-collapse-heading {
-  background-color: #FFFFFF !important;
-  background-image: none !important;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-
-.biblio-sidebar-collapse-item {
-  background-color: #F9F9F9;
-  border-top: none !important;
-}
-
 .search-btn-container {}
 
 .search-btn {
@@ -939,13 +943,13 @@ html, button, body, input, select, textarea, p {
   position: absolute;
   left: 0px;
   right: 0px;
-  top:35px;
+  top: 35px;
   z-index: 2;
   margin-right: 14px;
   margin-left: 14px;
 }
 
-.adv-search-dropdown-lg{
+.adv-search-dropdown-lg {
   top: 45px;
 }
 
@@ -953,21 +957,43 @@ html, button, body, input, select, textarea, p {
   border-bottom: 1px solid #cccccc;
 }
 
+
 /*HELP PAGE*/
-.help-page-software-availability{
-  padding-left:30px;
+
+.help-page-software-availability {
+  padding-left: 30px;
 }
 
-.help-page-subtitle{
-  font-size:20px;
+.help-page-subtitle {
+  font-size: 20px;
 }
 
-.faq-page-subtitle{
-    color:#476E91;
+/*FAQ PAGE*/
+.faq-page-subtitle {
+  color:rgb(29, 97, 162);
 }
 
-.repository-services-img-link{
+.faq-page-left-padded{
+  padding-left:40px;
+}
+
+.repository-services-img-link {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.faq-page-blockquote{
+  padding-left:20px;
+  margin-left:20px;
+  border-left:5px solid #EEEEEE;
+}
+
+.faq-page-btn{
+  font-size:18px;
+  font-weight:300;
+}
+
+.fa-page-caret{
+    color:#7787A8;
 }
 
 @keyframes spin {

@@ -109,7 +109,7 @@ export default class Splash extends React.Component {
               <div className="row center-text">
                 <div className='col-xs-1'></div>
                 {/*Search Bar*/}
-                <SearchBar searchbarSize='col-xs-9' largerBar/>
+                <SearchBar searchbarSize='col-xs-9  no-col-padding-right' largerBar/>
               </div>
               <br/>
               <br/>

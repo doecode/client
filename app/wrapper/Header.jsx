@@ -32,7 +32,7 @@ export default class Header extends React.Component {
                 </a>
               </div>
               {/*Search Bar*/}
-              <SearchBar searchbarSize='col-xs-6'/>
+              <SearchBar searchbarSize='col-xs-6 no-col-padding-right'/>
             </div>
             <br/>
             <br/>

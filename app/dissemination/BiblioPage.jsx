@@ -25,7 +25,6 @@ export default class BiblioPage extends React.Component {
 
   }
   componentDidMount() {
-    //const codeID = getQueryParam("code_id");
     //Grabs number at end of string
     var patt = new RegExp(/(\d+)$/);
     const codeID = patt.exec(window.location.href)[0];
@@ -167,10 +166,11 @@ export default class BiblioPage extends React.Component {
               <BreadcrumbTrail list={breadcrumbList}/>
             </div>
           </div>
+          <br/>
           {/*Title*/}
           <div className="row">
             <div className='col-md-2'></div>
-            <div className="col-md-8 col-xs-12 center-text biblio-title-container">
+            <div className="col-md-8 col-xs-12 biblio-title-container">
               <div className="biblio-title">
                 {metadata.getValue("software_title")}
               </div>
@@ -192,7 +192,7 @@ export default class BiblioPage extends React.Component {
               </div>
             </div>
             {/*Sidebar on the right*/}
-            <BiblioSidebar pageData={metadata} sidebarClass=' col-md-2 col-xs-12'/>
+            <BiblioSidebar pageData={metadata} sidebarClass=' col-md-2 col-xs-12 biblio-sidebar'/>
           </div>
         </div>
       </div>
