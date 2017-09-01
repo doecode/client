@@ -5,7 +5,7 @@ export default class Footer extends React.Component {
   constructor(props) {
     super(props);
     this.footer_classes = (this.props.is_homepage)   ? "footer-homepage" : "footer footer-bottom";
-    this.img_link = (this.props.is_homepage) ? "https://www.osti.gov/scitech/img/ui/DOE_SC_OSTI_70th_white.png":"https://www.osti.gov/doecode/images/DOE_SC_OSTI_666_sm.png";
+    this.img_link = (this.props.is_homepage) ? "https://www.osti.gov/sites/www.osti.gov/files/public/DOE_SC_OSTI_FFF.png":"https://www.osti.gov/doecode/images/DOE_SC_OSTI_666_sm.png";
     this.footer_link = (this.props.is_homepage) ? "footer-link-homepage":"footer-link";
   }
 

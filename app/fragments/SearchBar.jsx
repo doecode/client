@@ -58,8 +58,8 @@ export default class SearchBar extends React.Component {
       <span>
         <div className={this.props.searchbarSize}>
           <div className='input-group'>
-            <label htmlFor="allSearch" className="sr-only">Search DOE CODE for Published Software Entries</label>
-            <input id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className={this.searchBarStyles} placeholder="Search DOE CODE for Published Software Entries"/>
+            <label htmlFor="allSearch" className="sr-only">Search DOE CODE for published software entries</label>
+            <input id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className={this.searchBarStyles} placeholder="Search DOE CODE for published sotware entries"/>
             <span className='input-group-btn'>
               <button onClick={this.doAdvancedSearch} className={this.advSearchButtonStyles} type='button'>
                 <span className="fa fa-caret-down adv-search-button-icon"></span>
@@ -104,7 +104,7 @@ export default class SearchBar extends React.Component {
             </div>
           </div>}
         </div>
-        <div className="col-xs-2 search-btn-container text-left no-col-padding-left">
+        <div className="col-xs-2 search-btn-container text-left minimal-col-padding-left">
           <button type="button" className={this.searchButtonStyles} onClick={this.search}>
             <span className="fa fa-search"></span>
           </button>

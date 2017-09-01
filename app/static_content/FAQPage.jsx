@@ -296,7 +296,7 @@ export default class FAQ extends React.Component {
           <br/>
           <div>
             {fa_items.map((row, index) => <div>
-              <SimpleCollapsible toggleArrow button_text={row.text} contents={row.content}/>
+              <SimpleCollapsible toggleArrow button_text={row.text} contents={row.content} collapseContainerClasses='faq-page-blockquote'/>
             </div>)}
           </div>
 

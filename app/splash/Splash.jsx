@@ -62,16 +62,10 @@ export default class Splash extends React.Component {
 
   render() {
 
-    const icon_row1 = [
-    <IconRowIcon container_classes= 'col-md-4 col-xs-6' destination= '/doecode/projects' text= 'Submit Software/Code' icon_classes= 'fa fa-sign-in' key= "publish"/>,
-    <IconRowIcon container_classes = 'col-md-4 col-xs-12' destination = '/doecode/repository-services' text = 'Repository Services' icon_classes = 'fa fa-home clickable' key = "repoServices" />,
-    <IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/about' text = 'About' icon_classes = 'fa fa-building-o' key = "about" />
+    const icon_row1 = [ < IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/projects' text = 'Submit Software/Code' icon_classes = 'fa fa-sign-in' key = "publish" />, < IconRowIcon container_classes = 'col-md-4 col-xs-12' destination = '/doecode/repository-services' text = 'Repository Services' icon_classes = 'fa fa-home clickable' key = "repoServices" />, < IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/about' text = 'About' icon_classes = 'fa fa-info' key = "about" />
 
     ];
-    const icon_row2 = [
-      <IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/policy' text = 'Software Policy' icon_classes = 'fa fa-folder-open-o' key = "policy"/>,
-    <IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/communications' text = 'News/Resources' icon_classes = 'fa fa-newspaper-o' key = "comms" />,
-    <IconRowIcon container_classes = 'col-md-4 col-xs-12' destination = '/doecode/faq' text = 'FAQs' icon_classes = 'fa fa-question' key = "faq" />
+    const icon_row2 = [ < IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/policy' text = 'Software Policy' icon_classes = 'fa fa-folder-open-o' key = "policy" />, < IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/communications' text = 'News/Resources' icon_classes = 'fa fa-newspaper-o' key = "comms" />, < IconRowIcon container_classes = 'col-md-4 col-xs-12' destination = '/doecode/faq' text = 'FAQs' icon_classes = 'fa fa-question' key = "faq" />
     ];
     return (
 
@@ -90,37 +84,48 @@ export default class Splash extends React.Component {
           <br/> {/*The rest of the content*/}
           <div className="row">
             <div className="col-md-3"></div>
-            <div className="col-md-6 col-xs-12 static-content">
-              {/*Logo*/}
-              <div className="row center-text">
-                <div className="col-xs-12">
-                  <img src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" width="300"/>
+            <div className="col-xs-12 static-content">
+
+              <div className='row'>
+                <div className='col-md-3'></div>
+                <div className='col-md-6 col-xs-12'>
+                  {/*Logo*/}
+                  <div className="row center-text">
+                    <div className="col-xs-12">
+                      <img src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" width="300"/>
+                    </div>
+                  </div>
+                  <br/>
+                  <br/>
+                  <br/> {/*Search Bar*/}
+                  <div className="row center-text">
+                    <div className='col-xs-1'></div>
+                    {/*Search Bar*/}
+                    <SearchBar searchbarSize='col-xs-9  no-col-padding-right' largerBar/>
+                  </div>
                 </div>
+                <div className='col-md-3'></div>
               </div>
-              <br/>
-              <br/> {/*Subtext*/}
-              <div className="row center-text">
-                <div className="col-xs-12">
-                  <h4 className='header-subtext'>The U.S. Department of Energy's Code Repository</h4>
+
+              <div className='row'>
+                <div className='col-md-2'></div>
+                <div className='col-md-8 col-xs-12'>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/> {/*Icons*/}
+                  <LinkIconRow icon_row_data={icon_row1}/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <LinkIconRow icon_row_data={icon_row2}/>
                 </div>
+                <div className='col-md-2'></div>
               </div>
-              <br/>
-              <br/> {/*Search Bar*/}
-              <div className="row center-text">
-                <div className='col-xs-1'></div>
-                {/*Search Bar*/}
-                <SearchBar searchbarSize='col-xs-9  no-col-padding-right' largerBar/>
-              </div>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/> {/*Icons*/}
-              <LinkIconRow icon_row_data={icon_row1}/>
-              <br/>
-              <br/>
-              <LinkIconRow icon_row_data={icon_row2}/>
+
             </div>
             <div className="col-md-3"></div>
           </div>

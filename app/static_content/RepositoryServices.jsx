@@ -18,7 +18,7 @@ export default class RepositoryServices extends React.Component {
           <br/>
           <div className='row'>
             <div className='col-md-5 col-xs-12 center-text'>
-              <strong>Create a new project on our open source GitHub community:</strong>
+              <strong>Create a new project on our open source <br/>GitHub community:</strong>
               <br/>
               <br/>
               <br/>
