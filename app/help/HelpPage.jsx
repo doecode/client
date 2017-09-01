@@ -26,7 +26,7 @@ export default class HelpPage extends React.Component {
             Individual software records are directly submitted by the developer or the developing organization.
             <br/>
             <br/>
-            DOE CODE offers two paths for users to provide code. Users can (1)
+            DOE CODE offers two paths for users to provide code. Users can (1)&nbsp;
             <strong>publish</strong>&nbsp;code to DOE CODE, and (2)&nbsp;
             <strong>submit</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. See the "How do I publish code to DOE CODE?” and "How do I submit code to the Department of Energy through DOE CODE?" FAQs for more details.
           </p>
@@ -34,7 +34,7 @@ export default class HelpPage extends React.Component {
           <strong className='help-page-subtitle'>Repository Information</strong>
           <br/>
           <br/>
-          <strong>Software Availability -</strong>&nbsp; Please describe the availability of your software:
+          <strong>Software Availability&nbsp;-</strong>&nbsp; Please describe the availability of your software:
           <div className='help-page-software-availability'>
             <br/>
             <div className="row">
@@ -51,14 +51,14 @@ export default class HelpPage extends React.Component {
             <br/>
             <div className="row">
               <div className='col-xs-12'>
-                <strong>Closed Source -</strong>&nbsp;<HelpToolTip item="ClosedSource" justText/>
+                <strong>Closed Source&nbsp;-</strong>&nbsp;<HelpToolTip item="ClosedSource" justText/>
               </div>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Repository Link -</strong>&nbsp;<HelpToolTip item="RepositoryLink" justText/>
+              <strong>Repository Link&nbsp;-</strong>&nbsp;<HelpToolTip item="RepositoryLink" justText/>
             </div>
           </div>
           <br/>
@@ -71,13 +71,13 @@ export default class HelpPage extends React.Component {
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Landing Page -</strong>&nbsp;<HelpToolTip item="LandingPage" justText/>
+              <strong>Landing Page&nbsp;-</strong>&nbsp;<HelpToolTip item="LandingPage" justText/>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Autopopulate from Repository -</strong>&nbsp;<HelpToolTip item="Autopopulate" justText/>
+              <strong>Autopopulate from Repository&nbsp;-</strong>&nbsp;<HelpToolTip item="Autopopulate" justText/>
             </div>
           </div>
           <br/>
@@ -88,19 +88,19 @@ export default class HelpPage extends React.Component {
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Software Title -</strong>&nbsp;<HelpToolTip item="SoftwareTitle" justText/>
+              <strong>Software Title&nbsp;-</strong>&nbsp;<HelpToolTip item="SoftwareTitle" justText/>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Description/Abstract -</strong>&nbsp;<HelpToolTip item="DescriptionAbstract" justText/>
+              <strong>Description/Abstract&nbsp;-</strong>&nbsp;<HelpToolTip item="DescriptionAbstract" justText/>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>License(s) -</strong>&nbsp;<HelpToolTip item="License" justText/>
+              <strong>License(s)&nbsp;-</strong>&nbsp;<HelpToolTip item="License" justText/>
             </div>
           </div>
           <br/>
@@ -111,7 +111,7 @@ export default class HelpPage extends React.Component {
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Developer(s) -</strong>&nbsp;<HelpToolTip item="Developers" justText/>
+              <strong>Developer(s)&nbsp;-</strong>&nbsp;<HelpToolTip item="Developers" justText/>
             </div>
           </div>
           <br/>
@@ -122,25 +122,25 @@ export default class HelpPage extends React.Component {
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Digital Object Identifier (DOI) -</strong>&nbsp;<HelpToolTip item="DigitalObjectIdentifer" justText/>
+              <strong>Digital Object Identifier (DOI)&nbsp;-</strong>&nbsp;<HelpToolTip item="DigitalObjectIdentifer" justText/>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Reserve DOI -</strong>&nbsp;<HelpToolTip item="ReserveDoi" justText/>
+              <strong>Reserve DOI&nbsp;-</strong>&nbsp;<HelpToolTip item="ReserveDoi" justText/>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>DOI Infix -</strong>&nbsp;<HelpToolTip item="DOIInfix" justText/>
+              <strong>DOI Infix&nbsp;-</strong>&nbsp;<HelpToolTip item="DOIInfix" justText/>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Release Date -</strong>&nbsp;<HelpToolTip item="ReleaseDate" justText/>
+              <strong>Release Date&nbsp;-</strong>&nbsp;<HelpToolTip item="ReleaseDate" justText/>
             </div>
           </div>
           <br/>
@@ -151,37 +151,37 @@ export default class HelpPage extends React.Component {
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Short Title or Acronym -</strong>&nbsp;<HelpToolTip item="ShortTitle" justText/>
+              <strong>Short Title or Acronym&nbsp;-</strong>&nbsp;<HelpToolTip item="ShortTitle" justText/>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Country of Origin -</strong>&nbsp;<HelpToolTip item="CountryOfOrigin" justText/>
+              <strong>Country of Origin&nbsp;-</strong>&nbsp;<HelpToolTip item="CountryOfOrigin" justText/>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Keywords -</strong>&nbsp;<HelpToolTip item="Keywords" justText/>
+              <strong>Keywords&nbsp;-</strong>&nbsp;<HelpToolTip item="Keywords" justText/>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Other Special Requirements -</strong>&nbsp;<HelpToolTip item="OtherSpecialRequirements" justText/>
+              <strong>Other Special Requirements&nbsp;-</strong>&nbsp;<HelpToolTip item="OtherSpecialRequirements" justText/>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Site Accession Number -</strong>&nbsp;<HelpToolTip item="SiteAccessionNumber" justText/>
+              <strong>Site Accession Number&nbsp;-</strong>&nbsp;<HelpToolTip item="SiteAccessionNumber" justText/>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>File Upload -</strong>&nbsp;<HelpToolTip item="FileUpload" justText/>
+              <strong>File Upload&nbsp;-</strong>&nbsp;<HelpToolTip item="FileUpload" justText/>
             </div>
           </div>
           <br/>
@@ -192,43 +192,43 @@ export default class HelpPage extends React.Component {
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>Sponsoring Organization(s) -</strong>&nbsp;<HelpToolTip item="SponsoringOrg" justText/>
+              <strong>Sponsoring Organization(s)&nbsp;-</strong>&nbsp;<HelpToolTip item="SponsoringOrg" justText/>
               <br/>
               <br/>
               <ul>
                 <li>
-                  <strong>DOE Organization -</strong>&nbsp;<HelpToolTip item="SponsorOrgDOEOrg" justText/></li>
+                  <strong>DOE Organization&nbsp;-</strong>&nbsp;<HelpToolTip item="SponsorOrgDOEOrg" justText/></li>
                 <br/>
                 <li>
-                  <strong>Name -</strong>&nbsp;<HelpToolTip item="SponsorOrgName" justText/></li>
+                  <strong>Name&nbsp;-</strong>&nbsp;<HelpToolTip item="SponsorOrgName" justText/></li>
                 <br/>
                 <li>
-                  <strong>Primary Contract/Award Number -</strong>&nbsp;<HelpToolTip item="SponsorOrgContractNumber" justText/></li>
+                  <strong>Primary Contract/Award Number&nbsp;-</strong>&nbsp;<HelpToolTip item="SponsorOrgContractNumber" justText/></li>
                 <br/>
                 <li>
-                  <strong>Additional Award(s) -</strong>&nbsp;<HelpToolTip item="SponsorOrgAdditionalRewards" justText/></li>
+                  <strong>Additional Award(s)&nbsp;-</strong>&nbsp;<HelpToolTip item="SponsorOrgAdditionalRewards" justText/></li>
                 <br/>
                 <li>
                   <strong>
-                    B&amp;R Code(s) -</strong>&nbsp;<HelpToolTip item="SponsorOrgBRClassification" justText/></li>
+                    B&amp;R Code(s)&nbsp;-</strong>&nbsp;<HelpToolTip item="SponsorOrgBRClassification" justText/></li>
                 <br/>
                 <li>
-                  <strong>FWP Numbers -</strong>&nbsp;<HelpToolTip item="SponsorOrgFWPNum" justText/></li>
+                  <strong>FWP Numbers&nbsp;-</strong>&nbsp;<HelpToolTip item="SponsorOrgFWPNum" justText/></li>
               </ul>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className="col-xs-12">
-              <strong>Research Organization(s) -</strong>&nbsp;<HelpToolTip item="ResearchOrg" justText/>
+              <strong>Research Organization(s)&nbsp;-</strong>&nbsp;<HelpToolTip item="ResearchOrg" justText/>
               <br/>
               <br/>
               <ul>
                 <li>
-                  <strong>DOE Organization -</strong>&nbsp;<HelpToolTip item="ResearchOrgDOEOrg" justText/></li>
+                  <strong>DOE Organization&nbsp;-</strong>&nbsp;<HelpToolTip item="ResearchOrgDOEOrg" justText/></li>
                 <br/>
                 <li>
-                  <strong>Name -</strong>&nbsp;<HelpToolTip item="ResearchOrgName" justText/></li>
+                  <strong>Name&nbsp;-</strong>&nbsp;<HelpToolTip item="ResearchOrgName" justText/></li>
               </ul>
             </div>
           </div>
@@ -240,7 +240,7 @@ export default class HelpPage extends React.Component {
           <br/>
           <div className="row">
             <div className="col-xs-12">
-              <strong>Contributor(s) -</strong>&nbsp;<HelpToolTip item="Contributor" justText/>
+              <strong>Contributor(s)&nbsp;-</strong>&nbsp;<HelpToolTip item="Contributor" justText/>
             </div>
           </div>
           <br/>
@@ -248,19 +248,19 @@ export default class HelpPage extends React.Component {
             <div className="col-xs-12">
               <ul>
                 <li>
-                  <strong>Contributor Type-</strong>&nbsp;<HelpToolTip item="ContributorType" justText/></li>
+                  <strong>Contributor Type&nbsp;-</strong>&nbsp;<HelpToolTip item="ContributorType" justText/></li>
               </ul>
             </div>
           </div>
           <br/>
           <div className="row">
             <div className="col-xs-12">
-              <strong>Contributing Organization(s) -</strong>&nbsp;<HelpToolTip item="ContributorOrg" justText/>
+              <strong>Contributing Organization(s)&nbsp;-</strong>&nbsp;<HelpToolTip item="ContributorOrg" justText/>
               <br/>
               <br/>
               <ul>
                 <li>
-                  <strong>Contributor Type-</strong>&nbsp;<HelpToolTip item="ContributorType" justText/></li>
+                  <strong>Contributor Type&nbsp;-</strong>&nbsp;<HelpToolTip item="ContributorType" justText/></li>
               </ul>
             </div>
           </div>
@@ -277,17 +277,17 @@ export default class HelpPage extends React.Component {
           </div>
           <div className="row">
             <div className="col-xs-12">
-              <strong>Contributing Organization(s) -</strong>&nbsp;<HelpToolTip item="ContributorOrg" justText/>
+              <strong>Contributing Organization(s)&nbsp;-</strong>&nbsp;<HelpToolTip item="ContributorOrg" justText/>
               <br/>
               <ul>
                 <li>
-                  <strong>Identifier Type -</strong>&nbsp;<HelpToolTip item="IdentifierType" justText/>
+                  <strong>Identifier Type&nbsp;-</strong>&nbsp;<HelpToolTip item="IdentifierType" justText/>
                 </li>
                 <li>
-                  <strong>Relation Type -</strong>&nbsp;<HelpToolTip item="RelationType" justText/>
+                  <strong>Relation Type&nbsp;-</strong>&nbsp;<HelpToolTip item="RelationType" justText/>
                 </li>
                 <li>
-                  <strong>Identifier(s) -</strong>&nbsp;<HelpToolTip item="Identifier" justText/>
+                  <strong>Identifier(s)&nbsp;-</strong>&nbsp;<HelpToolTip item="Identifier" justText/>
                 </li>
               </ul>
             </div>
@@ -300,7 +300,7 @@ export default class HelpPage extends React.Component {
           <br/>
           <div className="row">
             <div className="col-xs-12">
-              <strong>Contact Information-</strong>&nbsp;<HelpToolTip item="ContactInformation" justText/>
+              <strong>Contact Information&nbsp;-</strong>&nbsp;<HelpToolTip item="ContactInformation" justText/>
             </div>
           </div>
         </div>

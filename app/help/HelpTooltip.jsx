@@ -15,8 +15,7 @@ export default class HelpTooltip extends React.Component {
         )
         : (
           <span>
-            If a valid repository URL is provided this function will attempt to automatically populate metadata fields based on information provided in the repository. DOE CODE also provides functionality to allow users to auto-populate metadata by placing a specifically formatted YAML file their repository's root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly. For detailed information and an example file please see:
-            <a target='_blank' href='https://github.com/doecode/doecode/tree/master/metadata-schema'>https://github.com/doecode/doecode/tree/master/metadata-schema</a>.</span>
+            If a valid repository URL is provided this function will attempt to automatically populate metadata fields based on information provided in the repository. DOE CODE also provides functionality to allow users to auto-populate metadata by placing a specifically formatted YAML file their repository's root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly. For detailed information and an example file please see:&nbsp;<a target='_blank' href='https://github.com/doecode/doecode/tree/master/metadata-schema'>https://github.com/doecode/doecode/tree/master/metadata-schema</a>.</span>
         );
     } else if (this.props.item == "ClosedSource") {
       returnData = (this.props.shortVersion !== undefined)
@@ -199,7 +198,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Provide, with controlled vocabulary, the relationship of the resource being registered and the related resource. The Relation Type field also allows you to define how the submitted software is related to the DOI you enter and the document you are submitting. For definitions of each relation type controlled vocabulary see &nbsp;<a href='https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf'>this</a>.</span>
+          <span>Provide, with controlled vocabulary, the relationship of the resource being registered and the related resource. The Relation Type field also allows you to define how the submitted software is related to the DOI you enter and the document you are submitting. For definitions of each relation type controlled vocabulary see&nbsp;<a href='https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf'>this</a>.</span>
         );
     } else if (this.props.item == "ReleaseDate") {
       returnData = (this.props.shortVersion !== undefined)

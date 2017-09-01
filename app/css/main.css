@@ -182,12 +182,12 @@ html h3 {
   padding-right: 0px;
 }
 
-.minimal-col-padding-left{
-  padding-left:5px;
+.minimal-col-padding-left {
+  padding-left: 5px;
 }
 
-.minimal-col-padding-right{
-  padding-right:5px;
+.minimal-col-padding-right {
+  padding-right: 5px;
 }
 
 .no-margin-left {
@@ -658,6 +658,10 @@ html, body {
   color: black !important;
 }
 
+.nav-menu-item-fa {
+  opacity: .5;
+}
+
 .active-menu-item {
   color: black !important;
   background-color: #F9F9F9;
@@ -976,32 +980,34 @@ html, button, body, input, select, textarea, p {
   font-size: 20px;
 }
 
+
 /*FAQ PAGE*/
+
 .faq-page-subtitle {
-  color:rgb(29, 97, 162);
+  color: rgb(29, 97, 162);
 }
 
-.faq-page-left-padded{
-  padding-left:40px;
+.faq-page-left-padded {
+  padding-left: 40px;
 }
 
 .repository-services-img-link {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-.faq-page-blockquote{
-  padding-left:20px;
-  margin-left:20px;
-  border-left:5px solid #EEEEEE;
+.faq-page-blockquote {
+  padding-left: 20px;
+  margin-left: 20px;
+  border-left: 5px solid #EEEEEE;
 }
 
-.faq-page-btn{
-  font-size:18px;
-  font-weight:300;
+.faq-page-btn {
+  font-size: 18px;
+  font-weight: 300;
 }
 
-.fa-page-caret{
-    color:#7787A8;
+.fa-page-caret {
+  color: #7787A8;
 }
 
 @keyframes spin {

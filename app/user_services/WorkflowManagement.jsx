@@ -86,6 +86,7 @@ export default class WorkflowManagement extends React.Component {
           record.workflow_status == "Published" && <div className="col-xs-4"><span className="pending">Pending Approval</span></div>
         );
 
+        console.log(JSON.stringify(record));
           rows.push({
             id: record.code_id,
             title: record.software_title,
