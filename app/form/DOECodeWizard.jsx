@@ -113,7 +113,7 @@ constructor(props) {
     }
 
 closeErrorModal() {
-  this.setState({"error": false, "errorMessage": ""});
+this.setState({"error": false, "errorMessage": ""});
 }
 
 parseErrorResponse(jqXhr, exception) {

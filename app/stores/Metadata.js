@@ -217,11 +217,11 @@ deserializeSponsoringOrganization(data) {
             for (var x = 0; x < fundingLength; x++) {
             	let val = new String(fundingIDs[x].identifier_value);
                 if (fundingIDs[x].identifier_type === 'AwardNumber') {
-                    awardNumbers.push(val)
+                    awardNumbers.push(val.toString());
                 } else if (fundingIDs[x].identifier_type === 'BRCode') {
-                    brCodes.push(val);
+                    brCodes.push(val.toString());
                 } else if (fundingIDs[x].identifier_type === 'FWPNumber') {
-                    fwpNumbers.push(val);
+                    fwpNumbers.push(val.toString());
                 }
 
             }

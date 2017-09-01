@@ -25,7 +25,7 @@ export default class AccessStep extends React.Component{
 	licenseBlur() {
 		this.props.metadata.validateField('licenses');
 	}
-	
+
 	accessBlur() {
 		this.props.metadata.validateField('access_limitations');
 	}
@@ -92,7 +92,6 @@ export default class AccessStep extends React.Component{
 	}
 
 	onLicensesChange(value) {
-
 		if (value.trim())
 			this.props.metadata.setValue("licenses",value.split(','));
 		else
@@ -109,7 +108,7 @@ export default class AccessStep extends React.Component{
 		const licenses = metadata.getValue("licenses");
 		let accessLimitationOptions = this.generateAccessLimitationOptions(access_limitations);
 
-		
+
 		return(
 		<div className="form-group">
 			<div className="col-sm-offset-2 col-sm-8">

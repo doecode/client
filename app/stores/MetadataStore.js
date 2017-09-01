@@ -140,7 +140,7 @@ class MetadataStore {
    @observable sponsoringOrganizationInfoSchema = {
           "organization_name": {required:true, completed:false, validations: [], error: ''},
           "primary_award" : {required:true, completed:false, validations: ["awardnumber"], error: ''},
-          "award_numbers" : {required:false, completed:false, validations: [""], error: ''},
+          "award_numbers" : {required:false, completed:false, validations: [], error: ''},
           "br_codes" : {required:false, completed:false, validations: ["BR"], error: ''},
           "fwp_numbers" : {required:false, completed:false, validations: [], error: ''},
      }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import {Creatable} from 'react-select';
 import DatePicker from 'react-datepicker';
 import {observer} from "mobx-react";
 import 'react-select/dist/react-select.css';
@@ -15,6 +16,8 @@ export default class Field extends React.Component {
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleRadioChange = this.handleRadioChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+    this.handleCreatablePrompt = this.handleCreatablePrompt.bind(this);
+    this.optionExists = this.optionExists.bind(this);
  }
 
 
@@ -47,9 +50,13 @@ export default class Field extends React.Component {
 	  this.props.properties.onChange(this.props.properties.field,event.target.value);
   }
 
+  handleCreatablePrompt(label) {
+    return "Add \"" + label + "\"";
+  }
+
   handleSelectChange(value) {
     if (this.props.properties.isArray) {
-        // comes in as string, no matter what simpleValue is set to on Select component
+        // comes in as string, because of simpleValue on Select component
         if (value.trim()) {
             this.props.linkedData.setValue(this.props.properties.field, value.split("\n"));
         } else {
@@ -63,6 +70,19 @@ export default class Field extends React.Component {
         this.props.properties.changeCallback(value);
     }
 }
+
+optionExists(json, value) {
+    let contains = false;
+
+    if (!json)
+      return contains;
+
+    Object.keys(json).some(key => {
+        contains = typeof json[key] === 'object' ? this.optionExists(json[key], value) : json[key] === value;
+        return contains;
+    });
+    return contains;
+ }
 
  emptyFunction(){
 }
@@ -150,16 +170,46 @@ export default class Field extends React.Component {
       const clearable = this.props.properties.clearable !== undefined ? this.props.properties.clearable : true;
 	    const errorClass = error ? "field-error" : ""
 
-      if (this.props.properties.isArray) {
-        // Passing array to SELECT doesn't appear to work, so send it as delimited string instead.
-        val = val.join("\n");
+      // multis must be array of object
+      if (this.props.properties.multi) {
+        let newVal = [];
+        if (val instanceof Array) {
+          let arrayLength = val.length;
+          for (var i = 0; i < arrayLength; i++) {
+              let tmpVal = val[i];
+              // when option exists, no need to create object version
+              if (!this.optionExists(this.props.properties.options, tmpVal))
+                tmpVal = { label: tmpVal, value: tmpVal};
+
+              newVal.push(tmpVal);
+          }
+        }
+        else {
+          // when option exists, no need to create object version
+          if (!this.optionExists(this.props.properties.options, val))
+            val = { label: val, value: val};
+          newVal.push(val);
+        }
+        val = newVal;
+      }
+      // singles must be object, not array
+      else {
+        if (val instanceof Array) {
+          val = val.join("\n");
+        }JSON.stringify()
+
+        // when option exists, no need to create object version
+        if (!this.optionExists(this.props.properties.options, val))
+          val = { label: val, value: val};
       }
 
-      input = <Select name={field} className={errorClass} clearable={clearable} allowCreate={this.props.properties.allowCreate} multi={this.props.properties.multi} options={this.props.properties.options} simpleValue delimiter={"\n"} placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} value={val} />
+      if (this.props.properties.allowCreate)
+        input = <Creatable name={field} className={errorClass} clearable={clearable} simpleValue joinValues delimiter={"\n"} multi={this.props.properties.multi} options={this.props.properties.options} placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} autoBlur={true} value={val} promptTextCreator={this.handleCreatablePrompt} />;
+      else
+        input = <Select name={field} className={errorClass} clearable={clearable} simpleValue joinValues delimiter={"\n"} multi={this.props.properties.multi} options={this.props.properties.options} placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} autoBlur={true} value={val} />;
 	  }
 	  else if (elementType === 'textarea') {
-
-		 input = <textarea name={field} className={inputStyle} value={val} onChange={this.handleChange} onBlur={this.handleBlur} />
+		 input = <textarea name={field} className={inputStyle} value={val} onChange={this.handleChange} onBlur={this.handleBlur} />;
 	  }
 	  else if (elementType === 'radio') {
 			 return (
