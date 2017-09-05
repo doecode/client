@@ -167,32 +167,31 @@ export default class BiblioPage extends React.Component {
             </div>
           </div>
           <br/>
-          {/*Title*/}
-          <div className="row">
-            <div className='col-md-2'></div>
-            <div className="col-md-8 col-xs-12 biblio-title-container">
-              <div className="biblio-title">
-                {metadata.getValue("software_title")}
+          <div className='container'>
+            {/*Title*/}
+            <div className="row">
+              <div className="col-xs-12 biblio-title-container">
+                <div className="biblio-title">
+                  {metadata.getValue("software_title")}
+                </div>
+                <br/>
               </div>
-              <br/>
             </div>
-            <div className='col-md-2'></div>
-          </div>
-          {/*Description and other Data*/}
-          <div className="row">
-            <div className='col-md-2'></div>
-            <div className="col-md-8 col-xs-12">
-              <div className="row">
-                {descriptionContent}
-              </div>
-              <div className="row">
-                <div className="citation-details-div col-xs-12  no-col-padding-left no-col-padding-right">
-                  {fieldsContent}
+            {/*Description and other Data*/}
+            <div className="row">
+              {/*Sidebar on the left*/}
+              <BiblioSidebar pageData={metadata} sidebarClass='col-xs-3 biblio-sidebar'/>
+              <div className="col-xs-9">
+                <div className="row">
+                  {descriptionContent}
+                </div>
+                <div className="row">
+                  <div className="citation-details-div col-xs-12  no-col-padding-left no-col-padding-right">
+                    {fieldsContent}
+                  </div>
                 </div>
               </div>
             </div>
-            {/*Sidebar on the right*/}
-            <BiblioSidebar pageData={metadata} sidebarClass=' col-md-2 col-xs-12 biblio-sidebar'/>
           </div>
         </div>
       </div>

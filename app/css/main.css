@@ -511,6 +511,7 @@ html h3 {
 html, body {
   height: 100%;
   margin: 0;
+  color:black;
 }
 
 .wrapper {
@@ -1002,8 +1003,17 @@ html, button, body, input, select, textarea, p {
 }
 
 .faq-page-btn {
-  font-size: 18px;
+  font-size: 18.7167px;
   font-weight: 300;
+  text-decoration: none !important;
+}
+
+.faq-page-btn-wrapper{
+  padding-bottom:10px;
+}
+
+.faq-page-collapse-wrapper{
+  padding-bottom:2px;
 }
 
 .fa-page-caret {

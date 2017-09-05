@@ -291,15 +291,13 @@ export default class FAQ extends React.Component {
         <div className="col-md-6 col-xs-12 static-content">
           <h2 className="static-content-title">FAQs</h2>
           <br/>
-          <br/>
           <p>Click or tap on the questions below to see answers to frequently asked questions.</p>
           <br/>
           <div>
-            {fa_items.map((row, index) => <div>
+            {fa_items.map((row, index) => <div className='faq-page-collapse-wrapper' key={'faq-'+index}>
               <SimpleCollapsible toggleArrow button_text={row.text} contents={row.content} collapseContainerClasses='faq-page-blockquote'/>
             </div>)}
           </div>
-
         </div>
         <div className="col-md-3"></div>
       </div>

@@ -23,20 +23,26 @@ export default class BiblioSidebar extends React.Component {
       fulltextURL = fieldMapdata.landing_page;
       fulltextMsg = "Project Landing Page";
     }
+
+    var has_http = new RegExp(/^http:\/\/|https:\/\//);
+    if (!has_http.test(fulltextURL)) {
+      fulltextURL = ("http://" + fulltextURL);
+    }
+
     return (
       <div className={this.props.sidebarClass}>
         <div className='row'>
           <div className='col-xs-12'>
-            {doi && <div className='row  biblio-sidebar-row'>
+            {(doi && fieldMapdata.release_date) && <div className='row  biblio-sidebar-row'>
               <div className='col-xs-12'>
                 <div className='biblio-sidebar-subtitle'>Digital Object Identifier</div>
-                <a href={doi} className='biblio-sidebar-traditional-anchor'>{fieldMapdata.doi}</a>
+                <a href={doi} target='_blank' className='biblio-sidebar-traditional-anchor'>{fieldMapdata.doi}</a>
               </div>
             </div>}
             <div className='row  biblio-sidebar-row'>
               <div className='col-xs-12'>
                 <div className='biblio-sidebar-subtitle'>{fulltextMsg}</div>
-                <a href={fulltextURL} className='biblio-sidebar-traditional-anchor'>{fulltextURL}</a>
+                <a href={fulltextURL} target='_blank' className='biblio-sidebar-traditional-anchor'>{fulltextURL}</a>
               </div>
             </div>
           </div>
