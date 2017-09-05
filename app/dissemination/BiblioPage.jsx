@@ -10,6 +10,7 @@ import ResearchOrgItem from './ResearchOrgItem';
 import ContributingOrgItem from './ContributingOrgItem';
 import SponsoringOrgItem from './SponsoringOrgItem';
 import LicensesItem from './LicensesItem';
+import SearchRowDescription from '../fragments/SearchRowDescription'
 
 const metadata = new Metadata();
 
@@ -55,7 +56,10 @@ export default class BiblioPage extends React.Component {
       let names = []
       for (var i = 0; i < devs.length; i++) {
         if (!(devs[i].last_name == 'None' && devs[i].first_name == 'None')) {
-          names.push(devs[i].last_name + ", " + devs[i].first_name);
+          names.push({
+            name: (devs[i].last_name + ", " + devs[i].first_name),
+            hasOrcid: devs[i].orcid.length > 0
+          });
         }
       }
 
@@ -66,7 +70,10 @@ export default class BiblioPage extends React.Component {
       let contributors = metadata.getValue("contributors");
       let contributorNames = [];
       for (var i = 0; i < contributors.length; i++) {
-        contributorNames.push(contributors[i].last_name + ", " + contributors[i].first_name);
+        contributorNames.push({
+          name: (contributors[i].last_name + ", " + contributors[i].first_name),
+          hasOrcid: contributors[i].orcid.length > 0
+        });
       }
       textContent = <span><DevAndContribLinks groupType="contributor" devsAndContributorsObj={contributors} devsAndContributors={contributorNames}/></span>;
       show_val = contributorNames.length > 0;
@@ -114,14 +121,14 @@ export default class BiblioPage extends React.Component {
     if (show_val) {
       return (
         <div className='biblio-row'>
-          <dl key={header} className="row">
-            <dt className="col-md-3 col-xs-12 biblio-page-header">
-              {header}:
-            </dt>
-            <dd className="col-md-9 col-xs-12">
+          <div className='col-xs-12'>
+            <h3 className='biblio-field-header'>
+              {header}
+            </h3>
+            <div className='biblio-field-value'>
               {textContent}
-            </dd>
-          </dl>
+            </div>
+          </div>
         </div>
       );
     } else {
@@ -134,14 +141,6 @@ export default class BiblioPage extends React.Component {
     metadata.deserializeData(this.state.data);
     const fieldsContent = staticContstants.biblioFieldsList.map(this.generateContent);
 
-    let descriptionContent = null;
-    const description = metadata.getValue("description");
-
-    if (description) {
-      descriptionContent = <div className="col-xs-12 biblio-description">
-        {description}
-      </div>;
-    }
     const breadcrumbList = [
       {
         key: 'brdcrmb1',
@@ -156,7 +155,7 @@ export default class BiblioPage extends React.Component {
         value: <span>{metadata.getValue("software_title")}</span>
       }
     ];
-
+    const abstract = metadata.getValue("description");
     return (
       <div className="row not-so-wide-row">
         <div className="col-xs-12">
@@ -181,9 +180,12 @@ export default class BiblioPage extends React.Component {
             <div className="row">
               {/*Sidebar on the left*/}
               <BiblioSidebar pageData={metadata} sidebarClass='col-xs-3 biblio-sidebar'/>
-              <div className="col-xs-9">
+              <div className="col-xs-9 biblio-main-content">
                 <div className="row">
-                  {descriptionContent}
+                  <div className="col-xs-12 biblio-description  no-col-padding-left no-col-padding-right">
+                    <h3 className='biblio-field-header'>Abstract</h3>
+                    <SearchRowDescription text={abstract} moreLess={200}/>
+                  </div>
                 </div>
                 <div className="row">
                   <div className="citation-details-div col-xs-12  no-col-padding-left no-col-padding-right">

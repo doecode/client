@@ -16,10 +16,15 @@ export default class DevAndContribLinks extends React.Component {
     }
   }
 
-  createLink(name, index, array) {
+  createLink(row, index, array) {
     return (
-      <span key={name + this.props.groupType + index}>
-        <SearchLink field="developers_contributors" value={name.trim()}/> {index != array.length - 1 && <span>
+      <span key={row.name + this.props.groupType + index}>
+        <SearchLink field="developers_contributors" value={row.name.trim()}/> {/*ORCID Icon, if applicable*/}
+        {row.hasOrcid && <span>&nbsp;
+          <img className='orc-id-img' src='https://orcid.org/sites/default/files/images/orcid_16x16(1).gif'/>
+        </span>}
+        {/*If there are more left, then we can show a semi-colon*/}
+        {index != array.length - 1 && <span>
           ;&nbsp;
         </span>}
       </span>
@@ -53,7 +58,7 @@ export default class DevAndContribLinks extends React.Component {
     var tempPropsList = [];
     //Strip out all "None, None" entries
     devContribPropsList.forEach(function(row) {
-      if (row.trim() != 'None, None') {
+      if (row.name.trim() != 'None, None') {
         tempPropsList.push(row);
       }
     });

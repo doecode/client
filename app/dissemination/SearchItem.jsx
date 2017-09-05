@@ -31,7 +31,9 @@ export default class SearchItem extends React.Component {
       return (null);
     } else {
       devsAndContributors.forEach(function(item) {
-        devContribList.push(item.replace('(undefined),', '').replace(' (undefined)', '').replace(' null', '').replace('null ', ''))
+        devContribList.push({
+          name: (item.replace('(undefined),', '').replace(' (undefined)', '').replace(' null', '').replace('null ', ''))
+        });
       });
     }
 
@@ -73,7 +75,7 @@ export default class SearchItem extends React.Component {
                 <a href={doiUrl}>{doi}</a>
               </div>}
 
-              {data.description !== undefined && <SearchRowDescription text={data.description}/>}
+              {data.description !== undefined && <SearchRowDescription text={data.description} moreLess={100}/>}
 
               {data.repositoryLink && <div className='right-text'>
                 <br/>

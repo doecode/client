@@ -182,6 +182,14 @@ html h3 {
   padding-right: 0px;
 }
 
+.no-btn-padding-top {
+  padding-top: 0px;
+}
+
+.no-btn-padding-bottom {
+  padding-bottom: 0px;
+}
+
 .minimal-col-padding-left {
   padding-left: 5px;
 }
@@ -260,13 +268,12 @@ html h3 {
   padding-right: 10px;
   padding-left: 10px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #cccccc;
   font-size: 16px;
 }
 
 .biblio-title-container {
-  border-bottom: 1px solid #CCCCCC;
   margin-bottom: 15px;
+  border-bottom: 1px solid #cccccc;
 }
 
 .biblio-title {
@@ -274,9 +281,12 @@ html h3 {
   font-size: 31px;
 }
 
-.biblio-sidebar {
+.biblio-main-content {
+  border-left: 1px solid #CCCCCC;
   padding-left: 30px;
 }
+
+.biblio-sidebar {}
 
 .biblio-sidebar-title {
   color: #828297;
@@ -284,11 +294,26 @@ html h3 {
   font-weight: bold;
 }
 
+.doi-subnotice {
+  font-style: italic;
+  font-size: 13.6px;
+  color: rgb(153, 153, 153);
+}
+
 .biblio-sidebar-subtitle {
-  color: #9999aa;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 24px;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: #777;
+  margin-bottom: 0;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+.biblio-sidebar-secondary-subtitle {
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  color: #aaa;
+  font-size: 11.2px;
 }
 
 .biblio-sidebar-traditional-anchor {
@@ -300,6 +325,9 @@ html h3 {
   border-bottom: 1px solid #DDDDDD;
   padding-bottom: 10px;
   padding-top: 10px;
+}
+.biblio-sidebar-row:last-child{
+  border-bottom: none;
 }
 
 .biblio-sidebar-collapse-panel {
@@ -322,22 +350,28 @@ html h3 {
   font-size: 16px;
 }
 
-.citation-details-div dl {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
 .biblio-row {
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
-.citation-details-div div.biblio-row:nth-child(2n+1) {
-  background-color: #ebebeb;
-}
-
 .biblio-row>dl {
   margin-bottom: 0px;
+}
+
+.biblio-field-header {
+  font-weight: 300;
+  font-size: 18.7167px;
+  margin-left: 0px;
+}
+
+.biblio-field-value {
+  padding-bottom: 10px;
+}
+
+.orc-id-img {
+  width: 16px;
+  height: 16px;
 }
 
 .search-result-title {
@@ -511,7 +545,7 @@ html h3 {
 html, body {
   height: 100%;
   margin: 0;
-  color:black;
+  color: black;
 }
 
 .wrapper {
@@ -582,6 +616,39 @@ html, body {
 
 
 /*^^^^MAKES THE FOOTER WORK^^^^*/
+
+.biblio-social-link {
+  border-right: 1px solid rgba(0,0,0,0.1);
+  font-size: 13.6px;
+  padding-right: 20px !important;
+  padding-left: 20px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+.facebook {
+  color: #3b5998;
+}
+
+.twitter {
+  color: #00aced;
+}
+
+.gplus {
+  color: #dd4b39;
+}
+
+.linkedin {
+  color: #007bb6;
+}
+
+.shareAlt {
+  color: #777;
+}
+
+.biblio-social-link:last-child {
+  border-right: none;
+}
 
 .static-content {
   font-size: 16px;
@@ -1008,30 +1075,30 @@ html, button, body, input, select, textarea, p {
   text-decoration: none !important;
 }
 
-.faq-page-btn-wrapper{
-  padding-bottom:10px;
+.faq-page-btn-wrapper {
+  padding-bottom: 10px;
 }
 
-.faq-page-collapse-wrapper{
-  padding-bottom:2px;
+.faq-page-collapse-wrapper {
+  padding-bottom: 2px;
 }
 
 .fa-page-caret {
   color: #7787A8;
 }
 
-.help-question-mark{
-  color:#0000EE;
-  font-size:16px;
+.help-question-mark {
+  color: #0000EE;
+  font-size: 16px;
 }
 
-.help-box{
-  max-width:300px;
-  font-weight:400;
+.help-box {
+  max-width: 300px;
+  font-weight: 400;
 }
 
-.fake-h2{
-  font-size:24px;
+.fake-h2 {
+  font-size: 24px;
 }
 
 @keyframes spin {

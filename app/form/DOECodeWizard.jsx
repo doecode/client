@@ -235,7 +235,7 @@ approve() {
     const codeID = getQueryParam("code_id");
 
     this.setState({"loading": true, "loadingMessage": "Approving"});
-    doAuthenticatedAjax('GET', '/doecode/api/metadata/approve?code_id='+codeID, this.parseApproveResponse, null, this.parseErrorResponse);
+    doAuthenticatedAjax('GET', '/doecode/api/metadata/approve/'+codeID, this.parseApproveResponse, null, this.parseErrorResponse);
 }
 
 doMultipartSubmission(url, successCallback) {
