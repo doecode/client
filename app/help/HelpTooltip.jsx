@@ -16,7 +16,7 @@ export default class HelpTooltip extends React.Component {
         )
         : (
           <span>
-            If a valid repository URL is provided this function will attempt to automatically populate metadata fields based on information provided in the repository. DOE CODE also provides functionality to allow users to auto-populate metadata by placing a specifically formatted YAML file their repository's root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly. For detailed information and an example file please see:&nbsp;<a target='_blank' href='https://github.com/doecode/doecode/tree/master/metadata-schema'>https://github.com/doecode/doecode/tree/master/metadata-schema</a>.</span>
+            If a valid repository URL is provided this function will attempt to automatically populate metadata fields based on information provided in the repository. DOE CODE also provides functionality to allow users to auto-populate metadata by placing a specifically formatted YAML file in their repository's root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly. For detailed information and an example file please see:&nbsp;<a target='_blank' href='https://github.com/doecode/doecode/tree/master/metadata-schema'>https://github.com/doecode/doecode/tree/master/metadata-schema</a>.</span>
         );
     } else if (this.props.item == "ClosedSource") {
       returnData = (this.props.shortVersion !== undefined)
@@ -371,7 +371,7 @@ export default class HelpTooltip extends React.Component {
         )
         : (
           <span>
-            If you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing of your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, .tar.gz2, and .war.</span>
+            If you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, .tar.gz2, and .war.</span>
         );
     }
     /*Okay, the text we just got, we'll do something with it now*/
