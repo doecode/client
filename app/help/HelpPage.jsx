@@ -19,6 +19,7 @@ export default class HelpPage extends React.Component {
           <h2 className="static-content-title">Help</h2>
           {/*THE VALUES FOR item MAP TO THE BIG IF ELSE STATEMENT IN THE HelpTooltip MODULE*/}
           <br/>
+          <br/>
           <strong className='help-page-subtitle'>How is Software Submitted?</strong>
           <br/>
           <br/>

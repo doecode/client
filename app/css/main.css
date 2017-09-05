@@ -1010,6 +1010,16 @@ html, button, body, input, select, textarea, p {
   color: #7787A8;
 }
 
+.help-question-mark{
+  color:#0000EE;
+  font-size:16px;
+}
+
+.help-box{
+  max-width:300px;
+  font-weight:400;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

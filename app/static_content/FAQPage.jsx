@@ -289,7 +289,7 @@ export default class FAQ extends React.Component {
       <div className="row not-so-wide-row">
         <div className="col-md-3"></div>
         <div className="col-md-6 col-xs-12 static-content">
-          <h2 className="static-content-title">FAQ's</h2>
+          <h2 className="static-content-title">FAQs</h2>
           <br/>
           <br/>
           <p>Click or tap on the questions below to see answers to frequently asked questions.</p>

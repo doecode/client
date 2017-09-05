@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 
 export default class HelpTooltip extends React.Component {
   constructor(props) {
@@ -379,6 +380,17 @@ export default class HelpTooltip extends React.Component {
         {this.props.justText !== undefined && <span>
           {returnData}
         </span>}
+        {this.props.justText === undefined && <span>
+          <span data-tip data-for={this.props.item}>
+            <span className='fa fa-question help-question-mark'></span>
+          </span>
+          <ReactTooltip id={this.props.item} aria-haspopup='true' role='example' >
+            <div className='help-box'>
+              {returnData}
+            </div>
+          </ReactTooltip>
+        </span>}
+
       </span>
     );
   }
