@@ -1020,6 +1020,10 @@ html, button, body, input, select, textarea, p {
   font-weight:400;
 }
 
+.fake-h2{
+  font-size:24px;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

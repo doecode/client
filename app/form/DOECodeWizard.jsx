@@ -503,12 +503,10 @@ buildPanel(obj) {
             <div className="col-md-3"></div>
              <div className="col-md-6 col-xs-12">
                  <div className="form-group form-group-sm row">
-                     <div className="col-md-3"></div>
-                     <div className="col-md-6 col-xs-12">
-                         <h1 className="text-center"> {headerText} </h1>
+                     <div className="col-xs-12 center-text">
+                         <h1> {headerText} </h1>
+                         <a href="/doecode/help">{helpLinkText}</a>
                      </div>
-                     <div className='center-text'><a href="/doecode/help"><span className='fa'> {helpLinkText} </span></a></div>
-                     <div className="col-md-3"></div>
                  </div>
                  {content}
                  <Modal show={this.state.loading} >

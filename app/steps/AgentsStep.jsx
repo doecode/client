@@ -10,7 +10,7 @@ import {observer} from 'mobx-react';
 import {Tabs, Tab} from 'react-bootstrap';
 import Promise from 'promise';
 import {getChildData} from '../utils/utils'
-
+import HelpTooltip from '../help/HelpTooltip';
 
 const tableStore = new TableStore();
 const metadata = new Metadata();
@@ -121,7 +121,8 @@ export default class AgentsStep extends React.Component {
                     <div className="container-fulid form-horizontal">
                         <div className="row">
                             <div className="col-md-9 col-xs-12">
-                                <h2> Developers </h2>
+                                <span className='fake-h2'>Developers</span>&nbsp;&nbsp;<HelpTooltip item='Developers'/>
+																<br/>
                                 {content}
                             </div>
                             <div className="col-md-3"></div>

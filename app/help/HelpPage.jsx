@@ -278,8 +278,6 @@ export default class HelpPage extends React.Component {
           </div>
           <div className="row">
             <div className="col-xs-12">
-              <strong>Contributing Organization(s)&nbsp;-</strong>&nbsp;<HelpToolTip item="ContributorOrg" justText/>
-              <br/>
               <ul>
                 <li>
                   <strong>Identifier Type&nbsp;-</strong>&nbsp;<HelpToolTip item="IdentifierType" justText/>

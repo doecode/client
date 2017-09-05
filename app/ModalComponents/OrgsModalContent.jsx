@@ -46,22 +46,22 @@ export default class OrgsModalContent extends React.Component {
 
             <div className="container-fluid form-horizontal">
 
-                    <SpecificField field="DOE" label="DOE Organization?" elementType="checkbox" toggleCallback={this.toggleCallback}  />
-                    <SpecificField  field="organization_name" label="Name" elementType="select" allowCreate={true} placeholder="Enter or select from the list your organization" options={orgNames}   />
+                    <SpecificField field="DOE" label="DOE Organization?" helpTooltip='SponsorOrgDOEOrg' elementType="checkbox" toggleCallback={this.toggleCallback}  />
+                    <SpecificField  field="organization_name" label="Name" helpTooltip='SponsorOrgName' elementType="select" allowCreate={true} placeholder="Enter or select from the list your organization" options={orgNames}   />
                     {data.getValue("primary_award") !== undefined &&
-                    <SpecificField  field="primary_award" label="Primary Award" elementType="input"  />
+                    <SpecificField  field="primary_award" label="Primary Award" helpTooltip='SponsorOrgContractNumber' elementType="input"  />
                     }
 
                     {this.props.data.getValue("award_numbers") !== undefined &&
-                    <SpecificField field="award_numbers" label="Additional Awards" elementType="select" allowCreate={true} isArray={true} multi={true} placeholder="Enter any additional awards"   />
+                    <SpecificField field="award_numbers" label="Additional Awards" helpTooltip='SponsorOrgAdditionalRewards' elementType="select" allowCreate={true} isArray={true} multi={true} placeholder="Enter any additional awards"   />
                     }
 
                     {this.props.data.getValue("br_codes") !== undefined &&
-                    <SpecificField field="br_codes" label="B&R Codes" elementType="select" allowCreate={true} isArray={true} multi={true} placeholder="Enter B&R Codes"   />
+                    <SpecificField field="br_codes" label="B&R Codes" elementType="select" helpTooltip='SponsorOrgBRClassification' allowCreate={true} isArray={true} multi={true} placeholder="Enter B&R Codes"   />
                     }
 
                     {this.props.data.getValue("fwp_numbers") !== undefined &&
-                    <SpecificField field="fwp_numbers" label="FWP Numbers" elementType="select" allowCreate={true} isArray={true} multi={true} placeholder="Enter FWP Numbers"   />
+                    <SpecificField field="fwp_numbers" label="FWP Numbers" elementType="select" helpTooltip='SponsorOrgFWPNum' allowCreate={true} isArray={true} multi={true} placeholder="Enter FWP Numbers"   />
                     }
 
             </div>
