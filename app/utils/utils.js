@@ -81,7 +81,26 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
       handleAuthenticatedError(jqXhr, exception, errorCallback);
     }
   });
+}
 
+function doAuthenicatedFileDownloadAjax(url, anchorID, codeid, successCallback, errorCallback) {
+  $.ajax({
+    url: url,
+    method: 'GET',
+    beforeSend: function(request) {
+      request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+    },
+    success: function(data) {
+      console.log("Success");
+    },
+    error: function(xhr) {
+      var data = xhr.responseText;
+      var uriContent = 'data:text/yml,'+encodeURIComponent(data);
+      window.open(uriContent,'file.yml');
+    }
+  });
+
+  $.get(url,)
 }
 
 function checkIsAuthenticated() {
@@ -242,8 +261,8 @@ function checkPassword(data) {
   return newState;
 }
 
-function getIsLoggedIn(){
-   return (localStorage.token_expiration != "" && moment(localStorage.token_expiration, "YYYY-MM-DD HH:mm").isAfter(moment()));
+function getIsLoggedIn() {
+  return (localStorage.token_expiration != "" && moment(localStorage.token_expiration, "YYYY-MM-DD HH:mm").isAfter(moment()));
 }
 
 export {doAjax};
@@ -260,3 +279,4 @@ export {checkPassword};
 export {resetLoggedInAttributesUserData};
 export {doArraysContainSame};
 export {getIsLoggedIn};
+export {doAuthenicatedFileDownloadAjax};

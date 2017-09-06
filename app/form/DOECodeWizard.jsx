@@ -159,13 +159,12 @@ componentDidMount() {
     if (window.sessionStorage.lastRecord) {
         //do an authenticated ajax against our allowed endpoing to check if valid and then do this in the success response...
         checkIsAuthenticated();
-        //metadata.loadValues(JSON.parse(window.sessionStorage.lastRecord));
         metadata.loadRecordFromSessionStorage(JSON.parse(window.sessionStorage.lastRecord), this.props.page);
         window.sessionStorage.lastRecord = "";
 
     } else if (codeID) {
         this.setState({"loading" : true, "loadingMessage" : "Loading"});
-        doAuthenticatedAjax('GET', "/doecode/api/metadata/edit/" + codeID, this.parseReceiveResponse);
+        doAuthenticatedAjax('GET', "/doecode/api/metadata/" + codeID, this.parseReceiveResponse);
     } else {
         checkIsAuthenticated();
     }

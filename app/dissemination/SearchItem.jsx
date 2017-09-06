@@ -12,7 +12,6 @@ export default class SearchItem extends React.Component {
   render() {
 
     const data = this.props.data;
-
     let releaseDate = undefined;
     let doi = undefined;
     let doiUrl = "";
@@ -65,7 +64,7 @@ export default class SearchItem extends React.Component {
 
               <div className='row'>
                 <div className="search-result-author col-md-8 col-xs-12">
-                  <DevAndContribLinks devsAndContributors={devContribList} searchPage releaseDate={releaseDateDisplay}/>
+                  <DevAndContribLinks items={devContribList} searchPage releaseDate={releaseDateDisplay}/>
                 </div>
 
               </div>

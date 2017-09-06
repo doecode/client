@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {getQueryParam, doAuthenticatedAjax} from '../utils/utils';
+import {getQueryParam, doAuthenticatedAjax, doAuthenicatedFileDownloadAjax} from '../utils/utils';
 import {Button} from 'react-bootstrap';
 import MetadataList from '../fragments/MetadataList';
 
@@ -12,7 +12,7 @@ export default class Confirmation extends React.Component {
     this.editRecord = this.editRecord.bind(this);
     this.parseMetadataCall = this.parseMetadataCall.bind(this);
     this.parseMetadataCallError = this.parseMetadataCallError.bind(this);
-
+    this.downloadYML = this.downloadYML.bind(this);
     let mintedDoi = getQueryParam("mintedDoi");
 
     if (!mintedDoi) {
@@ -28,7 +28,7 @@ export default class Confirmation extends React.Component {
   }
 
   componentDidMount() {
-    doAuthenticatedAjax('GET', '/doecode/api/metadata/edit/' + this.state.codeID, this.parseMetadataCall, null, this.parseMetadataCallError);
+    doAuthenticatedAjax('GET', '/doecode/api/metadata/' + this.state.codeID, this.parseMetadataCall, null, this.parseMetadataCallError);
   }
 
   parseMetadataCall(data) {
@@ -37,7 +37,7 @@ export default class Confirmation extends React.Component {
   }
 
   parseMetadataCallError() {
-    console.log("ERror in metadata");
+    console.log("Error in metadata");
   }
 
   newRecord() {
@@ -48,8 +48,12 @@ export default class Confirmation extends React.Component {
     window.location.href = "/doecode/submit?code_id=" + this.state.codeID;
   }
 
+  downloadYML(){
+    doAuthenicatedFileDownloadAjax('/doecode/api/metadata/' + this.state.codeID + "?format=yaml",'yml-anchor',this.state.codeID );
+  }
+
   render() {
-    const ymlDownload = "/doecode/api/metadata/edit/" + this.state.codeID + "?format=yaml";
+    //const ymlDownload = "/doecode/api/metadata/" + this.state.codeID + "?format=yaml";
 
     return (
       <div className="row not-so-wide-row">
@@ -74,7 +78,7 @@ export default class Confirmation extends React.Component {
                 </h2>
               </div>}
               <h2>
-                <a target="_blank" type="text/yaml" href={ymlDownload}>
+                <a id='yml-anchor' target="_blank" type="text/yaml">
                   Download Metadata.yml
                 </a>
               </h2>

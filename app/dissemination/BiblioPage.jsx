@@ -30,7 +30,7 @@ export default class BiblioPage extends React.Component {
     var patt = new RegExp(/(\d+)$/);
     const codeID = patt.exec(window.location.href)[0];
     if (codeID) {
-      doAjax('GET', "/doecode/api/metadata/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
+      doAjax('GET', "/doecode/api/search/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
     } else {
       console.log("This page is invalid...");
     }
@@ -53,30 +53,29 @@ export default class BiblioPage extends React.Component {
     /*These headers must match the biblioFieldsList header values in the constantLists json*/
     if (header == "Developers") {
       let devs = metadata.getValue("developers");
-      let names = []
-      for (var i = 0; i < devs.length; i++) {
-        if (!(devs[i].last_name == 'None' && devs[i].first_name == 'None')) {
-          names.push({
-            name: (devs[i].last_name + ", " + devs[i].first_name),
-            hasOrcid: devs[i].orcid.length > 0
-          });
+      var valid_devs = false;
+      devs.forEach(function(item) {
+        if (item.first_name != "None" && item.last_name != 'None') {
+          valid_devs = true;
+          return false;
         }
-      }
-
-      textContent = <span><DevAndContribLinks groupType="developer" devsAndContributorsObj={devs} devsAndContributors={names}/></span>;
-      show_val = names.length > 0;
+      });
+      textContent = <span><DevAndContribLinks groupType="developer" items={devs}/></span>;
+      show_val = valid_devs;
 
     } else if (header == "Contributors") {
       let contributors = metadata.getValue("contributors");
-      let contributorNames = [];
-      for (var i = 0; i < contributors.length; i++) {
-        contributorNames.push({
-          name: (contributors[i].last_name + ", " + contributors[i].first_name),
-          hasOrcid: contributors[i].orcid.length > 0
-        });
-      }
-      textContent = <span><DevAndContribLinks groupType="contributor" devsAndContributorsObj={contributors} devsAndContributors={contributorNames}/></span>;
-      show_val = contributorNames.length > 0;
+      //This is just here to make sure that there are valid names
+      var valid_contributors = false;
+      contributors.forEach(function(item) {
+        if (item.first_name != 'None' && item.last_name != 'None') {
+          valid_contributors = true;
+          return false;
+        }
+      });
+
+      textContent = <span><DevAndContribLinks groupType="contributor" items={contributors}/></span>;
+      show_val = valid_contributors;
 
     } else if (header == "Licenses") {
       const licenses = metadata.getValue("licenses");
