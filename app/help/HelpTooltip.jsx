@@ -88,7 +88,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Provide a clear, concise, and publicly releasable description of the software, including the purpose, function, and capabilities. Text should be spell checked, limited to 2000 characters and follow input standards for special characters.
+          <span>Provide a clear, concise, and publicly releasable description of the software, including the purpose, function, and capabilities. Text should be spell checked, limited to 2000 characters and follow input standards for special characters.&nbsp;
             <strong>DO NOT INCLUDE SENSITIVE INFORMATION IN THE DESCRIPTION/ABSTRACT.</strong>
           </span>
         );
@@ -382,7 +382,7 @@ export default class HelpTooltip extends React.Component {
         </span>}
         {this.props.justText === undefined && <span>
           <span data-tip data-for={this.props.item}>
-            <span className='fa fa-question help-question-mark'></span>
+            <span className='fa fa-question-circle help-question-mark'></span>
           </span>
           <ReactTooltip id={this.props.item} aria-haspopup='true' role='example' >
             <div className='help-box'>

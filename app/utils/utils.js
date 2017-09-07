@@ -83,7 +83,7 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
   });
 }
 
-function doAuthenicatedFileDownloadAjax(url, anchorID, codeid, successCallback, errorCallback) {
+function doAuthenicatedFileDownloadAjax(url, successCallback, errorCallback) {
   $.ajax({
     url: url,
     method: 'GET',
@@ -91,16 +91,13 @@ function doAuthenicatedFileDownloadAjax(url, anchorID, codeid, successCallback, 
       request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
     },
     success: function(data) {
-      console.log("Success");
+      handleAuthenticatedSuccess(data, successCallback);
     },
-    error: function(xhr) {
-      var data = xhr.responseText;
-      var uriContent = 'data:text/yml,'+encodeURIComponent(data);
-      window.open(uriContent,'file.yml');
+    error: function(xhr,exception) {
+      handleAuthenticatedError(xhr, exception, errorCallback);
     }
   });
 
-  $.get(url,)
 }
 
 function checkIsAuthenticated() {

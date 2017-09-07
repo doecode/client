@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchLink from './SearchLink';
+import SimpleDropdown from '../fragments/SimpleDropdown';
 import {Button, Collapse, Well} from 'react-bootstrap';
 
 export default class DevAndContribLinks extends React.Component {
@@ -9,6 +10,8 @@ export default class DevAndContribLinks extends React.Component {
     this.showAffiliationsBtn = this.showAffiliationsBtn.bind(this);
     this.createAuthorsLink = this.createAuthorsLink.bind(this);
     this.createAffiliationsList = this.createAffiliationsList.bind(this);
+    this.createORCIDLink = this.createORCIDLink.bind(this);
+
     this.state = {
       affiliationsOpen: false,
       affiliationStateLabel: <span>
@@ -16,15 +19,40 @@ export default class DevAndContribLinks extends React.Component {
     }
   }
 
+  createORCIDLink(row) {
+    var dropdown_list = [
+      {
+        link: '',
+        display: <SearchLink displayVal={'Search DOE CODE for ' + this.props.groupType + ' ' + row.name.trim()} field="developers_contributors" value={row.name.trim()}/>,
+        customAnchor: true
+      }, {
+        link: 'https://orcid.org/orcid-search/quick-search?searchQuery=' + row.orcid,
+        display: 'Search orcid.org for ORCID "' + row.orcid + '"'
+      }
+    ];
+
+    return (
+      <span>
+        <SimpleDropdown extraBtnClasses=' biblio-authors' noBtnPadding noToggleArrow items={dropdown_list} label={row.name.trim()}/>
+        &nbsp;
+        <img className='orc-id-img' src='https://orcid.org/sites/default/files/images/orcid_16x16(1).gif'/>
+      </span>
+    );
+  }
+
+  /*Make the search link. Things are a little different if it's got an orcid*/
   createAuthorsLink(row, index, array) {
+    var search_link = (row.orcid)
+      ? (this.createORCIDLink(row))
+      : (<SearchLink field="developers_contributors" value={row.name.trim()}/>);
+
     return (
       <span key={index}>
-        <SearchLink field="developers_contributors" value={row.name.trim()}/> {(row.sup_count && row.sup_count.length > 0) && <span>
+        {search_link}
+        {(row.sup_count && row.sup_count.length > 0) && <span>
           {row.sup_count.map((item, index2) => <sup key={index2}>[{item}]</sup>)}
         </span>}
-        {row.orcid && <span>&nbsp;
-          <img className='orc-id-img' src='https://orcid.org/sites/default/files/images/orcid_16x16(1).gif'/>
-        </span>}
+
         {((index + 1) < array.length) && <span>
           ;&nbsp;
         </span>}
@@ -34,8 +62,8 @@ export default class DevAndContribLinks extends React.Component {
 
   createAffiliationsList(items) {
     var affiliations_list = [];
-
     var affiliation_index = 0;
+
     items.forEach(function(row) {
       if (row.affiliations && row.affiliations.length > 0) {
         row.affiliations.forEach(function(affiliation) {
@@ -111,7 +139,9 @@ export default class DevAndContribLinks extends React.Component {
       refinedAuthorsList[i].sup_count = countArr;
     }
 
+    /*Map everything with in the refined authors list*/
     const authorsContent = refinedAuthorsList.map(this.createAuthorsLink);
+    /*Map every affiliation we've got*/
     const affiliations_list = this.createAffiliationsList(refinedAuthorsList);
 
     return (

@@ -12,7 +12,9 @@ export default class Confirmation extends React.Component {
     this.editRecord = this.editRecord.bind(this);
     this.parseMetadataCall = this.parseMetadataCall.bind(this);
     this.parseMetadataCallError = this.parseMetadataCallError.bind(this);
-    this.downloadYML = this.downloadYML.bind(this);
+    this.parseYMLDownloaderSuccess = this.parseYMLDownloaderSuccess.bind(this);
+    this.parseYMLDownloader = this.parseYMLDownloader.bind(this);
+
     let mintedDoi = getQueryParam("mintedDoi");
 
     if (!mintedDoi) {
@@ -23,16 +25,17 @@ export default class Confirmation extends React.Component {
       "mintedDoi": mintedDoi,
       "codeID": getQueryParam("code_id"),
       "workflow": getQueryParam("workflow"),
-      "metadata": {}
+      "metadata": {},
+      "showYMLDownload": false
     };
   }
 
   componentDidMount() {
     doAuthenticatedAjax('GET', '/doecode/api/metadata/' + this.state.codeID, this.parseMetadataCall, null, this.parseMetadataCallError);
+    doAuthenicatedFileDownloadAjax(('/doecode/api/metadata/' + this.state.codeID + "?format=yaml"),  this.parseYMLDownloaderSuccess, this.parseYMLDownloader);
   }
 
   parseMetadataCall(data) {
-    console.log("SUccess in metadata");
     this.setState({metadata: data.metadata, loadedDOI: data.metadata.doi});
   }
 
@@ -48,12 +51,19 @@ export default class Confirmation extends React.Component {
     window.location.href = "/doecode/submit?code_id=" + this.state.codeID;
   }
 
-  downloadYML(){
-    doAuthenicatedFileDownloadAjax('/doecode/api/metadata/' + this.state.codeID + "?format=yaml",'yml-anchor',this.state.codeID );
+  parseYMLDownloaderSuccess(data) {
+
+  }
+
+  parseYMLDownloader(data) {
+    this.setState({
+      showYMLDownload: true,
+      ymlHREF: 'data:text/yaml;charset=utf-8,' + encodeURIComponent(data.responseText),
+      ymlFILE: 'metadata-' + this.state.codeID + ".yml"
+    });
   }
 
   render() {
-    //const ymlDownload = "/doecode/api/metadata/" + this.state.codeID + "?format=yaml";
 
     return (
       <div className="row not-so-wide-row">
@@ -77,11 +87,12 @@ export default class Confirmation extends React.Component {
                   DOI: {this.state.loadedDOI}
                 </h2>
               </div>}
-              <h2>
-                <a id='yml-anchor' target="_blank" type="text/yaml">
+              {this.state.showYMLDownload && <h2>
+                <a id='yml-anchor' target="_blank" type="text/yaml" href={this.state.ymlHREF} download={this.state.ymlFILE}>
                   Download Metadata.yml
                 </a>
-              </h2>
+              </h2>}
+
             </div>
           </div>
           <div className="form-group form-group-sm row">

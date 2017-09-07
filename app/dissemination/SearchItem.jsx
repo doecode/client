@@ -71,7 +71,7 @@ export default class SearchItem extends React.Component {
               {doi !== undefined && <div className="search-result-doi">
                 <span className="fa fa-link"></span>
                 DOI:
-                <a href={doiUrl}>{doi}</a>
+                <a target="_blank" href={doiUrl}>{doi}</a>
               </div>}
 
               {data.description !== undefined && <SearchRowDescription text={data.description} moreLess={100}/>}

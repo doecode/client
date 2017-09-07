@@ -264,6 +264,10 @@ html h3 {
   color: green;
 }
 
+.biblio-authors{
+    font-size:16px !important;
+}
+
 .biblio-description {
   padding-right: 10px;
   padding-left: 10px;

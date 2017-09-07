@@ -5,6 +5,21 @@ import {Dropdown, MenuItem} from 'react-bootstrap';
 export default class SimpleDropdown extends React.Component {
   constructor(props) {
     super(props);
+    this.makeRow = this.makeRow.bind(this);
+  }
+
+  makeRow(row, index) {
+    let linkToUse = (row.customAnchor != undefined)
+      ? (row.display)
+      : (
+        <a href={row.link}>{row.display}</a>
+      );
+
+    return (
+      <li key={'dropdown-' + index}>
+        {linkToUse}
+      </li>
+    );
   }
 
   render() {
@@ -15,17 +30,21 @@ export default class SimpleDropdown extends React.Component {
     if (this.props.noBtnPadding) {
       btn_class += " no-col-padding-left no-col-padding-right no-btn-padding-bottom no-btn-padding-top";
     }
+
+    if (this.props.extraBtnClasses) {
+      btn_class += (" " + this.props.extraBtnClasses);
+    }
+
+    const listItems = this.props.items.map(this.makeRow);
     return (
-      <div className="dropdown">
+      <span className="dropdown">
         <button className={btn_class} type="button" data-toggle="dropdown">{this.props.label}
         </button>
         {this.props.noToggleArrow === undefined && <span className='fa fa-angle-down'></span>}
         <ul className="dropdown-menu">
-          {this.props.items.map((row, index) => <li key={'dropdown-' + index}>
-            <a href={row.link}>{row.display}</a>
-          </li>)}
+          {listItems}
         </ul>
-      </div>
+      </span>
     );
   }
 
