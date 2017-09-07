@@ -253,7 +253,15 @@ export default class Field extends React.Component {
           {label && <label htmlFor={field} className={labelStyle}>
             {label}
           </label>}
-          {this.props.properties.helpTooltip!=undefined &&<span>&nbsp; <HelpTooltip item={this.props.properties.helpTooltip}/></span>}
+          {this.props.properties.helpTooltip!=undefined &&
+            <span>&nbsp;
+              {this.props.properties.tooltipShort &&<span>
+                <HelpTooltip shortVersion item={this.props.properties.helpTooltip}/>
+              </span>}
+              {!this.props.properties.tooltipShort && <span>
+                <HelpTooltip item={this.props.properties.helpTooltip}/>
+              </span>}
+            </span>}
           <div className={divStyle}>
             {input}
             {error && <span className="error-color">

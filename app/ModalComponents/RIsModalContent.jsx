@@ -105,7 +105,7 @@ export default class RIsModalContent extends React.Component {
 
       <div className="container-fluid form-horizontal">
         <SpecificField field="identifier_type" helpTooltip='IdentifierType' label="Identifier Type" elementType="select" options={identifierTypes}/>
-        <SpecificField field="relation_type" helpTooltip='RelationType' label="Relation Type" elementType="select" options={relationTypes}/>
+        <SpecificField field="relation_type" helpTooltip='RelationType' tooltipShort label="Relation Type" elementType="select" options={relationTypes}/>
         <SpecificField field="identifier_value" helpTooltip='Identifier' label="Identifier" elementType="input"/>
       </div>
     );

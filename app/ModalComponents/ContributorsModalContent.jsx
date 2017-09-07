@@ -32,7 +32,7 @@ export default class ContributorsModalContent extends React.Component {
 
         </div>}
 
-        <SpecificField field="contributor_type" label="Contributor Type" elementType="select" helpTooltip='ContributorType' options={staticContstants.contributorTypes}/>
+        <SpecificField field="contributor_type" label="Contributor Type" elementType="select" helpTooltip='ContributorType' tooltipShort options={staticContstants.contributorTypes}/>
       </div>
     );
   }
