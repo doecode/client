@@ -199,7 +199,7 @@ export default class EditUser extends React.Component {
     const accountSaveUser = <span>
       <span className="fa fa-floppy-o"></span>&nbsp; Save User</span>;
 
-    //var showAdminRole = (localStorage.roles && JSON.parse(localStorage.roles).indexOf("CONTR")<0);
+    var showAdminRole = (localStorage.site && localStorage.site!='CONTR');
 
     return (
       <div className="row not-so-wide-row">
@@ -262,8 +262,9 @@ export default class EditUser extends React.Component {
               </div>
             </div>
           </div>
+
           <div className="row">
-            {/*<div className="col-md-6 col-xs-12">
+            {showAdminRole && <div className="col-md-6 col-xs-12">
               <div className="panel panel-default">
                 <div className="panel-heading account-panel-header center-text">Administrative Role</div>
                 <div className="panel-body account-panel-body center-text">
@@ -276,7 +277,8 @@ export default class EditUser extends React.Component {
                   </button>
                 </div>
               </div>
-            </div>*/}
+            </div>}
+
             <div className='col-md-6 col-xs-12'>
               <div className="panel panel-default">
                 <div className="panel-heading account-panel-header center-text">Generate New API Key</div>

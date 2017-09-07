@@ -163,6 +163,7 @@ function clearLoginLocalstorage() {
   localStorage.last_name = "";
   localStorage.token_expiration = "";
   localStorage.roles = "";
+  localStorage.user_site = "";
 }
 
 function setLoggedInAttributes(data) {
@@ -172,6 +173,7 @@ function setLoggedInAttributes(data) {
   localStorage.last_name = data.last_name;
   localStorage.token_expiration = moment().add(30, 'minutes').format("YYYY-MM-DD HH:mm");
   localStorage.roles = JSON.stringify(data.roles);
+  localStorage.user_site = data.site;
 }
 
 function resetLoggedInAttributesUserData(data) {

@@ -6,6 +6,7 @@ import UserData from '../stores/UserData';
 import PageMessageBox from '../fragments/PageMessageBox';
 import BootstrapAlertMsg from '../fragments/BootstrapAlertMsg';
 import {doAjax, doAuthenticatedAjax, checkIsAuthenticated, checkHasRole, doArraysContainSame} from '../utils/utils';
+import SimpleCollapsible from '../fragments/SimpleCollapsible';
 
 const userData = new UserData();
 export default class SigninStatus extends React.Component {
@@ -20,18 +21,63 @@ export default class SigninStatus extends React.Component {
     this.parseLoadUserData = this.parseLoadUserData.bind(this);
     this.parseLoadUserDataError = this.parseLoadUserDataError.bind(this);
     this.refreshPageUI = this.refreshPageUI.bind(this);
+    this.listPendingRoles = this.listPendingRoles.bind(this);
 
-    this.roles_list = ['OSTI'];
     this.roles_list = [
       {
+        label: 'AMES',
+        value: 'AMES'
+      }, {
+        label: 'ANL',
+        value: 'ANL'
+      }, {
+        label: 'BNL',
+        value: 'BNL'
+      }, {
+        label: 'FNAL',
+        value: 'FNAL'
+      }, {
+        label: 'INL',
+        value: 'INL'
+      }, {
+        label: 'LANL',
+        value: 'LANL'
+      }, {
+        label: 'LBNL',
+        value: 'LBNL'
+      }, {
+        label: 'LLNL',
+        value: 'LLNL'
+      }, {
+        label: 'NETL',
+        value: 'NETL'
+      }, {
+        label: 'NREL',
+        value: 'NREL'
+      }, {
+        label: 'ORNL',
+        value: 'ORNL'
+      }, {
         label: 'OSTI',
         value: 'OSTI'
       }, {
-        label: 'Administrator',
-        value: 'ADMIN'
+        label: 'PNNL',
+        value: 'PNNL'
       }, {
-        label: 'Contractor',
-        value: 'CONTR'
+        label: 'PPPL',
+        value: 'PPPL'
+      }, {
+        label: 'SLAC',
+        value: 'SLAC'
+      }, {
+        label: 'SNL',
+        value: 'SNL'
+      }, {
+        label: 'SRNL',
+        value: 'SRNL'
+      }, {
+        label: 'TJNAF',
+        value: 'TJNAF'
       }
     ];
     this.state = {
@@ -45,7 +91,9 @@ export default class SigninStatus extends React.Component {
       userLoadError: [],
       original_user_data: {},
       showUserSaveSuccess: false,
-      userSaveMessage: []
+      userSaveMessage: [],
+      pendingUserRoles: [],
+      showPendingUserRoles: false
     }
   }
 
@@ -57,14 +105,35 @@ export default class SigninStatus extends React.Component {
 
   parseUserListData(data) {
     var user_list = [];
+    var pending_user_roles = [];
     data.forEach(function(item) {
+      var userName = item.first_name + " " + item.last_name;
       user_list.push({
-        label: item.first_name + " " + item.last_name + " (" + item.email + ")",
+        label: userName + " (" + item.email + ")",
         value: item.email
       });
+      //If we have any pending roles for this user, grab them and compile them into a list
+      if (item.pending_roles.length > 0) {
+        var index = 0;
+        var request_list = '';
+        //For each role, go through and concatinate it to teh request list string
+        item.pending_roles.forEach(function(row) {
+          request_list += row;
+          if ((index + 1) < item.pending_roles.length) {
+            request_list += ", ";
+          } else {
+            index++;
+          }
+        });
+        pending_user_roles.push(userName + " - " + request_list);
+      }
     });
     user_list.unshift({value: '', label: ''});
-    this.setState({userList: user_list});
+    this.setState({
+      userList: user_list,
+      pendingUserRoles: pending_user_roles,
+      showPendingUserRoles: pending_user_roles.length > 0
+    });
   }
 
   parseUserListDataError() {
@@ -80,12 +149,19 @@ export default class SigninStatus extends React.Component {
   }
 
   refreshPageUI() {
-    this.setState({showUserFields: false, original_user_data: {}, showUserSaveError: false, showUserListLoadError: false, showUserSaveError: false});
+    this.setState({
+      showUserFields: false,
+      original_user_data: {},
+      showUserSaveError: false,
+      showUserListLoadError: false,
+      showUserSaveError: false,
+      showPendingUserRoles: true
+    });
   }
 
   parseLoadUserData(data) {
     userData.loadValues(data);
-    this.setState({showUserFields: true, original_user_data: data});
+    this.setState({showUserFields: true, original_user_data: data, showPendingUserRoles: false});
   }
 
   parseLoadUserDataError(data) {
@@ -148,6 +224,15 @@ export default class SigninStatus extends React.Component {
     this.setState({userSaveError: true, userSaveError: ['Error in saving user data'], original_user_data: {}});
   }
 
+  listPendingRoles(row, index) {
+    var blah = row.toString();
+    return (
+      <div key={index}>
+        {blah}
+      </div>
+    );
+  }
+
   render() {
     //Data we'll pass in to the UserStatuses component
     var passedInUserData = {};
@@ -160,7 +245,7 @@ export default class SigninStatus extends React.Component {
       passedInUserData.role = '';
     }
 
-    //  console.log("Passed in role: "+passedInUserData.role);
+    const pendingUserRolesDisplay = this.state.pendingUserRoles.map(this.listPendingRoles);
     return (
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
@@ -174,7 +259,6 @@ export default class SigninStatus extends React.Component {
               <PageMessageBox classValue='has-error center-text' showMessage ={this.state.showUserSaveError} items={this.state.userSaveError} keyPrefix='usrSavErr'/>
               <h2 className="static-content-title">User Administration</h2>
             </div>
-
           </div>
           {/*User Select Box*/}
           <div className='row'>
@@ -195,6 +279,16 @@ export default class SigninStatus extends React.Component {
             </div>
             <div className='col-md-4'></div>
           </div>
+          {/*See Pending Roles*/}
+          {this.state.showPendingUserRoles > 0 && <div className='row'>
+            <div className='col-md-4'></div>
+            <div className='col-md-4 col-xs-12'>
+              <SimpleCollapsible anchorClass='clickable' toggleArrow button_text={< strong > Users Requesting Roles < /strong>} contents={pendingUserRolesDisplay}/>
+            </div>
+            <div className='col-md-4'></div>
+          </div>}
+
+          {/*Divder*/}
           <div className='row'>
             <div className='col-md-2'></div>
             <div className='col-md-8 col-xs-12'>
