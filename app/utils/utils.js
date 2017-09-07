@@ -93,7 +93,7 @@ function doAuthenicatedFileDownloadAjax(url, successCallback, errorCallback) {
     success: function(data) {
       handleAuthenticatedSuccess(data, successCallback);
     },
-    error: function(xhr,exception) {
+    error: function(xhr, exception) {
       handleAuthenticatedError(xhr, exception, errorCallback);
     }
   });
@@ -264,6 +264,119 @@ function getIsLoggedIn() {
   return (localStorage.token_expiration != "" && moment(localStorage.token_expiration, "YYYY-MM-DD HH:mm").isAfter(moment()));
 }
 
+function addBiblio(searchData) {
+  var tagsList = [];
+  //Software Title
+  if (searchData.software_title) {
+    tagsList.push({name: 'citation_title', content: searchData.software_title});
+  }
+  //Doi
+  if (searchData.doi) {
+    tagsList.push({name: 'citation_doi', content: searchData.doi});
+  }
+  //Description
+  if (searchData.description) {
+    tagsList.push({name: 'citation_description', content: searchData.description});
+  }
+  //Keywords
+  if (searchData.keywords) {
+    tagsList.push({name: 'citation_keywords', content: searchData.keywords});
+  }
+  //Release Date
+  if (searchData.release_date) {
+    tagsList.push({name: 'citation_release_date', content: searchData.release_date});
+  }
+  //Licenses
+  if (searchData.licenses) {
+    tagsList.push({name: 'citation_licenses', content: searchData.licenses});
+  }
+  //Developers
+  if (searchData.developers && searchData.developers.length > 0) {
+    var index = 0;
+    var developerString = "";
+    searchData.developers.forEach(function(row) {
+      developerString += (row.last_name + ', ' + row.first_name);
+      if ((index + 1) < searchData.developers.length) {
+        developerString += "; ";
+      } else {
+        index++;
+      }
+    });
+    tagsList.push({name: 'citation_authors', content: developerString});
+  }
+  //Contributing Orgs
+  if (searchData.contributors && searchData.contributors.length > 0) {
+    var index = 0;
+    var contributorsString = "";
+    searchData.contributors.forEach(function(row) {
+      contributorsString += (row.last_name + ', ' + row.first_name);
+      if ((index + 1) < searchData.contributors.length) {
+        contributorsString += "; ";
+      } else {
+        index++;
+      }
+    });
+    tagsList.push({name: 'citation_contributors', content: contributorsString});
+  }
+  //Sponsoring Orgs
+  if (searchData.sponsoring_organizations && searchData.sponsoring_organizations.length > 0) {
+    var index = 0;
+    var sponsoringString = "";
+    searchData.sponsoring_organizations.forEach(function(row) {
+      sponsoringString += (row.organization_name);
+      if ((index + 1) < searchData.sponsoring_organizations.length) {
+        sponsoringString += "; ";
+      } else {
+        index++;
+      }
+    });
+    tagsList.push({name: 'citation_sponsoring_organizations', content: sponsoringString});
+  }
+  //Research Organizations
+  if (searchData.research_organizations && searchData.research_organizations.length > 0) {
+    var index = 0;
+    var researchString = "";
+    searchData.research_organizations.forEach(function(row) {
+      researchString += (row.organization_name);
+      if ((index + 1) < searchData.research_organizations.length) {
+        researchString += "; ";
+      } else {
+        index++;
+      }
+    });
+    tagsList.push({name: 'citation_research_organizations', content: researchString});
+  }
+  //Contributing Organizations
+  if (searchData.contributing_organizations && searchData.contributing_organizations.length > 0) {
+    var index = 0;
+    var contributingString = "";
+    searchData.contributing_organizations.forEach(function(row) {
+      v += (row.organization_name);
+      if ((index + 1) < searchData.contributing_organizations.length) {
+        contributingString += "; ";
+      } else {
+        index++;
+      }
+    });
+    tagsList.push({name: 'citation_contributing_organizations', content: contributingString});
+  }
+  //Country of Origin
+  if (searchData.country_of_origin) {
+    tagsList.push({name: 'citation_country_of_origin', content: searchData.country_of_origin});
+  }
+
+  addMetaTags(tagsList);
+}
+
+function addMetaTags(list) {
+  list.forEach(function(row) {
+    var metaTag = document.createElement('meta');
+    metaTag.setAttribute('name', row.name);
+    metaTag.setAttribute('content', row.content);
+    document.getElementById('document-head').appendChild(metaTag);
+  });
+}
+
 export {doAjax};
 export {doAuthenticatedAjax};
 export {checkIsAuthenticated};
@@ -279,3 +392,5 @@ export {resetLoggedInAttributesUserData};
 export {doArraysContainSame};
 export {getIsLoggedIn};
 export {doAuthenicatedFileDownloadAjax};
+export {addMetaTags};
+export {addBiblio};

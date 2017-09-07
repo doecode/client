@@ -29,7 +29,7 @@ export default class FAQ extends React.Component {
       }, {
         text: <span className='faq-page-subtitle'>Do I need to have cookies enabled to use DOE CODE?</span>,
         content: <p>Yes, you must select Accept All Cookies. Please see our&nbsp;
-            <a target='_blank' href='https://www.osti.gov/elink/disclaimers.jsp'>Website Policies/Important Links</a>&nbsp; for further information.</p>
+            <a href='/doecode/disclaimer'>Website Policies/Important Links</a>&nbsp; for further information.</p>
       }, {
         text: <span className='faq-page-subtitle'>What does DOE CODE contain?</span>,
         content: <p>DOE CODE contains records for DOE-funded software and links to the software or code repository. In addition to the code, the repositories may include manuals, examples, test data, etc.

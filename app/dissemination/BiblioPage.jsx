@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {doAjax, appendQueryString, getQueryParam} from '../utils/utils';
+import {doAjax, appendQueryString, getQueryParam, addBiblio} from '../utils/utils';
 import DevAndContribLinks from './DevAndContribLinks';
 import Metadata from '../stores/Metadata';
 import BreadcrumbTrail from '../fragments/BreadcrumbTrail';
@@ -25,16 +25,14 @@ export default class BiblioPage extends React.Component {
     }
 
   }
+
   componentDidMount() {
     //Grabs number at end of string
     var patt = new RegExp(/(\d+)$/);
     const codeID = patt.exec(window.location.href)[0];
     if (codeID) {
       doAjax('GET', "/doecode/api/search/" + codeID, this.parseReceiveResponse, undefined, this.parseErrorResponse);
-    } else {
-      console.log("This page is invalid...");
     }
-
   }
 
   parseReceiveResponse(data) {
@@ -114,7 +112,6 @@ export default class BiblioPage extends React.Component {
     } else {
       textContent = <span>{metadata.getValue(obj.field)}</span>;
       show_val = metadata.getValue(obj.field);
-
     }
 
     if (show_val) {
@@ -138,6 +135,8 @@ export default class BiblioPage extends React.Component {
   render() {
 
     metadata.deserializeData(this.state.data);
+    console.log(JSON.stringify(metadata.fieldMap));
+    addBiblio(metadata.fieldMap);
     const fieldsContent = staticContstants.biblioFieldsList.map(this.generateContent);
 
     const breadcrumbList = [
@@ -197,7 +196,5 @@ export default class BiblioPage extends React.Component {
         </div>
       </div>
     )
-
   }
-
 }

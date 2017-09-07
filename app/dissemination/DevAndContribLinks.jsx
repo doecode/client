@@ -26,6 +26,10 @@ export default class DevAndContribLinks extends React.Component {
         display: <SearchLink displayVal={'Search DOE CODE for ' + this.props.groupType + ' ' + row.name.trim()} field="developers_contributors" value={row.name.trim()}/>,
         customAnchor: true
       }, {
+        link: '',
+        display: <SearchLink displayVal={'Search DOE CODE for ORCID'+' '+row.orcid} field="orcid" value={row.orcid}/>,
+        customAnchor: true
+      }, {
         link: 'https://orcid.org/orcid-search/quick-search?searchQuery=' + row.orcid,
         display: 'Search orcid.org for ORCID "' + row.orcid + '"'
       }

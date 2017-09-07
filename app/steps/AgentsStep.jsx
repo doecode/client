@@ -120,12 +120,11 @@ export default class AgentsStep extends React.Component {
 
                     <div className="container-fulid form-horizontal">
                         <div className="row">
-                            <div className="col-md-9 col-xs-12">
+                            <div className="col-xs-12">
                                 <span className='fake-h2'>Developers</span>&nbsp;&nbsp;<HelpTooltip item='Developers'/>
 																<br/>
                                 {content}
                             </div>
-                            <div className="col-md-3"></div>
                         </div>
                     </div>
 

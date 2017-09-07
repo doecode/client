@@ -67,7 +67,7 @@ export default class BiblioSidebar extends React.Component {
           <div className='col-xs-12'>
             <div className='row  biblio-sidebar-row'>
               <div className='col-xs-12 no-col-padding-left'>
-                <h4 className='biblio-sidebar-subtitle'>FULL TEXT:</h4>
+                <h4 className='biblio-sidebar-subtitle'>Resource:</h4>
                 {(doi && fieldMapdata.release_date) && <span>
                   DOI:&nbsp;<a href={doi} target='_blank' className='biblio-sidebar-traditional-anchor'>{fieldMapdata.doi}</a>
                   <br/>

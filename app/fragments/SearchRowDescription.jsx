@@ -33,7 +33,7 @@ export default class SearchRowDescription extends React.Component {
         </span>
         <span>
           {this.needsToggle && <span>
-            &nbsp; {!this.state.is_open
+            &nbsp;{!this.state.is_open
               ? (
                 <a className='clickable' onClick={this.toggleOpenState}>More&gt;&gt;</a>
               )

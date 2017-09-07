@@ -54,13 +54,12 @@ export default class RIsStep extends React.Component {
     return (
       <div className="container-fluid form-horizontal">
         <div className="row">
-          <div className="col-md-9 col-xs-12">
+          <div className="col-xs-12">
             <div className="form-horizontal">
               <span className='fake-h2'>Related Identifiers</span>&nbsp;<HelpTooltip item="RelatedIdentifier"/>
               <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
             </div>
           </div>
-          <div className="col-md-3"></div>
         </div>
       </div>
     );

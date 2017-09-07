@@ -82,7 +82,7 @@ export default class OrgsStep extends React.Component {
     return (
       <div className="container-fluid form-horizontal">
         <div className="row">
-          <div className="col-md-9 col-xs-12">
+          <div className="col-xs-12">
             <div className="form-horizontal">
               <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="orgsStepTabs">
                 <Tab eventKey={0} title="* Sponsoring Organizations">
@@ -94,7 +94,6 @@ export default class OrgsStep extends React.Component {
               </Tabs>
             </div>
           </div>
-          <div className="col-md-3"></div>
         </div>
       </div>
     );

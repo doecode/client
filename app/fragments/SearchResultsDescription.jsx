@@ -45,6 +45,9 @@ export default class SearchResultsDescription extends React.Component {
     if (searchData.getValue("sponsoring_organization")) {
       searchDescriptionArr.push("Sponsoring Organization: " + searchData.getValue("sponsoring_organization"));
     }
+    if (searchData.getValue("orcid")) {
+      searchDescriptionArr.push("ORCID is: " + searchData.getValue("orcid"));
+    }
 
     if (searchDescriptionArr.length < 1) {
       searchDescriptionArr.push("All Records");

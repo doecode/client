@@ -125,7 +125,7 @@ export default class ContributorsStep extends React.Component {
     return (
       <div className="container-fluid form-horizontal">
         <div className="row">
-          <div className="col-md-9 col-xs-12">
+          <div className="col-xs-12">
             <div className="form-horizontal">
               <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="devsStepTabs">
                 <Tab eventKey={0} title="Contributors">
@@ -139,7 +139,6 @@ export default class ContributorsStep extends React.Component {
               </Tabs>
             </div>
           </div>
-          <div className="col-md-3"></div>
         </div>
       </div>
     );

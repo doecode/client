@@ -41,7 +41,9 @@ export default class Sidebar extends React.Component {
   }
 
   render() {
-    var searchForText = (this.props.searchForText!=undefined)?this.props.searchForText:"All Records";
+    var searchForText = (this.props.searchForText != undefined)
+      ? this.props.searchForText
+      : "All Records";
     return (
       <div className={this.props.sidebarClass}>
         {/*Checkbox Filters*/}

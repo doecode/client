@@ -17,8 +17,8 @@ class SearchStore {
       sponsoring_organization: '',
       start: 0,
       rows: 10,
-      sort: 'score desc'
-
+      sort: 'score desc',
+      orcid: ''
     }
 
     this.searchData = observable(this.defaultSearchData);

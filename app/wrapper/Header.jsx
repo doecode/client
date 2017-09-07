@@ -5,12 +5,19 @@ import NavigationBar from '../fragments/NavigationBar';
 import SigninStatus from '../fragments/SigninStatus';
 import SearchField from '../field/SearchField';
 import AdvancedSearchButton from '../dissemination/AdvancedSearchButton';
+import {addMetaTags} from '../utils/utils';
 import SearchBar from '../fragments/SearchBar';
 
 const searchData = new SearchData();
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
+    addMetaTags([
+      {
+        name: 'title',
+        content: 'DOE CODE: Your open source platform to easily publish, submit, and search for software code funded by the U.S. Department of Energy'
+      }
+    ]);
   }
 
   render() {
