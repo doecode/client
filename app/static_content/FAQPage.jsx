@@ -183,7 +183,7 @@ export default class FAQ extends React.Component {
               <a target='_blank' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>. There are plans to expand this functionality in future releases to support other repository types such as SVN and CVS.
             </p>
             <p>
-              NOTE: If you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing of your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, .tar.gz2, and .war.
+              NOTE: If you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing of your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, and .tar.gz2.
             </p>
           </div>
       }, {

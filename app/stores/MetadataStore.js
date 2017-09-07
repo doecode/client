@@ -47,7 +47,7 @@ class MetadataStore {
 	@observable metadataInfoSchema = {
 		   	"repository_link": {required:"pub", label: "Repository Link", completed:false, ever_completed:false, validations: ["repositorylink"], Panel: "Repository Information", error: ''},
 		   	"landing_page": {required:"", label: "Landing Page", completed:false, ever_completed:false, validations: ["url"], Panel: "", error: ''},
-				"file_name" : {required:"", label: "File Upload", completed: false, ever_completed:false, validations: [], Panel: "", error: ''},
+				"file_name" : {required:"", label: "Upload Source Code", completed: false, ever_completed:false, validations: [], Panel: "", error: ''},
 					"software_title": {required:"pub", label: "Software Title", completed:false, ever_completed:false, validations: [], Panel: "Product Description", error: ''},
 	        "description": {required:"pub", label: "Description/Abstract", completed:false, ever_completed:false, validations: [], Panel: "Product Description", error: ''},
 	        "licenses": {required:"pub", label: "Licenses", completed:false, hasError:false, ever_completed:false, validations: [], Panel: "Product Description", error: ''},

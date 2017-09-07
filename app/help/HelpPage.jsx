@@ -182,7 +182,7 @@ export default class HelpPage extends React.Component {
           <br/>
           <div className="row">
             <div className='col-xs-12'>
-              <strong>File Upload&nbsp;-</strong>&nbsp;<HelpToolTip item="FileUpload" justText/>
+              <strong>Upload Source Code&nbsp;-</strong>&nbsp;<HelpToolTip item="FileUpload" justText/>
             </div>
           </div>
           <br/>

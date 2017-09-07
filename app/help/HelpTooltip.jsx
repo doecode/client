@@ -371,7 +371,7 @@ export default class HelpTooltip extends React.Component {
         )
         : (
           <span>
-            If you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, .tar.gz2, and .war.</span>
+            If you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, and .tar.gz2.</span>
         );
     }
     /*Okay, the text we just got, we'll do something with it now*/

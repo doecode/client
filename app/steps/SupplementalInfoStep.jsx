@@ -39,13 +39,15 @@ export default class SupplementalInfoStep extends React.Component {
     const fileName = metadata.getValue("file_name");
     const accessibility = metadata.getValue("accessibility");
 
-    const acceptedFileTypes = ".zip,.tar,.tar.gz,.tar.bz2,.jar,.war"
+    const acceptedFileTypes = ".zip,.tar,.tar.gz,.tar.bz2";
+    const acceptedFileTypesText = acceptedFileTypes.replace(/,/g, ", ").replace(/^((?:.+?, )*)(.*?)$/g, function(match, $1, $2) { return ($1 ? $1 + "and " : $1) + $2; });
 
-    let fileLabelText = "File Upload (Optional Field)";
+    let fileLabelText = "Upload Source Code ";
 
-    if (this.props.page == 'submit') {
-      fileLabelText = "File Upload (Required Field)";
-    }
+    if (this.props.page == 'submit')
+      fileLabelText += "(Required Field)";
+    else
+      fileLabelText += "(Optional Field)";
 
     const fileLabelStyle = {
       "paddingLeft": "0px"
@@ -67,8 +69,10 @@ export default class SupplementalInfoStep extends React.Component {
                   : "form-label"}>
                   {fileLabelText}&nbsp;<HelpTooltip item='FileUpload'/>
                 </label>
-                &nbsp;&nbsp;
-                <small>Supported file types: .zip, .tar, .tar.gz, .tar.gz2, .war</small>
+                <br/>
+                <small>Please upload an archive file containing your source code. This will be used for archiving purposes.</small>
+                <br/>
+                <small>Supported file types include: {acceptedFileTypesText}</small>
                 <div>
                   <Dropzone name="file_upload" accept={acceptedFileTypes} onDrop={this.onDrop}>
                     <h2>
