@@ -49,14 +49,13 @@ export default class SearchItem extends React.Component {
       : <span></span>;
     return (
       <div>
-        <div className='col-xs-1 search-result-count-column'>
+        <div className='col-md-1 col-xs-2 search-result-count-column'>
           {this.props.listNumber}.
         </div>
-        <div className="col-xs-11 search-result-sub-row">
+        <div className="col-md-11 col-xs-10 search-result-sub-row">
           <div className="row">
             <div className="col-xs-12">
               <div>
-
                 <a href={biblioUrl} className="search-result-title">
                   {softwareTitle}
                 </a>

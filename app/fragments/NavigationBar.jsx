@@ -15,7 +15,7 @@ export default class NavgationBar extends React.Component {
       ? 'navbar-logo-img hide'
       : 'navbar-logo-img';
     return (
-      <div className=' no-col-padding-left container'>
+      <div className='  container'>
         <div className='row'>
           <div className='col-xs-12'>
             <div className="navbar-header">
