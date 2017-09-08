@@ -22,23 +22,15 @@ export default class SponsoringOrganization extends BaseData {
               "fwp_numbers" : {required:false, completed:false, ever_completed:false, validations: [], error: ''},
          }
 
-     /*if (!MetadataStore.sponsoringOrganization.DOE) {
-       MetadataStore.sponsoringOrganizationInfoSchema.primary_award.validations = [];
-       MetadataStore.sponsoringOrganizationInfoSchema.primary_award.required = false;
-
-     }*/
-
     	const props = {fieldMap: MetadataStore.sponsoringOrganization, infoSchema: MetadataStore.sponsoringOrganizationInfoSchema, fieldMapSnapshot: defaultSponsoringOrganization, infoSchemaSnapshot: defaultSponsoringOrganizationSchema};
       super(props);
-
     }
 
-    static loadValues() {
-      super.loadValues();
-
+    loadValues(data) {
+      super.loadValues(data);
       if (!this.getValue("DOE")) {
-        this.fieldInfo["primary_award"].required = false;
-        this.fieldInfo["primary_award"].validations = [];
+        this.infoSchema["primary_award"].required = false;
+        this.infoSchema["primary_award"].validations = [];
       }
     }
 }
