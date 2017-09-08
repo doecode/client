@@ -16,6 +16,7 @@ export default class Footer extends React.Component {
   }
 
   render() {
+    const linkColorClass=(this.props.is_homepage)?'white':'footer-link';
     return (
       <footer className={this.footer_classes}>
         <div className="container">
@@ -92,12 +93,18 @@ export default class Footer extends React.Component {
               <div className='row hide-md hide-lg not-so-wide-row '>
                 <br/>
                 <div className='col-xs-6 center-text'>
-                  <a href="/doecode/disclaimer" className='white'>
-                    <span className="fa fa-university"></span>&nbsp;Website Policies</a>
+
+                  <a href="/doecode/disclaimer" className={linkColorClass}>
+                    <span className="fa fa-university"></span>&nbsp;Website Policies
+                  </a>
+
                 </div>
                 <div className='col-xs-6 center-text'>
-                  <a href="/doecode/contact" className='white'>
+
+                  <a href="/doecode/contact" className={linkColorClass}>
                     <span className="fa fa-comments-o"></span>&nbsp;Contact Us</a>
+
+
                 </div>
               </div>
             </span>

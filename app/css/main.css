@@ -1164,6 +1164,7 @@ html, button, body, input, select, textarea, p {
 
 
 /*Between iphone 5 and small monitors*/
+
 @media only screen and (max-width:991px) and (min-width: 320px) {
   .header-logo-img {
     width: 290px;
@@ -1197,7 +1198,13 @@ html, button, body, input, select, textarea, p {
   .search-for-sidebar-row {
     border-bottom: none;
   }
-
+  .biblio-title {
+    font-size: 25px;
+  }
+  .biblio-main-content{
+    border-left:none;
+    padding-left:0px;
+  }
 }
 
 
