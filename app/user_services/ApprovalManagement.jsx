@@ -74,8 +74,8 @@ export default class ApprovalManagement extends React.Component {
             id: record.code_id,
             title: record.software_title,
             status: record.workflow_status,
-            edit: <div className="form-group-xs row">
-            <div className="col-xs-2">
+            edit: <div className="form-group-xs row" title="">
+            <div className="col-xs-2" title="View for Approval">
             <a  href={approveUrl} className="btn btn-info btn-sm">
   		<span className="fa fa-pencil"></span> View for Approval
   	</a> </div></div>

@@ -83,7 +83,7 @@ export default class WorkflowManagement extends React.Component {
         }
 
         let pendingStatus = (
-          record.workflow_status == "Published" && <div className="col-xs-4"><span className="pending">Pending Approval</span></div>
+          record.workflow_status == "Published" && <div className="col-xs-4" title="Pending Approval" ><span className="pending">Pending Approval</span></div>
         );
 
         //console.log(JSON.stringify(record));
@@ -91,13 +91,13 @@ export default class WorkflowManagement extends React.Component {
             id: record.code_id,
             title: record.software_title,
             status: record.workflow_status,
-            edit: <div className="form-group-xs row">
-          <div className="col-xs-4">
+            edit: <div className="form-group-xs row" title="" >
+          <div className="col-xs-4" title="Update Metadata" >
           <a href={publishUrl} className="btn btn-success btn-sm">
 		<span className="fa fa-pencil"></span> Update Metadata
 	</a>
           </div>
-            <div className="col-xs-4">
+            <div className="col-xs-4" title="Submit to E-Link" >
             <a  href={submitUrl} className="btn btn-info btn-sm">
   		<span className="fa fa-pencil"></span> Submit to E-Link
   	</a> </div>
