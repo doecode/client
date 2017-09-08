@@ -37,6 +37,9 @@ export default class UserFields extends React.Component {
     if ((validation.validateEmail(event.target.value) === "") && event.target.value.trim()) {
       doAjax('GET', '/doecode/api/user/getsitecode/' + event.target.value, this.handleContractNeedCheck, null, this.handleContractNeedCheckError);
     }
+    else
+      // don't show this if email is not valid
+      this.setState({showContractNumber: false});
   }
 
   handleContractNeedCheck(data) {
@@ -49,6 +52,7 @@ export default class UserFields extends React.Component {
 
   handleContractNeedCheckError(data) {
     console.log("Contract check error: " + JSON.stringify(data));
+    this.setState({showContractNumber: false});
   }
 
   handleContractCheck(event) {
@@ -72,16 +76,16 @@ export default class UserFields extends React.Component {
               <UserField field='last_name' label='Last Name' elementType='input' handleChange={this.updateLastNameAndCheckPassword} noExtraLabelText/>
             </div>
           </div>
-          {/*Contract Number*/}
-          {this.state.showContractNumber && <div className="row">
-            <div className="col-xs-12">
-              <UserField field='contract_number' label='Contract Number' elementType='input' handleChange={this.handleContractCheck} noExtraLabelText/>
-            </div>
-          </div>}
           {/*Email Address*/}
           {this.props.show_email && <div className='row'>
             <div className="col-xs-12">
               <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword} noExtraLabelText messageNode={emailSmalltext}/>
+            </div>
+          </div>}
+          {/*Contract Number*/}
+          {this.state.showContractNumber && <div className="row">
+            <div className="col-xs-12">
+              <UserField field='contract_number' label='Contract Number' elementType='input' handleChange={this.handleContractCheck} noExtraLabelText/>
             </div>
           </div>}
         </div>
