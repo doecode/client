@@ -19,6 +19,7 @@ export default class Field extends React.Component {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleCreatablePrompt = this.handleCreatablePrompt.bind(this);
     this.optionExists = this.optionExists.bind(this);
+    this.validate = this.validate.bind(this);
   }
 
   toggleCheckbox(event) {
@@ -30,8 +31,12 @@ export default class Field extends React.Component {
     }
   }
 
-  handleBlur(event) {
+  validate() {
     this.props.linkedData.validateField(this.props.properties.field);
+  }
+
+  handleBlur(event) {
+    this.validate();
   }
 
   handleChange(event) {
@@ -71,6 +76,9 @@ export default class Field extends React.Component {
     if (this.props.properties.changeCallback !== undefined) {
       this.props.properties.changeCallback(value);
     }
+
+    // autoBlur was causing onBlur to fire before onChange in Chrome and Firefox.  Removing react-select onBlur callback and putting validation here instead.
+    this.validate();
   }
 
   optionExists(json, value) {
@@ -218,7 +226,6 @@ export default class Field extends React.Component {
         if (val instanceof Array) {
           val = val.join("\n");
         }
-        JSON.stringify()
 
         // when option exists, no need to create object version
         if (!this.optionExists(this.props.properties.options, val))
@@ -229,9 +236,9 @@ export default class Field extends React.Component {
       }
 
       if (this.props.properties.allowCreate) {
-        input = <Creatable name={field} className={errorClass} clearable={clearable} simpleValue joinValues delimiter={"\n"} multi={this.props.properties.multi} options={this.props.properties.options} placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} autoBlur={true} value={val} promptTextCreator={this.handleCreatablePrompt}/>;
+        input = <Creatable name={field} className={errorClass} clearable={clearable} simpleValue joinValues delimiter={"\n"} multi={this.props.properties.multi} options={this.props.properties.options} placeholder={ph} onChange={this.handleSelectChange} autoBlur={true} value={val} promptTextCreator={this.handleCreatablePrompt}/>;
       } else {
-        input = <Select name={field} className={errorClass} clearable={clearable} simpleValue joinValues delimiter={"\n"} multi={this.props.properties.multi} options={this.props.properties.options} placeholder={ph} onChange={this.handleSelectChange} onBlur={this.handleBlur} autoBlur={true} value={val}/>;
+        input = <Select name={field} className={errorClass} clearable={clearable} simpleValue joinValues delimiter={"\n"} multi={this.props.properties.multi} options={this.props.properties.options} placeholder={ph} onChange={this.handleSelectChange} autoBlur={true} value={val}/>;
       }
     } else if (elementType === 'textarea') {
       input = <textarea name={field} className={inputStyle} value={val} onChange={this.handleChange} onBlur={this.handleBlur}/>;
