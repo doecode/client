@@ -43,7 +43,7 @@ export default class SigninStatus extends React.Component {
 
   render() {
     return (
-      <div>
+      <span>
         {this.is_logged_in && <div className="dropdown">
           <button className="btn btn-link dropdown-toggle login-dropdown-btn" type="button" id="accountSigninDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             {localStorage.first_name + " " + localStorage.last_name}&nbsp;
@@ -78,15 +78,19 @@ export default class SigninStatus extends React.Component {
         {!this.is_logged_in && <span>
           <span className="signin-btn-container">
             <a className="signin-btn" href="/doecode/login">
-              <span className="fa fa-user"></span>&nbsp;Sign In
+              <span className="fa fa-user signin-icon"></span>
+              <span className='signin-text'>&nbsp;Sign In</span>
             </a>
-            &nbsp;</span>|<span className="signin-btn-container">&nbsp;
+            &nbsp;</span>
+            <span className='signin-text'>|</span>
+            <span className="signin-btn-container">&nbsp;
             <a className="signin-btn" href="/doecode/register">
-              Create Account
+              <span className="fa fa-user-plus signin-icon"></span>
+              <span className='signin-text'>&nbsp;Create Account</span>
             </a>
           </span>
         </span>}
-      </div>
+      </span>
     );
   }
 }

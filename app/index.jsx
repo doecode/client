@@ -61,7 +61,7 @@ class DOECodeRouter extends React.Component {
       <Router basename="/doecode" history={browserHistory}>
         <div className={this.outtermost_class_name}>
           <div className={this.wrapper_class}>
-            {!this.is_homepage && <Header/>}
+            <Header isHomepage={this.is_homepage}/>
             <div>
               <Route exact path="/" component={Splash}/>
               <Route path="/publish" component={PublishForm}/>

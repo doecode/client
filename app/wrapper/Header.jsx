@@ -21,21 +21,23 @@ export default class Header extends React.Component {
   }
 
   render() {
+    var navStyle = (this.props.isHomepage)
+      ? 'navbar navbar-default main-header visible-xs visible-sm hidden-md hidden-lg'
+      : 'navbar navbar-default main-header';
     return (
-
-      <nav className="navbar navbar-default main-header">
-        <div className="container-fluid">
+      <nav className={navStyle}>
+        <div className="container-fluid header-container-fluid">
           <div className="pull-right hidden-xs hidden-sm visible-md visible-lg header-signin-links">
             <SigninStatus/>
           </div>
-          <div className='container hidden-xs hidden-sm visible-md visible-lg'>
+          <div className='container hidden-xs hidden-sm visible-md visible-lg header-search-container'>
             <br/>
             <br/>
             <br/>
             <div className='row'>
               <div className="col-xs-4 right-text">
                 <a href="/doecode">
-                  <img src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" width="300"/>
+                  <img className='header-logo-img' src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" />
                 </a>
               </div>
               {/*Search Bar*/}
@@ -45,7 +47,7 @@ export default class Header extends React.Component {
             <br/>
           </div>
           {/*Actual Navbar*/}
-          <NavigationBar/>
+          <NavigationBar isHomepage={this.props.isHomepage}/>
         </div>
       </nav>
 
