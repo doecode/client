@@ -404,31 +404,27 @@ buildPanel(obj) {
 
         let button = null;
 
-        const colSize1 = this.props.page == 'submit' ? "col-sm-9" : "col-sm-10";
-        const colSizeTemp = this.props.page == 'submit' ? "col-sm-3" : "col-sm-2";
-        const colSize2 = !(this.state.workflowStatus != "Published" && this.state.workflowStatus != "Approved") ? "col-sm-12" : colSizeTemp;
-
         let saveBtn = (this.state.workflowStatus != "Published" && this.state.workflowStatus != "Approved" &&
-          <div className={colSize1}>
-              <button type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
+          <div>
+              <button type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn save-btn-margin" onClick={this.save}>
                   Save Your Progress
                 </button>
           </div>
         );
 
         if (this.props.page == 'submit') {
-        button =             <div className="form-group-xs row">
-                            {saveBtn}
-                            <div className={colSize2}>
+        button =             <div className="form-group-xs row col-sm-12">
+                            <div>
                                 <button type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
                                     Submit Record to E-Link
                                 </button>
                             </div>
+                            {saveBtn}
                         </div>
         } else if (this.props.page == 'approve') {
-          button =           <div className="form-group-xs row">
+          button =           <div className="form-group-xs row col-sm-12">
 
-                          <div className="col-sm-12">
+                          <div>
                               <button  type="button" className={approveClass} onClick={this.approve}>
                                   Approve Record
                               </button>
@@ -436,14 +432,13 @@ buildPanel(obj) {
 
                       </div>
         } else {
-          button =           <div className="form-group-xs row">
-                          {saveBtn}
-                          <div className={colSize2}>
+          button =           <div className="form-group-xs row col-sm-12">
+                          <div>
                               <button  type="button" className={publishClass} disabled={publishDisabled} onClick={this.publish}>
                                   Publish Record
                               </button>
                           </div>
-
+                          {saveBtn}
 
                       </div>
         };

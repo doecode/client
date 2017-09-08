@@ -754,6 +754,10 @@ html, body {
   color: #5E5E5E !important;
 }
 
+.save-btn-margin {
+  margin-right: 8px;
+}
+
 .signin-btn-container {
   padding-right: 8px;
   padding-left: 8px;
