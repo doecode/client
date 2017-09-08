@@ -1159,6 +1159,18 @@ html, button, body, input, select, textarea, p {
   }
 }
 
+#repository-github-img{
+  width:350px;
+  height:150px;
+}
+#repository-gitlab-img{
+  width:350px;
+  height:150px;
+}
+
+.word-break{
+  word-wrap:break-word;
+}
 
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
 
@@ -1205,10 +1217,24 @@ html, button, body, input, select, textarea, p {
     border-left:none;
     padding-left:0px;
   }
+  #repository-github-img{
+    width:280px;
+    height:150px;
+  }
+  #repository-gitlab-img{
+    width:280px;
+    height:150px;
+  }
+  .padblock {
+    padding:0px;
+  }
+  .faq-page-btn{
+    font-size:15.6px;
+  }
 }
 
 
-/*Small Devices, Iphone 5 and up*/
+/*Small Devices, Iphone 5 to like iphone plus*/
 
 @media only screen and (max-width:479px) and (min-width: 320px) {
   .nav-menu li {

@@ -61,7 +61,7 @@ export default class Communications extends React.Component {
               <li>The Better Scientific Software Portal
                 <ul>
                   <li>GitHub,&nbsp;
-                    <a href="https://betterscientificsoftware.github.io/">https://betterscientificsoftware.github.io/</a>
+                    <a className='word-break' href="https://betterscientificsoftware.github.io/">https://betterscientificsoftware.github.io/</a>
                   </li>
                 </ul>
               </li>
