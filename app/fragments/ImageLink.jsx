@@ -10,7 +10,7 @@ export default class ImageLink extends React.Component {
     return (
       <div>
         <a target={this.props.linkTarget} href={this.props.linkURL}>
-          <img className='repository-services-img-link' src={this.props.imageURL} width={this.props.width} height={this.props.height}/>
+          <img id={this.props.imgID} className='repository-services-img-link' src={this.props.imageURL} width={this.props.width} height={this.props.height}/>
         </a>
       </div>
     );

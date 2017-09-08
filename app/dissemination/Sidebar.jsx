@@ -5,6 +5,7 @@ import SearchData from '../stores/SearchData';
 import {doAjax, getQueryParam} from '../utils/utils';
 import staticContstants from '../staticJson/constantLists';
 import SearchField from '../field/SearchField';
+import SimpleCollapsible from '../fragments/SimpleCollapsible';
 
 const searchData = new SearchData();
 
@@ -16,6 +17,7 @@ export default class Sidebar extends React.Component {
     this.licenseList = searchData.getValue("licenses");
     this.accessibilityList = searchData.getValue("accessibility");
     this.sortListValue = searchData.getValue("sort");
+    this.constructSidebarFilter = this.constructSidebarFilter.bind(this);
   }
 
   sidebarCallback(checked, value, type) {
@@ -40,10 +42,45 @@ export default class Sidebar extends React.Component {
     doAjax('POST', '/doecode/api/search/', this.props.parseSearchResponse, searchData.getData(), this.props.parseErrorResponse);
   }
 
+  constructSidebarFilter() {
+    return (
+      <span>
+        <div className="row">
+          <div className="col-md-1"></div>
+          <div className="col-md-12 col-xs-12">
+            <br/>
+            <h4 className="search-sidebar-filter-title">Accessibility</h4>
+            <div className="search-sidebar-text">
+              {staticContstants.availabilities.map((row) => <div key={row.key}>
+                <SearchCheckbox id={row.key} name={row.value} isChecked={this.accessibilityList.indexOf(row.value) > -1} value={row.value} type="accessibility" toggleCallback={this.sidebarCallback}/>&nbsp;
+                <label htmlFor={row.key}>{row.label}</label>
+              </div>)}
+            </div>
+          </div>
+          <div className="col-md-1"></div>
+        </div>
+        <div className="row">
+          <div className="col-md-1"></div>
+          <div className="col-md-12 col-xs-12">
+            <br/>
+            <h4 className="search-sidebar-filter-title">Licenses</h4>
+            <div className="search-sidebar-text">
+              {staticContstants.licenseOptions.map((row) => <div key={row.key}>
+                <label htmlFor={row.key}><SearchCheckbox id={row.key} name={row.value} isChecked={this.licenseList.indexOf(row.value) > -1} value={row.value} type="licenses" toggleCallback={this.sidebarCallback}/> {row.label}</label>
+              </div>)}
+            </div>
+          </div>
+          <div className="col-md-1"></div>
+        </div>
+      </span>
+    );
+  }
+
   render() {
     var searchForText = (this.props.searchForText != undefined)
       ? this.props.searchForText
       : "All Records";
+    var sidebarFilters = this.constructSidebarFilter();
     return (
       <div className={this.props.sidebarClass}>
         {/*Checkbox Filters*/}
@@ -61,33 +98,14 @@ export default class Sidebar extends React.Component {
               </div>
               <div className="col-md-1"></div>
             </div>
-            <div className="row">
-              <div className="col-md-1"></div>
-              <div className="col-md-12 col-xs-12">
-                <br/>
-                <h4 className="search-sidebar-filter-title">Accessibility</h4>
-                <div className="search-sidebar-text">
-                  {staticContstants.availabilities.map((row) => <div key={row.key}>
-                    <SearchCheckbox id={row.key} name={row.value} isChecked={this.accessibilityList.indexOf(row.value) > -1} value={row.value} type="accessibility" toggleCallback={this.sidebarCallback}/>&nbsp;
-                    <label htmlFor={row.key}>{row.label}</label>
-                  </div>)}
-                </div>
-              </div>
-              <div className="col-md-1"></div>
-            </div>
-            <div className="row">
-              <div className="col-md-1"></div>
-              <div className="col-md-12 col-xs-12">
-                <br/>
-                <h4 className="search-sidebar-filter-title">Licenses</h4>
-                <div className="search-sidebar-text">
-                  {staticContstants.licenseOptions.map((row) => <div key={row.key}>
-                    <label htmlFor={row.key}><SearchCheckbox id={row.key} name={row.value} isChecked={this.licenseList.indexOf(row.value) > -1} value={row.value} type="licenses" toggleCallback={this.sidebarCallback}/> {row.label}</label>
-                  </div>)}
-                </div>
-              </div>
-              <div className="col-md-1"></div>
-            </div>
+            {/*Show on larger screens*/}
+            <span className='hide-xs hide-sm'>
+              {sidebarFilters}
+            </span>
+            {/*Show on tinier screens*/}
+            <span className='hide-md hide-lg'>
+              <SimpleCollapsible toggleArrow button_text='Filter Search' contents={sidebarFilters} />              
+            </span>
           </div>
         </div>
       </div>

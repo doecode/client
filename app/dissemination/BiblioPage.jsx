@@ -167,7 +167,7 @@ export default class BiblioPage extends React.Component {
           <div className='container'>
             {/*Title*/}
             <div className="row">
-              <div className="col-xs-12 biblio-title-container">
+              <div className="col-xs-12 no-col-padding-left no-col-padding-right biblio-title-container">
                 <div className="biblio-title">
                   {metadata.getValue("software_title")}
                 </div>
@@ -177,8 +177,8 @@ export default class BiblioPage extends React.Component {
             {/*Description and other Data*/}
             <div className="row">
               {/*Sidebar on the left*/}
-              <BiblioSidebar pageData={metadata} sidebarClass='col-xs-3 biblio-sidebar'/>
-              <div className="col-xs-9 biblio-main-content">
+              <BiblioSidebar pageData={metadata} sidebarClass='col-md-3 hide-xs hide-sm biblio-sidebar'/>
+              <div className="col-md-9 col-xs-12 biblio-main-content">
                 <div className="row">
                   <div className="col-xs-12 biblio-description  no-col-padding-left no-col-padding-right">
                     <h3 className='biblio-field-header'>Abstract</h3>
@@ -191,6 +191,7 @@ export default class BiblioPage extends React.Component {
                   </div>
                 </div>
               </div>
+              <BiblioSidebar pageData={metadata} sidebarClass='col-xs-12 hide-md hide-lg biblio-sidebar'/>
             </div>
           </div>
         </div>

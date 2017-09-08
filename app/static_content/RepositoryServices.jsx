@@ -18,13 +18,14 @@ export default class RepositoryServices extends React.Component {
           <br/>
           <div className='row'>
             <div className='col-md-5 col-xs-12 center-text'>
-              <strong>Create a new project on our open source <br/>GitHub community:</strong>
+              <strong>Create a new project on our open source
+                <br/>GitHub community:</strong>
               <br/>
               <br/>
               <br/>
-              <ImageLink linkTarget='_blank' linkURL='https://github.com/doecode/' imageURL='https://www.aha.io/assets/github.7433692cabbfa132f34adb034e7909fa.png' width='350' height='150'/>
+              <ImageLink imgID='repository-github-img' linkTarget='_blank' linkURL='https://github.com/doecode/' imageURL='https://www.aha.io/assets/github.7433692cabbfa132f34adb034e7909fa.png'/>
             </div>
-            <div className='col-md-2 center-text'>
+            <div className='col-md-2 col-xs-12 center-text'>
               <h2>OR</h2>
             </div>
             <div className='col-md-5 col-xs-12 center-text'>
@@ -33,7 +34,7 @@ export default class RepositoryServices extends React.Component {
               </strong>
               <br/>
               <br/>
-              <ImageLink linkTarget='_blank' linkURL='http://gitlab.osti.gov/' imageURL='https://tctechcrunch2011.files.wordpress.com/2015/09/gitlab.png' width='350' height='150'/>
+              <ImageLink imgID='repository-gitlab-img' linkTarget='_blank' linkURL='http://gitlab.osti.gov/' imageURL='https://tctechcrunch2011.files.wordpress.com/2015/09/gitlab.png'/>
             </div>
           </div>
         </div>

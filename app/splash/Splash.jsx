@@ -76,7 +76,9 @@ export default class Splash extends React.Component {
             <div className="col-xs-12">
               <div className="pull-right">
                 <br/>
-                <SigninStatus/>
+                <span className='hidden-xs hidden-sm visible-md visible-lg'>
+                  <SigninStatus/>
+                </span>
               </div>
             </div>
           </div>
@@ -85,23 +87,24 @@ export default class Splash extends React.Component {
           <div className="row">
             <div className="col-md-3"></div>
             <div className="col-xs-12 static-content">
-
               <div className='row'>
                 <div className='col-md-3'></div>
                 <div className='col-md-6 col-xs-12'>
                   {/*Logo*/}
                   <div className="row center-text">
                     <div className="col-xs-12">
-                      <img src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" width="300"/>
+                      <img src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" className='header-logo-img'/>
                     </div>
                   </div>
                   <br/>
                   <br/>
                   <br/> {/*Search Bar*/}
                   <div className="row center-text">
-                    <div className='col-xs-1'></div>
+                    <div className='col-md-1'></div>
                     {/*Search Bar*/}
-                    <SearchBar searchbarSize='col-xs-9  no-col-padding-right' largerBar/>
+                    <span className='hidden-xs hidden-sm visible-md visible-lg'>
+                      <SearchBar searchbarSize='col-md-9 col-xs-9  no-col-padding-right' largerBar/>
+                    </span>
                   </div>
                 </div>
                 <div className='col-md-3'></div>
@@ -110,18 +113,20 @@ export default class Splash extends React.Component {
               <div className='row'>
                 <div className='col-md-2'></div>
                 <div className='col-md-8 col-xs-12'>
-                  <br/>
-                  <br/>
-                  <br/>
-                  <br/>
-                  <br/>
-                  <br/> {/*Icons*/}
-                  <LinkIconRow icon_row_data={icon_row1}/>
-                  <br/>
-                  <br/>
-                  <br/>
-                  <br/>
-                  <LinkIconRow icon_row_data={icon_row2}/>
+                  <span className='hidden-xs hidden-sm visible-md visible-lg'>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/> {/*Icons*/}
+                    <LinkIconRow icon_row_data={icon_row1}/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <LinkIconRow icon_row_data={icon_row2}/>
+                  </span>
                 </div>
                 <div className='col-md-2'></div>
               </div>
