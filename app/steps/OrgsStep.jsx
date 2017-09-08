@@ -6,6 +6,7 @@ import EditableDataTable from './EditableDataTable';
 import {observer} from 'mobx-react';
 import {Tabs, Tab} from 'react-bootstrap';
 import Promise from 'promise';
+import HelpTooltip from '../help/HelpTooltip';
 
 const tableStore = new TableStore();
 
@@ -85,10 +86,12 @@ export default class OrgsStep extends React.Component {
           <div className="col-xs-12">
             <div className="form-horizontal">
               <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="orgsStepTabs">
-                <Tab eventKey={0} title="* Sponsoring Organizations">
+                <Tab eventKey={0} title="Sponsoring Organizations">
+									<span className='fake-h2'>Sponsoring Organizations</span> &nbsp;<HelpTooltip item='SponsoringOrg'/>
                   {contentSO}
                 </Tab>
-                <Tab eventKey={1} title="* Research Organizations">
+                <Tab eventKey={1} title="Research Organizations">
+									<span className='fake-h2'>Research Organizations</span> &nbsp;<HelpTooltip item='ResearchOrg'/>
                   {contentRO}
                 </Tab>
               </Tabs>
