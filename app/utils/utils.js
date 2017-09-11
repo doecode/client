@@ -353,7 +353,7 @@ function addBiblio(searchData) {
     var index = 0;
     var contributingString = "";
     searchData.contributing_organizations.forEach(function(row) {
-      v += (row.organization_name);
+      contributingString += (row.organization_name);
       if ((index + 1) < searchData.contributing_organizations.length) {
         contributingString += "; ";
       } else {

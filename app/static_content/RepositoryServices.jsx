@@ -24,6 +24,8 @@ export default class RepositoryServices extends React.Component {
               <br/>
               <br/>
               <ImageLink imgID='repository-github-img' linkTarget='_blank' linkURL='https://github.com/doecode/' imageURL='https://www.aha.io/assets/github.7433692cabbfa132f34adb034e7909fa.png'/>
+              <br/>
+              To join the community, please email&nbsp;<a href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>
             </div>
             <div className='col-md-2 col-xs-12 center-text'>
               <h2>OR</h2>

@@ -169,9 +169,8 @@ export default class Disclaimer extends React.Component {
                   will remain on your hard drive until it reaches its expiration date or is deleted by you. This type of cookie is stored on your computer so the website that placed it there can recognize and remember when you return visit and keep track of which pages on their website you visit.</p>
               </li>
             </ul>
-            <p>The federal government has
-              <a href="https://obamawhitehouse.archives.gov/sites/default/files/omb/assets/memoranda_2010/m10-22.pdf">guidelines on the use of persistent cookies</a>
-              related to web measurement and tracking. The goals of the guidelines are to enable the useful functioning of federal websites while protecting individual privacy.</p>
+            <p>The federal government has&nbsp;
+              <a href="https://obamawhitehouse.archives.gov/sites/default/files/omb/assets/memoranda_2010/m10-22.pdf">guidelines on the use of persistent cookies</a>&nbsp;related to web measurement and tracking. The goals of the guidelines are to enable the useful functioning of federal websites while protecting individual privacy.</p>
             <p>This site does not automatically collect or store personal information in identifiable form about users. Certain non-personally identifiable information is collected and stored automatically via session cookies, including:</p>
             <ul>
               <li>
@@ -259,14 +258,13 @@ export default class Disclaimer extends React.Component {
                 </li>
               </ul>
             </ul>
-            <p>Google Analytics data is shared with Google. For more information on Google's Privacy Policies, visit:
+            <p>Google Analytics data is shared with Google. For more information on Google's Privacy Policies, visit:&nbsp;
               <a href="http://www.google.com/privacy.html">http://www.google.com/privacy.html</a>
             </p>
             <p>The Office of Management and Budget (OMB) classifies the use of this type of technology as Tier 2 usage, since we are utilizing a multi-session web measurement technology that does not collect any personally identifiable information (PII).</p>
             <p>The information collected by Google Analytics is used to optimize our website; helping us determine top tasks, improve our user interface, and diversify our content offerings to meet the needs of our customers. No personally identifiable information is collected, so the anonymity of the end user is protected. The measurement data that is collected is retained for as long as is needed for proper analysis and optimization of the website and is accessible only to employees whose job function requires it.</p>
-            <p>Users who do not wish to participate in these web measurement and tracking activities may visit
-              <a href="http://www.osti.gov/home/optout">http://www.osti.gov/home/optout</a>
-              for step-by-step instructions of how to opt-out. Google also provides a browser plug-in that will allow you to opt-out of all Google Analytics measurements, which you can find at
+            <p>Users who do not wish to participate in these web measurement and tracking activities may visit&nbsp;
+              <a href="http://www.osti.gov/home/optout">http://www.osti.gov/home/optout</a>&nbsp; for step-by-step instructions of how to opt-out. Google also provides a browser plug-in that will allow you to opt-out of all Google Analytics measurements, which you can find at&nbsp;
               <a href="http://tools.google.com/dlpage/gaoptout">http://tools.google.com/dlpage/gaoptout</a>. Please note that opting-out in no way affects your access to content within the site.</p>
             <p>Users may choose to provide personal information containing comments or questions or to enable use of specialized site features. This information is only used to provide service to the user or to respond to a user inquiry.</p>
             <h3>
@@ -275,7 +273,7 @@ export default class Disclaimer extends React.Component {
               <em>public domain</em>. When accessing OSTI websites, you may encounter documents, illustrations, photographs, or other information resources that are protected by U.S. or foreign copyright laws. OSTI provides access to such content under the authority of the government’s retained license to distribute publications and data resulting from federal funding.&nbsp; Although you may legally access such works via OSTI, the copyright owners retain rights that govern the reproduction, redistribution, and re-use of copyrighted works. You are
               <u>solely responsible</u>
               for complying with applicable copyright law restrictions, including seeking the permission of the copyright owners when your intended activities fall outside the limited uses provided for by fair use and other legal principles.</p>
-            <p>Many documents and other materials available via OSTI are marked with a copyright notice or other statement designed to inform the reader or user of applicable restrictions (or lack thereof). For example, documents labeled "U.S. Government Work" or similar are not copyrightable under U.S. law, and therefore may be freely copied and redistributed. Other works, such as journal articles or conference proceedings, clearly indicate the copyright holder, year copyrighted, and so forth. Finally, some OSTI materials may lack an explicit copyright statement; if so, you should treat these works as if they are protected by copyright. For more information on copyright law, please visit
+            <p>Many documents and other materials available via OSTI are marked with a copyright notice or other statement designed to inform the reader or user of applicable restrictions (or lack thereof). For example, documents labeled "U.S. Government Work" or similar are not copyrightable under U.S. law, and therefore may be freely copied and redistributed. Other works, such as journal articles or conference proceedings, clearly indicate the copyright holder, year copyrighted, and so forth. Finally, some OSTI materials may lack an explicit copyright statement; if so, you should treat these works as if they are protected by copyright. For more information on copyright law, please visit&nbsp;
               <a href="http://copyright.gov/.">http://copyright.gov/.</a>
             </p>
             <h3>
@@ -283,11 +281,10 @@ export default class Disclaimer extends React.Component {
             <p>In an effort to respect each author's intellectual and creative contributions, please give acknowledgement when re-using or redistributing U.S. Government works and other public domain works available via OSTI. For example, if you use images or other information that originated at OSTI, please credit us as the source. If you use a report generated at a DOE lab, please acknowledge the lab, the authors, and the DOE funding program, as appropriate.</p>
             <h3>
               <a name="accessibility"></a>Accessibility/Section 508</h3>
-            <p>The U.S. Department of Energy is committed to making its electronic and information technologies accessible to individuals with disabilities in accordance with
-              <a title="Section 508 details" href="http://www.access-board.gov/the-board/laws/rehabilitation-act-of-1973#508">Section 508 of the Rehabilitation Act (29 U.S.C. 794d), as amended in 1998</a>. Send feedback or concerns related to the accessibility of this website to
-              <a title="DOE Section 508 Coordinator" href="mailto:DOESection508Coordinator@hq.doe.gov">DOE Section 508 Coordinator</a>
-              mailbox.</p>
-            <p>For more information about Section 508, please visit the
+            <p>The U.S. Department of Energy is committed to making its electronic and information technologies accessible to individuals with disabilities in accordance with&nbsp;
+              <a title="Section 508 details" href="http://www.access-board.gov/the-board/laws/rehabilitation-act-of-1973#508">Section 508 of the Rehabilitation Act (29 U.S.C. 794d), as amended in 1998</a>. Send feedback or concerns related to the accessibility of this website to&nbsp;
+              <a title="DOE Section 508 Coordinator" href="mailto:DOESection508Coordinator@hq.doe.gov">DOE Section 508 Coordinator</a>&nbsp;mailbox.</p>
+            <p>For more information about Section 508, please visit the&nbsp;
               <a title="DOE Section 508 website" href="http://energy.gov/cio/department-energy-doe-and-section-508">DOE Section 508 website</a>.</p>
             <div>
               <strong>
@@ -318,21 +315,20 @@ export default class Disclaimer extends React.Component {
             </p>
             <h3>
               <a name="freedom"></a>Freedom of Information</h3>
-            <p>Most publicly-releasable information is already available through OSTI web products. If you do not find information you are seeking through OSTI web products, it may not yet be in a digitized format or it may not be in OSTI's collection. You may request that documents be digitized by contacting the
-              <a href="mailto:OSTIWebmaster@osti.gov">OSTIWebmaster@osti.gov</a>,and we will respond promptly during regular business hours. You also have the option of filing a Freedom of Information Act (FOIA) request.<br/>
+            <p>Most publicly-releasable information is already available through OSTI web products. If you do not find information you are seeking through OSTI web products, it may not yet be in a digitized format or it may not be in OSTI's collection. You may request that documents be digitized by contacting the&nbsp;
+              <a href="mailto:OSTIWebmaster@osti.gov">OSTIWebmaster@osti.gov</a>,&nbsp;and we will respond promptly during regular business hours. You also have the option of filing a Freedom of Information Act (FOIA) request.<br/>
               <a href="http://www.osti.gov/home/freedom-information-act-foia">OSTI Freedom of Information Act (FOIA)</a>
             </p>
             <h3>
               <a name="quality"></a>Information Quality</h3>
             <p>
-              As appropriate, this Website complies with
-              <a href="https://obamawhitehouse.archives.gov/omb/inforeg_information_quality/">OMB Specific Information Quality</a>
-              specifically the Guidance for Ensuring and Maximizing the Quality, Objectivity, Utility and Integrity of Information Dissemination by Federal Organization.
+              As appropriate, this Website complies with&nbsp;
+              <a href="https://obamawhitehouse.archives.gov/omb/inforeg_information_quality/">OMB Specific Information Quality</a>&nbsp;specifically the Guidance for Ensuring and Maximizing the Quality, Objectivity, Utility and Integrity of Information Dissemination by Federal Organization.
             </p>
             <h3>
               <a name="nofear"></a>No Fear Act</h3>
-            <p>As appropriate, this Website provides information in compliance with the
-              <a href="http://www.energy.gov/diversity/services/protecting-civil-rights/no-fear-act">"No Fear" Act</a>. You may review
+            <p>As appropriate, this Website provides information in compliance with the&nbsp;
+              <a href="http://www.energy.gov/diversity/services/protecting-civil-rights/no-fear-act">"No Fear" Act</a>. You may review&nbsp;
               <a href="http://www.eeoc.gov/eeoc/statistics/nofear/">Government-wide data pertaining to the "No Fear" Act</a>.</p>
             <h3>
               <a name="schedule"></a>Schedule for Posting Information</h3>
@@ -350,20 +346,17 @@ export default class Disclaimer extends React.Component {
             <h3>
               <a name="usajobs"></a>USAJOBS</h3>
             <p>
-              <a href="http://www.usajobs.gov/">USAJOBS</a>
-              is the official online, one-stop jobsite of the U.S. federal government. a wide variety of disparate sources, unless otherwise required by law.</p>
+              <a href="http://www.usajobs.gov/">USAJOBS</a>&nbsp;is the official online, one-stop jobsite of the U.S. federal government. a wide variety of disparate sources, unless otherwise required by law.</p>
             <h3>
               <a name="grants"></a>Grants</h3>
             <p>
-              <a href="http://www.grants.gov/">Grants.gov</a>
-              is an online resource to find and apply for federal government grants. It is a central storehouse for information on over 1,000 grant programs and provides access to approximately $500 billion in annual awards.</p>
+              <a href="http://www.grants.gov/">Grants.gov</a>&nbsp;is an online resource to find and apply for federal government grants. It is a central storehouse for information on over 1,000 grant programs and provides access to approximately $500 billion in annual awards.</p>
             <h3>
               <a name="regulations"></a>Regulations</h3>
             <p>
-              <a href="http://regulations.gov/">Regulations.gov</a>
-              is an online resource for all regulations (or rulemakings) issued by U.S. government agencies. On this site, the following can be found:</p>
+              <a href="http://regulations.gov/">Regulations.gov</a>&nbsp;is an online resource for all regulations (or rulemakings) issued by U.S. government agencies. On this site, the following can be found:</p>
             <ul>
-              <li>all Federal regulations that are open for public comment (i.e., proposed rules) and closed for comment (i.e., final rules) as published in the
+              <li>all Federal regulations that are open for public comment (i.e., proposed rules) and closed for comment (i.e., final rules) as published in the&nbsp;
                 <a href="https://www.federalregister.gov/">Federal Register</a>.</li>
               <li>many Federal agency notices published in the Federal Register.</li>
               <li>additional supporting materials, public comments, and Federal agency guidance and adjudications.<p></p>
@@ -372,8 +365,7 @@ export default class Disclaimer extends React.Component {
             <h3>
               <a name="usagov"></a>USA.gov</h3>
             <p>
-              <a href="http://www.usa.gov/">USA.gov</a>
-              is an interagency initiative administered by the
+              <a href="http://www.usa.gov/">USA.gov</a>&nbsp;is an interagency initiative administered by the&nbsp;
               <a href="http://www.gsa.gov/portal/category/100000">U.S. General Services Administration</a>. The site provides official information and services from the U.S. government.</p><br/>
           </div>
         </div>

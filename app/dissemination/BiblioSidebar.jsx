@@ -77,7 +77,7 @@ export default class BiblioSidebar extends React.Component {
                 </span>}
                 <span className='biblio-sidebar-secondary-subtitle'>{fulltextMsg}</span>
                 <br/>
-                <a href={fulltextURL} target='_blank' className='biblio-sidebar-traditional-anchor'>{fulltextURL}</a>
+                <a href={fulltextURL} target='_blank' className='biblio-sidebar-traditional-anchor word-break'>{fulltextURL}</a>
               </div>
             </div>
             <div className='row biblio-sidebar-row'>
