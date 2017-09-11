@@ -80,10 +80,12 @@ export default class ResultsPage extends React.Component {
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
           <div className='row'>
-            <div className='col-xs-12'>
+            <div className='col-md-2'></div>
+            <div className='col-md-8 col-xs-12'>
               <BreadcrumbTrail list={breadcrumbList}/>
               <br/>
             </div>
+            <div className='col-md-2'></div>
           </div>
           <div className='row'>
             <div className='col-md-2'></div>

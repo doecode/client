@@ -156,9 +156,11 @@ export default class BiblioPage extends React.Component {
       <div className="row not-so-wide-row">
         <div className="col-xs-12">
           {/*Breadcrumb trail*/}
-          <div className="row">
-            <div className='col-xs-12'>
-              <BreadcrumbTrail list={breadcrumbList}/>
+          <div className='container'>
+            <div className="row">
+              <div className='no-col-padding-left col-xs-12'>
+                <BreadcrumbTrail list={breadcrumbList}/>
+              </div>
             </div>
           </div>
           <br/>

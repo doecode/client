@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Dropdown, MenuItem} from 'react-bootstrap';
 import SimpleDropdown from '../fragments/SimpleDropdown';
+import {downloadJSONFile} from '../utils/utils';
 
 export default class BiblioSidebar extends React.Component {
   constructor(props) {
@@ -48,24 +49,21 @@ export default class BiblioSidebar extends React.Component {
     ];
     const export_metadata = [
       {
-        link: '#',
-        display: 'Endnote'
+        customAnchor: true,
+        display: <a href={'/doecode/api/search/' + fieldMapdata.code_id + '?format=xml'} download={fieldMapdata.code_id + '.xml'}>XML</a>
       }, {
-        link: '#',
-        display: 'RIS'
+        customAnchor: true,
+        display: <a href={'/doecode/api/search/' + fieldMapdata.code_id + '?format=yaml'} download={fieldMapdata.code_id + '.yaml'}>YAML</a>
       }, {
-        link: '#',
-        display: 'CSV'
-      }, {
-        link: '#',
-        display: 'XML'
+        customAnchor: true,
+        display: <a href={'/doecode/api/search/' + fieldMapdata.code_id + '?format=json'} download={fieldMapdata.code_id + '.json'}>JSON</a>
       }
     ];
     return (
       <div className={this.props.sidebarClass}>
         <div className='row'>
           <div className='col-xs-12'>
-            <div className='row  biblio-sidebar-row'>
+            <div className='row biblio-sidebar-row'>
               <div className='col-xs-12 no-col-padding-left'>
                 <h4 className='biblio-sidebar-subtitle'>Resource:</h4>
                 {(doi && fieldMapdata.release_date) && <span>
