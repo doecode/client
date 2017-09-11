@@ -1380,6 +1380,9 @@ html, button, body, input, select, textarea, p {
   .navbar .navbar-collapse {
     margin-bottom: -2px;
   }
+  .search-for-sidebar-row {
+    border-bottom: none;
+  }
 }
 
 
