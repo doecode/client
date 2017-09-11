@@ -62,10 +62,10 @@ export default class Splash extends React.Component {
 
   render() {
 
-    const icon_row1 = [ < IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/projects' text = 'Submit Software/Code' icon_classes = 'fa fa-sign-in' key = "publish" />, < IconRowIcon container_classes = 'col-md-4 col-xs-12' destination = '/doecode/repository-services' text = 'Repository Services' icon_classes = 'fa fa-home clickable' key = "repoServices" />, < IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/about' text = 'About' icon_classes = 'fa fa-info' key = "about" />
+    const icon_row1 = [ < IconRowIcon container_classes = 'col-sm-4 col-xs-6' destination = '/doecode/projects' text = 'Submit Software/Code' icon_classes = 'fa fa-sign-in' key = "publish" />, < IconRowIcon container_classes = 'col-sm-4 col-xs-12' destination = '/doecode/repository-services' text = 'Repository Services' icon_classes = 'fa fa-home clickable' key = "repoServices" />, < IconRowIcon container_classes = 'col-sm-4 col-xs-6' destination = '/doecode/about' text = 'About' icon_classes = 'fa fa-info' key = "about" />
     ];
 
-    const icon_row2 = [ < IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/policy' text = 'Software Policy' icon_classes = 'fa fa-folder-open-o' key = "policy" />, < IconRowIcon container_classes = 'col-md-4 col-xs-6' destination = '/doecode/communications' text = 'News/Resources' icon_classes = 'fa fa-newspaper-o' key = "comms" />, < IconRowIcon container_classes = 'col-md-4 col-xs-12' destination = '/doecode/faq' text = 'FAQs' icon_classes = 'fa fa-question' key = "faq" />
+    const icon_row2 = [ < IconRowIcon container_classes = 'col-sm-4 col-xs-6' destination = '/doecode/policy' text = 'Software Policy' icon_classes = 'fa fa-folder-open-o' key = "policy" />, < IconRowIcon container_classes = 'col-sm-4 col-xs-6' destination = '/doecode/communications' text = 'News/Resources' icon_classes = 'fa fa-newspaper-o' key = "comms" />, < IconRowIcon container_classes = 'col-sm-4 col-xs-12' destination = '/doecode/faq' text = 'FAQs' icon_classes = 'fa fa-question' key = "faq" />
     ];
     return (
 
@@ -76,7 +76,7 @@ export default class Splash extends React.Component {
             <div className="col-xs-12">
               <div className="pull-right">
                 <br/>
-                <span className='hidden-xs hidden-sm visible-md visible-lg'>
+                <span className='hidden-xs visible-sm visible-md visible-lg'>
                   <SigninStatus/>
                 </span>
               </div>
@@ -102,8 +102,8 @@ export default class Splash extends React.Component {
                   <div className="row center-text">
                     <div className='col-md-1'></div>
                     {/*Search Bar*/}
-                    <span className='hidden-xs hidden-sm visible-md visible-lg'>
-                      <SearchBar searchbarSize='col-md-9 col-xs-9  no-col-padding-right' largerBar/>
+                    <span className='hide-xs'>
+                      <SearchBar searchbarSize='col-md-9 col-sm-9 col-xs-9  no-col-padding-right' largerBar/>
                     </span>
                   </div>
                 </div>
@@ -113,13 +113,14 @@ export default class Splash extends React.Component {
               <div className='row'>
                 <div className='col-md-2'></div>
                 <div className='col-md-8 col-xs-12'>
-                  <span className='hidden-xs hidden-sm visible-md visible-lg'>
+                  <span className='hidden-xs visible-sm visible-md visible-lg'>
                     <br/>
                     <br/>
                     <br/>
                     <br/>
                     <br/>
-                    <br/> {/*Icons*/}
+                    <br/>
+                    {/*Icons*/}
                     <LinkIconRow icon_row_data={icon_row1}/>
                     <br/>
                     <br/>

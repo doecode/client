@@ -45,7 +45,7 @@ export default class SigninStatus extends React.Component {
     return (
       <span>
         {this.is_logged_in && <div className="dropdown">
-          <button className="btn btn-link dropdown-toggle login-dropdown-btn" type="button" id="accountSigninDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <button className="btn btn-link dropdown-toggle login-dropdown-btn " type="button" id="accountSigninDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             {localStorage.first_name + " " + localStorage.last_name}&nbsp;
             <span className="caret"></span>
           </button>

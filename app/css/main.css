@@ -190,6 +190,10 @@ html h3 {
   padding-bottom: 0px;
 }
 
+.no-padding {
+  padding: 0px;
+}
+
 .minimal-col-padding-left {
   padding-left: 5px;
 }
@@ -470,6 +474,14 @@ html h3 {
 }
 
 .white {
+  color: white;
+}
+
+.whiteAnchor {
+  color: white;
+}
+
+.whiteAnchor:hover {
   color: white;
 }
 
@@ -1159,25 +1171,27 @@ html, button, body, input, select, textarea, p {
   }
 }
 
-#repository-github-img{
-  width:350px;
-  height:150px;
-}
-#repository-gitlab-img{
-  width:350px;
-  height:150px;
+#repository-github-img {
+  width: 350px;
+  height: 150px;
 }
 
-.word-break{
-  word-wrap:break-word;
+#repository-gitlab-img {
+  width: 350px;
+  height: 150px;
 }
+
+.word-break {
+  word-wrap: break-word;
+}
+
 
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
 
 
 /*Between iphone 5 and small monitors*/
 
-@media only screen and (max-width:991px) and (min-width: 320px) {
+@media only screen and (max-width:767px) and (min-width: 320px) {
   .header-logo-img {
     width: 290px;
   }
@@ -1213,23 +1227,29 @@ html, button, body, input, select, textarea, p {
   .biblio-title {
     font-size: 25px;
   }
-  .biblio-main-content{
-    border-left:none;
-    padding-left:0px;
+  .biblio-main-content {
+    border-left: none;
+    padding-left: 0px;
   }
-  #repository-github-img{
-    width:280px;
-    height:150px;
+  #repository-github-img {
+    width: 280px;
+    height: 150px;
   }
-  #repository-gitlab-img{
-    width:280px;
-    height:150px;
+  #repository-gitlab-img {
+    width: 280px;
+    height: 150px;
   }
   .padblock {
-    padding:0px;
+    padding: 0px;
   }
-  .faq-page-btn{
-    font-size:15.6px;
+  .faq-page-btn {
+    font-size: 15.6px;
+  }
+  .footer {
+    height: 230px;
+  }
+  .wrapper {
+    min-height: calc(100vh - 230px);
   }
 }
 
@@ -1326,6 +1346,39 @@ html, button, body, input, select, textarea, p {
   .header-container-fluid {
     padding-left: 0px;
     padding-right: 0px;
+  }
+  .hide-sm {
+    display: none;
+  }
+  .nav-menu-item {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+  .footer {
+    height: 245px;
+  }
+  .wrapper {
+    min-height: calc(100vh - 245px);
+  }
+  .footer-homepage {
+    height: 195px;
+  }
+  .homepage-wrapper {
+    min-height: calc(100vh - 195px);
+    /*height of footer*/
+  }
+  .nav-menu-item-text {
+    font-size: 14px !important;
+  }
+  .biblio-main-content {
+    border-left: none;
+    padding-left: 0px;
+  }
+  .active-menu-item-text {
+    font-size: 14px !important;
+  }
+  .navbar .navbar-collapse {
+    margin-bottom: -2px;
   }
 }
 
