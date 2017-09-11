@@ -5,6 +5,7 @@ import ResearchOrganization from '../stores/ResearchOrganization';
 import ContributingOrganization from '../stores/ContributingOrganization';
 import RelatedIdentifier from '../stores/RelatedIdentifier';
 import moment from 'moment';
+import staticContstants from '../staticJson/constantLists';
 
 function doAjax(methodType, url, successCallback, data, errorCallback, dataType) {
   let errorCall = errorCallback;
@@ -284,7 +285,8 @@ function addBiblio(searchData) {
   }
   //Release Date
   if (searchData.release_date) {
-    tagsList.push({name: 'citation_release_date', content: searchData.release_date});
+    var release_date_moment = moment(searchData.release_date, "YYYY-MM-DD").format("YYYY/MM/DD");
+    tagsList.push({name: 'citation_date', content: release_date_moment});
   }
   //Licenses
   if (searchData.licenses) {
@@ -302,9 +304,9 @@ function addBiblio(searchData) {
         index++;
       }
     });
-    tagsList.push({name: 'citation_authors', content: developerString});
+    tagsList.push({name: 'citation_developers', content: developerString});
   }
-  //Contributing Orgs
+  //Contributors
   if (searchData.contributors && searchData.contributors.length > 0) {
     var index = 0;
     var contributorsString = "";
@@ -363,6 +365,20 @@ function addBiblio(searchData) {
   //Country of Origin
   if (searchData.country_of_origin) {
     tagsList.push({name: 'citation_country_of_origin', content: searchData.country_of_origin});
+  }
+  //Repository_link
+  if (searchData.repository_link) {
+    tagsList.push({name: 'citation_repository_link', content: searchData.repository_link});
+  }
+  //Accessibility
+  if (searchData.accessibility) {
+    var accessibility_display_val = '';
+    staticContstants.availabilities.forEach(function(item) {
+      if (item.value == searchData.accessibility) {
+        accessibility_display_val = item.label;
+      }
+    });
+    tagsList.push({name: 'citation_accessibility', content: accessibility_display_val});
   }
 
   addMetaTags(tagsList);
