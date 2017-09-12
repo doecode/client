@@ -155,7 +155,7 @@
 }
 
 .griddle-wrapper td {
-  word-wrap:break-word;
+  word-wrap: break-word;
 }
 
 html h1 {
@@ -285,7 +285,6 @@ html h3 {
 
 .biblio-title-container {
   margin-bottom: 15px;
-  border-bottom: 1px solid #cccccc;
 }
 
 .biblio-title {
@@ -294,7 +293,7 @@ html h3 {
 }
 
 .biblio-main-content {
-  border-left: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
   padding-left: 30px;
 }
 
@@ -373,13 +372,15 @@ html h3 {
 }
 
 .biblio-field-header {
-  font-weight: 300;
-  font-size: 18.7167px;
+  font-weight: normal;
+  font-size: 13.6px;
   margin-left: 0px;
+  color: #929292;
 }
 
 .biblio-field-value {
   padding-bottom: 10px;
+  font-size: 13.6px;
 }
 
 .orc-id-img {
@@ -1189,11 +1190,48 @@ html, button, body, input, select, textarea, p {
   word-wrap: break-word;
 }
 
+.biblio-summary-main-content {
+  border-left: 1px solid #CCCCCC;
+  padding-left: 30px;
+}
+
+.citation-formats {
+  font-size: 18.72px;
+  font-weight: 300;
+  padding-left: 0px;
+}
+
+
+/*Makes the active tabs on the biblio page have green bars on the underside*/
+
+.summary-row {
+  border-bottom: 1px solid #CCCCCC;
+}
+
+ul.biblio-page-ul>li {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+ul.biblio-page-ul>li.active {
+  border-bottom: 3px solid #669966 !important;
+}
+
+ul.biblio-page-ul>li.active>a {
+  background-color: inherit !important;
+  border: none !important;
+}
+
+ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
+  background-color: #F9F9F9 !important;
+  border: none !important;
+}
+
 
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
 
 
-/*Between iphone 5 and small monitors*/
+/*Between iphone 5 and right up to ipads*/
 
 @media only screen and (max-width:767px) and (min-width: 320px) {
   .header-logo-img {
@@ -1234,6 +1272,7 @@ html, button, body, input, select, textarea, p {
   .biblio-main-content {
     border-left: none;
     padding-left: 0px;
+    border-right: none;
   }
   #repository-github-img {
     width: 280px;
@@ -1254,6 +1293,22 @@ html, button, body, input, select, textarea, p {
   }
   .wrapper {
     min-height: calc(100vh - 230px);
+  }
+  .biblio-summary-main-content {
+    border-left: none;
+    padding-left: 0px;
+  }
+  .no-col-padding-right-mobile {
+    padding-left: 0px;
+  }
+  .no-col-padding-left-mobile {
+    padding-left: 0px;
+  }
+  ul.biblio-page-ul>li {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: -3px;
+    margin-right: -3px;
   }
 }
 
@@ -1377,6 +1432,7 @@ html, button, body, input, select, textarea, p {
   .biblio-main-content {
     border-left: none;
     padding-left: 0px;
+    border-right: none;
   }
   .active-menu-item-text {
     font-size: 14px !important;
@@ -1386,6 +1442,16 @@ html, button, body, input, select, textarea, p {
   }
   .search-for-sidebar-row {
     border-bottom: none;
+  }
+  .biblio-summary-main-content {
+    border-left: none;
+    padding-left: 0px;
+  }
+  .no-col-padding-right-mobile {
+    padding-left: 0px;
+  }
+  .no-col-padding-left-mobile {
+    padding-left: 0px;
   }
 }
 

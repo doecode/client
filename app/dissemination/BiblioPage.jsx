@@ -20,6 +20,7 @@ export default class BiblioPage extends React.Component {
     this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
     this.parseErrorResponse = this.parseErrorResponse.bind(this);
     this.generateContent = this.generateContent.bind(this);
+    this.generateSummaryContent = this.generateSummaryContent.bind(this);
     this.state = {
       data: undefined
     }
@@ -118,12 +119,10 @@ export default class BiblioPage extends React.Component {
       return (
         <div className='biblio-row'>
           <div className='col-xs-12'>
-            <h3 className='biblio-field-header'>
-              {header}
-            </h3>
-            <div className='biblio-field-value'>
-              {textContent}
-            </div>
+            <dl className='row'>
+              <dt className='col-md-3 col-xs-12 biblio-field-header'>{header}:</dt>
+              <dd className='col-md-9 col-xs-12 biblio-field-value'>{textContent}</dd>
+            </dl>
           </div>
         </div>
       );
@@ -132,9 +131,23 @@ export default class BiblioPage extends React.Component {
     }
   }
 
+  generateSummaryContent(obj) {
+    var content = null;
+    switch (obj.header) {
+      case 'Developers':
+      case 'Release Date':
+      case 'Sponsoring Organizations':
+      case 'Code ID':
+        content = this.generateContent(obj);
+        break;
+    }
+    return content;
+  }
+
   render() {
     metadata.deserializeData(this.state.data);
     addBiblio(metadata.fieldMap);
+    const summaryContent = staticContstants.biblioFieldsList.map(this.generateSummaryContent);
     const fieldsContent = staticContstants.biblioFieldsList.map(this.generateContent);
 
     const breadcrumbList = [
@@ -174,24 +187,102 @@ export default class BiblioPage extends React.Component {
                 <br/>
               </div>
             </div>
-            {/*Description and other Data*/}
-            <div className="row">
-              {/*Sidebar on the left*/}
-              <BiblioSidebar pageData={metadata} sidebarClass='col-md-3 hide-xs hide-sm biblio-sidebar'/>
-              <div className="col-md-9 col-xs-12 biblio-main-content">
-                <div className="row">
-                  <div className="col-xs-12 biblio-description  no-col-padding-left no-col-padding-right">
-                    <h3 className='biblio-field-header'>Abstract</h3>
-                    <SearchRowDescription text={abstract} moreLess={200}/>
+            <div className='row'>
+              <div className='col-xs-12'>
+                <ul className="nav nav-tabs biblio-page-ul">
+                  <li className="active">
+                    <a data-toggle="tab" href="#summary">Summary</a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#fullrecord">Full Record</a>
+                  </li>
+                </ul>
+                <div className="tab-content">
+                  <div id="summary" className="tab-pane fade in active">
+                    {/*Description and other Data*/}
+                    <div className="row">
+                      {/*Sidebar on the left*/}
+                      <BiblioSidebar pageData={metadata} sidebarClass='no-col-padding-left-mobile no-col-padding-right-mobile hide-xs hide-sm col-md-3 biblio-sidebar'/>
+                      <div className="col-md-9 col-xs-12 biblio-summary-main-content">
+                        <div className="row">
+                          <div className="col-xs-12 biblio-description  no-col-padding-left no-col-padding-right">
+                            <h3 className='citation-formats'>Abstract</h3>
+                            <SearchRowDescription text={abstract} moreLess={200}/>
+                          </div>
+                        </div>
+                        <div className="row summary-row">
+                          <div className="citation-details-div col-xs-12  no-col-padding-left no-col-padding-right">
+                            {summaryContent}
+                          </div>
+                        </div>
+                        <div className='row'>
+                          <div className='col-xs-12'>
+                            <h3 className='citation-formats'>Citation Format</h3>
+                            <ul className="nav nav-tabs biblio-page-ul">
+                              <li className="active">
+                                <a data-toggle="tab" href="#bibtext">Bibtex</a>
+                              </li>
+                              <li>
+                                <a data-toggle="tab" href="#mla">MLA</a>
+                              </li>
+                              <li>
+                                <a data-toggle="tab" href="#apa">APA</a>
+                              </li>
+                              <li>
+                                <a data-toggle="tab" href="#chicago">Chicago</a>
+                              </li>
+                            </ul>
+
+                            <div className="tab-content">
+                              <div id="bibtext" className="tab-pane fade in active">
+                                <div className='row'>
+                                  <div className='col-xs-12'>Bibtex</div>
+                                </div>
+                              </div>
+                              <div id="mla" className="tab-pane fade">
+                                <div className='row'>
+                                  <div className='col-xs-12'>MLA</div>
+                                </div>
+                              </div>
+                              <div id="apa" className="tab-pane fade">
+                                <div className='row'>
+                                  <div className='col-xs-12'>APA</div>
+                                </div>
+                              </div>
+                              <div id="chicago" className="tab-pane fade">
+                                <div className='row'>
+                                  <div className='col-xs-12'>Chicago</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <BiblioSidebar pageData={metadata} sidebarClass='no-col-padding-left-mobile no-col-padding-right-mobile hide-md hide-lg col-xs-12 biblio-sidebar'/>
+                    </div>
                   </div>
-                </div>
-                <div className="row">
-                  <div className="citation-details-div col-xs-12  no-col-padding-left no-col-padding-right">
-                    {fieldsContent}
+                  <div id="fullrecord" className="tab-pane fade">
+                    {/*Description and other Data*/}
+                    <div className="row">
+                      {/*Sidebar on the left*/}
+                      <div className="col-md-9 col-xs-12 biblio-main-content">
+                        <div className="row">
+                          <div className="col-xs-12 biblio-description  no-col-padding-left no-col-padding-right">
+                            <h3 className='citation-formats'>Abstract</h3>
+                            <SearchRowDescription text={abstract} moreLess={200}/>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="citation-details-div col-xs-12  no-col-padding-left no-col-padding-right">
+                            {fieldsContent}
+                          </div>
+                        </div>
+                      </div>
+                      <BiblioSidebar pageData={metadata} sidebarClass='no-col-padding-left-mobile no-col-padding-right-mobile col-md-3 col-xs-12 biblio-sidebar'/>
+                    </div>
                   </div>
                 </div>
               </div>
-              <BiblioSidebar pageData={metadata} sidebarClass='col-xs-12 hide-md hide-lg biblio-sidebar'/>
             </div>
           </div>
         </div>

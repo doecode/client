@@ -69,7 +69,7 @@ export default class BiblioSidebar extends React.Component {
         <div className='row'>
           <div className='col-xs-12'>
             <div className='row biblio-sidebar-row'>
-              <div className='col-xs-12 no-col-padding-left'>
+              <div className='col-xs-12'>
                 <h4 className='biblio-sidebar-subtitle'>Resource:</h4>
                 {(doi && fieldMapdata.release_date) && <span>
                   DOI:&nbsp;<a href={doi} target='_blank' className='biblio-sidebar-traditional-anchor'>{fieldMapdata.doi}</a>
@@ -84,7 +84,7 @@ export default class BiblioSidebar extends React.Component {
               </div>
             </div>
             <div className='row biblio-sidebar-row'>
-              <div className='col-xs-12 no-col-padding-left'>
+              <div className='col-xs-12'>
                 <h4 className='biblio-sidebar-subtitle'>SAVE/SHARE</h4>
                 <div>
                   <SimpleDropdown noBtnPadding items={citation_list} label='Citation Formats'/>
