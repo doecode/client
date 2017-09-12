@@ -172,7 +172,7 @@ export default class SigninStatus extends React.Component {
     var post_data = {};
     var changes_made = false;
 
-    //Let's go through and see if any changes were made
+    //Let's go through the values in the original user data and see if any changes were made
     for (var key in this.state.original_user_data) {
       //Get old and new values
       var original_val = this.state.original_user_data[key];
@@ -186,8 +186,12 @@ export default class SigninStatus extends React.Component {
       } else if (Array.isArray(original_val) && !doArraysContainSame(original_val, new_val)) {
         post_data[key] = new_val;
         changes_made = true;
-      }
 
+
+        //if (key == 'roles') {
+        //    post_data.pending_roles = [];
+        //  }
+      }
     }
 
     //Now we check password stuff
@@ -196,6 +200,10 @@ export default class SigninStatus extends React.Component {
       post_data.confirm_password = userData.getValue("confirm_password");
       changes_made = true;
     }
+
+    //Since we only have a one-role system right now, we just assume that you've chosen their role when saving, and will clear out the pending roles table for this user
+    //TODO If we ever allow more than one role, rewrite this roles structure
+    post_data.pending_roles = [];
 
     if (changes_made) {
       doAuthenticatedAjax('POST', '/doecode/api/user/update/' + this.state.original_user_data.email, this.parseSaveUserData, post_data, this.parseSaveUserDataError);
@@ -283,7 +291,11 @@ export default class SigninStatus extends React.Component {
           {this.state.showPendingUserRoles > 0 && <div className='row'>
             <div className='col-md-4'></div>
             <div className='col-md-4 col-xs-12'>
-              <SimpleCollapsible anchorClass='clickable' toggleArrow button_text={< strong > Users Requesting Roles < /strong>} contents={pendingUserRolesDisplay}/>
+              <SimpleCollapsible anchorClass='clickable' toggleArrow button_text={(
+                <strong>
+                  Users Requesting Roles
+                </strong>
+              )} contents={pendingUserRolesDisplay}/>
             </div>
             <div className='col-md-4'></div>
           </div>}

@@ -199,7 +199,7 @@ export default class EditUser extends React.Component {
     const accountSaveUser = <span>
       <span className="fa fa-floppy-o"></span>&nbsp; Save User</span>;
 
-    var showAdminRole = (localStorage.site && localStorage.site!='CONTR');
+    var showAdminRole = (localStorage.user_site && localStorage.user_site != 'CONTR' && localStorage.user_site != 'OSTI');
 
     return (
       <div className="row not-so-wide-row">

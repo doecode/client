@@ -7,6 +7,11 @@ import {downloadJSONFile} from '../utils/utils';
 export default class BiblioSidebar extends React.Component {
   constructor(props) {
     super(props);
+    this.sendToEmail = this.sendToEmail.bind(this);
+  }
+
+  sendToEmail(){
+
   }
 
   render() {
@@ -86,6 +91,9 @@ export default class BiblioSidebar extends React.Component {
                 </div>
                 <div>
                   <SimpleDropdown noBtnPadding items={export_metadata} label='Export Metadata'/>
+                </div>
+                <div>
+                  <a className='clickable' onClick={this.sendToEmail}></a>
                 </div>
                 <br/>
                 <div className="row ">

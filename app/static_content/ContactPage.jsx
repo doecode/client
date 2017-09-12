@@ -36,7 +36,7 @@ export default class Contact extends React.Component {
 
                 <div className="row">
                     <div className="col-md-2 hidden-xs hidden-sm">
-                        <img src="https://www.osti.gov/opennet/images/Phone.png" className="img-rounded img-responsive contact-img" alt="email"/>
+                        <img src="https://www.osti.gov/opennet/images/Phone.png" className="img-rounded img-responsive contact-img" alt="phone"/>
                     </div>
                     <div className="col-md-10 col-xs-12">
                         <div className="row">
@@ -51,7 +51,7 @@ export default class Contact extends React.Component {
 
                 <div className="row">
                     <div className="col-md-2 hidden-xs hidden-sm">
-                        <img src="https://www.osti.gov/opennet/images/Writing.png" className="img-rounded img-responsive contact-img" alt="email"/>
+                        <img src="https://www.osti.gov/opennet/images/Writing.png" className="img-rounded img-responsive contact-img" alt="writing"/>
                     </div>
                     <div className="col-md-10 col-xs-12">
                         <div className="row">

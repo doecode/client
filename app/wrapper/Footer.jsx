@@ -24,7 +24,7 @@ export default class Footer extends React.Component {
           <div className="row center-text">
             <div className='col-md-3'></div>
             <div className="col-md-6 col-xs-12 center-text">
-              <img src={this.img_link} className="mt-3 mb-1 img-responsive center-block" alt="U.S. Department of Energy" id="footer-banner" useMap="#footer-banner-map"/>
+              <img alt='usdoeimg' src={this.img_link} className="mt-3 mb-1 img-responsive center-block" alt="U.S. Department of Energy" id="footer-banner" useMap="#footer-banner-map"/>
               <map name="footer-banner-map" id="footer-banner-map">
                 <area alt="Office of Scientific and Technical Information" title="Office of Scientific and Technical Information" href="/" shape="rect" coords="236,1,400,44" target="_self"/>
                 <area alt="Office of Science" title="Office of Science" href="https://science.energy.gov" shape="rect" coords="157,0,235,44" target="_blank"/>

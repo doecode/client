@@ -46,6 +46,20 @@ export default class RegisterUser extends React.Component {
           key: (keyIndex + "-badRequest")
         });
         keyIndex++;
+        //Custom messages to go after ones we may or may not get
+        if (item == 'An account with this email address already exists.') {
+          errorMessages.push({
+            customError: true,
+            error: (
+              <label className='control-label'>If this is your account, you can&nbsp;
+                <a href='/doecode/login'>log into it</a>&nbsp;or if you have&nbsp;
+                <a href='/doecode/forgot-password'>forgotten your password</a>, you can request a password reset link</label>
+            ),
+            key: (keyIndex + "-badRequest")
+          });
+          keyIndex++;
+        }
+
       });
     } else {
       errorMessages.push({error: "A server error has occurred that is preventing registration from functioning properly.", key: "0-badRequest"});
@@ -87,7 +101,7 @@ export default class RegisterUser extends React.Component {
             <div className='row'>
               <div className='col-md-3'></div>
               <div className='col-md-6 col-xs-12'>
-                <PasswordFields />
+                <PasswordFields/>
               </div>
               <div className='col-md-3'></div>
             </div>

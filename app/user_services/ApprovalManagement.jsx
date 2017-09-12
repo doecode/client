@@ -7,7 +7,7 @@ import {Toolbar, Data} from 'react-data-grid-addons';
 
 const EmptyRowsView = React.createClass({
   render() {
-    return (<p>No records to show.</p>);
+    return (<div className='row'><div className='col-xs-12'>No records to show</div></div>);
   }
 });
 
