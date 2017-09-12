@@ -87,14 +87,14 @@ export default class ResultsPage extends React.Component {
             </div>
             <div className='col-md-2'></div>
           </div>
-          <div className='row'>
+          {this.state.numFound > 0 && <div className='row'>
             <div className='col-md-2'></div>
             <div className='col-md-8 col-xs-12'>
               <h1 className='search-results-count'>{this.state.numFound}&nbsp; Search Results</h1>
             </div>
             <div className='col-md-2'></div>
-          </div>
-          <div className='row'>
+          </div>}
+          {this.state.numFound > 0 && <div className='row'>
             <div className='col-md-2'></div>
             <Sidebar sidebarClass="col-md-2 col-xs-12 sidebar" searchForText={searchDescription} parseSearchResponse={this.parseSearchResponse} parseErrorResponse={this.parseErrorResponse} refreshSearch={this.refreshSearch}/>
             <div className="col-md-6 col-xs-12 all-search-results-row">
@@ -116,7 +116,12 @@ export default class ResultsPage extends React.Component {
             </div>
 
             <div className='col-md-2'></div>
-          </div>
+          </div>}
+          {this.state.numFound < 1 && <div className='row'>
+            <div className='col-xs-12 center-text'>
+              <h1>No records were found for your search terms</h1>
+            </div>
+          </div>}
         </div>
       </div>
 
