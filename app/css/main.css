@@ -642,8 +642,8 @@ html, body {
 .biblio-social-link {
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 13.6px;
-  padding-right: 20px !important;
-  padding-left: 20px !important;
+  padding-right: 15px !important;
+  padding-left: 15px !important;
   padding-top: 5px !important;
   padding-bottom: 5px !important;
 }
@@ -666,6 +666,18 @@ html, body {
 
 .shareAlt {
   color: #777;
+}
+
+.shareEmail {
+  color: #777;
+}
+
+.pintrest {
+  color: #CD2B32;
+}
+
+.tumblr {
+  color: #32506D;
 }
 
 .biblio-social-link:last-child {

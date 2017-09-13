@@ -4,6 +4,18 @@ import {getQueryParam, doAuthenticatedAjax} from '../utils/utils';
 import ReactDataGrid from 'react-data-grid';
 import {Toolbar, Data} from 'react-data-grid-addons';
 
+const EmptyRowsView = React.createClass({
+  render() {
+    return (
+      <div className='row'>
+        <div className='col-xs-12 center-text'>
+          <h1>No records to show.</h1>
+        </div>
+      </div>
+    );
+  }
+});
+
 export default class WorkflowManagement extends React.Component {
   constructor(props) {
     super(props);
@@ -57,11 +69,14 @@ export default class WorkflowManagement extends React.Component {
   }
 
   componentDidMount() {
+
     doAuthenticatedAjax('GET', "/doecode/api/metadata/projects", this.parseReceiveResponse);
+
   }
 
   parseReceiveResponse(data) {
     let rows = [];
+    //console.log(data);
     const records = data.records;
     for (let i = 0; i < records.length; i++) {
 
@@ -84,12 +99,12 @@ export default class WorkflowManagement extends React.Component {
       //console.log(JSON.stringify(record));
       rows.push({
         id: record.code_id, title: record.software_title, status: record.workflow_status, edit: <a href={publishUrl} className="btn btn-success btn-sm">
-          <span className="fa fa-pencil"></span>
-          Update Metadata
+                <span className="fa fa-pencil"></span>
+                Update Metadata
         </a>,
         submit: <a href={submitUrl} className="btn btn-info btn-sm">
-          <span className="fa fa-pencil"></span>
-          Submit to E-Link
+                <span className="fa fa-pencil"></span>
+                Submit to E-Link
         </a>,
         pending: <span>
             {pendingStatus}</span>
@@ -131,12 +146,12 @@ export default class WorkflowManagement extends React.Component {
   }
 
   render() {
-    const toolbar = <Toolbar enableFilter={true}/>
+    const toolbar_for_datagrid = <Toolbar enableFilter={true}/>;
     return (
 
       <div className="row not-so-wide-row">
-        <div className="col-md-2"></div>
-        <div className="col-md-8 col-xs-12 static-content">
+        <div className="col-md-3"></div>
+        <div className="col-md-6 col-xs-12 static-content">
           <h2 className="static-content-title">Manage My Projects</h2>
           <div className="form-group-xs row">
             <div className="col-sm-12">
@@ -145,16 +160,11 @@ export default class WorkflowManagement extends React.Component {
               </a>
             </div>
           </div>
-          {this.getSize() > 0 && <span>
-            <ReactDataGrid onGridSort={this.handleGridSort} enableCellSelect={true} columns={this._columns} rowGetter={this.rowGetter} rowsCount={this.getSize()} maxHeight={400} toolbar={toolbar} onAddFilter={this.handleFilterChange} onClearFilters={this.onClearFilters}/>
-          </span>}
-          {this.getSize() < 1 && <div className='row'>
-            <div className='col-xs-12 center-text'><h1>No records to show</h1></div>
-          </div>}
+          <ReactDataGrid onGridSort={this.handleGridSort} enableCellSelect={true} columns={this._columns} rowGetter={this.rowGetter} rowsCount={this.getSize()} maxHeight={400} toolbar={toolbar_for_datagrid} onAddFilter={this.handleFilterChange} onClearFilters={this.onClearFilters} emptyRowsView={EmptyRowsView}/>
           <br/>
           <br/>
         </div>
-        <div className="col-md-2"></div>
+        <div className="col-md-3"></div>
       </div>
     );
 

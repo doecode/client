@@ -35,13 +35,17 @@ export default class SimpleDropdown extends React.Component {
       btn_class += (" " + this.props.extraBtnClasses);
     }
 
+    const ul_class = (this.props.ulClasses)
+      ? this.props.ulClasses
+      : 'dropdown-menu';
+
     const listItems = this.props.items.map(this.makeRow);
     return (
       <span className="dropdown">
         <button className={btn_class} type="button" data-toggle="dropdown">{this.props.label}
         </button>
         {this.props.noToggleArrow === undefined && <span className='fa fa-angle-down'></span>}
-        <ul className="dropdown-menu">
+        <ul className={ul_class}>
           {listItems}
         </ul>
       </span>

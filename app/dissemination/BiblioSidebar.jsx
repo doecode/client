@@ -69,6 +69,28 @@ export default class BiblioSidebar extends React.Component {
         display: <a href={'/doecode/api/search/' + fieldMapdata.code_id + '?format=json'} download={fieldMapdata.code_id + '.json'}>JSON</a>
       }
     ];
+    const share_lbl = <span className="fa fa-share-alt shareAlt"></span>;
+    const share_list = [
+      {
+        customAnchor: true,
+        display: (
+          <a href="" target="_blank" className="pure-menu-link social">
+            <span className="fa fa-pinterest pintrest"></span>&nbsp;Pinterest</a>
+        )
+      }, {
+        customAnchor: true,
+        display: (
+          <a href="" target="_blank" className="pure-menu-link social">
+            <span className="fa fa-linkedin linkedin"></span>&nbsp;LinkedIn</a>
+        )
+      }, {
+        customAnchor: true,
+        display: (
+          <a href="" target="_blank" className="pure-menu-link social">
+            <span className="fa fa-tumblr tumblr"></span>&nbsp;Tumblr</a>
+        )
+      }
+    ];
     return (
       <div className={this.props.sidebarClass}>
         <div className='row'>
@@ -97,37 +119,32 @@ export default class BiblioSidebar extends React.Component {
                 <div>
                   <SimpleDropdown noBtnPadding items={export_metadata} label='Export Metadata'/>
                 </div>
-                <div>
-                  <a className='clickable' onClick={this.toggleShareModal}>Send to Email</a>
-                </div>
                 <br/>
                 <div className="row ">
                   <div className='col-xs-12'>
                     <ul className="list-inline">
                       <li className='biblio-social-link'>
-                        <a target="_blank" href="#">
+                        <a target="_blank" href={"https://www.facebook.com/sharer/sharer.php?u=" + window.location.href}>
                           <span className="fa fa-facebook facebook"></span>
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <a target="_blank" href="#">
+                        <a target="_blank" href={'https://twitter.com/home?status=DOE Research from DOECODE: ' + window.location.href}>
                           <span className="fa fa-twitter twitter"></span>
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <a target="_blank" href="#">
+                        <a target="_blank" href={'https://plus.google.com/share?url=' + window.location.href}>
                           <span className="fa fa-google-plus gplus"></span>
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <a target="_blank" href="#">
-                          <span className="fa fa-linkedin linkedin"></span>
+                        <a target="_blank" href={"mailto:?&subject=DOE Research from OSTI.GOV&body=" + window.location.href}>
+                          <span className="fa fa-envelope shareEmail"></span>
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <a target="_blank" href="#">
-                          <span className="fa fa-share-alt shareAlt"></span>
-                        </a>
+                        <SimpleDropdown noBtnPadding noToggleArrow ulClasses='dropdown-menu dropdown-menu-left' items={share_list} label={share_lbl}/>
                       </li>
                     </ul>
                   </div>
@@ -136,19 +153,7 @@ export default class BiblioSidebar extends React.Component {
             </div>
           </div>
         </div>
-        {/*Modal for the share function*/}
-        <Modal show={this.state.showShareModal}>
-          <Modal.Header>
-            <Modal.Title>Modal title</Modal.Title>
-          </Modal.Header>
 
-          <Modal.Body>
-            bODY
-          </Modal.Body>
-
-          <Modal.Footer></Modal.Footer>
-
-        </Modal>
       </div>
     );
   }

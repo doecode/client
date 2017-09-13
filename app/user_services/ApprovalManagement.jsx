@@ -4,6 +4,18 @@ import {getQueryParam, doAuthenticatedAjax} from '../utils/utils';
 import ReactDataGrid from 'react-data-grid';
 import {Toolbar, Data} from 'react-data-grid-addons';
 
+const EmptyRowsView = React.createClass({
+  render() {
+    return (
+      <div className='row'>
+        <div className='col-xs-12 center-text'>
+          <h1>No records to show.</h1>
+        </div>
+      </div>
+    );
+  }
+});
+
 export default class ApprovalManagement extends React.Component {
   constructor(props) {
     super(props);
@@ -115,20 +127,15 @@ export default class ApprovalManagement extends React.Component {
 
   render() {
 
-    const toolbar = <Toolbar enableFilter={true}/>;
     return (
+
       <div className="row not-so-wide-row">
         <div className="col-md-3"></div>
         <div className="col-md-6 col-xs-12 static-content">
           <h2 className="static-content-title">Approve Projects</h2>
-          {this.getSize() > 0 && <span>
-            <ReactDataGrid onGridSort={this.handleGridSort} enableCellSelect={true} columns={this._columns} rowGetter={this.rowGetter} rowsCount={this.getSize()} maxHeight={400} toolbar={toolbar} onAddFilter={this.handleFilterChange} onClearFilters={this.onClearFilters} />
-          </span>}
-          {this.getSize() < 1 && <div className='row'>
-            <div className='col-xs-12 center-text'>
-              <h1>No records to show</h1>
-            </div>
-          </div>}
+          <ReactDataGrid onGridSort={this.handleGridSort} enableCellSelect={true} columns={this._columns} rowGetter={this.rowGetter} rowsCount={this.getSize()} maxHeight={400} toolbar={< Toolbar enableFilter = {
+            true
+          } />} onAddFilter={this.handleFilterChange} onClearFilters={this.onClearFilters} emptyRowsView={EmptyRowsView}/>
           <br/>
           <br/>
         </div>
