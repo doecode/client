@@ -1,17 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Dropdown, MenuItem} from 'react-bootstrap';
+import {Dropdown, MenuItem, Modal} from 'react-bootstrap';
 import SimpleDropdown from '../fragments/SimpleDropdown';
 import {downloadJSONFile} from '../utils/utils';
 
 export default class BiblioSidebar extends React.Component {
   constructor(props) {
     super(props);
-    this.sendToEmail = this.sendToEmail.bind(this);
+    this.toggleShareModal = this.toggleShareModal.bind(this);
+    this.state = {
+      showShareModal: false
+    };
   }
 
-  sendToEmail(){
-
+  toggleShareModal() {
+    this.setState({
+      showShareModal: !this.state.showShareModal
+    });
   }
 
   render() {
@@ -93,7 +98,7 @@ export default class BiblioSidebar extends React.Component {
                   <SimpleDropdown noBtnPadding items={export_metadata} label='Export Metadata'/>
                 </div>
                 <div>
-                  <a className='clickable' onClick={this.sendToEmail}></a>
+                  <a className='clickable' onClick={this.toggleShareModal}>Send to Email</a>
                 </div>
                 <br/>
                 <div className="row ">
@@ -131,9 +136,20 @@ export default class BiblioSidebar extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+        {/*Modal for the share function*/}
+        <Modal show={this.state.showShareModal}>
+          <Modal.Header>
+            <Modal.Title>Modal title</Modal.Title>
+          </Modal.Header>
 
+          <Modal.Body>
+            bODY
+          </Modal.Body>
+
+          <Modal.Footer></Modal.Footer>
+
+        </Modal>
+      </div>
     );
   }
-
 }

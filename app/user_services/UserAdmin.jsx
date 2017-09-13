@@ -187,10 +187,6 @@ export default class SigninStatus extends React.Component {
         post_data[key] = new_val;
         changes_made = true;
 
-
-        //if (key == 'roles') {
-        //    post_data.pending_roles = [];
-        //  }
       }
     }
 

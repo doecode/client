@@ -47,12 +47,20 @@ export default class SearchItem extends React.Component {
           <time>Release Date {releaseDate}</time>
         </span>
       : <span></span>;
+
+    //If we have a search result number higher than 9999,  then we start having a number that is too close to the title, so we'll increase the number column size if we exceed 9999
+    var result_column_classes = (this.props.listNumber > 9999)
+      ? 'col-sm-2 col-xs-12 search-result-count-column'
+      : 'col-sm-1 col-xs-2 search-result-count-column';
+    var result_subrow_classes = (this.props.listNumber > 9999)
+      ? "col-sm-10 col-xs-12 search-result-sub-row"
+      : "col-sm-11 col-xs-10 search-result-sub-row";
     return (
       <div>
-        <div className='col-md-1 col-xs-2 search-result-count-column'>
+        <div className={result_column_classes}>
           {this.props.listNumber}.
         </div>
-        <div className="col-md-11 col-xs-10 search-result-sub-row">
+        <div className={result_subrow_classes}>
           <div className="row">
             <div className="col-xs-12">
               <div>

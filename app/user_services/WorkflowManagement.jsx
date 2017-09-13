@@ -4,16 +4,6 @@ import {getQueryParam, doAuthenticatedAjax} from '../utils/utils';
 import ReactDataGrid from 'react-data-grid';
 import {Toolbar, Data} from 'react-data-grid-addons';
 
-const EmptyRowsView = React.createClass({
-  render() {
-    return (
-      <div className='row'>
-        <div className='col-xs-12'>No records to show</div>
-      </div>
-    );
-  }
-});
-
 export default class WorkflowManagement extends React.Component {
   constructor(props) {
     super(props);
@@ -155,7 +145,12 @@ export default class WorkflowManagement extends React.Component {
               </a>
             </div>
           </div>
-          <ReactDataGrid onGridSort={this.handleGridSort} enableCellSelect={true} columns={this._columns} rowGetter={this.rowGetter} rowsCount={this.getSize()} maxHeight={400} toolbar={toolbar} onAddFilter={this.handleFilterChange} onClearFilters={this.onClearFilters} emptyRowsView={EmptyRowsView}/>
+          {this.getSize() > 0 && <span>
+            <ReactDataGrid onGridSort={this.handleGridSort} enableCellSelect={true} columns={this._columns} rowGetter={this.rowGetter} rowsCount={this.getSize()} maxHeight={400} toolbar={toolbar} onAddFilter={this.handleFilterChange} onClearFilters={this.onClearFilters}/>
+          </span>}
+          {this.getSize() < 1 && <div className='row'>
+            <div className='col-xs-12 center-text'><h1>No records to show</h1></div>
+          </div>}
           <br/>
           <br/>
         </div>

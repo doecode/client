@@ -60,7 +60,7 @@ export default class ResultsPage extends React.Component {
       : searchData.getValue("rows") + searchData.getValue("start");
     let pageNum = Math.ceil(searchData.getValue("start") / searchData.getValue("rows")) + 1;
 
-    const breadcrumbList = [
+    var breadcrumbList = [
       {
         key: 'brdcrmb1',
         value: <span>
@@ -68,12 +68,18 @@ export default class ResultsPage extends React.Component {
           </span>
       }, {
         key: 'brdcrmb2',
-        value: 'Search Results / '
-      }, {
-        key: 'brdcrmb3',
-        value: 'Page ' + pageNum + ' of ' + Math.ceil(this.state.numFound / searchData.getValue("rows"))
+        value: 'Search Results '
       }
     ];
+
+    //We only want to show a page number if there were any results found
+    if (this.state.numFound > 1) {
+      breadcrumbList.push({
+        key: 'brdcrmb3',
+        value: '/ Page ' + pageNum + ' of ' + Math.ceil(this.state.numFound / searchData.getValue("rows"))
+      });
+    }
+
     var searchDescription = <SearchResultsDescription/>;
     var searchNumCounter = pagStartVal;
     return (
@@ -94,34 +100,35 @@ export default class ResultsPage extends React.Component {
             </div>
             <div className='col-md-2'></div>
           </div>}
-          {this.state.numFound > 0 && <div className='row'>
+          <div className='row'>
             <div className='col-md-2'></div>
             <Sidebar sidebarClass="col-md-2 col-xs-12 sidebar" searchForText={searchDescription} parseSearchResponse={this.parseSearchResponse} parseErrorResponse={this.parseErrorResponse} refreshSearch={this.refreshSearch}/>
             <div className="col-md-6 col-xs-12 all-search-results-row">
-              <br/>
-              <div className="row">
-                <div className="col-xs-12 no-col-padding-left">
-                  {this.state.results != undefined && <div>
-                    {this.state.results.docs.map((row, index) => <div className='search-result-row' key={index}>
-                      <SearchItem listNumber={searchNumCounter++} data={row}/>
-                    </div>)}
-                  </div>}
+              {this.state.numFound > 0 && <span>
+                <br/>
+                <div className="row">
+                  <div className="col-xs-12 no-col-padding-left">
+                    {this.state.results != undefined && <div>
+                      {this.state.results.docs.map((row, index) => <div className='search-result-row' key={index}>
+                        <SearchItem listNumber={searchNumCounter++} data={row}/>
+                      </div>)}
+                    </div>}
+                  </div>
                 </div>
-              </div>
-              <div className="row center-text">
-                <div className="col-xs-12 center-text">
-                  <ReactPaginate previousLabel={"Prev"} nextLabel={"Next"} breakLabel={< a href = "#" > ...</a>} breakClassName={"break-me"} pageCount={Math.ceil(this.state.numFound / searchData.getValue("rows"))} marginPagesDisplayed={2} pageRangeDisplayed={3} forcePage={(searchData.getValue("start") / searchData.getValue("rows"))} onPageChange={this.handlePageClick} containerClassName={"pagination"} subContainerClassName={"pages pagination"} activeClassName={"active"}/>
+                <div className="row center-text">
+                  <div className="col-xs-12 center-text">
+                    <ReactPaginate previousLabel={"Prev"} nextLabel={"Next"} breakLabel={< a href = "#" > ...</a>} breakClassName={"break-me"} pageCount={Math.ceil(this.state.numFound / searchData.getValue("rows"))} marginPagesDisplayed={2} pageRangeDisplayed={3} forcePage={(searchData.getValue("start") / searchData.getValue("rows"))} onPageChange={this.handlePageClick} containerClassName={"pagination"} subContainerClassName={"pages pagination"} activeClassName={"active"}/>
+                  </div>
                 </div>
-              </div>
+              </span>}
+              {this.state.numFound < 1 && <span>
+                <div className='col-xs-12 center-text'>
+                  <h1>No records were found for your search terms</h1>
+                </div>
+              </span>}
             </div>
-
             <div className='col-md-2'></div>
-          </div>}
-          {this.state.numFound < 1 && <div className='row'>
-            <div className='col-xs-12 center-text'>
-              <h1>No records were found for your search terms</h1>
-            </div>
-          </div>}
+          </div>
         </div>
       </div>
 

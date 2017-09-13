@@ -20,7 +20,7 @@ import {
 const userData = new UserData();
 const validation = new Validation();
 
-export default class EditUser extends React.Component {
+export default class Account extends React.Component {
   constructor(props) {
     super(props);
     this.updateUser = this.updateUser.bind(this);
@@ -199,7 +199,10 @@ export default class EditUser extends React.Component {
     const accountSaveUser = <span>
       <span className="fa fa-floppy-o"></span>&nbsp; Save User</span>;
 
-    var showAdminRole = (localStorage.user_site && localStorage.user_site != 'CONTR' && localStorage.user_site != 'OSTI');
+    const user_site = localStorage.user_site;
+    const roles = localStorage.roles;
+
+    var showAdminRole = (user_site && localStorage.user_site != 'CONTR' && roles.indexOf(user_site) < 0);
 
     return (
       <div className="row not-so-wide-row">
