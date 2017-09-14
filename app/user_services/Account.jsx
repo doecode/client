@@ -275,8 +275,7 @@ export default class Account extends React.Component {
                     <PageMessageBox classValue={this.state.requestRoleClass} showMessage={this.state.showRequestRoleMessage} items={this.state.requestRoleMsg} keyPrefix='admin'/>
                   </div>
                   <button type="button" className="btn btn-lg btn-success" onClick={this.requestAdmin}>
-                    <span className="fa fa-unlock-alt"></span>
-                    Request Role
+                    <span className="fa fa-unlock-alt"></span>&nbsp;Request Role
                   </button>
                 </div>
               </div>

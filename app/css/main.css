@@ -1055,7 +1055,7 @@ html, button, body, input, select, textarea, p {
 }
 
 .adv-search-dropdown {
-  background-color: #F9F9F9;
+  background-color: #FCFCFC;
   border: 1px solid rgb(68, 68, 68);
   padding: 20px;
   position: absolute;
@@ -1211,6 +1211,7 @@ html, button, body, input, select, textarea, p {
   font-size: 18.72px;
   font-weight: 300;
   padding-left: 0px;
+  margin-left: 0px;
 }
 
 

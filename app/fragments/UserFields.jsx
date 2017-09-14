@@ -85,7 +85,7 @@ export default class UserFields extends React.Component {
           {/*Contract Number*/}
           {this.state.showContractNumber && <div className="row">
             <div className="col-xs-12">
-              <UserField field='contract_number' label='Contract Number' elementType='input' handleChange={this.handleContractCheck} noExtraLabelText/>
+              <UserField field='contract_number' label='Award/Contract Number' helpTooltip='ContractNumber' elementType='input' handleChange={this.handleContractCheck} noExtraLabelText/>
             </div>
           </div>}
         </div>

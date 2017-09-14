@@ -52,7 +52,11 @@ export default class Confirmation extends React.Component {
   }
 
   parseYMLDownloaderSuccess(data) {
-
+    this.setState({
+      showYMLDownload: true,
+      ymlHREF: 'data:text/yaml;charset=utf-8,' + encodeURIComponent(data),
+      ymlFILE: 'metadata-' + this.state.codeID + ".yml"
+    });
   }
 
   parseYMLDownloader(data) {
@@ -96,12 +100,13 @@ export default class Confirmation extends React.Component {
             </div>
           </div>
           <div className="form-group form-group-sm row">
-            {this.state.workflow === "published" && <div className="col-md-6 col-xs-12">
+            {this.state.workflow === "published" && <div className="col-sm-4 col-xs-12">
               <button type="button" className="btn btn-success btn-lg" onClick={this.editRecord}>
                 Continue to E-Link Submission
               </button>
             </div>}
-            <div className="col-md-6 col-xs-12">
+            <div className='col-sm-4 col-xs-12'></div>
+            <div className="col-sm-4 col-xs-12 right-text">
               <button type="button" className="btn btn-primary btn-lg" onClick={this.newRecord}>
                 Create New Record
               </button>

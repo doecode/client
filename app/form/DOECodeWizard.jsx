@@ -416,6 +416,7 @@ buildPanel(obj) {
 
         if (this.props.page == 'submit') {
         button =             <div className="form-group-xs row col-sm-12">
+          <br/>
                             <div>
                                 <button type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
                                     Submit Record to E-Link
@@ -425,7 +426,7 @@ buildPanel(obj) {
                         </div>
         } else if (this.props.page == 'approve') {
           button =           <div className="form-group-xs row col-sm-12">
-
+            <br/>
                           <div>
                               <button  type="button" className={approveClass} onClick={this.approve}>
                                   Approve Record
@@ -435,6 +436,7 @@ buildPanel(obj) {
                       </div>
         } else {
           button =           <div className="form-group-xs row col-sm-12">
+                <br/>
                           <div>
                               <button  type="button" className={publishClass} disabled={publishDisabled} onClick={this.publish}>
                                   Publish Record

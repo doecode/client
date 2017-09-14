@@ -31,7 +31,7 @@ export default class ConfirmUser extends React.Component {
     var url_key = window.location.href.toString();
     //Strip out everything that isn't
     url_key = url_key.substr(0, url_key.indexOf('doecode/'));
-    url_key += 'doecoeapi/services/user';
+    url_key += 'doecoeapi/services';
     return (
       <div className="row not-so-wide-row">
         <div className="col-md-3"></div>
