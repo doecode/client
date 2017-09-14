@@ -36,7 +36,7 @@ export default class ApprovalManagement extends React.Component {
       {
         key: 'id',
         name: 'Code ID',
-        width: 80,
+        width: 75,
         filterable: true,
         sortable: true
       }, {
@@ -47,12 +47,13 @@ export default class ApprovalManagement extends React.Component {
       }, {
         key: 'status',
         name: 'Status',
-        width: 100,
+        width: 90,
         filterable: true,
         sortable: true
       }, {
         key: 'edit',
-        name: 'View Record'
+        name: 'View Record',
+        width: 120
       }
     ];
 
