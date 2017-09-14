@@ -7,16 +7,7 @@ import {downloadJSONFile} from '../utils/utils';
 export default class BiblioSidebar extends React.Component {
   constructor(props) {
     super(props);
-    this.toggleShareModal = this.toggleShareModal.bind(this);
-    this.state = {
-      showShareModal: false
-    };
-  }
 
-  toggleShareModal() {
-    this.setState({
-      showShareModal: !this.state.showShareModal
-    });
   }
 
   render() {
@@ -139,7 +130,7 @@ export default class BiblioSidebar extends React.Component {
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <a target="_blank" href={"mailto:?&subject=DOE Research from OSTI.GOV&body=" + window.location.href}>
+                        <a target="_blank" href={"mailto:?subject=Software Records from DOECODE&body=" + window.location.href}>
                           <span className="fa fa-envelope shareEmail"></span>
                         </a>
                       </li>
