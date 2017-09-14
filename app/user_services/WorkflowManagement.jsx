@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {getQueryParam, doAuthenticatedAjax} from '../utils/utils';
 import ReactDataGrid from 'react-data-grid';
 import {Toolbar, Data} from 'react-data-grid-addons';
+import MessageBoxModal from '../fragments/MessageBoxModal';
 
 const EmptyRowsView = React.createClass({
   render() {
@@ -60,16 +61,19 @@ export default class WorkflowManagement extends React.Component {
     ];
 
     this.state = {
-      rows: [],
-      filters: {},
-      sortColumn: null,
-      sortDirection: null
+        rows: [],
+        filters: {},
+        sortColumn: null,
+        sortDirection: null,
+        showModal: false,
+        isError: false
     };
 
   }
 
   componentDidMount() {
 
+    this.setState({showModal: true});
     doAuthenticatedAjax('GET', "/doecode/api/metadata/projects", this.parseReceiveResponse);
 
   }
@@ -112,6 +116,7 @@ export default class WorkflowManagement extends React.Component {
     }
 
     this.setState({rows: rows});
+    this.setState({showModal: false});
   }
   getRows() {
     return Data.Selectors.getRows(this.state);
@@ -165,6 +170,11 @@ export default class WorkflowManagement extends React.Component {
           <br/>
         </div>
         <div className="col-md-3"></div>
+         <MessageBoxModal
+                 showModal={this.state.showModal}
+                 showSpinner
+                 isError={this.state.isError}
+         />
       </div>
     );
 
