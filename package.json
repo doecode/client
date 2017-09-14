@@ -67,6 +67,7 @@
     "react-router-dom": "^4.1.2",
     "react-select": "^v1.0.0-rc.5",
     "react-stepzilla": "^4.0.0",
+    "react-tooltip": "^3.3.0",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
     "uniqid": "https://registry.npmjs.org/uniqid/-/uniqid-4.1.1.tgz",
