@@ -36,6 +36,7 @@ export default class WorkflowManagement extends React.Component {
       {
         key: 'id',
         name: 'Code ID',
+        width: 75,
         filterable: true,
         sortable: true
       }, {
@@ -46,17 +47,21 @@ export default class WorkflowManagement extends React.Component {
       }, {
         key: 'status',
         name: 'Status',
+        width: 90,
         filterable: true,
         sortable: true
       }, {
         key: 'edit',
-        name: 'Update Metadata'
+        name: 'Update Metadata',
+        width: 140
       }, {
         key: 'submit',
-        name: 'Submit to E-Link'
+        name: 'Submit to E-Link',
+        width: 130
       }, {
         key: 'pending',
-        name: 'Pending Status'
+        name: 'Pending Status',
+        width: 125
       }
     ];
 
@@ -98,20 +103,26 @@ export default class WorkflowManagement extends React.Component {
         editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
       }
 
-      let pendingStatus = (record.workflow_status == "Published" && <span className="pending">Pending Approval</span>);
+      let pendingStatus = (record.workflow_status == "Published" && <div className="center-text" title="Pending Approval" ><span className="pending">Pending Approval</span></div>);
 
       //console.log(JSON.stringify(record));
       rows.push({
-        id: record.code_id, title: record.software_title, status: record.workflow_status, edit: <a href={publishUrl} className="btn btn-success btn-sm">
-                <span className="fa fa-pencil"></span>
-                Update Metadata
-        </a>,
-        submit: <a href={submitUrl} className="btn btn-info btn-sm">
-                <span className="fa fa-pencil"></span>
-                Submit to E-Link
-        </a>,
-        pending: <span>
-            {pendingStatus}</span>
+        id: record.code_id, title: record.software_title, status: record.workflow_status,
+        edit:
+          <div className="center-text" title="Update Metadata">
+            <a href={publishUrl} className="btn btn-success btn-sm">
+                    <span className="fa fa-pencil"></span>
+                    Update Metadata
+            </a>
+          </div>,
+        submit:
+          <div className="center-text" title="Submit to E-Link">
+            <a href={submitUrl} className="btn btn-info btn-sm">
+                    <span className="fa fa-pencil"></span>
+                    Submit to E-Link
+            </a>
+          </div>,
+        pending: pendingStatus
       });
     }
 
