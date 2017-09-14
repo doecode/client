@@ -17,6 +17,7 @@ import RIsStep from '../steps/RIsStep';
 import {PanelGroup, Panel} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
 /*import css from '../css/main.css';*/
+import MessageBoxModal from '../fragments/MessageBoxModal';
 
 const metadata = new Metadata();
 
@@ -37,7 +38,7 @@ constructor(props) {
     this.publish = this.publish.bind(this);
     this.submit = this.submit.bind(this);
     this.approve = this.approve.bind(this);
-    this.closeErrorModal = this.closeErrorModal.bind(this);
+    this.exitModalCallback = this.exitModalCallback.bind(this);
     this.doMultipartSubmission = this.doMultipartSubmission.bind(this);
     this.parseReceiveResponse = this.parseReceiveResponse.bind(this);
     this.parseErrorResponse = this.parseErrorResponse.bind(this);
@@ -47,11 +48,10 @@ constructor(props) {
     this.panelSelect = this.panelSelect.bind(this);
 
     this.state = {
-        "loading": false,
-        "loadingMessage": "",
-        "error": false,
-        "errorMessage": "",
-        "editLoad": false,
+        showModal: false,
+        modalTitle: null,
+        modalMessage: null,
+        isError: false,
         "published": false,
         "showAll": false,
         "activePanel": 1,
@@ -112,12 +112,16 @@ constructor(props) {
         submitSteps[x].key = "" + (x + i + 1);
     }
 
-closeErrorModal() {
-this.setState({"error": false, "errorMessage": ""});
+exitModalCallback() {
+  this.setState({
+        showModal: false,
+        modalTitle: null,
+        modalMessage: null,
+        isError: false});
 }
 
 parseErrorResponse(jqXhr, exception) {
-console.log(jqXhr);
+
 if (jqXhr.status === 401) {
     window.sessionStorage.lastLocation = window.location.href;
     window.sessionStorage.lastRecord = JSON.stringify(metadata.getData());
@@ -140,14 +144,13 @@ if (jqXhr.status === 401) {
     if (msg == "")
       msg = "Internal Server Error: " + jqXhr.status;
 
-    this.setState({"loading": false, "loadingMessage": ""});
-    this.setState({"error": true, "errorMessage": msg});
-    console.log("Error...");
+    this.setState({isError: true, modalMessage: msg});
 }
 
 }
 
 componentDidMount() {
+
     if (this.props.page == 'submit' || this.props.page == 'approve') {
         this.setState({"showAll": true});
     } else {
@@ -163,12 +166,11 @@ componentDidMount() {
         window.sessionStorage.lastRecord = "";
 
     } else if (codeID) {
-        this.setState({"loading" : true, "loadingMessage" : "Loading"});
+        this.setState({showModal : true});
         doAuthenticatedAjax('GET', "/doecode/api/metadata/" + codeID, this.parseReceiveResponse);
     } else {
         checkIsAuthenticated();
     }
-
 }
 
  showAdditionalFields() {
@@ -179,11 +181,11 @@ parseReceiveResponse(data) {
     this.setState({"workflowStatus": data.metadata.workflow_status});
     //metadata.deserializeData(data.metadata);
     metadata.loadRecordFromServer(data.metadata, this.props.page)
-    this.setState({"loading": false, "loadingMessage": ""});
+    this.setState({showModal : false});
 }
 
 autopopulate(event) {
-    this.setState({"loading": true, "loadingMessage": "Loading"});
+    this.setState({showModal : true});
     doAjax('GET', "/doecode/api/metadata/autopopulate?repo=" + metadata.getValue('repository_link'), this.parseAutopopulateResponse);
     event.preventDefault();
 }
@@ -193,15 +195,14 @@ parseAutopopulateResponse(responseData) {
     if (responseData !== undefined) {
         metadata.updateMetadata(responseData.metadata);
       }
-    this.setState({"loading": false, "loadingMessage": ""});
+    this.setState({showModal : false});
 }
 
 
 
 
 save() {
-
-    this.setState({"loading": true, "loadingMessage": "Saving"});
+    this.setState({showModal : true, modalTitle: "Saving"});
 
     if (metadata.getValue("accessibility") == 'OS' || (Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length == 0)) {
       doAuthenticatedAjax('POST', '/doecode/api/metadata/save', this.parseSaveResponse, metadata.serializeData(), this.parseErrorResponse);
@@ -211,9 +212,8 @@ save() {
 }
 
 publish() {
-    console.log(metadata.getData());
+    this.setState({showModal : true, modalTitle: "Publishing"});
 
-    this.setState({"loading": true, "loadingMessage": "Publishing"});
     if (metadata.getValue("accessibility") == 'OS' || metadata.getValue("files").length == 0) {
       doAuthenticatedAjax('POST', '/doecode/api/metadata/publish', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
     } else {
@@ -222,7 +222,8 @@ publish() {
 }
 
 submit() {
-    this.setState({"loading": true, "loadingMessage": "Submitting"});
+    this.setState({showModal : true, modalTitle: "Submitting"});
+
     if (metadata.getValue("accessibility") == 'OS' || metadata.getValue("files").length == 0) {
       doAuthenticatedAjax('POST', '/doecode/api/metadata/submit', this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
   } else {
@@ -233,7 +234,8 @@ submit() {
 approve() {
     const codeID = getQueryParam("code_id");
 
-    this.setState({"loading": true, "loadingMessage": "Approving"});
+    this.setState({showModal : true, modalTitle: "Approving"});
+
     doAuthenticatedAjax('GET', '/doecode/api/metadata/approve/'+codeID, this.parseApproveResponse, null, this.parseErrorResponse);
 }
 
@@ -246,7 +248,7 @@ doMultipartSubmission(url, successCallback) {
 }
 
 parseSaveResponse(data) {
-    this.setState({"loading": false, "loadingMessage": ""});
+    this.setState({showModal : false});
     metadata.setValue("code_id", data.metadata.code_id);
 }
 
@@ -503,37 +505,15 @@ buildPanel(obj) {
                      </div>
                  </div>
                  {content}
-                 <Modal show={this.state.loading} >
-                     <Modal.Header closeButton>
-                         <Modal.Title>{this.state.loadingMessage}</Modal.Title>
-                     </Modal.Header>
-                     <Modal.Body>
-                         <div className="loader"></div>
-                     </Modal.Body>
-                 </Modal>
-                 <Modal show={this.state.error} >
-                     <Modal.Header closeButton>
-                         <Modal.Title>ERROR</Modal.Title>
-                     </Modal.Header>
-                     <Modal.Body>
-                         <div className="loaderText">
-                          <div className="row">
-                            <div className="col-md-4 col-xs-12">
-                                <div className="loaderError"></div>
-                            </div>
-                            <div className="col-md-8 col-xs-12">
-                              <div className="loaderText">{this.state.errorMessage}</div>
-                              <br />
-                              <div>
-                                <button type="button" className="btn btn-lg pull-right" onClick={this.closeErrorModal}>
-                                  Close
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                         </div>
-                     </Modal.Body>
-                 </Modal>
+                 <MessageBoxModal
+                         showModal={this.state.showModal}
+                         showSpinner
+                         isError={this.state.isError}
+                         title={this.state.modalTitle}
+                         items={[this.state.modalMessage]}
+                         showCloseButton={this.state.isError}
+                         exitCallback={this.exitModalCallback}
+                 />
              </div>
              <div className="col-md-3"></div>
     </div>
