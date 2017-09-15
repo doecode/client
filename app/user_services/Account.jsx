@@ -6,7 +6,7 @@ import Validation from '../utils/Validation';
 import UserFields from '../fragments/UserFields';
 import PasswordFields from '../fragments/PasswordFields';
 import PageMessageBox from '../fragments/PageMessageBox';
-
+import PasswordRules from './PasswordRules';
 import {
   doAjax,
   doAuthenticatedAjax,
@@ -14,7 +14,8 @@ import {
   appendQueryString,
   getQueryParam,
   setLoggedInAttributes,
-  resetLoggedInAttributesUserData
+  resetLoggedInAttributesUserData,
+  checkPassword
 } from '../utils/utils';
 
 const userData = new UserData();
@@ -37,6 +38,8 @@ export default class Account extends React.Component {
     this.parseChangePasswordRequest = this.parseChangePasswordRequest.bind(this);
     this.parseChangePasswordRequestError = this.parseChangePasswordRequestError.bind(this);
     this.parseAPIError = this.parseAPIError.bind(this);
+    this.confirmAndCheckPassword = this.confirmAndCheckPassword.bind(this);
+    this.userDataToJSON = this.userDataToJSON.bind(this);
 
     this.state = {
       showUpdateUserMessage: false,
@@ -55,7 +58,13 @@ export default class Account extends React.Component {
       requestAdminStatus: false,
       requestAdminMessage: "",
       showPasswordChangeMessage: false,
-      showAdminButton: true
+      showAdminButton: true,
+      longEnough: false,
+      hasSpecial: false,
+      hasNumber: false,
+      upperAndLower: false,
+      containsName: false,
+      matches: false
     }
 
   }
@@ -173,7 +182,7 @@ export default class Account extends React.Component {
 
   parseRequestAdmin(data) {
     var current_pending = JSON.parse(localStorage.pending_roles);
-    if(!Array.isArray(current_pending)){
+    if (!Array.isArray(current_pending)) {
       current_pending = [];
     }
     current_pending.push(localStorage.user_site);
@@ -197,6 +206,24 @@ export default class Account extends React.Component {
 
   parseAPIError(data) {
     this.setState({showAPIKeyMessage: true, apiKeyMsg: ['An error has occurred in generating your new api key'], apiKeyClass: 'center-text has-error'});
+  }
+
+  userDataToJSON() {
+    return {
+      password: userData.getValue("password"),
+      email: (localStorage.user_email)
+        ? localStorage.user_email
+        : userData.getValue("email"),
+      confirm_password: userData.getValue("confirm_password")
+    };
+  }
+
+  confirmAndCheckPassword() {
+    var newState = checkPassword(this.userDataToJSON());
+    newState.validEmail = validation.validateEmail((localStorage.user_email)
+      ? localStorage.user_email
+      : userData.getValue("email")) === "";
+    this.setState(newState);
   }
 
   render() {
@@ -231,12 +258,14 @@ export default class Account extends React.Component {
                 <div className="panel-heading account-panel-header center-text">Password</div>
                 <div className="panel-body account-panel-body">
                   <div className='row'>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-11'>
-                      <div>
-                        <PageMessageBox classValue={this.state.updatePasswordClass} showMessage={this.state.showUpdatePasswordMessage} items={this.state.updatePasswordMsg} keyPrefix='password'/>
-                        <PasswordFields/>
-                      </div>
+                    <div className='col-md-6 col-xs-12'>
+                      <br/>
+                      <br/>
+                      <PageMessageBox classValue={this.state.updatePasswordClass} showMessage={this.state.showUpdatePasswordMessage} items={this.state.updatePasswordMsg} keyPrefix='password'/>
+                      <PasswordFields checkPasswordCallback={this.confirmAndCheckPassword}/>
+                    </div>
+                    <div className='col-md-6 col-xs-12'>
+                      <PasswordRules longEnough={this.state.longEnough} hasSpecial={this.state.hasSpecial} hasNumber={this.state.hasNumber} containsName={this.state.containsName} upperAndLower={this.state.upperAndLower} matches={this.state.matches}/>
                     </div>
                   </div>
                   <br/>

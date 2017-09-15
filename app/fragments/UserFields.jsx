@@ -66,8 +66,16 @@ export default class UserFields extends React.Component {
 
   render() {
     const emailSmalltext = <span>If you are an employee at a DOE National Laboratory, please register using your official .gov email address.</span>;
-    const has_firstName = userData.getValue("first_name") != '';
-    const has_lastName = userData.getValue("last_name") != '';
+    const has_firstName = userData.getValue("first_name") != '' || localStorage.first_name != '';
+    const has_lastName = userData.getValue("last_name") != '' || localStorage.last_name != '';
+
+    var firstNameValue = (userData.getValue("first_name"))
+      ? userData.getValue("first_name")
+      : localStorage.first_name;
+    var lastNameValue = (userData.getValue("last_name"))
+      ? userData.getValue("last_name")
+      : localStorage.last_name;
+
     const has_email = userData.getValue("email") != '';
     const has_contractNum = userData.getValue("contract_number") != '';
 
@@ -94,7 +102,7 @@ export default class UserFields extends React.Component {
               <div className={(has_firstName)
                 ? (successDiv)
                 : (notSuccess)}>
-                <input type='text' placeholder='First Name' id='first-name' className='pure-input-1-3 form-control' onChange={this.updateFirstName} onBlur={this.updateFirstName}/> {has_firstName && <span className="fa fa-check form-control-feedback successCheck"></span>}
+                <input type='text' placeholder='First Name' value={firstNameValue} id='first-name' className='pure-input-1-3 form-control' onChange={this.updateFirstName} onBlur={this.updateFirstName}/> {has_firstName && <span className="fa fa-check form-control-feedback successCheck"></span>}
               </div>
             </div>
 
@@ -110,7 +118,7 @@ export default class UserFields extends React.Component {
               <div className={(has_lastName)
                 ? (successDiv)
                 : (notSuccess)}>
-                <input type='text' placeholder='Last Name' id='last-name' className='pure-input-1-3 form-control' onChange={this.updateLastName} onBlur={this.updateLastName}/> {has_lastName && <span className="fa fa-check form-control-feedback successCheck"></span>}
+                <input type='text' placeholder='Last Name' value={lastNameValue} id='last-name' className='pure-input-1-3 form-control' onChange={this.updateLastName} onBlur={this.updateLastName}/> {has_lastName && <span className="fa fa-check form-control-feedback successCheck"></span>}
               </div>
             </div>
           </div>
