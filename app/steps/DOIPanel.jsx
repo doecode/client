@@ -2,26 +2,99 @@ import React from 'react';
 import MetadataField from '../field/MetadataField';
 import uniqid from 'uniqid';
 import {observer, Provider} from "mobx-react";
+import MessageBoxModal from '../fragments/MessageBoxModal';
+import {doAuthenticatedAjax} from '../utils/utils';
 
 @observer
 export default class DOIPanel extends React.Component {
 
   constructor(props) {
     super(props);
-    this._prefix = "10.5072/";
     this.handleInfix = this.handleInfix.bind(this);
     this.handleReserve = this.handleReserve.bind(this);
+    this.reserveDOI = this.reserveDOI.bind(this);
+    this.exitModalCallback = this.exitModalCallback.bind(this);
+    this.reservationApproveResponse = this.reservationApproveResponse.bind(this);
+    this.reservationErrorResponse = this.reservationErrorResponse.bind(this);
+
+    this.state = {
+        showModal: false,
+        modalTitle: "Reserving DOI...",
+        modalMessage: null,
+        isError: false
+    };
+  }
+
+  exitModalCallback() {
+    this.setState({
+          showModal: false,
+          modalMessage: null,
+          isError: false});
   }
 
   handleInfix(event) {
     let infix = event.target.value;
     this.props.metadata.setValue("doi_infix", infix);
     const doi = this.props.metadata.getValue("doi");
+    const prefix = doi.substr(0, doi.indexOf('/') + 1);
     const id = doi.substr(doi.lastIndexOf('/') + 1, doi.length - 1);
-    console.log(id);
+
     if (infix)
       infix += "/";
-    this.props.metadata.setValue("doi", this._prefix + infix + id);
+    this.props.metadata.setValue("doi", prefix + infix + id);
+  }
+
+  reserveDOI() {
+      this.setState({showModal: true});
+      doAuthenticatedAjax('GET', '/doecode/api/metadata/reservedoi', this.reservationApproveResponse, null, this.reservationErrorResponse);
+  }
+
+  reservationApproveResponse(data) {
+    const doiInfo = this.props.metadata.getFieldInfo("doi");
+    const infixInfo = this.props.metadata.getFieldInfo("doi_infix");
+    this.props.metadata.setValue("doi", data.doi);
+    this.props.metadata.setValue("doi_status", "RES");
+    doiInfo.completed = true;
+    doiInfo.ever_completed = true;
+    doiInfo.error = '';
+    infixInfo.completed = false;
+    infixInfo.error = '';
+    infixInfo.Panel = "DOI and Release Date"
+    this.setState({showModal: false});
+  }
+
+  reservationErrorResponse(data) {
+    this.setState({isError: true, modalMessage: "Unable to reserve a DOI at this time.  Please try again later."});
+  }
+
+  parseErrorResponse(jqXhr, exception) {
+    console.log(jqXhr);
+    if (jqXhr.status === 401) {
+        window.sessionStorage.lastLocation = window.location.href;
+        window.sessionStorage.lastRecord = JSON.stringify(metadata.getData());
+        window.location.href = '/doecode/login?redirect=true';
+
+    } else if (jqXhr.status === 403) {
+        window.location.href = '/doecode/forbidden';
+    } else {
+        //window.location.href = '/doecode/error';
+
+        let x = 0;
+        let msg = "";
+
+        if (jqXhr.responseJSON && jqXhr.responseJSON.errors) {
+          for (x = 0; x < jqXhr.responseJSON.errors.length; x++) {
+              msg += (msg == "" ? "" : "; ") + jqXhr.responseJSON.errors[x];
+          }
+        }
+
+        if (msg == "")
+          msg = "Internal Server Error: " + jqXhr.status;
+
+        this.setState({"loading": false, "loadingMessage": ""});
+        this.setState({"error": true, "errorMessage": msg});
+        console.log("Error...");
+    }
   }
 
   handleReserve() {
@@ -43,16 +116,7 @@ export default class DOIPanel extends React.Component {
       infixInfo.Panel = "";
     } else {
       //reserve a new DOI in correct format, disabling validations first to let our own DOI pass through
-      const doiInfo = this.props.metadata.getFieldInfo("doi");
-      const infixInfo = this.props.metadata.getFieldInfo("doi_infix");
-      this.props.metadata.setValue("doi", this._prefix + uniqid());
-      this.props.metadata.setValue("doi_status", "RES");
-      doiInfo.completed = true;
-      doiInfo.ever_completed = true;
-      doiInfo.error = '';
-      infixInfo.completed = false;
-      infixInfo.error = '';
-      infixInfo.Panel = "DOI and Release Date"
+      this.reserveDOI();
     }
   }
 
@@ -97,6 +161,15 @@ export default class DOIPanel extends React.Component {
           </div>
           <div className="col-md-4"></div>
         </div>
+        <MessageBoxModal
+                showModal={this.state.showModal}
+                showSpinner
+                isError={this.state.isError}
+                title={this.state.modalTitle}
+                items={[this.state.modalMessage]}
+                showCloseButton={this.state.isError}
+                exitCallback={this.exitModalCallback}
+        />
       </div>
     );
   }
