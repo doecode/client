@@ -311,6 +311,10 @@ html h3 {
   color: rgb(153, 153, 153);
 }
 
+.register-text {
+  font-size: 16px;
+}
+
 .biblio-sidebar-subtitle {
   text-transform: uppercase;
   font-weight: 300;
@@ -784,13 +788,15 @@ html, body {
   color: #5E5E5E !important;
 }
 
-.signin-page-container{
-  border-bottom:1px solid #E0E0E0;
+.signin-page-container {
+  border-bottom: 1px solid #E0E0E0;
 }
+
 .button-success {
-    background: #7cb342;
-    color: #f2f2f2;
+  background: #7cb342;
+  color: #f2f2f2;
 }
+
 .save-btn-margin {
   margin-right: 8px;
 }
@@ -807,12 +813,12 @@ html, body {
   color: #5E5E5E !important;
 }
 
-.signin-buttons{
-    font-size:16px;
+.signin-buttons {
+  font-size: 16px;
 }
 
-.signin-buttons-container{
-  padding-bottom:10px;
+.signin-buttons-container {
+  padding-bottom: 10px;
 }
 
 .workflow-publish-btn {
@@ -1265,6 +1271,20 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   border: none !important;
 }
 
+.input-label-adjusted{
+  font-weight:normal;
+  font-size:16px;
+  padding-top:4px;
+}
+
+.login-input-box{
+  font-size:16px;
+}
+
+.login-email-container{
+  padding-bottom:10px;
+}
+
 
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
 
@@ -1380,6 +1400,12 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
     padding-left: 0px;
     padding-right: 0px;
   }
+  .right-text-tiny {
+    text-align: right;
+  }
+  .left-text-tiny {
+    text-align: left;
+  }
 }
 
 
@@ -1411,6 +1437,12 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   .header-container-fluid {
     padding-left: 0px;
     padding-right: 0px;
+  }
+  .right-text-xs {
+    text-align: right;
+  }
+  .left-text-xs {
+    text-align: left;
   }
 }
 
@@ -1491,6 +1523,12 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   .no-col-padding-left-mobile {
     padding-left: 0px;
   }
+  .right-text-sm {
+    text-align: right;
+  }
+  .left-text-sm {
+    text-align: left;
+  }
 }
 
 
@@ -1515,6 +1553,12 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   .hide-md {
     display: none;
   }
+  .right-text-md {
+    text-align: right;
+  }
+  .left-text-md {
+    text-align: left;
+  }
 }
 
 
@@ -1535,5 +1579,11 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   }
   .hide-lg {
     display: none;
+  }
+  .right-text-lg {
+    text-align: right;
+  }
+  .left-text-lg {
+    text-align: left;
   }
 }
