@@ -60,32 +60,40 @@ export default class Login extends React.Component {
 
     return (
       <div className="row not-so-wide-row">
-        <div className="col-md-4"></div>
-        <div className="col-md-4 col-xs-12 ">
-          <div className='center-text'>
+        <div className="col-md-3"></div>
+        <div className="col-md-6 col-xs-12 ">
+          <div>
             <br/>
-            <h2 className="static-content-title">Login</h2>
+            <h2 className="static-content-title">Sign In</h2>
             <br/> {this.state.hasError && <span className="error-color">
               <label>{this.state.errorMsg}</label>
             </span>}
           </div>
           <br/>
-          <div className='form-horizontal large-control-label center-text'>
-            <UserField noval={true} field="email" label="Email Address" elementType="input" inputStyle=" input-lg " keypressMethod={this.triggerLogin}/>
-            <UserField noval={true} field="password" label="Password" elementType="password" inputStyle=" input-lg " keypressMethod={this.triggerLogin}/>
-            <br/>
-            <button type="button" className="btn btn-primary btn-lg" onClick={this.login}>Sign In</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" className="btn btn-info btn-lg" onClick={this.forgotPassword}>Forgot Password?</button>
+          <div className='row signin-page-container'>
+            <div className='col-md-1'></div>
+            <div className='col-md-6 col-xs-12'>
+              <UserField noval={true} field="email" label="Email Address" elementType="input" inputStyle=" " keypressMethod={this.triggerLogin} placeholderText='Email Address'/>
+              <UserField noval={true} field="password" label="Password" elementType="password" inputStyle=" " keypressMethod={this.triggerLogin} placeholderText='Password'/>
+              <br/>
+            </div>
+            <div className='col-md-5'></div>
           </div>
           <br/>
-          <br/>
-          <div className="form-horizontal large-control-label">
-            <p>Don't have an account?</p>
-            <button type="button" className="btn btn-success btn-lg" onClick={this.register}>Register</button>
+          <div className='row'>
+            <div className='col-md-1 col-xs-12  signin-buttons-container'>
+              <button type='button' className='pure-button signin-buttons'>Forgot Password?</button>
+            </div>
+            <div className='col-md-8'></div>
+            <div className='col-md-2 col-xs-12  signin-buttons-container'>
+              <button type='button' className='pure-button signin-buttons'>Create Account</button>
+            </div>
+            <div className='col-md-1 col-xs-12  signin-buttons-container'>
+              <button type='button' className='pure-button button-success signin-buttons'>Sign In</button>
+            </div>
           </div>
         </div>
-        <div className="col-md-4"></div>
+        <div className="col-md-3"></div>
       </div>
     );
 

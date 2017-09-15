@@ -44,7 +44,7 @@ export default class BiblioPage extends React.Component {
     console.log("Error?");
   }
 
-  generateContent(obj) {
+  generateContent(obj,index) {
     let textContent = null;
     let show_val = false;
     var header = obj.header;
@@ -117,7 +117,7 @@ export default class BiblioPage extends React.Component {
 
     if (show_val) {
       return (
-        <div className='biblio-row'>
+        <div className='biblio-row' key={index}>
           <div className='col-xs-12'>
             <dl className='row'>
               <dt className='col-md-3 col-xs-12 biblio-field-header'>{header}:</dt>
@@ -265,6 +265,7 @@ export default class BiblioPage extends React.Component {
                     {/*Description and other Data*/}
                     <div className="row">
                       {/*Sidebar on the left*/}
+                      <BiblioSidebar pageData={metadata} sidebarClass='no-col-padding-left-mobile no-col-padding-right-mobile hide-xs hide-sm col-md-3 col-xs-12 biblio-sidebar'/>
                       <div className="col-md-9 col-xs-12 biblio-main-content">
                         <div className="row">
                           <div className="col-xs-12 biblio-description  no-col-padding-left no-col-padding-right">
@@ -278,7 +279,7 @@ export default class BiblioPage extends React.Component {
                           </div>
                         </div>
                       </div>
-                      <BiblioSidebar pageData={metadata} sidebarClass='no-col-padding-left-mobile no-col-padding-right-mobile col-md-3 col-xs-12 biblio-sidebar'/>
+                      <BiblioSidebar pageData={metadata} sidebarClass='no-col-padding-left-mobile no-col-padding-right-mobile hide-md hide-lg col-md-3 col-xs-12 biblio-sidebar'/>
                     </div>
                   </div>
                 </div>

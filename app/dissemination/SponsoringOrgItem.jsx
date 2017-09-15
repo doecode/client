@@ -9,7 +9,7 @@ export default class SponsoringOrgItem extends React.Component {
   render() {
     return (
       <div>
-        {this.props.items.map((row, index) => <div key={index}>
+        {this.props.items.map((row, index) => <div key={index} className='sponsor-org-row'>
           <div className='row'>
             <div className='col-xs-12'>
               {row.organization_name}

@@ -54,7 +54,8 @@ export default class Account extends React.Component {
       showLoading: false,
       requestAdminStatus: false,
       requestAdminMessage: "",
-      showPasswordChangeMessage: false
+      showPasswordChangeMessage: false,
+      showAdminButton: true
     }
 
   }
@@ -171,7 +172,13 @@ export default class Account extends React.Component {
   }
 
   parseRequestAdmin(data) {
-    this.setState({showRequestRoleMessage: true, requestRoleMsg: ['Admin request success'], requestRoleClass: 'center-text has-success'});
+    var current_pending = JSON.parse(localStorage.pending_roles);
+    if(!Array.isArray(current_pending)){
+      current_pending = [];
+    }
+    current_pending.push(localStorage.user_site);
+    localStorage.pending_roles = JSON.stringify(current_pending);
+    this.setState({showRequestRoleMessage: true, requestRoleMsg: ['Admin request success'], requestRoleClass: 'center-text has-success', showAdminButton: false});
   }
 
   parseRequestAdminError(data) {
@@ -200,9 +207,11 @@ export default class Account extends React.Component {
       <span className="fa fa-floppy-o"></span>&nbsp; Save User</span>;
 
     const user_site = localStorage.user_site;
-    const roles = localStorage.roles;
+    const roles = JSON.parse(localStorage.roles);
+    const pending_roles = JSON.parse(localStorage.pending_roles);
 
     var showAdminRole = (user_site && localStorage.user_site != 'CONTR' && roles.indexOf(user_site) < 0);
+    var hasAlreadyRequested = (user_site && pending_roles.indexOf(user_site) > -1);
 
     return (
       <div className="row not-so-wide-row">
@@ -271,12 +280,17 @@ export default class Account extends React.Component {
               <div className="panel panel-default">
                 <div className="panel-heading account-panel-header center-text">Administrative Role</div>
                 <div className="panel-body account-panel-body center-text">
-                  <div>
-                    <PageMessageBox classValue={this.state.requestRoleClass} showMessage={this.state.showRequestRoleMessage} items={this.state.requestRoleMsg} keyPrefix='admin'/>
-                  </div>
-                  <button type="button" className="btn btn-lg btn-success" onClick={this.requestAdmin}>
-                    <span className="fa fa-unlock-alt"></span>&nbsp;Request Role
-                  </button>
+                  {!hasAlreadyRequested && <div>
+                    <div>
+                      <PageMessageBox classValue={this.state.requestRoleClass} showMessage={this.state.showRequestRoleMessage} items={this.state.requestRoleMsg} keyPrefix='admin'/>
+                    </div>
+                    <button type="button" className="btn btn-lg btn-success" onClick={this.requestAdmin}>
+                      <span className="fa fa-unlock-alt"></span>&nbsp;Request Role
+                    </button>
+                  </div>}
+                  {hasAlreadyRequested && <div>
+                    <label>Request Pending</label>
+                  </div>}
                 </div>
               </div>
             </div>}
