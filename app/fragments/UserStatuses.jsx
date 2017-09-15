@@ -30,17 +30,28 @@ export default class UserStatuses extends React.Component {
 
     return (
       <div>
-        <div className="checkbox">
-          <label htmlFor='active-state'><input type="checkbox" checked={this.state.activeChecked} onChange={this.handleActiveToggle} id='active-state'/>Is Active?</label>
+
+        <div className='form-group'>
+          <div className='row'>
+            <div className='col-xs-3 right-text'>
+              <label className='control-label input-label-adjusted' htmlFor='roles-box'>Roles:</label>
+            </div>
+            <div className='col-xs-9'>
+              <select className='form-control' value={this.state.chosenRole} id='roles-box' onChange={this.setRolesData}>
+                <option value=''></option>
+                {this.props.rolesList.map((row, index) => <option key={'roles-' + index} value={row.value}>{row.label}</option>)}
+              </select>
+            </div>
+          </div>
         </div>
         <div className='form-group'>
           <div className='row'>
-            <label className='control-label' htmlFor='user-admin-box'>Roles:</label>
-            <br/>
-            <select className='form-control' value={this.state.chosenRole} id='roles-box' onChange={this.setRolesData}>
-              <option value=''></option>
-              {this.props.rolesList.map((row, index) => <option key={'roles-' + index} value={row.value}>{row.label}</option>)}
-            </select>
+            <div className='col-xs-1'></div>
+            <div className='col-xs-11'>
+              <div className="checkbox">
+                <label htmlFor='active-state'><input type="checkbox" checked={this.state.activeChecked} onChange={this.handleActiveToggle} id='active-state'/>Is Active?</label>
+              </div>
+            </div>
           </div>
         </div>
       </div>

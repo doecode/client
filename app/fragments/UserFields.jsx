@@ -152,7 +152,7 @@ export default class UserFields extends React.Component {
               <div className={(has_contractNum)
                 ? (successDiv)
                 : (notSuccess)}>
-                <input type='text' placeholder='Award/Contract Number' id='contract-number' className='pure-input-1-3 form-control' onChange={this.handleContractCheck} onBlur={this.handleContractCheck}/> {has_contractNum && <span className="fa fa-check form-control-feedback successCheck"></span>}
+                <input type='text' placeholder='Award/Contract Number' id='contract-number' value={userData.getValue("contract_number")} className='pure-input-1-3 form-control' onChange={this.handleContractCheck} onBlur={this.handleContractCheck}/> {has_contractNum && <span className="fa fa-check form-control-feedback successCheck"></span>}
               </div>
             </div>
           </div>}
