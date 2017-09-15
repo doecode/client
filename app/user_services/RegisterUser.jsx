@@ -93,15 +93,26 @@ export default class RegisterUser extends React.Component {
             </div>}
             <div className='row'>
               <div className='col-md-3'></div>
-              <div className='col-md-3 col-xs-12'>
-                <UserFields show_email={true}/>
+              <div className='no-col-padding-left no-col-padding-right col-md-6 col-xs-12 register-text'>
+                To create an account, enter your first and last name, email address and password below. If you are an employee at a DOE National Laboratory, please register using your official .gov email address. For all other users, you will be asked to enter your current DOE award/contract number, which can be found in your DOE award package. DOE CODE will validate the number automatically.
               </div>
-              <div className='col-md-6'></div>
+              <div className='col-md-3'></div>
             </div>
-            <div className='row'>
+            <br/>
+            <div className='row signin-page-container'>
               <div className='col-md-3'></div>
               <div className='col-md-6 col-xs-12'>
-                <PasswordFields/>
+                <div className='row'>
+                  <div className='col-md-6 col-xs-12'>
+                    <UserFields show_email={true}/>
+                  </div>
+                  <div className='col-md-6'></div>
+                </div>
+                <div className='row'>
+                  <div className='col-xs-12'>
+                    <PasswordFields/>
+                  </div>
+                </div>
               </div>
               <div className='col-md-3'></div>
             </div>
@@ -109,7 +120,7 @@ export default class RegisterUser extends React.Component {
             <div className='row'>
               <div className='col-md-3'></div>
               <div className='col-md-6 col-xs-12'>
-                <button type='button' className='btn btn-success btn-lg' onClick={this.register}>
+                <button type='button' className='pure-button button-success' onClick={this.register}>
                   <span className='fa fa-paper-plane'></span>&nbsp;Submit
                 </button>
               </div>
