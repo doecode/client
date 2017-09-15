@@ -911,15 +911,12 @@ html, body {
   color: #5E5E5E !important;
 }
 
-.signin-buttons{
-    font-size:16px;
-}
-
-.signin-buttons-container{
-  padding-bottom:10px;
-
 .signin-buttons {
   font-size: 16px;
+}
+
+.signin-buttons-container {
+  padding-bottom: 10px;
 }
 
 .workflow-publish-btn {
@@ -1372,7 +1369,6 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   border: none !important;
 }
 
-<<<<<<< HEAD
 .input-label-adjusted {
   font-weight: normal;
   font-size: 16px;
@@ -1388,20 +1384,6 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
 
 .password-rules{
   font-size:16px;
-  
-.input-label-adjusted{
-  font-weight:normal;
-  font-size:16px;
-  padding-top:4px;
-}
-
-.login-input-box{
-  font-size:16px;
-}
-
-.login-email-container{
-  padding-bottom:10px;
->>>>>>> Redid the login page to match the new osti.gov
 }
 
 

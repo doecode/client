@@ -119,7 +119,6 @@ export default class RegisterUser extends React.Component {
               <div className='col-md-6'></div>
             </div>}
             <div className='row'>
-<<<<<<< HEAD
               <div className='col-md-2'></div>
               <div className='no-col-padding-left no-col-padding-right col-md-8 col-xs-12 register-text'>
                 To create an account, enter your first and last name, email address and password below. If you are an employee at a DOE National Laboratory, please register using your official .gov email address. For all other users, you will be asked to enter your current DOE award/contract number, which can be found in your DOE award package. DOE CODE will validate the number automatically.
@@ -147,27 +146,6 @@ export default class RegisterUser extends React.Component {
                   {/*Password Rules*/}
                   <div className='col-md-5 col-xs-12'>
                     <PasswordRules longEnough={this.state.longEnough} hasSpecial={this.state.hasSpecial} hasNumber={this.state.hasNumber} containsName={this.state.containsName} upperAndLower={this.state.upperAndLower} matches={this.state.matches}/>
-=======
-              <div className='col-md-3'></div>
-              <div className='no-col-padding-left no-col-padding-right col-md-6 col-xs-12 register-text'>
-                To create an account, enter your first and last name, email address and password below. If you are an employee at a DOE National Laboratory, please register using your official .gov email address. For all other users, you will be asked to enter your current DOE award/contract number, which can be found in your DOE award package. DOE CODE will validate the number automatically.
-              </div>
-              <div className='col-md-3'></div>
-            </div>
-            <br/>
-            <div className='row signin-page-container'>
-              <div className='col-md-3'></div>
-              <div className='col-md-6 col-xs-12'>
-                <div className='row'>
-                  <div className='col-md-6 col-xs-12'>
-                    <UserFields show_email={true}/>
-                  </div>
-                  <div className='col-md-6'></div>
-                </div>
-                <div className='row'>
-                  <div className='col-xs-12'>
-                    <PasswordFields/>
->>>>>>> Redid the login page to match the new osti.gov
                   </div>
                 </div>
               </div>
@@ -175,17 +153,10 @@ export default class RegisterUser extends React.Component {
             </div>
             <br/>
             <div className='row'>
-<<<<<<< HEAD
               <div className='col-md-2'></div>
               <div className='col-md-8 col-xs-12 right-text'>
                 <button type='button' className='pure-button button-success signin-buttons' onClick={this.register}>
                   Create Account
-=======
-              <div className='col-md-3'></div>
-              <div className='col-md-6 col-xs-12'>
-                <button type='button' className='pure-button button-success' onClick={this.register}>
-                  <span className='fa fa-paper-plane'></span>&nbsp;Submit
->>>>>>> Redid the login page to match the new osti.gov
                 </button>
               </div>
               <div className='col-md-2'></div>
