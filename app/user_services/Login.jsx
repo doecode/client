@@ -134,6 +134,7 @@ export default class Login extends React.Component {
             <div className='col-sm-1 hide-md hide-lg'></div>
             <div className='col-md-1 col-sm-3 col-xs-12  signin-buttons-container'>
               <button type='button' className='pure-button button-success signin-buttons' onClick={this.login}>Sign In</button>
+
             </div>
           </div>
         </div>

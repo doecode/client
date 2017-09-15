@@ -886,6 +886,7 @@ html, body {
   color: #5E5E5E !important;
 }
 
+<<<<<<< HEAD
 .signin-page-container {
   border-bottom: 1px solid #E0E0E0;
 }
@@ -911,12 +912,21 @@ html, body {
   color: #5E5E5E !important;
 }
 
+<<<<<<< HEAD
 .signin-buttons {
   font-size: 16px;
 }
 
 .signin-buttons-container {
   padding-bottom: 10px;
+=======
+.signin-buttons{
+    font-size:16px;
+}
+
+.signin-buttons-container{
+  padding-bottom:10px;
+>>>>>>> More front-end changes
 }
 
 .workflow-publish-btn {
