@@ -75,31 +75,44 @@ export default class Login extends React.Component {
           <div>
             <br/>
             <h2 className="static-content-title">Sign In</h2>
-            <br/>
-            <div className='center-text'>
-              {this.state.hasError && <span className="error-color">
+            <br/> {this.state.hasError && <div className='center-text'>
+              <span className="error-color">
                 <label>{this.state.errorMsg}</label>
-              </span>}
+              </span>
+            </div>}
+          </div>
+          <div className='row'>
+            <div className='col-xs-12 register-text'>
+              If you already have a DOE CODE account, enter your email address and password below to sign in. If you wish to create an account, please select “Create Account” and follow the instructions provided
             </div>
           </div>
-          <br/>
+          <br/> {/*EMail Address*/}
           <div className='row login-email-container'>
             <div className='col-md-2 col-xs-12 right-text-md right-text-lg no-col-padding-right '>
-              <label className='control-label input-label-adjusted' htmlFor='email-address'>Email Address:</label>&nbsp;<span className='hide-md hide-lg'><label className='control-label input-label-adjusted text-muted'>(required)</label></span>
+              <label className='control-label input-label-adjusted' htmlFor='email-address'>Email Address:</label>&nbsp;<span className='hide-md hide-lg'>
+                <label className='control-label input-label-adjusted text-muted'>(required)</label>
+              </span>
             </div>
             <div className='col-md-5 col-xs-12'>
-              <input type='text' placeholder='Email Address' id='email-address' className='pure-input-1-3 form-control login-input-box' onKeyPress={this.triggerLogin} onChange={this.addUsername} onBlur={this.addUsername}/>
+              <div className='form-group'>
+                <input type='text' placeholder='Email Address' id='email-address' className='pure-input-1-3 form-control login-input-box' onKeyPress={this.triggerLogin} onChange={this.addUsername} onBlur={this.addUsername}/>
+              </div>
             </div>
             <div className='col-md-2 left-text col-xs-12 no-col-padding-left hide-xs hide-sm'>
               <label className='control-label input-label-adjusted text-muted'>(required)</label>
             </div>
           </div>
+          {/*Password*/}
           <div className='row signin-page-container'>
             <div className='col-md-2 col-xs-12 right-text-md right-text-lg no-col-padding-right'>
-              <label className='control-label input-label-adjusted' htmlFor='password'>Password:</label>&nbsp;<span className='hide-md hide-lg'><label className='control-label input-label-adjusted text-muted'>(required)</label></span>
+              <label className='control-label input-label-adjusted' htmlFor='password'>Password:</label>&nbsp;<span className='hide-md hide-lg'>
+                <label className='control-label input-label-adjusted text-muted'>(required)</label>
+              </span>
             </div>
             <div className='col-md-5 col-xs-12'>
-              <input type='password' placeholder='Password' id='password' className='pure-input-1-3 form-control login-input-box' onKeyPress={this.triggerLogin} onChange={this.addPassword} onBlur={this.addPassword}/>
+              <div className='form-group'>
+                <input type='password' placeholder='Password' id='password' className='pure-input-1-3 form-control login-input-box' onKeyPress={this.triggerLogin} onChange={this.addPassword} onBlur={this.addPassword}/>
+              </div>
             </div>
             <div className='col-md-2 left-text col-xs-12 no-col-padding-left hide-xs hide-sm'>
               <label className='control-label input-label-adjusted text-muted'>(required)</label>
