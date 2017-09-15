@@ -257,7 +257,7 @@ function checkPassword(data) {
   newState.hasSpecial = specialCharacterRegex.test(password);
   newState.hasNumber = numberRegex.test(password);
   newState.upperAndLower = upperRegex.test(password) && lowerRegex.test(password);
-  newState.containsName = password.indexOf(email) > -1;
+  newState.containsName = (password.indexOf(email) > -1) && email.trim() != '';
   newState.matches = password !== '' && (password === confirm);
 
   return newState;

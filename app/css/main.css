@@ -1369,18 +1369,21 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   border: none !important;
 }
 
-.input-label-adjusted{
-  font-weight:normal;
-  font-size:16px;
-  padding-top:4px;
+.input-label-adjusted {
+  font-weight: normal;
+  font-size: 16px;
+  padding-top: 4px;
 }
 
-.login-input-box{
-  font-size:16px;
+.login-input-box {
+  font-size: 16px;
 }
 
-.login-email-container{
-  padding-bottom:10px;
+.login-email-container {
+}
+
+.password-rules{
+  font-size:16px;
 }
 
 
