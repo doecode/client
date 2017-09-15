@@ -1,6 +1,5 @@
 import React from 'react';
 import AgentsModal from './AgentsModal';
-import AgentsTable from './AgentsTable';
 import TableStore from '../stores/TableStore';
 import EditableDataTable from './EditableDataTable';
 import Developer from '../stores/Developer';

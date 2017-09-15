@@ -1,6 +1,5 @@
 import React from 'react';
 import AgentsModal from './AgentsModal';
-import AgentsTable from './AgentsTable';
 import TableStore from '../stores/TableStore';
 import {observer} from 'mobx-react';
 import EditableDataTable from './EditableDataTable';
