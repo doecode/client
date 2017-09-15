@@ -103,7 +103,7 @@ export default class AgentsModal extends React.Component {
 
         return (
             <div className="form-group form-group-sm">
-                <div className="col-xs-offset-5">
+                <div className="col-md-12 text-center">
                     <Button bsStyle="primary" bsSize="large" onClick={this.open}>
                         Add {label}
                     </Button>
