@@ -47,7 +47,7 @@ export default class EditableDataTable extends React.Component {
 		    return (
           <div>
             <div className="form-group form-group-sm col-sm-12 griddle-wrapper">
-                    <Griddle results = {currentArray.slice()} columnMetadata={this.props.config} columns={columns} showSettings={false} showFilter={true} onRowClick={this.rowClick} />
+                    <Griddle results={currentArray.slice()} useGriddleStyles={false} gridClassName="griddle" columnMetadata={this.props.config} columns={columns} showSettings={false} showFilter={true} onRowClick={this.rowClick} />
             </div>
            <AgentsModal dataType={parentName} tableStore={tableStore} data={data} contentType={this.props.contentType}  />
          </div>
