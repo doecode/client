@@ -882,6 +882,13 @@ html, body {
   color: #5E5E5E !important;
 }
 
+.signin-page-container{
+  border-bottom:1px solid #E0E0E0;
+}
+.button-success {
+    background: #7cb342;
+    color: #f2f2f2;
+}
 .save-btn-margin {
   margin-right: 8px;
 }
@@ -896,6 +903,14 @@ html, body {
 .signin-btn-container:hover {
   background-color: #E2E2E2;
   color: #5E5E5E !important;
+}
+
+.signin-buttons{
+    font-size:16px;
+}
+
+.signin-buttons-container{
+  padding-bottom:10px;
 }
 
 .workflow-publish-btn {
@@ -1153,7 +1168,7 @@ html, button, body, input, select, textarea, p {
 }
 
 .adv-search-dropdown {
-  background-color: #FCFCFC;
+  background-color: #FFFFFF;
   border: 1px solid rgb(68, 68, 68);
   padding: 20px;
   position: absolute;
@@ -1303,6 +1318,16 @@ html, button, body, input, select, textarea, p {
 .biblio-summary-main-content {
   border-left: 1px solid #CCCCCC;
   padding-left: 30px;
+}
+
+.sponsor-org-row {
+  background-color: #f6f6f6;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.sponsor-org-row:nth-child(2n+1) {
+  background-color: #f2f2f2;
 }
 
 .citation-formats {
