@@ -67,19 +67,19 @@ export default class UserFields extends React.Component {
           {/*First Name*/}
           <div className='row'>
             <div className="col-xs-12">
-              <UserField field='first_name' label='First Name' elementType='input' handleChange={this.updateFirstNameAndCheckPassword} noExtraLabelText/>
+              <UserField field='first_name' label='First Name' elementType='input' handleChange={this.updateFirstNameAndCheckPassword} noExtraLabelText placeholderText=''/>
             </div>
           </div>
           {/*Last Name*/}
           <div className="row">
             <div className="col-xs-12">
-              <UserField field='last_name' label='Last Name' elementType='input' handleChange={this.updateLastNameAndCheckPassword} noExtraLabelText/>
+              <UserField field='last_name' label='Last Name' elementType='input' handleChange={this.updateLastNameAndCheckPassword} noExtraLabelText placeholderText=''/>
             </div>
           </div>
           {/*Email Address*/}
           {this.props.show_email && <div className='row'>
             <div className="col-xs-12">
-              <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword} noExtraLabelText messageNode={emailSmalltext}/>
+              <UserField field="email" label="Email Address" elementType="input" handleChange={this.updateEmailAndCheckPassword} noExtraLabelText messageNode={emailSmalltext} placeholderText=''/>
             </div>
           </div>}
           {/*Contract Number*/}
