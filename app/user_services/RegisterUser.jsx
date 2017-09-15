@@ -7,8 +7,9 @@ import SignupBadRequest from '../fragments/SignupBadRequest';
 import SuccessfulSignup from '../fragments/SuccessfulSignup';
 import UserFields from '../fragments/UserFields';
 import PasswordFields from '../fragments/PasswordFields';
+import PasswordRules from './PasswordRules';
 
-import {doAjax, doAuthenticatedAjax, appendQueryString, getQueryParam} from '../utils/utils';
+import {doAjax, doAuthenticatedAjax, appendQueryString, getQueryParam, checkPassword} from '../utils/utils';
 
 const userData = new UserData();
 const validation = new Validation();
@@ -19,10 +20,18 @@ export default class RegisterUser extends React.Component {
     this.register = this.register.bind(this);
     this.parseRegister = this.parseRegister.bind(this);
     this.parseError = this.parseError.bind(this);
+    this.confirmAndCheckPassword = this.confirmAndCheckPassword.bind(this);
+    this.userDataToJSON = this.userDataToJSON.bind(this);
     this.state = {
       signupSuccess: false,
       badRequest: false,
-      badRequestErrors: []
+      badRequestErrors: [],
+      longEnough: false,
+      hasSpecial: false,
+      hasNumber: false,
+      upperAndLower: false,
+      containsName: false,
+      matches: false
     }
   }
 
@@ -67,6 +76,24 @@ export default class RegisterUser extends React.Component {
     this.setState({"badRequest": true, "badRequestErrors": errorMessages});
   }
 
+  userDataToJSON() {
+    return {
+      password: userData.getValue("password"),
+      email: (localStorage.user_email)
+        ? localStorage.user_email
+        : userData.getValue("email"),
+      confirm_password: userData.getValue("confirm_password")
+    };
+  }
+
+  confirmAndCheckPassword() {
+    var newState = checkPassword(this.userDataToJSON());
+    newState.validEmail = validation.validateEmail((localStorage.user_email)
+      ? localStorage.user_email
+      : userData.getValue("email")) === "";
+    this.setState(newState);
+  }
+
   render() {
     return (
       <div className="row not-so-wide-row">
@@ -92,39 +119,47 @@ export default class RegisterUser extends React.Component {
               <div className='col-md-6'></div>
             </div>}
             <div className='row'>
-              <div className='col-md-3'></div>
-              <div className='no-col-padding-left no-col-padding-right col-md-6 col-xs-12 register-text'>
+              <div className='col-md-2'></div>
+              <div className='no-col-padding-left no-col-padding-right col-md-8 col-xs-12 register-text'>
                 To create an account, enter your first and last name, email address and password below. If you are an employee at a DOE National Laboratory, please register using your official .gov email address. For all other users, you will be asked to enter your current DOE award/contract number, which can be found in your DOE award package. DOE CODE will validate the number automatically.
               </div>
-              <div className='col-md-3'></div>
+              <div className='col-md-2'></div>
             </div>
             <br/>
             <div className='row signin-page-container'>
-              <div className='col-md-3'></div>
-              <div className='col-md-6 col-xs-12'>
+              <div className='col-md-1'></div>
+              <div className='col-md-10 col-xs-12'>
                 <div className='row'>
-                  <div className='col-md-6 col-xs-12'>
-                    <UserFields show_email={true}/>
+                  {/*User Fields*/}
+                  <div className='col-md-7 col-xs-12'>
+                    <div className='row'>
+                      <div className='col-xs-12'>
+                        <UserFields show_email={true} checkPasswordCallback={this.confirmAndCheckPassword}/>
+                      </div>
+                    </div>
+                    <div className='row'>
+                      <div className='col-xs-12'>
+                        <PasswordFields checkPasswordCallback={this.confirmAndCheckPassword}/>
+                      </div>
+                    </div>
                   </div>
-                  <div className='col-md-6'></div>
-                </div>
-                <div className='row'>
-                  <div className='col-xs-12'>
-                    <PasswordFields/>
+                  {/*Password Rules*/}
+                  <div className='col-md-5 col-xs-12'>
+                    <PasswordRules longEnough={this.state.longEnough} hasSpecial={this.state.hasSpecial} hasNumber={this.state.hasNumber} containsName={this.state.containsName} upperAndLower={this.state.upperAndLower} matches={this.state.matches}/>
                   </div>
                 </div>
               </div>
-              <div className='col-md-3'></div>
+              <div className='col-md-1'></div>
             </div>
             <br/>
             <div className='row'>
-              <div className='col-md-3'></div>
-              <div className='col-md-6 col-xs-12'>
-                <button type='button' className='pure-button button-success' onClick={this.register}>
-                  <span className='fa fa-paper-plane'></span>&nbsp;Submit
+              <div className='col-md-2'></div>
+              <div className='col-md-8 col-xs-12 right-text'>
+                <button type='button' className='pure-button button-success signin-buttons' onClick={this.register}>
+                  Create Account
                 </button>
               </div>
-              <div className='col-md-3'></div>
+              <div className='col-md-2'></div>
             </div>
           </div>}
         </div>
