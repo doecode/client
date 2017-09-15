@@ -30,7 +30,7 @@ export default class MetadataList extends React.Component {
             </span>}
             {metadataList.accessibility && <span>
               <dt className={dtClass}>Code Availability</dt>
-              <dd className={ddClass}>{metadataList.accessibility}</dd>
+              <dd className={ddClass}>{metadataList.accessibility == 'CS' ? 'Closed Source' : (metadataList.accessibility == 'ON' ? 'Open Source, No Publicly Available Repository' : (metadataList.accessibility == 'OS' ? 'Open Source, Publicly Available Repository' : metadataList.accessibility))}</dd>
             </span>}
             {(metadataList.licenses && metadataList.licenses.length > 0) && <span>
               <dt className={dtClass}>License</dt>
