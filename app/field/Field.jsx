@@ -176,12 +176,12 @@ export default class Field extends React.Component {
       input = val;
     } else if (elementType === 'input') {
       if (!disabled) {
-        input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction}/>
+        input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction} placeholder={this.props.properties.placeholderText}/>
       } else {
-        input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} disabled/>
+        input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} disabled placeholder={this.props.placeholderText}/>
       }
     } else if (elementType === 'password') {
-      input = <input name={field} type="password" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction}/>
+      input = <input name={field} type="password" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction} placeholder={this.props.properties.placeholderText}/>
     } else if (elementType === 'checkbox') {
       input = <input name={field} type="checkbox" checked={val} onChange={this.toggleCheckbox}/>
     } else if (elementType === 'select') {
