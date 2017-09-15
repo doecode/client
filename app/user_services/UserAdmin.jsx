@@ -3,13 +3,23 @@ import UserFields from '../fragments/UserFields';
 import PasswordFields from '../fragments/PasswordFields';
 import UserStatuses from '../fragments/UserStatuses'
 import UserData from '../stores/UserData';
+import Validation from '../utils/Validation';
 import PageMessageBox from '../fragments/PageMessageBox';
 import BootstrapAlertMsg from '../fragments/BootstrapAlertMsg';
-import {doAjax, doAuthenticatedAjax, checkIsAuthenticated, checkHasRole, doArraysContainSame} from '../utils/utils';
+import {
+  doAjax,
+  doAuthenticatedAjax,
+  checkIsAuthenticated,
+  checkHasRole,
+  doArraysContainSame,
+  checkPassword
+} from '../utils/utils';
 import SimpleCollapsible from '../fragments/SimpleCollapsible';
+import PasswordRules from './PasswordRules';
 
 const userData = new UserData();
-export default class SigninStatus extends React.Component {
+const validation = new Validation();
+export default class UserAdmin extends React.Component {
   constructor(props) {
     super(props);
     this.loadUserData = this.loadUserData.bind(this);
@@ -22,6 +32,8 @@ export default class SigninStatus extends React.Component {
     this.parseLoadUserDataError = this.parseLoadUserDataError.bind(this);
     this.refreshPageUI = this.refreshPageUI.bind(this);
     this.listPendingRoles = this.listPendingRoles.bind(this);
+    this.confirmAndCheckPassword = this.confirmAndCheckPassword.bind(this);
+    this.userDataToJSON = this.userDataToJSON.bind(this);
 
     this.roles_list = [
       {
@@ -93,7 +105,13 @@ export default class SigninStatus extends React.Component {
       showUserSaveSuccess: false,
       userSaveMessage: [],
       pendingUserRoles: [],
-      showPendingUserRoles: false
+      showPendingUserRoles: false,
+      longEnough: false,
+      hasSpecial: false,
+      hasNumber: false,
+      upperAndLower: false,
+      containsName: false,
+      matches: false
     }
   }
 
@@ -237,6 +255,24 @@ export default class SigninStatus extends React.Component {
     );
   }
 
+  userDataToJSON() {
+    return {
+      password: userData.getValue("password"),
+      email: (localStorage.user_email)
+        ? localStorage.user_email
+        : userData.getValue("email"),
+      confirm_password: userData.getValue("confirm_password")
+    };
+  }
+
+  confirmAndCheckPassword() {
+    var newState = checkPassword(this.userDataToJSON());
+    newState.validEmail = validation.validateEmail((localStorage.user_email)
+      ? localStorage.user_email
+      : userData.getValue("email")) === "";
+    this.setState(newState);
+  }
+
   render() {
     //Data we'll pass in to the UserStatuses component
     var passedInUserData = {};
@@ -308,20 +344,20 @@ export default class SigninStatus extends React.Component {
           <div>
             {this.state.showUserFields && <div>
               <div className='row'>
-                <div className='col-md-4'></div>
-                <div className='col-md-4 col-xs-12'>
+                <div className='col-md-3'></div>
+                <div className='col-md-6 col-xs-12'>
                   <BootstrapAlertMsg showMsg={userData.getValue("pending_roles").indexOf('OSTI') > -1} alertClasses='alert alert-info alert-dismissable' message='This user has requested administrative privileges'/>
                   <BootstrapAlertMsg showMsg={userData.getValue("password_expired")} alertClasses='alert alert-warning alert-dismissable' message="This user's password has expired"/>
                 </div>
-                <div className='col-md-4'></div>
+                <div className='col-md-3'></div>
               </div>
               <br/> {/*First Name, last name, contract number*/}
               <div className='row'>
-                <div className='col-md-4'></div>
-                <div className='col-md-4 col-xs-12'>
-                  <UserFields showContractNumAlways show_email={false}/>
+                <div className='col-md-3'></div>
+                <div className='col-md-6 col-xs-12'>
+                  <UserFields showContractNumAlways show_email={false} checkPasswordCallback={this.confirmAndCheckPassword}/>
                 </div>
-                <div className='col-md-4'></div>
+                <div className='col-md-3'></div>
               </div>
               {/*Active state and stuff*/}
               <div className='row'>
@@ -333,23 +369,29 @@ export default class SigninStatus extends React.Component {
               </div>
               {/*Password*/}
               <div className='row'>
-                <div className='col-md-4'></div>
+                <div className='col-md-3'></div>
                 <div className='col-md-6 col-xs-12'>
-                  <div>
-                    <PasswordFields/>
-                  </div>
+                  <PasswordFields checkPasswordCallback={this.confirmAndCheckPassword}/>
                 </div>
-                <div className='col-md-2'></div>
+                <div className='col-md-3'></div>
+              </div>
+              <div className='row'>
+                <div className='col-md-4 col-xs-12'></div>
+                <div className='col-md-3'>
+                  <PasswordRules longEnough={this.state.longEnough} hasSpecial={this.state.hasSpecial} hasNumber={this.state.hasNumber} containsName={this.state.containsName} upperAndLower={this.state.upperAndLower} matches={this.state.matches}/>
+                </div>
+                <div className='col-md-5'></div>
+
               </div>
               {/*Save Button*/}
               <br/>
               <div className='row'>
-                <div className='col-md-4'></div>
-                <div className='col-md-4 col-xs-12'>
+                <div className='col-md-3'></div>
+                <div className='col-md-6 col-xs-12'>
                   <button type='button' className='btn btn-success btn-lg' onClick={this.saveUserData}>
                     <span className='fa fa-floppy-o'></span>&nbsp;Save</button>
                 </div>
-                <div className='col-md-4'></div>
+                <div className='col-md-3'></div>
               </div>
             </div>}
           </div>
