@@ -6,6 +6,7 @@ import HelpTooltip from '../help/HelpTooltip';
 import {observer} from "mobx-react";
 import 'react-select/dist/react-select.css';
 import 'react-datepicker/dist/react-datepicker.css';
+import Moment from 'moment';
 
 @observer
 export default class Field extends React.Component {
@@ -251,7 +252,12 @@ export default class Field extends React.Component {
         </div>
       );
     } else if (elementType === 'date') {
-      input = <DatePicker name={field} placeholderText="Click to select a date" selected={val} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>
+      let dateVal = Moment(val);
+
+      if (dateVal == null || !dateVal.isValid())
+        dateVal = null;
+
+      input = <DatePicker name={field} placeholderText="Click to select a date" selected={dateVal} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>
     }
 
     return (

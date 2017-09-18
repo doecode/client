@@ -15,6 +15,8 @@ export default class SearchBar extends React.Component {
     this.search = this.search.bind(this);
     this.doAdvancedSearch = this.doAdvancedSearch.bind(this);
     this.triggerSearch = this.triggerSearch.bind(this);
+    this.storeSearch = this.storeSearch.bind(this);
+    this.handleAdvancedSearchClick = this.handleAdvancedSearchClick.bind(this);
 
     if (this.props.largerBar !== undefined) {
       this.searchBarStyles = "form-control input-lg search-box";
@@ -35,8 +37,7 @@ export default class SearchBar extends React.Component {
   search() {
     searchData.clearValues();
     searchData.setValue("start", 0);
-    searchData.setValue("all_fields", this.state.all_fields);
-    window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
+    storeSearch();
     window.location.href = "/doecode/results";
   }
 
@@ -47,10 +48,18 @@ export default class SearchBar extends React.Component {
   }
 
   triggerSearch(event) {
-    console.log("triggered");
     if (event.key === 'Enter') {
       this.search();
     }
+  }
+
+  storeSearch() {
+    searchData.setValue("all_fields", this.state.all_fields);
+    window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
+  }
+
+  handleAdvancedSearchClick(event) {
+    this.storeSearch();
   }
 
   render() {
@@ -93,7 +102,7 @@ export default class SearchBar extends React.Component {
               </div>
               <div className='row adv-search-dropdown-title-row'>
                 <div className='col-xs-12  no-col-padding-left'>
-                  <a href='/doecode/search'>More Advanced Search Options</a>
+                  <a href='/doecode/search' onClick={this.handleAdvancedSearchClick}>More Advanced Search Options</a>
                 </div>
               </div>
               <br/>

@@ -16,6 +16,10 @@ export default class AdvancedSearch extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
+  }
+
   render() {
     return (
       <div className="row not-so-wide-row">
