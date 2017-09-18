@@ -34,7 +34,6 @@ export default class OrgMetadataDL extends React.Component {
             {this.props.data.fwp_numbers.map((fwpnumbers, index) => <div key={"fwpNum-" + index}>{fwpnumbers}</div>)}
           </div>
         </div>}
-        <br/>
       </div>
     );
   }
