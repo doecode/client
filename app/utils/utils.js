@@ -400,6 +400,25 @@ function addMetaTags(list) {
   });
 }
 
+function combineAuthorLists(list1, list2) {
+  var modified_author_list = [];
+  list1.forEach(function(item) {
+    var cont_name = item.last_name + ' ' + item.first_name;
+    if (item.middle_name) {
+      cont_name += (' ' + item.middle_name.substr(0, 1) + '.');
+    }
+    modified_author_list.push(cont_name);
+  });
+  list2.forEach(function(item) {
+    var dev_name = item.last_name + ' ' + item.first_name;
+    if (item.middle_name) {
+      dev_name += (' ' + item.middle_name.substr(0, 1) + '.');
+    }
+    modified_author_list.push(dev_name);
+  });
+  return modified_author_list;
+}
+
 export {doAjax};
 export {doAuthenticatedAjax};
 export {checkIsAuthenticated};
@@ -418,3 +437,4 @@ export {doAuthenicatedFileDownloadAjax};
 export {addMetaTags};
 export {addBiblio};
 export {getAvailabilityDisplay};
+export {combineAuthorLists};
