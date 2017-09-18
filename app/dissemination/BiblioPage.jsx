@@ -245,17 +245,17 @@ export default class BiblioPage extends React.Component {
                               </div>
                               <div id="apa" className="tab-pane fade">
                                 <div className='row'>
-                                  <div className='col-xs-12 citation-format-div'><APA contributors={metadata.fieldMap.contributors} developers={metadata.fieldMap.developers}/></div>
+                                  <div className='col-xs-12 citation-format-div'><APA data={metadata.fieldMap} /></div>
                                 </div>
                               </div>
                               <div id="chicago" className="tab-pane fade">
                                 <div className='row'>
-                                  <div className='col-xs-12 citation-format-div'><Chicago contributors={metadata.fieldMap.contributors} developers={metadata.fieldMap.developers}/></div>
+                                  <div className='col-xs-12 citation-format-div'><Chicago data={metadata.fieldMap} /></div>
                                 </div>
                               </div>
                               <div id="bibtex" className="tab-pane fade">
                                 <div className='row'>
-                                  <div className='col-xs-12 citation-format-div'><Bibtex contributors={metadata.fieldMap.contributors} developers={metadata.fieldMap.developers}/></div>
+                                  <div className='col-xs-12 citation-format-div'><Bibtex data={metadata.fieldMap} /></div>
                                 </div>
                               </div>
                             </div>
