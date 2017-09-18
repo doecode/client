@@ -53,7 +53,7 @@ export default class ApprovalManagement extends React.Component {
       }, {
         key: 'edit',
         name: 'View Record',
-        width: 120
+        width: 125
       }
     ];
 
