@@ -10,7 +10,11 @@ import ResearchOrgItem from './ResearchOrgItem';
 import ContributingOrgItem from './ContributingOrgItem';
 import SponsoringOrgItem from './SponsoringOrgItem';
 import LicensesItem from './LicensesItem';
-import SearchRowDescription from '../fragments/SearchRowDescription'
+import SearchRowDescription from '../fragments/SearchRowDescription';
+import MLA from '../citation/MLA';
+import APA from '../citation/APA';
+import Chicago from '../citation/Chicago';
+import Bibtex from '../citation/Bibtex';
 
 const metadata = new Metadata();
 
@@ -44,7 +48,7 @@ export default class BiblioPage extends React.Component {
     console.log("Error?");
   }
 
-  generateContent(obj,index) {
+  generateContent(obj, index) {
     let textContent = null;
     let show_val = false;
     var header = obj.header;
@@ -149,7 +153,7 @@ export default class BiblioPage extends React.Component {
     addBiblio(metadata.fieldMap);
     const summaryContent = staticContstants.biblioFieldsList.map(this.generateSummaryContent);
     const fieldsContent = staticContstants.biblioFieldsList.map(this.generateContent);
-
+    console.log(JSON.stringify(metadata.fieldMap));
     const breadcrumbList = [
       {
         key: 'brdcrmb1',
@@ -220,9 +224,6 @@ export default class BiblioPage extends React.Component {
                             <h3 className='citation-formats'>Citation Format</h3>
                             <ul className="nav nav-tabs biblio-page-ul">
                               <li className="active">
-                                <a data-toggle="tab" href="#bibtext">Bibtex</a>
-                              </li>
-                              <li>
                                 <a data-toggle="tab" href="#mla">MLA</a>
                               </li>
                               <li>
@@ -231,27 +232,30 @@ export default class BiblioPage extends React.Component {
                               <li>
                                 <a data-toggle="tab" href="#chicago">Chicago</a>
                               </li>
+                              <li>
+                                <a data-toggle="tab" href="#bibtex">Bibtex</a>
+                              </li>
                             </ul>
 
                             <div className="tab-content">
-                              <div id="bibtext" className="tab-pane fade in active">
+                              <div id="mla" className="tab-pane fade in active">
                                 <div className='row'>
-                                  <div className='col-xs-12'>Bibtex</div>
-                                </div>
-                              </div>
-                              <div id="mla" className="tab-pane fade">
-                                <div className='row'>
-                                  <div className='col-xs-12'>MLA</div>
+                                  <div className='col-xs-12 citation-format-div'><MLA data={metadata.fieldMap} /></div>
                                 </div>
                               </div>
                               <div id="apa" className="tab-pane fade">
                                 <div className='row'>
-                                  <div className='col-xs-12'>APA</div>
+                                  <div className='col-xs-12 citation-format-div'><APA contributors={metadata.fieldMap.contributors} developers={metadata.fieldMap.developers}/></div>
                                 </div>
                               </div>
                               <div id="chicago" className="tab-pane fade">
                                 <div className='row'>
-                                  <div className='col-xs-12'>Chicago</div>
+                                  <div className='col-xs-12 citation-format-div'><Chicago contributors={metadata.fieldMap.contributors} developers={metadata.fieldMap.developers}/></div>
+                                </div>
+                              </div>
+                              <div id="bibtex" className="tab-pane fade">
+                                <div className='row'>
+                                  <div className='col-xs-12 citation-format-div'><Bibtex contributors={metadata.fieldMap.contributors} developers={metadata.fieldMap.developers}/></div>
                                 </div>
                               </div>
                             </div>
