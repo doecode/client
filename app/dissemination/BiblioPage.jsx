@@ -153,7 +153,6 @@ export default class BiblioPage extends React.Component {
     addBiblio(metadata.fieldMap);
     const summaryContent = staticContstants.biblioFieldsList.map(this.generateSummaryContent);
     const fieldsContent = staticContstants.biblioFieldsList.map(this.generateContent);
-    console.log(JSON.stringify(metadata.fieldMap));
     const breadcrumbList = [
       {
         key: 'brdcrmb1',
