@@ -166,94 +166,100 @@
   background-color: rgb(237, 237, 239);
 }
 
-.griddle-container{
-  border:1px solid #DDD;
+.griddle-container {
+  border: 1px solid #DDD;
 }
 
-.griddle .top-section{
-  clear:both;
-  display:table;
-  width:100%;
+.griddle .top-section {
+  clear: both;
+  display: table;
+  width: 100%;
 }
 
-.griddle .griddle-filter{
-  float:left;
-  width:50%;
-  text-align:left;
-  color:#222;
-  min-height:1px;
+.griddle .griddle-filter {
+  float: left;
+  width: 50%;
+  text-align: left;
+  color: #222;
+  min-height: 1px;
 }
 
-.griddle .griddle-settings-toggle{
-  float:left;
-  width:50%;
-  text-align:right;
+.griddle .griddle-settings-toggle {
+  float: left;
+  width: 50%;
+  text-align: right;
 }
 
-.griddle .griddle-settings{
-  background-color:#FFF;
-  border:1px solid #DDD;
-  color:#222;
-  padding:10px;
-  margin-bottom:10px;
+.griddle .griddle-settings {
+  background-color: #FFF;
+  border: 1px solid #DDD;
+  color: #222;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
-.griddle .griddle-settings .griddle-columns{
-  clear:both;
-  display:table;
-  width:100%;
-  border-bottom:1px solid #EDEDED;
-  margin-bottom:10px;
+.griddle .griddle-settings .griddle-columns {
+  clear: both;
+  display: table;
+  width: 100%;
+  border-bottom: 1px solid #EDEDED;
+  margin-bottom: 10px;
 }
 
-.griddle .griddle-settings .griddle-column-selection{
-  float:left;
-  width:20%;
-}
-.griddle table{
-  width:100%;table-layout:fixed;
+.griddle .griddle-settings .griddle-column-selection {
+  float: left;
+  width: 20%;
 }
 
-.griddle th{
+.griddle table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.griddle th {
   background-color: rgb(5, 62, 97);
   font-weight: normal;
-  border:0px;
-  border-bottom:1px solid #DDD;
-  color:white;
-  padding:5px;
+  border: 0px;
+  border-bottom: 1px solid #DDD;
+  color: white;
+  padding: 5px;
 }
 
-.griddle td{
-  padding:5px;
-  background-color:#FFF;
-  border-top-color:#DDD;
-  color:#222;
+.griddle td {
+  padding: 5px;
+  background-color: #FFF;
+  border-top-color: #DDD;
+  color: #222;
 }
 
-.griddle .footer-container{
-  padding:0px;
+.griddle .footer-container {
+  padding: 0px;
   background-color: rgb(50, 119, 179);
-  border:0px;
-  color:white;
+  border: 0px;
+  color: white;
 }
 
-.griddle .griddle-previous, .griddle .griddle-page, .griddle .griddle-next{
-  float:left;
-  width:33%;
-  min-height:1px;
-  margin-top:5px;
+.griddle .griddle-previous, .griddle .griddle-page, .griddle .griddle-next {
+  float: left;
+  width: 33%;
+  min-height: 1px;
+  margin-top: 5px;
 }
+
 
 .griddle-page select, button {
   color:#222;
 }
-
-.griddle .griddle-page{
-  text-align:center;
+.griddle-page select {
+  color: #222;
 }
 
-.griddle .griddle-next{
-  text-align:right;
+.griddle .griddle-page {
+  text-align: center;
+}
+
+.griddle .griddle-next {
+  text-align: right;
 }
 
 html h1 {
@@ -1124,12 +1130,12 @@ ol.progtrckr li.progtrckr-done:hover:before {
 }
 
 .breadcrumbTrail {
-  font-size: 16px;
-  margin-top: 5px
+  font-size: 13.6px;
+  margin-top: 10px
 }
 
 .breadcrumbTrail a {
-  font-size: 16px;
+  font-size: 13.6px;
 }
 
 .search-btn-container {}
@@ -1379,11 +1385,19 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   font-size: 16px;
 }
 
-.login-email-container {
+.login-email-container {}
+
+.password-rules {
+  font-size: 16px;
 }
 
-.password-rules{
-  font-size:16px;
+.confirmation-page-metadata dd:nth-of-type(even), dt:nth-of-type(even) {
+  background-color: #e6e6e6;
+}
+
+.confirmation-page-metadata dd, dt {
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 
 

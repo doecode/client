@@ -374,16 +374,21 @@ function addBiblio(searchData) {
   }
   //Accessibility
   if (searchData.accessibility) {
-    var accessibility_display_val = '';
-    staticContstants.availabilities.forEach(function(item) {
-      if (item.value == searchData.accessibility) {
-        accessibility_display_val = item.label;
-      }
-    });
+    var accessibility_display_val = getAvailabilityDisplay(searchData.accessibility);
     tagsList.push({name: 'citation_accessibility', content: accessibility_display_val});
   }
 
   addMetaTags(tagsList);
+}
+
+function getAvailabilityDisplay(short_val) {
+  var accessibility_display_val = '';
+  staticContstants.availabilities.forEach(function(item) {
+    if (item.value == short_val) {
+      accessibility_display_val = item.label;
+    }
+  });
+  return accessibility_display_val;
 }
 
 function addMetaTags(list) {
@@ -412,3 +417,4 @@ export {getIsLoggedIn};
 export {doAuthenicatedFileDownloadAjax};
 export {addMetaTags};
 export {addBiblio};
+export {getAvailabilityDisplay};
