@@ -618,6 +618,10 @@ html h3 {
   text-align: left !important;
 }
 
+.italic-text{
+  font-style: italic !important;
+}
+
 .main-header {
   background-image: linear-gradient(rgb(30, 111, 146), rgb(1, 53, 88) 100%);
   box-shadow: none !important;
@@ -879,9 +883,13 @@ html, body {
 }
 
 .signin-btn {
-  font-size: 13px;
-  color: white;
+  font-size: 13.6px;
+  color: #f2f2f2;
   text-decoration-line: none !important;
+}
+
+.signin-btn-icon{
+  opacity:0.5;
 }
 
 .signin-btn:hover {
@@ -1298,6 +1306,12 @@ html, button, body, input, select, textarea, p {
 
 .hide {
   display: none;
+}
+
+.citation-format-div{
+  margin-top:25px;
+  font-family:monospace,monospace;
+  font-size:13.6px;
 }
 
 @keyframes spin {
