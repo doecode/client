@@ -246,9 +246,12 @@
   margin-top: 5px;
 }
 
-
 .griddle-page select, button {
   color:#222;
+}
+.griddle-page select {
+  color: #222;
+
 }
 .griddle-page select {
   color: #222;
