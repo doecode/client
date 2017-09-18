@@ -129,15 +129,15 @@ export default class DOIPanel extends React.Component {
     //flag indicating if doi is already reserved in this session
     const reserving = metadata.getValue("doi_status") === "RES" || registered;
 
-    const buttonClass = reserving
-      ? "btn btn-info btn-sm active"
-      : "btn btn-info btn-sm";
+    const buttonClass = "btn btn-primary btn-sm" + (reserving ? " active" : "");
+    const buttonText = reserving ? "Clear Reserved DOI" : "Reserve DOI";
+    const buttonIcon = reserving ? "fa fa-eraser" : "fa fa-pencil";
 
     let messageNode = null;
     if (reserving)
       messageNode = <span>
         <strong>
-          Please Note:
+          Please Note:&nbsp;
         </strong>
         Your reserved DOI will not be registered on DataCite until a Release Date is provided.
       </span>;
@@ -150,8 +150,8 @@ export default class DOIPanel extends React.Component {
             <MetadataField field="doi" label="DOI" helpTooltip='DigitalObjectIdentifer' elementType="input" disabled={reserving} messageNode={messageNode}/> {!registered && <div className="form-group form-group-sm row">
               <div className="col-xs-8">
                 <button type="button" className={buttonClass} onClick={this.handleReserve}>
-                  <span className="fa fa-pencil"></span>
-                  Reserve DOI
+                  <span className={buttonIcon}></span>
+                  {buttonText}
                 </button>
               </div>
             </div>}
