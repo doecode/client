@@ -306,7 +306,7 @@ function addBiblio(searchData) {
         index++;
       }
     });
-    tagsList.push({name: 'citation_developers', content: developerString});
+    tagsList.push({name: 'citation_authors', content: developerString});
   }
   //Contributors
   if (searchData.contributors && searchData.contributors.length > 0) {

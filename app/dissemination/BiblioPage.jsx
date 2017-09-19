@@ -140,8 +140,6 @@ export default class BiblioPage extends React.Component {
     switch (obj.header) {
       case 'Developers':
       case 'Release Date':
-      case 'Sponsoring Organizations':
-      case 'Code ID':
         content = this.generateContent(obj);
         break;
     }

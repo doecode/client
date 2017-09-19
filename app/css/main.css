@@ -247,12 +247,13 @@
 }
 
 .griddle-page select, button {
-  color:#222;
+  color: #222;
 }
+
 .griddle-page select {
   color: #222;
-
 }
+
 .griddle-page select {
   color: #222;
 }
@@ -625,7 +626,7 @@ html h3 {
   text-align: left !important;
 }
 
-.italic-text{
+.italic-text {
   font-style: italic !important;
 }
 
@@ -895,8 +896,8 @@ html, body {
   text-decoration-line: none !important;
 }
 
-.signin-btn-icon{
-  opacity:0.5;
+.signin-btn-icon {
+  opacity: 0.5;
 }
 
 .signin-btn:hover {
@@ -1198,7 +1199,7 @@ html, button, body, input, select, textarea, p {
   left: 0px;
   right: 0px;
   top: 35px;
-  z-index: 2;
+  z-index: 4;
   margin-right: 14px;
   margin-left: 14px;
 }
@@ -1209,6 +1210,19 @@ html, button, body, input, select, textarea, p {
 
 .adv-search-dropdown-title-row {
   border-bottom: 1px solid #cccccc;
+}
+
+.adv-search-dropdown-label {
+  font-size: 13.6px;
+  color: rgb(41, 43, 44);
+}
+
+.more-adv-search {
+  font-size: 13.6px;
+}
+
+.to-field {
+  padding-top: 7px;
 }
 
 
@@ -1315,10 +1329,10 @@ html, button, body, input, select, textarea, p {
   display: none;
 }
 
-.citation-format-div{
-  margin-top:25px;
-  font-family:monospace,monospace;
-  font-size:13.6px;
+.citation-format-div {
+  margin-top: 25px;
+  font-family: monospace, monospace;
+  font-size: 13.6px;
 }
 
 @keyframes spin {
@@ -1350,13 +1364,14 @@ html, button, body, input, select, textarea, p {
 }
 
 .sponsor-org-row {
-  background-color: #f6f6f6;
-  padding-top: 10px;
+  margin-top: 10px;
   padding-left: 10px;
+  margin-bottom: 10px;
 }
 
-.sponsor-org-row:nth-child(2n+1) {
-  background-color: #f2f2f2;
+.sponsor-org-bottom-row {
+  margin-top: 5px;
+  border-bottom: 1px solid #DDDDDD;
 }
 
 .citation-formats {
@@ -1499,6 +1514,15 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
     padding-right: 0px;
     margin-left: -3px;
     margin-right: -3px;
+  }
+  .search-sidebar-filter-title {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  /*Gets rid of the margins around the pagination buttons*/
+  div>ul.pagination {
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
 }
 
@@ -1660,6 +1684,15 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   }
   .left-text-sm {
     text-align: left;
+  }
+  .search-results-count {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  /*Gets rid of the margins around the pagination buttons*/
+  div>ul.pagination {
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
 }
 
