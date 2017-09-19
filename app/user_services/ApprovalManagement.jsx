@@ -87,7 +87,7 @@ export default class ApprovalManagement extends React.Component {
       rows.push({
         id: record.code_id, title: record.software_title, status: record.workflow_status, edit: <div className="form-group-xs row" title="">
             <div className="col-xs-2" title="View for Approval">
-              <a href={approveUrl} className="btn btn-info btn-sm">
+              <a href={approveUrl} className="btn btn-primary btn-sm">
                 <span className="fa fa-pencil"></span>
                 View for Approval
               </a>
@@ -136,8 +136,8 @@ export default class ApprovalManagement extends React.Component {
     return (
 
       <div className="row not-so-wide-row">
-        <div className="col-md-3"></div>
-        <div className="col-md-6 col-xs-12 static-content">
+        <div className="col-md-2"></div>
+        <div className="col-md-8 col-xs-12 static-content">
           <h2 className="static-content-title">Approve Projects</h2>
           <ReactDataGrid onGridSort={this.handleGridSort} enableCellSelect={true} columns={this._columns} rowGetter={this.rowGetter} rowsCount={this.getSize()} maxHeight={400} toolbar={< Toolbar enableFilter = {
             true
@@ -145,7 +145,7 @@ export default class ApprovalManagement extends React.Component {
           <br/>
           <br/>
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-md-2"></div>
         <MessageBoxModal
                 showModal={this.state.showModal}
                 showSpinner

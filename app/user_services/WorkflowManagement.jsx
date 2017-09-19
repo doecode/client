@@ -52,16 +52,8 @@ export default class WorkflowManagement extends React.Component {
         sortable: true
       }, {
         key: 'edit',
-        name: 'Update Metadata',
-        width: 140
-      }, {
-        key: 'submit',
-        name: 'Submit to E-Link',
-        width: 130
-      }, {
-        key: 'pending',
-        name: 'Pending Status',
-        width: 125
+        name: 'Modify Record',
+        width: 330,
       }
     ];
 
@@ -103,26 +95,27 @@ export default class WorkflowManagement extends React.Component {
         editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
       }
 
-      let pendingStatus = (record.workflow_status == "Published" && <div className="center-text" title="Pending Approval" ><span className="pending">Pending Approval</span></div>);
+      let pendingStatus = (record.workflow_status == "Published" && <div className="grid-button" title="Pending Approval" ><span className="pending">Pending Approval</span></div>);
 
       //console.log(JSON.stringify(record));
       rows.push({
         id: record.code_id, title: record.software_title, status: record.workflow_status,
         edit:
-          <div className="center-text" title="Update Metadata">
+          <div className="grid-button-container" title="">
+          <div className="grid-button" title="Update Metadata">
             <a href={publishUrl} className="btn btn-success btn-sm">
                     <span className="fa fa-pencil"></span>
                     Update Metadata
             </a>
-          </div>,
-        submit:
-          <div className="center-text" title="Submit to E-Link">
-            <a href={submitUrl} className="btn btn-info btn-sm">
+          </div>
+          <div className="grid-button" title="Submit to E-Link">
+            <a href={submitUrl} className="btn btn-primary btn-sm">
                     <span className="fa fa-pencil"></span>
                     Submit to E-Link
             </a>
-          </div>,
-        pending: pendingStatus
+          </div>
+          {pendingStatus}
+          </div>
       });
     }
 
@@ -166,8 +159,8 @@ export default class WorkflowManagement extends React.Component {
     return (
 
       <div className="row not-so-wide-row">
-        <div className="col-md-3"></div>
-        <div className="col-md-6 col-xs-12 static-content">
+        <div className="col-md-2"></div>
+        <div className="col-md-8 col-xs-12 static-content">
           <h2 className="static-content-title">Manage My Projects</h2>
           <div className="form-group-xs row">
             <div className="col-sm-12">
@@ -180,7 +173,7 @@ export default class WorkflowManagement extends React.Component {
           <br/>
           <br/>
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-md-2"></div>
          <MessageBoxModal
                  showModal={this.state.showModal}
                  showSpinner
