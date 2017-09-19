@@ -164,6 +164,10 @@
   display:inline-block;
 }
 
+.grid-button .btn {
+  padding: 0px 2px 0px 2px;
+}
+
 .griddle-wrapper td {
   word-wrap: break-word;
 }

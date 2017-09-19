@@ -36,7 +36,7 @@ export default class ApprovalManagement extends React.Component {
       {
         key: 'id',
         name: 'Code ID',
-        width: 75,
+        width: 90,
         filterable: true,
         sortable: true
       }, {
@@ -53,7 +53,7 @@ export default class ApprovalManagement extends React.Component {
       }, {
         key: 'edit',
         name: 'View Record',
-        width: 125
+        width: 135
       }
     ];
 
@@ -86,9 +86,9 @@ export default class ApprovalManagement extends React.Component {
 
       rows.push({
         id: record.code_id, title: record.software_title, status: record.workflow_status, edit: <div className="form-group-xs row" title="">
-            <div className="col-xs-2" title="View for Approval">
+            <div className="col-xs-2 grid-button" title="View for Approval">
               <a href={approveUrl} className="btn btn-primary btn-sm">
-                <span className="fa fa-pencil"></span>
+                <span className="fa fa-pencil"></span>&nbsp;
                 View for Approval
               </a>
             </div>

@@ -36,7 +36,7 @@ export default class WorkflowManagement extends React.Component {
       {
         key: 'id',
         name: 'Code ID',
-        width: 75,
+        width: 90,
         filterable: true,
         sortable: true
       }, {
@@ -53,7 +53,7 @@ export default class WorkflowManagement extends React.Component {
       }, {
         key: 'edit',
         name: 'Modify Record',
-        width: 330,
+        width: 345,
       }
     ];
 
@@ -104,13 +104,13 @@ export default class WorkflowManagement extends React.Component {
           <div className="grid-button-container" title="">
           <div className="grid-button" title="Update Metadata">
             <a href={publishUrl} className="btn btn-success btn-sm">
-                    <span className="fa fa-pencil"></span>
+                    <span className="fa fa-pencil"></span>&nbsp;
                     Update Metadata
             </a>
           </div>
           <div className="grid-button" title="Submit to E-Link">
             <a href={submitUrl} className="btn btn-primary btn-sm">
-                    <span className="fa fa-pencil"></span>
+                    <span className="fa fa-pencil"></span>&nbsp;
                     Submit to E-Link
             </a>
           </div>

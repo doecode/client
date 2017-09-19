@@ -150,7 +150,7 @@ export default class DOIPanel extends React.Component {
             <MetadataField field="doi" label="DOI" helpTooltip='DigitalObjectIdentifer' elementType="input" disabled={reserving} messageNode={messageNode}/> {!registered && <div className="form-group form-group-sm row">
               <div className="col-xs-8">
                 <button type="button" className={buttonClass} onClick={this.handleReserve}>
-                  <span className={buttonIcon}></span>
+                  <span className={buttonIcon}></span>&nbsp;
                   {buttonText}
                 </button>
               </div>
