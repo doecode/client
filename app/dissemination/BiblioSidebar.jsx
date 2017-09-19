@@ -103,7 +103,7 @@ export default class BiblioSidebar extends React.Component {
             </div>
             <div className='row biblio-sidebar-row'>
               <div className='col-xs-12'>
-                <h4 className='biblio-sidebar-subtitle'>SAVE/SHARE</h4>
+                <h4 className='biblio-sidebar-subtitle'>SAVE&nbsp;/&nbsp;SHARE</h4>
                 <div>
                   <SimpleDropdown noBtnPadding items={citation_list} label='Citation Formats'/>
                 </div>
@@ -130,7 +130,7 @@ export default class BiblioSidebar extends React.Component {
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <a target="_blank" href={"mailto:?subject=Software Records from DOECODE&body=" + window.location.href}>
+                        <a href={"mailto:?subject=Software Records from DOECODE&body=" + window.location.href}>
                           <span className="fa fa-envelope shareEmail"></span>
                         </a>
                       </li>

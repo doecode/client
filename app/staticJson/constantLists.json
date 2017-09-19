@@ -221,6 +221,9 @@
     "header": "Licenses",
     "field": "N/A"
   }, {
+    "header": "Sponsoring Organizations",
+    "field": "sponsoring_organizations"
+  }, {
     "header": "Code ID",
     "field": "code_id"
   }, {
@@ -230,22 +233,7 @@
     "header": "Research Organizations",
     "field": "research_organizations"
   }, {
-    "header": "Contributors",
-    "field": "N/A"
-  }, {
-    "header": "Contributing Organizations",
-    "field": "contributing_organizations"
-  }, {
-    "header": "Sponsoring Organizations",
-    "field": "sponsoring_organizations"
-  }, {
     "header": "Country of Origin",
     "field": "country_of_origin"
-  }, {
-    "header": "Other Special Requirements",
-    "field": "other_special_requirements"
-  }, {
-    "header": "Keywords",
-    "field": "keywords"
   }]
 }

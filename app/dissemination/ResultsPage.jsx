@@ -31,12 +31,13 @@ export default class ResultsPage extends React.Component {
   }
 
   parseSearchResponse(data) {
+    window.scrollTo(0, 0);
     this.setState({"results": data.response});
     this.setState({"numFound": data.response.numFound});
   }
 
   parseErrorResponse() {
-    console.log("Error....");
+    window.scrollTo(0, 0);
   }
 
   refreshSearch() {
@@ -82,6 +83,11 @@ export default class ResultsPage extends React.Component {
 
     var searchDescription = <SearchResultsDescription/>;
     var searchNumCounter = pagStartVal;
+    const break_lbl = <a href="#">&hellip;</a>;
+    var pageCount = Math.ceil(this.state.numFound / searchData.getValue("rows"));
+    var forcePage = (searchData.getValue("start") / searchData.getValue("rows"));
+
+
     return (
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
@@ -106,6 +112,11 @@ export default class ResultsPage extends React.Component {
             <div className="col-md-6 col-xs-12 all-search-results-row">
               {this.state.numFound > 0 && <span>
                 <br/>
+                <div className='row'>
+                  <div className='col-xs-12 center-text '>
+                    <ReactPaginate pageLinkClassName='clickable' previousLinkClassName='clickable' nextLinkClassName='clickable' pageClassName='clickble' activeClassName='clickble' previousLabel="Prev" nextLabel="Next" breakLabel={break_lbl} breakClassName="break-me" pageCount={pageCount} marginPagesDisplayed={2} pageRangeDisplayed={3} forcePage={forcePage} onPageChange={this.handlePageClick} containerClassName="pagination" subContainerClassName="pages pagination" activeClassName="active"/>
+                  </div>
+                </div>
                 <div className="row">
                   <div className="col-xs-12 no-col-padding-left">
                     {this.state.results != undefined && <div>
@@ -117,7 +128,7 @@ export default class ResultsPage extends React.Component {
                 </div>
                 <div className="row center-text">
                   <div className="col-xs-12 center-text">
-                    <ReactPaginate previousLabel={"Prev"} nextLabel={"Next"} breakLabel={< a href = "#" > ...</a>} breakClassName={"break-me"} pageCount={Math.ceil(this.state.numFound / searchData.getValue("rows"))} marginPagesDisplayed={2} pageRangeDisplayed={3} forcePage={(searchData.getValue("start") / searchData.getValue("rows"))} onPageChange={this.handlePageClick} containerClassName={"pagination"} subContainerClassName={"pages pagination"} activeClassName={"active"}/>
+                    <ReactPaginate pageLinkClassName='clickable' previousLinkClassName='clickable' nextLinkClassName='clickable' pageClassName='clickble' activeClassName='clickble' previousLabel="Prev" nextLabel="Next" breakLabel={break_lbl} breakClassName="break-me" pageCount={pageCount} marginPagesDisplayed={2} pageRangeDisplayed={3} forcePage={forcePage} onPageChange={this.handlePageClick} containerClassName="pagination" subContainerClassName="pages pagination" activeClassName="active"/>
                   </div>
                 </div>
               </span>}

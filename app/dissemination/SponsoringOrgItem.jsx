@@ -20,6 +20,11 @@ export default class SponsoringOrgItem extends React.Component {
               <OrgMetadataDL data={row}/>
             </div>
           </div>
+          <div className='row'>
+            <div className='col-xs-1'></div>
+            <div className='col-xs-10 sponsor-org-bottom-row'></div>
+            <div className='col-xs-1'></div>
+          </div>
         </div>)}
       </div>
     );

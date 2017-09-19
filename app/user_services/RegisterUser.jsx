@@ -105,18 +105,23 @@ export default class RegisterUser extends React.Component {
           </div>}
           {/*SHOW THE REGISTRATION STUFF*/}
           {!this.state.signupSuccess && <div>
-            <div className="center-text">
-              <h2 className="static-content-title">Registration</h2>
+            <div className='row'>
+              <div className='col-md-2'></div>
+              <div className="left-text col-md-8 col-xs-12 no-col-padding-left">
+                <h2 className="static-content-title">Create New Account</h2>
+                <br/>
+              </div>
+              <div className='col-md-2'></div>
             </div>
             {/*ERROR MESSAGE*/}
             {this.state.badRequest && <div className='row'>
-              <div className="col-md-3"></div>
-              <div className="col-md-3 col-xs-12">
+              <div className="col-md-2"></div>
+              <div className="col-md-3 col-xs-12 no-col-padding-left">
                 <br/>
                 <SignupBadRequest errors={this.state.badRequestErrors}/>
                 <br/>
               </div>
-              <div className='col-md-6'></div>
+              <div className='col-md-7'></div>
             </div>}
             <div className='row'>
               <div className='col-md-2'></div>
