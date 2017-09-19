@@ -37,7 +37,7 @@ export default class SearchBar extends React.Component {
   search() {
     searchData.clearValues();
     searchData.setValue("start", 0);
-    storeSearch();
+    this.storeSearch();
     window.location.href = "/doecode/results";
   }
 
