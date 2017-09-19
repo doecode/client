@@ -76,7 +76,6 @@ export default class SearchItem extends React.Component {
 
               </div>
               {doi !== undefined && <div className="search-result-doi">
-                <span className="fa fa-link"></span>
                 DOI:
                 <a target="_blank" href={doiUrl}>{doi}</a>
               </div>}

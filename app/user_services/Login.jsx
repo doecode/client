@@ -51,7 +51,9 @@ export default class Login extends React.Component {
   }
 
   parseError(data) {
-    this.setState({"hasError": true, "errorMsg": "Incorrect Username/Password"});
+    this.setState({
+      "hasError": true, "errorMsg": <span>Invalid Username/Password. If you belive this to be in error, please contact&nbsp;<a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>&nbsp;for further information.</span>
+    });
   }
 
   forgotPassword() {
