@@ -6,6 +6,7 @@ import {doAjax, getQueryParam} from '../utils/utils';
 import staticContstants from '../staticJson/constantLists';
 import SearchField from '../field/SearchField';
 import SimpleCollapsible from '../fragments/SimpleCollapsible';
+import SearchResultsDescription from '../fragments/SearchResultsDescription';
 
 const searchData = new SearchData();
 
@@ -13,16 +14,13 @@ export default class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.sidebarCallback = this.sidebarCallback.bind(this);
-    searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
-    this.licenseList = searchData.getValue("licenses");
-    this.accessibilityList = searchData.getValue("accessibility");
-    this.sortListValue = searchData.getValue("sort");
+
     this.constructSidebarFilter = this.constructSidebarFilter.bind(this);
+    this.refreshSidebarSearch = this.refreshSidebarSearch.bind(this);
   }
 
   sidebarCallback(checked, value, type) {
     searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
-
     let list = searchData.getValue(type);
 
     if (checked) {
@@ -38,11 +36,23 @@ export default class Sidebar extends React.Component {
     searchData.setValue(type, list);
     searchData.setValue("start", 0);
 
-    window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
-    doAjax('POST', '/doecode/api/search/', this.props.parseSearchResponse, searchData.getData(), this.props.parseErrorResponse);
+    this.props.refreshSearch();
   }
 
   constructSidebarFilter() {
+    searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
+    var licenseList = searchData.getValue("licenses")
+      ? searchData.getValue("licenses")
+      : [];
+    var accessibilityList = searchData.getValue("accessibility")
+      ? searchData.getValue("accessibility")
+      : [];
+    var sortListValue = searchData.getValue("sort")
+      ? searchData.getValue("sort")
+      : [];
+
+console.log("Refreshing sidebar");
+    console.log("accessibilityList: "+accessibilityList);
     return (
       <span>
         <div className="row">
@@ -52,7 +62,7 @@ export default class Sidebar extends React.Component {
             <h4 className="search-sidebar-filter-title">Accessibility</h4>
             <div className="search-sidebar-text">
               {staticContstants.availabilities.map((row) => <div key={row.key}>
-                <SearchCheckbox id={row.key} name={row.value} isChecked={this.accessibilityList.indexOf(row.value) > -1} value={row.value} type="accessibility" toggleCallback={this.sidebarCallback}/>&nbsp;
+                <SearchCheckbox id={row.key} name={row.value} isChecked={accessibilityList.indexOf(row.value) > -1} value={row.value} type="accessibility" toggleCallback={this.sidebarCallback}/>&nbsp;
                 <label htmlFor={row.key}>{row.label}</label>
               </div>)}
             </div>
@@ -66,7 +76,7 @@ export default class Sidebar extends React.Component {
             <h4 className="search-sidebar-filter-title">Licenses</h4>
             <div className="search-sidebar-text">
               {staticContstants.licenseOptions.map((row) => <div key={row.key}>
-                <label htmlFor={row.key}><SearchCheckbox id={row.key} name={row.value} isChecked={this.licenseList.indexOf(row.value) > -1} value={row.value} type="licenses" toggleCallback={this.sidebarCallback}/> {row.label}</label>
+                <label htmlFor={row.key}><SearchCheckbox id={row.key} name={row.value} isChecked={licenseList.indexOf(row.value) > -1} value={row.value} type="licenses" toggleCallback={this.sidebarCallback}/> {row.label}</label>
               </div>)}
             </div>
           </div>
@@ -76,11 +86,14 @@ export default class Sidebar extends React.Component {
     );
   }
 
+  refreshSidebarSearch() {
+    this.props.refreshSearch();
+  }
+
   render() {
-    var searchForText = (this.props.searchForText != undefined)
-      ? this.props.searchForText
-      : "All Records";
-    var sidebarFilters = this.constructSidebarFilter();
+    var searchForText = <SearchResultsDescription refreshSearch={this.refreshSidebarSearch}/>;
+    /*Wire where these things are updated too*/
+    const sidebarFilters = this.constructSidebarFilter();
     return (
       <div className={this.props.sidebarClass}>
         {/*Checkbox Filters*/}
@@ -104,7 +117,7 @@ export default class Sidebar extends React.Component {
             </span>
             {/*Show on tinier screens*/}
             <span className='hide-md hide-lg'>
-              <SimpleCollapsible toggleArrow button_text='Filter Search' contents={sidebarFilters} />              
+              <SimpleCollapsible toggleArrow button_text='Filter Search' contents={sidebarFilters}/>
             </span>
           </div>
         </div>

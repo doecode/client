@@ -105,9 +105,6 @@ export default class BiblioSidebar extends React.Component {
               <div className='col-xs-12'>
                 <h4 className='biblio-sidebar-subtitle'>SAVE&nbsp;/&nbsp;SHARE</h4>
                 <div>
-                  <SimpleDropdown noBtnPadding items={citation_list} label='Citation Formats'/>
-                </div>
-                <div>
                   <SimpleDropdown noBtnPadding items={export_metadata} label='Export Metadata'/>
                 </div>
                 <br/>

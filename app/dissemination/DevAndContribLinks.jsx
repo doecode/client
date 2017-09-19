@@ -155,8 +155,7 @@ export default class DevAndContribLinks extends React.Component {
           {(this.props.searchPage && authors.length > 3) && <span>;&nbsp;&hellip;</span>}
           {this.props.releaseDate}
         </div>
-        <div>
-          {(affiliations_list && affiliations_list.length > 0 && !this.props.searchPage) > 0 && <div>
+          {(affiliations_list && affiliations_list.length > 0 && !this.props.searchPage) > 0 && <div className='affiliations-div'>
             <button type="button" className="btn btn-link" onClick={this.showAffiliationsBtn}>{this.state.affiliationStateLabel}</button>
             <Collapse in={this.state.affiliationsOpen}>
               <div>
@@ -166,7 +165,6 @@ export default class DevAndContribLinks extends React.Component {
               </div>
             </Collapse>
           </div>}
-        </div>
       </div>
     );
   }

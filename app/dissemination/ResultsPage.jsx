@@ -8,7 +8,6 @@ import SearchField from '../field/SearchField';
 import Sidebar from './Sidebar';
 import staticContstants from '../staticJson/constantLists';
 import BreadcrumbTrail from '../fragments/BreadcrumbTrail';
-import SearchResultsDescription from '../fragments/SearchResultsDescription';
 
 const searchData = new SearchData();
 
@@ -32,8 +31,7 @@ export default class ResultsPage extends React.Component {
 
   parseSearchResponse(data) {
     window.scrollTo(0, 0);
-    this.setState({"results": data.response});
-    this.setState({"numFound": data.response.numFound});
+    this.setState({"results": data.response, numFound:data.response.numFound});
   }
 
   parseErrorResponse() {
@@ -81,13 +79,12 @@ export default class ResultsPage extends React.Component {
       });
     }
 
-    var searchDescription = <SearchResultsDescription/>;
     var searchNumCounter = pagStartVal;
     const break_lbl = <a href="#">&hellip;</a>;
     var pageCount = Math.ceil(this.state.numFound / searchData.getValue("rows"));
     var forcePage = (searchData.getValue("start") / searchData.getValue("rows"));
-
-
+    console.log("Rendering results page");
+    console.log("Search data accessibility: "+searchData.getValue("accessibility"));
     return (
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
@@ -108,7 +105,7 @@ export default class ResultsPage extends React.Component {
           </div>}
           <div className='row'>
             <div className='col-md-2'></div>
-            <Sidebar sidebarClass="col-md-2 col-xs-12 sidebar" searchForText={searchDescription} parseSearchResponse={this.parseSearchResponse} parseErrorResponse={this.parseErrorResponse} refreshSearch={this.refreshSearch}/>
+            <Sidebar sidebarClass="col-md-2 col-xs-12 sidebar" refreshSearch={this.refreshSearch}/>
             <div className="col-md-6 col-xs-12 all-search-results-row">
               {this.state.numFound > 0 && <span>
                 <br/>
