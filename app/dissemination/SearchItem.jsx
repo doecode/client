@@ -43,8 +43,8 @@ export default class SearchItem extends React.Component {
     const biblioUrl = "/doecode/biblio/" + data.codeId;
 
     var releaseDateDisplay = (releaseDate !== undefined)
-      ? <span className='search-result-release-date text-muted'>&nbsp;&nbsp;
-          <time>Release Date {releaseDate}</time>
+      ? <span className='search-result-release-date text-muted'>
+          <time>Release Date:&nbsp;{releaseDate}</time>
         </span>
       : <span></span>;
 
@@ -75,17 +75,15 @@ export default class SearchItem extends React.Component {
                 </div>
 
               </div>
-              {doi !== undefined && <div className="search-result-doi">
-                DOI:
-                <a target="_blank" href={doiUrl}>{doi}</a>
-              </div>}
-
               {data.description !== undefined && <SearchRowDescription text={data.description} moreLess={100}/>}
 
-              {data.repositoryLink && <div className='right-text'>
-                <br/>
-                <a target='_blank' href={data.repositoryLink}>Repository Link</a>
-              </div>}
+              <div className='right-text'>
+                <br/> {doi && <span>DOI:&nbsp;
+                  <a target="_blank" href={doiUrl}>{doi}</a>
+                </span>}{(data.repositoryLink && doi) && <span className='search-item-doi-divider'>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>}{data.repositoryLink && <span>
+                  <a target='_blank' href={data.repositoryLink}>Repository Link</a>
+                </span>}
+              </div>
               <br/>
             </div>
           </div>

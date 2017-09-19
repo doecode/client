@@ -1460,9 +1460,13 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   font-weight: 400;
 }
 
-.search-for-filter-header{
+.search-for-filter-header {
   color: #aaa;
-  font-size:13.6px;
+  font-size: 13.6px;
+}
+
+.search-item-doi-divider {
+  color: rgba(0, 0, 0, 0.2);
 }
 
 
