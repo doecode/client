@@ -247,17 +247,17 @@
 }
 
 .griddle .footer-container {
-  padding: 0px;
+  padding: 5px;
   background-color: rgb(50, 119, 179);
   border: 0px;
   color: white;
+  width: 100%;
 }
 
 .griddle .griddle-previous, .griddle .griddle-page, .griddle .griddle-next {
   float: left;
-  width: 33%;
+  width: 33.333%;
   min-height: 1px;
-  margin-top: 5px;
 }
 
 .griddle-page select, button {
@@ -278,6 +278,10 @@
 
 .griddle .griddle-next {
   text-align: right;
+}
+
+.griddle-page {
+  padding-top: 2px;
 }
 
 html h1 {
