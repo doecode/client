@@ -8,6 +8,7 @@ import SearchField from '../field/SearchField';
 import Sidebar from './Sidebar';
 import staticContstants from '../staticJson/constantLists';
 import BreadcrumbTrail from '../fragments/BreadcrumbTrail';
+import SimpleDropdown from '../fragments/SimpleDropdown';
 
 const searchData = new SearchData();
 
@@ -18,6 +19,8 @@ export default class ResultsPage extends React.Component {
     this.parseErrorResponse = this.parseErrorResponse.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
     this.refreshSearch = this.refreshSearch.bind(this);
+    this.changeSearchSort = this.changeSearchSort.bind(this);
+    this.storeAndConductSearch = this.storeAndConductSearch.bind(this);
     this.state = {
       results: undefined,
       numFound: 1
@@ -25,13 +28,12 @@ export default class ResultsPage extends React.Component {
   }
 
   componentDidMount() {
-    searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
-    doAjax('POST', '/doecode/api/search/', this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
+    this.storeAndConductSearch();
   }
 
   parseSearchResponse(data) {
     window.scrollTo(0, 0);
-    this.setState({"results": data.response, numFound:data.response.numFound});
+    this.setState({"results": data.docs, numFound: data.num_found});
   }
 
   parseErrorResponse() {
@@ -40,12 +42,21 @@ export default class ResultsPage extends React.Component {
 
   refreshSearch() {
     searchData.setValue("start", Math.floor(searchData.getValue("start") / searchData.getValue("rows")) * searchData.getValue("rows"));
-    window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
-    doAjax('POST', '/doecode/api/search/', this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
+    this.storeAndConductSearch();
   }
 
   handlePageClick(data) {
     searchData.setValue("start", searchData.getValue("rows") * data.selected);
+    this.storeAndConductSearch();
+  }
+
+  changeSearchSort(value) {
+    searchData.setValue("start", 0);
+    searchData.setValue("sort", value);
+    this.storeAndConductSearch();
+  }
+
+  storeAndConductSearch() {
     window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
     doAjax('POST', '/doecode/api/search/', this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
   }
@@ -83,8 +94,21 @@ export default class ResultsPage extends React.Component {
     const break_lbl = <a href="#">&hellip;</a>;
     var pageCount = Math.ceil(this.state.numFound / searchData.getValue("rows"));
     var forcePage = (searchData.getValue("start") / searchData.getValue("rows"));
-    console.log("Rendering results page");
-    console.log("Search data accessibility: "+searchData.getValue("accessibility"));
+
+    const sort_lbl = 'Sort by Relevance';
+    const sort_options = [
+      {
+        customAnchor: true,
+        display: <a className='clickable' onClick={() => this.changeSearchSort('relvance asc')}>Sort by Relevance</a>
+
+      }, {
+        customAnchor: true,
+        display: <a className='clickable' onClick={() => this.changeSearchSort('release_date asc')}>Release Date Ascending</a>
+      }, {
+        customAnchor: true,
+        display: <a className='clickable' onClick={() => this.changeSearchSort('release_date desc')}>Release Date Descending</a>
+      }
+    ];
     return (
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
@@ -98,8 +122,13 @@ export default class ResultsPage extends React.Component {
           </div>
           {this.state.numFound > 0 && <div className='row'>
             <div className='col-md-2'></div>
-            <div className='col-md-8 col-xs-12'>
+            <div className='col-md-4 col-xs-12'>
               <h1 className='search-results-count'>{this.state.numFound}&nbsp; Search Results</h1>
+            </div>
+            <div className='col-md-4 col-xs-12 right-text-md right-text-lg'>
+              <div className='search-sort-dropdown'>
+                <SimpleDropdown noBtnPadding items={sort_options} label={sort_lbl}/>
+              </div>
             </div>
             <div className='col-md-2'></div>
           </div>}
@@ -116,8 +145,8 @@ export default class ResultsPage extends React.Component {
                 </div>
                 <div className="row">
                   <div className="col-xs-12 no-col-padding-left">
-                    {this.state.results != undefined && <div>
-                      {this.state.results.docs.map((row, index) => <div className='search-result-row' key={index}>
+                    {this.state.results && this.state.results.length > 0 && <div>
+                      {this.state.results.map((row, index) => <div className='search-result-row' key={index}>
                         <SearchItem listNumber={searchNumCounter++} data={row}/>
                       </div>)}
                     </div>}

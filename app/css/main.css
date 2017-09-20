@@ -1469,6 +1469,11 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   color: rgba(0, 0, 0, 0.2);
 }
 
+.search-sort-dropdown {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
 
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
 
