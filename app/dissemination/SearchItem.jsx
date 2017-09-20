@@ -12,39 +12,42 @@ export default class SearchItem extends React.Component {
   render() {
 
     const data = this.props.data;
-    let releaseDate = undefined;
-    let doi = undefined;
+
+    //Digital Object Identifier
+    let doi = "";
     let doiUrl = "";
     if (data.doi !== undefined) {
       doi = data.doi;
       doiUrl = "https://doi.org/" + doi;
     }
 
-    if (data.releaseDate !== undefined)
-      releaseDate = data.releaseDate.substring(0, data.releaseDate.indexOf("T"));
-
-    const devsAndContributors = data._names;
+    //Developers and Contributors
     let devContribList = [];
-
-    if (devsAndContributors === undefined) {
-      return (null);
-    } else {
-      devsAndContributors.forEach(function(item) {
-        devContribList.push({
-          name: (item.replace('(undefined),', '').replace(' (undefined)', '').replace(' null', '').replace('null ', ''))
-        });
+    const devs = data.developers;
+    const contributors = data.contributors;
+    devs.forEach(function(item) {
+      var first_name = item.first_name.replace('(undefined),', '').replace(' (undefined)', '').replace(' null', '').replace('null ', '');
+      var last_name = item.last_name.replace('(undefined),', '').replace(' (undefined)', '').replace(' null', '').replace('null ', '')
+      devContribList.push({
+        name: (last_name + ", " + first_name)
       });
-    }
+    });
+    contributors.forEach(function(item) {
+      var first_name = item.first_name.replace('(undefined),', '').replace(' (undefined)', '').replace(' null', '').replace('null ', '');
+      var last_name = item.last_name.replace('(undefined),', '').replace(' (undefined)', '').replace(' null', '').replace('null ', '')
+      devContribList.push({
+        name: (last_name + ", " + first_name)
+      });
+    });
 
-    const softwareTitle = data.softwareTitle;
-    if (softwareTitle === undefined) {
-      return (null);
-    }
-    const biblioUrl = "/doecode/biblio/" + data.codeId;
 
-    var releaseDateDisplay = (releaseDate !== undefined)
+    const softwareTitle = data.software_title;
+
+    const biblioUrl = "/doecode/biblio/" + data.code_id;
+
+    var releaseDateDisplay = (data.release_date)
       ? <span className='search-result-release-date text-muted'>
-          <time>Release Date:&nbsp;{releaseDate}</time>
+          <time>Release Date:&nbsp;{data.release_date}</time>
         </span>
       : <span></span>;
 
@@ -55,6 +58,7 @@ export default class SearchItem extends React.Component {
     var result_subrow_classes = (this.props.listNumber > 9999)
       ? "col-sm-10 col-xs-12 search-result-sub-row"
       : "col-sm-11 col-xs-10 search-result-sub-row";
+
     return (
       <div>
         <div className={result_column_classes}>
@@ -80,8 +84,8 @@ export default class SearchItem extends React.Component {
               <div className='right-text'>
                 <br/> {doi && <span>DOI:&nbsp;
                   <a target="_blank" href={doiUrl}>{doi}</a>
-                </span>}{(data.repositoryLink && doi) && <span className='search-item-doi-divider'>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>}{data.repositoryLink && <span>
-                  <a target='_blank' href={data.repositoryLink}>Repository Link</a>
+                </span>}{(data.repository_link && doi) && <span className='search-item-doi-divider'>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>}{data.repository_link && <span>
+                  <a target='_blank' href={data.repository_link}>Repository Link</a>
                 </span>}
               </div>
               <br/>

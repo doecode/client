@@ -51,8 +51,6 @@ export default class Sidebar extends React.Component {
       ? searchData.getValue("sort")
       : [];
 
-console.log("Refreshing sidebar");
-    console.log("accessibilityList: "+accessibilityList);
     return (
       <span>
         <div className="row">

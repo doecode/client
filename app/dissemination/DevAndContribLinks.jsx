@@ -27,7 +27,7 @@ export default class DevAndContribLinks extends React.Component {
         customAnchor: true
       }, {
         link: '',
-        display: <SearchLink displayVal={'Search DOE CODE for ORCID'+' '+row.orcid} field="orcid" value={row.orcid}/>,
+        display: <SearchLink displayVal={'Search DOE CODE for ORCID' + ' ' + row.orcid} field="orcid" value={row.orcid}/>,
         customAnchor: true
       }, {
         link: 'https://orcid.org/orcid-search/quick-search?searchQuery=' + row.orcid,
@@ -152,19 +152,18 @@ export default class DevAndContribLinks extends React.Component {
       <div>
         <div>
           {authorsContent}
-          {(this.props.searchPage && authors.length > 3) && <span>;&nbsp;&hellip;</span>}
-          {this.props.releaseDate}
+          {(this.props.searchPage && authors.length > 3) && <span>;&nbsp;&hellip;</span>}{authors && <span>&nbsp;</span>}{this.props.releaseDate}
         </div>
-          {(affiliations_list && affiliations_list.length > 0 && !this.props.searchPage) > 0 && <div className='affiliations-div'>
-            <button type="button" className="btn btn-link" onClick={this.showAffiliationsBtn}>{this.state.affiliationStateLabel}</button>
-            <Collapse in={this.state.affiliationsOpen}>
-              <div>
-                <ol>
-                  {affiliations_list}
-                </ol>
-              </div>
-            </Collapse>
-          </div>}
+        {(affiliations_list && affiliations_list.length > 0 && !this.props.searchPage) > 0 && <div className='affiliations-div'>
+          <button type="button" className="btn btn-link" onClick={this.showAffiliationsBtn}>{this.state.affiliationStateLabel}</button>
+          <Collapse in={this.state.affiliationsOpen}>
+            <div>
+              <ol>
+                {affiliations_list}
+              </ol>
+            </div>
+          </Collapse>
+        </div>}
       </div>
     );
   }

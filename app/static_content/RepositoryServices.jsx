@@ -12,8 +12,8 @@ export default class RepositoryServices extends React.Component {
 
     return (
       <div className="row not-so-wide-row">
-        <div className="col-md-3"></div>
-        <div className="col-md-6 col-xs-12 static-content">
+        <div className="col-lg-3 col-md-1"></div>
+        <div className="col-lg-6 col-md-10 col-xs-12 static-content">
           <h2 className="static-content-title">Repository Services</h2>
           <br/>
           <div className='row'>
@@ -40,7 +40,7 @@ export default class RepositoryServices extends React.Component {
             </div>
           </div>
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-lg-3 col-md-1"></div>
       </div>
     );
   }
