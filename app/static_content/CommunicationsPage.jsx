@@ -11,29 +11,23 @@ export default class Communications extends React.Component {
 
     return (
       <div className="row not-so-wide-row">
-        <div className="col-md-3"></div>
-        <div className="col-md-6 col-xs-12 static-content">
-
+        <div className="col-lg-3 col-md-1"></div>
+        <div className="col-lg-6 col-md-10 col-xs-12 static-content">
           <h2 className="static-content-title">Communications and Resources</h2>
-
           <h3>Communications</h3>
           <div className="padblock">
-
             <h4>Blogs</h4>
             <ul>
               <li>11/12/16 OSTIblog&nbsp;<a href="https://www.osti.gov/ostiblog/osti-developing-open-source-social-coding-platform-doe-scientific-software">OSTI Developing Open Source, Social Coding Platform for DOE Scientific Software</a>
               </li>
             </ul>
-
             <h4>OSTI.gov Newsletter Articles</h4>
             <ul>
               <li>January/February 2017 OSTI.gov Newsletter:&nbsp;
                 <a href="https://www.osti.gov/home/newsletter/issue-18-january-february-2017#doesoftware">OSTI Developing New DOE Software Center</a>
               </li>
             </ul>
-
           </div>
-
           <h3>Resources</h3>
           <div className="padblock">
             <h4>Selected Articles and Presentations</h4>
@@ -46,9 +40,7 @@ export default class Communications extends React.Component {
               <li>03/01/2017 Poster presented at SIAM CSE17 PP108 Minisymposterium:&nbsp;
                 <a href="https://figshare.com/articles/billings_doecode_siamcse2017_20170301_jpg/4730203">Software Productivity and Sustainability for CSE and Data Science</a>&nbsp; by Jay Jay Billings, Oak Ridge National Laboratory</li>
             </ul>
-
           </div>
-
           <h3>External Links</h3>
           <div className="padblock">
             <ul>
@@ -69,7 +61,7 @@ export default class Communications extends React.Component {
           </div>
 
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-lg-3 col-md-1"></div>
       </div>
     );
   }
