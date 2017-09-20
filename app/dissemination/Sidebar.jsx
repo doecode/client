@@ -7,6 +7,7 @@ import staticContstants from '../staticJson/constantLists';
 import SearchField from '../field/SearchField';
 import SimpleCollapsible from '../fragments/SimpleCollapsible';
 import SearchResultsDescription from '../fragments/SearchResultsDescription';
+import SortDropdown from './SortDropdown';
 
 const searchData = new SearchData();
 
@@ -53,11 +54,19 @@ export default class Sidebar extends React.Component {
 
     return (
       <span>
+        <div className='row hide-sm hide-md hide-lg'>
+          <div className='col-xs-12'>
+            <div className='search-sort-dropdown'>
+              <SortDropdown searchCallback={this.props.refreshSearch}/>
+            </div>
+          </div>
+        </div>
         <div className="row">
           <div className="col-md-1"></div>
           <div className="col-md-12 col-xs-12">
             <br/>
-            <h4 className="search-sidebar-filter-title">Accessibility</h4>
+            <h4 className="search-sidebar-filter-title">Refine By:</h4>
+            <span className='search-for-filter-text search-for-filter-header'>Accessibility</span>
             <div className="search-sidebar-text">
               {staticContstants.availabilities.map((row) => <div key={row.key}>
                 <SearchCheckbox id={row.key} name={row.value} isChecked={accessibilityList.indexOf(row.value) > -1} label={row.label} value={row.value} type="accessibility" toggleCallback={this.sidebarCallback}/>
@@ -70,7 +79,7 @@ export default class Sidebar extends React.Component {
           <div className="col-md-1"></div>
           <div className="col-md-12 col-xs-12">
             <br/>
-            <h4 className="search-sidebar-filter-title">Licenses</h4>
+            <span className='search-for-filter-text search-for-filter-header'>Licenses</span>
             <div className="search-sidebar-text">
               {staticContstants.licenseOptions.map((row) => <div key={row.key}>
                 <SearchCheckbox id={row.key} name={row.value} isChecked={licenseList.indexOf(row.value) > -1} label={row.label} value={row.value} type="licenses" toggleCallback={this.sidebarCallback}/>

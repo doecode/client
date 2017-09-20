@@ -419,6 +419,17 @@ function combineAuthorLists(list1, list2) {
   return modified_author_list;
 }
 
+function getSearchSortDisplay(short_val){
+  var sortDisplayVal = '';
+  staticContstants.searchSortOptions.forEach(function(item){
+    if(item.value == short_val){
+      sortDisplayVal = item.value;
+      return false;
+    }
+  });
+  return sortDisplayVal;
+}
+
 export {doAjax};
 export {doAuthenticatedAjax};
 export {checkIsAuthenticated};
@@ -438,3 +449,4 @@ export {addMetaTags};
 export {addBiblio};
 export {getAvailabilityDisplay};
 export {combineAuthorLists};
+export {getSearchSortDisplay};

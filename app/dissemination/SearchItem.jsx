@@ -40,7 +40,6 @@ export default class SearchItem extends React.Component {
       });
     });
 
-
     const softwareTitle = data.software_title;
 
     const biblioUrl = "/doecode/biblio/" + data.code_id;
@@ -82,9 +81,18 @@ export default class SearchItem extends React.Component {
               {data.description !== undefined && <SearchRowDescription text={data.description} moreLess={100}/>}
 
               <div className='right-text'>
-                <br/> {doi && <span>DOI:&nbsp;
+                <br/>
+                {/*DOI*/}
+                {doi && <span>DOI:&nbsp;
                   <a target="_blank" href={doiUrl}>{doi}</a>
-                </span>}{(data.repository_link && doi) && <span className='search-item-doi-divider'>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>}{data.repository_link && <span>
+                </span>}
+                {/*Divider*/}
+                {(data.repository_link && doi) && <span>
+                  <span className='search-item-doi-divider hide-xs'>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+                  <span className='hide-sm hide-md hide-lg'><br/></span>
+                </span>}
+                {/*Repository Link*/}
+                {data.repository_link && <span>
                   <a target='_blank' href={data.repository_link}>Repository Link</a>
                 </span>}
               </div>
