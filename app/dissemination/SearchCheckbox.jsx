@@ -15,7 +15,9 @@ export default class SearchCheckbox extends React.Component {
   render() {
     return (
       <span>
-        <input className='styled-checkbox' id={this.props.id} name={this.props.name} type="checkbox" checked={this.props.isChecked} onChange={this.toggleCheckbox}/>
+        <input className='search-checkbox' id={this.props.id} name={this.props.name} type="checkbox" checked={this.props.isChecked} onChange={this.toggleCheckbox}/>
+        <label htmlFor={this.props.id}></label>
+        &nbsp;<label htmlFor={this.props.id}>{this.props.label}</label>
       </span>
     );
   }

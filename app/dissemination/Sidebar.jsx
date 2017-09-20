@@ -60,8 +60,7 @@ export default class Sidebar extends React.Component {
             <h4 className="search-sidebar-filter-title">Accessibility</h4>
             <div className="search-sidebar-text">
               {staticContstants.availabilities.map((row) => <div key={row.key}>
-                <SearchCheckbox id={row.key} name={row.value} isChecked={accessibilityList.indexOf(row.value) > -1} value={row.value} type="accessibility" toggleCallback={this.sidebarCallback}/>&nbsp;
-                <label htmlFor={row.key}>{row.label}</label>
+                <SearchCheckbox id={row.key} name={row.value} isChecked={accessibilityList.indexOf(row.value) > -1} label={row.label} value={row.value} type="accessibility" toggleCallback={this.sidebarCallback}/>
               </div>)}
             </div>
           </div>
@@ -74,7 +73,7 @@ export default class Sidebar extends React.Component {
             <h4 className="search-sidebar-filter-title">Licenses</h4>
             <div className="search-sidebar-text">
               {staticContstants.licenseOptions.map((row) => <div key={row.key}>
-                <label htmlFor={row.key}><SearchCheckbox id={row.key} name={row.value} isChecked={licenseList.indexOf(row.value) > -1} value={row.value} type="licenses" toggleCallback={this.sidebarCallback}/> {row.label}</label>
+                <SearchCheckbox id={row.key} name={row.value} isChecked={licenseList.indexOf(row.value) > -1} label={row.label} value={row.value} type="licenses" toggleCallback={this.sidebarCallback}/>
               </div>)}
             </div>
           </div>

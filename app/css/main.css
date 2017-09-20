@@ -1195,18 +1195,46 @@ html, button, body, input, select, textarea, p {
   font-weight: normal;
 }
 
+label {
+  display: inline;
+  margin-bottom: 0px;
+}
+
 .search-checkbox {
-  width: 14px;
-  height: 14px;
-  background-color: #e6e6e6;
-}
-
-.search-checkbox:hover {
-  background-color: #CCCCCC
-}
-
-.search-checkbox-box {
   display: none;
+}
+
+.search-checkbox + label {
+  background-color: rgb(230,230,230);
+  border-radius: 0px;
+  display: inline-block;
+  position: relative;
+  width: 13px;
+  height: 14px;
+}
+
+.search-checkbox + label:hover {
+  background-color: rgb(204,204,204);
+}
+
+.search-checkbox:checked + label:hover {
+  background-color: rgb(14,100,125);
+}
+
+.search-checkbox:checked + label {
+	background-color: rgb(42,161,192);
+	color: white;
+}
+
+.search-checkbox:checked + label:after {
+  font: normal normal normal 14px/1 FontAwesome;
+	content: '\f00c';
+	font-size: 11px;
+	position: absolute;
+	top: 1px;
+	left:1px;
+	color: white;
+	line-height: 14px;
 }
 
 .adv-search-dropdown {
@@ -1463,6 +1491,20 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
 .search-for-filter-header {
   color: #aaa;
   font-size: 13.6px;
+}
+
+.search-for-filter-x {
+  font-family: 'Roboto',sans-serif;
+  color: #aaa;
+  font-size: 13.6px;
+  font-style: normal;
+  font-size: 85%;
+  text-decoration: none;
+  opacity: .75;
+}
+
+.search-for-filter-x:hover {
+  color: #ca3c3c;
 }
 
 .search-item-doi-divider {

@@ -77,7 +77,7 @@ export default class SearchResultsDescription extends React.Component {
           <span className='search-for-filter-text search-for-filter-header'>{row.displayField}:&nbsp;</span>
           <br/>
           <span className='search-for-filter-text'>{row.display}</span>&nbsp;
-          <span className='text-muted clickable' onClick={() => this.removeFilter(row.field, row.value)}>[&times;]</span>
+          <span className='search-for-filter-x clickable' onClick={() => this.removeFilter(row.field, row.value)}>[ &times; ]</span>
         </div>)}
       </div>
     );
