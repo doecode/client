@@ -300,7 +300,7 @@ html h3 {
 }
 
 .pending {
-  font-size: 12px;
+  font-style: italic;
   color: #990000 !important
 }
 

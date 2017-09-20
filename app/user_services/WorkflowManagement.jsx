@@ -53,7 +53,7 @@ export default class WorkflowManagement extends React.Component {
       }, {
         key: 'edit',
         name: 'Modify Record',
-        width: 345,
+        width: 245,
       }
     ];
 
@@ -95,11 +95,11 @@ export default class WorkflowManagement extends React.Component {
         editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
       }
 
-      let pendingStatus = (record.workflow_status == "Published" && <div className="grid-button" title="Pending Approval" ><span className="pending">Pending Approval</span></div>);
+      let statusIndicator = (record.workflow_status == "Published" ? <div className="grid-button" title="Pending Approval" ><span className="pending">Pending</span></div> : record.workflow_status);
 
       //console.log(JSON.stringify(record));
       rows.push({
-        id: record.code_id, title: record.software_title, status: record.workflow_status,
+        id: record.code_id, title: record.software_title, status: statusIndicator,
         edit:
           <div className="grid-button-container" title="">
           <div className="grid-button" title="Update Metadata">
@@ -114,7 +114,6 @@ export default class WorkflowManagement extends React.Component {
                     Submit to E-Link
             </a>
           </div>
-          {pendingStatus}
           </div>
       });
     }
