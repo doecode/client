@@ -16,6 +16,8 @@ export default class PasswordRules extends React.Component {
         <ul>
           <li>Be at least 8 characters long. {this.props.longEnough && <span className="fa fa-check green"></span>}</li>
           <li>Contain at least one special character. {this.props.hasSpecial && <span className="fa fa-check green"></span>}
+            <br/>
+            &nbsp;<small>Accepted Special Characters: !&nbsp;@&nbsp;#&nbsp;$&nbsp;%&nbsp;^&nbsp;&amp;&nbsp;*&nbsp;(&nbsp;)</small>
           </li>
           <li>Contain at least one number character. {this.props.hasNumber && <span className="fa fa-check green"></span>}
           </li>

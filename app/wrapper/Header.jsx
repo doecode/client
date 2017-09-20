@@ -30,18 +30,20 @@ export default class Header extends React.Component {
           <div className="pull-right hidden-xs visible-sm visible-md visible-lg header-signin-links">
             <SigninStatus/>
           </div>
-          <div className='container hidden-xs hidden-sm visible-md visible-lg header-search-container'>
+          <div className='container hidden-xs visible-sm visible-md visible-lg header-search-container'>
             <br/>
             <br/>
             <br/>
-            <div className='row'>
-              <div className="col-xs-4 right-text">
+            <div className='row not-so-wide-row'>
+              <div className="col-sm-4 right-text">
                 <a href="/doecode">
-                  <img className='header-logo-img' src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" />
+                  <img className='header-logo-img' src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode"/>
                 </a>
               </div>
               {/*Search Bar*/}
-              <SearchBar searchbarSize='col-xs-6 no-col-padding-right'/>
+              <div className='col-sm-8'>
+                <SearchBar searchbarSize='col-lg-9 col-md-9 col-sm-10 col-xs-6 no-col-padding-right'/>
+              </div>
             </div>
             <br/>
             <br/>

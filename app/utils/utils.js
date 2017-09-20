@@ -247,7 +247,7 @@ function checkPassword(data) {
   const email = data.email;
   const confirm = data.confirm_password;
   const minLength = 8;
-  const specialCharacterRegex = /[^a-zA-Z\d\s]/g;
+  const specialCharacterRegex = /[!@#\$%\^&\*\(\)]/g;
   const lowerRegex = /[a-z]/g;
   const upperRegex = /[A-Z]/g;
   const numberRegex = /[\d]/g;

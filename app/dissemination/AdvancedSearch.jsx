@@ -23,8 +23,8 @@ export default class AdvancedSearch extends React.Component {
   render() {
     return (
       <div className="row not-so-wide-row">
-        <div className="col-md-3"></div>
-        <div className="col-md-6 col-xs-12">
+        <div className="col-lg-3 col-sm-1"></div>
+        <div className="col-lg-6 col-sm-10 col-xs-12">
           <br/>
           <div className="row advanced-search-panel">
             <div className="col-md-1"></div>
@@ -129,7 +129,7 @@ export default class AdvancedSearch extends React.Component {
           </div>
           <br/>
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-lg-3 col-sm-1"></div>
       </div>
     );
 

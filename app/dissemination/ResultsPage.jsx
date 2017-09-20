@@ -93,27 +93,27 @@ export default class ResultsPage extends React.Component {
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
           <div className='row'>
-            <div className='col-md-2'></div>
-            <div className='col-md-8 col-xs-12'>
+            <div className='col-lg-2'></div>
+            <div className='col-lg-8 col-xs-12'>
               <BreadcrumbTrail list={breadcrumbList}/>
               <br/>
             </div>
-            <div className='col-md-2'></div>
+            <div className='col-lg-2'></div>
           </div>
           {this.state.numFound > 0 && <div className='row'>
-            <div className='col-md-2'></div>
-            <div className='col-md-4 col-xs-12'>
+            <div className='col-lg-2'></div>
+            <div className='col-lg-4 col-md-6 col-xs-12'>
               <h1 className='search-results-count'>{this.state.numFound}&nbsp; Search Results</h1>
             </div>
-            <div className='col-md-4 col-xs-12 right-text-md right-text-lg hide-xs'>
+            <div className='col-lg-4 col-md-6 col-xs-12 right-text-md right-text-lg hide-xs'>
               <SortDropdown searchCallback={this.storeAndConductSearch}/>
             </div>
-            <div className='col-md-2'></div>
+            <div className='col-lg-2'></div>
           </div>}
           <div className='row'>
-            <div className='col-md-2'></div>
-            <Sidebar sidebarClass="col-md-2 col-xs-12 sidebar" refreshSearch={this.refreshSearch}/>
-            <div className="col-md-6 col-xs-12 all-search-results-row">
+            <div className='col-lg-2'></div>
+            <Sidebar sidebarClass="col-lg-2 col-md-4 col-xs-12 sidebar" refreshSearch={this.refreshSearch}/>
+            <div className="col-lg-6 col-md-8 col-xs-12 all-search-results-row">
               {this.state.numFound > 0 && <span>
                 <br/>
                 <div className='row'>
@@ -142,7 +142,7 @@ export default class ResultsPage extends React.Component {
                 </div>
               </span>}
             </div>
-            <div className='col-md-2'></div>
+            <div className='col-lg-2'></div>
           </div>
         </div>
       </div>

@@ -27,7 +27,7 @@ export default class SearchBar extends React.Component {
       this.searchBarStyles = "form-control search-box";
       this.advSearchButtonStyles = "btn btn-default adv-search-button";
       this.searchButtonStyles = "btn btn-success search-btn";
-      this.advDropdownStyles="adv-search-dropdown row";
+      this.advDropdownStyles = "adv-search-dropdown row";
     }
   }
   onAllFieldsChange(event) {
@@ -60,13 +60,16 @@ export default class SearchBar extends React.Component {
 
   handleAdvancedSearchClick(event) {
     this.storeSearch();
-    window.location.href='/doecode/search';
+    window.location.href = '/doecode/search';
   }
 
   render() {
+    var notSoWideSearchbar = this.props.notSoWideSearchbar
+      ? this.props.notSoWideSearchbar
+      : 'row';
+
     return (
-      <span>
-        <div className='col-sm-1 hide-md hide-lg'></div>
+      <div className={notSoWideSearchbar}>
         <div className={this.props.searchbarSize}>
           <div className='input-group'>
             <label htmlFor="allSearch" className="sr-only">Search DOE CODE for published software entries</label>
@@ -103,24 +106,25 @@ export default class SearchBar extends React.Component {
                   Identifier Numbers:
                 </div>
                 <div className='col-xs-12'>
-                  <SearchField field="identifiers"  elementType="input" noExtraLabelText/>
+                  <SearchField field="identifiers" elementType="input" noExtraLabelText/>
                 </div>
               </div>
               <div className="row">
                 <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                   Publication Date:
                 </div>
-                <div className="col-md-5 col-xs-12 text-left">
+                <div className="col-lg-5 col-xs-12 text-left ">
                   <SearchField field="date_earliest" elementType="date" noExtraLabelText/>
                 </div>
-                <div className='col-xs-1 no-col-padding-left to-field adv-search-dropdown-label'>to</div>
-                <div className="col-md-5 col-xs-12">
+                <div className='col-lg-1 no-col-padding-left to-field adv-search-dropdown-label'>to</div>
+                <div className="col-lg-5 col-xs-12 ">
                   <SearchField field="date_latest" elementType="date" noExtraLabelText/>
                 </div>
               </div>
               <div className='row adv-search-dropdown-title-row left-text'>
                 <div className='col-xs-12 no-col-padding-left'>
-                  <a onClick={this.handleAdvancedSearchClick} className='more-adv-search clickable'><span className='fa fa-plus-square-o'></span>&nbsp;More Options&hellip;</a>
+                  <a onClick={this.handleAdvancedSearchClick} className='more-adv-search clickable'>
+                    <span className='fa fa-plus-square-o'></span>&nbsp;More Options&hellip;</a>
                 </div>
               </div>
               <br/>
@@ -132,12 +136,12 @@ export default class SearchBar extends React.Component {
             </div>
           </div>}
         </div>
-        <div className="col-sm-1 col-md-2 col-lg-2 col-xs-2 search-btn-container text-left minimal-col-padding-left">
+        <div className="col-lg-2 col-md-2 col-sm-1 col-xs-2 search-btn-container text-left minimal-col-padding-left">
           <button type="button" className={this.searchButtonStyles} onClick={this.search}>
             <span className="fa fa-search"></span>
           </button>
         </div>
-      </span>
+      </div>
     );
   }
 }

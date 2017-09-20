@@ -72,8 +72,8 @@ export default class Login extends React.Component {
 
     return (
       <div className="row not-so-wide-row">
-        <div className="col-md-3"></div>
-        <div className="col-md-6 col-xs-12 ">
+        <div className="col-lg-3 col-md-1 col-sm-1"></div>
+        <div className="col-lg-6 col-md-10 col-sm-10 col-xs-12 ">
           <div>
             <br/>
             <h2 className="static-content-title">Sign In</h2>
@@ -126,20 +126,19 @@ export default class Login extends React.Component {
           </div>
           <br/>
           <div className='row'>
-            <div className='col-md-1 col-sm-2 col-xs-12  signin-buttons-container'>
+            <div className='col-lg-3 col-md-3 col-sm-2 col-xs-12  signin-buttons-container'>
               <button type='button' className='pure-button signin-buttons' onClick={this.forgotPassword}>Forgot Password?</button>
             </div>
-            <div className='col-md-8 col-sm-2'></div>
-            <div className='col-md-2 col-sm-3 col-xs-12  signin-buttons-container'>
+            <div className='col-lg-4 col-md-4 col-sm-4'></div>
+            <div className='col-lg-3 col-md-3 col-sm-3 col-xs-12  signin-buttons-container right-text-lg right-text-md right-text-sm'>
               <button type='button' className='pure-button signin-buttons' onClick={this.register}>Create Account</button>
             </div>
-            <div className='col-sm-1 hide-md hide-lg'></div>
-            <div className='col-md-1 col-sm-3 col-xs-12  signin-buttons-container'>
+            <div className='col-lg-2 col-md-2 col-sm-3 col-xs-12  signin-buttons-container'>
               <button type='button' className='pure-button button-success signin-buttons' onClick={this.login}>Sign In</button>
             </div>
           </div>
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-lg-3 col-md-1 col-sm-1"></div>
       </div>
     );
   }
