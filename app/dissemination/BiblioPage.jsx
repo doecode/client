@@ -148,6 +148,7 @@ export default class BiblioPage extends React.Component {
 
   render() {
     metadata.deserializeData(this.state.data);
+    //Add biblio page data to meta tags
     addBiblio(metadata.fieldMap);
     const summaryContent = staticContstants.biblioFieldsList.map(this.generateSummaryContent);
     const fieldsContent = staticContstants.biblioFieldsList.map(this.generateContent);

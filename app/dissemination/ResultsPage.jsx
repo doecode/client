@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchItem from './SearchItem';
 import ReactPaginate from 'react-paginate';
-import {doAjax, getQueryParam} from '../utils/utils';
+import {doAjax, getQueryParam, getSearchSortDisplay} from '../utils/utils';
 import SearchData from '../stores/SearchData';
 import SearchField from '../field/SearchField';
 import Sidebar from './Sidebar';
 import staticContstants from '../staticJson/constantLists';
 import BreadcrumbTrail from '../fragments/BreadcrumbTrail';
 import SimpleDropdown from '../fragments/SimpleDropdown';
+import SortDropdown from './SortDropdown';
 
 const searchData = new SearchData();
 
@@ -19,7 +20,6 @@ export default class ResultsPage extends React.Component {
     this.parseErrorResponse = this.parseErrorResponse.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
     this.refreshSearch = this.refreshSearch.bind(this);
-    this.changeSearchSort = this.changeSearchSort.bind(this);
     this.storeAndConductSearch = this.storeAndConductSearch.bind(this);
     this.state = {
       results: undefined,
@@ -47,12 +47,6 @@ export default class ResultsPage extends React.Component {
 
   handlePageClick(data) {
     searchData.setValue("start", searchData.getValue("rows") * data.selected);
-    this.storeAndConductSearch();
-  }
-
-  changeSearchSort(value) {
-    searchData.setValue("start", 0);
-    searchData.setValue("sort", value);
     this.storeAndConductSearch();
   }
 
@@ -95,20 +89,6 @@ export default class ResultsPage extends React.Component {
     var pageCount = Math.ceil(this.state.numFound / searchData.getValue("rows"));
     var forcePage = (searchData.getValue("start") / searchData.getValue("rows"));
 
-    const sort_lbl = 'Sort by Relevance';
-    const sort_options = [
-      {
-        customAnchor: true,
-        display: <a className='clickable' onClick={() => this.changeSearchSort('relvance asc')}>Sort by Relevance</a>
-
-      }, {
-        customAnchor: true,
-        display: <a className='clickable' onClick={() => this.changeSearchSort('release_date asc')}>Release Date Ascending</a>
-      }, {
-        customAnchor: true,
-        display: <a className='clickable' onClick={() => this.changeSearchSort('release_date desc')}>Release Date Descending</a>
-      }
-    ];
     return (
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
@@ -125,10 +105,8 @@ export default class ResultsPage extends React.Component {
             <div className='col-md-4 col-xs-12'>
               <h1 className='search-results-count'>{this.state.numFound}&nbsp; Search Results</h1>
             </div>
-            <div className='col-md-4 col-xs-12 right-text-md right-text-lg'>
-              <div className='search-sort-dropdown'>
-                <SimpleDropdown noBtnPadding items={sort_options} label={sort_lbl}/>
-              </div>
+            <div className='col-md-4 col-xs-12 right-text-md right-text-lg hide-xs'>
+              <SortDropdown searchCallback={this.storeAndConductSearch}/>
             </div>
             <div className='col-md-2'></div>
           </div>}
@@ -139,7 +117,7 @@ export default class ResultsPage extends React.Component {
               {this.state.numFound > 0 && <span>
                 <br/>
                 <div className='row'>
-                  <div className='col-xs-12 center-text '>
+                  <div className='col-xs-12 center-text hide-xs'>
                     <ReactPaginate pageLinkClassName='clickable' previousLinkClassName='clickable' nextLinkClassName='clickable' pageClassName='clickble' activeClassName='clickble' previousLabel="Prev" nextLabel="Next" breakLabel={break_lbl} breakClassName="break-me" pageCount={pageCount} marginPagesDisplayed={2} pageRangeDisplayed={3} forcePage={forcePage} onPageChange={this.handlePageClick} containerClassName="pagination" subContainerClassName="pages pagination" activeClassName="active"/>
                   </div>
                 </div>

@@ -1558,8 +1558,6 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
     margin-right: -3px;
   }
   .search-sidebar-filter-title {
-    margin-top: 0px;
-    margin-bottom: 0px;
   }
   /*Gets rid of the margins around the pagination buttons*/
   div>ul.pagination {
