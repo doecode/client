@@ -49,11 +49,11 @@ export default class OrgsModalContent extends React.Component {
                     <SpecificField field="DOE" label="DOE Organization?" helpTooltip='SponsorOrgDOEOrg' elementType="checkbox" toggleCallback={this.toggleCallback}  />
                     <SpecificField  field="organization_name" label="Name" helpTooltip='SponsorOrgName' elementType="select" allowCreate={true} placeholder="Enter or select from the list your organization" options={orgNames}   />
                     {data.getValue("primary_award") !== undefined &&
-                    <SpecificField  field="primary_award" label="Primary Award" helpTooltip='SponsorOrgContractNumber' elementType="input"  />
+                    <SpecificField  field="primary_award" label="Primary Award/Contract" helpTooltip='SponsorOrgContractNumber' elementType="input"  />
                     }
 
                     {this.props.data.getValue("award_numbers") !== undefined &&
-                    <SpecificField field="award_numbers" label="Additional Awards" helpTooltip='SponsorOrgAdditionalRewards' elementType="select" allowCreate={true} isArray={true} multi={true} placeholder="Enter any additional awards"   />
+                    <SpecificField field="award_numbers" label="Additional Awards/Contracts" helpTooltip='SponsorOrgAdditionalRewards' elementType="select" allowCreate={true} isArray={true} multi={true} placeholder="Enter any additional awards"   />
                     }
 
                     {this.props.data.getValue("br_codes") !== undefined &&

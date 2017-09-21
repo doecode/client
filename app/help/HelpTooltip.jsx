@@ -317,7 +317,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>A Budget and Reporting (B&amp;R) code is given to a project by the Department of Energy. The structure of a B&amp;R code parallels approved DOE PPAs (Program, Project or Activities). The code is used for executing the budget; reporting actual obligations, costs, and revenues; and controlling and measuring actual versus budgeted performance. Separate multiple codes with a semicolon.</span>
+          <span>A Budget and Reporting (B&amp;R) code is given to a project by the Department of Energy. The structure of a B&amp;R code parallels approved DOE PPAs (Program, Project or Activities). The code is used for executing the budget; reporting actual obligations, costs, and revenues; and controlling and measuring actual versus budgeted performance.</span>
         );
     } else if (this.props.item == "SponsorOrgContractNumber") {
       returnData = (this.props.shortVersion !== undefined)
@@ -325,7 +325,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>DOE award/contract number that is largely responsible for funding the project.</span>
+          <span>DOE award/contract number that is largely responsible for funding the project. At least one valid entry is required for Submittal.</span>
         );
     } else if (this.props.item == "SponsorOrgDOEOrg") {
       returnData = (this.props.shortVersion !== undefined)
@@ -333,8 +333,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>
-            Check the box if the code is sponsored by an organization within the Department of Energy.</span>
+          <span>Check this box if the Sponsoring Organization you are entering is an organization within the Department of Energy.</span>
         );
     } else if (this.props.item == "SponsorOrgFWPNum") {
       returnData = (this.props.shortVersion !== undefined)
