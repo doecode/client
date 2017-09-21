@@ -845,7 +845,7 @@ html, body {
 }
 
 .advanced-search-panel {
-//  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  //  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 .filter-header {
@@ -1353,16 +1353,33 @@ html, button, body, input, select, textarea, p {
   font-size: 13.6px;
 }
 
-.pagination-dropdown{
+.pagination-dropdown {
   background-color: #FFFFFF;
-  padding: 20px;
+  padding: 10px;
   position: absolute;
-  right: 0px;
-  top: 35px;
+  right: 60px;
+  top: 38px;
   z-index: 4;
   margin-right: 14px;
   margin-left: 14px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  border: solid 1px #ddd;
+  border-radius: 4px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pagination-dropdown::before {
+  position: absolute;
+  top: -6px;
+  right: 10px;
+  content: "";
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid white;
+  display: inline-block;
+}
+
+.pagination-input {
+  margin-top: 5px;
 }
 
 @keyframes spin {
@@ -1486,25 +1503,26 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   margin-bottom: 10px;
 }
 
-.custom-paginate-container{
-  display:inline-block;
+.custom-paginate-container {
+  display: inline-block;
 }
 
-.paginate-slider-arrow{
-  border-left:1px solid #A7A7A7;
-  border-right:1px solid #A7A7A7;
+.paginate-slider-arrow {
+  border-left: 1px solid #A7A7A7;
+  border-right: 1px solid #A7A7A7;
 }
 
-.range-container{
-    padding-left:5px;
-    padding-left:5px;
-    padding-top:5px;
-    padding-bottom:5px;
+.range-container {
+  padding-left: 5px;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-.inlineBlock{
-  display:inline-block;
+.inlineBlock {
+  display: inline-block;
 }
+
 
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchItem from './SearchItem';
-import ReactPaginate from 'react-paginate';
 import {doAjax, getQueryParam, getSearchSortDisplay} from '../utils/utils';
 import SearchData from '../stores/SearchData';
 import SearchField from '../field/SearchField';
@@ -47,6 +46,7 @@ export default class ResultsPage extends React.Component {
   }
 
   handlePageClick(data) {
+    console.log(JSON.stringify(data));
     searchData.setValue("start", searchData.getValue("rows") * data.selected);
     this.storeAndConductSearch();
   }
@@ -91,10 +91,6 @@ export default class ResultsPage extends React.Component {
 
     var forcePage = (searchData.getValue("start") / searchData.getValue("rows"));
 
-    console.log(JSON.stringify(searchData.fieldMap));
-
-    console.log("Page count: "+pageCount);
-    console.log("Current Page: "+(forcePage+1));
     return (
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
@@ -122,16 +118,6 @@ export default class ResultsPage extends React.Component {
             <div className="col-lg-6 col-md-8 col-xs-12 all-search-results-row">
               {this.state.numFound > 0 && <span>
                 <br/>
-                <div className='row right-text hide-xs center-text'>
-                  <div className='col-xs-12'>
-                    <PaginationButtons max={pageCount} currentVal={forcePage+1}/>
-                  </div>
-                </div>
-                <div className='row'>
-                  <div className='col-xs-12 center-text hide-xs'>
-                    <ReactPaginate pageLinkClassName='clickable' previousLinkClassName='clickable' nextLinkClassName='clickable' pageClassName='clickble' activeClassName='clickble' previousLabel="Prev" nextLabel="Next" breakLabel={break_lbl} breakClassName="break-me" pageCount={pageCount} marginPagesDisplayed={2} pageRangeDisplayed={3} forcePage={forcePage} onPageChange={this.handlePageClick} containerClassName="pagination" subContainerClassName="pages pagination" activeClassName="active"/>
-                  </div>
-                </div>
                 <div className="row">
                   <div className="col-xs-12 no-col-padding-left">
                     {this.state.results && this.state.results.length > 0 && <div>
@@ -141,12 +127,11 @@ export default class ResultsPage extends React.Component {
                     </div>}
                   </div>
                 </div>
-                <div className="row center-text">
-                  <div className="col-xs-12 center-text">
-                    <ReactPaginate pageLinkClassName='clickable' previousLinkClassName='clickable' nextLinkClassName='clickable' pageClassName='clickble' activeClassName='clickble' previousLabel="Prev" nextLabel="Next" breakLabel={break_lbl} breakClassName="break-me" pageCount={pageCount} marginPagesDisplayed={2} pageRangeDisplayed={3} forcePage={forcePage} onPageChange={this.handlePageClick} containerClassName="pagination" subContainerClassName="pages pagination" activeClassName="active"/>
+                <div className='row right-text '>
+                  <div className='col-xs-12'>
+                    <PaginationButtons max={pageCount} currentVal={forcePage + 1} refreshSearchCallback={this.handlePageClick}/>
                   </div>
                 </div>
-
               </span>}
               {this.state.numFound < 1 && <span>
                 <div className='col-xs-12 center-text'>
