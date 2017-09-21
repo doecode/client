@@ -242,27 +242,27 @@ export default class BiblioPage extends React.Component {
                             <div className="tab-content">
                               <div id="mla" className="tab-pane fade in active">
                                 <div className='row'>
-                                  <div className='col-xs-12 citation-format-div'><MLA data={metadata.fieldMap} /></div>
+                                  <div id="mla-clip" className='col-xs-12 citation-format-div'><MLA data={metadata.fieldMap} /></div>
                                 </div>
-                                <div className="text-right medium"><button className="pure-button clip-cite-bib" data-clipboard-target="#mla"><span className="fa fa-files-o"></span> Copy to clipboard</button></div>
+                                <div className="text-right medium"><button className="clip-cite-bib" data-clipboard-target="#mla-clip"><span className="fa fa-files-o"></span> Copy to clipboard</button></div>
                               </div>
                               <div id="apa" className="tab-pane fade">
                                 <div className='row'>
-                                  <div className='col-xs-12 citation-format-div'><APA data={metadata.fieldMap} /></div>
+                                  <div id="apa-clip" className='col-xs-12 citation-format-div'><APA data={metadata.fieldMap} /></div>
                                 </div>
-                                <div className="text-right medium"><button className="pure-button clip-cite-bib" data-clipboard-target="#apa"><span className="fa fa-files-o"></span> Copy to clipboard</button></div>
+                                <div className="text-right medium"><button className="clip-cite-bib" data-clipboard-target="#apa-clip"><span className="fa fa-files-o"></span> Copy to clipboard</button></div>
                               </div>
                               <div id="chicago" className="tab-pane fade">
                                 <div className='row'>
-                                  <div className='col-xs-12 citation-format-div'><Chicago data={metadata.fieldMap} /></div>
+                                  <div id="chicago-clip" className='col-xs-12 citation-format-div'><Chicago data={metadata.fieldMap} /></div>
                                 </div>
-                                <div className="text-right medium"><button className="pure-button clip-cite-bib" data-clipboard-target="#chicago"><span className="fa fa-files-o"></span> Copy to clipboard</button></div>
+                                <div className="text-right medium"><button className="clip-cite-bib" data-clipboard-target="#chicago-clip"><span className="fa fa-files-o"></span> Copy to clipboard</button></div>
                               </div>
                               <div id="bibtex" className="tab-pane fade">
                                 <div className='row'>
-                                  <div className='col-xs-12 citation-format-div'><Bibtex data={metadata.fieldMap} /></div>
+                                  <div id="bibtex-clip" className='col-xs-12 citation-format-div'><Bibtex data={metadata.fieldMap} /></div>
                                 </div>
-                                <div className="text-right medium"><button className="pure-button clip-cite-bib" data-clipboard-target="#bibtex"><span className="fa fa-files-o"></span> Copy to clipboard</button></div>
+                                <div className="text-right medium"><button className="clip-cite-bib" data-clipboard-target="#bibtex-clip"><span className="fa fa-files-o"></span> Copy to clipboard</button></div>
                               </div>
                             </div>
                           </div>

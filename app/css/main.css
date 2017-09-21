@@ -1482,6 +1482,25 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
   border: none !important;
 }
 
+ul.biblio-page-ul>li>a:hover {
+  text-decoration: underline;
+}
+
+.clip-cite-bib {
+  background-color: Transparent;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  padding: 10px;
+  color: #337ab7;
+}
+
+.clip-cite-bib:hover {
+  color: #23527c;
+  text-decoration: underline;
+}
+
 .input-label-adjusted {
   font-weight: normal;
   font-size: 16px;
