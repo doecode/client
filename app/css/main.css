@@ -695,6 +695,22 @@ html h3 {
   padding: 0 35px;
 }
 
+.header-side-text {
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 16px;
+  color: #f2f2f2;
+  font-weight: 300;
+  display:inline-block;
+  vertical-align: top;
+  padding-left:10px;
+  margin-left:10px;
+  padding-top:11.2px;
+  padding-bottom:11.2px;
+}
+
+.logo-header{
+  margin:0px;
+}
 
 /*VVVV MAKES THE FOOTER WORK VVVVV*/
 
@@ -854,12 +870,17 @@ html, body {
 }
 
 .adv-search-button {
-  background-image: none !important;
-  background-color: #FFFFFF !important;
-  border-color: #FFFFFF;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-  border: 1px solid #ccc;
-  border-left: none;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  position: absolute;
+  top: 7px;
+  right: 5px;
+  z-index: 2;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  color: #7cb342;
 }
 
 .adv-search-button-icon {
@@ -867,11 +888,8 @@ html, body {
   color: #7EAE49;
 }
 
-.adv-search-button:hover {
-  background-color: #FFFFFF !important;
-  border-color: #FFFFFF;
-  border: 1px solid #ccc;
-  border-left: none;
+.searchbar-container{
+    padding-top:7px;
 }
 
 .nav-menu {
@@ -1160,20 +1178,24 @@ ol.progtrckr li.progtrckr-done:hover:before {
 }
 
 .breadcrumbTrail {
-  font-size: 13.6px;
-  margin-top: 10px
+  font-size: 15px;
+  margin-top: 16px
 }
 
 .breadcrumbTrail a {
-  font-size: 13.6px;
+  font-size: 15px;
 }
 
-.search-btn-container {}
+.search-btn-container {
+
+}
 
 .search-btn {
-  background-color: #7EAE49;
-  background-image: none;
-  width: 61px;
+  font-size:16px;
+  padding-left:12.8px;
+  padding-right:12.8px;
+  padding-top:8px;
+  padding-bottom:8px;
 }
 
 .search-btn:hover {
@@ -1204,8 +1226,8 @@ label {
   display: none;
 }
 
-.search-checkbox + label {
-  background-color: rgb(230,230,230);
+.search-checkbox+label {
+  background-color: rgb(230, 230, 230);
   border-radius: 0px;
   display: inline-block;
   position: relative;
@@ -1213,28 +1235,28 @@ label {
   height: 14px;
 }
 
-.search-checkbox + label:hover {
-  background-color: rgb(204,204,204);
+.search-checkbox+label:hover {
+  background-color: rgb(204, 204, 204);
 }
 
-.search-checkbox:checked + label:hover {
-  background-color: rgb(14,100,125);
+.search-checkbox:checked+label:hover {
+  background-color: rgb(14, 100, 125);
 }
 
-.search-checkbox:checked + label {
-	background-color: rgb(42,161,192);
-	color: white;
+.search-checkbox:checked+label {
+  background-color: rgb(42, 161, 192);
+  color: white;
 }
 
-.search-checkbox:checked + label:after {
+.search-checkbox:checked+label:after {
   font: normal normal normal 14px/1 FontAwesome;
-	content: '\f00c';
-	font-size: 11px;
-	position: absolute;
-	top: 1px;
-	left:1px;
-	color: white;
-	line-height: 14px;
+  content: '\f00c';
+  font-size: 11px;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  color: white;
+  line-height: 14px;
 }
 
 .adv-search-dropdown {
@@ -1361,7 +1383,8 @@ label {
 }
 
 .header-logo-img {
-  width: 300px;
+  width: 290px;
+  padding-top:5px;
 }
 
 .navbar-logo-img {
@@ -1523,7 +1546,7 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
 }
 
 .search-for-filter-x {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #aaa;
   font-size: 13.6px;
   font-style: normal;
@@ -1596,10 +1619,10 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
     font-size: 20px !important;
   }
   .breadcrumbTrail {
-    font-size: 15px;
+    font-size: 13px;
   }
   .breadcrumbTrail a {
-    font-size: 15px;
+    font-size: 13px;
   }
   .search-for-sidebar-row {
     border-bottom: none;
@@ -1763,7 +1786,7 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
     padding-right: 0px;
   }
   .hide-sm {
-    display: none;
+    display: none !important;
   }
   .nav-menu-item {
     padding-left: 5px !important;
@@ -1857,7 +1880,7 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
     display: none;
   }
   .hide-md {
-    display: none;
+    display: none !important;
   }
   .right-text-md {
     text-align: right;
@@ -1894,7 +1917,7 @@ ul.biblio-page-ul>li>a:focus, ul.biblio-page-ul>li>a:hover {
     display: none;
   }
   .hide-lg {
-    display: none;
+    display: none !important;
   }
   .right-text-lg {
     text-align: right;

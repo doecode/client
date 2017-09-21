@@ -33,19 +33,22 @@ export default class Header extends React.Component {
           <div className='container hidden-xs visible-sm visible-md visible-lg header-search-container'>
             <br/>
             <br/>
-            <br/>
             <div className='row not-so-wide-row'>
-              <div className="col-sm-4 right-text">
-                <a href="/doecode">
-                  <img className='header-logo-img' src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode"/>
-                </a>
+              <div className='col-md-2 col-sm-12 hide-lg'></div>
+              <div className='col-lg-7 col-md-10 col-sm-12'>
+                <h1 className='logo-header'>
+                  <a href="/doecode">
+                    <img className='header-logo-img' src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode"/>
+                  </a>
+                  <span className='header-side-text'>U.S. Department of Energy<br/>
+                    Office of Scientific and Technical Information</span>
+                </h1>
               </div>
-              {/*Search Bar*/}
-              <div className='col-sm-8'>
-                <SearchBar searchbarSize='col-lg-9 col-md-9 col-sm-10 col-xs-6 no-col-padding-right'/>
+              <div className='col-md-2 col-sm-12 hide-lg'></div>
+              <div className='col-lg-5 col-md-10 col-sm-12'>
+                <SearchBar searchbarSize='col-lg-11 col-md-9 col-sm-10 col-xs-6 no-col-padding-right'/>
               </div>
             </div>
-            <br/>
             <br/>
           </div>
           {/*Actual Navbar*/}
