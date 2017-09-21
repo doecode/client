@@ -33,21 +33,6 @@ export default class BiblioSidebar extends React.Component {
       fulltextURL = ("http://" + fulltextURL);
     }
 
-    const citation_list = [
-      {
-        link: '#',
-        display: 'MLA'
-      }, {
-        link: '#',
-        display: 'APA'
-      }, {
-        link: '#',
-        display: 'Chicago'
-      }, {
-        link: '#',
-        display: 'Bibtex'
-      }
-    ];
     const export_metadata = [
       {
         customAnchor: true,
@@ -65,19 +50,19 @@ export default class BiblioSidebar extends React.Component {
       {
         customAnchor: true,
         display: (
-          <a href="" target="_blank" className="pure-menu-link social">
-            <span className="fa fa-pinterest pintrest"></span>&nbsp;Pinterest</a>
-        )
-      }, {
-        customAnchor: true,
-        display: (
-          <a href="" target="_blank" className="pure-menu-link social">
+          <a href={"https://www.linkedin.com/shareArticle?mini=true&url=" + window.location.href + "&title=DOE Research from DOE CODE&summary=&source="} target="_blank" className="pure-menu-link social">
             <span className="fa fa-linkedin linkedin"></span>&nbsp;LinkedIn</a>
         )
       }, {
         customAnchor: true,
         display: (
-          <a href="" target="_blank" className="pure-menu-link social">
+          <a href={"https://pinterest.com/pin/create/button/?url=&media=" + window.location.href + "&description="} target="_blank" className="pure-menu-link social">
+            <span className="fa fa-pinterest pintrest"></span>&nbsp;Pinterest</a>
+        )
+      }, {
+        customAnchor: true,
+        display: (
+          <a href={"http://www.tumblr.com/share?v=3&u=" + window.location.href + "&t="} target="_blank" className="pure-menu-link social">
             <span className="fa fa-tumblr tumblr"></span>&nbsp;Tumblr</a>
         )
       }
