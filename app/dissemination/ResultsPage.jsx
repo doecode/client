@@ -10,6 +10,7 @@ import staticContstants from '../staticJson/constantLists';
 import BreadcrumbTrail from '../fragments/BreadcrumbTrail';
 import SimpleDropdown from '../fragments/SimpleDropdown';
 import SortDropdown from './SortDropdown';
+import PaginationButtons from './PaginationButtons';
 
 const searchData = new SearchData();
 
@@ -77,18 +78,23 @@ export default class ResultsPage extends React.Component {
     ];
 
     //We only want to show a page number if there were any results found
+    var pageCount = Math.ceil(this.state.numFound / searchData.getValue("rows"));
     if (this.state.numFound > 1) {
       breadcrumbList.push({
         key: 'brdcrmb3',
-        value: ' /  Page ' + pageNum + ' of ' + Math.ceil(this.state.numFound / searchData.getValue("rows"))
+        value: ' /  Page ' + pageNum + ' of ' + pageCount
       });
     }
 
     var searchNumCounter = pagStartVal;
     const break_lbl = <a href="#">&hellip;</a>;
-    var pageCount = Math.ceil(this.state.numFound / searchData.getValue("rows"));
+
     var forcePage = (searchData.getValue("start") / searchData.getValue("rows"));
 
+    console.log(JSON.stringify(searchData.fieldMap));
+
+    console.log("Page count: "+pageCount);
+    console.log("Current Page: "+(forcePage+1));
     return (
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
@@ -116,6 +122,11 @@ export default class ResultsPage extends React.Component {
             <div className="col-lg-6 col-md-8 col-xs-12 all-search-results-row">
               {this.state.numFound > 0 && <span>
                 <br/>
+                <div className='row right-text hide-xs center-text'>
+                  <div className='col-xs-12'>
+                    <PaginationButtons max={pageCount} currentVal={forcePage+1}/>
+                  </div>
+                </div>
                 <div className='row'>
                   <div className='col-xs-12 center-text hide-xs'>
                     <ReactPaginate pageLinkClassName='clickable' previousLinkClassName='clickable' nextLinkClassName='clickable' pageClassName='clickble' activeClassName='clickble' previousLabel="Prev" nextLabel="Next" breakLabel={break_lbl} breakClassName="break-me" pageCount={pageCount} marginPagesDisplayed={2} pageRangeDisplayed={3} forcePage={forcePage} onPageChange={this.handlePageClick} containerClassName="pagination" subContainerClassName="pages pagination" activeClassName="active"/>
@@ -135,6 +146,7 @@ export default class ResultsPage extends React.Component {
                     <ReactPaginate pageLinkClassName='clickable' previousLinkClassName='clickable' nextLinkClassName='clickable' pageClassName='clickble' activeClassName='clickble' previousLabel="Prev" nextLabel="Next" breakLabel={break_lbl} breakClassName="break-me" pageCount={pageCount} marginPagesDisplayed={2} pageRangeDisplayed={3} forcePage={forcePage} onPageChange={this.handlePageClick} containerClassName="pagination" subContainerClassName="pages pagination" activeClassName="active"/>
                   </div>
                 </div>
+
               </span>}
               {this.state.numFound < 1 && <span>
                 <div className='col-xs-12 center-text'>
