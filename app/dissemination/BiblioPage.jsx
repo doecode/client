@@ -15,6 +15,7 @@ import MLA from '../citation/MLA';
 import APA from '../citation/APA';
 import Chicago from '../citation/Chicago';
 import Bibtex from '../citation/Bibtex';
+import Clipboard from 'clipboard'
 
 const metadata = new Metadata();
 
@@ -166,6 +167,9 @@ export default class BiblioPage extends React.Component {
       }
     ];
     const abstract = metadata.getValue("description");
+
+    new Clipboard('.clip-cite-bib');
+
     return (
       <div className="row not-so-wide-row">
         <div className="col-xs-12">
@@ -218,7 +222,7 @@ export default class BiblioPage extends React.Component {
                         </div>
                         <div className='row'>
                           <div className='col-xs-12'>
-                            <h3 className='citation-formats'>Citation Format</h3>
+                            <h3 className='citation-formats'>Citation Formats</h3>
                             <ul className="nav nav-tabs biblio-page-ul">
                               <li className="active">
                                 <a data-toggle="tab" href="#mla">MLA</a>
@@ -239,21 +243,25 @@ export default class BiblioPage extends React.Component {
                                 <div className='row'>
                                   <div className='col-xs-12 citation-format-div'><MLA data={metadata.fieldMap} /></div>
                                 </div>
+                                <div className="text-right medium"><button className="pure-button clip-cite-bib" data-clipboard-target="#mla"><span className="fa fa-files-o"></span> Copy to clipboard</button></div>
                               </div>
                               <div id="apa" className="tab-pane fade">
                                 <div className='row'>
                                   <div className='col-xs-12 citation-format-div'><APA data={metadata.fieldMap} /></div>
                                 </div>
+                                <div className="text-right medium"><button className="pure-button clip-cite-bib" data-clipboard-target="#apa"><span className="fa fa-files-o"></span> Copy to clipboard</button></div>
                               </div>
                               <div id="chicago" className="tab-pane fade">
                                 <div className='row'>
                                   <div className='col-xs-12 citation-format-div'><Chicago data={metadata.fieldMap} /></div>
                                 </div>
+                                <div className="text-right medium"><button className="pure-button clip-cite-bib" data-clipboard-target="#chicago"><span className="fa fa-files-o"></span> Copy to clipboard</button></div>
                               </div>
                               <div id="bibtex" className="tab-pane fade">
                                 <div className='row'>
                                   <div className='col-xs-12 citation-format-div'><Bibtex data={metadata.fieldMap} /></div>
                                 </div>
+                                <div className="text-right medium"><button className="pure-button clip-cite-bib" data-clipboard-target="#bibtex"><span className="fa fa-files-o"></span> Copy to clipboard</button></div>
                               </div>
                             </div>
                           </div>

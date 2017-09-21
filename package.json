@@ -48,6 +48,7 @@
   "dependencies": {
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
+    "clipboard": "^1.7.1",
     "compression": "^1.7.0",
     "express": "^4.15.3",
     "google-libphonenumber": "^3.0.0",
