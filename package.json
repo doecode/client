@@ -64,7 +64,6 @@
     "react-datepicker": "^0.40.0",
     "react-dom": "^15.4.2",
     "react-dropzone": "^3.12.2",
-    "react-paginate": "^4.4.4",
     "react-router-dom": "^4.1.2",
     "react-select": "^v1.0.0-rc.5",
     "react-stepzilla": "^4.0.0",

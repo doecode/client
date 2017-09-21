@@ -6,23 +6,16 @@ export default class PaginationButtons extends React.Component {
     super(props);
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.showCurrentSliderPage = this.showCurrentSliderPage.bind(this);
-    this.retriggerSearch = this.retriggerSearch.bind(this);
+    this.goToPage = this.goToPage.bind(this);
+    this.goBackAPage = this.goBackAPage.bind(this);
+    this.goForwardAPage = this.goForwardAPage.bind(this);
+    this.refreshSearch = this.refreshSearch.bind(this);
 
     this.state = {
       showDropdown: false,
       currentVal: this.props.currentVal,
       currentPropsVal: this.props.currentVal
     };
-  }
-
-  setWrapperRef(node) {
-    this.wrapperRef = node;
-  }
-
-  handleClickOutside(event) {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      console.log("Clicked outside");
-    }
   }
 
   toggleDropdown() {
@@ -35,8 +28,8 @@ export default class PaginationButtons extends React.Component {
     this.setState({currentVal: event.target.value});
   }
 
-  retriggerSearch() {
-    console.log("retriggering")
+  goToPage() {
+    this.refreshSearch(this.state.currentVal);
   }
 
   componentWillReceiveProps(newProps) {
@@ -45,14 +38,36 @@ export default class PaginationButtons extends React.Component {
     }
   }
 
+  goBackAPage() {
+    this.refreshSearch(this.state.currentVal - 1);
+  }
+
+  goForwardAPage() {
+    this.refreshSearch(this.state.currentVal + 1);
+  }
+
+  refreshSearch(newPageNum) {
+    this.setState({showDropdown: false});
+    this.props.refreshSearchCallback({
+      selected: (newPageNum - 1)
+    });
+  }
+
   render() {
+    var isPrevDisabled = (this.state.currentPropsVal == 1)
+      ? 'disabled'
+      : '';
+
+    var isNextDisabled = (this.state.currentPropsVal == this.props.max)
+      ? 'disabled'
+      : '';
     return (
       <div className='custom-paginate-container'>
-        <button type='button' className='pure-button'>Prev</button>
+        <button type='button' className='pure-button' disabled={isPrevDisabled} onClick={this.goBackAPage}>Prev</button>
         <button type='button' className='pure-button paginate-slider-arrow' onClick={this.toggleDropdown}>
           <span className='fa fa-caret-down'></span>
         </button>
-        <button type='button' className='pure-button'>Next</button>
+        <button type='button' className='pure-button' disabled={isNextDisabled} onClick={this.goForwardAPage}>Next</button>
         {this.state.showDropdown && <div className='pagination-dropdown'>
           <div className='row'>
             <div className='col-xs-12 right-text text-muted'>
@@ -60,9 +75,9 @@ export default class PaginationButtons extends React.Component {
             </div>
           </div>
           <div className='row'>
-            <div className='col-xs-8 no-col-padding-right'><input onChange={this.showCurrentSliderPage} type="range" min="1" max={this.props.max} defaultValue={this.state.currentVal} step="1"/></div>
-            <div className='col-xs-4 no-col-padding-left'>
-              <button type='button' className='pure-button' onClick={this.retriggerSearch}>&gt;&gt;</button>
+            <div className='col-xs-9 no-col-padding-right'><input className='pagination-input' onChange={this.showCurrentSliderPage} type="range" min="1" max={this.props.max} defaultValue={this.state.currentVal} step="1"/></div>
+            <div className='col-xs-3 minimal-col-padding-left left-text'>
+              <button type='button' className='pure-button' onClick={this.goToPage}>»</button>
             </div>
           </div>
         </div>}
