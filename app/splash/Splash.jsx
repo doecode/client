@@ -85,8 +85,8 @@ export default class Splash extends React.Component {
             <div className="col-md-3"></div>
             <div className="col-xs-12 static-content">
               <div className='row not-so-wide-row'>
-                <div className='col-lg-3 col-md-1'></div>
-                <div className='col-lg-6 col-md-10 col-xs-12'>
+                <div className='col-lg-2'></div>
+                <div className='col-lg-8 col-md-12 col-xs-12'>
                   {/*Logo*/}
                   <div className="row center-text">
                     <div className="col-xs-12">
@@ -96,15 +96,15 @@ export default class Splash extends React.Component {
                   <br/>
                   <br/>
                   <br/> {/*Search Bar*/}
-                  <div className="row center-text">
-                    <div className='col-sm-1'></div>
-                    {/*Search Bar*/}
-                    <span className='hide-xs'>
-                      <SearchBar searchbarSize='col-lg-8 col-md-8 col-sm-8 col-xs-9  no-col-padding-right' largerBar/>
-                    </span>
+                  <div className="row center-text hide-xs">
+                    <div className='col-lg-3 col-md-2 col-sm-2'></div>
+                    <div className='col-lg-9 col-md-10 col-sm-10'>
+                      {/*Search Bar*/}
+                      <SearchBar searchbarSize='col-lg-8 col-md-8 col-sm-8 col-xs-9  no-col-padding-right'/>
+                    </div>
                   </div>
                 </div>
-                <div className='col-lg-3 col-md-1 '></div>
+                <div className='col-lg-2'></div>
               </div>
 
               <div className='row'>
