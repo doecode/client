@@ -65,7 +65,7 @@ export default class Sidebar extends React.Component {
           <div className="col-md-1"></div>
           <div className="col-md-12 col-xs-12">
             <br/>
-            <h4 className="search-sidebar-filter-title">Refine By:</h4>
+            <h4 className="search-sidebar-filter-title">REFINE BY:</h4>
             <span className='search-for-filter-text search-for-filter-header'>ACCESSIBILITY</span>
             <div className="search-sidebar-text">
               {staticContstants.availabilities.map((row) => <div key={row.key}>

@@ -85,7 +85,7 @@ export default class SigninStatus extends React.Component {
             <span className='signin-text'>|</span>
             <span className="signin-btn-container">&nbsp;
             <a className="signin-btn" href="/doecode/register">
-              <span className="signin-btn-icon fa fa-user-plus signin-icon"></span>
+              <span className="signin-btn-icon fa fa-user-plus signin-icon hide-sm hide-lg hide-md"></span>
               <span className='signin-text'>&nbsp;Create Account</span>
             </a>
           </span>

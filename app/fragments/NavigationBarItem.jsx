@@ -32,8 +32,7 @@ export default class NavgationBarItem extends React.Component {
     return (
       <li className={this.li_class}>
         <a className={this.anchor_class} href={this.props.destination}>
-          <span className={this.fa_icon}></span>&nbsp;
-          {this.props.display_name}</a>
+          <span className={this.fa_icon}></span>&nbsp; {this.props.display_name}</a>
       </li>
     );
   }

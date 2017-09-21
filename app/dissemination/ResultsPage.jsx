@@ -69,7 +69,7 @@ export default class ResultsPage extends React.Component {
       {
         key: 'brdcrmb1',
         value: <span>
-            <a href='/doecode'>DOE CODE</a>&nbsp;&nbsp;/&nbsp;&nbsp;
+            <a href='/doecode'>DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
           </span>
       }, {
         key: 'brdcrmb2',
@@ -82,7 +82,7 @@ export default class ResultsPage extends React.Component {
     if (this.state.numFound > 1) {
       breadcrumbList.push({
         key: 'brdcrmb3',
-        value: ' /  Page ' + pageNum + ' of ' + pageCount
+        value:<span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Page&nbsp;{pageNum}&nbsp;of&nbsp;{pageCount}</span>
       });
     }
 

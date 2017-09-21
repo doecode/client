@@ -24,7 +24,7 @@ export default class NavgationBar extends React.Component {
                 <span className="icon-bar icon-bar-extra"></span>
                 <span className="icon-bar icon-bar-extra"></span>
               </button>
-              <img src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" className={img_class}/>
+              <a href='/doecode/'><img src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" className={img_class}/></a>
               <span className='hide-md hide-lg hide-sm pull-right'><SigninStatus/></span>
             </div>
             <div className="collapse navbar-collapse no-col-padding-right no-col-padding-left" id='header-nav-collapse'>
@@ -34,7 +34,6 @@ export default class NavgationBar extends React.Component {
                 <a className='whiteAnchor' href='/doecode/search'>Advanced Search</a>
               </div>
               <ul className='nav navbar-nav nav-menu'>
-                <NavBarItem current_page={this.current_page} destination="/doecode/" special="true" fa_icon="fa fa-home nav-menu-item-fa" display_name="Home"/>
                 <NavBarItem current_page={this.current_page} destination="/doecode/projects" special="true" fa_icon="fa fa-sign-in nav-menu-item-fa" display_name="Submit Software/Code"/>
                 <NavBarItem current_page={this.current_page} destination='/doecode/repository-services' special='true' fa_icon='fa fa-home nav-menu-item-fa' display_name='Repository Services'/>
                 <NavBarItem current_page={this.current_page} destination="/doecode/about" special="true" fa_icon="fa fa-info nav-menu-item-fa" display_name="About"/>
