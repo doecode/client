@@ -26,7 +26,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Software that is not Open Source and for which access must be granted by contacting a licensing official. Software is often Close Source because it is proprietary, sensitive, or has otherwise been deemed necessary for a limited distribution. A landing page URL is required for submitting Closed Source code, the URL should provide interested parties additional information on how they can obtain access to the code.</span>
+          <span>Software that is not Open Source and for which access must be granted by contacting a licensing official. Software is often Closed Source because it is proprietary, sensitive, or has otherwise been deemed appropriate for limited distribution only. A landing page URL is required for submitting Closed Source code; the URL should provide additional information on how to obtain access to the code.</span>
         );
     } else if (this.props.item == "ContactInformation") {
       returnData = (shortTooltip)
@@ -161,15 +161,15 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>Code is Open Source, but is not yet available on a public site. Interested users can contact the developer(s) or responsibly parties for information regarding access and (re)use. A URL is required for submitting Open Source, no publicly available repository, the URL is typically a landing page where interested parties can find out more information about obtaining access to the code.</span>
+          <span>Code is Open Source, but is not yet available in a public repository. Interested users can contact the developer(s) or responsible parties for information regarding access and (re)use. A landing page URL is required for submitting Open Source, no Publicly available repository code; the URL should provide additional information on how to obtain access to the code.</span>
         );
     } else if (this.props.item == "OpenSourcePublic") {
       returnData = (shortTooltip)
         ? (
-          <span></span>
+          <span>Software can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone in a public repository. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition.</span>
         )
         : (
-          <span>Software that can be used, changed and shared (in modified or unmodified form) by anyone. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See Open Source Initiative for more information and definitions.</span>
+          <span>Software can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone in a public repository. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See the <a href='https://opensource.org/'>Open Source Initiative</a> for more information and definitions.</span>
         );
     } else if (this.props.item == "OtherSpecialRequirements") {
       returnData = (shortTooltip)

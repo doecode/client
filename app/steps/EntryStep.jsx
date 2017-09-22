@@ -74,7 +74,7 @@ export default class EntryStep extends React.Component {
         </div>
         <div className="row">
           <div className="col-xs-12">
-            <MetadataField checked={accessibility === 'OS'} elementType="radio" label="Open Source, Publicly Available Repository" field="availability" value="OS" onChange={this.onRadioChange} helpTooltip='OpenSourcePublic'/>
+            <MetadataField checked={accessibility === 'OS'} elementType="radio" label="Open Source, Publicly Available Repository" field="availability" value="OS" onChange={this.onRadioChange} helpTooltip='OpenSourcePublic' tooltipShort/>
             <MetadataField checked={accessibility === 'ON'} elementType="radio" label="Open Source, No Publicly Available Repository" field="availability" value="ON" onChange={this.onRadioChange} helpTooltip='OpenSourceNotPublic'/>
             <MetadataField checked={accessibility === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange} helpTooltip='ClosedSource'/>
           </div>
