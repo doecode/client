@@ -247,7 +247,7 @@ export default class Field extends React.Component {
       return (
         <div className="form-group form-group-sm row">
           <div>
-            <label htmlFor={field}><input type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange}/> {label}</label>{this.props.properties.helpTooltip!=undefined &&<span>&nbsp; <HelpTooltip item={this.props.properties.helpTooltip}/></span>}
+            <label htmlFor={field}><input type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange}/> {label}</label>{this.props.properties.helpTooltip!=undefined &&<span>&nbsp; <HelpTooltip item={this.props.properties.helpTooltip} shortVersion={this.props.properties.tooltipShort}/></span>}
           </div>
         </div>
       );
@@ -268,12 +268,9 @@ export default class Field extends React.Component {
           </label>}
           {this.props.properties.helpTooltip!=undefined &&
             <span>&nbsp;
-              {this.props.properties.tooltipShort &&<span>
-                <HelpTooltip shortVersion item={this.props.properties.helpTooltip}/>
-              </span>}
-              {!this.props.properties.tooltipShort && <span>
-                <HelpTooltip item={this.props.properties.helpTooltip}/>
-              </span>}
+              <span>
+                <HelpTooltip item={this.props.properties.helpTooltip} shortVersion={this.props.properties.tooltipShort} />
+              </span>
             </span>}
           <div className={divStyle}>
             {input}
