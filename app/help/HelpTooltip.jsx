@@ -228,7 +228,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>If you select Open Source, publically available you must provide a unique URL which leads to the actual code repository. Please ensure you are providing the direct URL to the actual repository. As an example, the direct repository URL for DOE CODE is https://www.github.com/doecode/doecode whereas the project landing page is https://www.github.com/doecode.</span>
+          <span>If you select Open Source, publicly available you must provide a unique URL which leads to the actual code repository. Please ensure you are providing the direct URL to the actual repository. As an example, the direct repository URL for DOE CODE is https://www.github.com/doecode/doecode whereas the project landing page is https://www.github.com/doecode.</span>
         );
     } else if (this.props.item == "ResearchOrg") {
       returnData = (shortTooltip)

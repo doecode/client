@@ -665,6 +665,9 @@ html h3 {
   font-size: 16px;
   border-top-left-radius: 4px !important;
   border-bottom-left-radius: 4px !important;
+  box-shadow: rgb(221, 221, 221) 0px 1px 3px 0px inset;
+  height: 37px;
+  color: rgb(0, 0, 0);
 }
 
 .navbar .navbar-nav {
@@ -700,16 +703,20 @@ html h3 {
   font-size: 16px;
   color: #f2f2f2;
   font-weight: 300;
-  display:inline-block;
+  display: inline-block;
   vertical-align: top;
-  padding-left:10px;
-  margin-left:10px;
-  padding-top:11.2px;
-  padding-bottom:11.2px;
+  padding-left: 10px;
+  margin-left: 10px;
+  padding-top: 11.2px;
+  padding-bottom: 11.2px;
 }
 
-.logo-header{
-  margin:0px;
+.logo-header {
+  margin: 0px;
+}
+
+#publication-date-start-container{
+  margin-bottom:-15px;
 }
 
 /*VVVV MAKES THE FOOTER WORK VVVVV*/
@@ -888,8 +895,8 @@ html, body {
   color: #7EAE49;
 }
 
-.searchbar-container{
-    padding-top:7px;
+.searchbar-container {
+  padding-top: 7px;
 }
 
 .nav-menu {
@@ -1178,24 +1185,22 @@ ol.progtrckr li.progtrckr-done:hover:before {
 }
 
 .breadcrumbTrail {
-  font-size: 15px;
-  margin-top: 16px
+  font-size: 13.6px;
+  margin-top: 13.6px
 }
 
 .breadcrumbTrail a {
-  font-size: 15px;
+  font-size: 13.6px;
 }
 
-.search-btn-container {
-
-}
+.search-btn-container {}
 
 .search-btn {
-  font-size:16px;
-  padding-left:12.8px;
-  padding-right:12.8px;
-  padding-top:8px;
-  padding-bottom:8px;
+  font-size: 16px;
+  padding-left: 12.8px;
+  padding-right: 12.8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .search-btn:hover {
@@ -1266,7 +1271,7 @@ label {
   position: absolute;
   left: 0px;
   right: 0px;
-  top: 35px;
+  top: 37px;
   z-index: 4;
   margin-right: 14px;
   margin-left: 14px;
@@ -1384,7 +1389,7 @@ label {
 
 .header-logo-img {
   width: 290px;
-  padding-top:5px;
+  padding-top: 5px;
 }
 
 .navbar-logo-img {
@@ -1512,9 +1517,9 @@ ul.biblio-page-ul>li>a:hover {
 .clip-cite-bib {
   background-color: Transparent;
   border: none;
-  cursor:pointer;
+  cursor: pointer;
   overflow: hidden;
-  outline:none;
+  outline: none;
   padding: 10px;
   color: #337ab7;
 }
@@ -1608,6 +1613,47 @@ ul.biblio-page-ul>li>a:hover {
 }
 
 
+/*vv DATE BAR CHART ON THE SEARCH PAGE vv*/
+
+#date-range-slider {
+  max-width: 200px; //border: none !important;
+  background: none !important;
+  height: 3px !important;
+}
+
+.slider-btn {
+  border: 2px solid rgba(51, 122, 183, 0.5) !important;
+  cursor: pointer !important;
+  border-radius: 5px !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.slider-bar {
+  background-color: #999 !important;
+  border: 1px solid #ddd !important;
+  height: 3px !important;
+  opacity: 0.3 !important; //left: 0% !important;
+}
+
+.yearsDisplayContainer {
+  max-width: 200px;
+  padding-top: 5px;
+}
+
+.yearsDisplayValue {
+  font-size: 13.6px;
+}
+
+.homepage-subtext {
+  font-size: 26px;
+  color: white !important;
+}
+
+
+/*^^ DATE BAR CHART ON THE SEARCH PAGE ^^*/
+
+
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
 
 
@@ -1638,10 +1684,10 @@ ul.biblio-page-ul>li>a:hover {
     font-size: 20px !important;
   }
   .breadcrumbTrail {
-    font-size: 13px;
+    font-size: 13.6px;
   }
   .breadcrumbTrail a {
-    font-size: 13px;
+    font-size: 13.6px;
   }
   .search-for-sidebar-row {
     border-bottom: none;

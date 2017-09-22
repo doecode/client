@@ -21,6 +21,7 @@ export default class ResultsPage extends React.Component {
     this.handlePageClick = this.handlePageClick.bind(this);
     this.refreshSearch = this.refreshSearch.bind(this);
     this.storeAndConductSearch = this.storeAndConductSearch.bind(this);
+    this.constructYearsList = this.constructYearsList.bind(this);
     this.state = {
       results: undefined,
       numFound: 1
@@ -46,7 +47,6 @@ export default class ResultsPage extends React.Component {
   }
 
   handlePageClick(data) {
-    console.log(JSON.stringify(data));
     searchData.setValue("start", searchData.getValue("rows") * data.selected);
     this.storeAndConductSearch();
   }
@@ -54,6 +54,37 @@ export default class ResultsPage extends React.Component {
   storeAndConductSearch() {
     window.sessionStorage.latestSearch = JSON.stringify(searchData.getData());
     doAjax('POST', '/doecode/api/search/', this.parseSearchResponse, searchData.getData(), this.parseErrorResponse);
+  }
+
+  constructYearsList() {
+    //Facet Data
+    var years_bargraph_style = 'stroke-color: #337ab7; stroke-opacity: 0.6; stroke-width: 1; fill-color: #337ab7; fill-opacity: 0.2';
+    var years_list = [
+      [
+        'Year',
+        'Results', {
+          role: 'style'
+        }
+      ]
+    ];
+
+    years_list.push([
+      new Date(1951, 0, 1),
+      300,
+      years_bargraph_style
+    ]);
+    years_list.push([
+      new Date(1946, 0, 1),
+      839,
+      years_bargraph_style
+    ]);
+    years_list.push([
+      new Date(1950, 0, 1),
+      500,
+      years_bargraph_style
+    ]);
+
+    return years_list;
   }
 
   render() {
@@ -81,8 +112,7 @@ export default class ResultsPage extends React.Component {
     var pageCount = Math.ceil(this.state.numFound / searchData.getValue("rows"));
     if (this.state.numFound > 1) {
       breadcrumbList.push({
-        key: 'brdcrmb3',
-        value:<span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Page&nbsp;{pageNum}&nbsp;of&nbsp;{pageCount}</span>
+        key: 'brdcrmb3', value: <span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Page&nbsp;{pageNum}&nbsp;of&nbsp;{pageCount}</span>
       });
     }
 
@@ -91,6 +121,9 @@ export default class ResultsPage extends React.Component {
 
     var forcePage = (searchData.getValue("start") / searchData.getValue("rows"));
 
+    var facetData = {
+      release_dates: this.constructYearsList()
+    };
     return (
       <div className="row not-so-wide-row">
         <div className='col-xs-12'>
@@ -114,7 +147,7 @@ export default class ResultsPage extends React.Component {
           </div>}
           <div className='row'>
             <div className='col-lg-2'></div>
-            <Sidebar sidebarClass="col-lg-2 col-md-4 col-xs-12 sidebar" refreshSearch={this.refreshSearch}/>
+            <Sidebar sidebarClass="col-lg-2 col-md-4 col-xs-12 sidebar" refreshSearch={this.refreshSearch} facetData={facetData}/>
             <div className="col-lg-6 col-md-8 col-xs-12 all-search-results-row">
               {this.state.numFound > 0 && <span>
                 <br/>

@@ -8,6 +8,7 @@ import SearchField from '../field/SearchField';
 import SimpleCollapsible from '../fragments/SimpleCollapsible';
 import SearchResultsDescription from '../fragments/SearchResultsDescription';
 import SortDropdown from './SortDropdown';
+import DateColumnChart from './DateColumnChart';
 
 const searchData = new SearchData();
 
@@ -76,7 +77,6 @@ export default class Sidebar extends React.Component {
           <div className="col-md-1"></div>
         </div>
         <div className="row">
-          <div className="col-md-1"></div>
           <div className="col-md-12 col-xs-12">
             <br/>
             <span className='search-for-filter-text search-for-filter-header'>LICENSES</span>
@@ -86,8 +86,14 @@ export default class Sidebar extends React.Component {
               </div>)}
             </div>
           </div>
-          <div className="col-md-1"></div>
         </div>
+        {/*
+        <div className='row'>
+          <div className='col-xs-12'>
+            <DateColumnChart minDate='0' maxDate='300' years={this.props.facetData.release_dates}/>
+          </div>
+        </div>
+        */}
       </span>
     );
   }

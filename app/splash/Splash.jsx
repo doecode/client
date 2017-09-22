@@ -79,7 +79,6 @@ export default class Splash extends React.Component {
               </div>
             </div>
           </div>
-          <br/>
           <br/> {/*The rest of the content*/}
           <div className="row">
             <div className="col-md-3"></div>
@@ -91,6 +90,15 @@ export default class Splash extends React.Component {
                   <div className="row center-text">
                     <div className="col-xs-12">
                       <img src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" className='header-logo-img'/>
+                    </div>
+                  </div>
+                  <br/>
+                  <br/>
+                  <div className='row center-text'>
+                    <div className='col-xs-12 homepage-subtext'>
+                      U.S. Department of Energy
+                      <br/>
+                      Office of Scientific and Technical Information
                     </div>
                   </div>
                   <br/>

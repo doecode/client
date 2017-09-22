@@ -79,7 +79,7 @@ export default class SearchBar extends React.Component {
           </div>
           {/*Advanced search dropdown*/}
           {this.state.show_dropdown && <div className={this.advDropdownStyles}>
-            <div className='col-xs-12 '>
+            <div className='col-xs-12 pure-form'>
               <div className='row adv-search-dropdown-title-row'>
                 <div className='col-xs-12 no-col-padding-left left-text adv-search-dropdown-label'>
                   Advanced Search options
@@ -108,13 +108,13 @@ export default class SearchBar extends React.Component {
               </div>
               <div className="row">
                 <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
-                  Publication Date:
+                  Release Date:
                 </div>
-                <div className="col-lg-5 col-xs-12 text-left ">
+                <div id='publication-date-start-container' className="col-lg-7 col-md-5 col-xs-12 text-left ">
                   <SearchField field="date_earliest" elementType="date" noExtraLabelText/>
                 </div>
-                <div className='col-lg-1 no-col-padding-left to-field adv-search-dropdown-label'>to</div>
-                <div className="col-lg-5 col-xs-12 ">
+                <div className='col-lg-1 col-md-1 no-col-padding-left to-field adv-search-dropdown-label'>to</div>
+                <div className="col-lg-12 col-xs-12 ">
                   <SearchField field="date_latest" elementType="date" noExtraLabelText/>
                 </div>
               </div>
