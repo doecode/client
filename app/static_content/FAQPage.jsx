@@ -165,7 +165,7 @@ export default class FAQ extends React.Component {
               </ul>
             </div>
             <div>
-              Required Metadata to Submit to the Department of Energy through DOE CODE
+              Required Metadata to Submit to the Department of Energy through DOE CODE:
               <ul>
                 <li>Software Availability</li>
                 <li>Repository Link* or Landing Page</li>

@@ -73,7 +73,7 @@ export default class Policy extends React.Component {
           </p>
           <br/>
           <p>
-            <strong>Required Metadata to Submit to the Department of Energy through DOE CODE</strong>
+            <strong>Required Metadata to Submit to the Department of Energy through DOE CODE:</strong>
             <ul>
               <li>Software Availability</li>
               <li>Repository Link</li>
