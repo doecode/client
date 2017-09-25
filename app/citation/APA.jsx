@@ -1,7 +1,7 @@
 import React from 'react';
 import DelimitedDisplayList from '../fragments/DelimitedDisplayList';
 import moment from 'moment';
-import {combineAuthorLists} from '../utils/utils';
+import {combineAuthorLists, joinWithDelimiters} from '../utils/utils';
 
 export default class APA extends React.Component {
   constructor(props) {
@@ -9,26 +9,59 @@ export default class APA extends React.Component {
   }
 
   render() {
+
+    let needSpacing = false;
+
     /*Authors*/
-    var modified_author_list = combineAuthorLists(this.props.data.contributors, this.props.data.developers);
+    let modified_author_list = combineAuthorLists(this.props.data.contributors, this.props.data.developers);
+    let authorsText = joinWithDelimiters(modified_author_list, ", ", ", & ");
 
-    const delimiter = <span>,&nbsp;</span>;
+    if (authorsText)
+      authorsText = (needSpacing ? " " : "") + authorsText + (authorsText.endsWith(".") ? "" : ".");
+
+    needSpacing = needSpacing || authorsText;
+
+
     /*Release Date*/
-    var release_date = (this.props.data.release_date)
-      ? moment(this.props.data.release_date, "YYYY-MM-DD").format('YYYY, MMMM D')
-      : '';
+    let releaseDate = (this.props.data.release_date
+      ? (needSpacing ? " " : "") + "(" + moment(this.props.data.release_date, "YYYY-MM-DD").format('YYYY, MMMM D') + ")."
+      : '');
 
-    var sponsoring_orgs_list = [];
-    this.props.data.sponsoring_organizations.forEach(function(item) {
-      sponsoring_orgs_list.push(item.organization_name);
-    });
+    needSpacing = needSpacing || releaseDate;
+
+
+    /*Software Title*/
+    let softwareTitle = this.props.data.software_title && <span className='italic-text'>{(needSpacing ? " " : "") + this.props.data.software_title}.</span>;
+
+    needSpacing = needSpacing || softwareTitle;
+
+
+    /*Computer Software*/
+    let computerSoftware = (needSpacing ? " " : "") + "[Computer software].";
+
+    needSpacing = needSpacing || computerSoftware;
+
+
+    /*URL*/
+    let url = (this.props.data.repository_link ? (needSpacing ? " " : "") + this.props.data.repository_link + "." : "");
+
+    needSpacing = needSpacing || url;
+
+
+    /*DOI*/
+    let doi = (needSpacing ? " " : "") + (this.props.data.doi ? "doi:" + this.props.data.doi + "." : "");
+
+    needSpacing = needSpacing || doi;
+
+
     return (
       <div>
-        <DelimitedDisplayList items={modified_author_list} last_delimiter='&nbsp;&amp;&nbsp;' keyprefix='authors-' delimiter={delimiter}/>&nbsp;
-        <span>({release_date})&nbsp;</span>
-        <span className='italic-text'>{this.props.data.software_title}.</span>&nbsp;[Computer software].&nbsp;
-        <span>{this.props.data.repository_link && <span>{this.props.data.repository_link}.&nbsp;</span>}</span>
-        &nbsp;{this.props.data.doi && <span>doi:{this.props.data.doi}</span>}
+        {authorsText}
+        {releaseDate}
+        {softwareTitle}
+        {computerSoftware}
+        {url}
+        {doi}
       </div>
     );
   }

@@ -400,23 +400,46 @@ function addMetaTags(list) {
   });
 }
 
+function combineName(first, middle, last) {
+  let fullName = (last ? last : "");
+  fullName += (fullName && first ? ", " : "") + (first ? first : "");
+  fullName += (fullName && middle ? " " : "") + (middle ? middle.substr(0, 1) + "." : "");
+
+  return fullName;
+}
+
+function itemListToNameArray(itemList) {
+  let listArr = [];
+  itemList.forEach(function(item) {
+    let fullName = combineName(item.first_name, item.middle_name, item.last_name);
+
+    if (fullName)
+      listArr.push(fullName);
+  });
+
+  return listArr;
+}
+
 function combineAuthorLists(list1, list2) {
-  var modified_author_list = [];
-  list1.forEach(function(item) {
-    var cont_name = item.last_name + ' ' + item.first_name;
-    if (item.middle_name) {
-      cont_name += (' ' + item.middle_name.substr(0, 1) + '.');
-    }
-    modified_author_list.push(cont_name);
-  });
-  list2.forEach(function(item) {
-    var dev_name = item.last_name + ' ' + item.first_name;
-    if (item.middle_name) {
-      dev_name += (' ' + item.middle_name.substr(0, 1) + '.');
-    }
-    modified_author_list.push(dev_name);
-  });
-  return modified_author_list;
+  let list1Arr = itemListToNameArray(list1);
+  let list2Arr = itemListToNameArray(list2);
+
+  return list1Arr.concat(list2Arr);
+}
+
+function joinWithDelimiters(list, delimiter, lastDelimiter) {
+  let result = "";
+  let listEnd = "";
+
+  if (lastDelimiter && list.length > 1)
+    listEnd = list.pop();
+
+  result = list.join(delimiter);
+
+  if (listEnd)
+    result += lastDelimiter + listEnd;
+
+  return result;
 }
 
 function getSearchSortDisplay(short_val){
@@ -449,4 +472,5 @@ export {addMetaTags};
 export {addBiblio};
 export {getAvailabilityDisplay};
 export {combineAuthorLists};
+export {joinWithDelimiters};
 export {getSearchSortDisplay};
