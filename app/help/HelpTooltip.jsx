@@ -363,8 +363,8 @@ export default class HelpTooltip extends React.Component {
           <span>
             If you select&nbsp;
             <strong>Open Source</strong>,&nbsp;
-            <strong>no publicly available repository</strong>&nbsp; OR&nbsp;
-            <strong>Closed Source</strong>&nbsp; you must provide a unique URL which leads to the landing page of the software. The landing page should provide information regarding how to access the source code, point of contact, and licensing information.
+            <strong>no publicly available repository</strong> OR&nbsp;
+            <strong>Closed Source</strong> you must provide a unique URL which leads to the landing page of the software. The landing page should provide information regarding how to access the source code, point of contact, and licensing information.
           </span>
         );
     } else if (this.props.item == 'FileUpload') {
