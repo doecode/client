@@ -18,17 +18,20 @@ export default class SearchBar extends React.Component {
     this.storeSearch = this.storeSearch.bind(this);
     this.handleAdvancedSearchClick = this.handleAdvancedSearchClick.bind(this);
 
-    if (this.props.largerBar !== undefined) {
-      this.searchBarStyles = "form-control input-lg search-box";
-      this.advSearchButtonStyles = "adv-search-button hide-xs";
-      this.searchButtonStyles = "pure-button button-success search-btn ";
-      this.advDropdownStyles = "adv-search-dropdown adv-search-dropdown-lg row";
-    } else {
-      this.searchBarStyles = "form-control pure-input-1 search-box";
-      this.advSearchButtonStyles = "adv-search-button hide-xs";
-      this.searchButtonStyles = "pure-button button-success search-btn";
-      this.advDropdownStyles = "adv-search-dropdown row";
+    this.searchBarStyles = "form-control pure-input-1 search-box";
+    this.advSearchButtonStyles = "adv-search-button hide-xs";
+    this.searchButtonStyles = "pure-button button-success search-btn";
+    this.advDropdownStyles = "adv-search-dropdown row";
+    this.advSearchIconStyles = "fa fa-caret-down adv-search-button-icon";
+
+    if (this.props.isHomepage) {
+      this.searchBarStyles += "  homepage-searchbar";
+      this.searchButtonStyles += " homepage-search-btn";
+      this.advSearchButtonStyles += " homepage-adv-search-btn";
+      this.advSearchIconStyles+=" homepage-adv-search-icon";
+      this.advDropdownStyles += " homepage-adv-search-dropdown";
     }
+
   }
   onAllFieldsChange(event) {
     this.setState({"all_fields": event.target.value});
@@ -74,7 +77,7 @@ export default class SearchBar extends React.Component {
           <div>
             <input id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className={this.searchBarStyles} placeholder="Search DOE CODE for published software entries"/>
             <button onClick={this.doAdvancedSearch} className={this.advSearchButtonStyles} type='button'>
-              <span className="fa fa-caret-down adv-search-button-icon"></span>
+              <span className={this.advSearchIconStyles}></span>
             </button>
           </div>
           {/*Advanced search dropdown*/}

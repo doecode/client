@@ -108,7 +108,7 @@ export default class Splash extends React.Component {
                     <div className='col-lg-3 col-md-2 col-sm-2'></div>
                     <div className='col-lg-9 col-md-10 col-sm-10'>
                       {/*Search Bar*/}
-                      <SearchBar searchbarSize='col-lg-8 col-md-8 col-sm-8 col-xs-9  no-col-padding-right'/>
+                      <SearchBar isHomepage searchbarSize='col-lg-8 col-md-8 col-sm-8 col-xs-9 no-col-padding-right'/>
                     </div>
                   </div>
                 </div>

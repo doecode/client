@@ -661,6 +661,26 @@ html h3 {
   background-image: linear-gradient(rgb(30, 111, 146), rgb(1, 53, 88) 100%);
 }
 
+.homepage-searchbar {
+  height: 52px !important;
+}
+
+.homepage-search-btn {
+  height: 51px !important;
+}
+
+.homepage-adv-search-btn {
+  top: 12px !important;
+}
+
+.homepage-adv-search-icon{
+  font-size:30px !important;
+}
+
+.homepage-adv-search-dropdown{
+  top:52px !important;
+}
+
 .search-box {
   font-size: 16px;
   border-top-left-radius: 4px !important;
@@ -715,9 +735,10 @@ html h3 {
   margin: 0px;
 }
 
-#publication-date-start-container{
-  margin-bottom:-15px;
+#publication-date-start-container {
+  margin-bottom: -15px;
 }
+
 
 /*VVVV MAKES THE FOOTER WORK VVVVV*/
 
@@ -1650,6 +1671,18 @@ ul.biblio-page-ul>li>a:hover {
   color: white !important;
 }
 
+.first-signin-text {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dropdown-toggle-arrow {
+  color: #ccc;
+}
+
+.nav-menu li:last-child {
+  border-right: none;
+}
+
 
 /*^^ DATE BAR CHART ON THE SEARCH PAGE ^^*/
 
@@ -1932,9 +1965,6 @@ ul.biblio-page-ul>li>a:hover {
   .nav-menu li {
     border-right: 1px solid rgba(255, 255, 255, 0.2);
   }
-  .nav-menu-item-special {
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
-  }
   .biblio-page-header {
     text-align: right;
   }
@@ -1971,9 +2001,6 @@ ul.biblio-page-ul>li>a:hover {
 @media only screen and (min-width: 1200px) {
   .nav-menu li {
     border-right: 1px solid rgba(255, 255, 255, 0.2);
-  }
-  .nav-menu-item-special {
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
   }
   .biblio-page-header {
     text-align: right;

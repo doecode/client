@@ -43,7 +43,7 @@ export default class SimpleDropdown extends React.Component {
     return (
       <span className="dropdown">
         <button className={btn_class} type="button" data-toggle="dropdown">{this.props.label}
-        </button>{this.props.noToggleArrow === undefined && <span className='fa fa-angle-down'></span>}
+        </button>{this.props.noToggleArrow === undefined && <span className='fa fa-angle-down dropdown-toggle-arrow'></span>}
         <ul className={ul_class}>
           {listItems}
         </ul>
