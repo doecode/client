@@ -24,6 +24,7 @@ export default class ResultsPage extends React.Component {
     this.constructYearsList = this.constructYearsList.bind(this);
     this.state = {
       results: undefined,
+      facets: undefined,
       numFound: 1
     };
   }
@@ -34,7 +35,7 @@ export default class ResultsPage extends React.Component {
 
   parseSearchResponse(data) {
     window.scrollTo(0, 0);
-    this.setState({"results": data.docs, numFound: data.num_found});
+    this.setState({"results": data.docs, numFound: data.num_found, facets: data.facets});
   }
 
   parseErrorResponse() {
@@ -57,7 +58,9 @@ export default class ResultsPage extends React.Component {
   }
 
   constructYearsList() {
-    //Facet Data
+    var facet_data = {};
+
+    //Styles and structure for the years bar chart
     var years_bargraph_style = 'stroke-color: #337ab7; stroke-opacity: 0.6; stroke-width: 1; fill-color: #337ab7; fill-opacity: 0.2';
     var years_list = [
       [
@@ -68,23 +71,43 @@ export default class ResultsPage extends React.Component {
       ]
     ];
 
-    years_list.push([
-      new Date(1951, 0, 1),
-      300,
-      years_bargraph_style
-    ]);
-    years_list.push([
-      new Date(1946, 0, 1),
-      839,
-      years_bargraph_style
-    ]);
-    years_list.push([
-      new Date(1950, 0, 1),
-      500,
-      years_bargraph_style
-    ]);
+    var earliest_year = 0;
+    var latest_year = 0;
 
-    return years_list;
+    //If we had facet data, go through, and pull out the year data
+    if (this.state.facets) {
+      //In the facets for years and their associated counts, the key is the year, and the value is the count for that year
+      var just_years = [];
+      for (var x in this.state.facets) {
+        var facet_year = x.toString().substr(0, 4);
+        just_years.push(x);
+        years_list.push([
+          new Date(facet_year, 0, 1),
+          this.state.facets[x],
+          years_bargraph_style
+        ]);
+      }
+
+      if (just_years.length > 0) {
+        earliest_year = parseInt(just_years[0]);
+        latest_year = parseInt(just_years[0]);
+        just_years.forEach(function(row) {
+          var row_num = parseInt(row);
+          if (row_num < earliest_year) {
+            earliest_year = row_num;
+          }
+          if (row_num > latest_year) {
+            latest_year = row_num;
+          }
+        });
+      }
+
+    }
+
+    facet_data.min_year = earliest_year;
+    facet_data.max_year = latest_year;
+    facet_data.years_list = years_list;
+    return facet_data;
   }
 
   render() {
