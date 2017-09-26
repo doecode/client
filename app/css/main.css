@@ -583,6 +583,16 @@ html h3 {
   border-bottom: 1px solid #ddd;
 }
 
+.search-for-modify-search {
+  font-size: 13.6px;
+  opacity: 0.7;
+  font-weight: 300;
+}
+
+.modify-search-glass{
+  opacity:0.35;
+}
+
 .rounded {
   border-radius: .25rem;
 }
@@ -687,6 +697,7 @@ html h3 {
 
 .homepage-searchbar {
   height: 52px !important;
+  font-size: 20px !important;
 }
 
 .homepage-search-btn {
@@ -1632,7 +1643,7 @@ ul.biblio-page-ul>li>a:hover {
 }
 
 .search-for-filter-crumb {
-  color:#999;
+  color: #999;
   font-style: italic;
 }
 

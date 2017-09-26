@@ -8,6 +8,11 @@ export default class SearchResultsDescription extends React.Component {
   constructor(props) {
     super(props);
     this.removeFilter = this.removeFilter.bind(this);
+    this.modifySearchAction = this.modifySearchAction.bind(this);
+  }
+
+  modifySearchAction() {
+    window.location.href = '/doecode/search';
   }
 
   removeFilter(field, value) {
@@ -72,33 +77,28 @@ export default class SearchResultsDescription extends React.Component {
     return (
       <div>
         {!targetedSearch && <div>All Records</div>}
-        {
-        searchDescriptionArr.map(
-          function (row, index) {
+        {searchDescriptionArr.map(function(row, index) {
 
           if (row.value instanceof Array) {
             return (
               <div key={index}>
                 <span className='search-for-filter-text search-for-filter-header'>{row.displayField}:&nbsp;</span>
-                <br/>
-                {
-                  row.value.map(
-                    function (data, idx) {
-                      let display = (row.field == "accessibility" ? getAvailabilityDisplay(data) : data);
-                      return (
-                        <span key={index + "-" + idx}>
-                          {idx != 0 && <span>, </span>}
-                          <span className='search-for-filter-text'>{display}</span>&nbsp;
-                          <span className='search-for-filter-x clickable' onClick={() => self.removeFilter(row.field, data)}>[&nbsp;&times;&nbsp;]</span>
-                        </span>
-                      )
-                    }
+                <br/> {row.value.map(function(data, idx) {
+                  let display = (row.field == "accessibility"
+                    ? getAvailabilityDisplay(data)
+                    : data);
+                  return (
+                    <span key={index + "-" + idx}>
+                      {idx != 0 && <span>,
+                      </span>}
+                      <span className='search-for-filter-text'>{display}</span>&nbsp;
+                      <span className='search-for-filter-x clickable' onClick={() => self.removeFilter(row.field, data)}>[&nbsp;&times;&nbsp;]</span>
+                    </span>
                   )
-                }
+                })}
               </div>
             )
-          }
-          else {
+          } else {
             return (
               <div key={index}>
                 <span className='search-for-filter-text search-for-filter-header'>{row.displayField}:&nbsp;</span>
@@ -108,8 +108,12 @@ export default class SearchResultsDescription extends React.Component {
               </div>
             )
           }
-          }
-        )}
+        })}
+        {searchDescriptionArr.length > 0 && <div className='center-text'>
+          <br/>
+          <span className='clickable search-for-modify-search' onClick={this.modifySearchAction}>[&nbsp;<span className='fa fa-search modify-search-glass'></span>&nbsp;modify this search&nbsp;]</span>
+        </div>}
+
       </div>
     );
   }
