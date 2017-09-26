@@ -77,7 +77,7 @@ export default class BiblioSidebar extends React.Component {
                 {(doi && fieldMapdata.release_date) && <span>
                   DOI:&nbsp;<a href={doi} target='_blank' className='biblio-sidebar-traditional-anchor'>{fieldMapdata.doi}</a>
                   <br/>
-                  <span className='text-muted doi-subnotice'>Select the DOI to obtain a copy of this journal article from the publisher.</span>
+                  <span className='text-muted doi-subnotice'></span>
                   <br/>
                   <br/>
                 </span>}

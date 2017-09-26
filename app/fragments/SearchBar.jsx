@@ -2,6 +2,9 @@ import React from 'react';
 import SearchData from '../stores/SearchData';
 import AdvancedSearchButton from '../dissemination/AdvancedSearchButton';
 import SearchField from '../field/SearchField';
+import DatePicker from 'react-datepicker';
+import 'react-select/dist/react-select.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const searchData = new SearchData();
 export default class SearchBar extends React.Component {
@@ -9,7 +12,9 @@ export default class SearchBar extends React.Component {
     super(props);
     this.state = {
       all_fields: searchData.getValue("all_fields"),
-      show_dropdown: false
+      show_dropdown: false,
+      date_earliest: searchData.getValue("date_earliest"),
+      date_latest: searchData.getValue("date_latest")
     };
     this.onAllFieldsChange = this.onAllFieldsChange.bind(this);
     this.search = this.search.bind(this);
@@ -17,6 +22,7 @@ export default class SearchBar extends React.Component {
     this.triggerSearch = this.triggerSearch.bind(this);
     this.storeSearch = this.storeSearch.bind(this);
     this.handleAdvancedSearchClick = this.handleAdvancedSearchClick.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
 
     this.searchBarStyles = "form-control pure-input-1 search-box";
     this.advSearchButtonStyles = "adv-search-button hide-xs";
@@ -28,7 +34,7 @@ export default class SearchBar extends React.Component {
       this.searchBarStyles += "  homepage-searchbar";
       this.searchButtonStyles += " homepage-search-btn";
       this.advSearchButtonStyles += " homepage-adv-search-btn";
-      this.advSearchIconStyles+=" homepage-adv-search-icon";
+      this.advSearchIconStyles += " homepage-adv-search-icon";
       this.advDropdownStyles += " homepage-adv-search-dropdown";
     }
 
@@ -64,6 +70,18 @@ export default class SearchBar extends React.Component {
   handleAdvancedSearchClick(event) {
     this.storeSearch();
     window.location.href = '/doecode/search';
+  }
+
+  handleDateChange(value, field) {
+    var newDateValue = (value != null)
+      ? value
+      : '';
+    searchData.setValue(field, newDateValue);
+    if (field == 'date_earliest') {
+      this.setState({'date_earliest': newDateValue});
+    } else if (field == 'date_latest') {
+      this.setState({'date_latest': newDateValue});
+    }
   }
 
   render() {
@@ -113,14 +131,14 @@ export default class SearchBar extends React.Component {
                 <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                   Release Date:
                 </div>
-                <div id='publication-date-start-container' className="col-lg-7 col-md-5 col-xs-12 text-left ">
-                  <SearchField field="date_earliest" elementType="date" noExtraLabelText/>
+                <div className="col-xs-12 text-left no-col-padding-left">
+                  <DatePicker name='date_earliest' placeholderText="Click to select a date" selected={this.state.date_earliest} onChange={(e) => this.handleDateChange(e, 'date_earliest')} showMonthDropdown showYearDropdown dropdownMode="select"/>&nbsp;&nbsp;&nbsp;to
                 </div>
-                <div className='col-lg-1 col-md-1 no-col-padding-left to-field adv-search-dropdown-label'>to</div>
-                <div className="col-lg-12 col-xs-12 ">
-                  <SearchField field="date_latest" elementType="date" noExtraLabelText/>
+                <div className="col-xs-12 left-text no-col-padding-left">
+                  <DatePicker name='date_latest' placeholderText="Click to select a date" selected={this.state.date_latest} onChange={(e) => this.handleDateChange(e, 'date_latest')} showMonthDropdown showYearDropdown dropdownMode="select"/>
                 </div>
               </div>
+              <br/>
               <div className='row adv-search-dropdown-title-row left-text'>
                 <div className='col-xs-12 no-col-padding-left'>
                   <a onClick={this.handleAdvancedSearchClick} className='more-adv-search clickable'>

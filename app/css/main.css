@@ -690,6 +690,33 @@ html h3 {
   color: rgb(0, 0, 0);
 }
 
+.search-box::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: #838383;
+}
+
+.search-box:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #838383;
+  opacity: 1;
+}
+
+.search-box::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #838383;
+  opacity: 1;
+}
+
+.search-box:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #838383;
+}
+
+.search-box::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #838383;
+}
+
 .navbar .navbar-nav {
   display: inline-block;
   float: none;

@@ -14,45 +14,47 @@ export default class FAQ extends React.Component {
     const fa_items = [
       {
         text: <span className='faq-page-subtitle'>What is DOE CODE?</span>,
-        content: <p>DOE CODE is a software submission and search tool that allows for scientific software to be provided to the U.S. Department of Energy (DOE). DOE CODE provides functionality for collaboration, archiving, and discovery of scientific software. DOE CODE replaces the Energy Science and Technology Software Center (ESTSC). DOE CODE is an open source project and is available on GitHub. Throughout these FAQs, the terms "software" and "code" are used interchangeably.
+        content: <p>
+            DOE CODE is the U.S. Department of Energy’s (DOE) new software services platform and search tool for software resulting from DOE-funded research that provides functionality for collaboration, archiving, and discovery of scientific software funded by DOE. DOE CODE replaces the Energy Science and Technology Software Center (ESTSC). DOE CODE is an open source project and is available on GitHub. Throughout these FAQs, the terms “software” and “code” are used interchangeably, though it is understood there are discrete definitions in various communities.
           </p>
       }, {
         text: <span className='faq-page-subtitle'>What does it mean for DOE CODE to be released in Alpha?</span>,
-        content: <p>In Alpha, DOE CODE supports submission of unlimited distribution software projects, code repository services, and search and discovery of published software projects. As development of DOE CODE continues in toward Beta and Production releases, additional features and functionality will be included. Future requirements will include provenance and version tracking, social coding features, and additional profile features.</p>
+        content: <p>
+            In Alpha, DOE CODE supports submission of software projects, code repository services, and search and discovery of published software projects. As development of DOE CODE continues toward Beta and Production releases, additional features and functionality will be included. Future requirements will include support and archiving of additional repository types, automated alerting for software points of contact, authentication using GitHub accounts, and more user profile features.
+          </p>
 
       }, {
         text: <span className='faq-page-subtitle'>How is the DOE CODE software submission and search tool different than&nbsp;
           <a target="_blank" href='https://github.com/doecode'>DOE CODE GitHub</a>
         </span>,
-        content: <p>Per the charge for Office of Scientific and Technical Information (OSTI) to fulfill the Department’s responsibilities to collect, preserve, and disseminate scientific and technical information, emanating from DOE R&D activities, the DOE CODE provides for the submission and search of software here. DOE CODE is an open source project and is available on GitHub.</p>
+        content: <p>
+            DOE CODE provides for the submission and search of software at this site. DOE Code is a dedicated resource for members of the community to discover and share software developed by DOE-funded projects and provides submission and search options. The DOE CODE “platform” that runs this site is an open source project available on GitHub.
+            <br/><br/>
+            The DOE CODE GitHub Community is a dedicated GitHub organization that houses the source code for some projects funded by DOE, including the repositories for DOE CODE itself. This community is open to registered users of DOE CODE and those users are welcome to create and import their own repositories once they join. This service is provided by OSTI in recognition of the fact that many developers prefer to house and manage their projects on GitHub over other services.
+            <br/><br/>
+            Users may request to join the DOE CODE GitHub community by emailing a request to doecoderepositories@osti.gov.
+          </p>
 
       }, {
-        text: <span className='faq-page-subtitle'>Do I need to have cookies enabled to use DOE CODE?</span>,
-        content: <p>Yes, you must select Accept All Cookies. Please see our&nbsp;
-            <a href='/doecode/disclaimer'>Website Policies/Important Links</a>&nbsp; for further information.</p>
-      }, {
         text: <span className='faq-page-subtitle'>What does DOE CODE contain?</span>,
-        content: <p>DOE CODE contains records for DOE-funded software and links to the software or code repository. In addition to the code, the repositories may include manuals, examples, test data, etc.
+        content: <p>
+            DOE CODE contains records for DOE-funded software and links to the software or code repository. In addition to the code, the repositories may include manuals, examples, test data, etc.
           </p>
       }, {
         text: <span className='faq-page-subtitle'>Does DOE CODE provide repository services?</span>,
-        content: <p>DOE CODE provides repository hosting services for the DOE community via GitLab at&nbsp;
-            <a href='https://gitlab.osti.gov/'>https://gitlab.osti.gov/</a>. If you are interested in making use of this service please email&nbsp;
-            <a href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>&nbsp;to request more information.</p>
+        content: <p>
+            Yes. DOE CODE provides repository hosting services for the DOE community via&nbsp;<a href='https://github.com/doecode/doecode'>GitHub</a>&nbsp;and&nbsp;<a href='https://gitlab.osti.gov/users/sign_in'>GitLab</a>. GitHub repository services are for those who want typical GitHub open source project functionality. OSTI’s GitLab repository service offers the same functionality as the GitHub repository service, but also free private repositories and stronger access control.
+            <br/><br/>
+            If you are interested in making use of the GitHub or GitLab repository services, or to request to join the DOE CODE GitHub community please contact&nbsp;<a href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>.
+          </p>
       }, {
         text: <span className='faq-page-subtitle'>What are the types of Software Availability?</span>,
         content: <div>
-            <p>
-              <strong>Open Source, publicly available repository</strong>
-              - Software that can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone in a public repository. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See Open Source Initiative for more information and definitions.
-            </p>
-            <p>
-              <strong>Open Source, no publicly available repository</strong>
-              - Code is Open Source, but is not yet available in a public repository. Interested users can contact the developer(s) or responsibly parties for information regarding access and (re)use. A landing page URL is required for submitting Open Source, no publicly available repository, the URL is typically a landing page where interested parties can find out more information about obtaining access to the code.
-            </p>
-            <p>
-              <strong>Closed Source</strong>
-              - Software that is not Open Source and for which access must be granted by contacting a licensing official. Software is often Close Source because it is proprietary, sensitive, or has otherwise been deemed necessary for a limited distribution. A landing page URL is required for submitting Closed Source code, the URL should provide interested parties additional information on how they can obtain access to the code.</p>
+            <strong>Open Source, Publicly Available Repository</strong>&nbsp;- Software can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone in a public repository. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See the&nbsp;<a href='https://opensource.org/'>Open Source Initiative</a>&nbsp;for more information and definitions.
+            <br/><br/>
+            <strong>Open Source, No Publicly Available Repository</strong>&nbsp;- Code is Open Source, but is not yet available in a public repository. Interested users can contact the developer(s) or responsible parties for information regarding access and (re)use. A landing page URL is required for submitting Open Source, no Publicly available repository code; the URL should provide additional information on how to obtain access to the code.
+            <br/><br/>
+            <strong>Closed Source</strong>&nbsp;- Software that is not Open Source and for which access must be granted by contacting a licensing official. Software is often Closed Source because it is proprietary, sensitive, or has otherwise been deemed appropriate for limited distribution only. A landing page URL is required for submitting Closed Source code; the URL should provide additional information on how to obtain access to the code
           </div>
       }, {
         text: <span className='faq-page-subtitle'>Are there restrictions on the use of the material in DOE CODE?</span>,
@@ -61,65 +63,36 @@ export default class FAQ extends React.Component {
             <div>
               <ul>
                 <li>
-                  <a href='https://opensource.org/licenses/Apache-2.0'>Apache License 2.0</a>
-                </li>
-                <li>
-                  <a href='https://www.gnu.org/licenses/quick-guide-gplv3.html'>GNU General Public License v3.0</a>
-                </li>
-                <li>
-                  <a href='https://opensource.org/licenses/MIT'>MIT License</a>
-                </li>
-                <li>
-                  <a href='https://opensource.org/licenses/BSD-2-Clause'>BSD 2-clause "simplified" License</a>
-                </li>
-                <li>
-                  <a href='https://opensource.org/licenses/BSD-3-Clause'>BSD 3-clause "New or "Revised" License</a>
-                </li>
-                <li>
-                  <a href='https://opensource.org/licenses/EPL-1.0'>Eclipse Public License 1.0</a>
-                </li>
-                <li>
                   <a href='https://www.gnu.org/licenses/licenses.html#AGPL'>GNU Affero General Public License v3.0</a>
-                </li>
-                <li>
-                  <a href='https://www.gnu.org/licenses/old-licenses/lgpl-2.0.html'>GNU General Public License v2.0</a>
-                </li>
-                <li>
-                  <a href='https://www.gnu.org/licenses/old-licenses/gpl-1.0.html'>GNU General Public License v1.0</a>
-                </li>
-                <li>
-                  <a href='https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html'>GNU Lesser General Public License v2.1</a>
                 </li>
                 <li>
                   <a href='https://www.gnu.org/licenses/licenses.html#LGPL'>GNU Lesser General Public License v3.0</a>
                 </li>
-                <li>
-                  <a href='https://opensource.org/licenses/MPL-2.0'>Mozilla Public License 2.0</a>
-                </li>
-                <li>
-                  <a href='http://unlicense.org/'>The Unlicense</a>
-                </li>
               </ul>
               <br/>
-              More information regarding these license can also be found&nbsp;
-              <a href='https://opensource.org/licenses/alphabetical'>here</a>.
+              More information regarding these license can also be found at the&nbsp;
+              <a href='https://opensource.org/licenses/alphabetical'>Open Source Initiative - Licenses by Name</a>.
               <br/>
               <br/>
-              If you choice to use a license not in the above list you may select "Other" and provide a URL to the landing page of the license.
+              If you choose to use a license not in the above list you may select "Other" and provide a URL to the landing page of the license.
             </div>
           </div>
       }, {
         text: <span className='faq-page-subtitle'>How is Software Submitted?</span>,
         content: <div>
-            <p>Individual software records are directly submitted by the developer or the developing organization. Metadata information about software can be submitted to OSTI through DOE CODE.</p>
+            <p>Individual software records and associated metadata are directly provided by the developer or the developing organization to DOE through DOE CODE.</p>
             <p>DOE CODE offers two paths for users to provide code. Users can (1)&nbsp;
               <strong>publish</strong>&nbsp;code to DOE CODE, and (2)&nbsp;
-              <strong>submit</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. See the "How do I publish code to DOE CODE?" and "How do I submit code to the Department of Energy through DOE CODE?" for more details.</p>
+              <strong>submit</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. See the "What does it mean to publish code to DOE CODE?" and "What does it mean to submit code to DOE CODE?" for more details.</p>
           </div>
       }, {
-        text: <span className='faq-page-subtitle'>How do I publish code to DOE CODE?</span>,
+        text: <span className='faq-page-subtitle'>What does it mean to publish code to DOE CODE?</span>,
         content: <div>
-            <p>Users may want to publish their code to DOE CODE. Publishing to DOE CODE is easy, with only a minimal set of metadata required. Publishing offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Codes in early development, along with those wanting to obtain DOIs early in the process, are the primary use case for this functionality. (See more information about DOIs, below)</p>
+            <p>Users may want to publish their code to DOE CODE, because publishing offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Publishing to DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes that are in early development and for developers wanting to obtain DOIs early in the process. (See also “What is a Digital Object Identifier (DOI)?”).
+            </p>
+            <br/>
+            <p>Publishing to DOE CODE is easy, with only a minimal set of metadata required.</p>
+            <br/>
             <div>
               Required Metadata to Publish to DOE CODE
               <ul>
@@ -131,12 +104,13 @@ export default class FAQ extends React.Component {
                 <li>Developers</li>
               </ul>
             </div>
+
             <p>
-              *Currently only Git-based repositories are supported. Examples would be repositories hosted at git.com, bitbucket.org, sourcforge.org, and GitLab. There are plans to expand this functionality in future releases to support other repository types such as SVN and CVS.
+              *Currently only Git-based repositories are supported. Most repositories hosted at GitHub, Bitbucket, SourceForge, and GitLab support Git-based repositories. When submitting a repository, users should be certain to use the direct URL to the actual repository.
             </p>
           </div>
       }, {
-        text: <span className='faq-page-subtitle'>How do I submit code to the Department of Energy through DOE CODE?</span>,
+        text: <span className='faq-page-subtitle'>What does it mean to submit code to DOE CODE?</span>,
         content: <div>
             <p>Users may need to submit their code to the Department of Energy to ensure proper handling, announcement, and dissemination in accordance with DOE statutory responsibilities. Codes in later stages of development are the primary use case for this functionality. For submission to the Department of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory data fields should be included during submission when possible.
             </p>
@@ -178,6 +152,7 @@ export default class FAQ extends React.Component {
                 <li>Research Organization Name</li>
               </ul>
             </div>
+            <p>In addition to the basic requirements for metadata fields (above), other optional/non-mandatory data fields should be included during submission when possible.</p>
             <p>
               *Currently only Git-based repositories are supported. Most repositories hosted at git.com, bitbucket.org, sourcforge.org, and GitLab support Git-based repositories. When submitting a repository please make sure you are using the direct URL to the actual repository. As an example, the direct repository URL for DOE CODE is https://www.github.com/doecode/doecode whereas the project landing page is&nbsp;
               <a target='_blank' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>. There are plans to expand this functionality in future releases to support other repository types such as SVN and CVS.
@@ -189,7 +164,7 @@ export default class FAQ extends React.Component {
       }, {
         text: <span className='faq-page-subtitle'>What is a YAML file? How do I auto populate the YAML file?</span>,
         content: <p>
-            <a target='_blank' href='http://www.yaml.org/start.html'>YAML</a>&nbsp;is a human friendly data serialization standard for all programming languages. DOE CODE provides functionality to allow users to auto-populate their bibliographic data in DOE CODE by placing a specifically formatted YAML file their repository’s root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly. For detailed information and an example file please see:&nbsp;<a href='https://github.com/doecode/doecode/tree/master/metadata-schema'>https://github.com/doecode/doecode/tree/master/metadata-schema</a>
+            <a target='_blank' href='http://www.yaml.org/start.html'>YAML</a>&nbsp;is a human friendly data serialization standard for all programming languages. DOE CODE provides functionality to allow users to auto-populate their bibliographic data in DOE CODE by placing a specifically formatted YAML file their repository’s root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly.&nbsp;<a href='https://github.com/doecode/doecode/tree/master/metadata-schema'>See detailed YAML information and an example file.</a>
           </p>
       }, {
         text: <span className='faq-page-subtitle'>What are the Categories of Software?</span>,
@@ -197,8 +172,13 @@ export default class FAQ extends React.Component {
             <a href='https://www.osti.gov/stip/softwarecategories'>Software Categories</a>&nbsp;table. The table is not intended to provide an exhaustive list.
           </p>
       }, {
-        text: <span className='faq-page-subtitle'>What are Digital Object Identifiers (DOIs)?</span>,
-        content: <p>A DOI is a persistent identifier assigned to facilitate accurate linkage between a document or published article and the specific datasets underlying it. OSTI is a member of and registering agency for DataCite and has the authority to assign Digital Object Identifiers to software and code that are submitted by DOE and its contractors or grantees. The assigning and registration of a DOI for software is a free service provided by OSTI to enhance DOE's management of this important resource.
+        text: <span className='faq-page-subtitle'>Do I need an account to use DOE CODE?</span>,
+        content: <p>
+            A DOE CODE account is not needed to search for DOE-funded software, but an account is needed to publish or submit code. Users meeting minimum criteria can directly create a DOE CODE account. All you need is your first and last name, government email address or valid contract number, and a password.
+            <br/><br/>
+            Both of the repository services we provide require a separate account in addition to the account for publishing or submitting to DOE CODE. To utilize repositories on OSTI’s GitLab installation and DOE CODE GitHub, those interested must request an account by sending an email to&nbsp;<a href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>. DOE CODE Product Manager(s) will follow up with the requester.
+            <br/><br/>
+            What is a Digital Object Identifier (DOI)? A DOI is a unique persistent identifier that references a digital object and provides long term access; DOIs remain stable even in the underlying address or URL for the content changes. OSTI is a member of and registering agency for DataCite and has the authority to assign Digital Object Identifiers to software and code that are submitted by DOE and its contractors or grantees. The assigning and registration of a DOI for software is a free service provided by OSTI to enhance DOE's management of this important resource.
           </p>
       }, {
         text: <span className='faq-page-subtitle'>What are the benefits of getting a DOI for code or software?</span>,
@@ -276,7 +256,11 @@ export default class FAQ extends React.Component {
           </div>
       }, {
         text: <span className='faq-page-subtitle'>Are there APIs available for DOE CODE?</span>,
-        content: <p></p>
+        content: <p>Yes, there are lots of APIs with stable endpoints. For more information, see the API documentation</p>
+      }, {
+        text: <span className='faq-page-subtitle'>Do I need to have cookies enabled to use DOE CODE?</span>,
+        content: <p>Yes, you must select Accept All Cookies. Please see our&nbsp;
+            <a href='/doecode/disclaimer'>Website Policies/Important Links</a>&nbsp; for further information.</p>
       }, {
         text: <span className='faq-page-subtitle'>How can I find out more?</span>,
         content: <p>
@@ -294,7 +278,7 @@ export default class FAQ extends React.Component {
           <p>Click or tap on the questions below to see answers to frequently asked questions.</p>
           <br/>
           <div>
-            {fa_items.map((row, index) => <div className='faq-page-collapse-wrapper' key={'faq-'+index}>
+            {fa_items.map((row, index) => <div className='faq-page-collapse-wrapper' key={'faq-' + index}>
               <SimpleCollapsible toggleArrow button_text={row.text} contents={row.content} collapseContainerClasses='faq-page-blockquote'/>
             </div>)}
           </div>
