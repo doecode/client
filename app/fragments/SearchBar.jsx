@@ -10,12 +10,7 @@ const searchData = new SearchData();
 export default class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      all_fields: searchData.getValue("all_fields"),
-      show_dropdown: false,
-      date_earliest: searchData.getValue("date_earliest"),
-      date_latest: searchData.getValue("date_latest")
-    };
+
     this.onAllFieldsChange = this.onAllFieldsChange.bind(this);
     this.search = this.search.bind(this);
     this.doAdvancedSearch = this.doAdvancedSearch.bind(this);
@@ -30,6 +25,13 @@ export default class SearchBar extends React.Component {
     this.advDropdownStyles = "adv-search-dropdown row";
     this.advSearchIconStyles = "fa fa-caret-down adv-search-button-icon";
 
+    this.state = {
+      all_fields: searchData.getValue("all_fields"),
+      show_dropdown: false,
+      date_earliest: searchData.getValue("date_earliest"),
+      date_latest: searchData.getValue("date_latest")
+    };
+
     if (this.props.isHomepage) {
       this.searchBarStyles += "  homepage-searchbar";
       this.searchButtonStyles += " homepage-search-btn";
@@ -37,10 +39,10 @@ export default class SearchBar extends React.Component {
       this.advSearchIconStyles += " homepage-adv-search-icon";
       this.advDropdownStyles += " homepage-adv-search-dropdown";
     }
-
   }
   onAllFieldsChange(event) {
     this.setState({"all_fields": event.target.value});
+    searchData.setValue({"all_fields": event.target.value});
   }
 
   search() {
@@ -54,6 +56,11 @@ export default class SearchBar extends React.Component {
     this.setState({
       show_dropdown: !this.state.show_dropdown
     });
+
+    if (!this.state.show_dropdown) {
+      this.setState({"all_fields": ""});
+      searchData.setValue("all_fields", "");
+    }
   }
 
   triggerSearch(event) {
@@ -93,7 +100,7 @@ export default class SearchBar extends React.Component {
       <div className={notSoWideSearchbar}>
         <div className={this.props.searchbarSize}>
           <div>
-            <input id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.allFields} className={this.searchBarStyles} placeholder="Search DOE CODE for published software entries"/>
+            <input id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.all_fields} className={this.searchBarStyles} placeholder="Search DOE CODE for published software entries"/>
             <button onClick={this.doAdvancedSearch} className={this.advSearchButtonStyles} type='button'>
               <span className={this.advSearchIconStyles}></span>
             </button>
