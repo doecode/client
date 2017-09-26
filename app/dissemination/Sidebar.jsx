@@ -42,6 +42,9 @@ export default class Sidebar extends React.Component {
   }
 
   constructSidebarFilter() {
+    if (!window.sessionStorage.latestSearch)
+      return;
+
     searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
     var licenseList = searchData.getValue("licenses")
       ? searchData.getValue("licenses")
