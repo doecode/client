@@ -353,6 +353,30 @@ html h3 {
   border: 1px solid #a94442;
 }
 
+
+/*VVV About page VVV*/
+
+.bgGray {
+  background: #ecebeb !important;
+}
+
+.bgWhite {
+  background: #F9F9F9 !important;
+}
+
+.featuresStyle {
+  text-align: left !important;
+  color: #1E6F92 !important;
+}
+
+.containerStyle {
+  max-width: 750px !important;
+  text-align: center !important;
+}
+
+
+/*^^^ About page ^^^*/
+
 .error-color {
   color: #a94442;
 }
@@ -929,7 +953,7 @@ html, body {
   background-repeat: no-repeat;
   border: none;
   position: absolute;
-  top: 7px;
+  top: 9px;
   right: 5px;
   z-index: 2;
   cursor: pointer;
@@ -939,7 +963,7 @@ html, body {
 }
 
 .adv-search-button-icon {
-  font-size: 15px;
+  font-size: 16px;
   color: #7EAE49;
 }
 

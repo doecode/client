@@ -1,49 +1,175 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Modal, Button} from 'react-bootstrap';
 
 export default class About extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
+    this.changeImage = this.changeImage.bind(this);
+    this.changeDiscover = this.changeDiscover.bind(this);
+    this.changeCreate = this.changeCreate.bind(this);
+    this.changeSubmit = this.changeSubmit.bind(this);
+
+    this._imageUrls = [
+      "https://www.osti.gov/doecode/images/DOEcodeFeatures_main710px-min.png",
+      "https://www.osti.gov/doecode/images/DOEcodeFeatures_doi710px-min.png",
+      "https://www.osti.gov/doecode/images/DOEcodeFeatures_Catalog710px-min.png",
+      "https://www.osti.gov/doecode/images/DOEcodeFeatures_Policy710px-min.png",
+      "https://www.osti.gov/doecode/images/DOEcodeFeatures_Easy710px-min.png",
+      "https://www.osti.gov/doecode/images/DOEcodeFeatures_GitHub710px-min.png",
+      "https://www.osti.gov/doecode/images/DOEcodeFeatures_SocialCode710px-min.png"
+    ];
+
+    this._discoverUrls = ["https://www.osti.gov/doecode/images/Discover-min.png", "https://www.osti.gov/doecode/images/Discover_hover-min.png"];
+
+    this._createUrls = ["https://www.osti.gov/doecode/images/Create-min.png", "https://www.osti.gov/doecode/images/Create_hover-min.png"];
+
+    this._submitUrls = ["https://www.osti.gov/doecode/images/Submit-min.png", "https://www.osti.gov/doecode/images/Submit_hover-min.png"]
+    this.state = {
+      currentImage: this._imageUrls[0],
+      currentDiscover: this._discoverUrls[0],
+      currentCreate: this._createUrls[0],
+      currentSubmit: this._submitUrls[0]
     }
+  }
 
+  changeDiscover(index) {
+    this.setState({"currentDiscover": this._discoverUrls[index]});
+  }
 
-    render() {
+  changeCreate(index) {
+    this.setState({"currentCreate": this._createUrls[index]});
+  }
 
-        return (
-        <div className="row not-so-wide-row">
-            <div className="col-lg-3 col-md-1"></div>
-            <div className="col-lg-6 col-md-10 col-xs-12 static-content">
+  changeSubmit(index) {
+    this.setState({"currentSubmit": this._submitUrls[index]});
+  }
+
+  changeImage(index) {
+    this.setState({"currentImage": this._imageUrls[index]});
+  }
+  render() {
+    return (
+      <div>
+
+        <div className="container-fluid bgWhite">
+          <div className="container containerStyle">
+            <div className="row">
+              <div className="col-xs-12 static-content left-text">
                 <h2 className="static-content-title">About</h2>
-                <br/>
-                <p>The Department of Energy (DOE) Office of Scientific and Technical Information (OSTI) is building a new DOE software center.</p>
-
-                <p>DOE CODE is the reimagining of OSTI's current product for the submission of software, the Energy Science and Technology Software Center,
-                    or <a href="//www.osti.gov/moved/estsc/">ESTSC</a>.  Since DOE CODE is still under development, if you need to submit, search, or order software, please visit the ESTSC site for instructions.</p>
-
-                <p>DOE CODE, when launched, will provide a best-in-class service for the submission of software. As a form of scientific and technical information,
-                    software is a result of the Department's research and development activities at the DOE national laboratories and other DOE facilities/contractors.</p>
-
-                <p>DOE CODE will provide <a href="https://www.osti.gov/ostiblog/osti-developing-open-source-social-coding-platform-doe-scientific-software">an open source, social platform for DOE scientific software</a>.  DOE CODE will connect to repositories
-                    on GitHub, Bitbucket, and others, but will also provide a place to host code for users that are unable to use other hosting services.  Since DOE CODE
-                    is itself an open source product, other institutions will be able to download and deploy it for their own purposes too. You
-                    can follow DOE CODE’s development at the <a href="https://github.com/doecode">DOE CODE GitHub site.</a></p>
-
-                <p>To provide a new, modern way of interacting, DOE CODE will not only provide the ability to link to references (papers, datasets) but also to other
-                    documents, manuals, examples, charts, forums, etc., in one place. All of this scientific and technical information will be linked to scientific software,
-                    whether it be software for modeling and simulation, data analytics or instrument control.</p>
-
-                <p>The current software center, ESTSC, contains over 3,500 distinct pieces of software resulting from DOE R&amp;D, as well as selected software from the
-                    Nuclear Energy Agency of the Organization for Economic Cooperation and Development.  ESTSC is the centralized DOE software management portal.  The
-                    ESTSC portal provides access to software packages, including source code, executable object code, and the minimum support documentation (e.g.,
-                    software user guide or manual) needed to use the software or to modify the software to support subsequent development efforts.</p>
-
-                <p>ESTSC and DOE CODE are managed and operated by DOE OSTI.</p>
-                <br/>
-                <br/>
+              </div>
+              <div className=""></div>
             </div>
-            <div className="col-lg-3 col-md-1"></div>
+            <div className="row">
+              <div className=""></div>
+              <div className="col-xs-12 static-content">
+                <br/>
+                <p className='left-text'>The Department of Energy (DOE) Office of Scientific and Technical Information (OSTI) is building a new DOE software submission and search tool. DOE CODE is the reimagining of OSTI's current product for the submission of software, the Energy Science and Technology Software Center, or ESTSC. Since DOE CODE is still under development, if you need to submit, search, or order software, please visit the&nbsp;
+                  <a href="//www.osti.gov/moved/estsc/">ESTSC</a>&nbsp;site for instructions.
+                </p>
+
+                <p className="left-text hidden-md hidden-lg">
+                  <strong>CREATE</strong>
+                  - Create code inside or outside DOE CODE.</p>
+                <p className="left-text hidden-md hidden-lg">
+                  <strong>SUBMIT</strong>
+                  - Submit your DOE-funded code.</p>
+                <p className="left-text hidden-md hidden-lg">
+                  <strong>DISCOVER</strong>
+                  - Discover DOE-funded software and code.</p>
+
+                <img className="hidden-xs hidden-sm" src={this.state.currentCreate} width="150" height="113" alt="Create" onMouseOver={() => {
+                  this.changeCreate(1)
+                }} onMouseOut={() => {
+                  this.changeCreate(0)
+                }}/>
+                <img className="col-md-offset-1 hidden-xs hidden-sm" src={this.state.currentSubmit} width="150" height="113" alt="Submit" onMouseOver={() => {
+                  this.changeSubmit(1)
+                }} onMouseOut={() => {
+                  this.changeSubmit(0)
+                }}/>
+                <img className="col-md-offset-1 hidden-xs hidden-sm" src={this.state.currentDiscover} width="150" height="113" alt="Discover" onMouseOver={() => {
+                  this.changeDiscover(1)
+                }} onMouseOut={() => {
+                  this.changeDiscover(0)
+                }}/>
+                <div className=""></div>
+                <br/>
+                <br/>
+              </div>
+              <div className=""></div>
+            </div>
+          </div>
         </div>
-        );
-    }
+        <div className="container-fluid bgGray">
+          <div className="container containerStyle">
+            <div className="row">
+              <div className=""></div>
+              <div className="col-xs-12 static-content">
+                <img className="hidden-xs hidden-sm" src={this.state.currentImage} width="710" height="440" alt="DOE Code Features" useMap="#featuremap"></img>
+                <map name="featuremap">
+                  <area shape="circle" coords="220,83,32" alt="DOI" onMouseOver={() => {
+                    this.changeImage(1)
+                  }} onMouseOut={() => {
+                    this.changeImage(0)
+                  }}/>
+                  <area shape="circle" coords="160,216,32" alt="DOI" onMouseOver={() => {
+                    this.changeImage(2)
+                  }} onMouseOut={() => {
+                    this.changeImage(0)
+                  }}/>
+                  <area shape="circle" coords="220,354,32" alt="DOI" onMouseOver={() => {
+                    this.changeImage(3)
+                  }} onMouseOut={() => {
+                    this.changeImage(0)
+                  }}/>
+                  <area shape="circle" coords="488,352,32" alt="DOI" onMouseOver={() => {
+                    this.changeImage(4)
+                  }} onMouseOut={() => {
+                    this.changeImage(0)
+                  }}/>
+                  <area shape="circle" coords="548,217,32" alt="DOI" onMouseOver={() => {
+                    this.changeImage(5)
+                  }} onMouseOut={() => {
+                    this.changeImage(0)
+                  }}/>
+                  <area shape="circle" coords="489,83,32" alt="DOI" onMouseOver={() => {
+                    this.changeImage(6)
+                  }} onMouseOut={() => {
+                    this.changeImage(0)
+                  }}/>
+                </map>
+
+                <h3 className="hidden-md hidden-lg featuresStyle">FEATURES</h3>
+                <p className="left-text hidden-md hidden-lg">
+                  <strong>DOI</strong>
+                  - DOE CODE issues digital object identifiers (DOIs) for software code so your software is more easily cited and discoverable. Allows for stronger connections between code, publications, data, and other forms of STI through citation in reference sections.</p>
+                <p className="left-text hidden-md hidden-lg">
+                  <strong>CATALOG</strong>
+                  - DOE Software Catalog.</p>
+                <p className="left-text hidden-md hidden-lg">
+                  <strong>BEST PRACTICES AND POLICY</strong>
+                  - DOE CODE resources provide you information on best practices and policies for software.</p>
+                <p className="left-text hidden-md hidden-lg">
+                  <strong>SOCIAL CODING</strong>
+                  - DOE CODE seamlessly interfaces with common development platforms to make DOE-funded software and code more easily submitted, discoverable, and citable.</p>
+                <p className="left-text hidden-md hidden-lg">
+                  <strong>GITHUB</strong>
+                  - DOE CODE is an open source product on GitHub that other institutions can download and deploy for their own purposes.</p>
+                <p className="left-text hidden-md hidden-lg">
+                  <strong>EASY</strong>
+                  - DOE CODE is easy to use!</p>
+                <p className="left-text hidden-md hidden-lg">
+                  For more information about DOE CODE, reach out to&nbsp;
+                  <a href="mailto:doecode@osti.gov">doecode@osti.gov</a>.</p>
+                <p className="hidden-xs hidden-sm">
+                  For more information about DOE CODE, reach out to&nbsp;
+                  <a href="mailto:doecode@osti.gov">doecode@osti.gov</a>.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
