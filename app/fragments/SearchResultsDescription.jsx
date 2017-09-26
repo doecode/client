@@ -50,16 +50,10 @@ export default class SearchResultsDescription extends React.Component {
       searchDescriptionArr.push({displayField: 'Latest Release Date', display: date_latest_date.format("MM-DD-YYYY"), field: 'date_latest'});
     }
     if (searchData.getValue("accessibility") && searchData.getValue("accessibility").length > 0) {
-
-      searchData.getValue("accessibility").forEach(function(row) {
-        searchDescriptionArr.push({displayField: 'Accessibility', display: getAvailabilityDisplay(row), field: 'accessibility', value: row});
-      });
+      searchDescriptionArr.push({displayField: 'Accessibility', field: 'accessibility', value: searchData.getValue("accessibility")});
     }
     if (searchData.getValue("licenses") && searchData.getValue("licenses").length > 0) {
-      searchData.getValue("licenses").forEach(function(row) {
-        searchDescriptionArr.push({displayField: 'Licenses', display: row, field: 'licenses', value: row});
-      });
-
+      searchDescriptionArr.push({displayField: 'Licenses', field: 'licenses', value: searchData.getValue("licenses")});
     }
     if (searchData.getValue("research_organization")) {
       searchDescriptionArr.push({displayField: 'Research Organization', display: searchData.getValue("research_organization"), field: 'research_organization'});
@@ -70,15 +64,50 @@ export default class SearchResultsDescription extends React.Component {
     if (searchData.getValue("orcid")) {
       searchDescriptionArr.push({displayField: 'ORCID is', display: searchData.getValue("orcid"), field: 'orcid'});
     }
+
+    let self = this;
+
     return (
       <div>
         <div>All Records</div>
-        {searchDescriptionArr.map((row, index) => <div key={index}>
-          <span className='search-for-filter-text search-for-filter-header'>{row.displayField}:&nbsp;</span>
-          <br/>
-          <span className='search-for-filter-text'>{row.display}</span>&nbsp;
-          <span className='search-for-filter-x clickable' onClick={() => this.removeFilter(row.field, row.value)}>[ &times; ]</span>
-        </div>)}
+        {
+        searchDescriptionArr.map(
+          function (row, index) {
+
+          if (row.value instanceof Array) {
+            return (
+              <div key={index}>
+                <span className='search-for-filter-text search-for-filter-header'>{row.displayField}:&nbsp;</span>
+                <br/>
+                {
+                  row.value.map(
+                    function (data, idx) {
+                      let display = (row.field == "accessibility" ? getAvailabilityDisplay(data) : data);
+                      return (
+                        <span key={index + "-" + idx}>
+                          {idx != 0 && <span>, </span>}
+                          <span className='search-for-filter-text'>{display}</span>&nbsp;
+                          <span className='search-for-filter-x clickable' onClick={() => self.removeFilter(row.field, data)}>[&nbsp;&times;&nbsp;]</span>
+                        </span>
+                      )
+                    }
+                  )
+                }
+              </div>
+            )
+          }
+          else {
+            return (
+              <div key={index}>
+                <span className='search-for-filter-text search-for-filter-header'>{row.displayField}:&nbsp;</span>
+                <br/>
+                <span className='search-for-filter-text'>{row.display}</span>&nbsp;
+                <span className='search-for-filter-x clickable' onClick={() => self.removeFilter(row.field, row.value)}>[ &times; ]</span>
+              </div>
+            )
+          }
+          }
+        )}
       </div>
     );
   }
