@@ -21,6 +21,7 @@ export default class AdvancedSearch extends React.Component {
   }
 
   render() {
+    
     return (
       <div className="row not-so-wide-row">
         <div className="col-lg-3 col-sm-1"></div>

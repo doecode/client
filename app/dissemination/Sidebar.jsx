@@ -91,8 +91,6 @@ export default class Sidebar extends React.Component {
             </div>
           </div>
         </div>
-
-
         <div className='row'>
           {this.props.facetData.release_dates.min_year > 0 && <div className='col-xs-12'>
             <DateColumnChart minDate={this.props.facetData.release_dates.min_year} maxDate={this.props.facetData.release_dates.max_year} years={this.props.facetData.release_dates.years_list}/>
@@ -102,9 +100,7 @@ export default class Sidebar extends React.Component {
           {this.props.facetData.release_dates.min_year > 0 && <div className='col-xs-12'>
             <DateRangeSlider minDate={this.props.facetData.release_dates.min_year} maxDate={this.props.facetData.release_dates.max_year} refreshSearch={this.refreshSidebarSearch}/>
           </div>}
-
         </div>
-
       </span>
     );
   }
@@ -114,7 +110,6 @@ export default class Sidebar extends React.Component {
   }
 
   render() {
-    var searchForText = <SearchResultsDescription refreshSearch={this.refreshSidebarSearch}/>;
     /*Wire where these things are updated too*/
     const sidebarFilters = this.constructSidebarFilter();
     return (
@@ -128,7 +123,7 @@ export default class Sidebar extends React.Component {
                 <br/>
                 <h4 className="search-sidebar-filter-title">SEARCH FOR:</h4>
                 <div className="search-sidebar-text">
-                  {searchForText}
+                  <SearchResultsDescription refreshSearch={this.refreshSidebarSearch}/>
                 </div>
                 <br/>
               </div>
