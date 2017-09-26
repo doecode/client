@@ -9,6 +9,7 @@ import SimpleCollapsible from '../fragments/SimpleCollapsible';
 import SearchResultsDescription from '../fragments/SearchResultsDescription';
 import SortDropdown from './SortDropdown';
 import DateColumnChart from './DateColumnChart';
+import DateRangeSlider from './DateRangeSlider';
 
 const searchData = new SearchData();
 
@@ -55,8 +56,8 @@ export default class Sidebar extends React.Component {
     var sortListValue = searchData.getValue("sort")
       ? searchData.getValue("sort")
       : [];
-
     return (
+
       <span>
         <div className='row hide-sm hide-md hide-lg'>
           <div className='col-xs-12'>
@@ -90,13 +91,20 @@ export default class Sidebar extends React.Component {
             </div>
           </div>
         </div>
-        {/*
+
+
         <div className='row'>
-          <div className='col-xs-12'>
-            <DateColumnChart minDate='0' maxDate='300' years={this.props.facetData.release_dates}/>
-          </div>
+          {this.props.facetData.release_dates.min_year > 0 && <div className='col-xs-12'>
+            <DateColumnChart minDate={this.props.facetData.release_dates.min_year} maxDate={this.props.facetData.release_dates.max_year} years={this.props.facetData.release_dates.years_list}/>
+          </div>}
         </div>
-        */}
+        <div className='row'>
+          {this.props.facetData.release_dates.min_year > 0 && <div className='col-xs-12'>
+            <DateRangeSlider minDate={this.props.facetData.release_dates.min_year} maxDate={this.props.facetData.release_dates.max_year} refreshSearch={this.refreshSidebarSearch}/>
+          </div>}
+
+        </div>
+
       </span>
     );
   }

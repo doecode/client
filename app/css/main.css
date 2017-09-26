@@ -673,12 +673,12 @@ html h3 {
   top: 12px !important;
 }
 
-.homepage-adv-search-icon{
-  font-size:30px !important;
+.homepage-adv-search-icon {
+  font-size: 30px !important;
 }
 
-.homepage-adv-search-dropdown{
-  top:52px !important;
+.homepage-adv-search-dropdown {
+  top: 52px !important;
 }
 
 .search-box {
@@ -1642,25 +1642,11 @@ ul.biblio-page-ul>li>a:hover {
 
 /*vv DATE BAR CHART ON THE SEARCH PAGE vv*/
 
-#date-range-slider {
-  max-width: 200px; //border: none !important;
-  background: none !important;
-  height: 3px !important;
-}
-
-.slider-btn {
-  border: 2px solid rgba(51, 122, 183, 0.5) !important;
-  cursor: pointer !important;
-  border-radius: 5px !important;
-  width: 10px !important;
-  height: 10px !important;
-}
-
 .slider-bar {
   background-color: #999 !important;
   border: 1px solid #ddd !important;
   height: 3px !important;
-  opacity: 0.3 !important; //left: 0% !important;
+  opacity: 0.3 !important;
 }
 
 .yearsDisplayContainer {
@@ -1671,6 +1657,34 @@ ul.biblio-page-ul>li>a:hover {
 .yearsDisplayValue {
   font-size: 13.6px;
 }
+
+.rc-track-container {
+  max-width: 200px;
+  margin-top: 6px;
+}
+
+.rc-slider-track-1 {
+  background-color: #DDDDDD !important;
+  height: 3px !important;
+}
+
+.rc-slider-rail {
+  background: none !important;
+  height: 3px !important;
+  border: 1px solid #DDDDDD !important;
+}
+
+.rc-slider-handle-1, .rc-slider-handle-2 {
+  border: 2px solid rgba(51, 122, 183, 0.5) !important;
+  cursor: pointer !important;
+  border-radius: 5px !important;
+  width: 10px !important;
+  height: 10px !important;
+  top: 6px;
+}
+
+
+/*^^ DATE BAR CHART ON THE SEARCH PAGE ^^*/
 
 .homepage-subtext {
   font-size: 26px;
@@ -1688,9 +1702,6 @@ ul.biblio-page-ul>li>a:hover {
 .nav-menu li:last-child {
   border-right: none;
 }
-
-
-/*^^ DATE BAR CHART ON THE SEARCH PAGE ^^*/
 
 
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
