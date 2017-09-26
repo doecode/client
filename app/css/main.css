@@ -1580,6 +1580,11 @@ ul.biblio-page-ul>li>a:hover {
   margin-top: 5px;
 }
 
+.search-for-filter-crumb {
+  color:#999;
+  font-style: italic;
+}
+
 .search-for-filter-text {
   font-size: 15.5px;
   font-weight: 400;

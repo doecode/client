@@ -23,9 +23,11 @@ export default class SearchResultsDescription extends React.Component {
   }
 
   render() {
+    let targetedSearch = false;
     var searchDescriptionArr = [];
     if (searchData.getValue("all_fields")) {
-      searchDescriptionArr.push({displayField: 'Bibliographic Data', display: searchData.getValue("all_fields"), field: 'all_fields'});
+      targetedSearch = true;
+      searchDescriptionArr.push({displayField: 'Keywords', display: searchData.getValue("all_fields"), field: 'all_fields'});
     }
     if (searchData.getValue("software_title")) {
       searchDescriptionArr.push({displayField: 'Software Title', display: searchData.getValue("software_title"), field: 'software_title'});
@@ -69,7 +71,7 @@ export default class SearchResultsDescription extends React.Component {
 
     return (
       <div>
-        <div>All Records</div>
+        {!targetedSearch && <div>All Records</div>}
         {
         searchDescriptionArr.map(
           function (row, index) {

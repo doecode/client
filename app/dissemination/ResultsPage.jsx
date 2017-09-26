@@ -96,6 +96,25 @@ export default class ResultsPage extends React.Component {
       : searchData.getValue("rows") + searchData.getValue("start");
     let pageNum = Math.ceil(searchData.getValue("start") / searchData.getValue("rows")) + 1;
 
+    var searchFor = searchData.getValue("all_fields") ? searchData.getValue("all_fields") : "All Records";
+    searchFor = "Search for " + searchFor;
+
+    let needsFilterSuffix =
+      (searchData.getValue("software_title") ||
+      searchData.getValue("developers_contributors") ||
+      searchData.getValue("biblio_data") ||
+      searchData.getValue("identifiers") ||
+      searchData.getValue("date_earliest") ||
+      searchData.getValue("date_latest") ||
+      (searchData.getValue("accessibility") && searchData.getValue("accessibility").length > 0) ||
+      (searchData.getValue("licenses") && searchData.getValue("licenses").length > 0) ||
+      searchData.getValue("research_organization") ||
+      searchData.getValue("sponsoring_organization") ||
+      searchData.getValue("orcid"));
+
+    var filterSuffix = needsFilterSuffix && <span className="search-for-filter-crumb"> (filtered)</span>;
+    var searchCrumb = <span>{searchFor}{filterSuffix}</span>;
+
     var breadcrumbList = [
       {
         key: 'brdcrmb1',
@@ -104,7 +123,7 @@ export default class ResultsPage extends React.Component {
           </span>
       }, {
         key: 'brdcrmb2',
-        value: 'Search Results '
+        value: searchCrumb
       }
     ];
 
