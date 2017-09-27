@@ -257,7 +257,7 @@ export default class Field extends React.Component {
       if (dateVal == null || !dateVal.isValid())
         dateVal = null;
 
-      input = <DatePicker name={field} placeholderText="Click to select a date" selected={dateVal} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>
+      input = <span><DatePicker name={field} placeholderText="Click to select a date" selected={dateVal} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>{this.props.properties.textAfter&&<span>{this.props.properties.textAfter}</span>}</span>
     }
 
     return (
