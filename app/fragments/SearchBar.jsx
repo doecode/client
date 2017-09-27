@@ -24,7 +24,8 @@ export default class SearchBar extends React.Component {
     this.searchButtonStyles = "pure-button button-success search-btn";
     this.advDropdownStyles = "adv-search-dropdown row";
     this.advSearchIconStyles = "fa fa-caret-down adv-search-button-icon";
-
+    this.date_earliest_styles = "col-lg-6 col-md-6 col-sm-6 text-left publication-date-start-container left-text";
+    this.date_latest_styles = "col-lg-6 col-md-6 col-sm-6 publication-date-end-container left-text";
     this.state = {
       all_fields: searchData.getValue("all_fields"),
       show_dropdown: false,
@@ -38,6 +39,8 @@ export default class SearchBar extends React.Component {
       this.advSearchButtonStyles += " homepage-adv-search-btn";
       this.advSearchIconStyles += " homepage-adv-search-icon";
       this.advDropdownStyles += " homepage-adv-search-dropdown";
+      this.date_earliest_styles = "col-lg-6 col-xs-12 publication-date-start-container-homepage left-text";
+      this.date_latest_styles = "col-lg-6 col-xs-12 publication-date-end-container-homepage left-text";
     }
   }
   onAllFieldsChange(event) {
@@ -60,13 +63,12 @@ export default class SearchBar extends React.Component {
     if (!this.state.show_dropdown) {
       this.setState({"all_fields": ""});
       searchData.setValue("all_fields", "");
-    }
-    else {
+    } else {
       searchData.clearValues();
       if (window.sessionStorage.latestSearch)
         searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
+      }
     }
-  }
 
   triggerSearch(event) {
     if (event.key === 'Enter') {
@@ -100,7 +102,7 @@ export default class SearchBar extends React.Component {
     var notSoWideSearchbar = this.props.notSoWideSearchbar
       ? this.props.notSoWideSearchbar
       : 'row searchbar-container';
-
+    const to_span = <span className='to-span'>to</span>;
     return (
       <div className={notSoWideSearchbar}>
         <div className={this.props.searchbarSize}>
@@ -143,14 +145,13 @@ export default class SearchBar extends React.Component {
                 <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                   Release Date:
                 </div>
-                <div className="col-xs-12 text-left no-col-padding-left">
-                  <DatePicker name='date_earliest' placeholderText="Click to select a date" selected={this.state.date_earliest} onChange={(e) => this.handleDateChange(e, 'date_earliest')} showMonthDropdown showYearDropdown dropdownMode="select"/>&nbsp;&nbsp;&nbsp;to
+                <div className={this.date_earliest_styles}>
+                  <SearchField field="date_earliest" elementType="date" noExtraLabelText textAfter={to_span}/>
                 </div>
-                <div className="col-xs-12 left-text no-col-padding-left">
-                  <DatePicker name='date_latest' placeholderText="Click to select a date" selected={this.state.date_latest} onChange={(e) => this.handleDateChange(e, 'date_latest')} showMonthDropdown showYearDropdown dropdownMode="select"/>
+                <div className={this.date_latest_styles}>
+                  <SearchField field="date_latest" elementType="date" noExtraLabelText/>
                 </div>
               </div>
-              <br/>
               <div className='row adv-search-dropdown-title-row left-text'>
                 <div className='col-xs-12 no-col-padding-left'>
                   <a onClick={this.handleAdvancedSearchClick} className='more-adv-search clickable'>

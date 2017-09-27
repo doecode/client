@@ -589,8 +589,8 @@ html h3 {
   font-weight: 300;
 }
 
-.modify-search-glass{
-  opacity:0.35;
+.modify-search-glass {
+  opacity: 0.35;
 }
 
 .rounded {
@@ -795,10 +795,6 @@ html h3 {
 
 .logo-header {
   margin: 0px;
-}
-
-#publication-date-start-container {
-  margin-bottom: -15px;
 }
 
 
@@ -1765,6 +1761,10 @@ ul.biblio-page-ul>li>a:hover {
   border-right: none;
 }
 
+.to-span {
+  margin-left: 15px;
+}
+
 
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
 
@@ -2098,5 +2098,42 @@ ul.biblio-page-ul>li>a:hover {
   }
   .to-field {
     padding-top: 7px;
+  }
+  .publication-date-start-container input {
+    max-width: 150px;
+  }
+  .publication-date-end-container input {
+    max-width: 150px;
+    margin-left: 10px;
+  }
+}
+
+@media only screen and (max-width:1724px) and (min-width:1200px) {
+  .publication-date-start-container-homepage input {
+    max-width: 150px !important;
+  }
+  .publication-date-end-container-homepage input {
+    max-width: 150px !important;
+  }
+}
+
+@media only screen and (min-width:1725px) {
+  .publication-date-start-container-homepage input {
+    max-width: 250px !important;
+  }
+  .publication-date-end-container-homepage input {
+    max-width: 250px !important;
+  }
+}
+
+@media only screen and (max-width:1312px) and (min-width:1200px) {
+  .to-span {
+    margin-left: 0px;
+  }
+  .publication-date-start-container-homepage {
+    padding-right: 0px !important;
+  }
+  .publication-date-end-container-homepage{
+    text-align: right !important;
   }
 }
