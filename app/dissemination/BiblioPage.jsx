@@ -169,7 +169,11 @@ export default class BiblioPage extends React.Component {
     ];
     const abstract = metadata.getValue("description");
 
-    new Clipboard('.clip-cite-bib');
+    let clipboard = new Clipboard('.clip-cite-bib');
+
+    clipboard.on('success', function(e) {
+        e.clearSelection();
+    });
 
     return (
       <div className="row not-so-wide-row">
