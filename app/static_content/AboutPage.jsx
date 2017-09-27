@@ -63,8 +63,8 @@ export default class About extends React.Component {
               <div className=""></div>
               <div className="col-xs-12 static-content">
                 <br/>
-                <p className='left-text'>The Department of Energy (DOE) Office of Scientific and Technical Information (OSTI) is building a new DOE software submission and search tool. DOE CODE is the reimagining of OSTI's current product for the submission of software, the Energy Science and Technology Software Center, or ESTSC. Since DOE CODE is still under development, if you need to submit, search, or order software, please visit the&nbsp;
-                  <a href="//www.osti.gov/moved/estsc/">ESTSC</a>&nbsp;site for instructions.
+                <p className='left-text'>
+                The Department of Energy (DOE) Office of Scientific and Technical Information (OSTI) developed a new DOE software services platform and search tool for DOE-funded code – DOE CODE. DOE CODE replaces OSTI’s old software center, the Energy Science and Technology Software Center (ESTSC).
                 </p>
 
                 <p className="left-text hidden-md hidden-lg">
@@ -100,7 +100,7 @@ export default class About extends React.Component {
             </div>
           </div>
         </div>
-        <div className="container-fluid bgGray">
+        <div className="container-fluid">
           <div className="container containerStyle">
             <div className="row">
               <div className=""></div>
@@ -158,12 +158,6 @@ export default class About extends React.Component {
                 <p className="left-text hidden-md hidden-lg">
                   <strong>EASY</strong>
                   - DOE CODE is easy to use!</p>
-                <p className="left-text hidden-md hidden-lg">
-                  For more information about DOE CODE, reach out to&nbsp;
-                  <a href="mailto:doecode@osti.gov">doecode@osti.gov</a>.</p>
-                <p className="hidden-xs hidden-sm">
-                  For more information about DOE CODE, reach out to&nbsp;
-                  <a href="mailto:doecode@osti.gov">doecode@osti.gov</a>.</p>
               </div>
             </div>
 
