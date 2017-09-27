@@ -6,16 +6,35 @@ import SimpleCollapsible from '../fragments/SimpleCollapsible';
 export default class FAQ extends React.Component {
   constructor(props) {
     super(props);
+    this.handleAnchors = this.handleAnchors.bind(this);
+
+    var open_topic = "";
+    if (window.location.href.toString().indexOf('#') > -1) {
+      var patt = new RegExp(/#(\S+)$/);
+      open_topic = patt.exec(window.location.href)[0];
+      open_topic = open_topic.substr(1, open_topic.length);
+    }
+    this.state = {
+      open_topic: open_topic
+    }
+  }
+
+  componentDidMount() {}
+
+  handleAnchors(event, anchor) {
+    location.hash = anchor;
+    this.setState({'open_topic': anchor});
   }
 
   render() {
-
+    var api_location = window.location.href.toString().substr(0, window.location.href.toString().indexOf('/doecode'));
+    api_location += "/doecodeapi/services";
     /*If you want something added to this page, just plop it right in to this array in the order you want*/
     const fa_items = [
       {
         text: <span className='faq-page-subtitle'>What is DOE CODE?</span>,
         content: <p>
-            DOE CODE is the U.S. Department of Energy’s (DOE) new software services platform and search tool for software resulting from DOE-funded research that provides functionality for collaboration, archiving, and discovery of scientific software funded by DOE. DOE CODE replaces the Energy Science and Technology Software Center (ESTSC). DOE CODE is an open source project and is available on GitHub. Throughout these FAQs, the terms “software” and “code” are used interchangeably, though it is understood there are discrete definitions in various communities.
+            DOE CODE is the U.S. Department of Energy’s (DOE) new software services platform and search tool for software resulting from DOE-funded research that provides functionality for collaboration, archiving, and discovery of scientific software funded by DOE. DOE CODE replaces the Energy Science and Technology Software Center (ESTSC). DOE CODE is an open source project and is available on GitHub. Throughout these FAQs, the terms "software” and "code” are used interchangeably, though it is understood there are discrete definitions in various communities.
           </p>
       }, {
         text: <span className='faq-page-subtitle'>What does it mean for DOE CODE to be released in Alpha?</span>,
@@ -28,7 +47,7 @@ export default class FAQ extends React.Component {
           <a target="_blank" href='https://github.com/doecode'>DOE CODE GitHub</a>
         </span>,
         content: <p>
-            DOE CODE provides for the submission and search of software at this site. DOE Code is a dedicated resource for members of the community to discover and share software developed by DOE-funded projects and provides submission and search options. The DOE CODE “platform” that runs this site is an open source project available on GitHub.
+            DOE CODE provides for the submission and search of software at this site. DOE Code is a dedicated resource for members of the community to discover and share software developed by DOE-funded projects and provides submission and search options. The DOE CODE "platform” that runs this site is an open source project available on GitHub.
             <br/><br/>
             The DOE CODE GitHub Community is a dedicated GitHub organization that houses the source code for some projects funded by DOE, including the repositories for DOE CODE itself. This community is open to registered users of DOE CODE and those users are welcome to create and import their own repositories once they join. This service is provided by OSTI in recognition of the fact that many developers prefer to house and manage their projects on GitHub over other services.
             <br/><br/>
@@ -63,10 +82,43 @@ export default class FAQ extends React.Component {
             <div>
               <ul>
                 <li>
+                  <a href='https://opensource.org/licenses/Apache-2.0'>Apache License 2.0</a>
+                </li>
+                <li>
+                  <a href='https://www.gnu.org/licenses/quick-guide-gplv3.html'>GNU General Public License v3.0</a>
+                </li>
+                <li>
+                  <a href='https://opensource.org/licenses/MIT'>MIT License</a>
+                </li>
+                <li>
+                  <a href='https://opensource.org/licenses/BSD-2-Clause'>BSD 2-clause "simplified" License</a>
+                </li>
+                <li>
+                  <a href='https://opensource.org/licenses/BSD-3-Clause'>BSD 3-clause "New or "Revised" License</a>
+                </li>
+                <li>
+                  <a href='https://opensource.org/licenses/EPL-1.0'>Eclipse Public License 1.0</a>
+                </li>
+                <li>
                   <a href='https://www.gnu.org/licenses/licenses.html#AGPL'>GNU Affero General Public License v3.0</a>
                 </li>
                 <li>
+                  <a href='https://www.gnu.org/licenses/old-licenses/lgpl-2.0.html'>GNU General Public License v2.0</a>
+                </li>
+                <li>
+                  <a href='https://www.gnu.org/licenses/old-licenses/gpl-1.0.html'>GNU General Public License v1.0</a>
+                </li>
+                <li>
+                  <a href='https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html'>GNU Lesser General Public License v2.1</a>
+                </li>
+                <li>
                   <a href='https://www.gnu.org/licenses/licenses.html#LGPL'>GNU Lesser General Public License v3.0</a>
+                </li>
+                <li>
+                  <a href='https://opensource.org/licenses/MPL-2.0'>Mozilla Public License 2.0</a>
+                </li>
+                <li>
+                  <a href='http://unlicense.org/'>The Unlicense</a>
                 </li>
               </ul>
               <br/>
@@ -83,18 +135,19 @@ export default class FAQ extends React.Component {
             <p>Individual software records and associated metadata are directly provided by the developer or the developing organization to DOE through DOE CODE.</p>
             <p>DOE CODE offers two paths for users to provide code. Users can (1)&nbsp;
               <strong>publish</strong>&nbsp;code to DOE CODE, and (2)&nbsp;
-              <strong>submit</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. See the "What does it mean to publish code to DOE CODE?" and "What does it mean to submit code to DOE CODE?" for more details.</p>
+              <strong>submit</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. For more information about publishing and submitting code, see the "What does it mean to publish code to DOE CODE?" and "What does it mean to submit code to DOE CODE?" for more details.</p>
           </div>
       }, {
         text: <span className='faq-page-subtitle'>What does it mean to publish code to DOE CODE?</span>,
         content: <div>
-            <p>Users may want to publish their code to DOE CODE, because publishing offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Publishing to DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes that are in early development and for developers wanting to obtain DOIs early in the process. (See also “What is a Digital Object Identifier (DOI)?”).
+            <p>Users may want to publish their code to DOE CODE, because publishing offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Publishing to DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes that are in early development and for developers wanting to obtain DOIs early in the process. (See also "
+              <a className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-doi')}>What is a Digital Object Identifier (DOI)?</a>”).
             </p>
             <br/>
             <p>Publishing to DOE CODE is easy, with only a minimal set of metadata required.</p>
             <br/>
             <div>
-              Required Metadata to Publish to DOE CODE
+              Required Metadata to Publish to DOE CODE:
               <ul>
                 <li>Software Availability</li>
                 <li>Repository Link* or Landing Page</li>
@@ -118,10 +171,10 @@ export default class FAQ extends React.Component {
               DOE national laboratories and other DOE facilities/contractors who have developed and/or modified software during work supported by DOE or during work carried out for others at DOE facilities are required to submit a record of the software to the Department of Energy, if the software meets the following criteria:
               <ul>
                 <li>the software meets the definition of&nbsp;
-                  <a href='https://www.osti.gov/stip/stidefined'>STI</a>
+                  <a href='https://www.osti.gov/stip/stidefined'>STI</a>;
                 </li>
-                <li>the software is known or expected to be useful inside or outside the DOE community, or is not specific to the originating site; and</li>
-                <li>a stable, usable, documented version of the software exists (i.e., the software is not under initial development);</li>
+                <li>the software is known or expected to be useful inside or outside the DOE community, or is not specific to the originating site;</li>
+                <li>a stable, usable, documented version of the software exists (i.e., the software is not under initial development); and</li>
                 <li>the software has undergone all appropriate reviews for sensitivity and export control.</li>
               </ul>
             </div>
@@ -177,16 +230,20 @@ export default class FAQ extends React.Component {
             A DOE CODE account is not needed to search for DOE-funded software, but an account is needed to publish or submit code. Users meeting minimum criteria can directly create a DOE CODE account. All you need is your first and last name, government email address or valid contract number, and a password.
             <br/><br/>
             Both of the repository services we provide require a separate account in addition to the account for publishing or submitting to DOE CODE. To utilize repositories on OSTI’s GitLab installation and DOE CODE GitHub, those interested must request an account by sending an email to&nbsp;<a href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>. DOE CODE Product Manager(s) will follow up with the requester.
-            <br/><br/>
-            What is a Digital Object Identifier (DOI)? A DOI is a unique persistent identifier that references a digital object and provides long term access; DOIs remain stable even in the underlying address or URL for the content changes. OSTI is a member of and registering agency for DataCite and has the authority to assign Digital Object Identifiers to software and code that are submitted by DOE and its contractors or grantees. The assigning and registration of a DOI for software is a free service provided by OSTI to enhance DOE's management of this important resource.
+
           </p>
+      }, {
+        text: <span className='faq-page-subtitle'>What is a Digital Object Identifier (DOI)?</span>,
+        content: <p>
+          What is a Digital Object Identifier (DOI)? A DOI is a unique persistent identifier that references a digital object and provides long term access; DOIs remain stable even in the underlying address or URL for the content changes. OSTI is a member of and registering agency for DataCite and has the authority to assign Digital Object Identifiers to software and code that are submitted by DOE and its contractors or grantees. The assigning and registration of a DOI for software is a free service provided by OSTI to enhance DOE's management of this important resource.</p>,
+        anchorName: 'what-is-doi'
       }, {
         text: <span className='faq-page-subtitle'>What are the benefits of getting a DOI for code or software?</span>,
         content: <div>
             <ul>
               <li>
-                Announcing and registering code or software with DOIs enables researchers, especially future researchers, to more easily discover the code or software, access it, and reuse it for verification of the original experiment or to produce new results with the latest methods.</li>
-              <li>DOIs facilitate accurate linkage between a document or published article and the specific code or software underlying it.</li>
+                Announcing and registering code or software with DOIs enables researchers, especially future researchers, to more easily discover, access, and reuse teh coe or software for verification of the original experiment and to produce new results with the latest methods.</li>
+              <li>DOIs facilitate accurate linkage between a document or published article and the specific underlying code or software.</li>
               <li>DOIs make code easy to cite in a standardized way (DOIs have become recognizable as pointers to important information around the globe), encouraging authors to include this step in their writing/publishing activities.</li>
               <li>Enabling your code or software to be easily citable means that code developers, contributors, and others involved in the development, but not necessarily in the authoring of a publication, can receive proper attribution.
               </li>
@@ -200,7 +257,7 @@ export default class FAQ extends React.Component {
       }, {
         text: <span className='faq-page-subtitle'>How do I use the Advanced Search?</span>,
         content: <div>
-            The advanced search will allow you to perform more complex searches, offering you a number of fields, such as Title, Developer(s), or Release date to help you refine your search results.
+            The advanced search will allow you to perform more complex searches and retrieve more specific results, offering you a number of fields, such as Title, Developer(s), or Release date to help you refine your search results.
             <br/>
             <br/>
             <div className='faq-page-left-padded'>
@@ -237,6 +294,8 @@ export default class FAQ extends React.Component {
               <br/>
               Searches the fields for Open Source, Publicly Available; Open Source, Not Publicly Available; and Closed Source.
               <br/>
+              <strong>Licenses</strong>
+              Searches by names of licenses.
               <br/>
               <strong>
                 Research Organization</strong>
@@ -256,7 +315,8 @@ export default class FAQ extends React.Component {
           </div>
       }, {
         text: <span className='faq-page-subtitle'>Are there APIs available for DOE CODE?</span>,
-        content: <p>Yes, there are lots of APIs with stable endpoints. For more information, see the API documentation</p>
+        content: <p>Yes, there are lots of APIs with stable endpoints. For more information, see the&nbsp;<a target='_blank' href={api_location}>API documentation</a>
+          </p>
       }, {
         text: <span className='faq-page-subtitle'>Do I need to have cookies enabled to use DOE CODE?</span>,
         content: <p>Yes, you must select Accept All Cookies. Please see our&nbsp;
@@ -264,7 +324,7 @@ export default class FAQ extends React.Component {
       }, {
         text: <span className='faq-page-subtitle'>How can I find out more?</span>,
         content: <p>
-            For additional assitance,&nbsp;
+            For additional assistance,&nbsp;
             <a href='mailto:doecode@osti.gov'>Contact Us</a>
           </p>
       }
@@ -279,7 +339,10 @@ export default class FAQ extends React.Component {
           <br/>
           <div>
             {fa_items.map((row, index) => <div className='faq-page-collapse-wrapper' key={'faq-' + index}>
-              <SimpleCollapsible toggleArrow button_text={row.text} contents={row.content} collapseContainerClasses='faq-page-blockquote'/>
+              {(row.anchorName) && <span>
+                <a id={row.anchorName}></a>
+              </span>}
+              <SimpleCollapsible toggleArrow button_text={row.text} contents={row.content} collapseContainerClasses='faq-page-blockquote' isOpen={(row.anchorName && row.anchorName == this.state.open_topic)}/>
             </div>)}
           </div>
         </div>

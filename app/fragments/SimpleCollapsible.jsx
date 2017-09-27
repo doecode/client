@@ -5,8 +5,12 @@ export default class SimpleCollapsible extends React.Component {
   constructor(props) {
     super(props);
     this.toggleState = this.toggleState.bind(this);
+
+    var already_open = (this.props.isOpen && this.props.isOpen === true)
+      ? true
+      : false;
     this.state = {
-      isOpen: false,
+      isOpen: already_open,
       useToggleArrow: this.props.toggleArrow !== undefined
     }
   }
@@ -15,6 +19,12 @@ export default class SimpleCollapsible extends React.Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.isOpen && (this.state.isOpen != newProps.isOpen)) {
+      this.setState({isOpen: newProps.isOpen});
+    }
   }
 
   render() {

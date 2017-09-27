@@ -723,6 +723,10 @@ html h3 {
   box-shadow: rgb(221, 221, 221) 0px 1px 3px 0px inset;
   height: 37px;
   color: rgb(0, 0, 0);
+  padding-left:9.6px;
+  padding-right:9.6px;
+  padding-top:8px;
+  padding-bottom:8px;
 }
 
 .search-box::-webkit-input-placeholder {
