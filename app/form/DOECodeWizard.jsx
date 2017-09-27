@@ -153,8 +153,6 @@ componentDidMount() {
 
     if (this.props.page == 'submit' || this.props.page == 'approve') {
         this.setState({"showAll": true});
-    } else {
-        metadata.requireOnlyPublishedFields();
     }
 
     const codeID = getQueryParam("code_id");
@@ -164,12 +162,15 @@ componentDidMount() {
         checkIsAuthenticated();
         metadata.loadRecordFromSessionStorage(JSON.parse(window.sessionStorage.lastRecord), this.props.page);
         window.sessionStorage.lastRecord = "";
-
     } else if (codeID) {
         this.setState({showModal : true});
         doAuthenticatedAjax('GET', "/doecode/api/metadata/" + codeID, this.parseReceiveResponse);
     } else {
         checkIsAuthenticated();
+    }
+
+    if (this.props.page == 'publish') {
+        metadata.requireOnlyPublishedFields();
     }
 }
 
@@ -179,8 +180,10 @@ componentDidMount() {
 
 parseReceiveResponse(data) {
     this.setState({"workflowStatus": data.metadata.workflow_status});
-    //metadata.deserializeData(data.metadata);
-    metadata.loadRecordFromServer(data.metadata, this.props.page)
+    metadata.loadRecordFromServer(data.metadata, this.props.page);
+    if (this.props.page == 'publish') {
+        metadata.requireOnlyPublishedFields();
+    }
     this.setState({showModal : false});
 }
 
@@ -191,7 +194,6 @@ autopopulate(event) {
 }
 
 parseAutopopulateResponse(responseData) {
-
     if (responseData !== undefined) {
         metadata.updateMetadata(responseData.metadata);
       }
@@ -285,9 +287,9 @@ buildPanel(obj) {
         let optionalText = "";
         let panelStyle = "default";
 
-
         const panelStatus = metadata.getPanelStatus(obj.name);
         const required_status = panelStatus.remainingRequired>0 ? 'required-field-span':'';
+
              if (panelStatus.remainingRequired > 0) {
                   requiredText += " (Fields Required) ";
              }
@@ -297,18 +299,6 @@ buildPanel(obj) {
             		 requiredText += " (All Required Fields Completed) ";
             	 }
              }
-
-/*
-             if (panelStatus.remainingOptional > 0 && panelStatus.hasOptional) {
-                  requiredText += " (Optional Fields) ";
-             }
-             else {
-
-              if (panelStatus.hasOptional) {
-                requiredText += " (All Required Fields Completed) ";
-              }
-             }
-             */
 
         let arrowBool = this.state.activePanel == obj.key;
 
