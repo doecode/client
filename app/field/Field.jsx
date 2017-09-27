@@ -174,7 +174,7 @@ export default class Field extends React.Component {
     let input = null;
 
     if (elementType === 'display') {
-      input = val;
+      input = <div>val</div>;
     } else if (elementType === 'input') {
       if (!disabled) {
         input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction} placeholder={this.props.properties.placeholderText}/>
