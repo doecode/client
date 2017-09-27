@@ -42,7 +42,7 @@ export default class SearchBar extends React.Component {
   }
   onAllFieldsChange(event) {
     this.setState({"all_fields": event.target.value});
-    searchData.setValue({"all_fields": event.target.value});
+    searchData.setValue("all_fields", event.target.value);
   }
 
   search() {
@@ -60,6 +60,11 @@ export default class SearchBar extends React.Component {
     if (!this.state.show_dropdown) {
       this.setState({"all_fields": ""});
       searchData.setValue("all_fields", "");
+    }
+    else {
+      searchData.clearValues();
+      if (window.sessionStorage.latestSearch)
+        searchData.loadValues(JSON.parse(window.sessionStorage.latestSearch));
     }
   }
 
