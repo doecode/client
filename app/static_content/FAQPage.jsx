@@ -207,7 +207,8 @@ export default class FAQ extends React.Component {
             </div>
             <p>In addition to the basic requirements for metadata fields (above), other optional/non-mandatory data fields should be included during submission when possible.</p>
             <p>
-              *Currently only Git-based repositories are supported. Most repositories hosted at git.com, bitbucket.org, sourcforge.org, and GitLab support Git-based repositories. When submitting a repository please make sure you are using the direct URL to the actual repository. As an example, the direct repository URL for DOE CODE is https://www.github.com/doecode/doecode whereas the project landing page is&nbsp;
+              *Currently only Git-based repositories are supported. Most repositories hosted at git.com, bitbucket.org, sourcforge.org, and GitLab support Git-based repositories. When submitting a repository please make sure you are using the direct URL to the actual repository. As an example, the direct repository URL for DOE CODE is&nbsp;
+              <a href='https://www.github.com/doecode/doecode'>https://www.github.com/doecode/doecode</a>&nbsp;whereas the project landing page is&nbsp;
               <a target='_blank' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>. There are plans to expand this functionality in future releases to support other repository types such as SVN and CVS.
             </p>
             <p>
@@ -242,7 +243,7 @@ export default class FAQ extends React.Component {
         content: <div>
             <ul>
               <li>
-                Announcing and registering code or software with DOIs enables researchers, especially future researchers, to more easily discover, access, and reuse teh coe or software for verification of the original experiment and to produce new results with the latest methods.</li>
+                Announcing and registering code or software with DOIs enables researchers, especially future researchers, to more easily discover, access, and reuse the code or software for verification of the original experiment and to produce new results with the latest methods.</li>
               <li>DOIs facilitate accurate linkage between a document or published article and the specific underlying code or software.</li>
               <li>DOIs make code easy to cite in a standardized way (DOIs have become recognizable as pointers to important information around the globe), encouraging authors to include this step in their writing/publishing activities.</li>
               <li>Enabling your code or software to be easily citable means that code developers, contributors, and others involved in the development, but not necessarily in the authoring of a publication, can receive proper attribution.
@@ -294,8 +295,10 @@ export default class FAQ extends React.Component {
               <br/>
               Searches the fields for Open Source, Publicly Available; Open Source, Not Publicly Available; and Closed Source.
               <br/>
+              <br/>
               <strong>Licenses</strong>
               Searches by names of licenses.
+              <br/>
               <br/>
               <strong>
                 Research Organization</strong>
@@ -312,6 +315,7 @@ export default class FAQ extends React.Component {
               <strong>Sort</strong><br/>
               You can choose for your results to be sorted by Relevance, Publication Date (newest to oldest) or Publication Date (oldest to newest).
             </div>
+            <br/>
           </div>
       }, {
         text: <span className='faq-page-subtitle'>Are there APIs available for DOE CODE?</span>,

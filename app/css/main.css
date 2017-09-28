@@ -2076,6 +2076,12 @@ ul.biblio-page-ul>li>a:hover {
   .nav-menu-item-text {
     font-size: 13px !important;
   }
+  .publication-date-start-container-homepage input {
+    max-width: 190px !important;
+  }
+  .publication-date-end-container-homepage input {
+    max-width: 190px !important;
+  }
 }
 
 

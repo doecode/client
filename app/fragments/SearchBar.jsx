@@ -39,8 +39,8 @@ export default class SearchBar extends React.Component {
       this.advSearchButtonStyles += " homepage-adv-search-btn";
       this.advSearchIconStyles += " homepage-adv-search-icon";
       this.advDropdownStyles += " homepage-adv-search-dropdown";
-      this.date_earliest_styles = "col-lg-6 col-xs-12 publication-date-start-container-homepage left-text";
-      this.date_latest_styles = "col-lg-6 col-xs-12 publication-date-end-container-homepage left-text";
+      this.date_earliest_styles = "col-lg-6 col-md-6 col-xs-12 publication-date-start-container-homepage left-text";
+      this.date_latest_styles = "col-lg-6 col-md-6 col-xs-12 publication-date-end-container-homepage left-text";
     }
   }
   onAllFieldsChange(event) {
