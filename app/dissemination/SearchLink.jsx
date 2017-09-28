@@ -22,7 +22,7 @@ export default class SearchLink extends React.Component {
       ? (this.props.displayVal)
       : (this.props.value);
     return (
-      <a className='clickable' onClick={this.search}>{display_val}</a>
+      <a className='clickable' title={display_val} onClick={this.search}>{display_val}</a>
     );
   }
 

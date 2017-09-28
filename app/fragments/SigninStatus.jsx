@@ -45,45 +45,45 @@ export default class SigninStatus extends React.Component {
     return (
       <span>
         {this.is_logged_in && <div className="dropdown">
-          <button className="btn btn-link dropdown-toggle login-dropdown-btn " type="button" id="accountSigninDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <button title={localStorage.first_name + " " + localStorage.last_name} className="btn btn-link dropdown-toggle login-dropdown-btn " type="button" id="accountSigninDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             {localStorage.first_name + " " + localStorage.last_name}&nbsp;
             <span className="caret"></span>
           </button>
           <ul className="dropdown-menu dropdown-menu-right login-dropdown-text" aria-labelledby="accountSigninDropdown">
             <li>
-              <a href="/doecode/projects">
+              <a title='My Projects' href="/doecode/projects">
                 <span className='fa fa-code'></span>&nbsp; My Projects</a>
             </li>
             <li>
-              <a href="/doecode/account">
+              <a title='Account' href="/doecode/account">
                 <span className='fa fa-user-circle'></span>&nbsp; Account</a>
             </li>
             {this.has_osti_role && <li>
-              <a href="/doecode/pending">
+              <a title='Pending Approval' href="/doecode/pending">
                 <span className='fa fa-clock-o'></span>&nbsp; Pending Approval</a>
             </li>}
 
             {this.has_osti_role && <li>
-              <a href='/doecode/user-admin'>
+              <a title='User Admin' href='/doecode/user-admin'>
                 <span className='fa fa-user-plus'></span>&nbsp; User Admin</a>
             </li>}
 
             <li role="separator" className="divider"></li>
             <li className="clickable">
-              <a onClick={this.logout}>
+              <a title='Logout' onClick={this.logout}>
                 <span className='fa fa-sign-out'></span>&nbsp; Logout</a>
             </li>
           </ul>
         </div>}
         {!this.is_logged_in && <span>
           <span className="signin-btn-container first-signin-text">
-            <a className="signin-btn" href="/doecode/login">
+            <a title='Log In' className="signin-btn" href="/doecode/login">
               <span className=" signin-btn-icon fa fa-user signin-icon"></span>
               <span className='signin-text'>&nbsp;Sign In</span>
             </a>
             &nbsp;</span>
-            <span className="signin-btn-container">&nbsp;
-            <a className="signin-btn" href="/doecode/register">
+          <span className="signin-btn-container">&nbsp;
+            <a title='Create Account' className="signin-btn" href="/doecode/register">
               <span className="signin-btn-icon fa fa-user-plus signin-icon hide-sm hide-lg hide-md"></span>
               <span className='signin-text'>&nbsp;Create Account</span>
             </a>

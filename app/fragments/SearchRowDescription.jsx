@@ -35,7 +35,7 @@ export default class SearchRowDescription extends React.Component {
           {this.needsToggle && <span>
             &nbsp;{!this.state.is_open
               ? (
-                <a className='clickable' onClick={this.toggleOpenState}>More&gt;&gt;</a>
+                <a title='More' className='clickable' onClick={this.toggleOpenState}>More&gt;&gt;</a>
               )
               : (
                 <span>
@@ -43,7 +43,7 @@ export default class SearchRowDescription extends React.Component {
                     {this.descriptionPt2}
                   </span>
                   <span>
-                    <a className='clickable' onClick={this.toggleOpenState}>&lt;&lt;Less</a>
+                    <a title='Less' className='clickable' onClick={this.toggleOpenState}>&lt;&lt;Less</a>
                   </span>
                 </span>
               )}
