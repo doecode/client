@@ -79,15 +79,19 @@ export default class ResultsPage extends React.Component {
       //In the facets for years and their associated counts, the key is the year, and the value is the count for that year
       var just_years = [];
       for (var x in this.state.facets) {
+        //In a facet key, the year is in the first 4 characters
         var facet_year = x.toString().substr(0, 4);
+        //Add it to the years list
         just_years.push(x);
+        //Also add it into the list of years we'll give to the bar chart
         years_list.push([
           new Date(facet_year, 0, 1),
-          this.state.facets[x],
+          this.state.facets[x], //The actual number of records that were released that year
           years_bargraph_style
         ]);
       }
 
+      //Go through the years array, and determine the earliest and latest years, so we know what range we need for the bar chart
       if (just_years.length > 0) {
         earliest_year = parseInt(just_years[0]);
         latest_year = parseInt(just_years[0]);
@@ -119,30 +123,22 @@ export default class ResultsPage extends React.Component {
       : searchData.getValue("rows") + searchData.getValue("start");
     let pageNum = Math.ceil(searchData.getValue("start") / searchData.getValue("rows")) + 1;
 
-    var searchFor = searchData.getValue("all_fields") ? searchData.getValue("all_fields") : "All Records";
+    var searchFor = searchData.getValue("all_fields")
+      ? searchData.getValue("all_fields")
+      : "All Records";
     searchFor = "Search for " + searchFor;
 
-    let needsFilterSuffix =
-      (searchData.getValue("software_title") ||
-      searchData.getValue("developers_contributors") ||
-      searchData.getValue("biblio_data") ||
-      searchData.getValue("identifiers") ||
-      searchData.getValue("date_earliest") ||
-      searchData.getValue("date_latest") ||
-      (searchData.getValue("accessibility") && searchData.getValue("accessibility").length > 0) ||
-      (searchData.getValue("licenses") && searchData.getValue("licenses").length > 0) ||
-      searchData.getValue("research_organization") ||
-      searchData.getValue("sponsoring_organization") ||
-      searchData.getValue("orcid"));
+    let needsFilterSuffix = (searchData.getValue("software_title") || searchData.getValue("developers_contributors") || searchData.getValue("biblio_data") || searchData.getValue("identifiers") || searchData.getValue("date_earliest") || searchData.getValue("date_latest") || (searchData.getValue("accessibility") && searchData.getValue("accessibility").length > 0) || (searchData.getValue("licenses") && searchData.getValue("licenses").length > 0) || searchData.getValue("research_organization") || searchData.getValue("sponsoring_organization") || searchData.getValue("orcid"));
 
-    var filterSuffix = needsFilterSuffix && <span className="search-for-filter-crumb"> (filtered)</span>;
+    var filterSuffix = needsFilterSuffix && <span className="search-for-filter-crumb">
+      (filtered)</span>;
     var searchCrumb = <span>{searchFor}{filterSuffix}</span>;
 
     var breadcrumbList = [
       {
         key: 'brdcrmb1',
         value: <span>
-            <a href='/doecode'>DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+            <a title='DOE Code Homepage' href='/doecode'>DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
           </span>
       }, {
         key: 'brdcrmb2',

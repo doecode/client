@@ -91,9 +91,12 @@ export default class Sidebar extends React.Component {
             </div>
           </div>
         </div>
+        <br/>
         <div className='row'>
           {this.props.facetData.release_dates.min_year > 0 && <div className='col-xs-12'>
-            <DateColumnChart minDate={this.props.facetData.release_dates.min_year} maxDate={this.props.facetData.release_dates.max_year} years={this.props.facetData.release_dates.years_list}/>
+            <br/>
+            <span className='search-for-filter-text search-for-filter-header'>Release Date</span>
+            <DateColumnChart minDate={this.props.facetData.release_dates.min_year} maxDate={this.props.facetData.release_dates.max_year} years={this.props.facetData.release_dates.years_list} refreshSearch={this.refreshSidebarSearch}/>
           </div>}
         </div>
         <div className='row'>

@@ -67,7 +67,7 @@ export default class SearchItem extends React.Component {
           <div className="row">
             <div className="col-xs-12">
               <div>
-                <a href={biblioUrl} className="search-result-title">
+                <a title={'Bibliographic Data for Code ID ' + data.code_id} href={biblioUrl} className="search-result-title">
                   {softwareTitle}
                 </a>
               </div>
@@ -81,10 +81,9 @@ export default class SearchItem extends React.Component {
               {data.description !== undefined && <SearchRowDescription text={data.description} moreLess={100}/>}
 
               <div className='right-text'>
-                <br/>
-                {/*DOI*/}
+                <br/> {/*DOI*/}
                 {doi && <span>DOI:&nbsp;
-                  <a target="_blank" href={doiUrl}>{doi}</a>
+                  <a title={'DOI for Code ID ' + data.code_id} target="_blank" href={doiUrl}>{doi}</a>
                 </span>}
                 {/*Divider*/}
                 {(data.repository_link && doi) && <span>
@@ -93,7 +92,7 @@ export default class SearchItem extends React.Component {
                 </span>}
                 {/*Repository Link*/}
                 {data.repository_link && <span>
-                  <a target='_blank' href={data.repository_link}>Repository Link</a>
+                  <a title={'Repository Link for Code ID ' + data.code_id} target='_blank' href={data.repository_link}>Repository Link</a>
                 </span>}
               </div>
               <br/>

@@ -24,7 +24,7 @@ export default class NavgationBar extends React.Component {
                 <span className="icon-bar icon-bar-extra"></span>
                 <span className="icon-bar icon-bar-extra"></span>
               </button>
-              <a href='/doecode/'><img src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" className={img_class}/></a>
+              <a href='/doecode/'><img title='DOE Code Homepage' src="https://www.osti.gov/doecode/images/DOEcode300px_white.png" alt="DOECode" className={img_class}/></a>
               <span className='hide-md hide-lg hide-sm pull-right'><SigninStatus/></span>
             </div>
             <div className="collapse navbar-collapse no-col-padding-right no-col-padding-left" id='header-nav-collapse'>
@@ -34,12 +34,12 @@ export default class NavgationBar extends React.Component {
                 <a className='whiteAnchor' href='/doecode/search'>Advanced Search</a>
               </div>
               <ul className='nav navbar-nav nav-menu'>
-                <NavBarItem current_page={this.current_page} destination="/doecode/projects" special="true" fa_icon="fa fa-sign-in nav-menu-item-fa" display_name="Submit Software/Code"/>
-                <NavBarItem current_page={this.current_page} destination='/doecode/repository-services' special='true' fa_icon='fa fa-home nav-menu-item-fa' display_name='Repository Services'/>
-                <NavBarItem current_page={this.current_page} destination="/doecode/about" special="true" fa_icon="fa fa-info nav-menu-item-fa" display_name="About"/>
-                <NavBarItem current_page={this.current_page} destination="/doecode/policy" special="true" fa_icon="fa fa-folder-open-o nav-menu-item-fa" display_name="Software Policy"/>
-                <NavBarItem current_page={this.current_page} destination="/doecode/communications" special="true" fa_icon="fa fa-newspaper-o nav-menu-item-fa" display_name="News/Resources"/>
-                <NavBarItem current_page={this.current_page} destination="/doecode/faq" special="true" fa_icon="fa fa-question nav-menu-item-fa" display_name="FAQs"/>
+                <NavBarItem current_page={this.current_page} destination="/doecode/projects" navTitle='Submit Software/Code' special="true" fa_icon="fa fa-sign-in nav-menu-item-fa" display_name="Submit Software/Code"/>
+                <NavBarItem current_page={this.current_page} destination='/doecode/repository-services' navTitle='Repository Services' special='true' fa_icon='fa fa-home nav-menu-item-fa' display_name='Repository Services'/>
+                <NavBarItem current_page={this.current_page} destination="/doecode/about" navTitle='About' special="true" fa_icon="fa fa-info nav-menu-item-fa" display_name="About"/>
+                <NavBarItem current_page={this.current_page} destination="/doecode/policy" navTitle='Software Policy' special="true" fa_icon="fa fa-folder-open-o nav-menu-item-fa" display_name="Software Policy"/>
+                <NavBarItem current_page={this.current_page} destination="/doecode/communications" navTitle='News/Resources' special="true" fa_icon="fa fa-newspaper-o nav-menu-item-fa" display_name="News/Resources"/>
+                <NavBarItem current_page={this.current_page} destination="/doecode/faq" navTitle='FAQs' special="true" fa_icon="fa fa-question nav-menu-item-fa" display_name="FAQs"/>
               </ul>
             </div>
           </div>
