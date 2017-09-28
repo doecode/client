@@ -177,14 +177,14 @@ export default class Field extends React.Component {
       input = <div>val</div>;
     } else if (elementType === 'input') {
       if (!disabled) {
-        input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction} placeholder={this.props.properties.placeholderText}/>
+        input = <input title={this.props.properties.label} name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction} placeholder={this.props.properties.placeholderText}/>
       } else {
-        input = <input name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} disabled placeholder={this.props.placeholderText}/>
+        input = <input title={this.props.properties.label} name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} disabled placeholder={this.props.placeholderText}/>
       }
     } else if (elementType === 'password') {
-      input = <input name={field} type="password" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction} placeholder={this.props.properties.placeholderText}/>
+      input = <input title={this.props.properties.label} name={field} type="password" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction} placeholder={this.props.properties.placeholderText}/>
     } else if (elementType === 'checkbox') {
-      input = <input name={field} type="checkbox" checked={val} onChange={this.toggleCheckbox}/>
+      input = <input title={this.props.properties.label} name={field} type="checkbox" checked={val} onChange={this.toggleCheckbox}/>
     } else if (elementType === 'select') {
       const ph = this.props.properties.placeholder
         ? this.props.properties.placeholder
@@ -237,17 +237,17 @@ export default class Field extends React.Component {
       }
 
       if (this.props.properties.allowCreate) {
-        input = <Creatable name={field} className={errorClass} clearable={clearable} simpleValue joinValues delimiter={"\n"} multi={this.props.properties.multi} options={this.props.properties.options} placeholder={ph} onChange={this.handleSelectChange} autoBlur={true} value={val} promptTextCreator={this.handleCreatablePrompt}/>;
+        input = <Creatable title={this.props.properties.label} name={field} className={errorClass} clearable={clearable} simpleValue joinValues delimiter={"\n"} multi={this.props.properties.multi} options={this.props.properties.options} placeholder={ph} onChange={this.handleSelectChange} autoBlur={true} value={val} promptTextCreator={this.handleCreatablePrompt}/>;
       } else {
-        input = <Select name={field} className={errorClass} clearable={clearable} simpleValue joinValues delimiter={"\n"} multi={this.props.properties.multi} options={this.props.properties.options} placeholder={ph} onChange={this.handleSelectChange} autoBlur={true} value={val}/>;
+        input = <Select title={this.props.properties.label} name={field} className={errorClass} clearable={clearable} simpleValue joinValues delimiter={"\n"} multi={this.props.properties.multi} options={this.props.properties.options} placeholder={ph} onChange={this.handleSelectChange} autoBlur={true} value={val}/>;
       }
     } else if (elementType === 'textarea') {
-      input = <textarea name={field} className={inputStyle} value={val} onChange={this.handleChange} onBlur={this.handleBlur}/>;
+      input = <textarea title={this.props.properties.label} name={field} className={inputStyle} value={val} onChange={this.handleChange} onBlur={this.handleBlur}/>;
     } else if (elementType === 'radio') {
       return (
         <div className="form-group form-group-sm row">
           <div>
-            <label htmlFor={field}><input type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange}/> {label}</label>{this.props.properties.helpTooltip!=undefined &&<span>&nbsp; <HelpTooltip item={this.props.properties.helpTooltip} shortVersion={this.props.properties.tooltipShort}/></span>}
+            <label htmlFor={field}><input title={this.props.properties.label} type="radio" checked={this.props.properties.checked} name={field} value={val} onChange={this.handleRadioChange}/> {label}</label>{this.props.properties.helpTooltip!=undefined &&<span>&nbsp; <HelpTooltip item={this.props.properties.helpTooltip} shortVersion={this.props.properties.tooltipShort}/></span>}
           </div>
         </div>
       );
@@ -257,7 +257,7 @@ export default class Field extends React.Component {
       if (dateVal == null || !dateVal.isValid())
         dateVal = null;
 
-      input = <span><DatePicker name={field} placeholderText="Click to select a date" selected={dateVal} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>{this.props.properties.textAfter&&<span>{this.props.properties.textAfter}</span>}</span>
+      input = <span><DatePicker title={this.props.properties.label} name={field} placeholderText="Click to select a date" selected={dateVal} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>{this.props.properties.textAfter&&<span>{this.props.properties.textAfter}</span>}</span>
     }
 
     return (

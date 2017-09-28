@@ -63,11 +63,11 @@ export default class PaginationButtons extends React.Component {
       : '';
     return (
       <div className='custom-paginate-container'>
-        <button type='button' className='pure-button' disabled={isPrevDisabled} onClick={this.goBackAPage}>Prev</button>
-        <button type='button' className='pure-button paginate-slider-arrow' onClick={this.toggleDropdown}>
+        <button type='button' className='pure-button' title='Previous Page' disabled={isPrevDisabled} onClick={this.goBackAPage}>Prev</button>
+        <button type='button' className='pure-button paginate-slider-arrow' title='Choose a Page' onClick={this.toggleDropdown}>
           <span className='fa fa-caret-down'></span>
         </button>
-        <button type='button' className='pure-button' disabled={isNextDisabled} onClick={this.goForwardAPage}>Next</button>
+        <button type='button' className='pure-button' disabled={isNextDisabled} title='Next Page' onClick={this.goForwardAPage}>Next</button>
         {this.state.showDropdown && <div className='pagination-dropdown'>
           <div className='row'>
             <div className='col-xs-12 right-text text-muted'>
@@ -75,9 +75,9 @@ export default class PaginationButtons extends React.Component {
             </div>
           </div>
           <div className='row'>
-            <div className='col-xs-9 no-col-padding-right'><input className='pagination-input' onChange={this.showCurrentSliderPage} type="range" min="1" max={this.props.max} defaultValue={this.state.currentVal} step="1"/></div>
+            <div className='col-xs-9 no-col-padding-right'><input className='pagination-input' onChange={this.showCurrentSliderPage} title={"Page " + this.state.currentVal} type="range" min="1" max={this.props.max} defaultValue={this.state.currentVal} step="1"/></div>
             <div className='col-xs-3 minimal-col-padding-left left-text'>
-              <button type='button' className='pure-button' onClick={this.goToPage}>»</button>
+              <button type='button' title={"Go"} className='pure-button' onClick={this.goToPage}>»</button>
             </div>
           </div>
         </div>}

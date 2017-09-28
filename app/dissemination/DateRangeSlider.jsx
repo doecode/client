@@ -61,7 +61,7 @@ export default class DateRangeSlider extends React.Component {
     return (
       <div>
         <div>
-          <div className='rc-track-container'>
+          <div className='rc-track-container' title='Date range slider'>
             <Range min={this.state.earliestDateMin} max={this.state.latestDateMax} value={[this.state.earliestDate, this.state.latestDate]} defaultValue={[this.props.minDate, this.props.maxDate]} step={1} allowCross={false} pushable={false} onChange={this.handleSliderChange} onAfterChange={this.handleSliderChangePermanent}/>
           </div>
           <div className='row yearsDisplayContainer'>

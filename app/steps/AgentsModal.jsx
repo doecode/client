@@ -104,7 +104,7 @@ export default class AgentsModal extends React.Component {
         return (
             <div className="form-group form-group-sm">
                 <div className="col-xs-12 center-text">
-                    <Button bsStyle="primary" bsSize="large" onClick={this.open}>
+                    <Button title={label} bsStyle="primary" bsSize="large" onClick={this.open}>
                         Add {label}
                     </Button>
 
@@ -125,7 +125,7 @@ export default class AgentsModal extends React.Component {
                             {this.props.tableStore.isEdit && <Button bsStyle="danger" onClick={this.handleDelete}>Delete</Button>
 }
 
-                            <Button bsStyle="primary" onClick={this.handleSave} disabled={disabled} >Save and Close</Button>
+                            <Button title='Save and Close' bsStyle="primary" onClick={this.handleSave} disabled={disabled} >Save and Close</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>

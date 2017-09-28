@@ -12,7 +12,7 @@ export default class SimpleDropdown extends React.Component {
     let linkToUse = (row.customAnchor != undefined)
       ? (row.display)
       : (
-        <a href={row.link}>{row.display}</a>
+        <a title={row.display} href={row.link}>{row.display}</a>
       );
 
     return (
@@ -42,7 +42,7 @@ export default class SimpleDropdown extends React.Component {
     const listItems = this.props.items.map(this.makeRow);
     return (
       <span className="dropdown">
-        <button className={btn_class} type="button" data-toggle="dropdown">{this.props.label}
+        <button title={this.props.label} className={btn_class} type="button" data-toggle="dropdown">{this.props.label}
         </button>{this.props.noToggleArrow === undefined && <span className='fa fa-angle-down dropdown-toggle-arrow'></span>}
         <ul className={ul_class}>
           {listItems}

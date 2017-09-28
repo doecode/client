@@ -16,7 +16,7 @@ export default class SearchCheckbox extends React.Component {
     return (
       <span>
         <input className='search-checkbox' id={this.props.id} name={this.props.name} type="checkbox" checked={this.props.isChecked} onChange={this.toggleCheckbox}/>
-        <label htmlFor={this.props.id}></label>
+        <label title={this.props.label} htmlFor={this.props.id}></label>
         &nbsp;<label htmlFor={this.props.id}>{this.props.label}</label>
       </span>
     );

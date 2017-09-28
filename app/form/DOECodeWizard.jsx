@@ -380,8 +380,6 @@ buildPanel(obj) {
       const codeID = metadata.getValue("code_id");
 
       let headerText = "Create a New Software Record";
-      let helpLinkText = "More detailed information on this process can be found on our Help page";
-
       if (codeID !== undefined && codeID > 0)
     	  headerText = (this.props.page == 'approve' ? "Approving" : "Editing") + " Software Record #" + codeID;
 
@@ -503,7 +501,7 @@ buildPanel(obj) {
                  <div className="form-group form-group-sm row">
                      <div className="col-xs-12 center-text">
                          <h1> {headerText} </h1>
-                         <a href="/doecode/help">{helpLinkText}</a>
+                         <a title='More detailed information on this process can be found on our Help page' href="/doecode/help">More detailed information on this process can be found on our Help page</a>
                      </div>
                  </div>
                  {content}

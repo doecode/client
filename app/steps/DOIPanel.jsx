@@ -18,18 +18,15 @@ export default class DOIPanel extends React.Component {
     this.reservationErrorResponse = this.reservationErrorResponse.bind(this);
 
     this.state = {
-        showModal: false,
-        modalTitle: "Reserving DOI...",
-        modalMessage: null,
-        isError: false
+      showModal: false,
+      modalTitle: "Reserving DOI...",
+      modalMessage: null,
+      isError: false
     };
   }
 
   exitModalCallback() {
-    this.setState({
-          showModal: false,
-          modalMessage: null,
-          isError: false});
+    this.setState({showModal: false, modalMessage: null, isError: false});
   }
 
   handleInfix(event) {
@@ -45,8 +42,8 @@ export default class DOIPanel extends React.Component {
   }
 
   reserveDOI() {
-      this.setState({showModal: true});
-      doAuthenticatedAjax('GET', '/doecode/api/metadata/reservedoi', this.reservationApproveResponse, null, this.reservationErrorResponse);
+    this.setState({showModal: true});
+    doAuthenticatedAjax('GET', '/doecode/api/metadata/reservedoi', this.reservationApproveResponse, null, this.reservationErrorResponse);
   }
 
   reservationApproveResponse(data) {
@@ -70,30 +67,32 @@ export default class DOIPanel extends React.Component {
   parseErrorResponse(jqXhr, exception) {
     console.log(jqXhr);
     if (jqXhr.status === 401) {
-        window.sessionStorage.lastLocation = window.location.href;
-        window.sessionStorage.lastRecord = JSON.stringify(metadata.getData());
-        window.location.href = '/doecode/login?redirect=true';
+      window.sessionStorage.lastLocation = window.location.href;
+      window.sessionStorage.lastRecord = JSON.stringify(metadata.getData());
+      window.location.href = '/doecode/login?redirect=true';
 
     } else if (jqXhr.status === 403) {
-        window.location.href = '/doecode/forbidden';
+      window.location.href = '/doecode/forbidden';
     } else {
-        //window.location.href = '/doecode/error';
+      //window.location.href = '/doecode/error';
 
-        let x = 0;
-        let msg = "";
+      let x = 0;
+      let msg = "";
 
-        if (jqXhr.responseJSON && jqXhr.responseJSON.errors) {
-          for (x = 0; x < jqXhr.responseJSON.errors.length; x++) {
-              msg += (msg == "" ? "" : "; ") + jqXhr.responseJSON.errors[x];
-          }
+      if (jqXhr.responseJSON && jqXhr.responseJSON.errors) {
+        for (x = 0; x < jqXhr.responseJSON.errors.length; x++) {
+          msg += (msg == ""
+            ? ""
+            : "; ") + jqXhr.responseJSON.errors[x];
         }
+      }
 
-        if (msg == "")
-          msg = "Internal Server Error: " + jqXhr.status;
+      if (msg == "")
+        msg = "Internal Server Error: " + jqXhr.status;
 
-        this.setState({"loading": false, "loadingMessage": ""});
-        this.setState({"error": true, "errorMessage": msg});
-        console.log("Error...");
+      this.setState({"loading": false, "loadingMessage": ""});
+      this.setState({"error": true, "errorMessage": msg});
+      console.log("Error...");
     }
   }
 
@@ -129,9 +128,15 @@ export default class DOIPanel extends React.Component {
     //flag indicating if doi is already reserved in this session
     const reserving = metadata.getValue("doi_status") === "RES" || registered;
 
-    const buttonClass = "btn btn-primary btn-sm" + (reserving ? " active" : "");
-    const buttonText = reserving ? "Clear Reserved DOI" : "Reserve DOI";
-    const buttonIcon = reserving ? "fa fa-eraser" : "fa fa-pencil";
+    const buttonClass = "btn btn-primary btn-sm" + (reserving
+      ? " active"
+      : "");
+    const buttonText = reserving
+      ? "Clear Reserved DOI"
+      : "Reserve DOI";
+    const buttonIcon = reserving
+      ? "fa fa-eraser"
+      : "fa fa-pencil";
 
     let messageNode = null;
     if (reserving)
@@ -149,9 +154,8 @@ export default class DOIPanel extends React.Component {
           <div className="col-md-8 col-xs-12">
             <MetadataField field="doi" label="DOI" helpTooltip='DigitalObjectIdentifer' elementType="input" disabled={reserving} messageNode={messageNode}/> {!registered && <div className="form-group form-group-sm row">
               <div className="col-xs-8">
-                <button type="button" className={buttonClass} onClick={this.handleReserve}>
-                  <span className={buttonIcon}></span>&nbsp;
-                  {buttonText}
+                <button title={buttonText} type="button" className={buttonClass} onClick={this.handleReserve}>
+                  <span className={buttonIcon}></span>&nbsp; {buttonText}
                 </button>
               </div>
             </div>}
@@ -161,15 +165,7 @@ export default class DOIPanel extends React.Component {
           </div>
           <div className="col-md-4"></div>
         </div>
-        <MessageBoxModal
-                showModal={this.state.showModal}
-                showSpinner
-                isError={this.state.isError}
-                title={this.state.modalTitle}
-                items={[this.state.modalMessage]}
-                showCloseButton={this.state.isError}
-                exitCallback={this.exitModalCallback}
-        />
+        <MessageBoxModal showModal={this.state.showModal} showSpinner isError={this.state.isError} title={this.state.modalTitle} items={[this.state.modalMessage]} showCloseButton={this.state.isError} exitCallback={this.exitModalCallback}/>
       </div>
     );
   }

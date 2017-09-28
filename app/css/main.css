@@ -723,37 +723,42 @@ html h3 {
   box-shadow: rgb(221, 221, 221) 0px 1px 3px 0px inset;
   height: 37px;
   color: rgb(0, 0, 0);
-  padding-left:9.6px;
-  padding-right:9.6px;
-  padding-top:8px;
-  padding-bottom:8px;
+  padding-left: 9.6px;
+  padding-right: 9.6px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .search-box::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */
   color: #838383;
+  font-size: 15px;
 }
 
 .search-box:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #838383;
   opacity: 1;
+  font-size: 15px;
 }
 
 .search-box::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #838383;
   opacity: 1;
+  font-size: 15px;
 }
 
 .search-box:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: #838383;
+  font-size: 15px;
 }
 
 .search-box::-ms-input-placeholder {
   /* Microsoft Edge */
   color: #838383;
+  font-size: 15px;
 }
 
 .navbar .navbar-nav {
@@ -1356,7 +1361,7 @@ label {
   right: 0px;
   top: 37px;
   z-index: 4;
-  margin-right: 14px;
+  margin-right: 0px;
   margin-left: 14px;
 }
 
@@ -2143,7 +2148,7 @@ ul.biblio-page-ul>li>a:hover {
   .publication-date-start-container-homepage {
     padding-right: 0px !important;
   }
-  .publication-date-end-container-homepage{
+  .publication-date-end-container-homepage {
     text-align: right !important;
   }
 }

@@ -27,7 +27,7 @@ export default class SortDropdown extends React.Component {
         sort_lbl += row.label;
       }
       sort_options.push({
-        customAnchor: true, display: <a className='clickable' onClick={() => changeSearchSortVar(row.value)}>{row.label}</a>
+        customAnchor: true, display: <a title={row.label} className='clickable' onClick={() => changeSearchSortVar(row.value)}>{row.label}</a>
       });
     });
     return (

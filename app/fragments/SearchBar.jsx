@@ -107,8 +107,8 @@ export default class SearchBar extends React.Component {
       <div className={notSoWideSearchbar}>
         <div className={this.props.searchbarSize}>
           <div>
-            <input id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.all_fields} className={this.searchBarStyles} placeholder="Search DOE CODE for published software entries"/>
-            <button onClick={this.doAdvancedSearch} className={this.advSearchButtonStyles} type='button'>
+            <input title='All Fields Search' id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.all_fields} className={this.searchBarStyles} placeholder="Search DOE CODE for published software entries"/>
+            <button title='Toggle Advanced Search Dropdown' onClick={this.doAdvancedSearch} className={this.advSearchButtonStyles} type='button'>
               <span className={this.advSearchIconStyles}></span>
             </button>
           </div>
@@ -168,7 +168,7 @@ export default class SearchBar extends React.Component {
           </div>}
         </div>
         <div className="col-lg-1 col-md-2 col-sm-1 col-xs-2 search-btn-container text-left minimal-col-padding-left">
-          <button type="button" className={this.searchButtonStyles} onClick={this.search}>
+          <button title='Trigger Search' type="button" className={this.searchButtonStyles} onClick={this.search}>
             <span className="fa fa-search"></span>
           </button>
         </div>
