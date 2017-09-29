@@ -103,13 +103,13 @@ export default class WorkflowManagement extends React.Component {
         edit:
           <div className="grid-button-container" title="">
           <div className="grid-button" title="Update Metadata">
-            <a href={publishUrl} className="btn btn-success btn-sm">
+            <a href={publishUrl} className="pure-button button-success btn-sm">
                     <span className="fa fa-pencil"></span>&nbsp;
                     Update Metadata
             </a>
           </div>
           <div className="grid-button" title="Submit to E-Link">
-            <a href={submitUrl} className="btn btn-primary btn-sm">
+            <a href={submitUrl} className="pure-button button-secondary btn-sm">
                     <span className="fa fa-pencil"></span>&nbsp;
                     Submit to E-Link
             </a>
@@ -163,7 +163,7 @@ export default class WorkflowManagement extends React.Component {
           <h2 className="static-content-title">Manage My Projects</h2>
           <div className="form-group-xs row">
             <div className="col-sm-12">
-              <a title='Add New Record' href={"/doecode/publish" + this.wizardVersion} type="button" className="btn btn-success btn-lg pull-right workflow-publish-btn">
+              <a title='Add New Record' href={"/doecode/publish" + this.wizardVersion} type="button" className="pure-button button-success btn-lg pull-right workflow-publish-btn">
                 Add New Record
               </a>
             </div>

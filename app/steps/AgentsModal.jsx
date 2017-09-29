@@ -104,9 +104,9 @@ export default class AgentsModal extends React.Component {
         return (
             <div className="form-group form-group-sm">
                 <div className="col-xs-12 center-text">
-                    <Button title={label} bsStyle="primary" bsSize="large" onClick={this.open}>
-                        Add {label}
-                    </Button>
+                    <button type='button' title={label} className='pure-button button-secondary btn-lg' onClick={this.open}>
+                      Add {label}
+                    </button>
 
                     <Modal show={this.props.dataType === this.props.tableStore.showModal} onHide={this.close} bsSize="large">
                         <Modal.Header closeButton>
@@ -121,11 +121,10 @@ export default class AgentsModal extends React.Component {
                             {content}
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button onClick={this.close}>Close</Button>
-                            {this.props.tableStore.isEdit && <Button bsStyle="danger" onClick={this.handleDelete}>Delete</Button>
-}
-
-                            <Button title='Save and Close' bsStyle="primary" onClick={this.handleSave} disabled={disabled} >Save and Close</Button>
+                            <button onClick={this.close} type='button' className='pure-button'>Close</button>&nbsp;
+                            {this.props.tableStore.isEdit && <button type='button' title='Delete' className='pure-button button-warning' onClick={this.handleDelete}>Delete</button>}
+                            &nbsp;
+                            <button type='button' title='Save and Close' className='pure-button button-secondary' onClick={this.handleSave} disabled={disabled}>Save and Close</button>
                         </Modal.Footer>
                     </Modal>
                 </div>

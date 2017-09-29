@@ -308,7 +308,7 @@ export default class UserAdmin extends React.Component {
                 <div className='row'>
                   <label className='control-label col-xs-1' htmlFor='user-admin-box'>Users:</label>
                   <div className='col-xs-11'>
-                    <select className='form-control' id='user-admin-box' onChange={this.loadUserData}>
+                    <select title='Users' className='form-control' id='user-admin-box' onChange={this.loadUserData}>
                       {this.state.userList.map((row, index) => <option key={'userlist-' + index} value={row.value}>
                         {row.label}
                       </option>)}
@@ -323,7 +323,7 @@ export default class UserAdmin extends React.Component {
           {this.state.showPendingUserRoles > 0 && <div className='row'>
             <div className='col-md-4'></div>
             <div className='col-md-4 col-xs-12'>
-              <SimpleCollapsible anchorClass='clickable' toggleArrow button_text={(
+              <SimpleCollapsible title='Users Request Roles' anchorClass='clickable' toggleArrow button_text={(
                 <strong>
                   Users Requesting Roles
                 </strong>
@@ -363,7 +363,7 @@ export default class UserAdmin extends React.Component {
               <div className='row'>
                 <div className='col-md-4'></div>
                 <div className='col-md-4 col-xs-12'>
-                  <UserStatuses adminPrivRequest={requestedAdmin} passedInData={passedInUserData} rolesList={this.roles_list}/>
+                  <UserStatuses title='User Roles' adminPrivRequest={requestedAdmin} passedInData={passedInUserData} rolesList={this.roles_list}/>
                 </div>
                 <div className='col-md-4'></div>
               </div>
@@ -388,7 +388,7 @@ export default class UserAdmin extends React.Component {
               <div className='row'>
                 <div className='col-md-3'></div>
                 <div className='col-md-6 col-xs-12'>
-                  <button type='button' className='btn btn-success btn-lg' onClick={this.saveUserData}>
+                  <button title='Save User' type='button' className='pure-button button-success btn-lg' onClick={this.saveUserData}>
                     <span className='fa fa-floppy-o'></span>&nbsp;Save</button>
                 </div>
                 <div className='col-md-3'></div>

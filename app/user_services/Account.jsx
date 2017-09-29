@@ -278,7 +278,7 @@ export default class Account extends React.Component {
                   <br/>
                   <div className='row center-text'>
                     <div className='col-xs-12'>
-                      <button type='button' className='btn btn-success btn-lg' onClick={this.sendChangePasswordRequest}>Change Password</button>
+                      <button type='button' className='pure-button button-success btn-lg' onClick={this.sendChangePasswordRequest}>Change Password</button>
                     </div>
                   </div>
                 </div>
@@ -303,7 +303,7 @@ export default class Account extends React.Component {
                   <br/>
                   <div className='row'>
                     <div className='col-xs-12'>
-                      <button type='button' className='btn btn-success btn-lg' onClick={this.updateUser}>Update User</button>
+                      <button type='button' className='pure-button button-success btn-lg' onClick={this.updateUser}>Update User</button>
                     </div>
                   </div>
                 </div>
@@ -320,7 +320,7 @@ export default class Account extends React.Component {
                     <div>
                       <PageMessageBox classValue={this.state.requestRoleClass} showMessage={this.state.showRequestRoleMessage} items={this.state.requestRoleMsg} keyPrefix='admin'/>
                     </div>
-                    <button type="button" className="btn btn-lg btn-success" onClick={this.requestAdmin}>
+                    <button title='Request Admin Role' type="button" className="pure-button button-success btn-lg " onClick={this.requestAdmin}>
                       <span className="fa fa-unlock-alt"></span>&nbsp;Request Role
                     </button>
                   </div>}
@@ -338,7 +338,7 @@ export default class Account extends React.Component {
                   <div>
                     <PageMessageBox classValue={this.state.apiKeyClass} showMessage={this.state.showAPIKeyMessage} items={this.state.apiKeyMsg} keyPrefix='apikey'/>
                   </div>
-                  <button type="button" className='btn btn-lg btn-success' onClick={this.getAPIKey}>
+                  <button title='Generate New API Key' type="button" className='pure-button button-success btn-lg' onClick={this.getAPIKey}>
                     <span className='fa fa-key'></span>&nbsp;Generate</button>
                   <br/>
                   <br/>
