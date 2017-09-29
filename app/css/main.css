@@ -443,7 +443,7 @@ html h3 {
 }
 
 .biblio-main-content {
-  border-right: 1px solid #CCCCCC;
+  border-left: 1px solid #CCCCCC;
   padding-left: 30px;
 }
 
@@ -2036,10 +2036,11 @@ ul.biblio-page-ul>li>a:hover {
   .navbar-logo-img {
     display: none
   }
+  /*
   .header-logo-img {
     width: 200px;
     height: 50px;
-  }
+  }*/
   .to-field {
     padding-top: 0px;
     padding-bottom: 7px;
