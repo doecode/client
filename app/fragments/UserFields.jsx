@@ -102,7 +102,7 @@ export default class UserFields extends React.Component {
               <div className={(has_firstName)
                 ? (successDiv)
                 : (notSuccess)}>
-                <input type='text' placeholder='First Name' value={firstNameValue} id='first-name' className='pure-input-1-3 form-control' onChange={this.updateFirstName} onBlur={this.updateFirstName}/> {has_firstName && <span className="fa fa-check form-control-feedback successCheck"></span>}
+                <input title='First Name' type='text' placeholder='First Name' value={firstNameValue} id='first-name' className='pure-input-1-3 form-control' onChange={this.updateFirstName} onBlur={this.updateFirstName}/> {has_firstName && <span className="fa fa-check form-control-feedback successCheck"></span>}
               </div>
             </div>
 
@@ -118,7 +118,7 @@ export default class UserFields extends React.Component {
               <div className={(has_lastName)
                 ? (successDiv)
                 : (notSuccess)}>
-                <input type='text' placeholder='Last Name' value={lastNameValue} id='last-name' className='pure-input-1-3 form-control' onChange={this.updateLastName} onBlur={this.updateLastName}/> {has_lastName && <span className="fa fa-check form-control-feedback successCheck"></span>}
+                <input title='Last Name' type='text' placeholder='Last Name' value={lastNameValue} id='last-name' className='pure-input-1-3 form-control' onChange={this.updateLastName} onBlur={this.updateLastName}/> {has_lastName && <span className="fa fa-check form-control-feedback successCheck"></span>}
               </div>
             </div>
           </div>
@@ -133,7 +133,7 @@ export default class UserFields extends React.Component {
               <div className={(has_email && !hasEmailError)
                 ? (successDiv)
                 : (notSuccess)}>
-                <input type='text' placeholder='Email Address' id='email' className='pure-input-1-3 form-control' onChange={this.checkEmailAndContractNum} onBlur={this.updateEmailAndCheckPassword}/> {(has_email && !hasEmailError) && <span className="fa fa-check form-control-feedback successCheck"></span>}
+                <input title='Email Address' type='text' placeholder='Email Address' id='email' className='pure-input-1-3 form-control' onChange={this.checkEmailAndContractNum} onBlur={this.updateEmailAndCheckPassword}/> {(has_email && !hasEmailError) && <span className="fa fa-check form-control-feedback successCheck"></span>}
                 {hasEmailError && <div className='has-error'>
                   <label className='control-label'>{emailError}</label>
                 </div>}
@@ -152,7 +152,7 @@ export default class UserFields extends React.Component {
               <div className={(has_contractNum)
                 ? (successDiv)
                 : (notSuccess)}>
-                <input type='text' placeholder='Award/Contract Number' id='contract-number' value={userData.getValue("contract_number")} className='pure-input-1-3 form-control' onChange={this.handleContractCheck} onBlur={this.handleContractCheck}/> {has_contractNum && <span className="fa fa-check form-control-feedback successCheck"></span>}
+                <input title='Contract Number' type='text' placeholder='Award/Contract Number' id='contract-number' value={userData.getValue("contract_number")} className='pure-input-1-3 form-control' onChange={this.handleContractCheck} onBlur={this.handleContractCheck}/> {has_contractNum && <span className="fa fa-check form-control-feedback successCheck"></span>}
               </div>
             </div>
           </div>}

@@ -154,7 +154,7 @@ export default class SearchBar extends React.Component {
               </div>
               <div className='row adv-search-dropdown-title-row left-text'>
                 <div className='col-xs-12 no-col-padding-left'>
-                  <a onClick={this.handleAdvancedSearchClick} className='more-adv-search clickable'>
+                  <a title='Advanced Search Page' onClick={this.handleAdvancedSearchClick} className='more-adv-search clickable'>
                     <span className='fa fa-plus-square-o'></span>&nbsp;More Options&hellip;</a>
                 </div>
               </div>

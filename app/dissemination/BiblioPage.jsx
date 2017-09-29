@@ -158,11 +158,11 @@ export default class BiblioPage extends React.Component {
       {
         key: 'brdcrmb1',
         value: <span>
-            <a href='/doecode'>DOE CODE</a>&nbsp;/&nbsp;</span>
+            <a title='DOE Code Homepage' href='/doecode'>DOE CODE</a>&nbsp;/&nbsp;</span>
       }, {
         key: 'brdcrmb2',
         value: <span>
-            <a href='/doecode/results'>Search Results</a>&nbsp;/&nbsp;</span>
+            <a title='Search Results' href='/doecode/results'>Search Results</a>&nbsp;/&nbsp;</span>
       }, {
         key: 'brdcrmb3',
         value: <span>{metadata.getValue("software_title")}</span>
@@ -173,7 +173,7 @@ export default class BiblioPage extends React.Component {
     let clipboard = new Clipboard('.clip-cite-bib');
 
     clipboard.on('success', function(e) {
-        e.clearSelection();
+      e.clearSelection();
     });
 
     return (
@@ -231,16 +231,16 @@ export default class BiblioPage extends React.Component {
                             <h3 className='citation-formats'>Citation Formats</h3>
                             <ul className="nav nav-tabs biblio-page-ul">
                               <li className="active">
-                                <a data-toggle="tab" href="#mla">MLA</a>
+                                <a className='clickable' title='MLA Citation' data-toggle="tab" href="#mla">MLA</a>
                               </li>
                               <li>
-                                <a data-toggle="tab" href="#apa">APA</a>
+                                <a className='clickable' title='APA Citation' data-toggle="tab" href="#apa">APA</a>
                               </li>
                               <li>
-                                <a data-toggle="tab" href="#chicago">Chicago</a>
+                                <a className='clickable' title='Chicago Citation' data-toggle="tab" href="#chicago">Chicago</a>
                               </li>
                               <li>
-                                <a data-toggle="tab" href="#bibtex">Bibtex</a>
+                                <a className='clickable' title='Bibtex Citation' data-toggle="tab" href="#bibtex">Bibtex</a>
                               </li>
                             </ul>
 
@@ -250,7 +250,7 @@ export default class BiblioPage extends React.Component {
                                   <div id="mla-clip" className='col-xs-12 citation-format-div'><MLA data={metadata.fieldMap}/></div>
                                 </div>
                                 <div className="text-right medium">
-                                  <button className="clip-cite-bib" data-clipboard-target="#mla-clip">
+                                  <button title='Copy MLA to clipboard' className="clip-cite-bib" data-clipboard-target="#mla-clip">
                                     <span className="fa fa-files-o"></span>
                                     Copy to clipboard</button>
                                 </div>
@@ -260,7 +260,7 @@ export default class BiblioPage extends React.Component {
                                   <div id="apa-clip" className='col-xs-12 citation-format-div'><APA data={metadata.fieldMap}/></div>
                                 </div>
                                 <div className="text-right medium">
-                                  <button className="clip-cite-bib" data-clipboard-target="#apa-clip">
+                                  <button title='Copy APA to clipboard' className="clip-cite-bib" data-clipboard-target="#apa-clip">
                                     <span className="fa fa-files-o"></span>
                                     Copy to clipboard</button>
                                 </div>
@@ -270,7 +270,7 @@ export default class BiblioPage extends React.Component {
                                   <div id="chicago-clip" className='col-xs-12 citation-format-div'><Chicago data={metadata.fieldMap}/></div>
                                 </div>
                                 <div className="text-right medium">
-                                  <button className="clip-cite-bib" data-clipboard-target="#chicago-clip">
+                                  <button title='Copy Chicago to clipboard' className="clip-cite-bib" data-clipboard-target="#chicago-clip">
                                     <span className="fa fa-files-o"></span>
                                     Copy to clipboard</button>
                                 </div>
@@ -280,7 +280,7 @@ export default class BiblioPage extends React.Component {
                                   <div id="bibtex-clip" className='col-xs-12 citation-format-div'><Bibtex data={metadata.fieldMap}/></div>
                                 </div>
                                 <div className="text-right medium">
-                                  <button className="clip-cite-bib" data-clipboard-target="#bibtex-clip">
+                                  <button title='Copy Bibtex to clipboard' className="clip-cite-bib" data-clipboard-target="#bibtex-clip">
                                     <span className="fa fa-files-o"></span>
                                     Copy to clipboard</button>
                                 </div>

@@ -160,7 +160,7 @@ export default class RegisterUser extends React.Component {
             <div className='row'>
               <div className='col-md-2'></div>
               <div className='col-md-8 col-xs-12 right-text'>
-                <button type='button' className='pure-button button-success signin-buttons' onClick={this.register}>
+                <button title='Create Account' type='button' className='pure-button button-success signin-buttons' onClick={this.register}>
                   Create Account
                 </button>
               </div>

@@ -148,6 +148,9 @@ export default class DevAndContribLinks extends React.Component {
     /*Map every affiliation we've got*/
     const affiliations_list = this.createAffiliationsList(refinedAuthorsList);
 
+    var btnTitle = this.state.affiliationsOpen == true
+      ? 'Hide Affiliations'
+      : 'Show Affiliations';
     return (
       <div>
         <div>
@@ -155,7 +158,7 @@ export default class DevAndContribLinks extends React.Component {
           {(this.props.searchPage && authors.length > 3) && <span>;&nbsp;&hellip;</span>}{authors && <span>&nbsp;</span>}{this.props.releaseDate}
         </div>
         {(affiliations_list && affiliations_list.length > 0 && !this.props.searchPage) > 0 && <div className='affiliations-div'>
-          <button type="button" className="btn btn-link" onClick={this.showAffiliationsBtn}>{this.state.affiliationStateLabel}</button>
+          <button title={btnTitle} type="button" className="btn btn-link" onClick={this.showAffiliationsBtn}>{this.state.affiliationStateLabel}</button>
           <Collapse in={this.state.affiliationsOpen}>
             <div>
               <ol>

@@ -83,7 +83,7 @@ export default class BiblioSidebar extends React.Component {
                 </span>}
                 <span className='biblio-sidebar-secondary-subtitle'>{fulltextMsg}</span>
                 <br/>
-                <a href={fulltextURL} target='_blank' className='biblio-sidebar-traditional-anchor word-break'>{fulltextURL}</a>
+                <a title={fulltextURL} href={fulltextURL} target='_blank' className='biblio-sidebar-traditional-anchor word-break'>{fulltextURL}</a>
               </div>
             </div>
             <div className='row biblio-sidebar-row'>
@@ -97,22 +97,22 @@ export default class BiblioSidebar extends React.Component {
                   <div className='col-xs-12'>
                     <ul className="list-inline">
                       <li className='biblio-social-link'>
-                        <a target="_blank" href={"https://www.facebook.com/sharer/sharer.php?u=" + window.location.href}>
+                        <a title='Facebook' target="_blank" href={"https://www.facebook.com/sharer/sharer.php?u=" + window.location.href}>
                           <span className="fa fa-facebook facebook"></span>
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <a target="_blank" href={'https://twitter.com/home?status=DOE Research from DOECODE: ' + window.location.href}>
+                        <a title='Twitter' target="_blank" href={'https://twitter.com/home?status=DOE Research from DOECODE: ' + window.location.href}>
                           <span className="fa fa-twitter twitter"></span>
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <a target="_blank" href={'https://plus.google.com/share?url=' + window.location.href}>
+                        <a title='Google Plus' target="_blank" href={'https://plus.google.com/share?url=' + window.location.href}>
                           <span className="fa fa-google-plus gplus"></span>
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <a href={"mailto:?subject=Software Records from DOECODE&body=" + window.location.href}>
+                        <a title='Email' href={"mailto:?subject=Software Records from DOECODE&body=" + window.location.href}>
                           <span className="fa fa-envelope shareEmail"></span>
                         </a>
                       </li>
