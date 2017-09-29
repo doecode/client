@@ -37,11 +37,12 @@ export default class SimpleCollapsible extends React.Component {
     var anchorClass = this.props.anchorClass
       ? this.props.anchorClass
       : 'faq-page-btn clickable';
+      var anchorTitle = this.props.title ? this.props.title:'';
     return (
       <div>
         <div className={btn_wrapper_class}>
           {this.state.useToggleArrow && <span onClick={this.toggleState} className={arrow_class}></span>}&nbsp;&nbsp;
-          <a className={anchorClass} onClick={this.toggleState}>{this.props.button_text}</a>
+          <a title={anchorTitle} className={anchorClass} onClick={this.toggleState}>{this.props.button_text}</a>
         </div>
         <Collapse in={this.state.isOpen}>
           <div className={this.props.collapseContainerClasses}>
