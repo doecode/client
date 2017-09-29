@@ -10,6 +10,7 @@ module.exports = {
   },
 
   output: {
+    publicPath: "/",
     filename: "app.js",
     path: __dirname + "/dist",
   },
