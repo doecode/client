@@ -175,7 +175,7 @@ var titleValue = this.props.properties.title ? this.props.properties.title:this.
     let input = null;
 
     if (elementType === 'display') {
-      input = <div>val</div>;
+      input = <div>{val}</div>;
     } else if (elementType === 'input') {
       if (!disabled) {
         input = <input title={titleValue} name={field} type="text" className={inputStyle} value={val} onChange={handleChange} onBlur={this.handleBlur} onKeyPress={onKeypressFunction} placeholder={this.props.properties.placeholderText}/>
