@@ -126,19 +126,19 @@ export default class SearchBar extends React.Component {
                   Software Title:
                 </div>
                 <div className='col-xs-12'>
-                  <SearchField field="software_title" elementType="input" noExtraLabelText/>
+                  <SearchField title='Software Title' field="software_title" elementType="input" noExtraLabelText/>
                 </div>
                 <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                   Developers&nbsp;/&nbsp;Contributors:
                 </div>
                 <div className='col-xs-12'>
-                  <SearchField field="developers_contributors" elementType="input" noExtraLabelText/>
+                  <SearchField title='Developers / Contributors' field="developers_contributors" elementType="input" noExtraLabelText/>
                 </div>
                 <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                   Identifier Numbers:
                 </div>
                 <div className='col-xs-12'>
-                  <SearchField field="identifiers" elementType="input" noExtraLabelText/>
+                  <SearchField title='Identifier Numbers' field="identifiers" elementType="input" noExtraLabelText/>
                 </div>
               </div>
               <div className="row">
@@ -146,10 +146,10 @@ export default class SearchBar extends React.Component {
                   Release Date:
                 </div>
                 <div className={this.date_earliest_styles}>
-                  <SearchField field="date_earliest" elementType="date" noExtraLabelText textAfter={to_span}/>
+                  <SearchField title='Earliest Release Date' field="date_earliest" elementType="date" noExtraLabelText textAfter={to_span}/>
                 </div>
                 <div className={this.date_latest_styles}>
-                  <SearchField field="date_latest" elementType="date" noExtraLabelText/>
+                  <SearchField title='Latest Release Date' field="date_latest" elementType="date" noExtraLabelText/>
                 </div>
               </div>
               <div className='row adv-search-dropdown-title-row left-text'>
