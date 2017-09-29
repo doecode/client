@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-//const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: __dirname,
@@ -12,34 +12,34 @@ module.exports = {
   output: {
     publicPath: "/",
     filename: "app.js",
-    path: __dirname + "/dist",
+    path: __dirname + "/dist"
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
-    alias : {
-    'react' : path.resolve(path.join(__dirname, 'node_modules', 'react'))
-}
+    extensions: [
+      '.js', '.jsx', '.json'
+    ],
+    alias: {
+      'react': path.resolve(path.join(__dirname, 'node_modules', 'react'))
+    }
   },
-
 
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ["babel-loader"],
-      },
-      {
-	test: /\.css$/,
-	use: ['style-loader','css-loader']
+        loaders: ["babel-loader"]
+      }, {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
-    ],
+    ]
   },
 
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
-    //new UglifyJSPlugin(),
-    new webpack.DefinePlugin({'process.env.NODE_ENV': '"production"'})
+    new webpack.DefinePlugin({'process.env.NODE_ENV': '"production"'}),
+    new HtmlWebpackPlugin({template: 'dist/index.html', inject: 'body'})
   ]
 }
