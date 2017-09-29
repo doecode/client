@@ -1,6 +1,6 @@
 import React from 'react';
 import SimpleDropdown from '../fragments/SimpleDropdown';
-import staticContstants from '../staticJson/constantLists';
+import SearchSortOptionsList from '../staticJson/searchSortOptionsList';
 import SearchData from '../stores/SearchData';
 
 const searchData = new SearchData();
@@ -22,7 +22,7 @@ export default class SortDropdown extends React.Component {
     const sort_options = [];
 
     const changeSearchSortVar = this.changeSearchSort;
-    staticContstants.searchSortOptions.forEach(function(row) {
+    SearchSortOptionsList.searchSortOptions.forEach(function(row) {
       if (current_sort == row.value) {
         sort_lbl += row.label;
       }

@@ -1,0 +1,87 @@
+{
+  "licenseOptions": [{
+      "label": "Other",
+      "value": "Other",
+      "key": "license-other",
+      "title": "Other"
+    },
+    {
+      "label": "Apache License 2.0",
+      "value": "Apache License 2.0",
+      "key": "license-apache",
+      "title": "Apache License 2.0"
+    },
+    {
+      "label": "GNU General Public License v3.0",
+      "value": "GNU General Public License v3.0",
+      "key": "license-gnu3",
+      "title": "GNU General Public License v3.0"
+    },
+    {
+      "label": "MIT License",
+      "value": "MIT License",
+      "key": "license-mit",
+      "title": "MIT License"
+    },
+    {
+      "label": "BSD 2-clause \"Simplified\" License",
+      "value": "BSD 2-clause \"Simplified\" License",
+      "key": "license-bsd2",
+      "title": "BSD 2-clause \"Simplified\" License"
+    },
+    {
+      "label": "BSD 3-clause \"New\" or \"Revised\" License",
+      "value": "BSD 3-clause \"New\" or \"Revised\" License",
+      "key": "license-bsd3",
+      "title": "BSD 3-clause \"New\" or \"Revised\" License"
+    },
+    {
+      "label": "Eclipse Public License 1.0",
+      "value": "Eclipse Public License 1.0",
+      "key": "license-eclipse1",
+      "title": "Eclipse Public License 1.0"
+    },
+    {
+      "label": "GNU Affero General Public License v3.0",
+      "value": "GNU Affero General Public License v3.0",
+      "key": "license-gnuaffero3",
+      "title": "GNU Affero General Public License v3.0"
+    },
+    {
+      "label": "GNU General Public License v2.0",
+      "value": "GNU General Public License v2.0",
+      "key": "license-gnupublic2",
+      "title": "GNU General Public License v2.0"
+    },
+    {
+      "label": "GNU General Public License v2.1",
+      "value": "GNU General Public License v2.1",
+      "key": "license-gnupublic21",
+      "title": "GNU General Public License v2.1"
+    },
+    {
+      "label": "GNU Lesser General Public License v2.1",
+      "value": "GNU Lesser General Public License v2.1",
+      "key": "license-gnulesser21",
+      "title": "GNU Lesser General Public License v2.1"
+    },
+    {
+      "label": "GNU Lesser General Public License v3.0",
+      "value": "GNU Lesser General Public License v3.0",
+      "key": "license-gnuless3",
+      "title": "GNU Lesser General Public License v3.0"
+    },
+    {
+      "label": "Mozilla Public License 2.0",
+      "value": "Mozilla Public License 2.0",
+      "key": "license-moz2",
+      "title": "Mozilla Public License 2.0"
+    },
+    {
+      "label": "The Unlicense",
+      "value": "The Unlicense",
+      "key": "license-unlicense",
+      "title": "The Unlicense"
+    }
+  ]
+}

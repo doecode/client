@@ -5,7 +5,8 @@ import DevAndContribLinks from './DevAndContribLinks';
 import Metadata from '../stores/Metadata';
 import BreadcrumbTrail from '../fragments/BreadcrumbTrail';
 import BiblioSidebar from './BiblioSidebar';
-import staticContstants from '../staticJson/constantLists';
+import BiblioFieldsList from '../staticJson/biblioFieldsList';
+import AvailabilitiesList from '../staticJson/availabilityList';
 import ResearchOrgItem from './ResearchOrgItem';
 import ContributingOrgItem from './ContributingOrgItem';
 import SponsoringOrgItem from './SponsoringOrgItem';
@@ -54,7 +55,7 @@ export default class BiblioPage extends React.Component {
     let show_val = false;
     var header = obj.header;
 
-    /*These headers must match the biblioFieldsList header values in the constantLists json*/
+    /*These headers must match the biblioFieldsList header values in the biblioFieldsList json*/
     if (header == "Developers") {
       let devs = metadata.getValue("developers");
       var valid_devs = false;
@@ -93,7 +94,7 @@ export default class BiblioPage extends React.Component {
       show_val = metadata.getValue("release_date") != '';
 
     } else if (header == 'Code Availability') {
-      staticContstants.availabilities.forEach(function(item) {
+      AvailabilitiesList.availabilities.forEach(function(item) {
         if (item.value === metadata.getValue("accessibility")) {
           textContent = <span>{item.label}</span>;
           show_val = true;
@@ -151,8 +152,8 @@ export default class BiblioPage extends React.Component {
     metadata.deserializeData(this.state.data);
     //Add biblio page data to meta tags
     addBiblio(metadata.fieldMap);
-    const summaryContent = staticContstants.biblioFieldsList.map(this.generateSummaryContent);
-    const fieldsContent = staticContstants.biblioFieldsList.map(this.generateContent);
+    const summaryContent = BiblioFieldsList.biblioFieldsList.map(this.generateSummaryContent);
+    const fieldsContent = BiblioFieldsList.biblioFieldsList.map(this.generateContent);
     const breadcrumbList = [
       {
         key: 'brdcrmb1',

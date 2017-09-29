@@ -396,7 +396,7 @@ buildPanel(obj) {
 
         let saveBtn = (this.state.workflowStatus != "Published" && this.state.workflowStatus != "Approved" &&
           <div>
-              <button type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn save-btn-margin" onClick={this.save}>
+              <button title='Save Your Progress' type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn save-btn-margin" onClick={this.save}>
                   Save Your Progress
                 </button>
           </div>

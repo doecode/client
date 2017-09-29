@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import {observer} from "mobx-react";
 import 'react-select/dist/react-select.css';
-import staticContstants from '../staticJson/constantLists';
+import LicenseOptionsList from '../staticJson/licenseOptionsList';
 
 @observer
 export default class AccessStep extends React.Component{
@@ -113,7 +113,7 @@ export default class AccessStep extends React.Component{
 		<div className="form-group">
 			<div className="col-sm-offset-2 col-sm-8">
 				<h2 className="section-heading">Licenses</h2>
-				<Select multi simpleValue placeholder="Select your license(s)" options={staticContstants.licenseOptions} value={licenses.slice()} onChange={this.onLicensesChange} onBlur={this.licenseBlur}/>
+				<Select multi simpleValue placeholder="Select your license(s)" options={LicenseOptionsList.licenseOptions} value={licenses.slice()} onChange={this.onLicensesChange} onBlur={this.licenseBlur}/>
 			</div>
 			<div className="col-sm-offset-2 col-sm-8">
 				<h2 className="section-heading">Intellectual Property/Distribution Limitations</h2>

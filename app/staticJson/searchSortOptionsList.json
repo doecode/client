@@ -1,0 +1,21 @@
+{
+  "searchSortOptions": [{
+      "label": "Relevance",
+      "value": "score desc",
+      "valueKey": "score desc",
+      "title": "Revelance"
+    },
+    {
+      "label": "Publication Date (newest to oldest)",
+      "value": "releaseDate desc",
+      "valueKey": "releaseDate desc",
+      "title": "Publication Date (newest to oldest)"
+    },
+    {
+      "label": "Publication Date (oldest to newest)",
+      "value": "releaseDate asc",
+      "valueKey": "releaseDate asc",
+      "title": "Publication Date (oldest to newest)"
+    }
+  ]
+}

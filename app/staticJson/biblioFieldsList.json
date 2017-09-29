@@ -1,0 +1,30 @@
+{
+  "biblioFieldsList": [{
+    "header": "Developers",
+    "field": "N/A"
+  }, {
+    "header": "Release Date",
+    "field": "N/A"
+  }, {
+    "header": "Code Availability",
+    "field": "N/A"
+  }, {
+    "header": "Licenses",
+    "field": "N/A"
+  }, {
+    "header": "Sponsoring Organizations",
+    "field": "sponsoring_organizations"
+  }, {
+    "header": "Code ID",
+    "field": "code_id"
+  }, {
+    "header": "Site Accession Number",
+    "field": "site_accession_number"
+  }, {
+    "header": "Research Organizations",
+    "field": "research_organizations"
+  }, {
+    "header": "Country of Origin",
+    "field": "country_of_origin"
+  }]
+}
