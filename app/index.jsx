@@ -9,7 +9,6 @@ import ApprovalForm from './form/ApprovalForm';
 import Login from './user_services/Login';
 import RegisterUser from './user_services/RegisterUser';
 import Account from './user_services/Account';
-import ApproveRoles from './user_services/ApproveRoles';
 import ConfirmUser from './user_services/ConfirmUser';
 import ForgotPassword from './user_services/ForgotPassword';
 import UserAdmin from './user_services/UserAdmin';
@@ -75,7 +74,6 @@ class DOECodeRouter extends React.Component {
               <Route path="/approve" render={() =>< ApprovalForm disabled = "true" />}/>
               <Route path="/register" component={RegisterUser}/>
               <Route path="/account" component={Account}/>
-              <Route path="/admin" component={ApproveRoles}/>
               <Route path="/login" component={Login}/>
               <Route path="/confirmuser" component={ConfirmUser}/>
               <Route path="/search" component={AdvancedSearch}/>
