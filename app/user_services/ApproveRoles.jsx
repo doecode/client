@@ -7,11 +7,9 @@ import UserData from '../stores/UserData';
 
 const userData = new UserData();
 
-const EmptyRowsView = React.createClass({
-  render() {
+function EmptyRowsView(props) {
     return (<p>No requests to show.</p>);
-  }
-});
+};
 
 export default class ApproveRoles extends React.Component {
     constructor(props) {

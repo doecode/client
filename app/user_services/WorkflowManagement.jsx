@@ -5,8 +5,7 @@ import ReactDataGrid from 'react-data-grid';
 import {Toolbar, Data} from 'react-data-grid-addons';
 import MessageBoxModal from '../fragments/MessageBoxModal';
 
-const EmptyRowsView = React.createClass({
-  render() {
+function EmptyRowsView(props) {
     return (
       <div className='row'>
         <div className='col-xs-12 center-text'>
@@ -14,8 +13,7 @@ const EmptyRowsView = React.createClass({
         </div>
       </div>
     );
-  }
-});
+};
 
 export default class WorkflowManagement extends React.Component {
   constructor(props) {

@@ -5,17 +5,15 @@ import ReactDataGrid from 'react-data-grid';
 import {Toolbar, Data} from 'react-data-grid-addons';
 import MessageBoxModal from '../fragments/MessageBoxModal';
 
-const EmptyRowsView = React.createClass({
-  render() {
-    return (
-      <div className='row'>
-        <div className='col-xs-12 center-text'>
-          <h1>No records to show.</h1>
-        </div>
+function EmptyRowsView(props) {
+  return (
+    <div className='row'>
+      <div className='col-xs-12 center-text'>
+        <h1>No records to show.</h1>
       </div>
-    );
-  }
-});
+    </div>
+  );
+};
 
 export default class ApprovalManagement extends React.Component {
   constructor(props) {
