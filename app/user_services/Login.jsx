@@ -97,7 +97,7 @@ export default class Login extends React.Component {
             </div>
             <div className='col-md-5 col-xs-12'>
               <div className='form-group'>
-                <input type='text' placeholder='Email Address' id='email-address' className='pure-input-1-3 form-control login-input-box' onKeyPress={this.triggerLogin} onChange={this.addUsername} onBlur={this.addUsername}/>
+                <input title='Email Address' type='text' placeholder='Email Address' id='email-address' className='pure-input-1-3 form-control login-input-box' onKeyPress={this.triggerLogin} onChange={this.addUsername} onBlur={this.addUsername}/>
               </div>
             </div>
             <div className='col-md-2 left-text col-xs-12 no-col-padding-left hide-xs hide-sm'>
@@ -113,7 +113,7 @@ export default class Login extends React.Component {
             </div>
             <div className='col-md-5 col-xs-12'>
               <div className='form-group'>
-                <input type='password' placeholder='Password' id='password' className='pure-input-1-3 form-control login-input-box' onKeyPress={this.triggerLogin} onChange={this.addPassword} onBlur={this.addPassword}/>
+                <input title='Password' type='password' placeholder='Password' id='password' className='pure-input-1-3 form-control login-input-box' onKeyPress={this.triggerLogin} onChange={this.addPassword} onBlur={this.addPassword}/>
               </div>
             </div>
             <div className='col-md-2 left-text col-xs-12 no-col-padding-left hide-xs hide-sm'>
@@ -127,14 +127,14 @@ export default class Login extends React.Component {
           <br/>
           <div className='row'>
             <div className='col-lg-3 col-md-3 col-sm-2 col-xs-12  signin-buttons-container'>
-              <button type='button' className='pure-button signin-buttons' onClick={this.forgotPassword}>Forgot Password?</button>
+              <button title='Forgot Password Page' type='button' className='pure-button signin-buttons' onClick={this.forgotPassword}>Forgot Password?</button>
             </div>
             <div className='col-lg-4 col-md-4 col-sm-4'></div>
             <div className='col-lg-3 col-md-3 col-sm-3 col-xs-12  signin-buttons-container right-text-lg right-text-md right-text-sm'>
-              <button type='button' className='pure-button signin-buttons' onClick={this.register}>Create Account</button>
+              <button title='Create Account Page' type='button' className='pure-button signin-buttons' onClick={this.register}>Create Account</button>
             </div>
             <div className='col-lg-2 col-md-2 col-sm-3 col-xs-12  signin-buttons-container'>
-              <button type='button' className='pure-button button-success signin-buttons' onClick={this.login}>Sign In</button>
+              <button title='Sign In' type='button' className='pure-button button-success signin-buttons' onClick={this.login}>Sign In</button>
             </div>
           </div>
         </div>

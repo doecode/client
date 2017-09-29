@@ -24,6 +24,7 @@ const validation = new Validation();
 export default class Account extends React.Component {
   constructor(props) {
     super(props);
+    console.log("Your face");
     this.updateUser = this.updateUser.bind(this);
     this.parseUpdateUser = this.parseUpdateUser.bind(this);
     this.parseUpdateUserError = this.parseUpdateUserError.bind(this);
@@ -40,7 +41,7 @@ export default class Account extends React.Component {
     this.parseAPIError = this.parseAPIError.bind(this);
     this.confirmAndCheckPassword = this.confirmAndCheckPassword.bind(this);
     this.userDataToJSON = this.userDataToJSON.bind(this);
-
+    console.log("Your mom");
     this.state = {
       showUpdateUserMessage: false,
       updateUserMsg: [],
@@ -66,11 +67,12 @@ export default class Account extends React.Component {
       containsName: false,
       matches: false
     }
-
+    console.log("Yeh");
   }
 
   componentDidMount() {
     var passcode = getQueryParam("passcode");
+    console.log("Got passcode");
     if (passcode) {
       //add things for logging in and stuff
       doAjax("POST", "/doecode/api/user/login", this.parseLoginResponse, {
@@ -84,11 +86,13 @@ export default class Account extends React.Component {
   }
 
   parseLoginResponse(data) {
+    console.log("parse login response");
     setLoggedInAttributes(data);
     this.setState({showPasswordChangeMessage: true});
   }
 
   parseLoginError(data) {
+    console.log("Login error");
     var errorMessage = "";
     data.responseJSON.errors.forEach(function(item) {
       errorMessage += (item + "\n");
@@ -232,14 +236,17 @@ export default class Account extends React.Component {
 
     const accountSaveUser = <span>
       <span className="fa fa-floppy-o"></span>&nbsp; Save User</span>;
-
     const user_site = localStorage.user_site;
-    const roles = JSON.parse(localStorage.roles);
-    const pending_roles = JSON.parse(localStorage.pending_roles);
+
+    var roles = (localStorage.roles)
+      ? JSON.parse(localStorage.roles)
+      : [];
+    var pending_roles = (localStorage.roles)
+      ? JSON.parse(localStorage.pending_roles)
+      : [];
 
     var showAdminRole = (user_site && localStorage.user_site != 'CONTR' && roles.indexOf(user_site) < 0);
     var hasAlreadyRequested = (user_site && pending_roles.indexOf(user_site) > -1);
-
     return (
       <div className="row not-so-wide-row">
         <div className="col-md-3"></div>

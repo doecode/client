@@ -71,14 +71,14 @@ export default class ForgotPassword extends React.Component {
                 </div>}
                 <span>
                   <label className='static-content-title' htmlFor='email-address'>Please enter your email address to recover your password</label>
-                  <input type='text' id='email-address' className='form-control input-lg' onChange={this.updateEmailAddress} onKeyPress={this.triggerForgotPassword}/>
+                  <input title='Email Address' type='text' id='email-address' className='pure-input-1-3 form-control' onChange={this.updateEmailAddress} onKeyPress={this.triggerForgotPassword}/>
                   <br/>
                 </span>
               </div>
             </div>
             <div className="row">
               <div className="col-xs-12">
-                <button type='button' className='btn btn-primary btn-lg' onClick={this.forgotPassword}>Submit</button>
+                <button title='Submit Password Change Request' type='button' className='pure-button button-success' onClick={this.forgotPassword}>Submit</button>
               </div>
             </div>
           </div>}

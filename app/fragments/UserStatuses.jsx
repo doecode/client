@@ -39,7 +39,7 @@ export default class UserStatuses extends React.Component {
             <div className='col-xs-9'>
               <select className='form-control' value={this.state.chosenRole} id='roles-box' onChange={this.setRolesData}>
                 <option value=''></option>
-                {this.props.rolesList.map((row, index) => <option key={'roles-' + index} value={row.value}>{row.label}</option>)}
+                {this.props.rolesList.map((row, index) => <option title={row.label} key={'roles-' + index} value={row.value}>{row.label}</option>)}
               </select>
             </div>
           </div>

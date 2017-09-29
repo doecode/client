@@ -163,7 +163,7 @@ export default class WorkflowManagement extends React.Component {
           <h2 className="static-content-title">Manage My Projects</h2>
           <div className="form-group-xs row">
             <div className="col-sm-12">
-              <a href={"/doecode/publish" + this.wizardVersion} type="button" className="btn btn-success btn-lg pull-right workflow-publish-btn">
+              <a title='Add New Record' href={"/doecode/publish" + this.wizardVersion} type="button" className="btn btn-success btn-lg pull-right workflow-publish-btn">
                 Add New Record
               </a>
             </div>

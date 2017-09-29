@@ -37,7 +37,7 @@ export default class PasswordFields extends React.Component {
             </div>
             <div className='col-md-6 col-xs-12'>
               <div className='form-group'>
-                <input type='password' placeholder='Password' id='password' className='pure-input-1-3 form-control' onChange={this.updatePasswordAndCheckPassword} onBlur={this.updatePasswordAndCheckPassword}/>
+                <input title='Password' type='password' placeholder='Password' id='password' className='pure-input-1-3 form-control' onChange={this.updatePasswordAndCheckPassword} onBlur={this.updatePasswordAndCheckPassword}/>
               </div>
             </div>
           </div>
@@ -48,7 +48,7 @@ export default class PasswordFields extends React.Component {
             </div>
             <div className='col-md-6 col-xs-12'>
               <div className='form-group'>
-                <input type='password' placeholder='Confirm Password' id='confirm-password' className='pure-input-1-3 form-control' onChange={this.updateConfirmAndCheckPassword} onBlur={this.updateConfirmAndCheckPassword}/>
+                <input title='Confirm Password' type='password' placeholder='Confirm Password' id='confirm-password' className='pure-input-1-3 form-control' onChange={this.updateConfirmAndCheckPassword} onBlur={this.updateConfirmAndCheckPassword}/>
               </div>
             </div>
           </div>
