@@ -164,8 +164,8 @@
   display: inline-block;
 }
 
-.grid-button .btn {
-  padding: 0px 2px 0px 2px;
+.grid-button .pure-button {
+  padding: 0px 3px 0px 3px;
 }
 
 .griddle-wrapper td {
