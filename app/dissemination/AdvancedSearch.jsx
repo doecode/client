@@ -4,8 +4,11 @@ import {observer} from "mobx-react";
 import {doAjax} from '../utils/utils';
 import SearchData from '../stores/SearchData';
 import SearchField from '../field/SearchField';
-import staticLists from '../staticJson/staticLists';
-import staticContstants from '../staticJson/constantLists';
+import AvailabilitiesList from '../staticJson/availabilityList';
+import LicenseOptionsList from '../staticJson/licenseOptionsList';
+import SearchSortOptionsList from '../staticJson/searchSortOptionsList';
+import ResearchOrgsList from '../staticJson/researchOrgList';
+import SponsorOrgsList from '../staticJson/sponsorOrgsList';
 import AdvancedSearchButton from './AdvancedSearchButton';
 
 const searchData = new SearchData();
@@ -21,7 +24,7 @@ export default class AdvancedSearch extends React.Component {
   }
 
   render() {
-    
+
     return (
       <div className="row not-so-wide-row">
         <div className="col-lg-3 col-sm-1"></div>
@@ -85,31 +88,31 @@ export default class AdvancedSearch extends React.Component {
                       Code Accessibility
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="accessibility" isArray={true} elementType="select" options={staticContstants.availabilities} placeholder="Software's Accessibility" noExtraLabelText/>
+                      <SearchField field="accessibility" isArray={true} elementType="select" options={AvailabilitiesList.availabilities} placeholder="Software's Accessibility" noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Licenses
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="licenses" isArray={true} elementType="select" options={staticContstants.licenseOptions} placeholder="Software License" noExtraLabelText/>
+                      <SearchField field="licenses" isArray={true} elementType="select" options={LicenseOptionsList.licenseOptions} placeholder="Software License" noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Research Organization
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="research_organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={staticLists.researchOrgs} noExtraLabelText/>
+                      <SearchField field="research_organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={ResearchOrgsList.researchOrgs} noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Sponsoring Organization
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="sponsoring_organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={staticLists.sponsorOrgs} noExtraLabelText/>
+                      <SearchField field="sponsoring_organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={SponsorOrgsList.sponsorOrgs} noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Sort
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="sort" elementType="select" options={staticContstants.searchSortOptions} clearable={false} noExtraLabelText/>
+                      <SearchField field="sort" elementType="select" options={SearchSortOptionsList.searchSortOptions} clearable={false} noExtraLabelText/>
                     </div>
                   </div>
                 </div>

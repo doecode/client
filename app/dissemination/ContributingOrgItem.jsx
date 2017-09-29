@@ -1,5 +1,4 @@
 import React from 'react';
-import staticContstants from '../staticJson/constantLists';
 export default class ContributingOrgItem extends React.Component {
   constructor(props) {
     super(props);

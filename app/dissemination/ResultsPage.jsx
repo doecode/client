@@ -5,7 +5,6 @@ import {doAjax, getQueryParam, getSearchSortDisplay} from '../utils/utils';
 import SearchData from '../stores/SearchData';
 import SearchField from '../field/SearchField';
 import Sidebar from './Sidebar';
-import staticContstants from '../staticJson/constantLists';
 import BreadcrumbTrail from '../fragments/BreadcrumbTrail';
 import SimpleDropdown from '../fragments/SimpleDropdown';
 import SortDropdown from './SortDropdown';

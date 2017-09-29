@@ -4,7 +4,7 @@ import {Button} from 'react-bootstrap';
 import MetadataField from '../field/MetadataField';
 import {observer, Provider} from "mobx-react";
 import Metadata from '../stores/Metadata';
-import staticLists from '../staticJson/staticLists';
+import CountriesList from '../staticJson/countriesList';
 import HelpTooltip from '../help/HelpTooltip';
 
 const metadata = new Metadata();
@@ -59,7 +59,7 @@ export default class SupplementalInfoStep extends React.Component {
         <div className="row">
           <div className="col-md-8 col-xs-12">
             <MetadataField field="acronym" label="Short Title or Acronym" elementType="input" helpTooltip='ShortTitle'/>
-            <MetadataField field="country_of_origin" label="Country of Origin" options={staticLists.countries} elementType="select" helpTooltip='CountryOfOrigin'/>
+            <MetadataField field="country_of_origin" label="Country of Origin" options={CountriesList.countries} elementType="select" helpTooltip='CountryOfOrigin'/>
             <MetadataField field="keywords" label="Keywords" elementType="input" helpTooltip='Keywords'/>
             <MetadataField field="other_special_requirements" label="Other Special Requirements" elementType="input" helpTooltip='OtherSpecialRequirements'/>
             <MetadataField field="site_accession_number" label="Site Accession Number" helpTooltip='SiteAccessionNumber' elementType="input"/> {(accessibility === 'ON' || accessibility === 'CS') && <div className="form-group form-group-sm row">

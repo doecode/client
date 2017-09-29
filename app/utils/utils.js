@@ -5,7 +5,8 @@ import ResearchOrganization from '../stores/ResearchOrganization';
 import ContributingOrganization from '../stores/ContributingOrganization';
 import RelatedIdentifier from '../stores/RelatedIdentifier';
 import moment from 'moment';
-import staticContstants from '../staticJson/constantLists';
+import AvailabilitiesList from '../staticJson/availabilityList';
+import SearchSortOptions from '../staticJson/searchSortOptionsList';
 
 function doAjax(methodType, url, successCallback, data, errorCallback, dataType) {
   let errorCall = errorCallback;
@@ -383,7 +384,7 @@ function addBiblio(searchData) {
 
 function getAvailabilityDisplay(short_val) {
   var accessibility_display_val = '';
-  staticContstants.availabilities.forEach(function(item) {
+  AvailabilitiesList.availabilities.forEach(function(item) {
     if (item.value == short_val) {
       accessibility_display_val = item.label;
     }
@@ -401,9 +402,19 @@ function addMetaTags(list) {
 }
 
 function combineName(first, middle, last) {
-  let fullName = (last ? last : "");
-  fullName += (fullName && first ? ", " : "") + (first ? first : "");
-  fullName += (fullName && middle ? " " : "") + (middle ? middle.substr(0, 1) + "." : "");
+  let fullName = (last
+    ? last
+    : "");
+  fullName += (fullName && first
+    ? ", "
+    : "") + (first
+    ? first
+    : "");
+  fullName += (fullName && middle
+    ? " "
+    : "") + (middle
+    ? middle.substr(0, 1) + "."
+    : "");
 
   return fullName;
 }
@@ -415,7 +426,8 @@ function itemListToNameArray(itemList) {
 
     if (fullName)
       listArr.push(fullName);
-  });
+    }
+  );
 
   return listArr;
 }
@@ -442,10 +454,10 @@ function joinWithDelimiters(list, delimiter, lastDelimiter) {
   return result;
 }
 
-function getSearchSortDisplay(short_val){
+function getSearchSortDisplay(short_val) {
   var sortDisplayVal = '';
-  staticContstants.searchSortOptions.forEach(function(item){
-    if(item.value == short_val){
+  SearchSortOptions.searchSortOptions.forEach(function(item) {
+    if (item.value == short_val) {
       sortDisplayVal = item.value;
       return false;
     }

@@ -1,7 +1,7 @@
 import React from 'react';
-import staticLists from '../staticJson/staticLists';
+import AffiliationsList from '../staticJson/affiliationsList';
 import {observer} from "mobx-react";
-import staticContstants from '../staticJson/constantLists';
+import ContributorTypesList from '../staticJson/contributorTypes';
 
 @observer
 export default class ContributorsModalContent extends React.Component {
@@ -22,7 +22,7 @@ export default class ContributorsModalContent extends React.Component {
           <SpecificField field="last_name" label="Last Name" elementType="input"/>
           <SpecificField field="email" label="Email" elementType="input"/>
           <SpecificField field="orcid" label="ORCID" elementType="input"/>
-          <SpecificField field="affiliations" label="Affiliations" elementType="select" options={staticLists.affiliations} allowCreate={true} isArray={true} multi={true} placeholder="Enter any affiliations."/>
+          <SpecificField field="affiliations" label="Affiliations" elementType="select" options={AffiliationsList.affiliations} allowCreate={true} isArray={true} multi={true} placeholder="Enter any affiliations."/>
         </div>}
 
         {this.props.data.getValue("organization_name") !== undefined && <div>
@@ -32,7 +32,7 @@ export default class ContributorsModalContent extends React.Component {
 
         </div>}
 
-        <SpecificField field="contributor_type" label="Contributor Type" elementType="select" helpTooltip='ContributorType' tooltipShort options={staticContstants.contributorTypes}/>
+        <SpecificField field="contributor_type" label="Contributor Type" elementType="select" helpTooltip='ContributorType' tooltipShort options={ContributorTypesList.contributorTypes}/>
       </div>
     );
   }

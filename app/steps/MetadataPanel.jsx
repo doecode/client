@@ -2,7 +2,7 @@ import React from 'react';
 import MetadataField from '../field/MetadataField';
 import {observer, Provider} from "mobx-react";
 import Metadata from '../stores/Metadata';
-import staticContstants from '../staticJson/constantLists';
+import LicenseOptionsList from '../staticJson/licenseOptionsList';
 
 const metadata = new Metadata();
 
@@ -44,7 +44,7 @@ export default class MetadataPanel extends React.Component {
               {metadata.getValue("repository_link") && <MetadataField field="repository_link" label="Repository Link: " elementType="display" />}
               <MetadataField field="software_title" label="Software Title" elementType="input" helpTooltip="SoftwareTitle"/>
               <MetadataField field="description" label="Description/Abstract" elementType="textarea" helpTooltip="DescriptionAbstract"/>
-              <MetadataField field="licenses" label="Licenses" elementType="select" changeCallback={this.checkForProp} helpTooltip="License" tooltipShort options={staticContstants.licenseOptions} isArray={true} multi={true} placeholder="Select your license(s)"/>
+              <MetadataField field="licenses" label="Licenses" elementType="select" changeCallback={this.checkForProp} helpTooltip="License" tooltipShort options={LicenseOptionsList.licenseOptions} isArray={true} multi={true} placeholder="Select your license(s)"/>
 							{propInfo.required && <MetadataField field="proprietary_url" label="License URL" elementType="input"/>}
             </div>
           </div>

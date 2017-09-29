@@ -1,5 +1,6 @@
 import React from 'react';
-import staticLists from '../staticJson/staticLists';
+import SponsorOrgsList from '../staticJson/sponsorOrgsList';
+import ResearchOrgsList from '../staticJson/researchOrgList';
 import {observer} from "mobx-react";
 import SponsoringOrganization from '../stores/SponsoringOrganization';
 
@@ -35,9 +36,9 @@ export default class OrgsModalContent extends React.Component {
 
 
 				if (this.props.type == 'sponsoring_organizations') {
-					orgNames = staticLists.sponsorOrgs;
+					orgNames = SponsorOrgsList.sponsorOrgs;
 				} else if (this.props.type == 'research_organizations') {
-					orgNames = staticLists.researchOrgs;
+					orgNames = ResearchOrgsList.researchOrgs;
 				}
 
 

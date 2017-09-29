@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import SearchCheckbox from './SearchCheckbox';
 import SearchData from '../stores/SearchData';
 import {doAjax, getQueryParam} from '../utils/utils';
-import staticContstants from '../staticJson/constantLists';
+import AvailabilitiesList from '../staticJson/availabilityList';
+import LicenseOptionsList from '../staticJson/licenseOptionsList';
 import SearchField from '../field/SearchField';
 import SimpleCollapsible from '../fragments/SimpleCollapsible';
 import SearchResultsDescription from '../fragments/SearchResultsDescription';
@@ -73,7 +74,7 @@ export default class Sidebar extends React.Component {
             <h4 className="search-sidebar-filter-title">REFINE BY:</h4>
             <span className='search-for-filter-text search-for-filter-header'>ACCESSIBILITY</span>
             <div className="search-sidebar-text">
-              {staticContstants.availabilities.map((row) => <div key={row.key}>
+              {AvailabilitiesList.availabilities.map((row) => <div key={row.key}>
                 <SearchCheckbox id={row.key} name={row.value} isChecked={accessibilityList.indexOf(row.value) > -1} label={row.label} value={row.value} type="accessibility" toggleCallback={this.sidebarCallback}/>
               </div>)}
             </div>
@@ -85,7 +86,7 @@ export default class Sidebar extends React.Component {
             <br/>
             <span className='search-for-filter-text search-for-filter-header'>LICENSES</span>
             <div className="search-sidebar-text">
-              {staticContstants.licenseOptions.map((row) => <div key={row.key}>
+              {LicenseOptionsList.licenseOptions.map((row) => <div key={row.key}>
                 <SearchCheckbox id={row.key} name={row.value} isChecked={licenseList.indexOf(row.value) > -1} label={row.label} value={row.value} type="licenses" toggleCallback={this.sidebarCallback}/>
               </div>)}
             </div>

@@ -250,12 +250,12 @@ parseSubmitResponse(data) {
         button =             <div className="form-group-xs row">
 
                             <div className="col-sm-9">
-                                <button type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
+                                <button title='Save Your Progress' type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
                                     Save Your Progress
                                   </button>
                             </div>
                             <div className="col-sm-3">
-                                <button style={marginStyle} type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
+                                <button title='Submit Record to E-Link' style={marginStyle} type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
                                     Submit Record to E-Link
                                 </button>
                             </div>
