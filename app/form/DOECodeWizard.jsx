@@ -364,9 +364,9 @@ buildPanel(obj) {
       const submitDisabled = !metadata.validateSchema();
       const publishDisabled = !metadata.validatePublishedFields();
 
-      const publishClass = publishDisabled ? "btn btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "btn btn-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
-      const approveClass = "btn btn-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
-      const submitClass = submitDisabled ? "btn btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "btn btn-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
+      const publishClass = publishDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "pure-button button-secondary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
+      const approveClass = "pure-button button-secondary  btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
+      const submitClass = submitDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "pure-button button-secondary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
       const codeID = metadata.getValue("code_id");
 
       let headerText = "Create a New Software Record";
@@ -406,7 +406,7 @@ buildPanel(obj) {
         button =             <div className="form-group-xs row col-sm-12">
           <br/>
                             <div>
-                                <button type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
+                                <button title='Submit Record to E-Link' type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
                                     Submit Record to E-Link
                                 </button>
                             </div>
@@ -416,7 +416,7 @@ buildPanel(obj) {
           button =           <div className="form-group-xs row col-sm-12">
             <br/>
                           <div>
-                              <button  type="button" className={approveClass} onClick={this.approve}>
+                              <button title='Approve Record' type="button" className={approveClass} onClick={this.approve}>
                                   Approve Record
                               </button>
                           </div>
@@ -426,7 +426,7 @@ buildPanel(obj) {
           button =           <div className="form-group-xs row col-sm-12">
                 <br/>
                           <div>
-                              <button  type="button" className={publishClass} disabled={publishDisabled} onClick={this.publish}>
+                              <button title='Publish Record' type="button" className={publishClass} disabled={publishDisabled} onClick={this.publish}>
                                   Publish Record
                               </button>
                           </div>

@@ -128,7 +128,7 @@ export default class DOIPanel extends React.Component {
     //flag indicating if doi is already reserved in this session
     const reserving = metadata.getValue("doi_status") === "RES" || registered;
 
-    const buttonClass = "btn btn-primary btn-sm" + (reserving
+    const buttonClass = "pure-button button-secondary btn-sm" + (reserving
       ? " active"
       : "");
     const buttonText = reserving

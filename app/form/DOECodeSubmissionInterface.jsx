@@ -229,8 +229,8 @@ parseSubmitResponse(data) {
       const submitDisabled = !metadata.validateSchema();
       const publishDisabled = !metadata.validatePublishedFields();
 
-      const publishClass = publishDisabled ? "btn btn-lg pull-right doecode-wizard-btn" : "btn btn-primary btn-lg pull-right doecode-wizard-btn"
-      const submitClass = submitDisabled ? "btn btn-lg pull-right doecode-wizard-btn" : "btn btn-primary btn-lg pull-right doecode-wizard-btn"
+      const publishClass = publishDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn" : "pure-button button-secondary btn-lg pull-right doecode-wizard-btn"
+      const submitClass = submitDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn" : "pure-button button-secondary btn-lg pull-right doecode-wizard-btn"
       const codeID = metadata.getValue("code_id");
 
       let headerText = "Create a New Software Record";
@@ -265,12 +265,12 @@ parseSubmitResponse(data) {
           button =           <div className="form-group-xs row">
 
                           <div className="col-sm-10">
-                              <button type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
+                              <button title='Save Your Progress' type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
                                   Save Your Progress
                               </button>
                           </div>
                           <div className="col-sm-2">
-                              <button style={marginStyle} type="button" className={publishClass} disabled={publishDisabled} onClick={this.publish}>
+                              <button title='Publish Record' style={marginStyle} type="button" className={publishClass} disabled={publishDisabled} onClick={this.publish}>
                                   Publish Record
                               </button>
                           </div>

@@ -27,7 +27,7 @@ export default class UserStatuses extends React.Component {
   }
 
   render() {
-
+    var theTitle = this.props.title ? this.props.title : '';
     return (
       <div>
 
@@ -37,7 +37,7 @@ export default class UserStatuses extends React.Component {
               <label className='control-label input-label-adjusted' htmlFor='roles-box'>Roles:</label>
             </div>
             <div className='col-xs-9'>
-              <select className='form-control' value={this.state.chosenRole} id='roles-box' onChange={this.setRolesData}>
+              <select title={theTitle} className='form-control' value={this.state.chosenRole} id='roles-box' onChange={this.setRolesData}>
                 <option value=''></option>
                 {this.props.rolesList.map((row, index) => <option title={row.label} key={'roles-' + index} value={row.value}>{row.label}</option>)}
               </select>
@@ -49,7 +49,7 @@ export default class UserStatuses extends React.Component {
             <div className='col-xs-1'></div>
             <div className='col-xs-11'>
               <div className="checkbox">
-                <label htmlFor='active-state'><input type="checkbox" checked={this.state.activeChecked} onChange={this.handleActiveToggle} id='active-state'/>Is Active?</label>
+                <label title='Active State' htmlFor='active-state'><input type="checkbox" checked={this.state.activeChecked} onChange={this.handleActiveToggle} id='active-state'/>Is Active?</label>
               </div>
             </div>
           </div>

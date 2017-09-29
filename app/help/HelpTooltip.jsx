@@ -18,7 +18,8 @@ export default class HelpTooltip extends React.Component {
         )
         : (
           <span>
-            If a valid repository URL is provided this function will attempt to automatically populate metadata fields based on information provided in the repository. DOE CODE also provides functionality to allow users to auto-populate metadata by placing a specifically formatted YAML file in their repository's root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly. For detailed information and an example file please see:&nbsp;<a target='_blank' href='https://github.com/doecode/doecode/tree/master/metadata-schema'>https://github.com/doecode/doecode/tree/master/metadata-schema</a>.</span>
+            If a valid repository URL is provided this function will attempt to automatically populate metadata fields based on information provided in the repository. DOE CODE also provides functionality to allow users to auto-populate metadata by placing a specifically formatted YAML file in their repository's root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly. For detailed information and an example file please see:&nbsp;
+            <a title='Metadata Schema' target='_blank' href='https://github.com/doecode/doecode/tree/master/metadata-schema'>https://github.com/doecode/doecode/tree/master/metadata-schema</a>.</span>
         );
     } else if (this.props.item == "ClosedSource") {
       returnData = (shortTooltip)
@@ -75,7 +76,8 @@ export default class HelpTooltip extends React.Component {
           </span>
         )
         : (
-          <span>When adding a contributor, use contributor type to define the role of the contributor. A drop-down menu is provided. For definitions of each contributor type, please see&nbsp;<a href='https://schema.datacite.org/meta/kernel-4.0/'>DataCite</a>.</span>
+          <span>When adding a contributor, use contributor type to define the role of the contributor. A drop-down menu is provided. For definitions of each contributor type, please see&nbsp;
+            <a title='DataCite' href='https://schema.datacite.org/meta/kernel-4.0/'>DataCite</a>.</span>
         );
     } else if (this.props.item == "CountryOfOrigin") {
       returnData = (shortTooltip)
@@ -152,7 +154,7 @@ export default class HelpTooltip extends React.Component {
         )
         : (
           <span>Select the appropriate license from the drop-down menu of available options. Descriptions of Licenses are available&nbsp;
-            <a href='https://opensource.org/licenses/alphabetical'>here</a>
+            <a title='Open Source Alphabetical' href='https://opensource.org/licenses/alphabetical'>here</a>
           </span>
         );
     } else if (this.props.item == "OpenSourceNotPublic") {
@@ -169,7 +171,7 @@ export default class HelpTooltip extends React.Component {
           <span>Software can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone in a public repository. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition.</span>
         )
         : (
-          <span>Software can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone in a public repository. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See the <a href='https://opensource.org/'>Open Source Initiative</a> for more information and definitions.</span>
+          <span>Software can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone in a public repository. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See the <a title='Open Source Initiative' href='https://opensource.org/'>Open Source Initiative</a> for more information and definitions.</span>
         );
     } else if (this.props.item == "OtherSpecialRequirements") {
       returnData = (shortTooltip)
@@ -203,7 +205,7 @@ export default class HelpTooltip extends React.Component {
           </span>
         )
         : (
-          <span>Provide, with controlled vocabulary, the relationship of the resource being registered and the related resource. The Relation Type field also allows you to define how the submitted software is related to the DOI you enter and the document you are submitting. For definitions of each relation type controlled vocabulary see&nbsp;<a href='https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf'>this</a>.</span>
+          <span>Provide, with controlled vocabulary, the relationship of the resource being registered and the related resource. The Relation Type field also allows you to define how the submitted software is related to the DOI you enter and the document you are submitting. For definitions of each relation type controlled vocabulary see&nbsp;<a title='Datacite Metadata Kernel' href='https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf'>this</a>.</span>
         );
     } else if (this.props.item == "ReleaseDate") {
       returnData = (shortTooltip)
@@ -220,7 +222,7 @@ export default class HelpTooltip extends React.Component {
         )
         : (
           <span>You must provide a URL in order to proceed. If you do not have a URL, please go to&nbsp;
-            <a href='#'>DOE Code</a>&nbsp; and select Create a Repository.</span>
+            <a title='DOE Code Repository' href='#'>DOE Code</a>&nbsp; and select Create a Repository.</span>
         );
     } else if (this.props.item == "RepositoryLink") {
       returnData = (shortTooltip)
