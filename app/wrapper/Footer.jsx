@@ -16,7 +16,9 @@ export default class Footer extends React.Component {
   }
 
   render() {
-    const linkColorClass=(this.props.is_homepage)?'white':'footer-link';
+    const linkColorClass = (this.props.is_homepage)
+      ? 'white'
+      : 'footer-link';
     return (
       <footer className={this.footer_classes}>
         <div className="container">
@@ -38,30 +40,30 @@ export default class Footer extends React.Component {
             <span className='hide-xs hide-sm'>
               <ul className="list-inline">
                 <li className={this.footer_link}>
-                  <a href="/doecode/disclaimer">
+                  <a title='Website Policies / Important Links' href="/doecode/disclaimer">
                     <span className="fa fa-university"></span>&nbsp;Website Policies / Important Links</a>
                 </li>
                 <li className={this.footer_link}>
-                  <a href="/doecode/contact">
+                  <a title='Contact Us' href="/doecode/contact">
                     <span className="fa fa-comments-o"></span>&nbsp;Contact Us</a>
                 </li>
                 <li className={this.footer_link}>
-                  <a target="_blank" href="https://www.facebook.com/ostigov">
+                  <a title='Facebook' target="_blank" href="https://www.facebook.com/ostigov">
                     <span className="fa fa-facebook"></span>
                   </a>
                 </li>
                 <li className={this.footer_link}>
-                  <a target="_blank" href="https://twitter.com/OSTIgov">
+                  <a title='Twitter' target="_blank" href="https://twitter.com/OSTIgov">
                     <span className="fa fa-twitter"></span>
                   </a>
                 </li>
                 <li className={this.footer_link}>
-                  <a target="_blank" href="https://plus.google.com/+OstiGov">
+                  <a title='Google Plus' target="_blank" href="https://plus.google.com/+OstiGov">
                     <span className="fa fa-google-plus"></span>
                   </a>
                 </li>
                 <li className={this.footer_link}>
-                  <a target="_blank" href="https://www.youtube.com/user/ostigov">
+                  <a title='Youtube' target="_blank" href="https://www.youtube.com/user/ostigov">
                     <span className="fa fa-youtube-play"></span>
                   </a>
                 </li>
@@ -70,22 +72,22 @@ export default class Footer extends React.Component {
             <span className='hide-md hide-lg'>
               <ul className="list-inline">
                 <li className={this.footer_link}>
-                  <a target="_blank" href="https://www.facebook.com/ostigov">
+                  <a title='Facebook' target="_blank" href="https://www.facebook.com/ostigov">
                     <span className="fa fa-facebook"></span>
                   </a>
                 </li>
                 <li className={this.footer_link}>
-                  <a target="_blank" href="https://twitter.com/OSTIgov">
+                  <a title='Twitter' target="_blank" href="https://twitter.com/OSTIgov">
                     <span className="fa fa-twitter"></span>
                   </a>
                 </li>
                 <li className={this.footer_link}>
-                  <a target="_blank" href="https://plus.google.com/+OstiGov">
+                  <a title='Google Plus' target="_blank" href="https://plus.google.com/+OstiGov">
                     <span className="fa fa-google-plus"></span>
                   </a>
                 </li>
                 <li className={this.footer_link}>
-                  <a target="_blank" href="https://www.youtube.com/user/ostigov">
+                  <a title='Youtube' target="_blank" href="https://www.youtube.com/user/ostigov">
                     <span className="fa fa-youtube-play"></span>
                   </a>
                 </li>
@@ -93,18 +95,13 @@ export default class Footer extends React.Component {
               <div className='row hide-md hide-lg not-so-wide-row '>
                 <br/>
                 <div className='col-xs-6 center-text'>
-
-                  <a href="/doecode/disclaimer" className={linkColorClass}>
+                  <a title='Website Policies' href="/doecode/disclaimer" className={linkColorClass}>
                     <span className="fa fa-university"></span>&nbsp;Website Policies
                   </a>
-
                 </div>
                 <div className='col-xs-6 center-text'>
-
-                  <a href="/doecode/contact" className={linkColorClass}>
+                  <a title='Contact Us' href="/doecode/contact" className={linkColorClass}>
                     <span className="fa fa-comments-o"></span>&nbsp;Contact Us</a>
-
-
                 </div>
               </div>
             </span>

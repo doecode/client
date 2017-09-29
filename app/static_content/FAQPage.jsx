@@ -44,7 +44,7 @@ export default class FAQ extends React.Component {
 
       }, {
         text: <span className='faq-page-subtitle'>How is the DOE CODE software submission and search tool different than&nbsp;
-          <a target="_blank" href='https://github.com/doecode'>DOE CODE GitHub</a>
+          <a title='DOE Code Github' target="_blank" href='https://github.com/doecode'>DOE CODE GitHub</a>
         </span>,
         content: <p>
             DOE CODE provides for the submission and search of software at this site. DOE Code is a dedicated resource for members of the community to discover and share software developed by DOE-funded projects and provides submission and search options. The DOE CODE "platform” that runs this site is an open source project available on GitHub.
@@ -62,14 +62,14 @@ export default class FAQ extends React.Component {
       }, {
         text: <span className='faq-page-subtitle'>Does DOE CODE provide repository services?</span>,
         content: <p>
-            Yes. DOE CODE provides repository hosting services for the DOE community via&nbsp;<a target='_blank' href='https://github.com/doecode/doecode'>GitHub</a>&nbsp;and&nbsp;<a target='_blank' href='https://gitlab.osti.gov/users/sign_in'>GitLab</a>. GitHub repository services are for those who want typical GitHub open source project functionality. OSTI’s GitLab repository service offers the same functionality as the GitHub repository service, but also free private repositories and stronger access control.
+            Yes. DOE CODE provides repository hosting services for the DOE community via&nbsp;<a title='DOE Code Github' target='_blank' href='https://github.com/doecode/doecode'>GitHub</a>&nbsp;and&nbsp;<a title='Gitlab' target='_blank' href='https://gitlab.osti.gov/users/sign_in'>GitLab</a>. GitHub repository services are for those who want typical GitHub open source project functionality. OSTI’s GitLab repository service offers the same functionality as the GitHub repository service, but also free private repositories and stronger access control.
             <br/><br/>
-            If you are interested in making use of the GitHub or GitLab repository services, or to request to join the DOE CODE GitHub community please contact&nbsp;<a href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>.
+            If you are interested in making use of the GitHub or GitLab repository services, or to request to join the DOE CODE GitHub community please contact&nbsp;<a title='Email doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>.
           </p>
       }, {
         text: <span className='faq-page-subtitle'>What are the types of Software Availability?</span>,
         content: <div>
-            <strong>Open Source, Publicly Available Repository</strong>&nbsp;- Software can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone in a public repository. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See the&nbsp;<a target='_blank' href='https://opensource.org/'>Open Source Initiative</a>&nbsp;for more information and definitions.
+            <strong>Open Source, Publicly Available Repository</strong>&nbsp;- Software can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone in a public repository. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See the&nbsp;<a title='Open Source Initiative' target='_blank' href='https://opensource.org/'>Open Source Initiative</a>&nbsp;for more information and definitions.
             <br/><br/>
             <strong>Open Source, No Publicly Available Repository</strong>&nbsp;- Code is Open Source, but is not yet available in a public repository. Interested users can contact the developer(s) or responsible parties for information regarding access and (re)use. A landing page URL is required for submitting Open Source, no Publicly available repository code; the URL should provide additional information on how to obtain access to the code.
             <br/><br/>
@@ -82,48 +82,48 @@ export default class FAQ extends React.Component {
             <div>
               <ul>
                 <li>
-                  <a target='_blank' href='https://opensource.org/licenses/Apache-2.0'>Apache License 2.0</a>
+                  <a title='Apache License 2.0' target='_blank' href='https://opensource.org/licenses/Apache-2.0'>Apache License 2.0</a>
                 </li>
                 <li>
-                  <a target='_blank' href='https://www.gnu.org/licenses/quick-guide-gplv3.html'>GNU General Public License v3.0</a>
+                  <a title='GNU General Public License v3.0' target='_blank' href='https://www.gnu.org/licenses/quick-guide-gplv3.html'>GNU General Public License v3.0</a>
                 </li>
                 <li>
-                  <a target='_blank' href='https://opensource.org/licenses/MIT'>MIT License</a>
+                  <a title='MIT License' target='_blank' href='https://opensource.org/licenses/MIT'>MIT License</a>
                 </li>
                 <li>
-                  <a target='_blank' href='https://opensource.org/licenses/BSD-2-Clause'>BSD 2-clause "simplified" License</a>
+                  <a title='BSD 2-clause "simplified" License' target='_blank' href='https://opensource.org/licenses/BSD-2-Clause'>BSD 2-clause "simplified" License</a>
                 </li>
                 <li>
-                  <a target='_blank' href='https://opensource.org/licenses/BSD-3-Clause'>BSD 3-clause "New or "Revised" License</a>
+                  <a title='BSD 3-clause "New or "Revised" License' target='_blank' href='https://opensource.org/licenses/BSD-3-Clause'>BSD 3-clause "New or "Revised" License</a>
                 </li>
                 <li>
-                  <a target='_blank' href='https://opensource.org/licenses/EPL-1.0'>Eclipse Public License 1.0</a>
+                  <a title='Eclipse Public License 1.0' target='_blank' href='https://opensource.org/licenses/EPL-1.0'>Eclipse Public License 1.0</a>
                 </li>
                 <li>
-                  <a target='_blank' href='https://www.gnu.org/licenses/licenses.html#AGPL'>GNU Affero General Public License v3.0</a>
+                  <a title='GNU Affero General Public License v3.0' target='_blank' href='https://www.gnu.org/licenses/licenses.html#AGPL'>GNU Affero General Public License v3.0</a>
                 </li>
                 <li>
-                  <a target='_blank' href='https://www.gnu.org/licenses/old-licenses/lgpl-2.0.html'>GNU General Public License v2.0</a>
+                  <a title='GNU General Public License v2.0' target='_blank' href='https://www.gnu.org/licenses/old-licenses/lgpl-2.0.html'>GNU General Public License v2.0</a>
                 </li>
                 <li>
-                  <a target='_blank' href='https://www.gnu.org/licenses/old-licenses/gpl-1.0.html'>GNU General Public License v1.0</a>
+                  <a title='GNU General Public License v1.0' target='_blank' href='https://www.gnu.org/licenses/old-licenses/gpl-1.0.html'>GNU General Public License v1.0</a>
                 </li>
                 <li>
-                  <a target='_blank' href='https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html'>GNU Lesser General Public License v2.1</a>
+                  <a title='GNU Lesser General Public License v2.1' target='_blank' href='https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html'>GNU Lesser General Public License v2.1</a>
                 </li>
                 <li>
-                  <a target='_blank' href='https://www.gnu.org/licenses/licenses.html#LGPL'>GNU Lesser General Public License v3.0</a>
+                  <a title='GNU Lesser General Public License v3.0' target='_blank' href='https://www.gnu.org/licenses/licenses.html#LGPL'>GNU Lesser General Public License v3.0</a>
                 </li>
                 <li>
-                  <a target='_blank' href='https://opensource.org/licenses/MPL-2.0'>Mozilla Public License 2.0</a>
+                  <a title='Mozilla Public License 2.0' target='_blank' href='https://opensource.org/licenses/MPL-2.0'>Mozilla Public License 2.0</a>
                 </li>
                 <li>
-                  <a target='_blank' href='http://unlicense.org/'>The Unlicense</a>
+                  <a title='The Unlicense' target='_blank' href='http://unlicense.org/'>The Unlicense</a>
                 </li>
               </ul>
               <br/>
               More information regarding these license can also be found at the&nbsp;
-              <a target='_blank' href='https://opensource.org/licenses/alphabetical'>Open Source Initiative - Licenses by Name</a>.
+              <a title='Open Source Initiative' target='_blank' href='https://opensource.org/licenses/alphabetical'>Open Source Initiative - Licenses by Name</a>.
               <br/>
               <br/>
               If you choose to use a license not in the above list you may select "Other" and provide a URL to the landing page of the license.
@@ -141,7 +141,7 @@ export default class FAQ extends React.Component {
         text: <span className='faq-page-subtitle'>What does it mean to publish code to DOE CODE?</span>,
         content: <div>
             <p>Users may want to publish their code to DOE CODE, because publishing offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Publishing to DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes that are in early development and for developers wanting to obtain DOIs early in the process. (See also "
-              <a className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-doi')}>What is a Digital Object Identifier (DOI)?</a>”).
+              <a title='What is a Digital Object Identifier' className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-doi')}>What is a Digital Object Identifier (DOI)?</a>”).
             </p>
             <br/>
             <p>Publishing to DOE CODE is easy, with only a minimal set of metadata required.</p>
@@ -171,7 +171,7 @@ export default class FAQ extends React.Component {
               DOE national laboratories and other DOE facilities/contractors who have developed and/or modified software during work supported by DOE or during work carried out for others at DOE facilities are required to submit a record of the software to the Department of Energy, if the software meets the following criteria:
               <ul>
                 <li>the software meets the definition of&nbsp;
-                  <a target='_blank' href='https://www.osti.gov/stip/stidefined'>STI</a>;
+                  <a title='STI' target='_blank' href='https://www.osti.gov/stip/stidefined'>STI</a>;
                 </li>
                 <li>the software is known or expected to be useful inside or outside the DOE community, or is not specific to the originating site;</li>
                 <li>a stable, usable, documented version of the software exists (i.e., the software is not under initial development); and</li>
@@ -180,7 +180,7 @@ export default class FAQ extends React.Component {
             </div>
             <br/>
             <p>
-              For additional information about DOE scientific and technical software, refer to the&nbsp;<a target='_blank' href='https://www.osti.gov/includes/estsc/software_best_prac.html'>Software Best Practices document</a>.
+              For additional information about DOE scientific and technical software, refer to the&nbsp;<a title='Software Best Practices' target='_blank' href='https://www.osti.gov/includes/estsc/software_best_prac.html'>Software Best Practices document</a>.
             </p>
             <div>
               Software that meets the following criteria need not be submitted to the Department of Energy:
@@ -208,8 +208,8 @@ export default class FAQ extends React.Component {
             <p>In addition to the basic requirements for metadata fields (above), other optional/non-mandatory data fields should be included during submission when possible.</p>
             <p>
               *Currently only Git-based repositories are supported. Most repositories hosted at git.com, bitbucket.org, sourcforge.org, and GitLab support Git-based repositories. When submitting a repository please make sure you are using the direct URL to the actual repository. As an example, the direct repository URL for DOE CODE is&nbsp;
-              <a target='_blank' href='https://www.github.com/doecode/doecode'>https://www.github.com/doecode/doecode</a>&nbsp;whereas the project landing page is&nbsp;
-              <a target='_blank' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>. There are plans to expand this functionality in future releases to support other repository types such as SVN and CVS.
+              <a title='DOE CODE Github' target='_blank' href='https://www.github.com/doecode/doecode'>https://www.github.com/doecode/doecode</a>&nbsp;whereas the project landing page is&nbsp;
+              <a title='DOE CODE Main Github' target='_blank' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>. There are plans to expand this functionality in future releases to support other repository types such as SVN and CVS.
             </p>
             <p>
               NOTE: If you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing of your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, and .tar.gz2.
@@ -218,20 +218,20 @@ export default class FAQ extends React.Component {
       }, {
         text: <span className='faq-page-subtitle'>What is a YAML file? How do I auto populate the YAML file?</span>,
         content: <p>
-            <a target='_blank' href='http://www.yaml.org/start.html'>YAML</a>&nbsp;is a human friendly data serialization standard for all programming languages. DOE CODE provides functionality to allow users to auto-populate their bibliographic data in DOE CODE by placing a specifically formatted YAML file their repository’s root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly.&nbsp;
-            <a target='_blank' href='https://github.com/doecode/doecode/tree/master/metadata-schema'>See detailed YAML information and an example file.</a>
+            <a title='YAML' target='_blank' href='http://www.yaml.org/start.html'>YAML</a>&nbsp;is a human friendly data serialization standard for all programming languages. DOE CODE provides functionality to allow users to auto-populate their bibliographic data in DOE CODE by placing a specifically formatted YAML file their repository’s root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly.&nbsp;
+            <a title='YAML Schema' target='_blank' href='https://github.com/doecode/doecode/tree/master/metadata-schema'>See detailed YAML information and an example file.</a>
           </p>
       }, {
         text: <span className='faq-page-subtitle'>What are the Categories of Software?</span>,
         content: <p>Different categories of software have different distribution requirements, limitations, and appropriate distribution channels, which are defined in the&nbsp;
-            <a target='_blank' href='https://www.osti.gov/stip/softwarecategories'>Software Categories</a>&nbsp;table. The table is not intended to provide an exhaustive list.
+            <a title='Software Categories' target='_blank' href='https://www.osti.gov/stip/softwarecategories'>Software Categories</a>&nbsp;table. The table is not intended to provide an exhaustive list.
           </p>
       }, {
         text: <span className='faq-page-subtitle'>Do I need an account to use DOE CODE?</span>,
         content: <p>
             A DOE CODE account is not needed to search for DOE-funded software, but an account is needed to publish or submit code. Users meeting minimum criteria can directly create a DOE CODE account. All you need is your first and last name, government email address or valid contract number, and a password.
             <br/><br/>
-            Both of the repository services we provide require a separate account in addition to the account for publishing or submitting to DOE CODE. To utilize repositories on OSTI’s GitLab installation and DOE CODE GitHub, those interested must request an account by sending an email to&nbsp;<a href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>. DOE CODE Product Manager(s) will follow up with the requester.
+            Both of the repository services we provide require a separate account in addition to the account for publishing or submitting to DOE CODE. To utilize repositories on OSTI’s GitLab installation and DOE CODE GitHub, those interested must request an account by sending an email to&nbsp;<a title='Email doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>. DOE CODE Product Manager(s) will follow up with the requester.
 
           </p>
       }, {
@@ -255,7 +255,7 @@ export default class FAQ extends React.Component {
       }, {
         text: <span className='faq-page-subtitle'>What if I need to have a project removed from DOE CODE?</span>,
         content: <p>To have a project removed from DOE CODE please contact&nbsp;
-            <a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>.</p>
+            <a title='Email doecode@osti.gov' href='mailto:doecode@osti.gov'>doecode@osti.gov</a>.</p>
       }, {
         text: <span className='faq-page-subtitle'>How do I use the Advanced Search?</span>,
         content: <div>
@@ -321,17 +321,17 @@ export default class FAQ extends React.Component {
           </div>
       }, {
         text: <span className='faq-page-subtitle'>Are there APIs available for DOE CODE?</span>,
-        content: <p>Yes, there are lots of APIs with stable endpoints. For more information, see the&nbsp;<a target='_blank' href={api_location}>API documentation</a>
+        content: <p>Yes, there are lots of APIs with stable endpoints. For more information, see the&nbsp;<a title='API Documentation' target='_blank' href={api_location}>API documentation</a>
           </p>
       }, {
         text: <span className='faq-page-subtitle'>Do I need to have cookies enabled to use DOE CODE?</span>,
         content: <p>Yes, you must select Accept All Cookies. Please see our&nbsp;
-            <a href='/doecode/disclaimer'>Website Policies/Important Links</a>&nbsp; for further information.</p>
+            <a title='Website Policies / Important Links' href='/doecode/disclaimer'>Website Policies/Important Links</a>&nbsp; for further information.</p>
       }, {
         text: <span className='faq-page-subtitle'>How can I find out more?</span>,
         content: <p>
             For additional assistance,&nbsp;
-            <a href='mailto:doecode@osti.gov'>Contact Us</a>
+            <a title='Email doecode@osti.gov' href='mailto:doecode@osti.gov'>Contact Us</a>
           </p>
       }
     ];

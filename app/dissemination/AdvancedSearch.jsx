@@ -41,25 +41,25 @@ export default class AdvancedSearch extends React.Component {
                       All Fields
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="all_fields" elementType="input" noExtraLabelText/>
+                      <SearchField title='All Fields' field="all_fields" elementType="input" noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Software Title
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="software_title" elementType="input" noExtraLabelText/>
+                      <SearchField title='Software Title' field="software_title" elementType="input" noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Developers&nbsp;/&nbsp;Contributors
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="developers_contributors" elementType="input" noExtraLabelText/>
+                      <SearchField title='Developers / Contributors' field="developers_contributors" elementType="input" noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Identifier Numbers
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="identifiers" elementType="input" noExtraLabelText/>
+                      <SearchField title='Identifiers' field="identifiers" elementType="input" noExtraLabelText/>
                     </div>
                   </div>
                 </div>
@@ -68,14 +68,14 @@ export default class AdvancedSearch extends React.Component {
                 <div className='col-xs-12'>
                   <div className='row'>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
-                      Publication Date:
+                      Release Date:
                     </div>
                     <div className="col-xs-4 text-left">
-                      <SearchField field="date_earliest" elementType="date" noExtraLabelText/>
+                      <SearchField title='Date Earliest' field="date_earliest" elementType="date" noExtraLabelText/>
                     </div>
                     <div className='col-xs-1 no-col-padding-left to-field adv-search-dropdown-label'>to</div>
                     <div className="col-xs-4">
-                      <SearchField field="date_latest" elementType="date" noExtraLabelText/>
+                      <SearchField title='Date Latest' field="date_latest" elementType="date" noExtraLabelText/>
                     </div>
                     <div className='col-xs-1'></div>
                   </div>
@@ -88,31 +88,31 @@ export default class AdvancedSearch extends React.Component {
                       Code Accessibility
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="accessibility" isArray={true} elementType="select" options={AvailabilitiesList.availabilities} placeholder="Software's Accessibility" noExtraLabelText/>
+                      <SearchField title='Accessibility' field="accessibility" isArray={true} elementType="select" options={AvailabilitiesList.availabilities} placeholder="Software's Accessibility" noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Licenses
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="licenses" isArray={true} elementType="select" options={LicenseOptionsList.licenseOptions} placeholder="Software License" noExtraLabelText/>
+                      <SearchField title='Licenses' field="licenses" isArray={true} elementType="select" options={LicenseOptionsList.licenseOptions} placeholder="Software License" noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Research Organization
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="research_organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={ResearchOrgsList.researchOrgs} noExtraLabelText/>
+                      <SearchField title='Research Organization' field="research_organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={ResearchOrgsList.researchOrgs} noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Sponsoring Organization
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="sponsoring_organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={SponsorOrgsList.sponsorOrgs} noExtraLabelText/>
+                      <SearchField title='Sponsoring Organization' field="sponsoring_organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={SponsorOrgsList.sponsorOrgs} noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Sort
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField field="sort" elementType="select" options={SearchSortOptionsList.searchSortOptions} clearable={false} noExtraLabelText/>
+                      <SearchField title='Sort' field="sort" elementType="select" options={SearchSortOptionsList.searchSortOptions} clearable={false} noExtraLabelText/>
                     </div>
                   </div>
                 </div>

@@ -36,13 +36,13 @@ export default class BiblioSidebar extends React.Component {
     const export_metadata = [
       {
         customAnchor: true,
-        display: <a href={'/doecode/api/search/' + fieldMapdata.code_id + '?format=xml'} download={fieldMapdata.code_id + '.xml'}>XML</a>
+        display: <a title='Export to XML' href={'/doecode/api/search/' + fieldMapdata.code_id + '?format=xml'} download={fieldMapdata.code_id + '.xml'}>XML</a>
       }, {
         customAnchor: true,
-        display: <a href={'/doecode/api/search/' + fieldMapdata.code_id + '?format=yaml'} download={fieldMapdata.code_id + '.yaml'}>YAML</a>
+        display: <a title='Export to YAML' href={'/doecode/api/search/' + fieldMapdata.code_id + '?format=yaml'} download={fieldMapdata.code_id + '.yaml'}>YAML</a>
       }, {
         customAnchor: true,
-        display: <a href={'/doecode/api/search/' + fieldMapdata.code_id + '?format=json'} download={fieldMapdata.code_id + '.json'}>JSON</a>
+        display: <a title='Export to JSON' href={'/doecode/api/search/' + fieldMapdata.code_id + '?format=json'} download={fieldMapdata.code_id + '.json'}>JSON</a>
       }
     ];
     const share_lbl = <span className="fa fa-share-alt shareAlt"></span>;
@@ -50,19 +50,19 @@ export default class BiblioSidebar extends React.Component {
       {
         customAnchor: true,
         display: (
-          <a href={"https://www.linkedin.com/shareArticle?mini=true&url=" + window.location.href + "&title=DOE Research from DOE CODE&summary=&source="} target="_blank" className="pure-menu-link social">
+          <a title='LinkedIn' href={"https://www.linkedin.com/shareArticle?mini=true&url=" + window.location.href + "&title=DOE Research from DOE CODE&summary=&source="} target="_blank" className="pure-menu-link social">
             <span className="fa fa-linkedin linkedin"></span>&nbsp;LinkedIn</a>
         )
       }, {
         customAnchor: true,
         display: (
-          <a href={"https://pinterest.com/pin/create/button/?url=&media=" + window.location.href + "&description="} target="_blank" className="pure-menu-link social">
+          <a title='Pinterest' href={"https://pinterest.com/pin/create/button/?url=&media=" + window.location.href + "&description="} target="_blank" className="pure-menu-link social">
             <span className="fa fa-pinterest pintrest"></span>&nbsp;Pinterest</a>
         )
       }, {
         customAnchor: true,
         display: (
-          <a href={"http://www.tumblr.com/share?v=3&u=" + window.location.href + "&t="} target="_blank" className="pure-menu-link social">
+          <a title='Tumblr' href={"http://www.tumblr.com/share?v=3&u=" + window.location.href + "&t="} target="_blank" className="pure-menu-link social">
             <span className="fa fa-tumblr tumblr"></span>&nbsp;Tumblr</a>
         )
       }
@@ -75,7 +75,7 @@ export default class BiblioSidebar extends React.Component {
               <div className='col-xs-12'>
                 <h4 className='biblio-sidebar-subtitle'>Resource:</h4>
                 {(doi && fieldMapdata.release_date) && <span>
-                  DOI:&nbsp;<a href={doi} target='_blank' className='biblio-sidebar-traditional-anchor'>{fieldMapdata.doi}</a>
+                  DOI:&nbsp;<a title={'DOI: ' + doi} href={doi} target='_blank' className='biblio-sidebar-traditional-anchor'>{fieldMapdata.doi}</a>
                   <br/>
                   <span className='text-muted doi-subnotice'></span>
                   <br/>
@@ -117,7 +117,7 @@ export default class BiblioSidebar extends React.Component {
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <SimpleDropdown noBtnPadding noToggleArrow ulClasses='dropdown-menu dropdown-menu-left' items={share_list} label={share_lbl}/>
+                        <SimpleDropdown title='Share' noBtnPadding noToggleArrow ulClasses='dropdown-menu dropdown-menu-left' items={share_list} label={share_lbl}/>
                       </li>
                     </ul>
                   </div>

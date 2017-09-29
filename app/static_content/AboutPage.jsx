@@ -64,7 +64,7 @@ export default class About extends React.Component {
               <div className="col-xs-12 static-content">
                 <br/>
                 <p className='left-text'>
-                The Department of Energy (DOE) Office of Scientific and Technical Information (OSTI) developed a new DOE software services platform and search tool for DOE-funded code – DOE CODE. DOE CODE replaces OSTI’s old software center, the Energy Science and Technology Software Center (ESTSC).
+                  The Department of Energy (DOE) Office of Scientific and Technical Information (OSTI) developed a new DOE software services platform and search tool for DOE-funded code – DOE CODE. DOE CODE replaces OSTI’s old software center, the Energy Science and Technology Software Center (ESTSC).
                 </p>
 
                 <p className="left-text hidden-md hidden-lg">
@@ -77,17 +77,17 @@ export default class About extends React.Component {
                   <strong>DISCOVER</strong>
                   - Discover DOE-funded software and code.</p>
 
-                <img className="hidden-xs hidden-sm" src={this.state.currentCreate} width="150" height="113" alt="Create" onMouseOver={() => {
+                <img title='Create' className="hidden-xs hidden-sm" src={this.state.currentCreate} width="150" height="113" alt="Create" onMouseOver={() => {
                   this.changeCreate(1)
                 }} onMouseOut={() => {
                   this.changeCreate(0)
                 }}/>
-                <img className="col-md-offset-1 hidden-xs hidden-sm" src={this.state.currentSubmit} width="150" height="113" alt="Submit" onMouseOver={() => {
+                <img title='Submit' className="col-md-offset-1 hidden-xs hidden-sm" src={this.state.currentSubmit} width="150" height="113" alt="Submit" onMouseOver={() => {
                   this.changeSubmit(1)
                 }} onMouseOut={() => {
                   this.changeSubmit(0)
                 }}/>
-                <img className="col-md-offset-1 hidden-xs hidden-sm" src={this.state.currentDiscover} width="150" height="113" alt="Discover" onMouseOver={() => {
+                <img title='Discover' className="col-md-offset-1 hidden-xs hidden-sm" src={this.state.currentDiscover} width="150" height="113" alt="Discover" onMouseOver={() => {
                   this.changeDiscover(1)
                 }} onMouseOut={() => {
                   this.changeDiscover(0)
@@ -105,34 +105,34 @@ export default class About extends React.Component {
             <div className="row">
               <div className=""></div>
               <div className="col-xs-12 static-content">
-                <img className="hidden-xs hidden-sm" src={this.state.currentImage} width="710" height="440" alt="DOE Code Features" useMap="#featuremap"></img>
+                <img title='DOE Code Features' className="hidden-xs hidden-sm" src={this.state.currentImage} width="710" height="440" alt="DOE Code Features" useMap="#featuremap"></img>
                 <map name="featuremap">
-                  <area shape="circle" coords="220,83,32" alt="DOI" onMouseOver={() => {
+                  <area title='DOI' shape="circle" coords="220,83,32" alt="DOI" onMouseOver={() => {
                     this.changeImage(1)
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area shape="circle" coords="160,216,32" alt="DOI" onMouseOver={() => {
+                  <area title='Software Catalog' shape="circle" coords="160,216,32" alt="Software Catalog" onMouseOver={() => {
                     this.changeImage(2)
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area shape="circle" coords="220,354,32" alt="DOI" onMouseOver={() => {
+                  <area title='DOE Code Resources' shape="circle" coords="220,354,32" alt="DOE Code Resources" onMouseOver={() => {
                     this.changeImage(3)
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area shape="circle" coords="488,352,32" alt="DOI" onMouseOver={() => {
+                  <area title='Easy' shape="circle" coords="488,352,32" alt="Easy" onMouseOver={() => {
                     this.changeImage(4)
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area shape="circle" coords="548,217,32" alt="DOI" onMouseOver={() => {
+                  <area title='Open Source' shape="circle" coords="548,217,32" alt="Open Source" onMouseOver={() => {
                     this.changeImage(5)
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area shape="circle" coords="489,83,32" alt="DOI" onMouseOver={() => {
+                  <area title='DOE Code Seamless' shape="circle" coords="489,83,32" alt="DOE Code Seamless" onMouseOver={() => {
                     this.changeImage(6)
                   }} onMouseOut={() => {
                     this.changeImage(0)
