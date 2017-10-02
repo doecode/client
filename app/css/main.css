@@ -1756,6 +1756,10 @@ ul.biblio-page-ul>li>a:hover {
   /* this is a light blue */
 }
 
+.pure-button-primary a:focus{
+  color:white !important;
+}
+
 .button-warning {
   background: rgb(223, 117, 20);
   color: white;
