@@ -18,7 +18,7 @@ export default class Contact extends React.Component {
                 <br/>
                 <div className="row">
                     <div className="col-sm-2 hidden-xs ">
-                        <img title='Email' src={require('../images/E-Mail.png')} className="img-rounded img-responsive contact-img" alt="email"/>
+                        <img title='Email' src='https://www.osti.gov/includes/doecode/images/E-Mail.png' className="img-rounded img-responsive contact-img" alt="email"/>
                     </div>
                     <div className="col-sm-10 col-xs-12">
                         <div className="row">

@@ -101,13 +101,13 @@ export default class WorkflowManagement extends React.Component {
         edit:
           <div className="grid-button-container" title="">
           <div className="grid-button" title="Update Metadata">
-            <a href={publishUrl} className="pure-button button-success btn-sm">
+            <a href={publishUrl} className="pure-button button-success btn-sm white ">
                     <span className="fa fa-pencil"></span>&nbsp;
                     Update Metadata
             </a>
           </div>
           <div className="grid-button" title="Submit to E-Link">
-            <a href={submitUrl} className="pure-button pure-button-primary btn-sm">
+            <a href={submitUrl} className="pure-button pure-button-primary btn-sm white">
                     <span className="fa fa-pencil"></span>&nbsp;
                     Submit to E-Link
             </a>

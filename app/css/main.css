@@ -248,7 +248,7 @@
 
 .griddle .footer-container {
   padding: 5px;
-  background-color: rgb(50, 119, 179);
+  background-color: #0078e7;
   border: 0px;
   color: white;
   width: 100%;
@@ -644,6 +644,14 @@ html h3 {
 
 .white {
   color: white;
+}
+
+.white:focus {
+  color: white !important;
+}
+
+.white:hover {
+  color: white !important;
 }
 
 .whiteAnchor {
@@ -1752,12 +1760,12 @@ ul.biblio-page-ul>li>a:hover {
 
 .button-secondary {
   background: rgb(66, 184, 221);
-  color:white;
+  color: white;
   /* this is a light blue */
 }
 
-.pure-button-primary a:focus{
-  color:white !important;
+.pure-button-primary a:focus {
+  color: white !important;
 }
 
 .button-warning {
