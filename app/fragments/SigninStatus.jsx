@@ -38,7 +38,7 @@ export default class SigninStatus extends React.Component {
   }
 
   parseErrorResponse() {
-    console.log("Error....");
+    // silent error
   }
 
   render() {

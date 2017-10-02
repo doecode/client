@@ -16,7 +16,6 @@ export default class Validation {
       } else if (validations[i] === "url") {
         errors += this.validateURL(value);
       } else if (validations[i] === "BR") {
-        console.log(value);
         errors += this.validateBR(value);
       }
 
@@ -79,10 +78,9 @@ export default class Validation {
 
     try {
       var numberObj = phoneUtil.parse(value, "US");
-      //console.log("Number: " + JSON.stringify(numberObj));
       isValid = phoneUtil.isValidNumber(numberObj, 'US');
     } catch (e) {
-      console.log("Unable to parse and validate number: " + e.toString());
+      // silent error
     }
 
     let errors = "";

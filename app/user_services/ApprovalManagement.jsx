@@ -75,7 +75,7 @@ export default class ApprovalManagement extends React.Component {
 
   parseReceiveResponse(data) {
     let rows = [];
-    console.log(data);
+
     const records = data.records;
     for (let i = 0; i < records.length; i++) {
 

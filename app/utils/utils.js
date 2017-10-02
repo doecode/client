@@ -12,7 +12,7 @@ function doAjax(methodType, url, successCallback, data, errorCallback, dataType)
   let errorCall = errorCallback;
   if (errorCall === undefined) {
     errorCall = (jqXhr, exception) => {
-      console.log("Error...");
+      // silent error
     }
   }
 
@@ -37,7 +37,7 @@ function doAuthenticatedMultipartRequest(url, formData, successCallback, errorCa
 
   if (successCallback === undefined) {
     successCallback = () => {
-      console.log("Success")
+      // silent success
     };
   }
 

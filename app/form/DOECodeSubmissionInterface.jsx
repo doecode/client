@@ -109,9 +109,6 @@ parseErrorResponse(jqXhr, exception) {
 
     } else if (jqXhr.status === 403) {
         window.location.href = '/doecode/forbidden';
-    } else {
-        //window.location.href = '/doecode/error';
-        console.log("Error...")
     }
 
 }
@@ -119,7 +116,6 @@ parseErrorResponse(jqXhr, exception) {
 componentDidMount() {
     const workflowStatus = getQueryParam("workflow");
 
-    console.log(workflowStatus);
     if (this.props.page == 'submit') {
         this.setState({"showAll": true});
     } else {
@@ -178,8 +174,6 @@ save() {
 }
 
 publish() {
-    console.log(metadata.getData());
-
     this.setState({"loading": true, "loadingMessage": "Publishing"});
     const justFileName = !Array.isArray(metadata.getValue("files").slice());
     if (metadata.getValue("accessibility") == 'OS' || justFileName || metadata.getValue("files").length == 0) {

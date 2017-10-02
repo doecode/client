@@ -40,7 +40,7 @@ export default class Confirmation extends React.Component {
   }
 
   parseMetadataCallError() {
-    console.log("Error in metadata");
+    // silent error
   }
 
   newRecord() {
