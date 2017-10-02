@@ -18,7 +18,7 @@ export default class Contact extends React.Component {
                 <br/>
                 <div className="row">
                     <div className="col-sm-2 hidden-xs ">
-                        <img src="https://www.osti.gov/opennet/images/E-Mail.png" className="img-rounded img-responsive contact-img" alt="email"/>
+                        <img src="https://github.com/doecode/doecode.github.io/blob/master/images/E-Mail.png?raw=true" className="img-rounded img-responsive contact-img" alt="email"/>
                     </div>
                     <div className="col-sm-10 col-xs-12">
                         <div className="row">
@@ -36,7 +36,7 @@ export default class Contact extends React.Component {
 
                 <div className="row">
                     <div className="col-sm-2 hidden-xs ">
-                        <img src="https://www.osti.gov/opennet/images/Phone.png" className="img-rounded img-responsive contact-img" alt="phone"/>
+                        <img src="https://github.com/doecode/doecode.github.io/blob/master/images/Phone.png?raw=true" className="img-rounded img-responsive contact-img" alt="phone"/>
                     </div>
                     <div className="col-sm-10 col-xs-12">
                         <div className="row">
@@ -51,7 +51,7 @@ export default class Contact extends React.Component {
 
                 <div className="row">
                     <div className="col-sm-2 hidden-xs ">
-                        <img src="https://www.osti.gov/opennet/images/Writing.png" className="img-rounded img-responsive contact-img" alt="writing"/>
+                        <img src="https://github.com/doecode/doecode.github.io/blob/master/images/Phone.png?raw=true" className="img-rounded img-responsive contact-img" alt="writing"/>
                     </div>
                     <div className="col-sm-10 col-xs-12">
                         <div className="row">

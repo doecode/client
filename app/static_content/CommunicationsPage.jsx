@@ -33,9 +33,9 @@ export default class Communications extends React.Component {
             <h4>Selected Articles and Presentations</h4>
             <ul>
               <li>05/03/2017&nbsp;
-                <a title='Energy Science Tech Software Center' href="https://www.osti.gov/doecode/docs/billings_stip_20170503.pdf">The New Energy Science and Technology Software Center</a>&nbsp;presented at the DOE Scientific and Technical Information Program (STIP) Annual Working Meeting (Jay Jay Billings, Oak Ridge National Laboratory (ORNL))</li>
+                <a title='Energy Science Tech Software Center' href="https://github.com/doecode/doecode.github.io/blob/master/docs/billings_stip_20170503.pdf?raw=true">The New Energy Science and Technology Software Center</a>&nbsp;presented at the DOE Scientific and Technical Information Program (STIP) Annual Working Meeting (Jay Jay Billings, Oak Ridge National Laboratory (ORNL))</li>
               <li>04/21/2017&nbsp;
-                <a title='DOE CODE Metadata' href="http://www.osti.gov/doecode/docs/DOE_Code_Code4LibSE_2017.pptx.zip">DOE CODE Metadata</a>&nbsp;by Katie Knight, Oak Ridge National Laboratory,&nbsp;<a title='Code4LibSE' href="https://wiki.code4lib.org/Southeast_2017#Code4LibSE_2017_Emory_Meeting">Code4LibSE 2017 Emory Meeting</a>
+                <a title='DOE CODE Metadata' href="https://github.com/doecode/doecode.github.io/blob/master/docs/DOE_Code_Code4LibSE_2017.pptx.zip?raw=true">DOE CODE Metadata</a>&nbsp;by Katie Knight, Oak Ridge National Laboratory,&nbsp;<a title='Code4LibSE' href="https://wiki.code4lib.org/Southeast_2017#Code4LibSE_2017_Emory_Meeting">Code4LibSE 2017 Emory Meeting</a>
               </li>
               <li>03/01/2017 Poster presented at SIAM CSE17 PP108 Minisymposterium:&nbsp;
                 <a title='Software Productivity' href="https://figshare.com/articles/billings_doecode_siamcse2017_20170301_jpg/4730203">Software Productivity and Sustainability for CSE and Data Science</a>&nbsp; by Jay Jay Billings, Oak Ridge National Laboratory</li>
