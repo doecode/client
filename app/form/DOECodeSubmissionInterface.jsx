@@ -255,7 +255,7 @@ parseSubmitResponse(data) {
                                   </button>
                             </div>
                             <div className="col-sm-3">
-                                <button title='Submit Record to E-Link' style={marginStyle} type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
+                                <button title='Submit Record to E-Link' style={marginStyle} type="button" className={submitClass} disabled={(submitDisabled==true) ? 'disabled' : ''} onClick={this.submit}>
                                     Submit Record to E-Link
                                 </button>
                             </div>
@@ -270,7 +270,7 @@ parseSubmitResponse(data) {
                               </button>
                           </div>
                           <div className="col-sm-2">
-                              <button title='Publish Record' style={marginStyle} type="button" className={publishClass} disabled={publishDisabled} onClick={this.publish}>
+                              <button title='Publish Record' style={marginStyle} type="button" className={publishClass} disabled={(publishDisabled==true) ? 'disabled' : ''} onClick={this.publish}>
                                   Publish Record
                               </button>
                           </div>

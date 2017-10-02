@@ -426,7 +426,7 @@ buildPanel(obj) {
           button =           <div className="form-group-xs row col-sm-12">
                 <br/>
                           <div>
-                              <button title='Publish Record' type="button" className={publishClass} disabled={publishDisabled} onClick={this.publish}>
+                              <button title='Publish Record' type="button" className={publishClass} disabled={(publishDisabled==true) ? 'disabled' : ''} onClick={this.publish}>
                                   Publish Record
                               </button>
                           </div>
