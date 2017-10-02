@@ -35,7 +35,7 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       }, {
         test: /\.(png|jpg)$/,
-        loader: 'url-loader?limit=8192'
+         loader: 'file-loader?name=/img/[name].[ext]' 
       }
     ]
   },
