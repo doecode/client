@@ -47,7 +47,7 @@ export default class BiblioPage extends React.Component {
   }
 
   parseErrorResponse() {
-    console.log("Error?");
+    // silent error
   }
 
   generateContent(obj, index) {

@@ -19,7 +19,6 @@ export default class SupplementalInfoStep extends React.Component {
   }
 
   onDrop(files) {
-    console.log('Received files: ', files);
     metadata.setValue("files", files);
     metadata.setValue("file_name", files[0].name);
     metadata.validateField("file_name");

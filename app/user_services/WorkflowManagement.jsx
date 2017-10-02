@@ -75,7 +75,7 @@ export default class WorkflowManagement extends React.Component {
 
   parseReceiveResponse(data) {
     let rows = [];
-    //console.log(data);
+
     const records = data.records;
     for (let i = 0; i < records.length; i++) {
 
@@ -95,7 +95,6 @@ export default class WorkflowManagement extends React.Component {
 
       let statusIndicator = (record.workflow_status == "Published" ? <div className="grid-button" title="Pending Approval" ><span className="pending">Pending</span></div> : record.workflow_status);
 
-      //console.log(JSON.stringify(record));
       rows.push({
         id: record.code_id, title: record.software_title, status: statusIndicator,
         edit:
