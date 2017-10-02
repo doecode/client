@@ -39,7 +39,7 @@ export default class DevAndContribLinks extends React.Component {
       <span>
         <SimpleDropdown extraBtnClasses=' biblio-authors' noBtnPadding noToggleArrow items={dropdown_list} label={row.name.trim()}/>
         &nbsp;
-        <img title='ORCID' alt='ORCID' className='orc-id-img' src={require('../images/orcid_16x16(1).png')}/>
+        <img title='ORCID' alt='ORCID' className='orc-id-img' src='https://www.osti.gov/includes/doecode/images/orcid_16x16(1).png'/>
       </span>
     );
   }

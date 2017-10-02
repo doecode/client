@@ -89,7 +89,7 @@ export default class Splash extends React.Component {
                   {/*Logo*/}
                   <div className="row center-text">
                     <div className="col-xs-12">
-                      <img src={require('../images/DOEcode300px_white.png?raw=true')} alt="DOECode" title='DOE CODE' className='header-logo-img'/>
+                      <img src='https://www.osti.gov/includes/doecode/images/DOEcode300px_white.png' alt="DOECode" title='DOE CODE' className='header-logo-img'/>
                     </div>
                   </div>
                   <br/>

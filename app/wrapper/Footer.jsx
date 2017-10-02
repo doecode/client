@@ -9,7 +9,7 @@ export default class Footer extends React.Component {
       : "footer footer-bottom";
     this.img_link = (this.props.is_homepage)
       ? "https://www.osti.gov/sites/www.osti.gov/files/public/DOE_SC_OSTI_FFF.png"
-      : require('../images/DOE_SC_OSTI_666_sm.png');
+      : 'https://www.osti.gov/includes/doecode/images/DOE_SC_OSTI_666_sm.png';
     this.footer_link = (this.props.is_homepage)
       ? "footer-link-homepage"
       : "footer-link";

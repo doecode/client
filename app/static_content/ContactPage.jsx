@@ -36,7 +36,7 @@ export default class Contact extends React.Component {
 
                 <div className="row">
                     <div className="col-sm-2 hidden-xs ">
-                        <img title='Phone' src={require('../images/Phone.png')} className="img-rounded img-responsive contact-img" alt="phone"/>
+                        <img title='Phone' src='https://www.osti.gov/includes/doecode/images/Phone.png' className="img-rounded img-responsive contact-img" alt="phone"/>
                     </div>
                     <div className="col-sm-10 col-xs-12">
                         <div className="row">
@@ -51,7 +51,7 @@ export default class Contact extends React.Component {
 
                 <div className="row">
                     <div className="col-sm-2 hidden-xs ">
-                        <img title='Writing' src={require('../images/Writing.png')} className="img-rounded img-responsive contact-img" alt="writing"/>
+                        <img title='Writing' src='https://www.osti.gov/includes/doecode/images/Writing.png' className="img-rounded img-responsive contact-img" alt="writing"/>
                     </div>
                     <div className="col-sm-10 col-xs-12">
                         <div className="row">

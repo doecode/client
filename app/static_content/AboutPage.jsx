@@ -10,20 +10,20 @@ export default class About extends React.Component {
     this.changeSubmit = this.changeSubmit.bind(this);
 
     this._imageUrls = [
-      require('../images/DOEcodeFeatures_main710px-min.png'),
-      require('../images/DOEcodeFeatures_doi710px-min.png'),
-      require('../images/DOEcodeFeatures_Catalog710px-min.png'),
-      require('../images/DOEcodeFeatures_Policy710px-min.png'),
-      require('../images/DOEcodeFeatures_Easy710px-min.png'),
-      require('../images/DOEcodeFeatures_GitHub710px-min.png'),
-      require('../images/DOEcodeFeatures_SocialCode710px-min.png')
+      'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_main710px-min.png',
+      'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_doi710px-min.png',
+      'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_Catalog710px-min.png',
+      'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_Policy710px-min.png',
+      'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_Easy710px-min.png',
+      'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_GitHub710px-min.png',
+      'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_SocialCode710px-min.png'
     ];
 
-    this._discoverUrls = [require('../images/Discover-min.png'), require('../images/Discover_hover-min.png')];
+    this._discoverUrls = ['https://www.osti.gov/includes/doecode/images/Discover-min.png', 'https://www.osti.gov/includes/doecode/images/Discover_hover-min.png'];
 
-    this._createUrls = [require('../images/Create-min.png'), require('../images/Create_hover-min.png')];
+    this._createUrls = ['https://www.osti.gov/includes/doecode/images/Create-min.png', 'https://www.osti.gov/includes/doecode/images/Create_hover-min.png'];
 
-    this._submitUrls = [require('../images/Submit-min.png'), require('../images/Submit_hover-min.png')]
+    this._submitUrls = ['https://www.osti.gov/includes/doecode/images/Submit-min.png', 'https://www.osti.gov/includes/doecode/images/Submit_hover-min.png']
     this.state = {
       currentImage: this._imageUrls[0],
       currentDiscover: this._discoverUrls[0],

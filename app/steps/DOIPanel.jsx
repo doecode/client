@@ -64,7 +64,7 @@ export default class DOIPanel extends React.Component {
     this.setState({isError: true, modalMessage: "Unable to reserve a DOI at this time.  Please try again later."});
   }
 
-  parseErrorResponse(jqXhr, exception)
+  parseErrorResponse(jqXhr, exception) {
     if (jqXhr.status === 401) {
       window.sessionStorage.lastLocation = window.location.href;
       window.sessionStorage.lastRecord = JSON.stringify(metadata.getData());
@@ -73,6 +73,8 @@ export default class DOIPanel extends React.Component {
     } else if (jqXhr.status === 403) {
       window.location.href = '/doecode/forbidden';
     } else {
+      //window.location.href = '/doecode/error';
+
       let x = 0;
       let msg = "";
 
@@ -89,6 +91,7 @@ export default class DOIPanel extends React.Component {
 
       this.setState({"loading": false, "loadingMessage": ""});
       this.setState({"error": true, "errorMessage": msg});
+      console.log("Error...");
     }
   }
 
