@@ -23,7 +23,7 @@ export default class RepositoryServices extends React.Component {
               <br/>
               <br/>
               <br/>
-              <ImageLink title='Github' imgID='repository-github-img' linkTarget='_blank' linkURL='https://github.com/doecode/' imageURL='https://www.aha.io/assets/github.7433692cabbfa132f34adb034e7909fa.png'/>
+              <ImageLink title='Github' imgID='repository-github-img' linkTarget='_blank' linkURL='https://github.com/doecode/' imageURL={require('../images/github.7433692cabbfa132f34adb034e7909fa.png')}/>
               <br/>
               To join the community, please email&nbsp;<a title='Send email to doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>
             </div>
@@ -36,7 +36,7 @@ export default class RepositoryServices extends React.Component {
               </strong>
               <br/>
               <br/>
-              <ImageLink title='Gitlab' imgID='repository-gitlab-img' linkTarget='_blank' linkURL='http://gitlab.osti.gov/' imageURL='https://tctechcrunch2011.files.wordpress.com/2015/09/gitlab.png'/>
+              <ImageLink title='Gitlab' imgID='repository-gitlab-img' linkTarget='_blank' linkURL='http://gitlab.osti.gov/' imageURL={require('../images/gitlab.png')}/>
             </div>
           </div>
         </div>

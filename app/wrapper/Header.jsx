@@ -38,7 +38,7 @@ export default class Header extends React.Component {
               <div className='col-lg-7 col-md-10 col-sm-12'>
                 <h1 className='logo-header'>
                   <a href="/doecode">
-                    <img className='header-logo-img' title='DOE Code Homepage' src="https://github.com/doecode/doecode.github.io/blob/master/images/DOEcode300px_white.png?raw=true" alt="DOECode"/>
+                    <img className='header-logo-img' title='DOE Code Homepage' src={require('../images/DOEcode300px_white.png')} alt="DOECode"/>
                   </a>
                   <span className='header-side-text'>U.S. Department of Energy<br/>
                     Office of Scientific and Technical Information</span>

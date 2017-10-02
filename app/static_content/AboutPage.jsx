@@ -10,20 +10,20 @@ export default class About extends React.Component {
     this.changeSubmit = this.changeSubmit.bind(this);
 
     this._imageUrls = [
-      "https://github.com/doecode/doecode.github.io/blob/master/images/DOEcodeFeatures_main710px-min.png?raw=true",
-      "https://github.com/doecode/doecode.github.io/blob/master/images/DOEcodeFeatures_doi710px-min.png?raw=true",
-      "https://github.com/doecode/doecode.github.io/blob/master/images/DOEcodeFeatures_Catalog710px-min.png?raw=true",
-      "https://github.com/doecode/doecode.github.io/blob/master/images/DOEcodeFeatures_Policy710px-min.png?raw=true",
-      "https://github.com/doecode/doecode.github.io/blob/master/images/DOEcodeFeatures_Easy710px-min.png?raw=true",
-      "https://github.com/doecode/doecode.github.io/blob/master/images/DOEcodeFeatures_GitHub710px-min.png?raw=true",
-      "https://github.com/doecode/doecode.github.io/blob/master/images/DOEcodeFeatures_SocialCode710px-min.png?raw=true"
+      require('../images/DOEcodeFeatures_main710px-min.png'),
+      require('../images/DOEcodeFeatures_doi710px-min.png'),
+      require('../images/DOEcodeFeatures_Catalog710px-min.png'),
+      require('../images/DOEcodeFeatures_Policy710px-min.png'),
+      require('../images/DOEcodeFeatures_Easy710px-min.png'),
+      require('../images/DOEcodeFeatures_GitHub710px-min.png'),
+      require('../images/DOEcodeFeatures_SocialCode710px-min.png')
     ];
 
-    this._discoverUrls = ["https://github.com/doecode/doecode.github.io/blob/master/images/Discover-min.png?raw=true", "https://github.com/doecode/doecode.github.io/blob/master/images/Discover_hover-min.png?raw=true"];
+    this._discoverUrls = [require('../images/Discover-min.png'), require('../images/Discover_hover-min.png')];
 
-    this._createUrls = ["https://github.com/doecode/doecode.github.io/blob/master/images/Create-min.png?raw=true", "https://github.com/doecode/doecode.github.io/blob/master/images/Create_hover-min.png?raw=true"];
+    this._createUrls = [require('../images/Create-min.png'), require('../images/Create_hover-min.png')];
 
-    this._submitUrls = ["https://github.com/doecode/doecode.github.io/blob/master/images/Submit-min.png?raw=true", "https://github.com/doecode/doecode.github.io/blob/master/images/Submit_hover-min.png?raw=true"]
+    this._submitUrls = [require('../images/Submit-min.png'), require('../images/Submit_hover-min.png')]
     this.state = {
       currentImage: this._imageUrls[0],
       currentDiscover: this._discoverUrls[0],

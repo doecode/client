@@ -18,14 +18,14 @@ export default class Contact extends React.Component {
                 <br/>
                 <div className="row">
                     <div className="col-sm-2 hidden-xs ">
-                        <img src="https://github.com/doecode/doecode.github.io/blob/master/images/E-Mail.png?raw=true" className="img-rounded img-responsive contact-img" alt="email"/>
+                        <img title='Email' src={require('../images/E-Mail.png')} className="img-rounded img-responsive contact-img" alt="email"/>
                     </div>
                     <div className="col-sm-10 col-xs-12">
                         <div className="row">
                             <div className="col-xs-12 contact-page-header"><strong>EMAIL</strong></div>
                             <div className="col-xs-12">
                                 <p>
-                                    <a href="mailto:doecode@osti.gov?subject=Comments or Suggestions">doecode@osti.gov</a>
+                                    <a title='Email doecode@osti.gov' href="mailto:doecode@osti.gov?subject=Comments or Suggestions">doecode@osti.gov</a>
                                 </p>
                                 <p> NOTE: Email messages are answered Monday - Friday, 9 a.m. - 4 p.m. We do our best to respond within 48 hours. </p>
                             </div>
@@ -36,7 +36,7 @@ export default class Contact extends React.Component {
 
                 <div className="row">
                     <div className="col-sm-2 hidden-xs ">
-                        <img src="https://github.com/doecode/doecode.github.io/blob/master/images/Phone.png?raw=true" className="img-rounded img-responsive contact-img" alt="phone"/>
+                        <img title='Phone' src={require('../images/Phone.png')} className="img-rounded img-responsive contact-img" alt="phone"/>
                     </div>
                     <div className="col-sm-10 col-xs-12">
                         <div className="row">
@@ -51,7 +51,7 @@ export default class Contact extends React.Component {
 
                 <div className="row">
                     <div className="col-sm-2 hidden-xs ">
-                        <img src="https://github.com/doecode/doecode.github.io/blob/master/images/Phone.png?raw=true" className="img-rounded img-responsive contact-img" alt="writing"/>
+                        <img title='Writing' src={require('../images/Writing.png')} className="img-rounded img-responsive contact-img" alt="writing"/>
                     </div>
                     <div className="col-sm-10 col-xs-12">
                         <div className="row">

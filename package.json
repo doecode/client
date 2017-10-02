@@ -73,6 +73,7 @@
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
     "uniqid": "https://registry.npmjs.org/uniqid/-/uniqid-4.1.1.tgz",
+    "url-loader": "^0.5.9",
     "validator": "^7.0.0",
     "warning": "^3.0.0"
   }

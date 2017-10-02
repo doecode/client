@@ -10,43 +10,40 @@ module.exports = {
   output: {
     publicPath: "/",
     filename: "app.js",
-    path: __dirname + "/dist",
+    path: __dirname + "/dist"
   },
 
   resolve: {
     extensions: ['.js', '.jsx', '.json']
   },
 
+  devServer: {
+    proxy: {
+      '/doecode/api/*': {
+        target: 'http://lxappdev2:8080/doecodeapi/services',
+        secure: false,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/doecode/api': ''
+        }
+      }
+    }
 
-devServer: {
-proxy: {
-'/doecode/api/*': {
-target: 'http://lxappdev2:8080/doecodeapi/services',
-secure: false,
-changeOrigin: true,
-pathRewrite: {
-'^/doecode/api' : ''
-}
-}
-}
-
-}
-,
+  },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ["react-hot-loader","babel-loader"],
-      },
-      {
-	test: /\.css$/,
-	use: ['style-loader','css-loader']
+        loaders: ["react-hot-loader", "babel-loader"]
+      }, {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }, {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader?limit=8192'
       }
-    ],
+    ]
   },
-  plugins: [new HtmlWebpackPlugin({
-	template: 'dist/index.html',
-	inject: 'body'
-	})]
+  plugins: [new HtmlWebpackPlugin({template: 'dist/index.html', inject: 'body'})]
 }
