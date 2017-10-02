@@ -1779,6 +1779,12 @@ a.button-secondary:focus, a.button-secondary:hover {
   color: white !important;
 }
 
+.button-error {
+  background: rgb(202, 60, 60);
+  color:white;
+  /* this is a maroon */
+}
+
 
 /*^^ DATE BAR CHART ON THE SEARCH PAGE ^^*/
 

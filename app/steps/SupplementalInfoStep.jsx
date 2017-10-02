@@ -96,9 +96,7 @@ export default class SupplementalInfoStep extends React.Component {
                 {fileName}
               </div>
               <div className="col-sm-2">
-                <Button bsStyle="danger" active onClick={this.deleteFile}>
-                  Delete File
-                </Button>
+                <button type='button' className='pure-button button-error' onClick={this.deleteFile}>Delete File</button>
               </div>
 
             </div>}

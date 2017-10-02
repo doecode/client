@@ -288,7 +288,7 @@ buildPanel(obj) {
         let panelStyle = "default";
 
         const panelStatus = metadata.getPanelStatus(obj.name);
-        const required_status = panelStatus.remainingRequired>0 ? 'required-field-span':'';
+        const required_status = panelStatus.remainingRequired>0 ? 'required-field-span clickable':' clickable';
 
              if (panelStatus.remainingRequired > 0) {
                   requiredText += " (Fields Required) ";
@@ -306,17 +306,18 @@ buildPanel(obj) {
               arrowBool = this.state.activePanels[obj.key - 1];
         }
 
-        const heading = <div> <span className={required_status}>{obj.name}
+
+        const heading = <div> <span title={obj.name} className={required_status}>{obj.name}
                 {requiredText}</span>
         {panelStatus.hasRequired && panelStatus.remainingRequired == 0 &&
         <span className="green fa fa-check"></span>
         }
         {arrowBool &&
-        <span className="pull-right fa fa-chevron-down"></span>
+        <span title='Close' className="pull-right fa fa-chevron-down clickable"></span>
         }
 
         {!arrowBool &&
-        <span className="pull-right fa fa-chevron-right"></span>
+        <span title='Open' className="pull-right fa fa-chevron-right clickable"></span>
         }
       </div>;
 
