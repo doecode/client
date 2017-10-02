@@ -158,11 +158,11 @@ export default class BiblioPage extends React.Component {
       {
         key: 'brdcrmb1',
         value: <span>
-            <a title='DOE Code Homepage' href='/doecode'>DOE CODE</a>&nbsp;/&nbsp;</span>
+            <a title='DOE Code Homepage' href='/doecode'>DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;</span>
       }, {
         key: 'brdcrmb2',
         value: <span>
-            <a title='Search Results' href='/doecode/results'>Search Results</a>&nbsp;/&nbsp;</span>
+            <a title='Search Results' href='/doecode/results'>Search Results</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;</span>
       }, {
         key: 'brdcrmb3',
         value: <span>{metadata.getValue("software_title")}</span>
@@ -202,10 +202,10 @@ export default class BiblioPage extends React.Component {
               <div className='col-xs-12'>
                 <ul className="nav nav-tabs biblio-page-ul">
                   <li className="active">
-                    <a data-toggle="tab" href="#summary">Summary</a>
+                    <a title='Summary View' data-toggle="tab" href="#summary">Summary</a>
                   </li>
                   <li>
-                    <a data-toggle="tab" href="#fullrecord">Full Record</a>
+                    <a title='Full Record View' data-toggle="tab" href="#fullrecord">Full Record</a>
                   </li>
                 </ul>
                 <div className="tab-content">
