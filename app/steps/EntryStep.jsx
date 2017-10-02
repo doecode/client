@@ -86,7 +86,7 @@ export default class EntryStep extends React.Component {
 
         {accessibility === 'OS' && <div className="form-group form-group-sm row">
           <div className="col-xs-12">
-            <button title='Autopopulate from Repository' className='Autopopulate from Repository' className="pure-button button-secondary btn-sm" onClick={this.props.autopopulate}>
+            <button title='Autopopulate from Repository' className='Autopopulate from Repository' className="pure-button pure-button-primary btn-sm" onClick={this.props.autopopulate}>
               Autopopulate from Repository</button>&nbsp;<HelpTooltip shortVersion item='Autopopulate'/>
           </div>
         </div>}

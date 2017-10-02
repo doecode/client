@@ -1751,22 +1751,9 @@ ul.biblio-page-ul>li>a:hover {
 }
 
 .button-secondary {
-  background-image: linear-gradient(180deg, #337ab7 0, #265a88);
-  color: white;
+  background: rgb(66, 184, 221);
+  color:white;
   /* this is a light blue */
-}
-
-.button-secondary:hover, .button-secondary:focus {
-  background-color: ##265A88;
-  border-color: ##265A88;
-  background-image: linear-gradient(180deg, #3277b3 0, #2d6a9f) !important;
-  /*set the color you want here*/
-}
-
-.button-secondary[disabled] {
-  background-color: ##265A88;
-  border-color: ##265A88;
-  background-image: linear-gradient(180deg, #3277b3 0, #2d6a9f) !important;
 }
 
 .button-warning {
@@ -1775,13 +1762,9 @@ ul.biblio-page-ul>li>a:hover {
   /* this is an orange */
 }
 
-a.button-secondary:focus, a.button-secondary:hover {
-  color: white !important;
-}
-
 .button-error {
   background: rgb(202, 60, 60);
-  color:white;
+  color: white;
   /* this is a maroon */
 }
 

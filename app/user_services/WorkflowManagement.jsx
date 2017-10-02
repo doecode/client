@@ -107,7 +107,7 @@ export default class WorkflowManagement extends React.Component {
             </a>
           </div>
           <div className="grid-button" title="Submit to E-Link">
-            <a href={submitUrl} className="pure-button button-secondary btn-sm">
+            <a href={submitUrl} className="pure-button pure-button-primary btn-sm">
                     <span className="fa fa-pencil"></span>&nbsp;
                     Submit to E-Link
             </a>

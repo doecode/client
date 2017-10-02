@@ -229,8 +229,8 @@ parseSubmitResponse(data) {
       const submitDisabled = !metadata.validateSchema();
       const publishDisabled = !metadata.validatePublishedFields();
 
-      const publishClass = publishDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn" : "pure-button button-secondary btn-lg pull-right doecode-wizard-btn"
-      const submitClass = submitDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn" : "pure-button button-secondary btn-lg pull-right doecode-wizard-btn"
+      const publishClass = publishDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn" : "pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn"
+      const submitClass = submitDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn" : "pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn"
       const codeID = metadata.getValue("code_id");
 
       let headerText = "Create a New Software Record";
@@ -250,7 +250,7 @@ parseSubmitResponse(data) {
         button =             <div className="form-group-xs row">
 
                             <div className="col-sm-9">
-                                <button title='Save Your Progress' type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
+                                <button title='Save Your Progress' type="button" className="pure-button button-secondary btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
                                     Save Your Progress
                                   </button>
                             </div>
@@ -265,7 +265,7 @@ parseSubmitResponse(data) {
           button =           <div className="form-group-xs row">
 
                           <div className="col-sm-10">
-                              <button title='Save Your Progress' type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
+                              <button title='Save Your Progress' type="button" className="pure-button button-secondary btn-lg pull-right doecode-wizard-btn" onClick={this.save}>
                                   Save Your Progress
                               </button>
                           </div>

@@ -365,9 +365,9 @@ buildPanel(obj) {
       const submitDisabled = !metadata.validateSchema();
       const publishDisabled = !metadata.validatePublishedFields();
 
-      const publishClass = publishDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "pure-button button-secondary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
-      const approveClass = "pure-button button-secondary  btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
-      const submitClass = submitDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "pure-button button-secondary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
+      const publishClass = publishDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
+      const approveClass = "pure-button pure-button-primary  btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
+      const submitClass = submitDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
       const codeID = metadata.getValue("code_id");
 
       let headerText = "Create a New Software Record";
@@ -397,7 +397,7 @@ buildPanel(obj) {
 
         let saveBtn = (this.state.workflowStatus != "Published" && this.state.workflowStatus != "Approved" &&
           <div>
-              <button title='Save Your Progress' type="button" className="btn btn-info btn-lg pull-right doecode-wizard-btn save-btn-margin" onClick={this.save}>
+              <button title='Save Your Progress' type="button" className="pure-button button-secondary btn-lg pull-right doecode-wizard-btn save-btn-margin" onClick={this.save}>
                   Save Your Progress
                 </button>
           </div>

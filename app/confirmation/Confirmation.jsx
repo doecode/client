@@ -92,7 +92,7 @@ export default class Confirmation extends React.Component {
                 </h2>
               </div>}
               {this.state.showYMLDownload && <h2>
-                <a id='yml-anchor' target="_blank" type="text/yaml" href={this.state.ymlHREF} download={this.state.ymlFILE}>
+                <a title='Download YAML File' id='yml-anchor' target="_blank" type="text/yaml" href={this.state.ymlHREF} download={this.state.ymlFILE}>
                   Download Metadata.yml
                 </a>
               </h2>}
@@ -101,13 +101,13 @@ export default class Confirmation extends React.Component {
           </div>
           <div className="form-group form-group-sm row">
             {this.state.workflow === "published" && <div className="col-sm-4 col-xs-12">
-              <button type="button" className="btn btn-success btn-lg" onClick={this.editRecord}>
+              <button title='Continue to E-Link Submission' type="button" className="pure-button button-success btn-lg" onClick={this.editRecord}>
                 Continue to E-Link Submission
               </button>
             </div>}
             <div className='col-sm-4 col-xs-12'></div>
             <div className="col-sm-4 col-xs-12 right-text">
-              <button type="button" className="btn btn-primary btn-lg" onClick={this.newRecord}>
+              <button title='Create New Record' type="button" className="pure-button pure-button-primary btn-lg" onClick={this.newRecord}>
                 Create New Record
               </button>
             </div>

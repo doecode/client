@@ -104,7 +104,7 @@ export default class AgentsModal extends React.Component {
         return (
             <div className="form-group form-group-sm">
                 <div className="col-xs-12 center-text">
-                    <button type='button' title={label} className='pure-button button-secondary btn-lg' onClick={this.open}>
+                    <button type='button' title={label} className='pure-button pure-button-primary btn-lg' onClick={this.open}>
                       Add {label}
                     </button>
 
@@ -124,7 +124,7 @@ export default class AgentsModal extends React.Component {
                             <button onClick={this.close} type='button' className='pure-button'>Close</button>&nbsp;
                             {this.props.tableStore.isEdit && <button type='button' title='Delete' className='pure-button button-error' onClick={this.handleDelete}>Delete</button>}
                             &nbsp;
-                            <button type='button' title='Save and Close' className='pure-button button-secondary' onClick={this.handleSave} disabled={(disabled==true) ? 'disabled' : ''}>Save and Close</button>
+                            <button type='button' title='Save and Close' className='pure-button pure-button-primary' onClick={this.handleSave} disabled={(disabled==true) ? 'disabled' : ''}>Save and Close</button>
                         </Modal.Footer>
                     </Modal>
                 </div>
