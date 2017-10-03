@@ -75,20 +75,24 @@ export default class SigninStatus extends React.Component {
             </li>
           </ul>
         </div>}
-        {!this.is_logged_in && <span>
-          <span className="signin-btn-container first-signin-text">
-            <a title='Log In' className="signin-btn" href="/doecode/login">
-              <span className=" signin-btn-icon fa fa-user signin-icon"></span>
-              <span className='signin-text'>&nbsp;Sign In</span>
-            </a>
-            &nbsp;</span>
-          <span className="signin-btn-container">&nbsp;
-            <a title='Create Account' className="signin-btn" href="/doecode/register">
-              <span className="signin-btn-icon fa fa-user-plus signin-icon hide-sm hide-lg hide-md"></span>
-              <span className='signin-text'>&nbsp;Create Account</span>
-            </a>
-          </span>
-        </span>}
+        {!this.is_logged_in && <div className='signin-main-container'>
+
+          <ul className='list-inline'>
+            <li className='signin-btn-container first-signin-text'>
+              <a title='Log In' className="signin-btn" href="/doecode/login">
+                <span className=" signin-btn-icon fa fa-user signin-icon"></span>
+                &nbsp;
+                <span className='signin-text'>&nbsp;Sign In</span>
+              </a>
+            </li>
+            <li className='signin-btn-container'>
+              <a title='Create Account' className="signin-btn" href="/doecode/register">
+                <span className="signin-btn-icon fa fa-user-plus signin-icon hide-sm hide-lg hide-md"></span>
+                <span className='signin-text'>&nbsp;Create Account</span>
+              </a>
+            </li>
+          </ul>
+        </div>}
       </span>
     );
   }

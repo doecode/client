@@ -41,11 +41,11 @@ export default class Footer extends React.Component {
               <ul className="list-inline">
                 <li className={this.footer_link}>
                   <a title='Website Policies / Important Links' href="/doecode/disclaimer">
-                    <span className="fa fa-university"></span>&nbsp;Website Policies / Important Links</a>
+                    <span className="fa fa-university footer-fa-icon"></span>&nbsp;&nbsp;Website Policies / Important Links</a>
                 </li>
                 <li className={this.footer_link}>
                   <a title='Contact Us' href="/doecode/contact">
-                    <span className="fa fa-comments-o"></span>&nbsp;Contact Us</a>
+                    <span className="fa fa-comments-o footer-fa-icon"></span>&nbsp;&nbsp;Contact Us</a>
                 </li>
                 <li className={this.footer_link}>
                   <a title='Facebook' target="_blank" href="https://www.facebook.com/ostigov">

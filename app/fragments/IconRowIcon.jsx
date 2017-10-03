@@ -13,7 +13,7 @@ export default class IconRowIcon extends React.Component {
         </a>
         <br/>
         <small>
-          <a title={this.props.text} href={this.props.destination}>{this.props.text}</a>
+          <a className='icon-row-icon-text' title={this.props.text} href={this.props.destination}>{this.props.text}</a>
         </small>
       </div>
     );

@@ -426,9 +426,10 @@ html h3 {
   font-size: 13.6px !important;
 }
 
-.superscriptContainer{
-  padding-left:3px;
+.superscriptContainer {
+  padding-left: 3px;
 }
+
 .biblio-description {
   padding-right: 10px;
   padding-left: 10px;
@@ -793,7 +794,6 @@ html h3 {
 
 .header-signin-links {
   color: white;
-  padding-top: 8px;
 }
 
 .padblock {
@@ -860,7 +860,7 @@ html, body {
 }
 
 .footer-link-homepage {
-  border-right: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
   color: white;
 }
 
@@ -1060,15 +1060,19 @@ html, body {
 }
 
 .signin-btn-container {
-  padding-right: 8px;
-  padding-left: 8px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-right: 13.6px !important;
+  padding-left: 13.6px !important;
+  padding-top: 6.8px;
+  padding-bottom: 6.8px;
 }
 
 .signin-btn-container:hover {
   background-color: #E2E2E2;
   color: #5E5E5E !important;
+}
+
+.first-signin-text {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .signin-buttons {
@@ -1487,8 +1491,9 @@ label {
 }
 
 .header-logo-img {
-  width: 290px;
+  height: 55px;
   padding-top: 5px;
+  width: 295px;
 }
 
 .navbar-logo-img {
@@ -1789,10 +1794,7 @@ ul.biblio-page-ul>li>a:hover {
 .homepage-subtext {
   font-size: 26px;
   color: white !important;
-}
-
-.first-signin-text {
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 300;
 }
 
 .dropdown-toggle-arrow {
@@ -1805,6 +1807,14 @@ ul.biblio-page-ul>li>a:hover {
 
 .to-span {
   margin-left: 15px;
+}
+
+.icon-row-icon-text:hover {
+  text-decoration: none;
+}
+
+.footer-fa-icon {
+  opacity: 0.5;
 }
 
 
@@ -1933,6 +1943,15 @@ ul.biblio-page-ul>li>a:hover {
   }
   .left-text-tiny {
     text-align: left;
+  }
+  .first-signin-text {
+    border-right: none;
+  }
+  .signin-btn-container {
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
   }
 }
 
@@ -2069,11 +2088,9 @@ ul.biblio-page-ul>li>a:hover {
   .navbar-logo-img {
     display: none
   }
-  /*
   .header-logo-img {
-    width: 200px;
-    height: 50px;
-  }*/
+    height: 45px;
+  }
   .to-field {
     padding-top: 0px;
     padding-bottom: 7px;
@@ -2120,6 +2137,9 @@ ul.biblio-page-ul>li>a:hover {
   }
   .publication-date-end-container-homepage input {
     max-width: 190px !important;
+  }
+  .header-logo-img {
+    height: 45px;
   }
 }
 
