@@ -53,8 +53,7 @@ export default class DevAndContribLinks extends React.Component {
     return (
       <span key={index}>
         {search_link}
-        {(row.sup_count && row.sup_count.length > 0) && <span>
-          {row.sup_count.map((item, index2) => <sup key={index2}>[{item}]</sup>)}
+        {(row.sup_count && row.sup_count.length > 0) && <span className='superscriptContainer'>{row.sup_count.map((item, index2) => <sup key={index2}>[{item}]</sup>)}
         </span>}
 
         {((index + 1) < array.length) && <span>

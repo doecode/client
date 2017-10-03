@@ -423,9 +423,12 @@ html h3 {
 }
 
 .biblio-authors {
-  font-size: 16px !important;
+  font-size: 13.6px !important;
 }
 
+.superscriptContainer{
+  padding-left:3px;
+}
 .biblio-description {
   padding-right: 10px;
   padding-left: 10px;

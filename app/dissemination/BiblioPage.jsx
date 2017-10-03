@@ -79,7 +79,7 @@ export default class BiblioPage extends React.Component {
         }
       });
 
-      textContent = <div className='biblio-authors'><DevAndContribLinks groupType="contributor" items={contributors}/></div>;
+      textContent = <span><DevAndContribLinks groupType="contributor" items={contributors}/></span>;
       show_val = valid_contributors;
 
     } else if (header == "Licenses") {

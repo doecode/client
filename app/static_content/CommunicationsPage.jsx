@@ -13,8 +13,8 @@ export default class Communications extends React.Component {
       <div className="row not-so-wide-row">
         <div className="col-lg-3 col-md-1"></div>
         <div className="col-lg-6 col-md-10 col-xs-12 static-content">
-          <h2 className="static-content-title">Communications and Resources</h2>
-          <h3>Communications</h3>
+          <span className="static-content-title">Communications and Resources</span>
+          <h2>Communications</h2>
           <div className="padblock">
             <h4>Blogs</h4>
             <ul>
@@ -28,7 +28,7 @@ export default class Communications extends React.Component {
               </li>
             </ul>
           </div>
-          <h3>Resources</h3>
+          <h2>Resources</h2>
           <div className="padblock">
             <h4>Selected Articles and Presentations</h4>
             <ul>
@@ -41,7 +41,7 @@ export default class Communications extends React.Component {
                 <a title='Software Productivity' href="https://figshare.com/articles/billings_doecode_siamcse2017_20170301_jpg/4730203">Software Productivity and Sustainability for CSE and Data Science</a>&nbsp; by Jay Jay Billings, Oak Ridge National Laboratory</li>
             </ul>
           </div>
-          <h3>External Links</h3>
+          <h2>External Links</h2>
           <div className="padblock">
             <ul>
               <li>
@@ -59,7 +59,6 @@ export default class Communications extends React.Component {
               </li>
             </ul>
           </div>
-
         </div>
         <div className="col-lg-3 col-md-1"></div>
       </div>
