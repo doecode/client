@@ -21,7 +21,7 @@ export default class MetadataPanel extends React.Component {
 
     const propInfo = metadata.getFieldInfo("proprietary_url");
     if (hasProp) {
-      propInfo.required = "pub";
+      propInfo.required = "sub";
       propInfo.Panel = "Product Description";
     } else {
       metadata.setValue("proprietary_url", "");

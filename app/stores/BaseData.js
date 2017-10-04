@@ -90,9 +90,9 @@ export default class BaseData {
     			isValid = false;
     		}
     		else if (information.required && !information.completed) {
-    			if (update)
+    			if (update){
     				information.error = field + " is required.";
-
+					}
     			isValid = false;
     		}
 

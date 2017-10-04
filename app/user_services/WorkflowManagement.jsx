@@ -89,11 +89,11 @@ export default class WorkflowManagement extends React.Component {
       if (record.workflow_status === 'Saved') {
         editMessage = "Continue to Submit Record";
         editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
-      } else if (record.workflow_status === 'Published') {
+      } else if (record.workflow_status === 'Submitted') {
         editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
       }
 
-      let statusIndicator = (record.workflow_status == "Published" ? <div className="grid-button" title="Pending Approval" ><span className="pending">Pending</span></div> : record.workflow_status);
+      let statusIndicator = (record.workflow_status == "Submitted" ? <div className="grid-button" title="Pending Approval" ><span className="pending">Pending</span></div> : record.workflow_status);
 
       rows.push({
         id: record.code_id, title: record.software_title, status: statusIndicator,

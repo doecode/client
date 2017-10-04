@@ -158,9 +158,9 @@ export default class Metadata extends BaseData {
       if (field === 'accessibility' && data[field] != 'OS') {
         this.infoSchema["repository_link"].required = "";
         this.infoSchema["repository_link"].Panel = "";
-        this.infoSchema['file_name'].required = 'sub';
+        this.infoSchema['file_name'].required = "announ";
         this.infoSchema['file_name'].Panel = 'Supplemental Product Information';
-        this.infoSchema['landing_page'].required = 'pub';
+        this.infoSchema['landing_page'].required = "sub";
         this.infoSchema['landing_page'].Panel = 'Repository Information';
       }
 
@@ -169,7 +169,7 @@ export default class Metadata extends BaseData {
       }
 
       if (field === 'licenses' && data[field].indexOf('Other') > -1) {
-        this.infoSchema['proprietary_url'].required = "pub";
+        this.infoSchema['proprietary_url'].required = "sub";
         this.infoSchema['proprietary_url'].Panel = "Product Description";
       }
     }
@@ -281,25 +281,29 @@ export default class Metadata extends BaseData {
   validatePublishedFields() {
     let isValid = true;
 
+    var blah = [];
+
     for (var field in this.infoSchema) {
       const information = this.infoSchema[field];
 
       if (information.error) {
         isValid = false;
-      } else if (information.required === "pub" && !information.completed) {
+      } else if (information.required === "sub" && !information.completed) {
+        if(blah.indexOf(field)<0){
+          blah.push(field);
+        }
         isValid = false;
       }
 
     }
-
     return isValid;
   }
 
   requireOnlyPublishedFields() {
     for (var field in this.infoSchema) {
       const information = this.infoSchema[field];
+      if (information.required == "announ") {
 
-      if (information.required == "sub") {
         information.required = "";
       }
 

@@ -91,7 +91,6 @@ export default class DOIPanel extends React.Component {
 
       this.setState({"loading": false, "loadingMessage": ""});
       this.setState({"error": true, "errorMessage": msg});
-      console.log("Error...");
     }
   }
 

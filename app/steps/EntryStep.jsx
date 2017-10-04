@@ -29,7 +29,7 @@ export default class EntryStep extends React.Component {
       metadata.setValue("open_source", true);
       metadata.setValue("files", []);
       metadata.setValue("landing_page", "");
-      repoLinkInfo.required = "pub";
+      repoLinkInfo.required = "sub";
       repoLinkInfo.Panel = "Repository Information";
       landingPageInfo.required = "";
       landingPageInfo.Panel = "";
@@ -43,9 +43,9 @@ export default class EntryStep extends React.Component {
       repoLinkInfo.required = "";
       repoLinkInfo.completed = false;
       repoLinkInfo.Panel = "";
-      landingPageInfo.required = "pub";
+      landingPageInfo.required = "sub";
       landingPageInfo.Panel = "Repository Information";
-      fileInfo.required = this.props.page == 'announce' ? "sub" : "";
+      fileInfo.required = this.props.page == 'announce' ? "announ" : "";
       fileInfo.Panel = "Supplemental Product Information";
     }
 
