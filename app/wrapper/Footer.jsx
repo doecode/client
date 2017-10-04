@@ -37,7 +37,7 @@ export default class Footer extends React.Component {
           </div>
 
           <div className="row text-center mt-1 mb-1 white">
-            <span className='hide-xs hide-sm'>
+            <span className='hide-xs'>
               <ul className="list-inline">
                 <li className={this.footer_link}>
                   <a title='Website Policies / Important Links' href="/doecode/disclaimer">
@@ -69,7 +69,7 @@ export default class Footer extends React.Component {
                 </li>
               </ul>
             </span>
-            <span className='hide-md hide-lg'>
+            <span className='hide-md hide-lg hide-sm'>
               <ul className="list-inline">
                 <li className={this.footer_link}>
                   <a title='Facebook' target="_blank" href="https://www.facebook.com/ostigov">
@@ -94,7 +94,7 @@ export default class Footer extends React.Component {
               </ul>
               <div className='row hide-md hide-lg not-so-wide-row '>
                 <br/>
-                <div className='col-xs-6 center-text'>
+                <div className='col-xs-6 center-text website-policies-mobile'>
                   <a title='Website Policies' href="/doecode/disclaimer" className={linkColorClass}>
                     <span className="fa fa-university"></span>&nbsp;Website Policies
                   </a>

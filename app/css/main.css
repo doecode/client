@@ -715,6 +715,8 @@ html h3 {
 
 .homepage-search-btn {
   height: 51px !important;
+  width:60px !important;
+
 }
 
 .homepage-adv-search-btn {
@@ -853,6 +855,10 @@ html, body {
 .footer-link {
   border-right: 1px solid rgba(0, 0, 0, 0.2);
   color: #777;
+}
+
+.website-policies-mobile{
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .footer-link a {
