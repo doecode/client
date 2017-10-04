@@ -18,7 +18,7 @@ export default class SuccessfulSignup extends React.Component {
                 <br/>
                 <p>
                     A confirmation email has been sent to the email address you used to register your DOE CODE account. Please follow the instructions
-                    in that email to being using DOE CODE.
+                    in that email to begin using DOE CODE.
                 </p>
             </div>
             <div className="col-md-3"> </div>

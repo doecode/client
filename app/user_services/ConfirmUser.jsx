@@ -31,7 +31,7 @@ export default class ConfirmUser extends React.Component {
     var url_key = window.location.href.toString();
     //Strip out everything that isn't
     url_key = url_key.substr(0, url_key.indexOf('doecode/'));
-    url_key += 'doecoeapi/services';
+    url_key += 'doecodeapi/services';
     return (
       <div className="row not-so-wide-row">
         <div className="col-md-3"></div>
@@ -42,7 +42,7 @@ export default class ConfirmUser extends React.Component {
             <br/>
             <div>
               Your API key is listed below, please keep this in your records for future use. This key can be used to interact with DOE CODE APIs and documentation for those can be found&nbsp;
-              <a target='_blank' href={url_key}>Here</a>. If you happen to misplace your API key, a new one can be generated on the DOE CODE account page.
+              <a target='_blank' href={url_key}>here</a>. If you happen to misplace your API key, a new one can be generated on the DOE CODE account page.
               <br/>
               <br/>
               API Key:&nbsp;
