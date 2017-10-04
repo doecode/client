@@ -116,7 +116,7 @@ parseErrorResponse(jqXhr, exception) {
 componentDidMount() {
     const workflowStatus = getQueryParam("workflow");
 
-    if (this.props.page == 'submit') {
+    if (this.props.page == 'announce') {
         this.setState({"showAll": true});
     } else {
         metadata.requireOnlyPublishedFields();
@@ -174,7 +174,7 @@ save() {
 }
 
 publish() {
-    this.setState({"loading": true, "loadingMessage": "Publishing"});
+    this.setState({"loading": true, "loadingMessage": "Submitting"});
     const justFileName = !Array.isArray(metadata.getValue("files").slice());
     if (metadata.getValue("accessibility") == 'OS' || justFileName || metadata.getValue("files").length == 0) {
       doAuthenticatedAjax('POST', '/doecode/api/metadata/submit', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
@@ -184,7 +184,7 @@ publish() {
 }
 
 submit() {
-    this.setState({"loading": true, "loadingMessage": "Submitting"});
+    this.setState({"loading": true, "loadingMessage": "Announcing"});
     const justFileName = !Array.isArray(metadata.getValue("files").slice());
     if (metadata.getValue("accessibility") == 'OS' || justFileName) {
       doAuthenticatedAjax('POST', '/doecode/api/metadata/announce', this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
@@ -207,12 +207,12 @@ parseSaveResponse(data) {
 }
 
 parsePublishResponse(data) {
-    window.location.href = "/doecode/confirm?workflow=published&code_id=" + data.metadata.code_id;
+    window.location.href = "/doecode/confirm?workflow=submitted&code_id=" + data.metadata.code_id;
 }
 
 parseSubmitResponse(data) {
 
-    window.location.href = "/doecode/confirm?workflow=submitted&code_id=" + data.metadata.code_id;
+    window.location.href = "/doecode/confirm?workflow=announced&code_id=" + data.metadata.code_id;
 }
 
 
@@ -240,7 +240,7 @@ parseSubmitResponse(data) {
 
         let button = null;
 
-        if (this.props.page == 'submit') {
+        if (this.props.page == 'announce') {
         button =             <div className="form-group-xs row">
 
                             <div className="col-sm-9">
@@ -249,8 +249,8 @@ parseSubmitResponse(data) {
                                   </button>
                             </div>
                             <div className="col-sm-3">
-                                <button title='Submit Record to E-Link' style={marginStyle} type="button" className={submitClass} disabled={(submitDisabled==true) ? 'disabled' : ''} onClick={this.submit}>
-                                    Submit Record to E-Link
+                                <button title='Announce Record to E-Link' style={marginStyle} type="button" className={submitClass} disabled={(submitDisabled==true) ? 'disabled' : ''} onClick={this.submit}>
+                                    Announce Record to E-Link
                                 </button>
                             </div>
 
@@ -264,8 +264,8 @@ parseSubmitResponse(data) {
                               </button>
                           </div>
                           <div className="col-sm-2">
-                              <button title='Publish Record' style={marginStyle} type="button" className={publishClass} disabled={(publishDisabled==true) ? 'disabled' : ''} onClick={this.publish}>
-                                  Publish Record
+                              <button title='Submit Record' style={marginStyle} type="button" className={publishClass} disabled={(publishDisabled==true) ? 'disabled' : ''} onClick={this.publish}>
+                                  Submit Record
                               </button>
                           </div>
 
@@ -276,7 +276,7 @@ parseSubmitResponse(data) {
 
           let content;
 
-        if (this.props.page == 'submit') {
+        if (this.props.page == 'announce') {
           content =
           <div>
                 <div className="step-progress">

@@ -29,7 +29,6 @@ export default class ContributorsStep extends React.Component {
 
   _isValidated() {
 
-    //return this.props.getSubmitPromise();
 
   }
 

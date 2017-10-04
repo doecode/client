@@ -10,7 +10,7 @@ export default class AnnouncementInterface extends React.Component {
 	  render() {
 		    return (
           <div>
-          <DOECodeSubmissionInterface page="submit"/>
+          <DOECodeSubmissionInterface page="announce"/>
         </div>
 		      );
 		  }

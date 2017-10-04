@@ -10,7 +10,7 @@ export default class AnnounceForm extends React.Component {
 	  render() {
 		    return (
           <div>
-          <DOECodeWizard page="submit"/>
+          <DOECodeWizard page="announce"/>
         </div>
 		      );
 		  }

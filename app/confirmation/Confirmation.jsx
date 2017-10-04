@@ -100,9 +100,9 @@ export default class Confirmation extends React.Component {
             </div>
           </div>
           <div className="form-group form-group-sm row">
-            {this.state.workflow === "published" && <div className="col-sm-4 col-xs-12">
+            {this.state.workflow === "submitted" && <div className="col-sm-4 col-xs-12">
               <button title='Continue to E-Link Submission' type="button" className="pure-button button-success btn-lg" onClick={this.editRecord}>
-                Continue to E-Link Submission
+                Continue to E-Link Announcement
               </button>
             </div>}
             <div className='col-sm-4 col-xs-12'></div>

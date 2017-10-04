@@ -10,7 +10,7 @@ export default class SubmitForm extends React.Component {
 	  render() {
 		    return (
           <div>
-          <DOECodeWizard page="publish"/>
+          <DOECodeWizard page="submit"/>
         </div>
 		      );
 		  }

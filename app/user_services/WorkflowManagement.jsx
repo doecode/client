@@ -87,10 +87,10 @@ export default class WorkflowManagement extends React.Component {
       let editMessage = "Continue to E-Link Submission";
 
       if (record.workflow_status === 'Saved') {
-        editMessage = "Continue to Publish Record";
+        editMessage = "Continue to Submit Record";
         editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
       } else if (record.workflow_status === 'Published') {
-        editUrl = "/announce" + this.wizardVersion + "?code_id=" + record.code_id;
+        editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
       }
 
       let statusIndicator = (record.workflow_status == "Published" ? <div className="grid-button" title="Pending Approval" ><span className="pending">Pending</span></div> : record.workflow_status);
@@ -105,10 +105,10 @@ export default class WorkflowManagement extends React.Component {
                     Update Metadata
             </a>
           </div>
-          <div className="grid-button" title="Submit to E-Link">
+          <div className="grid-button" title="Announce to E-Link">
             <a href={submitUrl} className="pure-button pure-button-primary btn-sm white">
                     <span className="fa fa-pencil"></span>&nbsp;
-                    Submit to E-Link
+                    Announce to E-Link
             </a>
           </div>
           </div>
@@ -160,7 +160,7 @@ export default class WorkflowManagement extends React.Component {
           <h2 className="static-content-title">Manage My Projects</h2>
           <div className="form-group-xs row">
             <div className="col-sm-12">
-              <a title='Add New Record' href={"/doecode/submit" + this.wizardVersion} type="button" className="pure-button button-success btn-lg pull-right workflow-publish-btn">
+              <a title='Add New Record' href={"/doecode/submit" + this.wizardVersion} type="button" className="pure-button button-success btn-lg pull-right workflow-publish-btn white">
                 Add New Record
               </a>
             </div>

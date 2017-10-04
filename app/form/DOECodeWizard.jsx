@@ -150,8 +150,7 @@ if (jqXhr.status === 401) {
 }
 
 componentDidMount() {
-
-    if (this.props.page == 'submit' || this.props.page == 'approve') {
+    if (this.props.page == 'announce' || this.props.page == 'approve') {
         this.setState({"showAll": true});
     }
 
@@ -169,7 +168,7 @@ componentDidMount() {
         checkIsAuthenticated();
     }
 
-    if (this.props.page == 'publish') {
+    if (this.props.page == 'submit') {
         metadata.requireOnlyPublishedFields();
     }
 }
@@ -181,7 +180,7 @@ componentDidMount() {
 parseReceiveResponse(data) {
     this.setState({"workflowStatus": data.metadata.workflow_status});
     metadata.loadRecordFromServer(data.metadata, this.props.page);
-    if (this.props.page == 'publish') {
+    if (this.props.page == 'submit') {
         metadata.requireOnlyPublishedFields();
     }
     this.setState({showModal : false});
@@ -214,7 +213,7 @@ save() {
 }
 
 publish() {
-    this.setState({showModal : true, modalTitle: "Publishing"});
+    this.setState({showModal : true, modalTitle: "Submitting"});
 
     if (metadata.getValue("accessibility") == 'OS' || metadata.getValue("files").length == 0) {
       doAuthenticatedAjax('POST', '/doecode/api/metadata/submit', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
@@ -224,7 +223,7 @@ publish() {
 }
 
 submit() {
-    this.setState({showModal : true, modalTitle: "Submitting"});
+    this.setState({showModal : true, modalTitle: "Announcing"});
 
     if (metadata.getValue("accessibility") == 'OS' || metadata.getValue("files").length == 0) {
       doAuthenticatedAjax('POST', '/doecode/api/metadata/announce', this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
@@ -256,11 +255,11 @@ parseSaveResponse(data) {
 
 
 parsePublishResponse(data) {
-    window.location.href = "/doecode/confirm?workflow=published&code_id=" + data.metadata.code_id;
+    window.location.href = "/doecode/confirm?workflow=submitted&code_id=" + data.metadata.code_id;
 }
 
 parseSubmitResponse(data) {
-    window.location.href = "/doecode/confirm?workflow=submitted&code_id=" + data.metadata.code_id;
+    window.location.href = "/doecode/confirm?workflow=announced&code_id=" + data.metadata.code_id;
 }
 
 parseApproveResponse(data) {
@@ -302,7 +301,7 @@ buildPanel(obj) {
 
         let arrowBool = this.state.activePanel == obj.key;
 
-        if (this.props.page == 'submit' || this.props.page == 'approve') {
+        if (this.props.page == 'announce' || this.props.page == 'approve') {
               arrowBool = this.state.activePanels[obj.key - 1];
         }
 
@@ -321,7 +320,7 @@ buildPanel(obj) {
         }
       </div>;
 
-        const expandedBool = this.props.page == 'submit' || this.props.page == 'approve';
+        const expandedBool = this.props.page == 'announce' || this.props.page == 'approve';
 
 
         if (this.props.page == 'approve') {
@@ -403,12 +402,12 @@ buildPanel(obj) {
           </div>
         );
 
-        if (this.props.page == 'submit') {
+        if (this.props.page == 'announce') {
         button =             <div className="form-group-xs row col-sm-12">
           <br/>
                             <div>
                                 <button title='Submit Record to E-Link' type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
-                                    Submit Record to E-Link
+                                    Announce Record to E-Link
                                 </button>
                             </div>
                             {saveBtn}
@@ -428,7 +427,7 @@ buildPanel(obj) {
                 <br/>
                           <div>
                               <button title='Publish Record' type="button" className={publishClass} disabled={(publishDisabled==true) ? 'disabled' : ''} onClick={this.publish}>
-                                  Publish Record
+                                  Submit Record
                               </button>
                           </div>
                           {saveBtn}
@@ -436,7 +435,7 @@ buildPanel(obj) {
                       </div>
         };
 
-        const accordionBool = this.props.page == 'publish';
+        const accordionBool = this.props.page == 'submit';
 
         const disableForm = this.props.page == 'approve';
 

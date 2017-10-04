@@ -27,7 +27,6 @@ export default class AgentsStep extends React.Component {
 
 	_isValidated() {
 
-		//return this.props.getSubmitPromise();
 
 	}
 

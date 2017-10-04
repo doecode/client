@@ -45,7 +45,7 @@ export default class EntryStep extends React.Component {
       repoLinkInfo.Panel = "";
       landingPageInfo.required = "pub";
       landingPageInfo.Panel = "Repository Information";
-      fileInfo.required = this.props.page == 'submit' ? "sub" : "";
+      fileInfo.required = this.props.page == 'announce' ? "sub" : "";
       fileInfo.Panel = "Supplemental Product Information";
     }
 
