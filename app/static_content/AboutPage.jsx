@@ -12,9 +12,9 @@ export default class About extends React.Component {
     this._imageUrls = [
       'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_main710px-min.png',
       'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_doi710px-min.png',
+      'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_Repository710px-min.png',
       'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_Catalog710px-min.png',
       'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_Policy710px-min.png',
-      'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_Easy710px-min.png',
       'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_GitHub710px-min.png',
       'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_SocialCode710px-min.png'
     ];

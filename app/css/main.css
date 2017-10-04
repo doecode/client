@@ -367,6 +367,7 @@ html h3 {
 .featuresStyle {
   text-align: left !important;
   color: #1E6F92 !important;
+  margin-left: 0px !important;
 }
 
 .containerStyle {
