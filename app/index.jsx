@@ -1,7 +1,7 @@
-import PublishForm from './form/PublishForm';
 import SubmitForm from './form/SubmitForm';
-import SubmitSubmissionInterface from './form/SubmitSubmissionInterface';
-import PublishSubmissionInterface from './form/PublishSubmissionInterface';
+import AnnounceForm from './form/AnnounceForm';
+import AnnouncementInterface from './form/AnnouncementInterface';
+import SubmissionInterface from './form/SubmissionInterface';
 import Confirmation from './confirmation/Confirmation';
 import WorkflowManagement from './user_services/WorkflowManagement';
 import ApprovalManagement from './user_services/ApprovalManagement';
@@ -63,10 +63,10 @@ class DOECodeRouter extends React.Component {
             <Header isHomepage={this.is_homepage}/>
             <div>
               <Route exact path="/" component={Splash}/>
-              <Route path="/publish" component={PublishForm}/>
-              <Route path="/publish2" component={PublishSubmissionInterface}/>
               <Route path="/submit" component={SubmitForm}/>
-              <Route path="/submit2" component={SubmitSubmissionInterface}/>
+              <Route path="/submit2" component={AnnouncementInterface}/>
+              <Route path="/announce" component={AnnounceForm}/>
+              <Route path="/announce2" component={AnnouncementInterface}/>
               <Route path="/confirm" component={Confirmation}/>
               <Route path="/projects" component={WorkflowManagement}/>
               <Route path="/projects2" render={() =>< WorkflowManagement wizardVersion = "2" />}/>

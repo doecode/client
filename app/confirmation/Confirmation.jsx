@@ -44,11 +44,11 @@ export default class Confirmation extends React.Component {
   }
 
   newRecord() {
-    window.location.href = '/doecode/publish';
+    window.location.href = '/doecode/submit';
   }
 
   editRecord() {
-    window.location.href = "/doecode/submit?code_id=" + this.state.codeID;
+    window.location.href = "/doecode/announce?code_id=" + this.state.codeID;
   }
 
   parseYMLDownloaderSuccess(data) {
@@ -76,7 +76,7 @@ export default class Confirmation extends React.Component {
           <div className="form-group form-group-sm row">
             <div className='col-xs-12'>
               <h1>
-                Record Successfully Published to DOE CODE</h1>
+                Record Successfully Submitted to DOE CODE</h1>
               <h2>
                 DOE CODE ID: #{this.state.codeID}
               </h2>

@@ -1,7 +1,7 @@
 import React from 'react';
 import DOECodeWizard from './DOECodeWizard';
 
-export default class SubmitForm extends React.Component {
+export default class ApprovalForm extends React.Component {
 
 	constructor(props) {
 		    super(props);

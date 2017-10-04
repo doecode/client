@@ -1,7 +1,7 @@
 import React from 'react';
 import DOECodeSubmissionInterface from './DOECodeSubmissionInterface';
 
-export default class PublishSubmissionInterface extends React.Component {
+export default class SubmissionInterface extends React.Component {
 
 	constructor(props) {
 		    super(props);

@@ -177,9 +177,9 @@ publish() {
     this.setState({"loading": true, "loadingMessage": "Publishing"});
     const justFileName = !Array.isArray(metadata.getValue("files").slice());
     if (metadata.getValue("accessibility") == 'OS' || justFileName || metadata.getValue("files").length == 0) {
-      doAuthenticatedAjax('POST', '/doecode/api/metadata/publish', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
+      doAuthenticatedAjax('POST', '/doecode/api/metadata/submit', this.parsePublishResponse, metadata.serializeData(), this.parseErrorResponse);
     } else {
-      this.doMultipartSubmission('/doecode/api/metadata/publish',this.parsePublishResponse);
+      this.doMultipartSubmission('/doecode/api/metadata/submit',this.parsePublishResponse);
   }
 }
 
@@ -187,9 +187,9 @@ submit() {
     this.setState({"loading": true, "loadingMessage": "Submitting"});
     const justFileName = !Array.isArray(metadata.getValue("files").slice());
     if (metadata.getValue("accessibility") == 'OS' || justFileName) {
-      doAuthenticatedAjax('POST', '/doecode/api/metadata/submit', this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
+      doAuthenticatedAjax('POST', '/doecode/api/metadata/announce', this.parseSubmitResponse, metadata.serializeData(), this.parseErrorResponse);
   } else {
-      this.doMultipartSubmission('/doecode/api/metadata/submit',this.parseSubmitResponse);
+      this.doMultipartSubmission('/doecode/api/metadata/announce',this.parseSubmitResponse);
   }
 }
 

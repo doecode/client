@@ -80,17 +80,17 @@ export default class WorkflowManagement extends React.Component {
     for (let i = 0; i < records.length; i++) {
 
       const record = records[i];
-      const publishUrl = "/doecode/publish" + this.wizardVersion + "?code_id=" + record.code_id;
-      const submitUrl = "/doecode/submit" + this.wizardVersion + "?code_id=" + record.code_id;
-      let editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
+      const publishUrl = "/doecode/submit" + this.wizardVersion + "?code_id=" + record.code_id;
+      const submitUrl = "/doecode/announce" + this.wizardVersion + "?code_id=" + record.code_id;
+      let editUrl = "/announce" + this.wizardVersion + "?code_id=" + record.code_id;
 
       let editMessage = "Continue to E-Link Submission";
 
       if (record.workflow_status === 'Saved') {
         editMessage = "Continue to Publish Record";
-        editUrl = "/publish" + this.wizardVersion + "?code_id=" + record.code_id;
-      } else if (record.workflow_status === 'Published') {
         editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
+      } else if (record.workflow_status === 'Published') {
+        editUrl = "/announce" + this.wizardVersion + "?code_id=" + record.code_id;
       }
 
       let statusIndicator = (record.workflow_status == "Published" ? <div className="grid-button" title="Pending Approval" ><span className="pending">Pending</span></div> : record.workflow_status);
@@ -160,7 +160,7 @@ export default class WorkflowManagement extends React.Component {
           <h2 className="static-content-title">Manage My Projects</h2>
           <div className="form-group-xs row">
             <div className="col-sm-12">
-              <a title='Add New Record' href={"/doecode/publish" + this.wizardVersion} type="button" className="pure-button button-success btn-lg pull-right workflow-publish-btn">
+              <a title='Add New Record' href={"/doecode/submit" + this.wizardVersion} type="button" className="pure-button button-success btn-lg pull-right workflow-publish-btn">
                 Add New Record
               </a>
             </div>
