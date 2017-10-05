@@ -590,8 +590,13 @@ html h3 {
 
 .search-for-modify-search {
   font-size: 13.6px;
-  opacity: 0.7;
+  opacity: 0.5;
   font-weight: 300;
+  color: rgb(0, 0, 0);
+}
+
+.search-for-modify-search:hover {
+  opacity: 0.7;
 }
 
 .modify-search-glass {
@@ -715,8 +720,7 @@ html h3 {
 
 .homepage-search-btn {
   height: 51px !important;
-  width:60px !important;
-
+  width: 60px !important;
 }
 
 .homepage-adv-search-btn {
@@ -857,7 +861,7 @@ html, body {
   color: #777;
 }
 
-.website-policies-mobile{
+.website-policies-mobile {
   border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -1806,6 +1810,10 @@ ul.biblio-page-ul>li>a:hover {
 
 .dropdown-toggle-arrow {
   color: #ccc;
+}
+
+.dropdown-toggle-arrow:hover {
+  color: #8c8c8c;
 }
 
 .nav-menu li:last-child {

@@ -111,7 +111,7 @@ export default class SearchResultsDescription extends React.Component {
         })}
         {searchDescriptionArr.length > 0 && <div className='center-text'>
           <br/>
-          <span className='clickable search-for-modify-search' onClick={this.modifySearchAction}>[&nbsp;<span className='fa fa-search modify-search-glass'></span>&nbsp;modify this search&nbsp;]</span>
+          <span className='clickable search-for-modify-search' title='Modify this search' onClick={this.modifySearchAction}>[&nbsp;<span className='fa fa-search modify-search-glass'></span>&nbsp;modify this search&nbsp;]</span>
         </div>}
 
       </div>
