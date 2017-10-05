@@ -32,6 +32,7 @@ export default class EntryStep extends React.Component {
       repoLinkInfo.required = "sub";
       repoLinkInfo.Panel = "Repository Information";
       landingPageInfo.required = "";
+      landingPageInfo.error = "";
       landingPageInfo.Panel = "";
       landingPageInfo.completed = false;
       fileInfo.required = "";
@@ -41,6 +42,7 @@ export default class EntryStep extends React.Component {
     } else {
       metadata.setValue("repository_link", "");
       repoLinkInfo.required = "";
+      repoLinkInfo.error = "";
       repoLinkInfo.completed = false;
       repoLinkInfo.Panel = "";
       landingPageInfo.required = "sub";
