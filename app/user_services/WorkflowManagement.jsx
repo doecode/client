@@ -51,7 +51,7 @@ export default class WorkflowManagement extends React.Component {
       }, {
         key: 'edit',
         name: 'Modify Record',
-        width: 245,
+        width: 265,
       }
     ];
 
