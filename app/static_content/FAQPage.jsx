@@ -51,7 +51,7 @@ export default class FAQ extends React.Component {
             <br/><br/>
             The DOE CODE GitHub Community is a dedicated GitHub organization that houses the source code for some projects funded by DOE, including the repositories for DOE CODE itself. This community is open to registered users of DOE CODE and those users are welcome to create and import their own repositories once they join. This service is provided by OSTI in recognition of the fact that many developers prefer to house and manage their projects on GitHub over other services.
             <br/><br/>
-            Users may request to join the DOE CODE GitHub community by emailing a request to doecoderepositories@osti.gov.
+            Users may request to join the DOE CODE GitHub community by emailing a request to&nbsp;<a href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>.
           </p>
 
       }, {
@@ -138,7 +138,7 @@ export default class FAQ extends React.Component {
               <strong>submit</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. For more information about publishing and submitting code, see the "What does it mean to publish code to DOE CODE?" and "What does it mean to submit code to DOE CODE?" for more details.</p>
           </div>
       }, {
-        text: <span className='faq-page-subtitle'>What does it mean to publish code to DOE CODE?</span>,
+        text: <span className='faq-page-subtitle'>What does it mean to submit code to DOE CODE?</span>,
         content: <div>
             <p>Users may want to publish their code to DOE CODE, because publishing offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Publishing to DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes that are in early development and for developers wanting to obtain DOIs early in the process. (See also "
               <a title='What is a Digital Object Identifier' className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-doi')}>What is a Digital Object Identifier (DOI)?</a>”).
@@ -163,9 +163,9 @@ export default class FAQ extends React.Component {
             </p>
           </div>
       }, {
-        text: <span className='faq-page-subtitle'>What does it mean to submit code to DOE CODE?</span>,
+        text: <span className='faq-page-subtitle'>What does it mean to announce code to DOE CODE?</span>,
         content: <div>
-            <p>Users may need to submit their code to the Department of Energy to ensure proper handling, announcement, and dissemination in accordance with DOE statutory responsibilities. Codes in later stages of development are the primary use case for this functionality. For submission to the Department of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory data fields should be included during submission when possible.
+            <p>Users may need to submit their code to the Department of Energy to ensure proper handling, announcement, and dissemination in accordance with DOE statutory responsibilities. Codes in later stages of development are the primary use case for this functionality.
             </p>
             <div>
               DOE national laboratories and other DOE facilities/contractors who have developed and/or modified software during work supported by DOE or during work carried out for others at DOE facilities are required to submit a record of the software to the Department of Energy, if the software meets the following criteria:
@@ -179,10 +179,9 @@ export default class FAQ extends React.Component {
               </ul>
             </div>
             <br/>
-            <p>
-              For additional information about DOE scientific and technical software, refer to the&nbsp;<a title='Software Best Practices' target='_blank' href='https://www.osti.gov/includes/estsc/software_best_prac.html'>Software Best Practices document</a>.
-            </p>
             <div>
+              For additional information about DOE scientific and technical software, refer to the&nbsp;<a title='Software Best Practices' target='_blank' href='https://www.osti.gov/includes/estsc/software_best_prac.html'>Software Best Practices document</a>.
+              <br/>
               Software that meets the following criteria need not be submitted to the Department of Energy:
               <ul>
                 <li>operational systems software that is site-specific, unique to a particular hardware, or necessary to ensure the fundamental operability of automated data processing equipment, whether supplied by the manufacturer of the system hardware or others;</li>
@@ -321,7 +320,7 @@ export default class FAQ extends React.Component {
           </div>
       }, {
         text: <span className='faq-page-subtitle'>Are there APIs available for DOE CODE?</span>,
-        content: <p>Yes, there are lots of APIs with stable endpoints. For more information, see the&nbsp;<a title='API Documentation' target='_blank' href={api_location}>API documentation</a>
+        content: <p>Yes, there are lots of APIs with stable endpoints. For more information, see the&nbsp;<a title='API Documentation' target='_blank' href={api_location}>API documentation</a>.
           </p>
       }, {
         text: <span className='faq-page-subtitle'>Do I need to have cookies enabled to use DOE CODE?</span>,

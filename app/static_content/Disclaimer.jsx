@@ -345,7 +345,7 @@ export default class Disclaimer extends React.Component {
             <h2>
               <a name="usajobs"></a>USAJOBS</h2>
             <p>
-              <a target='_blank' href="http://www.usajobs.gov/">USAJOBS</a>&nbsp;is the official online, one-stop jobsite of the U.S. federal government. a wide variety of disparate sources, unless otherwise required by law.</p>
+              <a target='_blank' href="http://www.usajobs.gov/">USAJOBS</a>&nbsp;is the official online, one-stop jobsite of the U.S. federal government.</p>
             <h2>
               <a name="grants"></a>Grants</h2>
             <p>
