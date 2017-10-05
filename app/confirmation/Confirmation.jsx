@@ -32,7 +32,7 @@ export default class Confirmation extends React.Component {
 
   componentDidMount() {
     doAuthenticatedAjax('GET', '/doecode/api/metadata/' + this.state.codeID, this.parseMetadataCall, null, this.parseMetadataCallError);
-    doAuthenicatedFileDownloadAjax(('/doecode/api/metadata/' + this.state.codeID + "?format=yaml"),  this.parseYMLDownloaderSuccess, this.parseYMLDownloader);
+    doAuthenicatedFileDownloadAjax(('/doecode/api/metadata/' + this.state.codeID + "?format=yaml"), this.parseYMLDownloaderSuccess, this.parseYMLDownloader);
   }
 
   parseMetadataCall(data) {
@@ -68,6 +68,15 @@ export default class Confirmation extends React.Component {
   }
 
   render() {
+    var actionPhrase = '';
+    switch (this.state.workflow) {
+      case 'submitted':
+        actionPhrase = 'Record Successfully Submitted to DOE Code';
+        break;
+      case 'announced':
+        actionPhrase = 'Record Successfully Announced to E-Link';
+        break;
+    }
 
     return (
       <div className="row not-so-wide-row">
@@ -76,7 +85,7 @@ export default class Confirmation extends React.Component {
           <div className="form-group form-group-sm row">
             <div className='col-xs-12'>
               <h1>
-                Record Successfully Submitted to DOE CODE</h1>
+                {actionPhrase}</h1>
               <h2>
                 DOE CODE ID: #{this.state.codeID}
               </h2>
