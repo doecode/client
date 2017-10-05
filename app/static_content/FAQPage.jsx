@@ -138,7 +138,7 @@ export default class FAQ extends React.Component {
               <strong>submit</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. For more information about publishing and submitting code, see the "What does it mean to publish code to DOE CODE?" and "What does it mean to submit code to DOE CODE?" for more details.</p>
           </div>
       }, {
-        text: <span className='faq-page-subtitle'>What does it mean to publish code to DOE CODE?</span>,
+        text: <span className='faq-page-subtitle'>What does it mean to submit code to DOE CODE?</span>,
         content: <div>
             <p>Users may want to publish their code to DOE CODE, because publishing offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Publishing to DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes that are in early development and for developers wanting to obtain DOIs early in the process. (See also "
               <a title='What is a Digital Object Identifier' className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-doi')}>What is a Digital Object Identifier (DOI)?</a>”).
@@ -163,7 +163,7 @@ export default class FAQ extends React.Component {
             </p>
           </div>
       }, {
-        text: <span className='faq-page-subtitle'>What does it mean to submit code to DOE CODE?</span>,
+        text: <span className='faq-page-subtitle'>What does it mean to announce code to DOE CODE?</span>,
         content: <div>
             <p>Users may need to submit their code to the Department of Energy to ensure proper handling, announcement, and dissemination in accordance with DOE statutory responsibilities. Codes in later stages of development are the primary use case for this functionality.
             </p>
@@ -179,10 +179,9 @@ export default class FAQ extends React.Component {
               </ul>
             </div>
             <br/>
-            <p>
-              For additional information about DOE scientific and technical software, refer to the&nbsp;<a title='Software Best Practices' target='_blank' href='https://www.osti.gov/includes/estsc/software_best_prac.html'>Software Best Practices document</a>.
-            </p>
             <div>
+              For additional information about DOE scientific and technical software, refer to the&nbsp;<a title='Software Best Practices' target='_blank' href='https://www.osti.gov/includes/estsc/software_best_prac.html'>Software Best Practices document</a>.
+              <br/>
               Software that meets the following criteria need not be submitted to the Department of Energy:
               <ul>
                 <li>operational systems software that is site-specific, unique to a particular hardware, or necessary to ensure the fundamental operability of automated data processing equipment, whether supplied by the manufacturer of the system hardware or others;</li>
