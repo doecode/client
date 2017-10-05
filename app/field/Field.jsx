@@ -109,9 +109,9 @@ export default class Field extends React.Component {
     const divStyle = this.props.properties.divStyle != undefined
       ? this.props.properties.divStyle
       : "";
-    const inputStyle = this.props.properties.inputStyle != undefined
+    const inputStyle = (this.props.properties.inputStyle != undefined
       ? "form-control " + this.props.properties.inputStyle
-      : "form-control";
+      : "form-control") + " form-text-area";
     const messageNode = this.props.properties.messageNode;
     const onKeypressFunction = this.props.properties.keypressMethod != undefined
       ? this.props.properties.keypressMethod
