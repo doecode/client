@@ -51,7 +51,7 @@ export default class FAQ extends React.Component {
             <br/><br/>
             The DOE CODE GitHub Community is a dedicated GitHub organization that houses the source code for some projects funded by DOE, including the repositories for DOE CODE itself. This community is open to registered users of DOE CODE and those users are welcome to create and import their own repositories once they join. This service is provided by OSTI in recognition of the fact that many developers prefer to house and manage their projects on GitHub over other services.
             <br/><br/>
-            Users may request to join the DOE CODE GitHub community by emailing a request to doecoderepositories@osti.gov.
+            Users may request to join the DOE CODE GitHub community by emailing a request to&nbsp;<a href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>.
           </p>
 
       }, {
@@ -165,7 +165,7 @@ export default class FAQ extends React.Component {
       }, {
         text: <span className='faq-page-subtitle'>What does it mean to submit code to DOE CODE?</span>,
         content: <div>
-            <p>Users may need to submit their code to the Department of Energy to ensure proper handling, announcement, and dissemination in accordance with DOE statutory responsibilities. Codes in later stages of development are the primary use case for this functionality. For submission to the Department of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory data fields should be included during submission when possible.
+            <p>Users may need to submit their code to the Department of Energy to ensure proper handling, announcement, and dissemination in accordance with DOE statutory responsibilities. Codes in later stages of development are the primary use case for this functionality.
             </p>
             <div>
               DOE national laboratories and other DOE facilities/contractors who have developed and/or modified software during work supported by DOE or during work carried out for others at DOE facilities are required to submit a record of the software to the Department of Energy, if the software meets the following criteria:
@@ -321,7 +321,7 @@ export default class FAQ extends React.Component {
           </div>
       }, {
         text: <span className='faq-page-subtitle'>Are there APIs available for DOE CODE?</span>,
-        content: <p>Yes, there are lots of APIs with stable endpoints. For more information, see the&nbsp;<a title='API Documentation' target='_blank' href={api_location}>API documentation</a>
+        content: <p>Yes, there are lots of APIs with stable endpoints. For more information, see the&nbsp;<a title='API Documentation' target='_blank' href={api_location}>API documentation</a>.
           </p>
       }, {
         text: <span className='faq-page-subtitle'>Do I need to have cookies enabled to use DOE CODE?</span>,
