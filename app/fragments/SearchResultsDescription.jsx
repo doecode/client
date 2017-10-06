@@ -89,8 +89,7 @@ export default class SearchResultsDescription extends React.Component {
                     : data);
                   return (
                     <span key={index + "-" + idx}>
-                      {idx != 0 && <span>,
-                      </span>}
+                      {idx != 0 && <span>, </span>}
                       <span className='search-for-filter-text'>{display}</span>&nbsp;
                       <span className='search-for-filter-x clickable' onClick={() => self.removeFilter(row.field, data)}>[&nbsp;&times;&nbsp;]</span>
                     </span>

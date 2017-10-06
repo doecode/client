@@ -129,8 +129,8 @@ export default class ResultsPage extends React.Component {
 
     let needsFilterSuffix = (searchData.getValue("software_title") || searchData.getValue("developers_contributors") || searchData.getValue("biblio_data") || searchData.getValue("identifiers") || searchData.getValue("date_earliest") || searchData.getValue("date_latest") || (searchData.getValue("accessibility") && searchData.getValue("accessibility").length > 0) || (searchData.getValue("licenses") && searchData.getValue("licenses").length > 0) || searchData.getValue("research_organization") || searchData.getValue("sponsoring_organization") || searchData.getValue("orcid"));
 
-    var filterSuffix = needsFilterSuffix && <span className="search-for-filter-crumb">
-      (filtered)</span>;
+    let filterSuffix = needsFilterSuffix && <span className="search-for-filter-crumb"> (filtered)</span>;
+
     var searchCrumb = <span>{searchFor}{filterSuffix}</span>;
 
     var breadcrumbList = [
