@@ -18,9 +18,13 @@ export default class UserFields extends React.Component {
     this.handleContractNeedCheckError = this.handleContractNeedCheckError.bind(this);
     this.handleContractCheck = this.handleContractCheck.bind(this);
     this.checkEmailAndContractNum = this.checkEmailAndContractNum.bind(this);
+    this.handleContractValidationBlur = this.handleContractValidationBlur.bind(this);
+    this.handleContractValidation = this.handleContractValidation.bind(this);
+    this.handleContractValidationError = this.handleContractValidationError.bind(this);
 
     this.state = {
-      showContractNumber: this.props.showContractNumAlways !== undefined
+      showContractNumber: this.props.showContractNumAlways !== undefined,
+      isValidContractNum: undefined
     }
   }
 
@@ -60,8 +64,29 @@ export default class UserFields extends React.Component {
   }
 
   handleContractCheck(event) {
-    userData.setValue("contract_number", event.target.value);
+    var contractNum = event.target.value.trim();
+    userData.setValue("contract_number", contractNum);
     this.setState({});
+  }
+
+  handleContractValidationBlur(event) {
+    var contractNum = event.target.value.trim();
+    if (contractNum != '') {
+      //Check for valid contract number
+      doAjax('GET', ('/doecode/api/validation/awardnumber?value=' + contractNum), this.handleContractValidation, null, this.handleContractValidationError);
+    } else {
+      this.setState({isValidContractNum: undefined});
+    }
+  }
+
+  handleContractValidation(data) {
+    if (data.value == 'OK') {
+      this.setState({isValidContractNum: true});
+    }
+  }
+
+  handleContractValidationError(data) {
+    this.setState({isValidContractNum: false});
   }
 
   render() {
@@ -77,16 +102,35 @@ export default class UserFields extends React.Component {
       : localStorage.last_name;
 
     const has_email = userData.getValue("email") != '';
-    const has_contractNum = userData.getValue("contract_number") != '';
+    const successCheck = <span className="fa fa-check form-control-feedback successCheck"></span>;
+    const errorX = <span className="fa fa-times form-control-feedback successCheck"></span>;
+    const successDiv = 'form-group has-success has-feedback';
+    const errorDiv = 'form-group has-error has-feedback';
+    const notSuccess = 'form-group';
+    const labelClass = 'col-md-4 col-xs-12 right-text-md right-text-lg no-col-padding-right no-col-padding-left ';
 
     const emailError = (userData.getValue("email"))
       ? validation.validateEmail(userData.getValue("email"))
       : '';
     const hasEmailError = (emailError !== '');
 
-    const successDiv = 'form-group has-success has-feedback';
-    const notSuccess = 'form-group';
-    const labelClass = 'col-md-4 col-xs-12 right-text-md right-text-lg no-col-padding-right no-col-padding-left ';
+    //Contract Styles validation
+    var contractLabel = '';
+    var contractValue = '';
+    var contractStatus = '';
+    if (this.state.isValidContractNum === undefined) {
+      contractLabel = labelClass;
+      contractValue = notSuccess;
+      contractStatus = null;
+    } else if (this.state.isValidContractNum === true) {
+      contractLabel = labelClass + ' has-success';
+      contractValue = successDiv;
+      contractStatus = successCheck;
+    } else if (this.state.isValidContractNum === false) {
+      contractLabel = labelClass + ' has-error';
+      contractValue = errorDiv;
+      contractStatus = errorX;
+    }
 
     return (
       <div className='row'>
@@ -143,16 +187,12 @@ export default class UserFields extends React.Component {
           </div>}
           {/*Contract Number*/}
           {this.state.showContractNumber && <div className='row login-email-container'>
-            <div className={has_contractNum
-              ? labelClass + ' has-success'
-              : labelClass}>
+            <div className={contractLabel}>
               <label className='control-label input-label-adjusted' htmlFor='contract-number'>Award/Contract Number:</label>
             </div>
             <div className='col-md-6 col-xs-12'>
-              <div className={(has_contractNum)
-                ? (successDiv)
-                : (notSuccess)}>
-                <input title='Contract Number' type='text' placeholder='Award/Contract Number' id='contract-number' value={userData.getValue("contract_number")} className='pure-input-1-3 form-control' onChange={this.handleContractCheck} onBlur={this.handleContractCheck}/> {has_contractNum && <span className="fa fa-check form-control-feedback successCheck"></span>}
+              <div className={contractValue}>
+                <input title='Contract Number' type='text' placeholder='Award/Contract Number' id='contract-number' value={userData.getValue("contract_number")} className='pure-input-1-3 form-control' onChange={this.handleContractCheck} onBlur={this.handleContractValidationBlur}/> {contractStatus}
               </div>
             </div>
           </div>}

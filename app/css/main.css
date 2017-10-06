@@ -155,8 +155,8 @@
 }
 
 textarea.form-text-area {
-    resize: none;
-    height: 150px;
+  resize: none;
+  height: 150px;
 }
 
 .grid-button-container {
@@ -733,13 +733,14 @@ html h3 {
   right: 10px !important;
 }
 
-.adv-search-btn{
-  font-size:16px;
+.adv-search-btn {
+  font-size: 16px;
 }
 
 .adv-search-date-container {
   display: flex;
 }
+
 .adv-search-date-container-homepage {
   display: flex;
 }
@@ -756,6 +757,15 @@ html h3 {
 
 .search-box {
   width: 100%;
+  font-size: 16px;
+  box-shadow: rgb(221, 221, 221) 0px 1px 3px 0px inset;
+  color: rgb(0, 0, 0);
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding-left: 9.6px;
+  padding-right: 9.6px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .search-box::-webkit-input-placeholder {
