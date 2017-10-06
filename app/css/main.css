@@ -732,6 +732,22 @@ html h3 {
   right: 10px !important;
 }
 
+.adv-search-btn{
+  font-size:16px;
+}
+
+.adv-search-date-container {
+  display: flex;
+}
+.adv-search-date-container-homepage {
+  display: flex;
+}
+
+.adv-search-single-date-container input {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
 .homepage-adv-search-dropdown {
   top: 52px !important;
   right: 4px !important;
@@ -2106,9 +2122,8 @@ ul.biblio-page-ul>li>a:hover {
   .navbar-logo-img {
     display: none
   }
-  .to-field {
-    padding-top: 0px;
-    padding-bottom: 7px;
+  .adv-search-date-container-homepage {
+    display: inline-block;
   }
 }
 
@@ -2139,10 +2154,6 @@ ul.biblio-page-ul>li>a:hover {
   }
   .center-text-md {
     text-align: center;
-  }
-  .to-field {
-    padding-top: 0px;
-    padding-bottom: 7px;
   }
   .nav-menu-item-text {
     font-size: 13px !important;
@@ -2176,9 +2187,6 @@ ul.biblio-page-ul>li>a:hover {
   }
   .left-text-lg {
     text-align: left;
-  }
-  .to-field {
-    padding-top: 7px;
   }
   .publication-date-start-container input {
     max-width: 150px;
