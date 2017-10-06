@@ -46,7 +46,7 @@ export default class Header extends React.Component {
               </div>
               <div className='col-md-2 col-sm-12 hide-lg'></div>
               <div className='col-lg-5 col-md-10 col-sm-12'>
-                <SearchBar searchbarSize='col-lg-11 col-md-9 col-sm-10 col-xs-6 no-col-padding-right'/>
+                <SearchBar containerClasses='row searchbar-container' barType='header'/>
               </div>
             </div>
             <br/>

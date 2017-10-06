@@ -19,13 +19,6 @@ export default class SearchBar extends React.Component {
     this.handleAdvancedSearchClick = this.handleAdvancedSearchClick.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
 
-    this.searchBarStyles = "form-control pure-input-1 search-box";
-    this.advSearchButtonStyles = "adv-search-button hide-xs";
-    this.searchButtonStyles = "pure-button button-success search-btn";
-    this.advDropdownStyles = "adv-search-dropdown row";
-    this.advSearchIconStyles = "fa fa-caret-down adv-search-button-icon";
-    this.date_earliest_styles = "col-lg-6 col-md-6 col-sm-6 text-left publication-date-start-container left-text";
-    this.date_latest_styles = "col-lg-6 col-md-6 col-sm-6 publication-date-end-container left-text";
     this.state = {
       all_fields: searchData.getValue("all_fields"),
       show_dropdown: false,
@@ -33,15 +26,6 @@ export default class SearchBar extends React.Component {
       date_latest: searchData.getValue("date_latest")
     };
 
-    if (this.props.isHomepage) {
-      this.searchBarStyles += "  homepage-searchbar";
-      this.searchButtonStyles += " homepage-search-btn";
-      this.advSearchButtonStyles += " homepage-adv-search-btn";
-      this.advSearchIconStyles += " homepage-adv-search-icon";
-      this.advDropdownStyles += " homepage-adv-search-dropdown";
-      this.date_earliest_styles = "col-lg-6 col-md-6 col-xs-12 publication-date-start-container-homepage left-text";
-      this.date_latest_styles = "col-lg-6 col-md-6 col-xs-12 publication-date-end-container-homepage left-text";
-    }
   }
   onAllFieldsChange(event) {
     this.setState({"all_fields": event.target.value});
@@ -99,21 +83,21 @@ export default class SearchBar extends React.Component {
   }
 
   render() {
-    var notSoWideSearchbar = this.props.notSoWideSearchbar
-      ? this.props.notSoWideSearchbar
-      : 'row searchbar-container';
+    var searchBarType = this.props.barType;
+    var outterContainerClasses = this.props.containerClasses;
+
     const to_span = <span className='to-span'>to</span>;
     return (
-      <div className={notSoWideSearchbar}>
-        <div className={this.props.searchbarSize}>
+      <div className={outterContainerClasses}>
+        {searchBarType === 'header' && <div className='col-lg-11 col-md-9 col-sm-10 col-xs-6 no-col-padding-right'>
           <div>
-            <input title='All Fields Search' id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.all_fields} className={this.searchBarStyles} placeholder="Search DOE CODE for published software entries"/>
-            <button title='Toggle Advanced Search Dropdown' onClick={this.doAdvancedSearch} className={this.advSearchButtonStyles} type='button'>
-              <span className={this.advSearchIconStyles}></span>
+            <input title='All Fields Search' id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.all_fields} className='form-control pure-input-1 search-box' placeholder="Search DOE CODE for published software entries"/>
+            <button title='Toggle Advanced Search Dropdown' onClick={this.doAdvancedSearch} className='adv-search-button hide-xs' type='button'>
+              <span className='fa fa-caret-down adv-search-button-icon'></span>
             </button>
           </div>
           {/*Advanced search dropdown*/}
-          {this.state.show_dropdown && <div className={this.advDropdownStyles}>
+          {this.state.show_dropdown && <div className='adv-search-dropdown row'>
             <div className='col-xs-12 pure-form'>
               <div className='row adv-search-dropdown-title-row'>
                 <div className='col-xs-12 no-col-padding-left left-text adv-search-dropdown-label'>
@@ -145,10 +129,10 @@ export default class SearchBar extends React.Component {
                 <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                   Release Date:
                 </div>
-                <div className={this.date_earliest_styles}>
+                <div className='col-lg-6 col-md-6 col-sm-6 text-left publication-date-start-container left-text'>
                   <SearchField title='Earliest Release Date' field="date_earliest" elementType="date" noExtraLabelText textAfter={to_span}/>
                 </div>
-                <div className={this.date_latest_styles}>
+                <div className='col-lg-6 col-md-6 col-sm-6 publication-date-end-container left-text'>
                   <SearchField title='Latest Release Date' field="date_latest" elementType="date" noExtraLabelText/>
                 </div>
               </div>
@@ -166,12 +150,110 @@ export default class SearchBar extends React.Component {
               </div>
             </div>
           </div>}
-        </div>
-        <div className="col-lg-1 col-md-2 col-sm-1 col-xs-2 search-btn-container text-left minimal-col-padding-left">
-          <button title='Trigger Search' type="button" className={this.searchButtonStyles} onClick={this.search}>
+        </div>}
+        {searchBarType === 'header' && <div className="col-lg-1 col-md-2 col-sm-1 col-xs-2 search-btn-container text-left minimal-col-padding-left">
+          <button title='Trigger Search' type="button" className='pure-button button-success search-btn' onClick={this.search}>
             <span className="fa fa-search"></span>
           </button>
-        </div>
+        </div>}
+
+        {searchBarType === 'dropdown' && <div className='col-md-9 col-xs-9 no-col-padding-right'>
+          <div>
+            <input title='All Fields Search' id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.all_fields} className='form-control pure-input-1 search-box' placeholder="Search DOE CODE for published software entries"/>
+            <button title='Toggle Advanced Search Dropdown' onClick={this.doAdvancedSearch} className='adv-search-button hide-xs' type='button'>
+              <span className='fa fa-caret-down adv-search-button-icon'></span>
+            </button>
+          </div>
+        </div>}
+        {searchBarType === 'dropdown' && <div className="col-lg-1 col-md-2 col-sm-1 col-xs-2 search-btn-container text-left minimal-col-padding-left">
+          <button title='Trigger Search' type="button" className='pure-button button-success search-btn' onClick={this.search}>
+            <span className="fa fa-search"></span>
+          </button>
+        </div>}
+
+        {searchBarType === 'homepage' && <div className='col-sm-12'>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-sm-12'>
+                <div className='container'>
+                  <div className='row'>
+                    <div className='col-sm-2'></div>
+                    <div className='col-sm-8'>
+                      <div className='row'>
+                        <div className='col-sm-11 minimal-col-padding-right'>
+                          <input className='pure-input-1 search-box homepage-searchbar' placeholder="Search DOE CODE for published software entries" type='text'/>
+                          <button title="Toggle Advanced Search Dropdown" onClick={this.doAdvancedSearch} className="adv-search-button homepage-adv-search-btn" type="button">
+                            <span className="fa fa-caret-down adv-search-button-icon"></span>
+                          </button>
+                          {/*Advanced search dropdown*/}
+                          {this.state.show_dropdown && <div className='adv-search-dropdown row homepage-adv-search-dropdown'>
+                            <div className='col-xs-12 pure-form'>
+                              <div className='row adv-search-dropdown-title-row'>
+                                <div className='col-xs-12 no-col-padding-left left-text adv-search-dropdown-label'>
+                                  Advanced Search options
+                                </div>
+                              </div>
+                              <br/>
+                              <div className='row text-left'>
+                                <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
+                                  Software Title:
+                                </div>
+                                <div className='col-xs-12'>
+                                  <SearchField title='Software Title' field="software_title" elementType="input" noExtraLabelText/>
+                                </div>
+                                <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
+                                  Developers&nbsp;/&nbsp;Contributors:
+                                </div>
+                                <div className='col-xs-12'>
+                                  <SearchField title='Developers / Contributors' field="developers_contributors" elementType="input" noExtraLabelText/>
+                                </div>
+                                <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
+                                  Identifier Numbers:
+                                </div>
+                                <div className='col-xs-12'>
+                                  <SearchField title='Identifier Numbers' field="identifiers" elementType="input" noExtraLabelText/>
+                                </div>
+                              </div>
+                              <div className="row">
+                                <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
+                                  Release Date:
+                                </div>
+                                <div className='col-lg-6 col-md-6 col-xs-12 publication-date-start-container-homepage left-text'>
+                                  <SearchField title='Earliest Release Date' field="date_earliest" elementType="date" noExtraLabelText textAfter={to_span}/>
+                                </div>
+                                <div className='col-lg-6 col-md-6 col-xs-12 publication-date-end-container-homepage left-text'>
+                                  <SearchField title='Latest Release Date' field="date_latest" elementType="date" noExtraLabelText/>
+                                </div>
+                              </div>
+                              <div className='row adv-search-dropdown-title-row left-text'>
+                                <div className='col-xs-12 no-col-padding-left'>
+                                  <a title='Advanced Search Page' onClick={this.handleAdvancedSearchClick} className='more-adv-search clickable'>
+                                    <span className='fa fa-plus-square-o'></span>&nbsp;More Options&hellip;</a>
+                                </div>
+                              </div>
+                              <br/>
+                              <div className='row'>
+                                <div className='col-xs-12 right-text'>
+                                  <AdvancedSearchButton/>
+                                </div>
+                              </div>
+                            </div>
+                          </div>}
+                        </div>
+                        <div className='col-sm-1 no-col-padding-left'>
+                          <button title="Trigger Search" type="button" className="pure-button button-success search-btn homepage-search-btn" onClick={this.search}>
+                            <span className="fa fa-search"></span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='col-sm-2'></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>}
       </div>
     );
   }

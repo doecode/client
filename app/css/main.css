@@ -154,6 +154,10 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
+.relativePosition {
+  position: relative;
+}
+
 .grid-button-container {
   white-space: nowrap;
   overflow: hidden;
@@ -720,32 +724,21 @@ html h3 {
 
 .homepage-search-btn {
   height: 51px !important;
-  width: 60px !important;
+  width: 50px !important;
 }
 
 .homepage-adv-search-btn {
-  top: 12px !important;
-}
-
-.homepage-adv-search-icon {
-  font-size: 30px !important;
+  top: 18px !important;
+  right: 10px !important;
 }
 
 .homepage-adv-search-dropdown {
   top: 52px !important;
+  right: 4px !important;
 }
 
 .search-box {
-  font-size: 16px;
-  border-top-left-radius: 4px !important;
-  border-bottom-left-radius: 4px !important;
-  box-shadow: rgb(221, 221, 221) 0px 1px 3px 0px inset;
-  height: 37px;
-  color: rgb(0, 0, 0);
-  padding-left: 9.6px;
-  padding-right: 9.6px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  width: 100%;
 }
 
 .search-box::-webkit-input-placeholder {
@@ -801,6 +794,10 @@ html h3 {
 
 .header-signin-links {
   color: white;
+}
+
+.signin-list {
+  margin-bottom: 0px;
 }
 
 .padblock {
@@ -1115,7 +1112,7 @@ html, body {
 }
 
 .icon-row a.icon-row-icon {
-  font-size: 38px;
+  font-size: 40px;
 }
 
 .clickable {
@@ -1385,7 +1382,7 @@ label {
   position: absolute;
   left: 0px;
   right: 0px;
-  top: 37px;
+  top: 34px;
   z-index: 4;
   margin-right: 0px;
   margin-left: 14px;
@@ -1824,8 +1821,14 @@ ul.biblio-page-ul>li>a:hover {
   margin-left: 15px;
 }
 
+.icon-row-icon-text {}
+
 .icon-row-icon-text:hover {
   text-decoration: none;
+}
+
+.icon-row-icon-text a {
+  font-size: 40px;
 }
 
 .footer-fa-icon {
@@ -2103,9 +2106,6 @@ ul.biblio-page-ul>li>a:hover {
   .navbar-logo-img {
     display: none
   }
-  .header-logo-img {
-    height: 45px;
-  }
   .to-field {
     padding-top: 0px;
     padding-bottom: 7px;
@@ -2152,9 +2152,6 @@ ul.biblio-page-ul>li>a:hover {
   }
   .publication-date-end-container-homepage input {
     max-width: 190px !important;
-  }
-  .header-logo-img {
-    height: 45px;
   }
 }
 

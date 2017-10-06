@@ -30,7 +30,7 @@ export default class NavgationBar extends React.Component {
             <div className="collapse navbar-collapse no-col-padding-right no-col-padding-left" id='header-nav-collapse'>
               <div className='hide-md hide-lg hide-sm'>
                 <br/>
-                <SearchBar searchbarSize='col-md-9 col-xs-9 no-col-padding-right' notSoWideSearchbar='row not-so-wide-row'/>
+                <SearchBar containerClasses='row not-so-wide-row' barType='dropdown'/>
                 <a className='whiteAnchor' href='/doecode/search'>Advanced Search</a>
               </div>
               <ul className='nav navbar-nav nav-menu'>
