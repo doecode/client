@@ -16,7 +16,7 @@ export default class AdvancedSearchButton extends React.Component {
   render() {
     return (
       <span>
-        <button title='Advanced Search' type="button" className="pure-button button-success signin-buttons" onClick={this.search}>
+        <button title='Advanced Search' type="button" className="pure-button button-success adv-search-btn" onClick={this.search}>
           <span className="fa fa-search"></span>&nbsp; Search
         </button>
       </span>

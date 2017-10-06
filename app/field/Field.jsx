@@ -150,7 +150,8 @@ export default class Field extends React.Component {
       completed = info.completed;
     }
 
-    let wrapperStyle = "form-group row" + wrapperStyleExtra;
+    var rapperStyleRow = (this.props.properties.noRowWrapper) ? '' : 'form-group row';
+    let wrapperStyle = rapperStyleRow + ' ' + wrapperStyleExtra;
 
     if (!noval) {
 
@@ -254,11 +255,11 @@ var titleValue = this.props.properties.title ? this.props.properties.title:this.
       );
     } else if (elementType === 'date') {
       let dateVal = Moment(val);
-
+      var placeholder = this.props.properties.placeholder ? this.props.properties.placeholder : 'Click to select a date';
       if (dateVal == null || !dateVal.isValid())
         dateVal = null;
 
-      input = <span><DatePicker title={titleValue} name={field} placeholderText="Click to select a date" selected={dateVal} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>{this.props.properties.textAfter&&<span>{this.props.properties.textAfter}</span>}</span>
+      input = <span><DatePicker title={titleValue} name={field} placeholderText={placeholder} selected={dateVal} onChange={this.handleDateChange} showMonthDropdown showYearDropdown dropdownMode="select"/>{this.props.properties.textAfter&&<span>{this.props.properties.textAfter}</span>}</span>
     }
 
     return (

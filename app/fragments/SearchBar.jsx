@@ -86,7 +86,8 @@ export default class SearchBar extends React.Component {
     var searchBarType = this.props.barType;
     var outterContainerClasses = this.props.containerClasses;
 
-    const to_span = <span className='to-span'>to</span>;
+    const to_span = <span className='hide-lg hide-md '>&nbsp;&nbsp;to</span>;
+
     return (
       <div className={outterContainerClasses}>
         {searchBarType === 'header' && <div className='col-lg-11 col-md-9 col-sm-10 col-xs-6 no-col-padding-right'>
@@ -129,13 +130,17 @@ export default class SearchBar extends React.Component {
                 <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                   Release Date:
                 </div>
-                <div className='col-lg-6 col-md-6 col-sm-6 text-left publication-date-start-container left-text'>
-                  <SearchField title='Earliest Release Date' field="date_earliest" elementType="date" noExtraLabelText textAfter={to_span}/>
-                </div>
-                <div className='col-lg-6 col-md-6 col-sm-6 publication-date-end-container left-text'>
-                  <SearchField title='Latest Release Date' field="date_latest" elementType="date" noExtraLabelText/>
+                <div className='col-xs-12 no-col-padding-left left-text adv-search-date-container'>
+                  <div className='adv-search-single-date-container'>
+                    <SearchField title='Earliest Release Date' field="date_earliest" elementType="date" placeholder='  MM/DD/YYYY' noExtraLabelText noRowWrapper/>
+                  </div>
+                  <div className='to-field'>&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;</div>
+                  <div className='adv-search-single-date-container'>
+                    <SearchField title='Latest Release Date' field="date_latest" elementType="date" placeholder='  MM/DD/YYYY' noExtraLabelText noRowWrapper/>
+                  </div>
                 </div>
               </div>
+              <br/>
               <div className='row adv-search-dropdown-title-row left-text'>
                 <div className='col-xs-12 no-col-padding-left'>
                   <a title='Advanced Search Page' onClick={this.handleAdvancedSearchClick} className='more-adv-search clickable'>
@@ -218,13 +223,13 @@ export default class SearchBar extends React.Component {
                                 <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                                   Release Date:
                                 </div>
-                                <div className='col-lg-6 col-md-6 col-xs-12 publication-date-start-container-homepage left-text'>
-                                  <SearchField title='Earliest Release Date' field="date_earliest" elementType="date" noExtraLabelText textAfter={to_span}/>
-                                </div>
-                                <div className='col-lg-6 col-md-6 col-xs-12 publication-date-end-container-homepage left-text'>
-                                  <SearchField title='Latest Release Date' field="date_latest" elementType="date" noExtraLabelText/>
+                                <div className='col-xs-12 no-col-padding-left left-text adv-search-date-container-homepage'>
+                                  <SearchField title='Earliest Release Date' field="date_earliest" elementType="date" noExtraLabelText noRowWrapper textAfter={to_span}/>
+                                  <span className='to-field hide-sm'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                  <SearchField title='Latest Release Date' field="date_latest" elementType="date" noExtraLabelText noRowWrapper/>
                                 </div>
                               </div>
+                              <br/>
                               <div className='row adv-search-dropdown-title-row left-text'>
                                 <div className='col-xs-12 no-col-padding-left'>
                                   <a title='Advanced Search Page' onClick={this.handleAdvancedSearchClick} className='more-adv-search clickable'>
