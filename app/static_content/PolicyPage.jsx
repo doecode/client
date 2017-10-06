@@ -23,12 +23,12 @@ export default class Policy extends React.Component {
           </p>
           <br/>
           <p>
-            <strong>Submit Code to DOE Code</strong>
+            <strong>Submit Code to DOE CODE</strong>
             <br/>
             Users may want to submit their code to DOE CODE. Submitting to DOE CODE is easy, with only a minimal set of metadata required. Submitting offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Codes in early development, along with those wanting to obtain DOIs early in the process, are the primary use case for this functionality.
             <br/>
             <br/>
-            <strong>Required Metadata to Publish to DOE CODE:</strong>
+            <strong>Required Metadata to Submit to DOE CODE:</strong>
             <ul>
               <li>Software Availability</li>
               <li>Repository Link</li>
@@ -56,10 +56,10 @@ export default class Policy extends React.Component {
               <li>the software has undergone all appropriate reviews for sensitivity and export control.</li>
             </ul>
           </p>
-          <br/>
           <p>
             For additional information about DOE scientific and technical software, refer to the&nbsp;
             <a title='Best Practices' target='_blank' href='https://www.osti.gov/includes/estsc/software_best_prac.html'>Software Best Practices document</a>.
+            <br/>
             <br/>
             Software that meets the following criteria need not be announced to the Department of Energy:
             <ul>
@@ -69,9 +69,8 @@ export default class Policy extends React.Component {
               <li>specific software used by power administrations for the operation, control, planning, and modeling of electric power transmission systems and the interconnected utilities; however, modifications/enhancements to portions of this software that are not an integral part of the whole and have potential application outside the power administrations should be announced.</li>
             </ul>
           </p>
-          <br/>
           <p>
-            <strong>Required Metadata to Announce to the Department of Energy through DOE CODE</strong>
+            <strong>Required Metadata to Announce to the Department of Energy through DOE CODE:</strong>
             <ul>
               <li>Software Availability</li>
               <li>Repository Link</li>
