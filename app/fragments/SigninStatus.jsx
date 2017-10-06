@@ -76,8 +76,7 @@ export default class SigninStatus extends React.Component {
           </ul>
         </div>}
         {!this.is_logged_in && <div className='signin-main-container'>
-
-          <ul className='list-inline'>
+          <ul className='list-inline signin-list'>
             <li className='signin-btn-container first-signin-text'>
               <a title='Log In' className="signin-btn" href="/doecode/login">
                 <span className=" signin-btn-icon fa fa-user signin-icon"></span>

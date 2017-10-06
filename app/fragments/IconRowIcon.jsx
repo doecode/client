@@ -12,9 +12,7 @@ export default class IconRowIcon extends React.Component {
           <span className={this.props.icon_classes}></span>
         </a>
         <br/>
-        <small>
-          <a className='icon-row-icon-text' title={this.props.text} href={this.props.destination}>{this.props.text}</a>
-        </small>
+        <a className='icon-row-icon-text' title={this.props.text} href={this.props.destination}>{this.props.text}</a>
       </div>
     );
   }
