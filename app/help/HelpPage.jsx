@@ -28,8 +28,8 @@ export default class HelpPage extends React.Component {
             <br/>
             <br/>
             DOE CODE offers two paths for users to provide code. Users can (1)&nbsp;
-            <strong>publish</strong>&nbsp;code to DOE CODE, and (2)&nbsp;
-            <strong>submit</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. See the "How do I publish code to DOE CODE?” and "How do I submit code to the Department of Energy through DOE CODE?" FAQs for more details.
+            <strong>submit</strong>&nbsp;code to DOE CODE, and (2)&nbsp;
+            <strong>announce</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. See the "How do I submit code to DOE CODE?” and "How do I submit code to the Department of Energy through DOE CODE?" FAQs for more details.
           </p>
           <br/>
           <strong className='help-page-subtitle'>Repository Information</strong>

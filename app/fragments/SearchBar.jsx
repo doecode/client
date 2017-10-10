@@ -92,7 +92,7 @@ export default class SearchBar extends React.Component {
       <div className={outterContainerClasses}>
         {searchBarType === 'header' && <div className='col-lg-11 col-md-9 col-sm-10 col-xs-6 no-col-padding-right'>
           <div>
-            <input title='All Fields Search' id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.all_fields} className='form-control pure-input-1 search-box' placeholder="Search DOE CODE for published software entries"/>
+            <input title='All Fields Search' id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.all_fields} className='form-control pure-input-1 search-box' placeholder="Search DOE CODE for submitted software entries"/>
             <button title='Toggle Advanced Search Dropdown' onClick={this.doAdvancedSearch} className='adv-search-button hide-xs' type='button'>
               <span className='fa fa-caret-down adv-search-button-icon'></span>
             </button>
@@ -164,7 +164,7 @@ export default class SearchBar extends React.Component {
 
         {searchBarType === 'dropdown' && <div className='col-md-9 col-xs-9 no-col-padding-right'>
           <div>
-            <input title='All Fields Search' id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.all_fields} className='form-control pure-input-1 search-box' placeholder="Search DOE CODE for published software entries"/>
+            <input title='All Fields Search' id='allSearch' onKeyPress={this.triggerSearch} onChange={this.onAllFieldsChange} type="text" value={this.state.all_fields} className='form-control pure-input-1 search-box' placeholder="Search DOE CODE for submitted software entries"/>
             <button title='Toggle Advanced Search Dropdown' onClick={this.doAdvancedSearch} className='adv-search-button hide-xs' type='button'>
               <span className='fa fa-caret-down adv-search-button-icon'></span>
             </button>
@@ -186,7 +186,7 @@ export default class SearchBar extends React.Component {
                     <div className='col-sm-8'>
                       <div className='row'>
                         <div className='col-sm-11 minimal-col-padding-right'>
-                          <input className='pure-input-1 search-box homepage-searchbar' placeholder="Search DOE CODE for published software entries" type='text'/>
+                          <input className='pure-input-1 search-box homepage-searchbar' placeholder="Search DOE CODE for submitted software entries" type='text'/>
                           <button title="Toggle Advanced Search Dropdown" onClick={this.doAdvancedSearch} className="adv-search-button homepage-adv-search-btn" type="button">
                             <span className="fa fa-caret-down adv-search-button-icon"></span>
                           </button>
