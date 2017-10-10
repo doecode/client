@@ -102,7 +102,7 @@ export default class BiblioSidebar extends React.Component {
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <a title='Twitter' target="_blank" href={'https://twitter.com/home?status=DOE Research from DOECODE: ' + window.location.href}>
+                        <a title='Twitter' target="_blank" href={'https://twitter.com/home?status=DOE Research from DOE CODE: ' + window.location.href}>
                           <span className="fa fa-twitter twitter"></span>
                         </a>
                       </li>
@@ -112,7 +112,7 @@ export default class BiblioSidebar extends React.Component {
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <a title='Email' href={"mailto:?subject=Software Records from DOECODE&body=" + window.location.href}>
+                        <a title='Email' href={"mailto:?subject=Software Records from DOE CODE&body=" + window.location.href}>
                           <span className="fa fa-envelope shareEmail"></span>
                         </a>
                       </li>

@@ -105,24 +105,24 @@ export default class About extends React.Component {
             <div className="row">
               <div className=""></div>
               <div className="col-xs-12 static-content">
-                <img title='DOE Code Features' className="hidden-xs hidden-sm" src={this.state.currentImage} width="710" height="389" alt="DOE Code Features" useMap="#featuremap"></img>
+                <img title='DOE CODE Features' className="hidden-xs hidden-sm" src={this.state.currentImage} width="710" height="389" alt="DOE CODE Features" useMap="#featuremap"></img>
                 <map name="featuremap">
                   <area title='DOI' shape="circle" coords="230,70,32" alt="DOI" onMouseOver={() => {
                     this.changeImage(1)
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area title='DOE Code Offers' shape="circle" coords="178,195,32" alt="DOE Code Offers" onMouseOver={() => {
+                  <area title='DOE CODE Offers' shape="circle" coords="178,195,32" alt="DOE CODE Offers" onMouseOver={() => {
                     this.changeImage(2)
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area title='DOE Code Software Catalog' shape="circle" coords="232,311,32" alt="DOE Code Software Catalog" onMouseOver={() => {
+                  <area title='DOE CODE Software Catalog' shape="circle" coords="232,311,32" alt="DOE CODE Software Catalog" onMouseOver={() => {
                     this.changeImage(3)
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area title='DOE Code Features' shape="circle" coords="482,311,32" alt="DOE Code Features" onMouseOver={() => {
+                  <area title='DOE CODE Features' shape="circle" coords="482,311,32" alt="DOE CODE Features" onMouseOver={() => {
                     this.changeImage(4)
                   }} onMouseOut={() => {
                     this.changeImage(0)
@@ -132,7 +132,7 @@ export default class About extends React.Component {
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area title='DOE Code Seamless' shape="circle" coords="480,70,32" alt="DOE Code Seamless" onMouseOver={() => {
+                  <area title='DOE CODE Seamless' shape="circle" coords="480,70,32" alt="DOE CODE Seamless" onMouseOver={() => {
                     this.changeImage(6)
                   }} onMouseOut={() => {
                     this.changeImage(0)

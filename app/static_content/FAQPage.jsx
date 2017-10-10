@@ -44,10 +44,10 @@ export default class FAQ extends React.Component {
 
       }, {
         text: <span className='faq-page-subtitle'>How is the DOE CODE software submission and search tool different than&nbsp;
-          <a title='DOE Code Github' target="_blank" href='https://github.com/doecode'>DOE CODE GitHub</a>
+          <a title='DOE CODE Github' target="_blank" href='https://github.com/doecode'>DOE CODE GitHub</a>
         </span>,
         content: <p>
-            DOE CODE provides for the submission and search of software at this site. DOE Code is a dedicated resource for members of the community to discover and share software developed by DOE-funded projects and provides submission and search options. The DOE CODE "platform” that runs this site is an open source project available on GitHub.
+            DOE CODE provides for the submission and search of software at this site. DOE CODE is a dedicated resource for members of the community to discover and share software developed by DOE-funded projects and provides submission and search options. The DOE CODE "platform” that runs this site is an open source project available on GitHub.
             <br/><br/>
             The DOE CODE GitHub Community is a dedicated GitHub organization that houses the source code for some projects funded by DOE, including the repositories for DOE CODE itself. This community is open to registered users of DOE CODE and those users are welcome to create and import their own repositories once they join. This service is provided by OSTI in recognition of the fact that many developers prefer to house and manage their projects on GitHub over other services.
             <br/><br/>
@@ -62,7 +62,7 @@ export default class FAQ extends React.Component {
       }, {
         text: <span className='faq-page-subtitle'>Does DOE CODE provide repository services?</span>,
         content: <p>
-            Yes. DOE CODE provides repository hosting services for the DOE community via&nbsp;<a title='DOE Code Github' target='_blank' href='https://github.com/doecode/doecode'>GitHub</a>&nbsp;and&nbsp;<a title='Gitlab' target='_blank' href='https://gitlab.osti.gov/users/sign_in'>GitLab</a>. GitHub repository services are for those who want typical GitHub open source project functionality. OSTI’s GitLab repository service offers the same functionality as the GitHub repository service, but also free private repositories and stronger access control.
+            Yes. DOE CODE provides repository hosting services for the DOE community via&nbsp;<a title='DOE CODE Github' target='_blank' href='https://github.com/doecode/doecode'>GitHub</a>&nbsp;and&nbsp;<a title='Gitlab' target='_blank' href='https://gitlab.osti.gov/users/sign_in'>GitLab</a>. GitHub repository services are for those who want typical GitHub open source project functionality. OSTI’s GitLab repository service offers the same functionality as the GitHub repository service, but also free private repositories and stronger access control.
             <br/><br/>
             If you are interested in making use of the GitHub or GitLab repository services, or to request to join the DOE CODE GitHub community please contact&nbsp;<a title='Email doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>.
           </p>

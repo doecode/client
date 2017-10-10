@@ -39,11 +39,9 @@ export default class Splash extends React.Component {
                       {/*Logo*/}
                       <div className="row center-text">
                         <div className="col-xs-12">
-                          <img src='https://www.osti.gov/includes/doecode/images/DOEcode300px_white.png' alt="DOECode" title='DOE CODE' className='header-logo-img'/>
+                          <img src='https://www.osti.gov/includes/doecode/images/DOEcodeTitle_395-min.png' alt="DOE CODE" title='DOE CODE' className='header-logo-img-homepage'/>
                         </div>
                       </div>
-                      <br/>
-                      <br/>
                       <br/>
                       <br/>
                       <div className='row center-text'>

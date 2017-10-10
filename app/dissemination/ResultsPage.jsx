@@ -137,7 +137,7 @@ export default class ResultsPage extends React.Component {
       {
         key: 'brdcrmb1',
         value: <span>
-            <a title='DOE Code Homepage' href='/doecode'>DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+            <a title='DOE CODE Homepage' href='/doecode'>DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
           </span>
       }, {
         key: 'brdcrmb2',

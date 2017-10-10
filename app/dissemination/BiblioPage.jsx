@@ -158,7 +158,7 @@ export default class BiblioPage extends React.Component {
       {
         key: 'brdcrmb1',
         value: <span>
-            <a title='DOE Code Homepage' href='/doecode'>DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;</span>
+            <a title='DOE CODE Homepage' href='/doecode'>DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;</span>
       }, {
         key: 'brdcrmb2',
         value: <span>

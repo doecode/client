@@ -71,7 +71,7 @@ export default class Confirmation extends React.Component {
     var actionPhrase = '';
     switch (this.state.workflow) {
       case 'submitted':
-        actionPhrase = 'Record Successfully Submitted to DOE Code';
+        actionPhrase = 'Record Successfully Submitted to DOE CODE';
         break;
       case 'announced':
         actionPhrase = 'Record Successfully Announced to E-Link';

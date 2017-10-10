@@ -1531,6 +1531,10 @@ label {
   width: 295px;
 }
 
+.header-logo-img-homepage {
+  padding-top: 5px;
+}
+
 .navbar-logo-img {
   height: 40px;
   width: 150px;

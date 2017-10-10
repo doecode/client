@@ -188,7 +188,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>After required fields are completed, submit record to DOE Code</span>
+          <span>After required fields are completed, submit record to DOE CODE</span>
         );
     } else if (this.props.item == "RelatedIdentifier") {
       returnData = (shortTooltip)
@@ -222,7 +222,7 @@ export default class HelpTooltip extends React.Component {
         )
         : (
           <span>You must provide a URL in order to proceed. If you do not have a URL, please go to&nbsp;
-            <a title='DOE Code Repository' href='#'>DOE Code</a>&nbsp; and select Create a Repository.</span>
+            <a title='DOE CODE Repository' href='#'>DOE CODE</a>&nbsp; and select Create a Repository.</span>
         );
     } else if (this.props.item == "RepositoryLink") {
       returnData = (shortTooltip)
