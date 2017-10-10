@@ -85,7 +85,7 @@ export default class Login extends React.Component {
           </div>
           <div className='row'>
             <div className='col-xs-12 register-text'>
-              If you already have a DOE CODE account, enter your email address and password below to sign in. If you wish to create an account, please select “Create Account” and follow the instructions provided
+              If you already have a DOE CODE account, enter your email address and password below to sign in. If you wish to create an account, please select "Create Account" and follow the instructions provided
             </div>
           </div>
           <br/> {/*EMail Address*/}

@@ -34,7 +34,7 @@ export default class FAQ extends React.Component {
       {
         text: <span className='faq-page-subtitle'>What is DOE CODE?</span>,
         content: <p>
-            DOE CODE is the U.S. Department of Energy’s (DOE) new software services platform and search tool for software resulting from DOE-funded research that provides functionality for collaboration, archiving, and discovery of scientific software funded by DOE. DOE CODE replaces the Energy Science and Technology Software Center (ESTSC). DOE CODE is an open source project and is available on GitHub. Throughout these FAQs, the terms "software” and "code” are used interchangeably, though it is understood there are discrete definitions in various communities.
+            DOE CODE is the U.S. Department of Energy’s (DOE) new software services platform and search tool for software resulting from DOE-funded research that provides functionality for collaboration, archiving, and discovery of scientific software funded by DOE. DOE CODE replaces the Energy Science and Technology Software Center (ESTSC). DOE CODE is an open source project and is available on GitHub. Throughout these FAQs, the terms "software" and "code" are used interchangeably, though it is understood there are discrete definitions in various communities.
           </p>
       }, {
         text: <span className='faq-page-subtitle'>What does it mean for DOE CODE to be released in Alpha?</span>,
@@ -47,7 +47,7 @@ export default class FAQ extends React.Component {
           <a title='DOE CODE Github' target="_blank" href='https://github.com/doecode'>DOE CODE GitHub</a>
         </span>,
         content: <p>
-            DOE CODE provides for the submission and search of software at this site. DOE CODE is a dedicated resource for members of the community to discover and share software developed by DOE-funded projects and provides submission and search options. The DOE CODE "platform” that runs this site is an open source project available on GitHub.
+            DOE CODE provides for the submission and search of software at this site. DOE CODE is a dedicated resource for members of the community to discover and share software developed by DOE-funded projects and provides submission and search options. The DOE CODE "platform" that runs this site is an open source project available on GitHub.
             <br/><br/>
             The DOE CODE GitHub Community is a dedicated GitHub organization that houses the source code for some projects funded by DOE, including the repositories for DOE CODE itself. This community is open to registered users of DOE CODE and those users are welcome to create and import their own repositories once they join. This service is provided by OSTI in recognition of the fact that many developers prefer to house and manage their projects on GitHub over other services.
             <br/><br/>
@@ -141,7 +141,7 @@ export default class FAQ extends React.Component {
         text: <span className='faq-page-subtitle'>What does it mean to submit code to DOE CODE?</span>,
         content: <div>
             <p>Users may want to publish their code to DOE CODE, because publishing offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Publishing to DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes that are in early development and for developers wanting to obtain DOIs early in the process. (See also "
-              <a title='What is a Digital Object Identifier' className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-doi')}>What is a Digital Object Identifier (DOI)?</a>”).
+              <a title='What is a Digital Object Identifier' className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-doi')}>What is a Digital Object Identifier (DOI)?</a>").
             </p>
             <br/>
             <p>Publishing to DOE CODE is easy, with only a minimal set of metadata required.</p>

@@ -103,7 +103,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>A person concerned with facets of the software development process, including the research, design, programming, and testing of computer software. When there are multiple developers, the primary software developer should be listed first. “NONE” is an option when necessary.</span>
+          <span>A person concerned with facets of the software development process, including the research, design, programming, and testing of computer software. When there are multiple developers, the primary software developer should be listed first. "NONE" is an option when necessary.</span>
         );
     } else if (this.props.item == "DigitalObjectIdentifer") {
       returnData = (shortTooltip)
