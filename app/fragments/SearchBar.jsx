@@ -179,7 +179,7 @@ export default class SearchBar extends React.Component {
         {searchBarType === 'homepage' && <div className='col-sm-12'>
           <div className='container'>
             <div className='row'>
-              <div className='col-sm-12'>
+              <div className='col-sm-12 no-col-padding-left'>
                 <div className='container'>
                   <div className='row'>
                     <div className='col-sm-2'></div>

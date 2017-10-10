@@ -96,12 +96,12 @@ export default class Footer extends React.Component {
                 <br/>
                 <div className='col-xs-6 center-text website-policies-mobile'>
                   <a title='Website Policies' href="/doecode/disclaimer" className={linkColorClass}>
-                    <span className="fa fa-university"></span>&nbsp;Website Policies
+                    <span className="fa fa-university footer-fa-icon"></span>&nbsp;Website Policies
                   </a>
                 </div>
                 <div className='col-xs-6 center-text'>
                   <a title='Contact Us' href="/doecode/contact" className={linkColorClass}>
-                    <span className="fa fa-comments-o"></span>&nbsp;Contact Us</a>
+                    <span className="fa fa-comments-o footer-fa-icon"></span>&nbsp;Contact Us</a>
                 </div>
               </div>
             </span>

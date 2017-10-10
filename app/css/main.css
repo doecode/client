@@ -2009,6 +2009,9 @@ ul.biblio-page-ul>li>a:hover {
     padding-top: 1px !important;
     padding-bottom: 1px !important;
   }
+  .header-logo-img-homepage {
+    width:300px;
+  }
 }
 
 
