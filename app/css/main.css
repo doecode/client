@@ -1595,12 +1595,12 @@ label {
 }
 
 #repository-github-img {
-  width: 350px;
+  width: 314px;
   height: 150px;
 }
 
 #repository-gitlab-img {
-  width: 350px;
+  width: 314px;
   height: 150px;
 }
 
@@ -2185,6 +2185,12 @@ ul.biblio-page-ul>li>a:hover {
   }
   .publication-date-end-container-homepage input {
     max-width: 190px !important;
+  }
+  #repository-github-img {
+    width: 314px;
+  }
+  #repository-gitlab-img {
+    width: 314px;
   }
 }
 
