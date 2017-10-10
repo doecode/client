@@ -1500,6 +1500,11 @@ label {
   font-size: 24px;
 }
 
+.nav-menu-item-special {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
 .nav-menu-item-special:hover {
   background-color: #F9F9F9;
   color: black;
@@ -1526,9 +1531,8 @@ label {
 }
 
 .header-logo-img {
-  height: 55px;
   padding-top: 5px;
-  width: 295px;
+  width: 287px;
 }
 
 .header-logo-img-homepage {
@@ -1864,6 +1868,10 @@ ul.biblio-page-ul>li>a:hover {
 
 .footer-fa-icon {
   opacity: 0.5;
+}
+
+.header-search-container {
+  margin-bottom: 5px;
 }
 
 
