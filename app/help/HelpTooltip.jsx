@@ -270,7 +270,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>An incomplete record can be saved at any time, for future completion and publish</span>
+          <span>An incomplete record can be saved at any time, for future completion and submission</span>
         );
     } else if (this.props.item == "ShortTitle") {
       returnData = (shortTooltip)

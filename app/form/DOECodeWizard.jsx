@@ -375,7 +375,7 @@ buildPanel(obj) {
 
       const self = this;
 
-        const publishHeader = <div> <strong> Fields Required to Publish this Record on DOE CODE </strong>
+        const publishHeader = <div> <strong> Fields Required to Submit this Record on DOE CODE </strong>
 
 
         </div>
@@ -383,7 +383,7 @@ buildPanel(obj) {
         ;
         const publishPanels = publishSteps.map(this.buildPanel);
 
-        const submitHeader = <strong> Additional Fields Required to Submit to E-Link </strong>;
+        const submitHeader = <strong> Additional Fields Required to Announce to E-Link </strong>;
 
         let submitPanels = null;
 
@@ -406,7 +406,7 @@ buildPanel(obj) {
         button =             <div className="form-group-xs row col-sm-12">
           <br/>
                             <div>
-                                <button title='Submit Record to E-Link' type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
+                                <button title='Announce Record to E-Link' type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
                                     Announce Record to E-Link
                                 </button>
                             </div>
@@ -426,7 +426,7 @@ buildPanel(obj) {
           button =           <div className="form-group-xs row col-sm-12">
                 <br/>
                           <div>
-                              <button title='Publish Record' type="button" className={publishClass} disabled={(publishDisabled==true) ? 'disabled' : ''} onClick={this.publish}>
+                              <button title='Submit Record' type="button" className={publishClass} disabled={(publishDisabled==true) ? 'disabled' : ''} onClick={this.publish}>
                                   Submit Record
                               </button>
                           </div>

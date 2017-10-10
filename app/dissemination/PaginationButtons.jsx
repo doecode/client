@@ -63,10 +63,10 @@ export default class PaginationButtons extends React.Component {
       : '';
     return (
       <div className='custom-paginate-container'>
-        <button type='button' className='pure-button' title='Previous Page' disabled={isPrevDisabled} onClick={this.goBackAPage}>Prev</button>
+        <button type='button' className='pure-button' title='Previous Page' disabled={isPrevDisabled} onClick={this.goBackAPage}>Prev</button>&nbsp;&nbsp;
         <button type='button' className='pure-button paginate-slider-arrow' title='Choose a Page' onClick={this.toggleDropdown}>
-          <span className='fa fa-caret-down'></span>
-        </button>
+          &hellip;
+        </button>&nbsp;&nbsp;
         <button type='button' className='pure-button' disabled={isNextDisabled} title='Next Page' onClick={this.goForwardAPage}>Next</button>
         {this.state.showDropdown && <div className='pagination-dropdown'>
           <div className='row'>
