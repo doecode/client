@@ -1296,15 +1296,27 @@ ol.progtrckr li.progtrckr-done:hover:before {
   font-weight: 300 !important;
 }
 
-.search-sidebar-text {
+.search-sidebar-text .search-sidebar-checkbox-text {
   color: black !important;
   font-size: 16px !important;
 }
 
-.search-sidebar-text label {
+.search-sidebar-text label, .search-sidebar-checkbox-text label {
   font-weight: 400;
   font-size: 13px;
-  color: black !important
+  color: black !important;
+}
+
+.search-sidebar-checkbox-text {
+  margin-left: 18px;
+}
+
+.search-sidebar-checkbox-text span {
+  margin-left: 18px;
+}
+
+.search-sidebar-checkbox-text label:first-of-type {
+  margin-left: -18px;
 }
 
 .account-panel-header {
