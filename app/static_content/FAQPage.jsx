@@ -39,12 +39,12 @@ export default class FAQ extends React.Component {
       }, {
         text: <span className='faq-page-subtitle'>What does it mean for DOE CODE to be released in Alpha?</span>,
         content: <p>
-            In Alpha, DOE CODE supports submission of software projects, code repository services, and search and discovery of published software projects. As development of DOE CODE continues toward Beta and Production releases, additional features and functionality will be included. Future requirements will include support and archiving of additional repository types, automated alerting for software points of contact, authentication using GitHub accounts, and more user profile features.
+            In Alpha, DOE CODE supports submission of software projects, code repository services, and search and discovery of submitted software projects. As development of DOE CODE continues toward Beta and Production releases, additional features and functionality will be included. Future requirements will include support and archiving of additional repository types, automated alerting for software points of contact, authentication using GitHub accounts, and more user profile features.
           </p>
 
       }, {
         text: <span className='faq-page-subtitle'>How is the DOE CODE software submission and search tool different than&nbsp;
-          <a title='DOE CODE Github' target="_blank" href='https://github.com/doecode'>DOE CODE GitHub</a>
+          <a title='DOE CODE Github' target="_blank" href='https://github.com/doecode'>DOE CODE GitHub</a>?
         </span>,
         content: <p>
             DOE CODE provides for the submission and search of software at this site. DOE CODE is a dedicated resource for members of the community to discover and share software developed by DOE-funded projects and provides submission and search options. The DOE CODE "platform" that runs this site is an open source project available on GitHub.
@@ -62,7 +62,7 @@ export default class FAQ extends React.Component {
       }, {
         text: <span className='faq-page-subtitle'>Does DOE CODE provide repository services?</span>,
         content: <p>
-            Yes. DOE CODE provides repository hosting services for the DOE community via&nbsp;<a title='DOE CODE Github' target='_blank' href='https://github.com/doecode/doecode'>GitHub</a>&nbsp;and&nbsp;<a title='Gitlab' target='_blank' href='https://gitlab.osti.gov/users/sign_in'>GitLab</a>. GitHub repository services are for those who want typical GitHub open source project functionality. OSTI’s GitLab repository service offers the same functionality as the GitHub repository service, but also free private repositories and stronger access control.
+            Yes. DOE CODE provides repository hosting services for the DOE community via&nbsp;<a title='DOE CODE Github' target='_blank' href='https://github.com/doecode/doecode'>GitHub</a>&nbsp;and&nbsp;<a title='Gitlab' target='_blank' href='https://gitlab.osti.gov/users/sign_in'>GitLab</a>. GitHub repository services are for those who want typical GitHub open source project functionality. OSTI’s GitLab repository service offers the same functionality as the GitHub repository service, but allows for open or closed repositories and more control of the code.
             <br/><br/>
             If you are interested in making use of the GitHub or GitLab repository services, or to request to join the DOE CODE GitHub community please contact&nbsp;<a title='Email doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>.
           </p>
@@ -73,7 +73,7 @@ export default class FAQ extends React.Component {
             <br/><br/>
             <strong>Open Source, No Publicly Available Repository</strong>&nbsp;- Code is Open Source, but is not yet available in a public repository. Interested users can contact the developer(s) or responsible parties for information regarding access and (re)use. A landing page URL is required for submitting Open Source, no Publicly available repository code; the URL should provide additional information on how to obtain access to the code.
             <br/><br/>
-            <strong>Closed Source</strong>&nbsp;- Software that is not Open Source and for which access must be granted by contacting a licensing official. Software is often Closed Source because it is proprietary, sensitive, or has otherwise been deemed appropriate for limited distribution only. A landing page URL is required for submitting Closed Source code; the URL should provide additional information on how to obtain access to the code
+            <strong>Closed Source</strong>&nbsp;- Software that is not Open Source and for which access must be granted by contacting a licensing official. Software is often Closed Source because it is proprietary, sensitive, or has otherwise been deemed appropriate for limited distribution only. A landing page URL is required for submitting Closed Source code; the URL should provide additional information on how to obtain access to the code.
           </div>
       }, {
         text: <span className='faq-page-subtitle'>Are there restrictions on the use of the material in DOE CODE?</span>,
@@ -134,20 +134,20 @@ export default class FAQ extends React.Component {
         content: <div>
             <p>Individual software records and associated metadata are directly provided by the developer or the developing organization to DOE through DOE CODE.</p>
             <p>DOE CODE offers two paths for users to provide code. Users can (1)&nbsp;
-              <strong>publish</strong>&nbsp;code to DOE CODE, and (2)&nbsp;
-              <strong>submit</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. For more information about publishing and submitting code, see the "What does it mean to publish code to DOE CODE?" and "What does it mean to submit code to DOE CODE?" for more details.</p>
+              <strong>submit</strong>&nbsp;code to DOE CODE, and (2)&nbsp;
+              <strong>announce</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. For more information about submitting and announcing code, see the "
+              <a title='What does it mean to submit code to DOE CODE?' className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-submit-code')}>What does it mean to submit code to DOE CODE?</a>" and "
+              <a title='What does it mean to announce code to DOE CODE?' className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-announce-code')}>What does it mean to announce code to DOE CODE?</a> for more details.</p>
           </div>
       }, {
         text: <span className='faq-page-subtitle'>What does it mean to submit code to DOE CODE?</span>,
         content: <div>
-            <p>Users may want to publish their code to DOE CODE, because publishing offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Publishing to DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes that are in early development and for developers wanting to obtain DOIs early in the process. (See also "
+            <p>Users may want to submit their code to DOE CODE, because submitting offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Submitting to DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes that are in early development and for developers wanting to obtain DOIs early in the process. (See also "
               <a title='What is a Digital Object Identifier' className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-doi')}>What is a Digital Object Identifier (DOI)?</a>").
             </p>
             <br/>
-            <p>Publishing to DOE CODE is easy, with only a minimal set of metadata required.</p>
-            <br/>
             <div>
-              Required Metadata to Publish to DOE CODE:
+              Required Metadata to Submit to DOE CODE:
               <ul>
                 <li>Software Availability</li>
                 <li>Repository Link* or Landing Page</li>
@@ -161,14 +161,15 @@ export default class FAQ extends React.Component {
             <p>
               *Currently only Git-based repositories are supported. Most repositories hosted at GitHub, Bitbucket, SourceForge, and GitLab support Git-based repositories. When submitting a repository, users should be certain to use the direct URL to the actual repository.
             </p>
-          </div>
+          </div>,
+          anchorName: 'what-is-submit-code'
       }, {
         text: <span className='faq-page-subtitle'>What does it mean to announce code to DOE CODE?</span>,
         content: <div>
-            <p>Users may need to submit their code to the Department of Energy to ensure proper handling, announcement, and dissemination in accordance with DOE statutory responsibilities. Codes in later stages of development are the primary use case for this functionality.
+            <p>Users may need to announce their code to the Department of Energy to ensure announcement and dissemination in accordance with DOE statutory responsibilities. Codes in later stages of development are the primary use case for this functionality. For announcement to the Department of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory data fields should be included during announcement when possible.
             </p>
             <div>
-              DOE national laboratories and other DOE facilities/contractors who have developed and/or modified software during work supported by DOE or during work carried out for others at DOE facilities are required to submit a record of the software to the Department of Energy, if the software meets the following criteria:
+              DOE national laboratories and other DOE facilities/contractors who have developed and/or modified software during work supported by DOE or during work carried out for others at DOE facilities are required to announce a record of the software to the Department of Energy, if the software meets the following criteria:
               <ul>
                 <li>the software meets the definition of&nbsp;
                   <a title='STI' target='_blank' href='https://www.osti.gov/stip/stidefined'>STI</a>;
@@ -182,16 +183,16 @@ export default class FAQ extends React.Component {
             <div>
               For additional information about DOE scientific and technical software, refer to the&nbsp;<a title='Software Best Practices' target='_blank' href='https://www.osti.gov/includes/estsc/software_best_prac.html'>Software Best Practices document</a>.
               <br/>
-              Software that meets the following criteria need not be submitted to the Department of Energy:
+              Software that meets the following criteria need not be announced to the Department of Energy:
               <ul>
                 <li>operational systems software that is site-specific, unique to a particular hardware, or necessary to ensure the fundamental operability of automated data processing equipment, whether supplied by the manufacturer of the system hardware or others;</li>
                 <li>computer software programs developed and/or modified during work carried out for others at DOE facilities that are specifically excluded in the agreement under which the non-DOE funded work was performed;</li>
                 <li>software generated under the auspices of the Energy Information Administration; and</li>
-                <li>specific software used by power administrations for the operation, control, planning, and modeling of electric power transmission systems and the interconnected utilities; however, modifications/enhancements to portions of this software that are not an integral part of the whole and have potential application outside the power administrations should be submitted.</li>
+                <li>specific software used by power administrations for the operation, control, planning, and modeling of electric power transmission systems and the interconnected utilities; however, modifications/enhancements to portions of this software that are not an integral part of the whole and have potential application outside the power administrations should be announced.</li>
               </ul>
             </div>
             <div>
-              Required Metadata to Submit to the Department of Energy through DOE CODE:
+              Required Metadata to Announce to the Department of Energy through DOE CODE:
               <ul>
                 <li>Software Availability</li>
                 <li>Repository Link* or Landing Page</li>
@@ -204,7 +205,7 @@ export default class FAQ extends React.Component {
                 <li>Research Organization Name</li>
               </ul>
             </div>
-            <p>In addition to the basic requirements for metadata fields (above), other optional/non-mandatory data fields should be included during submission when possible.</p>
+            <p>In addition to the basic requirements for metadata fields (above), other optional/non-mandatory data fields should be included during announcement when possible.</p>
             <p>
               *Currently only Git-based repositories are supported. Most repositories hosted at git.com, bitbucket.org, sourcforge.org, and GitLab support Git-based repositories. When submitting a repository please make sure you are using the direct URL to the actual repository. As an example, the direct repository URL for DOE CODE is&nbsp;
               <a title='DOE CODE Github' target='_blank' href='https://www.github.com/doecode/doecode'>https://www.github.com/doecode/doecode</a>&nbsp;whereas the project landing page is&nbsp;
@@ -213,7 +214,8 @@ export default class FAQ extends React.Component {
             <p>
               NOTE: If you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing of your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, and .tar.gz2.
             </p>
-          </div>
+          </div>,
+          anchorName: 'what-is-announce-code'
       }, {
         text: <span className='faq-page-subtitle'>What is a YAML file? How do I auto populate the YAML file?</span>,
         content: <p>
@@ -228,9 +230,9 @@ export default class FAQ extends React.Component {
       }, {
         text: <span className='faq-page-subtitle'>Do I need an account to use DOE CODE?</span>,
         content: <p>
-            A DOE CODE account is not needed to search for DOE-funded software, but an account is needed to publish or submit code. Users meeting minimum criteria can directly create a DOE CODE account. All you need is your first and last name, government email address or valid contract number, and a password.
+            A DOE CODE account is not needed to search for DOE-funded software, but an account is needed to submit or announce code. Users meeting minimum criteria can directly create a DOE CODE account. All you need is your first and last name, government email address or valid contract number, and a password.
             <br/><br/>
-            Both of the repository services we provide require a separate account in addition to the account for publishing or submitting to DOE CODE. To utilize repositories on OSTI’s GitLab installation and DOE CODE GitHub, those interested must request an account by sending an email to&nbsp;<a title='Email doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>. DOE CODE Product Manager(s) will follow up with the requester.
+            Both of the repository services we provide require a separate account in addition to the account for submitting or announcing to DOE CODE. To utilize repositories on OSTI’s GitLab installation and DOE CODE GitHub, those interested must request an account by sending an email to&nbsp;<a title='Email doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>. DOE CODE Product Manager(s) will follow up with the requester.
 
           </p>
       }, {
