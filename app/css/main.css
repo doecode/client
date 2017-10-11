@@ -1887,6 +1887,25 @@ ul.biblio-page-ul>li>a:hover {
   border-top: none;
 }
 
+.repository-services-container {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+#github-repository-container {
+  width: 314px;
+}
+
+#or-repository-container {}
+
+#gitlab-repository-container {
+  width: 314px;
+}
+
+#repository-services-header-container{
+  padding-left:25%;
+}
 
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
 
@@ -1975,6 +1994,9 @@ ul.biblio-page-ul>li>a:hover {
   div>ul.pagination {
     margin-top: 0px;
     margin-bottom: 0px;
+  }
+  .repository-services-container {
+    display: block;
   }
 }
 
@@ -2164,6 +2186,7 @@ ul.biblio-page-ul>li>a:hover {
   .adv-search-date-container-homepage {
     display: inline-block;
   }
+
 }
 
 
@@ -2269,5 +2292,11 @@ ul.biblio-page-ul>li>a:hover {
   }
   .publication-date-end-container-homepage {
     text-align: right !important;
+  }
+}
+
+@media only screen and (max-width:1520px) and (min-width:1200px) {
+  #repository-services-header-container{
+    padding-left:15%;
   }
 }
