@@ -8,12 +8,11 @@ export default class Communications extends React.Component {
   }
 
   render() {
-
     return (
       <div className="row not-so-wide-row">
         <div className="col-lg-3 col-md-1"></div>
         <div className="col-lg-6 col-md-10 col-xs-12 static-content">
-          <span className="static-content-title">Communications and Resources</span>
+          <h2 className="static-content-title">Communications and Resources</h2>
           <h2>Communications</h2>
           <div className="padblock">
             <h4>Blogs</h4>
