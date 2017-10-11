@@ -23,7 +23,7 @@ export default class Metadata extends BaseData {
   }
 
   saveToArray(field, data) {
-    if (!data.id)
+    if (typeof data.id != "number")
       this.addToArray(field, data);
     else
       this.modifyElementInArray(field, data)
@@ -39,7 +39,7 @@ export default class Metadata extends BaseData {
   }
 
   modifyElementInArray(field, data) {
-    const index = this.fieldMap[field].findIndex(item => item.id === data.id);
+    const index = data.id;
 
     if (index > -1)
       this.fieldMap[field][index] = data;
