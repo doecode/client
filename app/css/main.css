@@ -1556,7 +1556,7 @@ label {
 }
 
 .navbar-logo-img {
-  padding-top:1px;
+  padding-top: 1px;
 }
 
 .hide {
@@ -1761,8 +1761,7 @@ ul.biblio-page-ul>li>a:hover {
   display: inline-block;
 }
 
-.paginate-slider-arrow {
-}
+.paginate-slider-arrow {}
 
 .range-container {
   padding-left: 5px;
@@ -1882,6 +1881,10 @@ ul.biblio-page-ul>li>a:hover {
 
 .header-search-container {
   margin-bottom: 5px;
+}
+
+#header-nav-collapse {
+  border-top: none;
 }
 
 
@@ -2021,7 +2024,7 @@ ul.biblio-page-ul>li>a:hover {
     padding-bottom: 1px !important;
   }
   .header-logo-img-homepage {
-    width:300px;
+    width: 300px;
   }
 }
 
