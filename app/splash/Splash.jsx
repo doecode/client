@@ -26,7 +26,7 @@ export default class Splash extends React.Component {
           <div className="col-xs-12">
             {/*Signin Stuff*/}
             <div className="row">
-              <div className="col-xs-12 hidden-xs visible-sm visible-md visible-lg right-text">
+              <div className="col-xs-12 hidden-xs visible-sm visible-md visible-lg right-text no-col-padding-right">
                 <SigninStatus/>
               </div>
             </div>
