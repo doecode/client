@@ -20,7 +20,12 @@
         "babelify",
         {
           "presets": [
-            "es2015"
+            "env",
+            {
+              "targets": {
+                "browsers": ["last 3 versions"]
+              }
+            }
           ]
         }
       ]
