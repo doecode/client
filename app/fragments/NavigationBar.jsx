@@ -24,7 +24,7 @@ export default class NavgationBar extends React.Component {
                 <span className="icon-bar icon-bar-extra"></span>
                 <span className="icon-bar icon-bar-extra"></span>
               </button>
-              <a href='/doecode/'><img title='DOE CODE Homepage' src='https://www.osti.gov/includes/doecode/images/DOEcode300px_white.png' alt="DOE CODE" className={img_class}/></a>
+              <a href='/doecode/'><img title='DOE CODE Homepage ' src='https://www.osti.gov/includes/doecode/images/DOEcodeTitle_185-min.png' alt="DOE CODE" className={img_class}/></a>
               <span className='hide-md hide-lg hide-sm pull-right'><SigninStatus/></span>
             </div>
             <div className="collapse navbar-collapse no-col-padding-right no-col-padding-left" id='header-nav-collapse'>

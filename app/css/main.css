@@ -1556,10 +1556,7 @@ label {
 }
 
 .navbar-logo-img {
-  height: 40px;
-  width: 150px;
-  padding-bottom: 5px;
-  padding-top: 8px;
+  padding-top:1px;
 }
 
 .hide {
