@@ -375,15 +375,7 @@ buildPanel(obj) {
 
       const self = this;
 
-        const publishHeader = <div> <strong> Fields Required to Submit this Record on DOE CODE </strong>
-
-
-        </div>
-
-        ;
         const publishPanels = publishSteps.map(this.buildPanel);
-
-        const submitHeader = <strong> Additional Fields Required to Announce to E-Link </strong>;
 
         let submitPanels = null;
 
