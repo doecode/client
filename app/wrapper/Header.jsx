@@ -26,7 +26,7 @@ export default class Header extends React.Component {
       : 'navbar navbar-default main-header';
     return (
       <nav className={navStyle}>
-        <div className="container-fluid header-container-fluid">
+        <div className="container-fluid header-container-fluid no-col-padding-right no-col-padding-left">
           <div className="pull-right hidden-xs visible-sm visible-md visible-lg header-signin-links">
             <SigninStatus/>
           </div>
