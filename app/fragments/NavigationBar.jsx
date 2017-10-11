@@ -19,7 +19,7 @@ export default class NavgationBar extends React.Component {
         <div className='row'>
           <div className='col-xs-12 no-col-padding-left no-col-padding-right'>
             <div className="navbar-header">
-              <button type="button" className="navbar-toggle hamburger-menu-btn no-col-padding-left no-col-padding-right" data-toggle="collapse" data-target="#header-nav-collapse">
+              <button type="button" title='Toggle Menu' className="navbar-toggle hamburger-menu-btn no-col-padding-left no-col-padding-right" data-toggle="collapse" data-target="#header-nav-collapse">
                 <span className="icon-bar icon-bar-extra"></span>
                 <span className="icon-bar icon-bar-extra"></span>
                 <span className="icon-bar icon-bar-extra"></span>
@@ -31,7 +31,7 @@ export default class NavgationBar extends React.Component {
               <div className='hide-md hide-lg hide-sm'>
                 <br/>
                 <SearchBar containerClasses='row not-so-wide-row' barType='dropdown'/>
-                <a className='whiteAnchor' href='/doecode/search'>Advanced Search</a>
+                <a className='whiteAnchor' title='Go to Advanced Search' href='/doecode/search'>Advanced Search</a>
               </div>
               <ul className='nav navbar-nav nav-menu'>
                 <NavBarItem current_page={this.current_page} destination="/doecode/projects" navTitle='Submit Software/Code' special="true" fa_icon="fa fa-sign-in nav-menu-item-fa" display_name="Submit Software/Code"/>
