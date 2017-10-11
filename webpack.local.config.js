@@ -9,7 +9,7 @@ module.exports = {
 
   output: {
     publicPath: "/",
-    filename: "app.js",
+    filename: "doecode/app.js",
     path: __dirname + "/dist"
   },
 
@@ -41,7 +41,7 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       }, {
         test: /\.(png|jpg)$/,
-        loader: 'file-loader?name=images/[name].[ext]' 
+        loader: 'file-loader?name=images/[name].[ext]'
       }
     ]
   },
