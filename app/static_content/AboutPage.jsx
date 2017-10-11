@@ -16,7 +16,8 @@ export default class About extends React.Component {
       'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_Catalog710px-min.png',
       'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_Policy710px-min.png',
       'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_GitHub710px-min.png',
-      'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_SocialCode710px-min.png'
+      'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_SocialCode710px-min.png',
+      'https://www.osti.gov/includes/doecode/images/DOEcodeFeatures_Easy710px-min.png'
     ];
 
     this._discoverUrls = ['https://www.osti.gov/includes/doecode/images/Discover-min.png', 'https://www.osti.gov/includes/doecode/images/Discover_hover-min.png'];
@@ -105,35 +106,40 @@ export default class About extends React.Component {
             <div className="row">
               <div className=""></div>
               <div className="col-xs-12 static-content">
-                <img title='DOE CODE Features' className="hidden-xs hidden-sm" src={this.state.currentImage} width="710" height="389" alt="DOE CODE Features" useMap="#featuremap"></img>
+                <img title='DOE CODE Features' className="hidden-xs hidden-sm" src={this.state.currentImage} width="710" height="442" alt="DOE CODE Features" useMap="#featuremap"></img>
                 <map name="featuremap">
-                  <area title='DOI' shape="circle" coords="230,70,32" alt="DOI" onMouseOver={() => {
-                    this.changeImage(1)
+                  <area title='Github' shape="circle" coords="232,107,32" alt="Github" onMouseOver={() => {
+                    this.changeImage(5) //10:30
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area title='DOE CODE Offers' shape="circle" coords="178,195,32" alt="DOE CODE Offers" onMouseOver={() => {
-                    this.changeImage(2)
+                  <area title='Social Code' shape="circle" coords="179,241,32" alt="Social Code" onMouseOver={() => {
+                    this.changeImage(6) //9 o clock
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area title='DOE CODE Software Catalog' shape="circle" coords="232,311,32" alt="DOE CODE Software Catalog" onMouseOver={() => {
-                    this.changeImage(3)
+                  <area title='Catalog' shape="circle" coords="233,362,32" alt="Catalog" onMouseOver={() => {
+                    this.changeImage(3) //7:30
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area title='DOE CODE Features' shape="circle" coords="482,311,32" alt="DOE CODE Features" onMouseOver={() => {
-                    this.changeImage(4)
+                  <area title='Repository' shape="circle" coords="481,365,32" alt="Repository" onMouseOver={() => {
+                    this.changeImage(2) //4:30
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area title='Open Source' shape="circle" coords="532,197,32" alt="Open Source" onMouseOver={() => {
-                    this.changeImage(5)
+                  <area title='DOI' shape="circle" coords="533,239,32" alt="DOI" onMouseOver={() => {
+                    this.changeImage(1) //3 o clock
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
-                  <area title='DOE CODE Seamless' shape="circle" coords="480,70,32" alt="DOE CODE Seamless" onMouseOver={() => {
-                    this.changeImage(6)
+                  <area title='Easy' shape="circle" coords="481,112,32" alt="Easy" onMouseOver={() => {
+                    this.changeImage(7) //1:30
+                  }} onMouseOut={() => {
+                    this.changeImage(0)
+                  }}/>
+                  <area title='Policy' shape="circle" coords="355,55,32" alt="Policy" onMouseOver={() => {
+                    this.changeImage(4) //12 o clock
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
