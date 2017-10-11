@@ -43,7 +43,7 @@ export default class SupplementalInfoStep extends React.Component {
 
     let fileLabelText = "Upload Source Code ";
 
-    if (this.props.page == 'submit')
+    if (this.props.page == 'announce')
       fileLabelText += "(Required Field)";
     else
       fileLabelText += "(Optional Field)";
