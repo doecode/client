@@ -1,6 +1,5 @@
 import React from 'react';
 import MetadataField from '../field/MetadataField';
-import uniqid from 'uniqid';
 import {observer, Provider} from "mobx-react";
 import MessageBoxModal from '../fragments/MessageBoxModal';
 import {doAuthenticatedAjax} from '../utils/utils';

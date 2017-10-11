@@ -1,5 +1,4 @@
 import BaseData from './BaseData';
-import uniqid from 'uniqid';
 import MetadataStore from './MetadataStore';
 import {toJS} from 'mobx';
 import moment from 'moment';
@@ -35,45 +34,30 @@ export default class Metadata extends BaseData {
   }
 
   addToArray(field, data) {
-    data.id = uniqid();
+    data.id = this.fieldMap[field].length;
     this.fieldMap[field].push(data);
   }
 
   modifyElementInArray(field, data) {
-
     const index = this.fieldMap[field].findIndex(item => item.id === data.id);
 
     if (index > -1)
       this.fieldMap[field][index] = data;
-
-    if (this.infoSchema[field].invalids !== undefined)
-      this.removeFromInvalids(field, data.id);
-
-    }
+  }
 
   removeFromArray(field, data) {
-    const index = this.fieldMap[field].findIndex(item => item.id === data.id);
+    const index = data.id;
     this.fieldMap[field].splice(index, 1);
+
+    // renumber ids as needed
+    const end = this.fieldMap[field].length;
+    for (var i = index; i < end; i++) {
+      this.fieldMap[field][i].id = i;
+    }
 
     if (this.fieldMap[field].length == 0)
       this.infoSchema[field].completed = false;
-
-    if (this.infoSchema[field].invalids !== undefined)
-      this.removeFromInvalids(field, data.id);
-
-    }
-
-  removeFromInvalids(field, id) {
-
-    if (this.infoSchema[field].invalids.length > 0) {
-      const invIndex = this.infoSchema[field].invalids.findIndex(item => item.id === id);
-      this.infoSchema[field].invalids.splice(invIndex, 1);
-
-      if (this.infoSchema[field].invalids.length == 0)
-        this.infoSchema[field].error = '';
-
-      }
-    }
+  }
 
   getPanelStatus(panelName) {
 
@@ -184,7 +168,7 @@ export default class Metadata extends BaseData {
         if (parents.indexOf(field) > -1) {
           const end = data[field].length;
           for (var i = 0; i < end; i++) {
-            data[field][i].id = uniqid();
+            data[field][i].id = i;
           }
         }
 
