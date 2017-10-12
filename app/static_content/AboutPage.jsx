@@ -69,14 +69,11 @@ export default class About extends React.Component {
                 </p>
 
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>CREATE</strong>
-                  - Create code inside or outside DOE CODE.</p>
+                  <strong>CREATE</strong> - Create code inside or outside DOE CODE.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>SUBMIT</strong>
-                  - Submit your DOE-funded code.</p>
+                  <strong>SUBMIT</strong> - Submit your DOE-funded code.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>DISCOVER</strong>
-                  - Discover DOE-funded software and code.</p>
+                  <strong>DISCOVER</strong> - Discover DOE-funded software and code.</p>
 
                 <img title='Create' className="hidden-xs hidden-sm" src={this.state.currentCreate} width="150" height="113" alt="Create" onMouseOver={() => {
                   this.changeCreate(1)
@@ -147,23 +144,19 @@ export default class About extends React.Component {
 
                 <h3 className="hidden-md hidden-lg featuresStyle">FEATURES</h3>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>DOI</strong>
-                  - DOE CODE issues digital object identifiers (DOIs) for software code so your software is more easily cited and discoverable. Allows for stronger connections between code, publications, data, and other forms of STI through citation in reference sections.</p>
+                  <strong>CATALOG</strong> - DOE Software Catalog.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>CATALOG</strong>
-                  - DOE Software Catalog.</p>
+                  <strong>SOCIAL CODE</strong> - DOE CODE seamlessly interfaces with common development platforms (e.g., open web API).</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>BEST PRACTICES AND POLICY</strong>
-                  - DOE CODE resources provide you information on best practices and policies for software.</p>
+                  <strong>GITHUB</strong> - DOE CODE is an open source product on GitHub that other institutions can download and deploy for their own purposes.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>SOCIAL CODING</strong>
-                  - DOE CODE seamlessly interfaces with common development platforms to make DOE-funded software and code more easily submitted, discoverable, and citable.</p>
+                  <strong>POLICY</strong> - DOE CODE resources provide you information on best practices and policies for software.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>GITHUB</strong>
-                  - DOE CODE is an open source product on GitHub that other institutions can download and deploy for their own purposes.</p>
+                  <strong>EASY</strong> - DOE CODE is easy to use and requires minimal metadata, often autopopulated.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>EASY</strong>
-                  - DOE CODE is easy to use!</p>
+                  <strong>DOI</strong> - DOE CODE issues digital object identifiers (DOIs) for code so software is more easily cited and discoverable. Allows for stronger connections between code, publications, and data through citation in reference sections.</p>
+                <p className="left-text hidden-md hidden-lg">
+                  <strong>REPOSITORY</strong> - DOE CODE offers public and private repository services in GitHub and GitLab.</p>
               </div>
             </div>
 
