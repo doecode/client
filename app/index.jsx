@@ -31,6 +31,7 @@ import ErrorPage from './error/ErrorPage';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RepositoryServices from './static_content/RepositoryServices';
+import SecurityHostingPage from './static_content/SecurityHostingPage';
 import {BrowserRouter as Router, Route, browserHistory, IndexRoute} from 'react-router-dom';
 
 import bootstrapcss from './css/bootstrap.min.css';
@@ -92,6 +93,7 @@ class DOECodeRouter extends React.Component {
               <Route path="/error" component={ErrorPage}/>
               <Route path="/user-admin" component={UserAdmin}/>
               <Route path='/repository-services' component={RepositoryServices}/>
+              <Route path='/security-hosting' component={SecurityHostingPage}/>
             </div>
           </div>
           <Footer is_homepage={this.is_homepage}/>
