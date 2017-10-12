@@ -1481,8 +1481,8 @@ label {
 }
 
 .faq-page-blockquote {
-  font-size:14px;
-  color:rgb(51, 51, 51);
+  font-size: 14px;
+  color: rgb(51, 51, 51);
 }
 
 .faq-page-btn {
@@ -1498,7 +1498,6 @@ label {
 .faq-page-collapse-wrapper {
   padding-bottom: 2px;
 }
-
 
 .fa-page-caret {
   color: #7787A8;
@@ -1907,6 +1906,60 @@ ul.biblio-page-ul>li>a:hover {
 
 #repository-services-header-container {
   padding-left: 25%;
+}
+
+
+/*!!!!!!!Security Hosting page!!!!!!*/
+
+#doecode-security-implementation {
+  padding-left: calc(5%);
+  width: calc(60%);
+}
+
+#security-host-doecode-about {
+  padding-right: calc(3%);
+}
+
+.security-host-page-title {
+  font-weight: 300;
+  font-size: 40px;
+  margin-left: 0px;
+}
+
+.security-host-text {
+  font-size: 24px;
+}
+
+.security-host-row-content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 35px;
+}
+
+.security-host-odd {
+  background-color: #DFDDDE;
+}
+
+.security-host-even {
+  background-color: #FFFFFF;
+}
+
+.security-host-arrow {}
+
+.security-host-image {}
+
+.security-host-image-odd {}
+
+
+/*!!!!!!!Security Hosting page!!!!!!*/
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
 }
 
 
