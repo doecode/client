@@ -88,25 +88,25 @@ export default class AdvancedSearch extends React.Component {
                       Code Accessibility
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField title='Accessibility' field="accessibility" isArray={true} elementType="select" options={AvailabilitiesList.availabilities} placeholder="Software's Accessibility" noExtraLabelText/>
+                      <SearchField title='Accessibility' field="accessibility" isArray={true} multi={true} elementType="select" options={AvailabilitiesList.availabilities} placeholder=" " noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Licenses
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField title='Licenses' field="licenses" isArray={true} elementType="select" options={LicenseOptionsList.licenseOptions} placeholder="Software License" noExtraLabelText/>
+                      <SearchField title='Licenses' field="licenses" isArray={true} multi={true} elementType="select" options={LicenseOptionsList.licenseOptions} placeholder=" " noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Research Organization
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField title='Research Organization' field="research_organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={ResearchOrgsList.researchOrgs} noExtraLabelText/>
+                      <SearchField title='Research Organization' field="research_organization" elementType="select" allowCreate={true} placeholder=" " options={ResearchOrgsList.researchOrgs} noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Sponsoring Organization
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField title='Sponsoring Organization' field="sponsoring_organization" elementType="select" allowCreate={true} placeholder="Enter or select an organization from the list." options={SponsorOrgsList.sponsorOrgs} noExtraLabelText/>
+                      <SearchField title='Sponsoring Organization' field="sponsoring_organization" elementType="select" allowCreate={true} placeholder=" " options={SponsorOrgsList.sponsorOrgs} noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Sort

@@ -65,6 +65,7 @@ export default class Field extends React.Component {
   handleSelectChange(value) {
     if (this.props.properties.isArray) {
       // comes in as string, because of simpleValue on Select component
+      value = value ? value : "";
       if (value.trim()) {
         this.props.linkedData.setValue(this.props.properties.field, value.split("\n"));
       } else {
