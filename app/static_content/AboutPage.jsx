@@ -161,6 +161,8 @@ export default class About extends React.Component {
             </div>
 
           </div>
+          <br/>
+          <div className='center-text'>For information about DOE CODE's security stance, visit our <a href='/doecode/security-hosting'>Hosting Security Page</a></div>
         </div>
       </div>
     );
