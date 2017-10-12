@@ -1467,7 +1467,9 @@ label {
 /*FAQ PAGE*/
 
 .faq-page-subtitle {
-  color: rgb(29, 97, 162);
+  color: rgb(49, 112, 143);
+  font-weight: normal;
+  font-size: 14px;
 }
 
 .faq-page-left-padded {
@@ -1479,9 +1481,8 @@ label {
 }
 
 .faq-page-blockquote {
-  padding-left: 20px;
-  margin-left: 20px;
-  border-left: 5px solid #EEEEEE;
+  font-size:14px;
+  color:rgb(51, 51, 51);
 }
 
 .faq-page-btn {
@@ -1497,6 +1498,7 @@ label {
 .faq-page-collapse-wrapper {
   padding-bottom: 2px;
 }
+
 
 .fa-page-caret {
   color: #7787A8;
@@ -1903,9 +1905,10 @@ ul.biblio-page-ul>li>a:hover {
   width: 314px;
 }
 
-#repository-services-header-container{
-  padding-left:25%;
+#repository-services-header-container {
+  padding-left: 25%;
 }
+
 
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
 
@@ -2186,7 +2189,6 @@ ul.biblio-page-ul>li>a:hover {
   .adv-search-date-container-homepage {
     display: inline-block;
   }
-
 }
 
 
@@ -2296,7 +2298,7 @@ ul.biblio-page-ul>li>a:hover {
 }
 
 @media only screen and (max-width:1520px) and (min-width:1200px) {
-  #repository-services-header-container{
-    padding-left:15%;
+  #repository-services-header-container {
+    padding-left: 15%;
   }
 }

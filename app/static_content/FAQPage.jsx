@@ -1,29 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Modal, Button, COllapse} from 'react-bootstrap';
-import SimpleCollapsible from '../fragments/SimpleCollapsible';
 
 export default class FAQ extends React.Component {
   constructor(props) {
     super(props);
-    this.handleAnchors = this.handleAnchors.bind(this);
-
-    var open_topic = "";
-    if (window.location.href.toString().indexOf('#') > -1) {
-      var patt = new RegExp(/#(\S+)$/);
-      open_topic = patt.exec(window.location.href)[0];
-      open_topic = open_topic.substr(1, open_topic.length);
-    }
-    this.state = {
-      open_topic: open_topic
-    }
-  }
-
-  componentDidMount() {}
-
-  handleAnchors(event, anchor) {
-    location.hash = anchor;
-    this.setState({'open_topic': anchor});
   }
 
   render() {
@@ -32,17 +11,20 @@ export default class FAQ extends React.Component {
     /*If you want something added to this page, just plop it right in to this array in the order you want*/
     const fa_items = [
       {
+        anchor: 'what-is',
         text: <span className='faq-page-subtitle'>What is DOE CODE?</span>,
         content: <p>
             DOE CODE is the U.S. Department of Energy’s (DOE) new software services platform and search tool for software resulting from DOE-funded research that provides functionality for collaboration, archiving, and discovery of scientific software funded by DOE. DOE CODE replaces the Energy Science and Technology Software Center (ESTSC). DOE CODE is an open source project and is available on GitHub. Throughout these FAQs, the terms "software" and "code" are used interchangeably, though it is understood there are discrete definitions in various communities.
           </p>
       }, {
+        anchor: 'what-does-alpha',
         text: <span className='faq-page-subtitle'>What does it mean for DOE CODE to be released in Alpha?</span>,
         content: <p>
             In Alpha, DOE CODE supports submission of software projects, code repository services, and search and discovery of submitted software projects. As development of DOE CODE continues toward Beta and Production releases, additional features and functionality will be included. Future requirements will include support and archiving of additional repository types, automated alerting for software points of contact, authentication using GitHub accounts, and more user profile features.
           </p>
 
       }, {
+        anchor: 'how-is-it-different',
         text: <span className='faq-page-subtitle'>How is the DOE CODE software submission and search tool different than&nbsp;
           <a title='DOE CODE Github' target="_blank" href='https://github.com/doecode'>DOE CODE GitHub</a>?
         </span>,
@@ -55,11 +37,13 @@ export default class FAQ extends React.Component {
           </p>
 
       }, {
+        anchor: 'what-does-it-contain',
         text: <span className='faq-page-subtitle'>What does DOE CODE contain?</span>,
         content: <p>
             DOE CODE contains records for DOE-funded software and links to the software or code repository. In addition to the code, the repositories may include manuals, examples, test data, etc.
           </p>
       }, {
+        anchor: 'what-does-it-provide',
         text: <span className='faq-page-subtitle'>Does DOE CODE provide repository services?</span>,
         content: <p>
             Yes. DOE CODE provides repository hosting services for the DOE community via&nbsp;<a title='DOE CODE Github' target='_blank' href='https://github.com/doecode/doecode'>GitHub</a>&nbsp;and&nbsp;<a title='Gitlab' target='_blank' href='https://gitlab.osti.gov/users/sign_in'>GitLab</a>. GitHub repository services are for those who want typical GitHub open source project functionality. OSTI’s GitLab repository service offers the same functionality as the GitHub repository service, but allows for open or closed repositories and more control of the code.
@@ -67,6 +51,7 @@ export default class FAQ extends React.Component {
             If you are interested in making use of the GitHub or GitLab repository services, or to request to join the DOE CODE GitHub community please contact&nbsp;<a title='Email doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>.
           </p>
       }, {
+        anchor: 'what-are-the-types',
         text: <span className='faq-page-subtitle'>What are the types of Software Availability?</span>,
         content: <div>
             <strong>Open Source, Publicly Available Repository</strong>&nbsp;- Software can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone in a public repository. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See the&nbsp;<a title='Open Source Initiative' target='_blank' href='https://opensource.org/'>Open Source Initiative</a>&nbsp;for more information and definitions.
@@ -76,6 +61,7 @@ export default class FAQ extends React.Component {
             <strong>Closed Source</strong>&nbsp;- Software that is not Open Source and for which access must be granted by contacting a licensing official. Software is often Closed Source because it is proprietary, sensitive, or has otherwise been deemed appropriate for limited distribution only. A landing page URL is required for submitting Closed Source code; the URL should provide additional information on how to obtain access to the code.
           </div>
       }, {
+        anchor: 'are-there-restrictions',
         text: <span className='faq-page-subtitle'>Are there restrictions on the use of the material in DOE CODE?</span>,
         content: <div>
             <p>There may be restrictions on use of the material based on the associated license(s). Currently, DOE CODE supports the following list of Open Source licenses:</p>
@@ -130,20 +116,23 @@ export default class FAQ extends React.Component {
             </div>
           </div>
       }, {
+        anchor: 'how-is-software-submitted',
         text: <span className='faq-page-subtitle'>How is Software Submitted?</span>,
         content: <div>
             <p>Individual software records and associated metadata are directly provided by the developer or the developing organization to DOE through DOE CODE.</p>
             <p>DOE CODE offers two paths for users to provide code. Users can (1)&nbsp;
               <strong>submit</strong>&nbsp;code to DOE CODE, and (2)&nbsp;
               <strong>announce</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. For more information about submitting and announcing code, see the "
-              <a title='What does it mean to submit code to DOE CODE?' className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-submit-code')}>What does it mean to submit code to DOE CODE?</a>" and "
-              <a title='What does it mean to announce code to DOE CODE?' className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-announce-code')}>What does it mean to announce code to DOE CODE?</a> for more details.</p>
+              <a title='What does it mean to submit code to DOE CODE?' href='/doecode/faq#what-does-it-mean-to-submit'>What does it mean to submit code to DOE CODE?</a>" and "
+              <a title='What does it mean to announce code to DOE CODE?' href='/doecode/faq#what-does-it-mean-to-announce'>What does it mean to announce code to DOE CODE?</a>
+              for more details.</p>
           </div>
       }, {
+        anchor: 'what-does-it-mean-to-submit',
         text: <span className='faq-page-subtitle'>What does it mean to submit code to DOE CODE?</span>,
         content: <div>
             <p>Users may want to submit their code to DOE CODE, because submitting offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Submitting to DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes that are in early development and for developers wanting to obtain DOIs early in the process. (See also "
-              <a title='What is a Digital Object Identifier' className='clickable' onClick={(e) => this.handleAnchors(e, 'what-is-doi')}>What is a Digital Object Identifier (DOI)?</a>").
+              <a title='What is a Digital Object Identifier' href='/doecode/faq#what-is-a-doi'>What is a Digital Object Identifier (DOI)?</a>").
             </p>
             <br/>
             <div>
@@ -161,9 +150,9 @@ export default class FAQ extends React.Component {
             <p>
               *Currently only Git-based repositories are supported. Most repositories hosted at GitHub, Bitbucket, SourceForge, and GitLab support Git-based repositories. When submitting a repository, users should be certain to use the direct URL to the actual repository.
             </p>
-          </div>,
-          anchorName: 'what-is-submit-code'
+          </div>
       }, {
+        anchor: 'what-does-it-mean-to-announce',
         text: <span className='faq-page-subtitle'>What does it mean to announce code to DOE CODE?</span>,
         content: <div>
             <p>Users may need to announce their code to the Department of Energy to ensure announcement and dissemination in accordance with DOE statutory responsibilities. Codes in later stages of development are the primary use case for this functionality. For announcement to the Department of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory data fields should be included during announcement when possible.
@@ -214,20 +203,22 @@ export default class FAQ extends React.Component {
             <p>
               NOTE: If you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing of your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, and .tar.gz2.
             </p>
-          </div>,
-          anchorName: 'what-is-announce-code'
+          </div>
       }, {
+        anchor: 'what-is-a-yaml',
         text: <span className='faq-page-subtitle'>What is a YAML file? How do I auto populate the YAML file?</span>,
         content: <p>
             <a title='YAML' target='_blank' href='http://www.yaml.org/start.html'>YAML</a>&nbsp;is a human friendly data serialization standard for all programming languages. DOE CODE provides functionality to allow users to auto-populate their bibliographic data in DOE CODE by placing a specifically formatted YAML file their repository’s root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly.&nbsp;
             <a title='YAML Schema' target='_blank' href='https://github.com/doecode/doecode/tree/master/metadata-schema'>See detailed YAML information and an example file.</a>
           </p>
       }, {
+        anchor: 'what-are-the-categories',
         text: <span className='faq-page-subtitle'>What are the Categories of Software?</span>,
         content: <p>Different categories of software have different distribution requirements, limitations, and appropriate distribution channels, which are defined in the&nbsp;
             <a title='Software Categories' target='_blank' href='https://www.osti.gov/stip/softwarecategories'>Software Categories</a>&nbsp;table. The table is not intended to provide an exhaustive list.
           </p>
       }, {
+        anchor: 'do-i-need-account',
         text: <span className='faq-page-subtitle'>Do I need an account to use DOE CODE?</span>,
         content: <p>
             A DOE CODE account is not needed to search for DOE-funded software, but an account is needed to submit or announce code. Users meeting minimum criteria can directly create a DOE CODE account. All you need is your first and last name, government email address or valid contract number, and a password.
@@ -236,11 +227,12 @@ export default class FAQ extends React.Component {
 
           </p>
       }, {
+        anchor: 'what-is-a-doi',
         text: <span className='faq-page-subtitle'>What is a Digital Object Identifier (DOI)?</span>,
         content: <p>
-          What is a Digital Object Identifier (DOI)? A DOI is a unique persistent identifier that references a digital object and provides long term access; DOIs remain stable even in the underlying address or URL for the content changes. OSTI is a member of and registering agency for DataCite and has the authority to assign Digital Object Identifiers to software and code that are submitted by DOE and its contractors or grantees. The assigning and registration of a DOI for software is a free service provided by OSTI to enhance DOE's management of this important resource.</p>,
-        anchorName: 'what-is-doi'
+            What is a Digital Object Identifier (DOI)? A DOI is a unique persistent identifier that references a digital object and provides long term access; DOIs remain stable even in the underlying address or URL for the content changes. OSTI is a member of and registering agency for DataCite and has the authority to assign Digital Object Identifiers to software and code that are submitted by DOE and its contractors or grantees. The assigning and registration of a DOI for software is a free service provided by OSTI to enhance DOE's management of this important resource.</p>
       }, {
+        anchor: 'what-are-the-benefits',
         text: <span className='faq-page-subtitle'>What are the benefits of getting a DOI for code or software?</span>,
         content: <div>
             <ul>
@@ -254,10 +246,12 @@ export default class FAQ extends React.Component {
             </ul>
           </div>
       }, {
+        anchor: 'removal',
         text: <span className='faq-page-subtitle'>What if I need to have a project removed from DOE CODE?</span>,
         content: <p>To have a project removed from DOE CODE please contact&nbsp;
             <a title='Email doecode@osti.gov' href='mailto:doecode@osti.gov'>doecode@osti.gov</a>.</p>
       }, {
+        anchor: 'advanced-search',
         text: <span className='faq-page-subtitle'>How do I use the Advanced Search?</span>,
         content: <div>
             The advanced search will allow you to perform more complex searches and retrieve more specific results, offering you a number of fields, such as Title, Developer(s), or Release date to help you refine your search results.
@@ -321,14 +315,17 @@ export default class FAQ extends React.Component {
             <br/>
           </div>
       }, {
+        anchor: 'are-there-apis',
         text: <span className='faq-page-subtitle'>Are there APIs available for DOE CODE?</span>,
         content: <p>Yes, there are lots of APIs with stable endpoints. For more information, see the&nbsp;<a title='API Documentation' target='_blank' href={api_location}>API documentation</a>.
           </p>
       }, {
+        anchor: 'do-i-need-cookies',
         text: <span className='faq-page-subtitle'>Do I need to have cookies enabled to use DOE CODE?</span>,
         content: <p>Yes, you must select Accept All Cookies. Please see our&nbsp;
             <a title='Website Policies / Important Links' href='/doecode/disclaimer'>Website Policies/Important Links</a>&nbsp; for further information.</p>
       }, {
+        anchor: 'more-info',
         text: <span className='faq-page-subtitle'>How can I find out more?</span>,
         content: <p>
             For additional assistance,&nbsp;
@@ -342,16 +339,20 @@ export default class FAQ extends React.Component {
         <div className="col-lg-6 col-md-10 col-xs-12 static-content">
           <h2 className="static-content-title">FAQs</h2>
           <br/>
-          <p>Click or tap on the questions below to see answers to frequently asked questions.</p>
-          <br/>
-          <div>
-            {fa_items.map((row, index) => <div className='faq-page-collapse-wrapper' key={'faq-' + index}>
-              {(row.anchorName) && <span>
-                <a title={row.text.props.children} id={row.anchorName}></a>
-              </span>}
-              <SimpleCollapsible title={row.text.props.children} toggleArrow button_text={row.text} contents={row.content} collapseContainerClasses='faq-page-blockquote' isOpen={(row.anchorName && row.anchorName == this.state.open_topic)}/>
-            </div>)}
-          </div>
+          <br/> {/*The list*/}
+          <ul>
+            {fa_items.map((row, index) => <li key={index}>
+              <a href={'/doecode/faq#' + row.anchor}>{row.text}</a>
+            </li>)}
+          </ul>
+          <br/> {/*The actual content*/}
+          {fa_items.map((row, index) => <div key={index}>
+            <a name={row.anchor}></a>
+            {row.text}
+            <blockquote className='faq-page-blockquote'>
+              {row.content}
+            </blockquote>
+          </div>)}
         </div>
         <div className="col-lg-3 col-md-1"></div>
       </div>
