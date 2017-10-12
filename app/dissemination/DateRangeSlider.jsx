@@ -36,7 +36,7 @@ export default class DateRangeSlider extends React.Component {
       doRefresh = true;
     }
     if (this.state.latestDateValue != event[1]) {
-      var newDate = event[1].toString() + "-12-31T23:59:59.999Z";
+      var newDate = event[1].toString() + "-12-31T23:59:59.001Z";
       searchData.setValue("date_latest", newDate);
       doRefresh = true;
     }
