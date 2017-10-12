@@ -186,6 +186,11 @@ export default class ResultsPage extends React.Component {
             <div className='col-lg-2'></div>
             <Sidebar sidebarClass="col-lg-2 col-md-4 col-xs-12 sidebar" refreshSearch={this.refreshSearch} facetData={facetData}/>
             <div className="col-lg-6 col-md-8 col-xs-12 all-search-results-row">
+              <div className='row right-text '>
+                <div className='col-xs-12'>
+                  <PaginationButtons max={pageCount} currentVal={forcePage + 1} refreshSearchCallback={this.handlePageClick}/>
+                </div>
+              </div>
               {this.state.numFound > 0 && <span>
                 <br/>
                 <div className="row">
