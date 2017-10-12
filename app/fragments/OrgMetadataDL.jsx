@@ -8,7 +8,7 @@ export default class OrgMetadataDL extends React.Component {
   render() {
     return (
       <div>
-        {this.props.data.primary_award && <div className='row'>
+        {(this.props.data.primary_award && this.props.data.primary_award.toString().toUpperCase() !== "UNKNOWN") && <div className='row'>
           <div className='col-md-1'></div>
           <div className='col-md-5 col-xs-12'>Primary Award/Contract Number:</div>
           <div className='col-md-6 col-xs-12'>{this.props.data.primary_award}</div>
