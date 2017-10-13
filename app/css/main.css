@@ -293,6 +293,19 @@ textarea.form-text-area {
   padding-top: 2px;
 }
 
+.griddle-filter>.filter-container {
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+.griddle-filter>.filter-container>input[type=text] {
+  box-shadow: rgb(221, 221, 221) 0px 1px 3px 0px inset;
+  color: rgb(0, 0, 0);
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+
 html h1 {
   font-size: 26px;
   margin-left: 10px;
@@ -1563,7 +1576,7 @@ label {
 }
 
 .header-logo-img-homepage {
-  margin-top:-30px;
+  margin-top: -30px;
 }
 
 .navbar-logo-img {
