@@ -173,8 +173,8 @@ export default class About extends React.Component {
 
           </div>
           <br/>
-          <div className='center-text'>For information about DOE CODE's security stance, visit our
-            <a href='/doecode/security-hosting'>Hosting Security Page</a>
+          <div className='center-text'>For information about DOE CODE's security stance, visit our&nbsp;
+            <a href='/doecode/security-hosting'>Hosting Security Page</a>.
           </div>
         </div>
       </div>
