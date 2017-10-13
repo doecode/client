@@ -305,7 +305,6 @@ textarea.form-text-area {
   border: 1px solid #ccc;
 }
 
-
 html h1 {
   font-size: 26px;
   margin-left: 10px;
@@ -2493,6 +2492,9 @@ ul.biblio-page-ul>li>a:hover {
   }
   #homepage-searchbar-container {
     padding-left: 37px;
+  }
+  .homepage-adv-search-dropdown {
+    left: 22px !important;
   }
 }
 
