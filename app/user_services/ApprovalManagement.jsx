@@ -50,7 +50,7 @@ export default class ApprovalManagement extends React.Component {
         sortable: true
       }, {
         key: 'edit',
-        name: 'View Record',
+        name: 'View Project',
         width: 135
       }
     ];

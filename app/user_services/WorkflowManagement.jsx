@@ -50,7 +50,7 @@ export default class WorkflowManagement extends React.Component {
         sortable: true
       }, {
         key: 'edit',
-        name: 'Modify Record',
+        name: 'Modify Project',
         width: 265,
       }
     ];
@@ -160,8 +160,8 @@ export default class WorkflowManagement extends React.Component {
           <h2 className="static-content-title">Manage My Projects</h2>
           <div className="form-group-xs row">
             <div className="col-sm-12">
-              <a title='Add New Record' href={"/doecode/submit" + this.wizardVersion} type="button" className="pure-button button-success btn-lg pull-right workflow-publish-btn white">
-                Add New Record
+              <a title='Add New Project' href={"/doecode/submit" + this.wizardVersion} type="button" className="pure-button button-success btn-lg pull-right workflow-publish-btn white">
+                Add New Project
               </a>
             </div>
           </div>

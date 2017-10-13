@@ -369,9 +369,9 @@ buildPanel(obj) {
       const submitClass = submitDisabled ? "pure-button btn-lg pull-right doecode-wizard-btn wizard-margin-style " : "pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style ";
       const codeID = metadata.getValue("code_id");
 
-      let headerText = "Create a New Software Record";
+      let headerText = "Create a New Software Project";
       if (codeID !== undefined && codeID > 0)
-    	  headerText = (this.props.page == 'approve' ? "Approving" : "Editing") + " Software Record #" + codeID;
+    	  headerText = (this.props.page == 'approve' ? "Approving" : "Editing") + " Software Project #" + codeID;
 
       const self = this;
 
