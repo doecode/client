@@ -1572,6 +1572,18 @@ label {
   font-size: 13.6px;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pagination-row {
+  display : flex;
+  align-items : center;
+  height: 35px;
+}
+
 .pagination-dropdown {
   background-color: #FFFFFF;
   padding: 10px;
@@ -1584,6 +1596,8 @@ label {
   border: solid 1px #ddd;
   border-radius: 4px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  height: 75px;
 }
 
 .pagination-dropdown::before {
@@ -1595,10 +1609,6 @@ label {
   border-right: 7px solid transparent;
   border-bottom: 7px solid white;
   display: inline-block;
-}
-
-.pagination-input {
-  margin-top: 5px;
 }
 
 @keyframes spin {

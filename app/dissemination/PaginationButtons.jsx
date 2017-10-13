@@ -74,10 +74,12 @@ export default class PaginationButtons extends React.Component {
               Go to page:&nbsp;{this.state.currentVal}&nbsp;of&nbsp;{this.props.max}
             </div>
           </div>
-          <div className='row'>
-            <div className='col-xs-9 no-col-padding-right'><input className='pagination-input' onChange={this.showCurrentSliderPage} title={"Page " + this.state.currentVal} type="range" min="1" max={this.props.max} defaultValue={this.state.currentVal} step="1"/></div>
-            <div className='col-xs-3 minimal-col-padding-left left-text'>
-              <button type='button' title={"Go"} className='pure-button' onClick={this.goToPage}>»</button>
+          <div className="flex-container">
+            <div className='row pagination-row'>
+              <div className='col-xs-9 no-col-padding-right'><input className='pagination-input' onChange={this.showCurrentSliderPage} title={"Page " + this.state.currentVal} type="range" min="1" max={this.props.max} defaultValue={this.state.currentVal} step="1"/></div>
+              <div className='col-xs-3 minimal-col-padding-left left-text'>
+                <button type='button' title={"Go"} className='pure-button pagination-button' onClick={this.goToPage}>»</button>
+              </div>
             </div>
           </div>
         </div>}
