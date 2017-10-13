@@ -2,7 +2,7 @@ import SubmitForm from './form/SubmitForm';
 import AnnounceForm from './form/AnnounceForm';
 import AnnouncementInterface from './form/AnnouncementInterface';
 import SubmissionInterface from './form/SubmissionInterface';
-import Confirmation from './confirmation/Confirmation';
+import Confirmation from './form/Confirmation';
 import WorkflowManagement from './user_services/WorkflowManagement';
 import ApprovalManagement from './user_services/ApprovalManagement';
 import ApprovalForm from './form/ApprovalForm';

@@ -13,7 +13,6 @@ import ContributorsStep from '../steps/ContributorsStep';
 import AccessStep from '../steps/AccessStep';
 import RecipientStep from '../steps/RecipientStep';
 import ConfirmStep from '../steps/ConfirmStep';
-import Confirmation from '../confirmation/Confirmation';
 import RIsStep from '../steps/RIsStep';
 import {PanelGroup, Panel} from 'react-bootstrap';
 import {Modal} from 'react-bootstrap';
