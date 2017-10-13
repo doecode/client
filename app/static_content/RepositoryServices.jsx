@@ -40,7 +40,7 @@ export default class RepositoryServices extends React.Component {
                   <br/>
                   <br/>
                   <br/>
-                  <h2>OR</h2>
+                  <h2 style={{marginRight:'10px'}}>OR</h2>
                 </span>
                 <span className='hide-sm hide-md hide-lg'>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className='fake-h2'>OR</span>
@@ -61,7 +61,7 @@ export default class RepositoryServices extends React.Component {
         <div className='col-xs-12 center-text'>
           <br/>
           <br/>
-          To join the community, please email&nbsp;<a title='Send email to doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>
+          To join the community, please email&nbsp;<a title='Send email to doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>.
         </div>
       </div>
     );
