@@ -35,8 +35,8 @@ export default class Footer extends React.Component {
             </div>
             <div className='col-md-3'></div>
           </div>
-
-          <div className="row text-center mt-1 mb-1 white">
+          
+          <div className="row text-center mt-1  white">
             <span className='hide-xs'>
               <ul className="list-inline">
                 <li className={this.footer_link}>
@@ -94,12 +94,12 @@ export default class Footer extends React.Component {
               </ul>
               <div className='row hide-md hide-lg not-so-wide-row '>
                 <br/>
-                <div className='col-xs-6 center-text website-policies-mobile'>
+                <div className='col-xs-6 right-text website-policies-mobile'>
                   <a title='Website Policies' href="/doecode/disclaimer" className={linkColorClass}>
                     <span className="fa fa-university footer-fa-icon"></span>&nbsp;Website Policies
                   </a>
                 </div>
-                <div className='col-xs-6 center-text'>
+                <div className='col-xs-6 left-text'>
                   <a title='Contact Us' href="/doecode/contact" className={linkColorClass}>
                     <span className="fa fa-comments-o footer-fa-icon"></span>&nbsp;Contact Us</a>
                 </div>

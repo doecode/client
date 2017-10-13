@@ -74,8 +74,9 @@ export default class Splash extends React.Component {
                       <br/>
                       <br/>
                       <br/>
-                      <br/>
                       <LinkIconRow icon_row_data={icon_row1}/>
+                      <br/>
+                      <br/>
                       <br/>
                       <br/>
                       <br/>

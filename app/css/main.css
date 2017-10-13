@@ -1351,8 +1351,8 @@ ol.progtrckr li.progtrckr-done:hover:before {
 
 .search-btn {
   font-size: 16px;
-  padding-left: 12.8px;
-  padding-right: 12.8px;
+  padding-left: 20.8px;
+  padding-right: 37.8px;
   padding-top: 8px;
   padding-bottom: 8px;
 }
@@ -2121,7 +2121,7 @@ ul.biblio-page-ul>li>a:hover {
     text-transform: uppercase;
     font-size: 25px;
     text-align: center;
-    padding:0px;
+    padding: 0px;
   }
 }
 
@@ -2386,6 +2386,9 @@ ul.biblio-page-ul>li>a:hover {
   .publication-date-end-container input {
     max-width: 150px;
     margin-left: 10px;
+  }
+  #homepage-searchbar-container{
+    padding-left:37px;
   }
 }
 

@@ -185,7 +185,7 @@ export default class SearchBar extends React.Component {
                     <div className='col-sm-2'></div>
                     <div className='col-sm-8'>
                       <div className='row'>
-                        <div className='col-sm-11 minimal-col-padding-right'>
+                        <div id='homepage-searchbar-container' className='col-sm-11 minimal-col-padding-right'>
                           <input className='pure-input-1 search-box homepage-searchbar' placeholder="Search DOE CODE for submitted software entries" type='text'/>
                           <button title="Toggle Advanced Search Dropdown" onClick={this.doAdvancedSearch} className="adv-search-button homepage-adv-search-btn" type="button">
                             <span className="fa fa-caret-down adv-search-button-icon"></span>
