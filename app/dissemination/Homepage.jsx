@@ -37,11 +37,24 @@ export default class Homepage extends React.Component {
                       {/*Logo*/}
                       <div className="row center-text">
                         <div className="col-xs-12">
+                          <span className='hide-md hide-sm hide-lg'>
+                            <br/>
+                            <br/>
+                          </span>
                           <img src='https://www.osti.gov/includes/doecode/images/DOEcodeTitle_395-min.png' alt="DOE CODE" title='DOE CODE' className='header-logo-img-homepage'/>
                         </div>
                       </div>
                       <br/>
-                      <br/>
+                      {/*Mobile Only*/}
+                      <div className='hide-md hide-sm hide-lg'>
+                        <br/>
+                        <br/>
+                        <SearchBar containerClasses='row not-so-wide-row' barType='homepage'/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                      </div>
                       <div className='row center-text'>
                         <div className='col-xs-12 homepage-subtext'>
                           U.S. Department of Energy
@@ -50,7 +63,6 @@ export default class Homepage extends React.Component {
                         </div>
                       </div>
                       <div className='hidden-xs visible-sm visible-md visible-lg'>
-                        <br/>
                         <br/>
                         <br/>
                         <br/>
@@ -67,6 +79,9 @@ export default class Homepage extends React.Component {
                 <div className='container hidden-xs visible-sm visible-md visible-lg'>
                   <div className='row'>
                     <div className='col-xs-12'>
+                      <br/>
+                      <br/>
+                      <br/>
                       <br/>
                       <br/>
                       <br/>

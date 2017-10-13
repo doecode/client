@@ -180,14 +180,14 @@ export default class SearchBar extends React.Component {
           <div className='container'>
             <div className='row'>
               <div className='col-sm-12 no-col-padding-left'>
-                <div className='container'>
+                <div className='container no-col-padding-left-mobile'>
                   <div className='row'>
-                    <div className='col-sm-2'></div>
-                    <div className='col-sm-8'>
+                    <div className='col-sm-2 col-xs-1'></div>
+                    <div className='col-sm-8 col-xs-10  no-col-padding-left-mobile'>
                       <div className='row'>
-                        <div id='homepage-searchbar-container' className='col-sm-11 minimal-col-padding-right'>
+                        <div id='homepage-searchbar-container' className='col-sm-11 col-xs-11 minimal-col-padding-right'>
                           <input className='pure-input-1 search-box homepage-searchbar' placeholder="Search DOE CODE for submitted software entries" type='text'/>
-                          <button title="Toggle Advanced Search Dropdown" onClick={this.doAdvancedSearch} className="adv-search-button homepage-adv-search-btn" type="button">
+                          <button title="Toggle Advanced Search Dropdown" onClick={this.doAdvancedSearch} className="adv-search-button homepage-adv-search-btn hide-xs" type="button">
                             <span className="fa fa-caret-down adv-search-button-icon"></span>
                           </button>
                           {/*Advanced search dropdown*/}
@@ -245,14 +245,14 @@ export default class SearchBar extends React.Component {
                             </div>
                           </div>}
                         </div>
-                        <div className='col-sm-1 no-col-padding-left'>
+                        <div className='col-sm-1 col-xs-1 no-col-padding-left'>
                           <button title="Trigger Search" type="button" className="pure-button button-success search-btn homepage-search-btn" onClick={this.search}>
                             <span className="fa fa-search"></span>
                           </button>
                         </div>
                       </div>
                     </div>
-                    <div className='col-sm-2'></div>
+                    <div className='col-sm-2 col-xs-1'></div>
                   </div>
                 </div>
               </div>

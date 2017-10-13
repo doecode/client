@@ -1555,7 +1555,7 @@ label {
 }
 
 .header-logo-img-homepage {
-  padding-top: 5px;
+  margin-top:-30px;
 }
 
 .navbar-logo-img {
@@ -1580,7 +1580,7 @@ label {
   background: white;
   border: solid 1px #ddd;
   border-radius: 4px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   overflow: visible;
   padding: 4px 0;
   margin: 0;
@@ -1628,7 +1628,7 @@ label {
 }
 
 .pagination-dropdown-panel td {
-  vertical-align:top;
+  vertical-align: top;
 }
 
 .pagination-dropdown-panel input[type=range] {
@@ -1637,13 +1637,13 @@ label {
 }
 
 .pagination-go label {
-  line-height:20px;
+  line-height: 20px;
   font-weight: 400;
   color: #636c72!important;
 }
 
 .pagination-arrow {
-   color:#ccc;
+  color: #ccc;
 }
 
 .pagination-input {
@@ -1954,7 +1954,7 @@ ul.biblio-page-ul>li>a:hover {
 }
 
 #or-repository-container {
-  text-align:center !important;
+  text-align: center !important;
 }
 
 #gitlab-repository-container {
@@ -2184,7 +2184,32 @@ ul.biblio-page-ul>li>a:hover {
     max-width: none !important;
   }
   #or-repository-container {
-    text-align:left !important;
+    text-align: left !important;
+  }
+  .search-box {
+    padding-bottom: 3px;
+  }
+  .homepage-search-btn {
+    height: 35px !important;
+  }
+  .homepage-searchbar {
+    height: inherit !important;
+    font-size: 16px !important;
+  }
+  .homepage-adv-search-btn {
+    top: 10px !important;
+  }
+  .homepage-search-btn {
+    width: 40px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  .signin-btn-icon {
+    opacity: 1;
+  }
+  .header-logo-img-homepage {
+    padding-top: 5px;
+    margin-top: 0px;
   }
 }
 

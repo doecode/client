@@ -12,7 +12,7 @@ export default class NavgationBar extends React.Component {
 
   render() {
     var img_class = (this.props.isHomepage)
-      ? 'navbar-logo-img hide'
+      ? 'navbar-logo-img '
       : 'navbar-logo-img';
     return (
       <div className='  container'>
