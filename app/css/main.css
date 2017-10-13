@@ -1589,7 +1589,7 @@ label {
 .pagination-dropdown.pagination-dropdown-tip:before {
   position: absolute;
   top: -6px;
-  left: 9px;
+  left: 158px;
   content: "";
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
@@ -1600,7 +1600,7 @@ label {
 .pagination-dropdown.pagination-dropdown-tip:after {
   position: absolute;
   top: -5px;
-  left: 10px;
+  left: 159px;
   content: "";
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
@@ -1610,7 +1610,7 @@ label {
 
 .pagination-dropdown-style {
   display: block;
-  left: 0px;
+  left: -75px;
   top: -5px;
 }
 
