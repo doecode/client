@@ -124,8 +124,7 @@ export default class FAQ extends React.Component {
               <strong>submit</strong>&nbsp;code to DOE CODE, and (2)&nbsp;
               <strong>announce</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. For more information about submitting and announcing code, see the "
               <a title='What does it mean to submit code to DOE CODE?' href='/doecode/faq#what-does-it-mean-to-submit'>What does it mean to submit code to DOE CODE?</a>" and "
-              <a title='What does it mean to announce code to DOE CODE?' href='/doecode/faq#what-does-it-mean-to-announce'>What does it mean to announce code to DOE CODE?</a>
-              for more details.</p>
+              <a title='What does it mean to announce code to DOE CODE?' href='/doecode/faq#what-does-it-mean-to-announce'>What does it mean to announce code to DOE CODE?</a>"&nbsp; for more details.</p>
           </div>
       }, {
         anchor: 'what-does-it-mean-to-submit',
@@ -146,7 +145,7 @@ export default class FAQ extends React.Component {
                 <li>Developers</li>
               </ul>
             </div>
-
+            <br/>
             <p>
               *Currently only Git-based repositories are supported. Most repositories hosted at GitHub, Bitbucket, SourceForge, and GitLab support Git-based repositories. When submitting a repository, users should be certain to use the direct URL to the actual repository.
             </p>
@@ -180,6 +179,7 @@ export default class FAQ extends React.Component {
                 <li>specific software used by power administrations for the operation, control, planning, and modeling of electric power transmission systems and the interconnected utilities; however, modifications/enhancements to portions of this software that are not an integral part of the whole and have potential application outside the power administrations should be announced.</li>
               </ul>
             </div>
+            <br/>
             <div>
               Required Metadata to Announce to the Department of Energy through DOE CODE:
               <ul>
@@ -194,6 +194,7 @@ export default class FAQ extends React.Component {
                 <li>Research Organization Name</li>
               </ul>
             </div>
+            <br/>
             <p>In addition to the basic requirements for metadata fields (above), other optional/non-mandatory data fields should be included during announcement when possible.</p>
             <p>
               *Currently only Git-based repositories are supported. Most repositories hosted at git.com, bitbucket.org, sourcforge.org, and GitLab support Git-based repositories. When submitting a repository please make sure you are using the direct URL to the actual repository. As an example, the direct repository URL for DOE CODE is&nbsp;
@@ -323,7 +324,7 @@ export default class FAQ extends React.Component {
         anchor: 'do-i-need-cookies',
         text: <span className='faq-page-subtitle'>Do I need to have cookies enabled to use DOE CODE?</span>,
         content: <p>Yes, you must select Accept All Cookies. Please see our&nbsp;
-            <a title='Website Policies / Important Links' href='/doecode/disclaimer'>Website Policies/Important Links</a>&nbsp; for further information.</p>
+            <a title='Website Policies / Important Links' href='/doecode/disclaimer'>Website Policies/Important Links</a>&nbsp;for further information.</p>
       }, {
         anchor: 'more-info',
         text: <span className='faq-page-subtitle'>How can I find out more?</span>,
