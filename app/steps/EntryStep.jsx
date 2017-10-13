@@ -67,7 +67,7 @@ export default class EntryStep extends React.Component {
       <div className="container-fluid form-horizontal">
 
         <div className="form-group form-group-sm row">
-          <div className="col-xs-12">
+          <div className="col-xs-12 input-form-push-left">
             <h3>Please describe the availability of your software:
             </h3>
           </div>

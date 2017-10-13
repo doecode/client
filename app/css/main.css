@@ -1519,6 +1519,14 @@ label {
   font-size: 24px;
 }
 
+.fake-h2.input-form-push-left {
+  margin-left: -15px;
+}
+
+.input-form-push-left h3 {
+  margin-left: -14px;
+}
+
 .nav-menu-item-special {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
