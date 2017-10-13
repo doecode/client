@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import UserData from '../stores/UserData';
 import UserField from '../field/UserField';
 import Validation from '../utils/Validation';
-import SignupBadRequest from '../fragments/SignupBadRequest';
 import SuccessfulSignup from '../fragments/SuccessfulSignup';
 import UserFields from '../fragments/UserFields';
 import PasswordFields from '../fragments/PasswordFields';
@@ -116,12 +115,17 @@ export default class RegisterUser extends React.Component {
             {/*ERROR MESSAGE*/}
             {this.state.badRequest && <div className='row'>
               <div className="col-md-2"></div>
-              <div className="col-md-3 col-xs-12 no-col-padding-left">
-                <br/>
-                <SignupBadRequest errors={this.state.badRequestErrors}/>
+              <div className="col-md-8 col-xs-12 no-col-padding-left">
+                <br/> {this.state.badRequestErrors.map((row) => <div className="has-error" key={row.key}>
+                  {!row.customError && <label className="control-label">{row.error}
+                  </label>}
+                  {row.customError && <span>
+                    {row.error}
+                  </span>}
+                </div>)}
                 <br/>
               </div>
-              <div className='col-md-7'></div>
+              <div className='col-md-2'></div>
             </div>}
             <div className='row'>
               <div className='col-md-2'></div>
