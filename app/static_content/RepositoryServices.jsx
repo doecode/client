@@ -23,22 +23,30 @@ export default class RepositoryServices extends React.Component {
           <div className="static-content repository-services-container center-text">
             <div className='repository-services-container'>
               <div className='center-text' id='github-repository-container'>
-                <strong>Create a new project on our open source
+                <strong>Create a new project on
+                  <br/>
+                  our open source
                   <br/>GitHub community:</strong>
                 <br/>
                 <br/>
-                <ImageLink title='Github' imgID='repository-github-img' linkTarget='_blank' linkURL='https://github.com/doecode/' imageURL='https://www.osti.gov/includes/doecode/images/github.7433692cabbfa132f34adb034e7909fa.png'/>
-                <br/>
-                To join the community, please email&nbsp;<a title='Send email to doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>
+                <ImageLink title='Github' imgID='repository-github-img' linkTarget='_blank' linkURL='https://github.com/doecode/' imageURL='https://www.osti.gov/includes/doecode/images/github314X150.png'/>
               </div>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <div className='center-text' id='or-repository-container'>
+                <span className='hide-xs'>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                </span>
                 <h2>OR</h2>
               </div>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <div className='center-text' id='gitlab-repository-container'>
                 <strong>Create a new project on our internal&nbsp;<br/>
-                  <a target='_blank' title='DOE CODE Repository' href="http://gitlab.osti.gov/">DOE CODE repository</a>&nbsp;where you can control access to the project.
+                  <a target='_blank' title='DOE CODE Repository' href="http://gitlab.osti.gov/">DOE CODE repository</a>&nbsp;where you can<br/>control access to the project.
                 </strong>
                 <br/>
                 <br/>
@@ -46,6 +54,11 @@ export default class RepositoryServices extends React.Component {
               </div>
             </div>
           </div>
+        </div>
+        <div className='col-xs-12 center-text'>
+          <br/>
+          <br/>
+          To join the community, please email&nbsp;<a title='Send email to doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>
         </div>
       </div>
     );
