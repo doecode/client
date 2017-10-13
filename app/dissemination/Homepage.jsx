@@ -6,12 +6,10 @@ import LinkIconRow from '../fragments/LinkIconRow';
 import IconRowIcon from '../fragments/IconRowIcon';
 import SearchBar from '../fragments/SearchBar';
 
-/*Search stuff. TODO modularize once we decide on a look for the search data*/
 import SearchData from '../stores/SearchData';
 const searchData = new SearchData();
-/*Search stuff. TODO modularize once we decide on a look for the search data*/
 
-export default class Splash extends React.Component {
+export default class Homepage extends React.Component {
   constructor(props) {
     super(props);
   }

@@ -12,7 +12,7 @@ import Account from './user_services/Account';
 import ConfirmUser from './user_services/ConfirmUser';
 import ForgotPassword from './user_services/ForgotPassword';
 import UserAdmin from './user_services/UserAdmin';
-import Splash from './splash/Splash';
+import Homepage from './dissemination/Homepage';
 import AdvancedSearch from './dissemination/AdvancedSearch';
 import ResultsPage from './dissemination/ResultsPage';
 import BiblioPage from './dissemination/BiblioPage';
@@ -63,7 +63,7 @@ class DOECodeRouter extends React.Component {
           <div className={this.wrapper_class}>
             <Header isHomepage={this.is_homepage}/>
             <div>
-              <Route exact path="/" component={Splash}/>
+              <Route exact path="/" component={Homepage}/>
               <Route path="/submit" component={SubmitForm}/>
               <Route path="/submit2" component={AnnouncementInterface}/>
               <Route path="/announce" component={AnnounceForm}/>
