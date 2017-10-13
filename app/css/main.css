@@ -1572,42 +1572,85 @@ label {
   font-size: 13.6px;
 }
 
-.flex-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.pagination-row {
-  display : flex;
-  align-items : center;
-  height: 35px;
-}
-
-.pagination-dropdown {
-  background-color: #FFFFFF;
-  padding: 10px;
-  position: absolute;
-  right: 60px;
-  top: 38px;
-  z-index: 4;
-  margin-right: 14px;
-  margin-left: 14px;
+.pagination-dropdown .pagination-dropdown-menu, .pagination-dropdown .pagination-dropdown-panel {
+  min-width: 160px;
+  max-width: 360px;
+  max-width: 400px;
+  list-style: none;
+  background: white;
   border: solid 1px #ddd;
   border-radius: 4px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  width: 200px;
-  height: 75px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  overflow: visible;
+  padding: 4px 0;
+  margin: 0;
 }
 
-.pagination-dropdown::before {
+.pagination-dropdown.pagination-dropdown-tip:before {
   position: absolute;
   top: -6px;
-  right: 10px;
+  left: 9px;
   content: "";
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  border-bottom: 7px solid white;
+  border-bottom: 7px solid #ddd;
+  display: inline-block;
+}
+
+.pagination-dropdown.pagination-dropdown-tip:after {
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  content: "";
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid white;
+  display: inline-block;
+}
+
+.pagination-dropdown-style {
+  display: block;
+  left: 0px;
+  top: -5px;
+}
+
+.pagination-dropdown.pagination-dropdown-tip {
+  margin-top: 8px;
+}
+
+.pagination-dropdown {
+  position: absolute;
+  z-index: 1039;
+}
+
+.pagination-dropdown .pagination-dropdown-panel {
+  padding: 10px;
+}
+
+.pagination-dropdown-panel td {
+  vertical-align:top;
+}
+
+.pagination-dropdown-panel input[type=range] {
+  display: block;
+  width: 200px;
+}
+
+.pagination-go label {
+  line-height:20px;
+  font-weight: 400;
+  color: #636c72!important;
+}
+
+.pagination-arrow {
+   color:#ccc;
+}
+
+.pagination-input {
+  height: 26px;
+  padding: 0px;
+  margin-right: 5px;
+  width: 200px;
   display: inline-block;
 }
 
