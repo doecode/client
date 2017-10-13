@@ -1953,7 +1953,9 @@ ul.biblio-page-ul>li>a:hover {
   width: 314px;
 }
 
-#or-repository-container {}
+#or-repository-container {
+  text-align:center !important;
+}
 
 #gitlab-repository-container {
   width: 314px;
@@ -2178,6 +2180,12 @@ ul.biblio-page-ul>li>a:hover {
     text-align: center;
     padding: 0px;
   }
+  .containerStyle {
+    max-width: none !important;
+  }
+  #or-repository-container {
+    text-align:left !important;
+  }
 }
 
 
@@ -2365,6 +2373,9 @@ ul.biblio-page-ul>li>a:hover {
   }
   .adv-search-date-container-homepage {
     display: inline-block;
+  }
+  .containerStyle {
+    max-width: none !important;
   }
 }
 

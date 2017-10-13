@@ -53,27 +53,30 @@ export default class About extends React.Component {
       <div>
 
         <div className="container-fluid bgWhite">
-          <div className="container containerStyle">
+          <div className="container-fluid containerStyle">
             <div className="row">
-              <div className="col-xs-12 static-content left-text">
+              <div className="col-xs-12 static-content left-text no-col-padding-left no-col-padding-right">
                 <h2 className="static-content-title">About</h2>
               </div>
               <div className=""></div>
             </div>
             <div className="row">
               <div className=""></div>
-              <div className="col-xs-12 static-content">
+              <div className="col-xs-12 static-content no-col-padding-left no-col-padding-right">
                 <br/>
                 <p className='left-text'>
                   The Department of Energy (DOE) Office of Scientific and Technical Information (OSTI) developed a new DOE software services platform and search tool for DOE-funded code – DOE CODE. DOE CODE replaces OSTI’s old software center, the Energy Science and Technology Software Center (ESTSC).
                 </p>
 
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>CREATE</strong> - Create code inside or outside DOE CODE.</p>
+                  <strong>CREATE</strong>
+                  - Create code inside or outside DOE CODE.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>SUBMIT</strong> - Submit your DOE-funded code.</p>
+                  <strong>SUBMIT</strong>
+                  - Submit your DOE-funded code.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>DISCOVER</strong> - Discover DOE-funded software and code.</p>
+                  <strong>DISCOVER</strong>
+                  - Discover DOE-funded software and code.</p>
 
                 <img title='Create' className="hidden-xs hidden-sm" src={this.state.currentCreate} width="150" height="113" alt="Create" onMouseOver={() => {
                   this.changeCreate(1)
@@ -99,44 +102,45 @@ export default class About extends React.Component {
           </div>
         </div>
         <div className="container-fluid">
-          <div className="container containerStyle">
+          <div className="container-fluid containerStyle">
             <div className="row">
               <div className=""></div>
-              <div className="col-xs-12 static-content">
+              <div className="col-xs-12 static-content no-col-padding-left no-col-padding-right">
                 <img title='DOE CODE Features' className="hidden-xs hidden-sm" src={this.state.currentImage} width="710" height="442" alt="DOE CODE Features" useMap="#featuremap"></img>
                 <map name="featuremap">
+                  {/*10:30*/}
                   <area title='Github' shape="circle" coords="232,107,32" alt="Github" onMouseOver={() => {
-                    this.changeImage(5) //10:30
+                    this.changeImage(5)
                   }} onMouseOut={() => {
                     this.changeImage(0)
-                  }}/>
+                  }}/> {/*9 o clock*/}
                   <area title='Social Code' shape="circle" coords="179,241,32" alt="Social Code" onMouseOver={() => {
-                    this.changeImage(6) //9 o clock
+                    this.changeImage(6)
                   }} onMouseOut={() => {
                     this.changeImage(0)
-                  }}/>
+                  }}/> {/*7:30*/}
                   <area title='Catalog' shape="circle" coords="233,362,32" alt="Catalog" onMouseOver={() => {
-                    this.changeImage(3) //7:30
+                    this.changeImage(3)
                   }} onMouseOut={() => {
                     this.changeImage(0)
-                  }}/>
+                  }}/> {/*4:30*/}
                   <area title='Repository' shape="circle" coords="481,365,32" alt="Repository" onMouseOver={() => {
-                    this.changeImage(2) //4:30
+                    this.changeImage(2)
                   }} onMouseOut={() => {
                     this.changeImage(0)
-                  }}/>
+                  }}/> {/*3 o clock*/}
                   <area title='DOI' shape="circle" coords="533,239,32" alt="DOI" onMouseOver={() => {
-                    this.changeImage(1) //3 o clock
+                    this.changeImage(1)
                   }} onMouseOut={() => {
                     this.changeImage(0)
-                  }}/>
+                  }}/> {/*1:30*/}
                   <area title='Easy' shape="circle" coords="481,112,32" alt="Easy" onMouseOver={() => {
-                    this.changeImage(7) //1:30
+                    this.changeImage(7)
                   }} onMouseOut={() => {
                     this.changeImage(0)
-                  }}/>
+                  }}/> {/*12 o clock*/}
                   <area title='Policy' shape="circle" coords="355,55,32" alt="Policy" onMouseOver={() => {
-                    this.changeImage(4) //12 o clock
+                    this.changeImage(4)
                   }} onMouseOut={() => {
                     this.changeImage(0)
                   }}/>
@@ -144,25 +148,34 @@ export default class About extends React.Component {
 
                 <h3 className="hidden-md hidden-lg featuresStyle">FEATURES</h3>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>CATALOG</strong> - DOE Software Catalog.</p>
+                  <strong>CATALOG</strong>
+                  - DOE Software Catalog.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>SOCIAL CODE</strong> - DOE CODE seamlessly interfaces with common development platforms (e.g., open web API).</p>
+                  <strong>SOCIAL CODE</strong>
+                  - DOE CODE seamlessly interfaces with common development platforms (e.g., open web API).</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>GITHUB</strong> - DOE CODE is an open source product on GitHub that other institutions can download and deploy for their own purposes.</p>
+                  <strong>GITHUB</strong>
+                  - DOE CODE is an open source product on GitHub that other institutions can download and deploy for their own purposes.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>POLICY</strong> - DOE CODE resources provide you information on best practices and policies for software.</p>
+                  <strong>POLICY</strong>
+                  - DOE CODE resources provide you information on best practices and policies for software.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>EASY</strong> - DOE CODE is easy to use and requires minimal metadata, often autopopulated.</p>
+                  <strong>EASY</strong>
+                  - DOE CODE is easy to use and requires minimal metadata, often autopopulated.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>DOI</strong> - DOE CODE issues digital object identifiers (DOIs) for code so software is more easily cited and discoverable. Allows for stronger connections between code, publications, and data through citation in reference sections.</p>
+                  <strong>DOI</strong>
+                  - DOE CODE issues digital object identifiers (DOIs) for code so software is more easily cited and discoverable. Allows for stronger connections between code, publications, and data through citation in reference sections.</p>
                 <p className="left-text hidden-md hidden-lg">
-                  <strong>REPOSITORY</strong> - DOE CODE offers public and private repository services in GitHub and GitLab.</p>
+                  <strong>REPOSITORY</strong>
+                  - DOE CODE offers public and private repository services in GitHub and GitLab.</p>
               </div>
             </div>
 
           </div>
           <br/>
-          <div className='center-text'>For information about DOE CODE's security stance, visit our <a href='/doecode/security-hosting'>Hosting Security Page</a></div>
+          <div className='center-text'>For information about DOE CODE's security stance, visit our
+            <a href='/doecode/security-hosting'>Hosting Security Page</a>
+          </div>
         </div>
       </div>
     );

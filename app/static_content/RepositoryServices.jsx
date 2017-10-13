@@ -12,13 +12,13 @@ export default class RepositoryServices extends React.Component {
 
     return (
       <div className="row not-so-wide-row">
-        <div className="col-lg-3 col-sm-1"></div>
-        <div className="col-lg-6 col-sm-10 col-xs-12 static-content">
+        <div className="col-lg-3 col-md-1"></div>
+        <div className="col-lg-6 col-md-10 col-xs-12 static-content">
           <h2 className="static-content-title">Repository Services</h2>
           <br/>
           <br/>
         </div>
-        <div className="col-lg-3 col-sm-1"></div>
+        <div className="col-lg-3 col-md-1"></div>
         <div className='no-col-padding-left col-xs-12'>
           <div className="static-content repository-services-container center-text">
             <div className='repository-services-container'>
@@ -32,7 +32,7 @@ export default class RepositoryServices extends React.Component {
                 <ImageLink title='Github' imgID='repository-github-img' linkTarget='_blank' linkURL='https://github.com/doecode/' imageURL='https://www.osti.gov/includes/doecode/images/github314X150.png'/>
               </div>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <div className='center-text' id='or-repository-container'>
+              <div id='or-repository-container'>
                 <span className='hide-xs'>
                   <br/>
                   <br/>
@@ -40,8 +40,11 @@ export default class RepositoryServices extends React.Component {
                   <br/>
                   <br/>
                   <br/>
+                  <h2>OR</h2>
                 </span>
-                <h2>OR</h2>
+                <span className='hide-sm hide-md hide-lg'>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className='fake-h2'>OR</span>
+                </span>
               </div>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <div className='center-text' id='gitlab-repository-container'>
