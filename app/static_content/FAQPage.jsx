@@ -310,7 +310,7 @@ export default class FAQ extends React.Component {
               <br/>
               <br/>
               <strong>Sort</strong><br/>
-              You can choose for your results to be sorted by Relevance, Publication Date (newest to oldest) or Publication Date (oldest to newest).
+              You can choose for your results to be sorted by Relevance, Release Date (newest to oldest) or Release Date (oldest to newest).
             </div>
             <br/>
           </div>
