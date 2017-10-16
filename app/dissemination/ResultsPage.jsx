@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PolyFill from 'babel-polyfill';
 import SearchItem from './SearchItem';
 import {doAjax, getQueryParam, getSearchSortDisplay} from '../utils/utils';
 import SearchData from '../stores/SearchData';

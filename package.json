@@ -23,7 +23,9 @@
             "env",
             {
               "targets": {
-                "browsers": ["last 3 versions"]
+                "browsers": [
+                  "last 3 versions"
+                ]
               }
             }
           ]
@@ -53,6 +55,7 @@
   "dependencies": {
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
+    "babel-polyfill": "^6.26.0",
     "clipboard": "1.7.1",
     "compression": "1.7.1",
     "express": "4.16.1",
