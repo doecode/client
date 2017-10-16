@@ -398,8 +398,8 @@ buildPanel(obj) {
         button =             <div className="form-group-xs row col-sm-12">
           <br/>
                             <div>
-                                <button title='Announce Record to E-Link' type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
-                                    Announce Record to E-Link
+                                <button title='Announce Project to E-Link' type="button" className={submitClass} disabled={submitDisabled} onClick={this.submit}>
+                                    Announce Project to E-Link
                                 </button>
                             </div>
                             {saveBtn}
@@ -408,8 +408,8 @@ buildPanel(obj) {
           button =           <div className="form-group-xs row col-sm-12">
             <br/>
                           <div>
-                              <button title='Approve Record' type="button" className={approveClass} onClick={this.approve}>
-                                  Approve Record
+                              <button title='Approve Project' type="button" className={approveClass} onClick={this.approve}>
+                                  Approve Project
                               </button>
                           </div>
 
@@ -418,8 +418,8 @@ buildPanel(obj) {
           button =           <div className="form-group-xs row col-sm-12">
                 <br/>
                           <div>
-                              <button title='Submit Record' type="button" className={publishClass} disabled={(publishDisabled==true) ? 'disabled' : ''} onClick={this.publish}>
-                                  Submit Record
+                              <button title='Submit Project' type="button" className={publishClass} disabled={(publishDisabled==true) ? 'disabled' : ''} onClick={this.publish}>
+                                  Submit Project
                               </button>
                           </div>
                           {saveBtn}

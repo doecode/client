@@ -205,7 +205,7 @@ export default class BiblioPage extends React.Component {
                     <a title='Summary View' data-toggle="tab" href="#summary">Summary</a>
                   </li>
                   <li>
-                    <a title='Full Record View' data-toggle="tab" href="#fullrecord">Full Record</a>
+                    <a title='Full Project View' data-toggle="tab" href="#fullrecord">Full Project</a>
                   </li>
                 </ul>
                 <div className="tab-content">

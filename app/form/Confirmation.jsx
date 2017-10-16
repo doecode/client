@@ -71,10 +71,10 @@ export default class Confirmation extends React.Component {
     var actionPhrase = '';
     switch (this.state.workflow) {
       case 'submitted':
-        actionPhrase = 'Record Successfully Submitted to DOE CODE';
+        actionPhrase = 'Project Successfully Submitted to DOE CODE';
         break;
       case 'announced':
-        actionPhrase = 'Record Successfully Announced to E-Link';
+        actionPhrase = 'Project Successfully Announced to E-Link';
         break;
     }
 
@@ -116,8 +116,8 @@ export default class Confirmation extends React.Component {
             </div>}
             <div className='col-sm-4 col-xs-12'></div>
             <div className="col-sm-4 col-xs-12 right-text">
-              <button title='Create New Record' type="button" className="pure-button pure-button-primary btn-lg" onClick={this.newRecord}>
-                Create New Record
+              <button title='Create New Project' type="button" className="pure-button pure-button-primary btn-lg" onClick={this.newRecord}>
+                Create New Project
               </button>
             </div>
           </div>

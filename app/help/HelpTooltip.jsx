@@ -188,7 +188,7 @@ export default class HelpTooltip extends React.Component {
           <span></span>
         )
         : (
-          <span>After required fields are completed, submit record to DOE CODE</span>
+          <span>After required fields are completed, submit project to DOE CODE</span>
         );
     } else if (this.props.item == "RelatedIdentifier") {
       returnData = (shortTooltip)

@@ -9,7 +9,7 @@ function EmptyRowsView(props) {
     return (
       <div className='row'>
         <div className='col-xs-12 center-text'>
-          <h1>No records to show.</h1>
+          <h1>No Project to show.</h1>
         </div>
       </div>
     );
@@ -87,7 +87,7 @@ export default class WorkflowManagement extends React.Component {
       let editMessage = "Continue to E-Link Submission";
 
       if (record.workflow_status === 'Saved') {
-        editMessage = "Continue to Submit Record";
+        editMessage = "Continue to Submit Project";
         editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;
       } else if (record.workflow_status === 'Submitted') {
         editUrl = "/submit" + this.wizardVersion + "?code_id=" + record.code_id;

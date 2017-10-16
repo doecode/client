@@ -112,7 +112,7 @@ export default class BiblioSidebar extends React.Component {
                         </a>
                       </li>
                       <li className='biblio-social-link'>
-                        <a title='Email' href={"mailto:?subject=Software Records from DOE CODE&body=" + window.location.href}>
+                        <a title='Email' href={"mailto:?subject=Software Project from DOE CODE&body=" + window.location.href}>
                           <span className="fa fa-envelope shareEmail"></span>
                         </a>
                       </li>
