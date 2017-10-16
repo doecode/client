@@ -43,21 +43,11 @@ export default class DateColumnChart extends React.Component {
         eventName: 'click',
         callback(chart, target) {
           if (target.targetID.indexOf("#") > 0) {
-            //Take the innertext and break it out by newline
-            var innertext_broken = chart.chart.container.innerText.split("\n");
+            //Grab the first year we see. It'll be the year we want
+            var year_pattern = new RegExp(/\d{4}/ig);
+            var year = year_pattern.exec(chart.chart.container.innerText.trim());
 
-            //Get the target id
-            var targetIDPattern = new RegExp(/\d+$/);
-            var targetIDValue = targetIDPattern.exec(target.targetID);
-
-            //Now, let's get the value out of the array
-            var yearRawString = innertext_broken[parseInt(targetIDValue) + 2]
-
-            //Now, we get the year out of that string
-            var yearRegex = new RegExp(/, \d{4}/);
-            var year = yearRegex.exec(yearRawString);
-            year = year.toString().replace(", ", "");
-
+            //Reconduct the search
             searchData.setValue("date_earliest", (year + "-01-01T00:00:01.001Z"));
             searchData.setValue("date_latest", (year + "-12-31T23:59:59.001Z"));
             self.props.refreshSearch();
