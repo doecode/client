@@ -16,7 +16,7 @@ export default class SearchResultsDescription extends React.Component {
   }
 
   removeFilter(field, value) {
-    if (field == 'accessibility' || field == 'licenses') {
+    if (field == 'accessibility' || field == 'licenses' || field == 'research_organization' || field == 'sponsoring_organization') {
       var newArray = searchData.getValue(field).filter(function(word) {
         return word != value;
       });
@@ -62,11 +62,11 @@ export default class SearchResultsDescription extends React.Component {
     if (searchData.getValue("licenses") && searchData.getValue("licenses").length > 0) {
       searchDescriptionArr.push({displayField: 'Licenses', field: 'licenses', value: searchData.getValue("licenses")});
     }
-    if (searchData.getValue("research_organization")) {
-      searchDescriptionArr.push({displayField: 'Research Organization', display: searchData.getValue("research_organization"), field: 'research_organization'});
+    if (searchData.getValue("research_organization") && searchData.getValue("research_organization").length > 0) {
+      searchDescriptionArr.push({displayField: 'Research Organization', field: 'research_organization', value: searchData.getValue("research_organization")});
     }
-    if (searchData.getValue("sponsoring_organization")) {
-      searchDescriptionArr.push({displayField: 'Sponsoring Organization', display: searchData.getValue("sponsoring_organization"), field: 'sponsoring_organization'});
+    if (searchData.getValue("sponsoring_organization") && searchData.getValue("sponsoring_organization").length > 0) {
+      searchDescriptionArr.push({displayField: 'Sponsoring Organization', field: 'sponsoring_organization', value: searchData.getValue("sponsoring_organization")});
     }
     if (searchData.getValue("orcid")) {
       searchDescriptionArr.push({displayField: 'ORCID is', display: searchData.getValue("orcid"), field: 'orcid'});

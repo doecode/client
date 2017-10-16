@@ -128,7 +128,7 @@ export default class ResultsPage extends React.Component {
       : "All Records";
     searchFor = "Search for " + searchFor;
 
-    let needsFilterSuffix = (searchData.getValue("software_title") || searchData.getValue("developers_contributors") || searchData.getValue("biblio_data") || searchData.getValue("identifiers") || searchData.getValue("date_earliest") || searchData.getValue("date_latest") || (searchData.getValue("accessibility") && searchData.getValue("accessibility").length > 0) || (searchData.getValue("licenses") && searchData.getValue("licenses").length > 0) || searchData.getValue("research_organization") || searchData.getValue("sponsoring_organization") || searchData.getValue("orcid"));
+    let needsFilterSuffix = (searchData.getValue("software_title") || searchData.getValue("developers_contributors") || searchData.getValue("biblio_data") || searchData.getValue("identifiers") || searchData.getValue("date_earliest") || searchData.getValue("date_latest") || (searchData.getValue("accessibility") && searchData.getValue("accessibility").length > 0) || (searchData.getValue("licenses") && searchData.getValue("licenses").length > 0) || (searchData.getValue("research_organization") && searchData.getValue("research_organization").length > 0) || (searchData.getValue("sponsoring_organization") && searchData.getValue("sponsoring_organization").length > 0) || searchData.getValue("orcid"));
 
     let filterSuffix = needsFilterSuffix && <span className="search-for-filter-crumb"> (filtered)</span>;
 

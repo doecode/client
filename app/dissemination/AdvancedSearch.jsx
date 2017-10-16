@@ -100,13 +100,13 @@ export default class AdvancedSearch extends React.Component {
                       Research Organization
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField title='Research Organization' field="research_organization" elementType="select" allowCreate={true} placeholder=" " options={ResearchOrgsList.researchOrgs} noExtraLabelText/>
+                      <SearchField title='Research Organization' field="research_organization" isArray={true} multi={true} elementType="select" allowCreate={true} placeholder=" " options={ResearchOrgsList.researchOrgs} noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Sponsoring Organization
                     </div>
                     <div className='col-xs-12'>
-                      <SearchField title='Sponsoring Organization' field="sponsoring_organization" elementType="select" allowCreate={true} placeholder=" " options={SponsorOrgsList.sponsorOrgs} noExtraLabelText/>
+                      <SearchField title='Sponsoring Organization' field="sponsoring_organization" isArray={true} multi={true} elementType="select" allowCreate={true} placeholder=" " options={SponsorOrgsList.sponsorOrgs} noExtraLabelText/>
                     </div>
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Sort
