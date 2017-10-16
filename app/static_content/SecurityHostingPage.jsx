@@ -19,7 +19,7 @@ export default class SecurityHostingPage extends React.Component {
               <br/>
               <br/>
               <div className='security-host-text security-host-left-text'>
-                Implementation of account management best practices, use of advanced cyber security tools, and application of intelligence data offers visitors a trusted source of DOE CODE and projects
+                Implementation of account management best practices, use of advanced cyber security tools, and application of intelligence data offers visitors a trusted source of DOE CODE and projects.
               </div>
             </div>
             {/*Mobile Version*/}
@@ -28,7 +28,7 @@ export default class SecurityHostingPage extends React.Component {
                 <div className="security-host-page-title center-text">DOE CODE Hosting Security</div>
                 <br/>
                 <div className='security-host-text'>
-                  Implementation of account management best practices, use of advanced cyber security tools, and application of intelligence data offers visitors a trusted source of DOE CODE and projects
+                  Implementation of account management best practices, use of advanced cyber security tools, and application of intelligence data offers visitors a trusted source of DOE CODE and projects.
                 </div>
               </div>
             </div>
@@ -79,7 +79,7 @@ export default class SecurityHostingPage extends React.Component {
               <div className='security-host-text security-host-list-text-right float-right'>
                 <ul>
                   <li>Compatible executable code is safely detonated by a software suite in an isolated environment.</li>
-                  <li>Machine-based learning identifies and quanantines suspcious behavior.</li>
+                  <li>Machine-based learning identifies and quarantines suspicious behavior.</li>
                 </ul>
               </div>
               <br/>
@@ -94,7 +94,7 @@ export default class SecurityHostingPage extends React.Component {
                 <div className='security-host-text'>
                   <ul>
                     <li>Compatible executable code is safely detonated by a software suite in an isolated environment.</li>
-                    <li>Machine-based learning identifies and quanantines suspcious behavior.</li>
+                    <li>Machine-based learning identifies and quarantines suspicious behavior.</li>
                   </ul>
                 </div>
               </div>
@@ -144,7 +144,7 @@ export default class SecurityHostingPage extends React.Component {
               <div className='security-host-text security-host-list-text-right float-right'>
                 <ul>
                   <li>Endpoint protection software scans raw source code and executable code for known signatures.</li>
-                  <li>Searches on files are supported to identify undesirable content</li>
+                  <li>Searches on files are supported to identify undesirable content.</li>
                 </ul>
               </div>
               <br/>
@@ -158,7 +158,7 @@ export default class SecurityHostingPage extends React.Component {
                 <div className='security-host-text'>
                   <ul>
                     <li>Endpoint protection software scans raw source code and executable code for known signatures.</li>
-                    <li>Searches on files are supported to identify undesirable content</li>
+                    <li>Searches on files are supported to identify undesirable content.</li>
                   </ul>
                 </div>
               </div>
