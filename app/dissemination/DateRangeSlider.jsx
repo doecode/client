@@ -31,7 +31,7 @@ export default class DateRangeSlider extends React.Component {
   handleSliderChangePermanent(event) {
     var doRefresh = false;
     if (this.state.earliestDateValue != event[0]) {
-      var newDate = event[0].toString() + "-01-01T00:00:01.000Z";
+      var newDate = event[0].toString() + "-01-01T05:00:01.000Z";
       searchData.setValue("date_earliest", newDate);
       doRefresh = true;
     }
