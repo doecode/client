@@ -53,20 +53,21 @@ export default class About extends React.Component {
       <div>
 
         <div className="container-fluid bgWhite">
-          <div className="container-fluid containerStyle">
-            <div className="row">
-              <div className="col-xs-12 static-content left-text no-col-padding-left no-col-padding-right">
-                <h2 className="static-content-title">About</h2>
-              </div>
-              <div className=""></div>
+          <div className='row'>
+            <div className="col-lg-3 col-md-1"></div>
+            <div className="col-lg-6 col-md-10 col-xs-12 static-content">
+              <h2 className="static-content-title">About</h2>
+              <br/>
+              <p className='left-text'>
+                The Department of Energy (DOE) Office of Scientific and Technical Information (OSTI) developed a new DOE software services platform and search tool for DOE-funded code – DOE CODE. DOE CODE replaces OSTI’s old software center, the Energy Science and Technology Software Center (ESTSC).
+              </p>
             </div>
+            <div className="col-lg-3 col-md-1"></div>
+          </div>
+          <div className="container-fluid containerStyle">
+            <br/>
             <div className="row">
-              <div className=""></div>
               <div className="col-xs-12 static-content no-col-padding-left no-col-padding-right">
-                <br/>
-                <p className='left-text'>
-                  The Department of Energy (DOE) Office of Scientific and Technical Information (OSTI) developed a new DOE software services platform and search tool for DOE-funded code – DOE CODE. DOE CODE replaces OSTI’s old software center, the Energy Science and Technology Software Center (ESTSC).
-                </p>
 
                 <p className="left-text hidden-md hidden-lg">
                   <strong>CREATE</strong>
