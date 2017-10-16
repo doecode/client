@@ -78,8 +78,8 @@ export default class SecurityHostingPage extends React.Component {
               <br/>
               <div className='security-host-text security-host-list-text-right float-right'>
                 <ul>
-                  <li>OSTI limits registrations to known/trusted entities to reduce attack surface.</li>
-                  <li>Native GitLab features give owners granular control of their project and project contributors.</li>
+                  <li>Compatible executable code is safely detonated by a software suite in an isolated environment.</li>
+                  <li>Machine-based learning identifies and quanantines suspcious behavior.</li>
                 </ul>
               </div>
               <br/>
@@ -93,8 +93,8 @@ export default class SecurityHostingPage extends React.Component {
                 <br/>
                 <div className='security-host-text'>
                   <ul>
-                    <li>OSTI limits registrations to known/trusted entities to reduce attack surface.</li>
-                    <li>Native GitLab features give owners granular control of their project and project contributors.</li>
+                    <li>Compatible executable code is safely detonated by a software suite in an isolated environment.</li>
+                    <li>Machine-based learning identifies and quanantines suspcious behavior.</li>
                   </ul>
                 </div>
               </div>
@@ -111,7 +111,7 @@ export default class SecurityHostingPage extends React.Component {
               <br/>
               <div className='security-host-text security-host-list-text-left'>
                 <ul>
-                  <li>Daily intelligence feed processing includes newly-identiifed malicious files and adversary tactics.</li>
+                  <li>Daily intelligence feed processing includes newly-identified malicious files and adversary tactics.</li>
                 </ul>
               </div>
               <br/>
@@ -125,7 +125,7 @@ export default class SecurityHostingPage extends React.Component {
                 <br/>
                 <div className='security-host-text'>
                   <ul>
-                    <li>Daily intelligence feed processing includes newly-identiifed malicious files and adversary tactics.</li>
+                    <li>Daily intelligence feed processing includes newly-identified malicious files and adversary tactics.</li>
                   </ul>
                 </div>
               </div>
