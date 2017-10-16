@@ -19,7 +19,6 @@ export default class PaginationButtons extends React.Component {
   }
 
   toggleDropdown() {
-    console.log("togle");
     this.setState({
       showDropdown: !this.state.showDropdown
     });

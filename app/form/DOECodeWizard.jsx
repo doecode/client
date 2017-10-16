@@ -370,9 +370,13 @@ buildPanel(obj) {
       const codeID = metadata.getValue("code_id");
 
       let headerText = "Create a New Software Project";
-      if (codeID !== undefined && codeID > 0)
+      if (codeID !== undefined && codeID > 0){
     	  headerText = (this.props.page == 'approve' ? "Approving" : "Editing") + " Software Project #" + codeID;
-
+        var codeIDAction = (this.props.page == 'approve' ? "Approving" : "Editing") + " Software Project #" + codeID;
+          document.title='DOE CODE: '+codeIDAction;
+}else{
+  document.title = 'DOE CODE: Creating New Software Project';
+}
       const self = this;
 
         const publishPanels = publishSteps.map(this.buildPanel);

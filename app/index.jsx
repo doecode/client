@@ -63,7 +63,7 @@ class DOECodeRouter extends React.Component {
           <div className={this.wrapper_class}>
             <Header isHomepage={this.is_homepage}/>
             <div>
-              <Route exact path="/" component={Homepage}/>
+              <Route exact path="/" component={Homepage} pageTitle='DOE CODE - A Product of the Office of Scientific and Technical Information'/>
               <Route path="/submit" component={SubmitForm}/>
               <Route path="/submit2" component={AnnouncementInterface}/>
               <Route path="/announce" component={AnnounceForm}/>

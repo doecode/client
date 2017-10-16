@@ -465,6 +465,90 @@ function getSearchSortDisplay(short_val) {
   return sortDisplayVal;
 }
 
+function setPageTitle() {
+  var page = window.location.href.toString();
+  //page = page.substr(page.indexOf('/doecode'), page.length).replace('/doecode/', '').toLowerCase();
+  //Remove everything up to /doecode
+  page = page.substr(page.indexOf('/doecode'), page.length);
+  //Remove /doecode/
+  page = page.replace("/doecode", '').replace('/', '');
+  //Remove query params
+  if (page.indexOf('?') > -1) {
+    page = page.substr(0, page.indexOf('?'));
+  }
+
+  var properTitle = '';
+  switch (page) {
+    case 'about':
+      properTitle = 'DOE CODE: About';
+      break;
+    case 'projects':
+      properTitle = 'DOE CODE: '+localStorage.first_name+' '+localStorage.last_name+"'s Projects";
+      break;
+    case 'pending':
+      properTitle = 'DOE CODE: Pending Records';
+      break;
+    case 'approve':
+      properTitle = 'DOE CODE: Approve';
+      break;
+    case 'register':
+      properTitle = 'DOE CODE: Register';
+      break;
+    case 'login':
+      properTitle = 'DOE CODE: Login';
+      break;
+    case 'search':
+      properTitle = 'DOE CODE: Search';
+      break;
+    case 'results':
+      properTitle = 'DOE CODE: Search Results';
+      break;
+    case 'communications':
+      properTitle = 'DOE CODE: Communications';
+      break;
+    case 'policy':
+      properTitle = 'DOE CODE: Policy';
+      break;
+    case 'faq':
+      properTitle = 'DOE CODE: FAQs';
+      break;
+    case 'contact':
+      properTitle = 'DOE CODE: Contact';
+      break;
+    case 'disclaimer':
+      properTitle = 'DOE CODE: Disclaimer';
+      break;
+    case 'forbidden':
+      properTitle = 'DOE CODE: Forbidden';
+      break;
+    case 'logout':
+      properTitle = 'DOE CODE: Logout';
+      break;
+    case 'help':
+      properTitle = 'DOE CODE: Logout';
+      break;
+    case 'forgot-password':
+      properTitle = 'DOE CODE: Forgot Password';
+      break;
+    case 'error':
+      properTitle = 'DOE CODE: Error Page';
+      break;
+    case 'user-admin':
+      properTitle = 'DOE CODE: User Administration';
+      break;
+    case 'repository-services':
+      properTitle = 'DOE CODE: Repository Services';
+      break;
+    case 'security-hosting':
+      properTitle = 'DOE CODE: Security Hosting';
+      break;
+    case '':
+      properTitle = 'DOE CODE: A Product of the Office of Scientific and Technical Information';
+      break;
+  }
+  document.title = properTitle;
+}
+
 export {doAjax};
 export {doAuthenticatedAjax};
 export {checkIsAuthenticated};
@@ -486,3 +570,4 @@ export {getAvailabilityDisplay};
 export {combineAuthorLists};
 export {joinWithDelimiters};
 export {getSearchSortDisplay};
+export {setPageTitle};

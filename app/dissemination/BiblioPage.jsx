@@ -43,6 +43,7 @@ export default class BiblioPage extends React.Component {
   }
 
   parseReceiveResponse(data) {
+    document.title = 'DOE CODE Project Metadata: ' + data.metadata.software_title;
     this.setState({"data": data.metadata});
   }
 

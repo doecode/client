@@ -81,6 +81,7 @@ export default class Account extends React.Component {
       userData.setValue("first_name", localStorage.first_name);
       userData.setValue("last_name", localStorage.last_name);
     }
+    document.title = 'DOE CODE: Account Information for ' + localStorage.first_name + ' ' + localStorage.last_name;
   }
 
   parseLoginResponse(data) {

@@ -76,7 +76,7 @@ export default class SearchResultsDescription extends React.Component {
 
     return (
       <div>
-        {!targetedSearch && <div>All Project</div>}
+        {!targetedSearch && <div>All Projects</div>}
         {searchDescriptionArr.map(function(row, index) {
 
           if (row.value instanceof Array) {

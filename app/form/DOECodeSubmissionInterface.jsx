@@ -228,10 +228,10 @@ parseSubmitResponse(data) {
 
       let headerText = "Create a New Software Project";
 
-      if (codeID !== undefined && codeID > 0)
+      if (codeID !== undefined && codeID > 0){
     	  headerText = "Editing Software Project #" + codeID;
 
-
+}
         const marginStyle = {
           'marginBottom' : '5px'
         };
