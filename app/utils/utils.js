@@ -393,7 +393,6 @@ function getAvailabilityDisplay(short_val) {
 }
 
 function addMetaTags(list) {
-  console.log("Meta tags called: "+JSON.stringify(list));
   list.forEach(function(row) {
     var metaTag = document.createElement('meta');
     metaTag.setAttribute('name', row.name);

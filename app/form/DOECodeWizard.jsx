@@ -112,7 +112,6 @@ constructor(props) {
         submitSteps[x].key = "" + (x + i + 1);
 }
 
-    console.log(window.location.href.toString());
     var loc = window.location.href.toString();
     if(loc.indexOf('announce')>-1){
       addMetaTags([{name:'title',content:'Announce'}]);
