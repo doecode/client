@@ -23,7 +23,7 @@ export default class DevAndContribLinks extends React.Component {
     var dropdown_list = [
       {
         link: '',
-        display: <SearchLink displayVal={'Search DOE CODE for ' + this.props.groupType + ' ' + row.name.trim()} field="developers_contributors" value={row.name.trim()}/>,
+        display: <SearchLink displayVal={'Search DOE CODE for ' + this.props.groupType + ' "' + row.name.trim() + '"'} field="developers_contributors" value={row.name.trim()} addQuotes />,
         customAnchor: true
       }, {
         link: '',
@@ -48,7 +48,7 @@ export default class DevAndContribLinks extends React.Component {
   createAuthorsLink(row, index, array) {
     var search_link = (row.orcid)
       ? (this.createORCIDLink(row))
-      : (<SearchLink field="developers_contributors" value={row.name.trim()}/>);
+      : (<SearchLink field="developers_contributors" value={row.name.trim()} addQuotes />);
 
     return (
       <span key={index}>
