@@ -12,12 +12,6 @@ const searchData = new SearchData();
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
-    addMetaTags([
-      {
-        name: 'title',
-        content: 'DOE CODE: Your open source platform to easily submit, announce, and search for software code funded by the U.S. Department of Energy'
-      }
-    ]);
     setPageTitle();
   }
 

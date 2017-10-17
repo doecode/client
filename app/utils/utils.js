@@ -393,6 +393,7 @@ function getAvailabilityDisplay(short_val) {
 }
 
 function addMetaTags(list) {
+  console.log("Meta tags called: "+JSON.stringify(list));
   list.forEach(function(row) {
     var metaTag = document.createElement('meta');
     metaTag.setAttribute('name', row.name);
@@ -488,9 +489,6 @@ function setPageTitle() {
     case 'pending':
       properTitle = 'DOE CODE: Pending Records';
       break;
-    case 'approve':
-      properTitle = 'DOE CODE: Approve';
-      break;
     case 'register':
       properTitle = 'DOE CODE: Register';
       break;
@@ -546,7 +544,16 @@ function setPageTitle() {
       properTitle = 'DOE CODE: A Product of the Office of Scientific and Technical Information';
       break;
   }
+
   document.title = properTitle;
+  if (properTitle != '') {
+    addMetaTags([
+      {
+        name: 'title',
+        content: properTitle
+      }
+    ]);
+  }
 }
 
 export {doAjax};

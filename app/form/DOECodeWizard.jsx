@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {doAjax, checkIsAuthenticated, doAuthenticatedAjax, appendQueryString, getQueryParam, doAuthenticatedMultipartRequest} from '../utils/utils';
+import {doAjax, checkIsAuthenticated, doAuthenticatedAjax, appendQueryString, getQueryParam, doAuthenticatedMultipartRequest,addMetaTags} from '../utils/utils';
 import {observer} from "mobx-react";
 import Metadata from '../stores/Metadata';
 import EntryStep from '../steps/EntryStep';
@@ -104,12 +104,24 @@ constructor(props) {
         		{name: 'Summary', component: <ConfirmStep metadata={metadata}/> }
          */
     let i = 0;
-    for (i = 0; i < publishSteps.length; i++)
+    for (i = 0; i < publishSteps.length; i++){
         publishSteps[i].key = "" + (i + 1);
-
+      }
     let x = 0;
-    for (x = 0; x < submitSteps.length; x++)
+    for (x = 0; x < submitSteps.length; x++){
         submitSteps[x].key = "" + (x + i + 1);
+}
+
+    console.log(window.location.href.toString());
+    var loc = window.location.href.toString();
+    if(loc.indexOf('announce')>-1){
+      addMetaTags([{name:'title',content:'Announce'}]);
+    }else if(loc.indexOf('submit')>-1){
+      addMetaTags([{name:'title',content:'Submit'}]);
+    }else if(loc.indexOf('approve')>-1){
+      addMetaTags([{name:'title',content:'Approve'}]);
+    }
+
     }
 
 exitModalCallback() {
