@@ -483,7 +483,7 @@ function setPageTitle() {
       properTitle = 'DOE CODE: About';
       break;
     case 'projects':
-      properTitle = 'DOE CODE: '+localStorage.first_name+' '+localStorage.last_name+"'s Projects";
+      properTitle = 'DOE CODE: ' + localStorage.first_name + ' ' + localStorage.last_name + "'s Projects";
       break;
     case 'pending':
       properTitle = 'DOE CODE: Pending Records';
@@ -525,7 +525,7 @@ function setPageTitle() {
       properTitle = 'DOE CODE: Logout';
       break;
     case 'help':
-      properTitle = 'DOE CODE: Logout';
+      properTitle = 'DOE CODE: Help Page';
       break;
     case 'forgot-password':
       properTitle = 'DOE CODE: Forgot Password';
