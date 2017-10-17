@@ -62,21 +62,25 @@ export default class EntryStep extends React.Component {
   render() {
     const accessibility = metadata.getValue("accessibility");
 
+    const divStyle = (accessibility ? "has-success " : "") + "col-xs-12";
+
     return (
 
       <div className="container-fluid form-horizontal">
 
         <div className="form-group form-group-sm row">
           <div className="col-xs-12 input-form-push-left">
-            <h3>Please describe the availability of your software:
-            </h3>
+            <h3>Please describe the availability of your software:</h3>
           </div>
         </div>
         <div className="row">
-          <div className="col-xs-12">
+          <div className={divStyle}>
+            <fieldset className="entry-group radiogroup">
+            <legend className="entry-legend"><label className="control-label req">Project Type</label></legend>
             <MetadataField checked={accessibility === 'OS'} elementType="radio" label="Open Source, Publicly Available Repository" field="availability" value="OS" onChange={this.onRadioChange} helpTooltip='OpenSourcePublic' tooltipShort/>
             <MetadataField checked={accessibility === 'ON'} elementType="radio" label="Open Source, No Publicly Available Repository" field="availability" value="ON" onChange={this.onRadioChange} helpTooltip='OpenSourceNotPublic'/>
             <MetadataField checked={accessibility === 'CS'} elementType="radio" label="Closed Source" field="availability" value="CS" onChange={this.onRadioChange} helpTooltip='ClosedSource'/>
+            </fieldset>
           </div>
         </div>
         {accessibility === 'OS' && <div className="row">
@@ -93,7 +97,12 @@ export default class EntryStep extends React.Component {
           </div>
         </div>}
 
-        {(accessibility === 'ON' || accessibility === 'CS') && <MetadataField field="landing_page" label="Landing Page" elementType="input" helpTooltip='LandingPage'/>}
+        {(accessibility === 'ON' || accessibility === 'CS') && <div className="row">
+          <div className="col-md-8 col-xs-12">
+            <MetadataField field="landing_page" label="Landing Page" elementType="input" helpTooltip='LandingPage'/>
+          </div>
+          <div className="col-md-4"></div>
+        </div>}
 
       </div>
     );

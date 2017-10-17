@@ -112,14 +112,22 @@ export default class AgentsStep extends React.Component {
 
 			const contentType = "Devs";
 
+			const panelStatus = metadata.getPanelStatus("Developers");
+			const isRequired = panelStatus.hasRequired;
+
+			const devArray = metadata.getValue(parentName);
+			const devArrayCount = (devArray ? devArray.length : 0);
+
+			const divStyle = (devArrayCount > 0 ? "has-success " : "");
+			const labelStyle = "control-label" + (isRequired ? " req" : "");
 
 				const content = <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
 		    return (
 
                     <div className="container-fluid form-horizontal">
                         <div className="row">
-                            <div className="col-xs-12">
-                                <span className='fake-h2'>Developers</span>&nbsp;&nbsp;<HelpTooltip item='Developers'/>
+                            <div className={divStyle}>
+                                <label className={labelStyle}>Developers</label>&nbsp;&nbsp;<HelpTooltip item='Developers'/>
 																<br/>
                                 {content}
                             </div>

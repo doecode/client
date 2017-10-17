@@ -46,7 +46,7 @@ export default class EditableDataTable extends React.Component {
 
 		    return (
           <div>
-            To edit data, click on the row containing the information to modify.
+            <div className="griddle-notice">To edit data, click on the row containing the information to modify.</div>
             <div className="form-group form-group-sm col-sm-12 griddle-wrapper">
                     <Griddle results={currentArray.slice()} useGriddleStyles={false} gridClassName="griddle" columnMetadata={this.props.config} columns={columns} showSettings={false} showFilter={true} onRowClick={this.rowClick} />
             </div>

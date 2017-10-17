@@ -6,8 +6,10 @@ import {observer} from 'mobx-react';
 import {Tabs, Tab} from 'react-bootstrap';
 import Promise from 'promise';
 import HelpTooltip from '../help/HelpTooltip';
+import Metadata from '../stores/Metadata';
 
 const tableStore = new TableStore();
+const metadata = new Metadata();
 
 @observer
 export default class OrgsStep extends React.Component {
@@ -76,22 +78,37 @@ export default class OrgsStep extends React.Component {
       columns.push("primary_award");
     }
 
+    const panelStatus = metadata.getPanelStatus("Organizations");
+    const isRequired = panelStatus.hasRequired;
+
+    const devArray = metadata.getValue(parentName);
+    const devArrayCount = (devArray ? devArray.length : 0);
+
+    const divStyle = (devArrayCount > 0 ? "has-success " : "");
+    const labelStyle = "control-label" + (isRequired ? " req" : "");
+
     const contentSO = parentName === 'sponsoring_organizations' && <EditableDataTable contentType={contentType} columns={columns} config={tableConfig} parentName={parentName}/>
     const contentRO = parentName === 'research_organizations' && <EditableDataTable contentType={contentType} columns={columns} config={tableConfig} parentName={parentName}/>
 
     return (
       <div className="container-fluid form-horizontal">
         <div className="row">
-          <div className="col-xs-12">
+          <div>
             <div className="form-horizontal">
               <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="orgsStepTabs">
                 <Tab eventKey={0} title="Sponsoring Organizations">
-									<span className='fake-h2'>Sponsoring Organizations</span> &nbsp;<HelpTooltip item='SponsoringOrg'/>
-                  {contentSO}
+                  <div className={divStyle}>
+                    <br />
+  									<label className={labelStyle}>Sponsoring Organizations</label> &nbsp;<HelpTooltip item='SponsoringOrg'/>
+                    {contentSO}
+                  </div>
                 </Tab>
                 <Tab eventKey={1} title="Research Organizations">
-									<span className='fake-h2'>Research Organizations</span> &nbsp;<HelpTooltip item='ResearchOrg'/>
-                  {contentRO}
+                  <div className={divStyle}>
+                    <br />
+  									<label className={labelStyle}>Research Organizations</label> &nbsp;<HelpTooltip item='ResearchOrg'/>
+                    {contentRO}
+                  </div>
                 </Tab>
               </Tabs>
             </div>

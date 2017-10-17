@@ -14,7 +14,8 @@ export default class RecipientStep extends React.Component {
 
     return (
       <div className="container-fluid form-horizontal">
-        <span className='fake-h2 input-form-push-left'>Contact</span>&nbsp;<HelpTooltip item='ContactInformation'/>
+        <label className='control-label input-form-push-left'>Contact</label>&nbsp;<HelpTooltip item='ContactInformation'/>
+        <p><br /></p>
         <div className="row">
           <div className="col-md-8 col-xs-12">
             <div className="form-horizontal">

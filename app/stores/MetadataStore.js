@@ -13,7 +13,7 @@ class MetadataStore {
             "doi": '',
             "doi_infix": '',
             "doi_status": "",
-            "accessibility": "OS",
+            "accessibility": "",
             "description": '',
             "country_of_origin": 'United States',
             "release_date" : '',

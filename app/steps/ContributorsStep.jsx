@@ -118,21 +118,37 @@ export default class ContributorsStep extends React.Component {
 
     columns.push("contributor_type");
 
+    const panelStatus = metadata.getPanelStatus("Contributors and Contributing Organizations");
+    const isRequired = panelStatus.hasRequired;
+
+    const devArray = metadata.getValue(parentName);
+    const devArrayCount = (devArray ? devArray.length : 0);
+
+    const divStyle = (devArrayCount > 0 ? "has-success " : "");
+    const labelStyle = "control-label" + (isRequired ? " req" : "");
+
     const contentC = parentName === 'contributors' && <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
     const contentCO = parentName === 'contributing_organizations' && <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
+
     return (
       <div className="container-fluid form-horizontal">
         <div className="row">
-          <div className="col-xs-12">
+          <div>
             <div className="form-horizontal">
               <Tabs activeKey={this.state.key} onSelect={this.onTabSelect} id="devsStepTabs">
                 <Tab eventKey={0} title="Contributors">
-									<span className='fake-h2'>Contributors</span> &nbsp;<HelpTooltip item='Contributor'/>
-                  {contentC}
+                  <div className={divStyle}>
+                    <br />
+  									<label className={labelStyle}>Contributors</label> &nbsp;<HelpTooltip item='Contributor'/>
+                    {contentC}
+                  </div>
                 </Tab>
                 <Tab eventKey={1} title="Contributing Organizations">
-									<span className='fake-h2'>Contributing Organizations</span> &nbsp;<HelpTooltip item='ContributorOrg'/>
-                  {contentCO}
+                  <div className={divStyle}>
+                    <br />
+  									<label className={labelStyle}>Contributing Organizations</label> &nbsp;<HelpTooltip item='ContributorOrg'/>
+                    {contentCO}
+                  </div>
                 </Tab>
               </Tabs>
             </div>
