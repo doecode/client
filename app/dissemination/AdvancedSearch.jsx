@@ -32,7 +32,7 @@ export default class AdvancedSearch extends React.Component {
           <br/>
           <div className="row advanced-search-panel">
             <div className="col-md-1"></div>
-            <div className="col-md-10 col-xs-12">
+            <div className="col-md-10 col-xs-12 pure-form">
               <br/>
               <div className="row">
                 <div className="col-xs-12">
@@ -70,10 +70,10 @@ export default class AdvancedSearch extends React.Component {
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Release Date:
                     </div>
-                    <div className='col-xs-12 no-col-padding-left left-text adv-search-date-container-advsearch'>
-                      <SearchField title='Earliest Release Date' field="date_earliest" elementType="date" noExtraLabelText noRowWrapper textAfter={to_span}/>
+                    <div className='col-xs-12 no-col-padding-left left-text adv-search-date-container-advsearch pure-form'>
+                      <SearchField title='Earliest Release Date' placeholder='  Click to select a date' field="date_earliest" elementType="date" noExtraLabelText noRowWrapper textAfter={to_span}/>
                       <span className='to-field hide-xs'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                      <SearchField title='Latest Release Date' field="date_latest" elementType="date" noExtraLabelText noRowWrapper/>
+                      <SearchField title='Latest Release Date' placeholder='  Click to select a date' field="date_latest" elementType="date" noExtraLabelText noRowWrapper/>
                     </div>
                   </div>
                 </div>

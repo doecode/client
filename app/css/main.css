@@ -303,7 +303,7 @@ textarea.form-text-area {
 
 .griddle-filter>.filter-container {
   margin-top: -5px;
-  margin-bottom:40px;
+  margin-bottom: 40px;
 }
 
 .griddle-notice {
@@ -2126,6 +2126,13 @@ ul.biblio-page-ul>li>a:hover {
   float: left;
 }
 
+/*Fixes an issue where pure-form causes an extra input to show up in react-select's*/
+div.Select>div.Select-control input {
+  display: inline-block;
+  border: none;
+  box-shadow: none;
+}
+
 
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
 
@@ -2462,7 +2469,6 @@ ul.biblio-page-ul>li>a:hover {
   .adv-search-date-container-homepage {
     display: inline-block;
   }
-
   .containerStyle {
     max-width: none !important;
   }
