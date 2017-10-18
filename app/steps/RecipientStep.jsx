@@ -2,6 +2,9 @@ import React from 'react';
 import MetadataField from '../field//MetadataField';
 import {observer, Provider} from "mobx-react";
 import HelpTooltip from '../help/HelpTooltip';
+import Metadata from '../stores/Metadata';
+
+const metadata = new Metadata();
 
 @observer
 export default class RecipientStep extends React.Component {
@@ -12,9 +15,19 @@ export default class RecipientStep extends React.Component {
 
   render() {
 
+  const panelStatus = metadata.getPanelStatus("Contact Information");
+  const isRequired = panelStatus.hasRequired;
+
+  const dataCount = panelStatus.completedOptional;
+
+  const divStyle = (dataCount ? "has-success " : "");
+  const labelStyle = "control-label input-form-push-left" + (isRequired ? " req" : "");
+
     return (
       <div className="container-fluid form-horizontal">
-        <label className='control-label input-form-push-left'>Contact</label>&nbsp;<HelpTooltip item='ContactInformation'/>
+        <div className={divStyle}>
+            <label className={labelStyle}>Contact</label>&nbsp;<HelpTooltip item='ContactInformation'/>
+        </div>
         <p><br /></p>
         <div className="row">
           <div className="col-md-8 col-xs-12">

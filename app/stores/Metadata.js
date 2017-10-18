@@ -63,8 +63,10 @@ export default class Metadata extends BaseData {
 
     let panelStatus = {
       "remainingRequired": 0,
+      "completedRequired": 0,
       "remainingString": "",
       "remainingOptional": 0,
+      "completedOptional": 0,
       "errors": "",
       "hasRequired": false,
       "hasOptional": false
@@ -80,18 +82,23 @@ export default class Metadata extends BaseData {
 
         if (obj.required) {
           panelStatus.hasRequired = true;
-          if (!obj.completed) {
+          if (obj.completed) {
+            panelStatus.completedRequired++;
+          }
+          else {
             panelStatus.remainingRequired++;
             incompleteRequiredFields.push(obj.label);
           }
 
         } else {
           panelStatus.hasOptional = true;
-          if (!obj.completed)
-            panelStatus.remainingOptional++;
-
+          if (obj.completed) {
+            panelStatus.completedOptional++;
           }
-
+          else {
+            panelStatus.remainingOptional++;
+          }
+        }
       }
 
     }
