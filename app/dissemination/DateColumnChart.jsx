@@ -50,6 +50,7 @@ export default class DateColumnChart extends React.Component {
             //Reconduct the search
             searchData.setValue("date_earliest", (year + "-01-01T05:00:01.001Z"));
             searchData.setValue("date_latest", (year + "-12-31T23:59:59.001Z"));
+            searchData.setValue("start", 0);
             self.props.refreshSearch();
           }
         }

@@ -41,6 +41,7 @@ export default class DateRangeSlider extends React.Component {
       doRefresh = true;
     }
     if (doRefresh == true) {
+      searchData.setValue("start", 0);
       this.setState({renderSlider: false});
       this.props.refreshSearch();
     }
