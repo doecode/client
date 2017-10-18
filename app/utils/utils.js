@@ -501,7 +501,7 @@ function setPageTitle() {
       properTitle = 'DOE CODE: Search Results';
       break;
     case 'communications':
-      properTitle = 'DOE CODE: Communications';
+      properTitle = 'DOE CODE: News/Resources';
       break;
     case 'policy':
       properTitle = 'DOE CODE: Policy';
