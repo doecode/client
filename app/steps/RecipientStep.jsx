@@ -20,7 +20,7 @@ export default class RecipientStep extends React.Component {
 
   const dataCount = panelStatus.completedOptional;
 
-  const divStyle = (dataCount ? "has-success " : "");
+  const divStyle = (dataCount && !panelStatus.errors ? "has-success " : "");
   const labelStyle = "control-label input-form-push-left" + (isRequired ? " req" : "");
 
     return (
