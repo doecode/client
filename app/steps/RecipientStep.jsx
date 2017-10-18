@@ -18,9 +18,9 @@ export default class RecipientStep extends React.Component {
   const panelStatus = metadata.getPanelStatus("Contact Information");
   const isRequired = panelStatus.hasRequired;
 
-  const dataCount = panelStatus.completedOptional;
+  const successNotice = isRequired ? panelStatus.remainingRequired == 0 : panelStatus.completedOptional > 0;
 
-  const divStyle = (dataCount && !panelStatus.errors ? "has-success " : "");
+  const divStyle = (successNotice && !panelStatus.errors ? "has-success " : "");
   const labelStyle = "control-label input-form-push-left" + (isRequired ? " req" : "");
 
     return (
