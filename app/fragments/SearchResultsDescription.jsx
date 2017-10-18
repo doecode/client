@@ -69,7 +69,7 @@ export default class SearchResultsDescription extends React.Component {
       searchDescriptionArr.push({displayField: 'Sponsoring Organization', field: 'sponsoring_organization', value: searchData.getValue("sponsoring_organization")});
     }
     if (searchData.getValue("orcid")) {
-      searchDescriptionArr.push({displayField: 'ORCID is', display: searchData.getValue("orcid"), field: 'orcid'});
+      searchDescriptionArr.push({displayField: 'ORCID', display: searchData.getValue("orcid"), field: 'orcid'});
     }
 
     let self = this;
