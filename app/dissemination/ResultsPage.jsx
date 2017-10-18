@@ -226,7 +226,7 @@ export default class ResultsPage extends React.Component {
               </span>}
               {this.state.serverError === true && <span>
                 <div className='col-xs-12 center-text has-error'>
-                  <label className='control-label'>A server error has occurred that is preventing your search from completing</label>
+                  <h2 className='control-label'>A server error has occurred that is preventing your search from completing</h2>
                 </div>
               </span>}
             </div>
