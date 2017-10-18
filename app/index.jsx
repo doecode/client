@@ -36,7 +36,6 @@ import {BrowserRouter as Router, Route, browserHistory, IndexRoute} from 'react-
 
 import bootstrapcss from './css/bootstrap.min.css';
 import bootstrapthemecss from './css/bootstrap-theme.min.css';
-import purecss from './css/pure-min.css';
 import css from './css/main.css';
 
 class DOECodeRouter extends React.Component {
