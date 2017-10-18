@@ -24,7 +24,7 @@ export default class AdvancedSearch extends React.Component {
   }
 
   render() {
-
+    const to_span = <span className='hide-lg hide-md hide-sm '>&nbsp;&nbsp;to</span>;
     return (
       <div className="row not-so-wide-row">
         <div className="col-lg-3 col-sm-1"></div>
@@ -66,21 +66,19 @@ export default class AdvancedSearch extends React.Component {
               </div>
               <div className="row">
                 <div className='col-xs-12'>
-                  <div className='row'>
+                  <div className="row">
                     <div className='col-xs-12 left-text no-col-padding-left adv-search-dropdown-label'>
                       Release Date:
                     </div>
-                    <div className="col-xs-4 text-left">
-                      <SearchField title='Date Earliest' field="date_earliest" elementType="date" noExtraLabelText/>
+                    <div className='col-xs-12 no-col-padding-left left-text adv-search-date-container-advsearch'>
+                      <SearchField title='Earliest Release Date' field="date_earliest" elementType="date" noExtraLabelText noRowWrapper textAfter={to_span}/>
+                      <span className='to-field hide-xs'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <SearchField title='Latest Release Date' field="date_latest" elementType="date" noExtraLabelText noRowWrapper/>
                     </div>
-                    <div className='col-xs-1 no-col-padding-left to-field adv-search-dropdown-label'>to</div>
-                    <div className="col-xs-4">
-                      <SearchField title='Date Latest' field="date_latest" elementType="date" noExtraLabelText/>
-                    </div>
-                    <div className='col-xs-1'></div>
                   </div>
                 </div>
               </div>
+              <br/>
               <div className="row">
                 <div className="col-xs-12">
                   <div className='row'>

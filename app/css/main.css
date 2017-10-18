@@ -799,6 +799,10 @@ html h3 {
   display: flex;
 }
 
+.adv-search-date-container-advsearch {
+  display: flex;
+}
+
 .adv-search-single-date-container input {
   padding-left: 0px !important;
   padding-right: 0px !important;
@@ -2267,6 +2271,9 @@ ul.biblio-page-ul>li>a:hover {
     padding-top: 5px;
     margin-top: 0px;
   }
+  .adv-search-date-container-advsearch {
+    display: inline-block;
+  }
 }
 
 
@@ -2455,6 +2462,7 @@ ul.biblio-page-ul>li>a:hover {
   .adv-search-date-container-homepage {
     display: inline-block;
   }
+
   .containerStyle {
     max-width: none !important;
   }
