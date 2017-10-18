@@ -6,7 +6,7 @@ import SigninStatus from '../fragments/SigninStatus';
 import SearchField from '../field/SearchField';
 import AdvancedSearchButton from '../dissemination/AdvancedSearchButton';
 import {addMetaTags, setPageTitle} from '../utils/utils';
-import SearchBar from '../fragments/SearchBar';
+import SearchBar from '../dissemination/SearchBar';
 
 const searchData = new SearchData();
 export default class Header extends React.Component {

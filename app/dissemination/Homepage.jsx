@@ -4,7 +4,7 @@ import {Modal, Button} from 'react-bootstrap';
 import SigninStatus from '../fragments/SigninStatus';
 import LinkIconRow from '../fragments/LinkIconRow';
 import IconRowIcon from '../fragments/IconRowIcon';
-import SearchBar from '../fragments/SearchBar';
+import SearchBar from './SearchBar';
 
 import SearchData from '../stores/SearchData';
 const searchData = new SearchData();
