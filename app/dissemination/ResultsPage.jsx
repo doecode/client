@@ -25,7 +25,9 @@ export default class ResultsPage extends React.Component {
     this.state = {
       results: undefined,
       facets: undefined,
-      numFound: 1
+      numFound: 0,
+      serverError: false,
+      initialLoading:true
     };
   }
 
@@ -35,11 +37,12 @@ export default class ResultsPage extends React.Component {
 
   parseSearchResponse(data) {
     window.scrollTo(0, 0);
-    this.setState({"results": data.docs, numFound: data.num_found, facets: data.facets});
+    this.setState({"results": data.docs, numFound: data.num_found, facets: data.facets, initialLoading:false});
   }
 
   parseErrorResponse() {
     window.scrollTo(0, 0);
+    this.setState({serverError: true, initialLoading:false});
   }
 
   refreshSearch() {
@@ -130,7 +133,8 @@ export default class ResultsPage extends React.Component {
 
     let needsFilterSuffix = (searchData.getValue("software_title") || searchData.getValue("developers_contributors") || searchData.getValue("biblio_data") || searchData.getValue("identifiers") || searchData.getValue("date_earliest") || searchData.getValue("date_latest") || (searchData.getValue("accessibility") && searchData.getValue("accessibility").length > 0) || (searchData.getValue("licenses") && searchData.getValue("licenses").length > 0) || (searchData.getValue("research_organization") && searchData.getValue("research_organization").length > 0) || (searchData.getValue("sponsoring_organization") && searchData.getValue("sponsoring_organization").length > 0) || searchData.getValue("orcid"));
 
-    let filterSuffix = needsFilterSuffix && <span className="search-for-filter-crumb"> (filtered)</span>;
+    let filterSuffix = needsFilterSuffix && <span className="search-for-filter-crumb">
+      (filtered)</span>;
 
     var searchCrumb = <span>{searchFor}{filterSuffix}</span>;
 
@@ -210,9 +214,19 @@ export default class ResultsPage extends React.Component {
                   </div>
                 </div>
               </span>}
-              {this.state.numFound < 1 && <span>
+              {(this.state.numFound < 1 && this.state.serverError === false && this.state.initialLoading ===false) && <span>
                 <div className='col-xs-12 center-text'>
                   <h1>No records were found for your search terms</h1>
+                </div>
+              </span>}
+              {(this.state.initialLoading === true) && <span>
+                <div className='col-xs-12 center-text'>
+                  <h1>Loading Search Results...</h1>
+                </div>
+              </span>}
+              {this.state.serverError === true && <span>
+                <div className='col-xs-12 center-text has-error'>
+                  <label className='control-label'>A server error has occurred that is preventing your search from completing</label>
                 </div>
               </span>}
             </div>
