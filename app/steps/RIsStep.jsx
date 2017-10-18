@@ -55,10 +55,10 @@ export default class RIsStep extends React.Component {
     const panelStatus = metadata.getPanelStatus("Identifiers");
     const isRequired = panelStatus.hasRequired;
 
-    const devArray = metadata.getValue(parentName);
-    const devArrayCount = (devArray ? devArray.length : 0);
+    const noticeArray = metadata.getValue(parentName);
+    const noticeArrayCount = (noticeArray ? noticeArray.length : 0);
 
-    const divStyle = (devArrayCount > 0 ? "has-success " : "");
+    const divStyle = (noticeArrayCount > 0 ? "has-success " : "");
     const labelStyle = "control-label" + (isRequired ? " req" : "");
 
     return (

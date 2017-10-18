@@ -81,10 +81,10 @@ export default class OrgsStep extends React.Component {
     const panelStatus = metadata.getPanelStatus("Organizations");
     const isRequired = panelStatus.hasRequired;
 
-    const devArray = metadata.getValue(parentName);
-    const devArrayCount = (devArray ? devArray.length : 0);
+    const noticeArray = metadata.getValue(parentName);
+    const noticeArrayCount = (noticeArray ? noticeArray.length : 0);
 
-    const divStyle = (devArrayCount > 0 ? "has-success " : "");
+    const divStyle = (noticeArrayCount > 0 ? "has-success " : "");
     const labelStyle = "control-label" + (isRequired ? " req" : "");
 
     const contentSO = parentName === 'sponsoring_organizations' && <EditableDataTable contentType={contentType} columns={columns} config={tableConfig} parentName={parentName}/>

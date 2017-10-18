@@ -115,10 +115,10 @@ export default class AgentsStep extends React.Component {
 			const panelStatus = metadata.getPanelStatus("Developers");
 			const isRequired = panelStatus.hasRequired;
 
-			const devArray = metadata.getValue(parentName);
-			const devArrayCount = (devArray ? devArray.length : 0);
+			const noticeArray = metadata.getValue(parentName);
+			const noticeArrayCount = (noticeArray ? noticeArray.length : 0);
 
-			const divStyle = (devArrayCount > 0 ? "has-success " : "");
+			const divStyle = (noticeArrayCount > 0 ? "has-success " : "");
 			const labelStyle = "control-label" + (isRequired ? " req" : "");
 
 				const content = <EditableDataTable columns={columns} contentType={contentType} config={tableConfig} parentName={parentName}/>
