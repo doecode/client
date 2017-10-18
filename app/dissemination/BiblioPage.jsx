@@ -28,7 +28,8 @@ export default class BiblioPage extends React.Component {
     this.generateContent = this.generateContent.bind(this);
     this.generateSummaryContent = this.generateSummaryContent.bind(this);
     this.state = {
-      data: undefined
+      data: undefined,
+      dataNotFound: false
     }
 
   }
@@ -48,7 +49,8 @@ export default class BiblioPage extends React.Component {
   }
 
   parseErrorResponse() {
-    // silent error
+    document.title = 'DOE CODE: CODE ID Not Found';
+    this.setState({dataNotFound: true});
   }
 
   generateContent(obj, index) {
@@ -180,16 +182,24 @@ export default class BiblioPage extends React.Component {
     return (
       <div className="row not-so-wide-row">
         <div className="col-xs-12">
+          {this.state.dataNotFound === true && <div className='container'>
+            <div className="row">
+              <div className='col-xs-12 center-text no-col-padding-left has-error'>
+                <br/>
+                <br/>
+                <h2 className='control-label'>CODE ID Not Found</h2>
+              </div>
+            </div>
+          </div>}
           {/*Breadcrumb trail*/}
-          <div className='container'>
+          {this.state.dataNotFound === false && <div className='container'>
             <div className="row">
               <div className='no-col-padding-left col-xs-12'>
                 <BreadcrumbTrail list={breadcrumbList}/>
               </div>
             </div>
-          </div>
-          <br/>
-          <div className='container'>
+          </div>}
+          <br/> {this.state.dataNotFound === false && <div className='container'>
             {/*Title*/}
             <div className="row">
               <div className="col-xs-12 no-col-padding-left no-col-padding-right biblio-title-container">
@@ -317,7 +327,8 @@ export default class BiblioPage extends React.Component {
                 </div>
               </div>
             </div>
-          </div>
+          </div>}
+
         </div>
       </div>
     )
