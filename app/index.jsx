@@ -36,6 +36,7 @@ import {BrowserRouter as Router, Route, browserHistory, IndexRoute} from 'react-
 
 import bootstrapcss from './css/bootstrap.min.css';
 import bootstrapthemecss from './css/bootstrap-theme.min.css';
+import purecss from './css/pure-min.css';
 import css from './css/main.css';
 
 class DOECodeRouter extends React.Component {
@@ -63,16 +64,16 @@ class DOECodeRouter extends React.Component {
           <div className={this.wrapper_class}>
             <Header isHomepage={this.is_homepage}/>
             <div>
-              <Route exact path="/" component={Homepage} pageTitle='DOE CODE - A Product of the Office of Scientific and Technical Information'/>
+              <Route exact path="/" component={Homepage}/>
               <Route path="/submit" component={SubmitForm}/>
               <Route path="/submit2" component={AnnouncementInterface}/>
               <Route path="/announce" component={AnnounceForm}/>
               <Route path="/announce2" component={AnnouncementInterface}/>
               <Route path="/confirm" component={Confirmation}/>
               <Route path="/projects" component={WorkflowManagement}/>
-              <Route path="/projects2" render={() =>< WorkflowManagement wizardVersion = "2" />}/>
+              <Route path="/projects2" render={() => <WorkflowManagement wizardVersion="2"/>}/>
               <Route path="/pending" component={ApprovalManagement}/>
-              <Route path="/approve" render={() =>< ApprovalForm disabled = "true" />}/>
+              <Route path="/approve" render={() => <ApprovalForm disabled="true"/>}/>
               <Route path="/register" component={RegisterUser}/>
               <Route path="/account" component={Account}/>
               <Route path="/login" component={Login}/>
