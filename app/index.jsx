@@ -34,6 +34,7 @@ import RepositoryServices from './static_content/RepositoryServices';
 import SecurityHostingPage from './static_content/SecurityHostingPage';
 import {BrowserRouter as Router, Route, browserHistory, IndexRoute} from 'react-router-dom';
 
+import purecss from './css/pure-min.css';
 import bootstrapcss from './css/bootstrap.min.css';
 import bootstrapthemecss from './css/bootstrap-theme.min.css';
 import css from './css/main.css';
