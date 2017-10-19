@@ -14,7 +14,7 @@ export default class PaginationButtons extends React.Component {
     this.state = {
       showDropdown: false,
       currentVal: this.props.currentVal,
-      currentPropsVal: this.props.currentVal
+      currentPageVal: this.props.currentVal
     };
   }
 
@@ -33,17 +33,17 @@ export default class PaginationButtons extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.currentVal != this.state.currentPropsVal) {
-      this.setState({currentPropsVal: newProps.currentVal, currentVal: newProps.currentVal});
+    if (newProps.currentVal != this.state.currentPageVal) {
+      this.setState({currentPageVal: newProps.currentVal, currentVal: newProps.currentVal});
     }
   }
 
   goBackAPage() {
-    this.refreshSearch(this.state.currentVal - 1);
+    this.refreshSearch(this.state.currentPageVal - 1);
   }
 
   goForwardAPage() {
-    this.refreshSearch(this.state.currentVal + 1);
+    this.refreshSearch(this.state.currentPageVal + 1);
   }
 
   refreshSearch(newPageNum) {
@@ -54,34 +54,54 @@ export default class PaginationButtons extends React.Component {
   }
 
   render() {
-    var isPrevDisabled = (this.state.currentPropsVal == 1)
+    console.log(JSON.stringify(this.state));
+    var isPrevDisabled = (this.state.currentPageVal == 1)
       ? 'disabled'
       : '';
 
-    var isNextDisabled = (this.state.currentPropsVal == this.props.max)
+    var isNextDisabled = (this.state.currentPageVal == this.props.max)
       ? 'disabled'
       : '';
 
-    var isChooseDisabled = (this.state.currentPropsVal == 1 && this.state.currentPropsVal == this.props.max)
+    var isChooseDisabled = (this.state.currentPageVal == 1 && this.state.currentPageVal == this.props.max)
       ? 'disabled'
       : '';
 
     return (
       <div className='custom-paginate-container'>
-        <button type='button' className='pure-button' title='Previous Page' disabled={isPrevDisabled} onClick={this.goBackAPage}><span className="fa fa-angle-left pagination-arrow"></span> Prev</button>&nbsp;&nbsp;
+        <button type='button' className='pure-button' title='Previous Page' disabled={isPrevDisabled} onClick={this.goBackAPage}>
+          <span className="fa fa-angle-left pagination-arrow"></span>
+          Prev</button>&nbsp;&nbsp;
         <button type='button' className='pure-button paginate-slider-arrow' title='Choose a Page' disabled={isChooseDisabled} onClick={this.toggleDropdown}>
           &hellip;
         </button>&nbsp;&nbsp;
-        <button type='button' className='pure-button' disabled={isNextDisabled} title='Next Page' onClick={this.goForwardAPage}>Next <span className="fa fa-angle-right pagination-arrow"></span></button>
+        <button type='button' className='pure-button' disabled={isNextDisabled} title='Next Page' onClick={this.goForwardAPage}>Next
+          <span className="fa fa-angle-right pagination-arrow"></span>
+        </button>
         {this.state.showDropdown && <div className='pagination-dropdown'>
           <div id="paging-1" className="pagination-dropdown pagination-dropdown-tip pagination-dropdown-relative pagination-dropdown-style">
             <div className="pagination-dropdown-panel">
-                <div className="text-muted pagination-go"><label htmlFor="pagination-sel-1">Go to page: <span className="paging-target">{this.state.currentVal}</span> of <span className="paging-max">{this.props.max}</span></label></div>
-                <div><table><tbody><tr><td>
-                    <input data-range="" onChange={this.showCurrentSliderPage} title={"Page " + this.state.currentVal} value={this.state.currentVal} min="1" max={this.props.max} name="pagination-sel" type="range" className="pagination-sel pagination-input" id="pagination-sel-1" step="1" />
-                    </td><td>
-                    <button className="pure-button pagination-go-slider" title={"Go"} type="button" onClick={this.goToPage}>»</button>
-                </td></tr></tbody></table></div>
+              <div className="text-muted pagination-go">
+                <label htmlFor="pagination-sel-1">Go to page:
+                  <span className="paging-target">{this.state.currentVal}</span>
+                  of
+                  <span className="paging-max">{this.props.max}</span>
+                </label>
+              </div>
+              <div>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <input data-range="" onChange={this.showCurrentSliderPage} title={"Page " + this.state.currentVal} value={this.state.currentVal} min="1" max={this.props.max} name="pagination-sel" type="range" className="pagination-sel pagination-input" id="pagination-sel-1" step="1"/>
+                      </td>
+                      <td>
+                        <button className="pure-button pagination-go-slider" title={"Go"} type="button" onClick={this.goToPage}>»</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>}
