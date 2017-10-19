@@ -540,7 +540,7 @@ function setPageTitle() {
       properTitle = 'DOE CODE: Security Hosting';
       break;
     case '':
-      properTitle = 'DOE CODE: A Product of the Office of Scientific and Technical Information';
+      properTitle = 'DOE CODE: Your software services platform and search tool to easily submit, announce, and discover code funded by the U.S. Department of Energy';
       break;
   }
 
