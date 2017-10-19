@@ -61,7 +61,7 @@ export default class RepositoryServices extends React.Component {
         <div className='col-xs-12 center-text'>
           <br/>
           <br/>
-          To join the community, please email&nbsp;<a title='Send email to doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>.
+          To join the GitHub community or to use the internal DOE CODE GitLab repository, please email&nbsp;<a title='Send email to doecoderepositories@osti.gov' href='mailto:doecoderepositories@osti.gov'>doecoderepositories@osti.gov</a>.
         </div>
       </div>
     );
