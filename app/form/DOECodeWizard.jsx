@@ -386,7 +386,7 @@ buildPanel(obj) {
         var codeIDAction = (this.props.page == 'approve' ? "Approving" : "Editing") + " Software Project #" + codeID;
           document.title='DOE CODE: '+codeIDAction;
 }else{
-  document.title = 'DOE CODE: Creating New Software Project';
+  document.title = 'DOE CODE: Submit New Software Project';
 }
       const self = this;
 
