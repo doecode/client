@@ -22,12 +22,32 @@ export default class Policy extends React.Component {
             DOE CODE offers two paths for users to provide code. Users can (1) Submit code to DOE CODE, and (2) Announce code to the Department of Energy for official review and release through DOE CODE.
           </p>
           <br/>
+          <ul>
+            <li>
+              <a href='#submit-code-to-doe-code'>Submit Code to DOE CODE</a>
+            </li>
+            <li>
+              <a href='#required-metadata-to-submit-to-doe-code'>Required Metadata to submit to DOE CODE</a>
+            </li>
+            <li>
+              <a href='#announce-code-to-department-of-energy'>Announce Code to the Department of Energy through DOE CODE</a>
+            </li>
+            <li>
+              <a href='#required-metadata-to-announce-to-elink'>Required Metadata to Announce to the Department of Energy through DOE CODE</a>
+            </li>
+            <li>
+              <a href='#software-categories'>Software Categories</a>
+            </li>
+          </ul>
+          <br/>
           <p>
+            <a name='submit-code-to-doe-code'></a>
             <strong>Submit Code to DOE CODE</strong>
             <br/>
             Users may want to submit their code to DOE CODE. Submitting to DOE CODE is easy, with only a minimal set of metadata required. Submitting offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Codes in early development, along with those wanting to obtain DOIs early in the process, are the primary use case for this functionality.
             <br/>
             <br/>
+            <a name='required-metadata-to-submit-to-doe-code'></a>
             <strong>Required Metadata to Submit to DOE CODE:</strong>
             <ul>
               <li>Software Availability</li>
@@ -40,6 +60,7 @@ export default class Policy extends React.Component {
           </p>
           <br/>
           <p>
+            <a name='announce-code-to-department-of-energy'></a>
             <strong>Announce Code to the Department of Energy through DOE CODE</strong>
             <br/>
             Users may need to announce their code to the Department of Energy to ensure announcement and dissemination in accordance with DOE statutory responsibilities. Codes in later stages of development are the primary use case for this functionality. For announcement to the Department of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory data fields should be included during announcement when possible.
@@ -70,6 +91,7 @@ export default class Policy extends React.Component {
             </ul>
           </p>
           <p>
+            <a name='required-metadata-to-announce-to-elink'></a>
             <strong>Required Metadata to Announce to the Department of Energy through DOE CODE:</strong>
             <ul>
               <li>Software Availability</li>
@@ -85,6 +107,7 @@ export default class Policy extends React.Component {
           </p>
           <br/>
           <p>
+            <a name='software-categories'></a>
             <strong>Software Categories</strong>
             <br/>
             Different categories of software have different distribution requirements, limitations, and appropriate distribution channels, which are defined in the&nbsp;
