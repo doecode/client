@@ -17,7 +17,7 @@ import AdvancedSearch from './dissemination/AdvancedSearch';
 import ResultsPage from './dissemination/ResultsPage';
 import BiblioPage from './dissemination/BiblioPage';
 import AboutPage from './static_content/AboutPage';
-import CommunicationsPage from './static_content/CommunicationsPage';
+import NewsResourcesPage from './static_content/NewsResourcesPage';
 import PolicyPage from './static_content/PolicyPage';
 import FAQPage from './static_content/FAQPage';
 import ContactPage from './static_content/ContactPage';
@@ -82,7 +82,7 @@ class DOECodeRouter extends React.Component {
               <Route path="/results" component={ResultsPage}/>
               <Route path="/biblio" component={BiblioPage}/>
               <Route path="/about" component={AboutPage}/>
-              <Route path="/communications" component={CommunicationsPage}/>
+              <Route path="/news-resources" component={NewsResourcesPage}/>
               <Route path="/policy" component={PolicyPage}/>
               <Route path="/faq" component={FAQPage}/>
               <Route path="/contact" component={ContactPage}/>

@@ -38,7 +38,7 @@ export default class NavgationBar extends React.Component {
                 <NavBarItem current_page={this.current_page} destination='/doecode/repository-services' navTitle='Repository Services' special='true' fa_icon='fa fa-home nav-menu-item-fa' display_name='Repository Services'/>
                 <NavBarItem current_page={this.current_page} destination="/doecode/about" navTitle='About' special="true" fa_icon="fa fa-info nav-menu-item-fa" display_name="About"/>
                 <NavBarItem current_page={this.current_page} destination="/doecode/policy" navTitle='Software Policy' special="true" fa_icon="fa fa-folder-open-o nav-menu-item-fa" display_name="Software Policy"/>
-                <NavBarItem current_page={this.current_page} destination="/doecode/communications" navTitle='News/Resources' special="true" fa_icon="fa fa-newspaper-o nav-menu-item-fa" display_name="News/Resources"/>
+                <NavBarItem current_page={this.current_page} destination="/doecode/news-resources" navTitle='News/Resources' special="true" fa_icon="fa fa-newspaper-o nav-menu-item-fa" display_name="News/Resources"/>
                 <NavBarItem current_page={this.current_page} destination="/doecode/faq" navTitle='FAQs' special="true" fa_icon="fa fa-question nav-menu-item-fa" display_name="FAQs"/>
               </ul>
             </div>

@@ -500,7 +500,7 @@ function setPageTitle() {
     case 'results':
       properTitle = 'DOE CODE: Search Results';
       break;
-    case 'communications':
+    case 'news-resources':
       properTitle = 'DOE CODE: News/Resources';
       break;
     case 'policy':

@@ -17,7 +17,7 @@ export default class Homepage extends React.Component {
 
     const icon_row1 = [(<IconRowIcon container_classes='col-sm-4 col-xs-6' destination='/doecode/projects' text='Submit Software/Code' icon_classes='fa fa-sign-in' key="publish"/>), (<IconRowIcon container_classes='col-sm-4 col-xs-12' destination='/doecode/repository-services' text='Repository Services' icon_classes='fa fa-home clickable' key="repoServices"/>), (<IconRowIcon container_classes='col-sm-4 col-xs-6' destination='/doecode/about' text='About' icon_classes='fa fa-info' key="about"/>)];
 
-    const icon_row2 = [(<IconRowIcon container_classes='col-sm-4 col-xs-6' destination='/doecode/policy' text='Software Policy' icon_classes='fa fa-folder-open-o' key="policy"/>), (<IconRowIcon container_classes='col-sm-4 col-xs-6' destination='/doecode/communications' text='News/Resources' icon_classes='fa fa-newspaper-o' key="comms"/>), (<IconRowIcon container_classes='col-sm-4 col-xs-12' destination='/doecode/faq' text='FAQs' icon_classes='fa fa-question' key="faq"/>)];
+    const icon_row2 = [(<IconRowIcon container_classes='col-sm-4 col-xs-6' destination='/doecode/policy' text='Software Policy' icon_classes='fa fa-folder-open-o' key="policy"/>), (<IconRowIcon container_classes='col-sm-4 col-xs-6' destination='/doecode/news-resources' text='News/Resources' icon_classes='fa fa-newspaper-o' key="comms"/>), (<IconRowIcon container_classes='col-sm-4 col-xs-12' destination='/doecode/faq' text='FAQs' icon_classes='fa fa-question' key="faq"/>)];
     return (
       <div className='container-fluid'>
         <div className="row">

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Modal, Button} from 'react-bootstrap';
 
-export default class Communications extends React.Component {
+export default class NewsResourcesPage extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -12,7 +12,7 @@ export default class Communications extends React.Component {
       <div className="row not-so-wide-row">
         <div className="col-lg-3 col-md-1"></div>
         <div className="col-lg-6 col-md-10 col-xs-12 static-content">
-          <h2 className="static-content-title">Communications and Resources</h2>
+          <h2 className="static-content-title">News/Resources</h2>
           <h2>Communications</h2>
           <div className="padblock">
             <h4>Blogs</h4>
