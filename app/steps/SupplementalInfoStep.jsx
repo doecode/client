@@ -35,7 +35,9 @@ export default class SupplementalInfoStep extends React.Component {
     const files = metadata.getValue("files");
     const filesInfo = metadata.getFieldInfo("file_name");
 
-    const fileName = metadata.getValue("file_name");
+    const fileNameWithPath = metadata.getValue("file_name");
+    const fileName = fileNameWithPath.split(/[\/\\]/).pop();
+
     const accessibility = metadata.getValue("accessibility");
 
     const acceptedFileTypes = ".zip,.tar,.tar.gz,.tar.bz2";
@@ -86,20 +88,20 @@ export default class SupplementalInfoStep extends React.Component {
                 </span>}
               </div>
             </div>}
+          </div>
 
-            {filesInfo.completed && <div className="form-group form-group-sm row">
-              <label className="col-sm-4" style={fileLabelStyle}>
+            {filesInfo.completed && <div className="form-group form-group-sm row col-xs-12">
+              <label className="upload-file" style={fileLabelStyle}>
                 Uploaded File
               </label>
-              <div className="col-sm-6">
+              <div className="upload-file">
                 {fileName}
               </div>
-              <div className="col-sm-2">
+              <div className="upload-file">
                 <button type='button' className='pure-button button-error' onClick={this.deleteFile}>Delete File</button>
               </div>
 
             </div>}
-          </div>
         </div>
       </div>
     );
