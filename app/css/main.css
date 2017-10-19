@@ -1162,6 +1162,11 @@ html, body {
 .signin-btn-container:hover {
   background-color: #E2E2E2;
   color: #5E5E5E !important;
+  cursor: pointer;
+}
+
+.signin-btn-container:hover>.signin-btn {
+  color: black;
 }
 
 .first-signin-text {
@@ -2126,7 +2131,9 @@ ul.biblio-page-ul>li>a:hover {
   float: left;
 }
 
+
 /*Fixes an issue where pure-form causes an extra input to show up in react-select's*/
+
 div.Select>div.Select-control input {
   display: inline-block;
   border: none;

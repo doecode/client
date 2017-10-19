@@ -7,6 +7,8 @@ export default class SigninStatus extends React.Component {
     super(props);
     this.parseErrorResponse = this.parseErrorResponse.bind(this);
     this.logout = this.logout.bind(this);
+    this.goToSignin = this.goToSignin.bind(this);
+    this.goToCreateAccount = this.goToCreateAccount.bind(this);
 
     //Make sure that the token still hasn't expired
     this.is_logged_in = getIsLoggedIn();
@@ -39,6 +41,14 @@ export default class SigninStatus extends React.Component {
 
   parseErrorResponse() {
     // silent error
+  }
+
+  goToSignin(){
+    window.location.href='/doecode/login';
+  }
+
+  goToCreateAccount(){
+    window.location.href='/doecode/register';
   }
 
   render() {
@@ -77,14 +87,14 @@ export default class SigninStatus extends React.Component {
         </div>}
         {!this.is_logged_in && <div className='signin-main-container'>
           <ul className='list-inline signin-list'>
-            <li className='signin-btn-container first-signin-text'>
+            <li className='signin-btn-container first-signin-text' onClick={this.goToSignin}>
               <a title='Log In' className="signin-btn" href="/doecode/login">
                 <span className=" signin-btn-icon fa fa-user signin-icon"></span>
                 &nbsp;
                 <span className='signin-text'>&nbsp;Sign In</span>
               </a>
             </li>
-            <li className='signin-btn-container'>
+            <li className='signin-btn-container' onClick={this.goToCreateAccount}>
               <a title='Create Account' className="signin-btn" href="/doecode/register">
                 <span className="signin-btn-icon fa fa-user-plus signin-icon hide-sm hide-lg hide-md"></span>
                 <span className='signin-text'>&nbsp;Create Account</span>
