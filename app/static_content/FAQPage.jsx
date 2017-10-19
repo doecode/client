@@ -171,6 +171,7 @@ export default class FAQ extends React.Component {
             <div>
               For additional information about DOE scientific and technical software, refer to the&nbsp;<a title='Software Best Practices' target='_blank' href='https://www.osti.gov/includes/estsc/software_best_prac.html'>Software Best Practices document</a>.
               <br/>
+              <br/>
               Software that meets the following criteria need not be announced to the Department of Energy:
               <ul>
                 <li>operational systems software that is site-specific, unique to a particular hardware, or necessary to ensure the fundamental operability of automated data processing equipment, whether supplied by the manufacturer of the system hardware or others;</li>
