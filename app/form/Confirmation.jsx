@@ -72,9 +72,11 @@ export default class Confirmation extends React.Component {
     switch (this.state.workflow) {
       case 'submitted':
         actionPhrase = 'Project Successfully Submitted to DOE CODE';
+        document.title = 'DOE CODE: CODE ID #' + this.state.codeID + ' Successfully Submitted to DOE CODE';
         break;
       case 'announced':
         actionPhrase = 'Project Successfully Announced to E-Link';
+        document.title = 'DOE CODE: CODE ID #' + this.state.codeID + ' Successfully Announced to E-Link';
         break;
     }
 
