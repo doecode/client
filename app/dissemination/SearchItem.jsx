@@ -58,6 +58,12 @@ export default class SearchItem extends React.Component {
       ? "col-sm-10 col-xs-12 search-result-sub-row"
       : "col-sm-11 col-xs-10 search-result-sub-row";
 
+    var landing_page_display = '';
+    if (data.landing_page) {
+      landing_page_display=(data.landing_page.indexOf('http:') > -1 || data.landing_page.indexOf('https:') > -1)
+        ? data.landing_page
+        : 'http://' + data.landing_page;
+    }
     return (
       <div>
         <div className={result_column_classes}>
@@ -86,13 +92,17 @@ export default class SearchItem extends React.Component {
                   <a title={'DOI for Code ID ' + data.code_id} target="_blank" href={doiUrl}>{doi}</a>
                 </span>}
                 {/*Divider*/}
-                {(data.repository_link && doi) && <span>
+                {((data.repository_link || data.landing_page) && doi) && <span>
                   <span className='search-item-doi-divider hide-xs'>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
                   <span className='hide-sm hide-md hide-lg'><br/></span>
                 </span>}
                 {/*Repository Link*/}
                 {data.repository_link && <span>
                   <a title={'Repository Link for Code ID ' + data.code_id} target='_blank' href={data.repository_link}>Repository Link</a>
+                </span>}
+                {/*Landing Page*/}
+                {data.landing_page && <span>
+                  <a title={'Landing Page for Code ID ' + data.code_id} target='_blank' href={landing_page_display}>Landing Page</a>
                 </span>}
               </div>
               <br/>

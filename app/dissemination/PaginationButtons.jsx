@@ -54,7 +54,6 @@ export default class PaginationButtons extends React.Component {
   }
 
   render() {
-    console.log(JSON.stringify(this.state));
     var isPrevDisabled = (this.state.currentPageVal == 1)
       ? 'disabled'
       : '';
