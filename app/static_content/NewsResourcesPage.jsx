@@ -26,6 +26,12 @@ export default class NewsResourcesPage extends React.Component {
                 <a title='2017 Newsletter' href="https://www.osti.gov/home/newsletter/issue-18-january-february-2017#doesoftware">OSTI Developing New DOE Software Center</a>
               </li>
             </ul>
+            <h4>DOE CODE Fact Sheet</h4>
+            <ul>
+              <li>
+                <a title='DOE CODE Fact Sheet' href='https://www.osti.gov/includes/doecode/docs/DOEcode_C228.pdf'>Fact Sheet</a>&nbsp;&nbsp;<a href='https://www.osti.gov/includes/doecode/docs/DOEcode_C228.pdf'><img src='https://www.osti.gov/includes/doecode/images/page_white_acrobat.png' title='DOE CODE Fact Sheet PDF' /></a>&nbsp;<small style={{'fontSize':'12px'}} className='text-muted'>(182&nbsp;KB)</small>
+              </li>
+            </ul>
           </div>
           <h2>Resources</h2>
           <div className="padblock">
