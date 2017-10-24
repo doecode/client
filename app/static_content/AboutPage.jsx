@@ -21,9 +21,7 @@ export default class About extends React.Component {
     ];
 
     this._discoverUrls = ['https://www.osti.gov/includes/doecode/images/Discover-min.png', 'https://www.osti.gov/includes/doecode/images/Discover_hover-min.png'];
-
     this._createUrls = ['https://www.osti.gov/includes/doecode/images/Create-min.png', 'https://www.osti.gov/includes/doecode/images/Create_hover-min.png'];
-
     this._submitUrls = ['https://www.osti.gov/includes/doecode/images/Submit-min.png', 'https://www.osti.gov/includes/doecode/images/Submit_hover-min.png']
     this.state = {
       currentImage: this._imageUrls[0],
@@ -150,7 +148,7 @@ export default class About extends React.Component {
                 <h3 className="hidden-md hidden-lg featuresStyle">FEATURES</h3>
                 <p className="left-text hidden-md hidden-lg">
                   <strong>CATALOG</strong>
-                  - DOE Software Catalog.</p>
+                  - DOE CODE is the DOE Software Catalog.</p>
                 <p className="left-text hidden-md hidden-lg">
                   <strong>SOCIAL CODE</strong>
                   - DOE CODE seamlessly interfaces with common development platforms (e.g., open web API).</p>
@@ -165,10 +163,10 @@ export default class About extends React.Component {
                   - DOE CODE is easy to use and requires minimal metadata, often autopopulated.</p>
                 <p className="left-text hidden-md hidden-lg">
                   <strong>DOI</strong>
-                  - DOE CODE issues digital object identifiers (DOIs) for code so software is more easily cited and discoverable. Allows for stronger connections between code, publications, and data through citation in reference sections.</p>
+                  - DOE CODE issues digital object identifiers (DOIs) for code so software is more easily cited and discoverable. This allows for stronger connections between code, publications, and data through citation in reference sections.</p>
                 <p className="left-text hidden-md hidden-lg">
                   <strong>REPOSITORY</strong>
-                  - DOE CODE offers public and private repository services in GitHub and GitLab.</p>
+                  - DOE CODE offers public and private repository services in GitHub and Gitlab.</p>
               </div>
             </div>
 
