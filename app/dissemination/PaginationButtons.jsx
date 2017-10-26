@@ -81,9 +81,8 @@ export default class PaginationButtons extends React.Component {
           <div id="paging-1" className="pagination-dropdown pagination-dropdown-tip pagination-dropdown-relative pagination-dropdown-style">
             <div className="pagination-dropdown-panel">
               <div className="text-muted pagination-go">
-                <label htmlFor="pagination-sel-1">Go to page:
-                  <span className="paging-target">{this.state.currentVal}</span>
-                  of
+                <label htmlFor="pagination-sel-1">Go to page:&nbsp;
+                  <span className="paging-target">{this.state.currentVal}</span>&nbsp;of&nbsp;
                   <span className="paging-max">{this.props.max}</span>
                 </label>
               </div>
