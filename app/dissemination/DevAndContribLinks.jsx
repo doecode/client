@@ -154,7 +154,7 @@ export default class DevAndContribLinks extends React.Component {
       <div>
         <div>
           {authorsContent}
-          {(this.props.searchPage && authors.length > 3) && <span>;&nbsp;&hellip;</span>}{authors && <span>&nbsp;</span>}{this.props.releaseDate}
+          {(this.props.searchPage && authors.length > 3) && <span>;&nbsp;&hellip;</span>}{authors && <span>&nbsp;</span>}&nbsp;&nbsp;<span className='hide-sm hide-md hide-lg'><br/></span>{this.props.releaseDate}
         </div>
         {(affiliations_list && affiliations_list.length > 0 && !this.props.searchPage) > 0 && <div className='affiliations-div'>
           <button title={btnTitle} type="button" className="btn btn-link" onClick={this.showAffiliationsBtn}>{this.state.affiliationStateLabel}</button>

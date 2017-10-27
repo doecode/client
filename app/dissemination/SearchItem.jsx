@@ -82,7 +82,6 @@ export default class SearchItem extends React.Component {
                 <div className="search-result-author col-md-8 col-xs-12">
                   <DevAndContribLinks items={devContribList} searchPage releaseDate={releaseDateDisplay}/>
                 </div>
-
               </div>
               {data.description !== undefined && <SearchRowDescription text={data.description} moreLess={100}/>}
 
