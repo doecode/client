@@ -8,6 +8,10 @@ export default class NavgationBar extends React.Component {
   constructor(props) {
     super(props);
     this.current_page = ("/doecode/" + location.href.match(/([^\/]*)\/*$/)[1]);
+    if(this.current_page.indexOf('?')>-1){
+      this.current_page = this.current_page.substr(0,this.current_page.indexOf('?'));
+      console.log(this.current_page);
+    }
   }
 
   render() {
@@ -34,7 +38,7 @@ export default class NavgationBar extends React.Component {
                 <a className='whiteAnchor' title='Go to Advanced Search' href='/doecode/search'>Advanced Search</a>
               </div>
               <ul className='nav navbar-nav nav-menu'>
-                <NavBarItem current_page={this.current_page} destination="/doecode/projects" navTitle='Submit Software/Code' special="true" fa_icon="fa fa-sign-in nav-menu-item-fa" display_name="Submit Software/Code"/>
+                <NavBarItem current_page={this.current_page} destination='/doecode/projects' multDestinations={["/doecode/projects","/doecode/submit","/doecode/announce","/doecode/approve","/doecode/pending"]} navTitle='Submit Software/Code' special="true" fa_icon="fa fa-sign-in nav-menu-item-fa" display_name="Submit Software/Code"/>
                 <NavBarItem current_page={this.current_page} destination='/doecode/repository-services' navTitle='Repository Services' special='true' fa_icon='fa fa-home nav-menu-item-fa' display_name='Repository Services'/>
                 <NavBarItem current_page={this.current_page} destination="/doecode/about" navTitle='About' special="true" fa_icon="fa fa-info nav-menu-item-fa" display_name="About"/>
                 <NavBarItem current_page={this.current_page} destination="/doecode/policy" navTitle='Software Policy' special="true" fa_icon="fa fa-folder-open-o nav-menu-item-fa" display_name="Software Policy"/>

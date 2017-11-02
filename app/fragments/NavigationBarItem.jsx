@@ -8,7 +8,13 @@ export default class NavgationBarItem extends React.Component {
     this.anchor_class = "";
     this.fa_icon = "";
 
-    this.is_active = (this.props.destination === this.props.current_page);
+    this.is_active = false;
+    if (this.props.multDestinations) {
+      this.is_active = this.props.multDestinations.indexOf(this.props.current_page) > -1;
+    } else {
+      this.is_active = (this.props.destination === this.props.current_page);
+    }
+
     this.li_class = (this.is_active)
       ? " active-menu-item "
       : "";
