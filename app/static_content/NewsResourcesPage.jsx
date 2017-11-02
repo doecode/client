@@ -22,6 +22,9 @@ export default class NewsResourcesPage extends React.Component {
             </ul>
             <h4>OSTI.gov Newsletter Articles</h4>
             <ul>
+              <li>
+                October/November 2017 OSTI.gov Newsletter: OSTI Launches DOE CODE
+              </li>
               <li>January/February 2017 OSTI.gov Newsletter:&nbsp;
                 <a title='2017 Newsletter' href="https://www.osti.gov/home/newsletter/issue-18-january-february-2017#doesoftware">OSTI Developing New DOE Software Center</a>
               </li>
