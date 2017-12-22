@@ -1,0 +1,56 @@
+{{> wrapper/header}}
+<input type='hidden' id='code_id' value="{{code_id}}"/>
+<input type='hidden' id='page' value="{{page}}"/>
+<input type='hidden' id='page_req_id' value="{{page_req_id}}"/>
+<input type='hidden' id='current_datatable_id' value="-1"/>
+<div class='row not-so-wide-row'>
+     <div class="col-md-3"></div>
+     <div class='col-md-6 col-xs-12'>
+	  <div class="form-group form-group-sm row">
+	       <div class="col-xs-12 center-text">
+		    <h1>{{page_message}}</h1>
+		    <a id="input-help-anchor" title="More detailed information on this process can be found on our Help page" href="/doecode/help">More detailed information on this process can be found on our Help page</a>
+		    <span id="input-approve-msg" class="error-color" style="display: none">NOTICE: This is an Approval Only form!  ANY CHANGES MADE WILL BE LOST!</span>
+	       </div>
+	  </div>
+	  <div class="panel-group" id="input-page-accordion" role="tablist" aria-multiselectable="true">
+	       <!--Repository Information-->
+	       {{> input/repository-information-step}}
+	       <!--Product Description-->
+	       {{> input/product-description-step}}
+	       <!--Developers-->
+	       {{> input/developers-step}}
+	       <!--DOI and Release DAte-->
+	       {{> input/doi-release-date-step}}
+	       <!--Supplemental Product Info-->
+	       {{> input/supplemental-product-info-step}}
+	       <!--Organizations-->
+	       {{> input/organizations-step}}
+	       <!--Contributors-->
+	       {{> input/contributors-contributing-orgs-step}}
+	       <!--Identifiers-->
+	       {{> input/identifiers-step}}
+	       <!--Contact Information-->
+	       {{> input/contact-info-step}}
+	  </div>
+	  {{#if show_optional_toggle}}
+	  <button type="button" id='input-form-optional-toggle' class="btn">
+	       <span class="fa fa-plus-square-o"></span>&nbsp;Show Additional Optional Fields
+	  </button>
+	  {{/if}}
+			<button id="input-submit-btn" title='Submit Project' type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style" style="display: none">
+				Submit Project
+			</button>
+			<button id="input-announce-btn" title='Announce Project to E-Link' type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style" style="display: none">
+				Announce Project to E-Link
+			</button>
+			<button id="input-approve-btn" title='Approve Project' type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style" style="display: none">
+				Approve Project
+			</button>
+			<button id="input-save-btn" title='Save Your Progress' type="button" class="pure-button button-secondary btn-lg pull-right doecode-wizard-btn save-btn-margin" style="display: none">
+				Save Your Progress
+			</button>
+     </div>
+     <div class="col-md-3"></div>
+</div>
+{{> wrapper/footer}}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+	  <link rel="icon" type="image/png" href="/doecode/images/doecode-icon.png"/>
+	  <meta charset="utf-8">
+	  <title>{{page_title}}</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <!--All CSS-->
+	  <!--<link rel='stylesheet' href='/doecode/css/doecode-css.css'/>-->
+	  <style>
+	       {{{css}}}
+	  </style>
+	  {{#each meta_tag}}
+	  <meta name='{{name}}' content='{{content}}'/>
+	  {{/each}}
+     </head>
+     <body>
+	  <input type='hidden' id='active-page' value='{{active_page}}'/>
+	  <span class="hidden">
+	       {{> search/search-form}}
+	  </span>
+	  <div class='{{outter_wrapper_style}}'>
+	       <div class='{{header_class}}'>
+		    <nav class='{{nav_class}}'>
+			 <div class="container-fluid header-container-fluid no-col-padding-right no-col-padding-left">
+			      <div class="pull-right hidden-xs visible-sm visible-md visible-lg header-signin-links" id="signin-status-big-screens">
+				   {{> user/SigninStatus}}
+			      </div>
+			      <div class='container hidden-xs visible-sm visible-md visible-lg header-search-container'>
+				   <br/>
+				   <br/>
+				   <div class='row not-so-wide-row'>
+					<div class='col-md-2 col-sm-12 hide-lg'></div>
+					<div class='col-lg-7 col-md-10 col-sm-12'>
+					     <h3 class='logo-header'>
+						  <a href="/doecode">
+						       <img class='header-logo-img' title='DOE CODE Homepage' src='/doecode/images/DOEcodeTitle_287X45-min.png' alt="DOE CODE"/>
+						  </a>
+						  <span class='header-side-text'>U.S. Department of Energy<br/>
+						       Office of Scientific and Technical Information</span>
+					     </h3>
+					</div>
+					<div class='col-md-2 col-sm-12 hide-lg'></div>
+					<div class='col-lg-5 col-md-10 col-sm-12'>
+					     {{> search/navbar-searchbar}}
+					</div>
+				   </div>
+				   <br/>
+			      </div>
+			      <!--VV Navigation Bar VV-->
+			      <div class=' container'>
+				   <div class='row'>
+					<div class='col-xs-12 no-col-padding-left no-col-padding-right'>
+					     <div class="navbar-header">
+						  <button type="button" title='Toggle Menu' class="navbar-toggle hamburger-menu-btn no-col-padding-left no-col-padding-right" data-toggle="collapse" data-target="#header-nav-collapse">
+						       <span class="icon-bar icon-bar-extra"></span>
+						       <span class="icon-bar icon-bar-extra"></span>
+						       <span class="icon-bar icon-bar-extra"></span>
+						  </button>
+						  <a href='/doecode/'><img title='DOE CODE Homepage ' src='/doecode/images/DOEcodeTitle_185-min.png' alt="DOE CODE" class='navbar-logo-img'/></a>
+						  <span class='hide-md hide-lg hide-sm pull-right' id="signin-status-small-screens">{{> user/SigninStatus}}</span>
+					     </div>
+					     <div class="collapse navbar-collapse no-col-padding-right no-col-padding-left" id='header-nav-collapse'>
+						  <div class='hide-md hide-lg hide-sm'>
+						       <br/>
+						       {{> search/dropdown-searchbar}}
+						       <a class='whiteAnchor' title='Go to Advanced Search' href='/doecode/search'>Advanced Search</a>
+						  </div>
+						  <!--Navigation bar. Shows up in the top-middle and in the hamburger menu dropdown-->
+						  <ul class="nav navbar-nav nav-menu">
+						       <li class='{{navbar.projects.list_item}}'>
+							    <a title="Submit Software/Code" class='{{navbar.projects.anchor}}' href="/doecode/projects">
+								 <span class="fa fa-sign-in nav-menu-item-fa {{navbar.projects.span}}"></span>&nbsp;Submit Software/Code
+							    </a>
+						       </li>
+						       <li class='{{navbar.repository_services.list_item}}'>
+							    <a title="Repository Services" class='{{navbar.repository_services.anchor}}' href="/doecode/repository-services">
+								 <span class="fa fa-home nav-menu-item-fa {{navbar.repository_services.span}}"></span>&nbsp;Repository Services
+							    </a>
+						       </li>
+						       <li class='{{navbar.about.list_item}}'>
+							    <a title="About" class='{{navbar.about.anchor}}' href="/doecode/about">
+								 <span class="fa fa-info nav-menu-item-fa {{navbar.about.span}}"></span>&nbsp;About
+							    </a>
+						       </li>
+						       <li class='{{navbar.policy.list_item}}'>
+							    <a title="Software Policy" class='{{navbar.policy.anchor}}' href="/doecode/policy">
+								 <span class="fa fa-folder-open-o nav-menu-item-fa {{navbar.policy.span}}"></span>&nbsp;Software Policy</a>
+						       </li>
+						       <li class='{{navbar.news_resources.list_item}}'>
+							    <a title="News/Resources" class='{{navbar.news_resources.anchor}}' href="/doecode/news-resources">
+								 <span class="fa fa-newspaper-o nav-menu-item-fa {{navbar.news_resources.span}}"></span>&nbsp;News/Resources
+							    </a>
+						       </li>
+						       <li class='{{navbar.faq.list_item}}'>
+							    <a title="FAQs" class='{{navbar.faq.anchor}}' href="/doecode/faq">
+								 <span class="fa fa-question nav-menu-item-fa {{navbar.faq.span}}"></span>&nbsp;FAQs
+							    </a>
+						       </li>
+						  </ul>
+					     </div>
+					</div>
+				   </div>
+			      </div>
+			      <!--^^ Navigation Bar ^^-->
+			 </div>
+		    </nav>

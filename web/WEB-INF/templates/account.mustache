@@ -1,0 +1,149 @@
+{{> wrapper/header}}
+<input type='hidden' id='user-account-page-identifier'/>
+<input type='hidden' id='original-user-first-name' value='{{current_user_data.first_name}}'/>
+<input type='hidden' id='original-user-last-name' value='{{current_user_data.last_name}}'/>
+<input type='hidden' id='user-passcode' value='{{passcode}}'/>
+
+<div class="row not-so-wide-row">
+     <div class="col-lg-2 special-lg-2 col-md-1"></div>
+     <div class="col-lg-8 special-lg-8 col-md-10 col-xs-12">
+	  <br/>
+	  <div class="row">
+	       <div class='col-xs-12'>
+		    <div class="panel panel-default">
+			 <div class="panel-heading account-panel-header center-text">User Information</div>
+			 <div class="panel-body account-panel-body">
+			      <div class='row'>
+				   <div class='col-xs-12 center-text has-warning'>
+					<label class='control-label'>{{page_warning_message}}</label>
+				   </div>
+			      </div>
+			      <div class='row'>
+				   <div class='col-xs-12 center-text has-success'>
+					<label class='control-label' id='user-account-success-message'></label>
+				   </div>
+			      </div>
+			      <div class='row'>
+				   <div class='col-xs-12 center-text has-error'>
+					<label class='control-label' id='account-error-message'></label>
+				   </div>
+			      </div>
+			      <br/>
+			      <div class='row'>
+				   <div class='col-lg-6 col-md-10 col-sm-10 col-xs-12 right-text-lg right-text-md right-text-sm no-col-padding-left-lg no-col-padding-right-lg'>
+					<br/>
+					<div class='row'>
+					     <div class='col-xs-12'>
+						  <div class="form-inline">
+						       <label class='control-label normal-weight' for='email'>Email:&nbsp;&nbsp;</label>
+						       <input title='Email' id='email' class="form-control pure-input-1 user-account-input" value='{{current_user_data.email}}' type="text" readonly disabled>
+						  </div>
+					     </div>
+					</div>
+					<br/>
+					<div class='row'>
+					     <div class='col-xs-12'>
+						  <div class="form-inline">
+						       <label class='control-label normal-weight' for='first_name'>First Name:&nbsp;&nbsp;</label>
+						       <input title='First Name' placeholder='First Name' id='first_name' class="form-control pure-input-1 user-account-input" value='{{current_user_data.first_name}}' type="text">
+						  </div>
+					     </div>
+					</div>
+					<br/>
+					<div class='row'>
+					     <div class='col-xs-12'>
+						  <div class="form-inline">
+						       <label class='control-label normal-weight' for='last_name'>Last Name:&nbsp;&nbsp;</label>
+						       <input title='Last Name' placeholder='Last Name' id='last_name' class="form-control pure-input-1 user-account-input" value='{{current_user_data.last_name}}' type="text">
+						  </div>
+					     </div>
+					</div>
+					<br/>
+					<div class='row'>
+					     <div class='col-xs-12'>
+						  <div class="form-inline">
+						       <label class='control-label normal-weight' for='password'>Password:&nbsp;&nbsp;</label>
+						       <input title="Password" placeholder="Password" id="password" class="pure-input-1-3 form-control user-account-input" type="password">
+						  </div>
+					     </div>
+					</div>
+					<br/>
+					<div class='row'>
+					     <div class='col-xs-12'>
+						  <div class="form-inline">
+						       <label class='control-label normal-weight' for='confirm-password'>Confirm Password:&nbsp;&nbsp;</label>
+						       <input title="Confirm Password" placeholder="Confirm Password" id="confirm-password" class="pure-input-1-3 form-control user-account-input" type="password">
+						  </div>
+					     </div>
+					</div>
+				   </div>
+				   <!--Password rules-->
+				   <div class='col-lg-6 col-lg-offset-0 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-2 col-xs-12 no-col-padding-right-xs no-col-padding-left-xs'>
+					{{> user/password-rules}}
+				   </div>
+			      </div>
+			      <br/>
+			      <div class='row center-text'>
+				   <div class='col-xs-12'>
+					<button type='button' id='save-user-btn' class='pure-button button-success btn-lg'>Save</button>
+				   </div>
+			      </div>
+			 </div>
+		    </div>
+
+	       </div>
+	  </div>
+	  <div class='row'>
+	       <!--Request Admin role-->
+	       {{#if current_user_data.can_request_admin_role}}
+	       <div class='col-md-6 col-xs-12'>
+		    <div class="panel panel-default">
+			 <div class="panel-heading account-panel-header center-text">Administrative Role</div>
+			 <div class="panel-body account-panel-body center-text">
+			      {{#unless current_user_data.has_already_requested}}
+			      <div class="has-error">
+				   <label class="control-label" id="request-admin-role-errors"></label>
+			      </div>
+			      <div class="has-success">
+				   <label class="control-label" id="request-admin-role-message"></label>
+			      </div>
+			      <br/>
+			      <button title='Request Admin Role' type="button" id='request-admin-role' class="pure-button button-success btn-lg ">
+				   <span class="fa fa-unlock-alt"></span>&nbsp;Request Role
+			      </button>
+			      {{else}}
+			      <div>
+				   <label>Request Pending</label>
+			      </div>
+			      {{/unless}}
+			      <br/>
+			 </div>
+		    </div>
+	       </div>
+	       {{/if}}
+	       <div class='col-md-6 col-xs-12'>
+		    <div class="panel panel-default">
+			 <div class="panel-heading account-panel-header center-text">Generate New API Key</div>
+			 <div class="panel-body center-text">
+			      <div class='has-error'>
+				   <label class="control-label" id='new-api-key-error-message'></label>
+			      </div>
+			      <div class='has-success'>
+				   <label class="control-label" id='new-api-key'></label>
+			      </div>
+			      <button title='Generate New API Key' type="button" id='generate-new-api-key-btn' class='pure-button button-success btn-lg'>
+				   <span class='fa fa-key'></span>&nbsp;Generate
+			      </button>
+			      <br/>
+			      <br/>
+			      <div class='has-error'>
+				   <label class="control-label">You will need to log out after generating a new API key</label>
+			      </div>
+			 </div>
+		    </div>
+	       </div>
+	  </div>
+     </div>
+     <div class="col-lg-2 special-lg-2 col-md-1"></div>
+</div>
+{{> wrapper/footer}}

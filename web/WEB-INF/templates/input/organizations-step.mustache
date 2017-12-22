@@ -1,0 +1,240 @@
+<div class="panel panel-default" {{#if show_optional_toggle}}style='display:none'{{/if}}>
+     <div class="panel-heading" role="tab" id="heading-organizations">
+	  <div class="panel-title">
+	       <a id='organizations-panel-anchor' class='input-accordion-title' role="button" data-toggle="collapse" {{#if is_accordion}}data-parent="#input-page-accordion"{{/if}} href="#collapse-organizations" aria-expanded="false" aria-controls="collapse-organizations">
+		    Organizations
+	       </a>
+	       <span class="green fa fa-check" style="display: none"></span>
+	       <span title="Open" class="pull-right fa fa-chevron-right clickable accordion-toggle-arrow"></span>
+	  </div>
+     </div>
+     <div id="collapse-organizations" class="panel-collapse collapse input-panel-collapse" role="tabpanel" aria-labelledby="heading-organizations">
+	  <div class="panel-body">
+	       <ul class="nav nav-tabs">
+		    <li class="active"><a data-toggle="tab" href="#sponsoring-orgs-tab">Sponsoring Organizations</a></li>
+		    <li><a data-toggle="tab" href="#research-orgs-tab">Research Organizations</a></li>
+	       </ul>
+	       <div class="tab-content">
+		    <!--Sponsoring Orgs Tab-->
+		    <div id="sponsoring-orgs-tab" class="tab-pane fade in active">
+			 <div class='row'>
+			      <div class='col-xs-12'>
+				   <br/>
+				   <label id="sponsoring-orgs-lbl" class='control-label'>[from data store]</label>{{> tooltips/SponsoringOrg}}
+				   <br/>
+				   <br/>
+				   <table id='sponsoring-orgs-data-table' class="table table-condensed table-striped table-bordered">
+					<thead>
+					     <tr>
+						  <th>First Name</th>
+						  <th>Last Name</th>
+					     </tr>
+					</thead>
+					<tbody>
+					</tbody>
+				   </table>
+			      </div>
+			 </div>
+			 <div class='row'>
+			      <div class='col-xs-12 center-text'>
+				   <button type="button" title="Sponsoring Organizations" id='add-sponsoring-orgs-modal-btn' class="pure-button pure-button-primary btn-lg">Add Sponsoring Organization</button>
+			      </div>
+			 </div>
+		    </div>
+		    <!--Research Orgs Tab-->
+		    <div id="research-orgs-tab" class="tab-pane fade">
+			 <div class='row'>
+			      <div class='col-xs-12'>
+				   <br/>
+				   <label id="research-orgs-lbl" class='control-label'>[from data store]</label>{{> tooltips/ResearchOrg}}
+				   <br/>
+				   <br/>
+				   <table id='research-orgs-data-table' class="table table-condensed table-striped table-bordered">
+					<thead>
+					     <tr>
+						  <th>Name</th>
+					     </tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				   </table>
+			      </div>
+			 </div>
+			 <div class='row'>
+			      <div class='col-xs-12 center-text'>
+				   <button type="button" title="Research Organizations" id='add-research-orgs-modal-btn' class="pure-button pure-button-primary btn-lg">Add Research Organization</button>
+			      </div>
+			 </div>
+		    </div>
+	       </div>
+	  </div>
+     </div>
+     <!--Sponsoring Org Edit Modal-->
+     <div class="modal fade" id="sponsoring-orgs-edit-modal" role="dialog">
+	  <div class="modal-dialog modal-lg">
+	       <!-- Modal content-->
+	       <div class="modal-content">
+		    <div class="modal-header">
+			 <button type="button" class="close" data-dismiss="modal">&times;</button>
+			 <h4 id="sponsoring-orgs-manage-lbl" class="modal-title">Manage Sponsoring Organizations</h4>
+		    </div>
+		    <div class="modal-body dl-horizontal">
+			 <div id="sponsoring-orgs-modal-error-zone" class='row'>
+				<div class='col-xs-12'>
+					<div class="error-color">
+						<h2 id="sponsoring-orgs-modal-error"></h2>
+						<br/>
+					</div>
+             	</div>
+             </div>
+			 <div class='row'>
+			      <div class='col-xs-12'>
+				   <label class='control-label' for='sponsoring-orgs-edit-DOE'>DOE Organization? (Optional Field)</label>{{> tooltips/SponsorOrgDOEOrg}}
+				   <br/>
+				   <input type='checkbox' id='sponsoring-orgs-edit-DOE' class='pure-input1' checked/>
+				   <br/>
+				   <br/>
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="sponsoring-orgs-edit-organization_name-lbl" class='control-label' for='sponsoring-orgs-edit-organization_name'>Name</label>{{> tooltips/SponsorOrgName}}
+						</div>
+						<div class="col-xs-12">
+						   <select id='sponsoring-orgs-edit-organization_name' class='pure-input-1 doecode-chosen-select' title='Organization Name'  data-allowcustom="true" data-issingle='true' data-placeholder='Select your Options'>
+							{{#each sponsoring_orgs_list}}
+							<option title="{{title}}" value="{{value}}">{{label}}</option>
+							{{/each}}
+						   </select>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="sponsoring-orgs-edit-organization_name-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+				   <br/>
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="sponsoring-orgs-edit-primary_award-lbl" class='control-label' for='sponsoring-orgs-edit-primary_award'>Primary Award/Contract</label>{{> tooltips/SponsorOrgContractNumber}}
+						</div>
+						<div class="col-xs-12">
+							<input type='text' id='sponsoring-orgs-edit-primary_award' class='pure-input-1 form-control'/>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="sponsoring-orgs-edit-primary_award-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+				   <br/>
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="sponsoring-orgs-edit-award_numbers-lbl" class='control-label' for='sponsoring-orgs-edit-award_numbers'>Additional Awards/Contracts</label>{{> tooltips/SponsorOrgAdditionalAwards}}
+						</div>
+						<div class="col-xs-12">
+						   <select id='sponsoring-orgs-edit-award_numbers' class='pure-input-1 doecode-chosen-select' title='Additional Awards/Contracts' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+						   </select>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="sponsoring-orgs-edit-award_numbers-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+				   <br/>
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="sponsoring-orgs-edit-br_codes-lbl" class='control-label' for='sponsoring-orgs-edit-br_codes'>B&amp;R Codes</label>{{> tooltips/SponsorOrgBRClassification}}
+						</div>
+						<div class="col-xs-12">
+						   <select id='sponsoring-orgs-edit-br_codes' class='pure-input-1 doecode-chosen-select' title='B&R Codes' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+						   </select>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="sponsoring-orgs-edit-br_codes-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+				   <br/>
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="sponsoring-orgs-edit-fwp_numbers-lbl" class='control-label' for='sponsoring-orgs-edit-fwp_numbers'>FWP Numbers</label>{{> tooltips/SponsorOrgFWPNum}}
+						</div>
+						<div class="col-xs-12">
+						   <select id='sponsoring-orgs-edit-fwp_numbers' class='pure-input-1 doecode-chosen-select' title='FWP Numbers' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+						   </select>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="sponsoring-orgs-edit-fwp_numbers-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+				   <br/>
+			      </div>
+			 </div>
+		    </div>
+		    <div class="modal-footer">
+			 <button type="button" id='sponsoring-orgs-close-btn' class="pure-button">Close</button>&nbsp;
+			 <span name="delete-btn"><button type="button" id='sponsoring-orgs-delete-btn' title="Delete" class="pure-button button-error">Delete</button>&nbsp;</span>
+			 <button type="button" id='sponsoring-orgs-save-btn' title="Save and Close" class="pure-button pure-button-primary">Save and Close</button>
+		    </div>
+	       </div>
+	  </div>
+     </div>
+     <!--Research Org Edit Modal-->
+     <div class="modal fade" id="research-orgs-edit-modal" role="dialog">
+	  <div class="modal-dialog modal-lg">
+	       <!-- Modal content-->
+	       <div class="modal-content">
+		    <div class="modal-header">
+			 <button type="button" class="close" data-dismiss="modal">&times;</button>
+			 <h4 id="research-orgs-manage-lbl" class="modal-title">Manage Research Organizations</h4>
+		    </div>
+		    <div class="modal-body dl-horizontal">
+			 <div id="research-orgs-modal-error-zone" class='row'>
+				<div class='col-xs-12'>
+					<div class="error-color">
+						<h2 id="research-orgs-modal-error"></h2>
+						<br/>
+					</div>
+             	</div>
+             </div>
+			 	 <div class='row'>
+			      <div class='col-xs-12'>
+				   <label class='control-label' for='research-orgs-edit-DOE'>DOE Organization? (Optional Field)</label>{{> tooltips/ResearchOrgDOEOrg}}
+				   <br/>
+				   <input type='checkbox' id='research-orgs-edit-DOE' class='pure-input1' checked/>
+				   <br/>
+				   <br/>				   
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="research-orgs-edit-organization_name-lbl" class='control-label' for='research-orgs-edit-organization_name'>Name</label>{{> tooltips/ResearchOrgName}}
+						</div>
+						<div class="col-xs-12">
+						   <select id='research-orgs-edit-organization_name' class='pure-input-1 doecode-chosen-select' title='Organization Name'  data-allowcustom="true" data-issingle='true' data-placeholder='Select your Options'>
+							{{#each research_orgs_list}}
+							<option title="{{title}}" value="{{value}}">{{label}}</option>
+							{{/each}}
+						   </select>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="research-orgs-edit-organization_name-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+				   <br/>
+			      </div>
+			 </div>
+		    </div>
+		    <div class="modal-footer">
+			 <button type="button" id='research-orgs-close-btn' class="pure-button">Close</button>&nbsp;
+			 <span name="delete-btn"><button type="button" id='research-orgs-delete-btn' title="Delete" class="pure-button button-error">Delete</button>&nbsp;</span>
+			 <button type="button" id='research-orgs-save-btn' title="Save and Close" class="pure-button pure-button-primary">Save and Close</button>
+		    </div>
+	       </div>
+	  </div>
+     </div>
+</div>

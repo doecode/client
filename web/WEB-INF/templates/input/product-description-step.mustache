@@ -1,0 +1,98 @@
+<div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="heading-product-description">
+	  <div class="panel-title">
+	       <a id='product-description-panel-anchor' class='input-accordion-title' title='Product Description' role="button" data-toggle="collapse" {{#if is_accordion}}data-parent="#input-page-accordion"{{/if}} href="#collapse-product-description" aria-expanded="false" aria-controls="collapse-product-description">
+		    Product Description
+	       </a>
+	       <span class="green fa fa-check" style="display: none"></span>
+	       <span title="Open" class="pull-right fa fa-chevron-right clickable accordion-toggle-arrow"></span>
+	  </div>
+     </div>
+     <div id="collapse-product-description" class="panel-collapse collapse input-panel-collapse" role="tabpanel" aria-labelledby="heading-product-description">
+	  <div class="panel-body">
+	       <div class='row'>
+		    <div class='col-xs-8'>
+				<div id="repository-link-display-div">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="repository-link-display" id="repository-link-display-lbl" class="control-label">Repository Link</label>
+						</div>
+						<div class="col-xs-12">
+							<div id="repository-link-display" class="display-field"></div>
+						</div>
+						<div class="col-xs-12">
+							<label id="repository-link-display-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+					<br />
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<label id='software-title-lbl' for='software-title' class='control-label'>[from data store]</label>{{> tooltips/SoftwareTitle}}
+					</div>
+					<div class="col-xs-12">
+						<input type='text' id='software-title' class='pure-input-1 form-control'/>
+						<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+						<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+					</div>
+					<div class="col-xs-12">
+						<label id="software-title-lbl-error" class="control-label errorCheck">Problem</label>
+					</div>
+				</div>
+			 <br/>
+				<div class="row">
+					<div class="col-xs-12">
+						<label id='description-lbl' for='description' class='control-label'>[from data store]</label>{{> tooltips/DescriptionAbstract}}
+					</div>
+					<div class="col-xs-12">
+						<textarea id='description' title='Description/Abstract' class='form-control form-text-area'></textarea>
+						<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+						<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+					</div>
+					<div class="col-xs-12">
+						<label id="description-lbl-error" class="control-label errorCheck">Problem</label>
+					</div>
+				</div>
+			 <br/>
+				<div class="row">
+					<div class="col-xs-12">
+						<label id='licenses-lbl' for='licenses' class='control-label'>[from data store]</label>{{> tooltips/License}}
+					</div>
+					<div class="col-xs-12">
+						 <select class='pure-input-1 doecode-chosen-select' title='Licenses' id='licenses' data-allowcustom="false" data-placeholder='Select your license(s)' multiple>
+						      {{#each licenses_list}}
+						      <option title='{{title}}' value='{{value}}'>{{label}}</option>
+						      {{/each}}
+						 </select>
+						<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+						<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+					</div>
+					<div class="col-xs-12">
+						<label id="description-lbl-error" class="control-label errorCheck">Problem</label>
+					</div>
+				</div>
+			<div id="proprietary-url-zone" style="display: none">
+			 <br/>
+				<div class="row">
+					<div class="col-xs-12">
+						<label id='proprietary-url-lbl' for='proprietary-url' class='control-label'>[from data store]</label>
+					</div>
+					<div class="col-xs-12">
+						<input type='text' id='proprietary-url' class='pure-input-1 form-control'/>
+						<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+						<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+					</div>
+					<div class="col-xs-12">
+						<label id="proprietary-url-lbl-error" class="control-label errorCheck">Problem</label>
+					</div>
+				</div>
+		    </div>
+			 <br/>
+		    </div>
+		    <div class='col-xs-4'>
+			 
+		    </div>
+	       </div>
+	  </div>
+     </div>
+</div>

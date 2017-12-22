@@ -1,0 +1,69 @@
+<div class="row searchbar-container">
+     <div class="col-lg-11 col-md-9 col-sm-10 col-xs-6 no-col-padding-right">
+	  <input title="All Fields Search" value="" class="form-control pure-input-1 search-box" placeholder="Search DOE CODE for submitted software entries" type="text">
+	  <button title="Toggle Advanced Search Dropdown" class="adv-search-button  hide-xs" type="button">
+	       <span class="fa fa-caret-down adv-search-button-icon"></span>
+	  </button>
+	  <div class="adv-search-dropdown row" style='display:none;'>
+	       <div class='col-xs-12 pure-form'>
+		    <div class='row adv-search-dropdown-title-row'>
+			 <div class='col-xs-12 no-col-padding-left left-text adv-search-dropdown-label'>
+			      Advanced Search options
+			 </div>
+		    </div>
+		    <br/>
+		    <div class='row text-left'>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
+			      <label for='navbar-searchbar-software_title' class='adv-search-dropdown-label'>Software Title:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right'>
+			      <input type='text' id='navbar-searchbar-software_title' title='Software Title' data-field='software_title' class='pure-input-1'/>
+			 </div>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
+			      <label for='navbar-searchbar-developers_contributors' class='adv-search-dropdown-label'>Developers&nbsp;/&nbsp;Contributors:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right'>
+			      <input type='text' id='navbar-searchbar-developers_contributors' title='Developers / Contributors' class='pure-input-1'/>
+			 </div>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
+			      <label for='navbar-searchbar-identifier_numbers' class='adv-search-dropdown-label'>Identifier Numbers:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right'>
+			      <input type='text' id='navbar-searchbar-identifier_numbers' title='Identifier Numbers' class='pure-input-1'/>
+			 </div>
+		    </div>
+		    <div class="row">
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
+			      <label for='navbar-searchbar-date_earliest' class='adv-search-dropdown-label'>Release Date:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left left-text adv-search-date-container-homepage'>
+			      <input type='text' placeholder='MM/DD/YYYY' class='pure-input-1 doecode-datepicker navbar-datepicker' id='navbar-searchbar-date_earliest' title='Earliest Release Date'/>
+			      <span class='to-field '>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for='navbar-searchbar-date_latest' class='adv-search-dropdown-label'>to</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			      <input type='text' placeholder='MM/DD/YYYY' class='pure-input-1 doecode-datepicker navbar-datepicker' id='navbar-searchbar-date_latest' title='Latest Release Date'/>
+			 </div>
+		    </div>
+		    <br/>
+		    <div class='row adv-search-dropdown-title-row left-text'>
+			 <div class='col-xs-12 no-col-padding-left'>
+			      <a title='Advanced Search Page' href='/doecode/search'  class='more-adv-search'>
+				   <span class='fa fa-plus-square-o'></span>&nbsp;More Options&hellip;</a>
+			 </div>
+		    </div>
+		    <br/>
+		    <div class='row'>
+			 <div class='col-xs-12 right-text'>
+			      <button title='Advanced Search' type="button" data-idprefix="navbar-searchbar" class="pure-button button-success adv-search-btn adv-search-btn-dropdown" >
+				   <span class="fa fa-search"></span>&nbsp; Search
+			      </button>
+			 </div>
+		    </div>
+	       </div>
+	  </div>
+     </div>
+     <div class="col-lg-1 col-md-2 col-sm-1 col-xs-2 search-btn-container text-left minimal-col-padding-left">
+	  <button title="Trigger Search" type="button" class="pure-button button-success search-btn">
+	       <span class="fa fa-search"></span>
+	  </button>
+     </div>
+
+</div>

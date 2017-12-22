@@ -1,0 +1,84 @@
+<div class="panel panel-default" {{#if show_optional_toggle}}style='display:none'{{/if}}>
+     <div class="panel-heading" role="tab" id="heading-contact-info">
+	  <div class="panel-title">
+	       <a id='contact-info-panel-anchor' class='input-accordion-title' role="button" data-toggle="collapse" {{#if is_accordion}}data-parent="#input-page-accordion"{{/if}} href="#collapse-contact-info" aria-expanded="false" aria-controls="collapse-contact-info">
+		    Contact Information
+	       </a>
+	       <span class="green fa fa-check" style="display: none"></span>
+	       <span title="Open" class="pull-right fa fa-chevron-right clickable accordion-toggle-arrow "></span>
+	  </div>
+     </div>
+     <div id="collapse-contact-info" class="panel-collapse collapse input-panel-collapse" role="tabpanel" aria-labelledby="heading-contact-info">
+	  <div class="panel-body">
+	       <div class='row'>
+		    <div class='col-xs-8'>
+				<div class="row">
+					<div class="col-xs-12">
+						<label id="contact-lbl" class='control-label'>Contact</label>{{> tooltips/ContactInformation}}
+					</div>
+				</div>
+			 <p><br/></p>
+				<div class="row">
+					<div class="col-xs-12">
+						<label id='contact-info-name-lbl' for='contact-info-name' class='control-label'>[from data store]</label>
+					</div>
+					<div class="col-xs-12">
+						<input type='text' id='contact-info-name' class='pure-input-1 form-control'/>
+						<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+						<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+					</div>
+					<div class="col-xs-12">
+						<label id="contact-info-name-lbl-error" class="control-label errorCheck">Problem</label>
+					</div>
+				</div>
+			 <br/>
+				<div class="row">
+					<div class="col-xs-12">
+						<label id='contact-info-email-lbl' for='contact-info-email' class='control-label'>[from data store]</label>
+					</div>
+					<div class="col-xs-12">
+						<input type='text' id='contact-info-email' class='pure-input-1 form-control'/>
+						<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+						<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+					</div>
+					<div class="col-xs-12">
+						<label id="contact-info-email-lbl-error" class="control-label errorCheck">Problem</label>
+					</div>
+				</div>
+			 <br/>
+				<div class="row">
+					<div class="col-xs-12">
+						<label id='contact-info-phone-lbl' for='contact-info-phone' class='control-label'>[from data store]</label>
+					</div>
+					<div class="col-xs-12">
+						<input type='text' id='contact-info-phone' class='pure-input-1 form-control'/>
+						<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+						<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+					</div>
+					<div class="col-xs-12">
+						<label id="contact-info-phone-lbl-error" class="control-label errorCheck">Problem</label>
+					</div>
+				</div>
+			 <br/>
+				<div class="row">
+					<div class="col-xs-12">
+						<label id='contact-info-organization-lbl' for='contact-info-organization' class='control-label'>[from data store]</label>
+					</div>
+					<div class="col-xs-12">
+						<input type='text' id='contact-info-organization' class='pure-input-1 form-control'/>
+						<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+						<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+					</div>
+					<div class="col-xs-12">
+						<label id="contact-info-organization-lbl-error" class="control-label errorCheck">Problem</label>
+					</div>
+				</div>
+			 <br/>
+		    </div>
+		    <div class='col-xs-4'>
+			 
+		    </div>
+	       </div>
+	  </div>
+     </div>
+</div>

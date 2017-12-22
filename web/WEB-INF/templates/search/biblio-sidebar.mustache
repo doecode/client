@@ -1,0 +1,88 @@
+<div class='row'>
+     <div class='col-xs-12'>
+	  <div class='row biblio-sidebar-row'>
+	       <div class='col-xs-12'>
+		    <h4 class='biblio-sidebar-subtitle'>RESOURCE</h4>
+		    <span class='biblio-sidebar-secondary-subtitle'>{{biblio_sidebar.fulltextMsg}} {{#if biblio_sidebar.is_publicly_accessible}}{{> tooltips/Biblio-RepositoryURL}}{{/if}}</span>
+		    <br/>
+		    <a title='{{biblio_sidebar.fulltextURL}}' href='{{biblio_sidebar.fulltextURL}}' target='_blank' rel="noopener noreferrer" class='biblio-sidebar-traditional-anchor word-break'>{{biblio_sidebar.fulltextURL}}</a> 
+		    {{#if biblio_sidebar.has_doi_and_release}}
+		    <br/>
+		    <br/>
+		    <span>
+			 DOI:&nbsp;<a title='DOI: {{biblio_sidebar.doi}}' href='https://dx.doi.org/{{biblio_sidebar.doi}}' target='_blank' rel="noopener noreferrer" class='biblio-sidebar-traditional-anchor'>{{biblio_sidebar.doi}}</a>
+			 <span class='text-muted doi-subnotice'></span>
+		    </span>
+		    {{/if}}
+	       </div>
+	  </div>
+	  <div class='row biblio-sidebar-row'>
+	       <div class='col-xs-12'>
+		    <h4 class='biblio-sidebar-subtitle'>SAVE&nbsp;/&nbsp;SHARE</h4>
+		    <div>
+			 <span class="dropdown">
+			      <button title="Export Metadata" class="btn btn-link dropdown-toggle no-col-padding-left no-col-padding-right no-btn-padding-bottom no-btn-padding-top" type="button" data-toggle="dropdown" aria-expanded="false">Export Metadata</button>
+			      <span class="fa fa-angle-down dropdown-toggle-arrow clickable" data-toggle="dropdown"></span>
+			      <ul class="dropdown-menu">
+				   <li><a title="Export to XML" href="{{biblio_sidebar.api_url}}search/{{biblio_sidebar.code_id}}?format=xml" download="{{biblio_sidebar.code_id}}.xml">XML</a></li>
+				   <li><a title="Export to YAML" href="{{biblio_sidebar.api_url}}search/{{biblio_sidebar.code_id}}?format=yaml" download="{{biblio_sidebar.code_id}}.yaml">YAML</a></li>
+				   <li><a title="Export to JSON" href="{{biblio_sidebar.api_url}}search/{{biblio_sidebar.code_id}}?format=json" download="{{biblio_sidebar.code_id}}.json">JSON</a></li>
+			      </ul>
+			 </span>
+		    </div>
+		    <br/>
+		    <div class="row ">
+			 <div class='col-xs-12'>
+			      <ul class="list-inline">
+				   <li class='biblio-social-link'>
+					<a title='Facebook' class="biblio-sharing-link" rel="noopener noreferrer" target='_blank' rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=">
+					     <span class="fa fa-facebook facebook"></span>
+					</a>
+				   </li>
+				   <li class='biblio-social-link'>
+					<a title='Twitter' class="biblio-sharing-link" rel="noopener noreferrer" target='_blank' rel="noopener noreferrer" href='https://twitter.com/home?status=DOE Research from DOE CODE: '>
+					     <span class="fa fa-twitter twitter"></span>
+					</a>
+				   </li>
+				   <li class='biblio-social-link'>
+					<a title='Google Plus' class="biblio-sharing-link" rel="noopener noreferrer" target='_blank' rel="noopener noreferrer" href='https://plus.google.com/share?url='>
+					     <span class="fa fa-google-plus gplus"></span>
+					</a>
+				   </li>
+				   <li class='biblio-social-link'>
+					<a title='Email' class="biblio-sharing-link" rel="noopener noreferrer" href="mailto:?subject=Software Project from DOE CODE&body=" >
+					     <span class="fa fa-envelope shareEmail"></span>
+					</a>
+				   </li>
+				   <li class='biblio-social-link'>
+					<span class="dropdown">
+					     <button title="Share" class="btn btn-link dropdown-toggle no-col-padding-left no-col-padding-right no-btn-padding-bottom no-btn-padding-top" type="button" data-toggle="dropdown">
+						  <span class="fa fa-share-alt shareAlt"></span>
+					     </button>
+					     <ul class="dropdown-menu dropdown-menu-left">
+						  <li>
+						       <a title="LinkedIn" rel="noopener noreferrer" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.osti.gov/doecode/biblio/{{biblio_sidebar.code_id}}&amp;title=DOE Research from DOE CODE&amp;summary=&amp;source=" target='_blank' rel="noopener noreferrer" class="pure-menu-link social">
+							    <span class="fa fa-linkedin linkedin"></span>&nbsp;LinkedIn
+						       </a>
+						  </li>
+						  <li>
+						       <a title="Pinterest" rel="noopener noreferrer" href="https://pinterest.com/pin/create/button/?url=&amp;media=https://www.osti.gov/doecode/biblio/{{biblio_sidebar.code_id}}&amp;description=" target='_blank' rel="noopener noreferrer" class="pure-menu-link social">
+							    <span class="fa fa-pinterest pintrest"></span>&nbsp;Pinterest
+						       </a>
+						  </li>
+						  <li>
+						       <a title="Tumblr" rel="noopener noreferrer" href="http://www.tumblr.com/share?v=3&amp;u=https://www.osti.gov/doecode/biblio/{{biblio_sidebar.code_id}}&amp;t=" target='_blank' rel="noopener noreferrer" class="pure-menu-link social">
+							    <span class="fa fa-tumblr tumblr"></span>&nbsp;Tumblr
+						       </a>
+						  </li>
+					     </ul>
+
+					</span>
+				   </li>
+			      </ul>
+			 </div>
+		    </div>
+	       </div>
+	  </div>
+     </div>
+</div>

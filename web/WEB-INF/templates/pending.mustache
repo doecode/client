@@ -1,0 +1,32 @@
+{{> wrapper/header}}
+<input type="hidden" id="approval-page-identifier"/>
+<div class="row not-so-wide-row">
+     <div class="col-lg-2"></div>
+     <div class="col-lg-8 col-xs-12 static-content">
+          <h2 class="static-content-title">Approve Projects</h2>
+	  <div class='has-error'>
+	       <label class='control-label' id='approval-error-msg'></label>
+	  </div>
+	  <div class='row'>
+	       <div class='col-xs-12'>
+		    <!--Data table-->
+		    <table id='pending-datatable' class="table table-condensed table-striped table-bordered">
+			 <thead>
+			      <tr>
+				   <th>Code ID</th>
+				   <th>Title</th>
+				   <th>Status</th>
+				   <th>View Project</th>
+			      </tr>
+			 </thead>
+			 <tbody>
+
+			 </tbody>
+		    </table>
+	       </div>
+	  </div>
+     </div>
+     <div class="col-lg-2"></div>
+
+</div>
+{{> wrapper/footer}}

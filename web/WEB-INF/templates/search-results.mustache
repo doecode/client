@@ -1,0 +1,147 @@
+{{> wrapper/header}}
+
+<input type='hidden' id='search-results-page-identifier'/>
+<input type='hidden' id='facets-year-data' value='{{year_facets_data}}'/>
+<input type='hidden' id='search-results-count' value='{{search_result_count}}'/>
+<div class="row not-so-wide-row">
+     <div class='col-xs-12'>
+          <div class='row'>
+	       <div class='col-lg-2'></div>
+	       <div class='col-lg-8 col-xs-12'>
+		    {{> search/breadcrumbTrail}}
+		    <br/>
+	       </div>
+	       <div class='col-lg-2'></div>
+          </div>
+          <div class='row'>
+	       <div class='col-lg-2'></div>
+	       <div class='col-lg-4 col-md-6 col-xs-12'>
+		    <span class='search-results-count fake-h2'>{{search_result_count}}&nbsp;&nbsp;Search Results</span>
+	       </div>
+	       <div class='col-lg-4 col-md-6 col-xs-12 right-text-md right-text-lg hide-xs'>
+		    {{> search/sort-dropdown}}
+	       </div>
+	       <div class='col-lg-2'></div>
+          </div>
+          <div class='row'>
+	       <div class='col-lg-2'></div>
+	       <!--VV Sidebar VV-->
+	       <div class='col-lg-2 col-md-4 col-xs-12 sidebar'>
+		    <!--Checkbox Filters-->
+		    <div class="row">
+			 <div class="col-xs-12">
+			      <div class="row search-for-sidebar-row">
+				   <div class="col-md-1"></div>
+				   <div class="col-md-12 col-xs-12">
+					<br/>
+					<span class="search-sidebar-filter-title" style='padding-bottom:5px;'>SEARCH FOR:</span>
+					<div class="search-sidebar-text">
+					     {{> search/search-results-description}}
+					</div>
+					<br/>
+				   </div>
+				   <div class="col-md-1"></div>
+			      </div>
+			      <!--Sidebar Filters screens-->
+			      <button title='Filter Search' type='button' class='btn btn-link toggle-sidebar faq-page-btn hide-md hide-lg'>
+				   <span class="fa fa-caret-right fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search
+			      </button>
+			      <div class='collapse small-screen-collapse'>
+				   {{> search/sidebar-filters}}
+			      </div>
+			 </div>
+		    </div>
+	       </div>
+	       <!--^^ Sidebar ^^-->
+	       <div class="col-lg-6 col-md-8 col-xs-12 all-search-results-row">
+		    <div>
+			 <div class='row right-text '>
+			      <div class='col-xs-12'>
+				   <input type="hidden" id="pagination-btn-thing" value="{{pagination_btn}}"/>
+				   {{#if had_results}}
+				   {{> search/pagination-buttons}}
+				   {{/if}}
+			      </div>
+			 </div>
+			 <br/>
+			 <div class="row">
+			      <div class="col-xs-12 no-col-padding-left">
+				   {{#if had_results}}
+				   <div>
+					<!--Each Search Result Item-->
+					{{#each search_results_list}}
+					<div class='search-result-row'>
+					     <div>
+						  <div class='{{result_column_classes}}'>
+						       {{list_number}}.
+						  </div>
+						  <div class='{{result_subrow_classes}}'>
+						       <div class="row">
+							    <div class="col-xs-12">
+								 <!--Title-->
+								 <div>
+								      <a title='Bibliographic Data for Code ID #{{code_id}}' href="/doecode/biblio/{{code_id}}" class="search-result-title">{{software_title}}</a>
+								 </div>
+								 <!--Developers and Contributors-->
+								 <div class='row'>
+								      <div class="search-result-author col-md-8 col-xs-12">
+									   {{> search/devAndContributorLinks}}
+								      </div>
+								 </div>
+								 <!--Description-->
+								 {{> search/description}}
+								 <div class='right-text'>
+								      <br/>
+
+								      <!--DOI-->
+								      {{#if searchRowLandingLinks.show_doi}}
+								      DOI:&nbsp;<a title='DOI for Code ID {{code_id}}' target='_blank' rel="noopener noreferrer" href='{{searchRowLandingLinks.fixed_doi}}'>{{searchRowLandingLinks.doi}}</a>
+								      {{/if}}
+
+								      <!--Show Divider-->
+								      {{#if searchRowLandingLinks.show_divider}}
+								      <span class='search-item-doi-divider hide-xs'>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+								      <span class='hide-sm hide-md hide-lg'><br/></span>
+								      {{/if}}
+
+								      <!--Repository Link-->
+								      {{#if searchRowLandingLinks.has_repository_link}}
+								      <a title='Repository Link for Code ID {{code_id}}' target='_blank' rel="noopener noreferrer" href='{{searchRowLandingLinks.repository_link}}'>Repository Link</a>
+								      {{else if searchRowLandingLinks.has_landing_page}}
+								      <a title='Landing Page for Code ID {{code_id}}' target='_blank' rel="noopener noreferrer" href='{{searchRowLandingLinks.landing_page}}'>Landing Page</a>
+								      {{/if}}
+								 </div>
+								 <br/>
+							    </div>
+						       </div>
+						  </div>
+					     </div>
+					</div>
+
+					{{/each}}
+				   </div>
+				   {{else}}
+				   <div class='has-error center-text'>
+					{{#if had_error}}
+					<label class='control-label'>{{error_message}}</label>
+					{{else}}
+					<label class='control-label'>No results found for your search parameters</label>
+					{{/if}}
+				   </div>
+				   {{/if}}
+			      </div>
+			 </div>
+			 <div class='row right-text '>
+			      <div class='col-xs-12'>
+				   {{#if had_results}}
+				   {{> search/pagination-buttons}}
+				   {{/if}}
+			      </div>
+			 </div>
+		    </div>
+	       </div>
+	       <div class='col-lg-2'></div>
+          </div>
+     </div>
+</div>
+{{> wrapper/footer}}

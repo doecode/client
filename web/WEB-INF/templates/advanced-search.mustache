@@ -1,0 +1,113 @@
+{{> wrapper/header}}
+<input type="hidden" id="advanced-search-page-identifier"/>
+<div class="row not-so-wide-row">
+     <div class="col-lg-3 col-sm-1"></div>
+     <div class="col-lg-6 col-sm-10 col-xs-12">
+          <br/>
+          <div class="row advanced-search-panel">
+	       <div class="col-md-1"></div>
+	       <div class="col-md-10 col-xs-12 pure-form">
+		    <br/>
+		    <div class='row text-left'>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
+			      <label for='advanced-search-all_fields' class='advsearch-adv-search-dropdown-label'>All Fields:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>
+			      <input type='text' id='advanced-search-all_fields' title='All Fields' data-field='all_fields' class='pure-input-1'/>
+			 </div>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
+			      <label for='advanced-search-software_title' class='advsearch-adv-search-dropdown-label'>Software Title:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>
+			      <input type='text' id='advanced-search-software_title' title='Software Title' data-field='software_title' class='pure-input-1'/>
+			 </div>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
+			      <label for='advanced-search-developers_contributors' class='advsearch-adv-search-dropdown-label'>Developers&nbsp;/&nbsp;Contributors:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>
+			      <input type='text' id='advanced-search-developers_contributors' title='Developers / Contributors' class='pure-input-1'/>
+			 </div>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
+			      <label for='advanced-search-identifier_numbers' class='advsearch-adv-search-dropdown-label'>Identifier Numbers:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>
+			      <input type='text' id='advanced-search-identifier_numbers' title='Identifier Numbers' class='pure-input-1'/>
+			 </div>
+		    </div>
+		    <div class="row">
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
+			      <label for='advanced-search-date_earliest' class='advsearch-adv-search-dropdown-label'>Release Date:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left left-text adv-search-date-container-advsearch tiny-col-padding'>
+			      <input type='text' placeholder='MM/DD/YYYY' class='pure-input-1 doecode-datepicker' id='advanced-search-date_earliest' title='Earliest Release Date'/>
+			      <span class='to-field hide-xs' style='padding-top:7px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			      <input type='text' placeholder='MM/DD/YYYY' class='pure-input-1 doecode-datepicker' id='advanced-search-date_latest' title='Latest Release Date'/>
+			 </div>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
+			      <label for='advanced-search-accessibility' class='advsearch-adv-search-dropdown-label tiny-center-text'>Code Accessibility:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right  tiny-col-padding'>
+			      <select class='pure-input-1 doecode-chosen-select' title='Code Accessibilty' id='advanced-search-accessibility'  data-allowcustom="false" data-placeholder='Select your Options' multiple>
+				   {{#each adv_search_lists.affiliations_list}}
+				   <option title="{{title}}" value="{{value}}">{{label}}</option>
+				   {{/each}}
+			      </select>
+			 </div>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
+			      <label for='advanced-search-licenses' class='advsearch-adv-search-dropdown-label'>Licenses:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>
+			      <select class='pure-input-1 doecode-chosen-select' title='Licenses' id='advanced-search-licenses' data-allowcustom="false" data-placeholder='Select your Options' multiple>
+				   {{#each adv_search_lists.licenses_list}}
+				   <option title="{{title}}" value="{{value}}">{{label}}</option>
+				   {{/each}}
+			      </select>
+			 </div>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
+			      <label for='advanced-search-research_organization' class='advsearch-adv-search-dropdown-label'>Research Organization:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>
+			      <select class='pure-input-1 doecode-chosen-select' title='Research Organization' id='advanced-search-research_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+				   {{#each adv_search_lists.research_org_list}}
+				   <option title="{{title}}" value="{{value}}">{{label}}</option>
+				   {{/each}}
+			      </select>
+			 </div>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
+			      <label for='advanced-search-sponsoring_organization' class='advsearch-adv-search-dropdown-label'>Sponsoring Organization:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>
+			      <select class='pure-input-1 doecode-chosen-select' title='Sponsoring Organization' id='advanced-search-sponsoring_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+				   {{#each adv_search_lists.sponsor_org_list}}
+				   <option title="{{title}}" value="{{value}}">{{label}}</option>
+				   {{/each}}
+			      </select>
+			 </div>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
+			      <label for='advanced-search-sort' class='advsearch-adv-search-dropdown-label'>Sort:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>
+			      <select class='pure-input-1' title='Sort' id='advanced-search-sort' data-placeholder='Select your Options' >
+				   {{#each adv_search_lists.sort_list}}
+				   <option title="{{title}}" value="{{value}}">{{label}}</option>
+				   {{/each}}
+			      </select>
+			 </div>
+		    </div>
+		    <br/>
+		    <div class='row'>
+			 <div class='col-xs-12 right-text'>
+			      <button title='Advanced Search' id="adv-search-page-search-btn" type="button" class="pure-button button-success adv-search-btn" >
+				   <span class="fa fa-search"></span>&nbsp; Search
+			      </button>
+			 </div>
+		    </div>
+
+	       </div>
+	       <div class="col-md-1"></div>
+          </div>
+          <br/>
+     </div>
+     <div class="col-lg-3 col-sm-1"></div>
+</div>
+{{> wrapper/footer}}

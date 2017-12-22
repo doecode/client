@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <session-config>
+        <session-timeout>
+            @session_timeout@
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>
+            Index
+        </welcome-file>
+    </welcome-file-list>
+    <context-param>
+        <param-name>api_url</param-name>
+        <param-value>@api.backend.url@</param-value>
+    </context-param>
+    <context-param>
+        <param-name>site_url</param-name>
+        <param-value>@site.url@</param-value>
+    </context-param>
+    <context-param>
+        <param-name>session_timeout</param-name>
+        <param-value>@session_timeout@</param-value>
+    </context-param>
+    
+    <!--Servlet to give the Dissemination pages, like search, about, etc-->
+    <servlet>
+        <servlet-name>Dissemination</servlet-name>
+        <servlet-class>gov.osti.doecode.pagemappings.Dissemination</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Dissemination</servlet-name>
+        <url-pattern>/Index</url-pattern>
+        <url-pattern>/repository-services</url-pattern>
+        <url-pattern>/about</url-pattern>
+        <url-pattern>/policy</url-pattern>
+        <url-pattern>/news-resources</url-pattern>
+        <url-pattern>/faq</url-pattern>
+        <url-pattern>/results</url-pattern>
+        <url-pattern>/search</url-pattern>
+        <url-pattern>/biblio/*</url-pattern>
+        <url-pattern>/forbidden</url-pattern>
+        <url-pattern>/security-hosting</url-pattern>
+        <url-pattern>/contact</url-pattern>
+        <url-pattern>/disclaimer</url-pattern>
+    </servlet-mapping>
+    
+    <!--Input pages, such as the announce, submit, and approve pages-->
+    <servlet>
+        <servlet-name>Input</servlet-name>
+        <servlet-class>gov.osti.doecode.pagemappings.Input</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Input</servlet-name>
+        <url-pattern>/submit</url-pattern>
+        <url-pattern>/announce</url-pattern>
+        <url-pattern>/approve</url-pattern>
+        <url-pattern>/confirm</url-pattern>
+        <url-pattern>/projects</url-pattern>
+        <url-pattern>/pending</url-pattern>
+    </servlet-mapping>
+    
+    <!--User pages, such as admin and account-->
+    <servlet>
+        <servlet-name>User</servlet-name>
+        <servlet-class>gov.osti.doecode.pagemappings.User</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>User</servlet-name>
+        <url-pattern>/account</url-pattern>
+        <url-pattern>/user-admin</url-pattern>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/set-login-status-name</url-pattern>
+        <url-pattern>/update-login-status-name</url-pattern>
+        <url-pattern>/logout</url-pattern>
+        <url-pattern>/register</url-pattern>
+        <url-pattern>/forgot-password</url-pattern>
+        <url-pattern>/confirmuser</url-pattern>
+        <url-pattern>/get-projects-data</url-pattern>
+        <url-pattern>/help</url-pattern>
+    </servlet-mapping>
+    
+    <!--500 pages, 404's, etc-->
+    <servlet>
+        <servlet-name>Errors</servlet-name>
+        <servlet-class>gov.osti.doecode.pagemappings.Errors</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Errors</servlet-name>
+        <url-pattern>/page-not-found</url-pattern>
+        <url-pattern>/error</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/page-not-found</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error</location>
+    </error-page>
+    
+    <!-- configuration servlet class -->
+    <servlet>
+        <servlet-name>Config</servlet-name>
+        <servlet-class>gov.osti.doecode.servlet.Init</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+</web-app>

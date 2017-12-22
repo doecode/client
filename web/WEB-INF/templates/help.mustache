@@ -1,0 +1,450 @@
+{{> wrapper/header}}
+<input type="hidden" id="help-page-identifier"/>
+
+<div class="row not-so-wide-row">
+     <div class="col-md-3">
+     </div>
+     <div class="col-md-6 col-xs-12 static-content">
+	  <h2 class="static-content-title">Help</h2>
+	  <br/>
+	  <br/>
+	  <strong class="help-page-subtitle">How is Software Submitted?</strong>
+	  <br/>
+	  <br/>
+	  <p>Individual software records are directly submitted by the developer or the developing organization.
+	       <br/>
+	       <br/>DOE CODE offers two paths for users to provide code. Users can (1)&nbsp;<strong>submit</strong>&nbsp;code to DOE CODE, and (2)&nbsp;
+	       <strong>announce</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. See the "
+	       <a title="What does it mean to submit code to DOE CODE?" href="faq#what-does-it-mean-to-submit">What does it mean to submit code to DOE CODE?</a>" and "
+	       <a title="What does it mean to announce code to DOE CODE?" href="faq#what-does-it-mean-to-announce">What does it mean to announce code to DOE CODE?</a>
+	       " FAQs for more details.
+	  </p>
+
+	  <br/><strong class="help-page-subtitle">Repository Information</strong>
+	  <br/>
+	  <br/><strong>Software Availability&nbsp;-</strong>&nbsp; 
+	  Please describe the availability of your software:
+	  <div class="help-page-software-availability">
+	       <br/>
+	       <div class="row">
+		    <div class="col-xs-12">
+			 <strong>Open Source, publicly available repository&nbsp;-</strong>&nbsp;
+			 <span>
+			      <span>
+				   <span>Software can be freely accessed, used, changed and shared (in modified or unmodified form) by anyone in a public repository. Open Source software is made by many people, and distributed under licenses that comply with the Open Source Definition. See the <a title="Open Source Initiative" href="https://opensource.org/">Open Source Initiative</a> for more information and definitions.
+				   </span>
+			      </span>
+			 </span>
+		    </div>
+	       </div>
+	       <br/>
+	       <div class="row">
+		    <div class="col-xs-12">
+			 <strong>Open Source, no publicly available repository&nbsp;-</strong>&nbsp;
+			 <span>
+			      <span>
+				   <span>Code is Open Source, but is not yet available in a public repository. Interested users can contact the developer(s) or responsible parties for information regarding access and (re)use. A landing page URL is required for submitting Open Source, no Publicly available repository code; the URL should provide additional information on how to obtain access to the code.
+				   </span>
+			      </span>
+			 </span>
+		    </div>
+	       </div>
+	       <br/>
+	       <div class="row">
+		    <div class="col-xs-12"><strong>Closed Source&nbsp;-</strong>&nbsp;
+			 <span>
+			      <span>
+				   <span>Software that is not Open Source and for which access must be granted by contacting a licensing official. Software is often Closed Source because it is proprietary, sensitive, or has otherwise been deemed appropriate for limited distribution only. A landing page URL is required for submitting Closed Source code; the URL should provide additional information on how to obtain access to the code.
+				   </span>
+			      </span>
+			 </span>
+		    </div>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Repository Link&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>If you select Open Source, publicly available you must provide a unique URL which leads to the actual code repository. Please ensure you are providing the direct URL to the actual repository. As an example, the direct repository URL for DOE CODE is https://www.github.com/doecode/doecode whereas the project landing page is https://www.github.com/doecode.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>NOTE:</strong>&nbsp;Currently only Git-based repositories are supported. Most repositories hosted at git.com, bitbucket.org, sourcforge.org, and GitLab support Git-based repositories. There are plans to expand this functionality in future releases to support other repository types such as SVN and CVS.
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Landing Page&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>If you select&nbsp;<strong>Open Source</strong>,&nbsp;<strong>no publicly available repository</strong> OR&nbsp;<strong>Closed Source</strong> you must provide a unique URL which leads to the landing page of the software. The landing page should provide information regarding how to access the source code, point of contact, and licensing information.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Autopopulate from Repository&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>If a valid repository URL is provided this function will attempt to automatically populate metadata fields based on information provided in the repository. DOE CODE also provides functionality to allow users to auto-populate metadata by placing a specifically formatted YAML file in their repository's root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly. For detailed information and an example file please see:&nbsp;<a title="Metadata Schema" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode/doecode/tree/master/metadata-schema">https://github.com/doecode/doecode/tree/master/metadata-schema</a>.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/><hr>
+	  <br/><strong class="help-page-subtitle">Product Description</strong>
+	  <br/>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Software Title&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>The title of the software.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Description/Abstract&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>Provide a clear, concise, and publicly releasable description of the software, including the purpose, function, and capabilities. Text should be spell checked, limited to 2000 characters and follow input standards for special characters.&nbsp;<strong>DO NOT INCLUDE SENSITIVE INFORMATION IN THE DESCRIPTION/ABSTRACT.</strong>
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>License(s)&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>Select the appropriate license from the drop-down menu of available options. Descriptions of Licenses are available&nbsp;<a title="Open Source Alphabetical" href="https://opensource.org/licenses/alphabetical">here</a>
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <hr>
+	  <br/><strong class="help-page-subtitle">Developers</strong>
+	  <br/>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Developer(s)&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>A person concerned with facets of the software development process, including the research, design, programming, and testing of computer software. When there are multiple developers, the primary software developer should be listed first. "NONE" is an option when necessary.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/><hr>
+	  <br/><strong class="help-page-subtitle">DOI and Release Date</strong>
+	  <br/>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Digital Object Identifier (DOI)&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>A unique persistent identifier that references a digital object and provides long-term access; DOIs remain stable even if the underlying address or URL for the content changes. If a DOI has not yet been minted for the software, OSTI will mint a persistent identifier, in the form of a DOI, for the software upon submission.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Reserve DOI&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>If a DOI has not yet been minted for the software, use Reserve DOE so that OSTI will assign a persistent identifier before you submit. Please note, your reserved DOI will not be registered with DataCite until a Release Date is provided.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>DOI Infix&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>A DOI contains 3 components. The prefix, which is assigned by the registration agency, begins with 10.xxx; the infix, which can contain intelligence, such as the name of the journal, repository or project; the suffix, which is assigned by the allocation agency. Example: 10.00000/OSTIDOE CODE/170000
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Release Date&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>Select the software release date.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/><hr>
+	  <br/><strong class="help-page-subtitle">Supplemental Product Information</strong>
+	  <br/>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Short Title or Acronym&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>Abbreviated title or acronym for the software.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Country of Origin&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>Identify the country of origin for the software. Default is the United States.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Keywords&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>A list of words or phrases that describe the software. Keywords aide in the online search and discovery of information about the software. More than one keyword may be entered. Separate terms with a semicolon.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Other Special Requirements&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>Information regarding hardware or software requirements.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Site Accession Number&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>The accession or other identifying numbers assigned by the submitting site, university, or repository's database, records, etc.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Upload Source Code&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>If you are submitting Open Source, No Publicly Available Repository or Close Source code through DOE CODE you will also be required to upload an archive file containing your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tar.gz, and .tar.gz2.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/><hr>
+	  <br/><strong class="help-page-subtitle">Organizations</strong>
+	  <br/>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Sponsoring Organization(s)&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>The sponsoring or funding office of the software product.
+			      </span>
+			 </span>
+		    </span>
+		    <br/>
+		    <br/><ul><li><strong>DOE Organization&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>Check this box if the Sponsoring Organization you are entering is an organization within the Department of Energy.
+					</span>
+				   </span>
+			      </span></li>
+			 <br/><li><strong>Name&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>The name of the sponsoring or funding organization. If the sponsoring or funding organization is from the Department of Energy, please choose from the list of DOE organizations. Other sponsoring organization names will be freeform.
+					</span>
+				   </span>
+			      </span></li>
+			 <br/><li><strong>Primary Contract/Award Number&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>DOE award/contract number that is largely responsible for funding the project. At least one valid entry is required for Submittal.
+					</span>
+				   </span>
+			      </span></li>
+			 <br/><li><strong>Additional Award(s)&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>Other award/contract numbers that represent funding contributed to the project, including other DOE awards or awards from other government agencies, foundations, etc.
+					</span>
+				   </span>
+			      </span></li>
+			 <br/><li><strong>B&amp;R Code(s)&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>A Budget and Reporting (B&amp;R) code is given to a project by the Department of Energy. The structure of a B&amp;R code parallels approved DOE PPAs (Program, Project or Activities). The code is used for executing the budget; reporting actual obligations, costs, and revenues; and controlling and measuring actual versus budgeted performance.
+					</span>
+				   </span>
+			      </span></li>
+			 <br/><li><strong>FWP Numbers&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>Field Work Proposal number. A number given to a proposal from a DOE laboratory by the Department of Energy.
+					</span>
+				   </span>
+			      </span></li></ul>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Research Organization(s)&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>The research organization, such as a DOE national laboratory or university, which had primary responsibility for developing the software.
+			      </span>
+			 </span>
+		    </span>
+		    <br/>
+		    <br/><ul><li><strong>DOE Organization&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>Check the box if the research organization is associated with the Department of Energy.
+					</span>
+				   </span>
+			      </span></li>
+			 <br/><li><strong>Name&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>The name of the research organization. If the research organization is within the Department of Energy, please select from the list of DOE organizations. Other research organization names will be freeform.
+					</span>
+				   </span>
+			      </span></li></ul>
+	       </div>
+	  </div>
+	  <br/><hr>
+	  <br/><strong class="help-page-subtitle">Contributors and Contributing Organizations</strong>
+	  <br/>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Contributor(s)&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>The name of a person or institution that has contributed to the software (code, documentation, tests, ideas, project guidance, etc.), but is not listed as a developer.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><ul><li><strong>Contributor Type&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>When adding a contributor, use contributor type to define the role of the contributor. A drop-down menu is provided. For definitions of each contributor type, please see&nbsp;<a title="DataCite" href="https://schema.datacite.org/meta/kernel-4.0/">DataCite</a>.
+					</span>
+				   </span>
+			      </span></li></ul>
+	       </div>
+	  </div>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Contributing Organization(s)&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>Other organizations which provided support to the project. May be entered in place of naming individual software developers.
+			      </span>
+			 </span>
+		    </span>
+		    <br/>
+		    <br/><ul><li><strong>Contributor Type&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>When adding a contributor, use contributor type to define the role of the contributor. A drop-down menu is provided. For definitions of each contributor type, please see&nbsp;<a title="DataCite" href="https://schema.datacite.org/meta/kernel-4.0/">DataCite</a>.
+					</span>
+				   </span>
+			      </span></li></ul>
+	       </div>
+	  </div>
+	  <br/><hr>
+	  <br/><strong class="help-page-subtitle">Identifiers</strong>
+	  <br/>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12">
+		    <span>
+			 <span>
+			      <span>DOI or URL identifiers of related resources. Referencing other documents, datasets, or software that relate to the submitted software allows users to follow these vital links and to better understand the scope of your research.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+	  <div class="row">
+	       <div class="col-xs-12"><ul><li><strong>Identifier Type&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>Identifiers used must be Digital Object Identifiers (DOIs) or URLs.
+					</span>
+				   </span>
+			      </span></li><li><strong>Relation Type&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>Provide, with controlled vocabulary, the relationship of the resource being registered and the related resource. The Relation Type field also allows you to define how the submitted software is related to the DOI you enter and the document you are submitting. For definitions of each relation type controlled vocabulary see&nbsp;<a title="Datacite Metadata Kernel" href="https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf">this</a>.
+					</span>
+				   </span>
+			      </span></li><li><strong>Identifier(s)&nbsp;-</strong>&nbsp;
+			      <span>
+				   <span>
+					<span>Provide the Digital Object Identifier (DOI) or URL for the related item(s).
+					</span>
+				   </span>
+			      </span></li></ul>
+	       </div>
+	  </div>
+	  <br/><hr>
+	  <br/><strong class="help-page-subtitle">Contact Information</strong>
+	  <br/>
+	  <br/>
+	  <div class="row">
+	       <div class="col-xs-12"><strong>Contact Information&nbsp;-</strong>&nbsp;
+		    <span>
+			 <span>
+			      <span>Provide the name, email address, phone number and organization of the submitter. This contact information will serve as the point of contact for DOE if there are questions about the submitted software. Contact information will not be shared in public output products.
+			      </span>
+			 </span>
+		    </span>
+	       </div>
+	  </div>
+     </div>
+     <div class="col-md-3">
+     </div>
+</div>
+{{> wrapper/footer}}

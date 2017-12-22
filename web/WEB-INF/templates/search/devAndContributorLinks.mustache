@@ -1,0 +1,22 @@
+<div>
+     <!--Authors Content-->
+     {{#each dev_contributors.list}}
+     <!--Regular Author Link thing-->
+     <a class="clickable author-search-name" data-authorname='{{combined_name}}' title='Search for {{author_type}} {{combined_name}}'>{{combined_name}}</a>
+     {{#unless is_last}};{{/unless}}
+     {{/each}}
+     
+     {{#if dev_contributors.show_ellipsis}}
+     &hellip;
+     {{/if}}
+     
+     {{#if show_release_date}}
+     &nbsp;
+     <span class='hide-sm hide-md hide-lg'>
+	  <br/>
+     </span>
+     <span class="search-result-release-date text-muted">
+	  <time>Release Date:&nbsp;{{release_date}}</time>
+     </span>
+     {{/if}}
+</div>

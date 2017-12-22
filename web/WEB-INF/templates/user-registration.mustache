@@ -1,0 +1,155 @@
+{{> wrapper/header}}
+<input type="hidden" id='user-registration-page-identifier'/>
+<div class="row not-so-wide-row">
+     <div class="col-lg-1 hide-md col-sm-1"></div>
+     <div class="col-lg-10 col-md-12 col-sm-10 col-xs-12">
+	  <div class="row not-so-wide-row" id='successful-signup-container' style='display:none'>
+	       <div class="col-md-3"> </div>
+	       <div class="col-md-6 col-xs-12 center-text static-content">
+		    <br/>
+		    <br/>
+		    <br/>
+		    <p>
+			 A confirmation email has been sent to the email address you used to register your DOE CODE account. Please follow the instructions
+			 in that email to begin using DOE CODE.
+		    </p>
+	       </div>
+	       <div class="col-md-3"> </div>
+	  </div>
+	  <div id='create-account-container'>
+	       <div class="row">
+		    <div class="col-md-2"></div>
+		    <div class="left-text col-md-8 col-xs-12">
+			 <h2 class="static-content-title">Create New Account</h2>
+			 <br>
+		    </div>
+		    <div class="col-md-2"></div>	 
+	       </div>
+	       <div class="row">
+		    <div class="col-md-2"></div>
+		    <div class="col-md-8 col-xs-12 register-text">
+			 <div class='has-error'>
+			      <label class='control-label' id='signup-errors'></label>
+			      <label class='control-label' id='forgot-password-reminder-text' style='display:none'>If this is your account, you can&nbsp;
+				   <a href='/doecode/login'>log into it</a>&nbsp;or if you have&nbsp;
+				   <a href='/doecode/forgot-password'>forgotten your password</a>, you can request a password reset link</label>
+			 </div>
+			 To create an account, enter your first and last name, email address 
+			 and password below. If you are an employee at a DOE National Laboratory, please register using your official .gov email address. 
+			 For all other users, you will be asked to enter your current DOE award/contract number, which can be found in your DOE award package.
+			 DOE CODE will validate the number automatically.
+		    </div>
+		    <div class="col-md-2"></div>			 
+	       </div>
+	       <br>
+	       <div class="row signin-page-container">
+		    <div class="col-md-1"></div>
+		    <div class="col-md-10 col-xs-12">
+			 <div class="row">
+			      <div class="col-lg-7 col-xs-12">
+				   <div class="row">
+					<div class="col-xs-12">
+					     <div class="row">
+						  <div class="col-xs-12 ">
+						       <!--First Name-->
+						       <div class="row login-email-container">
+							    <div class="col-md-4 col-xs-12 right-text-md right-text-lg no-col-padding-right no-col-padding-left tiny-center-text">
+								 <label class="control-label input-label-adjusted" for="first-name">First Name:</label>
+							    </div>
+							    <div class="col-md-6 col-xs-12 small-screen-no-col-padding-left small-screen-no-col-padding-right">
+								 <div class="form-group">
+								      <input title="First Name" placeholder="First Name" value="" id="first-name" class="pure-input-1-3 form-control" type="text">
+								 </div>
+							    </div>
+						       </div>
+						       <!--Last Name-->
+						       <div class="row login-email-container">
+							    <div class="col-md-4 col-xs-12 right-text-md right-text-lg no-col-padding-right no-col-padding-left tiny-center-text">
+								 <label class="control-label input-label-adjusted" for="last-name">Last Name:</label>
+							    </div>
+							    <div class="col-md-6 col-xs-12 small-screen-no-col-padding-left small-screen-no-col-padding-right">
+								 <div class="form-group">
+								      <input title="Last Name" placeholder="Last Name" value="" id="last-name" class="pure-input-1-3 form-control" type="text">
+								 </div>
+							    </div>
+						       </div>
+						       <!--Email Address-->
+						       <div class="row login-email-container">
+							    <div class="col-md-4 col-xs-12 right-text-md right-text-lg no-col-padding-right no-col-padding-left tiny-center-text">
+								 <label class="control-label input-label-adjusted" for="email">Email Address:</label>
+							    </div>
+							    <div class="col-md-6 col-xs-12 small-screen-no-col-padding-left small-screen-no-col-padding-right">
+								 <div class="form-group">
+								      <input title="Email Address" placeholder="Email Address" id="email" class="pure-input-1-3 form-control" type="text">
+								      <div>If you are an employee at a DOE National Laboratory, please register using your official .gov email address.</div>
+								 </div>
+							    </div>
+						       </div>
+						       <!--Contract Number-->
+						       <div class="row login-email-container" id='contract-number-container' style='display:none'>
+							    <div class="col-md-4 col-xs-12 right-text-md right-text-lg no-col-padding-right no-col-padding-left tiny-center-text">
+								 <label class="control-label input-label-adjusted" for="contract-number">Award/Contract Number:</label>
+							    </div>
+							    <div class="col-md-6 col-xs-12 small-screen-no-col-padding-left small-screen-no-col-padding-right">
+								 <div class="form-group">
+								      <input title="Contract Number" placeholder="Award/Contract Number" id="contract-number" value="" class="pure-input-1-3 form-control" type="text">
+								      <label class='control-label registration-msg'></label>
+								 </div>
+							    </div>
+						       </div>
+						  </div>
+					     </div>
+					</div>
+				   </div>
+				   <div class="row">
+					<div class="col-xs-12">
+					     <div class="row">
+						  <div class="col-xs-12">
+						       <div class="row login-email-container">
+							    <div class="col-md-4 col-xs-12 right-text-md right-text-lg no-col-padding-right no-col-padding-left tiny-center-text">
+								 <label class="control-label input-label-adjusted" for="password">Password:</label>
+							    </div>
+							    <div class="col-md-6 col-xs-12 small-screen-no-col-padding-left small-screen-no-col-padding-right">
+								 <div class="form-group">
+								      <input title="Password" placeholder="Password" id="password" class="pure-input-1-3 form-control" type="password">
+								 </div>
+							    </div>
+						       </div>
+						       <div class="row login-email-container">
+							    <div class="col-md-4 col-xs-12 right-text-md right-text-lg no-col-padding-right no-col-padding-left tiny-center-text">
+								 <label class="control-label input-label-adjusted" for="confirm-password">Confirm Password:</label>
+							    </div>
+							    <div class="col-md-6 col-xs-12 small-screen-no-col-padding-left small-screen-no-col-padding-right">
+								 <div class="form-group">
+								      <input title="Confirm Password" placeholder="Confirm Password" id="confirm-password" class="pure-input-1-3 form-control" type="password">
+								 </div>
+							    </div>
+						       </div>
+						  </div>
+					     </div>
+					</div>
+				   </div>
+			      </div>
+			      <div class='col-md-1 hide-lg hide-sm hide-xs'></div>
+			      <div class="col-lg-5 col-md-11 col-xs-12 small-screen-no-col-padding-left small-screen-no-col-padding-right">
+				   {{> user/password-rules}}
+			      </div>
+			 </div>
+		    </div>
+		    <div class="col-md-1"></div>
+	       </div>
+	       <br>
+	       <div class="row">
+		    <div class="col-md-2">
+		    </div>
+		    <div class="col-md-8 col-xs-12 right-text">
+			 <button title="Create Account" id='create-account-btn' type="button" class="pure-button button-success signin-buttons">Create Account</button>
+		    </div>
+		    <div class="col-md-2"></div> 
+	       </div>    
+	  </div>       
+     </div>
+     <div class="col-lg-1 hide-md col-sm-1"></div>
+</div>
+{{> wrapper/footer}}
+

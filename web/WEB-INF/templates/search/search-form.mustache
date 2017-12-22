@@ -1,0 +1,19 @@
+<!--Unashamedly, we have this in its own thing-->
+<form id='search-page-form' method='POST' action='/doecode/results'>
+     <input class="search-form-input" type='hidden' id='search-all_fields' name='all_fields' value='{{search_form_data.all_fields}}' data-dtype="string"/>
+     <input class="search-form-input" type='hidden' id='search-software_title' name='software_title' value='{{search_form_data.software_title}}' data-dtype="string"/>
+     <input class="search-form-input" type='hidden' id='search-developers_contributors' name='developers_contributors' value='{{search_form_data.developers_contributors}}' data-dtype="string"/>
+     <input class="search-form-input" type='hidden' id='search-biblio_data' name='biblio_data' value='{{search_form_data.biblio_data}}' data-dtype="string"/>
+     <input class="search-form-input" type='hidden' id='search-identifiers' name='identifiers' value='{{search_form_data.identifiers}}' data-dtype="string"/>
+     <input class="search-form-input" type='hidden' id='search-date_earliest' name='date_earliest' value='{{search_form_data.date_earliest}}' data-dtype="date"/>
+     <input class="search-form-input" type='hidden' id='search-date_latest' name='date_latest' value='{{search_form_data.date_latest}}' data-dtype="date"/>
+     <input class="search-form-input" type='hidden' id='search-accessibility' name='accessibility' value='{{search_form_data.accessibility}}' data-dtype="array"/>
+     <input class="search-form-input" type='hidden' id='search-licenses' name='licenses' value='{{search_form_data.licenses}}' data-dtype="array"/>
+     <input class="search-form-input" type='hidden' id='search-research_organization' name='research_organization' value='{{search_form_data.research_organization}}' data-dtype="array"/>
+     <input class="search-form-input" type='hidden' id='search-sponsoring_organization' name='sponsoring_organization' value='{{search_form_data.sponsoring_organization}}' data-dtype="array"/>
+     <input class="search-form-input" type='hidden' id='search-start' name='start' value='{{search_form_data.start}}'/>
+     <input class="search-form-input" type='hidden' id='search-rows' name='rows' value='{{search_form_data.rows}}'/>
+     <input class="search-form-input" type='hidden' id='search-sort' name='sort' value='{{search_form_data.sort}}'/>
+     <input class="search-form-input" type='hidden' id='search-orcid' name='orcid' value='{{search_form_data.orcid}}'/>
+     <input class="search-form-input" type='hidden' id='search-pageNum' name='pageNum' value='{{search_form_data.pageNum}}'/>
+</form>

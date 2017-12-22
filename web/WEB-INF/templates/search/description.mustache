@@ -1,0 +1,10 @@
+<div class='search-result-description'>
+     <!--First part of the description. May be the only part, based on the length-->
+     {{descriptionObj.description_pt1}}
+
+     <!--If the description exceeds the length passed in, then we need a hide-show toggle-->
+     {{#if descriptionObj.needs_toggle}}
+     <span class='description-pt2-container' style='display:none;'>{{descriptionObj.description_pt2}}</span>
+     &nbsp;<a title='More' class='description-pt2-toggle clickable'>More&gt;&gt;</a>
+     {{/if}}
+</div>

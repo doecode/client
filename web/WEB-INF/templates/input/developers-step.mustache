@@ -1,0 +1,164 @@
+<div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="heading-developers">
+	  <div class="panel-title">
+	       <a id='developers-panel-anchor' class='input-accordion-title' title='Developers' role="button" data-toggle="collapse" {{#if is_accordion}}data-parent="#input-page-accordion"{{/if}} href="#collapse-developers" aria-expanded="false" aria-controls="collapse-developers">
+		    Developers
+	       </a>
+	       <span class="green fa fa-check" style="display: none"></span>
+	       <span title="Open" class="pull-right fa fa-chevron-right clickable accordion-toggle-arrow"></span>
+	  </div>
+     </div>
+     <div id="collapse-developers" class="panel-collapse collapse input-panel-collapse" role="tabpanel" aria-labelledby="heading-developers">
+	  <div class="panel-body">
+	       <div class='row'>
+			<div class="col-xs-12">
+				<label id="developers-lbl" class='control-label'>[from data store]</label>{{> tooltips/Developers}}
+				 <br/>
+				 <br/>
+			</div>
+			<div class="col-xs-12">
+			 <table id='developers-data-table' class="table table-condensed table-striped table-bordered">
+			      <thead>
+				   <tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Affiliations</th>
+				   </tr>
+			      </thead>
+			      <tbody>
+
+			      </tbody>
+			 </table>
+			</div>
+			<div class="col-xs-12">
+				<label id="developers-lbl-error" class="control-label errorCheck">Problem</label>
+			</div>
+	       </div>
+	       <div class='row'>
+		    <div class='col-xs-12 center-text'>
+			 <button type="button" title="Developers" id='add-developers-modal-btn' class="pure-button pure-button-primary btn-lg">Add Developer</button>
+		    </div>
+	       </div>
+	  </div>
+     </div>
+
+     <!--Developer Edit Modal-->
+     <div class="modal fade" id="developers-edit-modal" role="dialog">
+	  <div class="modal-dialog modal-lg">
+	       <!-- Modal content-->
+	       <div class="modal-content">
+		    <div class="modal-header">
+			 <button type="button" class="close" data-dismiss="modal">&times;</button>
+			 <h4 id="developers-manage-lbl" class="modal-title">Manage Developer</h4>
+		    </div>
+		    <div class="modal-body dl-horizontal">
+			 <div id="developers-modal-error-zone" class='row'>
+				<div class='col-xs-12'>
+					<div class="error-color">
+						<h2 id="developers-modal-error"></h2>
+						<br/>
+					</div>
+             	</div>
+             </div>
+			 <div class='row'>
+			      <div class='col-xs-12'>
+					<div class="row">
+						<div class="col-xs-12">
+							<label id='developer-edit-first-name-lbl' for='developer-edit-first-name' class='control-label'>First Name</label>
+						</div>
+						<div class="col-xs-12">
+							<input type='text' class='pure-input-1 form-control' id='developer-edit-first-name'/>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="developer-edit-first-name-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+				   <br/>
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="developer-edit-middle-name-lbl" for='developer-edit-middle-name' class='control-label'>Middle Name</label>
+						</div>
+						<div class="col-xs-12">
+							<input type='text' class='pure-input-1 form-control' id='developer-edit-middle-name'/>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="developer-edit-middle-name-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+				   <br/>
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="developer-edit-last-name-lbl" for='developer-edit-last-name' class='control-label'>Last Name</label>
+						</div>
+						<div class="col-xs-12">
+							<input type='text' class='pure-input-1 form-control' id='developer-edit-last-name'/>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="developer-edit-last-name-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+				   <br/>
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="developer-edit-email-lbl" for='developer-edit-email' class='control-label'>Email</label>
+						</div>
+						<div class="col-xs-12">
+							<input type='text' class='pure-input-1 form-control' id='developer-edit-email'/>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="developer-edit-email-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+				   <br/>
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="developer-edit-orcid-lbl" for='developer-edit-orcid' class='control-label'>ORCID</label>
+						</div>
+						<div class="col-xs-12">
+							<input type='text' class='pure-input-1 form-control' id='developer-edit-orcid'/>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="developer-edit-orcid-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+				   <br/>
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="developer-edit-affiliations-lbl" for='developer-edit-affiliations' class='control-label'>Affiliations</label>
+						</div>
+						<div class="col-xs-12">
+						   <select class='pure-input-1 doecode-chosen-select' title='Developer Affiliations' id='developer-edit-affiliations' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+							{{#each affiliations_list}}
+							<option title="{{title}}" value="{{value}}">{{label}}</option>
+							{{/each}}
+						   </select>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="developer-edit-affiliations-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+					<br/>
+			      </div>
+			 </div>
+		    </div>
+		    <div class="modal-footer">
+			 <button type="button" id='developers-close-btn' class="pure-button">Close</button>&nbsp;
+			 <span name="delete-btn"><button type="button" id='developers-delete-btn' title="Delete" class="pure-button button-error">Delete</button>&nbsp;</span>
+			 <button type="button" id='developers-save-btn' title="Save and Close" class="pure-button pure-button-primary">Save and Close</button>
+		    </div>
+	       </div>
+	  </div>
+     </div>
+</div>

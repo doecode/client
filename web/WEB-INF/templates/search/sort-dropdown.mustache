@@ -1,0 +1,13 @@
+<div class="search-sort-dropdown">
+     <span class="dropdown">
+	  <button title="Sort by {{search_sort_dropdown.current}}" class="btn btn-link dropdown-toggle sort-dropdown-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	       <span class='sort-dropdown-btn-label'>Sort&nbsp;by&nbsp;{{search_sort_dropdown.current}}</span>
+	       <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu">
+	       {{#each search_sort_dropdown.sort_dropdown_options}}
+	       <li><a title="{{label}}" class="clickable sort-dropdown-option" data-sortval="{{value}}">{{label}}</a></li>
+	       {{/each}}
+	  </ul>
+     </span>
+</div>

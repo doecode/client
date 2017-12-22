@@ -1,0 +1,41 @@
+{{> wrapper/header}}
+<input type="hidden" id="projects-page-identifier"/>
+<div class="row not-so-wide-row">
+     <div class="col-lg-2"></div>
+     <div class="col-lg-8 col-xs-12 static-content">
+          <h2 class="static-content-title">Manage My Projects</h2>
+	  <div class='has-error'>
+	       <label class='control-label' id='projects-error-msg'></label>
+	  </div>
+	  <br/>
+          <div class="form-group-xs row">
+	       <div class="col-sm-12 right-text tiny-center-text center-text-xs">
+		    <button title='Add new Project' id='projects-add-new' type="button" class="pure-button button-success btn-lg workflow-publish-btn white">
+			 Add New Project
+		    </button>
+	       </div>
+          </div>
+	  <br/>
+	  <div class='row'>
+	       <div class='col-xs-12'>
+		    <table id='projects-datatable' class="table table-condensed table-striped table-bordered" width='100%'>
+			 <thead>
+			      <tr>
+				   <th data-priority='1'>Code ID</th>
+				   <th>Title</th>
+				   <th data-priority='2'>Status</th>
+				   <th>Update</th>
+				   <th>Announce</th>
+			      </tr>
+			 </thead>
+			 <tbody>
+
+			 </tbody>
+		    </table>
+	       </div>
+	  </div>
+     </div>
+     <div class="col-lg-2"></div>
+
+</div>
+{{> wrapper/footer}}

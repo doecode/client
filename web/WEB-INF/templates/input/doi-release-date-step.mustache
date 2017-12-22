@@ -1,0 +1,81 @@
+<div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="heading-doi-release-date">
+	  <div class="panel-title">
+	       <a id='doi-release-date-panel-anchor' class='input-accordion-title' role="button" data-toggle="collapse" {{#if is_accordion}}data-parent="#input-page-accordion"{{/if}} href="#collapse-doi-release-date" aria-expanded="false" aria-controls="collapse-doi-release-date">
+		    DOI and Release Date
+	       </a>
+	       <span class="green fa fa-check" style="display: none"></span>
+	       <span title="Open" class="pull-right fa fa-chevron-right clickable accordion-toggle-arrow"></span>
+	  </div>
+     </div>
+     <div id="collapse-doi-release-date" class="panel-collapse collapse input-panel-collapse" role="tabpanel" aria-labelledby="heading-doi-release-date">
+	  <div class="panel-body">
+	       <div class='row'>
+		    <div class='col-xs-8'>
+				<div class="row">
+					<div class="col-xs-12">
+						<label id="doi-lbl" for='doi' class='control-label'>DOI</label>{{> tooltips/DigitalObjectIdentifier}}
+					</div>
+					<div class="col-xs-12">
+						<input type='text' class='pure-input-1 form-control' id='doi' title='DOI'/>
+						<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+						<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+					</div>
+					<div class="col-xs-12">
+						<label id="doi-lbl-error" class="control-label errorCheck">Problem</label>
+					</div>
+					<div class="col-xs-12">
+						<span id="doi-notice" style="display: none">
+							<strong>Please Note:&nbsp;</strong>Your reserved DOI will not be registered on DataCite until a Release Date is provided.
+						</span>
+					</div>
+				</div>
+			 <div id="doi-reservation-zone">
+			 	<br/>
+				<div class="row">
+					<div class="col-xs-12">
+                        <button title="Reserve DOI" type="button" id='reserve-doi-btn' class="pure-button pure-button-primary btn-sm">
+                        	<span id="reserve-icon" class="fa fa-pencil"></span>&nbsp;<span id="reserve-text">Reserve DOI</span>
+                        </button>
+					</div>
+				</div>
+			</div>
+			 <div id="doi-infix-zone">
+			 	<br/>
+				<div class="row">
+					<div class="col-xs-12">
+						<label id="doi-infix-lbl" for='doi' class='control-label'>DOI Infix</label>{{> tooltips/DOIInfix}}
+					</div>
+					<div class="col-xs-12">
+						<input type='text' class='pure-input-1 form-control' id='doi-infix' title='DOI Infix'/>
+						<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+						<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+					</div>
+					<div class="col-xs-12">
+						<label id="doi-infix-lbl-error" class="control-label errorCheck">Problem</label>
+					</div>
+				</div>
+			</div>
+			 <br/>
+				<div class="row">
+					<div class="col-xs-12">
+						<label id="release-date-lbl" for='release-date' class='control-label'>[from data store]</label>{{> tooltips/ReleaseDate}}
+					</div>
+					<div class="col-xs-6">
+						<input type='text' placeholder="MM/DD/YYYY" class='pure-input-1 form-control doecode-datepicker' id='release-date' title="Release Date"/>
+						<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+						<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+					</div>
+					<div class="col-xs-12">
+						<label id="release-date-lbl-error" class="control-label errorCheck">Problem</label>
+					</div>
+				</div>
+			 <br/>
+		    </div>
+		    <div class='col-xs-4'>
+
+		    </div>
+	       </div>
+	  </div>
+     </div>
+</div>

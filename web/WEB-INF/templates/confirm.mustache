@@ -1,0 +1,59 @@
+{{> wrapper/header}}
+<input type="hidden" id="code-id" value="{{code_id}}"/>
+<input type='hidden' id='confirmation-page-identifier'/>
+<input type='hidden' id='availabilities-list-json' value='{{availabilities_list_json}}'/>
+<div class="row not-so-wide-row">
+     <div class='col-md-3'></div>
+     <div class='col-md-6 col-xs-12'>
+	  <div class="form-group form-group-sm row">
+	       <div class='col-xs-12'>
+		    <div class='has-error'>
+			 <label class='control-label' id='confirm-error-message'></label>
+		    </div>
+		    <h1>{{action_phrase}}</h1>
+		    <h2>DOE CODE ID: #{{code_id}}</h2>
+		    {{#if has_minted_doi}}
+		    <div>
+			 <h2>Minted DOI: {{minted_doi}}</h2>
+		    </div>
+		    {{/if}}
+		    <div>
+			 <h2 id="loaded-doi">
+			 </h2>
+		    </div>
+		    <div id="download-yml-container" style="display:none;">
+			 <h2>
+			      <a title='Download YAML File' id='yml-anchor' target="_blank" type="text/yaml" href='' download=''>
+				   Download Metadata.yml
+			      </a>
+			 </h2>
+		    </div>
+	       </div>
+	  </div>
+          <div class="form-group form-group-sm row">
+	       {{#if is_submitted}} 
+	       <div class="col-sm-4 col-xs-12">
+		    <a title='Continue to E-Link Submission' type="button" class="pure-button button-success btn-lg white" href='/doecode/announce?code_id={{code_id}}'>
+			 Continue to E-Link Announcement
+		    </a>
+	       </div>
+	       {{/if}}
+	       <div class='col-sm-4 col-xs-12'></div>
+	       <div class="col-sm-4 col-xs-12 right-text">
+		    <a title='Create New Project' type="button" class="pure-button pure-button-primary btn-lg white" href='/doecode/submit'>
+			 Create New Project
+		    </a>
+	       </div>
+          </div>
+          <br/>
+          <br/>
+          <div class='row static-content'>
+	       <div class='col-xs-12'>
+		    <dl class="row confirmation-page-metadata" id='confirmation-metadata-container' style='display:none;'>
+		    </dl>
+	       </div>
+          </div>
+     </div>
+     <div class='col-md-3'></div>
+</div>
+{{> wrapper/footer}}

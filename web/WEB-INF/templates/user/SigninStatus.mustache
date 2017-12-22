@@ -1,0 +1,56 @@
+{{#if user_data.is_logged_in}}
+<div class="dropdown">
+     <button title="{{user_data.first_name}} {{user_data.last_name}}" class="btn btn-link dropdown-toggle login-dropdown-btn " type="button" id="accountSigninDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	  <span class='hide-xs'>{{user_data.first_name}} {{user_data.last_name}}</span>
+	  <span style='font-size:20px;' class='hide-sm hide-md hide-lg'><span class='fa fa-user-circle-o signin-icon signin-btn-icon'></span></span>
+	  &nbsp;<span class="caret"></span>
+     </button>
+     <ul class="dropdown-menu dropdown-menu-right login-dropdown-text" aria-labelledby="accountSigninDropdown">
+	  <li>
+	       <a title='My Projects' href="/doecode/projects">
+		    <span class='fa fa-code'></span>&nbsp;My Projects
+	       </a>
+	  </li>
+	  <li>
+	       <a title='Account' href="/doecode/account">
+		    <span class='fa fa-user-circle'></span>&nbsp;Account
+	       </a>
+	  </li>
+	  {{#if user_data.has_osti_role}}
+	  <li>
+	       <a title='Pending Approval' href="/doecode/pending">
+		    <span class='fa fa-clock-o'></span>&nbsp;Pending Approval
+	       </a>
+	  </li>
+	  <li>
+	       <a title='User Admin' href='/doecode/user-admin'>
+		    <span class='fa fa-user-plus'></span>&nbsp;User Admin
+	       </a>
+	  </li>
+	  {{/if}}
+	  <li role="separator" class="divider"></li>
+	  <li class="clickable">
+	       <a title='Logout' class="logout-btn">
+		    <span class='fa fa-sign-out'></span>&nbsp;Logout
+	       </a>
+	  </li>
+     </ul>
+</div>
+{{else}}
+<div class='signin-main-container'>
+     <ul class='list-inline signin-list'>
+	  <li class='signin-btn-container first-signin-text' >
+	       <a title='Log In' class="signin-btn" href="/doecode/login">
+		    <span class=" signin-btn-icon fa fa-user signin-icon"></span>
+		    <span class='signin-text'>&nbsp;Sign In</span>
+	       </a>
+	  </li>
+	  <li class='signin-btn-container' >
+	       <a title='Create Account' class="signin-btn" href="/doecode/register">
+		    <span class="signin-btn-icon fa fa-user-plus signin-icon hide-sm hide-lg hide-md"></span>
+		    <span class='signin-text'>&nbsp;Create Account</span>
+	       </a>
+	  </li>
+     </ul>
+</div>
+{{/if}}

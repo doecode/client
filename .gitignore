@@ -1,6 +1,4 @@
+.project
+/target
 .classpath
-node_modules
 .settings/
-dist/app.js
-
-/nbproject/
