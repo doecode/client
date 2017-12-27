@@ -343,16 +343,6 @@ $(document).ready(function () {
         /*Triggers a re-search for the sake of sorting*/
         $(".sort-dropdown-option").on('click', updateSearchSort);
 
-        /*Adds id's to all of the search-input-labels and their text inputs*/
-        var search_check_id_prefix = "search-sidebar-filter-";
-        var search_check_id_value = 0;
-        $(".search-input-label").each(function () {
-            var new_id = search_check_id_prefix + search_check_id_value.toString();
-            $(this).attr('for', new_id);
-            $(this).prev('input.search-checkbox').attr('id', new_id);
-            search_check_id_value++;
-        });
-
         //Makes it where clicking on a checkbox on the search results page adds or removes that value from the search
         $(".search-checkbox").on('click', addSearchCheckboxToSearch);
 

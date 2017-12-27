@@ -81,6 +81,7 @@ public class SearchFunctions {
           post_data.add("licenses", handleRequestArray(request.getParameter("licenses")));
           post_data.add("research_organization", handleRequestArray(request.getParameter("research_organization")));
           post_data.add("sponsoring_organization", handleRequestArray(request.getParameter("sponsoring_organization")));
+          post_data.add("software_type", handleRequestArray(request.getParameter("software_type")));
 
           //Create the post object
           CloseableHttpClient hc = HttpClientBuilder.create().setDefaultRequestConfig(RequestConfig.custom().setSocketTimeout(5000).setConnectTimeout(5000).setConnectionRequestTimeout(5000).build()).build();
@@ -140,6 +141,7 @@ public class SearchFunctions {
           return_data.add("search_sort_dropdown", sort_dropdownOptions(context, post_data.getString("sort", "")));
           return_data.add("availabilities_list", getSearchDropdownList(context, DOECODEUtils.AVAILABILITIES_LIST_JSON, DOECODEUtils.AVAILABILITIES_LIST_JSON_KEY, handleRequestArray(request.getParameter("accessibility"))));
           return_data.add("license_options_list", getSearchDropdownList(context, DOECODEUtils.LICENSE_OPTIONS_LIST_JSON, DOECODEUtils.LICENSE_JLIST_SON_KEY, handleRequestArray(request.getParameter("licenses"))));
+          return_data.add("software_type_options_list", getSearchDropdownList(context, DOECODEUtils.SOFTWARE_TYPES_LIST_JSON, DOECODEUtils.SOFTWARE_TYPES_LIST_JSON_KEY, handleRequestArray(request.getParameter("software_type"))));
           return_data.add("search_description", getSearchResultsDescription(post_data, context));
           if (!invalid_search_data) {
                return_data.add("search_facets_data", search_result_data.get("facets"));
@@ -235,6 +237,20 @@ public class SearchFunctions {
                }
 
                search_description_list.add(makeSearchDescriptionObjectArray("Accessibility", Json.parse(accessibility_array).asArray(), "accessibility", accessiblity_display_vals));
+          }
+
+          //Software Type
+          String software_type_array = post_data.getString("software_type", "");
+          if (StringUtils.isNotBlank(software_type_array) && Json.parse(software_type_array).asArray().size() > 0) {
+               //Get the software_type array so we can get display values
+               JsonArray software_type_display_vals = new JsonArray();
+               try {
+                    software_type_display_vals = DOECODEUtils.getJsonList((context.getRealPath("./json") + "/" + DOECODEUtils.SOFTWARE_TYPES_LIST_JSON), DOECODEUtils.SOFTWARE_TYPES_LIST_JSON_KEY);
+               } catch (Exception e) {
+                    log.severe("Couldn't get accessiblity json file: " + e.getMessage());
+               }
+
+               search_description_list.add(makeSearchDescriptionObjectArray("Software Type", Json.parse(software_type_array).asArray(), "software_type", software_type_display_vals));
           }
           //Licenses
           String license_array = post_data.getString("licenses", "");
@@ -1038,6 +1054,7 @@ public class SearchFunctions {
           JsonObject biblio_data = new JsonObject();
           try {
                biblio_data = Json.parse(raw_json).asObject().get("metadata").asObject();
+               log.info(biblio_data.toString());
           } catch (Exception e) {
                is_valid = false;
                log.severe("Invalid JSON: " + e.getMessage());
@@ -1079,6 +1096,16 @@ public class SearchFunctions {
                return_data.add("availability", availabilityObj.getString("label", ""));
                return_data.add("has_availability", StringUtils.isNotBlank(biblio_data.getString("accessibility", "")));
                meta_tags.add(makeMetaTag("availability", availabilityObj.getString("label", "")));
+
+               /*Software Type*/
+               JsonArray softwareTypeList = new JsonArray();
+               try {
+                    softwareTypeList = DOECODEUtils.getJsonList(jsonpath + "/" + DOECODEUtils.SOFTWARE_TYPES_LIST_JSON, DOECODEUtils.SOFTWARE_TYPES_LIST_JSON_KEY);
+               } catch (Exception e) {
+               }
+               JsonObject softwareTypeObj = DOECODEUtils.getJsonListItem(softwareTypeList, "value", biblio_data.getString("software_type", ""));
+               return_data.add("software_type", softwareTypeObj.getString("label", ""));
+               meta_tags.add(makeMetaTag("software_type", softwareTypeObj.getString("label", "")));
 
                /*Licenses*/
                return_data.add("licenses", biblio_data.get("licenses").asArray());

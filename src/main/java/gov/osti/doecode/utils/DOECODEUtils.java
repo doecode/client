@@ -38,6 +38,9 @@ public class DOECODEUtils {
 
      public static final String CONTRIBUTOR_TYPES_LIST_JSON_KEY = "contributorTypes";
      public static final String CONTRIBUTOR_TYPES_LIST_JSON = "contributorTypes.json";
+     
+     public static final String SOFTWARE_TYPES_LIST_JSON_KEY = "softwareTypes";
+     public static final String SOFTWARE_TYPES_LIST_JSON = "softwareTypeList.json";
 
      public static JsonArray getJsonList(String path, String key) throws IOException {
           File f = new File(path);

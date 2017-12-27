@@ -1,0 +1,15 @@
+{
+    "softwareTypes": [{
+            "label": "Business",
+            "value": "B",
+            "key": "software-type-business",
+            "title": "Business"
+        },
+        {
+            "label": "Scientific",
+            "value": "S",
+            "key": "software-type-scientific",
+            "title": "Scientific"
+        }
+    ]
+}
