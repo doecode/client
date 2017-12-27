@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 /**
  *
@@ -30,10 +32,22 @@ public class Input extends HttpServlet {
           String page_title = "";
           String template = "";
           String current_page = "";
+          
           JsonObject output_data = new JsonObject();
           JsonArray jsFilesList = new JsonArray();
           boolean is_inputjs = false;
           boolean is_accordion = false;
+
+          //Software type param
+          String software_type_param = request.getParameter("software_type");
+
+          //Some of the option steps, and whether or not we should hide them
+          boolean hide_contact = false;
+          boolean hide_contributors = false;
+          boolean hide_identifiers = false;
+          boolean hide_organizations = false;
+          boolean hide_supplemental_info = false;
+          boolean show_optional_toggle = false;
 
           boolean is_logged_in = UserFunctions.isUserLoggedIn(request);
 
@@ -58,7 +72,20 @@ public class Input extends HttpServlet {
                } else {
                     output_data.add("page_message", "Submit a New Software Project");
                }
-               output_data.add("show_optional_toggle", true);
+
+               //Toggle everything to not be shown, since we're on the submit page
+               hide_contact = true;
+               hide_contributors = true;
+               hide_identifiers = true;
+               hide_organizations = true;
+               hide_supplemental_info = true;
+               show_optional_toggle = true;
+
+               //If it's business software, show the organizations tab
+               if (StringUtils.equals(software_type_param, "Business")) {
+                    hide_organizations = false;
+               }
+
                current_page = TemplateUtils.PAGE_PROJECTS;
                is_inputjs = true;
                is_accordion = true;
@@ -77,7 +104,6 @@ public class Input extends HttpServlet {
                } else {
                     output_data.add("page_message", "Submit a New Software Project");
                }
-               output_data.add("show_optional_toggle", false);
                is_inputjs = true;
                current_page = TemplateUtils.PAGE_PROJECTS;
 
@@ -95,7 +121,6 @@ public class Input extends HttpServlet {
                } else {
                     output_data.add("page_message", "Submit a New Software Project");
                }
-               output_data.add("show_optional_toggle", false);
                is_inputjs = true;
                current_page = TemplateUtils.PAGE_PROJECTS;
 
@@ -124,6 +149,7 @@ public class Input extends HttpServlet {
                output_data.add("is_submitted", is_submitted);
                output_data.add("action_phrase", action_phrase);
                output_data.add("code_id", code_id);
+               
                //Minted doi
                output_data.add("minted_doi", minted_doi);
                output_data.add("has_minted_doi", StringUtils.isNotBlank(minted_doi));
@@ -147,6 +173,20 @@ public class Input extends HttpServlet {
                current_page = TemplateUtils.PAGE_PROJECTS;
                jsFilesList.add("input-other");
           }
+
+          //Add all of the hide/shows for the panels
+          output_data.add("hide_contact_info_step", hide_contact);
+          output_data.add("hide_contributing_step", hide_contributors);
+          output_data.add("hide_identifiers_step", hide_identifiers);
+          output_data.add("hide_organizations_step", hide_organizations);
+          output_data.add("hide_supplemental_step", hide_supplemental_info);
+          output_data.add("show_optional_toggle", show_optional_toggle);
+
+          //Check the software type
+          if (StringUtils.isBlank(software_type_param)) {
+               software_type_param = "S";
+          }
+          output_data.add("software_type", Jsoup.clean(software_type_param, Whitelist.basic()));
 
           //These js files are needed on all input pages
           jsFilesList.add("libraries/jquery.dataTables.min");

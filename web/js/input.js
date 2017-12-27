@@ -344,9 +344,10 @@ var approve = function approve() {
 var parseSaveResponse = function parseReceiveResponse(data) {
     metadata.setValue("code_id", data.metadata.code_id);
     hideCommonModalMessage();
-    
-    if (!($("#code_id").val()))
-    	window.location.href = "/doecode/submit?code_id=" + data.metadata.code_id;
+
+    if (!($("#code_id").val())) {
+        window.location.href = "/doecode/submit?code_id=" + data.metadata.code_id + "?software_type=" + $("#software-type").val();
+    }
 };
 
 

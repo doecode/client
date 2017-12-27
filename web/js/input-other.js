@@ -24,7 +24,8 @@ var pending_data_table_opts = {
         {name: 'software_title', data: 'software_title', width: '69%'},
         {name: 'workflow_status', data: 'workflow_status', width: '8%', className: 'text-center', orderable: false},
         {render: function (data, type, row) {
-                return '<a href="/doecode/approve?code_id=' + row.code_id
+                var software_type_url = getSoftwareTypeLabel(row.software_type);
+                return '<a href="/doecode/approve?code_id=' + row.code_id + '?software_type=' + software_type_url
                         + '" class="pure-button pure-button-primary btn-sm white"><span class="fa fa-pencil"></span> View for Approval</a>';
             }, width: '13%', className: 'text-center', orderable: false}
     ]
@@ -39,11 +40,13 @@ var projects_data_table_opts = {
         {name: 'software_title', data: 'software_title', width: '56%'},
         {name: 'workflow_status', data: 'workflow_status', width: '8%', className: 'text-center'},
         {render: function (data, type, row) {
-                return '<a href="/doecode/submit?code_id=' + row.code_id
+                var software_type_url = getSoftwareTypeLabel(row.software_type);
+                return '<a href="/doecode/submit?code_id=' + row.code_id + '?software_type=' + software_type_url
                         + '" class="pure-button button-success btn-sm white "><span class="fa fa-pencil"></span> Update Metadata</a>';
             }, width: '13%', className: 'text-center', orderable: false},
         {render: function (data, type, row) {
-                return '<a href="/doecode/announce?code_id=' + row.code_id
+                var software_type_url = getSoftwareTypeLabel(row.software_type);
+                return '<a href="/doecode/announce?code_id=' + row.code_id + '?software_type=' + software_type_url
                         + '" class="pure-button pure-button-primary btn-sm white"><span class="fa fa-pencil"></span> Announce to E-Link</a>';
             }, width: '13%', className: 'text-center', orderable: false}
     ]
@@ -267,15 +270,13 @@ $(document).ready(function () {
 
     } else if (document.getElementById('projects-page-identifier')) {
         checkIsAuthenticated();
-        //Makes the "Add New Project" button work
-        $("#projects-add-new").on('click', {page: '/doecode/submit'}, goToPage);
 
         //Show the modal message for loading projects
         setCommonModalMessage(LOADING_PROJECTS_OPTS);
         showCommonModalMessage();
         $.ajax({
             url: API_BASE + 'metadata/projects',
-        	cache: false,
+            cache: false,
             contentType: "application/json; charset=UTF-8",
             method: "GET",
             beforeSend: function beforeSend(request) {
@@ -307,7 +308,7 @@ $(document).ready(function () {
         showCommonModalMessage();
         $.ajax({
             url: API_BASE + 'metadata/projects/pending',
-        	cache: false,
+            cache: false,
             contentType: "application/json",
             method: "GET",
             beforeSend: function beforeSend(request) {
