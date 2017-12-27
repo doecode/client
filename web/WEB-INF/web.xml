@@ -53,6 +53,7 @@
     <servlet-mapping>
         <servlet-name>Input</servlet-name>
         <url-pattern>/submit</url-pattern>
+        <url-pattern>/form-select</url-pattern>
         <url-pattern>/announce</url-pattern>
         <url-pattern>/approve</url-pattern>
         <url-pattern>/confirm</url-pattern>

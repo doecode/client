@@ -32,7 +32,7 @@ public class Input extends HttpServlet {
           String page_title = "";
           String template = "";
           String current_page = "";
-          
+
           JsonObject output_data = new JsonObject();
           JsonArray jsFilesList = new JsonArray();
           boolean is_inputjs = false;
@@ -149,7 +149,7 @@ public class Input extends HttpServlet {
                output_data.add("is_submitted", is_submitted);
                output_data.add("action_phrase", action_phrase);
                output_data.add("code_id", code_id);
-               
+
                //Minted doi
                output_data.add("minted_doi", minted_doi);
                output_data.add("has_minted_doi", StringUtils.isNotBlank(minted_doi));
@@ -167,9 +167,16 @@ public class Input extends HttpServlet {
                template = TemplateUtils.TEMPLATE_MY_PROJECTS;
                current_page = TemplateUtils.PAGE_PROJECTS;
                jsFilesList.add("input-other");
+
           } else if (remaining.startsWith("pending")) {
                page_title = "DOE CODE: Pending";
                template = TemplateUtils.TEMPLATE_PENDING_APPROVAL;
+               current_page = TemplateUtils.PAGE_PROJECTS;
+               jsFilesList.add("input-other");
+
+          } else if (remaining.equals("form-select")) {
+               page_title = "DOE CODE: Form Select";
+               template = TemplateUtils.TEMPLATE_FORM_SELECT;
                current_page = TemplateUtils.PAGE_PROJECTS;
                jsFilesList.add("input-other");
           }

@@ -2026,6 +2026,14 @@ div.Select>div.Select-control input {
     padding-bottom:5px;
 }
 
+.form-select-btn{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 30px;
+}
+
 /*!!!!!!!MEDIA QUERIES!!!!!!*/
 
 /*Between iphone 5 and right up to ipads*/

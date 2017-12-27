@@ -262,15 +262,14 @@ var goToPage = function (event) {
 };
 
 $(document).ready(function () {
+    checkIsAuthenticated();
+    
     if (document.getElementById('confirmation-page-identifier')) {
-        checkIsAuthenticated();
         var code_id = $("#code-id").val();
         doAuthenticatedAjax('GET', API_BASE + 'metadata/' + code_id, parseConfirmPageData, null, parseConfirmPageError);
         doAuthenicatedFileDownloadAjax((API_BASE + 'metadata/' + code_id + '?format=yaml'), parseYMLDownloadSuccess, praseYMLDownloadError);
 
     } else if (document.getElementById('projects-page-identifier')) {
-        checkIsAuthenticated();
-
         //Show the modal message for loading projects
         setCommonModalMessage(LOADING_PROJECTS_OPTS);
         showCommonModalMessage();
@@ -301,8 +300,6 @@ $(document).ready(function () {
             }
         });
     } else if (document.getElementById('approval-page-identifier')) {
-        checkIsAuthenticated();
-
         //LOADING_PENDING_PROJECTS_OPTS
         setCommonModalMessage(LOADING_PENDING_PROJECTS_OPTS);
         showCommonModalMessage();

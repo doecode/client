@@ -1,0 +1,44 @@
+{{> wrapper/header}}
+<div class="row not-so-wide-row">
+     <div class="col-lg-3 col-md-1">  
+
+     </div>
+     <div class="col-lg-6 col-md-10 col-xs-12 static-content">
+	  <h2 class="static-content-title">Select Software Project Type</h2>
+	  <br><br>
+     </div>
+     <div class="col-lg-3 col-md-1">
+     </div>
+     <div class="no-col-padding-left col-xs-12">
+	  <div class="static-content repository-services-container center-text">
+	       <div class="repository-services-container">
+		    <div class="center-text" id="github-repository-container">
+			 <div>
+			      <a title='Add New Scientific Software Project' href="/doecode/submit?software_type=Scientific" class="pure-button pure-button-primary btn-lg workflow-publish-btn white form-select-btn">
+				   Scientific
+			      </a>
+			 </div>
+		    </div>
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    <div id="or-repository-container">
+			 <span class="hide-xs">
+			      <h2 style="margin-right: 10px;">OR</h2>
+			 </span>
+			 <span class="hide-sm hide-md hide-lg">
+			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			      <span class="fake-h2">OR</span>
+			 </span>
+		    </div>
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    <div class="center-text" id="gitlab-repository-container">
+			 <div>
+			      <a title='Add New Business Software Project' href="/doecode/submit?software_type=Business" class="pure-button pure-button-primary btn-lg workflow-publish-btn white form-select-btn">
+				   Business
+			      </a>
+			 </div>
+		    </div>
+	       </div>
+	  </div>
+     </div>
+</div>
+{{> wrapper/footer}}
