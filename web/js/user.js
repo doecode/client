@@ -504,6 +504,8 @@ var clearAdminForm = function () {
     $("#award_number").val('');
     $("#roles-box").val('');
     $("#active-state").prop('checked', false);
+    $("#user-admin-warning-message").html('');
+    $("#useradmin-warning-message-container").hide();
 };
 var loadUserDataForAdminForm = function () {
     //Clear the form
@@ -517,6 +519,8 @@ var loadUserDataForAdminForm = function () {
         var award_number = chosen_option.data('awardnum');
         var role = chosen_option.data('role');
         var is_active = chosen_option.data('isactive');
+        var is_verified = chosen_option.data('isverified');
+        var is_password_expired = chosen_option.data('ispassexpired');
 
         $("#email").val(email);
         $("#first_name").val(first_name);
@@ -528,13 +532,22 @@ var loadUserDataForAdminForm = function () {
         $("#active-state").prop('checked', is_active);
         $("#user-admin-input-form-container").show();
 
+        if (is_verified == false) {
+            $("#user-admin-warning-message").html('User has not been verified');
+            $("#useradmin-warning-message-container").show();
+        } else if (is_password_expired == true) {
+            $("#user-admin-warning-message").html("User's password has expired.");
+            $("#useradmin-warning-message-container").show();
+        } 
+
         var current_user_obj = {
             email: email,
             first_name: first_name,
             last_name: last_name,
             award_number: award_number,
             roles: [role],
-            active: is_active
+            active: is_active,
+            is_verified: is_verified
         };
 
         $("#current-user-values-obj").val(JSON.stringify(current_user_obj));
@@ -567,7 +580,7 @@ var saveUserAdminForm = function () {
     //Validate the passwords, if any passwords were entered. If no passwords were entered, then we won't add them to the post object
     var password = $("#password").val();
     var confirm_password = $("#confirm-password").val();
-    
+
     if (password.length > 0 || confirm_password.length > 0) {
         var password_valid = doPasswordValidation(password_check_ids, false);
         var confirm_password_valid = doPasswordValidation(password_check_ids, true);
@@ -806,9 +819,10 @@ $(document).ready(function () {
                 data.forEach(function (item) {
                     var role = (item.roles.length > 0) ? item.roles[0] : '';//Since we only have a one-role system at the moment, we're just going to grab the first role from the list, because that's all there will be
                     //Because data attributes
+                    //Comes out like <option value="email@email.com" data-firstname="john" data-lastname="doe" data-awardnum="3135" data-role="BAPL" data-isactive="true" data-isverified="false">John DOE (email@email.com)</option>
                     var user_option = '<option value="' + item.email + '" data-firstname="' + item.first_name + '" data-lastname="'
                             + item.last_name + '" data-awardnum="' + item.contract_number + '" data-role="' + role + '" data-isactive="'
-                            + item.active + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
+                            + item.active + '" data-isverified="' + item.verified + '" data-ispassexpired="' + item.password_expired + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
                     $("#user-admin-box").append(user_option);
                     if (item.pending_roles.length > 0) {
                         pending_roles_list.push(
@@ -858,6 +872,7 @@ $(document).ready(function () {
 
         //the contract number is a bit special
         $("#award_number").on('blur', handleUserAdminContractNumberValidation);
+
 
     } else if (document.getElementById('help-page-identifier')) {
         checkIsAuthenticated();
