@@ -24,6 +24,21 @@
         <httpclient.version>4.5.2</httpclient.version>
         <session_timeout>30</session_timeout>
     </properties>
+    <!--
+        You will need to add your own profiles into this pom.xml, or use profiles stored in your local settings.xml
+        <profile>
+            <id>profile-name</id>
+            <properties>
+                <environment_url>URL to your tomcat server</environment_url>
+                <username>username of tomcat server</username>
+                <password>Password of your tomcat server</password>
+                <apiURL>https://www.osti.gov/doecodeapi/services/</apiURL>
+                <apiBackendURL>URL to either a local version of the DOE CODE API, or the https://www. version</apiBackendURL>
+                <siteURL>Your local url for your instance of this application</siteURL>
+                <authorityapiURL>https://www.osti.gov/elink/api/authorities/</authorityapiURL>
+            </properties>
+        </profile>
+    -->
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
