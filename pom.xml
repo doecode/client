@@ -160,6 +160,7 @@
                                 <cssSourceFile>dropzone/dropzone.min.css</cssSourceFile>                                
                                 <cssSourceFile>doecode-fonts.css</cssSourceFile>
                                 <cssSourceFile>doecode.css</cssSourceFile>
+                                <cssSourceFile>doecode-media-queries.css</cssSourceFile>
                             </cssSourceFiles>
                             <cssFinalFile>doecode-css.css</cssFinalFile>
                             <nosuffix>true</nosuffix>
