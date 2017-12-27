@@ -64,6 +64,12 @@ var triggerAdvancedSearch = function () {
     if (sponsoring_orgs.length > 0) {
         $("#search-sponsoring_organization").val(JSON.stringify(sponsoring_orgs));
     }
+    
+    //Software Type
+    var software_types = $("#advanced-search-software_type").val();
+    if(software_types.length>0){
+        $("#search-software_type").val(JSON.stringify(software_types));
+    }
 
     //Sort
     $("#search-sort").val($("#advanced-search-sort").val());

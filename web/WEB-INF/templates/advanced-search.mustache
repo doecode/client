@@ -84,6 +84,16 @@
 			      </select>
 			 </div>
 			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
+			      <label for='advanced-search-software_type' class='advsearch-adv-search-dropdown-label'>Software Type:</label>
+			 </div>
+			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>
+			      <select class='pure-input-1 doecode-chosen-select' title='Software Type' id='advanced-search-software_type' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+				   {{#each adv_search_lists.software_type}}
+				   <option title="{{title}}" value="{{value}}">{{label}}</option>
+				   {{/each}}
+			      </select>
+			 </div>
+			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
 			      <label for='advanced-search-sort' class='advsearch-adv-search-dropdown-label'>Sort:</label>
 			 </div>
 			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>

@@ -582,6 +582,7 @@ public class SearchFunctions {
           String jsonPath = context.getRealPath("./json");
           return_data.add("affiliations_list", DOECODEUtils.getJsonList((jsonPath + "/" + DOECODEUtils.AVAILABILITIES_LIST_JSON), DOECODEUtils.AVAILABILITIES_LIST_JSON_KEY));
           return_data.add("licenses_list", DOECODEUtils.getJsonList((jsonPath + "/" + DOECODEUtils.LICENSE_OPTIONS_LIST_JSON), DOECODEUtils.LICENSE_JLIST_SON_KEY));
+          return_data.add("software_type", DOECODEUtils.getJsonList((jsonPath + "/" + DOECODEUtils.SOFTWARE_TYPES_LIST_JSON), DOECODEUtils.SOFTWARE_TYPES_LIST_JSON_KEY));
           return_data.add("research_org_list", DOECODEUtils.getJsonList((jsonPath + "/" + DOECODEUtils.RESEARCH_ORG_LIST_JSON), DOECODEUtils.RESEARCH_ORG_LIST_JSON_KEY));
           return_data.add("sponsor_org_list", DOECODEUtils.getJsonList((jsonPath + "/" + DOECODEUtils.SPONSOR_ORG_LIST_JSON), DOECODEUtils.SPONSOR_ORG_LIST_JSON_KEY));
           return_data.add("sort_list", DOECODEUtils.getJsonList((jsonPath + "/" + DOECODEUtils.SEARCH_SORT_OPTIONS_LIST_JSON), DOECODEUtils.SEARCH_SORT_LIST_JSON_KEY));
