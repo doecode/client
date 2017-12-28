@@ -258,7 +258,7 @@ var doMultipartSubmission = function doMultipartSubmission(url, successCallback)
   formData.append('file', files[0]);
   formData.append('metadata', JSON.stringify(metadata.serializeData()));
   doAuthenticatedMultipartRequest(url, formData, successCallback, parseErrorResponse);
-}
+};
 
 
 var save = function save() {
@@ -278,7 +278,7 @@ var save = function save() {
       doAuthenticatedAjax('POST', API_BASE + 'metadata/save', parseSaveResponse, metadata.serializeData(), parseErrorResponse);
     else
       doMultipartSubmission(API_BASE + 'metadata/save', parseSaveResponse);
-}
+};
 
 
 
@@ -299,7 +299,7 @@ var submit = function submit() {
       doAuthenticatedAjax('POST', API_BASE + 'metadata/submit', parseSubmitResponse, metadata.serializeData(), parseErrorResponse);
     else
       doMultipartSubmission(API_BASE + 'metadata/submit', parseSubmitResponse);
-}
+};
 
 
 
@@ -320,7 +320,7 @@ var announce = function announce() {
       doAuthenticatedAjax('POST', API_BASE + 'metadata/announce', parseAnnounceResponse, metadata.serializeData(), parseErrorResponse);
     else
       doMultipartSubmission(API_BASE + 'metadata/announce', parseAnnounceResponse);
-}
+};
 
 
 
@@ -338,7 +338,7 @@ var approve = function approve() {
     showCommonModalMessage();
 
     doAuthenticatedAjax('GET', API_BASE + 'metadata/approve/'+code_id, parseApproveResponse, null, parseErrorResponse);
-}
+};
 
 var parseSaveResponse = mobx.action("Parse Receive Response", function parseReceiveResponse(data) {
     metadata.setValue("code_id", data.metadata.code_id);
