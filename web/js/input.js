@@ -125,17 +125,17 @@ var setRequired = function (label, is_required, exclude_parenthetical_text) {
     }
 };
 
-var inputChange = function (event) {
+var inputChange = mobx.action("Input Change", function (event) {
 	var value = $(this).val();
 	if (event.data.field == "release_date" && value)
 		value = moment(value, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
 		
 	event.data.store.setValue(event.data.field, value);
-};
+});
 
-var checkboxChange = function (event) {
+var checkboxChange = mobx.action("Checkbox Change", function (event) {
 	event.data.store.setValue(event.data.field, $(this).is(":checked"));
-};
+});
 
 var updateLabelStyle = function (store, field, label, exclude_parenthetical_text) {
     $("#" + label).text(store.getLabel(field, $("#" + label).text()));
@@ -220,7 +220,7 @@ var parseErrorResponse = function parseErrorResponse(jqXhr, exception) {
     showCommonModalMessage();
 };
 
-var parseSearchResponse = function parseReceiveResponse(data) {
+var parseSearchResponse = mobx.action("Parse Search Response", function parseReceiveResponse(data) {
     metadata.loadRecordFromServer(data.metadata, $("#page").val());
     
     form.allowSave = (data.metadata.workflow_status != "Submitted" && data.metadata.workflow_status != "Approved");
@@ -242,14 +242,14 @@ var parseSearchResponse = function parseReceiveResponse(data) {
     
    	
     hideCommonModalMessage();
-};
+});
 
-var parseAutopopulateResponse = function parseAutopopulateResponse(responseData) {
+var parseAutopopulateResponse = mobx.action("Parse Autopopulate Response", function parseAutopopulateResponse(responseData) {
     if (responseData !== undefined) {
         metadata.updateMetadata(responseData.metadata);
       }
     hideCommonModalMessage();
-}
+});
 
 
 var doMultipartSubmission = function doMultipartSubmission(url, successCallback) {
@@ -340,14 +340,14 @@ var approve = function approve() {
     doAuthenticatedAjax('GET', API_BASE + 'metadata/approve/'+code_id, parseApproveResponse, null, parseErrorResponse);
 }
 
-var parseSaveResponse = function parseReceiveResponse(data) {
+var parseSaveResponse = mobx.action("Parse Receive Response", function parseReceiveResponse(data) {
     metadata.setValue("code_id", data.metadata.code_id);
     hideCommonModalMessage();
 
     if (!($("#code_id").val())) {
         window.location.href = "/doecode/submit?code_id=" + data.metadata.code_id + "?software_type=" + $("#software-type").val();
     }
-};
+});
 
 
 var parseSubmitResponse = function parseSubmitResponse(data) {
