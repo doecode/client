@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-
-
 import org.apache.commons.io.FileUtils;
 
 public class Init extends HttpServlet {
