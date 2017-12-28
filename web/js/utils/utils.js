@@ -319,13 +319,18 @@ var populateSelectWithCustomData = function (select, data) {
     if (!data || !isSelectOption(select, "allowcustom"))
         return;
 
-    if (typeof data == "string") {
+    if (typeof data == "string")
         data = [data];
-    }
+
     data.forEach(function (item) {
-        //If not in Select
-        if ($("#" + select + " option[value=" + item + "]").val() === undefined) {
-            $("#" + select).append('<option value="' + item + '" data-iscustom="true">' + item + '</option>');
+        var length = $("#" + select + " option:contains(" + item + ")").length;
+        if (length == 0) {
+            var newOption = $('<option>', {
+                value: item,
+                text: item,
+                'data-iscustom': "true"
+            });
+            $("#" + select).append(newOption);
         }
     });
 };
