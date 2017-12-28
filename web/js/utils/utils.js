@@ -287,16 +287,16 @@ function joinWithDelimiters(list, delimiter, lastDelimiter) {
  * It will allow you to enter your own options into the chosen select
  */
 var modifyChosenSelectForCustomEntryTabKey = function (event) {
-	// Had to add Tab check apart from Enter, because Enter was causing issues during "keydown"
+    // Had to add Tab check apart from Enter, because Enter was causing issues during "keydown"
     if (event.which === 9) {
-		var e = jQuery.Event("keyup");
-		e.which = 13; // # Enter key code
-		$(this).trigger(e);
+        var e = jQuery.Event("keyup");
+        e.which = 13; // # Enter key code
+        $(this).trigger(e);
     }
 };
 
 var modifyChosenSelectForCustomEntry = function (event) {
-	// Tab does not trigger during "keyup" but "keydown" was causing issues, so now Tab triggers from another function to keep it separated from Enter.
+    // Tab does not trigger during "keyup" but "keydown" was causing issues, so now Tab triggers from another function to keep it separated from Enter.
     if (event.which === 13) {
         //The value the user has entered
         var val_typed_in = $(this).val();
