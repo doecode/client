@@ -1033,14 +1033,14 @@ mobx.autorun("Contact Organization", function () {
  FORM (action)
  *********************/
 mobx.autorun("Submit Button", function () {
-    $('#input-submit-btn').prop('disabled', !metadata.validateSubmitFields());
-	
+    $('#input-submit-btn').prop('disabled', !metadata.validateSchema());
+
 	//mobx.whyRun();
 });
 
 mobx.autorun("Announce Button", function () {
     $('#input-announce-btn').prop('disabled', !metadata.validateSchema());
-	
+
 	//mobx.whyRun();
 });
 

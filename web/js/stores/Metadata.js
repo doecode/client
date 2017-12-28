@@ -170,22 +170,6 @@ var Metadata = function (_BaseData) {
       return data;
     }
   }, {
-	key: "validateSubmitFields",
-	value: function validateSubmitFields() {
-	  var isValid = true;
-
-	  for (var field in this.infoSchema) {
-		var information = this.infoSchema[field];
-
-		if (information.error) {
-		  isValid = false;
-		} else if (information.required === "sub" && !information.completed) {
-		  isValid = false;
-		}
-	  }
-	  return isValid;
-	}
-  }, {
     key: "requireOnlySubmitFields",
     value: mobx.action("Require Only Submit", function requireOnlySubmitFields() {
       for (var field in this.infoSchema) {
