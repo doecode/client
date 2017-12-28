@@ -1,5 +1,15 @@
 var MetadataStore = function MetadataStore() {};
 
+	var repo_fields = ["accessibility","repository_link","landing_page"];
+	var product_fields = ["software_title","description","licenses","proprietary_url"];
+	var developers_fields = ["developers"];
+	var doi_fields = ["doi","doi_infix","release_date"];
+	var supplemental_fields = ["acronym","country_of_origin","keywords","site_accession_number","other_special_requirements","file_name"];
+	var organizations_fields = ["sponsoring_organizations","research_organizations"];	
+	var contribs_fields = ["contributors","contributing_organizations"];
+	var identifiers_fields = ["related_identifiers"];		
+	var contact_fields = ["recipient_name","recipient_email","recipient_phone","recipient_org"];
+
   var _metadata = mobx.observable({
     "code_id": 0,
     "open_source": false,
@@ -61,6 +71,540 @@ var MetadataStore = function MetadataStore() {};
     "recipient_email": { required: "announ", label: "Email", completed: false, ever_completed: false, validations: ["email"], panel: "Contact Information", error: '' },
     "recipient_phone": { required: "announ", label: "Phone", completed: false, ever_completed: false, validations: ["phonenumber"], panel: "Contact Information", error: '' },
     "recipient_org": { required: "announ", label: "Organization", completed: false, ever_completed: false, validations: [], panel: "Contact Information", error: '' }
+  });
+
+  var _panelStatus = mobx.observable({
+    "repository": {
+    	get remainingRequired() {
+    		var remainingRequired = 0;
+
+		      for (var i = 0, len = repo_fields.length; i < len; i++) {
+		      	var field = repo_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required && !obj.completed) {		        		          
+		        	remainingRequired++;
+		        }
+		      }
+		      
+			return remainingRequired; 
+    	},
+    	get completedOptional() {
+    		var completedOptional = 0;
+
+		      for (var i = 0, len = repo_fields.length; i < len; i++) {
+		      	var field = repo_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && !obj.required && obj.completed) {		        		          
+		        	completedOptional++;
+		        }
+		      }
+		      
+			return completedOptional; 
+    	},
+    	get hasRequired() {
+    		var hasRequired = false;
+
+		      for (var i = 0, len = repo_fields.length; i < len; i++) {
+		      	var field = repo_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required) {		        		          
+		        	hasRequired = true;
+		        	break;
+		        }
+		      }
+		      
+			return hasRequired; 
+    	},
+    	get errors() {
+    		var errors = "";
+
+		      for (var i = 0, len = repo_fields.length; i < len; i++) {
+		      	var field = repo_fields[i];
+		        var obj = _metadataInfoSchema[field];
+
+		        if (obj.panel && obj.error) {		        		          
+					errors += (errors ? "; " : "") + obj.error;
+		        }
+		      }
+		      
+			return errors; 
+    	}
+    },
+    "product": {
+    	get remainingRequired() {
+    		var remainingRequired = 0;
+
+		      for (var i = 0, len = product_fields.length; i < len; i++) {
+		      	var field = product_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required && !obj.completed) {		        		          
+		        	remainingRequired++;
+		        }
+		      }
+		      
+			return remainingRequired; 
+    	},
+    	get completedOptional() {
+    		var completedOptional = 0;
+
+		      for (var i = 0, len = product_fields.length; i < len; i++) {
+		      	var field = product_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && !obj.required && obj.completed) {		        		          
+		        	completedOptional++;
+		        }
+		      }
+		      
+			return completedOptional; 
+    	},
+    	get hasRequired() {
+    		var hasRequired = false;
+
+		      for (var i = 0, len = product_fields.length; i < len; i++) {
+		      	var field = product_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required) {		        		          
+		        	hasRequired = true;
+		        	break;
+		        }
+		      }
+		      
+			return hasRequired; 
+    	},
+    	get errors() {
+    		var errors = "";
+
+		      for (var i = 0, len = product_fields.length; i < len; i++) {
+		      	var field = product_fields[i];
+		        var obj = _metadataInfoSchema[field];
+
+		        if (obj.panel && obj.error) {		        		          
+					errors += (errors ? "; " : "") + obj.error;
+		        }
+		      }
+		      
+			return errors; 
+    	}
+    },
+    "developers": {
+    	get remainingRequired() {
+    		var remainingRequired = 0;
+
+		      for (var i = 0, len = developers_fields.length; i < len; i++) {
+		      	var field = developers_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required && !obj.completed) {		        		          
+		        	remainingRequired++;
+		        }
+		      }
+		      
+			return remainingRequired; 
+    	},
+    	get completedOptional() {
+    		var completedOptional = 0;
+
+		      for (var i = 0, len = developers_fields.length; i < len; i++) {
+		      	var field = developers_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && !obj.required && obj.completed) {		        		          
+		        	completedOptional++;
+		        }
+		      }
+		      
+			return completedOptional; 
+    	},
+    	get hasRequired() {
+    		var hasRequired = false;
+
+		      for (var i = 0, len = developers_fields.length; i < len; i++) {
+		      	var field = developers_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required) {		        		          
+		        	hasRequired = true;
+		        	break;
+		        }
+		      }
+		      
+			return hasRequired; 
+    	},
+    	get errors() {
+    		var errors = "";
+
+		      for (var i = 0, len = developers_fields.length; i < len; i++) {
+		      	var field = developers_fields[i];
+		        var obj = _metadataInfoSchema[field];
+
+		        if (obj.panel && obj.error) {		        		          
+					errors += (errors ? "; " : "") + obj.error;
+		        }
+		      }
+		      
+			return errors; 
+    	}
+    },
+    "doi": {
+    	get remainingRequired() {
+    		var remainingRequired = 0;
+
+		      for (var i = 0, len = doi_fields.length; i < len; i++) {
+		      	var field = doi_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required && !obj.completed) {		        		          
+		        	remainingRequired++;
+		        }
+		      }
+		      
+			return remainingRequired; 
+    	},
+    	get completedOptional() {
+    		var completedOptional = 0;
+
+		      for (var i = 0, len = doi_fields.length; i < len; i++) {
+		      	var field = doi_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && !obj.required && obj.completed) {		        		          
+		        	completedOptional++;
+		        }
+		      }
+		      
+			return completedOptional; 
+    	},
+    	get hasRequired() {
+    		var hasRequired = false;
+
+		      for (var i = 0, len = doi_fields.length; i < len; i++) {
+		      	var field = doi_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required) {		        		          
+		        	hasRequired = true;
+		        	break;
+		        }
+		      }
+		      
+			return hasRequired; 
+    	},
+    	get errors() {
+    		var errors = "";
+
+		      for (var i = 0, len = doi_fields.length; i < len; i++) {
+		      	var field = doi_fields[i];
+		        var obj = _metadataInfoSchema[field];
+
+		        if (obj.panel && obj.error) {		        		          
+					errors += (errors ? "; " : "") + obj.error;
+		        }
+		      }
+		      
+			return errors; 
+    	}
+    },
+    "supplemental": {
+    	get remainingRequired() {
+    		var remainingRequired = 0;
+
+		      for (var i = 0, len = supplemental_fields.length; i < len; i++) {
+		      	var field = supplemental_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required && !obj.completed) {		        		          
+		        	remainingRequired++;
+		        }
+		      }
+		      
+			return remainingRequired; 
+    	},
+    	get completedOptional() {
+    		var completedOptional = 0;
+
+		      for (var i = 0, len = supplemental_fields.length; i < len; i++) {
+		      	var field = supplemental_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && !obj.required && obj.completed) {		        		          
+		        	completedOptional++;
+		        }
+		      }
+		      
+			return completedOptional; 
+    	},
+    	get hasRequired() {
+    		var hasRequired = false;
+
+		      for (var i = 0, len = supplemental_fields.length; i < len; i++) {
+		      	var field = supplemental_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required) {		        		          
+		        	hasRequired = true;
+		        	break;
+		        }
+		      }
+		      
+			return hasRequired; 
+    	},
+    	get errors() {
+    		var errors = "";
+
+		      for (var i = 0, len = supplemental_fields.length; i < len; i++) {
+		      	var field = supplemental_fields[i];
+		        var obj = _metadataInfoSchema[field];
+
+		        if (obj.panel && obj.error) {		        		          
+					errors += (errors ? "; " : "") + obj.error;
+		        }
+		      }
+		      
+			return errors; 
+    	}
+    },
+    "organizations": {
+    	get remainingRequired() {
+    		var remainingRequired = 0;
+
+		      for (var i = 0, len = organizations_fields.length; i < len; i++) {
+		      	var field = organizations_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required && !obj.completed) {		        		          
+		        	remainingRequired++;
+		        }
+		      }
+		      
+			return remainingRequired; 
+    	},
+    	get completedOptional() {
+    		var completedOptional = 0;
+
+		      for (var i = 0, len = organizations_fields.length; i < len; i++) {
+		      	var field = organizations_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && !obj.required && obj.completed) {		        		          
+		        	completedOptional++;
+		        }
+		      }
+		      
+			return completedOptional; 
+    	},
+    	get hasRequired() {
+    		var hasRequired = false;
+
+		      for (var i = 0, len = organizations_fields.length; i < len; i++) {
+		      	var field = organizations_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required) {		        		          
+		        	hasRequired = true;
+		        	break;
+		        }
+		      }
+		      
+			return hasRequired; 
+    	},
+    	get errors() {
+    		var errors = "";
+
+		      for (var i = 0, len = organizations_fields.length; i < len; i++) {
+		      	var field = organizations_fields[i];
+		        var obj = _metadataInfoSchema[field];
+
+		        if (obj.panel && obj.error) {		        		          
+					errors += (errors ? "; " : "") + obj.error;
+		        }
+		      }
+		      
+			return errors; 
+    	}
+    },
+    "contribs": {
+    	get remainingRequired() {
+    		var remainingRequired = 0;
+
+		      for (var i = 0, len = contribs_fields.length; i < len; i++) {
+		      	var field = contribs_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required && !obj.completed) {		        		          
+		        	remainingRequired++;
+		        }
+		      }
+		      
+			return remainingRequired; 
+    	},
+    	get completedOptional() {
+    		var completedOptional = 0;
+
+		      for (var i = 0, len = contribs_fields.length; i < len; i++) {
+		      	var field = contribs_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && !obj.required && obj.completed) {		        		          
+		        	completedOptional++;
+		        }
+		      }
+		      
+			return completedOptional; 
+    	},
+    	get hasRequired() {
+    		var hasRequired = false;
+
+		      for (var i = 0, len = contribs_fields.length; i < len; i++) {
+		      	var field = contribs_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required) {		        		          
+		        	hasRequired = true;
+		        	break;
+		        }
+		      }
+		      
+			return hasRequired; 
+    	},
+    	get errors() {
+    		var errors = "";
+
+		      for (var i = 0, len = contribs_fields.length; i < len; i++) {
+		      	var field = contribs_fields[i];
+		        var obj = _metadataInfoSchema[field];
+
+		        if (obj.panel && obj.error) {		        		          
+					errors += (errors ? "; " : "") + obj.error;
+		        }
+		      }
+		      
+			return errors; 
+    	}
+    },
+    "identifiers": {
+    	get remainingRequired() {
+    		var remainingRequired = 0;
+
+		      for (var i = 0, len = identifiers_fields.length; i < len; i++) {
+		      	var field = identifiers_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required && !obj.completed) {		        		          
+		        	remainingRequired++;
+		        }
+		      }
+		      
+			return remainingRequired; 
+    	},
+    	get completedOptional() {
+    		var completedOptional = 0;
+
+		      for (var i = 0, len = identifiers_fields.length; i < len; i++) {
+		      	var field = identifiers_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && !obj.required && obj.completed) {		        		          
+		        	completedOptional++;
+		        }
+		      }
+		      
+			return completedOptional; 
+    	},
+    	get hasRequired() {
+    		var hasRequired = false;
+
+		      for (var i = 0, len = identifiers_fields.length; i < len; i++) {
+		      	var field = identifiers_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required) {		        		          
+		        	hasRequired = true;
+		        	break;
+		        }
+		      }
+		      
+			return hasRequired; 
+    	},
+    	get errors() {
+    		var errors = "";
+
+		      for (var i = 0, len = identifiers_fields.length; i < len; i++) {
+		      	var field = identifiers_fields[i];
+		        var obj = _metadataInfoSchema[field];
+
+		        if (obj.panel && obj.error) {		        		          
+					errors += (errors ? "; " : "") + obj.error;
+		        }
+		      }
+		      
+			return errors; 
+    	}
+    },
+	"contact": {
+    	get remainingRequired() {
+    		var remainingRequired = 0;
+
+		      for (var i = 0, len = contact_fields.length; i < len; i++) {
+		      	var field = contact_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required && !obj.completed) {		        		          
+		        	remainingRequired++;
+		        }
+		      }
+		      
+			return remainingRequired; 
+    	},
+    	get completedOptional() {
+    		var completedOptional = 0;
+
+		      for (var i = 0, len = contact_fields.length; i < len; i++) {
+		      	var field = contact_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && !obj.required && obj.completed) {		        		          
+		        	completedOptional++;
+		        }
+		      }
+		      
+			return completedOptional; 
+    	},
+    	get hasRequired() {
+    		var hasRequired = false;
+
+		      for (var i = 0, len = contact_fields.length; i < len; i++) {
+		      	var field = contact_fields[i];
+		        var obj = _metadataInfoSchema[field];
+		
+		        if (obj.panel && obj.required) {		        		          
+		        	hasRequired = true;
+		        	break;
+		        }
+		      }
+		      
+			return hasRequired; 
+    	},
+    	get errors() {
+    		var errors = "";
+
+		      for (var i = 0, len = contact_fields.length; i < len; i++) {
+		      	var field = contact_fields[i];
+		        var obj = _metadataInfoSchema[field];
+
+		        if (obj.panel && obj.error) {		        		          
+					errors += (errors ? "; " : "") + obj.error;
+		        }
+		      }
+		      
+			return errors; 
+    	}
+    }
   });
 
   var _developer = mobx.observable({
@@ -186,4 +730,5 @@ var MetadataStore = function MetadataStore() {};
   Object.defineProperty(MetadataStore, "relatedIdentifierInfoSchema", {get: function() {return _relatedIdentifierInfoSchema;}});
   Object.defineProperty(MetadataStore, "user", {get: function() {return _user;}});
   Object.defineProperty(MetadataStore, "userSchema", {get: function() {return _userSchema;}});
+  Object.defineProperty(MetadataStore, "panelStatus", {get: function() {return _panelStatus;}});
 

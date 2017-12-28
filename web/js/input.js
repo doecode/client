@@ -241,7 +241,6 @@ var parseSearchResponse = function parseReceiveResponse(data) {
     	
     
    	
-
     hideCommonModalMessage();
 };
 
@@ -402,9 +401,7 @@ var setModalStatus = function setModalStatus(modal, store) {
 	$("#" + modal + "-save-btn").prop('disabled', disabled);
 }
 
-var setPanelStatus = function setPanelStatus(panel, anchor) {
-	const panelStatus = metadata.getPanelStatus(panel, $("#page_req_id").val());
-
+var setPanelStatus = function setPanelStatus(panel, anchor, panelStatus) {
 	$("#" + anchor).removeClass("req_fr req_arfc required-field-span");
 	$("#" + anchor).next("span").hide();
 	
@@ -443,7 +440,7 @@ mobx.autorun("Allow Save", function () {
  REPO PANEL (action)
  *********************/
 mobx.autorun("Repository Info Panel", function () {
-	setPanelStatus("Repository Information", "repository-panel-anchor");
+	setPanelStatus("Repository Information", "repository-panel-anchor", metadata.panelStatus.repository);
 	
 	//mobx.whyRun();
 });
@@ -502,7 +499,7 @@ mobx.autorun("Landing Page", function () {
  PRODUCT PANEL (action)
  *********************/
 mobx.autorun("Product Description Panel", function () {
-	setPanelStatus("Product Description", "product-description-panel-anchor");
+	setPanelStatus("Product Description", "product-description-panel-anchor", metadata.panelStatus.product);
 	
 	//mobx.whyRun();
 });
@@ -547,7 +544,7 @@ mobx.autorun("Proprietary URL", function () {
  DEVELOPERS PANEL (action)
  *********************/
 mobx.autorun("Developers Panel", function () {
-	setPanelStatus("Developers", "developers-panel-anchor");
+	setPanelStatus("Developers", "developers-panel-anchor", metadata.panelStatus.developers);
 	
 	//mobx.whyRun();
 });
@@ -624,7 +621,7 @@ mobx.autorun("Developer Modal", function () {
  DOI PANEL (action)
  *********************/
 mobx.autorun("DOI/Release Date Panel", function () {
-	setPanelStatus("DOI and Release Date", "doi-release-date-panel-anchor");
+	setPanelStatus("DOI and Release Date", "doi-release-date-panel-anchor", metadata.panelStatus.doi);
 	
 	//mobx.whyRun();
 });
@@ -685,7 +682,7 @@ mobx.autorun("Release Date", function () {
  SUPPLEMENTAL PANEL (action)
  *********************/
 mobx.autorun("Supplemental Product Information Panel", function () {
-	setPanelStatus("Supplemental Product Information", "supplemental-product-info-panel-anchor");
+	setPanelStatus("Supplemental Product Information", "supplemental-product-info-panel-anchor", metadata.panelStatus.supplemental);
 	
 	//mobx.whyRun();
 });
@@ -731,7 +728,7 @@ mobx.autorun("File Upload", function () {
  ORGANIZATIONS PANEL (action)
  *********************/
 mobx.autorun("Organizations Panel", function () {
-	setPanelStatus("Organizations", "organizations-panel-anchor");
+	setPanelStatus("Organizations", "organizations-panel-anchor", metadata.panelStatus.organizations);
 	
 	//mobx.whyRun();
 });
@@ -835,7 +832,7 @@ mobx.autorun("ResearchOrg Modal", function () {
  CONTRIBUTORS PANEL (action)
  *********************/
 mobx.autorun("Contributors and Contributing Organizations Panel", function () {
-	setPanelStatus("Contributors and Contributing Organizations", "contributors-contributing-orgs-panel-anchor");
+	setPanelStatus("Contributors and Contributing Organizations", "contributors-contributing-orgs-panel-anchor", metadata.panelStatus.contribs);
 	
 	//mobx.whyRun();
 });
@@ -951,7 +948,7 @@ mobx.autorun("ContributingOrg Modal", function () {
  IDENTIFIERS PANEL (action)
  *********************/
 mobx.autorun("Identifiers Panel", function () {
-	setPanelStatus("Identifiers", "identifiers-panel-anchor");
+	setPanelStatus("Identifiers", "identifiers-panel-anchor", metadata.panelStatus.identifiers);
 	
 	//mobx.whyRun();
 });
@@ -1000,9 +997,9 @@ mobx.autorun("Related Identifier Modal", function () {
 
 /*********************
  CONTACT PANEL (action)
- *********************/
+ *********************/ 
 mobx.autorun("Contact Panel", function () {
-	setPanelStatus("Contact Information", "contact-info-panel-anchor");
+	setPanelStatus("Contact Information", "contact-info-panel-anchor", metadata.panelStatus.contact);
 	
 	//mobx.whyRun();
 });

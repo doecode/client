@@ -12,6 +12,7 @@ var BaseData = function () {
 
     this.fieldMap = props.fieldMap;
     this.infoSchema = props.infoSchema;
+    this.panelStatus = props.panelStatus;
     if (!props.infoSchema) this.infoSchema = {};
     this.fieldMapSnapshot = props.fieldMapSnapshot;
     this.infoSchemaSnapshot = props.infoSchemaSnapshot;
