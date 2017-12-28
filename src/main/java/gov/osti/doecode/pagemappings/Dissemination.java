@@ -3,12 +3,12 @@
  */
 package gov.osti.doecode.pagemappings;
 
-import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonArray;
-import com.eclipsesource.json.JsonObject;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.entity.SearchFunctions;
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.utils.DOECODEUtils;
+import gov.osti.doecode.utils.JsonObjectUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -32,8 +32,8 @@ public class Dissemination extends HttpServlet {
           String page_title = "";
           String template = "";
           String current_page = "";
-          JsonObject output_data = new JsonObject();
-          JsonArray jsFilesList = new JsonArray();
+          ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
           boolean isHomepage = false;
 
           /*Determine what page we're on, and load the appropriate title, template, etc*/
@@ -83,7 +83,7 @@ public class Dissemination extends HttpServlet {
           } else if (remaining.equals("/search")) {
                page_title = "DOE CODE: Advanced Search";
                template = TemplateUtils.TEMPLATE_ADVANCED_SEARCH;
-               output_data.add("adv_search_lists", SearchFunctions.getAdvancedSearchPageLists(getServletContext()));
+               output_data.put("adv_search_lists", SearchFunctions.getAdvancedSearchPageLists(getServletContext()));
 
           } else if (remaining.trim().startsWith("/biblio/")) {
                page_title = "DOE CODE: Project Metadata";
@@ -91,20 +91,20 @@ public class Dissemination extends HttpServlet {
 
                if (DOECODEUtils.isValidLong(remaining.replace("/biblio/", ""))) {
                     long code_id = Long.parseLong(remaining.replace("/biblio/", ""));
-                    JsonObject biblio_data = SearchFunctions.getBiblioData(code_id, getServletContext());
+                    ObjectNode biblio_data = SearchFunctions.getBiblioData(code_id, getServletContext());
 
                     //If, and only if, this is a valid code id
-                    if (biblio_data.getBoolean("is_valid", false)) {
+                    if (JsonObjectUtils.getBoolean(biblio_data, "is_valid", false)) {
                          jsFilesList.add("libraries/clipboard.min");
                          output_data = biblio_data;
 
                     } else {
-                         output_data.add("is_invalid_code_id", true);
+                         output_data.put("is_invalid_code_id", true);
                          response.setStatus(HttpStatus.SC_NOT_FOUND);
 
                     }
                } else {
-                    output_data.add("is_invalid_code_id", true);
+                    output_data.put("is_invalid_code_id", true);
                     response.setStatus(HttpStatus.SC_NOT_FOUND);
                }
 
@@ -130,7 +130,7 @@ public class Dissemination extends HttpServlet {
 
           //Check if they're logged in, and only do something if they're not logged in
           if (!UserFunctions.isUserLoggedIn(request)) {
-               output_data.add("user_data", Json.object());
+               output_data.put("user_data", new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE));
           } else {
                //Increment time
                response.addCookie(UserFunctions.updateUserSessionTimeout(request));

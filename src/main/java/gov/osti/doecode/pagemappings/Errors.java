@@ -1,10 +1,10 @@
 package gov.osti.doecode.pagemappings;
 
-import com.eclipsesource.json.JsonArray;
-import com.eclipsesource.json.JsonObject;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import gov.osti.doecode.utils.JsonObjectUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 
 public class Errors extends HttpServlet {
+
      private Logger log = Logger.getLogger(Errors.class.getName());
 
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -22,7 +23,7 @@ public class Errors extends HttpServlet {
 
           String page_title = "";
           String template = "";
-          JsonObject output_data = new JsonObject();
+          ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
 
           switch (remaining) {
                case "page-not-found":
@@ -35,13 +36,13 @@ public class Errors extends HttpServlet {
                     page_title = "Error Page";
                     template = TemplateUtils.TEMPLATE_ERROR_PAGE;
                     String error_msg = request.getParameter("message");
-                    output_data.add("message", StringUtils.isNotBlank(error_msg) ? error_msg : "An error has occurred");
+                    output_data.put("message", StringUtils.isNotBlank(error_msg) ? error_msg : "An error has occurred");
                     response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
                     break;
           }
-          
-          output_data = TemplateUtils.GET_COMMON_DATA(false, output_data, "", new JsonArray(), request);
+
+          output_data = TemplateUtils.GET_COMMON_DATA(false, output_data, "", new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE), request);
           TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
      }
 

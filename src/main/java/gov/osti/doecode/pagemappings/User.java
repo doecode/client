@@ -1,10 +1,9 @@
 package gov.osti.doecode.pagemappings;
 
-import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonArray;
-import com.eclipsesource.json.JsonObject;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.entity.UserFunctions;
-import gov.osti.doecode.utils.DOECODEUtils;
+import gov.osti.doecode.utils.JsonObjectUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -28,15 +27,15 @@ public class User extends HttpServlet {
           boolean is_logged_in = UserFunctions.isUserLoggedIn(request);
 
           if (StringUtils.equals(request.getContentType(), "application/json")) {
-               JsonObject return_data = new JsonObject();
-               JsonObject request_data = Json.parse(request.getReader()).asObject();
+               ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+               ObjectNode request_data = JsonObjectUtils.parseObjectNode(request.getReader());
                boolean add_signin_html = false;
                switch (remaining) {
                     case "set-login-status-name":
                          return_data = UserFunctions.setUserDataForCookie(request_data);
                          Cookie last_location = UserFunctions.getLastLocationCookie(request);
                          if (null != last_location) {
-                              return_data.add("requested_url", last_location.getValue());
+                              return_data.put("requested_url", last_location.getValue());
                          }
                          add_signin_html = true;
                          break;
@@ -48,9 +47,9 @@ public class User extends HttpServlet {
                response.addCookie(UserFunctions.makeUserCookie(return_data));
                response.setContentType("application/json");
                if (add_signin_html) {
-                    return_data.add("signin_html", TemplateUtils.getNewSigninStatusHtml(getServletContext(), request_data));
+                    return_data.put("signin_html", TemplateUtils.getNewSigninStatusHtml(getServletContext(), request_data));
                }
-               return_data.writeTo(response.getWriter());
+               JsonObjectUtils.writeTo(return_data, response);
           } else {
                if (is_logged_in) {
                     //Increment time
@@ -59,8 +58,8 @@ public class User extends HttpServlet {
 
                String page_title = "";
                String template = "";
-               JsonObject output_data = new JsonObject();
-               JsonArray jsFilesList = new JsonArray();
+               ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+               ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
 
                switch (remaining) {
                     case "account":
@@ -68,14 +67,14 @@ public class User extends HttpServlet {
                          template = TemplateUtils.TEMPLATE_USER_ACCOUNT;
                          //If they have a passcode, we need to let them on in, and then take care of things from there
                          if (StringUtils.isNotBlank(request.getParameter("passcode"))) {
-                              output_data.add("passcode", request.getParameter("passcode"));
-                              output_data.add("page_warning_message", "Please change your password");
+                              output_data.put("passcode", request.getParameter("passcode"));
+                              output_data.put("page_warning_message", "Please change your password");
                          } else {
                               if (!is_logged_in) {
                                    UserFunctions.redirectUserToLogin(request, response, site_url);
                               }
-                              JsonObject current_user_data = UserFunctions.getAccountPageData(request);
-                              output_data.add("current_user_data", current_user_data);
+                              ObjectNode current_user_data = UserFunctions.getAccountPageData(request);
+                              output_data.put("current_user_data", current_user_data);
                          }
                          break;
                     case "user-admin":
@@ -89,8 +88,8 @@ public class User extends HttpServlet {
                          page_title = "DOE CODE: Login";
                          template = TemplateUtils.TEMPLATE_USER_LOGIN;
                          if (StringUtils.isNotBlank(request.getParameter("redirect")) && request.getParameter("redirect").equals("true")) {
-                              output_data.add("user_data", Json.object());
-                              output_data.add("is_redirected", true);
+                              output_data.put("user_data", new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE));
+                              output_data.put("is_redirected", true);
                               response.addCookie(new Cookie("user_data", null));
                          }
                          break;
@@ -105,7 +104,7 @@ public class User extends HttpServlet {
                     case "logout":
                          page_title = "DOE CODE: Logout";
                          template = TemplateUtils.TEMPLATE_USER_LOGOUT;
-                         output_data.add("user_data", Json.object());
+                         output_data.put("user_data", new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE));
                          response.addCookie(new Cookie("user_data", null));
                          break;
                     case "confirmuser":
