@@ -8,11 +8,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DOECODEUtils {
      
-     private final static Logger log = Logger.getLogger(DOECODEUtils.class.getName());
+     private final static Logger log = LoggerFactory.getLogger(DOECODEUtils.class.getName());
      
      public static final String AVAILABILITIES_LIST_JSON_KEY = "availabilities";
      public static final String AVAILABILITIES_LIST_JSON = "availabilityList.json";

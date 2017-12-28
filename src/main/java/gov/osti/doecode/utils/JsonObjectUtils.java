@@ -10,7 +10,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class JsonObjectUtils {
      
-     private static Logger log = Logger.getLogger(JsonObjectUtils.class.getName());
+     private static Logger log = LoggerFactory.getLogger(JsonObjectUtils.class.getName());
      
      public static final JsonNodeFactory FACTORY_INSTANCE = JsonNodeFactory.instance;
      public static final ObjectMapper MAPPER = new ObjectMapper();
@@ -48,6 +49,7 @@ public class JsonObjectUtils {
      public static ArrayList<String> getKeys(ObjectNode on) {
           ArrayList<String> keys = new ArrayList();
           on.fieldNames().forEachRemaining((s) -> {
+               System.out.println(s);
                keys.add(s);
           });
           return keys;
@@ -68,7 +70,7 @@ public class JsonObjectUtils {
           try {
                on = (ObjectNode) MAPPER.readTree(s);
           } catch (Exception e) {
-               log.severe("Exception in parsing object" + e.getMessage());
+               log.error("Exception in parsing object" + e.getMessage());
           }
           return on;
      }
@@ -78,7 +80,7 @@ public class JsonObjectUtils {
           try {
                on = (ObjectNode) MAPPER.readTree(r);
           } catch (Exception e) {
-               log.severe("Exception in parsing object " + e.getMessage());
+               log.error("Exception in parsing object " + e.getMessage());
           }
           return on;
      }
@@ -88,7 +90,7 @@ public class JsonObjectUtils {
           try {
                an = (ArrayNode) MAPPER.readTree(s);
           } catch (Exception e) {
-               log.severe("Exception in parsing array: " + e.getMessage());
+               log.error("Exception in parsing array: " + e.getMessage());
           }
           return an;
      }
@@ -98,7 +100,7 @@ public class JsonObjectUtils {
           try {
                an = (ArrayNode) MAPPER.readTree(r);
           } catch (Exception e) {
-               log.severe("Exception in parsing array: " + e.getMessage());
+               log.error("Exception in parsing array: " + e.getMessage());
           }
           return an;
      }

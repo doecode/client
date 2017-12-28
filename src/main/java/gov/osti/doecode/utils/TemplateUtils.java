@@ -1,7 +1,5 @@
 package gov.osti.doecode.utils;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.jknack.handlebars.Context;
@@ -16,14 +14,15 @@ import gov.osti.doecode.servlet.Init;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class TemplateUtils {
 
-     private static Logger log = Logger.getLogger(TemplateUtils.class.getName());
+     private static Logger log = LoggerFactory.getLogger(TemplateUtils.class.getName());
 
      //Dissemination
      public static final String TEMPLATE_HOMEPAGE = "index";
@@ -187,7 +186,7 @@ public class TemplateUtils {
                template_data = t.apply(data_for_template);
 
           } catch (Exception e) {
-               log.severe("Exception: " + e);
+               log.error("Exception: " + e);
           }
 
           return template_data;

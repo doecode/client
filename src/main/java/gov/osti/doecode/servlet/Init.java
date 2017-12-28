@@ -6,18 +6,19 @@ import com.github.jknack.handlebars.io.ServletContextTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
 import java.io.File;
 import java.io.IOException;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-import java.util.logging.Logger;
+
 import org.apache.commons.io.FileUtils;
 
 public class Init extends HttpServlet {
 
      private static final long serialVersionUID = 1L;
-     private static Logger log = Logger.getLogger(Init.class.getName());
+     private static Logger log = LoggerFactory.getLogger(Init.class.getName());
      public static Handlebars handlebars;
      public static Handlebars handlebarsUser;
      public static String css_string;
@@ -27,7 +28,6 @@ public class Init extends HttpServlet {
      }
 
      public void init(ServletConfig config) throws ServletException {
-
           super.init(config);
 
           /**
@@ -57,7 +57,7 @@ public class Init extends HttpServlet {
           try {
                return_data = FileUtils.readFileToString(f);
           } catch (IOException ex) {
-               log.severe("Can't read file for css: " + ex.getMessage());
+               log.error("Can't read file for css: " + ex.getMessage());
           }
           return return_data;
      }

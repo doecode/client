@@ -11,17 +11,18 @@ import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Dissemination extends HttpServlet {
 
-     protected Logger log = Logger.getLogger(Dissemination.class.getName());
+     protected Logger log = LoggerFactory.getLogger(Dissemination.class.getName());
 
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {

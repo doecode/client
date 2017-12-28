@@ -5,12 +5,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import java.io.IOException;
-import java.util.logging.Logger;
 import javax.servlet.ServletContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class InputFunctions {
 
-     private static Logger log = Logger.getLogger(InputFunctions.class.getName());
+     private static Logger log = LoggerFactory.getLogger(InputFunctions.class.getName());
 
      public static ObjectNode getInputFormLists(ServletContext context) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
@@ -23,7 +24,7 @@ public class InputFunctions {
                return_data.put("research_orgs_list", getInputJsonList(context, DOECODEUtils.RESEARCH_ORG_LIST_JSON, DOECODEUtils.RESEARCH_ORG_LIST_JSON_KEY));
                return_data.put("contributor_type_list", getInputJsonList(context, DOECODEUtils.CONTRIBUTOR_TYPES_LIST_JSON, DOECODEUtils.CONTRIBUTOR_TYPES_LIST_JSON_KEY));
           } catch (Exception e) {
-               log.severe("Error in loading input json lists: " + e.getMessage());
+               log.error("Error in loading input json lists: " + e.getMessage());
           }
           return return_data;
      }

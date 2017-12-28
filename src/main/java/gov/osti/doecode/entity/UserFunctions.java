@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +24,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -34,7 +35,7 @@ public class UserFunctions {
 
      public static final DateTimeFormatter SESSION_TIMEOUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm:ss");
 
-     private static Logger log = Logger.getLogger(UserFunctions.class.getName());
+     private static Logger log = LoggerFactory.getLogger(UserFunctions.class.getName());
 
      /*
      Looks for a user data cookie. If one is found, it takes it, parses the value as a json object, and returns it
@@ -51,7 +52,7 @@ public class UserFunctions {
                                    break;
                               }
                          } catch (Exception ex) {
-                              log.severe("Couldn't decode: " + ex.getMessage());
+                              log.error("Couldn't decode: " + ex.getMessage());
                          }
                     }
                }
@@ -175,12 +176,12 @@ public class UserFunctions {
                }
 
           } catch (Exception e) {
-               log.severe("Exception in getting user confirmation code: " + e.getMessage());
+               log.error("Exception in getting user confirmation code: " + e.getMessage());
           } finally {
                try {
                     hc.close();
                } catch (Exception e) {
-                    log.severe("Couldn't close connection properly: " + e.getMessage());
+                    log.error("Couldn't close connection properly: " + e.getMessage());
                }
           }
 

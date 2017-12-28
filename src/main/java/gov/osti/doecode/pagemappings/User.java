@@ -6,7 +6,8 @@ import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import org.apache.commons.lang.StringUtils;
 
 public class User extends HttpServlet {
 
-     private Logger log = Logger.getLogger(User.class.getName());
+     private Logger log = LoggerFactory.getLogger(User.class.getName());
 
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {

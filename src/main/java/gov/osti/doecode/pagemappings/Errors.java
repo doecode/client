@@ -5,7 +5,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ import org.apache.commons.lang.StringUtils;
 
 public class Errors extends HttpServlet {
 
-     private Logger log = Logger.getLogger(Errors.class.getName());
+     private Logger log = LoggerFactory.getLogger(Errors.class.getName());
 
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {

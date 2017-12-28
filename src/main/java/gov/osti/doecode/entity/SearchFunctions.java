@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
@@ -25,10 +24,12 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SearchFunctions {
 
-     private final static Logger log = Logger.getLogger(SearchFunctions.class.getName());
+     private final static Logger log = LoggerFactory.getLogger(SearchFunctions.class.getName());
      public static final DateTimeFormatter RELEASE_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
      public static final DateTimeFormatter APA_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy, MMMM dd");
      public static final DateTimeFormatter CHICAGO_DATE_FORMAT = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
@@ -99,7 +100,7 @@ public class SearchFunctions {
                     invalid_search_data = true;
                }
           } catch (Exception ex) {
-               log.severe("Exception in search: " + ex.getMessage());
+               log.error("Exception in search: " + ex.getMessage());
                had_error = true;
                invalid_search_data = true;
                error_message = "An error has occurred that is preventing your search from working.";
@@ -107,7 +108,7 @@ public class SearchFunctions {
                try {
                     hc.close();
                } catch (IOException ex) {
-                    log.severe("Bad issue in closing search connection: " + ex.getMessage());
+                    log.error("Bad issue in closing search connection: " + ex.getMessage());
                }
           }
 
@@ -231,7 +232,7 @@ public class SearchFunctions {
                try {
                     accessiblity_display_vals = DOECODEUtils.getJsonList((context.getRealPath("./json") + "/" + DOECODEUtils.AVAILABILITIES_LIST_JSON), DOECODEUtils.AVAILABILITIES_LIST_JSON_KEY);
                } catch (Exception e) {
-                    log.severe("Couldn't get accessiblity json file: " + e.getMessage());
+                    log.error("Couldn't get accessiblity json file: " + e.getMessage());
                }
 
                search_description_list.add(makeSearchDescriptionObjectArray("Accessibility", JsonObjectUtils.parseArrayNode(accessibility_array), "accessibility", accessiblity_display_vals));
@@ -245,7 +246,7 @@ public class SearchFunctions {
                try {
                     software_type_display_vals = DOECODEUtils.getJsonList((context.getRealPath("./json") + "/" + DOECODEUtils.SOFTWARE_TYPES_LIST_JSON), DOECODEUtils.SOFTWARE_TYPES_LIST_JSON_KEY);
                } catch (Exception e) {
-                    log.severe("Couldn't get accessiblity json file: " + e.getMessage());
+                    log.error("Couldn't get accessiblity json file: " + e.getMessage());
                }
 
                search_description_list.add(makeSearchDescriptionObjectArray("Software Type", JsonObjectUtils.parseArrayNode(software_type_array), "software_type", software_type_display_vals));
@@ -331,7 +332,7 @@ public class SearchFunctions {
                String jsonPath = context.getRealPath("./json");
                return_data = DOECODEUtils.getJsonList(jsonPath + "/" + list, list_key);
           } catch (IOException ex) {
-               log.severe("Exception in gettin search sidebar Options: " + ex.getMessage());
+               log.error("Exception in gettin search sidebar Options: " + ex.getMessage());
           }
 
           /*Go through the array, and if we have that selected, we'll set a flag that says it's checked*/
@@ -367,7 +368,7 @@ public class SearchFunctions {
                     }
                }
           } catch (IOException ex) {
-               log.severe("Exception in gettin search sort Options: " + ex.getMessage());
+               log.error("Exception in gettin search sort Options: " + ex.getMessage());
           }
 
           options_obj.put("sort_dropdown_options", options);
@@ -773,7 +774,7 @@ public class SearchFunctions {
           if (list.size() > 1 && StringUtils.isNotBlank(lastDelimiter)) {
                last_item = list.get(list.size() - 1).asText();
                list.remove(list.size() - 1);
-               
+
           }
 
           for (int i = 0; i < list.size(); i++) {
@@ -1045,12 +1046,12 @@ public class SearchFunctions {
                raw_json = EntityUtils.toString(response.getEntity());
           } catch (Exception e) {
                is_valid = false;
-               log.severe("Error in getting json: " + e.getMessage());
+               log.error("Error in getting json: " + e.getMessage());
           } finally {
                try {
                     hc.close();
                } catch (IOException ex) {
-                    log.severe("Bad issue in closing search connection: " + ex.getMessage());
+                    log.error("Bad issue in closing search connection: " + ex.getMessage());
                }
           }
 
@@ -1060,7 +1061,7 @@ public class SearchFunctions {
                biblio_data = (ObjectNode) JsonObjectUtils.parseObjectNode(raw_json).get("metadata");
           } catch (Exception e) {
                is_valid = false;
-               log.severe("Invalid JSON: " + e.getMessage());
+               log.error("Invalid JSON: " + e.getMessage());
           }
 
           //Massage any data that needs it
