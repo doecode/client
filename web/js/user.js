@@ -48,7 +48,7 @@ var login = function () {
                         if (return_data.requested_url) {
                             window.location.href = return_data.requested_url;
                         } else if (window.sessionStorage.lastLocation && window.sessionStorage.lastLocation.length > 0) {
-                            window.location.href = window.sessionStorage.lastLocation
+                            window.location.href = window.sessionStorage.lastLocation;
                         } else {
                             window.location.href = '/doecode/projects';
                         }

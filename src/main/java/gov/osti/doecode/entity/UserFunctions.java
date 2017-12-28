@@ -75,6 +75,7 @@ public class UserFunctions {
      }
 
      public static Cookie makeUserCookie(ObjectNode user_data) {
+          log.info("User data: "+user_data.toString());
           String user_data_encoded = Base64.encodeBase64String(user_data.toString().getBytes());
           Cookie c = new Cookie("user_data", user_data_encoded);
           return c;
@@ -93,7 +94,7 @@ public class UserFunctions {
           return_data.put("has_osti_role", hasRole(roles, "OSTI"));
           return_data.put("is_logged_in", true);
           return_data.put("session_timeout", LocalDateTime.now().plus(Init.SESSION_TIMEOUT_MINUTES, ChronoUnit.MINUTES).format(SESSION_TIMEOUT_FORMAT));
-
+          log.info("Return data: "+return_data.toString());
           return return_data;
      }
 

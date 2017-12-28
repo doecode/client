@@ -92,7 +92,7 @@ public class TemplateUtils {
 
           output_data.put("active_page", current_page);
           output_data.put("isHomepage", isHomepage);
-          if (JsonObjectUtils.containsKey(output_data, "user_data")) {
+          if (!JsonObjectUtils.containsKey(output_data, "user_data")) {
                output_data.put("user_data", UserFunctions.getUserDataFromCookie(request));
           }
           output_data.put("jsFiles", jsFilesList);

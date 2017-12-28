@@ -110,6 +110,5 @@ public class JsonObjectUtils {
           p.print(obj.toString());
           p.flush();
           p.close();
-          return;
      }
 }
