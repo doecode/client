@@ -15,9 +15,9 @@ var Metadata = function (_BaseData) {
     _classCallCheck(this, Metadata);
 
     var props = {
-      page: "",
       fieldMap: MetadataStore.metadata,
-      infoSchema: MetadataStore.metadataInfoSchema
+      infoSchema: MetadataStore.metadataInfoSchema,
+      panelStatus: MetadataStore.panelStatus
     };
     
     return _possibleConstructorReturn(this, (Metadata.__proto__ || Object.getPrototypeOf(Metadata)).call(this, props));
@@ -59,50 +59,6 @@ var Metadata = function (_BaseData) {
 
       if (this.fieldMap[field].length == 0) this.infoSchema[field].completed = false;
     })
-  }, {
-    key: "getPanelStatus",
-    value: function getPanelStatus(panelName) {
-      var panelStatus = {
-        "remainingRequired": 0,
-        "completedRequired": 0,
-        "remainingString": "",
-        "remainingOptional": 0,
-        "completedOptional": 0,
-        "errors": "",
-        "hasRequired": false,
-        "hasOptional": false
-      };
-      var incompleteRequiredFields = [];
-      for (var field in this.infoSchema) {
-        var obj = this.getFieldInfo(field);
-
-        if (obj.panel == panelName) {
-        
-          if (obj.error) panelStatus.errors += obj.error + " ";
-          
-          if (obj.required) {
-            panelStatus.hasRequired = true;
-            if (obj.completed) {
-              panelStatus.completedRequired++;
-            } else {
-              panelStatus.remainingRequired++;
-              incompleteRequiredFields.push(obj.label);
-            }
-          } else {
-            panelStatus.hasOptional = true;
-            if (obj.completed) {
-              panelStatus.completedOptional++;
-            } else {
-              panelStatus.remainingOptional++;
-            }
-          }
-        }
-      }
-
-      if (incompleteRequiredFields.length > 0) panelStatus.remainingString = incompleteRequiredFields.join(", ");
-
-      return panelStatus;
-    }
   }, {
     key: "loadRecordFromServer",
     value: mobx.action("Load Record from Server", function loadRecordFromServer(data, page) {
@@ -213,22 +169,6 @@ var Metadata = function (_BaseData) {
 
       return data;
     }
-  }, {
-	key: "validateSubmitFields",
-	value: function validateSubmitFields() {
-	  var isValid = true;
-
-	  for (var field in this.infoSchema) {
-		var information = this.infoSchema[field];
-
-		if (information.error) {
-		  isValid = false;
-		} else if (information.required === "sub" && !information.completed) {
-		  isValid = false;
-		}
-	  }
-	  return isValid;
-	}
   }, {
     key: "requireOnlySubmitFields",
     value: mobx.action("Require Only Submit", function requireOnlySubmitFields() {

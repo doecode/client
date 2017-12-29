@@ -125,17 +125,17 @@ var setRequired = function (label, is_required, exclude_parenthetical_text) {
     }
 };
 
-var inputChange = function (event) {
+var inputChange = mobx.action("Input Change", function (event) {
 	var value = $(this).val();
 	if (event.data.field == "release_date" && value)
 		value = moment(value, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
 		
 	event.data.store.setValue(event.data.field, value);
-};
+});
 
-var checkboxChange = function (event) {
+var checkboxChange = mobx.action("Checkbox Change", function (event) {
 	event.data.store.setValue(event.data.field, $(this).is(":checked"));
-};
+});
 
 var updateLabelStyle = function (store, field, label, exclude_parenthetical_text) {
     $("#" + label).text(store.getLabel(field, $("#" + label).text()));
@@ -220,7 +220,7 @@ var parseErrorResponse = function parseErrorResponse(jqXhr, exception) {
     showCommonModalMessage();
 };
 
-var parseSearchResponse = function parseReceiveResponse(data) {
+var parseSearchResponse = mobx.action("Parse Search Response", function parseReceiveResponse(data) {
     metadata.loadRecordFromServer(data.metadata, $("#page").val());
     
     form.allowSave = (data.metadata.workflow_status != "Submitted" && data.metadata.workflow_status != "Approved");
@@ -241,16 +241,15 @@ var parseSearchResponse = function parseReceiveResponse(data) {
     	
     
    	
-
     hideCommonModalMessage();
-};
+});
 
-var parseAutopopulateResponse = function parseAutopopulateResponse(responseData) {
+var parseAutopopulateResponse = mobx.action("Parse Autopopulate Response", function parseAutopopulateResponse(responseData) {
     if (responseData !== undefined) {
         metadata.updateMetadata(responseData.metadata);
       }
     hideCommonModalMessage();
-}
+});
 
 
 var doMultipartSubmission = function doMultipartSubmission(url, successCallback) {
@@ -259,7 +258,7 @@ var doMultipartSubmission = function doMultipartSubmission(url, successCallback)
   formData.append('file', files[0]);
   formData.append('metadata', JSON.stringify(metadata.serializeData()));
   doAuthenticatedMultipartRequest(url, formData, successCallback, parseErrorResponse);
-}
+};
 
 
 var save = function save() {
@@ -279,7 +278,7 @@ var save = function save() {
       doAuthenticatedAjax('POST', API_BASE + 'metadata/save', parseSaveResponse, metadata.serializeData(), parseErrorResponse);
     else
       doMultipartSubmission(API_BASE + 'metadata/save', parseSaveResponse);
-}
+};
 
 
 
@@ -300,7 +299,7 @@ var submit = function submit() {
       doAuthenticatedAjax('POST', API_BASE + 'metadata/submit', parseSubmitResponse, metadata.serializeData(), parseErrorResponse);
     else
       doMultipartSubmission(API_BASE + 'metadata/submit', parseSubmitResponse);
-}
+};
 
 
 
@@ -321,7 +320,7 @@ var announce = function announce() {
       doAuthenticatedAjax('POST', API_BASE + 'metadata/announce', parseAnnounceResponse, metadata.serializeData(), parseErrorResponse);
     else
       doMultipartSubmission(API_BASE + 'metadata/announce', parseAnnounceResponse);
-}
+};
 
 
 
@@ -339,16 +338,16 @@ var approve = function approve() {
     showCommonModalMessage();
 
     doAuthenticatedAjax('GET', API_BASE + 'metadata/approve/'+code_id, parseApproveResponse, null, parseErrorResponse);
-}
+};
 
-var parseSaveResponse = function parseReceiveResponse(data) {
+var parseSaveResponse = mobx.action("Parse Receive Response", function parseReceiveResponse(data) {
     metadata.setValue("code_id", data.metadata.code_id);
     hideCommonModalMessage();
 
     if (!($("#code_id").val())) {
         window.location.href = "/doecode/submit?code_id=" + data.metadata.code_id + "&software_type=" + $("#software-type").val();
     }
-};
+});
 
 
 var parseSubmitResponse = function parseSubmitResponse(data) {
@@ -402,9 +401,7 @@ var setModalStatus = function setModalStatus(modal, store) {
 	$("#" + modal + "-save-btn").prop('disabled', disabled);
 }
 
-var setPanelStatus = function setPanelStatus(panel, anchor) {
-	const panelStatus = metadata.getPanelStatus(panel, $("#page_req_id").val());
-
+var setPanelStatus = function setPanelStatus(panel, anchor, panelStatus) {
 	$("#" + anchor).removeClass("req_fr req_arfc required-field-span");
 	$("#" + anchor).next("span").hide();
 	
@@ -443,7 +440,7 @@ mobx.autorun("Allow Save", function () {
  REPO PANEL (action)
  *********************/
 mobx.autorun("Repository Info Panel", function () {
-	setPanelStatus("Repository Information", "repository-panel-anchor");
+	setPanelStatus("Repository Information", "repository-panel-anchor", metadata.panelStatus.repository);
 	
 	//mobx.whyRun();
 });
@@ -502,7 +499,7 @@ mobx.autorun("Landing Page", function () {
  PRODUCT PANEL (action)
  *********************/
 mobx.autorun("Product Description Panel", function () {
-	setPanelStatus("Product Description", "product-description-panel-anchor");
+	setPanelStatus("Product Description", "product-description-panel-anchor", metadata.panelStatus.product);
 	
 	//mobx.whyRun();
 });
@@ -547,7 +544,7 @@ mobx.autorun("Proprietary URL", function () {
  DEVELOPERS PANEL (action)
  *********************/
 mobx.autorun("Developers Panel", function () {
-	setPanelStatus("Developers", "developers-panel-anchor");
+	setPanelStatus("Developers", "developers-panel-anchor", metadata.panelStatus.developers);
 	
 	//mobx.whyRun();
 });
@@ -624,7 +621,7 @@ mobx.autorun("Developer Modal", function () {
  DOI PANEL (action)
  *********************/
 mobx.autorun("DOI/Release Date Panel", function () {
-	setPanelStatus("DOI and Release Date", "doi-release-date-panel-anchor");
+	setPanelStatus("DOI and Release Date", "doi-release-date-panel-anchor", metadata.panelStatus.doi);
 	
 	//mobx.whyRun();
 });
@@ -685,7 +682,7 @@ mobx.autorun("Release Date", function () {
  SUPPLEMENTAL PANEL (action)
  *********************/
 mobx.autorun("Supplemental Product Information Panel", function () {
-	setPanelStatus("Supplemental Product Information", "supplemental-product-info-panel-anchor");
+	setPanelStatus("Supplemental Product Information", "supplemental-product-info-panel-anchor", metadata.panelStatus.supplemental);
 	
 	//mobx.whyRun();
 });
@@ -731,7 +728,7 @@ mobx.autorun("File Upload", function () {
  ORGANIZATIONS PANEL (action)
  *********************/
 mobx.autorun("Organizations Panel", function () {
-	setPanelStatus("Organizations", "organizations-panel-anchor");
+	setPanelStatus("Organizations", "organizations-panel-anchor", metadata.panelStatus.organizations);
 	
 	//mobx.whyRun();
 });
@@ -835,7 +832,7 @@ mobx.autorun("ResearchOrg Modal", function () {
  CONTRIBUTORS PANEL (action)
  *********************/
 mobx.autorun("Contributors and Contributing Organizations Panel", function () {
-	setPanelStatus("Contributors and Contributing Organizations", "contributors-contributing-orgs-panel-anchor");
+	setPanelStatus("Contributors and Contributing Organizations", "contributors-contributing-orgs-panel-anchor", metadata.panelStatus.contribs);
 	
 	//mobx.whyRun();
 });
@@ -951,7 +948,7 @@ mobx.autorun("ContributingOrg Modal", function () {
  IDENTIFIERS PANEL (action)
  *********************/
 mobx.autorun("Identifiers Panel", function () {
-	setPanelStatus("Identifiers", "identifiers-panel-anchor");
+	setPanelStatus("Identifiers", "identifiers-panel-anchor", metadata.panelStatus.identifiers);
 	
 	//mobx.whyRun();
 });
@@ -1000,9 +997,9 @@ mobx.autorun("Related Identifier Modal", function () {
 
 /*********************
  CONTACT PANEL (action)
- *********************/
+ *********************/ 
 mobx.autorun("Contact Panel", function () {
-	setPanelStatus("Contact Information", "contact-info-panel-anchor");
+	setPanelStatus("Contact Information", "contact-info-panel-anchor", metadata.panelStatus.contact);
 	
 	//mobx.whyRun();
 });
@@ -1036,14 +1033,14 @@ mobx.autorun("Contact Organization", function () {
  FORM (action)
  *********************/
 mobx.autorun("Submit Button", function () {
-    $('#input-submit-btn').prop('disabled', !metadata.validateSubmitFields());
-	
+    $('#input-submit-btn').prop('disabled', !metadata.validateSchema());
+
 	//mobx.whyRun();
 });
 
 mobx.autorun("Announce Button", function () {
     $('#input-announce-btn').prop('disabled', !metadata.validateSchema());
-	
+
 	//mobx.whyRun();
 });
 

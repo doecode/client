@@ -12,6 +12,7 @@ var BaseData = function () {
 
     this.fieldMap = props.fieldMap;
     this.infoSchema = props.infoSchema;
+    this.panelStatus = props.panelStatus;
     if (!props.infoSchema) this.infoSchema = {};
     this.fieldMapSnapshot = props.fieldMapSnapshot;
     this.infoSchemaSnapshot = props.infoSchemaSnapshot;
@@ -165,19 +166,15 @@ var BaseData = function () {
     })
   }, {
     key: 'validateSchema',
-    value: function validateSchema(update) {
+    value: function validateSchema() {
       var isValid = true;
 
       for (var field in this.infoSchema) {
         var information = this.infoSchema[field];
 
-        if (information.error) {
+        if ((information.error) || (information.required && !information.completed)) {
           isValid = false;
-        } else if (information.required && !information.completed) {
-          if (update) {
-            information.error = field + " is required.";
-          }
-          isValid = false;
+          break;
         }
       }
 
