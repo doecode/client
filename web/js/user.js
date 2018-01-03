@@ -115,11 +115,17 @@ var doPasswordValidation = function (password_check_ids, is_confirm) {
     var numberRegex = /[\d]/g;
 
     var return_data = {};
+    //Is the password long enough?
     return_data.long_enough = (password_to_use.length >= minLength);
+    //Does it contain at least one special character?
     return_data.special_char = specialCharacterRegex.test(password_to_use);
+    //Does it contain at least one number?
     return_data.contains_num = numberRegex.test(password_to_use);
+    //Does it have at least one upper case and lower case letter?
     return_data.upper_case_lower_case = (upperRegex.test(password_to_use) && lowerRegex.test(password_to_use));
-    return_data.password_no_email = (password_to_use.indexOf(email) < 0 || email.trim() == '');
+    //Does it contain the email?
+    return_data.password_no_email = (password_to_use.toLowerCase().indexOf(email.toLowerCase()) < 0 || email.toLowerCase().trim() == '');
+    //Do the password and confirm password match?
     return_data.password_match = (password !== '' && password === confirm);
     //Returns whether this particular password is a match
     return_data.is_valid_password = return_data.long_enough && return_data.special_char && return_data.contains_num && return_data.upper_case_lower_case && return_data.password_no_email;
