@@ -87,19 +87,37 @@ var checkPassword = function (event) {
     var password_validation_data = doPasswordValidation(event.data, event.data.is_confirm);
     if (!event.data.is_confirm) {
         //Is Password wrong enough
-        password_validation_data.long_enough ? $("#password-rule-min-length").show() : $("#password-rule-min-length").hide();
-        //Does it contain a proper special character?
-        password_validation_data.special_char ? $("#password-rule-accepted-char").show() : $("#password-rule-accepted-char").hide();
-        //Does it contain a number
-        password_validation_data.contains_num ? $("#password-rule-number-char").show() : $("#password-rule-number-char").hide();
-        //Does it contain upper and lower case characters
-        password_validation_data.upper_case_lower_case ? $("#password-rule-upper-lower").show() : $("#password-rule-upper-lower").hide();
-        //Make sure it doesn't contain the email
-        password_validation_data.password_no_email ? $("#password-rule-no-username").show() : $("#password-rule-no-username").hide();
-        //Do the confirm and password match?
-        password_validation_data.password_match ? $("#password-rule-confirm-match").show() : $("#password-rule-confirm-match").hide();
-    }
+        togglePasswordRuleIndicator('password-rule-min-length', password_validation_data.long_enough);
 
+        //Does it contain a proper special character?
+        togglePasswordRuleIndicator('password-rule-accepted-char', password_validation_data.special_char);
+
+        //Does it contain a number
+        togglePasswordRuleIndicator('password-rule-number-char', password_validation_data.contains_num);
+
+        //Does it contain upper and lower case characters
+        togglePasswordRuleIndicator('password-rule-upper-lower', password_validation_data.upper_case_lower_case);
+
+        //Make sure it doesn't contain the email
+        togglePasswordRuleIndicator('password-rule-no-username', password_validation_data.password_no_email);
+
+        //Do the confirm and password match?
+        togglePasswordRuleIndicator('password-rule-confirm-match', password_validation_data.password_match);
+    }
+};
+
+var togglePasswordRuleIndicator = function (element_id, is_valid) {
+    if (is_valid) {
+        $("#" + element_id).addClass('green');
+        $("#" + element_id).next('span.password-rule-description').addClass('green');
+        $("#" + element_id).removeClass('fa-minus');
+        $("#" + element_id).addClass('fa-check');
+    } else {
+        $("#" + element_id).removeClass('green');
+        $("#" + element_id).next('span.password-rule-description').removeClass('green');
+        $("#" + element_id).removeClass('fa-check');
+        $("#" + element_id).addClass('fa-minus');
+    }
 };
 
 var doPasswordValidation = function (password_check_ids, is_confirm) {
@@ -544,7 +562,7 @@ var loadUserDataForAdminForm = function () {
         } else if (is_password_expired == true) {
             $("#user-admin-warning-message").html("User's password has expired.");
             $("#useradmin-warning-message-container").show();
-        } 
+        }
 
         var current_user_obj = {
             email: email,
