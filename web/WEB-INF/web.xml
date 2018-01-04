@@ -22,6 +22,10 @@
         <param-name>session_timeout</param-name>
         <param-value>@session_timeout@</param-value>
     </context-param>
+    <context-param>
+        <param-name>app_name_prefix</param-name>
+        <param-value>@app_name_prefix@</param-value>
+    </context-param>
     
     <!--Servlet to give the Dissemination pages, like search, about, etc-->
     <servlet>

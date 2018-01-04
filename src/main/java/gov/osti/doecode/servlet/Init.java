@@ -20,6 +20,7 @@ public class Init extends HttpServlet {
      public static Handlebars handlebars;
      public static Handlebars handlebarsUser;
      public static String css_string;
+     public static String app_name;
      public static int SESSION_TIMEOUT_MINUTES;
 
      public Init() {
@@ -44,6 +45,8 @@ public class Init extends HttpServlet {
           if (servlet_path.exists() && servlet_path.isDirectory()) {
                css_string = getFileData(new File(css_path + "doecode-css.css"));
           }
+          
+          app_name = getServletContext().getInitParameter("app_name_prefix");
           
           SESSION_TIMEOUT_MINUTES = Integer.parseInt(getServletContext().getInitParameter("session_timeout"));
 

@@ -3,6 +3,7 @@ package gov.osti.doecode.pagemappings;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.entity.UserFunctions;
+import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class User extends HttpServlet {
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {
           String URI = request.getRequestURI();
-          String remaining = StringUtils.substringAfterLast(URI, "/doecode/");
+          String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
           String site_url = getServletConfig().getServletContext().getInitParameter("site_url");
 
           boolean is_logged_in = UserFunctions.isUserLoggedIn(request);

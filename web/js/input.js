@@ -345,26 +345,26 @@ var parseSaveResponse = mobx.action("Parse Receive Response", function parseRece
     hideCommonModalMessage();
 
     if (!($("#code_id").val())) {
-        window.location.href = "/doecode/submit?code_id=" + data.metadata.code_id + "&software_type=" + $("#software-type").val();
+        window.location.href = '/' + APP_NAME + '/submit?code_id=' + data.metadata.code_id + "&software_type=" + $("#software-type").val();
     }
 });
 
 
 var parseSubmitResponse = function parseSubmitResponse(data) {
     hideCommonModalMessage();
-    window.location.href = "/doecode/confirm?workflow=submitted&code_id=" + data.metadata.code_id;
+    window.location.href = '/' + APP_NAME + '/confirm?workflow=submitted&code_id=' + data.metadata.code_id;
 };
 
 
 var parseAnnounceResponse = function parseAnnounceResponse(data) {
     hideCommonModalMessage();
-    window.location.href = "/doecode/confirm?workflow=announced&code_id=" + data.metadata.code_id;
+    window.location.href = '/' + APP_NAME + '/confirm?workflow=announced&code_id=' + data.metadata.code_id;
 };
 
 
 var parseApproveResponse = function parseApproveResponse(data) {
     hideCommonModalMessage();
-    window.location.href = "/doecode/pending";
+    window.location.href = '/' + APP_NAME + '/pending';
 };
 
 

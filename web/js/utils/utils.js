@@ -2,6 +2,7 @@ const API_BASE = "@api.url@";
 const AUTHORITY_API_BASE = "@authorityapi.url@";
 const LOGIN_EXPIRATION_DATE_FORMAT = "YYYY-MM-DD HH:mm";
 const SESSION_TIMEOUT = parseInt("@session_timeout@");
+const APP_NAME = '@app_name_prefix@';
 
 function doAjax(methodType, url, successCallback, data, errorCallback, dataType) {
     var errorCall = errorCallback;
@@ -141,13 +142,13 @@ function handleAuthenticatedError(jqXhr, exception, callback) {
     if (jqXhr.status == 401) {
         window.sessionStorage.lastLocation = window.location.href;
         clearLoginLocalstorage();
-        window.location.href = '/doecode/login?redirect=true';
+        window.location.href = '/' + APP_NAME + '/login?redirect=true';
     } else if (jqXhr.status == 403) {
-        window.location.href = '/doecode/forbidden';
+        window.location.href = '/' + APP_NAME + '/forbidden';
     } else if (callback != undefined) {
         callback(jqXhr, exception);
     } else {
-        window.location.href = '/doecode/error';
+        window.location.href = '/' + APP_NAME + '/error';
     }
 }
 
@@ -498,14 +499,14 @@ var makeDelimitedList = function (list, delimiter) {
     return html;
 };
 
-var getSoftwareTypeLabel = function(software_char){
-  var return_val = "Scientific";
-  
-  switch(software_char){
-      case "B":
-          return_val = "Business";
-          break;
-  }
-  
-  return return_val;
+var getSoftwareTypeLabel = function (software_char) {
+    var return_val = "Scientific";
+
+    switch (software_char) {
+        case "B":
+            return_val = "Business";
+            break;
+    }
+
+    return return_val;
 };

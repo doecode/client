@@ -1,18 +1,18 @@
 const ABOUT_IMG_URLS = [
-    '/doecode/images/DOEcodeFeatures_main710px-min.png',
-    '/doecode/images/DOEcodeFeatures_doi710px-min.png',
-    '/doecode/images/DOEcodeFeatures_Repository710px-min.png',
-    '/doecode/images/DOEcodeFeatures_Catalog710px-min.png',
-    '/doecode/images/DOEcodeFeatures_Policy710px-min.png',
-    '/doecode/images/DOEcodeFeatures_GitHub710px-min.png',
-    '/doecode/images/DOEcodeFeatures_SocialCode710px-min.png',
-    '/doecode/images/DOEcodeFeatures_Easy710px-min.png'
+    '/' + APP_NAME + '/images/DOEcodeFeatures_main710px-min.png',
+    '/' + APP_NAME + '/images/DOEcodeFeatures_doi710px-min.png',
+    '/' + APP_NAME + '/images/DOEcodeFeatures_Repository710px-min.png',
+    '/' + APP_NAME + '/images/DOEcodeFeatures_Catalog710px-min.png',
+    '/' + APP_NAME + '/images/DOEcodeFeatures_Policy710px-min.png',
+    '/' + APP_NAME + '/images/DOEcodeFeatures_GitHub710px-min.png',
+    '/' + APP_NAME + '/images/DOEcodeFeatures_SocialCode710px-min.png',
+    '/' + APP_NAME + '/images/DOEcodeFeatures_Easy710px-min.png'
 ];
 
 const ABOUT_TOP_URLS = [
-    '/doecode/images/Discover-min.png', '/doecode/images/Discover_hover-min.png',
-    '/doecode/images/Create-min.png', '/doecode/images/Create_hover-min.png',
-    '/doecode/images/Submit-min.png', '/doecode/images/Submit_hover-min.png'
+    '/' + APP_NAME + '/images/Discover-min.png', '/' + APP_NAME + '/images/Discover_hover-min.png',
+    '/' + APP_NAME + '/images/Create-min.png', '/' + APP_NAME + '/images/Create_hover-min.png',
+    '/' + APP_NAME + '/images/Submit-min.png', '/' + APP_NAME + '/images/Submit_hover-min.png'
 ];
 
 /*Handles the 3 images on teh top of the about page*/
@@ -57,7 +57,7 @@ var toggleDescriptionMoreLess = function () {
 var authorSearchDropdownName = function () {
     clearSearchFormFields();
     $("#search-developers_contributors").val("\"" + $(this).data('authorname') + "\"");
-    $("#search-page-form").attr('action', '/doecode/results?page=1');
+    $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
     $("#search-page-form").submit();
 };
 
@@ -68,7 +68,7 @@ var authorSearchDropdownORCID = function () {
 
     clearSearchFormFields();
     $("#search-orcid").val(orcid);
-    $("#search-page-form").attr('action', '/doecode/results?page=1');
+    $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
     $("#search-page-form").submit();
 
 };
@@ -113,7 +113,7 @@ var triggerPaginationGoSearch = function () {
 /*Manipulates the search form, and sends it forwards or backwards*/
 var submitSearchFormDirection = function (new_start, new_page) {
     $("#search-start").val(new_start);
-    $("#search-page-form").attr('action', '/doecode/results?page=' + new_page);
+    $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=' + new_page);
     $("#search-page-form").submit();
 };
 
@@ -160,7 +160,7 @@ var addSearchCheckboxToSearch = function () {
 
 var restartSearchToFirstpage = function () {
     $("#search-start").val(0);
-    $("#search-page-form").attr('action', '/doecode/results?page=1');
+    $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
     $("#search-page-form").submit();
 };
 
@@ -173,7 +173,7 @@ var goBackToSearch = function () {
     if (previous_page.indexOf(environment + "/results") == 0) {//If the previous page was a search page, go there
         window.history.back();
     } else {//If the previous page wasn't a search page, just go back to the search
-        window.location.href = '/doecode/results?page=1';
+        window.location.href = '/' + APP_NAME + '/results?page=1';
     }
 };
 
@@ -201,7 +201,7 @@ var removeSearchResultDescriptionItem = function () {
 
 var modify_search = function () {
     localStorage.isRefinedSearch = "true";
-    window.location.href = '/doecode/search';
+    window.location.href = '/' + APP_NAME + '/search';
 };
 
 var setUpDateSlider = function () {

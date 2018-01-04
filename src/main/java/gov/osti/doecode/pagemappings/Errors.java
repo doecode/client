@@ -2,6 +2,7 @@ package gov.osti.doecode.pagemappings;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class Errors extends HttpServlet {
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {
           String URI = request.getRequestURI();
-          String remaining = StringUtils.substringAfterLast(URI, "/doecode/");
+          String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
 
           String page_title = "";
           String template = "";
