@@ -39,7 +39,7 @@ var login = function () {
                 //Now that we're logged in, let's set some local storage attributes
                 setLoggedInAttributes(data);
                 //Send up our login data for java to do content with
-                $.ajax("/doecode/set-login-status-name", {
+                $.ajax('/' + APP_NAME + '/set-login-status-name', {
                     cache: false,
                     contentType: "application/json",
                     method: "POST",
@@ -50,7 +50,7 @@ var login = function () {
                         } else if (window.sessionStorage.lastLocation && window.sessionStorage.lastLocation.length > 0) {
                             window.location.href = window.sessionStorage.lastLocation;
                         } else {
-                            window.location.href = '/doecode/projects';
+                            window.location.href = '/' + APP_NAME + '/projects';
                         }
 
                     }
@@ -60,7 +60,7 @@ var login = function () {
                 $("#redirect-errors-container").hide();
                 var response = xhr.responseJSON;
                 var error_msg = (response.status === 401 && response.errors && response.errors.length > 0 && response.errors[0] == 'Password is expired.')
-                        ? 'Your password has expired. Please go to the <a href="/doecode/forgot-password">password reset page</a> to reset your password.'
+                        ? 'Your password has expired. Please go to the <a href="/' + APP_NAME + '/forgot-password">password reset page</a> to reset your password.'
                         : "Invalid Username/Password. If you believe this to be in error, please contact&nbsp;<a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>&nbsp;for further information."
 
                 $("#login-errors").html(error_msg);
@@ -443,7 +443,7 @@ var savePasswordChanges = function (post_data, update_login_status_name, login_n
             } else {
                 $("#user-account-success-message").html('Changes saved successfully. Your page will reload in 3 seconds');
                 setTimeout(function () {
-                    window.location.href = '/doecode/account';
+                    window.location.href = '/' + APP_NAME + '/account';
                 }, 3000);
             }
         },
@@ -455,7 +455,7 @@ var savePasswordChanges = function (post_data, update_login_status_name, login_n
 
 var updateLoginNameStatus = function (post_data) {
     $.ajax({
-        url: '/doecode/update-login-status-name',
+        url: '/' + APP_NAME + '/update-login-status-name',
         cache: false,
         contentType: "application/json",
         method: "POST",
@@ -463,7 +463,7 @@ var updateLoginNameStatus = function (post_data) {
         success: function (data) {
             $("#user-account-success-message").html('Changes saved successfully. Your page will reload in 3 seconds');
             setTimeout(function () {
-                window.location.href = '/doecode/account';
+                window.location.href = '/' + APP_NAME + '/account';
             }, 3000);
         },
         error: function (xhr) {
@@ -503,7 +503,7 @@ var requestAdminRole = function () {
             var post_data = {pending_roles: [localStorage.user_site]};
             //We have to update the back-end
             $.ajax({
-                url: '/doecode/update-login-status-name',
+                url: '/' + APP_NAME + '/update-login-status-name',
                 cache: false,
                 contentType: "application/json",
                 method: "POST",
@@ -644,7 +644,7 @@ var saveUserAdminForm = function () {
                 //We have to update the back-end
                 if (new_user_data.email == localStorage.user_email) {
                     $.ajax({
-                        url: '/doecode/update-login-status-name',
+                        url: '/' + APP_NAME + '/update-login-status-name',
                         cache: false,
                         contentType: "application/json",
                         method: "POST",
@@ -653,7 +653,7 @@ var saveUserAdminForm = function () {
                             window.scrollTo(0, 0);
                             $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh in 3 seconds');
                             setTimeout(function () {
-                                window.location.href = '/doecode/user-admin';
+                                window.location.href = '/' + APP_NAME + '/user-admin';
                             }, 3000);
                         }
                     });
@@ -661,7 +661,7 @@ var saveUserAdminForm = function () {
                     window.scrollTo(0, 0);
                     $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh in 3 seconds');
                     setTimeout(function () {
-                        window.location.href = '/doecode/user-admin';
+                        window.location.href = '/' + APP_NAME + '/user-admin';
                     }, 3000);
                 }
 
@@ -799,7 +799,7 @@ $(document).ready(function () {
                     //Now that we're logged in, let's set some local storage attributes
                     setLoggedInAttributes(data);
                     //Send up our login data for java to do content with
-                    $.ajax("/doecode/set-login-status-name", {
+                    $.ajax('/' + APP_NAME + '/set-login-status-name', {
                         cache: false,
                         contentType: "application/json",
                         method: "POST",
@@ -816,7 +816,7 @@ $(document).ready(function () {
                 error: function (xhr) {
                     setCommonModalMessage(FAILED_TO_LOGIN_WITH_PASSCODE);
                     setTimeout(function () {
-                        window.location.href = '/doecode/login';
+                        window.location.href = '/' + APP_NAME + '/login';
                     }, 1000);
                 }
             });

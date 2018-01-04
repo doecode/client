@@ -74,7 +74,7 @@ var triggerAdvancedSearch = function () {
     //Sort
     $("#search-sort").val($("#advanced-search-sort").val());
 
-    $("#search-page-form").attr('action', '/doecode/results?page=1');
+    $("#search-page-form").attr('action', '/'+APP_NAME+'/results?page=1');
     $("#search-page-form").submit();
 };
 
@@ -101,14 +101,14 @@ var triggerDropdownAdvancedSearch = function () {
         $("#search-date_latest").val(moment(date_latest, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT) + "T23:59:59.001Z");
     }
 
-    $("#search-page-form").attr('action', '/doecode/results?page=1');
+    $("#search-page-form").attr('action', '/'+APP_NAME+'/results?page=1');
     $("#search-page-form").submit();
 };
 
 var triggerBasicSearch = function () {
     clearSearchFormFields();
     $("#search-all_fields").val($(this).parent().prev('div').find('input[type=text]').val());
-    $("#search-page-form").attr('action', '/doecode/results?page=1');
+    $("#search-page-form").attr('action', '/'+APP_NAME+'/results?page=1');
     $("#search-page-form").submit();
 };
 
@@ -134,7 +134,7 @@ var clearSearchFormFields = function () {
 var logout = function () {
     $.get(API_BASE + 'user/logout', function (data) {
         clearLoginLocalstorage();
-        window.location.href = '/doecode/logout';
+        window.location.href = '/'+APP_NAME+'/logout';
     }, 'json');
 };
 
