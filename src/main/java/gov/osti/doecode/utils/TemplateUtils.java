@@ -98,6 +98,7 @@ public class TemplateUtils {
           output_data.put("jsFiles", jsFilesList);
           output_data.put("navbar", GET_NAVBAR_CLASSES(current_page));
           output_data.put("css", Init.css_string);
+          output_data.put("app_name", Init.app_name);
 
           return output_data;
      }
