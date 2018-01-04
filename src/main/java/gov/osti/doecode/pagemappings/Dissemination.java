@@ -124,6 +124,9 @@ public class Dissemination extends HttpServlet {
           } else if (remaining.equals("/contact")) {
                page_title = "DOE CODE: Contact Us";
                template = TemplateUtils.TEMPLATE_CONTACT_PAGE;
+          } else if (remaining.equals("/gitlab-signup")) {
+               page_title = "DOECODE: Gitlab Signup";
+               template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP;
           }
 
           //Add the common dissemination js file

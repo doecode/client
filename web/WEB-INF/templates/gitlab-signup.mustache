@@ -1,0 +1,129 @@
+{{> wrapper/header}}
+<input type="hidden" id="gitlab-signup-page-identifier"/>
+<div class="row not-so-wide-row">
+     <div class="col-lg-3 col-md-1"></div>
+     <div class="col-lg-8 special-lg-8 col-md-10 col-xs-12 static-content">
+	  <h2 class="static-content-title">OSTI Gitlab Signup</h2>
+          <br/>
+	  <div class='row'>
+	       <div class='col-xs-12 center-text has-success'>
+		    <label class='control-label' id='gitlab-signup-success-message'></label>
+	       </div>
+	  </div>
+	  <div class='row'>
+	       <div class='col-xs-12 center-text has-error'>
+		    <label class='control-label' id='gitlab-signup-error-message'></label>
+	       </div>
+	  </div>
+
+	  <div class='row'>
+	       <div class="col-xs-12 gitlab-signup-input-row">
+		    <label class="control-label gitlab-signup-row-heading">Name</label>
+		    <br/>
+	       </div>
+	       <div class='col-lg-4 col-sm-5 col-xs-12 gitlab-signup-input-row'>
+		    <input title='First Name' placeholder='First Name' id='first_name' class="pure-input-1 form-control full-width-input" type="text">
+		    <div>
+			 <small><label class='control-label normal-weight' for='first_name'>&nbsp;First Name</label></small>
+		    </div>
+	       </div>
+	       <div class='col-lg-4 col-sm-5 col-xs-12 gitlab-signup-input-row'>
+		    <input title='Last Name' placeholder='Last Name' id='last_name' class="pure-input-1 form-control full-width-input" type="text">
+		    <div>
+			 <small><label class='control-label normal-weight ' for='last_name'>&nbsp;Last Name</label></small>
+		    </div>
+	       </div> 
+	       <div class='col-lg-2 col-sm-2 col-xs-12 gitlab-signup-input-row'>
+		    <input title='Suffix' placeholder='Suffix' id='suffix' class="pure-input-1 form-control" size="4"  type="text">
+		    <div>
+			 <small><label class='control-label normal-weight ' for='suffix'>&nbsp;Suffix</label></small>
+		    </div>
+	       </div>
+	  </div>
+	  <br/>
+	  <br/>
+
+	  <div class='row'>
+	       <div class="col-xs-12 gitlab-signup-input-row">
+		    <label class="control-label gitlab-signup-row-heading">Mailing Address</label>
+		    <br/>
+	       </div>
+	       <div class='col-lg-10 col-xs-12 gitlab-signup-input-row'>
+		    <input title='Street Address' placeholder='Street Address' id='address' class="pure-input-1 form-control full-width-input" type="text">
+		    <div>
+			 <small><label class='control-label normal-weight' for='address'>&nbsp;Street Address</label></small>
+		    </div>
+	       </div>
+	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+		    <input title='City' placeholder='City' id='city' class="pure-input-1 form-control full-width-input" type="text">
+		    <div>
+			 <small><label class='control-label normal-weight' for='city'>&nbsp;City</label></small>
+		    </div>
+	       </div>
+	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+		    <input title='State/Province' placeholder='State/Province' id='state' class="pure-input-1 form-control full-width-input" type="text">
+		    <div>
+			 <small><label class='control-label normal-weight' for='state'>&nbsp;State/Province</label></small>
+		    </div>
+	       </div>
+	       <div class='col-lg-3 col-sm-4 col-xs-12 gitlab-signup-input-row'>
+		    <input title='Zip Code' placeholder='Zip Code' id='zip-code' class="pure-input-1 form-control full-width-input" type="text">
+		    <div>
+			 <small><label class='control-label normal-weight' for='zip-code'>&nbsp;Zip Code</label></small>
+		    </div>
+	       </div>
+	       <div class='col-sm-2 hide-xs'></div>
+	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+		    <input title='Country' placeholder='Country' id='country' class="pure-input-1 form-control full-width-input" type="text">
+		    <div>
+			 <small><label class='control-label normal-weight' for='country'>&nbsp;Country</label></small>
+		    </div>
+	       </div>
+	  </div>
+	  <br/>
+	  <br/>
+
+	  <div class='row'>
+	       <div class="col-xs-12 gitlab-signup-input-row">
+		    <label class="control-label gitlab-signup-row-heading">Contact information</label>
+		    <br/>
+	       </div>
+	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+		    <input title='Email Address' placeholder='Email Address' id='email' class="pure-input-1 form-control full-width-input" type="text">
+		    <div>
+			 <small><label class='control-label normal-weight' for='email'>&nbsp;Email Address</label></small>
+		    </div>
+	       </div>
+	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+		    <input title='Phone Number' placeholder='Phone Number' id='phone-number' class="pure-input-1 form-control full-width-input" type="text">
+		    <div>
+			 <small><label class='control-label normal-weight' for='phone-number'>&nbsp;Phone Number</label></small>
+		    </div>
+	       </div>
+	  </div>
+	  <br/>
+	  <br/>
+	  <div class='row'>
+	       <div class="col-xs-12 gitlab-signup-input-row">
+		    <label class="control-label gitlab-signup-row-heading">Employment</label>
+		    <br/>
+	       </div>
+	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+		    <input title='Job Title' placeholder='Job Title' id='job-title' class="pure-input-1 form-control full-width-input" type="text">
+		    <div>
+			 <small><label class='control-label normal-weight' for='job-title'>&nbsp;Job Title</label></small>
+		    </div>
+	       </div>
+	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+		    <input title='Employment Designation' placeholder='Employment Designation' id='employment-designation' class="pure-input-1 form-control full-width-input" type="text">
+		    <div>
+			 <small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Employment Designation</label></small>
+		    </div>
+	       </div>
+	  </div>
+	  <br/>
+
+     </div>
+     <div class="col-lg-3 col-md-1"></div>
+</div>
+{{> wrapper/footer}}

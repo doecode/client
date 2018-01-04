@@ -2026,3 +2026,16 @@ div.Select>div.Select-control input {
     padding-right: 20px;
     font-size: 30px;
 }
+
+.full-width-input{
+    width:100%;
+}
+
+/*Gitlab signup styles*/
+.gitlab-signup-input-row{
+    padding-bottom:10px;
+}
+
+.gitlab-signup-row-heading{
+    font-size:20px;
+}

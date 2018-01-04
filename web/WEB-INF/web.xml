@@ -43,6 +43,7 @@
         <url-pattern>/security-hosting</url-pattern>
         <url-pattern>/contact</url-pattern>
         <url-pattern>/disclaimer</url-pattern>
+        <url-pattern>/gitlab-signup</url-pattern>
     </servlet-mapping>
     
     <!--Input pages, such as the announce, submit, and approve pages-->

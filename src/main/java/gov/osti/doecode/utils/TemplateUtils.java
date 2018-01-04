@@ -40,6 +40,7 @@ public class TemplateUtils {
      public static final String TEMPLATE_SECURITY_HOSTING_PAGE = "security-hosting";
      public static final String TEMPLATE_DISCLAIMER_PAGE = "disclaimer";
      public static final String TEMPLATE_CONTACT_PAGE = "contact";
+     public static final String TEMPLATE_GITLAB_SIGNUP = "gitlab-signup";
 
      //Input
      public static final String TEMPLATE_INPUT_FORM = "input-form";

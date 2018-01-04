@@ -355,7 +355,7 @@ $(document).ready(function () {
         $(".search-for-modify-search").on('click', modify_search);
 
         //Makes the date range slider work
-        if (isValidJSON($("#facets-year-data").val()) && JSON.parse($("#facets-year-data").val()).length>0 && isValidInt($("#search-results-count").val()) && parseInt($("#search-results-count").val()) > 0) {
+        if (isValidJSON($("#facets-year-data").val()) && JSON.parse($("#facets-year-data").val()).length > 0 && isValidInt($("#search-results-count").val()) && parseInt($("#search-results-count").val()) > 0) {
             setUpDateSlider();
         } else {
             $(".release-date-sidebar-container").hide();
@@ -431,5 +431,9 @@ $(document).ready(function () {
         //Makes the chosen js inputs work with custom content
         $(".chosen-search-input").on('keyup', modifyChosenSelectForCustomEntry);
         $(".chosen-search-input").on('keydown', modifyChosenSelectForCustomEntryTabKey);
+        
+    } else if (document.getElementById('gitlab-signup-page-identifier')) {
+        
+        
     }
 });
