@@ -58,10 +58,17 @@ var login = function () {
             },
             error: function (xhr) {
                 $("#redirect-errors-container").hide();
-                var response = xhr.responseJSON;
-                var error_msg = (response.status === 401 && response.errors && response.errors.length > 0 && response.errors[0] == 'Password is expired.')
-                        ? 'Your password has expired. Please go to the <a href="/' + APP_NAME + '/forgot-password">password reset page</a> to reset your password.'
-                        : "Invalid Username/Password. If you believe this to be in error, please contact&nbsp;<a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>&nbsp;for further information."
+
+                var error_msg = "";
+
+                if (xhr.responseJSON) {
+                    var response = xhr.responseJSON;
+                    error_msg = (response.status === 401 && response.errors && response.errors.length > 0 && response.errors[0] == 'Password is expired.')
+                            ? 'Your password has expired. Please go to the <a href="/' + APP_NAME + '/forgot-password">password reset page</a> to reset your password.'
+                            : "Invalid Username/Password. If you believe this to be in error, please contact&nbsp;<a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>&nbsp;for further information."
+                } else {
+                    error_msg = "An error has occurred, and the DOE CODE API couldn't be reached.";
+                }
 
                 $("#login-errors").html(error_msg);
                 $("#login-errors-container").show();
