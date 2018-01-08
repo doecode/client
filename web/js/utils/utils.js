@@ -2,7 +2,7 @@ const API_BASE = "@api.url@";
 const AUTHORITY_API_BASE = "@authorityapi.url@";
 const LOGIN_EXPIRATION_DATE_FORMAT = "YYYY-MM-DD HH:mm";
 const SESSION_TIMEOUT = parseInt("@session_timeout@");
-const APP_NAME = '@app_name_prefix@';
+const APP_NAME = '@app_name@';
 
 function doAjax(methodType, url, successCallback, data, errorCallback, dataType) {
     var errorCall = errorCallback;

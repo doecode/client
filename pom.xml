@@ -25,7 +25,7 @@
         <httpclient.version>4.5.2</httpclient.version>
         <logback.version>1.2.3</logback.version>
         <session_timeout>30</session_timeout>
-        <app_name_prefix>doecode</app_name_prefix>
+        <app_name>doecode</app_name>
     </properties>
     <!--
         You will need to add your own profiles into this pom.xml, or use profiles stored in your local settings.xml
@@ -39,11 +39,12 @@
                 <apiBackendURL>URL to either a local version of the DOE CODE API, or the https://www. version</apiBackendURL>
                 <siteURL>Your local url for your instance of this application</siteURL>
                 <authorityapiURL>https://www.osti.gov/elink/api/authorities/</authorityapiURL>
+                <app_name>name of app</app_name>
             </properties>
         </profile>
     -->
     <build>
-        <finalName>${app_name_prefix}</finalName>
+        <finalName>${app_name}</finalName>
         <plugins>
             <plugin>
                 <groupId>com.samaxes.maven</groupId>
@@ -222,35 +223,35 @@
                                 </replacement>
                                 <replacement>
                                     <token>chosen-sprite.png</token>
-                                    <value>/${app_name_prefix}/css/chosen/chosen-sprite.png</value>
+                                    <value>/${app_name}/css/chosen/chosen-sprite.png</value>
                                 </replacement>
                                 <replacement>
                                     <token>images/ui-icons_</token>
-                                    <value>/${app_name_prefix}/css/jquery-ui-themes-1.12.1/base/images/ui-icons_</value>
+                                    <value>/${app_name}/css/jquery-ui-themes-1.12.1/base/images/ui-icons_</value>
                                 </replacement>
                                 <replacement>
                                     <token>../images/sort_both.png</token>
-                                    <value>/${app_name_prefix}/css/DataTables-1.10.16/images/sort_both.png</value>
+                                    <value>/${app_name}/css/DataTables-1.10.16/images/sort_both.png</value>
                                 </replacement>
                                 <replacement>
                                     <token>../images/sort_asc.png</token>
-                                    <value>/${app_name_prefix}/css/DataTables-1.10.16/images/sort_asc.png</value>
+                                    <value>/${app_name}/css/DataTables-1.10.16/images/sort_asc.png</value>
                                 </replacement>
                                 <replacement>
                                     <token>../images/sort_desc.png</token>
-                                    <value>/${app_name_prefix}/css/DataTables-1.10.16/images/sort_desc.png</value>
+                                    <value>/${app_name}/css/DataTables-1.10.16/images/sort_desc.png</value>
                                 </replacement>
                                 <replacement>
                                     <token>../fonts/fontawesome</token>
-                                    <value>/${app_name_prefix}/css/font-awesome-4.7.0/fonts/fontawesome</value>
+                                    <value>/${app_name}/css/font-awesome-4.7.0/fonts/fontawesome</value>
                                 </replacement>
                                 <replacement>
                                     <token>@session_timeout@</token>
                                     <value>${session_timeout}</value>
                                 </replacement>
                                 <replacement>
-                                    <token>@app_name_prefix@</token>
-                                    <value>${app_name_prefix}</value>
+                                    <token>@app_name@</token>
+                                    <value>${app_name}</value>
                                     <value></value>
                                 </replacement>
                             </replacements>
@@ -267,7 +268,7 @@
                     <url>${environment_url}</url>
                     <username>${username}</username>
                     <password>${password}</password>
-                    <warFile>${project.build.directory}/${app_name_prefix}.war</warFile>
+                    <warFile>${project.build.directory}/${app_name}.war</warFile>
                     <path>/${project.build.finalName}</path>
                 </configuration>
             </plugin>

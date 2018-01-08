@@ -46,7 +46,7 @@ public class Init extends HttpServlet {
                css_string = getFileData(new File(css_path + "doecode-css.css"));
           }
           
-          app_name = getServletContext().getInitParameter("app_name_prefix");
+          app_name = getServletContext().getInitParameter("app_name");
           
           SESSION_TIMEOUT_MINUTES = Integer.parseInt(getServletContext().getInitParameter("session_timeout"));
 
