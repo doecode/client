@@ -432,8 +432,5 @@ $(document).ready(function () {
         $(".chosen-search-input").on('keyup', modifyChosenSelectForCustomEntry);
         $(".chosen-search-input").on('keydown', modifyChosenSelectForCustomEntryTabKey);
         
-    } else if (document.getElementById('gitlab-signup-page-identifier')) {
-        
-        
-    }
+    } 
 });

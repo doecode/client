@@ -47,7 +47,6 @@ public class User extends HttpServlet {
                          break;
                }
                response.addCookie(UserFunctions.makeUserCookie(return_data));
-               response.setContentType("application/json");
                if (add_signin_html) {
                     return_data.put("signin_html", TemplateUtils.getNewSigninStatusHtml(getServletContext(), request_data));
                }

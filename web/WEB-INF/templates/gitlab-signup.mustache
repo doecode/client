@@ -21,20 +21,26 @@
 		    <label class="control-label gitlab-signup-row-heading">Name</label>
 		    <br/>
 	       </div>
-	       <div class='col-lg-4 col-sm-5 col-xs-12 gitlab-signup-input-row'>
-		    <input title='First Name' placeholder='First Name' id='first_name' class="pure-input-1 form-control full-width-input" type="text">
+	       <div class='col-lg-5 col-sm-5 col-xs-12 gitlab-signup-input-row'>
+		    <input title='First Name' placeholder='First Name' id='first-name' class="pure-input-1 form-control full-width-input" type="text">
 		    <div>
 			 <small><label class='control-label normal-weight' for='first_name'>&nbsp;First Name</label></small>
 		    </div>
 	       </div>
-	       <div class='col-lg-4 col-sm-5 col-xs-12 gitlab-signup-input-row'>
-		    <input title='Last Name' placeholder='Last Name' id='last_name' class="pure-input-1 form-control full-width-input" type="text">
+	       <div class='col-lg-5 col-sm-5 col-xs-12 gitlab-signup-input-row'>
+		    <input title='Middle Name' placeholder='Middle Name' id='middle-name' class="pure-input-1 form-control full-width-input" type="text">
+		    <div>
+			 <small><label class='control-label normal-weight ' for='middle_name'>&nbsp;Middle Name</label></small>
+		    </div>
+	       </div> 
+	       <div class='col-lg-5 col-sm-5 col-xs-12 gitlab-signup-input-row'>
+		    <input title='Last Name' placeholder='Last Name' id='last-name' class="pure-input-1 form-control full-width-input" type="text">
 		    <div>
 			 <small><label class='control-label normal-weight ' for='last_name'>&nbsp;Last Name</label></small>
 		    </div>
 	       </div> 
-	       <div class='col-lg-2 col-sm-2 col-xs-12 gitlab-signup-input-row'>
-		    <input title='Suffix' placeholder='Suffix' id='suffix' class="pure-input-1 form-control" size="4"  type="text">
+	       <div class='col-lg-2 col-sm-2 col-xs-4 gitlab-signup-input-row'>
+		    <input title='Suffix' placeholder='Suffix' id='suffix' class="pure-input-1 form-control" size="4" type="text">
 		    <div>
 			 <small><label class='control-label normal-weight ' for='suffix'>&nbsp;Suffix</label></small>
 		    </div>
@@ -67,9 +73,9 @@
 		    </div>
 	       </div>
 	       <div class='col-lg-3 col-sm-4 col-xs-12 gitlab-signup-input-row'>
-		    <input title='Zip Code' placeholder='Zip Code' id='zip-code' class="pure-input-1 form-control full-width-input" type="text">
+		    <input title='Postal Code' placeholder='Postal Code' id='postal-code' class="pure-input-1 form-control full-width-input" type="text">
 		    <div>
-			 <small><label class='control-label normal-weight' for='zip-code'>&nbsp;Zip Code</label></small>
+			 <small><label class='control-label normal-weight' for='postal-code'>&nbsp;Postal Code</label></small>
 		    </div>
 	       </div>
 	       <div class='col-sm-2 hide-xs'></div>
@@ -122,7 +128,14 @@
 	       </div>
 	  </div>
 	  <br/>
-
+	  <br/>
+	  <div class="row">
+	       <div class='col-sm-10 col-xs-12 right-text'>
+		    <button id="submit-btn" title="Submit" type="button" class="pure-button pure-button-primary btn-lg" >
+			 Submit
+		    </button>
+	       </div>
+	  </div>
      </div>
      <div class="col-lg-3 col-md-1"></div>
 </div>

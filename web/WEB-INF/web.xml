@@ -2,7 +2,7 @@
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <session-config>
         <session-timeout>
-            @session_timeout@
+            30
         </session-timeout>
     </session-config>
     <welcome-file-list>
@@ -10,6 +10,7 @@
             Index
         </welcome-file>
     </welcome-file-list>
+    <!--Context Parameters-->
     <context-param>
         <param-name>api_url</param-name>
         <param-value>@api.backend.url@</param-value>
@@ -26,7 +27,18 @@
         <param-name>app_name</param-name>
         <param-value>@app_name@</param-value>
     </context-param>
-    
+    <context-param>
+        <param-name>gitlab_submit_email</param-name>
+        <param-value>@gitlab_submit_email@</param-value>
+    </context-param>
+    <context-param>
+        <param-name>gitlab_from_email</param-name>
+        <param-value>@gitlab_from_email@</param-value>
+    </context-param>
+    <context-param>
+        <param-name>smptHost</param-name>
+        <param-value>@smptHost@</param-value>
+    </context-param>
     <!--Servlet to give the Dissemination pages, like search, about, etc-->
     <servlet>
         <servlet-name>Dissemination</servlet-name>
@@ -47,9 +59,7 @@
         <url-pattern>/security-hosting</url-pattern>
         <url-pattern>/contact</url-pattern>
         <url-pattern>/disclaimer</url-pattern>
-        <url-pattern>/gitlab-signup</url-pattern>
     </servlet-mapping>
-    
     <!--Input pages, such as the announce, submit, and approve pages-->
     <servlet>
         <servlet-name>Input</servlet-name>
@@ -65,7 +75,6 @@
         <url-pattern>/projects</url-pattern>
         <url-pattern>/pending</url-pattern>
     </servlet-mapping>
-    
     <!--User pages, such as admin and account-->
     <servlet>
         <servlet-name>User</servlet-name>
@@ -85,7 +94,16 @@
         <url-pattern>/get-projects-data</url-pattern>
         <url-pattern>/help</url-pattern>
     </servlet-mapping>
-    
+    <!--Miscellaneous-->
+    <servlet>
+        <servlet-name>Other</servlet-name>
+        <servlet-class>gov.osti.doecode.pagemappings.Other</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Other</servlet-name>
+        <url-pattern>/gitlab-submission-form</url-pattern>
+        <url-pattern>/gitlab-signup</url-pattern>
+    </servlet-mapping>
     <!--500 pages, 404's, etc-->
     <servlet>
         <servlet-name>Errors</servlet-name>
@@ -104,7 +122,6 @@
         <error-code>500</error-code>
         <location>/error</location>
     </error-page>
-    
     <!-- configuration servlet class -->
     <servlet>
         <servlet-name>Config</servlet-name>
