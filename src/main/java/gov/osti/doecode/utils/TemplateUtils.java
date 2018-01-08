@@ -72,27 +72,8 @@ public class TemplateUtils {
      public static final String PAGE_NEWS_RESOURCES = "news-resources";
      public static final String PAGE_FAQ = "faq";
 
-     public static final ObjectNode GET_COMMON_DATA(boolean isHomepage, ObjectNode output_data, String current_page, ArrayNode jsFilesList, HttpServletRequest request) {
-          //Set the wrapper classes for the header and footer
-          if (isHomepage) {
-               output_data.put("header_class", "homepage-wrapper");
-               output_data.put("footer_class", "footer-homepage");
-               output_data.put("nav_class", "navbar navbar-default main-header visible-xs hidden-sm hidden-md hidden-lg");
-               output_data.put("footer_img_link", "/" + Init.app_name + "/images/DOE_SC_OSTI_FFF.png");
-               output_data.put("footer_link", "footer-link-homepage");
-               output_data.put("linkColorClass", "white");
-               output_data.put("outter_wrapper_style", "homepage-outtermost-style");
-          } else {
-               output_data.put("header_class", " wrapper ");
-               output_data.put("footer_class", "footer footer-bottom");
-               output_data.put("nav_class", "navbar navbar-default main-header");
-               output_data.put("footer_img_link", "/" + Init.app_name + "/images/DOE_SC_OSTI_666_sm.png");
-               output_data.put("footer_link", "footer-link");
-               output_data.put("linkColorClass", "footer-link");
-          }
-
+     public static final ObjectNode GET_COMMON_DATA(ObjectNode output_data, String current_page, ArrayNode jsFilesList, HttpServletRequest request) {
           output_data.put("active_page", current_page);
-          output_data.put("isHomepage", isHomepage);
           if (!JsonObjectUtils.containsKey(output_data, "user_data")) {
                output_data.put("user_data", UserFunctions.getUserDataFromCookie(request));
           }

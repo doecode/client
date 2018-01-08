@@ -36,11 +36,9 @@ public class Dissemination extends HttpServlet {
           String current_page = "";
           ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          boolean isHomepage = false;
 
           /*Determine what page we're on, and load the appropriate title, template, etc*/
           if (remaining.equals("") || remaining.equals("/")) {//HOMEPAGE
-               isHomepage = true;
                page_title = "DOE CODE: Your software services platform and search tool to easily submit, announce, and discover code funded by the U.S. Department of Energy";
                template = TemplateUtils.TEMPLATE_HOMEPAGE;
 
@@ -140,7 +138,7 @@ public class Dissemination extends HttpServlet {
           }
 
           //Send in this object, and get a hold of the common data, like the classes needed to render the homepage correctly and such
-          output_data = TemplateUtils.GET_COMMON_DATA(isHomepage, output_data, current_page, jsFilesList, request);
+          output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, request);
 
           //Write the template out
           TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);

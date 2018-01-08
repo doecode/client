@@ -1,0 +1,19 @@
+<!--Closes outtermost wrapper-->
+<script src='/{{app_name}}/js/libraries/jquery-3.1.1.min.js' type='text/javascript' defer></script>
+<noscript>Your browser does not support JavaScript!</noscript>
+<script src='/{{app_name}}/js/libraries/jquery-ui.min.js' type='text/javascript' defer></script>
+<noscript>Your browser does not support JavaScript!</noscript>
+<script src='/{{app_name}}/js/libraries/bootstrap.min.js' type='text/javascript' defer></script>
+<noscript>Your browser does not support JavaScript!</noscript>
+<script src='/{{app_name}}/js/libraries/chosen.jquery.min.js' type='text/javascript' defer></script>
+<noscript>Your browser does not support JavaScript!</noscript>
+<script src='/{{app_name}}/js/libraries/moment.min-2.19.1.js' type='text/javascript' defer></script>
+<noscript>Your browser does not support JavaScript!</noscript>
+<script src='/{{app_name}}/js/utils/utils.js' type='text/javascript' defer></script>
+<noscript>Your browser does not support JavaScript!</noscript>
+{{#each jsFiles}}
+<script src='/{{app_name}}/js/{{.}}.js' type='text/javascript' defer></script>
+<noscript>Your browser does not support JavaScript!</noscript>
+{{/each}}
+<script src='/{{app_name}}/js/doecode.js' type='text/javascript' defer></script>
+<noscript>Your browser does not support JavaScript!</noscript>

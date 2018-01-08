@@ -1,28 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
      <head>
-	  <link rel="icon" type="image/png" href="/{{app_name}}/images/doecode-icon.png"/>
-	  <meta charset="utf-8">
-	  <title>{{page_title}}</title>
-	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	  <!--All CSS-->
-	  <!--<link rel='stylesheet' href='/{{app_name}}/css/doecode-css.css'/>-->
-	  <style>
-	       {{{css}}}
-	  </style>
-	  {{#each meta_tag}}
-	  <meta name='{{name}}' content='{{content}}'/>
-	  {{/each}}
+	  {{> wrapper/head-content}}
      </head>
      <body>
 	  <input type='hidden' id='active-page' value='{{active_page}}'/>
 	  <span class="hidden">
 	       {{> search/search-form}}
 	  </span>
-	  <div class='{{outter_wrapper_style}}'>
-	       <div class='{{header_class}}'>
-		    <nav class='{{nav_class}}'>
+	  <div>
+	       <div class='wrapper'>
+		    <nav class='navbar navbar-default main-header'>
 			 <div class="container-fluid header-container-fluid no-col-padding-right no-col-padding-left">
 			      <div class="pull-right hidden-xs visible-sm visible-md visible-lg header-signin-links" id="signin-status-big-screens">
 				   {{> user/SigninStatus}}

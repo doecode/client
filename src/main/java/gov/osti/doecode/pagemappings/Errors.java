@@ -44,7 +44,7 @@ public class Errors extends HttpServlet {
                     break;
           }
 
-          output_data = TemplateUtils.GET_COMMON_DATA(false, output_data, "", new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE), request);
+          output_data = TemplateUtils.GET_COMMON_DATA(output_data, "", new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE), request);
           TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
      }
 

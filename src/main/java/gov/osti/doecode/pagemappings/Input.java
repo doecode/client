@@ -190,7 +190,7 @@ public class Input extends HttpServlet {
           //We'll set whether or not this is a collection of collapsible panels 
           output_data.put("is_accordion", true);
           //get common data, like the classes needed for the header and footer
-          output_data = TemplateUtils.GET_COMMON_DATA(false, output_data, current_page, jsFilesList, request);
+          output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, request);
 
           //Write it out
           TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
