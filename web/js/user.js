@@ -736,178 +736,175 @@ var setUpUserAccountPage = function () {
     $("#request-admin-role").on('click', requestAdminRole);
 };
 
-$(document).ready(function () {
-    if (document.getElementById('login-page-identifier')) {
-        //Log In
-        $("#signin-btn").on('click', login);
+if (document.getElementById('login-page-identifier')) {
+    //Log In
+    $("#signin-btn").on('click', login);
 
-        //Make enter work on email and password
-        $("#password").on('keyup', {callback: login}, triggerByEnter);
+    //Make enter work on email and password
+    $("#password").on('keyup', {callback: login}, triggerByEnter);
 
-    } else if (document.getElementById('user-registration-page-identifier')) {
-        var password_check_ids = {email_id: "email",
-            password_id: "password",
-            confirm_password_id: "confirm-password"};
+} else if (document.getElementById('user-registration-page-identifier')) {
+    var password_check_ids = {email_id: "email",
+        password_id: "password",
+        confirm_password_id: "confirm-password"};
 
-        //Bindings to make the password validators work correctly
-        $("#email").on('blur', password_check_ids, checkPassword);
-        //Put check mark or x or nothing next to thing
-        $("#password").on('blur', {password_ids: password_check_ids, is_confirm: false}, validateRegistrationPasswordField);
-        //Put check mark or x or nothing next to thing
-        $("#confirm-password").on('blur', {password_ids: password_check_ids, is_confirm: true}, validateRegistrationPasswordField);
+    //Bindings to make the password validators work correctly
+    $("#email").on('blur', password_check_ids, checkPassword);
+    //Put check mark or x or nothing next to thing
+    $("#password").on('blur', {password_ids: password_check_ids, is_confirm: false}, validateRegistrationPasswordField);
+    //Put check mark or x or nothing next to thing
+    $("#confirm-password").on('blur', {password_ids: password_check_ids, is_confirm: true}, validateRegistrationPasswordField);
 
-        $("#email").on('keyup', password_check_ids, checkPassword);
-        $("#password").on('keyup', password_check_ids, checkPassword);
-        $("#confirm-password").on('keyup', password_check_ids, checkPassword);
+    $("#email").on('keyup', password_check_ids, checkPassword);
+    $("#password").on('keyup', password_check_ids, checkPassword);
+    $("#confirm-password").on('keyup', password_check_ids, checkPassword);
 
-        //Bindings to make the field appear as green and check-marked if it's considered valid
-        $("#first-name").on('blur', markRegisterAsValidOrEmpty);
-        $("#last-name").on('blur', markRegisterAsValidOrEmpty);
-        $("#email").on('blur', function () {
-            var self = this;
-            markRegistrationFieldWithStatus(BLANK_CONDITION, self);
-            var email_val = $(this).val().trim();
-            if (email_val) {
-                $.get(API_BASE + "validation/email?value=" + email_val, function (data) {
-                    markRegistrationFieldWithStatus(SUCCESS_CONDITION, self);
-                }, 'json').fail(function () {
-                    markRegistrationFieldWithStatus(ERROR_CONDITION, self);
-                });
-            }
-        });
-        $("#first-name").on('keyup', markRegisterAsValidOrEmpty);
-        $("#last-name").on('keyup', markRegisterAsValidOrEmpty);
-
-        //the contract number is a bit special
-        $("#contract-number").on('blur', handleRegistrationContractNumberValidation);
-
-        //Checker to ensure whether or not we need to be showing the contract number field
-        $("#email").on('blur', doContractNumberValidationCheck);
-
-        //Makes the create account button work
-        $("#create-account-btn").on('click', createAccount);
-
-        //trigger the create account function when you press enter on teh confirm password field
-        $("#confirm-password").on('keyup', {callback: createAccount}, triggerByEnter);
-
-    } else if (document.getElementById('forgot-password-page-identifier')) {
-        $("#forgot-password-btn").on('click', sendForgotPasswordRequest);
-        $("#email-address").on('keyup', {callback: sendForgotPasswordRequest}, triggerByEnter);
-
-    } else if (document.getElementById('user-account-page-identifier')) {
-        var passcode = $("#user-passcode").val();
-        if ($("#user-passcode").val()) {
-            $.ajax(API_BASE + "user/login", {
-                cache: false,
-                contentType: "application/json",
-                method: "POST",
-                data: JSON.stringify({confirmation_code: passcode}),
-                success: function (data) {
-                    //Now that we're logged in, let's set some local storage attributes
-                    setLoggedInAttributes(data);
-                    //Send up our login data for java to do content with
-                    $.ajax('/' + APP_NAME + '/set-login-status-name', {
-                        cache: false,
-                        contentType: "application/json",
-                        method: "POST",
-                        data: JSON.stringify(data),
-                        success: function (return_data) {
-                            $("#signin-status-big-screens,#signin-status-small-screens").html(return_data.signin_html);
-                            $("#email").val(return_data.email);
-                            $("#first_name").val(return_data.first_name);
-                            $("#last_name").val(return_data.last_name);
-                            setUpUserAccountPage();
-                        }
-                    });
-                },
-                error: function (xhr) {
-                    setCommonModalMessage(FAILED_TO_LOGIN_WITH_PASSCODE);
-                    setTimeout(function () {
-                        window.location.href = '/' + APP_NAME + '/login';
-                    }, 1000);
-                }
+    //Bindings to make the field appear as green and check-marked if it's considered valid
+    $("#first-name").on('blur', markRegisterAsValidOrEmpty);
+    $("#last-name").on('blur', markRegisterAsValidOrEmpty);
+    $("#email").on('blur', function () {
+        var self = this;
+        markRegistrationFieldWithStatus(BLANK_CONDITION, self);
+        var email_val = $(this).val().trim();
+        if (email_val) {
+            $.get(API_BASE + "validation/email?value=" + email_val, function (data) {
+                markRegistrationFieldWithStatus(SUCCESS_CONDITION, self);
+            }, 'json').fail(function () {
+                markRegistrationFieldWithStatus(ERROR_CONDITION, self);
             });
-        } else {
-            checkIsAuthenticated();
-            setUpUserAccountPage();
         }
-    } else if (document.getElementById('user-admin-page-identifier')) {
-        checkHasRole('OSTI');
-        checkIsAuthenticated();
+    });
+    $("#first-name").on('keyup', markRegisterAsValidOrEmpty);
+    $("#last-name").on('keyup', markRegisterAsValidOrEmpty);
 
-        //Now, we get the user list
-        $.ajax({
-            url: API_BASE + 'user/users',
+    //the contract number is a bit special
+    $("#contract-number").on('blur', handleRegistrationContractNumberValidation);
+
+    //Checker to ensure whether or not we need to be showing the contract number field
+    $("#email").on('blur', doContractNumberValidationCheck);
+
+    //Makes the create account button work
+    $("#create-account-btn").on('click', createAccount);
+
+    //trigger the create account function when you press enter on teh confirm password field
+    $("#confirm-password").on('keyup', {callback: createAccount}, triggerByEnter);
+
+} else if (document.getElementById('forgot-password-page-identifier')) {
+    $("#forgot-password-btn").on('click', sendForgotPasswordRequest);
+    $("#email-address").on('keyup', {callback: sendForgotPasswordRequest}, triggerByEnter);
+
+} else if (document.getElementById('user-account-page-identifier')) {
+    var passcode = $("#user-passcode").val();
+    if ($("#user-passcode").val()) {
+        $.ajax(API_BASE + "user/login", {
             cache: false,
             contentType: "application/json",
-            method: "GET",
-            beforeSend: function beforeSend(request) {
-                request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
-            },
+            method: "POST",
+            data: JSON.stringify({confirmation_code: passcode}),
             success: function (data) {
-                //Go through the users list, and populate the select with the values
-                var pending_roles_list = [];
-                data.forEach(function (item) {
-                    var role = (item.roles.length > 0) ? item.roles[0] : '';//Since we only have a one-role system at the moment, we're just going to grab the first role from the list, because that's all there will be
-                    //Because data attributes
-                    //Comes out like <option value="email@email.com" data-firstname="john" data-lastname="doe" data-awardnum="3135" data-role="BAPL" data-isactive="true" data-isverified="false">John DOE (email@email.com)</option>
-                    var user_option = '<option value="' + item.email + '" data-firstname="' + item.first_name + '" data-lastname="'
-                            + item.last_name + '" data-awardnum="' + item.contract_number + '" data-role="' + role + '" data-isactive="'
-                            + item.active + '" data-isverified="' + item.verified + '" data-ispassexpired="' + item.password_expired + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
-                    $("#user-admin-box").append(user_option);
-                    if (item.pending_roles.length > 0) {
-                        pending_roles_list.push(
-                                {name: item.first_name + ' ' + item.last_name, roles: item.pending_roles.join(',')});
+                //Now that we're logged in, let's set some local storage attributes
+                setLoggedInAttributes(data);
+                //Send up our login data for java to do content with
+                $.ajax('/' + APP_NAME + '/set-login-status-name', {
+                    cache: false,
+                    contentType: "application/json",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    success: function (return_data) {
+                        $("#signin-status-big-screens,#signin-status-small-screens").html(return_data.signin_html);
+                        $("#email").val(return_data.email);
+                        $("#first_name").val(return_data.first_name);
+                        $("#last_name").val(return_data.last_name);
+                        setUpUserAccountPage();
                     }
                 });
-                //If we have pending roles, we'll add them to the container
-                if (pending_roles_list.length > 0) {
-                    var pending_roles_html = "";
-                    pending_roles_list.forEach(function (item) {
-                        pending_roles_html += ("<div>" + item.name + " - " + item.roles + "</div>");
-                    });
-                    //Set the html to show the things
-                    $("#requesting-roles-collapse-container").html(pending_roles_html);
-                    //Show the container
-                    $("#requesting-roles-container").show();
-                }
             },
-            error: function () {
-                $("#approval-error-msg").html('An error has occurred, preventing the users from loading.');
+            error: function (xhr) {
+                setCommonModalMessage(FAILED_TO_LOGIN_WITH_PASSCODE);
+                setTimeout(function () {
+                    window.location.href = '/' + APP_NAME + '/login';
+                }, 1000);
             }
         });
-
-        //Makes teh "Users Requesting Roles" work
-        $("#requesting-roles-collapse-btn").on('click',
-                {open_name: '<strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>',
-                    close_name: '<strong><span class="fa fa-caret-down fa-page-caret clickable"></span> Users Requesting Roles</strong>'}
-        , toggleCollapse);
-
-        //Makes the dropdown list work
-        $("#user-admin-box").on('change', loadUserDataForAdminForm);
-
-        var password_check_ids = {email_id: "email",
-            password_id: "password",
-            confirm_password_id: "confirm-password"};
-        //Makes the input form validation content work
-        $("#first_name").on('blur', markUserFieldAsValidOrEmpty);
-        $("#last_name").on('blur', markUserFieldAsValidOrEmpty);
-        $("#password").on('blur', {password_ids: password_check_ids, is_confirm: false}, validateUserPagePasswordField);
-        $("#confirm-password").on('blur', {password_ids: password_check_ids, is_confirm: true}, validateUserPagePasswordField);
-
-        //content for the password validation
-        $("#password").on('keyup', password_check_ids, checkPassword);
-        $("#confirm-password").on('keyup', password_check_ids, checkPassword);
-
-        $("#save-user-admin-btn").on('click', saveUserAdminForm);
-
-        //the contract number is a bit special
-        $("#award_number").on('blur', handleUserAdminContractNumberValidation);
-
-
-    } else if (document.getElementById('help-page-identifier')) {
+    } else {
         checkIsAuthenticated();
-
+        setUpUserAccountPage();
     }
-});
+} else if (document.getElementById('user-admin-page-identifier')) {
+    checkHasRole('OSTI');
+    checkIsAuthenticated();
 
+    //Now, we get the user list
+    $.ajax({
+        url: API_BASE + 'user/users',
+        cache: false,
+        contentType: "application/json",
+        method: "GET",
+        beforeSend: function beforeSend(request) {
+            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+        },
+        success: function (data) {
+            //Go through the users list, and populate the select with the values
+            var pending_roles_list = [];
+            data.forEach(function (item) {
+                var role = (item.roles.length > 0) ? item.roles[0] : '';//Since we only have a one-role system at the moment, we're just going to grab the first role from the list, because that's all there will be
+                //Because data attributes
+                //Comes out like <option value="email@email.com" data-firstname="john" data-lastname="doe" data-awardnum="3135" data-role="BAPL" data-isactive="true" data-isverified="false">John DOE (email@email.com)</option>
+                var user_option = '<option value="' + item.email + '" data-firstname="' + item.first_name + '" data-lastname="'
+                        + item.last_name + '" data-awardnum="' + item.contract_number + '" data-role="' + role + '" data-isactive="'
+                        + item.active + '" data-isverified="' + item.verified + '" data-ispassexpired="' + item.password_expired + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
+                $("#user-admin-box").append(user_option);
+                if (item.pending_roles.length > 0) {
+                    pending_roles_list.push(
+                            {name: item.first_name + ' ' + item.last_name, roles: item.pending_roles.join(',')});
+                }
+            });
+            //If we have pending roles, we'll add them to the container
+            if (pending_roles_list.length > 0) {
+                var pending_roles_html = "";
+                pending_roles_list.forEach(function (item) {
+                    pending_roles_html += ("<div>" + item.name + " - " + item.roles + "</div>");
+                });
+                //Set the html to show the things
+                $("#requesting-roles-collapse-container").html(pending_roles_html);
+                //Show the container
+                $("#requesting-roles-container").show();
+            }
+        },
+        error: function () {
+            $("#approval-error-msg").html('An error has occurred, preventing the users from loading.');
+        }
+    });
+
+    //Makes teh "Users Requesting Roles" work
+    $("#requesting-roles-collapse-btn").on('click',
+            {open_name: '<strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>',
+                close_name: '<strong><span class="fa fa-caret-down fa-page-caret clickable"></span> Users Requesting Roles</strong>'}
+    , toggleCollapse);
+
+    //Makes the dropdown list work
+    $("#user-admin-box").on('change', loadUserDataForAdminForm);
+
+    var password_check_ids = {email_id: "email",
+        password_id: "password",
+        confirm_password_id: "confirm-password"};
+    //Makes the input form validation content work
+    $("#first_name").on('blur', markUserFieldAsValidOrEmpty);
+    $("#last_name").on('blur', markUserFieldAsValidOrEmpty);
+    $("#password").on('blur', {password_ids: password_check_ids, is_confirm: false}, validateUserPagePasswordField);
+    $("#confirm-password").on('blur', {password_ids: password_check_ids, is_confirm: true}, validateUserPagePasswordField);
+
+    //content for the password validation
+    $("#password").on('keyup', password_check_ids, checkPassword);
+    $("#confirm-password").on('keyup', password_check_ids, checkPassword);
+
+    $("#save-user-admin-btn").on('click', saveUserAdminForm);
+
+    //the contract number is a bit special
+    $("#award_number").on('blur', handleUserAdminContractNumberValidation);
+
+
+} else if (document.getElementById('help-page-identifier')) {
+    checkIsAuthenticated();
+
+}

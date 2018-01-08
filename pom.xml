@@ -26,6 +26,9 @@
         <logback.version>1.2.3</logback.version>
         <session_timeout>30</session_timeout>
         <app_name>doecode</app_name>
+        <gitlab_submit_email></gitlab_submit_email>
+        <gitlab_from_email></gitlab_from_email>
+        <smtpHost></smtpHost>
     </properties>
     <!--
         You will need to add your own profiles into this pom.xml, or use profiles stored in your local settings.xml
@@ -40,6 +43,9 @@
                 <siteURL>Your local url for your instance of this application</siteURL>
                 <authorityapiURL>https://www.osti.gov/elink/api/authorities/</authorityapiURL>
                 <app_name>name of app</app_name>
+                <gitlab_submit_email>email for gitlab submission</gitlab_submit_email>
+                <gitlab_from_email>Email that the gitlab submission is from</gitlab_from_email>
+                <smtpHost>SMTP host for email sending</smtpHost>
             </properties>
         </profile>
     -->
@@ -106,7 +112,6 @@
                             <goal>minify</goal>
                         </goals>
                     </execution>
-                    <!--
                     <execution>
                         <id>minify-user</id>
                         <phase>package</phase>
@@ -125,7 +130,6 @@
                             <goal>minify</goal>
                         </goals>
                     </execution>
-                    -->
                     <execution>
                         <id>minify-utils</id>
                         <phase>package</phase>
@@ -252,7 +256,18 @@
                                 <replacement>
                                     <token>@app_name@</token>
                                     <value>${app_name}</value>
-                                    <value></value>
+                                </replacement>
+                                <replacement>
+                                    <token>@gitlab_submit_email@</token>
+                                    <value>${gitlab_submit_email}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@gitlab_from_email@</token>
+                                    <value>${gitlab_from_email}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@smtpHost@</token>
+                                    <value>${smtpHost}</value>
                                 </replacement>
                             </replacements>
                         </configuration>
@@ -370,6 +385,11 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.5</version>
         </dependency>
         <!--Jsoup (for cleaning out script tags to prevent XSS attacks)-->
         <dependency>

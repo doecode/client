@@ -64,17 +64,17 @@ var triggerAdvancedSearch = function () {
     if (sponsoring_orgs.length > 0) {
         $("#search-sponsoring_organization").val(JSON.stringify(sponsoring_orgs));
     }
-    
+
     //Software Type
     var software_types = $("#advanced-search-software_type").val();
-    if(software_types.length>0){
+    if (software_types.length > 0) {
         $("#search-software_type").val(JSON.stringify(software_types));
     }
 
     //Sort
     $("#search-sort").val($("#advanced-search-sort").val());
 
-    $("#search-page-form").attr('action', '/'+APP_NAME+'/results?page=1');
+    $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
     $("#search-page-form").submit();
 };
 
@@ -101,14 +101,14 @@ var triggerDropdownAdvancedSearch = function () {
         $("#search-date_latest").val(moment(date_latest, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT) + "T23:59:59.001Z");
     }
 
-    $("#search-page-form").attr('action', '/'+APP_NAME+'/results?page=1');
+    $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
     $("#search-page-form").submit();
 };
 
 var triggerBasicSearch = function () {
     clearSearchFormFields();
     $("#search-all_fields").val($(this).parent().prev('div').find('input[type=text]').val());
-    $("#search-page-form").attr('action', '/'+APP_NAME+'/results?page=1');
+    $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
     $("#search-page-form").submit();
 };
 
@@ -134,57 +134,55 @@ var clearSearchFormFields = function () {
 var logout = function () {
     $.get(API_BASE + 'user/logout', function (data) {
         clearLoginLocalstorage();
-        window.location.href = '/'+APP_NAME+'/logout';
+        window.location.href = '/' + APP_NAME + '/logout';
     }, 'json');
 };
 
-$(document).ready(function () {
-    //Toggles teh advanced search button dropdown
-    $(".adv-search-button").on('click', toggleSearchDropdown);
+//Toggles teh advanced search button dropdown
+$(".adv-search-button").on('click', toggleSearchDropdown);
 
-    //Makes all of the advanced search and search buttons work
-    $("#adv-search-page-search-btn").on('click', triggerAdvancedSearch);
-    $(".adv-search-btn-dropdown").on('click', triggerDropdownAdvancedSearch);
-    $(".search-btn").on('click', triggerBasicSearch);
-    $(".search-box").on('keyup', function (event) {
-        if (event.which === 13) {
-            $(this).parent().next('div').find('button').trigger('click');
-        }
-    });
-
-    //Sets up all of the datepickers
-    $(".doecode-datepicker").datepicker(DATEPICKER_OPTS);
-
-    /*Page-specific content*/
-    if (document.getElementById('search-results-page-identifier')) {
-        /*Store the latest search parameters on the search results page*/
-        localStorage.latestSearchParams = JSON.stringify($("#search-page-form").serializeArray());
-
-    } else {
-        /*Clear out the latest search params*/
-        localStorage.latestSearchParams = JSON.stringify({});
+//Makes all of the advanced search and search buttons work
+$("#adv-search-page-search-btn").on('click', triggerAdvancedSearch);
+$(".adv-search-btn-dropdown").on('click', triggerDropdownAdvancedSearch);
+$(".search-btn").on('click', triggerBasicSearch);
+$(".search-box").on('keyup', function (event) {
+    if (event.which === 13) {
+        $(this).parent().next('div').find('button').trigger('click');
     }
+});
 
-    /*Makes the logout button work*/
-    $(".logout-btn").on("click", logout);
+//Sets up all of the datepickers
+$(".doecode-datepicker").datepicker(DATEPICKER_OPTS);
 
-    /*Clears out the common message modal*/
-    $("#common-message-dialog").on('hidden.bs.modal', clearCommonModal);
+/*Page-specific content*/
+if (document.getElementById('search-results-page-identifier')) {
+    /*Store the latest search parameters on the search results page*/
+    localStorage.latestSearchParams = JSON.stringify($("#search-page-form").serializeArray());
 
-    /*Puts all of the correct text into each tooltip*/
-    $(".tooltip-item").each(function () {
-        var related_html = $(this).find('span.tooltip-content').html();
-        var hide_val = $(this).data('hidecount') ? parseInt($(this).data('hidecount')) : 1000;
-        $(this).tooltip({placement: 'top',
-            html: true,
-            title: related_html,
-            delay: {'hide': hide_val,
-                'show': 100}
-        });
+} else {
+    /*Clear out the latest search params*/
+    localStorage.latestSearchParams = JSON.stringify({});
+}
+
+/*Makes the logout button work*/
+$(".logout-btn").on("click", logout);
+
+/*Clears out the common message modal*/
+$("#common-message-dialog").on('hidden.bs.modal', clearCommonModal);
+
+/*Puts all of the correct text into each tooltip*/
+$(".tooltip-item").each(function () {
+    var related_html = $(this).find('span.tooltip-content').html();
+    var hide_val = $(this).data('hidecount') ? parseInt($(this).data('hidecount')) : 1000;
+    $(this).tooltip({placement: 'top',
+        html: true,
+        title: related_html,
+        delay: {'hide': hide_val,
+            'show': 100}
     });
+});
 
-    /*Make the signin-btn-containers trigger the anchor tags within them*/
-    $(".signin-btn-container").on('click', function () {
-        window.location.href=$(this).find('a').attr('href');
-    });
+/*Make the signin-btn-containers trigger the anchor tags within them*/
+$(".signin-btn-container").on('click', function () {
+    window.location.href = $(this).find('a').attr('href');
 });

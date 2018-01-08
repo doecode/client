@@ -297,143 +297,138 @@ var setUpDateSlider = function () {
     }
 };
 
-$(document).ready(function () {
-    //If we're on the about page....
-    if (document.getElementById('about-page-identifier')) {
-        /*Make the top 3 image hovers work*/
-        $(".about-top-img").hover(handleAboutTopMouseEnter, handleAboutTopMouseLeave);
-        $(".about-urls-area").hover(handleAboutMouseEnter, handleAboutMouseLeave);
-        /*Had to add false href's to these to pass 508 compliance. This is here to prevent the clicking from doing anything*/
-        $(".about-urls-area").on('click', function (event) {
-            event.preventDefault();
-        });
+//If we're on the about page....
+if (document.getElementById('about-page-identifier')) {
+    /*Make the top 3 image hovers work*/
+    $(".about-top-img").hover(handleAboutTopMouseEnter, handleAboutTopMouseLeave);
+    $(".about-urls-area").hover(handleAboutMouseEnter, handleAboutMouseLeave);
+    /*Had to add false href's to these to pass 508 compliance. This is here to prevent the clicking from doing anything*/
+    $(".about-urls-area").on('click', function (event) {
+        event.preventDefault();
+    });
 
-    } else if (document.getElementById('search-results-page-identifier')) {
-        /*Toggles the more or less on the search results page*/
-        $(".description-pt2-toggle").on('click', toggleDescriptionMoreLess);
+} else if (document.getElementById('search-results-page-identifier')) {
+    /*Toggles the more or less on the search results page*/
+    $(".description-pt2-toggle").on('click', toggleDescriptionMoreLess);
 
-        /*Toggles sidebar filter on small screens*/
-        $(".toggle-sidebar").on('click',
-                {open_name: '<span class="fa fa-caret-right fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search',
-                    close_name: '<span class="fa fa-caret-down fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search'}
-        , toggleCollapse);
+    /*Toggles sidebar filter on small screens*/
+    $(".toggle-sidebar").on('click',
+            {open_name: '<span class="fa fa-caret-right fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search',
+                close_name: '<span class="fa fa-caret-down fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search'}
+    , toggleCollapse);
 
-        /*Makes the previous and next buttons work*/
-        $(".pagination-prev-btn,.pagination-next-btn").on('click', searchPagePaginate);
+    /*Makes the previous and next buttons work*/
+    $(".pagination-prev-btn,.pagination-next-btn").on('click', searchPagePaginate);
 
-        /*Hides and shows the dropdown*/
-        $(".pagination-choose-btn").on('click', togglePaginationDropdown);
+    /*Hides and shows the dropdown*/
+    $(".pagination-choose-btn").on('click', togglePaginationDropdown);
 
-        /*Updates the value of where the slider bar is at*/
-        $(".pagination-choose-slider").on('input', updatePaginationSliderValues);
+    /*Updates the value of where the slider bar is at*/
+    $(".pagination-choose-slider").on('input', updatePaginationSliderValues);
 
-        /*Moves search to page you got to with the slider*/
-        $(".pagination-go-slider").on('click', triggerPaginationGoSearch);
+    /*Moves search to page you got to with the slider*/
+    $(".pagination-go-slider").on('click', triggerPaginationGoSearch);
 
-        /*Need to apply unique id's to the sort dropdowndowns so they work correctly*/
-        var id_prefix = "sort-dropdown-";
-        var sort_dropdown_value = 0;
-        $(".sort-dropdown-btn").each(function () {
-            var new_id = id_prefix + sort_dropdown_value.toString();
-            $(this).attr('id', new_id);
-            $(this).next('ul.dropdown-menu').attr('aria-labelledby', new_id);
-            sort_dropdown_value++;
-        });
+    /*Need to apply unique id's to the sort dropdowndowns so they work correctly*/
+    var id_prefix = "sort-dropdown-";
+    var sort_dropdown_value = 0;
+    $(".sort-dropdown-btn").each(function () {
+        var new_id = id_prefix + sort_dropdown_value.toString();
+        $(this).attr('id', new_id);
+        $(this).next('ul.dropdown-menu').attr('aria-labelledby', new_id);
+        sort_dropdown_value++;
+    });
 
-        /*Triggers a re-search for the sake of sorting*/
-        $(".sort-dropdown-option").on('click', updateSearchSort);
+    /*Triggers a re-search for the sake of sorting*/
+    $(".sort-dropdown-option").on('click', updateSearchSort);
 
-        //Makes it where clicking on a checkbox on the search results page adds or removes that value from the search
-        $(".search-checkbox").on('click', addSearchCheckboxToSearch);
+    //Makes it where clicking on a checkbox on the search results page adds or removes that value from the search
+    $(".search-checkbox").on('click', addSearchCheckboxToSearch);
 
-        //Allows you to search by author name
-        $(".author-search-name").on('click', authorSearchDropdownName);
+    //Allows you to search by author name
+    $(".author-search-name").on('click', authorSearchDropdownName);
 
-        //Makes the x next to the items in teh search results description work
-        $(".search-for-filter-x").on('click', removeSearchResultDescriptionItem);
+    //Makes the x next to the items in teh search results description work
+    $(".search-for-filter-x").on('click', removeSearchResultDescriptionItem);
 
-        $(".search-for-modify-search").on('click', modify_search);
+    $(".search-for-modify-search").on('click', modify_search);
 
-        //Makes the date range slider work
-        if (isValidJSON($("#facets-year-data").val()) && JSON.parse($("#facets-year-data").val()).length > 0 && isValidInt($("#search-results-count").val()) && parseInt($("#search-results-count").val()) > 0) {
-            setUpDateSlider();
-        } else {
-            $(".release-date-sidebar-container").hide();
+    //Makes the date range slider work
+    if (isValidJSON($("#facets-year-data").val()) && JSON.parse($("#facets-year-data").val()).length > 0 && isValidInt($("#search-results-count").val()) && parseInt($("#search-results-count").val()) > 0) {
+        setUpDateSlider();
+    } else {
+        $(".release-date-sidebar-container").hide();
+    }
+} else if (document.getElementById('biblio-page-identifier') && !document.getElementById('biblio-code-id-not-found')) {
+
+    //For authors
+    $(".author-search-name").on('click', authorSearchDropdownName);
+
+    /*Searches DOECODE for a given orcid*/
+    $(".author-dropdown-search-orcid").on("click", authorSearchDropdownORCID);
+
+    //For author affiliations
+    $(".toggle-affiliations").on('click', toggleAffiliationCollapse);
+
+    //Tacks this page's url onto each of the social media links
+    $(".biblio-sharing-link").each(function () {
+        var current_href = $(this).attr('href');
+        $(this).attr('href', current_href + window.location.href);
+    });
+
+    //Makes the "Search Results" part of the breadcrumb trail work
+    $(".biblio-breadcrumb-trail").on('click', goBackToSearch);
+
+    //Makes the "previous/next" work on the description
+    $(".description-pt2-toggle").on('click', toggleDescriptionMoreLess);
+
+    var clipboard = new Clipboard(".clip-cite-bib");
+    //Unhighlights the text copied to the clipboard
+    clipboard.on('success', function () {
+        if (document.selection) {
+            document.selection.empty();
+        } else if (window.getSelection) {
+            window.getSelection().removeAllRanges();
         }
-    } else if (document.getElementById('biblio-page-identifier') && !document.getElementById('biblio-code-id-not-found')) {
+    });
 
-        //For authors
-        $(".author-search-name").on('click', authorSearchDropdownName);
 
-        /*Searches DOECODE for a given orcid*/
-        $(".author-dropdown-search-orcid").on("click", authorSearchDropdownORCID);
+} else if (document.getElementById('advanced-search-page-identifier')) {
+    //If we had a latest search, we'll populate the advanced search page with the parameters we had
+    if (isValidJSON(localStorage.latestSearchParams) && Array.isArray(JSON.parse(localStorage.latestSearchParams)) && localStorage.isRefinedSearch === "true") {
 
-        //For author affiliations
-        $(".toggle-affiliations").on('click', toggleAffiliationCollapse);
+        var latestSearchParams = JSON.parse(localStorage.latestSearchParams);
+        //Go through each search param,and add it to the search results page
+        latestSearchParams.forEach(function (item) {
+            var item_val = item.value;
+            var item_name = item.name;
+            //If the item passed in is json, then we need to treat it differently
+            if (isValidJSON(item_val) && Array.isArray(JSON.parse(item_val))) {
+                var item_values = JSON.parse(item_val);
+                item_values.forEach(function (values_item) {
+                    //Go through each item. If we don't have the value, then add it to the select box
+                    if ($("#advanced-search-" + item_name + " option[value='" + values_item + "']").val() === undefined) {
+                        $("#advanced-search-" + item_name).append('<option value="' + values_item + '" selected>' + values_item + "</option>");
 
-        //Tacks this page's url onto each of the social media links
-        $(".biblio-sharing-link").each(function () {
-            var current_href = $(this).attr('href');
-            $(this).attr('href', current_href + window.location.href);
-        });
+                    } else {//IF we have the value already, go to that item and set it to selected
+                        $("#advanced-search-" + item_name).find('option[value="' + values_item + '"]').prop('selected', true);
+                    }
 
-        //Makes the "Search Results" part of the breadcrumb trail work
-        $(".biblio-breadcrumb-trail").on('click', goBackToSearch);
+                    $("#advanced-search-" + item_name).trigger('chosen:updated');
+                });
+            } else if (item_val && (item_name == 'date_latest' || item_name == 'date_earliest')) {//If it's a date
+                var no_t_date = item_val.substr(0, item_val.indexOf('T'));
+                $("#advanced-search-" + item_name).val(moment(no_t_date, BACK_END_DATE_FORMAT).format(FRONT_END_DATE_FORMAT));
 
-        //Makes the "previous/next" work on the description
-        $(".description-pt2-toggle").on('click', toggleDescriptionMoreLess);
-
-        var clipboard = new Clipboard(".clip-cite-bib");
-        //Unhighlights the text copied to the clipboard
-        clipboard.on('success', function () {
-            if (document.selection) {
-                document.selection.empty();
-            } else if (window.getSelection) {
-                window.getSelection().removeAllRanges();
+            } else {//If it's anything else
+                $("#advanced-search-" + item.name).val(item_val);
             }
         });
-
-
-    } else if (document.getElementById('advanced-search-page-identifier')) {
-        //If we had a latest search, we'll populate the advanced search page with the parameters we had
-        if (isValidJSON(localStorage.latestSearchParams) && Array.isArray(JSON.parse(localStorage.latestSearchParams)) && localStorage.isRefinedSearch === "true") {
-
-            var latestSearchParams = JSON.parse(localStorage.latestSearchParams);
-            //Go through each search param,and add it to the search results page
-            latestSearchParams.forEach(function (item) {
-                var item_val = item.value;
-                var item_name = item.name;
-                //If the item passed in is json, then we need to treat it differently
-                if (isValidJSON(item_val) && Array.isArray(JSON.parse(item_val))) {
-                    var item_values = JSON.parse(item_val);
-                    item_values.forEach(function (values_item) {
-                        //Go through each item. If we don't have the value, then add it to the select box
-                        if ($("#advanced-search-" + item_name + " option[value='" + values_item + "']").val() === undefined) {
-                            $("#advanced-search-" + item_name).append('<option value="' + values_item + '" selected>' + values_item + "</option>");
-
-                        } else {//IF we have the value already, go to that item and set it to selected
-                            $("#advanced-search-" + item_name).find('option[value="' + values_item + '"]').prop('selected', true);
-                        }
-
-                        $("#advanced-search-" + item_name).trigger('chosen:updated');
-                    });
-                } else if (item_val && (item_name == 'date_latest' || item_name == 'date_earliest')) {//If it's a date
-                    var no_t_date = item_val.substr(0, item_val.indexOf('T'));
-                    $("#advanced-search-" + item_name).val(moment(no_t_date, BACK_END_DATE_FORMAT).format(FRONT_END_DATE_FORMAT));
-
-                } else {//If it's anything else
-                    $("#advanced-search-" + item.name).val(item_val);
-                }
-            });
-        }
-        localStorage.isRefinedSearch = "false";
-
-        //Makes the chosen js inputs work with custom content
-        $(".chosen-search-input").on('keyup', modifyChosenSelectForCustomEntry);
-        $(".chosen-search-input").on('keydown', modifyChosenSelectForCustomEntryTabKey);
-        
-    } else if (document.getElementById('gitlab-signup-page-identifier')) {
-        
-        
     }
-});
+    localStorage.isRefinedSearch = "false";
+
+    //Makes the chosen js inputs work with custom content
+    $(".chosen-search-input").on('keyup', modifyChosenSelectForCustomEntry);
+    $(".chosen-search-input").on('keydown', modifyChosenSelectForCustomEntryTabKey);
+
+} 

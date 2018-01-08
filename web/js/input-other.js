@@ -258,74 +258,72 @@ var goToPage = function (event) {
     window.location.href = event.data.page;
 };
 
-$(document).ready(function () {
-    checkIsAuthenticated();
+checkIsAuthenticated();
 
-    if (document.getElementById('confirmation-page-identifier')) {
-        var code_id = $("#code-id").val();
-        doAuthenticatedAjax('GET', API_BASE + 'metadata/' + code_id, parseConfirmPageData, null, parseConfirmPageError);
-        doAuthenicatedFileDownloadAjax((API_BASE + 'metadata/' + code_id + '?format=yaml'), parseYMLDownloadSuccess, praseYMLDownloadError);
+if (document.getElementById('confirmation-page-identifier')) {
+    var code_id = $("#code-id").val();
+    doAuthenticatedAjax('GET', API_BASE + 'metadata/' + code_id, parseConfirmPageData, null, parseConfirmPageError);
+    doAuthenicatedFileDownloadAjax((API_BASE + 'metadata/' + code_id + '?format=yaml'), parseYMLDownloadSuccess, praseYMLDownloadError);
 
-    } else if (document.getElementById('projects-page-identifier')) {
-        //Show the modal message for loading projects
-        setCommonModalMessage(LOADING_PROJECTS_OPTS);
-        showCommonModalMessage();
-        $.ajax({
-            url: API_BASE + 'metadata/projects',
-            cache: false,
-            contentType: "application/json; charset=UTF-8",
-            method: "GET",
-            beforeSend: function beforeSend(request) {
-                request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
-            },
-            success: function (data) {
-                var new_data = [];
+} else if (document.getElementById('projects-page-identifier')) {
+    //Show the modal message for loading projects
+    setCommonModalMessage(LOADING_PROJECTS_OPTS);
+    showCommonModalMessage();
+    $.ajax({
+        url: API_BASE + 'metadata/projects',
+        cache: false,
+        contentType: "application/json; charset=UTF-8",
+        method: "GET",
+        beforeSend: function beforeSend(request) {
+            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+        },
+        success: function (data) {
+            var new_data = [];
 
-                data.records.forEach(function (item) {
-                    new_data.push({
-                        code_id: item.code_id ? item.code_id : '',
-                        software_title: item.software_title ? item.software_title : '',
-                        workflow_status: item.workflow_status ? item.workflow_status : ''
-                    });
+            data.records.forEach(function (item) {
+                new_data.push({
+                    code_id: item.code_id ? item.code_id : '',
+                    software_title: item.software_title ? item.software_title : '',
+                    workflow_status: item.workflow_status ? item.workflow_status : ''
                 });
-                var projects_table = $("#projects-datatable").DataTable(projects_data_table_opts);
-                projects_table.rows.add(new_data).draw();
-                hideCommonModalMessage();
-            },
-            error: function () {
-                setCommonModalMessage(LOADER_PROJECTS_ERROR_OPTS);
-            }
-        });
-    } else if (document.getElementById('approval-page-identifier')) {
-        //LOADING_PENDING_PROJECTS_OPTS
-        setCommonModalMessage(LOADING_PENDING_PROJECTS_OPTS);
-        showCommonModalMessage();
-        $.ajax({
-            url: API_BASE + 'metadata/projects/pending',
-            cache: false,
-            contentType: "application/json",
-            method: "GET",
-            beforeSend: function beforeSend(request) {
-                request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
-            },
-            success: function (data) {
-                var new_data = [];
+            });
+            var projects_table = $("#projects-datatable").DataTable(projects_data_table_opts);
+            projects_table.rows.add(new_data).draw();
+            hideCommonModalMessage();
+        },
+        error: function () {
+            setCommonModalMessage(LOADER_PROJECTS_ERROR_OPTS);
+        }
+    });
+} else if (document.getElementById('approval-page-identifier')) {
+    //LOADING_PENDING_PROJECTS_OPTS
+    setCommonModalMessage(LOADING_PENDING_PROJECTS_OPTS);
+    showCommonModalMessage();
+    $.ajax({
+        url: API_BASE + 'metadata/projects/pending',
+        cache: false,
+        contentType: "application/json",
+        method: "GET",
+        beforeSend: function beforeSend(request) {
+            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+        },
+        success: function (data) {
+            var new_data = [];
 
-                data.records.forEach(function (item) {
-                    new_data.push({
-                        code_id: item.code_id ? item.code_id : '',
-                        software_title: item.software_title ? item.software_title : '',
-                        workflow_status: item.workflow_status ? item.workflow_status : ''
-                    });
+            data.records.forEach(function (item) {
+                new_data.push({
+                    code_id: item.code_id ? item.code_id : '',
+                    software_title: item.software_title ? item.software_title : '',
+                    workflow_status: item.workflow_status ? item.workflow_status : ''
                 });
-                var approval_table = $("#pending-datatable").DataTable(pending_data_table_opts);
-                approval_table.rows.add(new_data).draw();
-                hideCommonModalMessage();
-            },
-            error: function () {
-                setCommonModalMessage(LOADING_PENDING_PROJECTS_ERROR_OPTS);
-            }
-        });
+            });
+            var approval_table = $("#pending-datatable").DataTable(pending_data_table_opts);
+            approval_table.rows.add(new_data).draw();
+            hideCommonModalMessage();
+        },
+        error: function () {
+            setCommonModalMessage(LOADING_PENDING_PROJECTS_ERROR_OPTS);
+        }
+    });
 
-    }
-});
+}
