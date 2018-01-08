@@ -44,12 +44,12 @@ public class Input extends HttpServlet {
           //Software type param
           String software_type_param = request.getParameter("software_type");
 
+          //Default, if invalid type
+          if (StringUtils.isBlank(software_type_param) || !(software_type_param.equalsIgnoreCase("Scientific") || software_type_param.equalsIgnoreCase("Business"))) {
+               software_type_param = "Scientific";
+          }
+
           //Some of the option steps, and whether or not we should hide them
-          boolean hide_contact = false;
-          boolean hide_contributors = false;
-          boolean hide_identifiers = false;
-          boolean hide_organizations = false;
-          boolean hide_supplemental_info = false;
           boolean show_optional_toggle = false;
 
           boolean is_logged_in = UserFunctions.isUserLoggedIn(request);
@@ -77,17 +77,7 @@ public class Input extends HttpServlet {
                }
 
                //Toggle everything to not be shown, since we're on the submit page
-               hide_contact = true;
-               hide_contributors = true;
-               hide_identifiers = true;
-               hide_organizations = true;
-               hide_supplemental_info = true;
                show_optional_toggle = true;
-
-               //If it's business software, show the organizations tab
-               if (StringUtils.equals(software_type_param, "Business")) {
-                    hide_organizations = false;
-               }
 
                current_page = TemplateUtils.PAGE_PROJECTS;
                is_inputjs = true;
@@ -185,18 +175,9 @@ public class Input extends HttpServlet {
           }
 
           //Add all of the hide/shows for the panels
-          output_data.put("hide_contact_info_step", hide_contact);
-          output_data.put("hide_contributing_step", hide_contributors);
-          output_data.put("hide_identifiers_step", hide_identifiers);
-          output_data.put("hide_organizations_step", hide_organizations);
-          output_data.put("hide_supplemental_step", hide_supplemental_info);
           output_data.put("show_optional_toggle", show_optional_toggle);
-
-          //Check the software type
-          if (StringUtils.isBlank(software_type_param)) {
-               software_type_param = "S";
-          }
-          output_data.put("software_type", Jsoup.clean(software_type_param, Whitelist.basic()));
+          
+          output_data.put("software_type", Jsoup.clean(software_type_param.substring(0, 1).toUpperCase(), Whitelist.basic()));
 
           //These js files are needed on all input pages
           jsFilesList.add("libraries/jquery.dataTables.min");

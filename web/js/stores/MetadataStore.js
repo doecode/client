@@ -12,6 +12,7 @@ var MetadataStore = function MetadataStore() {};
 
   var _metadata = mobx.observable({
     "code_id": 0,
+    "software_type": "",
     "open_source": false,
     "repository_link": '',
     "landing_page": '',

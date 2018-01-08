@@ -498,15 +498,3 @@ var makeDelimitedList = function (list, delimiter) {
     }
     return html;
 };
-
-var getSoftwareTypeLabel = function (software_char) {
-    var return_val = "Scientific";
-
-    switch (software_char) {
-        case "B":
-            return_val = "Business";
-            break;
-    }
-
-    return return_val;
-};

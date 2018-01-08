@@ -24,8 +24,7 @@ var pending_data_table_opts = {
         {name: 'software_title', data: 'software_title', width: '69%'},
         {name: 'workflow_status', data: 'workflow_status', width: '8%', className: 'text-center', orderable: false},
         {render: function (data, type, row) {
-                var software_type_url = getSoftwareTypeLabel(row.software_type);
-                return '<a href="/' + APP_NAME + '/approve?code_id=' + row.code_id + '&software_type=' + software_type_url
+                return '<a href="/' + APP_NAME + '/approve?code_id=' + row.code_id
                         + '" class="pure-button pure-button-primary btn-sm white"><span class="fa fa-pencil"></span> View for Approval</a>';
             }, width: '13%', className: 'text-center', orderable: false}
     ]
@@ -40,13 +39,11 @@ var projects_data_table_opts = {
         {name: 'software_title', data: 'software_title', width: '56%'},
         {name: 'workflow_status', data: 'workflow_status', width: '8%', className: 'text-center'},
         {render: function (data, type, row) {
-                var software_type_url = getSoftwareTypeLabel(row.software_type);
-                return '<a href="/' + APP_NAME + '/submit?code_id=' + row.code_id + '&software_type=' + software_type_url
+                return '<a href="/' + APP_NAME + '/submit?code_id=' + row.code_id
                         + '" class="pure-button button-success btn-sm white "><span class="fa fa-pencil"></span> Update Metadata</a>';
             }, width: '13%', className: 'text-center', orderable: false},
         {render: function (data, type, row) {
-                var software_type_url = getSoftwareTypeLabel(row.software_type);
-                return '<a href="/' + APP_NAME + '/announce?code_id=' + row.code_id + '&software_type=' + software_type_url
+                return '<a href="/' + APP_NAME + '/announce?code_id=' + row.code_id
                         + '" class="pure-button pure-button-primary btn-sm white"><span class="fa fa-pencil"></span> Announce to E-Link</a>';
             }, width: '13%', className: 'text-center', orderable: false}
     ]

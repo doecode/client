@@ -220,9 +220,14 @@ var parseErrorResponse = function parseErrorResponse(jqXhr, exception) {
     showCommonModalMessage();
 };
 
-var parseSearchResponse = mobx.action("Parse Search Response", function parseReceiveResponse(data) {
+var parseSearchResponse = mobx.action("Parse Search Response", function parseSearchResponse(data) {
     metadata.loadRecordFromServer(data.metadata, $("#page").val());
     
+    // if old record that's not updated, set to default
+    var software_type_id = metadata.getValue("software_type");
+    if (!software_type_id)
+	    metadata.setValue("software_type", $("#software_type").val());
+	    
     form.allowSave = (data.metadata.workflow_status != "Submitted" && data.metadata.workflow_status != "Approved");
     
     
@@ -340,12 +345,12 @@ var approve = function approve() {
     doAuthenticatedAjax('GET', API_BASE + 'metadata/approve/'+code_id, parseApproveResponse, null, parseErrorResponse);
 };
 
-var parseSaveResponse = mobx.action("Parse Receive Response", function parseReceiveResponse(data) {
+var parseSaveResponse = mobx.action("Parse Receive Response", function parseSaveResponse(data) {
     metadata.setValue("code_id", data.metadata.code_id);
     hideCommonModalMessage();
 
     if (!($("#code_id").val())) {
-        window.location.href = '/' + APP_NAME + '/submit?code_id=' + data.metadata.code_id + "&software_type=" + $("#software-type").val();
+        window.location.href = "/" + APP_NAME + "/submit?code_id=" + data.metadata.code_id;
     }
 });
 
@@ -432,6 +437,15 @@ mobx.autorun("Allow Save", function () {
    		
 	$("#doi").prop("disabled", !form.allowSave && metadata.getValue("doi"));
 	
+	//mobx.whyRun();
+});
+
+mobx.autorun("Toggle Software Type", function () {
+   	if (metadata.getValue("software_type") == "B") {
+   		$("#organizations-step").show();
+   		$('#organizations-step').insertBefore('#doi-step');
+   	}
+
 	//mobx.whyRun();
 });
 
@@ -1340,9 +1354,6 @@ var modalToMetadataProperty = function (modal) {
 
 /**DOI and Release Date**/
 var parseReservationResponse = mobx.action("Reservation Response", function (data) {
-	var doiInfo = metadata.getFieldInfo("doi");
-	var infixInfo = metadata.getFieldInfo("doi_infix");
-
     metadata.setValue("doi", data.doi);
     metadata.setValue("doi_status", "RES");
     
@@ -1494,6 +1505,9 @@ $(document).ready(mobx.action("Document Ready", function () {
         showCommonModalMessage();
         doAuthenticatedAjax('GET', API_BASE + "metadata/" + code_id, parseSearchResponse, undefined, parseErrorResponse);
     } else {
+	    // set software type
+	    metadata.setValue("software_type", $("#software_type").val());
+	    
         $("#input-save-btn").show();
     }
 
@@ -1526,6 +1540,7 @@ $(document).ready(mobx.action("Document Ready", function () {
             $(this).hide();
         });
     }
+    
     // open first panel
     $("#repository-panel-anchor").trigger('click');
     //Makes the accessibility radio buttons work

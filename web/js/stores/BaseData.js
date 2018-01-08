@@ -68,6 +68,11 @@ var BaseData = function () {
 	      }
       }
       
+      if (field === 'software_type' && data == 'B') {  
+	      var schema = this.infoSchema["sponsoring_organizations"];  
+	      schema.required = "sub";
+      }
+      
       if (field === 'doi_status') {  
 	      var schema = this.infoSchema["doi_infix"];    
 	      if (data == 'RES') {      
