@@ -83,7 +83,6 @@ public class Dissemination extends HttpServlet {
           } else if (remaining.equals("/search")) {
                page_title = "DOE CODE: Advanced Search";
                template = TemplateUtils.TEMPLATE_ADVANCED_SEARCH;
-               output_data.put("adv_search_lists", SearchFunctions.getAdvancedSearchPageLists(getServletContext()));
 
           } else if (remaining.trim().startsWith("/biblio/")) {
                page_title = "DOE CODE: Project Metadata";
@@ -123,9 +122,10 @@ public class Dissemination extends HttpServlet {
           } else if (remaining.equals("/contact")) {
                page_title = "DOE CODE: Contact Us";
                template = TemplateUtils.TEMPLATE_CONTACT_PAGE;
-               
-          } 
 
+          }
+
+          output_data.put("adv_search_lists", SearchFunctions.getAdvancedSearchPageLists(getServletContext()));
           //Add the common dissemination js file
           jsFilesList.add("dissemination");
 

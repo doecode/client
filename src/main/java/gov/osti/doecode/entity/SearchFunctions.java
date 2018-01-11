@@ -581,7 +581,7 @@ public class SearchFunctions {
      public static ObjectNode getAdvancedSearchPageLists(ServletContext context) throws IOException {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           String jsonPath = context.getRealPath("./json");
-          return_data.put("affiliations_list", DOECODEUtils.getJsonList((jsonPath + "/" + DOECODEUtils.AVAILABILITIES_LIST_JSON), DOECODEUtils.AVAILABILITIES_LIST_JSON_KEY));
+          return_data.put("availabilities_list", DOECODEUtils.getJsonList((jsonPath + "/" + DOECODEUtils.AVAILABILITIES_LIST_JSON), DOECODEUtils.AVAILABILITIES_LIST_JSON_KEY));
           return_data.put("licenses_list", DOECODEUtils.getJsonList((jsonPath + "/" + DOECODEUtils.LICENSE_OPTIONS_LIST_JSON), DOECODEUtils.LICENSE_JLIST_SON_KEY));
           return_data.put("software_type", DOECODEUtils.getJsonList((jsonPath + "/" + DOECODEUtils.SOFTWARE_TYPES_LIST_JSON), DOECODEUtils.SOFTWARE_TYPES_LIST_JSON_KEY));
           return_data.put("research_org_list", DOECODEUtils.getJsonList((jsonPath + "/" + DOECODEUtils.RESEARCH_ORG_LIST_JSON), DOECODEUtils.RESEARCH_ORG_LIST_JSON_KEY));

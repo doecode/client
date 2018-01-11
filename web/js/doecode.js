@@ -8,6 +8,9 @@ var toggleSearchDropdown = function () {
     var dropdownElement = $(this).next('div.adv-search-dropdown');
 
     if ($(dropdownElement).is(':visible')) {
+        if ($("#adv-search-toggle-extra-container").is(':visible')) {
+            $("#adv-search-toggle-btn").trigger('click');
+        }
         $(dropdownElement).hide();
     } else {
         $(dropdownElement).show();
@@ -95,11 +98,45 @@ var triggerDropdownAdvancedSearch = function () {
     if (date_earliest) {
         $("#search-date_earliest").val(moment(date_earliest, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT) + "T05:00:01.000Z");
     }
+
     //Release Date End
     var date_latest = $(name_prefix + "-date_latest").val();
     if (date_latest) {
         $("#search-date_latest").val(moment(date_latest, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT) + "T23:59:59.001Z");
     }
+
+    //Code Accessibility
+    var accessibility_vals = $("#navbar-searchbar-accessibility").val();
+    if (accessibility_vals.length > 0) {
+        $("#search-accessibility").val(JSON.stringify(accessibility_vals));
+    }
+
+    //Licenses
+    var licenses_vals = $("#navbar-searchbar-licenses").val();
+    if (licenses_vals.length > 0) {
+        $("#search-licenses").val(JSON.stringify(licenses_vals));
+    }
+
+    //Research Organization
+    var research_orgs = $("#navbar-searchbar-research_organization").val();
+    if (research_orgs.length > 0) {
+        $("#search-research_organization").val(JSON.stringify(research_orgs));
+    }
+
+    //Sponsoring Organization
+    var sponsoring_orgs = $("#navbar-searchbar-sponsoring_organization").val();
+    if (sponsoring_orgs.length > 0) {
+        $("#search-sponsoring_organization").val(JSON.stringify(sponsoring_orgs));
+    }
+
+    //Software Type
+    var software_types = $("#navbar-searchbar-software_type").val();
+    if (software_types.length > 0) {
+        $("#search-software_type").val(JSON.stringify(software_types));
+    }
+
+    //Sort
+    $("#search-sort").val($("#navbar-searchbar-sort").val());
 
     $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
     $("#search-page-form").submit();
@@ -136,6 +173,27 @@ var logout = function () {
         clearLoginLocalstorage();
         window.location.href = '/' + APP_NAME + '/logout';
     }, 'json');
+};
+
+//Toggles the advanced search extended dropdown
+var toggleAdvExtendedDropdown = function () {
+    if ($("#adv-search-toggle-extra-container").is(':visible')) {//close
+        if (document.getElementById('homepage-indicator')) {
+            $("#outtermost-homepage-style").css('padding-bottom', '0px');
+        }
+        $("#adv-search-toggle-extra-container").hide();
+        $("#adv-search-toggle-btn-icon").removeClass('fa-minus-square-o');
+        $("#adv-search-toggle-btn-icon").addClass('fa-plus-square-o');
+        $("#adv-search-toggle-btn-icon-text").html('More Options');
+    } else {//open
+        if (document.getElementById('homepage-indicator')) {
+            $("#outtermost-homepage-style").css('padding-bottom', '200px');
+        }
+        $("#adv-search-toggle-extra-container").show();
+        $("#adv-search-toggle-btn-icon").removeClass('fa-plus-square-o');
+        $("#adv-search-toggle-btn-icon").addClass('fa-minus-square-o');
+        $("#adv-search-toggle-btn-icon-text").html('Less Options');
+    }
 };
 
 //Toggles teh advanced search button dropdown
@@ -186,3 +244,6 @@ $(".tooltip-item").each(function () {
 $(".signin-btn-container").on('click', function () {
     window.location.href = $(this).find('a').attr('href');
 });
+
+/*Toggles the advanced search button*/
+$("#adv-search-toggle-btn").on('click', toggleAdvExtendedDropdown);

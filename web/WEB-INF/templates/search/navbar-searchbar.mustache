@@ -8,7 +8,7 @@
 	       <div class='col-xs-12 pure-form'>
 		    <div class='row adv-search-dropdown-title-row'>
 			 <div class='col-xs-12 no-col-padding-left left-text adv-search-dropdown-label'>
-			      Advanced Search options
+			      Advanced Search Options
 			 </div>
 		    </div>
 		    <br/>
@@ -45,11 +45,81 @@
 		    <br/>
 		    <div class='row adv-search-dropdown-title-row left-text'>
 			 <div class='col-xs-12 no-col-padding-left'>
-			      <a title='Advanced Search Page' href='/{{app_name}}/search'  class='more-adv-search'>
-				   <span class='fa fa-plus-square-o'></span>&nbsp;More Options&hellip;</a>
+			      <a title='Advanced Search Page' id="adv-search-toggle-btn" class="clickable">
+				   <span id="adv-search-toggle-btn-icon" class='fa fa-plus-square-o '></span>&nbsp;<span id="adv-search-toggle-btn-icon-text">More Options</span>&hellip;
+			      </a>
 			 </div>
 		    </div>
 		    <br/>
+		    <div id="adv-search-toggle-extra-container" style="display:none;">
+			 <div class='row text-left'>
+			      <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
+				   <label for='navbar-searchbar-accessibility' class='adv-search-dropdown-label'>Code Accessibility:</label>
+			      </div>
+			      <div class='col-xs-12 no-col-padding-left no-col-padding-right'>
+				   <select class='pure-input-1 doecode-chosen-select' title='Code Accessibilty' id='navbar-searchbar-accessibility'  data-allowcustom="false" data-placeholder='Select your Options' multiple>
+					{{#each adv_search_lists.availabilities_list}}
+					<option title="{{title}}" value="{{value}}">{{label}}</option>
+					{{/each}}
+				   </select>
+			      </div>
+
+			      <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
+				   <label for='navbar-searchbar-licenses' class='adv-search-dropdown-label'>Licenses:</label>
+			      </div>
+			      <div class='col-xs-12 no-col-padding-left no-col-padding-right'>
+				   <select class='pure-input-1 doecode-chosen-select' title='Licenses' id='navbar-searchbar-licenses' data-allowcustom="false" data-placeholder='Select your Options' multiple>
+					{{#each adv_search_lists.licenses_list}}
+					<option title="{{title}}" value="{{value}}">{{label}}</option>
+					{{/each}}
+				   </select>
+			      </div>
+
+			      <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
+				   <label for='navbar-searchbar-research_organization' class='adv-search-dropdown-label'>Research Organization:</label>
+			      </div>
+			      <div class='col-xs-12 no-col-padding-left no-col-padding-right'>
+				   <select class='pure-input-1 doecode-chosen-select' title='Research Organization' id='navbar-searchbar-research_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+					{{#each adv_search_lists.research_org_list}}
+					<option title="{{title}}" value="{{value}}">{{label}}</option>
+					{{/each}}
+				   </select>
+			      </div>
+			      <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
+				   <label for='navbar-searchbar-sponsoring_organization' class='adv-search-dropdown-label'>Sponsoring Organization:</label>
+			      </div>
+			      <div class='col-xs-12 no-col-padding-left no-col-padding-right'>
+				   <select class='pure-input-1 doecode-chosen-select' title='Sponsoring Organization' id='navbar-searchbar-sponsoring_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+					{{#each adv_search_lists.sponsor_org_list}}
+					<option title="{{title}}" value="{{value}}">{{label}}</option>
+					{{/each}}
+				   </select>
+			      </div>
+			      <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
+				   <label for='navbar-searchbar-software_type' class='adv-search-dropdown-label'>Software Type:</label>
+			      </div>
+			      <div class='col-xs-12 no-col-padding-left no-col-padding-right'>
+				   <select class='pure-input-1 doecode-chosen-select' title='Software Type' id='navbar-searchbar-software_type' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+					{{#each adv_search_lists.software_type}}
+					<option title="{{title}}" value="{{value}}">{{label}}</option>
+					{{/each}}
+				   </select>
+			      </div>
+			      <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
+				   <label for='navbar-searchbar-sort' class='adv-search-dropdown-label'>Sort:</label>
+			      </div>
+			      <div class='col-xs-12 no-col-padding-left no-col-padding-right'>
+				   <select class='pure-input-1' title='Sort' id='navbar-searchbar-sort' data-placeholder='Select your Options' >
+					{{#each adv_search_lists.sort_list}}
+					<option title="{{title}}" value="{{value}}">{{label}}</option>
+					{{/each}}
+				   </select>
+			      </div>
+			      <div class="col-xs-12">
+				   <br/>
+			      </div>
+			 </div>
+		    </div>
 		    <div class='row'>
 			 <div class='col-xs-12 right-text'>
 			      <button title='Advanced Search' type="button" data-idprefix="navbar-searchbar" class="pure-button button-success adv-search-btn adv-search-btn-dropdown" >

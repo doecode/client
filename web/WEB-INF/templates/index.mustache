@@ -5,36 +5,16 @@
      </head>
      <body>
 	  <input type='hidden' id='active-page' value='{{active_page}}'/>
+	  <input type="hidden" id="homepage-indicator"/>
 	  <span class="hidden">
 	       {{> search/search-form}}
 	  </span>
-	  <div class='homepage-outtermost-style'>
+	  <div id="outtermost-homepage-style" class='homepage-outtermost-style'>
 	       <div class='homepage-wrapper'>
 		    <nav class='navbar navbar-default main-header visible-xs hidden-sm hidden-md hidden-lg'>
 			 <div class="container-fluid header-container-fluid no-col-padding-right no-col-padding-left">
 			      <div class="pull-right hidden-xs visible-sm visible-md visible-lg header-signin-links" id="signin-status-big-screens">
 				   {{> user/SigninStatus}}
-			      </div>
-			      <div class='container hidden-xs visible-sm visible-md visible-lg header-search-container'>
-				   <br/>
-				   <br/>
-				   <div class='row not-so-wide-row'>
-					<div class='col-md-2 col-sm-12 hide-lg'></div>
-					<div class='col-lg-7 col-md-10 col-sm-12'>
-					     <h3 class='logo-header'>
-						  <a href="/{{app_name}}/">
-						       <img class='header-logo-img' title='DOE CODE Homepage' src='/{{app_name}}/images/DOEcodeTitle_287X45-min.png' alt="DOE CODE"/>
-						  </a>
-						  <span class='header-side-text'>U.S. Department of Energy<br/>
-						       Office of Scientific and Technical Information</span>
-					     </h3>
-					</div>
-					<div class='col-md-2 col-sm-12 hide-lg'></div>
-					<div class='col-lg-5 col-md-10 col-sm-12'>
-					     {{> search/navbar-searchbar}}
-					</div>
-				   </div>
-				   <br/>
 			      </div>
 			      <!--VV Navigation Bar VV-->
 			      <div class=' container'>
