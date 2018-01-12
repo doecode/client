@@ -1,6 +1,7 @@
 package gov.osti.doecode.entity;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import javax.servlet.ServletContext;
 import org.apache.commons.mail.EmailException;
@@ -98,8 +99,8 @@ public class OtherFunctions {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           try {
                String jsonPath = context.getRealPath("./json");
-               return_data.put("countries_list", JsonObjectUtils.getJsonList(jsonPath + "/" + JsonObjectUtils.COUNTRIES_LIST_JSON, JsonObjectUtils.COUNTRIES_LIST_JSON_KEY));
-               return_data.put("state_list", JsonObjectUtils.getJsonList(jsonPath + "/" + JsonObjectUtils.STATE_LIST_JSON, JsonObjectUtils.STATE_LIST_JSON_KEY));
+               return_data.put("countries_list", Init.countries_list);
+               return_data.put("state_list", Init.states_list);
           } catch (Exception e) {
                log.error("Error in loading input json lists: " + e.getMessage());
           }

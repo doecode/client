@@ -150,7 +150,7 @@ public class Input extends HttpServlet {
                //Get some json for the page
                ArrayNode availabilityList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
                try {
-                    availabilityList = JsonObjectUtils.getJsonList(getServletContext().getRealPath("./json") + "/" + JsonObjectUtils.AVAILABILITIES_LIST_JSON, JsonObjectUtils.AVAILABILITIES_LIST_JSON_KEY);
+                    availabilityList = Init.availabilities_list;
                     output_data.put("availabilities_list_json", availabilityList.toString());
                } catch (Exception e) {
                }

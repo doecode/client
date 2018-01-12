@@ -3,6 +3,7 @@ package gov.osti.doecode.entity;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import java.io.IOException;
@@ -138,10 +139,10 @@ public class SearchFunctions {
           return_data.put("search_results_list", search_results_list);
           return_data.put("pagination_btn", getPaginationData(search_form_data, num_found));
           return_data.put("breadcrumbTrailItem", getSearchBreadcrumbTrailList(post_data, num_found));
-          return_data.put("search_sort_dropdown", sort_dropdownOptions(context, JsonObjectUtils.getString(post_data, "sort", "")));
-          return_data.put("availabilities_list", getSearchDropdownList(context, JsonObjectUtils.AVAILABILITIES_LIST_JSON, JsonObjectUtils.AVAILABILITIES_LIST_JSON_KEY, handleRequestArray(request.getParameter("accessibility"))));
-          return_data.put("license_options_list", getSearchDropdownList(context, JsonObjectUtils.LICENSE_OPTIONS_LIST_JSON, JsonObjectUtils.LICENSE_JLIST_SON_KEY, handleRequestArray(request.getParameter("licenses"))));
-          return_data.put("software_type_options_list", getSearchDropdownList(context, JsonObjectUtils.SOFTWARE_TYPES_LIST_JSON, JsonObjectUtils.SOFTWARE_TYPES_LIST_JSON_KEY, handleRequestArray(request.getParameter("software_type"))));
+          return_data.put("search_sort_dropdown", sort_dropdownOptions(JsonObjectUtils.getString(post_data, "sort", "")));
+          return_data.put("availabilities_list", getSearchDropdownList(Init.availabilities_list, handleRequestArray(request.getParameter("accessibility"))));
+          return_data.put("license_options_list", getSearchDropdownList(Init.licenses_list, handleRequestArray(request.getParameter("licenses"))));
+          return_data.put("software_type_options_list", getSearchDropdownList(Init.software_type, handleRequestArray(request.getParameter("software_type"))));
           return_data.put("search_description", getSearchResultsDescription(post_data, context));
           if (!invalid_search_data) {
                return_data.put("search_facets_data", search_result_data.get("facets"));
@@ -230,7 +231,7 @@ public class SearchFunctions {
                //Get teh accessibility array so we can get some display values
                ArrayNode accessiblity_display_vals = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
                try {
-                    accessiblity_display_vals = JsonObjectUtils.getJsonList((context.getRealPath("./json") + "/" + JsonObjectUtils.AVAILABILITIES_LIST_JSON), JsonObjectUtils.AVAILABILITIES_LIST_JSON_KEY);
+                    accessiblity_display_vals = Init.availabilities_list;
                } catch (Exception e) {
                     log.error("Couldn't get accessiblity json file: " + e.getMessage());
                }
@@ -244,7 +245,7 @@ public class SearchFunctions {
                //Get the software_type array so we can get display values
                ArrayNode software_type_display_vals = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
                try {
-                    software_type_display_vals = JsonObjectUtils.getJsonList((context.getRealPath("./json") + "/" + JsonObjectUtils.SOFTWARE_TYPES_LIST_JSON), JsonObjectUtils.SOFTWARE_TYPES_LIST_JSON_KEY);
+                    software_type_display_vals = Init.software_type;
                } catch (Exception e) {
                     log.error("Couldn't get accessiblity json file: " + e.getMessage());
                }
@@ -326,14 +327,8 @@ public class SearchFunctions {
           return return_data;
      }
 
-     private static ArrayNode getSearchDropdownList(ServletContext context, String list, String list_key, ArrayNode selected) {
-          ArrayNode return_data = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          try {
-               String jsonPath = context.getRealPath("./json");
-               return_data = JsonObjectUtils.getJsonList(jsonPath + "/" + list, list_key);
-          } catch (IOException ex) {
-               log.error("Exception in gettin search sidebar Options: " + ex.getMessage());
-          }
+     private static ArrayNode getSearchDropdownList(ArrayNode list, ArrayNode selected) {
+          ArrayNode return_data = JsonObjectUtils.parseArrayNode(list.toString()); //Had to put this to string followed by parse because assigning return_data directly to list was causing a pass by reference issue
 
           /*Go through the array, and if we have that selected, we'll set a flag that says it's checked*/
           for (int i = 0; i < return_data.size(); i++) {
@@ -353,22 +348,17 @@ public class SearchFunctions {
           return return_data;
      }
 
-     private static ObjectNode sort_dropdownOptions(ServletContext context, String sort_value) {
+     private static ObjectNode sort_dropdownOptions(String sort_value) {
           ObjectNode options_obj = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          ArrayNode options = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ArrayNode options = Init.sort_list;
           String current = "";
-          try {
-               String jsonPath = context.getRealPath("./json");
-               options = JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.SEARCH_SORT_OPTIONS_LIST_JSON), JsonObjectUtils.SEARCH_SORT_LIST_JSON_KEY);
-               for (JsonNode j : options) {
-                    ObjectNode jObj = (ObjectNode) j;
-                    if (JsonObjectUtils.getString(jObj, "value", "").equals(sort_value)) {
-                         current = JsonObjectUtils.getString(jObj, "label", "");
-                         break;
-                    }
+
+          for (JsonNode j : options) {
+               ObjectNode jObj = (ObjectNode) j;
+               if (JsonObjectUtils.getString(jObj, "value", "").equals(sort_value)) {
+                    current = JsonObjectUtils.getString(jObj, "label", "");
+                    break;
                }
-          } catch (IOException ex) {
-               log.error("Exception in gettin search sort Options: " + ex.getMessage());
           }
 
           options_obj.put("sort_dropdown_options", options);
@@ -578,15 +568,14 @@ public class SearchFunctions {
           return return_data;
      }
 
-     public static ObjectNode getAdvancedSearchPageLists(ServletContext context) throws IOException {
+     public static ObjectNode getAdvancedSearchPageLists(ServletContext context) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          String jsonPath = context.getRealPath("./json");
-          return_data.put("availabilities_list", JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.AVAILABILITIES_LIST_JSON), JsonObjectUtils.AVAILABILITIES_LIST_JSON_KEY));
-          return_data.put("licenses_list", JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.LICENSE_OPTIONS_LIST_JSON), JsonObjectUtils.LICENSE_JLIST_SON_KEY));
-          return_data.put("software_type", JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.SOFTWARE_TYPES_LIST_JSON), JsonObjectUtils.SOFTWARE_TYPES_LIST_JSON_KEY));
-          return_data.put("research_org_list", JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.RESEARCH_ORG_LIST_JSON), JsonObjectUtils.RESEARCH_ORG_LIST_JSON_KEY));
-          return_data.put("sponsor_org_list", JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.SPONSOR_ORG_LIST_JSON), JsonObjectUtils.SPONSOR_ORG_LIST_JSON_KEY));
-          return_data.put("sort_list", JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.SEARCH_SORT_OPTIONS_LIST_JSON), JsonObjectUtils.SEARCH_SORT_LIST_JSON_KEY));
+          return_data.put("availabilities_list", Init.availabilities_list);
+          return_data.put("licenses_list", Init.licenses_list);
+          return_data.put("software_type", Init.software_type);
+          return_data.put("research_org_list", Init.research_org_list);
+          return_data.put("sponsor_org_list", Init.sponsor_org_list);
+          return_data.put("sort_list", Init.sort_list);
 
           return return_data;
      }
@@ -1093,10 +1082,8 @@ public class SearchFunctions {
 
                /*Code Availability*/
                ArrayNode availabilityList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-               try {
-                    availabilityList = JsonObjectUtils.getJsonList(jsonpath + "/" + JsonObjectUtils.AVAILABILITIES_LIST_JSON, JsonObjectUtils.AVAILABILITIES_LIST_JSON_KEY);
-               } catch (Exception e) {
-               }
+               availabilityList = Init.availabilities_list;
+
                ObjectNode availabilityObj = JsonObjectUtils.getJsonListItem(availabilityList, "value", JsonObjectUtils.getString(biblio_data, "accessibility", ""));
                return_data.put("availability", JsonObjectUtils.getString(availabilityObj, "label", ""));
                return_data.put("has_availability", StringUtils.isNotBlank(JsonObjectUtils.getString(biblio_data, "accessibility", "")));
@@ -1104,10 +1091,7 @@ public class SearchFunctions {
 
                /*Software Type*/
                ArrayNode softwareTypeList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-               try {
-                    softwareTypeList = JsonObjectUtils.getJsonList(jsonpath + "/" + JsonObjectUtils.SOFTWARE_TYPES_LIST_JSON, JsonObjectUtils.SOFTWARE_TYPES_LIST_JSON_KEY);
-               } catch (Exception e) {
-               }
+               softwareTypeList = Init.software_type;
                ObjectNode softwareTypeObj = JsonObjectUtils.getJsonListItem(softwareTypeList, "value", JsonObjectUtils.getString(biblio_data, "software_type", ""));
                return_data.put("software_type", JsonObjectUtils.getString(softwareTypeObj, "label", ""));
                meta_tags.add(makeMetaTag("software_type", JsonObjectUtils.getString(softwareTypeObj, "label", "")));
