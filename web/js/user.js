@@ -161,9 +161,6 @@ var doPasswordValidation = function (password_check_ids, is_confirm) {
     return return_data;
 };
 
-const ERROR_CONDITION = 'error';
-const SUCCESS_CONDITION = 'success';
-const BLANK_CONDITION = 'blank';
 var markRegistrationFieldWithStatus = function (condition, element, message) {
     switch (condition) {
         case ERROR_CONDITION:

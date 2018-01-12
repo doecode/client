@@ -58,7 +58,7 @@ public class DOECODEUtils {
      public static ObjectNode getJsonListItem(ArrayNode array, String key, String value) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           for (JsonNode v : array) {
-               ObjectNode row = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+               ObjectNode row = (ObjectNode)v;
                if (JsonObjectUtils.getString(row, key, "").equals(value)) {
                     return_data = row;
                     break;

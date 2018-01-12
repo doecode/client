@@ -49,7 +49,6 @@ public class JsonObjectUtils {
      public static ArrayList<String> getKeys(ObjectNode on) {
           ArrayList<String> keys = new ArrayList();
           on.fieldNames().forEachRemaining((s) -> {
-               System.out.println(s);
                keys.add(s);
           });
           return keys;

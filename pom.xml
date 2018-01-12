@@ -271,8 +271,7 @@
                                 </replacement>
                             </replacements>
                         </configuration>
-                    </execution>
-                                       
+                    </execution>     
                 </executions>
             </plugin>
             <plugin>

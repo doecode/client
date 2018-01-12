@@ -36,8 +36,8 @@
         <param-value>@gitlab_from_email@</param-value>
     </context-param>
     <context-param>
-        <param-name>smptHost</param-name>
-        <param-value>@smptHost@</param-value>
+        <param-name>smtpHost</param-name>
+        <param-value>@smtpHost@</param-value>
     </context-param>
     <!--Servlet to give the Dissemination pages, like search, about, etc-->
     <servlet>

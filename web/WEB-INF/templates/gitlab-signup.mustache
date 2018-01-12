@@ -4,6 +4,11 @@
      <div class="col-lg-3 col-md-1"></div>
      <div class="col-lg-8 special-lg-8 col-md-10 col-xs-12 static-content">
 	  <h2 class="static-content-title">OSTI Gitlab Signup</h2>
+	  <div class='row'>
+	       <div class='col-xs-12 '>
+		    <small><label class="control-label">*=required field</label></small>
+	       </div>
+	  </div>
           <br/>
 	  <div class='row'>
 	       <div class='col-xs-12 center-text has-success'>
@@ -22,25 +27,33 @@
 		    <br/>
 	       </div>
 	       <div class='col-lg-5 col-sm-5 col-xs-12 gitlab-signup-input-row'>
-		    <input title='First Name' placeholder='First Name' id='first-name' class="pure-input-1 form-control full-width-input" type="text">
+		    <input title='First Name' placeholder='First Name' id='first-name' class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+		    <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
-			 <small><label class='control-label normal-weight' for='first_name'>&nbsp;First Name</label></small>
+			 <small><label class='control-label normal-weight' for='first_name'>&nbsp;First Name *</label></small>
 		    </div>
 	       </div>
 	       <div class='col-lg-5 col-sm-5 col-xs-12 gitlab-signup-input-row'>
-		    <input title='Middle Name' placeholder='Middle Name' id='middle-name' class="pure-input-1 form-control full-width-input" type="text">
+		    <input title='Middle Name' placeholder='Middle Name' id='middle-name' class="pure-input-1 form-control full-width-input gitlab-signup-input" type="text">
+		    <span class="fa fa-check form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
 			 <small><label class='control-label normal-weight ' for='middle_name'>&nbsp;Middle Name</label></small>
 		    </div>
 	       </div> 
 	       <div class='col-lg-5 col-sm-5 col-xs-12 gitlab-signup-input-row'>
-		    <input title='Last Name' placeholder='Last Name' id='last-name' class="pure-input-1 form-control full-width-input" type="text">
+		    <input title='Last Name' placeholder='Last Name' id='last-name' class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+		    <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
-			 <small><label class='control-label normal-weight ' for='last_name'>&nbsp;Last Name</label></small>
+			 <small><label class='control-label normal-weight ' for='last_name'>&nbsp;Last Name *</label></small>
 		    </div>
 	       </div> 
 	       <div class='col-lg-2 col-sm-2 col-xs-4 gitlab-signup-input-row'>
-		    <input title='Suffix' placeholder='Suffix' id='suffix' class="pure-input-1 form-control" size="4" type="text">
+		    <input title='Suffix' placeholder='Suffix' id='suffix' class="pure-input-1 form-control gitlab-signup-input" size="4" type="text">
+		    <span class="fa fa-check form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
 			 <small><label class='control-label normal-weight ' for='suffix'>&nbsp;Suffix</label></small>
 		    </div>
@@ -55,34 +68,49 @@
 		    <br/>
 	       </div>
 	       <div class='col-lg-10 col-xs-12 gitlab-signup-input-row'>
-		    <input title='Street Address' placeholder='Street Address' id='address' class="pure-input-1 form-control full-width-input" type="text">
+		    <input title='Street Address' placeholder='Street Address' id='address' class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+		    <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
-			 <small><label class='control-label normal-weight' for='address'>&nbsp;Street Address</label></small>
+			 <small><label class='control-label normal-weight' for='address'>&nbsp;Street Address *</label></small>
 		    </div>
 	       </div>
 	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-		    <input title='City' placeholder='City' id='city' class="pure-input-1 form-control full-width-input" type="text">
+		    <input title='City' placeholder='City' id='city' class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+		    <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
-			 <small><label class='control-label normal-weight' for='city'>&nbsp;City</label></small>
+			 <small><label class='control-label normal-weight' for='city'>&nbsp;City *</label></small>
 		    </div>
 	       </div>
 	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-		    <input title='State/Province' placeholder='State/Province' id='state' class="pure-input-1 form-control full-width-input" type="text">
+		    <select class='pure-input-1 full-width-input form-control gitlab-signup-input' title='State' id="state">
+			 {{> lists/states}}
+		    </select>		
+		    <span class="fa fa-check form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
-			 <small><label class='control-label normal-weight' for='state'>&nbsp;State/Province</label></small>
+			 <small><label class='control-label normal-weight' for='state'>&nbsp;State</label> </small>
 		    </div>
 	       </div>
 	       <div class='col-lg-3 col-sm-4 col-xs-12 gitlab-signup-input-row'>
-		    <input title='Postal Code' placeholder='Postal Code' id='postal-code' class="pure-input-1 form-control full-width-input" type="text">
+		    <input title='Postal Code' placeholder='Postal Code' id='postal-code' class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+		    <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
-			 <small><label class='control-label normal-weight' for='postal-code'>&nbsp;Postal Code</label></small>
+			 <small><label class='control-label normal-weight' for='postal-code'>&nbsp;Postal Code *</label></small>
 		    </div>
 	       </div>
 	       <div class='col-sm-2 hide-xs'></div>
 	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-		    <input title='Country' placeholder='Country' id='country' class="pure-input-1 form-control full-width-input" type="text">
+		    <!--<input title='Country' placeholder='Country' id='country' class="pure-input-1 form-control full-width-input" type="text">-->
+		    <select class='pure-input-1 full-width-input form-control gitlab-signup-input gitlab-signup-required' title='Country' id="country">
+			 {{> lists/countries}}
+		    </select>
+		    <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
-			 <small><label class='control-label normal-weight' for='country'>&nbsp;Country</label></small>
+			 <small><label class='control-label normal-weight' for='country'>&nbsp;Country *</label></small>
 		    </div>
 	       </div>
 	  </div>
@@ -95,15 +123,19 @@
 		    <br/>
 	       </div>
 	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-		    <input title='Email Address' placeholder='Email Address' id='email' class="pure-input-1 form-control full-width-input" type="text">
+		    <input title='Email Address' placeholder='Email Address' id='email' class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+		    <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
-			 <small><label class='control-label normal-weight' for='email'>&nbsp;Email Address</label></small>
+			 <small><label class='control-label normal-weight' for='email'>&nbsp;Email Address *</label></small>
 		    </div>
 	       </div>
 	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-		    <input title='Phone Number' placeholder='Phone Number' id='phone-number' class="pure-input-1 form-control full-width-input" type="text">
+		    <input title='Phone Number' placeholder='Phone Number' id='phone-number' class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+		    <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
-			 <small><label class='control-label normal-weight' for='phone-number'>&nbsp;Phone Number</label></small>
+			 <small><label class='control-label normal-weight' for='phone-number'>&nbsp;Phone Number *</label></small>
 		    </div>
 	       </div>
 	  </div>
@@ -115,15 +147,19 @@
 		    <br/>
 	       </div>
 	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-		    <input title='Job Title' placeholder='Job Title' id='job-title' class="pure-input-1 form-control full-width-input" type="text">
+		    <input title='Job Title' placeholder='Job Title' id='job-title' class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+		    <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
-			 <small><label class='control-label normal-weight' for='job-title'>&nbsp;Job Title</label></small>
+			 <small><label class='control-label normal-weight' for='job-title'>&nbsp;Job Title *</label></small>
 		    </div>
 	       </div>
 	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-		    <input title='Employment Designation' placeholder='Employment Designation' id='employment-designation' class="pure-input-1 form-control full-width-input" type="text">
+		    <input title='Employment Designation' placeholder='Employment Designation' id='employment-designation' class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+		    <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 		    <div>
-			 <small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Employment Designation</label></small>
+			 <small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Employment Designation *</label></small>
 		    </div>
 	       </div>
 	  </div>
