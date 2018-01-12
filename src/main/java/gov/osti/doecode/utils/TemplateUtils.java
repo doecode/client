@@ -9,6 +9,7 @@ import com.github.jknack.handlebars.context.FieldValueResolver;
 import com.github.jknack.handlebars.context.JavaBeanValueResolver;
 import com.github.jknack.handlebars.context.MapValueResolver;
 import com.github.jknack.handlebars.context.MethodValueResolver;
+import gov.osti.doecode.entity.SearchFunctions;
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
 import java.io.IOException;
@@ -72,7 +73,7 @@ public class TemplateUtils {
      public static final String PAGE_NEWS_RESOURCES = "news-resources";
      public static final String PAGE_FAQ = "faq";
 
-     public static final ObjectNode GET_COMMON_DATA(ObjectNode output_data, String current_page, ArrayNode jsFilesList, HttpServletRequest request) {
+     public static final ObjectNode GET_COMMON_DATA(ObjectNode output_data, String current_page, ArrayNode jsFilesList, HttpServletRequest request) throws IOException {
           output_data.put("active_page", current_page);
           if (!JsonObjectUtils.containsKey(output_data, "user_data")) {
                output_data.put("user_data", UserFunctions.getUserDataFromCookie(request));
@@ -81,6 +82,7 @@ public class TemplateUtils {
           output_data.put("navbar", GET_NAVBAR_CLASSES(current_page));
           output_data.put("css", Init.css_string);
           output_data.put("app_name", Init.app_name);
+          output_data.put("adv_search_lists", SearchFunctions.getAdvancedSearchPageLists(request.getServletContext()));
 
           return output_data;
      }

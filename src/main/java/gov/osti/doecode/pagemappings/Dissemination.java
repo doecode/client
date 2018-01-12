@@ -125,7 +125,6 @@ public class Dissemination extends HttpServlet {
 
           }
 
-          output_data.put("adv_search_lists", SearchFunctions.getAdvancedSearchPageLists(getServletContext()));
           //Add the common dissemination js file
           jsFilesList.add("dissemination");
 

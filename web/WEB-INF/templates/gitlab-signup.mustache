@@ -85,7 +85,10 @@
 	       </div>
 	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
 		    <select class='pure-input-1 full-width-input form-control gitlab-signup-input' title='State' id="state">
-			 {{> lists/states}}
+			 {{#each state_list}}
+			 <option value="{{value}}" title="{{title}}">{{label}}</option>
+			 {{/each}}
+
 		    </select>		
 		    <span class="fa fa-check form-control-feedback errorCheck" style="display:none;"></span>
 		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
@@ -103,9 +106,11 @@
 	       </div>
 	       <div class='col-sm-2 hide-xs'></div>
 	       <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-		    <!--<input title='Country' placeholder='Country' id='country' class="pure-input-1 form-control full-width-input" type="text">-->
 		    <select class='pure-input-1 full-width-input form-control gitlab-signup-input gitlab-signup-required' title='Country' id="country">
-			 {{> lists/countries}}
+			 <option></option>
+			 {{#each countries_list}}
+			 <option value="{{value}}" title="{{title}}">{{label}}</option>
+			 {{/each}}
 		    </select>
 		    <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
 		    <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>

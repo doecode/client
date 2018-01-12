@@ -31,7 +31,7 @@ public class Other extends HttpServlet {
                }
 
                JsonObjectUtils.writeTo(return_data, response);
-               
+
           } else {
                String page_title = "";
                String template = "";
@@ -39,10 +39,12 @@ public class Other extends HttpServlet {
                ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
                ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
 
-               if (remaining.equals("gitlab-signup")) {
-                    page_title = "DOECODE: Gitlab Signup";
-                    template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP;
-
+               switch (remaining) {
+                    case "gitlab-signup":
+                         page_title = "DOECODE: Gitlab Signup";
+                         template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP;
+                         output_data = OtherFunctions.getOtherLists(getServletContext());
+                         break;
                }
 
                //Add the common dissemination js file

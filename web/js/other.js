@@ -44,6 +44,16 @@ var post_gitlab_form_data = function () {
             data: JSON.stringify(post_data),
             success: function (data) {
                 $("#submit-btn").prop('disabled', false);
+                if (data.success) {
+                    $(".gitlab-signup-input").each(function () {
+                        $(this).val('');
+                        var self = this;
+                        mark_gitlab_form_field(self, BLANK_CONDITION);
+                    });
+                    $("#gitlab-signup-success-message").html('Your registration was sent successfully');
+                } else {
+                    $("#gitlab-signup-error-message").html('An error has occurred, and we are unable to process your registration at this time.');
+                }
             },
             error: function (xhr) {
                 $("#submit-btn").prop('disabled', false);
