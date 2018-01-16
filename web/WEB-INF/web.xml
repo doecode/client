@@ -39,6 +39,14 @@
         <param-name>smtpHost</param-name>
         <param-value>@smtpHost@</param-value>
     </context-param>
+    <context-param>
+        <param-name>recaptcha_sitekey</param-name>
+        <param-value>@recaptcha_sitekey@</param-value>
+    </context-param>
+    <context-param>
+        <param-name>recaptcha_secretkey</param-name>
+        <param-value>@recaptcha_secretkey@</param-value>
+    </context-param>
     <!--Servlet to give the Dissemination pages, like search, about, etc-->
     <servlet>
         <servlet-name>Dissemination</servlet-name>

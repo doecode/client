@@ -1,5 +1,6 @@
 {{> wrapper/header}}
 <input type="hidden" id="gitlab-signup-page-identifier"/>
+<script src="https://www.google.com/recaptcha/api.js"></script>
 <div class="row not-so-wide-row">
      <div class="col-lg-3 col-md-1"></div>
      <div class="col-lg-8 special-lg-8 col-md-10 col-xs-12 static-content">
@@ -166,6 +167,11 @@
 		    <div>
 			 <small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Employment Designation *</label></small>
 		    </div>
+	       </div>
+	  </div>
+	  <div class="row">
+	       <div class="col-xs-12 left-text">
+		    <div class='g-recaptcha' data-sitekey='{{recaptcha_sitekey}}'></div>
 	       </div>
 	  </div>
 	  <br/>

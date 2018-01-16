@@ -29,6 +29,8 @@
         <gitlab_submit_email></gitlab_submit_email>
         <gitlab_from_email></gitlab_from_email>
         <smtpHost></smtpHost>
+        <gitlab_recaptcha_site_key></gitlab_recaptcha_site_key>
+        <gitlab_recaptcha_secret_key></gitlab_recaptcha_secret_key>
     </properties>
     <!--
         You will need to add your own profiles into this pom.xml, or use profiles stored in your local settings.xml
@@ -43,9 +45,11 @@
                 <siteURL>Your local url for your instance of this application</siteURL>
                 <authorityapiURL>https://www.osti.gov/elink/api/authorities/</authorityapiURL>
                 <app_name>name of app</app_name>
+                <smtpHost>SMTP host for email sending</smtpHost>
                 <gitlab_submit_email>email for gitlab submission</gitlab_submit_email>
                 <gitlab_from_email>Email that the gitlab submission is from</gitlab_from_email>
-                <smtpHost>SMTP host for email sending</smtpHost>
+                <gitlab_recaptcha_site_key>Key for your instance of captcha, should you use it</gitlab_recaptcha_site_key>
+                <gitlab_recaptcha_secret_key>Key for your instance of captcha, should you use it</gitlab_recaptcha_secret_key>
             </properties>
         </profile>
     -->
@@ -286,6 +290,14 @@
                                 <replacement>
                                     <token>@smtpHost@</token>
                                     <value>${smtpHost}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@recaptcha_sitekey@</token>
+                                    <value>${gitlab_recaptcha_site_key}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@recaptcha_secretkey@</token>
+                                    <value>${gitlab_recaptcha_secret_key}</value>
                                 </replacement>
                             </replacements>
                         </configuration>
