@@ -1056,7 +1056,6 @@ public class SearchFunctions {
           //Massage any data that needs it
           if (is_valid) {
                ArrayNode meta_tags = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-               String jsonpath = context.getRealPath("./json");
                /*Title*/
                return_data.put("title", JsonObjectUtils.getString(biblio_data, "software_title", ""));
                meta_tags.add(makeMetaTag("title", JsonObjectUtils.getString(biblio_data, "software_title", "")));

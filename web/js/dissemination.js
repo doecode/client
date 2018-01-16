@@ -200,8 +200,16 @@ var removeSearchResultDescriptionItem = function () {
 };
 
 var modify_search = function () {
-    localStorage.isRefinedSearch = "true";
-    window.location.href = '/' + APP_NAME + '/search';
+    var width = $(document).width();
+    if (width < 768) {
+        localStorage.isRefinedSearch = "true";
+        window.location.href = '/' + APP_NAME + '/search';
+    } else {
+        if (!$("#advanced-search-dropdown").is(':visible')) {
+            $("#advanced-search-dropdown-btn").trigger('click');
+        }
+        toggleAdvExtendedDropdown(ADV_DROPDOWN_OPEN);
+    }
 };
 
 var setUpDateSlider = function () {
@@ -396,34 +404,7 @@ if (document.getElementById('about-page-identifier')) {
 } else if (document.getElementById('advanced-search-page-identifier')) {
     //If we had a latest search, we'll populate the advanced search page with the parameters we had
     if (isValidJSON(localStorage.latestSearchParams) && Array.isArray(JSON.parse(localStorage.latestSearchParams)) && localStorage.isRefinedSearch === "true") {
-
-        var latestSearchParams = JSON.parse(localStorage.latestSearchParams);
-        //Go through each search param,and add it to the search results page
-        latestSearchParams.forEach(function (item) {
-            var item_val = item.value;
-            var item_name = item.name;
-            //If the item passed in is json, then we need to treat it differently
-            if (isValidJSON(item_val) && Array.isArray(JSON.parse(item_val))) {
-                var item_values = JSON.parse(item_val);
-                item_values.forEach(function (values_item) {
-                    //Go through each item. If we don't have the value, then add it to the select box
-                    if ($("#advanced-search-" + item_name + " option[value='" + values_item + "']").val() === undefined) {
-                        $("#advanced-search-" + item_name).append('<option value="' + values_item + '" selected>' + values_item + "</option>");
-
-                    } else {//IF we have the value already, go to that item and set it to selected
-                        $("#advanced-search-" + item_name).find('option[value="' + values_item + '"]').prop('selected', true);
-                    }
-
-                    $("#advanced-search-" + item_name).trigger('chosen:updated');
-                });
-            } else if (item_val && (item_name == 'date_latest' || item_name == 'date_earliest')) {//If it's a date
-                var no_t_date = item_val.substr(0, item_val.indexOf('T'));
-                $("#advanced-search-" + item_name).val(moment(no_t_date, BACK_END_DATE_FORMAT).format(FRONT_END_DATE_FORMAT));
-
-            } else {//If it's anything else
-                $("#advanced-search-" + item.name).val(item_val);
-            }
-        });
+        populateAdvancedSearchForm("advanced-search-");
     }
     localStorage.isRefinedSearch = "false";
 

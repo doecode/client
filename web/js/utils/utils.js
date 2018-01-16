@@ -501,3 +501,36 @@ var makeDelimitedList = function (list, delimiter) {
     }
     return html;
 };
+
+/*Populates the advanced search form needed*/
+var populateAdvancedSearchForm = function (id_prefix) {
+    var latestSearchParams = JSON.parse(localStorage.latestSearchParams);
+    latestSearchParams.forEach(function (item) {
+        var item_val = item.value;
+        var item_name = item.name;
+        //If the item passed in is json, then we need to treat it differently
+        if (isValidJSON(item_val) && Array.isArray(JSON.parse(item_val))) {
+            var item_values = JSON.parse(item_val);
+            item_values.forEach(function (values_item) {
+                //Go through each item. If we don't have the value, then add it to the select box
+                if ($("#" + id_prefix + item_name + " option[value='" + values_item + "']").val() === undefined) {
+                    $("#" + id_prefix + item_name).append('<option value="' + values_item + '" selected>' + values_item + "</option>");
+
+                } else {//IF we have the value already, go to that item and set it to selected
+                    $("#" + id_prefix + item_name).find('option[value="' + values_item + '"]').prop('selected', true);
+                }
+
+                $("#" + id_prefix + item_name).trigger('chosen:updated');
+            });
+        } else if (item_val && (item_name == 'date_latest' || item_name == 'date_earliest')) {//If it's a date
+            var no_t_date = item_val.substr(0, item_val.indexOf('T'));
+            $("#" + id_prefix + item_name).val(moment(no_t_date, BACK_END_DATE_FORMAT).format(FRONT_END_DATE_FORMAT));
+
+        } else {//If it's anything else
+            $("#" + id_prefix + item.name).val(item_val);
+        }
+    });
+};
+
+const ADV_DROPDOWN_CLOSE = 'CLOSE';
+const ADV_DROPDOWN_OPEN = 'OPEN';

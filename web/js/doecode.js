@@ -176,8 +176,8 @@ var logout = function () {
 };
 
 //Toggles the advanced search extended dropdown
-var toggleAdvExtendedDropdown = function () {
-    if ($("#adv-search-toggle-extra-container").is(':visible')) {//close
+var toggleAdvExtendedDropdown = function (action) {
+    if ($("#adv-search-toggle-extra-container").is(':visible') || action === ADV_DROPDOWN_CLOSE) {//close
         if (document.getElementById('homepage-indicator')) {
             $("#outtermost-homepage-style").css('padding-bottom', '0px');
         }
@@ -196,7 +196,8 @@ var toggleAdvExtendedDropdown = function () {
     }
 };
 
-//Toggles teh advanced search button dropdown
+/*Initialize Everything*/
+//Toggles the advanced search button dropdown
 $(".adv-search-button").on('click', toggleSearchDropdown);
 
 //Makes all of the advanced search and search buttons work
@@ -247,3 +248,8 @@ $(".signin-btn-container").on('click', function () {
 
 /*Toggles the advanced search button*/
 $("#adv-search-toggle-btn").on('click', toggleAdvExtendedDropdown);
+
+/*If we have content in the advanced search, let's populate the advanced search dropdown with it*/
+if (isValidJSON(localStorage.latestSearchParams) && Array.isArray(JSON.parse(localStorage.latestSearchParams))) {
+    populateAdvancedSearchForm("navbar-searchbar-");
+}
