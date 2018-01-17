@@ -1788,6 +1788,7 @@ ul.biblio-page-ul>li>a:hover {
     border-top: none;
 }
 
+/*!!!!!Repository Services page!!!!!!*/
 .repository-services-container {
     margin-left: auto;
     margin-right: auto;
@@ -1799,14 +1800,6 @@ ul.biblio-page-ul>li>a:hover {
     padding-right:10px;
 }
 
-#github-repository-container a{
-    background-color:#277091 !important;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
 #or-repository-container {
     text-align: center !important;
 }
@@ -1816,7 +1809,23 @@ ul.biblio-page-ul>li>a:hover {
     padding-left:10px;
 }
 
-#gitlab-repository-container a{
+#repository-services-header-container {
+    padding-left: 25%;
+}
+
+/*!!!!!!!Form Select page*/
+.form-select-container {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+#scientific-form-select-container {
+    width: 314px;
+    padding-right:10px;
+}
+
+#scientific-form-select-container a{
     background-color:#277091 !important;
     padding-left: 50px;
     padding-right: 50px;
@@ -1824,8 +1833,21 @@ ul.biblio-page-ul>li>a:hover {
     padding-bottom: 20px;
 }
 
-#repository-services-header-container {
-    padding-left: 25%;
+#or-form-select-container {
+    text-align: center !important;
+}
+
+#business-form-select-container {
+    width: 314px;
+    padding-left:10px;
+}
+
+#business-form-select-container a{
+    background-color:#277091 !important;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 /*!!!!!!!Security Hosting page!!!!!!*/

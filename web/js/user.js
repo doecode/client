@@ -1,5 +1,5 @@
 /*Options for loading message on the account page in the event of a failed login when using a passcode*/
-const FAILED_TO_LOGIN_WITH_PASSCODE = {title: 'Failed to Log In', show_loader: true,
+const FAILED_TO_LOGIN_WITH_PASSCODE = {title: 'Failed to Sign In', show_loader: true,
     message_type: MESSAGE_TYPE_ERROR, content: '<br/>Passcode login failed<br/>Page will redirect in 1 second',
     contentClasses: ['center-text'], showClose: true};
 
