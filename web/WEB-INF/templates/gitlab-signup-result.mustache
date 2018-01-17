@@ -1,0 +1,23 @@
+{{> wrapper/header}}
+<input type="hidden" id="gitlab-signup-page-identifier"/>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<div class="row not-so-wide-row">
+     <div class="col-lg-3 col-md-1"></div>
+     <div class="col-lg-8 special-lg-8 col-md-10 col-xs-12 static-content">
+	  {{#if had_error}}
+	  <div class='row'>
+	       <div class='col-xs-12 center-text has-error'>
+		    <label class='control-label'>{{message}}</label>
+	       </div>
+	  </div>
+	  {{else}}
+	  <div class='row'>
+	       <div class='col-xs-12 center-text has-success'>
+		    <label class='control-label'>{{message}}</label>
+	       </div>
+	  </div>
+	  {{/if}}
+     </div>
+     <div class="col-lg-3 col-md-1"></div>
+</div>
+{{> wrapper/footer}}

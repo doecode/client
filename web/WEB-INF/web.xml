@@ -109,7 +109,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Other</servlet-name>
-        <url-pattern>/gitlab-submission-form</url-pattern>
+        <url-pattern>/gitlab-signup-result</url-pattern>
         <url-pattern>/gitlab-signup</url-pattern>
     </servlet-mapping>
     <!--500 pages, 404's, etc-->

@@ -1,20 +1,20 @@
 var post_gitlab_form_data = function () {
     $("#gitlab-signup-error-message").html('');
     $("#submit-btn").prop('disabled', true);
-    var post_data = {};
-    post_data.first_name = $("#first-name").val();
-    post_data.middle_name = $("#middle-name").val();
-    post_data.last_name = $("#last-name").val();
-    post_data.suffix = $("#suffix").val();
-    post_data.address = $("#address").val();
-    post_data.city = $("#city").val();
-    post_data.state = $("#state option:selected").text();
-    post_data.postal_code = $("#postal-code").val();
-    post_data.country = $("#country option:selected").text();
-    post_data.email_address = $("#email").val();
-    post_data.phone_number = $("#phone-number").val();
-    post_data.job_title = $("#job-title").val();
-    post_data.employment_designation = $("#employment-designation").val();
+    var submission_data = {};
+    submission_data.first_name = $("#first-name").val();
+    submission_data.middle_name = $("#middle-name").val();
+    submission_data.last_name = $("#last-name").val();
+    submission_data.suffix = $("#suffix").val();
+    submission_data.address = $("#address").val();
+    submission_data.city = $("#city").val();
+    submission_data.state = $("#state option:selected").text();
+    submission_data.postal_code = $("#postal-code").val();
+    submission_data.country = $("#country option:selected").text();
+    submission_data.email_address = $("#email").val();
+    submission_data.phone_number = $("#phone-number").val();
+    submission_data.job_title = $("#job-title").val();
+    submission_data.employment_designation = $("#employment-designation").val();
 
     //Go through and get the value of each field. If there's a value, mark it as successful. If there's no value, yet the field is required, mark it as erroneous. Otherwise, blank it out
     $(".gitlab-signup-input").each(function () {
@@ -32,34 +32,11 @@ var post_gitlab_form_data = function () {
         }
     });
 
-    //If something was entered in every field
-    if (post_data.first_name && post_data.last_name && post_data.address
-            && post_data.city && post_data.postal_code && post_data.country
-            && post_data.email_address && post_data.phone_number
-            && post_data.job_title && post_data.employment_designation) {
-        $.ajax("/" + APP_NAME + "/gitlab-submission-form", {
-            cache: false,
-            contentType: "application/json",
-            method: "POST",
-            data: JSON.stringify(post_data),
-            success: function (data) {
-                $("#submit-btn").prop('disabled', false);
-                if (data.success) {
-                    $(".gitlab-signup-input").each(function () {
-                        $(this).val('');
-                        var self = this;
-                        mark_gitlab_form_field(self, BLANK_CONDITION);
-                    });
-                    $("#gitlab-signup-success-message").html('Your registration was sent successfully');
-                } else {
-                    $("#gitlab-signup-error-message").html('An error has occurred, and we are unable to process your registration at this time.');
-                }
-            },
-            error: function (xhr) {
-                $("#submit-btn").prop('disabled', false);
-            }
-        });
-    } else {
+    //Put up an error if any of the required fields aren't filled out
+    if (!submission_data.first_name || !submission_data.last_name || !submission_data.address
+            || !submission_data.city || !submission_data.postal_code || !submission_data.country
+            || !submission_data.email_address || !submission_data.phone_number
+            || !submission_data.job_title || !submission_data.employment_designation) {
         $("#gitlab-signup-error-message").html('You must fill out all required fields');
         $("#submit-btn").prop('disabled', false);
     }
@@ -93,9 +70,18 @@ var mark_gitlab_form_field = function (element, condition) {
     }
 };
 
+var gitlab_signup_callback = function () {
+    console.log("Success");
+};
+
 //Keep at bottom
 if (document.getElementById('gitlab-signup-page-identifier')) {
     $("#submit-btn").on('click', post_gitlab_form_data);
-
+    //Makes the on-blur's work
     $(".gitlab-signup-input").on('blur', gitlab_form_blur_callback);
+    //Prevents form from submitting with enter
+    $("#gitlab-signup-form").on('submit', function (event) {
+        event.preventDefault();
+        console.log("didn't submit");
+    });
 }
