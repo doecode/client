@@ -1796,6 +1796,15 @@ ul.biblio-page-ul>li>a:hover {
 
 #github-repository-container {
     width: 314px;
+    padding-right:10px;
+}
+
+#github-repository-container a{
+    background-color:#277091 !important;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 #or-repository-container {
@@ -1804,6 +1813,15 @@ ul.biblio-page-ul>li>a:hover {
 
 #gitlab-repository-container {
     width: 314px;
+    padding-left:10px;
+}
+
+#gitlab-repository-container a{
+    background-color:#277091 !important;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 #repository-services-header-container {
