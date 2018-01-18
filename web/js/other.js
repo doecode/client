@@ -81,7 +81,8 @@ var gitlab_recaptcha_expiration_callback = function () {
 };
 
 var gitlab_recaptcha_error_callback = function () {
-    console.log("Recaptcha error");
+    $("#gitlab-signup-error-message").html('An error has occurred with captcha. Your request could not be processed at this time');
+    $("#submit-btn").prop('disabled', true);
 };
 
 
