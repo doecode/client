@@ -74,7 +74,7 @@ public class OtherFunctions {
           try {
                HttpResponse response = hc.execute(post);
                ObjectNode response_data = JsonObjectUtils.parseObjectNode(EntityUtils.toString(response.getEntity()));
-               is_valid = JsonObjectUtils.getBoolean(response_data,"success",false);
+               is_valid = JsonObjectUtils.getBoolean(response_data, "success", false);
           } catch (Exception ex) {
                log.error("Exception in search: " + ex.getMessage());
           } finally {
@@ -84,7 +84,6 @@ public class OtherFunctions {
                     log.error("Bad issue in closing search connection: " + ex.getMessage());
                }
           }
-          
 
           return is_valid;
      }
@@ -164,7 +163,6 @@ public class OtherFunctions {
                email.setMsg(email_message.toString());
                email.send();
                return_data.put("had_error", false);
-               return_data.put("message", "Your signup was successful");
           } catch (EmailException e) {
                log.error("Email error: " + e.getMessage());
                return_data.put("message", "Unable to send email due to unknown error");
