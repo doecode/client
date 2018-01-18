@@ -1472,6 +1472,10 @@ var FILE_UPLOAD_CONFIG = {url: 'someurl',
 $(document).ready(mobx.action("Document Ready", function () {
     //Above all else, make sure we're allowed to be here
     checkIsAuthenticated();
+    
+    // Set table input message
+	$('.table-msg').html($("#table_msg").val());
+    
     // Override Chosen to allow Success/Error marking
     $(".chosen-container").addClass("selectControl");
 

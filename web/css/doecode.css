@@ -2054,6 +2054,10 @@ div.Select>div.Select-control input {
     max-width:350px !important;
 }
 
+.table-msg {
+	font-style: italic;
+}
+
 /**Datatable overrides**/
 #projects-datatable_filter,#pending-datatable_filter{
     padding-bottom:5px;
