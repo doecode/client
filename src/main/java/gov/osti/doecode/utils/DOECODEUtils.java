@@ -3,6 +3,7 @@ package gov.osti.doecode.utils;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +42,20 @@ public class DOECODEUtils {
                b.append(list.get(i));
           }
           return b.toString();
+     }
+
+     public static String getClientIp(HttpServletRequest request) {
+
+          String remoteAddr = "";
+
+          if (request != null) {
+               remoteAddr = request.getHeader("X-FORWARDED-FOR");
+               if (remoteAddr == null || "".equals(remoteAddr)) {
+                    remoteAddr = request.getRemoteAddr();
+               }
+          }
+
+          return remoteAddr;
      }
 
 }

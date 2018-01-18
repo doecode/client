@@ -44,7 +44,7 @@ public class TemplateUtils {
      
      //Other
      public static final String TEMPLATE_GITLAB_SIGNUP = "gitlab-signup";
-     public static final String TEMPLATE_GITLAB_SINGUP_RESULT = "gitlab-signup-success";
+     public static final String TEMPLATE_GITLAB_SIGNUP_RESULT = "gitlab-signup-result";
 
      //Input
      public static final String TEMPLATE_INPUT_FORM = "input-form";

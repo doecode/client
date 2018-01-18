@@ -38,7 +38,7 @@ var post_gitlab_form_data = function () {
             || !submission_data.job_title || !submission_data.employment_designation) {
         $("#gitlab-signup-error-message").html('You must fill out all required fields');
     } else {
-        $("#gitlab-signup-form").post();
+        $("#gitlab-signup-form").submit();
     }
 };
 
@@ -90,8 +90,5 @@ if (document.getElementById('gitlab-signup-page-identifier')) {
     $("#submit-btn").on('click', post_gitlab_form_data);
     //Makes the on-blur's work
     $(".gitlab-signup-input").on('blur', gitlab_form_blur_callback);
-    //Prevents form from submitting with enter
-    $("#gitlab-signup-form").on('submit', function (event) {
-        event.preventDefault();
-    });
+
 }
