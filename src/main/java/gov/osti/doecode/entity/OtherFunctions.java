@@ -37,7 +37,7 @@ public class OtherFunctions {
                   || StringUtils.isBlank(captcha_response) || StringUtils.isBlank(recaptcha_secretkey)
                   || !isValidreCaptcha(captcha_response, recaptcha_secretkey, ip_address)) {
                return_data.put("had_error", true);
-               return_data.put("message", "You must enter all required fields and validate the captcha");
+               return_data.put("message", "You must enter all required fields and validate the captcha.");
           } else {
                //Submit form
                ObjectNode requested_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
@@ -61,6 +61,7 @@ public class OtherFunctions {
      }
 
      private static boolean isValidreCaptcha(String key, String secret_key, String ip_address) {
+          boolean is_valid = false;
           String recaptcha_url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secret_key + "&response=" + key;
           if (StringUtils.isNotBlank(ip_address)) {
                recaptcha_url += ("&remoteip=" + ip_address);
@@ -73,7 +74,7 @@ public class OtherFunctions {
           try {
                HttpResponse response = hc.execute(post);
                ObjectNode response_data = JsonObjectUtils.parseObjectNode(EntityUtils.toString(response.getEntity()));
-               log.info(response_data.toString());
+               is_valid = JsonObjectUtils.getBoolean(response_data,"success",false);
           } catch (Exception ex) {
                log.error("Exception in search: " + ex.getMessage());
           } finally {
@@ -83,7 +84,7 @@ public class OtherFunctions {
                     log.error("Bad issue in closing search connection: " + ex.getMessage());
                }
           }
-          boolean is_valid = true;
+          
 
           return is_valid;
      }
@@ -163,7 +164,7 @@ public class OtherFunctions {
                email.setMsg(email_message.toString());
                email.send();
                return_data.put("had_error", false);
-               return_data.put("message", "Successful signup");
+               return_data.put("message", "Your signup was successful");
           } catch (EmailException e) {
                log.error("Email error: " + e.getMessage());
                return_data.put("message", "Unable to send email due to unknown error");
