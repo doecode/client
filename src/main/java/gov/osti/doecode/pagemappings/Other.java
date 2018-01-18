@@ -39,7 +39,6 @@ public class Other extends HttpServlet {
                     page_title = "DOECODE: Gitlab Signup Result";
                     template = TemplateUtils.TEMPLATE_GITLAB_SINGUP_RESULT;
                     output_data = OtherFunctions.handleGitlabSubmissionForm(request);
-
                     break;
           }
 

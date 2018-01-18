@@ -177,7 +177,7 @@
 		    </div>
 		    <br/>
 		    <div class="col-xs-12 left-text">
-			 <div class='g-recaptcha' id="gitlab-signup-recaptcha-div" data-callback="gitlab_signup_callback" data-sitekey='{{recaptcha_sitekey}}'></div>
+			 <div class='g-recaptcha' id="gitlab-signup-recaptcha-div" data-error-callback="gitlab_recaptcha_error_callback" data-callback="gitlab_recaptcha_success_callback" data-expired-callback="gitlab_recaptcha_expiration_callback" data-sitekey='{{recaptcha_sitekey}}'></div>
 		    </div>
 	       </div>
 	  </form>
@@ -185,7 +185,7 @@
 	  <br/>
 	  <div class="row">
 	       <div class='col-sm-10 col-xs-12 right-text'>
-		    <button id="submit-btn" title="Submit" type="button" class="pure-button pure-button-primary btn-lg" >
+		    <button id="submit-btn" title="Submit" type="button" class="pure-button pure-button-primary btn-lg" disabled>
 			 Submit
 		    </button>
 	       </div>

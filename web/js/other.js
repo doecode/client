@@ -1,6 +1,5 @@
 var post_gitlab_form_data = function () {
     $("#gitlab-signup-error-message").html('');
-    $("#submit-btn").prop('disabled', true);
     var submission_data = {};
     submission_data.first_name = $("#first-name").val();
     submission_data.middle_name = $("#middle-name").val();
@@ -38,7 +37,8 @@ var post_gitlab_form_data = function () {
             || !submission_data.email_address || !submission_data.phone_number
             || !submission_data.job_title || !submission_data.employment_designation) {
         $("#gitlab-signup-error-message").html('You must fill out all required fields');
-        $("#submit-btn").prop('disabled', false);
+    } else {
+        $("#gitlab-signup-form").post();
     }
 };
 
@@ -70,9 +70,20 @@ var mark_gitlab_form_field = function (element, condition) {
     }
 };
 
-var gitlab_signup_callback = function () {
-    console.log("Success");
+var gitlab_recaptcha_success_callback = function () {
+    $("#gitlab-signup-error-message").html('');
+    $("#submit-btn").prop('disabled', false);
 };
+
+var gitlab_recaptcha_expiration_callback = function () {
+    $("#gitlab-signup-error-message").html('Your recaptcha session has expired. Please try the recaptcha again before submitting.');
+    $("#submit-btn").prop('disabled', true);
+};
+
+var gitlab_recaptcha_error_callback = function () {
+    console.log("Recaptcha error");
+};
+
 
 //Keep at bottom
 if (document.getElementById('gitlab-signup-page-identifier')) {
@@ -82,6 +93,5 @@ if (document.getElementById('gitlab-signup-page-identifier')) {
     //Prevents form from submitting with enter
     $("#gitlab-signup-form").on('submit', function (event) {
         event.preventDefault();
-        console.log("didn't submit");
     });
 }

@@ -12,16 +12,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class OtherFunctions {
-
+     
      private static Logger log = LoggerFactory.getLogger(OtherFunctions.class.getName());
-
+     
      public static ObjectNode handleGitlabSubmissionForm(HttpServletRequest request) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
 
           //Make sure there's a value for everything that's required. If any one of these dont' have values, return an error
-          if (StringUtils.isBlank(request.getParameter("first_name")) || StringUtils.isBlank(request.getParameter("last_name")) || StringUtils.isBlank(request.getParameter("address")) || StringUtils.isBlank(request.getParameter("city")
-          ) || StringUtils.isBlank(request.getParameter("postal_code")) || StringUtils.isBlank(request.getParameter("country")) || StringUtils.isBlank(request.getParameter("email_address")) || StringUtils.isBlank(request.getParameter("phone_number")
-          ) || StringUtils.isBlank(request.getParameter("job_title")) || StringUtils.isBlank(request.getParameter("employment_designation")) || isValidreCaptcha(request.getParameter("g-recaptcha-response"))) {
+          if (StringUtils.isBlank(request.getParameter("first_name")) || StringUtils.isBlank(request.getParameter("last_name"))
+                  || StringUtils.isBlank(request.getParameter("address")) || StringUtils.isBlank(request.getParameter("city"))
+                  || StringUtils.isBlank(request.getParameter("postal_code")) || StringUtils.isBlank(request.getParameter("country"))
+                  || StringUtils.isBlank(request.getParameter("email_address")) || StringUtils.isBlank(request.getParameter("phone_number"))
+                  || StringUtils.isBlank(request.getParameter("job_title")) || StringUtils.isBlank(request.getParameter("employment_designation"))
+                  || isValidreCaptcha(request.getParameter("g-recaptcha-response"), request.getServletContext().getInitParameter("recaptcha_secretkey"))) {
                return_data.put("had_error", true);
                return_data.put("message", "You must enter all required fields and validate the captcha");
           } else {
@@ -42,17 +45,18 @@ public class OtherFunctions {
                requested_data.put("employment_designation", request.getParameter("employment_designation"));
                return_data = sendGitlabSubmissionEmail(request.getServletContext(), requested_data);
           }
-
+          
           return return_data;
      }
-
-     private static boolean isValidreCaptcha(String key) {
-          log.info(key);
-          boolean is_valid = false;
-
+     
+     private static boolean isValidreCaptcha(String key, String secret_key) {
+          log.info("KEY sent: "+key);
+          log.info("Secret keY: "+secret_key);
+          boolean is_valid = true;
+          
           return is_valid;
      }
-
+     
      public static ObjectNode sendGitlabSubmissionEmail(ServletContext context, ObjectNode request_data) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
 
@@ -116,7 +120,7 @@ public class OtherFunctions {
           email_message.append(" ");
           //Employment Designation
           email_message.append(JsonObjectUtils.getString(request_data, "employment_designation", ""));
-
+          
           HtmlEmail email = new HtmlEmail();
           email.setHostName(context.getInitParameter("smtpHost"));
           try {
@@ -132,10 +136,10 @@ public class OtherFunctions {
                return_data.put("message", "Unable to send email due to unknown error");
                return_data.put("had_error", true);
           }
-
+          
           return return_data;
      }
-
+     
      public static ObjectNode getOtherLists(ServletContext context) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           try {
