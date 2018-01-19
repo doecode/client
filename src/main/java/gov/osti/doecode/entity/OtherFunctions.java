@@ -97,7 +97,7 @@ public class OtherFunctions {
           StringBuilder email_message = new StringBuilder();
 
           /*Name*/
-          email_message.append("NAME: \n");
+          email_message.append("----- NAME ----- \n");
           //First Name
           email_message.append(JsonObjectUtils.getString(request_data, "first_name", ""));
           email_message.append(" ");
@@ -118,18 +118,21 @@ public class OtherFunctions {
           email_message.append("\n\n");
 
           /*Address*/
-          email_message.append("Mailing Address: \n");
+          email_message.append("----- Mailing Address ----- \n");
           //Street Address
           email_message.append(JsonObjectUtils.getString(request_data, "address", ""));
           email_message.append("\n");
           //City
           email_message.append(JsonObjectUtils.getString(request_data, "city", ""));
-          email_message.append(" ");
+
           //State
           String state = JsonObjectUtils.getString(request_data, "state", "");
           if (StringUtils.isNotBlank(state)) {
+               email_message.append(", ");
                email_message.append(state);
                email_message.append("\n");
+          } else {
+               email_message.append(" ");
           }
           //Postal Code
           email_message.append(JsonObjectUtils.getString(request_data, "postal_code", ""));
@@ -139,19 +142,19 @@ public class OtherFunctions {
           email_message.append("\n\n");
 
           /*Contact Info*/
-          email_message.append("Contact Information: \n");
+          email_message.append("----- Contact Information ----- \n");
           //Email Address
           email_message.append(JsonObjectUtils.getString(request_data, "email_address", ""));
-          email_message.append(" ");
+          email_message.append("\n");
           //PHone Number
           email_message.append(JsonObjectUtils.getString(request_data, "phone_number", ""));
           email_message.append("\n\n");
 
           /*Job*/
-          email_message.append("Job Title/Designation: \n");
+          email_message.append("----- Job Title/Designation ----- \n");
           //Job Title
           email_message.append(JsonObjectUtils.getString(request_data, "job_title", ""));
-          email_message.append(" ");
+          email_message.append(", ");
           //Employment Designation
           email_message.append(JsonObjectUtils.getString(request_data, "employment_designation", ""));
 
