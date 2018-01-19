@@ -4,8 +4,8 @@
 <noscript>Your browser does not support JavaScript!</noscript>
 <div class="row not-so-wide-row">
      <div class="col-lg-3 col-md-1"></div>
-     <div class="col-lg-8 special-lg-8 col-md-10 col-xs-12 static-content">
-	  <h2 class="static-content-title">OSTI Gitlab Signup</h2>
+     <div class="col-lg-8 special-lg-8 col-md-10 col-sm-11 col-xs-11 static-content">
+	  <h2 class="static-content-title">DOE CODE Repositories Services Access Request</h2>
 	  <div class='row'>
 	       <div class='col-xs-12 '>
 		    <small><label class="control-label">*=required field</label></small>
@@ -110,7 +110,6 @@
 		    <div class='col-sm-2 hide-xs'></div>
 		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
 			 <select class='pure-input-1 full-width-input form-control gitlab-signup-input gitlab-signup-required' name="country" title='Country' id="country">
-			      <option></option>
 			      {{#each countries_list}}
 			      <option value="{{value}}" title="{{title}}">{{label}}</option>
 			      {{/each}}
@@ -163,7 +162,12 @@
 			 </div>
 		    </div>
 		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-			 <input title='Employment Designation' placeholder='Employment Designation' id='employment-designation' name="employment_designation" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+			  <select class='pure-input-1 full-width-input form-control gitlab-signup-input gitlab-signup-required' name="employment_designation" title='Employment Designation' id="employment-designation">
+			       <option value="DOE Federal Employee" title="DOE Federal Employee">DOE Federal Employee</option>
+			       <option value="DOE Prime Contractor" title="DOE Prime Contractor">DOE Prime Contractor</option>
+			       <option value="DOE Sub-Contractor" title="DOE Sub-Contractor">DOE Sub-Contractor</option>
+			       <option value="Other" title="Other">Other</option>
+			 </select>
 			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
 			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 			 <div>
@@ -185,7 +189,7 @@
 	  <br/>
 	  <br/>
 	  <div class="row">
-	       <div class='col-sm-10 col-xs-12 right-text'>
+	       <div class='col-md-10 col-sm-11 col-xs-12 right-text'>
 		    <button id="submit-btn" title="Submit" type="button" class="pure-button pure-button-primary btn-lg" disabled>
 			 Submit
 		    </button>

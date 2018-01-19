@@ -1,5 +1,6 @@
 package gov.osti.doecode.entity;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
@@ -175,7 +176,21 @@ public class OtherFunctions {
      public static ObjectNode getOtherLists(ServletContext context) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           try {
-               return_data.put("countries_list", Init.countries_list);
+               ArrayNode countries_list_modified = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+               //Since, for this form only, we need the United States to be first in the list, we have to add an object for it, and then remove the one from the list towards the bottom
+               ObjectNode the_us = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+               the_us.put("label", "United States");
+               the_us.put("value", "United States");
+               the_us.put("title", "United States");
+               countries_list_modified.add(the_us);
+               Init.countries_list.forEach((s) -> {
+                    if (!StringUtils.equals(JsonObjectUtils.getString((ObjectNode) s, "label", ""), "United States")) {
+                         countries_list_modified.add(s);
+                    }
+               });
+
+               return_data.put("countries_list", countries_list_modified);
+               //return_data.put("countries_list", Init.countries_list);
                return_data.put("state_list", Init.states_list);
           } catch (Exception e) {
                log.error("Error in loading input json lists: " + e.getMessage());
