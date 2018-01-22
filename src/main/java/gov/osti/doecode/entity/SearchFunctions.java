@@ -6,23 +6,19 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonObjectUtils;
-import java.io.IOException;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Consts;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 import org.slf4j.Logger;
@@ -83,20 +79,28 @@ public class SearchFunctions {
           post_data.put("sponsoring_organization", handleRequestArray(request.getParameter("sponsoring_organization")));
           post_data.put("software_type", handleRequestArray(request.getParameter("software_type")));
 
-          //Create the post object
-          CloseableHttpClient hc = HttpClientBuilder.create().setDefaultRequestConfig(RequestConfig.custom().setSocketTimeout(5000).setConnectTimeout(5000).setConnectionRequestTimeout(5000).build()).build();
-          HttpPost post = new HttpPost(api_url + "search");
-          post.setHeader("Content-Type", "application/json");
-          post.setHeader("Accept", "application/json");
-          post.setEntity(new StringEntity(post_data.toString(), "UTF-8"));
-
-          //Build our post object and execute it
           ObjectNode search_result_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           try {
-               HttpResponse response = hc.execute(post);
-               String raw_search_data = EntityUtils.toString(response.getEntity());
-               if (JsonObjectUtils.isValidObjectNode(raw_search_data)) {
-                    search_result_data = JsonObjectUtils.parseObjectNode(raw_search_data);
+               URL url = new URL(api_url + "search");
+               HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+               conn.setConnectTimeout(5000);
+               conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+               conn.setDoOutput(true);
+               conn.setDoInput(true);
+               conn.setRequestMethod("POST");
+
+               OutputStream os = conn.getOutputStream();
+               os.write(post_data.toString().getBytes());
+               os.close();
+
+               InputStream in = new BufferedInputStream(conn.getInputStream());
+               String result = org.apache.commons.io.IOUtils.toString(in, "UTF-8");
+
+               in.close();
+               conn.disconnect();
+
+               if (JsonObjectUtils.isValidObjectNode(result)) {
+                    search_result_data = JsonObjectUtils.parseObjectNode(result);
                } else {
                     invalid_search_data = true;
                }
@@ -105,12 +109,6 @@ public class SearchFunctions {
                had_error = true;
                invalid_search_data = true;
                error_message = "An error has occurred that is preventing your search from working.";
-          } finally {
-               try {
-                    hc.close();
-               } catch (IOException ex) {
-                    log.error("Bad issue in closing search connection: " + ex.getMessage());
-               }
           }
 
           //Get the num found
@@ -1023,34 +1021,24 @@ public class SearchFunctions {
           boolean is_valid = true;
           String api_url = context.getInitParameter("api_url");
 
-          //Connect to the api and grab our needed data
-          CloseableHttpClient hc = HttpClientBuilder.create().setDefaultRequestConfig(RequestConfig.custom().setSocketTimeout(5000).setConnectTimeout(5000).setConnectionRequestTimeout(5000).build()).build();
-          HttpGet get = new HttpGet(api_url + "search/" + osti_id);
-          get.setHeader("Content-Type", "application/json");
-          get.setHeader("Accept", "application/json");
-          get.setHeader(CoreProtocolPNames.HTTP_CONTENT_CHARSET, Consts.UTF_8.name());
-          String raw_json = "";
-          try {
-               HttpResponse response = hc.execute(get);
-               raw_json = EntityUtils.toString(response.getEntity());
-          } catch (Exception e) {
-               is_valid = false;
-               log.error("Error in getting json: " + e.getMessage());
-          } finally {
-               try {
-                    hc.close();
-               } catch (IOException ex) {
-                    log.error("Bad issue in closing search connection: " + ex.getMessage());
-               }
-          }
-
-          //Grab the metadata object out of our search
           ObjectNode biblio_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           try {
-               biblio_data = (ObjectNode) JsonObjectUtils.parseObjectNode(raw_json).get("metadata");
+               StringBuilder result = new StringBuilder();
+               URL url = new URL(api_url + "search/" + osti_id);
+               HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+               conn.setRequestMethod("GET");
+               BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+               String line;
+               while ((line = rd.readLine()) != null) {
+                    result.append(line);
+               }
+               rd.close();
+               conn.disconnect();
+               biblio_data = (ObjectNode) JsonObjectUtils.parseObjectNode(result.toString()).get("metadata");
+
           } catch (Exception e) {
+               log.error("Error: " + e.getMessage());
                is_valid = false;
-               log.error("Invalid JSON: " + e.getMessage());
           }
 
           //Massage any data that needs it
@@ -1080,8 +1068,7 @@ public class SearchFunctions {
                meta_tags.add(makeMetaTag("release_date", JsonObjectUtils.getString(biblio_data, "release_date", "")));
 
                /*Code Availability*/
-               ArrayNode availabilityList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-               availabilityList = Init.availabilities_list;
+               ArrayNode availabilityList = Init.availabilities_list;
 
                ObjectNode availabilityObj = JsonObjectUtils.getJsonListItem(availabilityList, "value", JsonObjectUtils.getString(biblio_data, "accessibility", ""));
                return_data.put("availability", JsonObjectUtils.getString(availabilityObj, "label", ""));
@@ -1089,15 +1076,15 @@ public class SearchFunctions {
                meta_tags.add(makeMetaTag("availability", JsonObjectUtils.getString(availabilityObj, "label", "")));
 
                /*Software Type*/
-               ArrayNode softwareTypeList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-               softwareTypeList = Init.software_type;
+               ArrayNode softwareTypeList = Init.software_type;
                ObjectNode softwareTypeObj = JsonObjectUtils.getJsonListItem(softwareTypeList, "value", JsonObjectUtils.getString(biblio_data, "software_type", ""));
                return_data.put("software_type", JsonObjectUtils.getString(softwareTypeObj, "label", ""));
                meta_tags.add(makeMetaTag("software_type", JsonObjectUtils.getString(softwareTypeObj, "label", "")));
 
                /*Licenses*/
-               return_data.put("licenses", (ArrayNode) biblio_data.get("licenses"));
-               return_data.put("has_licenses", ((ArrayNode) biblio_data.get("licenses")).size() > 0);
+               ArrayNode licenses = (ArrayNode) biblio_data.get("licenses");
+               return_data.put("licenses", licenses);
+               return_data.put("has_licenses", licenses != null && licenses.size() > 0);
                meta_tags.add(makeMetaTag("licenses", DOECODEUtils.makeSpaceSeparatedList((ArrayNode) biblio_data.get("licenses"))));
 
                /*Sponsoring Org*/

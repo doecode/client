@@ -181,7 +181,7 @@ public class TemplateUtils {
      }
 
      public static void writeOutTemplateData(String page_title, String template, HttpServletResponse response, ObjectNode data) throws IOException {
-          response.setContentType("text/html;charset=UTF-8");
+          response.setContentType("text/html; charset=UTF-8");
           //Turn our json object into jackson
           data.put("page_title", page_title);
           //Put the jackson context together
