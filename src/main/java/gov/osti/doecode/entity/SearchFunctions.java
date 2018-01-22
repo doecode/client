@@ -452,7 +452,7 @@ public class SearchFunctions {
                     String combined_name = last_name + ", " + first_name;
 
                     //If we still had anything left over, we'll assume we have a properly combined name
-                    if (StringUtils.isNotBlank(combined_name.replaceAll(" ", "").replaceAll(",", ""))) {
+                    if (StringUtils.isNotBlank(combined_name.replaceAll(" ", "").replaceAll(",", "")) && !first_name.equalsIgnoreCase("none") && !last_name.equalsIgnoreCase("none")) {
                          row.put("combined_name", combined_name);
                          row.put("author_type", "developer");
                          return_data.add(row);
@@ -471,7 +471,7 @@ public class SearchFunctions {
                     String combined_name = last_name + ", " + first_name;
 
                     //If we still had anything left over, we'll assume we have a properly combined name
-                    if (StringUtils.isNotBlank(combined_name.replaceAll(" ", "").replaceAll(",", ""))) {
+                    if (StringUtils.isNotBlank(combined_name.replaceAll(" ", "").replaceAll(",", "")) && !first_name.equalsIgnoreCase("none") && !last_name.equalsIgnoreCase("none")) {
                          row.put("combined_name", combined_name);
                          row.put("author_type", "contributor");
                          return_data.add(row);
@@ -521,7 +521,7 @@ public class SearchFunctions {
                authorlist.set(i, current_row);
           }
 
-          //Only if want affiliations will we struggle through this
+          return_data.put("had_list", authorlist.size() > 0);
           return_data.put("affiliations_list", affiliations_list);
           return_data.put("list", authorlist);
           return_data.put("show_ellipsis", showEllipsis);
@@ -1054,7 +1054,9 @@ public class SearchFunctions {
 
                /*Developers and contributors*/
                ArrayNode developers_combined = combineDevContributorNames((ArrayNode) biblio_data.get("developers"), null);
-               return_data.put("developers_list", getDevAndContributorLink(developers_combined, true, false, true));
+               ObjectNode devs_contributors_obj = getDevAndContributorLink(developers_combined, true, false, true);
+               return_data.put("developers_list", devs_contributors_obj);
+               return_data.put("has_developers", JsonObjectUtils.getBoolean(devs_contributors_obj, "had_list", false));
                ArrayNode developerslist = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
                for (JsonNode v : developers_combined) {
                     ObjectNode vObj = (ObjectNode) v;

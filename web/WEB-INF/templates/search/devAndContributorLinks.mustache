@@ -5,13 +5,17 @@
      <a class="clickable author-search-name" data-authorname='{{combined_name}}' title='Search for {{author_type}} {{combined_name}}'>{{combined_name}}</a>
      {{#unless is_last}};{{/unless}}
      {{/each}}
-     
+
      {{#if dev_contributors.show_ellipsis}}
      &hellip;
      {{/if}}
-     
-     {{#if show_release_date}}
+
+     <!--If we had developers. we'll put a space in-->
+     {{#if dev_contributors.had_list}}
      &nbsp;
+     {{/if}}
+
+     {{#if show_release_date}}
      <span class='hide-sm hide-md hide-lg'>
 	  <br/>
      </span>

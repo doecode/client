@@ -62,6 +62,7 @@
 					     <div class="row" >
 						  <div class="citation-details-div col-xs-12  no-col-padding-left no-col-padding-right">
 						       <!--Developers-->
+						       {{#if has_developers}}
 						       <div class='biblio-row'>
 							    <div class='col-xs-12'>
 								 <dl class='row'>
@@ -70,6 +71,7 @@
 								 </dl>
 							    </div>
 						       </div>
+						       {{/if}}
 						       <!--Release Date-->
 						       {{#if has_release_date}}
 						       <div class='biblio-row'>
