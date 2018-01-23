@@ -1612,11 +1612,6 @@ $(document).ready(mobx.action("Document Ready", function () {
     //Makes the autopopualte from repository work
     $("#autopopulate-from-repository").on('click', autopopulateFromRepository);
 
-    //Makes the chosen js inputs work with custom content
-    $(".chosen-search-input").on('keyup', modifyChosenSelectForCustomEntry);
-    $(".chosen-search-input").on('keydown', modifyChosenSelectForCustomEntryTabKey);
-
-
     /*Developers*/
     setModalActions("developers");
 

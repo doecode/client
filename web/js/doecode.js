@@ -253,3 +253,8 @@ $("#adv-search-toggle-btn").on('click', toggleAdvExtendedDropdown);
 if (isValidJSON(localStorage.latestSearchParams) && Array.isArray(JSON.parse(localStorage.latestSearchParams))) {
     populateAdvancedSearchForm("navbar-searchbar-");
 }
+
+
+//Makes the chosen js inputs work with custom content
+$(".chosen-search-input").on('keyup', modifyChosenSelectForCustomEntry);
+$(".chosen-search-input").on('keydown', modifyChosenSelectForCustomEntryTabKey);

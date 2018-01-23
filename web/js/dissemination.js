@@ -407,9 +407,4 @@ if (document.getElementById('about-page-identifier')) {
         populateAdvancedSearchForm("advanced-search-");
     }
     localStorage.isRefinedSearch = "false";
-
-    //Makes the chosen js inputs work with custom content
-    $(".chosen-search-input").on('keyup', modifyChosenSelectForCustomEntry);
-    $(".chosen-search-input").on('keydown', modifyChosenSelectForCustomEntryTabKey);
-
 } 
