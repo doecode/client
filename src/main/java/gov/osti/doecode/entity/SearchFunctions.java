@@ -715,21 +715,31 @@ public class SearchFunctions {
 
           for (JsonNode v : arr1) {
                ObjectNode row = (ObjectNode) v;
+               String first_name = JsonObjectUtils.getString(row, "first_name", "");
+               String middle_name = JsonObjectUtils.getString(row, "middle_name", "");
+               String last_name = JsonObjectUtils.getString(row, "last_name", "");
+               //Make sure they're not a "none" entry
+               if (!first_name.equalsIgnoreCase("none") && !middle_name.equalsIgnoreCase("none") && !last_name.equalsIgnoreCase("none")) {
+                    String combinedName = combineName(first_name, middle_name, last_name);
 
-               String combinedName = combineName(JsonObjectUtils.getString(row, "first_name", ""), JsonObjectUtils.getString(row, "middle_name", ""), JsonObjectUtils.getString(row, "last_name", ""));
-
-               if (StringUtils.isNotBlank(combinedName)) {
-                    return_data.add(combinedName);
+                    if (StringUtils.isNotBlank(combinedName)) {
+                         return_data.add(combinedName);
+                    }
                }
           }
 
           for (JsonNode v : arr2) {
                ObjectNode row = (ObjectNode) v;
+               String first_name = JsonObjectUtils.getString(row, "first_name", "");
+               String middle_name = JsonObjectUtils.getString(row, "middle_name", "");
+               String last_name = JsonObjectUtils.getString(row, "last_name", "");
 
-               String combinedName = combineName(JsonObjectUtils.getString(row, "first_name", ""), JsonObjectUtils.getString(row, "middle_name", ""), JsonObjectUtils.getString(row, "last_name", ""));
+               if (!first_name.equalsIgnoreCase("none") && !middle_name.equalsIgnoreCase("none") && !last_name.equalsIgnoreCase("none")) {
+                    String combinedName = combineName(first_name, middle_name, last_name);
 
-               if (StringUtils.isNotBlank(combinedName)) {
-                    return_data.add(combinedName);
+                    if (StringUtils.isNotBlank(combinedName)) {
+                         return_data.add(combinedName);
+                    }
                }
           }
 
