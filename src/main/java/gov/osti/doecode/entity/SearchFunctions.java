@@ -580,7 +580,7 @@ public class SearchFunctions {
 
      public static ArrayNode getSearchBreadcrumbTrailList(ObjectNode search_form_data, long num_found) {
           ArrayNode return_data = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          return_data.add("<a title='DOE CODE Homepage' href='/doecode'> DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;");
+          return_data.add("<a title='DOE CODE Homepage' href='/" + Init.app_name + "/'> DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;");
 
           String all_fields_text = "Search for " + (StringUtils.isNotBlank(JsonObjectUtils.getString(search_form_data, "all_fields", "")) ? JsonObjectUtils.getString(search_form_data, "all_fields", "") : "All Projects");
           String filter_suffix = (getWasAnythingFilteredFor(search_form_data)) ? "<span class='search-for-filter-crumb'>(filtered)</span>" : "";
