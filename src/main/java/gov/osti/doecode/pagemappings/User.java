@@ -71,9 +71,12 @@ public class User extends HttpServlet {
                               output_data.put("passcode", request.getParameter("passcode"));
                               output_data.put("page_warning_message", "Please change your password");
                          } else {
+                              log.info("Is logged in: " + is_logged_in);
                               if (!is_logged_in) {
                                    UserFunctions.redirectUserToLogin(request, response, site_url);
+                                   return;
                               }
+                              log.info("I'm not logged in, but I'm doing stuff anyways");
                               ObjectNode current_user_data = UserFunctions.getAccountPageData(request);
                               output_data.put("current_user_data", current_user_data);
                          }
@@ -81,6 +84,7 @@ public class User extends HttpServlet {
                     case "user-admin":
                          if (!is_logged_in) {
                               UserFunctions.redirectUserToLogin(request, response, site_url);
+                              return;
                          }
                          page_title = "DOE CODE: User Administration";
                          template = TemplateUtils.TEMPLATE_USER_ADMIN;
@@ -116,6 +120,7 @@ public class User extends HttpServlet {
                     case "help":
                          if (!is_logged_in) {
                               UserFunctions.redirectUserToLogin(request, response, site_url);
+                              return;
                          }
                          page_title = "DOE CODE: Help";
                          template = TemplateUtils.TEMPLATE_HELP;

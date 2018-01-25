@@ -130,7 +130,6 @@ public class UserFunctions {
           response.addCookie(new Cookie("requested_url", requested_url.toString()));
           response.addCookie(new Cookie("user_data", ""));
           response.sendRedirect(site_url + "login?redirect=true");
-          return;
      }
 
      public static ObjectNode updateUserCookie(HttpServletRequest request, ObjectNode new_user_data) {

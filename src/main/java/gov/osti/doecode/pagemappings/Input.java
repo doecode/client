@@ -56,6 +56,7 @@ public class Input extends HttpServlet {
 
           if (!is_logged_in) {
                UserFunctions.redirectUserToLogin(request, response, site_url);
+               return;
           } else {
                //Increment time
                response.addCookie(UserFunctions.updateUserSessionTimeout(request));
