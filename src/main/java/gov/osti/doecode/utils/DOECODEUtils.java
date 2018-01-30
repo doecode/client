@@ -44,6 +44,7 @@ public class DOECODEUtils {
           return b.toString();
      }
 
+     /*
      public static String getClientIp(HttpServletRequest request) {
 
           String remoteAddr = "";
@@ -56,6 +57,6 @@ public class DOECODEUtils {
           }
 
           return remoteAddr;
-     }
+     }*/
 
 }

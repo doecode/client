@@ -3,20 +3,18 @@ package gov.osti.doecode.entity;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonObjectUtils;
-import java.io.IOException;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +26,7 @@ public class OtherFunctions {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           String captcha_response = request.getParameter("g-recaptcha-response");
           String recaptcha_secretkey = request.getServletContext().getInitParameter("recaptcha_secretkey");
-          String ip_address = DOECODEUtils.getClientIp(request);
+          String ip_address = "";//DOECODEUtils.getClientIp(request);
           //Make sure there's a value for everything that's required. If any one of these dont' have values, return an error
           if (StringUtils.isBlank(request.getParameter("first_name")) || StringUtils.isBlank(request.getParameter("last_name"))
                   || StringUtils.isBlank(request.getParameter("address")) || StringUtils.isBlank(request.getParameter("city"))
@@ -67,24 +65,31 @@ public class OtherFunctions {
           if (StringUtils.isNotBlank(ip_address)) {
                recaptcha_url += ("&remoteip=" + ip_address);
           }
-          CloseableHttpClient hc = HttpClientBuilder.create().setDefaultRequestConfig(RequestConfig.custom().setSocketTimeout(5000).setConnectTimeout(5000).setConnectionRequestTimeout(5000).build()).build();
-          HttpPost post = new HttpPost(recaptcha_url);
-          post.setHeader("Content-Type", "application/json");
-          post.setHeader("Accept", "application/json");
-
+          
+          ObjectNode response = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           try {
-               HttpResponse response = hc.execute(post);
-               ObjectNode response_data = JsonObjectUtils.parseObjectNode(EntityUtils.toString(response.getEntity()));
-               is_valid = JsonObjectUtils.getBoolean(response_data, "success", false);
+               URL url = new URL(recaptcha_url);
+               HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+               conn.setConnectTimeout(5000);
+               conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+               conn.setDoOutput(true);
+               conn.setDoInput(true);
+               conn.setRequestMethod("POST");
+
+               OutputStream os = conn.getOutputStream();
+               os.close();
+
+               InputStream in = new BufferedInputStream(conn.getInputStream());
+               String result = IOUtils.toString(in, "UTF-8");
+               response = JsonObjectUtils.parseObjectNode(result);
+               in.close();
+               conn.disconnect();
+
           } catch (Exception ex) {
-               log.error("Exception in search: " + ex.getMessage());
-          } finally {
-               try {
-                    hc.close();
-               } catch (IOException ex) {
-                    log.error("Bad issue in closing search connection: " + ex.getMessage());
-               }
+               log.error("Exception in gitlab submission: " + ex.getMessage());
           }
+          
+          is_valid = JsonObjectUtils.getBoolean(response,"success",false);
 
           return is_valid;
      }

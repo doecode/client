@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
@@ -94,7 +95,7 @@ public class SearchFunctions {
                os.close();
 
                InputStream in = new BufferedInputStream(conn.getInputStream());
-               String result = org.apache.commons.io.IOUtils.toString(in, "UTF-8");
+               String result = IOUtils.toString(in, "UTF-8");
 
                in.close();
                conn.disconnect();
