@@ -31,6 +31,8 @@
         <smtpHost></smtpHost>
         <gitlab_recaptcha_site_key></gitlab_recaptcha_site_key>
         <gitlab_recaptcha_secret_key></gitlab_recaptcha_secret_key>
+        <google_analytics_id></google_analytics_id>
+        <google_analytics_domain></google_analytics_domain>
     </properties>
     <!--
         You will need to add your own profiles into this pom.xml, or use profiles stored in your local settings.xml
@@ -298,6 +300,14 @@
                                 <replacement>
                                     <token>@recaptcha_secretkey@</token>
                                     <value>${gitlab_recaptcha_secret_key}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@google_analytics_id@</token>
+                                    <value>${google_analytics_id}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@google_analytics_domain@</token>
+                                    <value>${google_analytics_domain}</value>
                                 </replacement>
                             </replacements>
                         </configuration>

@@ -306,17 +306,12 @@ var setUpDateSlider = function () {
 };
 
 var pushDownloadMetric = function () {
-    _gaq.push(['_setAccount', 'UA-89103371-1']);
-    _gaq.push(['_setDomainName', 'www.osti.gov']);
-    _gaq.push(['trackDownload']);
-    (function () {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = 'https://ssl.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-    })();
+    //code id we care about
+    var code_id = $(this).data('codeid');
+    var href = $(this).attr('href');
+
+    var ga_link = '/' + APP_NAME + "/downloads/" + code_id + "/" + href;
+    _gaq.push(['_trackPageview', ga_link]);
 };
 
 //If we're on the about page....
