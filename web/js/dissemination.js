@@ -305,6 +305,20 @@ var setUpDateSlider = function () {
     }
 };
 
+var pushDownloadMetric = function () {
+    _gaq.push(['_setAccount', 'UA-89103371-1']);
+    _gaq.push(['_setDomainName', 'www.osti.gov']);
+    _gaq.push(['trackDownload']);
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+};
+
 //If we're on the about page....
 if (document.getElementById('about-page-identifier')) {
     /*Make the top 3 image hovers work*/
@@ -367,6 +381,10 @@ if (document.getElementById('about-page-identifier')) {
     } else {
         $(".release-date-sidebar-container").hide();
     }
+
+    //Makes the download links work
+    $(".download-link").on('click', pushDownloadMetric);
+
 } else if (document.getElementById('biblio-page-identifier') && !document.getElementById('biblio-code-id-not-found')) {
 
     //For authors
@@ -400,6 +418,8 @@ if (document.getElementById('about-page-identifier')) {
         }
     });
 
+    //Makes the download links work
+    $(".download-link").on('click', pushDownloadMetric);
 
 } else if (document.getElementById('advanced-search-page-identifier')) {
     //If we had a latest search, we'll populate the advanced search page with the parameters we had

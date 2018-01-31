@@ -106,9 +106,9 @@
 
 								      <!--Repository Link-->
 								      {{#if searchRowLandingLinks.has_repository_link}}
-								      <a title='Repository Link for Code ID {{code_id}}' target='_blank' rel="noopener noreferrer" href='{{searchRowLandingLinks.repository_link}}'>Repository Link</a>
+								      <a title='Repository Link for Code ID {{code_id}}' target='_blank' rel="noopener noreferrer" class='download-link' data-codeid='{{code_id}}' href='{{searchRowLandingLinks.repository_link}}'>Repository Link</a>
 								      {{else if searchRowLandingLinks.has_landing_page}}
-								      <a title='Landing Page for Code ID {{code_id}}' target='_blank' rel="noopener noreferrer" href='{{searchRowLandingLinks.landing_page}}'>Landing Page</a>
+								      <a title='Landing Page for Code ID {{code_id}}' target='_blank' rel="noopener noreferrer" class='download-link' data-codeid='{{code_id}}' href='{{searchRowLandingLinks.landing_page}}'>Landing Page</a>
 								      {{/if}}
 								 </div>
 								 <br/>

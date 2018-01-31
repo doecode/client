@@ -1,7 +1,7 @@
 <script type="text/javascript">
-     var _gaq = _gaq || [];
-</script>
+     var _gaq = _gaq || [];</script>
 <noscript>Your browser does not support JavaScript!</noscript>
+
 <script type="text/javascript">
      _gaq.push(['_setAccount', 'UA-89103371-1']);
      _gaq.push(['_setDomainName', 'www.osti.gov']);
@@ -10,28 +10,35 @@
      var ga = document.createElement('script');
      ga.type = 'text/javascript';
      ga.async = true;
-     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     ga.src = 'https://ssl.google-analytics.com/ga.js';
      var s = document.getElementsByTagName('script')[0];
      s.parentNode.insertBefore(ga, s);
      })();
 </script>
 <noscript>Your browser does not support JavaScript!</noscript>
-<!--Closes outtermost wrapper-->
+
 <script src='/{{app_name}}/js/libraries/jquery-3.1.1.min.js' type='text/javascript' defer></script>
 <noscript>Your browser does not support JavaScript!</noscript>
+
 <script src='/{{app_name}}/js/libraries/jquery-ui.min.js' type='text/javascript' defer></script>
 <noscript>Your browser does not support JavaScript!</noscript>
+
 <script src='/{{app_name}}/js/libraries/bootstrap.min.js' type='text/javascript' defer></script>
 <noscript>Your browser does not support JavaScript!</noscript>
+
 <script src='/{{app_name}}/js/libraries/chosen.jquery.min.js' type='text/javascript' defer></script>
 <noscript>Your browser does not support JavaScript!</noscript>
+
 <script src='/{{app_name}}/js/libraries/moment.min-2.19.1.js' type='text/javascript' defer></script>
 <noscript>Your browser does not support JavaScript!</noscript>
+
 <script src='/{{app_name}}/js/utils/utils.js' type='text/javascript' defer></script>
 <noscript>Your browser does not support JavaScript!</noscript>
+
 {{#each jsFiles}}
 <script src='/{{app_name}}/js/{{.}}.js' type='text/javascript' defer></script>
 <noscript>Your browser does not support JavaScript!</noscript>
 {{/each}}
+
 <script src='/{{app_name}}/js/doecode.js' type='text/javascript' defer></script>
 <noscript>Your browser does not support JavaScript!</noscript>
