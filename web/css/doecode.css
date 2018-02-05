@@ -2012,6 +2012,9 @@ div.Select>div.Select-control input {
 .chosen-search-input{
     margin-top:3px !important;
 }
+.chosen-search-input::-ms-clear{
+    display:none;
+}
 
 .modal-body {
     padding-right: 27px;
@@ -2055,7 +2058,7 @@ div.Select>div.Select-control input {
 }
 
 .table-msg {
-	font-style: italic;
+    font-style: italic;
 }
 
 /**Datatable overrides**/
@@ -2083,3 +2086,4 @@ div.Select>div.Select-control input {
 .gitlab-signup-row-heading{
     font-size:20px;
 }
+
