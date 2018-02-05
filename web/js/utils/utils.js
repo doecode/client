@@ -4,13 +4,14 @@ const AUTHORITY_API_BASE = "@authorityapi.url@"; //The url to the OSTI Elink Aut
 const SESSION_TIMEOUT = parseInt("@session_timeout@"); //Amount of time until session expires (in minutes)
 const APP_NAME = '@app_name@'; //Name of application. doecode by default, but can be changed if paralell deployments on the same tomcat are needed
 const GOOGLE_ANALYTICS_ID = "@google_analytics_id@";//ID used for google analytics tracking
-const GOOGLE_ANALYTICS_DOMAIN="@google_analytics_domain@";//Domain used for google analytics tracking
+const GOOGLE_ANALYTICS_DOMAIN = "@google_analytics_domain@";//Domain used for google analytics tracking
 
 /*Normal static values*/
 const LOGIN_EXPIRATION_DATE_FORMAT = "YYYY-MM-DD HH:mm";//Date format used to for the moment object that determines if you've been inactive for 45 minutes or not
 const ERROR_CONDITION = 'error'; //Used to indicate that a field needs to be marked as erroneous 
 const SUCCESS_CONDITION = 'success';//Used to indicate that a field needs to be marked as successful
 const BLANK_CONDITION = 'blank';//Used to indicate that a field needs to be marked as blank, because it's neither successful or erroneous
+var NON_CHARACTER_KEYCODES = [13, 38, 40, 39, 37, 27, 17, 18, 16, 9];//enter, up arrow, down arrow, right arrow, left arrow, escape, ctrl, alt, shift, tab
 
 function doAjax(methodType, url, successCallback, data, errorCallback, dataType) {
     var errorCall = errorCallback;
@@ -290,36 +291,53 @@ function joinWithDelimiters(list, delimiter, lastDelimiter) {
     return result;
 }
 
-
-/*
- * This modifies a chosen select that has a data-allowcustom value of "true"
- * It will allow you to enter your own options into the chosen select
- */
 var modifyChosenSelectForCustomEntryTabKey = function (event) {
-    // Had to add Tab check apart from Enter, because Enter was causing issues during "keydown"
     if (event.which === 9) {
-        var e = jQuery.Event("keyup");
-        e.which = 13; // # Enter key code
-        $(this).trigger(e);
+        //The default behavior is to just close the box and do nothing, so we'll need to override it
+        event.preventDefault();
+        //Grab highlighted item
+        var highlighted = $(this).parent().parent().next('.chosen-drop').find('ul.chosen-results').find('li.active-result.highlighted');
+
+        if (highlighted.length > 0) {
+            //Get the related select
+            var related_select_id = $(this).parent().parent().parent().prev('select.doecode-chosen-select').attr('id');
+            //Get the item from the dropdown that's highlighted
+            var highlighted_option_index = $(highlighted).data('option-array-index') + 1;
+            //Set the item to selected
+            var item_to_add = $("#" + related_select_id + " option:nth-child(" + highlighted_option_index + ")");
+            $(item_to_add).prop('selected', true);
+            if ($(item_to_add).data('allowcustom') == true) {
+                $(item_to_add).html($(item_to_add).val());
+            }
+            //Update
+            $("#" + related_select_id).trigger('chosen:updated');
+            $("#" + related_select_id).trigger('change');
+            $("#" + related_select_id).trigger('chosen:close');
+        }
     }
 };
 
 var modifyChosenSelectForCustomEntry = function (event) {
-    // Tab does not trigger during "keyup" but "keydown" was causing issues, so now Tab triggers from another function to keep it separated from Enter.
-    if (event.which === 13) {
-        //The value the user has entered
-        var val_typed_in = $(this).val();
+    var keypressed = event.which;
 
-        //The select box that this chosen select is associated with
-        var related_select = $(this).parent().parent().parent().prev('select.doecode-chosen-select');
+    if (NON_CHARACTER_KEYCODES.indexOf(keypressed) < 0) {
+        var self = this;
+        var val = $(self).val();
+        var related_select = $(self).parent().parent().parent().prev('select.doecode-chosen-select');
+        if ($(related_select).data('allowcustom') == true) {
+            //Get the related select information
+            var related_select_id = $(related_select).attr('id');
 
-        //If the value we selected isn't already in the select box, let's add it in, and select it
-        var related_select_id = $(related_select).attr('id');
-
-        //If this is a select that allows multiple customs, and there was a value entered that isn't one already in the list, add it to the list
-        if (val_typed_in) {
-            //Go to the associated select, add the value to it
-            setSelectData(related_select_id, [val_typed_in]);
+            //If we don't have an index for this in the underlying select, make it so
+            if (!document.getElementById(related_select_id + "-custom-option")) {
+                $(related_select).prepend("<option id=" + related_select_id + "-custom-option" + " value='" + val + "'>Add: " + val + "</option>");
+            } else {
+                $("#" + related_select_id + "-custom-option").val(val);
+                $("#" + related_select_id + "-custom-option").html("Add: " + val);
+            }
+            $(related_select).trigger("chosen:updated");
+            $(self).val(val);
+            $(self).width('100%');
         }
     }
 };
@@ -328,9 +346,9 @@ var populateSelectWithCustomData = function (select, data) {
     if (!data || !isSelectOption(select, "allowcustom"))
         return;
 
-    if (typeof data == "string")
+    if (typeof data == "string") {
         data = [data];
-
+    }
     data.forEach(function (item) {
         var length = $("#" + select + " option:contains(" + item + ")").length;
         if (length == 0) {
@@ -345,12 +363,12 @@ var populateSelectWithCustomData = function (select, data) {
 };
 
 var loadSelectData = function (select, data, is_single) {
-    if (typeof data == "string")
+    if (typeof data == "string") {
         data = [data];
-
-    if (!is_single)
+    }
+    if (!is_single) {
         is_single = isSelectOption(select, "issingle");
-
+    }
     if (!is_single) {
         //Get the currently selected values, push in the new values
         var selected_vals = $("#" + select).val();
@@ -378,21 +396,56 @@ var setSelectData = function (select, data) {
 };
 
 var isSelectOption = function (select, option) {
-    if (option == "issingle" && !$("#" + select).hasClass("doecode-chosen-select"))
+    if (option == "issingle" && !$("#" + select).hasClass("doecode-chosen-select")) {
         return true;
-    else
+    } else {
         return $("#" + select).data(option) ? $("#" + select).data(option) == true : false;
+    }
 };
 
 /*Goes through each select, and assigns it a chosen attribute based on whether it allows custom entries or not*/
 $(".doecode-chosen-select").each(function () {
-    var allows_custom_text = ($(this).data('allowcustom') == false) ? 'No match found for:' : 'Add:';
+    var self = this;
+    var self_id = $(this).attr('id');
+    var allows_custom_text = ($(self).data('allowcustom') == false) ? 'No match found for:' : 'Add:';
+    //Initialize all chosen selects
     $(this).chosen({
         width: '100%',
         no_results_text: allows_custom_text,
         search_contains: true
     });
+
+    //On change, if the option that was selected is the value in the custom option at the top, remove it from the custom option at the top, 
+    if ($(self).data('allowcustom') == true) {
+        $(self).on('change', function () {
+            var custom_field = $("#" + $(self).attr('id') + "-custom-option");
+            var custom_field_val = $(custom_field).val();
+
+            var this_selects_values = $(self).val();
+            //If the value in the custom option field is in the array of options associated with this select, add a new option to the bottom of the list.
+            if (this_selects_values.indexOf(custom_field_val) > -1) {
+                $(self).append("<option value='" + custom_field_val + "' title='" + custom_field_val + "' data-iscustom='true' selected>" + custom_field_val + "</option>");
+            }
+
+            //If there is an option in this select that is custom, and is no longer in this select's array of values, remove that item entirely
+            var items_to_remove = $(self).find("option[data-iscustom='true']");
+            $(items_to_remove).each(function () {
+                var item = this;
+                if (this_selects_values.indexOf($(item).val()) < 0) {
+                    var item_val = $(item).val();
+                    $("#" + self_id + " option[data-iscustom='true'][value='" + item_val + "']").remove();
+                }
+            });
+
+            //Clear out the custom field and update
+            $(custom_field).val('');
+            $(custom_field).html('');
+            $(custom_field).prop('selected', false);
+            $(self).trigger('chosen:updated');
+        });
+    }
 });
+
 
 /*Generically handles the toggling of a given collapsible in bootstrap. This is here so you can toggle without the need for ID's*/
 var toggleCollapse = function (event) {
