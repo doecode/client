@@ -217,6 +217,15 @@
     .tiny-center-text{
         text-align:center !important;
     }
+    .faq-page-blockquote{
+        font-size:14px;
+    }
+    .faq-page-subtitle{
+        font-size:15px;
+    }
+    .faq-page-anchor{
+        font-size:15px;
+    }
 }
 
 

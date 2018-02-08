@@ -1303,7 +1303,13 @@ label {
 .faq-page-subtitle {
     color: rgb(49, 112, 143);
     font-weight: normal;
-    font-size: 14px;
+    font-size: 19.8833px;
+}
+
+.faq-page-anchor{
+    color: rgb(49, 112, 143);
+    font-weight: normal;
+    font-size: 17px;
 }
 
 .faq-page-left-padded {
@@ -1315,7 +1321,7 @@ label {
 }
 
 .faq-page-blockquote {
-    font-size: 14px;
+    font-size: 17px;
     color: rgb(51, 51, 51);
 }
 
