@@ -26,7 +26,7 @@ public class OtherFunctions {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           String captcha_response = request.getParameter("g-recaptcha-response");
           String recaptcha_secretkey = request.getServletContext().getInitParameter("recaptcha_secretkey");
-          String ip_address = "";//DOECODEUtils.getClientIp(request);
+          String ip_address = "";
           //Make sure there's a value for everything that's required. If any one of these dont' have values, return an error
           if (StringUtils.isBlank(request.getParameter("first_name")) || StringUtils.isBlank(request.getParameter("last_name"))
                   || StringUtils.isBlank(request.getParameter("address")) || StringUtils.isBlank(request.getParameter("city"))
@@ -34,7 +34,8 @@ public class OtherFunctions {
                   || StringUtils.isBlank(request.getParameter("email_address")) || StringUtils.isBlank(request.getParameter("phone_number"))
                   || StringUtils.isBlank(request.getParameter("job_title")) || StringUtils.isBlank(request.getParameter("employment_designation"))
                   || StringUtils.isBlank(captcha_response) || StringUtils.isBlank(recaptcha_secretkey)
-                  || !isValidreCaptcha(captcha_response, recaptcha_secretkey, ip_address)) {
+                  || !isValidreCaptcha(captcha_response, recaptcha_secretkey, ip_address)
+                  || !allConditionalAreValid(request)) {
                return_data.put("had_error", true);
                return_data.put("message", "You must enter all required fields and validate the captcha.");
           } else {
@@ -53,10 +54,25 @@ public class OtherFunctions {
                requested_data.put("phone_number", request.getParameter("phone_number"));
                requested_data.put("job_title", request.getParameter("job_title"));
                requested_data.put("employment_designation", request.getParameter("employment_designation"));
+               requested_data.put("contract_number", request.getParameter("contract_number"));
+               requested_data.put("contracting_organization", request.getParameter("contracting_organization"));
                return_data = sendGitlabSubmissionEmail(request.getServletContext(), requested_data);
           }
 
           return return_data;
+     }
+
+     private static boolean allConditionalAreValid(HttpServletRequest request) {
+          boolean all_valid = true;
+          //Check contract number stuff
+          String designation = request.getParameter("employment_designation");
+          //If the designation is one of the values that requires a contract number and contracting organization, we'll have to check to make sure we got those values
+          if (StringUtils.equals(designation, "DOE Federal Employee") || StringUtils.equals(designation, "DOE Federal Employee")
+                  && (StringUtils.isBlank("contracting_organization") || StringUtils.isBlank("contract_number"))) {
+               all_valid = false;
+          }
+
+          return all_valid;
      }
 
      private static boolean isValidreCaptcha(String key, String secret_key, String ip_address) {
@@ -65,7 +81,7 @@ public class OtherFunctions {
           if (StringUtils.isNotBlank(ip_address)) {
                recaptcha_url += ("&remoteip=" + ip_address);
           }
-          
+
           ObjectNode response = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           try {
                URL url = new URL(recaptcha_url);
@@ -88,8 +104,8 @@ public class OtherFunctions {
           } catch (Exception ex) {
                log.error("Exception in gitlab submission: " + ex.getMessage());
           }
-          
-          is_valid = JsonObjectUtils.getBoolean(response,"success",false);
+
+          is_valid = JsonObjectUtils.getBoolean(response, "success", false);
 
           return is_valid;
      }
@@ -162,6 +178,18 @@ public class OtherFunctions {
           email_message.append(", ");
           //Employment Designation
           email_message.append(JsonObjectUtils.getString(request_data, "employment_designation", ""));
+
+          /*Contract Number/Organization*/
+          String contract_number = JsonObjectUtils.getString(request_data, "contract_number", "");
+          if (StringUtils.isNotBlank(contract_number)) {
+               email_message.append("\n\n");
+               email_message.append("----- Contract Number Information -----\n");
+               //Contract Number
+               email_message.append(contract_number);
+               email_message.append("     ");
+               //Contracting Organization
+               email_message.append(JsonObjectUtils.getString(request_data, "contracting_organization", ""));
+          }
 
           HtmlEmail email = new HtmlEmail();
           email.setHostName(context.getInitParameter("smtpHost"));

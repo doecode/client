@@ -162,16 +162,32 @@
 			 </div>
 		    </div>
 		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-			  <select class='pure-input-1 full-width-input form-control gitlab-signup-input gitlab-signup-required' name="employment_designation" title='Employment Designation' id="employment-designation">
-			       <option value="DOE Federal Employee" title="DOE Federal Employee">DOE Federal Employee</option>
-			       <option value="DOE Prime Contractor" title="DOE Prime Contractor">DOE Prime Contractor</option>
-			       <option value="DOE Sub-Contractor" title="DOE Sub-Contractor">DOE Sub-Contractor</option>
-			       <option value="Other" title="Other">Other</option>
+			 <select class='pure-input-1 full-width-input form-control gitlab-signup-input gitlab-signup-required' name="employment_designation" title='Employment Designation' id="employment-designation">
+			      <option value="DOE Federal Employee" title="DOE Federal Employee">DOE Federal Employee</option>
+			      <option value="DOE Prime Contractor" title="DOE Prime Contractor">DOE Prime Contractor</option>
+			      <option value="DOE Sub-Contractor" title="DOE Sub-Contractor">DOE Sub-Contractor</option>
+			      <option value="Other" title="Other">Other</option>
 			 </select>
 			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
 			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 			 <div>
 			      <small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Employment Designation *</label></small>
+			 </div>
+		    </div>
+		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
+			 <input title='DOE Contract Number' placeholder='DOE Contract Number' id='contract-number' name="contract_number" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required" data-associatedfield='employment-designation' data-associatedvalues='DOE Federal Employee,DOE Sub-Contractor' type="text">
+			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+			 <div>
+			      <small><label class='control-label normal-weight' for='job-title'>&nbsp;DOE Contract Number *</label></small>
+			 </div>
+		    </div>
+		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
+			 <input title='Contracting Organization' placeholder='Contract Organization' id='contracting-organization' name='contracting_organization' class='pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required' data-associatedfield='employment-designation' data-associatedvalues='DOE Federal Employee,DOE Sub-Contractor' type='text'/>
+			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+			 <div>
+			      <small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Contracting Organization *</label></small>
 			 </div>
 		    </div>
 	       </div>
