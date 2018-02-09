@@ -41,7 +41,7 @@ public class TemplateUtils {
      public static final String TEMPLATE_SECURITY_HOSTING_PAGE = "security-hosting";
      public static final String TEMPLATE_DISCLAIMER_PAGE = "disclaimer";
      public static final String TEMPLATE_CONTACT_PAGE = "contact";
-     
+
      //Other
      public static final String TEMPLATE_GITLAB_SIGNUP = "gitlab-signup";
      public static final String TEMPLATE_GITLAB_SIGNUP_RESULT = "gitlab-signup-result";
@@ -76,14 +76,14 @@ public class TemplateUtils {
      public static final String PAGE_NEWS_RESOURCES = "news-resources";
      public static final String PAGE_FAQ = "faq";
 
-     public static final ObjectNode GET_COMMON_DATA(ObjectNode output_data, String current_page, ArrayNode jsFilesList, HttpServletRequest request) throws IOException {
+     public static final ObjectNode GET_COMMON_DATA(ObjectNode output_data, String current_page, ArrayNode jsFilesList, ArrayNode cssFilesList, HttpServletRequest request) throws IOException {
           output_data.put("active_page", current_page);
           if (!JsonObjectUtils.containsKey(output_data, "user_data")) {
                output_data.put("user_data", UserFunctions.getUserDataFromCookie(request));
           }
           output_data.put("jsFiles", jsFilesList);
+          output_data.put("cssFiles", cssFilesList);
           output_data.put("navbar", GET_NAVBAR_CLASSES(current_page));
-          output_data.put("css", Init.css_string);
           output_data.put("app_name", Init.app_name);
           output_data.put("adv_search_lists", SearchFunctions.getAdvancedSearchPageLists(request.getServletContext()));
 

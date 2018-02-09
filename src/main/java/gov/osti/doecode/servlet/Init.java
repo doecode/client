@@ -21,7 +21,6 @@ public class Init extends HttpServlet {
      private static Logger log = LoggerFactory.getLogger(Init.class.getName());
      public static Handlebars handlebars;
      public static Handlebars handlebarsUser;
-     public static String css_string;
      public static String app_name;
      public static ArrayNode availabilities_list;
      public static ArrayNode licenses_list;
@@ -51,13 +50,6 @@ public class Init extends HttpServlet {
           //Initialize the user template loader
           TemplateLoader loader2 = new ServletContextTemplateLoader(getServletContext(), "/WEB-INF/templates/user", ".mustache");
           handlebarsUser = new Handlebars(loader2);
-
-          //Pull the css into a string
-          String css_path = getServletContext().getRealPath("./css/");
-          File servlet_path = new File(css_path);
-          if (servlet_path.exists() && servlet_path.isDirectory()) {
-               css_string = getFileData(new File(css_path + "doecode-css.css"));
-          }
 
           //Get the name of the app from the web.xml
           app_name = getServletContext().getInitParameter("app_name");

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.entity.InputFunctions;
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
@@ -38,6 +37,7 @@ public class Input extends HttpServlet {
 
           ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ArrayNode cssFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
           boolean is_inputjs = false;
           boolean is_accordion = false;
 
@@ -161,12 +161,16 @@ public class Input extends HttpServlet {
                template = TemplateUtils.TEMPLATE_MY_PROJECTS;
                current_page = TemplateUtils.PAGE_PROJECTS;
                jsFilesList.add("input-other");
+               cssFilesList.add("DataTables-1.10.16/css/jquery.dataTables.min");
+               cssFilesList.add("Responsive-2.2.0/css/responsive.dataTables.min");
 
           } else if (remaining.startsWith("pending")) {
                page_title = "DOE CODE: Pending";
                template = TemplateUtils.TEMPLATE_PENDING_APPROVAL;
                current_page = TemplateUtils.PAGE_PROJECTS;
                jsFilesList.add("input-other");
+               cssFilesList.add("DataTables-1.10.16/css/jquery.dataTables.min");
+               cssFilesList.add("Responsive-2.2.0/css/responsive.dataTables.min");
 
           } else if (remaining.equals("form-select")) {
                page_title = "DOE CODE: Form Select";
@@ -177,7 +181,7 @@ public class Input extends HttpServlet {
 
           //Add all of the hide/shows for the panels
           output_data.put("show_optional_toggle", show_optional_toggle);
-          
+
           output_data.put("software_type", Jsoup.clean(software_type_param.substring(0, 1).toUpperCase(), Whitelist.basic()));
 
           //These js files are needed on all input pages
@@ -186,12 +190,13 @@ public class Input extends HttpServlet {
           //Only on the input form (Not on the projects or pending pages)
           if (is_inputjs) {
                jsFilesList = getInputFormJsFiles(jsFilesList);
+               cssFilesList = getInputFormCssFiles(cssFilesList);
           }
 
           //We'll set whether or not this is a collection of collapsible panels 
           output_data.put("is_accordion", true);
           //get common data, like the classes needed for the header and footer
-          output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, request);
+          output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, cssFilesList, request);
 
           //Write it out
           TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
@@ -216,6 +221,14 @@ public class Input extends HttpServlet {
           return_data.add("stores/Metadata");
 
           return_data.add("input");
+          return return_data;
+     }
+
+     private ArrayNode getInputFormCssFiles(ArrayNode array) {
+          ArrayNode return_data = array;
+          return_data.add("dropzone/basic.min");
+          return_data.add("dropzone/dropzone.min");
+
           return return_data;
      }
 

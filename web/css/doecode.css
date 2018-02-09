@@ -13,10 +13,6 @@ textarea.form-text-area {
     height: 150px;
 }
 
-.pure-button {
-    padding: 0px 3px 0px 3px;
-}
-
 fieldset.entry-group {
     border: 1.25px #ccc solid;
     border-radius: 5px;
@@ -521,10 +517,6 @@ html h3 {
 .not-so-wide-row {
     margin-right: 0px !important;
     margin-left: 0px !important;
-}
-
-label.control-label {
-    font-size: 23px;
 }
 
 .padblock {

@@ -183,15 +183,8 @@
                             <cssSourceDir>css</cssSourceDir>
                             <cssSourceFiles>
                                 <cssSourceFile>font-awesome-4.7.0/css/font-awesome.min.css</cssSourceFile>
-                                <cssSourceFile>jquery-ui-themes-1.12.1/base/jquery-ui.min.css</cssSourceFile>
                                 <cssSourceFile>purecss/purecss.min.css</cssSourceFile>
-                                <cssSourceFile>bootstrap-3.3.7-dist/css/bootstrap.min.css</cssSourceFile>
-                                <cssSourceFile>bootstrap-3.3.7-dist/css/bootstrap-theme.min.css</cssSourceFile>
-                                <cssSourceFile>DataTables-1.10.16/css/jquery.dataTables.min.css</cssSourceFile>
-                                <cssSourceFile>Responsive-2.2.0/css/responsive.dataTables.min.css</cssSourceFile>
-                                <cssSourceFile>chosen/chosen.css</cssSourceFile>
-                                <cssSourceFile>dropzone/basic.min.css</cssSourceFile>
-                                <cssSourceFile>dropzone/dropzone.min.css</cssSourceFile>                                
+                                <cssSourceFile>bootstrap-3.3.7-dist/css/bootstrap.min.css</cssSourceFile>                                                                                   
                                 <cssSourceFile>doecode-fonts.css</cssSourceFile>
                                 <cssSourceFile>doecode.css</cssSourceFile>
                                 <cssSourceFile>doecode-media-queries.css</cssSourceFile>
@@ -224,12 +217,8 @@
                                 <include>target/**/common-functions.js</include>
                                 <include>target/**/doecode-css.css</include>
                                 <include>target/**/font-awesome-min.css</include>
-                                <include>target/**/jquery-ui-min.css</include>
                                 <include>target/**/pure-css-min.css</include>
                                 <include>target/**/bootstrap-min.css</include>
-                                <include>target/**/datatables-min.css</include>
-                                <include>target/**/chosen-min.css</include>
-                                <include>target/**/dropzone-min.css</include>
                                 <include>target/**/doecode-min.css</include>
                             </includes>
                             <replacements>
@@ -248,26 +237,6 @@
                                 <replacement>
                                     <token>@authorityapi.url@</token>
                                     <value>${authorityapiURL}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>chosen-sprite.png</token>
-                                    <value>/${app_name}/css/chosen/chosen-sprite.png</value>
-                                </replacement>
-                                <replacement>
-                                    <token>images/ui-icons_</token>
-                                    <value>/${app_name}/css/jquery-ui-themes-1.12.1/base/images/ui-icons_</value>
-                                </replacement>
-                                <replacement>
-                                    <token>../images/sort_both.png</token>
-                                    <value>/${app_name}/css/DataTables-1.10.16/images/sort_both.png</value>
-                                </replacement>
-                                <replacement>
-                                    <token>../images/sort_asc.png</token>
-                                    <value>/${app_name}/css/DataTables-1.10.16/images/sort_asc.png</value>
-                                </replacement>
-                                <replacement>
-                                    <token>../images/sort_desc.png</token>
-                                    <value>/${app_name}/css/DataTables-1.10.16/images/sort_desc.png</value>
                                 </replacement>
                                 <replacement>
                                     <token>../fonts/fontawesome</token>
