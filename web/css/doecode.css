@@ -8,26 +8,12 @@
     display: inline !important;
 }
 
-.display-field {
-    word-wrap: break-word;
-}
-
 textarea.form-text-area {
     resize: none;
     height: 150px;
 }
 
-.grid-button-container {
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.grid-button {
-    margin-right: 5px;
-    display: inline-block;
-}
-
-.grid-button .pure-button {
+.pure-button {
     padding: 0px 3px 0px 3px;
 }
 
@@ -67,11 +53,6 @@ html h2 {
 html h3 {
     font-size: 14px;
     margin-left: 10px;
-}
-
-.pending {
-    font-style: italic;
-    color: #990000 !important
 }
 
 .no-col-padding-left {
@@ -115,20 +96,7 @@ html h3 {
     position: relative;
 }
 
-.field-error {
-    border: 1px solid #a94442;
-}
-
-.field-error .Select-control {
-    border: 1px solid #a94442;
-}
-
-
 /*VVV About page VVV*/
-
-.bgGray {
-    background: #ecebeb !important;
-}
 
 .bgWhite {
     background: #F9F9F9 !important;
@@ -147,14 +115,6 @@ html h3 {
 
 
 /*^^^ About page ^^^*/
-
-.error-color {
-    color: #a94442;
-}
-
-.LabelColumn {
-    width: 150px;
-}
 
 .req:before {
     content: "* ";
@@ -224,23 +184,11 @@ html h3 {
     color: green;
 }
 
-.biblio-authors {
-    font-size: 13.6px !important;
-}
-
-.superscriptContainer {
-    padding-left: 3px;
-}
-
 .biblio-description {
     padding-right: 10px;
     padding-left: 10px;
     padding-bottom: 15px;
     font-size: 16px;
-}
-
-.biblio-title-container {
-    margin-bottom: 15px;
 }
 
 .biblio-title {
@@ -253,22 +201,10 @@ html h3 {
     padding-left: 30px;
 }
 
-.biblio-sidebar {}
-
-.biblio-sidebar-title {
-    color: #828297;
-    font-size: 16px;
-    font-weight: bold;
-}
-
 .doi-subnotice {
     font-style: italic;
     font-size: 13.6px;
     color: rgb(153, 153, 153);
-}
-
-.register-text {
-    font-size: 16px;
 }
 
 .biblio-sidebar-subtitle {
@@ -317,10 +253,6 @@ html h3 {
     border-top: none !important;
 }
 
-.citation-details-div {
-    font-size: 16px;
-}
-
 .biblio-row {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -345,15 +277,6 @@ html h3 {
 .orc-id-img {
     width: 16px;
     height: 16px;
-}
-
-.search-result-title {
-    font-size: 24px;
-    font-weight: 300;
-}
-
-.search-results-list {
-    font-size: 16px;
 }
 
 .search-result-sub-row {
@@ -399,14 +322,6 @@ html h3 {
     opacity: 0.7;
 }
 
-.modify-search-glass {
-    opacity: 0.35;
-}
-
-.rounded {
-    border-radius: .25rem;
-}
-
 .search-result-author {
     font-size: 12px;
     padding-top: 5px;
@@ -423,18 +338,6 @@ html h3 {
     text-align: left;
     padding-top: 5px;
     padding-bottom: 5px;
-}
-
-.search-result-description {
-    font-size: 16px;
-}
-
-.search-result-doi {
-    font-size: 15px;
-}
-
-.all-search-results-row {
-    border-left: 1px solid #ddd;
 }
 
 .col {
@@ -480,14 +383,6 @@ html h3 {
     color: black !important;
 }
 
-.blackAnchor {
-    color: black;
-}
-
-.blackAnchor:hover {
-    color: black;
-}
-
 .mb-1 {
     margin-bottom: 1rem!important;
 }
@@ -523,10 +418,6 @@ html h3 {
     margin-bottom: 0px;
     border-radius: 0px !important;
     border: none;
-}
-
-.homepage-outtermost-style {
-    background-image: linear-gradient(rgb(30, 111, 146), rgb(1, 53, 88) 100%);
 }
 
 .homepage-searchbar {
@@ -632,16 +523,8 @@ html h3 {
     margin-left: 0px !important;
 }
 
-.large-control-label label.control-label {
+label.control-label {
     font-size: 23px;
-}
-
-.header-signin-links {
-    color: white;
-}
-
-.signin-list {
-    margin-bottom: 0px;
 }
 
 .padblock {
@@ -660,11 +543,6 @@ html h3 {
     padding-top: 11.2px;
     padding-bottom: 11.2px;
 }
-
-.logo-header {
-    margin: 0px;
-}
-
 
 /*VVVV MAKES THE FOOTER WORK VVVVV*/
 
@@ -740,11 +618,6 @@ html, body {
     background-color: #F9F9F9;
 }
 
-.footer-buttons {
-    margin-top: 10px;
-}
-
-
 /*^^^^MAKES THE FOOTER WORK^^^^*/
 
 .biblio-social-link {
@@ -764,24 +637,12 @@ html, body {
     color: #00aced;
 }
 
-.gplus {
-    color: #dd4b39;
-}
-
 .linkedin {
     color: #007bb6;
 }
 
-.shareAlt {
-    color: #777;
-}
-
 .shareEmail {
     color: #777;
-}
-
-.pintrest {
-    color: #CD2B32;
 }
 
 .tumblr {
@@ -843,10 +704,6 @@ html, body {
     color: #7EAE49;
 }
 
-.searchbar-container {
-    padding-top: 7px;
-}
-
 .nav-menu {
     margin-bottom: -5px !important;
 }
@@ -904,10 +761,6 @@ html, body {
     color: #f2f2f2;
 }
 
-.save-btn-margin {
-    margin-right: 8px;
-}
-
 .signin-btn-container {
     padding-right: 13.6px !important;
     padding-left: 13.6px !important;
@@ -945,10 +798,6 @@ html, body {
     margin-bottom: 5px;
 }
 
-.header-subtext {
-    color: white;
-}
-
 .icon-row {
     color: white;
 }
@@ -969,21 +818,6 @@ html, body {
     cursor:default;
 }
 
-.progtrckr {
-    text-align: center;
-    padding-bottom: 16px;
-}
-
-.interface-step {
-    text-align: center;
-    padding-bottom: 16px;
-}
-
-.interface-group {
-    padding: 25px;
-    border: 5px solid #f3f3f3;
-}
-
 hr {
     border: 0;
     clear: both;
@@ -993,122 +827,8 @@ hr {
     height: 1px;
 }
 
-.pub-btns {
-    border: 0;
-    padding-top: 10px;
-    clear: both;
-    display: block;
-}
-
-ol.progtrckr {
-    list-style-type: none;
-    padding: 0;
-}
-
-ol.progtrckr li {
-    display: inline-block;
-    text-align: center;
-    line-height: 4.5rem;
-    cursor: pointer;
-}
-
-ol.progtrckr li span {
-    padding: 0 1.5rem;
-}
-
-@media (max-width: 650px) {
-    .progtrckr li span {
-        display: none;
-    }
-}
-
-.progtrckr em {
-    display: none;
-    font-weight: 700;
-    padding-left: 1rem;
-}
-
-@media (max-width: 650px) {
-    .progtrckr em {
-        display: inline;
-    }
-}
-
-ol.progtrckr li.progtrckr-todo {
-    color: silver;
-    border-bottom: 4px solid silver;
-}
-
-ol.progtrckr li.progtrckr-doing {
-    color: black;
-    border-bottom: 4px solid #013558;
-}
-
-ol.progtrckr li.progtrckr-done {
-    color: black;
-    border-bottom: 4px solid #5cb85c;
-}
-
-ol.progtrckr li:after {
-    content: "\00a0\00a0";
-}
-
-ol.progtrckr li:before {
-    position: relative;
-    bottom: -3.7rem;
-    float: left;
-    left: 50%;
-}
-
-ol.progtrckr li.progtrckr-todo:before {
-    content: "\039F";
-    color: silver;
-    background-color: white;
-    width: 1.2em;
-    line-height: 1.4em;
-}
-
-ol.progtrckr li.progtrckr-todo:hover:before {
-    color: #ff4500;
-}
-
-ol.progtrckr li.progtrckr-doing:before {
-    content: "\2022";
-    color: white;
-    background-color: #013558;
-    width: 1.2em;
-    line-height: 1.2em;
-    border-radius: 1.2em;
-}
-
-ol.progtrckr li.progtrckr-doing:hover:before {
-    color: #ff4500;
-}
-
-ol.progtrckr li.progtrckr-done:before {
-    content: "\2713";
-    color: white;
-    background-color: #5cb85c;
-    width: 1.2em;
-    line-height: 1.2em;
-    border-radius: 1.2em;
-}
-
-ol.progtrckr li.progtrckr-done:hover:before {
-    color: #333;
-}
-
 .login-dropdown-text li {
     text-align: center;
-}
-
-.login-dropdown-btn {
-    color: white !important;
-}
-
-.login-accounts-btn {
-    font-size: 25px;
-    color: white;
 }
 
 .search-sidebar-filter-title {
@@ -1152,11 +872,6 @@ ol.progtrckr li.progtrckr-done:hover:before {
     margin-left: 10px;
 }
 
-.account-loading-image {
-    width: 70px;
-    height: 50px
-}
-
 .breadcrumbTrail {
     font-size: 13.6px;
     margin-top: 13.6px
@@ -1178,19 +893,8 @@ ol.progtrckr li.progtrckr-done:hover:before {
     background-color: #7DAD49 !important;
 }
 
-
-/*Puts the roboto font frickin everywhere*/
-
 html, button, body, input, select, textarea, p {
     font-family: 'Roboto', sans-serif !important;
-}
-
-.biblio-sub-dl {
-    font-size: 14px;
-}
-
-.biblio-sub-dl dt {
-    font-weight: normal;
 }
 
 label {
@@ -1248,10 +952,6 @@ label {
     margin-left: 14px;
 }
 
-.adv-search-dropdown-lg {
-    top: 45px;
-}
-
 .adv-dropdown-row{
     margin-top:10px;
 }
@@ -1278,25 +978,13 @@ label {
     font-weight:normal;
 }
 
-.more-adv-search {
-    font-size: 13.6px;
-}
-
 .to-field {
     padding-top: 7px;
-}
-
-
-/*HELP PAGE*/
-
-.help-page-software-availability {
-    padding-left: 30px;
 }
 
 .help-page-subtitle {
     font-size: 20px;
 }
-
 
 /*FAQ PAGE*/
 
@@ -1310,10 +998,6 @@ label {
     color: rgb(49, 112, 143);
     font-weight: normal;
     font-size: 17px;
-}
-
-.faq-page-left-padded {
-    padding-left: 40px;
 }
 
 .repository-services-img-link {
@@ -1331,14 +1015,6 @@ label {
     text-decoration: none !important;
 }
 
-.faq-page-btn-wrapper {
-    padding-bottom: 10px;
-}
-
-.faq-page-collapse-wrapper {
-    padding-bottom: 2px;
-}
-
 .fa-page-caret {
     color: #7787A8;
 }
@@ -1346,11 +1022,6 @@ label {
 .help-question-mark {
     color: #0000EE;
     font-size: 16px;
-}
-
-.help-box {
-    max-width: 300px;
-    font-weight: 400;
 }
 
 .fake-h2 {
@@ -1537,21 +1208,6 @@ label {
     hyphens: auto;
 }
 
-.biblio-summary-main-content {
-    border-left: 1px solid #CCCCCC;
-    padding-left: 30px;
-}
-
-.sponsor-org-row {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.sponsor-org-bottom-row {
-    margin-top: 5px;
-    border-bottom: 1px solid #DDDDDD;
-}
-
 .citation-formats {
     font-size: 18.72px;
     font-weight: 300;
@@ -1560,11 +1216,6 @@ label {
 }
 
 /*Makes the active tabs on the biblio page have green bars on the underside*/
-
-.summary-row {
-    border-bottom: 1px solid #CCCCCC;
-}
-
 ul.biblio-page-ul>li {
     padding-left: 5px;
     padding-right: 5px;
@@ -1613,10 +1264,6 @@ ul.biblio-page-ul>li>a:hover {
     font-size: 16px;
 }
 
-.password-rules {
-    font-size: 16px;
-}
-
 .confirmation-page-metadata dd:nth-of-type(even), dt:nth-of-type(even) {
     background-color: #e6e6e6;
 }
@@ -1661,33 +1308,10 @@ ul.biblio-page-ul>li>a:hover {
     color: #ca3c3c;
 }
 
-.search-item-doi-divider {
-    color: rgba(0, 0, 0, 0.2);
-}
-
 .search-sort-dropdown {
     margin-top: 20px;
     margin-bottom: 10px;
 }
-
-.custom-paginate-container {
-    display: inline-block;
-}
-
-.paginate-slider-arrow {}
-
-.range-container {
-    padding-left: 5px;
-    padding-left: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-.inlineBlock {
-    display: inline-block;
-}
-
-
 /*vv DATE BAR CHART ON THE SEARCH PAGE vv*/
 
 .goog-inline-block .google-visualization-controls-rangefilter-thumblabel:first-child {
@@ -1727,21 +1351,8 @@ ul.biblio-page-ul>li>a:hover {
 }
 
 /*^^ DATE BAR CHART ON THE SEARCH PAGE ^^*/
-
-.button-secondary {
-    background: rgb(66, 184, 221);
-    color: white;
-    /* this is a light blue */
-}
-
 .pure-button-primary a:focus {
     color: white !important;
-}
-
-.button-warning {
-    background: rgb(223, 117, 20);
-    color: white;
-    /* this is an orange */
 }
 
 .button-error {
@@ -1767,12 +1378,6 @@ ul.biblio-page-ul>li>a:hover {
 .nav-menu li:last-child {
     border-right: none;
 }
-
-.to-span {
-    margin-left: 15px;
-}
-
-.icon-row-icon-text {}
 
 .icon-row-icon-text:hover {
     text-decoration: none;
@@ -1891,12 +1496,6 @@ ul.biblio-page-ul>li>a:hover {
     width: calc(45%);
 }
 
-.security-host-page-title {
-    font-weight: 300;
-    font-size: 40px;
-    margin-left: 0px;
-}
-
 .security-host-text {
     font-size: 15px;
 }
@@ -1937,24 +1536,9 @@ ul.biblio-page-ul>li>a:hover {
     text-align: center;
 }
 
-#security-host-file-scans {}
-
 #security-host-detonation {
     font-size: 28px;
 }
-
-
-/*!!!!!!!Security Hosting page!!!!!!*/
-
-.float-right {
-    float: right;
-}
-
-.float-left {
-    float: left;
-}
-
-
 
 /*Fixes an issue where pure-form causes an extra input to show up in react-select's*/
 
@@ -2053,14 +1637,6 @@ div.Select>div.Select-control input {
 
 .normal-weight{
     font-weight:normal !important;
-}
-
-.small-screen-collapse{
-
-}
-
-.tooltip-inner{
-    max-width:350px !important;
 }
 
 .table-msg {

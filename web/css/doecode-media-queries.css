@@ -80,7 +80,6 @@
         margin-left: -3px;
         margin-right: -3px;
     }
-    .search-sidebar-filter-title {}
     /*Gets rid of the margins around the pagination buttons*/
     div>ul.pagination {
         margin-top: 0px;
@@ -95,14 +94,9 @@
         padding-right: 0px;
         padding-left: 0px;
     }
-    .security-host-page-title {
-        font-weight: 300;
-        font-size: 35px;
-    }
     .security-host-text {
         font-size: 14px;
     }
-    .security-host-row-content {}
     .security-host-title {
         background-color: #1E6E91;
         color: white;
@@ -512,9 +506,6 @@
 }
 
 @media only screen and (max-width:1312px) and (min-width:1200px) {
-    .to-span {
-        margin-left: 0px;
-    }
     .publication-date-start-container-homepage {
         padding-right: 0px !important;
     }
