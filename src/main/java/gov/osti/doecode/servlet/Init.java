@@ -6,14 +6,12 @@ import com.github.jknack.handlebars.Jackson2Helper;
 import com.github.jknack.handlebars.io.ServletContextTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
 import gov.osti.doecode.utils.JsonObjectUtils;
-import java.io.File;
 import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import org.apache.commons.io.FileUtils;
 
 public class Init extends HttpServlet {
 
@@ -75,15 +73,5 @@ public class Init extends HttpServlet {
           }
 
           log.info("DOE CODE Application Started");
-     }
-
-     private String getFileData(File f) {
-          String return_data = "";
-          try {
-               return_data = FileUtils.readFileToString(f);
-          } catch (IOException ex) {
-               log.error("Can't read file for css: " + ex.getMessage());
-          }
-          return return_data;
      }
 }
