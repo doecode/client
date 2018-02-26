@@ -5,6 +5,7 @@
     <groupId>gov.osti</groupId>
     <artifactId>doecode</artifactId>
     <version>1.2</version>
+    <name>DOE Code Web Application (Client)</name>
     <packaging>war</packaging>
     <repositories>
         <repository>

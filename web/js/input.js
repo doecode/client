@@ -20,9 +20,9 @@ var form = mobx.observable({
 var developers_data_tbl_opts = {
     order: [[0, 'asc']],
     columns: [
-        {name: 'first_name', data: 'first_name'},
-        {name: 'last_name', data: 'last_name'},
-        {name: 'affiliations', data: 'affiliations', render: function (data, type, row) {
+        {name: 'first_name', data: 'first_name', 'defaultContent': ''},
+        {name: 'last_name', data: 'last_name', 'defaultContent': ''},
+        {name: 'affiliations', data: 'affiliations', 'defaultContent': '', render: function (data, type, row) {
                 var affiliations = data ? data.join(', ') : '';
                 return affiliations;
             }}
@@ -32,41 +32,41 @@ var developers_data_tbl_opts = {
 var sponsoring_org_tbl_opts = {
     order: [[0, 'asc']],
     columns: [
-        {name: 'organization_name', data: 'organization_name'},
-        {name: 'primary_award', data: 'primary_award'}
+        {name: 'organization_name', data: 'organization_name', 'defaultContent': ''},
+        {name: 'primary_award', data: 'primary_award', 'defaultContent': ''}
     ]
 };
 
 var research_org_tbl_opts = {
     order: [[0, 'asc']],
     columns: [
-        {name: 'organization_name', data: 'organization_name'}
+        {name: 'organization_name', data: 'organization_name', 'defaultContent': ''}
     ]
 };
 
 var contributors_org_tbl_opts = {
     order: [[0, 'asc']],
     columns: [
-        {name: 'first_name', data: 'first_name'},
-        {name: 'last_name', data: 'last_name'},
-        {name: 'contributor_type', data: 'contributor_type'}
+        {name: 'first_name', data: 'first_name', 'defaultContent': ''},
+        {name: 'last_name', data: 'last_name', 'defaultContent': ''},
+        {name: 'contributor_type', data: 'contributor_type', 'defaultContent': ''}
     ]
 };
 
 var contributing_organizations_tbl_opts = {
     order: [[0, 'asc']],
     columns: [
-        {name: 'organization_name', data: 'organization_name'},
-        {name: 'contributor_type', data: 'contributor_type'}
+        {name: 'organization_name', data: 'organization_name', 'defaultContent': ''},
+        {name: 'contributor_type', data: 'contributor_type', 'defaultContent': ''}
     ]
 };
 
 var related_identifiers_tbl_opts = {
     order: [[0, 'asc']],
     columns: [
-        {name: 'identifier_type', data: 'identifier_type'},
-        {name: 'relation_type', data: 'relation_type'},
-        {name: 'identifier_value', data: 'identifier_value'}
+        {name: 'identifier_type', data: 'identifier_type', 'defaultContent': ''},
+        {name: 'relation_type', data: 'relation_type', 'defaultContent': ''},
+        {name: 'identifier_value', data: 'identifier_value', 'defaultContent': ''}
     ]
 };
 
