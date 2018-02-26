@@ -273,6 +273,7 @@ html h3 {
 .orc-id-img {
     width: 16px;
     height: 16px;
+    vertical-align: top;
 }
 
 .search-result-sub-row {
