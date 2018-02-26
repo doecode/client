@@ -65,6 +65,8 @@ public class Input extends HttpServlet {
           if (remaining.equals("submit")) {
                String code_id = request.getParameter("code_id");
                output_data = InputFunctions.getInputFormLists(getServletContext());
+               cssFilesList.add("DataTables-1.10.16/css/jquery.dataTables.min");
+               cssFilesList.add("Responsive-2.2.0/css/responsive.dataTables.min");
 
                page_title = "DOE CODE: Submit";
                template = TemplateUtils.TEMPLATE_INPUT_FORM;
@@ -87,6 +89,8 @@ public class Input extends HttpServlet {
           } else if (remaining.startsWith("announce")) {
                String code_id = request.getParameter("code_id");
                output_data = InputFunctions.getInputFormLists(getServletContext());
+               cssFilesList.add("DataTables-1.10.16/css/jquery.dataTables.min");
+               cssFilesList.add("Responsive-2.2.0/css/responsive.dataTables.min");
 
                page_title = "Announce";
                template = TemplateUtils.TEMPLATE_INPUT_FORM;
@@ -104,6 +108,8 @@ public class Input extends HttpServlet {
           } else if (remaining.startsWith("approve")) {
                String code_id = request.getParameter("code_id");
                output_data = InputFunctions.getInputFormLists(getServletContext());
+               cssFilesList.add("DataTables-1.10.16/css/jquery.dataTables.min");
+               cssFilesList.add("Responsive-2.2.0/css/responsive.dataTables.min");
 
                page_title = "Announce";
                template = TemplateUtils.TEMPLATE_INPUT_FORM;
