@@ -27,7 +27,7 @@ var Contributor = function (_BaseData) {
             "middle_name": { required: false, completed: false, ever_completed: false, validations: [], error: '' },
             "last_name": { required: true, completed: false, ever_completed: false, validations: [], error: '' },
             "email": { required: false, completed: false, ever_completed: false, validations: ["email"], error: '' },
-            "orcid": { required: false, completed: false, ever_completed: false, validations: ["Orcid"], error: '' },
+            "orcid": { required: false, completed: false, ever_completed: false, validations: ["orcid"], error: '' },
             "affiliations": { required: false, completed: false, ever_completed: false, validations: [], error: '' },
             "contributor_type": { required: true, completed: false, ever_completed: false, validations: [], error: '' }
 

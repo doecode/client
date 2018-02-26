@@ -1575,7 +1575,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#developer-edit-middle-name').on('input', {store: developer, field: "middle_name"}, inputChange);
     $('#developer-edit-last-name').on('input', {store: developer, field: "last_name"}, inputChange);
     $('#developer-edit-email').on('change', {store: developer, field: "email"}, inputChange);
-    $('#developer-edit-orcid').on('input', {store: developer, field: "orcid"}, inputChange);
+    $('#developer-edit-orcid').on('change', {store: developer, field: "orcid"}, inputChange);
     $('#developer-edit-affiliations').on('change', {store: developer, field: "affiliations"}, inputChange);
 
     // SponsorOrg Modal Updates
@@ -1595,7 +1595,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#contributor-edit-middle_name').on('input', {store: contributor, field: "middle_name"}, inputChange);
     $('#contributor-edit-last_name').on('input', {store: contributor, field: "last_name"}, inputChange);
     $('#contributor-edit-email').on('change', {store: contributor, field: "email"}, inputChange);
-    $('#contributor-edit-orcid').on('input', {store: contributor, field: "orcid"}, inputChange);
+    $('#contributor-edit-orcid').on('change', {store: contributor, field: "orcid"}, inputChange);
     $('#contributor-edit-affiliations').on('change', {store: contributor, field: "affiliations"}, inputChange);
     $('#contributor-edit-contribtype').on('change', {store: contributor, field: "contributor_type"}, inputChange);
 

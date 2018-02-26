@@ -623,7 +623,7 @@ var MetadataStore = function MetadataStore() {};
     "middle_name": { required: false, completed: false, validations: [], error: '' },
     "last_name": { required: true, completed: false, validations: [], error: '' },
     "email": { required: false, completed: false, validations: ["email"], error: '' },
-    "orcid": { required: false, completed: false, validations: ["Orcid"], error: '' },
+    "orcid": { required: false, completed: false, validations: ["orcid"], error: '' },
     "affiliations": { required: false, completed: false, validations: [], error: '' }
 
   });
@@ -644,7 +644,7 @@ var MetadataStore = function MetadataStore() {};
     "middle_name": { required: false, completed: false, validations: [], error: '' },
     "last_name": { required: true, completed: false, validations: [], error: '' },
     "email": { required: false, completed: false, validations: ["email"], error: '' },
-    "orcid": { required: false, completed: false, validations: ["Orcid"], error: '' },
+    "orcid": { required: false, completed: false, validations: ["orcid"], error: '' },
     "affiliations": { required: false, completed: false, validations: [], error: '' },
     "contributor_type": { required: true, completed: false, validations: [], error: '' }
 

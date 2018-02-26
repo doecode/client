@@ -9,7 +9,7 @@ var Validation = function () {
 
   _createClass(Validation, [{
     key: "validate",
-    value: mobx.action("Validate", function validate(value, validationObj, validationCallback, parentArraySizel) {
+    value: mobx.action("Validate", function validate(value, validationObj, validationCallback) {
       var errors = "";
       var validations = validationObj.validations;
 
@@ -60,7 +60,7 @@ var Validation = function () {
   }, {
     key: "needsServer",
     value: function needsServer(value) {
-      var asyncValidations = ["awardnumber", "doi", "repositorylink", "url"];
+      var asyncValidations = ["awardnumber", "doi", "repositorylink", "url", "orcid"];
 
       return asyncValidations.indexOf(value) > -1;
     }
@@ -120,8 +120,8 @@ var Validation = function () {
       var errors = "";
 
       for (var i = 0; i < allDevs.length; i++) {
-        if (!allDevs[i].first_name || !allDevs[i].last_name) {
-        	var dev = allDevs[i];
+        var dev = allDevs[i];
+        if (!dev.first_name || !dev.last_name) {
           badDevs.push("<br> First Name: [" + (dev.first_name ? dev.first_name : "{missing}") + "]  Last Name: [" + (dev.last_name ? dev.last_name : "{missing}") + "]  Affiliations: [" + (dev.affiliations ? dev.affiliations.join(", ") : "") + "]");
         }
       }
