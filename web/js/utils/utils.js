@@ -11,7 +11,16 @@ const LOGIN_EXPIRATION_DATE_FORMAT = "YYYY-MM-DD HH:mm";//Date format used to fo
 const ERROR_CONDITION = 'error'; //Used to indicate that a field needs to be marked as erroneous 
 const SUCCESS_CONDITION = 'success';//Used to indicate that a field needs to be marked as successful
 const BLANK_CONDITION = 'blank';//Used to indicate that a field needs to be marked as blank, because it's neither successful or erroneous
-var NON_CHARACTER_KEYCODES = [13, 38, 40, 39, 37, 27, 17, 18, 16, 9];//enter, up arrow, down arrow, right arrow, left arrow, escape, ctrl, alt, shift, tab
+var NON_CHARACTER_KEYCODES = [13, /*enter*/
+    38, /*up arrow*/
+    40, /*down arrow*/
+    39, /*right arrow*/
+    37, /*left arrow*/
+    27, /*escape*/
+    17, /*ctrl*/
+    18, /*alt*/
+    16, /*shift*/
+    9 /*tab*/];
 
 function doAjax(methodType, url, successCallback, data, errorCallback, dataType) {
     var errorCall = errorCallback;
@@ -328,17 +337,32 @@ var modifyChosenSelectForCustomEntry = function (event) {
             //Get the related select information
             var related_select_id = $(related_select).attr('id');
 
+            //Caret Position
+            var caret_position = event.target.selectionStart;
+            sessionStorage.last_chosen_input_position = caret_position;
+
             //If we don't have an index for this in the underlying select, make it so
             if (!document.getElementById(related_select_id + "-custom-option")) {
                 $(related_select).prepend("<option id=" + related_select_id + "-custom-option" + " value='" + val + "'>Add: " + val + "</option>");
+
             } else {
                 $("#" + related_select_id + "-custom-option").val(val);
                 $("#" + related_select_id + "-custom-option").html("Add: " + val);
             }
+
             $(related_select).trigger("chosen:updated");
             $(self).val(val);
             $(self).width('100%');
+
+            var triggersearch = jQuery.Event('keyup');
+            triggersearch.which = 39;
+            $(self).trigger(triggersearch);
         }
+    } else if ((keypressed == 39 || keypressed == 37) && sessionStorage.last_chosen_input_position) {//If the key pressed is the left or right arrow
+        this.setSelectionRange(sessionStorage.last_chosen_input_position, sessionStorage.last_chosen_input_position);
+        sessionStorage.last_chosen_input_position = "";
+    } else {
+        sessionStorage.last_chosen_input_position = "";
     }
 };
 
