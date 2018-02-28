@@ -632,7 +632,10 @@ var saveUserAdminForm = function () {
         }
     }
 
-    if (post_data.roles) {
+    //TODO If business rules allow more than one permission per user, this will need to made smarter. 
+    //Currently, since there is only one permission per user (even though the data structures allow for multiples), it's assumed that if you have a permission, that you won't need
+    //to request any more
+    if (post_data.roles && current_user_data.pending_roles && current_user_data.pending_roles.length > 0) {
         post_data.pending_roles = [];
     }
 
