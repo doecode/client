@@ -549,11 +549,12 @@ var loadUserDataForAdminForm = function () {
         var is_active = chosen_option.data('isactive');
         var is_verified = chosen_option.data('isverified');
         var is_password_expired = chosen_option.data('ispassexpired');
+        var pending_roles = chosen_option.data('pendingroles').split(',');
 
         $("#email").val(email);
         $("#first_name").val(first_name);
         $("#last_name").val(last_name);
-        if (award_number) {
+        if (award_number && award_number != 'undefined' && award_number != undefined) {
             $("#award_number").val(award_number);
         }
         $("#roles-box").val(role);
@@ -575,7 +576,8 @@ var loadUserDataForAdminForm = function () {
             award_number: award_number,
             roles: [role],
             active: is_active,
-            is_verified: is_verified
+            is_verified: is_verified,
+            pending_roles: pending_roles
         };
 
         $("#current-user-values-obj").val(JSON.stringify(current_user_obj));
@@ -629,6 +631,12 @@ var saveUserAdminForm = function () {
             post_data[key] = new_user_data[key];
         }
     }
+
+    if (post_data.roles) {
+        post_data.pending_roles = [];
+    }
+
+    console.log(JSON.stringify(post_data));
 
     //Now, if we had anything put into the post data object, we'll post the data
     if (Object.keys(post_data).length > 0 && try_save === true) {
@@ -846,10 +854,11 @@ if (document.getElementById('login-page-identifier')) {
             data.forEach(function (item) {
                 var role = (item.roles.length > 0) ? item.roles[0] : '';//Since we only have a one-role system at the moment, we're just going to grab the first role from the list, because that's all there will be
                 //Because data attributes
-                //Comes out like <option value="email@email.com" data-firstname="john" data-lastname="doe" data-awardnum="3135" data-role="BAPL" data-isactive="true" data-isverified="false">John DOE (email@email.com)</option>
+                //Comes out like <option value="email@email.com" data-firstname="john" data-lastname="doe" data-awardnum="3135" data-role="BAPL" data-isactive="true" data-isverified="false" data-pendingroles='SITE1,SITE2,SITE3'>John DOE (email@email.com)</option>
                 var user_option = '<option value="' + item.email + '" data-firstname="' + item.first_name + '" data-lastname="'
                         + item.last_name + '" data-awardnum="' + item.contract_number + '" data-role="' + role + '" data-isactive="'
-                        + item.active + '" data-isverified="' + item.verified + '" data-ispassexpired="' + item.password_expired + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
+                        + item.active + '" data-isverified="' + item.verified + '" data-ispassexpired="'
+                        + item.password_expired + '" data-pendingroles="' + item.pending_roles.join(',') + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
                 $("#user-admin-box").append(user_option);
                 if (item.pending_roles.length > 0) {
                     pending_roles_list.push(
