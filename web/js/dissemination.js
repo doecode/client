@@ -57,6 +57,7 @@ var toggleDescriptionMoreLess = function () {
 var authorSearchDropdownName = function () {
     clearSearchFormFields();
     $("#search-developers_contributors").val("\"" + $(this).data('authorname') + "\"");
+    console.log($("#search-developers_contributors").val());
     $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
     $("#search-page-form").submit();
 };
@@ -64,7 +65,6 @@ var authorSearchDropdownName = function () {
 /*Triggers the search by the name of the orcid clicked*/
 var authorSearchDropdownORCID = function () {
     var orcid = $(this).data('orcid');
-
 
     clearSearchFormFields();
     $("#search-orcid").val(orcid);

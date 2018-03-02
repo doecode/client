@@ -96,14 +96,17 @@ public class SearchFunctions {
                os.write(post_data.toString().getBytes());
                os.close();
 
-               InputStream in = new BufferedInputStream(conn.getInputStream());
-               String result = IOUtils.toString(in, "UTF-8");
+               BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+               StringBuilder result = new StringBuilder();
+               String line;
+               while ((line = rd.readLine()) != null) {
+                    result.append(line);
+               }
 
-               in.close();
                conn.disconnect();
 
-               if (JsonObjectUtils.isValidObjectNode(result)) {
-                    search_result_data = JsonObjectUtils.parseObjectNode(result);
+               if (JsonObjectUtils.isValidObjectNode(result.toString())) {
+                    search_result_data = JsonObjectUtils.parseObjectNode(result.toString());
                } else {
                     invalid_search_data = true;
                }
@@ -144,7 +147,7 @@ public class SearchFunctions {
           return_data.put("availabilities_list", getSearchDropdownList(Init.availabilities_list, handleRequestArray(request.getParameter("accessibility"))));
           return_data.put("license_options_list", getSearchDropdownList(Init.licenses_list, handleRequestArray(request.getParameter("licenses"))));
           return_data.put("software_type_options_list", getSearchDropdownList(Init.software_type, handleRequestArray(request.getParameter("software_type"))));
-          return_data.put("search_description", getSearchResultsDescription(post_data, context));
+          return_data.put("search_description", getSearchResultsDescription(post_data));
           if (!invalid_search_data) {
                return_data.put("search_facets_data", search_result_data.get("facets"));
                return_data.put("year_facets_data", getYearFacetsData((ObjectNode) search_result_data.get("facets")));
@@ -169,7 +172,7 @@ public class SearchFunctions {
           return return_data;
      }
 
-     private static ObjectNode getSearchResultsDescription(ObjectNode post_data, ServletContext context) {
+     private static ObjectNode getSearchResultsDescription(ObjectNode post_data) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           ArrayNode search_description_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
 
