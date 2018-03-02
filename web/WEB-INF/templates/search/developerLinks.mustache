@@ -19,12 +19,7 @@
      <!--Regular Author Link thing-->
      {{/if}}
      <!--Superscript content-->
-     {{#if show_sup}}
-     {{#each sup_count}}
-     <sup>[{{.}}]</sup>
-     {{/each}}
-     {{/if}}
-     {{#unless is_last}}; &nbsp; {{/unless}}
+     {{#if show_sup}}{{#each sup_count}}<sup>[{{.}}]</sup>{{/each}}{{/if}}{{#unless is_last}}; &nbsp; {{/unless}}
      {{/each}}
      {{#if show_release_date}}
      &nbsp;
