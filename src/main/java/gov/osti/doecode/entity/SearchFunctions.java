@@ -509,32 +509,33 @@ public class SearchFunctions {
                     //Go through each affiliation. If it's a valid one, tack on another number to show in the superscript thing in the link
                     if (current_row.get("affiliations") != null && ((ArrayNode) current_row.get("affiliations")).size() > 0) {
                          //Go through each affiliation, and if it's not "null", add a number for it to the authorlist of developers/contributors
-                        for (JsonNode v : (ArrayNode) current_row.get("affiliations")) {
-                            if (!v.isNull() && !StringUtils.equalsIgnoreCase(v.asText(), "null")) {
-                                // if affiliation is already in the list, use previous
-                                boolean matchFound = false;
-                                for (int j = 0; j < affiliations_list.size(); j++) {
-                                    if (StringUtils.equalsIgnoreCase(affiliations_list.get(j).asText(), v.asText())) {
-                                        matchFound = true;
-                                        //countArray.add(j + 1);
-                                        countList.add(j + 1);
-                                        break;
-                                    }
-                                }
-                                
-                                if (!matchFound) {
-                                    //countArray.add(affiliations_count);
-                                    countList.add(affiliations_count);
-                                    affiliations_list.add(v.asText());
-                                    affiliations_count++;
-                                }
-                            }
-                        }
+                         for (JsonNode v : (ArrayNode) current_row.get("affiliations")) {
+                              if (!v.isNull() && !StringUtils.equalsIgnoreCase(v.asText(), "null")) {
+                                   // if affiliation is already in the list, use previous
+                                   boolean matchFound = false;
+                                   for (int j = 0; j < affiliations_list.size(); j++) {
+                                        if (StringUtils.equalsIgnoreCase(affiliations_list.get(j).asText(), v.asText())) {
+                                             matchFound = true;
+                                             //countArray.add(j + 1);
+                                             countList.add(j + 1);
+                                             break;
+                                        }
+                                   }
+
+                                   if (!matchFound) {
+                                        //countArray.add(affiliations_count);
+                                        countList.add(affiliations_count);
+                                        affiliations_list.add(v.asText());
+                                        affiliations_count++;
+                                   }
+                              }
+                         }
                     }
                     //Add the counts needed to this given developer/contributor
                     countList.sort(null);
-                    for (Integer value : countList)
-                        countArray.add(value);
+                    for (Integer value : countList) {
+                         countArray.add(value);
+                    }
                     current_row.put("sup_count", countArray);
                     current_row.put("show_sup", countArray.size() > 0);
                }
@@ -1058,7 +1059,7 @@ public class SearchFunctions {
                URL url = new URL(api_url + "search/" + osti_id);
                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                conn.setRequestMethod("GET");
-               BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+               BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
                String line;
                while ((line = rd.readLine()) != null) {
                     result.append(line);

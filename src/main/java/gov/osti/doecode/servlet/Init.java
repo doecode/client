@@ -20,6 +20,8 @@ public class Init extends HttpServlet {
      public static Handlebars handlebars;
      public static Handlebars handlebarsUser;
      public static String app_name;
+     public static String google_analytics_id;
+     public static String google_analytics_domain;
      public static ArrayNode availabilities_list;
      public static ArrayNode licenses_list;
      public static ArrayNode software_type;
@@ -51,6 +53,10 @@ public class Init extends HttpServlet {
 
           //Get the name of the app from the web.xml
           app_name = getServletContext().getInitParameter("app_name");
+          
+          //Google analytics info
+          google_analytics_id = getServletContext().getInitParameter("ga_id");
+          google_analytics_domain = getServletContext().getInitParameter("ga_domain");
 
           //Get the session timeout from the web.xml
           SESSION_TIMEOUT_MINUTES = Integer.parseInt(getServletContext().getInitParameter("session_timeout"));
