@@ -86,6 +86,8 @@ public class TemplateUtils {
           output_data.put("navbar", GET_NAVBAR_CLASSES(current_page));
           output_data.put("app_name", Init.app_name);
           output_data.put("adv_search_lists", SearchFunctions.getAdvancedSearchPageLists(request.getServletContext()));
+          output_data.put("google_analytics_id", Init.google_analytics_id);
+          output_data.put("ga_domain", Init.google_analytics_domain);
 
           return output_data;
      }
