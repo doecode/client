@@ -639,8 +639,6 @@ var saveUserAdminForm = function () {
         post_data.pending_roles = [];
     }
 
-    console.log(JSON.stringify(post_data));
-
     //Now, if we had anything put into the post data object, we'll post the data
     if (Object.keys(post_data).length > 0 && try_save === true) {
         $.ajax({

@@ -57,7 +57,6 @@ var toggleDescriptionMoreLess = function () {
 var authorSearchDropdownName = function () {
     clearSearchFormFields();
     $("#search-developers_contributors").val("\"" + $(this).data('authorname') + "\"");
-    console.log($("#search-developers_contributors").val());
     $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
     $("#search-page-form").submit();
 };
@@ -309,7 +308,6 @@ var pushDownloadMetric = function () {
     //code id we care about
     var code_id = $(this).data('codeid');
     var href = $(this).attr('href');
-
     var ga_link = '/' + APP_NAME + "/downloads/" + code_id + "/" + href;
     _gaq.push(['_trackPageview', ga_link]);
 };
