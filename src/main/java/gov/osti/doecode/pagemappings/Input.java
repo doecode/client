@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
 
 /**
  *
@@ -189,7 +187,7 @@ public class Input extends HttpServlet {
           //Add all of the hide/shows for the panels
           output_data.put("show_optional_toggle", show_optional_toggle);
 
-          output_data.put("software_type", Jsoup.clean(software_type_param.substring(0, 1).toUpperCase(), Whitelist.basic()));
+          output_data.put("software_type", software_type_param.substring(0, 1).toUpperCase());
 
           //These js files are needed on all input pages
           jsFilesList.add("libraries/jquery.dataTables.min");

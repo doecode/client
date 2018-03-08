@@ -22,8 +22,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,10 +80,10 @@ public class UserFunctions {
 
      public static ObjectNode setUserDataForCookie(ObjectNode user_data) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          return_data.put("first_name", Jsoup.clean(JsonObjectUtils.getString(user_data, "first_name", ""), Whitelist.basic()));
-          return_data.put("last_name", Jsoup.clean(JsonObjectUtils.getString(user_data, "last_name", ""), Whitelist.basic()));
-          return_data.put("email", Jsoup.clean(JsonObjectUtils.getString(user_data, "email", ""), Whitelist.basic()));
-          return_data.put("site", Jsoup.clean(JsonObjectUtils.getString(user_data, "site", ""), Whitelist.basic()));
+          return_data.put("first_name", JsonObjectUtils.getString(user_data, "first_name", ""));
+          return_data.put("last_name", JsonObjectUtils.getString(user_data, "last_name", ""));
+          return_data.put("email", JsonObjectUtils.getString(user_data, "email", ""));
+          return_data.put("site", JsonObjectUtils.getString(user_data, "site", ""));
           ArrayNode roles = JsonObjectUtils.parseArrayNode(JsonObjectUtils.getString(user_data, "roles", "[]"));
           ArrayNode pending_roles = JsonObjectUtils.parseArrayNode(JsonObjectUtils.getString(user_data, "pending_roles", "[]"));
           return_data.put("roles", roles);

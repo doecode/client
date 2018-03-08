@@ -6,13 +6,15 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonObjectUtils;
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.InputStream;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,10 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,11 +35,11 @@ public class SearchFunctions {
      public static final DateTimeFormatter MLA_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM. yyyy.");
      public static final DateTimeFormatter SEARCH_RESULTS_DESCRIPTION_FORMAT = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 
-     public static ObjectNode conductSearch(HttpServletRequest request, ServletContext context, long page_num) {
+     public static ObjectNode conductSearch(HttpServletRequest request, ServletContext context, long page_num){
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
 
           //Go and actually search
-          return_data = doSearchPost(request, context.getInitParameter("api_url"), context);
+          return_data = doSearchPost(request, context.getInitParameter("api_url"));
 
           //Get the search form data and get teh page number
           ObjectNode search_form_data = (ObjectNode) return_data.get("search_form_data");
@@ -53,7 +52,7 @@ public class SearchFunctions {
           return return_data;
      }
 
-     private static ObjectNode doSearchPost(HttpServletRequest request, String api_url, ServletContext context) {
+     private static ObjectNode doSearchPost(HttpServletRequest request, String api_url){
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           boolean had_error = false;
           boolean invalid_search_data = false;
@@ -64,17 +63,17 @@ public class SearchFunctions {
 
           //Get all of the data into a postable object
           ObjectNode post_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          post_data.put("all_fields", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("all_fields"), ""), Whitelist.basic()));
-          post_data.put("software_title", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("software_title"), ""), Whitelist.basic()));
-          post_data.put("developers_contributors", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("developers_contributors"), ""), Whitelist.basic()));
-          post_data.put("biblio_data", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("biblio_data"), ""), Whitelist.basic()));
-          post_data.put("identifiers", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("identifiers"), ""), Whitelist.basic()));
-          post_data.put("date_earliest", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("date_earliest"), ""), Whitelist.basic()));
-          post_data.put("date_latest", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("date_latest"), ""), Whitelist.basic()));
+          post_data.put("all_fields", StringUtils.defaultIfBlank(request.getParameter("all_fields"), ""));
+          post_data.put("software_title", StringUtils.defaultIfBlank(request.getParameter("software_title"), ""));
+          post_data.put("developers_contributors", StringUtils.defaultIfBlank(request.getParameter("developers_contributors"), ""));
+          post_data.put("biblio_data", StringUtils.defaultIfBlank(request.getParameter("biblio_data"), ""));
+          post_data.put("identifiers", StringUtils.defaultIfBlank(request.getParameter("identifiers"), ""));
+          post_data.put("date_earliest", StringUtils.defaultIfBlank(request.getParameter("date_earliest"), ""));
+          post_data.put("date_latest", StringUtils.defaultIfBlank(request.getParameter("date_latest"), ""));
           post_data.put("start", start);
           post_data.put("rows", rows);
-          post_data.put("sort", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("sort"), ""), Whitelist.basic()));
-          post_data.put("orcid", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("orcid"), ""), Whitelist.basic()));
+          post_data.put("sort", StringUtils.defaultIfBlank(request.getParameter("sort"), ""));
+          post_data.put("orcid", StringUtils.defaultIfBlank(request.getParameter("orcid"), ""));
 
           post_data.put("accessibility", handleRequestArray(request.getParameter("accessibility")));
           post_data.put("licenses", handleRequestArray(request.getParameter("licenses")));
@@ -92,9 +91,10 @@ public class SearchFunctions {
                conn.setDoInput(true);
                conn.setRequestMethod("POST");
 
-               OutputStream os = conn.getOutputStream();
-               os.write(post_data.toString().getBytes());
-               os.close();
+               BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream(), "UTF-8"));
+               bw.write(post_data.toString());
+               bw.flush();
+               bw.close();
 
                BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
                StringBuilder result = new StringBuilder();
@@ -393,7 +393,7 @@ public class SearchFunctions {
           if (StringUtils.isNotBlank(value) && !StringUtils.equals("[]", value)) {
                ArrayNode temp_array = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
                for (JsonNode v : JsonObjectUtils.parseArrayNode(value)) {
-                    temp_array.add(Jsoup.clean(v.asText(), Whitelist.basic()));
+                    temp_array.add(v.asText());
                }
                request_array = temp_array;
           }
