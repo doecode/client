@@ -17,6 +17,10 @@
         <param-value>@api.backend.url@</param-value>
     </context-param>
     <context-param>
+        <param-name>public_api_url</param-name>
+        <param-value>@api.url@</param-value>
+    </context-param>
+    <context-param>
         <param-name>site_url</param-name>
         <param-value>@site.url@</param-value>
     </context-param>

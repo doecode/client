@@ -644,7 +644,7 @@ public class SearchFunctions {
                   || StringUtils.isNotBlank(JsonObjectUtils.getString(request_data, "orcid", ""));
      }
 
-     public static ObjectNode getBiblioSidebarData(ObjectNode search_data, String api_url) {
+     public static ObjectNode getBiblioSidebarData(ObjectNode search_data, String public_api_url) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           //DOI and release date
           return_data.put("has_doi_and_release", (StringUtils.isNotBlank(JsonObjectUtils.getString(search_data, "doi", "")) && StringUtils.isNotBlank(JsonObjectUtils.getString(search_data, "release_date", ""))));
@@ -662,7 +662,7 @@ public class SearchFunctions {
           return_data.put("code_id", JsonObjectUtils.getLong(search_data, "code_id", 0));
 
           //DOE CODE API URL
-          return_data.put("api_url", api_url);
+          return_data.put("api_url", public_api_url);
 
           return return_data;
      }
@@ -1162,7 +1162,7 @@ public class SearchFunctions {
                return_data.put("chicago", getChicagoFormat(biblio_data));
 
                /*Biblio sidebar data*/
-               return_data.put("biblio_sidebar", getBiblioSidebarData(biblio_data, api_url));
+               return_data.put("biblio_sidebar", getBiblioSidebarData(biblio_data, context.getInitParameter("public_api_url")));
 
                /*Meta tags*/
                //Before we send the meta tags down, let's go ahead and remove all of the ones that didn't have any actual content
