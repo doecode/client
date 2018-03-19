@@ -403,6 +403,12 @@
             <artifactId>commons-email</artifactId>
             <version>1.5</version>
         </dependency>
+        <!--Jsoup (for cleaning out script tags to prevent XSS attacks)-->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.11.2</version>
+        </dependency>
         <!--Logging-->
         <dependency>
             <groupId>ch.qos.logback</groupId>

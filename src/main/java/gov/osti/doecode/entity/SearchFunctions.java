@@ -23,6 +23,8 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,17 +65,17 @@ public class SearchFunctions {
 
           //Get all of the data into a postable object
           ObjectNode post_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          post_data.put("all_fields", StringUtils.defaultIfBlank(request.getParameter("all_fields"), ""));
-          post_data.put("software_title", StringUtils.defaultIfBlank(request.getParameter("software_title"), ""));
-          post_data.put("developers_contributors", StringUtils.defaultIfBlank(request.getParameter("developers_contributors"), ""));
-          post_data.put("biblio_data", StringUtils.defaultIfBlank(request.getParameter("biblio_data"), ""));
-          post_data.put("identifiers", StringUtils.defaultIfBlank(request.getParameter("identifiers"), ""));
-          post_data.put("date_earliest", StringUtils.defaultIfBlank(request.getParameter("date_earliest"), ""));
-          post_data.put("date_latest", StringUtils.defaultIfBlank(request.getParameter("date_latest"), ""));
+          post_data.put("all_fields", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("all_fields"), ""), Whitelist.basic()));
+          post_data.put("software_title", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("software_title"), ""), Whitelist.basic()));
+          post_data.put("developers_contributors", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("developers_contributors"), ""), Whitelist.basic()));
+          post_data.put("biblio_data", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("biblio_data"), ""), Whitelist.basic()));
+          post_data.put("identifiers", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("identifiers"), ""), Whitelist.basic()));
+          post_data.put("date_earliest", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("date_earliest"), ""), Whitelist.basic()));
+          post_data.put("date_latest", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("date_latest"), ""), Whitelist.basic()));
           post_data.put("start", start);
           post_data.put("rows", rows);
-          post_data.put("sort", StringUtils.defaultIfBlank(request.getParameter("sort"), ""));
-          post_data.put("orcid", StringUtils.defaultIfBlank(request.getParameter("orcid"), ""));
+          post_data.put("sort", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("sort"), ""), Whitelist.basic()));
+          post_data.put("orcid", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("orcid"), ""), Whitelist.basic()));
 
           post_data.put("accessibility", handleRequestArray(request.getParameter("accessibility")));
           post_data.put("licenses", handleRequestArray(request.getParameter("licenses")));
@@ -393,7 +395,7 @@ public class SearchFunctions {
           if (StringUtils.isNotBlank(value) && !StringUtils.equals("[]", value)) {
                ArrayNode temp_array = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
                for (JsonNode v : JsonObjectUtils.parseArrayNode(value)) {
-                    temp_array.add(v.asText());
+                    temp_array.add(Jsoup.clean(v.asText(), Whitelist.basic()));
                }
                request_array = temp_array;
           }
