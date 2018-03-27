@@ -120,6 +120,7 @@ public class Input extends HttpServlet {
                } else {
                     output_data.put("page_message", "Submit a New Software Project");
                }
+               output_data.put("show_owner_message", true);
                is_inputjs = true;
                current_page = TemplateUtils.PAGE_PROJECTS;
 

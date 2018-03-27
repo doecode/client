@@ -11,6 +11,9 @@
 	  <div class="form-group form-group-sm row">
 	       <div class="col-xs-12 center-text">
 		    <h1>{{page_message}}</h1>
+		    {{#if show_owner_message}}
+		    <label>Owned by: <span id='owner-email-address'></span></label><br/>
+		    {{/if}}
 		    <a id="input-help-anchor" title="More detailed information on this process can be found on our Help page" href="/{{app_name}}/help">More detailed information on this process can be found on our Help page</a>
 		    <span id="input-approve-msg" class="error-color" style="display: none">NOTICE: This is an Approval Only form!  ANY CHANGES MADE WILL BE LOST!</span>
 	       </div>
@@ -40,18 +43,18 @@
 	       <span class="fa fa-plus-square-o"></span>&nbsp;Show Additional Optional Fields
 	  </button>
 	  {{/if}}
-			<button id="input-submit-btn" title='Submit Project' type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style" style="display: none">
-				Submit Project
-			</button>
-			<button id="input-announce-btn" title='Announce Project to E-Link' type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style" style="display: none">
-				Announce Project to E-Link
-			</button>
-			<button id="input-approve-btn" title='Approve Project' type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style" style="display: none">
-				Approve Project
-			</button>
-			<button id="input-save-btn" title='Save Your Progress' type="button" class="pure-button btn-lg pull-right doecode-wizard-btn" style="margin-right: 8px;background: rgb(66, 184, 221);color: white;display: none;">
-				Save Your Progress
-			</button>
+	  <button id="input-submit-btn" title='Submit Project' type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style" style="display: none">
+	       Submit Project
+	  </button>
+	  <button id="input-announce-btn" title='Announce Project to E-Link' type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style" style="display: none">
+	       Announce Project to E-Link
+	  </button>
+	  <button id="input-approve-btn" title='Approve Project' type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style" style="display: none">
+	       Approve Project
+	  </button>
+	  <button id="input-save-btn" title='Save Your Progress' type="button" class="pure-button btn-lg pull-right doecode-wizard-btn" style="margin-right: 8px;background: rgb(66, 184, 221);color: white;display: none;">
+	       Save Your Progress
+	  </button>
      </div>
      <div class="col-md-3"></div>
 </div>
