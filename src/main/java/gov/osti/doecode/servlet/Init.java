@@ -10,6 +10,7 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
@@ -22,6 +23,10 @@ public class Init extends HttpServlet {
      public static String app_name;
      public static String google_analytics_id;
      public static String google_analytics_domain;
+     public static String public_api_url;
+     public static String backend_api_url;
+     public static String authority_api_base;
+     public static String site_url;
      public static ArrayNode availabilities_list;
      public static ArrayNode licenses_list;
      public static ArrayNode software_type;
@@ -41,28 +46,37 @@ public class Init extends HttpServlet {
      public void init(ServletConfig config) throws ServletException {
           super.init(config);
 
+          //Get the servlet context
+          ServletContext context = getServletContext();
+
           //Initialize the main template loader
           TemplateLoader loader = new ServletContextTemplateLoader(
-                  getServletContext(), "/WEB-INF/templates", ".mustache");
+                  context, "/WEB-INF/classes/templates", ".mustache");
           handlebars = new Handlebars(loader);
           handlebars.registerHelper("json", Jackson2Helper.INSTANCE);
 
           //Initialize the user template loader
-          TemplateLoader loader2 = new ServletContextTemplateLoader(getServletContext(), "/WEB-INF/templates/user", ".mustache");
+          TemplateLoader loader2 = new ServletContextTemplateLoader(context, "/WEB-INF/classes/templates/user", ".mustache");
           handlebarsUser = new Handlebars(loader2);
 
-          //Get the name of the app from the web.xml
-          app_name = getServletContext().getInitParameter("app_name");
-          
-          //Google analytics info
-          google_analytics_id = getServletContext().getInitParameter("ga_id");
-          google_analytics_domain = getServletContext().getInitParameter("ga_domain");
+          //Get the URL's used for searching and validation
+          public_api_url = context.getInitParameter("api_url");
+          backend_api_url = context.getInitParameter("api_backend_url");
+          authority_api_base = context.getInitParameter("authority_base_url");
 
+          //Get the name of the app from the web.xml
+          app_name = context.getInitParameter("app_name");
+          site_url = context.getInitParameter("site_url");
+
+          //Google analytics info
+          google_analytics_id = context.getInitParameter("ga_id");
+          google_analytics_domain = context.getInitParameter("ga_domain");
+          
           //Get the session timeout from the web.xml
-          SESSION_TIMEOUT_MINUTES = Integer.parseInt(getServletContext().getInitParameter("session_timeout"));
+          SESSION_TIMEOUT_MINUTES = Integer.parseInt(context.getInitParameter("session_timeout"));
 
           //Get the most commonly used json files, and load them into objects
-          String jsonPath = getServletContext().getRealPath("./json");
+          String jsonPath = context.getRealPath("./json");
           try {
                availabilities_list = JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.AVAILABILITIES_LIST_JSON), JsonObjectUtils.AVAILABILITIES_LIST_JSON_KEY);
                licenses_list = JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.LICENSE_OPTIONS_LIST_JSON), JsonObjectUtils.LICENSE_JLIST_SON_KEY);

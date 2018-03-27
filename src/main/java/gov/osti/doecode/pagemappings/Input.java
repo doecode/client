@@ -29,7 +29,7 @@ public class Input extends HttpServlet {
           request.setCharacterEncoding("UTF-8");
           String URI = request.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
-          String site_url = getServletConfig().getServletContext().getInitParameter("site_url");
+          String site_url = Init.site_url;
           String page_title = "";
           String template = "";
           String current_page = "";

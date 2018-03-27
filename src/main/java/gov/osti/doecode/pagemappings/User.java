@@ -25,7 +25,7 @@ public class User extends HttpServlet {
           request.setCharacterEncoding("UTF-8");
           String URI = request.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
-          String site_url = getServletConfig().getServletContext().getInitParameter("site_url");
+          String site_url = Init.site_url;
 
           boolean is_logged_in = UserFunctions.isUserLoggedIn(request);
 
@@ -114,7 +114,7 @@ public class User extends HttpServlet {
                     case "confirmuser":
                          page_title = "DOE CODE: Confirm User";
                          template = TemplateUtils.TEMPLATE_USER_CONFIRMATION;
-                         output_data = UserFunctions.getUserRegistrationData(getServletContext(), request.getParameter("confirmation"));
+                         output_data = UserFunctions.getUserRegistrationData(request.getParameter("confirmation"));
                          break;
                     case "help":
                          if (!is_logged_in) {

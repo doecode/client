@@ -12,53 +12,58 @@
         </welcome-file>
     </welcome-file-list>
     <!--Context Parameters-->
+    
     <context-param>
-        <param-name>api_url</param-name>
-        <param-value>@api.backend.url@</param-value>
+        <param-name>api_backend_url</param-name>
+        <param-value>${apiBackendURL}</param-value>
     </context-param>
     <context-param>
-        <param-name>public_api_url</param-name>
-        <param-value>@api.url@</param-value>
+        <param-name>api_url</param-name>
+        <param-value>${apiURL}</param-value>
     </context-param>
     <context-param>
         <param-name>site_url</param-name>
-        <param-value>@site.url@</param-value>
+        <param-value>${siteURL}</param-value>
+    </context-param>
+        <context-param>
+        <param-name>authority_base_url</param-name>
+        <param-value>${authorityapiURL}</param-value>
     </context-param>
     <context-param>
         <param-name>session_timeout</param-name>
-        <param-value>@session_timeout@</param-value>
+        <param-value>${session_timeout}</param-value>
     </context-param>
     <context-param>
         <param-name>app_name</param-name>
-        <param-value>@app_name@</param-value>
+        <param-value>${app_name}</param-value>
     </context-param>
     <context-param>
         <param-name>gitlab_submit_email</param-name>
-        <param-value>@gitlab_submit_email@</param-value>
+        <param-value>${gitlab_submit_email}</param-value>
     </context-param>
     <context-param>
         <param-name>gitlab_from_email</param-name>
-        <param-value>@gitlab_from_email@</param-value>
+        <param-value>${gitlab_from_email}</param-value>
     </context-param>
     <context-param>
         <param-name>smtpHost</param-name>
-        <param-value>@smtpHost@</param-value>
+        <param-value>${smtpHost}</param-value>
     </context-param>
     <context-param>
         <param-name>recaptcha_sitekey</param-name>
-        <param-value>@recaptcha_sitekey@</param-value>
+        <param-value>${gitlab_recaptcha_site_key}</param-value>
     </context-param>
     <context-param>
         <param-name>recaptcha_secretkey</param-name>
-        <param-value>@recaptcha_secretkey@</param-value>
+        <param-value>${gitlab_recaptcha_secret_key}</param-value>
     </context-param>
     <context-param>
         <param-name>ga_id</param-name>
-        <param-value>@google_analytics_id@</param-value>
+        <param-value>${google_analytics_id}</param-value>
     </context-param>
     <context-param>
         <param-name>ga_domain</param-name>
-        <param-value>@google_analytics_domain@</param-value>
+        <param-value>${google_analytics_domain}</param-value>
     </context-param>
     <!--Servlet to give the Dissemination pages, like search, about, etc-->
     <servlet>

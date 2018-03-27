@@ -41,7 +41,7 @@ public class SearchFunctions {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
 
           //Go and actually search
-          return_data = doSearchPost(request, context.getInitParameter("api_url"));
+          return_data = doSearchPost(request, Init.backend_api_url);
 
           //Get the search form data and get teh page number
           ObjectNode search_form_data = (ObjectNode) return_data.get("search_form_data");
@@ -593,7 +593,7 @@ public class SearchFunctions {
           return return_data;
      }
 
-     public static ObjectNode getAdvancedSearchPageLists(ServletContext context) {
+     public static ObjectNode getAdvancedSearchPageLists() {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           return_data.put("availabilities_list", Init.availabilities_list);
           return_data.put("licenses_list", Init.licenses_list);
@@ -1053,10 +1053,10 @@ public class SearchFunctions {
           return return_data;
      }
 
-     public static ObjectNode getBiblioData(long osti_id, ServletContext context) {
+     public static ObjectNode getBiblioData(long osti_id) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           boolean is_valid = true;
-          String api_url = context.getInitParameter("api_url");
+          String api_url = Init.backend_api_url;
 
           ObjectNode biblio_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           try {
@@ -1164,7 +1164,7 @@ public class SearchFunctions {
                return_data.put("chicago", getChicagoFormat(biblio_data));
 
                /*Biblio sidebar data*/
-               return_data.put("biblio_sidebar", getBiblioSidebarData(biblio_data, context.getInitParameter("public_api_url")));
+               return_data.put("biblio_sidebar", getBiblioSidebarData(biblio_data, Init.public_api_url));
 
                /*Meta tags*/
                //Before we send the meta tags down, let's go ahead and remove all of the ones that didn't have any actual content

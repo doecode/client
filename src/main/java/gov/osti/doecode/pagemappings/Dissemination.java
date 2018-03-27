@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,7 +89,7 @@ public class Dissemination extends HttpServlet {
 
                if (DOECODEUtils.isValidLong(remaining.replace("/biblio/", ""))) {
                     long code_id = Long.parseLong(remaining.replace("/biblio/", ""));
-                    ObjectNode biblio_data = SearchFunctions.getBiblioData(code_id, getServletContext());
+                    ObjectNode biblio_data = SearchFunctions.getBiblioData(code_id);
 
                     //If, and only if, this is a valid code id
                     if (JsonObjectUtils.getBoolean(biblio_data, "is_valid", false)) {
@@ -99,12 +98,12 @@ public class Dissemination extends HttpServlet {
 
                     } else {
                          output_data.put("is_invalid_code_id", true);
-                         response.setStatus(HttpStatus.SC_NOT_FOUND);
+                         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
                     }
                } else {
                     output_data.put("is_invalid_code_id", true);
-                    response.setStatus(HttpStatus.SC_NOT_FOUND);
+                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                }
 
           } else if (remaining.equals("/forbidden")) {

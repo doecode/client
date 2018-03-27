@@ -6,22 +6,19 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonObjectUtils;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -154,30 +151,40 @@ public class UserFunctions {
           return has;
      }
 
-     public static ObjectNode getUserRegistrationData(ServletContext context, String confirmation_code) {
+     public static ObjectNode getUserRegistrationData(String confirmation_code) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          String api_url = context.getInitParameter("api_url");
+          String api_url = Init.backend_api_url;
 
-          CloseableHttpClient hc = HttpClientBuilder.create().setDefaultRequestConfig(RequestConfig.custom().setSocketTimeout(5000).setConnectTimeout(5000).setConnectionRequestTimeout(5000).build()).build();
-          HttpGet get = new HttpGet(api_url + "user/confirm?confirmation=" + confirmation_code);
-          get.setHeader("Content-Type", "application/json");
-          get.setHeader("Accept", "application/json");
-
+          HttpURLConnection conn = null;
           ObjectNode response_json = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           try {
-               HttpResponse response = hc.execute(get);
-               String raw_json = EntityUtils.toString(response.getEntity());
-               if (JsonObjectUtils.isValidObjectNode(raw_json)) {
-                    response_json = JsonObjectUtils.parseObjectNode(raw_json);
+               URL url = new URL(api_url + "user/confirm?confirmation=" + confirmation_code);
+               conn = (HttpURLConnection) url.openConnection();
+               conn.setConnectTimeout(5000);
+               conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+               conn.setRequestProperty("Accept", "application/json");
+               conn.setRequestMethod("GET");
+
+               BufferedReader in = new BufferedReader(
+                       new InputStreamReader(conn.getInputStream()));
+               String inputLine;
+               StringBuilder response = new StringBuilder();
+
+               while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+               }
+               in.close();
+
+               if (JsonObjectUtils.isValidObjectNode(response.toString())) {
+                    response_json = JsonObjectUtils.parseObjectNode(response.toString());
                }
 
           } catch (Exception e) {
-               log.error("Exception in getting user confirmation code: " + e.getMessage());
+               log.error("Exception getting user registration data: " + e.getMessage());
           } finally {
                try {
-                    hc.close();
+                    conn.disconnect();
                } catch (Exception e) {
-                    log.error("Couldn't close connection properly: " + e.getMessage());
                }
           }
 

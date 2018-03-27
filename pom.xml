@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>gov.osti</groupId>
     <artifactId>doecode</artifactId>
-    <version>1.2.5</version>
+    <version>1.3.0</version>
     <name>DOE Code Web Application (Client)</name>
     <packaging>war</packaging>
     <repositories>
@@ -21,19 +21,10 @@
         </repository>
     </distributionManagement>
     <properties>
-        <jackson.version>2.9.0</jackson.version>
         <handlebars.version>4.0.6</handlebars.version>
-        <httpclient.version>4.5.2</httpclient.version>
         <logback.version>1.2.3</logback.version>
         <session_timeout>45</session_timeout>
-        <app_name>doecode</app_name>
-        <gitlab_submit_email></gitlab_submit_email>
-        <gitlab_from_email></gitlab_from_email>
-        <smtpHost></smtpHost>
-        <gitlab_recaptcha_site_key></gitlab_recaptcha_site_key>
-        <gitlab_recaptcha_secret_key></gitlab_recaptcha_secret_key>
-        <google_analytics_id></google_analytics_id>
-        <google_analytics_domain></google_analytics_domain>
+        <app_name>${project.artifactId}</app_name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -42,24 +33,36 @@
         <profile>
             <id>profile-name</id>
             <properties>
-                <environment_url>URL to your tomcat server</environment_url>
-                <username>username of tomcat server</username>
-                <password>Password of your tomcat server</password>
-                <apiURL>https://www.osti.gov/doecodeapi/services/</apiURL>
-                <apiBackendURL>URL to either a local version of the DOE CODE API, or the https://www. version</apiBackendURL>
-                <siteURL>Your local url for your instance of this application</siteURL>
-                <authorityapiURL>https://www.osti.gov/elink/api/authorities/</authorityapiURL>
-                <app_name>name of app</app_name>
-                <smtpHost>SMTP host for email sending</smtpHost>
-                <gitlab_submit_email>email for gitlab submission</gitlab_submit_email>
-                <gitlab_from_email>Email that the gitlab submission is from</gitlab_from_email>
-                <gitlab_recaptcha_site_key>Key for your instance of captcha, should you use it</gitlab_recaptcha_site_key>
-                <gitlab_recaptcha_secret_key>Key for your instance of captcha, should you use it</gitlab_recaptcha_secret_key>
+             <environment_url>URL of the tomcat you are deploying the application to</environment_url>
+                <username>Username of the tomcat manager you deploy the application to</username>
+                <password>Password of the tomcat manager you deploy the application to</password>
+                <apiURL>The URL to the DOECODE API instance that you use</apiURL>
+                <apiBackendURL>The URL the java side of the application uses to call the DOE CODE API. </apiBackendURL>
+                (This separation is optional, and is mainly used for those that have the DOE CODE running locally and prefer to access it via localhost on the java side. 
+                If you don't have the api running on the same tomcat, make this value the same as your api_url)
+                <siteURL>The base url for the site</siteURL>
+                <authorityapiURL>The base URL for OSTI's Elink Authority API</authorityapiURL>
+                <app_name>The base name of the app. "doecode" by default</app_name>
+                The following fields are entirely optional
+                <smtpHost>The host used to send emails from the application</smtpHost>
+                <gitlab_submit_email>The email address gitlab submissions are sent to</gitlab_submit_email>
+                <gitlab_from_email>The email address gitlab submissions are from</gitlab_from_email>
+                <gitlab_recaptcha_site_key>The public key attached to recaptcha instances</gitlab_recaptcha_site_key>
+                <gitlab_recaptcha_secret_key>The private key attached to recaptcha submissions</gitlab_recaptcha_secret_key>
+                <google_analytics_id>The public ID used for google analytics submissions</google_analytics_id>
+                <google_analytics_domain>The domain used for google analytics. Needs to match the environment (If your url is "www.site.com", make sure this is "www.site.com" minus the ")</google_analytics_domain>
             </properties>
         </profile>
     -->
     <build>
         <finalName>${app_name}</finalName>
+        <resources>
+            <!--Copies to classes directory-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>com.samaxes.maven</groupId>
@@ -69,11 +72,11 @@
                     <!--Minify Javascript Files-->
                     <execution>
                         <id>minify-base</id>
-                        <phase>package</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <charset>UTF-8</charset>
-                            <webappSourceDir>${project.build.directory}/${project.build.finalName}</webappSourceDir>
-                            <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+                            <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
                             <jsSourceDir>js</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>doecode.js</jsSourceFile>
@@ -87,11 +90,11 @@
                     </execution>
                     <execution>
                         <id>minify-dissemination</id>
-                        <phase>package</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <charset>UTF-8</charset>
-                            <webappSourceDir>${project.build.directory}/${project.build.finalName}</webappSourceDir>
-                            <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+                            <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
                             <jsSourceDir>js</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>dissemination.js</jsSourceFile>
@@ -105,11 +108,11 @@
                     </execution>
                     <execution>
                         <id>minify-input</id>
-                        <phase>package</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <charset>UTF-8</charset>
-                            <webappSourceDir>${project.build.directory}/${project.build.finalName}</webappSourceDir>
-                            <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+                            <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
                             <jsSourceDir>js</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>input.js</jsSourceFile>
@@ -123,11 +126,11 @@
                     </execution>
                     <execution>
                         <id>minify-user</id>
-                        <phase>package</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <charset>UTF-8</charset>
-                            <webappSourceDir>${project.build.directory}/${project.build.finalName}</webappSourceDir>
-                            <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+                            <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
                             <jsSourceDir>js</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>user.js</jsSourceFile>
@@ -141,11 +144,11 @@
                     </execution>
                     <execution>
                         <id>minify-utils</id>
-                        <phase>package</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <charset>UTF-8</charset>
-                            <webappSourceDir>${project.build.directory}/${project.build.finalName}</webappSourceDir>
-                            <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+                            <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
                             <jsSourceDir>js/utils</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>utils.js</jsSourceFile>
@@ -159,11 +162,11 @@
                     </execution>
                     <execution>
                         <id>minify-other</id>
-                        <phase>package</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <charset>UTF-8</charset>
-                            <webappSourceDir>${project.build.directory}/${project.build.finalName}</webappSourceDir>
-                            <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+                            <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
                             <jsSourceDir>js</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>other.js</jsSourceFile>
@@ -178,17 +181,15 @@
                     <!--Minify Everything css files-->
                     <execution>
                         <id>minify-everything-css</id>
-                        <phase>package</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <charset>UTF-8</charset>
-                            <webappSourceDir>${project.build.directory}/${project.build.finalName}</webappSourceDir>
-                            <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+                            <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
                             <cssSourceDir>css</cssSourceDir>
                             <cssSourceFiles>
-                                <cssSourceFile>font-awesome-4.7.0/css/font-awesome.min.css</cssSourceFile>
                                 <cssSourceFile>purecss/purecss.min.css</cssSourceFile>
                                 <cssSourceFile>bootstrap-3.3.7-dist/css/bootstrap.min.css</cssSourceFile>                                                                                   
-                                <cssSourceFile>doecode-fonts.css</cssSourceFile>
                                 <cssSourceFile>doecode.css</cssSourceFile>
                                 <cssSourceFile>doecode-media-queries.css</cssSourceFile>
                             </cssSourceFiles>
@@ -199,91 +200,6 @@
                             <goal>minify</goal>
                         </goals>
                     </execution>
-                </executions>
-            </plugin>
-            <!--Replacer Plugin-->
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
-                <version>1.5.2</version>
-                <executions>
-                    <execution>
-                        <id>replace-url-content</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                        <configuration>
-                            <includes>
-                                <include>target/**/WEB-INF/web.xml</include>
-                                <include>target/**/utils/utils.js</include>
-                                <include>target/**/common-functions.js</include>
-                                <include>target/**/doecode-css.css</include>
-                                <include>target/**/font-awesome-min.css</include>
-                                <include>target/**/pure-css-min.css</include>
-                                <include>target/**/bootstrap-min.css</include>
-                                <include>target/**/doecode-min.css</include>
-                            </includes>
-                            <replacements>
-                                <replacement>
-                                    <token>@api.url@</token>
-                                    <value>${apiURL}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>@api.backend.url@</token>
-                                    <value>${apiBackendURL}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>@site.url@</token>
-                                    <value>${siteURL}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>@authorityapi.url@</token>
-                                    <value>${authorityapiURL}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>../fonts/fontawesome</token>
-                                    <value>/${app_name}/css/font-awesome-4.7.0/fonts/fontawesome</value>
-                                </replacement>
-                                <replacement>
-                                    <token>@session_timeout@</token>
-                                    <value>${session_timeout}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>@app_name@</token>
-                                    <value>${app_name}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>@gitlab_submit_email@</token>
-                                    <value>${gitlab_submit_email}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>@gitlab_from_email@</token>
-                                    <value>${gitlab_from_email}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>@smtpHost@</token>
-                                    <value>${smtpHost}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>@recaptcha_sitekey@</token>
-                                    <value>${gitlab_recaptcha_site_key}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>@recaptcha_secretkey@</token>
-                                    <value>${gitlab_recaptcha_secret_key}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>@google_analytics_id@</token>
-                                    <value>${google_analytics_id}</value>
-                                </replacement>
-                                <replacement>
-                                    <token>@google_analytics_domain@</token>
-                                    <value>${google_analytics_domain}</value>
-                                </replacement>
-                            </replacements>
-                        </configuration>
-                    </execution>     
                 </executions>
             </plugin>
             <plugin>
@@ -301,54 +217,38 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
-                
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
             </plugin>
             <!--Building Plugin-->
-            <plugin>                
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>                
-                <version>3.1.0</version>                
-                <executions>                    
-                    <execution>                        
-                        <id>prepare-war</id>                        
-                        <phase>package</phase>                        
-                        <goals>                            
-                            <goal>war</goal>                        
-                        </goals>                        
-                        <configuration>                            
-                            <useCache>true</useCache>                            
-                            <archiveClasses>true</archiveClasses>                    
-                        </configuration>                    
-                    </execution>                    
-                    <execution>                        
-                        <id>default-war</id>                        
-                        <phase>package</phase>                        
-                        <goals>                            
-                            <goal>war</goal>                        
-                        </goals>                        
-                        <configuration>                     
-                            <warSourceDirectory>${basedir}/web</warSourceDirectory>                            
-                            <webXml>${basedir}/web/WEB-INF/web.xml</webXml>           
-                            <webResources>
-                                <!--Copies the logging properties file into the /classes directory so logging works-->                              
-                                <resource>                                    
-                                    <directory>${basedir}/web/WEB-INF</directory>                                    
-                                    <targetPath>WEB-INF/classes</targetPath>
-                                    <excludes>                                        
-                                        <exclude>**/web.xml</exclude>
-                                        <exclude>**/templates/**</exclude>
-                                    </excludes> 
-                                    <includes>
-                                        <include>**/logback.xml</include>
-                                    </includes>                       
-                                </resource>                             
-                            </webResources>                   
-                        </configuration>                    
-                    </execution>    
-                </executions>            
+                <version>3.1.0</version>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>gif</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>bmp</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>jpg</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>png</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>otf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                    <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                    <webResources>
+                        <resource>
+                            <directory>${basedir}/src/main/webapp/</directory>
+                            <filtering>true</filtering>
+                        </resource>
+                    </webResources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -360,7 +260,7 @@
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
-        <!--Jackson and handlebars (templates)-->
+        <!--Templating-->
         <dependency>
             <groupId>com.github.jknack</groupId>
             <artifactId>handlebars</artifactId>
@@ -371,21 +271,11 @@
             <artifactId>handlebars-jackson2</artifactId>
             <version>${handlebars.version}</version>
         </dependency>
+        <!--Jackson Library for JSON-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <!-- Apache HTTP components for connector communication -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>${httpclient.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-dbcp2</artifactId>
-            <version>2.1.1</version>
+            <version>2.9.0</version>
         </dependency>
         <!--Apache Commons-->
         <dependency>
@@ -403,7 +293,12 @@
             <artifactId>commons-email</artifactId>
             <version>1.5</version>
         </dependency>
-        <!--Jsoup (for cleaning out script tags to prevent XSS attacks)-->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.11</version>
+        </dependency>
+        <!--Jsoup (for scrubbing out script tags to prevent XSS attacks)-->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>

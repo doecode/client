@@ -1,17 +1,18 @@
 /*Values acquired from replacer plugin in the pom*/
-const API_BASE = "@api.url@";//The url to the DOE CODE API
-const AUTHORITY_API_BASE = "@authorityapi.url@"; //The url to the OSTI Elink Authority API
-const SESSION_TIMEOUT = parseInt("@session_timeout@"); //Amount of time until session expires (in minutes)
-const APP_NAME = '@app_name@'; //Name of application. doecode by default, but can be changed if paralell deployments on the same tomcat are needed
-const GOOGLE_ANALYTICS_ID = "@google_analytics_id@";//ID used for google analytics tracking
-const GOOGLE_ANALYTICS_DOMAIN = "@google_analytics_domain@";//Domain used for google analytics tracking
+const API_BASE = $("#api-url").val();//The url to the DOE CODE API
+const AUTHORITY_API_BASE = $("#authority-api-base").val(); //The url to the OSTI Elink Authority API
+const SESSION_TIMEOUT = parseInt($("#session-timeout").val()); //Amount of time until session expires (in minutes)
+const APP_NAME = $("#app-name").val(); //Name of application. doecode by default, but can be changed if paralell deployments on the same tomcat are needed
+const GOOGLE_ANALYTICS_ID = $("#google-analytics-id").val();//ID used for google analytics tracking
+const GOOGLE_ANALYTICS_DOMAIN = $("#google-analytics-domain").val();//Domain used for google analytics tracking
 
 /*Normal static values*/
 const LOGIN_EXPIRATION_DATE_FORMAT = "YYYY-MM-DD HH:mm";//Date format used to for the moment object that determines if you've been inactive for 45 minutes or not
 const ERROR_CONDITION = 'error'; //Used to indicate that a field needs to be marked as erroneous 
 const SUCCESS_CONDITION = 'success';//Used to indicate that a field needs to be marked as successful
 const BLANK_CONDITION = 'blank';//Used to indicate that a field needs to be marked as blank, because it's neither successful or erroneous
-var NON_CHARACTER_KEYCODES = [13, /*enter*/
+var NON_CHARACTER_KEYCODES = [
+    13, /*enter*/
     38, /*up arrow*/
     40, /*down arrow*/
     39, /*right arrow*/
