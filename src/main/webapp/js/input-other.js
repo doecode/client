@@ -275,7 +275,7 @@ if (document.getElementById('confirmation-page-identifier')) {
         contentType: "application/json; charset=UTF-8",
         method: "GET",
         beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         success: function (data) {
             var new_data = [];
@@ -305,7 +305,7 @@ if (document.getElementById('confirmation-page-identifier')) {
         contentType: "application/json",
         method: "GET",
         beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         success: function (data) {
             var new_data = [];

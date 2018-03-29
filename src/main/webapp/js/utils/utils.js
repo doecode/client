@@ -62,7 +62,7 @@ function doAuthenticatedMultipartRequest(url, formData, successCallback, errorCa
         contentType: false,
         method: 'POST',
         beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         dataType: 'json',
         data: formData,
@@ -86,7 +86,7 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
         cache: false,
         method: methodType,
         beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         dataType: 'json',
         data: JSON.stringify(data),
@@ -106,7 +106,7 @@ function doAuthenicatedFileDownloadAjax(url, successCallback, errorCallback) {
         cache: false,
         method: 'GET',
         beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         success: function success(data) {
             handleAuthenticatedSuccess(data, successCallback);
@@ -119,7 +119,9 @@ function doAuthenicatedFileDownloadAjax(url, successCallback, errorCallback) {
 
 function checkIsAuthenticated() {
     var successCallback = function successCallback() {
-        localStorage.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
+        var user_data = JSON.parse(localStorage.user_data);
+        user_data.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
+        localStorage.user_data = JSON.stringify(user_data);
     };
 
     $.ajax({
@@ -127,7 +129,7 @@ function checkIsAuthenticated() {
         cache: false,
         method: 'GET',
         beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         success: successCallback,
         error: handleAuthenticatedError
@@ -135,16 +137,17 @@ function checkIsAuthenticated() {
 }
 
 function checkHasRole(role) {
-
     $.ajax({
         url: API_BASE + 'user/hasrole/' + role,
         cache: false,
         method: 'GET',
         beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         success: function success() {
-            localStorage.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
+            var user_data = JSON.parse(localStorage.user_data);
+            user_data.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
+            localStorage.user_data = JSON.stringify(user_data);
         },
         error: function error(jqXhr, exception) {
             handleAuthenticatedError(jqXhr, exception);
@@ -153,7 +156,9 @@ function checkHasRole(role) {
 }
 
 function handleAuthenticatedSuccess(data, callback) {
-    localStorage.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
+    var user_data = JSON.parse(localStorage.user_data);
+    user_data.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
+    localStorage.user_data = JSON.stringify(user_data);
     callback(data);
 }
 
@@ -172,135 +177,27 @@ function handleAuthenticatedError(jqXhr, exception, callback) {
 }
 
 function clearLoginLocalstorage() {
-    localStorage.xsrfToken = "";
-    localStorage.user_email = "";
-    localStorage.first_name = "";
-    localStorage.last_name = "";
-    localStorage.token_expiration = "";
-    localStorage.roles = "";
-    localStorage.user_site = "";
-    localStorage.pending_roles = "";
+    localStorage.user_data = "";
 }
 
 function setLoggedInAttributes(data) {
-    localStorage.xsrfToken = data.xsrfToken;
-    localStorage.user_email = data.email;
-    localStorage.first_name = data.first_name;
-    localStorage.last_name = data.last_name;
-    localStorage.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
-    localStorage.roles = JSON.stringify(data.roles);
-    localStorage.user_site = data.site;
-    localStorage.pending_roles = JSON.stringify(data.pending_roles);
+    var user_data = {};
+
+    user_data.xsrfToken = data.xsrfToken;
+    user_data.user_email = data.email;
+    user_data.first_name = data.first_name;
+    user_data.last_name = data.last_name;
+    user_data.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
+    user_data.roles = JSON.stringify(data.roles);
+    user_data.user_site = data.site;
+    user_data.pending_roles = JSON.stringify(data.pending_roles);
+
+    localStorage.user_data = JSON.stringify(user_data);
 }
 
-function resetLoggedInAttributesUserData(data) {
-    localStorage.first_name = data.first_name;
-    localStorage.last_name = data.last_name;
-}
-
-function appendQueryString(url) {
-    var ampOrQuestion = "?";
-    if (url.indexOf('?') > 0)
-        ampOrQuestion = "&";
-
-    var queryString = window.location.search.slice(1);
-    if (queryString)
-        return url + ampOrQuestion + window.location.search.slice(1);
-    else
-        return url;
-}
-
-function getQueryParam(paramName) {
-    var query = window.location.search.substring(1);
-    var vars = query.split("&");
-    for (var i = 0; i < vars.length; i++) {
-        var pair = vars[i].split("=");
-        if (pair[0].toLowerCase() === paramName.toLowerCase()) {
-            return pair[1];
-        }
-    }
-
-    return false;
-}
-
-function getChildData(type) {
-    if (type === 'developers') {
-        return new Developer();
-    } else if (type === 'contributors') {
-        return new Contributor();
-    } else if (type === 'sponsoring_organizations') {
-        return new SponsoringOrganization();
-    } else if (type === 'contributing_organizations') {
-        return new ContributingOrganization();
-    } else if (type === 'research_organizations') {
-        return new ResearchOrganization();
-    } else if (type === 'related_identifiers') {
-        return new RelatedIdentifier();
-    }
-}
-
-/*Sees whether or not the arrays contain the same content, regardless of order*/
-function doArraysContainSame(array1, array2) {
-    var containsSame = true;
-    if (array1.length == array2.length) {
-        array1.forEach(function (item) {
-            if (array2.indexOf(item) < 0) {
-                containsSame = false;
-                return false;
-            }
-        });
-    } else {
-        containsSame = false;
-    }
-    return containsSame;
-}
-
-function getIsLoggedIn() {
-    return localStorage.token_expiration != "" && moment(localStorage.token_expiration, LOGIN_EXPIRATION_DATE_FORMAT).isAfter(moment());
-}
-
-function combineName(first, middle, last) {
-    var fullName = last ? last : "";
-    fullName += (fullName && first ? ", " : "") + (first ? first : "");
-    fullName += (fullName && middle ? " " : "") + (middle ? middle.substr(0, 1) + "." : "");
-
-    return fullName;
-}
-
-function itemListToNameArray(itemList) {
-    var listArr = [];
-    itemList.forEach(function (item) {
-        var fullName = combineName(item.first_name, item.middle_name, item.last_name);
-
-        if (fullName)
-            listArr.push(fullName);
-    });
-
-    return listArr;
-}
-
-function combineAuthorLists(list1, list2) {
-    var list1Arr = itemListToNameArray(list1);
-    var list2Arr = itemListToNameArray(list2);
-
-    return list1Arr.concat(list2Arr);
-}
-
-function joinWithDelimiters(list, delimiter, lastDelimiter) {
-    var result = "";
-    var listEnd = "";
-
-    if (lastDelimiter && list.length > 1)
-        listEnd = list.pop();
-
-    result = list.join(delimiter);
-
-    if (listEnd)
-        result += lastDelimiter + listEnd;
-
-    return result;
-}
-
+/****************************/
+/****CHOSEN JS OVERRIDES*****/
+/****************************/
 var modifyChosenSelectForCustomEntryTabKey = function (event) {
     if (event.which === 9) {
         //The default behavior is to just close the box and do nothing, so we'll need to override it
@@ -470,7 +367,9 @@ $(".doecode-chosen-select").each(function () {
         });
     }
 });
-
+/****************************/
+/****CHOSEN JS OVERRIDES*****/
+/****************************/
 
 /*Generically handles the toggling of a given collapsible in bootstrap. This is here so you can toggle without the need for ID's*/
 var toggleCollapse = function (event) {

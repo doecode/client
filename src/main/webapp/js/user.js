@@ -411,7 +411,7 @@ var saveUserAccountChanges = function () {
             method: "POST",
             data: JSON.stringify(name_post_data),
             beforeSend: function beforeSend(request) {
-                request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+                request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
             },
             success: function (data) {
                 if (save_password_changes) {
@@ -439,7 +439,7 @@ var savePasswordChanges = function (post_data, update_login_status_name, login_n
         method: "POST",
         data: JSON.stringify(post_data),
         beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         success: function (data) {
             if (update_login_status_name) {
@@ -483,7 +483,7 @@ var generateNewAPIKey = function () {
         contentType: "application/json",
         method: "GET",
         beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         success: function (data) {
             $("#new-api-key").html("New API Key<br/>" + data.apiKey);
@@ -501,10 +501,10 @@ var requestAdminRole = function () {
         contentType: "application/json",
         method: "GET",
         beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         success: function (data) {
-            var post_data = {pending_roles: [localStorage.user_site]};
+            var post_data = {pending_roles: [JSON.parse(localStorage.user_data).user_site]};
             //We have to update the back-end
             $.ajax({
                 url: '/' + APP_NAME + '/update-login-status-name',
@@ -647,7 +647,7 @@ var saveUserAdminForm = function () {
             contentType: "application/json",
             method: "POST",
             beforeSend: function beforeSend(request) {
-                request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+                request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
             },
             data: JSON.stringify(post_data),
             success: function (data) {
@@ -655,7 +655,7 @@ var saveUserAdminForm = function () {
                 $("#user-admin-input-form-container").hide();
                 //If this user is the one currently logged in, we have to update their content
                 //We have to update the back-end
-                if (new_user_data.email == localStorage.user_email) {
+                if (new_user_data.email == JSON.parse(localStorage.user_data).user_email) {
                     $.ajax({
                         url: '/' + APP_NAME + '/update-login-status-name',
                         cache: false,
@@ -847,7 +847,7 @@ if (document.getElementById('login-page-identifier')) {
         contentType: "application/json",
         method: "GET",
         beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", localStorage.xsrfToken);
+            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         success: function (data) {
             //Go through the users list, and populate the select with the values
