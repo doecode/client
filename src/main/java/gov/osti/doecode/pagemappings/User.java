@@ -29,7 +29,7 @@ public class User extends HttpServlet {
 
           boolean is_logged_in = UserFunctions.isUserLoggedIn(request);
 
-          if (StringUtils.equals(request.getContentType(), "application/json")) {
+          if (StringUtils.containsIgnoreCase(request.getContentType(), "application/json")) {
                ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
                ObjectNode request_data = JsonObjectUtils.parseObjectNode(request.getReader());
                boolean add_signin_html = false;

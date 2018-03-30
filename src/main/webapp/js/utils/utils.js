@@ -23,7 +23,7 @@ var NON_CHARACTER_KEYCODES = [
     16, /*shift*/
     9 /*tab*/];
 
-function doAjax(methodType, url, successCallback, data, errorCallback, dataType) {
+function doAjax(methodType, url, successCallback, data, errorCallback, dataType, contentType) {
     var errorCall = errorCallback;
     if (errorCall === undefined) {
         errorCall = function errorCall(jqXhr, exception) {
@@ -35,13 +35,18 @@ function doAjax(methodType, url, successCallback, data, errorCallback, dataType)
         dataType = "json";
     }
 
+    if(contentType===undefined){
+        contentType =  "application/json";
+        
+    }
+
     $.ajax({
         url: url,
         cache: false,
         method: methodType,
         dataType: dataType,
         data: JSON.stringify(data),
-        contentType: "application/json; charset=utf-8",
+        contentType: "application/json; charset=UTF-8",
         success: successCallback,
         error: errorCall
     });
@@ -89,6 +94,7 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
             request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         dataType: 'json',
+        contentType: "application/json",
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
         success: function success(data) {

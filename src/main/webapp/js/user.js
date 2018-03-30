@@ -3,6 +3,41 @@ const FAILED_TO_LOGIN_WITH_PASSCODE = {title: 'Failed to Sign In', show_loader: 
     message_type: MESSAGE_TYPE_ERROR, content: '<br/>Passcode login failed<br/>Page will redirect in 1 second',
     contentClasses: ['center-text'], showClose: true};
 
+var parseNameStatusData = function (return_data) {
+    if (return_data.requested_url) {
+        window.location.href = return_data.requested_url;
+    } else if (window.sessionStorage.lastLocation && window.sessionStorage.lastLocation.length > 0) {
+        window.location.href = window.sessionStorage.lastLocation;
+    } else {
+        window.location.href = '/' + APP_NAME + '/projects';
+    }
+};
+
+var parseLoginData = function (data) {
+    //Now that we're logged in, let's set some local storage attributes
+    setLoggedInAttributes(data);
+    //Send up our login data for java to do content with
+    doAjax('POST', '/' + APP_NAME + '/set-login-status-name', parseNameStatusData, data);
+};
+
+var parseLoginError = function (xhr) {
+    $("#redirect-errors-container").hide();
+
+    var error_msg = "";
+
+    if (xhr.responseJSON) {
+        var response = xhr.responseJSON;
+        error_msg = (response.status === 401 && response.errors && response.errors.length > 0 && response.errors[0] == 'Password is expired.')
+                ? 'Your password has expired. Please go to the <a href="/' + APP_NAME + '/forgot-password">password reset page</a> to reset your password.'
+                : "Invalid Username/Password. If you believe this to be in error, please contact&nbsp;<a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>&nbsp;for further information."
+    } else {
+        error_msg = "An error has occurred, and the DOE CODE API couldn't be reached.";
+    }
+
+    $("#login-errors").html(error_msg);
+    $("#login-errors-container").show();
+};
+
 var login = function () {
     //Remove errors, if they're even showing up 
     $("#login-email-container").removeClass('has-error');
@@ -30,50 +65,7 @@ var login = function () {
     }
 
     if (try_login === true) {
-        $.ajax(API_BASE + "user/login", {
-            cache: false,
-            contentType: "application/json",
-            method: "POST",
-            data: JSON.stringify(post_data),
-            success: function (data) {
-                //Now that we're logged in, let's set some local storage attributes
-                setLoggedInAttributes(data);
-                //Send up our login data for java to do content with
-                $.ajax('/' + APP_NAME + '/set-login-status-name', {
-                    cache: false,
-                    contentType: "application/json",
-                    method: "POST",
-                    data: JSON.stringify(data),
-                    success: function (return_data) {
-                        if (return_data.requested_url) {
-                            window.location.href = return_data.requested_url;
-                        } else if (window.sessionStorage.lastLocation && window.sessionStorage.lastLocation.length > 0) {
-                            window.location.href = window.sessionStorage.lastLocation;
-                        } else {
-                            window.location.href = '/' + APP_NAME + '/projects';
-                        }
-
-                    }
-                });
-            },
-            error: function (xhr) {
-                $("#redirect-errors-container").hide();
-
-                var error_msg = "";
-
-                if (xhr.responseJSON) {
-                    var response = xhr.responseJSON;
-                    error_msg = (response.status === 401 && response.errors && response.errors.length > 0 && response.errors[0] == 'Password is expired.')
-                            ? 'Your password has expired. Please go to the <a href="/' + APP_NAME + '/forgot-password">password reset page</a> to reset your password.'
-                            : "Invalid Username/Password. If you believe this to be in error, please contact&nbsp;<a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>&nbsp;for further information."
-                } else {
-                    error_msg = "An error has occurred, and the DOE CODE API couldn't be reached.";
-                }
-
-                $("#login-errors").html(error_msg);
-                $("#login-errors-container").show();
-            }
-        });
+        doAjax('POST', API_BASE + 'user/login', parseLoginData, post_data, parseLoginError);
     } else {
         $("#login-errors").html(error_messages);
         $("#login-errors-container").show();
@@ -298,6 +290,34 @@ var doContractNumberValidationCheck = function () {
     }
 };
 
+var parseRegisterData = function (data) {
+    $("#create-account-container").hide();
+    $("#successful-signup-container").show();
+};
+
+var parseRegisterError = function (xhr) {
+    var error_text = "";
+    var responseText = JSON.parse(xhr.responseText);
+    var errorMessages = [];
+
+    if (xhr.status == 400) {
+        errorMessages = responseText.errors;
+        //If this message shows up, we do something special
+        if (errorMessages.indexOf('An account with this email address already exists.') > -1) {
+            $("#forgot-password-reminder-text").show();
+        }
+        //check for contract error
+    } else {
+        errorMessages.push("A server error has occurred that is preventing registration from functioning properly.");
+    }
+
+    //Put all of the errors into a string, and show them
+    errorMessages.forEach(function (item) {
+        error_text += (item + "<br/>");
+    });
+    $("#signup-errors").html(error_text);
+};
+
 var createAccount = function () {
     var user_data = {
         first_name: $("#first-name").val(),
@@ -309,38 +329,21 @@ var createAccount = function () {
     };
     $("#forgot-password-reminder-text").hide();
 
-    $.ajax(API_BASE + "user/register", {
-        cache: false,
-        contentType: "application/json",
-        method: "POST",
-        data: JSON.stringify(user_data),
-        success: function (data) {
-            $("#create-account-container").hide();
-            $("#successful-signup-container").show();
-        },
-        error: function (xhr) {
-            var error_text = "";
-            var responseText = JSON.parse(xhr.responseText);
-            var errorMessages = [];
+    doAjax('POST', API_BASE + 'user/register', parseRegisterData, user_data, parseRegisterError);
+};
 
-            if (xhr.status == 400) {
-                errorMessages = responseText.errors;
-                //If this message shows up, we do something special
-                if (errorMessages.indexOf('An account with this email address already exists.') > -1) {
-                    $("#forgot-password-reminder-text").show();
-                }
-                //check for contract error
-            } else {
-                errorMessages.push("A server error has occurred that is preventing registration from functioning properly.");
-            }
+var parseForgotPasswordData = function (data) {
+    $("#forgot-password-container").hide();
+    $("#forgot-password-confirmation-container").show();
+};
 
-            //Put all of the errors into a string, and show them
-            errorMessages.forEach(function (item) {
-                error_text += (item + "<br/>");
-            });
-            $("#signup-errors").html(error_text);
-        }
-    });
+var parseForgotPasswordError = function (xhr) {
+    if (xhr.status === 400) {
+        $("#forgot-password-container").hide();
+        $("#forgot-password-confirmation-container").show();
+    } else {
+        $("#forgot-password-error").html('An error has occurred, preventing your request from being processed.');
+    }
 };
 
 var sendForgotPasswordRequest = function () {
@@ -350,28 +353,14 @@ var sendForgotPasswordRequest = function () {
     };
 
     if (post_data.email) {
-        $.ajax({
-            url: API_BASE + 'user/forgotpassword',
-            cache: false,
-            contentType: "application/json",
-            method: "POST",
-            data: JSON.stringify(post_data),
-            success: function (data) {
-                $("#forgot-password-container").hide();
-                $("#forgot-password-confirmation-container").show();
-            },
-            error: function (xhr) {
-                if (xhr.status === 400) {
-                    $("#forgot-password-container").hide();
-                    $("#forgot-password-confirmation-container").show();
-                } else {
-                    $("#forgot-password-error").html('An error has occurred, preventing your request from being processed.');
-                }
-            }
-        });
+        doAjax('POST', API_BASE + 'user/forgotpassword', parseForgotPasswordData, post_data, parseForgotPasswordError);
     } else {
         $("#forgot-password-error").html('Please enter an email adddress');
     }
+};
+
+var parseAccountUpdateError = function (xhr) {
+    $("#account-error-message").html('An error has occurred, preventing your first/last name changes from saving.');
 };
 
 var saveUserAccountChanges = function () {
@@ -404,126 +393,85 @@ var saveUserAccountChanges = function () {
 
     //Save changes
     if (save_name_changes) {
-        $.ajax({
-            url: API_BASE + 'user/update',
-            cache: false,
-            contentType: "application/json",
-            method: "POST",
-            data: JSON.stringify(name_post_data),
-            beforeSend: function beforeSend(request) {
-                request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
-            },
-            success: function (data) {
-                if (save_password_changes) {
-                    savePasswordChanges(password_post_data, true, data);
-                } else {
-                    updateLoginNameStatus(data);
-                }
-            },
-            error: function (xhr) {
-                $("#account-error-message").html('An error has occurred, preventing your first/last name changes from saving.');
+        doAuthenticatedAjax('POST', API_BASE + 'user/update', function (data) {
+            if (save_password_changes) {
+                savePasswordChanges(password_post_data, true, data);
+            } else {
+                updateLoginNameStatus(data);
             }
-        });
+        }, name_post_data, parseAccountUpdateError);
+
     } else if (save_password_changes) {
         savePasswordChanges(password_post_data, false);
+
     } else {
         $("#account-error-message").html('No changes were made');
     }
 };
 
 var savePasswordChanges = function (post_data, update_login_status_name, login_name_status_data) {
-    $.ajax({
-        url: API_BASE + 'user/changepassword',
-        cache: false,
-        contentType: "application/json",
-        method: "POST",
-        data: JSON.stringify(post_data),
-        beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
-        },
-        success: function (data) {
-            if (update_login_status_name) {
-                updateLoginNameStatus(login_name_status_data);
-            } else {
-                $("#user-account-success-message").html('Changes saved successfully. Your page will reload in 3 seconds');
-                setTimeout(function () {
-                    window.location.href = '/' + APP_NAME + '/account';
-                }, 3000);
-            }
-        },
-        error: function (xhr) {
-            $("#account-error-message").html('Error in updating password: Password is not acceptable.');
-        }
-    });
-};
-
-var updateLoginNameStatus = function (post_data) {
-    $.ajax({
-        url: '/' + APP_NAME + '/update-login-status-name',
-        cache: false,
-        contentType: "application/json",
-        method: "POST",
-        data: JSON.stringify(post_data),
-        success: function (data) {
+    doAuthenticatedAjax('POST', API_BASE + 'user/changepassword', function (data) {
+        if (update_login_status_name) {
+            updateLoginNameStatus(login_name_status_data);
+        } else {
             $("#user-account-success-message").html('Changes saved successfully. Your page will reload in 3 seconds');
             setTimeout(function () {
                 window.location.href = '/' + APP_NAME + '/account';
             }, 3000);
-        },
-        error: function (xhr) {
-            $("#account-error-message").html('An error has occurred in updating your first/last name');
         }
-    });
+    }, post_data,
+            function (xhr) {
+                $("#account-error-message").html('Error in updating password: Password is not acceptable.');
+            });
+
+};
+
+var parseUpdateLoginNameStatusData = function (data) {
+    $("#user-account-success-message").html('Changes saved successfully. Your page will reload in 3 seconds');
+    setTimeout(function () {
+        window.location.href = '/' + APP_NAME + '/account';
+    }, 3000);
+};
+
+var parseUpdateLoginNameStatusError = function (xhr) {
+    $("#account-error-message").html('An error has occurred in updating your first/last name');
+};
+
+var updateLoginNameStatus = function (post_data, successcallback, failcallback) {
+    var successCall = (successcallback === undefined) ? parseUpdateLoginNameStatusData : successcallback;
+    var failcall = (failcallback === undefined) ? parseUpdateLoginNameStatusError : failcallback;
+    
+    doAjax('POST', '/' + APP_NAME + '/update-login-status-name', successCall, post_data, failcall);
+};
+
+var parseNewAPIKeyData = function (data) {
+    $("#new-api-key").html("New API Key<br/>" + data.apiKey);
+};
+
+var parseNewAPIKeyError = function (xhr) {
+    $("#new-api-key-error-message").html('An error has occurred, preventing your new api key from being generated');
 };
 
 var generateNewAPIKey = function () {
-    $.ajax({
-        url: API_BASE + 'user/newapikey',
-        cache: false,
-        contentType: "application/json",
-        method: "GET",
-        beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
-        },
-        success: function (data) {
-            $("#new-api-key").html("New API Key<br/>" + data.apiKey);
-        },
-        error: function () {
-            $("#new-api-key-error-message").html('An error has occurred, preventing your new api key from being generated');
-        }
+    doAuthenticatedAjax('GET', API_BASE + 'user/newapikey', parseNewAPIKeyData, null, parseNewAPIKeyError);
+};
+
+var parseRequestAdminData = function (data) {
+    var post_data = {pending_roles: [JSON.parse(localStorage.user_data).user_site]};
+    updateLoginNameStatus(post_data, function (data) {
+        $("#request-admin-role-message").html('Administrative role successfully requested');
+    }, function (xhr) {
+        $("#request-admin-role-errors").html('An error has occurred in updating your profile. You may need to log out for all changes to take effect');
     });
+
+};
+
+var parseRequestAdminError = function (xhr) {
+    $("#request-admin-role-errors").html('Error in requesting administration role');
 };
 
 var requestAdminRole = function () {
-    $.ajax({
-        url: API_BASE + 'user/requestadmin',
-        cache: false,
-        contentType: "application/json",
-        method: "GET",
-        beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
-        },
-        success: function (data) {
-            var post_data = {pending_roles: [JSON.parse(localStorage.user_data).user_site]};
-            //We have to update the back-end
-            $.ajax({
-                url: '/' + APP_NAME + '/update-login-status-name',
-                cache: false,
-                contentType: "application/json",
-                method: "POST",
-                data: JSON.stringify(post_data),
-                success: function (data) {
-                    $("#request-admin-role-message").html('Administrative role successfully requested');
-                },
-                error: function (xhr) {
-                    $("#request-admin-role-errors").html('An error has occurred in updating your profile. You may need to log out for all changes to take effect');
-                }
-            });
-        },
-        error: function () {
-            $("#request-admin-role-errors").html('Error in updating ');
-        }
-    });
+    doAuthenticatedAjax('GET', API_BASE + 'user/requestadmin', parseRequestAdminData, null, parseRequestAdminError);
 };
 var clearAdminForm = function () {
     $("#email").val('');
@@ -656,20 +604,13 @@ var saveUserAdminForm = function () {
                 //If this user is the one currently logged in, we have to update their content
                 //We have to update the back-end
                 if (new_user_data.email == JSON.parse(localStorage.user_data).user_email) {
-                    $.ajax({
-                        url: '/' + APP_NAME + '/update-login-status-name',
-                        cache: false,
-                        contentType: "application/json",
-                        method: "POST",
-                        data: JSON.stringify(post_data),
-                        success: function (data) {
-                            window.scrollTo(0, 0);
-                            $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh in 3 seconds');
-                            setTimeout(function () {
-                                window.location.href = '/' + APP_NAME + '/user-admin';
-                            }, 3000);
-                        }
-                    });
+                    updateLoginNameStatus(post_data, function (data) {
+                        window.scrollTo(0, 0);
+                        $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh in 3 seconds');
+                        setTimeout(function () {
+                            window.location.href = '/' + APP_NAME + '/user-admin';
+                        }, 3000);
+                    }, function () {});
                 } else {
                     window.scrollTo(0, 0);
                     $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh in 3 seconds');
@@ -716,6 +657,40 @@ var validateUserPagePasswordField = function (event) {
         validation_status = SUCCESS_CONDITION;
     }
     markUserFieldWithStatus(validation_status, this);
+};
+
+var parseGetUserListData = function (data) {
+    //Go through the users list, and populate the select with the values
+    var pending_roles_list = [];
+    data.forEach(function (item) {
+        var role = (item.roles.length > 0) ? item.roles[0] : '';//Since we only have a one-role system at the moment, we're just going to grab the first role from the list, because that's all there will be
+        //Because data attributes
+        //Comes out like <option value="email@email.com" data-firstname="john" data-lastname="doe" data-awardnum="3135" data-role="BAPL" data-isactive="true" data-isverified="false" data-pendingroles='SITE1,SITE2,SITE3'>John DOE (email@email.com)</option>
+        var user_option = '<option value="' + item.email + '" data-firstname="' + item.first_name + '" data-lastname="'
+                + item.last_name + '" data-awardnum="' + item.contract_number + '" data-role="' + role + '" data-isactive="'
+                + item.active + '" data-isverified="' + item.verified + '" data-ispassexpired="'
+                + item.password_expired + '" data-pendingroles="' + item.pending_roles.join(',') + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
+        $("#user-admin-box").append(user_option);
+        if (item.pending_roles.length > 0) {
+            pending_roles_list.push(
+                    {name: item.first_name + ' ' + item.last_name, roles: item.pending_roles.join(',')});
+        }
+    });
+    //If we have pending roles, we'll add them to the container
+    if (pending_roles_list.length > 0) {
+        var pending_roles_html = "";
+        pending_roles_list.forEach(function (item) {
+            pending_roles_html += ("<div>" + item.name + " - " + item.roles + "</div>");
+        });
+        //Set the html to show the things
+        $("#requesting-roles-collapse-container").html(pending_roles_html);
+        //Show the container
+        $("#requesting-roles-container").show();
+    }
+};
+
+var parseGetUserListError = function (xhr) {
+    $("#approval-error-msg").html('An error has occurred, preventing the users from loading.');
 };
 
 var setUpUserAccountPage = function () {
@@ -811,19 +786,14 @@ if (document.getElementById('login-page-identifier')) {
                 //Now that we're logged in, let's set some local storage attributes
                 setLoggedInAttributes(data);
                 //Send up our login data for java to do content with
-                $.ajax('/' + APP_NAME + '/set-login-status-name', {
-                    cache: false,
-                    contentType: "application/json",
-                    method: "POST",
-                    data: JSON.stringify(data),
-                    success: function (return_data) {
-                        $("#signin-status-big-screens,#signin-status-small-screens").html(return_data.signin_html);
-                        $("#email").val(return_data.email);
-                        $("#first_name").val(return_data.first_name);
-                        $("#last_name").val(return_data.last_name);
-                        setUpUserAccountPage();
-                    }
-                });
+                updateLoginNameStatus(data, function (return_data) {
+                    $("#signin-status-big-screens,#signin-status-small-screens").html(return_data.signin_html);
+                    $("#email").val(return_data.email);
+                    $("#first_name").val(return_data.first_name);
+                    $("#last_name").val(return_data.last_name);
+                    setUpUserAccountPage();
+                }, function () {});
+
             },
             error: function (xhr) {
                 setCommonModalMessage(FAILED_TO_LOGIN_WITH_PASSCODE);
@@ -839,49 +809,8 @@ if (document.getElementById('login-page-identifier')) {
 } else if (document.getElementById('user-admin-page-identifier')) {
     checkHasRole('OSTI');
     checkIsAuthenticated();
+    doAuthenticatedAjax('GET', API_BASE + 'user/users', parseGetUserListData, null, parseGetUserListError);
 
-    //Now, we get the user list
-    $.ajax({
-        url: API_BASE + 'user/users',
-        cache: false,
-        contentType: "application/json",
-        method: "GET",
-        beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
-        },
-        success: function (data) {
-            //Go through the users list, and populate the select with the values
-            var pending_roles_list = [];
-            data.forEach(function (item) {
-                var role = (item.roles.length > 0) ? item.roles[0] : '';//Since we only have a one-role system at the moment, we're just going to grab the first role from the list, because that's all there will be
-                //Because data attributes
-                //Comes out like <option value="email@email.com" data-firstname="john" data-lastname="doe" data-awardnum="3135" data-role="BAPL" data-isactive="true" data-isverified="false" data-pendingroles='SITE1,SITE2,SITE3'>John DOE (email@email.com)</option>
-                var user_option = '<option value="' + item.email + '" data-firstname="' + item.first_name + '" data-lastname="'
-                        + item.last_name + '" data-awardnum="' + item.contract_number + '" data-role="' + role + '" data-isactive="'
-                        + item.active + '" data-isverified="' + item.verified + '" data-ispassexpired="'
-                        + item.password_expired + '" data-pendingroles="' + item.pending_roles.join(',') + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
-                $("#user-admin-box").append(user_option);
-                if (item.pending_roles.length > 0) {
-                    pending_roles_list.push(
-                            {name: item.first_name + ' ' + item.last_name, roles: item.pending_roles.join(',')});
-                }
-            });
-            //If we have pending roles, we'll add them to the container
-            if (pending_roles_list.length > 0) {
-                var pending_roles_html = "";
-                pending_roles_list.forEach(function (item) {
-                    pending_roles_html += ("<div>" + item.name + " - " + item.roles + "</div>");
-                });
-                //Set the html to show the things
-                $("#requesting-roles-collapse-container").html(pending_roles_html);
-                //Show the container
-                $("#requesting-roles-container").show();
-            }
-        },
-        error: function () {
-            $("#approval-error-msg").html('An error has occurred, preventing the users from loading.');
-        }
-    });
 
     //Makes teh "Users Requesting Roles" work
     $("#requesting-roles-collapse-btn").on('click',
