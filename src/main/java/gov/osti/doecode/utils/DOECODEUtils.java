@@ -3,11 +3,13 @@ package gov.osti.doecode.utils;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DOECODEUtils {
+     
+     //public static final DateTimeFormatter MONTH_DAY_YEAR_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm:ss");
+     public static final DateTimeFormatter MONTH_DAY_YEAR_TIME_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
 
      private final static Logger log = LoggerFactory.getLogger(DOECODEUtils.class.getName());
 

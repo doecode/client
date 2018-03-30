@@ -2,8 +2,10 @@ package gov.osti.doecode.pagemappings;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import gov.osti.doecode.entity.DOECODEJson;
 import gov.osti.doecode.entity.InputFunctions;
 import gov.osti.doecode.entity.UserFunctions;
+import gov.osti.doecode.listeners.DOECODEServletContextListener;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import gov.osti.doecode.utils.TemplateUtils;
@@ -157,7 +159,7 @@ public class Input extends HttpServlet {
                //Get some json for the page
                ArrayNode availabilityList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
                try {
-                    availabilityList = Init.availabilities_list;
+                    availabilityList = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
                     output_data.put("availabilities_list_json", availabilityList.toString());
                } catch (Exception e) {
                }

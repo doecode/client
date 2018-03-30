@@ -3,6 +3,7 @@ package gov.osti.doecode.entity;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import gov.osti.doecode.listeners.DOECODEServletContextListener;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonObjectUtils;
@@ -37,7 +38,7 @@ public class SearchFunctions {
      public static final DateTimeFormatter MLA_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM. yyyy.");
      public static final DateTimeFormatter SEARCH_RESULTS_DESCRIPTION_FORMAT = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 
-     public static ObjectNode conductSearch(HttpServletRequest request, ServletContext context, long page_num){
+     public static ObjectNode conductSearch(HttpServletRequest request, ServletContext context, long page_num) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
 
           //Go and actually search
@@ -54,7 +55,7 @@ public class SearchFunctions {
           return return_data;
      }
 
-     private static ObjectNode doSearchPost(HttpServletRequest request, String api_url){
+     private static ObjectNode doSearchPost(HttpServletRequest request, String api_url) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           boolean had_error = false;
           boolean invalid_search_data = false;
@@ -146,9 +147,9 @@ public class SearchFunctions {
           return_data.put("pagination_btn", getPaginationData(search_form_data, num_found));
           return_data.put("breadcrumbTrailItem", getSearchBreadcrumbTrailList(post_data, num_found));
           return_data.put("search_sort_dropdown", sort_dropdownOptions(JsonObjectUtils.getString(post_data, "sort", "")));
-          return_data.put("availabilities_list", getSearchDropdownList(Init.availabilities_list, handleRequestArray(request.getParameter("accessibility"))));
-          return_data.put("license_options_list", getSearchDropdownList(Init.licenses_list, handleRequestArray(request.getParameter("licenses"))));
-          return_data.put("software_type_options_list", getSearchDropdownList(Init.software_type, handleRequestArray(request.getParameter("software_type"))));
+          return_data.put("availabilities_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY), handleRequestArray(request.getParameter("accessibility"))));
+          return_data.put("license_options_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY), handleRequestArray(request.getParameter("licenses"))));
+          return_data.put("software_type_options_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY), handleRequestArray(request.getParameter("software_type"))));
           return_data.put("search_description", getSearchResultsDescription(post_data));
           if (!invalid_search_data) {
                return_data.put("search_facets_data", search_result_data.get("facets"));
@@ -235,12 +236,7 @@ public class SearchFunctions {
           String accessibility_array = JsonObjectUtils.getString(post_data, "accessibility", "");
           if (StringUtils.isNotBlank(accessibility_array) && JsonObjectUtils.parseArrayNode(accessibility_array).size() > 0) {
                //Get teh accessibility array so we can get some display values
-               ArrayNode accessiblity_display_vals = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-               try {
-                    accessiblity_display_vals = Init.availabilities_list;
-               } catch (Exception e) {
-                    log.error("Couldn't get accessiblity json file: " + e.getMessage());
-               }
+               ArrayNode accessiblity_display_vals = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
 
                search_description_list.add(makeSearchDescriptionObjectArray("Accessibility", JsonObjectUtils.parseArrayNode(accessibility_array), "accessibility", accessiblity_display_vals));
           }
@@ -249,12 +245,7 @@ public class SearchFunctions {
           String software_type_array = JsonObjectUtils.getString(post_data, "software_type", "");
           if (StringUtils.isNotBlank(software_type_array) && JsonObjectUtils.parseArrayNode(software_type_array).size() > 0) {
                //Get the software_type array so we can get display values
-               ArrayNode software_type_display_vals = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-               try {
-                    software_type_display_vals = Init.software_type;
-               } catch (Exception e) {
-                    log.error("Couldn't get accessiblity json file: " + e.getMessage());
-               }
+               ArrayNode software_type_display_vals = DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY);
 
                search_description_list.add(makeSearchDescriptionObjectArray("Software Type", JsonObjectUtils.parseArrayNode(software_type_array), "software_type", software_type_display_vals));
           }
@@ -356,7 +347,7 @@ public class SearchFunctions {
 
      private static ObjectNode sort_dropdownOptions(String sort_value) {
           ObjectNode options_obj = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          ArrayNode options = Init.sort_list;
+          ArrayNode options = DOECODEServletContextListener.getJsonList(DOECODEJson.SEARCH_SORT_KEY);
           String current = "";
 
           for (JsonNode j : options) {
@@ -595,12 +586,12 @@ public class SearchFunctions {
 
      public static ObjectNode getAdvancedSearchPageLists() {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          return_data.put("availabilities_list", Init.availabilities_list);
-          return_data.put("licenses_list", Init.licenses_list);
-          return_data.put("software_type", Init.software_type);
-          return_data.put("research_org_list", Init.research_org_list);
-          return_data.put("sponsor_org_list", Init.sponsor_org_list);
-          return_data.put("sort_list", Init.sort_list);
+          return_data.put("availabilities_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY));
+          return_data.put("licenses_list", DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY));
+          return_data.put("software_type", DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY));
+          return_data.put("research_org_list", DOECODEServletContextListener.getJsonList(DOECODEJson.RESEARCH_KEY));
+          return_data.put("sponsor_org_list", DOECODEServletContextListener.getJsonList(DOECODEJson.SPONSOR_ORG_KEY));
+          return_data.put("sort_list", DOECODEServletContextListener.getJsonList(DOECODEJson.SEARCH_SORT_KEY));
 
           return return_data;
      }
@@ -1107,7 +1098,7 @@ public class SearchFunctions {
                meta_tags.add(makeMetaTag("release_date", JsonObjectUtils.getString(biblio_data, "release_date", "")));
 
                /*Code Availability*/
-               ArrayNode availabilityList = Init.availabilities_list;
+               ArrayNode availabilityList = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
 
                ObjectNode availabilityObj = JsonObjectUtils.getJsonListItem(availabilityList, "value", JsonObjectUtils.getString(biblio_data, "accessibility", ""));
                return_data.put("availability", JsonObjectUtils.getString(availabilityObj, "label", ""));
@@ -1115,7 +1106,7 @@ public class SearchFunctions {
                meta_tags.add(makeMetaTag("availability", JsonObjectUtils.getString(availabilityObj, "label", "")));
 
                /*Software Type*/
-               ArrayNode softwareTypeList = Init.software_type;
+               ArrayNode softwareTypeList = DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY);
                ObjectNode softwareTypeObj = JsonObjectUtils.getJsonListItem(softwareTypeList, "value", JsonObjectUtils.getString(biblio_data, "software_type", ""));
                return_data.put("software_type", JsonObjectUtils.getString(softwareTypeObj, "label", ""));
                meta_tags.add(makeMetaTag("software_type", JsonObjectUtils.getString(softwareTypeObj, "label", "")));

@@ -12,7 +12,6 @@
         </welcome-file>
     </welcome-file-list>
     <!--Context Parameters-->
-    
     <context-param>
         <param-name>api_backend_url</param-name>
         <param-value>${apiBackendURL}</param-value>
@@ -25,7 +24,7 @@
         <param-name>site_url</param-name>
         <param-value>${siteURL}</param-value>
     </context-param>
-        <context-param>
+    <context-param>
         <param-name>authority_base_url</param-name>
         <param-value>${authorityapiURL}</param-value>
     </context-param>
@@ -65,6 +64,11 @@
         <param-name>ga_domain</param-name>
         <param-value>${google_analytics_domain}</param-value>
     </context-param>
+    <!--Servlet Context Listener-->
+    <listener>
+        <description>ServletContextListener</description>
+        <listener-class>gov.osti.doecode.listeners.DOECODEServletContextListener</listener-class>
+    </listener>
     <!--Servlet to give the Dissemination pages, like search, about, etc-->
     <servlet>
         <servlet-name>Dissemination</servlet-name>

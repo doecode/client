@@ -8,11 +8,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
-import java.nio.file.Files;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
@@ -49,13 +47,6 @@ public class JsonObjectUtils {
 
      public static final JsonNodeFactory FACTORY_INSTANCE = JsonNodeFactory.instance;
      public static final ObjectMapper MAPPER = new ObjectMapper();
-
-     public static ArrayNode getJsonList(String path, String key) throws IOException {
-          File f = new File(path);
-          byte[] bytes = Files.readAllBytes(f.toPath());
-          String s = new String(bytes, "UTF-8");
-          return (ArrayNode) JsonObjectUtils.parseObjectNode(s).get(key);
-     }
 
      /*
      Takes a json array, and you pass what key in that array you're comparing to, and what value

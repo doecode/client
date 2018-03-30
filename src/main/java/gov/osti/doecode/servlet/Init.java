@@ -1,12 +1,9 @@
 package gov.osti.doecode.servlet;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Jackson2Helper;
 import com.github.jknack.handlebars.io.ServletContextTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
-import gov.osti.doecode.utils.JsonObjectUtils;
-import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.servlet.ServletConfig;
@@ -27,16 +24,6 @@ public class Init extends HttpServlet {
      public static String backend_api_url;
      public static String authority_api_base;
      public static String site_url;
-     public static ArrayNode availabilities_list;
-     public static ArrayNode licenses_list;
-     public static ArrayNode software_type;
-     public static ArrayNode research_org_list;
-     public static ArrayNode sponsor_org_list;
-     public static ArrayNode sort_list;
-     public static ArrayNode affiliations_list;
-     public static ArrayNode countries_list;
-     public static ArrayNode contributor_type_list;
-     public static ArrayNode states_list;
 
      public static int SESSION_TIMEOUT_MINUTES;
 
@@ -74,23 +61,6 @@ public class Init extends HttpServlet {
           
           //Get the session timeout from the web.xml
           SESSION_TIMEOUT_MINUTES = Integer.parseInt(context.getInitParameter("session_timeout"));
-
-          //Get the most commonly used json files, and load them into objects
-          String jsonPath = context.getRealPath("./json");
-          try {
-               availabilities_list = JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.AVAILABILITIES_LIST_JSON), JsonObjectUtils.AVAILABILITIES_LIST_JSON_KEY);
-               licenses_list = JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.LICENSE_OPTIONS_LIST_JSON), JsonObjectUtils.LICENSE_JLIST_SON_KEY);
-               software_type = JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.SOFTWARE_TYPES_LIST_JSON), JsonObjectUtils.SOFTWARE_TYPES_LIST_JSON_KEY);
-               research_org_list = JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.RESEARCH_ORG_LIST_JSON), JsonObjectUtils.RESEARCH_ORG_LIST_JSON_KEY);
-               sponsor_org_list = JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.SPONSOR_ORG_LIST_JSON), JsonObjectUtils.SPONSOR_ORG_LIST_JSON_KEY);
-               sort_list = JsonObjectUtils.getJsonList((jsonPath + "/" + JsonObjectUtils.SEARCH_SORT_OPTIONS_LIST_JSON), JsonObjectUtils.SEARCH_SORT_LIST_JSON_KEY);
-               affiliations_list = JsonObjectUtils.getJsonList(jsonPath + "/" + JsonObjectUtils.AFFILIATIONS_LIST_JSON, JsonObjectUtils.AFFILIATIONS_LIST_JSON_KEY);
-               countries_list = JsonObjectUtils.getJsonList(jsonPath + "/" + JsonObjectUtils.COUNTRIES_LIST_JSON, JsonObjectUtils.COUNTRIES_LIST_JSON_KEY);
-               contributor_type_list = JsonObjectUtils.getJsonList(jsonPath + "/" + JsonObjectUtils.CONTRIBUTOR_TYPES_LIST_JSON, JsonObjectUtils.CONTRIBUTOR_TYPES_LIST_JSON_KEY);
-               states_list = JsonObjectUtils.getJsonList(jsonPath + "/" + JsonObjectUtils.STATE_LIST_JSON, JsonObjectUtils.STATE_LIST_JSON_KEY);
-          } catch (IOException ex) {
-               log.error("Error in loading json lists while initializing: " + ex.getMessage());
-          }
 
           log.info("DOE CODE Application Started");
      }
