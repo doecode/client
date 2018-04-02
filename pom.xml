@@ -27,6 +27,10 @@
         <app_name>${project.artifactId}</app_name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <elink_authorities_country>https://www.osti.gov/elink/api/authorities/simple/countries-list?sort=description</elink_authorities_country>
+        <elink_authorities_sponsor>https://www.osti.gov/elink/api/authorities/sponsor/sponsor-org-list</elink_authorities_sponsor>
+        <elink_authorities_research>https://www.osti.gov/elink/api/authorities/research/orig-research-org-list</elink_authorities_research>
+        <elink_authorities_affiliations>https://www.osti.gov/elink/api/authorities/affiliations/affiliations-list</elink_authorities_affiliations>
     </properties>
     <!--
         You will need to add your own profiles into this pom.xml, or use profiles stored in your local settings.xml

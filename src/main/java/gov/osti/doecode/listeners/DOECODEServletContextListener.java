@@ -65,12 +65,12 @@ public class DOECODEServletContextListener implements ServletContextListener {
      @Override
      public void contextInitialized(ServletContextEvent sce) {
           //FIll up the lists
-          doecode_json_lists.UPDATE_REMOTE_LISTS();
+          doecode_json_lists.UPDATE_REMOTE_LISTS(sce.getServletContext());
           //Schedule a job that runs once a day that fills the lists back up with fresh data
           TimerTask json_maintenance = new TimerTask() {
                public void run() {
                     log.info("Updating remote lists at: " + LocalDateTime.now().format(DOECODEUtils.MONTH_DAY_YEAR_TIME_FORMAT));
-                    doecode_json_lists.UPDATE_REMOTE_LISTS();
+                    doecode_json_lists.UPDATE_REMOTE_LISTS(sce.getServletContext());
                     log.info("Completed remote lists at: " + LocalDateTime.now().format(DOECODEUtils.MONTH_DAY_YEAR_TIME_FORMAT));
                }
           };

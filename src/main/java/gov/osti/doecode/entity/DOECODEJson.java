@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import javax.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -168,9 +169,10 @@ public class DOECODEJson {
           return on;
      }
 
-     public final void UPDATE_REMOTE_LISTS() {
+     public final void UPDATE_REMOTE_LISTS(ServletContext context) {
+          
           //Countries
-          ArrayNode country = getItemFromElinkAuthority("https://www.osti.gov/elink/api/authorities/simple/countries-list?sort=description&dir=ASC");
+          ArrayNode country = getItemFromElinkAuthority(context.getInitParameter("elink_authorities_country"));
           if (country.size() > 0) {
                this.countries_list = translateElinkAuthorityList(country);
           } else {
@@ -191,7 +193,7 @@ public class DOECODEJson {
           sponsoring_orgs.add(blank);
           sponsoring_orgs.add(usdoe);
           //Get the rest of the sponsoring org items
-          ArrayNode sponsor_orgs_api = getItemFromElinkAuthority("https://www.osti.gov/elink/api/authorities/sponsor/sponsor-org-list");
+          ArrayNode sponsor_orgs_api = getItemFromElinkAuthority(context.getInitParameter("elink_authorities_sponsor"));
           if (sponsor_orgs_api.size() > 0) {
                sponsoring_orgs = translateElinkAuthorityList(sponsoring_orgs);
                sponsor_orgs_api = translateElinkAuthorityList(sponsor_orgs_api);
@@ -207,7 +209,7 @@ public class DOECODEJson {
           }
 
           //Research Org
-          ArrayNode research_orgs = getItemFromElinkAuthority("https://www.osti.gov/elink/api/authorities/research/orig-research-org-list");
+          ArrayNode research_orgs = getItemFromElinkAuthority(context.getInitParameter("elink_authorities_research"));
           if (research_orgs.size() > 0) {
                this.research_org_list = translateElinkAuthorityList(research_orgs);
           } else {
@@ -215,7 +217,7 @@ public class DOECODEJson {
           }
 
           //Affiliations
-          ArrayNode affiliations = getItemFromElinkAuthority("https://www.osti.gov/elink/api/authorities/affiliations/affiliations-list");
+          ArrayNode affiliations = getItemFromElinkAuthority(context.getInitParameter("elink_authorities_affiliations"));
           if (affiliations.size() > 0) {
                this.affiliations_list = translateElinkAuthorityList(affiliations);
           } else {

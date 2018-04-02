@@ -64,6 +64,22 @@
         <param-name>ga_domain</param-name>
         <param-value>${google_analytics_domain}</param-value>
     </context-param>
+    <context-param>
+        <param-name>elink_authorities_country</param-name>
+        <param-value>${elink_authorities_country}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>elink_authorities_sponsor</param-name>
+        <param-value>${elink_authorities_sponsor}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>elink_authorities_research</param-name>
+        <param-value>${elink_authorities_research}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>elink_authorities_affiliations</param-name>
+        <param-value>${elink_authorities_affiliations}</param-value>
+    </context-param>
     <!--Servlet Context Listener-->
     <listener>
         <description>ServletContextListener</description>
