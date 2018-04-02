@@ -14,6 +14,7 @@ import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
+import java.math.BigDecimal;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -67,6 +68,7 @@ public class Dissemination extends HttpServlet {
                page_title = "DOE CODE: News Resources";
                template = TemplateUtils.TEMPLATE_NEWS_RESOURCES_PAGE;
                current_page = TemplateUtils.PAGE_NEWS_RESOURCES;
+               output_data.put("api_url", StringUtils.substringBeforeLast(Init.public_api_url, "/"));
 
           } else if (remaining.equals("/faq")) {
                page_title = "DOE CODE: FAQ's";
