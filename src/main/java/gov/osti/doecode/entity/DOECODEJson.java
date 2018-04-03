@@ -14,9 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DOECODEJson {
-
+     
      private Logger log = LoggerFactory.getLogger(DOECODEJson.class.getName());
-
+     
      public static final String AFFILIATIONS_KEY = "affiliations";
      public static final String AVAILABILITY_KEY = "availability";
      public static final String CONTRIBUTOR_KEY = "contributor";
@@ -27,6 +27,7 @@ public class DOECODEJson {
      public static final String SOFTWARE_TYPE_KEY = "software";
      public static final String SPONSOR_ORG_KEY = "sponsor";
      public static final String STATES_KEY = "states";
+     public static final String RELATION_TYPES_KEY = "relation_types";
 
      //Json Array lists
      private ArrayNode affiliations_list;
@@ -39,6 +40,7 @@ public class DOECODEJson {
      private ArrayNode software_type_list;
      private ArrayNode sponsor_orgs_list;
      private ArrayNode states_list;
+     private ArrayNode relation_types_list;
 
      /**
       * Initializes all of the json lists DOE CODE Uses. Fills up the lists that don't pull data from OSTI's ELINK AUthority API
@@ -54,6 +56,7 @@ public class DOECODEJson {
           this.software_type_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
           this.sponsor_orgs_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
           this.states_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+          this.relation_types_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
 
           //Since some of the lists have content that isn't pulled from OSTI's Elink Authority API, we'll go ahead and fill those lists up
           //Search Sort Options
@@ -158,9 +161,9 @@ public class DOECODEJson {
           this.states_list.add(makeListObj("West Virginia", "WV", "West Virginia"));
           this.states_list.add(makeListObj("Wisconsin", "WI", "Wisconsin"));
           this.states_list.add(makeListObj("Wyoming", "WY", "Wyoming"));
-
+          
      }
-
+     
      private final ObjectNode makeListObj(String label, String value, String title) {
           ObjectNode on = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
           on.put("label", label);
@@ -168,11 +171,12 @@ public class DOECODEJson {
           on.put("title", title);
           return on;
      }
-
+     
      public final void UPDATE_REMOTE_LISTS(ServletContext context) {
-          
+          String authorityapi_base_url = context.getInitParameter("authority_base_url");
+
           //Countries
-          ArrayNode country = getItemFromElinkAuthority(context.getInitParameter("elink_authorities_country"));
+          ArrayNode country = getItemFromElinkAuthority(authorityapi_base_url + "simple/countries-list?sort=description");
           if (country.size() > 0) {
                this.countries_list = translateElinkAuthorityList(country);
           } else {
@@ -193,23 +197,23 @@ public class DOECODEJson {
           sponsoring_orgs.add(blank);
           sponsoring_orgs.add(usdoe);
           //Get the rest of the sponsoring org items
-          ArrayNode sponsor_orgs_api = getItemFromElinkAuthority(context.getInitParameter("elink_authorities_sponsor"));
+          ArrayNode sponsor_orgs_api = getItemFromElinkAuthority(authorityapi_base_url + "sponsor/sponsor-org-list");
           if (sponsor_orgs_api.size() > 0) {
                sponsoring_orgs = translateElinkAuthorityList(sponsoring_orgs);
                sponsor_orgs_api = translateElinkAuthorityList(sponsor_orgs_api);
-
+               
                ArrayNode org_lists_combined = sponsoring_orgs;
                for (JsonNode n : sponsor_orgs_api) {
                     org_lists_combined.add(n);
                }
-
+               
                this.sponsor_orgs_list = org_lists_combined;
           } else {
                log.error("Sponsoring Orgs Json Array returned empty");
           }
 
           //Research Org
-          ArrayNode research_orgs = getItemFromElinkAuthority(context.getInitParameter("elink_authorities_research"));
+          ArrayNode research_orgs = getItemFromElinkAuthority(authorityapi_base_url + "research/orig-research-org-list");
           if (research_orgs.size() > 0) {
                this.research_org_list = translateElinkAuthorityList(research_orgs);
           } else {
@@ -217,14 +221,22 @@ public class DOECODEJson {
           }
 
           //Affiliations
-          ArrayNode affiliations = getItemFromElinkAuthority(context.getInitParameter("elink_authorities_affiliations"));
+          ArrayNode affiliations = getItemFromElinkAuthority(authorityapi_base_url + "affiliations/affiliations-list");
           if (affiliations.size() > 0) {
                this.affiliations_list = translateElinkAuthorityList(affiliations);
           } else {
                log.error("Affiliations Json Array returned empty");
           }
-     }
 
+          //Relation Types
+          ArrayNode relation_types = getItemFromElinkAuthority(authorityapi_base_url + "simple/relation-types-list?status=C");
+          if (relation_types.size() > 0) {
+               this.relation_types_list = translateElinkAuthorityList(relation_types);
+          } else {
+               log.error("Relation types Json Array returned empty");
+          }
+     }
+     
      private ArrayNode getItemFromElinkAuthority(String api_url) {
           ArrayNode arr = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
           try {
@@ -240,20 +252,20 @@ public class DOECODEJson {
                rd.close();
                conn.disconnect();
                arr = (ArrayNode) JsonObjectUtils.parseArrayNode(result.toString());
-
+               
           } catch (Exception e) {
                log.error("An error has occurred in pulling Elink Authority API Data: " + e.getMessage());
           }
           return arr;
      }
-
+     
      private ArrayNode translateElinkAuthorityList(ArrayNode original_list) {
           ArrayNode new_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
           for (JsonNode n : original_list) {
                //ObjectNode original_row = (ObjectNode) n;
                String name_val = (n instanceof TextNode) ? n.asText() : JsonObjectUtils.getString((ObjectNode) n, "name", "");
                ObjectNode new_row = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-
+               
                new_row.put("title", name_val);
                new_row.put("value", name_val);
                new_row.put("label", name_val);
@@ -261,44 +273,48 @@ public class DOECODEJson {
           }
           return new_list;
      }
-
+     
      public ArrayNode getAffiliationsList() {
           return this.affiliations_list;
      }
-
+     
      public ArrayNode getAvailabilityList() {
           return this.availability_list;
      }
-
+     
      public ArrayNode getContributorList() {
           return this.contributor_types;
      }
-
+     
      public ArrayNode getCountriesList() {
           return this.countries_list;
      }
-
+     
      public ArrayNode getLicenseOptionsList() {
           return this.license_options_list;
      }
-
+     
      public ArrayNode getResearchOrgList() {
           return this.research_org_list;
      }
-
+     
      public ArrayNode getSearchSortOptionsList() {
           return this.search_sort_options_list;
      }
-
+     
      public ArrayNode getSoftwareTypeList() {
           return this.software_type_list;
      }
-
+     
      public ArrayNode getSponsorOrgsList() {
           return this.sponsor_orgs_list;
      }
-
+     
      public ArrayNode getStatesList() {
           return this.states_list;
+     }
+     
+     public ArrayNode getRelationTypesList(){
+          return this.relation_types_list;
      }
 }

@@ -84,31 +84,9 @@
 						<div class="col-xs-12">
 						   <select class='pure-input-1 form-control' title='Sort' id='related-identifier-relation-type'>
 							<option title='' value=''></option>
-							<option title="Cites" value="Cites">Cites</option> 
-							<option title="IsCitedBy" value="IsCitedBy">IsCitedBy</option> 
-							<option title="IsSupplementTo" value="IsSupplementTo">IsSupplementTo</option> 
-							<option title="IsSupplementedBy" value="IsSupplementedBy">IsSupplementedBy</option> 
-							<option title="IsContinuedBy" value="IsContinuedBy">IsContinuedBy</option> 
-							<option title="Continues" value="Continues">Continues</option> 
-							<option title="HasMetadata" value="HasMetadata">HasMetadata</option> 
-							<option title="IsMetadataFor" value="IsMetadataFor">IsMetadataFor</option> 
-							<option title="IsNewVersionOf" value="IsNewVersionOf">IsNewVersionOf</option> 
-							<option title="IsPreviousVersionOf" value="IsPreviousVersionOf">IsPreviousVersionOf</option> 
-							<option title="IsPartOf" value="IsPartOf">IsPartOf</option> 
-							<option title="HasPart" value="HasPart">HasPart</option> 
-							<option title="IsReferencedBy" value="IsReferencedBy">IsReferencedBy</option> 
-							<option title="References" value="References">References</option> 
-							<option title="IsDocumentedBy" value="IsDocumentedBy">IsDocumentedBy</option> 
-							<option title="Documents" value="Documents">Documents</option> 
-							<option title="IsCompiledBy" value="IsCompiledBy">IsCompiledBy</option> 
-							<option title="Compiles" value="Compiles">Compiles</option> 
-							<option title="IsVariantFormOf" value="IsVariantFormOf">IsVariantFormOf</option> 
-							<option title="IsOriginalFormOf" value="IsOriginalFormOf">IsOriginalFormOf</option> 
-							<option title="IsIdenticalTo" value="IsIdenticalTo">IsIdenticalTo</option> 
-							<option title="IsReviewedBy" value="IsReviewedBy">IsReviewedBy</option> 
-							<option title="Reviews" value="Reviews">Reviews</option> 
-							<option title="IsDerivedFrom" value="IsDerivedFrom">IsDerivedFrom</option> 
-							<option title="IsSourceOf" value="IsSourceOf">IsSourceOf</option>
+							{{#each relation_type}}
+							<option title="{{value}}" value="{{value}}">{{value}}</option> 
+							{{/each}}
 						   </select>
 							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
 							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>

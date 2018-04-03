@@ -80,6 +80,8 @@ public class Input extends HttpServlet {
                     output_data.put("page_message", "Submit a New Software Project");
                }
 
+               output_data.put("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
+
                //Toggle everything to not be shown, since we're on the submit page
                show_optional_toggle = true;
 
@@ -103,6 +105,9 @@ public class Input extends HttpServlet {
                } else {
                     output_data.put("page_message", "Submit a New Software Project");
                }
+
+               output_data.put("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
+
                is_inputjs = true;
                current_page = TemplateUtils.PAGE_PROJECTS;
 
@@ -123,6 +128,8 @@ public class Input extends HttpServlet {
                     output_data.put("page_message", "Submit a New Software Project");
                }
                output_data.put("show_owner_message", true);
+
+               output_data.put("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
                is_inputjs = true;
                current_page = TemplateUtils.PAGE_PROJECTS;
 
@@ -157,12 +164,11 @@ public class Input extends HttpServlet {
                output_data.put("has_minted_doi", StringUtils.isNotBlank(minted_doi));
 
                //Get some json for the page
-               ArrayNode availabilityList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-               try {
-                    availabilityList = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
-                    output_data.put("availabilities_list_json", availabilityList.toString());
-               } catch (Exception e) {
-               }
+               ArrayNode availabilityList = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
+               output_data.put("availabilities_list_json", availabilityList.toString());
+
+               output_data.put("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
+
                current_page = TemplateUtils.PAGE_PROJECTS;
           } else if (remaining.startsWith("projects")) {
                page_title = "DOE CODE: Projects";
@@ -185,6 +191,7 @@ public class Input extends HttpServlet {
                template = TemplateUtils.TEMPLATE_FORM_SELECT;
                current_page = TemplateUtils.PAGE_PROJECTS;
                jsFilesList.add("input-other");
+
           }
 
           //Add all of the hide/shows for the panels
@@ -203,6 +210,8 @@ public class Input extends HttpServlet {
 
           //We'll set whether or not this is a collection of collapsible panels 
           output_data.put("is_accordion", true);
+
+          log.info("OUtput data: " + output_data);
           //get common data, like the classes needed for the header and footer
           output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, cssFilesList, request);
 
