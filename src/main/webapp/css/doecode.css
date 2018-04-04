@@ -979,6 +979,10 @@ label {
     font-size: 20px;
 }
 
+.help-page-list li{
+    padding-bottom:10px;
+}
+
 /*FAQ PAGE*/
 
 .faq-page-subtitle {
