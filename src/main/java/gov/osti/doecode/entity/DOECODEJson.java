@@ -91,7 +91,7 @@ public class DOECODEJson {
           this.contributor_types.add(makeListObj("Supervisor", "Supervisor", "Supervisor"));
           this.contributor_types.add(makeListObj("Work Package Leader", "WorkPackageLeader", "Work Package Leader"));
           //License Options
-          this.license_options_list.add(makeListObj("Other", "Other", "Other"));
+          this.license_options_list.add(makeListObj("Other (Commercial or Open-Source)", "Other", "Other"));
           this.license_options_list.add(makeListObj("Apache License 2.0", "Apache License 2.0", "Apache License 2.0"));
           this.license_options_list.add(makeListObj("GNU General Public License v3.0", "GNU General Public License v3.0", "GNU General Public License v3.0"));
           this.license_options_list.add(makeListObj("MIT License", "MIT License", "MIT License"));

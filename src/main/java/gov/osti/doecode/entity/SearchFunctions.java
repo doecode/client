@@ -1113,7 +1113,14 @@ public class SearchFunctions {
 
                /*Licenses*/
                ArrayNode licenses = (ArrayNode) biblio_data.get("licenses");
-               return_data.put("licenses", licenses);
+               ArrayNode license_displays = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+               if (licenses != null) {
+                    for (JsonNode row : licenses) {
+                         String rowVal = row.asText();
+                         license_displays.add(DOECODEUtils.getDisplayVersionOfValue(DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY), rowVal));
+                    }
+               }
+               return_data.put("licenses", license_displays);
                return_data.put("has_licenses", licenses != null && licenses.size() > 0);
                meta_tags.add(makeMetaTag("licenses", DOECODEUtils.makeSpaceSeparatedList((ArrayNode) biblio_data.get("licenses"))));
 
