@@ -257,3 +257,20 @@ if (isValidJSON(localStorage.latestSearchParams) && Array.isArray(JSON.parse(loc
 //Makes the chosen js inputs work with custom content
 $(".chosen-search-input").on('keyup', modifyChosenSelectForCustomEntry);
 $(".chosen-search-input").on('keydown', modifyChosenSelectForCustomEntryTabKey);
+
+var clearOutMicrosoftCharacters = function (value) {
+    // smart single quotes and apostrophe
+    value = value.replace(/[\u2018\u2019\u201A]/g, "'");
+    // smart double quotes
+    value = value.replace(/[\u201C\u201D\u201E]/g, '"');
+    // ellipsis
+    value = value.replace(/\u2026/g, "...");
+    // dashes
+    value = value.replace(/[\u2013\u2014]/g, "-");
+
+    return value;
+};
+
+$("input[type=text],textarea").on('blur', function () {
+    $(this).val(clearOutMicrosoftCharacters($(this).val()));
+});
