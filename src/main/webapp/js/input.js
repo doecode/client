@@ -232,7 +232,7 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     if (!software_type_id)
         metadata.setValue("software_type", $("#software_type").val());
 	    
-    form.allowSave = (data.metadata.workflow_status != "Submitted" && data.metadata.workflow_status != "Approved");
+    form.allowSave = (data.metadata.workflow_status == "" || data.metadata.workflow_status == "Saved");
     
     
     
