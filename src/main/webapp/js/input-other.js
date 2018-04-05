@@ -20,9 +20,9 @@ var pending_data_table_opts = {
     autoWidth: false,
     responsive: true,
     columns: [
-        {name: 'code_id', data: 'code_id', width: '10%', className: 'text-center'},
-        {name: 'software_title', data: 'software_title', width: '69%'},
-        {name: 'workflow_status', data: 'workflow_status', width: '8%', className: 'text-center', orderable: false},
+        {name: 'code_id', data: 'code_id', width: '88px', className: 'text-center'},
+        {name: 'software_title', data: 'software_title'},
+        {name: 'workflow_status', data: 'workflow_status', width: '88px', className: 'text-center'},
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/approve?code_id=' + row.code_id
                         + '" class="pure-button pure-button-primary btn-sm white"><span class="fa fa-pencil"></span> View for Approval</a>';
@@ -35,9 +35,9 @@ var projects_data_table_opts = {
     autoWidth: false,
     responsive: true,
     columns: [
-        {name: 'code_id', data: 'code_id', width: '10%', className: 'text-center'},
-        {name: 'software_title', data: 'software_title', width: '56%'},
-        {name: 'workflow_status', data: 'workflow_status', width: '8%', className: 'text-center'},
+        {name: 'code_id', data: 'code_id', width: '88px', className: 'text-center'},
+        {name: 'software_title', data: 'software_title'},
+        {name: 'workflow_status', data: 'workflow_status', width: '88px', className: 'text-center'},
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/submit?code_id=' + row.code_id
                         + '" class="pure-button button-success btn-sm white "><span class="fa fa-pencil"></span> Update Metadata</a>';
@@ -262,10 +262,16 @@ var parseProjectsPageData = function (data) {
     var new_data = [];
 
     data.records.forEach(function (item) {
+        var workflow_value = item.workflow_status ? item.workflow_status : '';
+        if (workflow_value == 'Saved')
+            workflow_value = '<span class="datatable-blue-status">' + workflow_value + '</span>';
+        else if (workflow_value != 'Approved')
+            workflow_value = '<span class="datatable-red-status">' + workflow_value + '</span><br><span class="datatable-red-status datatable-pending-suffix">pending approval</span>';
+
         new_data.push({
             code_id: item.code_id ? item.code_id : '',
             software_title: item.software_title ? item.software_title : '',
-            workflow_status: item.workflow_status ? item.workflow_status : ''
+            workflow_status: workflow_value
         });
     });
     var projects_table = $("#projects-datatable").DataTable(projects_data_table_opts);
@@ -281,10 +287,14 @@ var parseApprovalPageData = function (data) {
     var new_data = [];
 
     data.records.forEach(function (item) {
+        var workflow_value = item.workflow_status ? item.workflow_status : '';
+        if (workflow_value == 'Announced')
+            workflow_value = '<span class="datatable-blue-status">' + workflow_value + '</span>';
+
         new_data.push({
             code_id: item.code_id ? item.code_id : '',
             software_title: item.software_title ? item.software_title : '',
-            workflow_status: item.workflow_status ? item.workflow_status : ''
+            workflow_status: workflow_value
         });
     });
     var approval_table = $("#pending-datatable").DataTable(pending_data_table_opts);
