@@ -241,7 +241,7 @@ public class DOECODEJson {
           //Programming languages
           ArrayNode programming_languages = getItemFromElinkAuthority(authorityapi_base_url + "simple/programming-languages-list");
           if (programming_languages.size() > 0) {
-               this.programming_languages_list = programming_languages;
+               this.programming_languages_list = translateElinkAuthorityList(programming_languages);
           } else {
                log.error("Programming languages Json Array returned empty");
           }
