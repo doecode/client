@@ -80,6 +80,7 @@ public class Input extends HttpServlet {
                     output_data.put("page_message", "Submit a New Software Project");
                }
 
+               output_data.put("programming_languages_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
                output_data.put("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
 
                //Toggle everything to not be shown, since we're on the submit page
@@ -106,6 +107,7 @@ public class Input extends HttpServlet {
                     output_data.put("page_message", "Submit a New Software Project");
                }
 
+               output_data.put("programming_languages_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
                output_data.put("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
 
                is_inputjs = true;
@@ -129,6 +131,7 @@ public class Input extends HttpServlet {
                }
                output_data.put("show_owner_message", true);
 
+               output_data.put("programming_languages_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
                output_data.put("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
                is_inputjs = true;
                current_page = TemplateUtils.PAGE_PROJECTS;
