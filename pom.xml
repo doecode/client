@@ -76,7 +76,7 @@
                         <configuration>
                             <charset>UTF-8</charset>
                             <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
+                            <webappTargetDir>${basedir}/target/${app_name}/</webappTargetDir>
                             <jsSourceDir>js</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>doecode.js</jsSourceFile>
@@ -94,7 +94,7 @@
                         <configuration>
                             <charset>UTF-8</charset>
                             <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
+                            <webappTargetDir>${basedir}/target/${app_name}/</webappTargetDir>
                             <jsSourceDir>js</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>dissemination.js</jsSourceFile>
@@ -112,7 +112,7 @@
                         <configuration>
                             <charset>UTF-8</charset>
                             <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
+                            <webappTargetDir>${basedir}/target/${app_name}/</webappTargetDir>
                             <jsSourceDir>js</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>input.js</jsSourceFile>
@@ -130,7 +130,7 @@
                         <configuration>
                             <charset>UTF-8</charset>
                             <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
+                            <webappTargetDir>${basedir}/target/${app_name}/</webappTargetDir>
                             <jsSourceDir>js</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>user.js</jsSourceFile>
@@ -148,7 +148,7 @@
                         <configuration>
                             <charset>UTF-8</charset>
                             <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
+                            <webappTargetDir>${basedir}/target/${app_name}/</webappTargetDir>
                             <jsSourceDir>js/utils</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>utils.js</jsSourceFile>
@@ -166,7 +166,7 @@
                         <configuration>
                             <charset>UTF-8</charset>
                             <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
+                            <webappTargetDir>${basedir}/target/${app_name}/</webappTargetDir>
                             <jsSourceDir>js</jsSourceDir>
                             <jsSourceFiles>
                                 <jsSourceFile>other.js</jsSourceFile>
@@ -185,11 +185,11 @@
                         <configuration>
                             <charset>UTF-8</charset>
                             <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-                            <webappTargetDir>${basedir}/target/${project.artifactId}/</webappTargetDir>
+                            <webappTargetDir>${basedir}/target/${app_name}/</webappTargetDir>
                             <cssSourceDir>css</cssSourceDir>
                             <cssSourceFiles>
                                 <cssSourceFile>purecss/purecss.min.css</cssSourceFile>
-                                <cssSourceFile>bootstrap-3.3.7-dist/css/bootstrap.min.css</cssSourceFile>                                                                                   
+                                <cssSourceFile>bootstrap-3.3.7-dist/css/bootstrap.min.css</cssSourceFile>
                                 <cssSourceFile>doecode.css</cssSourceFile>
                                 <cssSourceFile>doecode-media-queries.css</cssSourceFile>
                             </cssSourceFiles>
