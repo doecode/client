@@ -211,7 +211,7 @@ public class Input extends HttpServlet {
                cssFilesList = getInputFormCssFiles(cssFilesList);
           }
 
-          //We'll set whether or not this is a collection of collapsible panels 
+          //We'll set whether or not this is a collection of collapsible panels
           output_data.put("is_accordion", true);
 
           //get common data, like the classes needed for the header and footer
