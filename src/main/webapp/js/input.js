@@ -390,7 +390,7 @@ var setModalActions = function setModalActions(modal) {
     $("#" + modal + "-save-btn").on('click', {modal_name: modal}, saveModalData);
     //Load the item data
     $("#" + modal + "-data-table tbody").on('click', 'tr', {modal_name: modal}, loadDataIntoModalForm);
-}
+};
 
 var setModalStatus = function setModalStatus(modal, store) {
     const disabled = !store.validateSchema();
@@ -540,13 +540,30 @@ mobx.autorun("Description", function () {
     //mobx.whyRun();
 });
 
+mobx.autorun("Programming Language(s)", function(){
+    updateSelectStyle(metadata, "programming_languages", "programming-languages-lbl", "programming-languages");
+    
+    //mobx.whyRun();
+});
+mobx.autorun("Version Number", function(){
+    updateInputStyle(metadata, "version_number", "version-number-lbl", "version-number");
+    
+    //mobx.whyRun();
+});
+mobx.autorun("Documentation URL", function(){
+    updateInputStyle(metadata, "documentation_url", "documentation-url-lbl", "documentation-url");
+    
+    //mobx.whyRun();
+});
+
 mobx.autorun("Licenses", function () {
     updateSelectStyle(metadata, "licenses", "licenses-lbl", "licenses");
 
-    if (metadata.getValue("licenses").indexOf('Other') > -1)
+    if (metadata.getValue("licenses").indexOf('Other') > -1) {
         $("#proprietary-url-zone").show();
-    else
+    } else {
         $("#proprietary-url-zone").hide();
+    }
 
     //mobx.whyRun();
 });
@@ -1492,6 +1509,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     }
 
     clearChosenList("licenses");
+    clearChosenList("programming-languages");
 
     // If editing, load the data from server.
     var code_id = $("#code_id").val();
@@ -1550,9 +1568,14 @@ $(document).ready(mobx.action("Document Ready", function () {
     // Panel Updates
     $('#repository-link').on('change', {store: metadata, field: "repository_link"}, inputChange);
     $('#landing-page').on('change', {store: metadata, field: "landing_page"}, inputChange);
+    
     $('#software-title').on('input', {store: metadata, field: "software_title"}, inputChange);
     $('#description').on('input', {store: metadata, field: "description"}, inputChange);
+    $('#programming-languages').on('change', {store: metadata, field: "programming_languages"}, inputChange);
+    $('#version-number').on('input', {store: metadata, field: "version_number"}, inputChange);
+    $('#documentation-url').on('input', {store: metadata, field: "documentation_url"}, inputChange);
     $('#licenses').on('change', {store: metadata, field: "licenses"}, inputChange);
+    
     $('#proprietary-url').on('change', {store: metadata, field: "proprietary_url"}, inputChange);
     $('#doi').on('change', {store: metadata, field: "doi"}, inputChange);
     $('#doi-infix').on('input', {field: "doi_infix"}, handleInfix);
@@ -1562,6 +1585,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#keywords').on('input', {store: metadata, field: "keywords"}, inputChange);
     $('#other-special-requirements').on('input', {store: metadata, field: "other_special_requirements"}, inputChange);
     $('#site-accession-number').on('input', {store: metadata, field: "site_accession_number"}, inputChange);
+    
     $('#contact-info-name').on('input', {store: metadata, field: "recipient_name"}, inputChange);
     $('#contact-info-email').on('change', {store: metadata, field: "recipient_email"}, inputChange);
     $('#contact-info-phone').on('change', {store: metadata, field: "recipient_phone"}, inputChange);
