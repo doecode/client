@@ -55,7 +55,7 @@ var _metadataInfoSchema = mobx.observable({
     "file_name": {required: "", label: "Upload Source Code", completed: false, ever_completed: false, validations: [], panel: "", error: ''},
     "software_title": {required: "sub", label: "Software Title", completed: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},
     "description": {required: "sub", label: "Description/Abstract", completed: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},
-    "programming_languages":{required: "", label: "Programming Language", completed: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},
+    "programming_languages":{required: "", label: "Programming Languages", completed: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},
     "version_number":{required: "", label: "Version Number", completed: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},
     "documentation_url":{required: "", label: "Documentation URL", completed: false, ever_completed: false, validations: ["url"], panel: "Product Description", error: ''},
     "licenses": {required: "sub", label: "Licenses", completed: false, hasError: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},

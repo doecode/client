@@ -1573,7 +1573,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#description').on('input', {store: metadata, field: "description"}, inputChange);
     $('#programming-languages').on('change', {store: metadata, field: "programming_languages"}, inputChange);
     $('#version-number').on('input', {store: metadata, field: "version_number"}, inputChange);
-    $('#documentation-url').on('input', {store: metadata, field: "documentation_url"}, inputChange);
+    $('#documentation-url').on('change', {store: metadata, field: "documentation_url"}, inputChange);
     $('#licenses').on('change', {store: metadata, field: "licenses"}, inputChange);
     
     $('#proprietary-url').on('change', {store: metadata, field: "proprietary_url"}, inputChange);
