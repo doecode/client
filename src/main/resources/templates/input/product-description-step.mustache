@@ -54,58 +54,6 @@
 			 </div>
 		    </div>
 		    <br/>
-
-		    <!--Programming Language-->
-		    <div class="row">
-			 <div class="col-xs-12">
-			      <label id='programming-languages-lbl' for='programming-languages' class='control-label'>[from data store]</label>{{> tooltips/ProgrammingLanguage}}
-			 </div>
-			 <div class="col-xs-12">
-			      <select class='pure-input-1 doecode-chosen-select' title='Licenses' id='programming-languages' data-allowcustom="false" data-placeholder='Select your programming language(s)' multiple>
-				   {{#each programming_languages_list}}
-				   <option title='{{title}}' value='{{value}}'>{{label}}</option>
-				   {{/each}}
-			      </select>
-			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
-			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
-			 </div>
-			 <div class="col-xs-12">
-			      <label id="description-lbl-error" class="control-label errorCheck">Problem</label>
-			 </div>
-		    </div>
-		    <br/>
-		    <!--Version Number-->
-		    <div class="row">
-			 <div class="col-xs-12">
-			      <label id='version-number-lbl' for='version-number' class='control-label'>[from data store]</label>{{> tooltips/VersionNumber}}
-			 </div>
-			 <div class="col-xs-12">
-			      <input type='text' id='version-number' class='pure-input-1 form-control'/>
-			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
-			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
-			 </div>
-			 <div class="col-xs-12">
-			      <label id="version-number-lbl-error" class="control-label errorCheck">Problem</label>
-			 </div>
-		    </div>
-		    <br/>
-		    <!--Documentation URL-->
-		    <div class="row">
-			 <div class="col-xs-12">
-			      <label id='documentation-url-lbl' for='documentation-url' class='control-label'>[from data store]</label>{{> tooltips/DocumentationURL}}
-			 </div>
-			 <div class="col-xs-12">
-			      <input type='text' id='documentation-url' class='pure-input-1 form-control'/>
-			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
-			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
-			 </div>
-			 <div class="col-xs-12">
-			      <label id="documentation-url-lbl-error" class="control-label errorCheck">Problem</label>
-			 </div>
-		    </div>
-		    <br/>
-
-
 		    <div class="row">
 			 <div class="col-xs-12">
 			      <label id='licenses-lbl' for='licenses' class='control-label'>[from data store]</label>{{> tooltips/License}}
@@ -137,6 +85,52 @@
 			      <div class="col-xs-12">
 				   <label id="proprietary-url-lbl-error" class="control-label errorCheck">Problem</label>
 			      </div>
+			 </div>
+		    </div>
+		    <br/>
+		    <div class="row">
+			 <div class="col-xs-12">
+			      <label id='programming-languages-lbl' for='programming-languages' class='control-label'>[from data store]</label>{{> tooltips/ProgrammingLanguage}}
+			 </div>
+			 <div class="col-xs-12">
+			      <select class='pure-input-1 doecode-chosen-select' title='Licenses' id='programming-languages' data-allowcustom="false" data-placeholder='Select your programming language(s)' multiple>
+				   {{#each programming_languages_list}}
+				   <option title='{{title}}' value='{{value}}'>{{label}}</option>
+				   {{/each}}
+			      </select>
+			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+			 </div>
+			 <div class="col-xs-12">
+			      <label id="description-lbl-error" class="control-label errorCheck">Problem</label>
+			 </div>
+		    </div>
+		    <br/>
+		    <div class="row">
+			 <div class="col-xs-12">
+			      <label id='version-number-lbl' for='version-number' class='control-label'>[from data store]</label>{{> tooltips/VersionNumber}}
+			 </div>
+			 <div class="col-xs-12">
+			      <input type='text' id='version-number' class='pure-input-1 form-control'/>
+			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+			 </div>
+			 <div class="col-xs-12">
+			      <label id="version-number-lbl-error" class="control-label errorCheck">Problem</label>
+			 </div>
+		    </div>
+		    <br/>
+		    <div class="row">
+			 <div class="col-xs-12">
+			      <label id='documentation-url-lbl' for='documentation-url' class='control-label'>[from data store]</label>{{> tooltips/DocumentationURL}}
+			 </div>
+			 <div class="col-xs-12">
+			      <input type='text' id='documentation-url' class='pure-input-1 form-control'/>
+			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+			 </div>
+			 <div class="col-xs-12">
+			      <label id="documentation-url-lbl-error" class="control-label errorCheck">Problem</label>
 			 </div>
 		    </div>
 		    <br/>
