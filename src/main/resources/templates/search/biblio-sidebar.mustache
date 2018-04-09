@@ -6,6 +6,12 @@
 		    <span class='biblio-sidebar-secondary-subtitle'>{{biblio_sidebar.fulltextMsg}} {{#if biblio_sidebar.is_publicly_accessible}}{{> tooltips/Biblio-RepositoryURL}}{{/if}}</span>
 		    <br/>
 		    <a title='{{biblio_sidebar.fulltextURL}}' href='{{biblio_sidebar.fulltextURL}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' class='biblio-sidebar-traditional-anchor word-break download-link'>{{biblio_sidebar.fulltextURL}}</a> 
+		    {{#if biblio_sidebar.has_documentation_url}}
+		    <br/>
+		    <span class="biblio-sidebar-secondary-subtitle">Documentation</span>
+		    <br/>
+		    <a title="{{biblio_sidebar.documentation_url}}" href="{{biblio_sidebar.documentation_url}}" target="_blank" rel="noopener noreferrer" class="biblio-sidebar-traditional-anchor word-break download-link">{{biblio_sidebar.documentation_url}}</a>
+		    {{/if}}
 		    {{#if biblio_sidebar.has_doi_and_release}}
 		    <br/>
 		    <br/>

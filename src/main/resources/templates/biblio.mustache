@@ -103,6 +103,33 @@
 								 </dl>
 							    </div>
 						       </div>
+						       <!--Programming Languages-->
+						       {{#if has_programming_languages}}
+						       <div class='biblio-row'>
+							    <div class='col-xs-12'>
+								 <dl class='row'>
+								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Programming Languages:</dt>
+								      <dd class='col-md-9 col-xs-12 biblio-field-value'>
+									   {{#each programming_languages_list}}
+									   {{.}}
+									   <br/>
+									   {{/each}}
+								      </dd>
+								 </dl>
+							    </div>
+						       </div>
+						       {{/if}}
+						       <!--Version Number-->
+						       {{#if has_version_number}}
+						       <div class='biblio-row'>
+							    <div class='col-xs-12'>
+								 <dl class='row'>
+								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Version:</dt>
+								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{version_number}}</dd>
+								 </dl>
+							    </div>
+						       </div>
+						       {{/if}}
 						       <!--Licenses-->
 						       {{#if has_licenses}}
 						       <div class='biblio-row'>

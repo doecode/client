@@ -658,6 +658,9 @@ public class SearchFunctions {
           //DOE CODE API URL
           return_data.put("api_url", public_api_url);
 
+          //Documentation URL
+          return_data.put("documentation_url", JsonObjectUtils.getString(search_data, "documentation_url", ""));
+          return_data.put("has_documentation_url", StringUtils.isNotBlank(JsonObjectUtils.getString(search_data, "documentation_url", "")));
           return return_data;
      }
 
@@ -1155,6 +1158,15 @@ public class SearchFunctions {
                return_data.put("country_of_origin", JsonObjectUtils.getString(biblio_data, "country_of_origin", ""));
                return_data.put("has_country_of_origin", StringUtils.isNotBlank(JsonObjectUtils.getString(biblio_data, "country_of_origin", "")));
                meta_tags.add(makeMetaTag("country_of_origin", JsonObjectUtils.getString(biblio_data, "country_of_origin", "")));
+
+               /*Programming Languages*/
+               ArrayNode programming_languages = (ArrayNode) biblio_data.get("programming_languages");
+               return_data.put("programming_languages_list", programming_languages);
+               return_data.put("has_programming_languages", programming_languages.size() > 0);
+
+               /*Version Number*/
+               return_data.put("version_number", JsonObjectUtils.getString(biblio_data, "version_number", ""));
+               return_data.put("has_version_number", StringUtils.isNotBlank(JsonObjectUtils.getString(biblio_data, "version_number", "")));
 
                /*Citation formats*/
                return_data.put("mla", getMLAFormat(biblio_data));
