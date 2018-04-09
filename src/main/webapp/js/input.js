@@ -221,7 +221,6 @@ var parseErrorResponse = function parseErrorResponse(jqXhr, exception) {
 };
 
 var parseSearchResponse = mobx.action("Parse Search Response", function parseSearchResponse(data) {
-    //console.log(data.metadata.owner);
     if(document.getElementById('owner-email-address')){
         $("#owner-email-address").html(data.metadata.owner);
     }

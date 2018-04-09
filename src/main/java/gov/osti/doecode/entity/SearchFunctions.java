@@ -10,12 +10,9 @@ import gov.osti.doecode.utils.JsonObjectUtils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -39,10 +36,7 @@ public class SearchFunctions {
      public static final DateTimeFormatter SEARCH_RESULTS_DESCRIPTION_FORMAT = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 
      public static ObjectNode conductSearch(HttpServletRequest request, ServletContext context, long page_num) {
-          ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-
-          //Go and actually search
-          return_data = doSearchPost(request, Init.backend_api_url);
+          ObjectNode return_data = doSearchPost(request, Init.backend_api_url);
 
           //Get the search form data and get teh page number
           ObjectNode search_form_data = (ObjectNode) return_data.get("search_form_data");
@@ -80,7 +74,7 @@ public class SearchFunctions {
 
           post_data.put("accessibility", handleRequestArray(request.getParameter("accessibility")));
           post_data.put("licenses", handleRequestArray(request.getParameter("licenses")));
-          post_data.put("programmingLanguages", handleRequestArray(request.getParameter("programming_languages")));
+          post_data.put("programming_languages", handleRequestArray(request.getParameter("programming_languages")));
           post_data.put("research_organization", handleRequestArray(request.getParameter("research_organization")));
           post_data.put("sponsoring_organization", handleRequestArray(request.getParameter("sponsoring_organization")));
           post_data.put("software_type", handleRequestArray(request.getParameter("software_type")));
@@ -250,10 +244,17 @@ public class SearchFunctions {
 
                search_description_list.add(makeSearchDescriptionObjectArray("Software Type", JsonObjectUtils.parseArrayNode(software_type_array), "software_type", software_type_display_vals));
           }
+
           //Licenses
           String license_array = JsonObjectUtils.getString(post_data, "licenses", "");
           if (StringUtils.isNotBlank(license_array) && JsonObjectUtils.parseArrayNode(license_array).size() > 0) {
                search_description_list.add(makeSearchDescriptionObjectArray("Licenses", JsonObjectUtils.parseArrayNode(license_array), "licenses", null));
+          }
+
+          //Programming Languages
+          String programming_languages_array = JsonObjectUtils.getString(post_data, "programming_languages", "");
+          if (StringUtils.isNotBlank(programming_languages_array) && JsonObjectUtils.parseArrayNode(programming_languages_array).size() > 0) {
+               search_description_list.add(makeSearchDescriptionObjectArray("Programming Language:", JsonObjectUtils.parseArrayNode(programming_languages_array), "programming_languages", null));
           }
 
           //Research Organization
@@ -593,6 +594,7 @@ public class SearchFunctions {
           return_data.put("research_org_list", DOECODEServletContextListener.getJsonList(DOECODEJson.RESEARCH_KEY));
           return_data.put("sponsor_org_list", DOECODEServletContextListener.getJsonList(DOECODEJson.SPONSOR_ORG_KEY));
           return_data.put("sort_list", DOECODEServletContextListener.getJsonList(DOECODEJson.SEARCH_SORT_KEY));
+          return_data.put("programming_languages_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
 
           return return_data;
      }

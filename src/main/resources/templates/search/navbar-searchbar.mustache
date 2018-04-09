@@ -76,6 +76,17 @@
 			      </div>
 
 			      <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
+				   <label for='navbar-searchbar-programming_languages' class='adv-search-dropdown-label'>Programming Languages:</label>
+			      </div>
+			      <div class='col-xs-12 no-col-padding-left no-col-padding-right'>
+				   <select class='pure-input-1 doecode-chosen-select' title='Programming Languages' id='navbar-searchbar-programming_languages' data-allowcustom="true" data-placeholder='Select your programming language(s)' multiple>
+					{{#each adv_search_lists.programming_languages_list}}
+					<option title='{{title}}' value='{{value}}'>{{label}}</option>
+					{{/each}}
+				   </select>
+			      </div>
+
+			      <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
 				   <label for='navbar-searchbar-research_organization' class='adv-search-dropdown-label'>Research Organization:</label>
 			      </div>
 			      <div class='col-xs-12 no-col-padding-left no-col-padding-right'>

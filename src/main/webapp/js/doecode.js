@@ -56,6 +56,12 @@ var triggerAdvancedSearch = function () {
         $("#search-licenses").val(JSON.stringify(licenses_vals));
     }
 
+    //Programming Languages
+    var programming_languages_vals = $("#advanced-search-programming_languages").val();
+    if (programming_languages_vals.length > 0) {
+        $("#search-programming_languages").val(JSON.stringify(programming_languages_vals));
+    }
+
     //Research Organization
     var research_orgs = $("#advanced-search-research_organization").val();
     if (research_orgs.length > 0) {
@@ -115,6 +121,12 @@ var triggerDropdownAdvancedSearch = function () {
     var licenses_vals = $("#navbar-searchbar-licenses").val();
     if (licenses_vals.length > 0) {
         $("#search-licenses").val(JSON.stringify(licenses_vals));
+    }
+
+    //Programming Languages
+    var programming_languages_vals = $("#navbar-searchbar-programming_languages").val();
+    if (programming_languages_vals.length > 0) {
+        $("#search-programming_languages").val(JSON.stringify(programming_languages_vals));
     }
 
     //Research Organization
