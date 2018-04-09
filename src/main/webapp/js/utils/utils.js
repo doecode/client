@@ -35,9 +35,9 @@ function doAjax(methodType, url, successCallback, data, errorCallback, dataType,
         dataType = "json";
     }
 
-    if(contentType===undefined){
-        contentType =  "application/json";
-        
+    if (contentType === undefined) {
+        contentType = "application/json";
+
     }
 
     $.ajax({
@@ -94,7 +94,6 @@ function doAuthenticatedAjax(methodType, url, successCallback, data, errorCallba
             request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
         },
         dataType: 'json',
-        contentType: "application/json",
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
         success: function success(data) {

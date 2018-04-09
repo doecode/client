@@ -1,0 +1,45 @@
+{{> wrapper/header}}
+<input type="hidden" id="poc-admin-page-identifier"/>
+<div class="row not-so-wide-row">
+     <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1 col-xs-12">
+	  <div class="center-text">
+	       <h2 class="static-content-title">DOE CODE Site Administration</h2>
+	       <br/>
+	  </div>
+	  <div>
+	       <div class='row'>
+		    <div class='col-lg-6 col-lg-offset-3 col-xs-12 center-text'>
+			 <label for='poc-site-list' class='control-label'>Sites</label>
+			 <br/>
+			 <select id='poc-site-list' class='form-control pure-input-1'>
+			      <option></option>
+			      <option value=' ' title='New Site'>New Site</option>
+			 </select>
+		    </div>
+	       </div>
+
+	       <div class='row' id='poc-site-list-container'>
+		    <div class='col-xs-12'>
+			 <label class='control-label' for='new-site-code'></label>
+			 <input type='text' id='new-site-code' class='form-control pure-input-1' style='display:none;'/>
+			 <br/>
+			 <table id="poc-admin-email-list" class="table table-hover table-striped">
+			      <thead>
+				   <tr>
+					<th>Email Address</th>
+					<th></th>
+				   </tr>
+			      </thead>
+			      <tbody>
+				   <tr>
+					<td><input type="text" placeholder="New POC Email Address" id="new-poc-email-address" class="form-control pure-input-1"/></td>
+					<td><span class="fa fa-plus-circle poc-add-new-email" title="Add New Email"></span></td>
+				   </tr>
+			      </tbody>
+			 </table>
+		    </div>
+	       </div>
+	  </div>
+     </div>
+</div>
+{{> wrapper/footer}}

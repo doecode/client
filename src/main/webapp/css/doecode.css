@@ -1682,3 +1682,17 @@ div.Select>div.Select-control input {
     font-size:20px;
 }
 
+/*Point of Contact Manager*/
+.poc-add-new-email{
+    color:green;
+    cursor: pointer;
+    font-size:23px !important;
+    padding-top:5px;
+}
+
+.poc-remove-email{
+    color:red;
+    cursor: pointer;
+    font-size:23px !important;
+    padding-top:5px;
+}

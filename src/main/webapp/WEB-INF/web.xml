@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <display-name>DOE CODE Client Web Application</display-name>
+
     <session-config>
         <session-timeout>
             45
@@ -133,6 +134,16 @@
         <servlet-name>Other</servlet-name>
         <url-pattern>/gitlab-signup-result</url-pattern>
         <url-pattern>/gitlab-signup</url-pattern>
+    </servlet-mapping>
+    <!--Site-->
+    <servlet>
+        <servlet-name>Site</servlet-name>
+        <servlet-class>gov.osti.doecode.pagemappings.Site</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Site</servlet-name>
+        <url-pattern>/site-admin</url-pattern>
+        <url-pattern>/poc-admin</url-pattern>
     </servlet-mapping>
     <!--500 pages, 404's, etc-->
     <servlet>

@@ -63,6 +63,10 @@ public class TemplateUtils {
      public static final String TEMPLATE_PENDING_APPROVAL = "pending";
      public static final String TEMPLATE_SIGNIN_STATUS = "SigninStatus";
      public static final String TEMPLATE_HELP = "help";
+     
+     //Site
+     public static final String TEMPLATE_SITE_ADMIN = "site-admin";
+     public static final String TEMPLATE_POC_ADMIN = "poc-admin";
 
      //Error Pages
      public static final String TEMPLATE_404_PAGE = "page-not-found";
