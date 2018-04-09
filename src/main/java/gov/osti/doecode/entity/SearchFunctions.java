@@ -80,6 +80,7 @@ public class SearchFunctions {
 
           post_data.put("accessibility", handleRequestArray(request.getParameter("accessibility")));
           post_data.put("licenses", handleRequestArray(request.getParameter("licenses")));
+          post_data.put("programmingLanguages", handleRequestArray(request.getParameter("programming_languages")));
           post_data.put("research_organization", handleRequestArray(request.getParameter("research_organization")));
           post_data.put("sponsoring_organization", handleRequestArray(request.getParameter("sponsoring_organization")));
           post_data.put("software_type", handleRequestArray(request.getParameter("software_type")));
