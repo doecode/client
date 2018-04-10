@@ -1700,6 +1700,14 @@ div.Select>div.Select-control input {
     padding-top:5px;
 }
 
+#poc-admin-email-list thead > tr > th:first-child{
+    padding-left:0px;
+}
+
+#poc-admin-email-list > tbody > tr > td:first-child{
+    padding-left:0px;
+}
+
 .form-control-feedback{
     line-height:34px !important;
 }
