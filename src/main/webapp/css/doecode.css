@@ -93,6 +93,9 @@ html h3 {
 }
 
 /*VVV About page VVV*/
+.error-color {
+    color: #a94442;
+}
 
 .bgWhite {
     background: #F9F9F9 !important;
@@ -516,7 +519,7 @@ html h3 {
     margin-bottom: -1px;
 }
 
-.thin-row {
+.not-so-wide-row {
     margin-right: 0px !important;
     margin-left: 0px !important;
 }
@@ -1695,4 +1698,8 @@ div.Select>div.Select-control input {
     cursor: pointer;
     font-size:23px !important;
     padding-top:5px;
+}
+
+.form-control-feedback{
+    line-height:34px !important;
 }
