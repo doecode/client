@@ -519,5 +519,31 @@ var populateAdvancedSearchForm = function (id_prefix) {
     });
 };
 
+/**
+ * Takes a, and returns an array with all of the indexes that are duplicates. If the list is empty, assume there are no duplicates
+ * 
+ */
+var checkForDuplicates = function (list) {
+    var duplicate_indexes = [];
+    for (var i = 0; i < list.length; i++) {
+        //If this index hasn't already been been flagged as a duplicate, continue
+        if (duplicate_indexes.indexOf(i) < 0) {
+            var current_val = list[i];
+            //For every other item in the list, go through and gather the indexes of each duplicate
+            for (var x = i + 1; x < list.length; x++) {
+                var check_val = list[x];
+                //Make sure again that indexes that have already been gathered aren't gathered again
+                if (duplicate_indexes.indexOf(x) < 0 && current_val == check_val) {
+                    if (duplicate_indexes.indexOf(i) < 0) {
+                        duplicate_indexes.push(i);
+                    }
+                    duplicate_indexes.push(x);
+                }
+            }
+        }
+    }
+    return duplicate_indexes;
+};
+
 const ADV_DROPDOWN_CLOSE = 'CLOSE';
 const ADV_DROPDOWN_OPEN = 'OPEN';

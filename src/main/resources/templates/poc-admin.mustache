@@ -12,31 +12,46 @@
 			 <label for='poc-site-list' class='control-label'>Sites</label>
 			 <br/>
 			 <select id='poc-site-list' class='form-control pure-input-1'>
-			      <option></option>
+			      <option selected></option>
 			      <option value=' ' title='New Site'>New Site</option>
 			 </select>
 		    </div>
 	       </div>
 
-	       <div class='row' id='poc-site-list-container'>
-		    <div class='col-xs-12'>
-			 <label class='control-label' for='new-site-code'></label>
-			 <input type='text' id='new-site-code' class='form-control pure-input-1' style='display:none;'/>
+	       <div class='row' id='poc-site-list-container' style="display:none;">
+		    <div class="col-xs-12">
 			 <br/>
+			 <div class="has-feedback center-text">
+			      <label class="control-label normal-weight biblio-title" id="poc-message"></label>
+			 </div>
+		    </div>
+		    <div class="col-lg-4 col-md-6 col-xs-12">
+			 <br/>
+			 <br/>
+			 <label class='control-label' for='site-code'>Site Code:</label>
+			 <input type='text' id='site-code' class='form-control pure-input-1'/>
+			 <br/>
+		    </div>
+		    <div class='col-xs-12'>
 			 <table id="poc-admin-email-list" class="table table-hover table-striped">
 			      <thead>
 				   <tr>
 					<th>Email Address</th>
+					<th class="center-text">Active?</th>
 					<th></th>
 				   </tr>
 			      </thead>
-			      <tbody>
+			      <tbody class="center-text">
 				   <tr>
-					<td><input type="text" placeholder="New POC Email Address" id="new-poc-email-address" class="form-control pure-input-1"/></td>
+					<td class=""><input type="text" placeholder="New POC Email Address" id="new-poc-email-address" class="form-control pure-input-1 new-poc-entry"/></td>
+					<td><input type="checkbox" checked/></td>
 					<td><span class="fa fa-plus-circle poc-add-new-email" title="Add New Email"></span></td>
 				   </tr>
 			      </tbody>
 			 </table>
+		    </div>
+		    <div class="col-xs-12 right-text">
+			 <button id="save-changes-btn" title="Submit Project" type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn"><span class='fa fa-save'></span> Save</button>
 		    </div>
 	       </div>
 	  </div>
