@@ -174,7 +174,7 @@ public class DOECODEJson {
           return on;
      }
 
-     public final void UPDATE_REMOTE_LISTS(ServletContext context) {
+     public final void UPDATE_REMOTE_LISTS(ServletContext context) throws Exception{
           String authorityapi_base_url = context.getInitParameter("authority_base_url");
 
           //Countries

@@ -178,6 +178,24 @@
                             <goal>minify</goal>
                         </goals>
                     </execution>
+                     <execution>
+                        <id>minify-site</id>
+                        <phase>compile</phase>
+                        <configuration>
+                            <charset>UTF-8</charset>
+                            <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+                            <webappTargetDir>${basedir}/target/${app_name}/</webappTargetDir>
+                            <jsSourceDir>js</jsSourceDir>
+                            <jsSourceFiles>
+                                <jsSourceFile>site.js</jsSourceFile>
+                            </jsSourceFiles>
+                            <jsFinalFile>site.js</jsFinalFile>
+                            <nosuffix>true</nosuffix>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
                     <!--Minify Everything css files-->
                     <execution>
                         <id>minify-everything-css</id>

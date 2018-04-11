@@ -157,11 +157,25 @@ var submitPOCChanges = function () {
             if (email_lists.length < 1) {
                 showPOCMessage(true, 'You must enter at least one email to save', 'has-error');
             } else {
-                //Gather emails, save
-                var post_data = {
-                    emails: email_lists,
-                    site_code: site_code
+                //Gather emails, active states, etc
+                var emails = [];
+                $("#poc-admin-email-list > tbody > tr:not(:last-child)").each(function(){
+                    var self = this;
+                    var email_address = $(self).find('td:first-child > input[type=text]').val();
+                    var is_checked = $(self).find('td:nth-child(2) > input[type=checkbox]').is(':checked');
+                    
+                    emails.push({
+                        email_address:email_address,
+                        active:is_checked
+                    });
+                });
+                
+                var post_data=  {
+                    site:site_code,
+                    emails:emails
                 };
+                
+                console.log(JSON.stringify(post_data));
             }
         }
     } else {
