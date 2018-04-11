@@ -440,8 +440,15 @@ var parseUpdateLoginNameStatusError = function (xhr) {
 var updateLoginNameStatus = function (post_data, successcallback, failcallback) {
     var successCall = (successcallback === undefined) ? parseUpdateLoginNameStatusData : successcallback;
     var failcall = (failcallback === undefined) ? parseUpdateLoginNameStatusError : failcallback;
-    
+
     doAjax('POST', '/' + APP_NAME + '/update-login-status-name', successCall, post_data, failcall);
+};
+
+var setLoginNameStatus = function (post_data, successcallback, failcallback) {
+    var successCall = (successcallback === undefined) ? parseUpdateLoginNameStatusData : successcallback;
+    var failcall = (failcallback === undefined) ? parseUpdateLoginNameStatusError : failcallback;
+
+    doAjax('POST', '/' + APP_NAME + '/set-login-status-name', successCall, post_data, failcall);
 };
 
 var parseNewAPIKeyData = function (data) {
@@ -786,13 +793,14 @@ if (document.getElementById('login-page-identifier')) {
                 //Now that we're logged in, let's set some local storage attributes
                 setLoggedInAttributes(data);
                 //Send up our login data for java to do content with
-                updateLoginNameStatus(data, function (return_data) {
-                    $("#signin-status-big-screens,#signin-status-small-screens").html(return_data.signin_html);
-                    $("#email").val(return_data.email);
-                    $("#first_name").val(return_data.first_name);
-                    $("#last_name").val(return_data.last_name);
-                    setUpUserAccountPage();
-                }, function () {});
+                setLoginNameStatus(data,
+                        function (return_data) {
+                            $("#signin-status-big-screens,#signin-status-small-screens").html(return_data.signin_html);
+                            $("#email").val(return_data.email);
+                            $("#first_name").val(return_data.first_name);
+                            $("#last_name").val(return_data.last_name);
+                            setUpUserAccountPage();
+                        }, function () {});
 
             },
             error: function (xhr) {

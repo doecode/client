@@ -20,40 +20,26 @@ public class Site extends HttpServlet {
           request.setCharacterEncoding("UTF-8");
           String URI = request.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
-          String site_url = Init.site_url;
 
-          boolean is_logged_in = UserFunctions.isUserLoggedIn(request);
-          if (is_logged_in) {
-               //Increment time
-               response.addCookie(UserFunctions.updateUserSessionTimeout(request));
-          } else {
-               UserFunctions.redirectUserToLogin(request, response, site_url);
-               return;
+          String page_title = "";
+          String template = "";
+          ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+
+          switch (remaining) {
+               case "site-admin":
+                    page_title = "DOE CODE: Site Administration";
+                    template = TemplateUtils.TEMPLATE_SITE_ADMIN;
+                    break;
+               case "poc-admin":
+                    page_title = "DOECODE: Point of Contact Administration";
+                    template = TemplateUtils.TEMPLATE_POC_ADMIN;
+                    break;
           }
 
-          if (StringUtils.containsIgnoreCase(request.getContentType(), "application/json")) {
-
-          } else {
-               String page_title = "";
-               String template = "";
-               ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-               ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-
-               switch (remaining) {
-                    case "site-admin":
-                         page_title = "DOE CODE: Site Administration";
-                         template = TemplateUtils.TEMPLATE_SITE_ADMIN;
-                         break;
-                    case "poc-admin":
-                         page_title = "DOECODE: Point of Contact Administration";
-                         template = TemplateUtils.TEMPLATE_POC_ADMIN;
-                         break;
-               }
-               
-               jsFilesList.add("site");
-               output_data = TemplateUtils.GET_COMMON_DATA(output_data, "", jsFilesList, null, request);
-               TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
-          }
+          jsFilesList.add("site");
+          output_data = TemplateUtils.GET_COMMON_DATA(output_data, "", jsFilesList, null, request);
+          TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
      }
 
      @Override

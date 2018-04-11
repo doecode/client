@@ -25,9 +25,6 @@ public class User extends HttpServlet {
           request.setCharacterEncoding("UTF-8");
           String URI = request.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
-          String site_url = Init.site_url;
-
-          boolean is_logged_in = UserFunctions.isUserLoggedIn(request);
 
           if (StringUtils.containsIgnoreCase(request.getContentType(), "application/json")) {
                ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
@@ -53,11 +50,6 @@ public class User extends HttpServlet {
                }
                JsonObjectUtils.writeTo(return_data, response);
           } else {
-               if (is_logged_in) {
-                    //Increment time
-                    response.addCookie(UserFunctions.updateUserSessionTimeout(request));
-               }
-
                String page_title = "";
                String template = "";
                ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
@@ -72,19 +64,10 @@ public class User extends HttpServlet {
                               output_data.put("passcode", request.getParameter("passcode"));
                               output_data.put("page_warning_message", "Please change your password");
                          } else {
-                              if (!is_logged_in) {
-                                   UserFunctions.redirectUserToLogin(request, response, site_url);
-                                   return;
-                              }
-                              ObjectNode current_user_data = UserFunctions.getAccountPageData(request);
-                              output_data.put("current_user_data", current_user_data);
+                              output_data.put("current_user_data", UserFunctions.getAccountPageData(request));
                          }
                          break;
                     case "user-admin":
-                         if (!is_logged_in) {
-                              UserFunctions.redirectUserToLogin(request, response, site_url);
-                              return;
-                         }
                          page_title = "DOE CODE: User Administration";
                          template = TemplateUtils.TEMPLATE_USER_ADMIN;
                          break;
@@ -117,10 +100,6 @@ public class User extends HttpServlet {
                          output_data = UserFunctions.getUserRegistrationData(request.getParameter("confirmation"));
                          break;
                     case "help":
-                         if (!is_logged_in) {
-                              UserFunctions.redirectUserToLogin(request, response, site_url);
-                              return;
-                         }
                          page_title = "DOE CODE: Help";
                          template = TemplateUtils.TEMPLATE_HELP;
                          break;

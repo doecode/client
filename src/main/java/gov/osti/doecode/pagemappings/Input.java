@@ -53,16 +53,6 @@ public class Input extends HttpServlet {
           //Some of the option steps, and whether or not we should hide them
           boolean show_optional_toggle = false;
 
-          boolean is_logged_in = UserFunctions.isUserLoggedIn(request);
-
-          if (!is_logged_in) {
-               UserFunctions.redirectUserToLogin(request, response, site_url);
-               return;
-          } else {
-               //Increment time
-               response.addCookie(UserFunctions.updateUserSessionTimeout(request));
-          }
-
           if (remaining.equals("submit")) {
                String code_id = request.getParameter("code_id");
                output_data = InputFunctions.getInputFormLists(getServletContext());

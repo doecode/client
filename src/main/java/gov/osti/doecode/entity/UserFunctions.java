@@ -71,6 +71,7 @@ public class UserFunctions {
 
      public static Cookie makeUserCookie(ObjectNode user_data) {
           String user_data_encoded = Base64.encodeBase64String(user_data.toString().getBytes());
+          
           Cookie c = new Cookie("user_data", user_data_encoded);
           return c;
      }
