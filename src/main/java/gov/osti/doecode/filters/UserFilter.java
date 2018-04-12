@@ -6,13 +6,13 @@ package gov.osti.doecode.filters;
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
 import java.io.IOException;
-import java.util.Arrays;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -34,18 +34,44 @@ public class UserFilter implements Filter {
           HttpServletResponse res = (HttpServletResponse) response;
           String URI = req.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
-          //TODO: Add support for checking user permissions on the backends
+          //TODO: Add support for checking user permissions on the backend
 
           boolean is_logged_in = UserFunctions.isUserLoggedIn(req);
-          if (is_logged_in || (!is_logged_in && StringUtils.equals(remaining, "account"))) {
-               //Increment time
+          boolean password_needs_reset = StringUtils.equals(UserFunctions.getOtherUserCookieValue(req, "needs_password_reset"), "true");
+          //Determine the course of action, based on the need for a login
+          if ((is_logged_in && !password_needs_reset) || (is_logged_in && password_needs_reset && StringUtils.equals(remaining, "account"))) {
+               //If they are logged in, and don't need a password reset, or, if they need a password reset, and are going to the account page, they can continue
                res.addCookie(UserFunctions.updateUserSessionTimeout(req));
+               if (password_needs_reset) {
+                    Cookie needs_reset_cookie = UserFunctions.getOtherUserCookie(req, "needs_password_reset");
+                    needs_reset_cookie.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
+                    res.addCookie(needs_reset_cookie);
+               }
+
+          } else if (is_logged_in && password_needs_reset && !StringUtils.equals(remaining, "account")) {
+               //If they try to redirect to a logged-in page (that isn't account), but need a password reset, redirect them to the account page
+               res.sendRedirect(Init.site_url + "account");
+
+          } else if (!is_logged_in && StringUtils.equals(remaining, "account")) {
+               //If they are not logged in, but are going to the account page with a passcode
+               String passcode_param = req.getParameter("passcode");
+
+               //If they don't have a passcode either way, redirect them to the login
+               if (StringUtils.isBlank(passcode_param)) {
+                    UserFunctions.redirectUserToLogin(req, res, Init.site_url);
+                    return;
+               }
+
+               res.addCookie(UserFunctions.updateUserSessionTimeout(req));
+               if (password_needs_reset) {
+                    Cookie needs_reset_cookie = UserFunctions.getOtherUserCookie(req, "needs_password_reset");
+                    needs_reset_cookie.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
+                    res.addCookie(needs_reset_cookie);
+               }
           } else {
                UserFunctions.redirectUserToLogin(req, res, Init.site_url);
                return;
           }
-
-          response.setContentType("text/html; charset=UTF-8");
           chain.doFilter(request, response);
      }
 

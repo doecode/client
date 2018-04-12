@@ -5,17 +5,15 @@ package gov.osti.doecode.pagemappings;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import gov.osti.doecode.entity.DOECODEJson;
 import gov.osti.doecode.entity.SearchFunctions;
 import gov.osti.doecode.entity.UserFunctions;
-import gov.osti.doecode.listeners.DOECODEServletContextListener;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
-import java.math.BigDecimal;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -137,6 +135,11 @@ public class Dissemination extends HttpServlet {
           } else {
                //Increment time
                response.addCookie(UserFunctions.updateUserSessionTimeout(request));
+               if (StringUtils.equals(UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"), "true")) {
+                    Cookie needs_reset_cookie = UserFunctions.getOtherUserCookie(request, "needs_password_reset");
+                    needs_reset_cookie.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
+                    response.addCookie(needs_reset_cookie);
+               }
           }
 
           //Send in this object, and get a hold of the common data, like the classes needed to render the homepage correctly and such

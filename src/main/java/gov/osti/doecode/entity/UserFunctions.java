@@ -55,6 +55,21 @@ public class UserFunctions {
           return return_data;
      }
 
+     public static String getOtherUserCookieValue(HttpServletRequest request, String key) {
+          String return_data = "";
+          if (request.getCookies() != null) {
+               for (Cookie c : request.getCookies()) {
+                    if (StringUtils.equals(c.getName(), key)) {
+                         log.info("Key is: " + key);
+                         log.info("Value is: " + c.getValue());
+                         return_data = c.getValue();
+                         break;
+                    }
+               }
+          }
+          return return_data;
+     }
+
      public static boolean isUserLoggedIn(HttpServletRequest request) {
           ObjectNode user_data = UserFunctions.getUserDataFromCookie(request);
           boolean is_logged_in = JsonObjectUtils.getBoolean(user_data, "is_logged_in", false);
@@ -71,7 +86,7 @@ public class UserFunctions {
 
      public static Cookie makeUserCookie(ObjectNode user_data) {
           String user_data_encoded = Base64.encodeBase64String(user_data.toString().getBytes());
-          
+
           Cookie c = new Cookie("user_data", user_data_encoded);
           return c;
      }
@@ -92,20 +107,27 @@ public class UserFunctions {
           return return_data;
      }
 
+     public static boolean hasRecentlyDonePasswordReset(HttpServletRequest request) {
+          String needs_password_reset = UserFunctions.getOtherUserCookieValue(request, "needs_password_reset");
+
+          return StringUtils.equals(needs_password_reset, "true");
+     }
+
      public static Cookie updateUserSessionTimeout(HttpServletRequest request) {
           ObjectNode user_data = getUserDataFromCookie(request);
           String session_timeout = JsonObjectUtils.getString(user_data, "session_timeout", "");
           if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, session_timeout)) {
                user_data.put("session_timeout", LocalDateTime.now().plus(Init.SESSION_TIMEOUT_MINUTES, ChronoUnit.MINUTES).format(SESSION_TIMEOUT_FORMAT));
           }
+          
           return makeUserCookie(user_data);
      }
 
-     public static Cookie getLastLocationCookie(HttpServletRequest request) {
+     public static Cookie getOtherUserCookie(HttpServletRequest request, String cookie_name) {
           Cookie return_cookie = null;
           if (request.getCookies() != null) {
                for (Cookie c : request.getCookies()) {
-                    if (StringUtils.equals(c.getName(), "requested_url")) {
+                    if (StringUtils.equals(c.getName(), cookie_name)) {
                          return_cookie = c;
                          break;
                     }

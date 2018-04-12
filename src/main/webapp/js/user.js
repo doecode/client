@@ -391,26 +391,32 @@ var saveUserAccountChanges = function () {
         save_password_changes = true;
     }
 
-    //Save changes
-    if (save_name_changes) {
-        doAuthenticatedAjax('POST', API_BASE + 'user/update', function (data) {
-            if (save_password_changes) {
-                savePasswordChanges(password_post_data, true, data);
-            } else {
-                updateLoginNameStatus(data);
-            }
-        }, name_post_data, parseAccountUpdateError);
-
-    } else if (save_password_changes) {
-        savePasswordChanges(password_post_data, false);
-
+    //If the user has a passcode, they must change their password
+    if ($("#user-passcode").val() && !save_password_changes) {
+        $("#account-error-message").html('You must change your password');
     } else {
-        $("#account-error-message").html('No changes were made');
+        //Save changes
+        if (save_name_changes) {
+            doAuthenticatedAjax('POST', API_BASE + 'user/update', function (data) {
+                if (save_password_changes) {
+                    savePasswordChanges(password_post_data, true, data);
+                } else {
+                    updateLoginNameStatus(data);
+                }
+            }, name_post_data, parseAccountUpdateError);
+
+        } else if (save_password_changes) {
+            savePasswordChanges(password_post_data, true, name_post_data);
+
+        } else {
+            $("#account-error-message").html('No changes were made');
+        }
     }
 };
 
 var savePasswordChanges = function (post_data, update_login_status_name, login_name_status_data) {
     doAuthenticatedAjax('POST', API_BASE + 'user/changepassword', function (data) {
+        console.log("Update login name status: " + update_login_status_name);
         if (update_login_status_name) {
             updateLoginNameStatus(login_name_status_data);
         } else {
@@ -783,7 +789,7 @@ if (document.getElementById('login-page-identifier')) {
 
 } else if (document.getElementById('user-account-page-identifier')) {
     var passcode = $("#user-passcode").val();
-    if ($("#user-passcode").val()) {
+    if (passcode) {
         $.ajax(API_BASE + "user/login", {
             cache: false,
             contentType: "application/json",

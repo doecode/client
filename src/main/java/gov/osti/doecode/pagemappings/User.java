@@ -17,15 +17,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 
 public class User extends HttpServlet {
-
+     
      private Logger log = LoggerFactory.getLogger(User.class.getName());
-
+     
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {
           request.setCharacterEncoding("UTF-8");
           String URI = request.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
-
+          
+          log.info("Calling a thing: " +remaining);
           if (StringUtils.containsIgnoreCase(request.getContentType(), "application/json")) {
                ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
                ObjectNode request_data = JsonObjectUtils.parseObjectNode(request.getReader());
@@ -33,7 +34,7 @@ public class User extends HttpServlet {
                switch (remaining) {
                     case "set-login-status-name":
                          return_data = UserFunctions.setUserDataForCookie(request_data);
-                         Cookie last_location = UserFunctions.getLastLocationCookie(request);
+                         Cookie last_location = UserFunctions.getOtherUserCookie(request, "requested_url");
                          if (null != last_location) {
                               return_data.put("requested_url", last_location.getValue());
                          }
@@ -41,6 +42,12 @@ public class User extends HttpServlet {
                          break;
                     case "update-login-status-name":
                          return_data = UserFunctions.updateUserCookie(request, request_data);
+                         log.info("cool, updating the things");
+                         //If this is being called, and there are values for needs_password_reset & passcode, clear them out
+                         if (UserFunctions.hasRecentlyDonePasswordReset(request)) {
+                              log.info("Cool, going to clear out that pesky cookie");
+                              response.addCookie(new Cookie("needs_password_reset", null));
+                         }
                          add_signin_html = true;
                          break;
                }
@@ -54,13 +61,16 @@ public class User extends HttpServlet {
                String template = "";
                ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
                ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-
+               
                switch (remaining) {
                     case "account":
                          page_title = "DOE CODE: Account";
                          template = TemplateUtils.TEMPLATE_USER_ACCOUNT;
                          //If they have a passcode, we need to let them on in, and then take care of things from there
                          if (StringUtils.isNotBlank(request.getParameter("passcode"))) {
+                              Cookie c = new Cookie("needs_password_reset", "true");
+                              c.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
+                              response.addCookie(c);
                               output_data.put("passcode", request.getParameter("passcode"));
                               output_data.put("page_warning_message", "Please change your password");
                          } else {
@@ -93,6 +103,8 @@ public class User extends HttpServlet {
                          template = TemplateUtils.TEMPLATE_USER_LOGOUT;
                          output_data.put("user_data", new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE));
                          response.addCookie(new Cookie("user_data", null));
+                         response.addCookie(new Cookie("needs_password_reset", null));
+                         response.addCookie(new Cookie("requested_url", null));
                          break;
                     case "confirmuser":
                          page_title = "DOE CODE: Confirm User";
@@ -106,24 +118,24 @@ public class User extends HttpServlet {
                     default:
                          break;
                }
-
+               
                jsFilesList.add("user");
-
+               
                output_data = TemplateUtils.GET_COMMON_DATA(output_data, "", jsFilesList, null, request);
                TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
           }
      }
-
+     
      @Override
      protected void doGet(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {
           processRequest(request, response);
      }
-
+     
      @Override
      protected void doPost(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {
           processRequest(request, response);
      }
-
+     
 }

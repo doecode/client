@@ -36,7 +36,7 @@ public class Site extends HttpServlet {
                     template = TemplateUtils.TEMPLATE_POC_ADMIN;
                     break;
           }
-
+          
           jsFilesList.add("site");
           output_data = TemplateUtils.GET_COMMON_DATA(output_data, "", jsFilesList, null, request);
           TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
