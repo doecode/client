@@ -17,15 +17,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 
 public class User extends HttpServlet {
-     
+
      private Logger log = LoggerFactory.getLogger(User.class.getName());
-     
+
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {
           request.setCharacterEncoding("UTF-8");
           String URI = request.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
-          
+
           if (StringUtils.containsIgnoreCase(request.getContentType(), "application/json")) {
                ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
                ObjectNode request_data = JsonObjectUtils.parseObjectNode(request.getReader());
@@ -58,7 +58,7 @@ public class User extends HttpServlet {
                String template = "";
                ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
                ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-               
+
                switch (remaining) {
                     case "account":
                          page_title = "DOE CODE: Account";
@@ -72,6 +72,10 @@ public class User extends HttpServlet {
                               output_data.put("page_warning_message", "Please change your password");
                          } else {
                               output_data.put("current_user_data", UserFunctions.getAccountPageData(request));
+                         }
+
+                         if (StringUtils.equals(UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"), "true")) {
+                              output_data.put("page_warning_message", "Please change your password");
                          }
                          break;
                     case "user-admin":
@@ -115,24 +119,24 @@ public class User extends HttpServlet {
                     default:
                          break;
                }
-               
+
                jsFilesList.add("user");
-               
+
                output_data = TemplateUtils.GET_COMMON_DATA(output_data, "", jsFilesList, null, request);
                TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
           }
      }
-     
+
      @Override
      protected void doGet(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {
           processRequest(request, response);
      }
-     
+
      @Override
      protected void doPost(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {
           processRequest(request, response);
      }
-     
+
 }
