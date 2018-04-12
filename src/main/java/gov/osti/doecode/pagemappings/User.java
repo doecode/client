@@ -26,7 +26,6 @@ public class User extends HttpServlet {
           String URI = request.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
           
-          log.info("Calling a thing: " +remaining);
           if (StringUtils.containsIgnoreCase(request.getContentType(), "application/json")) {
                ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
                ObjectNode request_data = JsonObjectUtils.parseObjectNode(request.getReader());
@@ -42,10 +41,8 @@ public class User extends HttpServlet {
                          break;
                     case "update-login-status-name":
                          return_data = UserFunctions.updateUserCookie(request, request_data);
-                         log.info("cool, updating the things");
                          //If this is being called, and there are values for needs_password_reset & passcode, clear them out
                          if (UserFunctions.hasRecentlyDonePasswordReset(request)) {
-                              log.info("Cool, going to clear out that pesky cookie");
                               response.addCookie(new Cookie("needs_password_reset", null));
                          }
                          add_signin_html = true;

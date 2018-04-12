@@ -60,8 +60,6 @@ public class UserFunctions {
           if (request.getCookies() != null) {
                for (Cookie c : request.getCookies()) {
                     if (StringUtils.equals(c.getName(), key)) {
-                         log.info("Key is: " + key);
-                         log.info("Value is: " + c.getValue());
                          return_data = c.getValue();
                          break;
                     }
