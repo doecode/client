@@ -1708,6 +1708,13 @@ div.Select>div.Select-control input {
     padding-left:0px;
 }
 
+.poc-large-text{
+    font-size:20px;
+}
+
+/*
+    Override to make sure checkboxes are aligned correctly
+*/
 .form-control-feedback{
     line-height:34px !important;
 }

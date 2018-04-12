@@ -1,16 +1,67 @@
 {{> wrapper/header}}
 <input type="hidden" id="site-admin-page-identifier"/>
 <div class="row not-so-wide-row">
-     <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1 col-xs-12 static-content center-text">
-	  <h2 class="static-content-title">DOE CODE Site Administration</h2>
-	  <br/>
-     </div>
-     <div class="no-col-padding-left col-xs-12">
-	  <div class="static-content form-select-container center-text">
-	       <div class="form-select-container">
-		    <a title='Site Point of Contact Admin' href="/{{app_name}}/poc-admin" class="pure-button pure-button-primary workflow-publish-btn white form-select-btn">
-			 Point of Contact Admin
-		    </a>
+     <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1 col-xs-12">
+	  <div class="center-text">
+	       <h2 class="static-content-title">DOE CODE Site Administration</h2>
+	  </div>
+	  <div>
+	       <div class='row'>
+		    <div class="col-xs-12">
+			 <br/>
+			 <div class="has-feedback center-text">
+			      <label class="control-label normal-weight poc-large-text" id="site-admin-message"></label>
+			 </div>
+		    </div>
+		    <div class='col-lg-6 col-lg-offset-3 col-xs-12 center-text'>
+			 <label for='site-list' id='sites-list-label' class='control-label'></label>
+			 <br/>
+			 <select id='site-list' class='form-control pure-input-1' disabled="">
+			      <option value='' selected></option>
+			 </select>
+		    </div>
+		    <div class='col-xs-12'>
+			 <hr/>
+		    </div>
+	       </div>
+
+	       <div class='row' id='site-list-container' style="display:none;">
+		    <div class="col-xs-12">
+			 <br/>
+			 <div class="has-feedback center-text">
+			      <label class="control-label normal-weight biblio-title" id="poc-message"></label>
+			 </div>
+		    </div>
+		    <div class="col-xs-12">
+			 <label class='control-label poc-large-text' >Site Code: </label><span id="site-code" class="control-label poc-large-text" ></span>
+			 <br/>
+			 <label class='control-label poc-large-text' >Lab Name: </label><span id='lab-name' class='control-label poc-large-text' ></span>
+			 <br/>
+			 <label class='control-label poc-large-text' >Email Domain(s): </label><span id='email-domains' class='control-label poc-large-text' ></span>
+		    </div>
+		    <div class='col-xs-12'>
+			 <br/>
+			 <div class='center-text poc-large-text' >
+			      Point of Contact Email Addresses
+			 </div>
+			 <table id="poc-admin-email-list" class="table table-hover table-striped">
+			      <thead>
+				   <tr>
+					<th>Email Address</th>
+					<th></th>
+				   </tr>
+			      </thead>
+			      <tbody class="center-text">
+				   <tr>
+					<td class=""><input type="text" placeholder="New POC Email Address" id="new-poc-email-address" class="form-control pure-input-1 new-poc-entry"/></td>
+					<td><span class="fa fa-plus-circle poc-add-new-email" title="Add New Email"></span></td>
+				   </tr>
+			      </tbody>
+			 </table>
+		    </div>
+		    <div class="col-xs-12 right-text">
+			 <button id="save-changes-btn" title="Save Entry" type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn"><span class='fa fa-save'></span> Save</button>
+		    </div>
 	       </div>
 	  </div>
      </div>
