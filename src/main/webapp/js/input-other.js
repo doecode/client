@@ -320,6 +320,8 @@ if (document.getElementById('confirmation-page-identifier')) {
     doAuthenticatedAjax('GET', API_BASE + 'metadata/projects', parseProjectsPageData, null, parseProjectsPageError);
 
 } else if (document.getElementById('approval-page-identifier')) {
+    checkHasRole('OSTI');
+    checkIsAuthenticated();
     //LOADING_PENDING_PROJECTS_OPTS
     setCommonModalMessage(LOADING_PENDING_PROJECTS_OPTS);
     showCommonModalMessage();

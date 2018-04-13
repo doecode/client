@@ -217,10 +217,9 @@ var submitPOCChanges = function () {
     });
 };
 
+checkHasRole('OSTI');
+checkIsAuthenticated();
 if (document.getElementById('site-admin-page-identifier')) {
-    checkHasRole('OSTI');
-    checkIsAuthenticated();
-
     //Get the site list
     $("#sites-list-label").html('Site list loading...');
     doAuthenticatedAjax('GET', API_BASE + 'site/info', function (data) {
