@@ -14,7 +14,8 @@ var contributor_orgs_table = null;
 var related_identifiers_table = null;
 
 var form = mobx.observable({
-    "allowSave": true
+    "allowSave": true,
+    "workflowStatus": ""
 });
 
 var developers_data_tbl_opts = {
@@ -231,6 +232,7 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     if (!software_type_id)
         metadata.setValue("software_type", $("#software_type").val());
 	    
+    form.workflowStatus = data.metadata.workflow_status;
     form.allowSave = (data.metadata.workflow_status == "" || data.metadata.workflow_status == "Saved");
     
     
@@ -450,6 +452,20 @@ mobx.autorun("Toggle Software Type", function () {
     }
 
     //mobx.whyRun();
+});
+
+mobx.autorun("Overwrite", function () {
+    // if submitting and announced project, pre-approval, show a warning.
+    if (form.workflowStatus == "Announced" && $("#page").val() == 'submit') {
+        $('#input-overwrite-msg-top').show();
+        $('#input-overwrite-msg-bottom').show();
+    }
+    else {
+        $('#input-overwrite-msg-top').hide();
+        $('#input-overwrite-msg-bottom').hide();
+    }
+
+    // mobx.whyRun();
 });
 
 
@@ -1666,11 +1682,12 @@ $(document).ready(mobx.action("Document Ready", function () {
 
     if ($("#page").val() == 'approve') {
         $('#input-help-anchor').hide();
-        $('#input-approve-msg').show();
+        $('#input-approve-msg-top').show();
+        $('#input-approve-msg-bottom').show();
         $('#input-approve-btn').show();
     }
 
-    //If this is the announce or approve page, we're going to open all of the panels
+    // if this is the announce or approve page, we're going to open all of the panels
     if ($('#page').val() == 'announce' || $('#page').val() == 'approve') {
         //$('.panel-collapse:not(".in")').collapse('show');
     }

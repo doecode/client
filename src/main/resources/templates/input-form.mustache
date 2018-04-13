@@ -15,7 +15,14 @@
 		    <label>Owned by: <span id='owner-email-address'></span></label><br/>
 		    {{/if}}
 		    <a id="input-help-anchor" title="More detailed information on this process can be found on our Help page" href="/{{app_name}}/help">More detailed information on this process can be found on our Help page</a>
-		    <span id="input-approve-msg" class="error-color" style="display: none">NOTICE: This is an Approval Only form!  ANY CHANGES MADE WILL BE LOST!</span>
+		    <div id="input-approve-msg-top" style="display: none; font-weight:bold">
+                <br/>
+                <span class="error-color">NOTICE: This is an Approval Only form!  ANY CHANGES MADE WILL BE LOST!</span>
+            </div>
+		    <div id="input-overwrite-msg-top" style="display: none; font-weight:bold">
+                <br/>
+                <span class="error-color">NOTICE: This record is pending approval.  If these updates are also needed in E-Link, select "Announce to E-Link" after submission.</span>
+            </div>
 	       </div>
 	  </div>
 	  <div class="panel-group" id="input-page-accordion" role="tablist" aria-multiselectable="true">
@@ -43,6 +50,12 @@
 	       <span class="fa fa-plus-square-o"></span>&nbsp;Show Additional Optional Fields
 	  </button>
 	  {{/if}}
+      <div id="input-approve-msg-bottom" class="col-xs-12 center-text" style="display:none; font-weight:bold; margin-bottom:15px">
+		    <span id="" class="error-color">NOTICE: This is an Approval Only form!  ANY CHANGES MADE WILL BE LOST!</span>
+      </div>
+      <div id="input-overwrite-msg-bottom" class="col-xs-12 center-text" style="display:none; font-weight:bold; margin-bottom:15px; margin-top:15px">
+		    <span id="input-overwrite-msg2" class="error-color">NOTICE: This record is pending approval.  If these updates are also needed in E-Link, select "Announce to E-Link" after submission.</span>
+      </div>
 	  <button id="input-submit-btn" title='Submit Project' type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style" style="display: none">
 	       Submit Project
 	  </button>
