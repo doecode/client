@@ -64,7 +64,7 @@ public class User extends HttpServlet {
                          page_title = "DOE CODE: Account";
                          template = TemplateUtils.TEMPLATE_USER_ACCOUNT;
                          //If they have a passcode, we need to let them on in, and then take care of things from there
-                         if (StringUtils.isNotBlank(request.getParameter("passcode"))) {
+                         if (StringUtils.isNotBlank(request.getParameter("passcode")) && !StringUtils.equals(UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"), "true")) {
                               Cookie c = new Cookie("needs_password_reset", "true");
                               c.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
                               response.addCookie(c);

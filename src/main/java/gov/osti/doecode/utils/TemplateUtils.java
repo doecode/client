@@ -63,7 +63,7 @@ public class TemplateUtils {
      public static final String TEMPLATE_PENDING_APPROVAL = "pending";
      public static final String TEMPLATE_SIGNIN_STATUS = "SigninStatus";
      public static final String TEMPLATE_HELP = "help";
-     
+
      //Site
      public static final String TEMPLATE_SITE_ADMIN = "site-admin";
      public static final String TEMPLATE_POC_ADMIN = "poc-admin";
@@ -177,7 +177,7 @@ public class TemplateUtils {
           user_data.put("has_osti_role", JsonObjectUtils.getBoolean(data, "has_osti_role", false));
           HashMap data_for_template = new HashMap();
           data_for_template.put("user_data", user_data);
-
+          data_for_template.put("app_name", Init.app_name);
           try {
                Template t = Init.handlebarsUser.compile(TEMPLATE_SIGNIN_STATUS);
                template_data = t.apply(data_for_template);
