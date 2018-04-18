@@ -31,7 +31,7 @@
 				   <label id="country-of-origin-lbl" class='control-label' for='country-of-origin'>Country of Origin</label>{{> tooltips/CountryOfOrigin}}
 			      </div>
 			      <div class="col-xs-12">
-				   <select class='pure-input-1 form-control' title='Sort' id='country-of-origin' data-placeholder='Select your Options' data-issingle='true' >
+				   <select class='pure-input-1 form-control' title='Sort' id='country-of-origin' data-placeholder='Select your Options' data-allowcustom="true" data-issingle='true' >
 					{{#each countries_list}}
 					<option title='{{title}}' value='{{value}}'>{{label}}</option>
 					{{/each}}
