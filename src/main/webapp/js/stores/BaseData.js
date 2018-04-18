@@ -28,14 +28,14 @@ var BaseData = function () {
     key: 'setValue',
     value: mobx.action("Set Value", function setValue(field, data) {
       this.fieldMap[field] = data;
-      
+
       if (field === 'accessibility') {
-	      var schemaRepo = this.infoSchema["repository_link"]; 
-	      var schemaLanding = this.infoSchema["landing_page"]; 
-	      var schemaFile = this.infoSchema["file_name"]; 
-	      
-	      this.setValue("open_source", (data !== 'CS'));
-	      
+	      var schemaRepo = this.infoSchema["repository_link"];
+	      var schemaLanding = this.infoSchema["landing_page"];
+	      var schemaFile = this.infoSchema["file_name"];
+
+	      this.setValue("open_source", (data.charAt(0) == 'O'));
+
 	      if (data == 'OS') {
 	        schemaRepo.required = "sub";
 	        schemaRepo.panel = "Repository Information";
@@ -46,12 +46,27 @@ var BaseData = function () {
 	        schemaFile.required = "";
 	        schemaFile.panel = "";
 	        schemaFile.completed = false;
-	        
+
             this.setValue("repository_link", this.getValue("repository_link") || this.getValue("landing_page"));
             this.setValue("landing_page", "");
-            
+
             this.setValue("file_name", "");
             this.setValue("files", []);
+	      }
+	      else if (data == 'CO') {
+	        schemaRepo.required = "";
+	        schemaRepo.panel = "";
+	        schemaRepo.error = "";
+	        schemaRepo.completed = false;
+	        schemaLanding.required = "";
+	        schemaLanding.panel = 'Repository Information';
+	        schemaLanding.error = "";
+	        schemaLanding.completed = false;
+	        schemaFile.required = "sub";
+	        schemaFile.panel = 'Supplemental Product Information';
+
+            this.setValue("landing_page", this.getValue("landing_page") || this.getValue("repository_link"));
+            this.setValue("repository_link", "");
 	      }
 	      else {
 	        schemaRepo.required = "";
@@ -62,17 +77,17 @@ var BaseData = function () {
 	        schemaLanding.panel = 'Repository Information';
 	        schemaFile.required = this.page == 'announce' ? "announ" : "";
 	        schemaFile.panel = 'Supplemental Product Information';
-	        
+
             this.setValue("landing_page", this.getValue("landing_page") || this.getValue("repository_link"));
             this.setValue("repository_link", "");
 	      }
       }
-      
-      if (field === 'software_type' && data == 'B') {  
-	      var schema = this.infoSchema["sponsoring_organizations"];  
+
+      if (field === 'software_type' && data == 'B') {
+	      var schema = this.infoSchema["sponsoring_organizations"];
 	      schema.required = "sub";
       }
-      
+
       if (field === 'doi_status') {  
 	      var schema = this.infoSchema["doi_infix"];    
 	      if (data == 'RES') {      

@@ -429,7 +429,7 @@ public class SearchFunctions {
                //Get the sponsorOrgRow number. The sponsorOrgRow number is where we start, plus 1, plus the index we're on
                newRow.put("list_number", ((start + 1) + i));
 
-               //Get teh classes that will contain the result sponsorOrgRow
+               //Get the classes that will contain the result sponsorOrgRow
                newRow.put("result_column_classes", (num_found > 9999) ? "col-sm-2 col-xs-12 search-result-count-column" : "col-sm-1 col-xs-2 search-result-count-column");
                newRow.put("result_subrow_classes", (num_found > 9999) ? "col-sm-10 col-xs-12 search-result-sub-row" : "col-sm-11 col-xs-10 search-result-sub-row");
 

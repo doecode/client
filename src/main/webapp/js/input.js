@@ -169,10 +169,13 @@ var updateDropzoneStyle = function (store, field, label, input, exclude_parenthe
 
 };
 
-var updateTextStyle = function (store, field, label, input, exclude_parenthetical_text) {
-    updateLabelStyle(store, field, label, exclude_parenthetical_text);  	
+var updateTextStyle = function (store, field, label, input, exclude_parenthetical_text, placeholder) {
+    updateLabelStyle(store, field, label, exclude_parenthetical_text);
 
-    $("#" + input).text(store.getValue(field));
+    var value = store.getValue(field);
+    value = placeholder && !value ? placeholder : value;
+
+    $("#" + input).text(value);
 };
 
 var updateSelectStyle = function (store, field, label, input, exclude_parenthetical_text) {
@@ -231,7 +234,14 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     var software_type_id = metadata.getValue("software_type");
     if (!software_type_id)
         metadata.setValue("software_type", $("#software_type").val());
-	    
+
+    // if CO project, we need to store original repo link, in case they change type
+    form.co_repo = "";
+    if (metadata.getValue("accessibility") == "CO") {
+        var orig_repo = metadata.getValue("repository_link");
+        form.co_repo = orig_repo ? orig_repo : form.co_repo;
+    }
+
     form.workflowStatus = data.metadata.workflow_status;
     form.allowSave = (data.metadata.workflow_status == "" || data.metadata.workflow_status == "Saved");
     
@@ -487,15 +497,26 @@ mobx.autorun("Project Type", function () {
             $("#landing-page-div").hide();
             $("#autopop-div").show();
             $("#repository-link-display-div").show();
+            $("#repository-link-co-div").hide();
             $("#file-upload-zone").hide();
             break;
-        case "CS":
         case "ON":
+        case "CS":
             $("#git-repo-only-div").hide();
             $("#repository-link-div").hide();
             $("#landing-page-div").show();
             $("#autopop-div").hide();
             $("#repository-link-display-div").hide();
+            $("#repository-link-co-div").hide();
+            $("#file-upload-zone").show();
+            break;
+        case "CO":
+            $("#git-repo-only-div").hide();
+            $("#repository-link-div").hide();
+            $("#landing-page-div").show();
+            $("#autopop-div").hide();
+            $("#repository-link-display-div").show();
+            $("#repository-link-co-div").show();
             $("#file-upload-zone").show();
             break;
         default:
@@ -504,19 +525,34 @@ mobx.autorun("Project Type", function () {
             $("#landing-page-div").hide();
             $("#autopop-div").hide();
             $("#repository-link-display-div").hide();
+            $("#repository-link-co-div").hide();
             $("#file-upload-zone").show();
             break;
     }
     $("input[name=repository-info-group][value=" + project_type + "]").prop('checked', true);
 
+    if (project_type == "CO") {
+        metadata.setValue("repository_link", form.co_repo);
+        $("#supplemental-step").show();
+    }
+    else if ($("#input-form-optional-toggle").is(":visible")) {
+        $("#supplemental-step").hide();
+    }
+
     setSuccess("project-type-lbl", project_type != null);
-	
+
     //mobx.whyRun();
 });
 
 mobx.autorun("Repository Link", function () {
     updateInputStyle(metadata, "repository_link", "repository-link-lbl", "repository-link");
     $("#autopopulate-from-repository").prop('disabled', !metadata.isCompleted("repository_link"));
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Repository Link CO", function () {
+    updateTextStyle(metadata, "repository_link", "repository-link-co-lbl", "repository-link-co", metadata.getValue("accessibility") == "CO", "TBD");
 
     //mobx.whyRun();
 });
@@ -536,9 +572,9 @@ mobx.autorun("Product Description Panel", function () {
 
     //mobx.whyRun();
 });
- 
+
 mobx.autorun("Repository Link Display", function () {
-    updateTextStyle(metadata, "repository_link", "repository-link-display-lbl", "repository-link-display");
+    updateTextStyle(metadata, "repository_link", "repository-link-display-lbl", "repository-link-display", metadata.getValue("accessibility") == "CO", "TBD");
 
     //mobx.whyRun();
 });

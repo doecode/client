@@ -68,8 +68,8 @@ public class DOECODEJson {
           //Availability
           this.availability_list.add(makeListObj("Open Source, Publicly Available Repository", "OS", "Open Source, Publicly Available Repository"));
           this.availability_list.add(makeListObj("Open Source, No Publicly Available Repository", "ON", "Open Source, No Publicly Available Repository"));
-          this.availability_list.add(makeListObj("Closed Source - Site Hosted", "CS", "Closed Source - Site Hosted"));
-          this.availability_list.add(makeListObj("Closed Source - OSTI Hosted", "CO", "Closed Source - OSTI Hosted"));
+          this.availability_list.add(makeListObj("Closed Source, Site Hosted", "CS", "Closed Source, Site Hosted"));
+          this.availability_list.add(makeListObj("Closed Source, OSTI Hosted", "CO", "Closed Source, OSTI Hosted"));
           //Contributor Types
           this.contributor_types.add(makeListObj("", "", ""));
           this.contributor_types.add(makeListObj("Contact Person", "ContactPerson", "Contact Person"));

@@ -19,7 +19,7 @@
 		    <div class='row'>
 			 <div class='col-xs-12'>
 			      <fieldset class="entry-group radiogroup has-success">
-				   <legend class="entry-legend"><label id="project-type-lbl" class="control-label req">Project Type</label></legend>  
+				   <legend class="entry-legend"><label id="project-type-lbl" class="control-label req">Project Type</label></legend>
 				   <div class="radio">
 					<label style="font-weight: bold"><input title="Open Source, Publicly Available Repository" value="OS" name="repository-info-group" type="radio">Open Source, Publicly Available Repository</label>{{> tooltips/OpenSourcePublic}}
 				   </div>
@@ -27,10 +27,10 @@
 					<label style="font-weight: bold"><input title="Open Source, No Publicly Available Repository" value="ON" name="repository-info-group" type="radio">Open Source, No Publicly Available Repository</label>{{> tooltips/OpenSourceNotPublic}}
 				   </div>
 				   <div class="radio">
-					<label style="font-weight: bold"><input title="Closed Source, Site Hosted" value="CS" name="repository-info-group" type="radio">Closed Source</label>{{> tooltips/ClosedSourceSite}}
+					<label style="font-weight: bold"><input title="Closed Source, Site Hosted" value="CS" name="repository-info-group" type="radio">Closed Source, Site Hosted</label>{{> tooltips/ClosedSourceSite}}
 				   </div>
 				   <div class="radio">
-					<label style="font-weight: bold"><input title="Closed Source, OSTI Hosted" value="CO" name="repository-info-group" type="radio">Closed Source</label>{{> tooltips/ClosedSourceOSTI}}
+					<label style="font-weight: bold"><input title="Closed Source, OSTI Hosted" value="CO" name="repository-info-group" type="radio">Closed Source, OSTI Hosted</label>{{> tooltips/ClosedSourceOSTI}}
 				   </div>
 				   <br>
 			      </fieldset>
@@ -38,6 +38,20 @@
 			 </div>
 			 <div class="col-xs-8">
 			      <div class="row">
+                    <div id="repository-link-co-div">
+                     <div class="row">
+                          <div class="col-xs-12">
+                           <label for="repository-link-co" id="repository-link-co-lbl" class="control-label">Repository Link</label>
+                          </div>
+                          <div class="col-xs-12">
+                           <div id="repository-link-co" style="word-wrap: break-word;"></div>
+                          </div>
+                          <div class="col-xs-12">
+                           <label id="repository-link-co-lbl-error" class="control-label errorCheck">Problem</label>
+                          </div>
+                     </div>
+                     <br />
+                    </div>
 				   <div id="repository-link-div">
 					<div class="row">
 					     <div class="col-xs-12">
