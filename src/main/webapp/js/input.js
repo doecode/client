@@ -164,8 +164,14 @@ var updateDropzoneStyle = function (store, field, label, input, exclude_parenthe
 
     if (value)
         $("#uploaded-file-div").show();
-    else
+    else {
+        var existingFile = $(".dz-remove")[0];
+
+        if (existingFile)
+            existingFile.click();
+
         $("#uploaded-file-div").hide();
+    }
 
 };
 
