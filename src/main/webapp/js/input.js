@@ -113,17 +113,17 @@ var setSuccess = function (label, is_completed, error_msg) {
 
 var setRequired = function (label, is_required, exclude_parenthetical_text) {
     use_parenthetical_text = !(exclude_parenthetical_text === true);
-    var req_list = use_parenthetical_text ? "req req_rf" : "req";
-    var opt_list = use_parenthetical_text ? "req_of" : "";
+
+    var new_class_list = "";
 
     if (is_required) {
-    	$("#" + label).addClass(req_list);
-    	$("#" + label).removeClass(opt_list);
+    	new_class_list = use_parenthetical_text ? "req req_rf" : "req";
     }
-    else {
-    	$("#" + label).removeClass(req_list);
-    	$("#" + label).addClass(opt_list);
+    else if (use_parenthetical_text) {
+    	new_class_list = use_parenthetical_text ? "req_of" : "";
     }
+
+    $("#" + label).removeClass("req req_rf req_of").addClass(new_class_list);
 };
 
 var inputChange = mobx.action("Input Change", function (event) {
@@ -140,13 +140,13 @@ var checkboxChange = mobx.action("Checkbox Change", function (event) {
 
 var updateLabelStyle = function (store, field, label, exclude_parenthetical_text) {
     $("#" + label).text(store.getLabel(field, $("#" + label).text()));
-    
+
     setRequired(label, store.isRequired(field), exclude_parenthetical_text);
     setSuccess(label, store.isCompleted(field), store.getError(field));
 };
 
 var updateInputStyle = function (store, field, label, input, exclude_parenthetical_text) {
-    updateLabelStyle(store, field, label, exclude_parenthetical_text);  	
+    updateLabelStyle(store, field, label, exclude_parenthetical_text);
 
     var value = store.getValue(field);
     if (field == "release_date" && value)
@@ -156,7 +156,7 @@ var updateInputStyle = function (store, field, label, input, exclude_parenthetic
 };
 
 var updateDropzoneStyle = function (store, field, label, input, exclude_parenthetical_text) {
-    updateLabelStyle(store, field, label, exclude_parenthetical_text);  	
+    updateLabelStyle(store, field, label, exclude_parenthetical_text);
 
     var value = store.getValue(field);
 
@@ -179,7 +179,7 @@ var updateTextStyle = function (store, field, label, input, exclude_parenthetica
 };
 
 var updateSelectStyle = function (store, field, label, input, exclude_parenthetical_text) {
-    updateLabelStyle(store, field, label, exclude_parenthetical_text);  	
+    updateLabelStyle(store, field, label, exclude_parenthetical_text);
     var current_list = mobx.toJS(store.getValue(field));
     populateSelectWithCustomData(input, current_list);
     loadSelectData(input, current_list);
