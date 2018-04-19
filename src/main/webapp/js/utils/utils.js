@@ -523,7 +523,7 @@ var populateAdvancedSearchForm = function (id_prefix) {
  * Takes a, and returns an array with all of the indexes that are duplicates. If the list is empty, assume there are no duplicates
  * 
  */
-var checkForDuplicates = function (list) {
+var checkForDuplicates = function (list, ignoreBlanks) {
     var duplicate_indexes = [];
     for (var i = 0; i < list.length; i++) {
         //If this index hasn't already been been flagged as a duplicate, continue
@@ -533,7 +533,8 @@ var checkForDuplicates = function (list) {
             for (var x = i + 1; x < list.length; x++) {
                 var check_val = list[x];
                 //Make sure again that indexes that have already been gathered aren't gathered again
-                if (duplicate_indexes.indexOf(x) < 0 && current_val == check_val) {
+                if ((ignoreBlanks && duplicate_indexes.indexOf(x) < 0 && current_val.trim() == check_val.trim() && current_val.trim() != '')
+                        || (!ignoreBlanks && duplicate_indexes.indexOf(x) < 0 && current_val == check_val)) {
                     if (duplicate_indexes.indexOf(i) < 0) {
                         duplicate_indexes.push(i);
                     }

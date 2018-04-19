@@ -66,14 +66,16 @@ var checkAndMarkPOCDuplicates = function (email_list) {
     showPOCMessage(false, '');
 
     //Check for duplicates, and mark accordingly
-    var duplicates = checkForDuplicates(email_list);
+    var duplicates = checkForDuplicates(email_list, true);
     if (duplicates.length > 0) {
-
         duplicates.forEach(function (item) {
             $("#poc-admin-email-list > tbody tr:nth-child(" + (parseInt(item) + 1) + ") > td:first-child > input[type=text]").parent().addClass('has-error');
         });
         had_duplicates = true;
         showPOCMessage(true, 'Please resolve duplicate emails', 'has-error');
+        $("#save-changes-btn").prop('disabled', true);
+    } else {
+        $("#save-changes-btn").prop('disabled', false);
     }
     return had_duplicates;
 };
@@ -106,10 +108,16 @@ var POCListAction = function () {
             $("#email-domains").html(email_domains_list);
 
             //Load all of the emails
-            data.poc_emails.forEach(function (item) {
-                $("#poc-admin-email-list > tbody > tr:last-child").before('<tr><td><input id="new-poc-email-address" value="' + item + '" class="form-control pure-input-1" type="text"></td>'
-                        + '<td><span class="fa fa-minus-circle poc-remove-email" title="Remove Email"></span></td></tr>');
-            });
+            if (data.poc_emails.length > 0) {
+                data.poc_emails.forEach(function (item) {
+                    $("#poc-admin-email-list > tbody > tr:last-child").before('<tr><td><input id="new-poc-email-address" value="' + item + '" class="form-control pure-input-1" type="text"></td>'
+                            + '<td><span class="fa fa-minus-circle poc-remove-email" title="Remove Email"></span></td></tr>');
+                });
+            } else {
+                $("#poc-admin-email-list > tbody > tr:last-child").before('<tr><td><input id="new-poc-email-address" class="form-control pure-input-1" type="text"></td>'
+                            + '<td><span class="fa fa-minus-circle poc-remove-email" title="Remove Email"></span></td></tr>');
+            }
+
             $("#site-list-container").show();
         }, null, function () {
             setCommonModalMessage(POC_LIST_LOADER_ERROR);
@@ -137,26 +145,9 @@ var gatherAllPOCEmails = function () {
  * Triggers when you click on the green plus next to the empty text box at the bottom of the POC list
  */
 var addNewPOCToTable = function () {
-    var self = this;
-    var new_email = $(self).parent().prev('td').find('input[type=text].new-poc-entry').val().trim();
-
-    if (new_email) {
-        //Gather all of the emails
-        var email_list = gatherAllPOCEmails();
-        email_list.push(new_email);
-        var duplicates = checkAndMarkPOCDuplicates(email_list);
-
-        //If there were no duplicates, add the new row
-        if (!duplicates) {
-            //Add email to list
-            $("#poc-admin-email-list>tbody").prepend('<tr><td><input id="new-poc-email-address" value="' + new_email + '" class="form-control pure-input-1" type="text"></td>'
-                    + '<td><span class="fa fa-minus-circle poc-remove-email" title="Remove Email"></span></td></tr>');
-            $(self).parent().prev('td').find('input[type=text].new-poc-entry').val('');
-            showPOCMessage(false, '');
-        }
-    } else {
-        showPOCMessage(true, 'You must enter an email address to add one to the list', 'has-error');
-    }
+    $("#poc-admin-email-list > tbody > tr:last").before('<tr><td><input id="new-poc-email-address" class="form-control pure-input-1" type="text"/></td>'
+            + '<td><span class="fa fa-minus-circle poc-remove-email" title="Remove Email"></span></td></tr>');
+    $("#poc-admin-email-list > tbody > tr:nth-last-child(2) > td:first-child > input[type=text]").focus();
 };
 
 /**
@@ -179,8 +170,20 @@ var checkPOCEmails = function () {
  * Saves POC admin changes
  */
 var submitPOCChanges = function () {
-    //Clear out last field
-    $("#poc-admin-email-list > tbody > tr:last-child > td:first-child > input[type=text]").val('');
+    //Clear out the empty fields, if there are any
+    var empty_list = [];
+    $("#poc-admin-email-list > tbody > tr > td:first-child > input[type=text]").each(function () {
+        var self = this;
+        var val = $(self).val();
+        if (!val) {
+            empty_list.push($(self).parent().parent());
+        }
+    });
+    //Remove the empty rows
+    empty_list.forEach(function (item) {
+        $(item).remove();
+    });
+
 
     //Get the current site code
     var current_site_code = $("#site-list").val();
@@ -206,7 +209,7 @@ var submitPOCChanges = function () {
         $("#site-list").attr('disabled', 'disabled');
         $("#site-list-container").hide();
 
-        showSiteAdminMessage(true, 'Changes successfully changed. This page will reload in 3 seconds', 'has-success');
+        showSiteAdminMessage(true, 'Changes saved. This page will reload in 3 seconds', 'has-success');
         setTimeout(function () {
             window.location.href = '/' + APP_NAME + '/site-admin';
         }, 3000);
@@ -214,6 +217,7 @@ var submitPOCChanges = function () {
         setCommonModalMessage(POC_POST_LOADER_ERROR);
         showCommonModalMessage();
     });
+
 };
 
 checkHasRole('OSTI');
@@ -237,8 +241,6 @@ if (document.getElementById('site-admin-page-identifier')) {
         showCommonModalMessage();
     });
 
-    //Get the list of sites
-
     //OnClick for when you select a site from the dropdown
     $("#site-list").on('change', POCListAction);
 
@@ -252,10 +254,9 @@ if (document.getElementById('site-admin-page-identifier')) {
     $("#poc-admin-email-list > tbody").on('input', " tr:not(:last-child) > td:first-child > input[type=text]", checkPOCEmails);
 
     //On entery, trigger the add functionality
-    $("#poc-admin-email-list > tbody > tr:last-child > td:first-child > input[type=text]").on('keyup', function (event) {
-        var self = this;
+    $("#poc-admin-email-list > tbody").on('keyup', 'tr:nth-last-child(2) > td:first-child > input[type=text]', function (event) {
         if (event.which === 13) {
-            $(self).parent().next('td').find('span.poc-add-new-email').trigger('click');
+            $("#poc-admin-email-list > tbody > tr:last-child > td:nth-child(2) > span.poc-add-new-email").trigger('click');
         }
     });
 
