@@ -1718,3 +1718,8 @@ div.Select>div.Select-control input {
 .form-control-feedback{
     line-height:34px !important;
 }
+
+/*Allows the tooltips to be wider*/
+.tooltip-inner{
+    max-width:300px !important;
+}
