@@ -204,6 +204,7 @@ var submitPOCChanges = function () {
         $("#site-list").val('');
         $("#site-list option[value='']").trigger('click');
         $("#site-list").attr('disabled', 'disabled');
+        $("#site-list-container").hide();
 
         showSiteAdminMessage(true, 'Changes successfully changed. This page will reload in 3 seconds', 'has-success');
         setTimeout(function () {
@@ -239,7 +240,7 @@ if (document.getElementById('site-admin-page-identifier')) {
     //Get the list of sites
 
     //OnClick for when you select a site from the dropdown
-    $("#site-list").on('click', 'option', POCListAction);
+    $("#site-list").on('change', POCListAction);
 
     //OnClick for adding a adding a new site
     $("#poc-admin-email-list > tbody tr td span.poc-add-new-email").on('click', addNewPOCToTable);
