@@ -1723,3 +1723,8 @@ div.Select>div.Select-control input {
 .tooltip-inner{
     max-width:300px !important;
 }
+
+/*Fixes an issue where the Drop Zone was getting to wide*/
+#file-upload-dropzone{
+    max-width:200px;
+}
