@@ -1,9 +1,7 @@
 package gov.osti.doecode.entity;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.listeners.DOECODEServletContextListener;
-import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.JsonObjectUtils;
 import java.io.BufferedInputStream;
 import java.io.InputStream;

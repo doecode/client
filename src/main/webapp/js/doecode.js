@@ -44,7 +44,7 @@ var triggerAdvancedSearch = function () {
         $("#search-date_latest").val(moment(date_latest, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT) + "T23:59:59.001Z");
     }
 
-    //Code Accessibility
+    //Project Type
     var accessibility_vals = $("#advanced-search-accessibility").val();
     if (accessibility_vals.length > 0) {
         $("#search-accessibility").val(JSON.stringify(accessibility_vals));
@@ -111,7 +111,7 @@ var triggerDropdownAdvancedSearch = function () {
         $("#search-date_latest").val(moment(date_latest, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT) + "T23:59:59.001Z");
     }
 
-    //Code Accessibility
+    //Project Type
     var accessibility_vals = $("#navbar-searchbar-accessibility").val();
     if (accessibility_vals.length > 0) {
         $("#search-accessibility").val(JSON.stringify(accessibility_vals));
