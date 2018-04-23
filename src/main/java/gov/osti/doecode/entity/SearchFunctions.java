@@ -892,12 +892,15 @@ public class SearchFunctions {
 
           //URL 
           if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "repository_link", ""))) {
-               optional_data.add(getOptionalBibtexObj("url", "{" + JsonUtils.getString(biblio_data, "repository_link", "") + "}"));
+               String url = JsonUtils.getString(biblio_data, "repository_link", "");
+               optional_data.add(getOptionalBibtexObj("url", "{" + url + "}"));
           }
 
           //DOI
           if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "doi", ""))) {
-               optional_data.add(getOptionalBibtexObj("doi", "{" + JsonUtils.getString(biblio_data, "doi", "") + "}"));
+               String doi = "{" + JsonUtils.getString(biblio_data, "doi", "") + "}";
+               optional_data.add(getOptionalBibtexObj("doi", doi));
+               optional_data.add(getOptionalBibtexObj("howpublished", "{[Computer Software] \\url" + doi + "}"));
           }
 
           //Release Date
@@ -907,8 +910,8 @@ public class SearchFunctions {
                LocalDate release_date = LocalDate.parse(JsonUtils.getString(biblio_data, "release_date", ""), RELEASE_DATE_FORMAT);
                release_date_year = Integer.toString(release_date.getYear());
                release_date_month = Integer.toString(release_date.getMonthValue());
-               optional_data.add(getOptionalBibtexObj("year", release_date_year));
-               optional_data.add(getOptionalBibtexObj("month", release_date_month));
+               optional_data.add(getOptionalBibtexObj("year", "{" + release_date_year + "}"));
+               optional_data.add(getOptionalBibtexObj("month", "{" + DOECODEUtils.getShortMonth(release_date_month, false) + "}"));
           }
 
           return_data.put("code_id", JsonUtils.getLong(biblio_data, "code_id", 0));

@@ -17,7 +17,6 @@ This version of the client application uses the following major technologies (No
 - jKnack Handlebars
 - mobx
 - Jackson
-- Eclipsesource json
 - chosen.js
 - bootstrap
 - jQuery DataTables
