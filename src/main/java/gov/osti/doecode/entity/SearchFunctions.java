@@ -866,8 +866,16 @@ public class SearchFunctions {
           return return_data;
      }
 
+     private static ObjectNode getOptionalBibtexObj(String label, String value) {
+          ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          return_data.put("label", label);
+          return_data.put("value", value);
+          return return_data;
+     }
+
      private static ObjectNode getBibtexFormat(ObjectNode biblio_data) {
           ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ArrayNode optional_data = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
 
           //Software Title
           String software_title = "{" + JsonObjectUtils.getString(biblio_data, "software_title", "") + "}";
@@ -880,21 +888,16 @@ public class SearchFunctions {
           }
 
           //Description
-          String description = "";
-          if (StringUtils.isNotBlank(JsonObjectUtils.getString(biblio_data, "description", ""))) {
-               description = "{" + JsonObjectUtils.getString(biblio_data, "description", "") + "}";
-          }
+          String description = "{" + JsonObjectUtils.getString(biblio_data, "description", "") + "}";
 
           //URL 
-          String url = "";
           if (StringUtils.isNotBlank(JsonObjectUtils.getString(biblio_data, "repository_link", ""))) {
-               url = "{" + JsonObjectUtils.getString(biblio_data, "repository_link", "") + "}";
+               optional_data.add(getOptionalBibtexObj("url", "{" + JsonObjectUtils.getString(biblio_data, "repository_link", "") + "}"));
           }
 
           //DOI
-          String doi = "";
           if (StringUtils.isNotBlank(JsonObjectUtils.getString(biblio_data, "doi", ""))) {
-               doi = "{" + JsonObjectUtils.getString(biblio_data, "doi", "") + "}";
+               optional_data.add(getOptionalBibtexObj("doi", "{" + JsonObjectUtils.getString(biblio_data, "doi", "") + "}"));
           }
 
           //Release Date
@@ -904,29 +907,25 @@ public class SearchFunctions {
                LocalDate release_date = LocalDate.parse(JsonObjectUtils.getString(biblio_data, "release_date", ""), RELEASE_DATE_FORMAT);
                release_date_year = Integer.toString(release_date.getYear());
                release_date_month = Integer.toString(release_date.getMonthValue());
+               optional_data.add(getOptionalBibtexObj("year", release_date_year));
+               optional_data.add(getOptionalBibtexObj("month", release_date_month));
           }
 
           return_data.put("code_id", JsonObjectUtils.getLong(biblio_data, "code_id", 0));
-
+          return_data.put("authors_text", author_text);
+          return_data.put("description", description);
           return_data.put("software_title", software_title);
 
-          return_data.put("has_authors", StringUtils.isNotBlank(author_text));
-          return_data.put("authors_text", author_text);
+          //If there was anything in the optional_data array, and its size is more than 1, we will add an indicator saying that it's the last, so we won't want a comma
+          if (optional_data.size() > 0) {
+               int last_item_index = optional_data.size() - 1;
 
-          return_data.put("has_description", StringUtils.isNotBlank(description));
-          return_data.put("description", description);
+               ObjectNode last_item = (ObjectNode) optional_data.get(last_item_index);
+               last_item.put("is_last", true);
+               optional_data.set(last_item_index, last_item);
+          }
 
-          return_data.put("has_url", StringUtils.isNotBlank(url));
-          return_data.put("url", url);
-
-          return_data.put("has_doi", StringUtils.isNotBlank(doi));
-          return_data.put("doi", doi);
-
-          return_data.put("has_release_date_year", StringUtils.isNotBlank(release_date_year));
-          return_data.put("release_date_year", release_date_year);
-
-          return_data.put("has_release_date_month", StringUtils.isNotBlank(release_date_month));
-          return_data.put("release_date_month", release_date_month);
+          return_data.put("optional", optional_data);
           return return_data;
      }
 
@@ -1164,7 +1163,7 @@ public class SearchFunctions {
                /*Programming Languages*/
                ArrayNode programming_languages = (ArrayNode) biblio_data.get("programming_languages");
                return_data.put("programming_languages_list", programming_languages);
-               return_data.put("has_programming_languages", programming_languages.size() > 0);
+               return_data.put("has_programming_languages", programming_languages != null && programming_languages.size() > 0);
 
                /*Version Number*/
                return_data.put("version_number", JsonObjectUtils.getString(biblio_data, "version_number", ""));

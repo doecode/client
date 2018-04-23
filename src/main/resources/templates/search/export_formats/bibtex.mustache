@@ -1,27 +1,12 @@
-@misc&#123;doecode_{{bibtex.code_id}},<br/>
-<span>title&nbsp;=&nbsp;{{bibtex.software_title}}<br/></span>
+@misc&#123;
+doecode_{{bibtex.code_id}},<br/>
+<span>title&nbsp;=&nbsp;{{bibtex.software_title}},<br/></span>
 
-{{#if bibtex.has_authors}}
-<span>author&nbsp;=&nbsp;{{bibtex.authors_text}}<br/></span>
-{{/if}}
+<span>author&nbsp;=&nbsp;{{bibtex.authors_text}},<br/></span>
 
-{{#if bibtex.has_description}}
-<span>abstractNote&nbsp;=&nbsp;{{bibtex.description}}<br/></span>
-{{/if}}
+<span>abstractNote&nbsp;=&nbsp;{{bibtex.description}},<br/></span>
+{{#each bibtex.optional}}
+<span>{{label}}&nbsp;=&nbsp;{{value}}{{#unless is_last}},{{/unless}}<br/></span>
 
-{{#if bibtex.has_url}}
-<span>url&nbsp;=&nbsp;{{bibtex.url}}<br/></span>
-{{/if}}
-
-{{#if bibtex.has_doi}}
-<span>doi&nbsp;=&nbsp;{{bibtex.doi}}<br/></span>
-{{/if}}
-
-{{#if bibtex.has_release_date_year}}
-<span>year&nbsp;=&nbsp;{{bibtex.release_date_year}}<br/></span>
-{{/if}}
-
-{{#if bibtex.has_release_date_month}}
-<span>month&nbsp;=&nbsp;{{bibtex.release_date_month}}<br/></span>
-{{/if}}
+{{/each}}
 &#125;
