@@ -3,7 +3,7 @@ package gov.osti.doecode.entity;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.listeners.DOECODEServletContextListener;
 import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.JsonObjectUtils;
+import gov.osti.doecode.utils.JsonUtils;
 import javax.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ public class InputFunctions {
      private static Logger log = LoggerFactory.getLogger(InputFunctions.class.getName());
 
      public static ObjectNode getInputFormLists(ServletContext context) {
-          ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           return_data.put("availabilities_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY));
           return_data.put("licenses_list", DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY));
           return_data.put("affiliations_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AFFILIATIONS_KEY));

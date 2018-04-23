@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
-import gov.osti.doecode.utils.JsonObjectUtils;
+import gov.osti.doecode.utils.JsonUtils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,14 +36,14 @@ public class UserFunctions {
      Looks for a user data cookie. If one is found, it takes it, parses the value as a json object, and returns it
       */
      public static ObjectNode getUserDataFromCookie(HttpServletRequest request) {
-          ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           if (request.getCookies() != null) {
                for (Cookie c : request.getCookies()) {
                     if (StringUtils.equals(c.getName(), "user_data")) {
                          try {
                               byte[] decoded = Base64.decodeBase64(c.getValue());
-                              if (StringUtils.isNotBlank(new String(decoded)) && JsonObjectUtils.isValidObjectNode(new String(decoded))) {
-                                   return_data = JsonObjectUtils.parseObjectNode(new String(decoded));
+                              if (StringUtils.isNotBlank(new String(decoded)) && JsonUtils.isValidObjectNode(new String(decoded))) {
+                                   return_data = JsonUtils.parseObjectNode(new String(decoded));
                                    break;
                               }
                          } catch (Exception ex) {
@@ -70,10 +70,10 @@ public class UserFunctions {
 
      public static boolean isUserLoggedIn(HttpServletRequest request) {
           ObjectNode user_data = UserFunctions.getUserDataFromCookie(request);
-          boolean is_logged_in = JsonObjectUtils.getBoolean(user_data, "is_logged_in", false);
+          boolean is_logged_in = JsonUtils.getBoolean(user_data, "is_logged_in", false);
           boolean is_within_time = false;
-          if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, JsonObjectUtils.getString(user_data, "session_timeout", ""))) {
-               LocalDateTime last_timeout = LocalDateTime.parse(JsonObjectUtils.getString(user_data, "session_timeout", ""), SESSION_TIMEOUT_FORMAT);
+          if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, JsonUtils.getString(user_data, "session_timeout", ""))) {
+               LocalDateTime last_timeout = LocalDateTime.parse(JsonUtils.getString(user_data, "session_timeout", ""), SESSION_TIMEOUT_FORMAT);
                LocalDateTime right_now = LocalDateTime.now();
                long minutes = ChronoUnit.MINUTES.between(right_now, last_timeout);
                is_within_time = Math.abs(minutes) < Init.SESSION_TIMEOUT_MINUTES;
@@ -90,13 +90,13 @@ public class UserFunctions {
      }
 
      public static ObjectNode setUserDataForCookie(ObjectNode user_data) {
-          ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          return_data.put("first_name", JsonObjectUtils.getString(user_data, "first_name", ""));
-          return_data.put("last_name", JsonObjectUtils.getString(user_data, "last_name", ""));
-          return_data.put("email", JsonObjectUtils.getString(user_data, "email", ""));
-          return_data.put("site", JsonObjectUtils.getString(user_data, "site", ""));
-          ArrayNode roles = JsonObjectUtils.parseArrayNode(JsonObjectUtils.getString(user_data, "roles", "[]"));
-          ArrayNode pending_roles = JsonObjectUtils.parseArrayNode(JsonObjectUtils.getString(user_data, "pending_roles", "[]"));
+          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          return_data.put("first_name", JsonUtils.getString(user_data, "first_name", ""));
+          return_data.put("last_name", JsonUtils.getString(user_data, "last_name", ""));
+          return_data.put("email", JsonUtils.getString(user_data, "email", ""));
+          return_data.put("site", JsonUtils.getString(user_data, "site", ""));
+          ArrayNode roles = JsonUtils.parseArrayNode(JsonUtils.getString(user_data, "roles", "[]"));
+          ArrayNode pending_roles = JsonUtils.parseArrayNode(JsonUtils.getString(user_data, "pending_roles", "[]"));
           return_data.put("roles", roles);
           return_data.put("pending_roles", pending_roles);
           return_data.put("has_osti_role", hasRole(roles, "OSTI"));
@@ -113,7 +113,7 @@ public class UserFunctions {
 
      public static Cookie updateUserSessionTimeout(HttpServletRequest request) {
           ObjectNode user_data = getUserDataFromCookie(request);
-          String session_timeout = JsonObjectUtils.getString(user_data, "session_timeout", "");
+          String session_timeout = JsonUtils.getString(user_data, "session_timeout", "");
           if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, session_timeout)) {
                user_data.put("session_timeout", LocalDateTime.now().plus(Init.SESSION_TIMEOUT_MINUTES, ChronoUnit.MINUTES).format(SESSION_TIMEOUT_FORMAT));
           }
@@ -151,8 +151,8 @@ public class UserFunctions {
      public static ObjectNode updateUserCookie(HttpServletRequest request, ObjectNode new_user_data) {
           ObjectNode return_data = getUserDataFromCookie(request);
           //If we have new data, let's go through each item in the new object, and set it in our current user cookie
-          if (JsonObjectUtils.getKeys(new_user_data).size() > 0) {
-               JsonObjectUtils.getKeys(new_user_data).forEach((s) -> {
+          if (JsonUtils.getKeys(new_user_data).size() > 0) {
+               JsonUtils.getKeys(new_user_data).forEach((s) -> {
                     return_data.set(s, new_user_data.get(s));
                });
           }
@@ -173,11 +173,11 @@ public class UserFunctions {
      }
 
      public static ObjectNode getUserRegistrationData(String confirmation_code) {
-          ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           String api_url = Init.backend_api_url;
 
           HttpURLConnection conn = null;
-          ObjectNode response_json = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode response_json = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           try {
                URL url = new URL(api_url + "user/confirm?confirmation=" + confirmation_code);
                conn = (HttpURLConnection) url.openConnection();
@@ -196,8 +196,8 @@ public class UserFunctions {
                }
                in.close();
 
-               if (JsonObjectUtils.isValidObjectNode(response.toString())) {
-                    response_json = JsonObjectUtils.parseObjectNode(response.toString());
+               if (JsonUtils.isValidObjectNode(response.toString())) {
+                    response_json = JsonUtils.parseObjectNode(response.toString());
                }
 
           } catch (Exception e) {
@@ -209,7 +209,7 @@ public class UserFunctions {
                }
           }
 
-          String api_key = JsonObjectUtils.getString(response_json, "apiKey", "");
+          String api_key = JsonUtils.getString(response_json, "apiKey", "");
           String url_key = StringUtils.substringBeforeLast(api_url, "/");
 
           return_data.put("url_key", url_key);
@@ -223,7 +223,7 @@ public class UserFunctions {
           ObjectNode return_data = UserFunctions.getUserDataFromCookie(request);
           ArrayNode roles = (ArrayNode) return_data.get("roles");
           ArrayNode pending_roles = (ArrayNode) return_data.get("pending_roles");
-          String site = JsonObjectUtils.getString(return_data, "site", "");
+          String site = JsonUtils.getString(return_data, "site", "");
           //See if their site is in their roles
           boolean site_in_roles = false;
           for (JsonNode v : roles) {

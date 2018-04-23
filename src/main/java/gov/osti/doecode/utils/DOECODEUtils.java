@@ -53,9 +53,9 @@ public class DOECODEUtils {
           String display_val = value;
           for(JsonNode n:array){
                ObjectNode objNode = (ObjectNode)n;
-               String nVal = JsonObjectUtils.getString(objNode,"value","");
+               String nVal = JsonUtils.getString(objNode,"value","");
                if(StringUtils.equals(nVal,value)){
-                    display_val = JsonObjectUtils.getString(objNode, "label", value);
+                    display_val = JsonUtils.getString(objNode, "label", value);
                     break;
                }
           }

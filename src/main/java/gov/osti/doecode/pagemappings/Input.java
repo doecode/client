@@ -7,7 +7,7 @@ import gov.osti.doecode.entity.InputFunctions;
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.listeners.DOECODEServletContextListener;
 import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.JsonObjectUtils;
+import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
 import org.slf4j.Logger;
@@ -36,9 +36,9 @@ public class Input extends HttpServlet {
           String template = "";
           String current_page = "";
 
-          ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          ArrayNode cssFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode output_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ArrayNode jsFilesList = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          ArrayNode cssFilesList = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
           boolean is_inputjs = false;
           boolean is_accordion = false;
 

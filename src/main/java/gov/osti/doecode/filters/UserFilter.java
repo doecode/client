@@ -5,7 +5,7 @@ package gov.osti.doecode.filters;
 
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.JsonObjectUtils;
+import gov.osti.doecode.utils.JsonUtils;
 import java.io.IOException;
 import java.util.Arrays;
 import javax.servlet.Filter;
@@ -53,7 +53,7 @@ public class UserFilter implements Filter {
                res.addCookie(UserFunctions.updateUserSessionTimeout(req));
 
                //If the user doesn't have an OSTI role, yet is trying to access osti-only content, they need to be redirected 
-               boolean has_osti_role = JsonObjectUtils.getBoolean(UserFunctions.getUserDataFromCookie(req), "has_osti_role", false);
+               boolean has_osti_role = JsonUtils.getBoolean(UserFunctions.getUserDataFromCookie(req), "has_osti_role", false);
                if (!has_osti_role && Arrays.asList(REQUIRES_OSTI_ROLE).contains(remaining)) {
                     res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                     res.sendRedirect(Init.site_url + "forbidden");

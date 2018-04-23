@@ -3,7 +3,7 @@ package gov.osti.doecode.listeners;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import gov.osti.doecode.entity.DOECODEJson;
 import gov.osti.doecode.utils.DOECODEUtils;
-import gov.osti.doecode.utils.JsonObjectUtils;
+import gov.osti.doecode.utils.JsonUtils;
 import java.time.LocalDateTime;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -25,7 +25,7 @@ public class DOECODEServletContextListener implements ServletContextListener {
      private static final DOECODEJson doecode_json_lists = new DOECODEJson();
 
      public static ArrayNode getJsonList(String list) {
-          ArrayNode return_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ArrayNode return_list = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
           switch (list) {
                case DOECODEJson.AFFILIATIONS_KEY:
                     return_list = doecode_json_lists.getAffiliationsList();

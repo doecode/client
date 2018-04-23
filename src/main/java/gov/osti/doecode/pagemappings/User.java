@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.JsonObjectUtils;
+import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
 import org.slf4j.Logger;
@@ -27,8 +27,8 @@ public class User extends HttpServlet {
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
 
           if (StringUtils.containsIgnoreCase(request.getContentType(), "application/json")) {
-               ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-               ObjectNode request_data = JsonObjectUtils.parseObjectNode(request.getReader());
+               ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+               ObjectNode request_data = JsonUtils.parseObjectNode(request.getReader());
                boolean add_signin_html = false;
                switch (remaining) {
                     case "set-login-status-name":
@@ -52,12 +52,12 @@ public class User extends HttpServlet {
                if (add_signin_html) {
                     return_data.put("signin_html", TemplateUtils.getNewSigninStatusHtml(getServletContext(), request_data));
                }
-               JsonObjectUtils.writeTo(return_data, response);
+               JsonUtils.writeTo(return_data, response);
           } else {
                String page_title = "";
                String template = "";
-               ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-               ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+               ObjectNode output_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+               ArrayNode jsFilesList = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
 
                switch (remaining) {
                     case "account":
@@ -86,7 +86,7 @@ public class User extends HttpServlet {
                          page_title = "DOE CODE: Login";
                          template = TemplateUtils.TEMPLATE_USER_LOGIN;
                          if (StringUtils.isNotBlank(request.getParameter("redirect")) && request.getParameter("redirect").equals("true")) {
-                              output_data.put("user_data", new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE));
+                              output_data.put("user_data", new ObjectNode(JsonUtils.FACTORY_INSTANCE));
                               output_data.put("is_redirected", true);
                               response.addCookie(new Cookie("user_data", null));
                          }
@@ -102,7 +102,7 @@ public class User extends HttpServlet {
                     case "logout":
                          page_title = "DOE CODE: Logout";
                          template = TemplateUtils.TEMPLATE_USER_LOGOUT;
-                         output_data.put("user_data", new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE));
+                         output_data.put("user_data", new ObjectNode(JsonUtils.FACTORY_INSTANCE));
                          response.addCookie(new Cookie("user_data", null));
                          response.addCookie(new Cookie("needs_password_reset", null));
                          response.addCookie(new Cookie("requested_url", null));

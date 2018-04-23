@@ -9,7 +9,7 @@ import gov.osti.doecode.entity.SearchFunctions;
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
-import gov.osti.doecode.utils.JsonObjectUtils;
+import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -34,8 +34,8 @@ public class Dissemination extends HttpServlet {
           String page_title = "";
           String template = "";
           String current_page = "";
-          ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode output_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ArrayNode jsFilesList = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
 
           /*Determine what page we're on, and load the appropriate title, template, etc*/
           if (remaining.equals("") || remaining.equals("/")) {//HOMEPAGE
@@ -94,7 +94,7 @@ public class Dissemination extends HttpServlet {
                     ObjectNode biblio_data = SearchFunctions.getBiblioData(code_id);
 
                     //If, and only if, this is a valid code id
-                    if (JsonObjectUtils.getBoolean(biblio_data, "is_valid", false)) {
+                    if (JsonUtils.getBoolean(biblio_data, "is_valid", false)) {
                          jsFilesList.add("libraries/clipboard.min");
                          output_data = biblio_data;
 
@@ -131,7 +131,7 @@ public class Dissemination extends HttpServlet {
 
           //Check if they're logged in, and only do something if they're not logged in
           if (!UserFunctions.isUserLoggedIn(request)) {
-               output_data.put("user_data", new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE));
+               output_data.put("user_data", new ObjectNode(JsonUtils.FACTORY_INSTANCE));
           } else {
                //Increment time
                response.addCookie(UserFunctions.updateUserSessionTimeout(request));

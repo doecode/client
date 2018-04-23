@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.entity.OtherFunctions;
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.JsonObjectUtils;
+import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
 import javax.servlet.ServletContext;
@@ -27,8 +27,8 @@ public class Other extends HttpServlet {
           String page_title = "";
           String template = "";
           String current_page = "";
-          ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode output_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ArrayNode jsFilesList = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
           ServletContext context = getServletContext();
           switch (remaining) {
                case "gitlab-signup":
@@ -49,7 +49,7 @@ public class Other extends HttpServlet {
 
           //Check if they're logged in, and only do something if they're not logged in
           if (!UserFunctions.isUserLoggedIn(request)) {
-               output_data.put("user_data", new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE));
+               output_data.put("user_data", new ObjectNode(JsonUtils.FACTORY_INSTANCE));
           } else {
                //Increment time
                response.addCookie(UserFunctions.updateUserSessionTimeout(request));

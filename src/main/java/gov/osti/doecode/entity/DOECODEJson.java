@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-import gov.osti.doecode.utils.JsonObjectUtils;
+import gov.osti.doecode.utils.JsonUtils;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -48,17 +48,17 @@ public class DOECODEJson {
       * Initializes all of the json lists DOE CODE Uses. Fills up the lists that don't pull data from OSTI's ELINK AUthority API
       */
      public DOECODEJson() {
-          this.affiliations_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          this.availability_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          this.contributor_types = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          this.countries_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          this.license_options_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          this.research_org_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          this.search_sort_options_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          this.software_type_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          this.sponsor_orgs_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          this.states_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
-          this.relation_types_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+          this.affiliations_list = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          this.availability_list = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          this.contributor_types = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          this.countries_list = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          this.license_options_list = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          this.research_org_list = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          this.search_sort_options_list = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          this.software_type_list = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          this.sponsor_orgs_list = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          this.states_list = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          this.relation_types_list = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
 
           //Since some of the lists have content that isn't pulled from OSTI's Elink Authority API, we'll go ahead and fill those lists up
           //Search Sort Options
@@ -168,7 +168,7 @@ public class DOECODEJson {
      }
 
      private final ObjectNode makeListObj(String label, String value, String title) {
-          ObjectNode on = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode on = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           on.put("label", label);
           on.put("value", value);
           on.put("title", title);
@@ -187,13 +187,13 @@ public class DOECODEJson {
           }
 
           //Sponsoring Orgs
-          ArrayNode sponsoring_orgs = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ArrayNode sponsoring_orgs = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
           //These two items have to be added to the top of the sponsoring org list
-          ObjectNode blank = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode blank = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           blank.put("name", "");
           blank.put("code", "");
           blank.put("status", "");
-          ObjectNode usdoe = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode usdoe = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           blank.put("name", "USDOE");
           blank.put("code", "USDOE");
           blank.put("status", "C");
@@ -249,7 +249,7 @@ public class DOECODEJson {
      }
 
      private ArrayNode getItemFromElinkAuthority(String api_url) {
-          ArrayNode arr = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ArrayNode arr = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
           try {
                StringBuilder result = new StringBuilder();
                URL url = new URL(api_url);
@@ -262,7 +262,7 @@ public class DOECODEJson {
                }
                rd.close();
                conn.disconnect();
-               arr = (ArrayNode) JsonObjectUtils.parseArrayNode(result.toString());
+               arr = (ArrayNode) JsonUtils.parseArrayNode(result.toString());
 
           } catch (Exception e) {
                log.error("An error has occurred in pulling Elink Authority API Data: " + e.getMessage());
@@ -271,11 +271,11 @@ public class DOECODEJson {
      }
 
      private ArrayNode translateElinkAuthorityList(ArrayNode original_list) {
-          ArrayNode new_list = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ArrayNode new_list = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
           for (JsonNode n : original_list) {
                //ObjectNode original_row = (ObjectNode) n;
-               String name_val = (n instanceof TextNode) ? n.asText() : JsonObjectUtils.getString((ObjectNode) n, "name", "");
-               ObjectNode new_row = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+               String name_val = (n instanceof TextNode) ? n.asText() : JsonUtils.getString((ObjectNode) n, "name", "");
+               ObjectNode new_row = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
 
                new_row.put("title", name_val);
                new_row.put("value", name_val);

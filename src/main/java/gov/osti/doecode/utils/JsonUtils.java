@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author smithwa
  */
-public class JsonObjectUtils {
+public class JsonUtils {
 
      public static final String AFFILIATIONS_LIST_JSON = "affiliationsList.json";
      public static final String AFFILIATIONS_LIST_JSON_KEY = "affiliations";
@@ -43,7 +43,7 @@ public class JsonObjectUtils {
      public static final String STATE_LIST_JSON = "statesList.json";
      public static final String STATE_LIST_JSON_KEY = "states";
 
-     private static Logger log = LoggerFactory.getLogger(JsonObjectUtils.class.getName());
+     private static Logger log = LoggerFactory.getLogger(JsonUtils.class.getName());
 
      public static final JsonNodeFactory FACTORY_INSTANCE = JsonNodeFactory.instance;
      public static final ObjectMapper MAPPER = new ObjectMapper();
@@ -54,10 +54,10 @@ public class JsonObjectUtils {
      If we do that, it's like getJsonListItem(list,"value",val);
       */
      public static ObjectNode getJsonListItem(ArrayNode array, String key, String value) {
-          ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           for (JsonNode v : array) {
                ObjectNode row = (ObjectNode) v;
-               if (JsonObjectUtils.getString(row, key, "").equals(value)) {
+               if (JsonUtils.getString(row, key, "").equals(value)) {
                     return_data = row;
                     break;
                }

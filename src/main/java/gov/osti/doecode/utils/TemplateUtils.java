@@ -82,7 +82,7 @@ public class TemplateUtils {
 
      public static final ObjectNode GET_COMMON_DATA(ObjectNode output_data, String current_page, ArrayNode jsFilesList, ArrayNode cssFilesList, HttpServletRequest request) throws IOException {
           output_data.put("active_page", current_page);
-          if (!JsonObjectUtils.containsKey(output_data, "user_data")) {
+          if (!JsonUtils.containsKey(output_data, "user_data")) {
                output_data.put("user_data", UserFunctions.getUserDataFromCookie(request));
           }
           output_data.put("jsFiles", jsFilesList);
@@ -100,28 +100,28 @@ public class TemplateUtils {
      }
 
      public static final ObjectNode GET_NAVBAR_CLASSES(String current_page) {
-          ObjectNode return_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          ObjectNode projects = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode projects = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           projects.put("list_item", "nav-menu-item-special");
           projects.put("anchor", "nav-menu-item nav-menu-item-text");
 
-          ObjectNode repositoryServices = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode repositoryServices = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           repositoryServices.put("list_item", "nav-menu-item-special");
           repositoryServices.put("anchor", "nav-menu-item nav-menu-item-text");
 
-          ObjectNode about = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode about = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           about.put("list_item", "nav-menu-item-special");
           about.put("anchor", "nav-menu-item nav-menu-item-text");
 
-          ObjectNode policy = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode policy = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           policy.put("list_item", "nav-menu-item-special");
           policy.put("anchor", "nav-menu-item nav-menu-item-text");
 
-          ObjectNode newsResources = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode newsResources = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           newsResources.put("list_item", "nav-menu-item-special");
           newsResources.put("anchor", "nav-menu-item nav-menu-item-text");
 
-          ObjectNode faq = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode faq = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           faq.put("list_item", "nav-menu-item-special");
           faq.put("anchor", "nav-menu-item nav-menu-item-text");
 
@@ -171,10 +171,10 @@ public class TemplateUtils {
      public static String getNewSigninStatusHtml(ServletContext context, ObjectNode data) {
           String template_data = "";
           HashMap user_data = new HashMap();
-          user_data.put("first_name", JsonObjectUtils.getString(data, "first_name", ""));
-          user_data.put("last_name", JsonObjectUtils.getString(data, "last_name", ""));
+          user_data.put("first_name", JsonUtils.getString(data, "first_name", ""));
+          user_data.put("last_name", JsonUtils.getString(data, "last_name", ""));
           user_data.put("is_logged_in", true);
-          user_data.put("has_osti_role", JsonObjectUtils.getBoolean(data, "has_osti_role", false));
+          user_data.put("has_osti_role", JsonUtils.getBoolean(data, "has_osti_role", false));
           HashMap data_for_template = new HashMap();
           data_for_template.put("user_data", user_data);
           data_for_template.put("app_name", Init.app_name);

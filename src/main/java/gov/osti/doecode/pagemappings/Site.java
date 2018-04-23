@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.JsonObjectUtils;
+import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -23,8 +23,8 @@ public class Site extends HttpServlet {
 
           String page_title = "";
           String template = "";
-          ObjectNode output_data = new ObjectNode(JsonObjectUtils.FACTORY_INSTANCE);
-          ArrayNode jsFilesList = new ArrayNode(JsonObjectUtils.FACTORY_INSTANCE);
+          ObjectNode output_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ArrayNode jsFilesList = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
 
           switch (remaining) {
                case "site-admin":
