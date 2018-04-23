@@ -1,12 +1,9 @@
 @misc&#123;
 doecode_{{bibtex.code_id}},<br/>
-<span>title&nbsp;=&nbsp;{{bibtex.software_title}},<br/></span>
-
-<span>author&nbsp;=&nbsp;{{bibtex.authors_text}},<br/></span>
-
-<span>abstractNote&nbsp;=&nbsp;{{bibtex.description}},<br/></span>
+<div class='bibtex-entry'>title&nbsp;=&nbsp;{{bibtex.software_title}},<br/></div>
+<div class='bibtex-entry'>author&nbsp;=&nbsp;{{bibtex.authors_text}},<br/></div>
+<div class='bibtex-entry'>abstractNote&nbsp;=&nbsp;{{bibtex.description}},<br/></div>
 {{#each bibtex.optional}}
-<span>{{{label}}}&nbsp;=&nbsp;{{{value}}}{{#unless is_last}},{{/unless}}<br/></span>
-
+<div class='bibtex-entry'>{{{label}}}&nbsp;=&nbsp;{{{value}}}{{#unless is_last}},{{/unless}}<br/></div>
 {{/each}}
 &#125;

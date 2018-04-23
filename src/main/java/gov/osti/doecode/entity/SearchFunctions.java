@@ -890,16 +890,10 @@ public class SearchFunctions {
           //Description
           String description = "{" + JsonUtils.getString(biblio_data, "description", "") + "}";
 
-          //URL 
-          if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "repository_link", ""))) {
-               String url = JsonUtils.getString(biblio_data, "repository_link", "");
-               optional_data.add(getOptionalBibtexObj("url", "{" + url + "}"));
-          }
-
           //DOI
           if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "doi", ""))) {
-               String doi = "{" + JsonUtils.getString(biblio_data, "doi", "") + "}";
-               optional_data.add(getOptionalBibtexObj("doi", doi));
+               String doi = JsonUtils.getString(biblio_data, "doi", "");
+               optional_data.add(getOptionalBibtexObj("url", "{https://dx.doi.org/" + doi + "}"));
                optional_data.add(getOptionalBibtexObj("howpublished", "{[Computer Software] \\url" + doi + "}"));
           }
 

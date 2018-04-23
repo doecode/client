@@ -220,6 +220,9 @@
     .faq-page-anchor{
         font-size:15px;
     }
+    .bibtex-entry{
+        padding-left:0px;
+    }
 }
 
 
@@ -266,6 +269,9 @@
     }
     .tiny-center-text{
         text-align:center !important;
+    }
+    .bibtex-entry{
+        padding-left:20px;
     }
 }
 
@@ -385,6 +391,9 @@
     .small-screen-no-col-padding-right{
         padding-right:0px;
     }
+    .bibtex-entry{
+        padding-left:20px;
+    }
 }
 
 
@@ -432,6 +441,9 @@
     }
     .small-screen-collapse{
         display:block;
+    }
+    .bibtex-entry{
+        padding-left:30px;
     }
 }
 

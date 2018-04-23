@@ -274,6 +274,10 @@ html h3 {
     font-size: 13.6px;
 }
 
+.bibtex-entry{
+    padding-left:30px;
+}
+
 .orc-id-img {
     width: 16px;
     height: 16px;
