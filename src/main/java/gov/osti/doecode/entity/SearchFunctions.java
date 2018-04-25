@@ -672,12 +672,18 @@ public class SearchFunctions {
           return_data.put("doi", JsonUtils.getString(search_data, "doi", ""));
 
           //Repository URL
-          boolean is_publicly_accessible = StringUtils.isNotBlank(JsonUtils.getString(search_data, "repository_link", ""));
-          String fulltextURL = is_publicly_accessible ? JsonUtils.getString(search_data, "repository_link", "") : JsonUtils.getString(search_data, "landing_page", "");
-          String fulltextMsg = is_publicly_accessible ? "Publicly Accessible Repository" : "Project Landing Page";
-          return_data.put("is_publicly_accessible", is_publicly_accessible);
-          return_data.put("fulltextMsg", fulltextMsg);
-          return_data.put("fulltextURL", (StringUtils.startsWith(fulltextURL, "https://") || StringUtils.startsWith(fulltextURL, "http://")) ? fulltextURL : "http://" + fulltextURL);
+          String repository_link = JsonUtils.getString(search_data, "repository_link", "");
+          String landing_page = JsonUtils.getString(search_data, "landing_page", "");
+
+          if (StringUtils.isNotBlank(repository_link)) {
+               return_data.put("has_repo_link", true);
+               return_data.put("repo_link", (StringUtils.startsWith(repository_link, "https://") || StringUtils.startsWith(repository_link, "http://")) ? repository_link : "http://" + repository_link);
+          }
+
+          if (StringUtils.isNotBlank(landing_page)) {
+               return_data.put("has_landing_page", true);
+               return_data.put("landing_page", (StringUtils.startsWith(landing_page, "https://") || StringUtils.startsWith(landing_page, "http://")) ? landing_page : "http://" + landing_page);
+          }
 
           //Code ID
           return_data.put("code_id", JsonUtils.getLong(search_data, "code_id", 0));

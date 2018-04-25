@@ -3,15 +3,26 @@
 	  <div class='row biblio-sidebar-row'>
 	       <div class='col-xs-12'>
 		    <h4 class='biblio-sidebar-subtitle'>RESOURCE</h4>
-		    <span class='biblio-sidebar-secondary-subtitle'>{{biblio_sidebar.fulltextMsg}} {{#if biblio_sidebar.is_publicly_accessible}}{{> tooltips/Biblio-RepositoryURL}}{{/if}}</span>
+		    {{#if biblio_sidebar.has_repo_link}}
+		    <span class='biblio-sidebar-secondary-subtitle'>Publicly Accessible Repository {{> tooltips/Biblio-RepositoryURL}}</span>
 		    <br/>
-		    <a title='{{biblio_sidebar.fulltextURL}}' href='{{biblio_sidebar.fulltextURL}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' class='biblio-sidebar-traditional-anchor word-break download-link'>{{biblio_sidebar.fulltextURL}}</a> 
+		    <a title='Publicly Accessible Repository for Code ID #{{code_id}}' href='{{biblio_sidebar.repo_link}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' class='biblio-sidebar-traditional-anchor word-break download-link'>{{biblio_sidebar.repo_link}}</a> 
+		    {{/if}}
+
+		    {{#if biblio_sidebar.has_landing_page}}
+		    <span class='biblio-sidebar-secondary-subtitle'>Project Landing Page</span>
+		    <br/>
+		    <a title='Landing Page for Code ID #{{code_id}}' href='{{biblio_sidebar.landing_page}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' class='biblio-sidebar-traditional-anchor word-break download-link'>{{biblio_sidebar.landing_page}}</a> 
+		    {{/if}}
+
+		    <!--Documentation URL-->
 		    {{#if biblio_sidebar.has_documentation_url}}
 		    <br/>
 		    <span class="biblio-sidebar-secondary-subtitle">Documentation</span>
 		    <br/>
 		    <a title="{{biblio_sidebar.documentation_url}}" href="{{biblio_sidebar.documentation_url}}" target="_blank" rel="noopener noreferrer" class="biblio-sidebar-traditional-anchor word-break download-link">{{biblio_sidebar.documentation_url}}</a>
 		    {{/if}}
+		    <!--DOI and Release Date-->
 		    {{#if biblio_sidebar.has_doi_and_release}}
 		    <br/>
 		    <br/>
