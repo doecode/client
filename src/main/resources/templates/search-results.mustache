@@ -67,7 +67,7 @@
 			 <div class="row">
 			      <div class="col-xs-12 no-col-padding-left">
 				   {{#if had_results}}
-				   <div>
+				   <div class='search-result-rows-container'>
 					<!--Each Search Result Item-->
 					{{#each search_results_list}}
 					<div class='search-result-row'>
@@ -90,28 +90,16 @@
 								 </div>
 								 <!--Description-->
 								 {{> search/description}}
-								 <div class='right-text'>
+								 <div class='right-text landing-page-repo-links'>
 								      <br/>
-
-								      <!--DOI-->
-								      {{#if searchRowLandingLinks.show_doi}}
-								      DOI:&nbsp;<a title='DOI for Code ID {{code_id}}' target='_blank' rel="noopener noreferrer" href='{{searchRowLandingLinks.fixed_doi}}'>{{searchRowLandingLinks.doi}}</a>
-								      {{/if}}
-
-								      <!--Show Divider-->
-								      {{#if searchRowLandingLinks.show_divider}}
+								      {{#each repository_links_list}}
+								      {{pretext}}<a title='{{title}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' href='{{href}}'>{{display}}</a>
+								      {{#unless is_last}}
 								      <span class='hide-xs' style="color: rgba(0, 0, 0, 0.2);">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
 								      <span class='hide-sm hide-md hide-lg'><br/></span>
-								      {{/if}}
-
-								      <!--Repository Link-->
-								      {{#if searchRowLandingLinks.has_repository_link}}
-								      <a title='Repository Link for Code ID {{code_id}}' target='_blank' rel="noopener noreferrer" class='download-link' data-codeid='{{code_id}}' href='{{searchRowLandingLinks.repository_link}}'>Repository Link</a>
-								      {{else if searchRowLandingLinks.has_landing_page}}
-								      <a title='Landing Page for Code ID {{code_id}}' target='_blank' rel="noopener noreferrer" class='download-link' data-codeid='{{code_id}}' href='{{searchRowLandingLinks.landing_page}}'>Landing Page</a>
-								      {{/if}}
+								      {{/unless}}
+								      {{/each}}
 								 </div>
-								 <br/>
 							    </div>
 						       </div>
 						  </div>

@@ -338,6 +338,15 @@ html h3 {
     font-size: 13.6px;
 }
 
+/*Puts space below the doi and repository link/landing page entries on the search results page*/
+div.search-result-rows-container > div.search-result-row > div > div > div.row > div > div.landing-page-repo-links{
+    padding-bottom:10px;
+}
+
+div.search-result-rows-container > div.search-result-row > div > div > div.row > div > div.landing-page-repo-links:last-child{
+    padding-bottom:15px !important;
+}
+
 .search-result-release-date {
     font-size: 14px;
     text-align: left;

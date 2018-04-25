@@ -403,7 +403,8 @@ public class SearchFunctions {
                ObjectNode row = (ObjectNode) search_result_list.get(i);
 
                ObjectNode newRow = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
-               newRow.put("code_id", JsonUtils.getLong(row, "code_id", 0));
+               Long code_id = JsonUtils.getLong(row, "code_id", 0);
+               newRow.put("code_id", code_id);
                newRow.put("release_date", JsonUtils.getString(row, "release_date", ""));
                newRow.put("show_release_date", StringUtils.isNotBlank(JsonUtils.getString(row, "release_date", "")));
                newRow.put("software_title", JsonUtils.getString(row, "software_title", ""));
@@ -424,7 +425,7 @@ public class SearchFunctions {
 
                newRow.put("dev_contributors", getDevAndContributorLink(devContributorsTrimmed, false, is_more_than_3, false));
                newRow.put("descriptionObj", getDescription(JsonUtils.getString(row, "description", ""), 100));
-               newRow.put("searchRowLandingLinks", getDoiReposLinks(JsonUtils.getString(row, "doi", ""), JsonUtils.getString(row, "repository_link", ""), JsonUtils.getString(row, "landing_page", ""), JsonUtils.getString(row, "release_date", "")));
+               newRow.put("repository_links_list", getDoiReposLinks(code_id.toString(), JsonUtils.getString(row, "doi", ""), JsonUtils.getString(row, "repository_link", ""), JsonUtils.getString(row, "landing_page", ""), JsonUtils.getString(row, "release_date", "")));
 
                //Get the sponsorOrgRow number. The sponsorOrgRow number is where we start, plus 1, plus the index we're on
                newRow.put("list_number", ((start + 1) + i));
@@ -569,20 +570,44 @@ public class SearchFunctions {
           return return_data;
      }
 
-     private static ObjectNode getDoiReposLinks(String doi, String repository_link, String landing_page, String release_date) {
+     private static ArrayNode getDoiReposLinks(String code_id, String doi, String repository_link, String landing_page, String release_date) {
+          ArrayNode return_data = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+
+          //doi
+          if (StringUtils.isNotBlank(release_date) && StringUtils.isNotBlank(doi)) {
+               String fixed_doi = "https://doi.org/" + doi;
+               return_data.add(makeDOIRepoLinkObj("DOI: ", "DOI for Code ID " + code_id, code_id, fixed_doi, doi));
+          }
+
+          //repository link
+          if (StringUtils.isNotBlank(repository_link)) {
+               repository_link = (StringUtils.startsWith(repository_link, "http:") || StringUtils.startsWith(repository_link, "https:")) ? repository_link : "http://" + repository_link;
+               return_data.add(makeDOIRepoLinkObj("", "Repository Link for Code ID", code_id, repository_link, "Repository Link"));
+          }
+
+          //Landing page
+          if (StringUtils.isNotBlank(landing_page)) {
+               landing_page = (StringUtils.startsWith(landing_page, "http:") || StringUtils.startsWith(landing_page, "https:")) ? landing_page : "http://" + landing_page;
+               return_data.add(makeDOIRepoLinkObj("", "Landing Page for Code ID", code_id, landing_page, "Landing Page"));
+          }
+
+          //Mark the last one as "is_last"
+          if (return_data.size() > 0) {
+               int last_index = return_data.size() - 1;
+               ObjectNode last_item = (ObjectNode) return_data.get(last_index);
+               last_item.put("is_last", true);
+               return_data.set(last_index, last_item);
+          }
+          return return_data;
+     }
+
+     private static ObjectNode makeDOIRepoLinkObj(String pretext, String title, String code_id, String href, String display) {
           ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
-          boolean has_doi = StringUtils.isNotBlank(doi);
-          boolean has_repos_link = StringUtils.isNotBlank(repository_link) || StringUtils.isNotBlank(landing_page);
-
-          return_data.put("show_doi", has_doi && StringUtils.isNotBlank(release_date));
-          return_data.put("doi", doi);
-          return_data.put("fixed_doi", "https://doi.org/" + doi);
-          return_data.put("show_divider", has_doi && has_repos_link);
-          return_data.put("has_repository_link", StringUtils.isNotBlank(repository_link));
-          return_data.put("has_landing_page", StringUtils.isNotBlank(landing_page));
-          return_data.put("repository_link", (StringUtils.startsWith(repository_link, "http:") || StringUtils.startsWith(repository_link, "https:")) ? repository_link : "http://" + repository_link);
-          return_data.put("landing_page", (StringUtils.startsWith(landing_page, "http:") || StringUtils.startsWith(landing_page, "https:")) ? landing_page : "http://" + landing_page);
-
+          return_data.put("pretext", pretext);
+          return_data.put("title", title);
+          return_data.put("code_id", code_id);
+          return_data.put("href", href);
+          return_data.put("display", display);
           return return_data;
      }
 
