@@ -21,8 +21,8 @@
 	       <li><a title="Does DOE CODE provide repository services?" href="/{{app_name}}/faq#what-does-it-provide">
 			 <span class="faq-page-anchor">Does DOE CODE provide repository services?</span></a></li>
 
-	       <li><a title="What are the Project Types Found in DOE CODE?" href="/{{app_name}}/faq#what-are-the-types">
-			 <span class="faq-page-anchor">What are the Project Types Found in DOE CODE?</span></a></li>
+	       <li><a title="What are the Project Types found in DOE CODE?" href="/{{app_name}}/faq#what-are-the-types">
+			 <span class="faq-page-anchor">What are the Project Types found in DOE CODE?</span></a></li>
 
 	       <li><a title="Are there restrictions on the use of the material in DOE CODE?" href="/{{app_name}}/faq#are-there-restrictions">
 			 <span class="faq-page-anchor">Are there restrictions on the use of the material in DOE CODE?</span></a></li>
@@ -168,7 +168,7 @@
 			 <br/>
 			 <strong>Closed Source, Site Hosted</strong>&nbsp;- Software that is not Open Source and for which access must be granted by contacting a licensing 
 			 official. Software is often Closed Source because it is proprietary, or has otherwise been deemed appropriate for limited 
-			 distribution only. A landing page URL is required for submitting Closed Source code; the URL should provide additional information on 
+			 distribution only. A landing page URL is required for submitting Closed Source, Site Hosted code; the URL should provide additional information on 
 			 how to obtain access to the code.
 			 <br/>
 			 <br/>
@@ -253,7 +253,7 @@
 	       <a name="what-does-it-mean-to-submit"></a><span class="faq-page-subtitle">What does it mean to submit scientific software to DOE CODE?</span>
 	       <blockquote class="faq-page-blockquote"><div>
 			 <p>
-			      Users may want to simply submit their scientific code to DOE CODE because submitting offers increased discoverability and the 
+			      Users may want to simply submit their scientific software to DOE CODE because submitting offers increased discoverability and the 
 			      option to obtain a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Submitting scientific 
 			      code to DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes 
 			      that are in early development and for developers wanting to obtain DOIs early in the process. 
@@ -296,7 +296,7 @@
 
 			 <p>
 			      Users may need to announce their scientific code to the Department of Energy to ensure announcement and dissemination in accordance 
-			      with DOE statutory responsibilities. Scientific codes in later stages of development are the primary use case for this functionality. 
+			      with DOE statutory responsibilities. Scientific codes in later stages of development are the primary use cases for this functionality. 
 			      For announcement to the Department of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory 
 			      data fields should be included during announcement when possible.
 			 </p>
@@ -391,7 +391,7 @@
 			 <p>
 			      DOE CODE offers two paths for users to provide business software. Users can (1) submit code to DOE CODE, and (2) announce code to the 
 			      Department of Energy for official review and release through DOE CODE. For more information about submitting and announcing code, 
-			      see the "What does it mean to submit business software to DOE CODE?" and "What does it mean to announce business software to DOE CODE?" 
+			      see the "<a href='/{{app_name}}/faq#what-does-it-mean-to-submit-business-software-to-doe-code'>What does it mean to submit business software to DOE CODE?</a>" and "<a href="/{{app_name}}/faq#what-does-it-mean-to-announce-business-software-to-doe-code">What does it mean to announce business software to DOE CODE?</a>" 
 			      for more details.
 			 </p>
 		    </div>
@@ -471,12 +471,15 @@
 				   <li>Contact Information</li>
 			      </ul>
 			 </div>
+			 <br/>
 			 <p>
 			      *Currently only Git and SVN-based repositories are supported. Most repositories hosted at GitHub, Bitbucket, SourceForge, and GitLab 
 			      support Git and SVN-based repositories. When submitting a repository, users should be certain to use the direct URL to the actual 
-			      repository. As an example, the direct Repository Link for DOE CODE is https://www.github.com/doecode/doecode whereas the project 
-			      landing page is https://www.github.com/doecode. There are plans to expand this functionality in future releases to support other 
-			      repository types such as CVS.  
+			      repository. As an example, the direct Repository Link for DOE CODE is 
+			      <a title="DOECODE Github" target='_blank' rel="noopener noreferrer" href='https://www.github.com/doecode/doecode'>https://www.github.com/doecode/doecode</a>
+			      whereas the project landing page is 
+			      <a title='' target='_blank' rel='noopener noreferrer' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>.  
+			      There are plans to expand this functionality in future releases to support other repository types such as CVS.  
 			 </p>
 			 <p>
 			      **A landing page is required when submitting or announcing Closed Source, Site Hosted code. A landing is optional when submitting 
@@ -510,8 +513,8 @@
 	       <a name="what-is-a-yaml"></a><span class="faq-page-subtitle">What is a YAML file? How do I auto populate the YAML file?</span>
 	       <blockquote class="faq-page-blockquote">
 		    <p>
-			 <a title="YAML" target='_blank' rel="noopener noreferrer" href="http://www.yaml.org/start.html">YAML</a>&nbsp;
-			 is a human friendly data serialization standard for all programming languages. DOE CODE provides functionality to allow users to 
+			 <a title="YAML" target='_blank' rel="noopener noreferrer" href="http://www.yaml.org/start.html">YAML</a> is a human friendly data 
+			 serialization standard for all programming languages. DOE CODE provides functionality to allow users to 
 			 auto-populate metadata in DOE CODE by placing a specifically formatted YAML file in their repository's root main 
 			 directory. The file must be named "metadata.yml" or "doecode.yml", and the file must be formatted correctly.&nbsp;
 			 <a title="YAML Schema" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode/doecode/tree/master/metadata-schema">See detailed YAML information and an example file.</a>
@@ -623,7 +626,7 @@
 			      <br/>
 			      <strong>Project Type</strong>
 			      <br/>
-			      Searches the fields for Open Source, Publicly Available; Open Source, Not Publicly Available; Closed Source, Site Hosted; Closed Source, OSTI Hosted
+			      Searches the fields for Open Source, Publicly Available; Open Source, Not Publicly Available; Closed Source, Site Hosted; and Closed Source, OSTI Hosted
 			      <br/>
 			      <br/>
 			      <strong>Licenses</strong>
