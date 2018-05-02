@@ -174,7 +174,8 @@ public class TemplateUtils {
           user_data.put("first_name", JsonUtils.getString(data, "first_name", ""));
           user_data.put("last_name", JsonUtils.getString(data, "last_name", ""));
           user_data.put("is_logged_in", true);
-          user_data.put("has_osti_role", JsonUtils.getBoolean(data, "has_osti_role", false));
+          ArrayNode roles_list = JsonUtils.parseArrayNode(JsonUtils.getString(data, "roles", "[]"));
+          user_data.put("has_osti_role", JsonUtils.arrayContains(roles_list, "OSTI"));
           HashMap data_for_template = new HashMap();
           data_for_template.put("user_data", user_data);
           data_for_template.put("app_name", Init.app_name);

@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -83,6 +84,15 @@ public class JsonUtils {
 
      public static boolean containsKey(ObjectNode on, String key) {
           return getKeys(on).contains(key);
+     }
+     
+     public static boolean arrayContains(ArrayNode arr,String s){
+          for(JsonNode j:arr){
+               if(StringUtils.equals(j.asText(),s)){
+                    return true;
+               }
+          }
+          return false;
      }
 
      public static ArrayList<String> getKeys(ObjectNode on) {
