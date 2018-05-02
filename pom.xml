@@ -265,6 +265,10 @@
                             <directory>${basedir}/src/main/webapp/</directory>
                             <filtering>true</filtering>
                         </resource>
+                        <resource>
+                            <directory>${basedir}/src/main/resources/templates/</directory>
+                            <filtering>true</filtering>
+                        </resource>
                     </webResources>
                 </configuration>
             </plugin>

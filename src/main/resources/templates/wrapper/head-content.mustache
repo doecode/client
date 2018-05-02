@@ -1,12 +1,12 @@
-<link rel="icon" type="image/png" href="/{{app_name}}/images/doecode-icon.png"/>
+<link rel="icon" type="image/png" href="/${app_name}/images/doecode-icon.png"/>
 <meta charset="utf-8">
 <title>{{page_title}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 {{#each cssFiles}}
-<link rel='stylesheet' type='text/css' href='/{{app_name}}/css/{{.}}.css'/>
+<link rel='stylesheet' type='text/css' href='/${app_name}/css/{{.}}.css'/>
 {{/each}}
-<link rel='stylesheet' type='text/css' href='/{{app_name}}/css/doecode-css.css'/>
+<link rel='stylesheet' type='text/css' href='/${app_name}/css/doecode-css.css'/>
 <!--Meta tags-->
 {{#each meta_tag}}<meta name='{{name}}' content='{{content}}'/>
 {{/each}}
@@ -64,6 +64,6 @@
 <input type='hidden' id='api-url' value='{{api_url_js}}'/>
 <input type='hidden' id='authority-api-base' value='{{auth_api_base}}'/>
 <input type='hidden' id='session-timeout' value='{{session_timeout}}'/>
-<input type='hidden' id='app-name' value='{{app_name}}'/>
+<input type='hidden' id='app-name' value='${app_name}'/>
 <input type='hidden' id='google-analytics-id' value='{{google_analytics_id}}'/>
 <input type='hidden' id='google-analytics-domain' value='{{ga_domain}}'/>
