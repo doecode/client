@@ -558,7 +558,7 @@ mobx.autorun("Repository Link", function () {
 });
 
 mobx.autorun("Repository Link CO", function () {
-    updateTextStyle(metadata, "repository_link", "repository-link-co-lbl", "repository-link-co", metadata.getValue("accessibility") == "CO", "TBD");
+    updateTextStyle(metadata, "repository_link", "repository-link-co-lbl", "repository-link-co", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "TBD");
 
     //mobx.whyRun();
 });
@@ -580,7 +580,7 @@ mobx.autorun("Product Description Panel", function () {
 });
 
 mobx.autorun("Repository Link Display", function () {
-    updateTextStyle(metadata, "repository_link", "repository-link-display-lbl", "repository-link-display", metadata.getValue("accessibility") == "CO", "TBD");
+    updateTextStyle(metadata, "repository_link", "repository-link-display-lbl", "repository-link-display", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "TBD");
 
     //mobx.whyRun();
 });

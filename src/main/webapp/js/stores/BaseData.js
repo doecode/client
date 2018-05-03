@@ -39,6 +39,7 @@ var BaseData = function () {
 	      if (data == 'OS') {
 	        schemaRepo.required = "sub";
 	        schemaRepo.panel = "Repository Information";
+            schemaRepo.validations = ["repositorylink"];
 	        schemaLanding.required = "";
 	        schemaLanding.panel = "";
 	        schemaLanding.error = "";
@@ -58,6 +59,7 @@ var BaseData = function () {
 	        schemaRepo.panel = "";
 	        schemaRepo.error = "";
 	        schemaRepo.completed = false;
+            schemaRepo.validations = [];
 	        schemaLanding.required = "";
 	        schemaLanding.panel = 'Repository Information';
 	        schemaLanding.error = "";
@@ -65,14 +67,15 @@ var BaseData = function () {
 	        schemaFile.required = "sub";
 	        schemaFile.panel = 'Supplemental Product Information';
 
-            this.setValue("landing_page", this.getValue("landing_page") || this.getValue("repository_link"));
-            this.setValue("repository_link", "");
+            this.setValue("landing_page", this.getValue("landing_page"));
+            this.setValue("repository_link", this.getValue("repository_link"));
 	      }
 	      else {
 	        schemaRepo.required = "";
 	        schemaRepo.panel = "";
 	        schemaRepo.error = "";
 	        schemaRepo.completed = false;
+            schemaRepo.validations = ["repositorylink"];
 	        schemaLanding.required = "sub";
 	        schemaLanding.panel = 'Repository Information';
 	        schemaFile.required = this.page == 'announce' ? "announ" : "";
