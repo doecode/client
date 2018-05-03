@@ -201,7 +201,7 @@ var autopopulateFromRepository = function () {
         contentClasses: ['center-text'], showClose: false
     });
     showCommonModalMessage();
-    
+
     doAjax('GET', API_BASE + "metadata/autopopulate?repo=" + metadata.getValue('repository_link'), parseAutopopulateResponse, undefined, parseErrorResponse);
     event.preventDefault();
 };
@@ -235,7 +235,7 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
         $("#owner-email-address").html(data.metadata.owner);
     }
     metadata.loadRecordFromServer(data.metadata, $("#page").val());
-    
+
     // if old record that's not updated, set to default
     var software_type_id = metadata.getValue("software_type");
     if (!software_type_id)
@@ -250,23 +250,23 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
 
     form.workflowStatus = data.metadata.workflow_status;
     form.allowSave = (data.metadata.workflow_status == "" || data.metadata.workflow_status == "Saved");
-    
-    
-    
-    // this should really be based on info from data store, not calculated like this.  We should revisit doi_status...    
+
+
+
+    // this should really be based on info from data store, not calculated like this.  We should revisit doi_status...
     const doi = metadata.getValue("doi");
     const prefix = doi.substr(0, doi.indexOf('/'));
     const id = doi.substr(doi.lastIndexOf('/') + 1, doi.length - 1);
     const infix = doi.substr(doi.indexOf('/') + 1, doi.lastIndexOf('/') - doi.indexOf('/') - 1);
-    
+
     if (prefix == "10.5072" || prefix == "10.11578")
     	metadata.setValue("doi_status", (form.allowSave ? "RES" : "REG"));
-    	
+
     if (infix)
     	metadata.setValue("doi_infix", infix);
-    	
-    
-   	
+
+
+
     hideCommonModalMessage();
 });
 

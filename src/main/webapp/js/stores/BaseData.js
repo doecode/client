@@ -88,16 +88,16 @@ var BaseData = function () {
 	      schema.required = "sub";
       }
 
-      if (field === 'doi_status') {  
-	      var schema = this.infoSchema["doi_infix"];    
-	      if (data == 'RES') {      
+      if (field === 'doi_status') {
+	      var schema = this.infoSchema["doi_infix"];
+	      if (data == 'RES') {
 	        schema.panel = "DOI and Release Date";
 	        schema.error = "";
 	        schema.completed = false;
 	      }
 	      else
 	        schema.panel = "";
-      }      
+      }
 
       if (field === "licenses") {
 	      var schema = this.infoSchema["proprietary_url"];
@@ -112,8 +112,8 @@ var BaseData = function () {
 	        schema.completed = false;
 	      	this.setValue("proprietary_url", "");
 	      }
-      }      
-      
+      }
+
       this.validateField(field);
     })
   }, {
