@@ -179,7 +179,7 @@ var updateTextStyle = function (store, field, label, input, exclude_parenthetica
     updateLabelStyle(store, field, label, exclude_parenthetical_text);
 
     var value = store.getValue(field);
-    value = placeholder && !value ? placeholder : value;
+    value = value ? value : placeholder;
 
     $("#" + input).text(value);
 };
