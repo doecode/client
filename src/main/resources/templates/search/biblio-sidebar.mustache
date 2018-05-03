@@ -4,12 +4,14 @@
 	       <div class='col-xs-12'>
 		    <h4 class='biblio-sidebar-subtitle'>RESOURCE</h4>
 		    {{#if biblio_sidebar.has_repo_link}}
+		    <br/>
 		    <span class='biblio-sidebar-secondary-subtitle'>Publicly Accessible Repository {{> tooltips/Biblio-RepositoryURL}}</span>
 		    <br/>
 		    <a title='Publicly Accessible Repository for Code ID #{{code_id}}' href='{{biblio_sidebar.repo_link}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' class='biblio-sidebar-traditional-anchor word-break download-link'>{{biblio_sidebar.repo_link}}</a> 
 		    {{/if}}
 
 		    {{#if biblio_sidebar.has_landing_page}}
+		    <br/>
 		    <span class='biblio-sidebar-secondary-subtitle'>Project Landing Page</span>
 		    <br/>
 		    <a title='Landing Page for Code ID #{{code_id}}' href='{{biblio_sidebar.landing_page}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' class='biblio-sidebar-traditional-anchor word-break download-link'>{{biblio_sidebar.landing_page}}</a> 
