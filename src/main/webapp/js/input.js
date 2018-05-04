@@ -311,12 +311,16 @@ var save = function save() {
 var submit = function submit() {
     var code_id = $("#code_id").val();
     var msg = code_id ? "Project " + code_id : "New Project";
-    
+
+    msg = "<br/>Submitting data for " + msg + ".";
+    if (metadata.getValue("accessibility").charAt(0) == 'C')
+        msg += "<br/><br/>Please wait while your record and the associated files are being sent to DOE CODE. This may take a few minutes to complete.";
+
     setCommonModalMessage({
         title: 'Submitting',
         show_loader: true,
     	message_type: MESSAGE_TYPE_REGULAR,
-    	content: "<br/>Submitting data for " + msg + ".",
+    	content: msg,
     	contentClasses: ['center-text'], showClose: false
     });
     showCommonModalMessage();
