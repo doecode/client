@@ -267,8 +267,11 @@ if (isValidJSON(localStorage.latestSearchParams) && Array.isArray(JSON.parse(loc
 }
 
 //Makes the chosen js inputs work with custom content
-$(".chosen-search-input").on('keyup', modifyChosenSelectForCustomEntry);
-$(".chosen-search-input").on('keydown', modifyChosenSelectForCustomEntryTabKey);
+$("li.search-field > .chosen-search-input").on('keyup', modifyChosenSelectForCustomEntry);
+$("li.search-field > .chosen-search-input").on('keydown', modifyChosenSelectForCustomEntryTabKey);
+
+//Makes the chosen js inputs that only allow one entry with custom content
+$("div.chosen-search").on('keyup', 'input.chosen-search-input', modifyChosenSelectForCustomEntrySingle);
 
 var clearOutMicrosoftCharacters = function (value) {
     // smart single quotes and apostrophe

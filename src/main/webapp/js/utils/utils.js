@@ -269,6 +269,34 @@ var modifyChosenSelectForCustomEntry = function (event) {
     }
 };
 
+
+var modifyChosenSelectForCustomEntrySingle = function (event) {
+    var keypressed = event.which;
+
+    if (NON_CHARACTER_KEYCODES.indexOf(keypressed) < 0) {
+        var self = this;
+        var val = $(self).val();
+        var related_select = $(self).parent().parent().parent().prev('select.doecode-chosen-select');
+        if ($(related_select).data('allowcustom') == true) {
+            var related_select_id = $(related_select).attr('id');
+            //See if there's a custom entry field
+            //If we don't have an index for this in the underlying select, make it so
+            if (!document.getElementById(related_select_id + "-custom-option")) {
+                $(related_select).prepend("<option id=" + related_select_id + "-custom-option" + " value='" + val + "'>Add: " + val + "</option>");
+            } else {
+                $("#" + related_select_id + "-custom-option").val(val);
+                $("#" + related_select_id + "-custom-option").html("Add: " + val);
+            }
+            $(related_select).trigger('chosen:updated');
+            $(self).val(val);
+
+            var triggersearch = jQuery.Event('keyup');
+            triggersearch.which = 39;
+            $(self).trigger(triggersearch);
+        }
+    }
+};
+
 var populateSelectWithCustomData = function (select, data) {
     if (!data || !isSelectOption(select, "allowcustom"))
         return;
@@ -331,7 +359,7 @@ var isSelectOption = function (select, option) {
 };
 
 /*Goes through each select, and assigns it a chosen attribute based on whether it allows custom entries or not*/
-$(".doecode-chosen-select").each(function () {
+$("select.doecode-chosen-select:not([data-issingle=true])").each(function () {
     var self = this;
     var self_id = $(this).attr('id');
     var allows_custom_text = ($(self).data('allowcustom') == false) ? 'No match found for:' : 'Add:';
@@ -372,6 +400,33 @@ $(".doecode-chosen-select").each(function () {
         });
     }
 });
+
+//Chosen selects for single inputs
+$("select.doecode-chosen-select[data-issingle=true]").each(function () {
+    var self = this;
+    var allows_custom_text = ($(self).data('allowcustom') == false) ? 'No match found for:' : '';
+    $(self).chosen({
+        width: '100%',
+        no_results_text: allows_custom_text,
+        search_contains: true
+    });
+    //TODO on change, see if the value chosen is custom. If it isn't, then remove the custom value 
+    if ($(self).data('allowcustom') == true) {
+        $(self).on('change', function () {
+            var custom_field = $("#" + $(self).attr('id') + "-custom-option");
+            var custom_field_val = $(custom_field).val();
+            var chosen_val = $(self).val();
+
+            if (custom_field_val != chosen_val) {
+                $(custom_field).remove();
+            } else {
+                $(custom_field).html($(custom_field).val());
+                $(self).trigger('chosen:updated');
+            }
+        });
+    }
+});
+
 /****************************/
 /****CHOSEN JS OVERRIDES*****/
 /****************************/
