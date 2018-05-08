@@ -576,19 +576,19 @@ public class SearchFunctions {
           //doi
           if (StringUtils.isNotBlank(release_date) && StringUtils.isNotBlank(doi)) {
                String fixed_doi = "https://doi.org/" + doi;
-               return_data.add(makeDOIRepoLinkObj("DOI: ", "DOI for Code ID " + code_id, code_id, fixed_doi, doi));
+               return_data.add(makeDOIRepoLinkObj("DOI: ", "DOI for Code ID " + code_id, code_id, fixed_doi, doi, ""));
           }
 
           //repository link
           if (StringUtils.isNotBlank(repository_link)) {
                repository_link = (StringUtils.startsWith(repository_link, "http:") || StringUtils.startsWith(repository_link, "https:")) ? repository_link : "http://" + repository_link;
-               return_data.add(makeDOIRepoLinkObj("", "Repository Link for Code ID", code_id, repository_link, "Repository Link"));
+               return_data.add(makeDOIRepoLinkObj("", "Repository Link for Code ID", code_id, repository_link, "Repository Link", "download-link"));
           }
 
           //Landing page
           if (StringUtils.isNotBlank(landing_page)) {
                landing_page = (StringUtils.startsWith(landing_page, "http:") || StringUtils.startsWith(landing_page, "https:")) ? landing_page : "http://" + landing_page;
-               return_data.add(makeDOIRepoLinkObj("", "Landing Page for Code ID", code_id, landing_page, "Landing Page"));
+               return_data.add(makeDOIRepoLinkObj("", "Landing Page for Code ID", code_id, landing_page, "Landing Page", "download-link"));
           }
 
           //Mark the last one as "is_last"
@@ -601,13 +601,14 @@ public class SearchFunctions {
           return return_data;
      }
 
-     private static ObjectNode makeDOIRepoLinkObj(String pretext, String title, String code_id, String href, String display) {
+     private static ObjectNode makeDOIRepoLinkObj(String pretext, String title, String code_id, String href, String display, String css_class) {
           ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           return_data.put("pretext", pretext);
           return_data.put("title", title);
           return_data.put("code_id", code_id);
           return_data.put("href", href);
           return_data.put("display", display);
+          return_data.put("css_class", css_class);
           return return_data;
      }
 
