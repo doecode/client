@@ -4,30 +4,31 @@
 	       <div class='col-xs-12'>
 		    <h4 class='biblio-sidebar-subtitle'>RESOURCE</h4>
 		    {{#if biblio_sidebar.has_repo_link}}
-		    <br/>
-		    <span class='biblio-sidebar-secondary-subtitle'>Publicly Accessible Repository {{> tooltips/Biblio-RepositoryURL}}</span>
-		    <br/>
-		    <a title='Publicly Accessible Repository for Code ID #{{code_id}}' href='{{biblio_sidebar.repo_link}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' class='biblio-sidebar-traditional-anchor word-break download-link'>{{biblio_sidebar.repo_link}}</a> 
+		    <div class='link-content'>
+			 <span class='biblio-sidebar-secondary-subtitle'>Publicly Accessible Repository {{> tooltips/Biblio-RepositoryURL}}</span>
+			 <br/>
+			 <a title='Publicly Accessible Repository for Code ID #{{code_id}}' href='{{biblio_sidebar.repo_link}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' class='biblio-sidebar-traditional-anchor word-break download-link'>{{biblio_sidebar.repo_link}}</a> 
+		    </div>
 		    {{/if}}
 
 		    {{#if biblio_sidebar.has_landing_page}}
-		    <br/>
-		    <span class='biblio-sidebar-secondary-subtitle'>Project Landing Page</span>
-		    <br/>
-		    <a title='Landing Page for Code ID #{{code_id}}' href='{{biblio_sidebar.landing_page}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' class='biblio-sidebar-traditional-anchor word-break download-link'>{{biblio_sidebar.landing_page}}</a> 
+		    <div class='link-content'>
+			 <span class='biblio-sidebar-secondary-subtitle'>Project Landing Page</span>
+			 <br/>
+			 <a title='Landing Page for Code ID #{{code_id}}' href='{{biblio_sidebar.landing_page}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' class='biblio-sidebar-traditional-anchor word-break download-link'>{{biblio_sidebar.landing_page}}</a> 
+		    </div>
 		    {{/if}}
 
 		    <!--Documentation URL-->
 		    {{#if biblio_sidebar.has_documentation_url}}
-		    <br/>
-		    <span class="biblio-sidebar-secondary-subtitle">Documentation</span>
-		    <br/>
-		    <a title="{{biblio_sidebar.documentation_url}}" href="{{biblio_sidebar.documentation_url}}" target="_blank" rel="noopener noreferrer" class="biblio-sidebar-traditional-anchor word-break download-link">{{biblio_sidebar.documentation_url}}</a>
+		    <div class='link-content'>
+			 <span class="biblio-sidebar-secondary-subtitle">Documentation</span>
+			 <br/>
+			 <a title="{{biblio_sidebar.documentation_url}}" href="{{biblio_sidebar.documentation_url}}" target="_blank" rel="noopener noreferrer" class="biblio-sidebar-traditional-anchor word-break download-link">{{biblio_sidebar.documentation_url}}</a>
+		    </div>
 		    {{/if}}
 		    <!--DOI and Release Date-->
 		    {{#if biblio_sidebar.has_doi_and_release}}
-		    <br/>
-		    <br/>
 		    <span>
 			 DOI:&nbsp;<a title='DOI: {{biblio_sidebar.doi}}' href='https://doi.org/{{biblio_sidebar.doi}}' target='_blank' rel="noopener noreferrer" class='biblio-sidebar-traditional-anchor'>{{biblio_sidebar.doi}}</a>
 			 <span class='text-muted doi-subnotice'></span>
