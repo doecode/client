@@ -276,10 +276,6 @@ html h3 {
 
 /*Puts spacing between the contents of the resource section of the biblio sidebar*/
 .biblio-sidebar-row > div > div.link-content{
-    padding-bottom:8px;
-}
-
-.biblio-sidebar-row > div > div.link-content:last-of-type{
     padding-bottom:20px;
 }
 
