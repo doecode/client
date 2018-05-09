@@ -17,6 +17,7 @@ var form = mobx.observable({
     "allowSave": true,
     "workflowStatus": ""
 });
+form.co_repo = "";
 
 var developers_data_tbl_opts = {
     order: [[0, 'asc']],
