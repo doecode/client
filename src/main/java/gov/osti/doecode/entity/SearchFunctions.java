@@ -669,7 +669,11 @@ public class SearchFunctions {
      public static ObjectNode getBiblioSidebarData(ObjectNode search_data, String public_api_url) {
           ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
           //DOI and release date
-          return_data.put("has_doi_and_release", (StringUtils.isNotBlank(JsonUtils.getString(search_data, "doi", "")) && StringUtils.isNotBlank(JsonUtils.getString(search_data, "release_date", ""))));
+          String release_date = JsonUtils.getString(search_data, "release_date", "");
+          if (StringUtils.isNotBlank(release_date) && StringUtils.isNotBlank(JsonUtils.getString(search_data, "doi", ""))) {
+               LocalDate release_date_ld = LocalDate.parse(release_date, RELEASE_DATE_FORMAT);
+               return_data.put("has_doi_and_release", release_date_ld.isBefore(LocalDate.now().plusDays(1)));
+          }
           return_data.put("doi", JsonUtils.getString(search_data, "doi", ""));
 
           //Repository URL
