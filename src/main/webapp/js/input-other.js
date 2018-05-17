@@ -306,8 +306,8 @@ var parseApprovalPageError = function () {
     setCommonModalMessage(LOADING_PENDING_PROJECTS_ERROR_OPTS);
 };
 
+//Content to be ran at the beginning of the page
 checkIsAuthenticated();
-
 if (document.getElementById('confirmation-page-identifier')) {
     var code_id = $("#code-id").val();
     doAuthenticatedAjax('GET', API_BASE + 'metadata/' + code_id, parseConfirmPageData, null, parseConfirmPageError);
@@ -318,6 +318,34 @@ if (document.getElementById('confirmation-page-identifier')) {
     setCommonModalMessage(LOADING_PROJECTS_OPTS);
     showCommonModalMessage();
     doAuthenticatedAjax('GET', API_BASE + 'metadata/projects', parseProjectsPageData, null, parseProjectsPageError);
+
+    //New stuff
+    /*
+     doAuthenticatedAjax('GET', API_BASE + 'metadata/projects', function (data) {
+     
+     }, null,
+     function () {
+     setCommonModalMessage(LOADER_PROJECTS_ERROR_OPTS);
+     });*/
+    /*
+    $(window).on('scroll', function () {
+        if (document.getElementById('bottom-item')) {
+            var bottom_item = $("#bottom-item");
+            var bottom_pointer_top = Math.ceil($(bottom_item).offset().top);
+            var viewportBottom = $(window).scrollTop() + $(window).height();
+
+            //If the "bottom-item" is in view
+            if (viewportBottom >= bottom_pointer_top) {
+                $(bottom_item).removeAttr('id');
+                //TODO if therea re more records, add them to the list, and set the id to the one near the bottom
+                if (document.getElementById('bottom-item')) {
+                    console.log("Still here");
+                } else {
+                    console.log("Not here anymore");
+                }
+            }
+        }
+    });*/
 
 } else if (document.getElementById('approval-page-identifier')) {
     checkHasRole('OSTI');
