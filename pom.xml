@@ -21,8 +21,6 @@
         </repository>
     </distributionManagement>
     <properties>
-        <handlebars.version>4.0.6</handlebars.version>
-        <logback.version>1.2.3</logback.version>
         <session_timeout>45</session_timeout>
         <app_name>${project.artifactId}</app_name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,7 +31,7 @@
         <profile>
             <id>profile-name</id>
             <properties>
-             <environment_url>URL of the tomcat you are deploying the application to</environment_url>
+                <environment_url>URL of the tomcat you are deploying the application to</environment_url>
                 <username>Username of the tomcat manager you deploy the application to</username>
                 <password>Password of the tomcat manager you deploy the application to</password>
                 <apiURL>The URL to the DOECODE API instance that you use</apiURL>
@@ -43,7 +41,6 @@
                 <siteURL>The base url for the site</siteURL>
                 <authorityapiURL>The base URL for OSTI's Elink Authority API</authorityapiURL>
                 <app_name>The base name of the app. "doecode" by default</app_name>
-                The following fields are entirely optional
                 <smtpHost>The host used to send emails from the application</smtpHost>
                 <gitlab_submit_email>The email address gitlab submissions are sent to</gitlab_submit_email>
                 <gitlab_from_email>The email address gitlab submissions are from</gitlab_from_email>
@@ -64,6 +61,29 @@
             </resource>
         </resources>
         <plugins>
+            <!--
+            This plugin is used as a way for several developers to utilize the same project and configurations. To use it, you must have an application in the location
+            specified in <file>. The properties from that file are loaded as maven properties. This is meant to be a replacement to using traditional maven profiles located
+            in the pom.xml or in a .m2/settings.xml
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${user.home}/shared-resources/doecode/${environment}.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>com.samaxes.maven</groupId>
                 <artifactId>minify-maven-plugin</artifactId>
@@ -178,7 +198,7 @@
                             <goal>minify</goal>
                         </goals>
                     </execution>
-                     <execution>
+                    <execution>
                         <id>minify-site</id>
                         <phase>compile</phase>
                         <configuration>
@@ -220,14 +240,34 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--
+                The properties for this could either be located here in the pom.xml, or in the settings.xml in your maven .m2 directory
+                Example: 
+                <servers>
+                    <server>
+                        <id>[ID Goes Here]</id>
+                        <username>tomcat username</username>
+                        <password>tomcat password</password>
+                    </server>
+                </serers>
+                <profiles>
+                    <profile>
+                        <id>[Id of profile, the value you put after -P when calling maven]</id>
+                        <properties>
+                            <server>[Id of server you declared above]</server>
+                            <host>URL to tomcat you're deploying to</host>
+                            <port>Port of tomcat you're deploying to</port>
+                        </properties>
+                    </profile>
+                </profiles>
+            -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>${environment_url}</url>
-                    <username>${username}</username>
-                    <password>${password}</password>
+                    <server>${server}</server>
+                    <url>http://${host}:${port}/manager/text</url>
                     <warFile>${project.build.directory}/${app_name}.war</warFile>
                     <path>/${project.build.finalName}</path>
                 </configuration>
@@ -282,12 +322,12 @@
         <dependency>
             <groupId>com.github.jknack</groupId>
             <artifactId>handlebars</artifactId>
-            <version>${handlebars.version}</version>
+            <version>4.0.6</version>
         </dependency>
         <dependency>
             <groupId>com.github.jknack</groupId>
             <artifactId>handlebars-jackson2</artifactId>
-            <version>${handlebars.version}</version>
+            <version>4.0.6</version>
         </dependency>
         <!--Jackson Library for JSON-->
         <dependency>
@@ -326,12 +366,12 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
+            <version>1.2.3</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>${logback.version}</version>
+            <version>1.2.3</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
