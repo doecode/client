@@ -55,6 +55,14 @@ var parseConfirmPageData = function (data) {
     //Now, go through, grab the values
     var metadata_list = [];
 
+    //Title
+    if (data.software_title) {
+        metadata_list.push({
+            title: 'Software Title',
+            content: data.software_title
+        });
+    }
+
     //Developers
     if (data.developers && data.developers.length > 0) {
         var developer_list_refined = [];
@@ -181,8 +189,22 @@ var parseConfirmPageData = function (data) {
             content: data.keywords
         });
     }
+    //Landing Page
+    if (data.landing_page) {
+        metadata_list.push({
+            title: 'Landing Page',
+            content: '<a target="_blank" href="' + data.landing_page + '">' + data.landing_page + '</a>'
+        });
+    }
+    //Repository URL
+    if (data.repository_link) {
+        metadata_list.push({
+            title: 'Repository URL',
+            content: '<a target="_blank" href="' + data.repository_link + '">' + data.repository_link + '</a>'
+        });
+    }
 
-    //Go through, put all of teh things into an html string
+    //Go through, put all of the things into an html string
     var content_string = "";
     metadata_list.forEach(function (item) {
         content_string += ('<dt class="col-xs-4">' + item.title + '</dt><dd class="col-xs-8">' + item.content + '</dd>');
@@ -328,24 +350,24 @@ if (document.getElementById('confirmation-page-identifier')) {
      setCommonModalMessage(LOADER_PROJECTS_ERROR_OPTS);
      });*/
     /*
-    $(window).on('scroll', function () {
-        if (document.getElementById('bottom-item')) {
-            var bottom_item = $("#bottom-item");
-            var bottom_pointer_top = Math.ceil($(bottom_item).offset().top);
-            var viewportBottom = $(window).scrollTop() + $(window).height();
-
-            //If the "bottom-item" is in view
-            if (viewportBottom >= bottom_pointer_top) {
-                $(bottom_item).removeAttr('id');
-                //TODO if therea re more records, add them to the list, and set the id to the one near the bottom
-                if (document.getElementById('bottom-item')) {
-                    console.log("Still here");
-                } else {
-                    console.log("Not here anymore");
-                }
-            }
-        }
-    });*/
+     $(window).on('scroll', function () {
+     if (document.getElementById('bottom-item')) {
+     var bottom_item = $("#bottom-item");
+     var bottom_pointer_top = Math.ceil($(bottom_item).offset().top);
+     var viewportBottom = $(window).scrollTop() + $(window).height();
+     
+     //If the "bottom-item" is in view
+     if (viewportBottom >= bottom_pointer_top) {
+     $(bottom_item).removeAttr('id');
+     //TODO if therea re more records, add them to the list, and set the id to the one near the bottom
+     if (document.getElementById('bottom-item')) {
+     console.log("Still here");
+     } else {
+     console.log("Not here anymore");
+     }
+     }
+     }
+     });*/
 
 } else if (document.getElementById('approval-page-identifier')) {
     checkHasRole('OSTI');
