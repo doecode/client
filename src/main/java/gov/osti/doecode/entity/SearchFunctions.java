@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,15 @@ public class SearchFunctions {
      public static final DateTimeFormatter CHICAGO_DATE_FORMAT = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
      public static final DateTimeFormatter MLA_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM. yyyy.");
      public static final DateTimeFormatter SEARCH_RESULTS_DESCRIPTION_FORMAT = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+
+     //Gives the max number of records you can have with a search results export, based on type of export you're doing
+     public final static HashMap<String, Integer> MAX_RECS_BY_TYPE = new HashMap();
+
+     static {
+          MAX_RECS_BY_TYPE.put("json", 5000);
+          MAX_RECS_BY_TYPE.put("csv", 5000);
+          MAX_RECS_BY_TYPE.put("excel", 2000);
+     }
 
      public static ObjectNode conductSearch(HttpServletRequest request, ServletContext context, long page_num) {
           ObjectNode return_data = doSearchPost(request, Init.backend_api_url);

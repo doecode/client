@@ -3,8 +3,12 @@ package gov.osti.doecode.servlet;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.entity.SearchFunctions;
 import gov.osti.doecode.utils.JsonUtils;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -16,16 +20,19 @@ import org.slf4j.LoggerFactory;
 
 public class DisseminationServlet extends HttpServlet {
 
+     private static final int BYTES_DOWNLOAD = 1024;
      private Logger log = LoggerFactory.getLogger(DisseminationServlet.class);
 
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {
+          request.setCharacterEncoding("UTF-8");
           String remaining = StringUtils.substringAfterLast(request.getRequestURI(), "/" + Init.app_name + "/dissemination/");
 
           if (remaining.equals("export-search-results")) {
                String format = StringUtils.defaultIfBlank(request.getParameter("format"), "json");
+
                //Get search results
-               ObjectNode search_request_data = SearchFunctions.createPostDataObj(request, 0, 2000);
+               ObjectNode search_request_data = SearchFunctions.createPostDataObj(request, 0, SearchFunctions.MAX_RECS_BY_TYPE.get(format));
                ObjectNode search_result_data = new ObjectNode(JsonUtils.INSTANCE);
 
                try {
@@ -37,29 +44,31 @@ public class DisseminationServlet extends HttpServlet {
                     log.error("Exception in getting exported search results: " + e.getMessage());
                }
 
-               log.info(search_result_data.toString());
-               ServletOutputStream out = response.getOutputStream();
                //Format search results data
                switch (format) {
                     case "excel":
                          response.setContentType("application/vnd.ms-excel");
                          response.setHeader("Expires", "0");
                          response.setHeader("Content-Disposition", "attachment; filename=Search-Results.xls");
-                         
-                         out.flush();
-                         out.close();
                          break;
                     case "csv":
                          response.setContentType("text/csv");
-                         response.setHeader("Content-Disposition","attachment; filename=Search-results.csv");
+                         response.setHeader("Content-Disposition", "attachment; filename=Search-results.csv");
                          break;
                     default:
                          response.setContentType("application/json");
                          response.setHeader("Content-Disposition", "attachment; filename=Search-results.json");
-                         PrintWriter p = response.getWriter();
-                         p.print(search_result_data.toString());
-                         p.flush();
-                         p.close();
+                         InputStream input = new ByteArrayInputStream(search_result_data.toString().getBytes("UTF-8"));
+                         int read = 0;
+                         byte[] bytes = new byte[BYTES_DOWNLOAD];
+                         OutputStream os = response.getOutputStream();
+
+                         //data form resultset
+                         while ((read = input.read(bytes)) != -1) {
+                              os.write(bytes, 0, read);
+                         }
+                         os.flush();
+                         os.close();
                          break;
                }
 

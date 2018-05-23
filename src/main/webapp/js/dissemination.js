@@ -378,6 +378,15 @@ if (document.getElementById('about-page-identifier')) {
     //Makes the download links work
     $(".download-link").on('click', pushDownloadMetric);
 
+    //Makes the Search Results Exporter links work
+    $(".results-export-link").on('click', function () {
+        var format = $(this).data('format');
+        var search_form_data = $("#search-page-form").serialize();
+        console.log(format);
+        console.log(search_form_data);
+        window.open('/' + APP_NAME + '/dissemination/export-search-results?format=' + format + "&" + search_form_data, '_blank');
+    });
+
 } else if (document.getElementById('biblio-page-identifier') && !document.getElementById('biblio-code-id-not-found')) {
 
     //For authors
