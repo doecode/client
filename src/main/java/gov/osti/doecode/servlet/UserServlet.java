@@ -18,7 +18,7 @@ public class UserServlet extends HttpServlet {
              throws ServletException, IOException {
           String URI = request.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/user/");
-          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           ObjectNode request_data = JsonUtils.parseObjectNode(request.getReader());
           boolean add_signin_html = false;
           switch (remaining) {

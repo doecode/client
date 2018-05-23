@@ -22,7 +22,7 @@ public class OtherFunctions {
      private static Logger log = LoggerFactory.getLogger(OtherFunctions.class.getName());
 
      public static ObjectNode handleGitlabSubmissionForm(HttpServletRequest request) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           String captcha_response = request.getParameter("g-recaptcha-response");
           String recaptcha_secretkey = request.getServletContext().getInitParameter("recaptcha_secretkey");
           String ip_address = "";
@@ -39,7 +39,7 @@ public class OtherFunctions {
                return_data.put("message", "You must enter all required fields and validate the captcha.");
           } else {
                //Submit form
-               ObjectNode requested_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+               ObjectNode requested_data = new ObjectNode(JsonUtils.INSTANCE);
                requested_data.put("first_name", request.getParameter("first_name"));
                requested_data.put("middle_name", request.getParameter("middle_name"));
                requested_data.put("last_name", request.getParameter("last_name"));
@@ -81,7 +81,7 @@ public class OtherFunctions {
                recaptcha_url += ("&remoteip=" + ip_address);
           }
 
-          ObjectNode response = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode response = new ObjectNode(JsonUtils.INSTANCE);
           try {
                URL url = new URL(recaptcha_url);
                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -110,7 +110,7 @@ public class OtherFunctions {
      }
 
      public static ObjectNode sendGitlabSubmissionEmail(ServletContext context, ObjectNode request_data) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
 
           //Check all of the values before submitting
           //Let's go ahead and put the message together
@@ -209,7 +209,7 @@ public class OtherFunctions {
      }
 
      public static ObjectNode getOtherLists(ServletContext context) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           try {
                return_data.put("countries_list", DOECODEServletContextListener.getJsonList(DOECODEJson.COUNTRIES_KEY));
                return_data.put("state_list", DOECODEServletContextListener.getJsonList(DOECODEJson.STATES_KEY));

@@ -36,9 +36,9 @@ public class Input extends HttpServlet {
           String template = "";
           String current_page = "";
 
-          ObjectNode output_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
-          ArrayNode jsFilesList = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
-          ArrayNode cssFilesList = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
+          ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
+          ArrayNode cssFilesList = new ArrayNode(JsonUtils.INSTANCE);
           boolean is_inputjs = false;
           boolean is_accordion = false;
 

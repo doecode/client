@@ -36,7 +36,7 @@ public class UserFunctions {
      Looks for a user data cookie. If one is found, it takes it, parses the value as a json object, and returns it
       */
      public static ObjectNode getUserDataFromCookie(HttpServletRequest request) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           if (request.getCookies() != null) {
                for (Cookie c : request.getCookies()) {
                     if (StringUtils.equals(c.getName(), "user_data")) {
@@ -90,7 +90,7 @@ public class UserFunctions {
      }
 
      public static ObjectNode setUserDataForCookie(ObjectNode user_data) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           return_data.put("first_name", JsonUtils.getString(user_data, "first_name", ""));
           return_data.put("last_name", JsonUtils.getString(user_data, "last_name", ""));
           return_data.put("email", JsonUtils.getString(user_data, "email", ""));
@@ -173,11 +173,11 @@ public class UserFunctions {
      }
 
      public static ObjectNode getUserRegistrationData(String confirmation_code) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           String api_url = Init.backend_api_url;
 
           HttpURLConnection conn = null;
-          ObjectNode response_json = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode response_json = new ObjectNode(JsonUtils.INSTANCE);
           try {
                URL url = new URL(api_url + "user/confirm?confirmation=" + confirmation_code);
                conn = (HttpURLConnection) url.openConnection();

@@ -28,8 +28,8 @@ public class User extends HttpServlet {
 
           String page_title = "";
           String template = "";
-          ObjectNode output_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
-          ArrayNode jsFilesList = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
+          ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
 
           switch (remaining) {
                case "account":
@@ -58,7 +58,7 @@ public class User extends HttpServlet {
                     page_title = "DOE CODE: Login";
                     template = TemplateUtils.TEMPLATE_USER_LOGIN;
                     if (StringUtils.isNotBlank(request.getParameter("redirect")) && request.getParameter("redirect").equals("true")) {
-                         output_data.put("user_data", new ObjectNode(JsonUtils.FACTORY_INSTANCE));
+                         output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
                          output_data.put("is_redirected", true);
                          response.addCookie(new Cookie("user_data", null));
                     }
@@ -74,7 +74,7 @@ public class User extends HttpServlet {
                case "logout":
                     page_title = "DOE CODE: Logout";
                     template = TemplateUtils.TEMPLATE_USER_LOGOUT;
-                    output_data.put("user_data", new ObjectNode(JsonUtils.FACTORY_INSTANCE));
+                    output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
                     response.addCookie(new Cookie("user_data", null));
                     response.addCookie(new Cookie("needs_password_reset", null));
                     response.addCookie(new Cookie("requested_url", null));

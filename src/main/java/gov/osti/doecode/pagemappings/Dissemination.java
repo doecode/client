@@ -34,8 +34,8 @@ public class Dissemination extends HttpServlet {
           String page_title = "";
           String template = "";
           String current_page = "";
-          ObjectNode output_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
-          ArrayNode jsFilesList = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
+          ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
 
           /*Determine what page we're on, and load the appropriate title, template, etc*/
           if (remaining.equals("") || remaining.equals("/")) {//HOMEPAGE
@@ -131,7 +131,7 @@ public class Dissemination extends HttpServlet {
 
           //Check if they're logged in, and only do something if they're not logged in
           if (!UserFunctions.isUserLoggedIn(request)) {
-               output_data.put("user_data", new ObjectNode(JsonUtils.FACTORY_INSTANCE));
+               output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
           } else {
                //Increment time
                response.addCookie(UserFunctions.updateUserSessionTimeout(request));
