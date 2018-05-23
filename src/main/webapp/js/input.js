@@ -165,14 +165,8 @@ var updateDropzoneStyle = function (store, field, label, input, exclude_parenthe
 
     if (value)
         $("#uploaded-file-div").show();
-    else {
-        var existingFile = $(".dz-remove")[0];
-
-        if (existingFile)
-            existingFile.click();
-
+    else
         $("#uploaded-file-div").hide();
-    }
 
 };
 
@@ -1487,10 +1481,15 @@ var handleInfix = mobx.action("Handle DOI Infix", function (event) {
 Dropzone.autoDiscover = false;
 //Regex to see if the file is allowed
 const FILE_EXTENSION_REGEX = new RegExp(/\.(zip|tar|tar[.]gz|tar[.]bz2)$/);
-var hideFileUploadInfo = mobx.action("Remove File Drop", function () {
-    $("#delete-uploaded-file-btn").unbind();
+var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
     metadata.setValue("file_name", "");
     metadata.setValue("files", []);
+
+    // if dropzone has a file associated, remove it via click event
+    var existingFile = $(".dz-remove")[0];
+
+    if (existingFile)
+        existingFile.click();
 });
 //Configuration for the file upload dropzone
 var FILE_UPLOAD_CONFIG = {url: 'someurl',
@@ -1500,20 +1499,20 @@ var FILE_UPLOAD_CONFIG = {url: 'someurl',
     maxFiles: 1,
     init: function () {
         var self = this;
-        
+
         /*Runs when you try to add more files than allowed*/
         self.on("maxfilesexceeded", function (file) {
             this.removeAllFiles();
             this.addFile(file);
         });
-        
+
         /*Runs when you add a file that isn't allowed*/
         this.on("error", function (file, message, xhr) {
             if (xhr == null) {
                 this.removeFile(file);
             }
         });
-        
+
         /*Runs when you add any kind of file*/
         self.on("addedfile", mobx.action("Add File Drop", function (file) {
             //Make sure that this file is allowed
@@ -1525,16 +1524,10 @@ var FILE_UPLOAD_CONFIG = {url: 'someurl',
                 //Button to make the file uploader work
                 metadata.setValue("file_name", file.name);
                 metadata.setValue("files", [file]);
-				
-                //Make the delete file button work
-                $("#delete-uploaded-file-btn").on('click', function () {
-                    self.removeFile(file);
-                    hideFileUploadInfo();
-                });
 
                 //Make the remove button included hide the right content
                 $(".dz-remove").on('click', function () {
-                    hideFileUploadInfo();
+                    removeFileUploadInfo();
                 });
 
                 //Hide the progress bar because we don't want to see it
@@ -1714,6 +1707,8 @@ $(document).ready(mobx.action("Document Ready", function () {
 
     /*File uploads*/
     var dropzone = $("#file-upload-dropzone").dropzone(FILE_UPLOAD_CONFIG);
+    // bind removal event
+    $("#delete-uploaded-file-btn").on('click', function() {removeFileUploadInfo()});
 
     // form buttons
     $('#input-save-btn').on('click', save);
