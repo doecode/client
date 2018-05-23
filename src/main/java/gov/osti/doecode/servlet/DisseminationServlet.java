@@ -1,6 +1,7 @@
 package gov.osti.doecode.servlet;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import gov.osti.doecode.entity.ReportFunctions;
 import gov.osti.doecode.entity.SearchFunctions;
 import gov.osti.doecode.utils.JsonUtils;
 import java.io.ByteArrayInputStream;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +34,7 @@ public class DisseminationServlet extends HttpServlet {
                String format = StringUtils.defaultIfBlank(request.getParameter("format"), "json");
 
                //Get search results
-               ObjectNode search_request_data = SearchFunctions.createPostDataObj(request, 0, SearchFunctions.MAX_RECS_BY_TYPE.get(format));
+               ObjectNode search_request_data = SearchFunctions.createPostDataObj(request, 0, ReportFunctions.MAX_RECS_BY_TYPE.get(format));
                ObjectNode search_result_data = new ObjectNode(JsonUtils.INSTANCE);
 
                try {
@@ -50,6 +52,11 @@ public class DisseminationServlet extends HttpServlet {
                          response.setContentType("application/vnd.ms-excel");
                          response.setHeader("Expires", "0");
                          response.setHeader("Content-Disposition", "attachment; filename=Search-Results.xls");
+                         ServletOutputStream out = response.getOutputStream();
+                         Workbook excel_doc = ReportFunctions.getExcelSearchExports(search_result_data);
+                         excel_doc.write(response.getOutputStream());
+                         out.flush();
+                         out.close();
                          break;
                     case "csv":
                          response.setContentType("text/csv");
@@ -63,7 +70,7 @@ public class DisseminationServlet extends HttpServlet {
                          byte[] bytes = new byte[BYTES_DOWNLOAD];
                          OutputStream os = response.getOutputStream();
 
-                         //data form resultset
+                         
                          while ((read = input.read(bytes)) != -1) {
                               os.write(bytes, 0, read);
                          }

@@ -18,34 +18,25 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
+
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SearchFunctions {
-
+     
      private final static Logger log = LoggerFactory.getLogger(SearchFunctions.class.getName());
      public static final DateTimeFormatter RELEASE_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
      public static final DateTimeFormatter APA_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy, MMMM dd");
      public static final DateTimeFormatter CHICAGO_DATE_FORMAT = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
      public static final DateTimeFormatter MLA_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM. yyyy.");
      public static final DateTimeFormatter SEARCH_RESULTS_DESCRIPTION_FORMAT = DateTimeFormatter.ofPattern("MM-dd-yyyy");
-
-     //Gives the max number of records you can have with a search results export, based on type of export you're doing
-     public final static HashMap<String, Integer> MAX_RECS_BY_TYPE = new HashMap();
-
-     static {
-          MAX_RECS_BY_TYPE.put("json", 5000);
-          MAX_RECS_BY_TYPE.put("csv", 5000);
-          MAX_RECS_BY_TYPE.put("excel", 2000);
-     }
-
+     
      public static ObjectNode conductSearch(HttpServletRequest request, ServletContext context, long page_num) {
           ObjectNode return_data = doSearchPost(request, Init.backend_api_url);
 
@@ -56,10 +47,10 @@ public class SearchFunctions {
           //Add together all of the data, send it out
           return_data.put("had_results", JsonUtils.getLong(return_data, "search_result_count", 0) > 0);
           return_data.put("search_form_data", search_form_data);
-
+          
           return return_data;
      }
-
+     
      public static ObjectNode createPostDataObj(HttpServletRequest request, long start, long rows) {
           //Get all of the data into a postable object
           ObjectNode post_data = new ObjectNode(JsonUtils.INSTANCE);
@@ -74,7 +65,7 @@ public class SearchFunctions {
           post_data.put("rows", rows);
           post_data.put("sort", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("sort"), ""), Whitelist.basic()));
           post_data.put("orcid", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("orcid"), ""), Whitelist.basic()));
-
+          
           post_data.put("accessibility", handleRequestArray(request.getParameter("accessibility")));
           post_data.put("licenses", handleRequestArray(request.getParameter("licenses")));
           post_data.put("programming_languages", handleRequestArray(request.getParameter("programming_languages")));
@@ -83,24 +74,24 @@ public class SearchFunctions {
           post_data.put("software_type", handleRequestArray(request.getParameter("software_type")));
           return post_data;
      }
-
+     
      public static ObjectNode doSearchPost(HttpServletRequest request, String api_url) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           boolean had_error = false;
           boolean invalid_search_data = false;
           String error_message = "";
-
+          
           long start = Long.parseLong(StringUtils.defaultIfBlank(request.getParameter("start"), "0"));
           long rows = Long.parseLong(StringUtils.defaultIfBlank(request.getParameter("rows"), "10"));
-
+          
           ObjectNode post_data = createPostDataObj(request, start, rows);
-
+          
           ObjectNode search_result_data = new ObjectNode(JsonUtils.INSTANCE);
           try {
-
                String result = getRawSearchResultData(api_url, post_data);
                if (JsonUtils.isValidObjectNode(result)) {
                     search_result_data = JsonUtils.parseObjectNode(result);
+                    log.info(result);
                } else {
                     invalid_search_data = true;
                }
@@ -146,10 +137,10 @@ public class SearchFunctions {
                return_data.put("search_facets_data", search_result_data.get("facets"));
                return_data.put("year_facets_data", getYearFacetsData((ObjectNode) search_result_data.get("facets")));
           }
-
+          
           return return_data;
      }
-
+     
      public static String getRawSearchResultData(String api_url, ObjectNode post_data) throws IOException {
           URL url = new URL(api_url + "search");
           HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -158,26 +149,26 @@ public class SearchFunctions {
           conn.setDoOutput(true);
           conn.setDoInput(true);
           conn.setRequestMethod("POST");
-
+          
           BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream(), "UTF-8"));
           bw.write(post_data.toString());
           bw.flush();
           bw.close();
-
+          
           BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
           StringBuilder result = new StringBuilder();
           String line;
           while ((line = rd.readLine()) != null) {
                result.append(line);
           }
-
+          
           conn.disconnect();
           return result.toString();
      }
-
+     
      private static ArrayNode getYearFacetsData(ObjectNode facets) {
           ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
-
+          
           for (String key : JsonUtils.getKeys(facets)) {
                //Get our needed values
                ObjectNode row = new ObjectNode(JsonUtils.INSTANCE);
@@ -185,12 +176,12 @@ public class SearchFunctions {
                int count = facets.get(key).asInt();
                row.put("year", year);
                row.put("count", count);
-
+               
                return_data.add(row);
           }
           return return_data;
      }
-
+     
      private static ObjectNode getSearchResultsDescription(ObjectNode post_data) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           ArrayNode search_description_list = new ArrayNode(JsonUtils.INSTANCE);
@@ -253,7 +244,7 @@ public class SearchFunctions {
           if (StringUtils.isNotBlank(accessibility_array) && JsonUtils.parseArrayNode(accessibility_array).size() > 0) {
                //Get teh accessibility array so we can get some display values
                ArrayNode accessiblity_display_vals = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
-
+               
                search_description_list.add(makeSearchDescriptionObjectArray("Accessibility", JsonUtils.parseArrayNode(accessibility_array), "accessibility", accessiblity_display_vals));
           }
 
@@ -262,7 +253,7 @@ public class SearchFunctions {
           if (StringUtils.isNotBlank(software_type_array) && JsonUtils.parseArrayNode(software_type_array).size() > 0) {
                //Get the software_type array so we can get display values
                ArrayNode software_type_display_vals = DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY);
-
+               
                search_description_list.add(makeSearchDescriptionObjectArray("Software Type", JsonUtils.parseArrayNode(software_type_array), "software_type", software_type_display_vals));
           }
 
@@ -299,7 +290,7 @@ public class SearchFunctions {
           return_data.put("had_things_to_search_by", search_description_list.size() > 0);
           return return_data;
      }
-
+     
      private static ObjectNode makeSearchDescriptionObject(String displayField, String display_value, String field) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           return_data.put("displayField", displayField);
@@ -307,11 +298,11 @@ public class SearchFunctions {
           return_data.put("field", field);
           return return_data;
      }
-
+     
      private static ObjectNode makeSearchDescriptionObjectArray(String displayField, ArrayNode values, String field, ArrayNode display_vals_array) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           return_data.put("displayField", displayField);
-
+          
           ArrayNode values_to_show = values;
           //If we have a display vals array, we'll through there and grab the display values we actually want to show
           if (display_vals_array != null) {
@@ -341,19 +332,19 @@ public class SearchFunctions {
                values_arr.add(row);
           }
           return_data.put("value", values_arr);
-
+          
           return_data.put("field", field);
           return_data.put("is_array", true);
           return return_data;
      }
-
+     
      private static ArrayNode getSearchDropdownList(ArrayNode list, ArrayNode selected) {
           ArrayNode return_data = JsonUtils.parseArrayNode(list.toString()); //Had to put this to string followed by parse because assigning return_data directly to list was causing a pass by reference issue
 
           /*Go through the array, and if we have that selected, we'll set a flag that says it's checked*/
           for (int i = 0; i < return_data.size(); i++) {
                ObjectNode row = (ObjectNode) return_data.get(i);
-
+               
                String current_row_val = JsonUtils.getString(row, "value", "");
                for (JsonNode v : selected) {
                     if (v.asText().equals(current_row_val)) {
@@ -362,17 +353,17 @@ public class SearchFunctions {
                          break;
                     }
                }
-
+               
           }
-
+          
           return return_data;
      }
-
+     
      private static ObjectNode sort_dropdownOptions(String sort_value) {
           ObjectNode options_obj = new ObjectNode(JsonUtils.INSTANCE);
           ArrayNode options = DOECODEServletContextListener.getJsonList(DOECODEJson.SEARCH_SORT_KEY);
           String current = "";
-
+          
           for (JsonNode j : options) {
                ObjectNode jObj = (ObjectNode) j;
                if (JsonUtils.getString(jObj, "value", "").equals(sort_value)) {
@@ -380,30 +371,30 @@ public class SearchFunctions {
                     break;
                }
           }
-
+          
           options_obj.put("sort_dropdown_options", options);
           options_obj.put("current", current);
           return options_obj;
      }
-
+     
      private static ObjectNode getPaginationData(ObjectNode search_form_data, long num_found) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           long start = JsonUtils.getLong(search_form_data, "start", 0);
           long rows = JsonUtils.getLong(search_form_data, "rows", 10);
-
+          
           long page = ((int) (start / rows) + 1);
           long max_pages = ((int) (num_found / rows) + 1);
-
+          
           return_data.put("pagination_btn_prev_disabled", page < 2);
           return_data.put("pagination_btn_next_disabled", (start + rows >= num_found));
           return_data.put("pagination_btn_choose_disabled", max_pages < 2);
           return_data.put("min_pages", 1);
           return_data.put("max_pages", max_pages);
           return_data.put("current_page", page);
-
+          
           return return_data;
      }
-
+     
      private static ArrayNode handleRequestArray(String value) {
           ArrayNode request_array = new ArrayNode(JsonUtils.INSTANCE);
           if (StringUtils.isNotBlank(value) && !StringUtils.equals("[]", value)) {
@@ -413,16 +404,16 @@ public class SearchFunctions {
                }
                request_array = temp_array;
           }
-
+          
           return request_array;
      }
-
+     
      private static ArrayNode processSearchResultData(ArrayNode search_result_list, long start, long num_found) {
           ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
-
+          
           for (int i = 0; i < search_result_list.size(); i++) {
                ObjectNode row = (ObjectNode) search_result_list.get(i);
-
+               
                ObjectNode newRow = new ObjectNode(JsonUtils.INSTANCE);
                Long code_id = JsonUtils.getLong(row, "code_id", 0);
                newRow.put("code_id", code_id);
@@ -443,7 +434,7 @@ public class SearchFunctions {
                } else {
                     devContributorsTrimmed = devContributors;
                }
-
+               
                newRow.put("dev_contributors", getDevAndContributorLink(devContributorsTrimmed, false, is_more_than_3, false));
                newRow.put("descriptionObj", getDescription(JsonUtils.getString(row, "description", ""), 100));
                newRow.put("repository_links_list", getDoiReposLinks(code_id.toString(), JsonUtils.getString(row, "doi", ""), JsonUtils.getString(row, "repository_link", ""), JsonUtils.getString(row, "landing_page", ""), JsonUtils.getString(row, "release_date", "")));
@@ -454,16 +445,16 @@ public class SearchFunctions {
                //Get the classes that will contain the result sponsorOrgRow
                newRow.put("result_column_classes", (num_found > 9999) ? "col-sm-2 col-xs-12 search-result-count-column" : "col-sm-1 col-xs-2 search-result-count-column");
                newRow.put("result_subrow_classes", (num_found > 9999) ? "col-sm-10 col-xs-12 search-result-sub-row" : "col-sm-11 col-xs-10 search-result-sub-row");
-
+               
                return_data.add(newRow);
           }
-
+          
           return return_data;
      }
-
+     
      private static ArrayNode combineDevContributorNames(ArrayNode developers, ArrayNode contributors) {
           ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
-
+          
           if (developers != null) {
                for (JsonNode v : developers) {
                     ObjectNode row = (ObjectNode) v;
@@ -482,7 +473,7 @@ public class SearchFunctions {
                     }
                }
           }
-
+          
           if (contributors != null) {
                for (JsonNode v : contributors) {
                     ObjectNode row = (ObjectNode) v;
@@ -501,10 +492,10 @@ public class SearchFunctions {
                     }
                }
           }
-
+          
           return return_data;
      }
-
+     
      private static ObjectNode getDevAndContributorLink(ArrayNode authorlist, boolean showAffiliations, boolean showEllipsis, boolean showOrcid) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           //We need to go ahead and tack on the lack of a need of a semi-colon after a given author
@@ -522,7 +513,7 @@ public class SearchFunctions {
 
                //We need to know whether this author has an orcid or not
                current_row.put("showOrcid", StringUtils.isNotBlank(JsonUtils.getString(current_row, "orcid", "")) && showOrcid);
-
+               
                if (showAffiliations) {
                     ArrayNode countArray = new ArrayNode(JsonUtils.INSTANCE);
                     List<Integer> countList = new ArrayList<Integer>();
@@ -541,7 +532,7 @@ public class SearchFunctions {
                                              break;
                                         }
                                    }
-
+                                   
                                    if (!matchFound) {
                                         //countArray.add(affiliations_count);
                                         countList.add(affiliations_count);
@@ -559,10 +550,10 @@ public class SearchFunctions {
                     current_row.put("sup_count", countArray);
                     current_row.put("show_sup", countArray.size() > 0);
                }
-
+               
                authorlist.set(i, current_row);
           }
-
+          
           return_data.put("had_list", authorlist.size() > 0);
           return_data.put("affiliations_list", affiliations_list);
           return_data.put("list", authorlist);
@@ -570,7 +561,7 @@ public class SearchFunctions {
           return_data.put("show_affiliations", showAffiliations && affiliations_list.size() > 0);
           return return_data;
      }
-
+     
      private static ObjectNode getDescription(String description, int moreLessValue) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           String description_pt1 = description;
@@ -584,13 +575,13 @@ public class SearchFunctions {
                description_pt1 = String.join(" ", Arrays.asList(description_words).subList(0, moreLessValue));
                description_pt2 = String.join(" ", Arrays.asList(description_words).subList(moreLessValue, description_words.length));
           }
-
+          
           return_data.put("description_pt1", description_pt1);
           return_data.put("description_pt2", description_pt2);
           return_data.put("needs_toggle", needs_toggle);
           return return_data;
      }
-
+     
      private static ArrayNode getDoiReposLinks(String code_id, String doi, String repository_link, String landing_page, String release_date) {
           ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
 
@@ -621,7 +612,7 @@ public class SearchFunctions {
           }
           return return_data;
      }
-
+     
      private static ObjectNode makeDOIRepoLinkObj(String pretext, String title, String code_id, String href, String display, String css_class) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           return_data.put("pretext", pretext);
@@ -632,7 +623,7 @@ public class SearchFunctions {
           return_data.put("css_class", css_class);
           return return_data;
      }
-
+     
      public static ObjectNode getAdvancedSearchPageLists() {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           return_data.put("availabilities_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY));
@@ -642,33 +633,33 @@ public class SearchFunctions {
           return_data.put("sponsor_org_list", DOECODEServletContextListener.getJsonList(DOECODEJson.SPONSOR_ORG_KEY));
           return_data.put("sort_list", DOECODEServletContextListener.getJsonList(DOECODEJson.SEARCH_SORT_KEY));
           return_data.put("programming_languages_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
-
+          
           return return_data;
      }
-
+     
      public static ArrayNode getSearchBreadcrumbTrailList(ObjectNode search_form_data, long num_found) {
           ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
           return_data.add("<a title='DOE CODE Homepage' href='/" + Init.app_name + "/'> DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;");
-
+          
           String all_fields_text = "Search for " + (StringUtils.isNotBlank(JsonUtils.getString(search_form_data, "all_fields", "")) ? JsonUtils.getString(search_form_data, "all_fields", "") : "All Projects");
           String filter_suffix = (getWasAnythingFilteredFor(search_form_data)) ? "<span class='search-for-filter-crumb'>(filtered)</span>" : "";
           return_data.add(all_fields_text + filter_suffix);
-
+          
           if (num_found > 0) {
                long start = JsonUtils.getLong(search_form_data, "start", 0);
                long rows = JsonUtils.getLong(search_form_data, "rows", 10);
-
+               
                long page = ((int) (start / rows) + 1);
                long max_pages = ((int) (num_found / rows) + 1);
-
+               
                if (max_pages > 1) {
                     return_data.add("&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Page&nbsp;" + Long.toString(page) + "&nbsp;of&nbsp;" + Long.toString(max_pages) + "&nbsp;");
                }
           }
-
+          
           return return_data;
      }
-
+     
      public static boolean getWasAnythingFilteredFor(ObjectNode request_data) {
           return StringUtils.isNotBlank(JsonUtils.getString(request_data, "software_title", ""))
                   || StringUtils.isNotBlank(JsonUtils.getString(request_data, "developers_contributors", ""))
@@ -686,7 +677,7 @@ public class SearchFunctions {
                   && JsonUtils.parseArrayNode(JsonUtils.getString(request_data, "sponsoring_organization", "")).size() > 0)
                   || StringUtils.isNotBlank(JsonUtils.getString(request_data, "orcid", ""));
      }
-
+     
      public static ObjectNode getBiblioSidebarData(ObjectNode search_data, String public_api_url) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           //DOI and release date
@@ -696,12 +687,12 @@ public class SearchFunctions {
           //Repository URL
           String repository_link = JsonUtils.getString(search_data, "repository_link", "");
           String landing_page = JsonUtils.getString(search_data, "landing_page", "");
-
+          
           if (StringUtils.isNotBlank(repository_link)) {
                return_data.put("has_repo_link", true);
                return_data.put("repo_link", (StringUtils.startsWith(repository_link, "https://") || StringUtils.startsWith(repository_link, "http://")) ? repository_link : "http://" + repository_link);
           }
-
+          
           if (StringUtils.isNotBlank(landing_page)) {
                return_data.put("has_landing_page", true);
                return_data.put("landing_page", (StringUtils.startsWith(landing_page, "https://") || StringUtils.startsWith(landing_page, "http://")) ? landing_page : "http://" + landing_page);
@@ -718,15 +709,15 @@ public class SearchFunctions {
           return_data.put("has_documentation_url", StringUtils.isNotBlank(JsonUtils.getString(search_data, "documentation_url", "")));
           return return_data;
      }
-
+     
      public static ObjectNode getSponsoringOrgData(ArrayNode sponsoring_orgs) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           ArrayNode list = new ArrayNode(JsonUtils.INSTANCE);
-
+          
           for (int i = 0; i < sponsoring_orgs.size(); i++) {
                ObjectNode sponsorOrgRow = (ObjectNode) sponsoring_orgs.get(i);
                ObjectNode refinedSponsorOrgRow = new ObjectNode(JsonUtils.INSTANCE);
-
+               
                refinedSponsorOrgRow.put("org_name", JsonUtils.getString(sponsorOrgRow, "organization_name", ""));
                ArrayNode AwardNums = new ArrayNode(JsonUtils.INSTANCE);
                ArrayNode FWPNums = new ArrayNode(JsonUtils.INSTANCE);
@@ -772,12 +763,12 @@ public class SearchFunctions {
                }
                list.add(refinedSponsorOrgRow);
           }
-
+          
           return_data.put("list", list);
           return_data.put("has_sponsoring_org", list.size() > 0);
           return return_data;
      }
-
+     
      public static ArrayNode getResearchOrganizations(ArrayNode researchOrgs) {
           ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
           for (JsonNode v : researchOrgs) {
@@ -786,10 +777,10 @@ public class SearchFunctions {
           }
           return return_data;
      }
-
+     
      public static ArrayNode combineAuthorLists(ArrayNode arr1, ArrayNode arr2) {
           ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
-
+          
           for (JsonNode v : arr1) {
                ObjectNode row = (ObjectNode) v;
                String first_name = JsonUtils.getString(row, "first_name", "");
@@ -798,77 +789,77 @@ public class SearchFunctions {
                //Make sure they're not a "none" entry
                if (!first_name.equalsIgnoreCase("none") && !middle_name.equalsIgnoreCase("none") && !last_name.equalsIgnoreCase("none")) {
                     String combinedName = combineName(first_name, middle_name, last_name);
-
+                    
                     if (StringUtils.isNotBlank(combinedName)) {
                          return_data.add(combinedName);
                     }
                }
           }
-
+          
           for (JsonNode v : arr2) {
                ObjectNode row = (ObjectNode) v;
                String first_name = JsonUtils.getString(row, "first_name", "");
                String middle_name = JsonUtils.getString(row, "middle_name", "");
                String last_name = JsonUtils.getString(row, "last_name", "");
-
+               
                if (!first_name.equalsIgnoreCase("none") && !middle_name.equalsIgnoreCase("none") && !last_name.equalsIgnoreCase("none")) {
                     String combinedName = combineName(first_name, middle_name, last_name);
-
+                    
                     if (StringUtils.isNotBlank(combinedName)) {
                          return_data.add(combinedName);
                     }
                }
           }
-
+          
           return return_data;
      }
-
+     
      private static String combineName(String first_name, String middle_name, String last_name) {
           String fullname = "";
-
+          
           if (StringUtils.isNotBlank(last_name)) {
                fullname += last_name;
           }
-
+          
           if (StringUtils.isNotBlank(fullname) && StringUtils.isNotBlank(first_name)) {
                fullname += (", " + first_name);
           }
-
+          
           if (StringUtils.isNotBlank(fullname) && StringUtils.isNotBlank(middle_name.trim()) && StringUtils.length(middle_name.trim()) > 0) {
                fullname += (" " + middle_name.substring(0, 1) + ".");
           }
-
+          
           return fullname;
      }
-
+     
      public static String joinWithDelimiters(ArrayNode list, String delimiter, String lastDelimiter) {
           String return_string = "";
           String last_item = "";
-
+          
           if (list.size() > 1 && StringUtils.isNotBlank(lastDelimiter)) {
                last_item = list.get(list.size() - 1).asText();
                list.remove(list.size() - 1);
-
+               
           }
-
+          
           for (int i = 0; i < list.size(); i++) {
                return_string += list.get(i).asText();
-
+               
                if ((i + 1) < list.size()) {
                     return_string += delimiter;
                }
           }
-
+          
           if (StringUtils.isNotBlank(last_item)) {
                return_string += (lastDelimiter + last_item);
           }
-
+          
           return return_string;
      }
-
+     
      private static ObjectNode getAPAFormat(ObjectNode biblio_data) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-
+          
           boolean needsSpacing = false;
 
           //Authors
@@ -908,24 +899,24 @@ public class SearchFunctions {
           if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "doi", ""))) {
                doi = ((needsSpacing ? " " : "") + "doi:" + JsonUtils.getString(biblio_data, "doi", "") + ".");
           }
-
+          
           return_data.put("authors", author_text);
           return_data.put("release_date", release_date);
           return_data.put("software_title", software_title);
           return_data.put("computer_software", computer_software);
           return_data.put("url", url);
           return_data.put("doi", doi);
-
+          
           return return_data;
      }
-
+     
      private static ObjectNode getOptionalBibtexObj(String label, String value) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           return_data.put("label", label);
           return_data.put("value", value);
           return return_data;
      }
-
+     
      private static ObjectNode getBibtexFormat(ObjectNode biblio_data) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           ArrayNode optional_data = new ArrayNode(JsonUtils.INSTANCE);
@@ -960,7 +951,7 @@ public class SearchFunctions {
                optional_data.add(getOptionalBibtexObj("year", "{" + release_date_year + "}"));
                optional_data.add(getOptionalBibtexObj("month", "{" + DOECODEUtils.getShortMonth(release_date_month, false) + "}"));
           }
-
+          
           return_data.put("code_id", JsonUtils.getLong(biblio_data, "code_id", 0));
           return_data.put("authors_text", author_text);
           return_data.put("description", description);
@@ -969,19 +960,19 @@ public class SearchFunctions {
           //If there was anything in the optional_data array, and its size is more than 1, we will add an indicator saying that it's the last, so we won't want a comma
           if (optional_data.size() > 0) {
                int last_item_index = optional_data.size() - 1;
-
+               
                ObjectNode last_item = (ObjectNode) optional_data.get(last_item_index);
                last_item.put("is_last", true);
                optional_data.set(last_item_index, last_item);
           }
-
+          
           return_data.put("optional", optional_data);
           return return_data;
      }
-
+     
      private static ObjectNode getChicagoFormat(ObjectNode biblio_data) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-
+          
           boolean needsSpacing = false;
 
           //Authors
@@ -1022,7 +1013,7 @@ public class SearchFunctions {
           if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "doi", ""))) {
                doi = ((needsSpacing ? " " : "") + "doi:" + JsonUtils.getString(biblio_data, "doi", "") + ".");
           }
-
+          
           return_data.put("authors", author_text);
           return_data.put("software_title", software_title);
           return_data.put("release_date", release_date);
@@ -1030,7 +1021,7 @@ public class SearchFunctions {
           return_data.put("doi", doi);
           return return_data;
      }
-
+     
      private static ObjectNode getMLAFormat(ObjectNode biblio_data) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           boolean needsSpacing = false;
@@ -1098,12 +1089,12 @@ public class SearchFunctions {
           return_data.put("doi", doi);
           return return_data;
      }
-
+     
      public static ObjectNode getBiblioData(long osti_id) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           boolean is_valid = true;
           String api_url = Init.backend_api_url;
-
+          
           ObjectNode biblio_data = new ObjectNode(JsonUtils.INSTANCE);
           try {
                StringBuilder result = new StringBuilder();
@@ -1118,7 +1109,7 @@ public class SearchFunctions {
                rd.close();
                conn.disconnect();
                biblio_data = (ObjectNode) JsonUtils.parseObjectNode(result.toString()).get("metadata");
-
+               
           } catch (Exception e) {
                log.error("Error: " + e.getMessage());
                is_valid = false;
@@ -1154,7 +1145,7 @@ public class SearchFunctions {
 
                /*Code Availability*/
                ArrayNode availabilityList = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
-
+               
                ObjectNode availabilityObj = JsonUtils.getJsonListItem(availabilityList, "value", JsonUtils.getString(biblio_data, "accessibility", ""));
                return_data.put("availability", JsonUtils.getString(availabilityObj, "label", ""));
                return_data.put("has_availability", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "accessibility", "")));
@@ -1239,17 +1230,18 @@ public class SearchFunctions {
                }
                return_data.put("meta_tag", refined_meta_tags);
           }
-
+          
           return_data.put("is_valid", is_valid);
-
+          
           return return_data;
      }
-
+     
      private static ObjectNode makeMetaTag(String name, String value) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           return_data.put("name", name);
           return_data.put("content", value);
           return return_data;
      }
-
+     
+     
 }

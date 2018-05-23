@@ -23,6 +23,7 @@ public class User extends HttpServlet {
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {
           request.setCharacterEncoding("UTF-8");
+          log.info("In user");
           String URI = request.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
 

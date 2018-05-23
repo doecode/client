@@ -11,11 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UserServlet extends HttpServlet {
 
+     private Logger log = LoggerFactory.getLogger(UserServlet.class);
+
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {
+          request.setCharacterEncoding("UTF-8");
+          log.info("In user servlet");
           String URI = request.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/user/");
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
@@ -39,6 +45,7 @@ public class UserServlet extends HttpServlet {
                     add_signin_html = true;
                     break;
           }
+          log.info("User data: " + return_data);
           response.addCookie(UserFunctions.makeUserCookie(return_data));
           if (add_signin_html) {
                return_data.put("signin_html", TemplateUtils.getNewSigninStatusHtml(getServletContext(), request_data));

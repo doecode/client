@@ -47,6 +47,7 @@ public class UserFilter implements Filter {
           boolean is_logged_in = UserFunctions.isUserLoggedIn(req);
           boolean password_needs_reset = StringUtils.equals(UserFunctions.getOtherUserCookieValue(req, "needs_password_reset"), "true");
 
+          log.info("Is logged in: "+is_logged_in);
           /*Determine the course of action, based on the need for a login*/
           if (is_logged_in && !password_needs_reset) {
                //If they are logged in, and don't need a password reset, continue
@@ -85,6 +86,7 @@ public class UserFilter implements Filter {
                res.addCookie(UserFunctions.updateUserSessionTimeout(req));
 
           } else {
+               log.info("NOne of the above");
                UserFunctions.redirectUserToLogin(req, res, Init.site_url);
                return;
 
