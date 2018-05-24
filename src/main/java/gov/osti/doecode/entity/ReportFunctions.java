@@ -23,18 +23,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ReportFunctions {
-     
+
      private static Logger log = LoggerFactory.getLogger(ReportFunctions.class);
 
      //Gives the max number of records you can have with a search results export, based on type of export you're doing
      public static final HashMap<String, Integer> MAX_RECS_BY_TYPE = new HashMap();
      public static final ArrayList<String> SEARCH_RESULTS_HEADER_LIST = new ArrayList();
-     
+
      static {
           MAX_RECS_BY_TYPE.put("json", 5000);
           MAX_RECS_BY_TYPE.put("csv", 5000);
           MAX_RECS_BY_TYPE.put("excel", 2000);
-          
+
           SEARCH_RESULTS_HEADER_LIST.add("CODE ID");
           SEARCH_RESULTS_HEADER_LIST.add("Software Type");
           SEARCH_RESULTS_HEADER_LIST.add("Project Type");
@@ -59,12 +59,95 @@ public class ReportFunctions {
           SEARCH_RESULTS_HEADER_LIST.add("Contributing Org(s)");
           SEARCH_RESULTS_HEADER_LIST.add("Related Identifiers");
      }
-     
+
      public static String getCSVSearchExports(ObjectNode search_data) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-          return return_data.toString();
+
+          ArrayNode docs_rows = new ArrayNode(JsonUtils.INSTANCE);
+          ArrayNode docs = (ArrayNode) search_data.get("docs");
+          for (int i = 0; i < docs.size(); i++) {
+               ObjectNode rec = getSearchResultsReportVersion((ObjectNode) docs.get(i));
+
+               ArrayNode row_vals = new ArrayNode(JsonUtils.INSTANCE);
+               //Code ID
+               row_vals.add("\"" + JsonUtils.getLong(rec, "code_id", 0) + "\"");
+
+               //Software type
+               row_vals.add("\"" + JsonUtils.getString(rec, "software_type", "") + "\"");
+
+               //Project Type
+               row_vals.add("\"" + JsonUtils.getString(rec, "project_type", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Repository/Landing Page Link
+               row_vals.add("\"" + JsonUtils.getString(rec, "repository_link_landing_page", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Software Title
+               row_vals.add("\"" + JsonUtils.getString(rec, "software_title", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Description
+               row_vals.add("\"" + JsonUtils.getString(rec, "description", "").replaceAll("\"", "\"\"") + "\"");
+
+               //License(s)
+               row_vals.add("\"" + JsonUtils.getString(rec, "licenses", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Programming Language(s)
+               row_vals.add("\"" + JsonUtils.getString(rec, "programming_languages", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Version Number
+               row_vals.add("\"" + JsonUtils.getString(rec, "version_number", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Documentation URL
+               row_vals.add("\"" + JsonUtils.getString(rec, "documentation_url", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Developer(s)
+               row_vals.add("\"" + JsonUtils.getString(rec, "developers_list", "").replaceAll("\"", "\"\"") + "\"");
+
+               //DOI
+               row_vals.add("\"" + JsonUtils.getString(rec, "doi", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Release Date
+               row_vals.add("\"" + JsonUtils.getString(rec, "release_date", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Short Title 
+               row_vals.add("\"" + JsonUtils.getString(rec, "short_title", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Country of Origin
+               row_vals.add("\"" + JsonUtils.getString(rec, "country_of_origin", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Keywords
+               row_vals.add("\"" + JsonUtils.getString(rec, "keywords", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Other Special Requirements
+               row_vals.add("\"" + JsonUtils.getString(rec, "other_special_requirements", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Site Accession Number
+               row_vals.add("\"" + JsonUtils.getString(rec, "site_accession_number", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Sponsoring orgs
+               row_vals.add("\"" + JsonUtils.getString(rec, "sponsor_orgs", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Research Orgs
+               row_vals.add("\"" + JsonUtils.getString(rec, "research_orgs", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Contributors
+               row_vals.add("\"" + JsonUtils.getString(rec, "contributors", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Contributing Orgs
+               row_vals.add("\"" + JsonUtils.getString(rec, "contributing_orgs", "").replaceAll("\"", "\"\"") + "\"");
+
+               //Related Identifiers
+               row_vals.add("\"" + JsonUtils.getString(rec, "related_identifiers", "").replaceAll("\"", "\"\"") + "\"");
+
+               docs_rows.add(DOECODEUtils.makeTokenSeparatedList(row_vals, ", "));
+          }
+
+          String return_data = StringUtils.join(SEARCH_RESULTS_HEADER_LIST, ",") + "\n";
+          for (JsonNode j : docs_rows) {
+               return_data += (j.asText() + "\n");
+          }
+
+          return return_data;
      }
-     
+
      public static Workbook getExcelSearchExports(ObjectNode search_data) {
           Workbook book = new HSSFWorkbook();
           Sheet sheet1;
@@ -210,24 +293,24 @@ public class ReportFunctions {
                cell = row.createCell(22);
                cell.setCellStyle(cell_style);
                cell.setCellValue(JsonUtils.getString(rec, "related_identifiers", ""));
-               
+
           }
-          
+
           for (int i = 0; i < SEARCH_RESULTS_HEADER_LIST.size(); i++) {
                sheet1.autoSizeColumn(i);
           }
           return book;
      }
-     
+
      public static String getJsonSearchExports(ObjectNode search_data) {
           ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
           for (JsonNode doc : (ArrayNode) search_data.get("docs")) {
                return_data.add(getSearchResultsReportVersion((ObjectNode) doc));
           }
-          
+
           return return_data.toString();
      }
-     
+
      private static ObjectNode getSearchResultsReportVersion(ObjectNode docs) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           //code id
@@ -290,7 +373,7 @@ public class ReportFunctions {
                     name_parts.add(first_name);
                }
                String name = DOECODEUtils.makeTokenSeparatedList(name_parts, ", ");
-               
+
                ArrayNode other_parts = new ArrayNode(JsonUtils.INSTANCE);
                String orc_id = JsonUtils.getString(row, "orcid", "");
                if (StringUtils.isNotBlank(orc_id)) {
@@ -302,12 +385,12 @@ public class ReportFunctions {
                     other_parts.add("Affiliations: " + affiliations_str);
                }
                String other_parts_str = DOECODEUtils.makeTokenSeparatedList(other_parts, ", ");
-               
+
                String display = name;
                if (StringUtils.isNotBlank(other_parts_str)) {
                     display += " (" + other_parts_str + ")";
                }
-               
+
                developer_displays.add(display);
           }
           return_data.put("developers_list", DOECODEUtils.makeTokenSeparatedList(developer_displays, "; "));
@@ -345,7 +428,7 @@ public class ReportFunctions {
                boolean is_doe = JsonUtils.getBoolean(row, "DOE", false);
                //Contrat num
                String primary_award = JsonUtils.getString(row, "primary_award", "");
-               
+
                ArrayNode additional_rewards = new ArrayNode(JsonUtils.INSTANCE);
                ArrayNode br_codes = new ArrayNode(JsonUtils.INSTANCE);
                ArrayNode fwp_nums = new ArrayNode(JsonUtils.INSTANCE);
@@ -369,7 +452,7 @@ public class ReportFunctions {
                ArrayNode value_str = new ArrayNode(JsonUtils.INSTANCE);
                value_str.add("DOE Organization (" + (is_doe ? "Y" : "N"));
                value_str.add("Primary Award/Contract: " + primary_award);
-               
+
                if (additional_rewards.size() > 0) {
                     value_str.add("Additional Awards/Contracts: " + DOECODEUtils.makeTokenSeparatedList(additional_rewards, "; "));
                }
@@ -379,7 +462,7 @@ public class ReportFunctions {
                if (br_codes.size() > 0) {
                     value_str.add("B&R Codes: " + DOECODEUtils.makeTokenSeparatedList(br_codes, "; "));
                }
-               
+
                sponsor_orgs_list.add(org_name + " (" + DOECODEUtils.makeTokenSeparatedList(value_str, ", ") + ")");
           }
           return_data.put("sponsor_orgs", DOECODEUtils.makeTokenSeparatedList(sponsor_orgs_list, "; "));
@@ -430,7 +513,7 @@ public class ReportFunctions {
                     other_parts.add("Contributor Type: " + contributor_type);
                }
                String other_parts_str = DOECODEUtils.makeTokenSeparatedList(other_parts, ", ");
-               
+
                String display = name;
                if (StringUtils.isNotBlank(other_parts_str)) {
                     display += " (" + other_parts_str + ")";
@@ -457,11 +540,11 @@ public class ReportFunctions {
                String value = JsonUtils.getString(row, "identifier_value", "");
                String type = JsonUtils.getString(row, "identifier_type", "");
                String relation_type = JsonUtils.getString(row, "relation_type", "");
-               
+
                related_identifiers_list.add(value + " (Identifier Type: " + type + ", Relation Type: " + relation_type + ")");
           }
           return_data.put("related_identifiers", DOECODEUtils.makeTokenSeparatedList(related_identifiers_list, "; "));
-          
+
           return return_data;
      }
 }

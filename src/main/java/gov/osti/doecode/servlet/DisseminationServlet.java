@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -49,9 +48,8 @@ public class DisseminationServlet extends HttpServlet {
                //Format search results data
                switch (format) {
                     case "excel":
-                         response.setContentType("application/vnd.ms-excel");
-                         response.setHeader("Expires", "0");
-                         response.setHeader("Content-Disposition", "attachment; filename=Search-Results.xls");
+                         response.setContentType("application/vnd.ms-excel; charset=utf-8");
+                         response.setHeader("Content-Disposition", "attachment; filename=DOECODE-SearchResults.xls");
                          ServletOutputStream out = response.getOutputStream();
                          Workbook excel_doc = ReportFunctions.getExcelSearchExports(search_result_data);
                          excel_doc.write(response.getOutputStream());
@@ -59,18 +57,21 @@ public class DisseminationServlet extends HttpServlet {
                          out.close();
                          break;
                     case "csv":
-                         response.setContentType("text/csv");
-                         response.setHeader("Content-Disposition", "attachment; filename=Search-results.csv");
+                         response.setContentType("text/csv; charset=utf-8");
+                         response.setHeader("Content-Disposition", "attachment; filename=DOECODE-SearchResults.csv");
+                         PrintWriter p = response.getWriter();
+                         p.write(ReportFunctions.getCSVSearchExports(search_result_data));
+                         p.flush();
+                         p.close();
                          break;
                     default:
-                         response.setContentType("application/json");
-                         response.setHeader("Content-Disposition", "attachment; filename=Search-results.json");
+                         response.setContentType("application/json; charset=utf-8");
+                         response.setHeader("Content-Disposition", "attachment; filename=DOECODE-SearchResults.json");
 
                          InputStream input = new ByteArrayInputStream(ReportFunctions.getJsonSearchExports(search_result_data).getBytes("UTF-8"));
                          int read = 0;
                          byte[] bytes = new byte[BYTES_DOWNLOAD];
                          OutputStream os = response.getOutputStream();
-
                          while ((read = input.read(bytes)) != -1) {
                               os.write(bytes, 0, read);
                          }
