@@ -17,7 +17,7 @@ var parseLoginData = function (data) {
     //Now that we're logged in, let's set some local storage attributes
     setLoggedInAttributes(data);
     //Send up our login data for java to do content with
-    doAjax('POST', '/' + APP_NAME + '/user/set-login-status-name', parseNameStatusData, data);
+    doAjax('POST', '/' + APP_NAME + '/set-login-status-name', parseNameStatusData, data);
 };
 
 var parseLoginError = function (xhr) {
@@ -447,14 +447,14 @@ var updateLoginNameStatus = function (post_data, successcallback, failcallback) 
     var successCall = (successcallback === undefined) ? parseUpdateLoginNameStatusData : successcallback;
     var failcall = (failcallback === undefined) ? parseUpdateLoginNameStatusError : failcallback;
 
-    doAjax('POST', '/' + APP_NAME + '/user/update-login-status-name', successCall, post_data, failcall);
+    doAjax('POST', '/' + APP_NAME + '/update-login-status-name', successCall, post_data, failcall);
 };
 
 var setLoginNameStatus = function (post_data, successcallback, failcallback) {
     var successCall = (successcallback === undefined) ? parseUpdateLoginNameStatusData : successcallback;
     var failcall = (failcallback === undefined) ? parseUpdateLoginNameStatusError : failcallback;
 
-    doAjax('POST', '/' + APP_NAME + '/user/set-login-status-name', successCall, post_data, failcall);
+    doAjax('POST', '/' + APP_NAME + '/set-login-status-name', successCall, post_data, failcall);
 };
 
 var parseNewAPIKeyData = function (data) {

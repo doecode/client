@@ -124,21 +124,13 @@
         <url-pattern>/account</url-pattern>
         <url-pattern>/user-admin</url-pattern>
         <url-pattern>/login</url-pattern>
+        <url-pattern>/set-login-status-name</url-pattern>
+        <url-pattern>/update-login-status-name</url-pattern>
         <url-pattern>/logout</url-pattern>
         <url-pattern>/register</url-pattern>
         <url-pattern>/forgot-password</url-pattern>
         <url-pattern>/confirmuser</url-pattern>
         <url-pattern>/help</url-pattern>
-    </servlet-mapping>
-    <!--User actions, such as updating username when logging in via reset token-->
-    <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>gov.osti.doecode.servlet.UserServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/user/set-login-status-name</url-pattern>
-        <url-pattern>/user/update-login-status-name</url-pattern>
     </servlet-mapping>
     <!--Miscellaneous-->
     <servlet>
