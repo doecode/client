@@ -206,7 +206,6 @@ public class ReportFunctions {
      }
 
      private static ObjectNode getSearchResultsReportVersion(ObjectNode docs) {
-          log.info(docs.toString());
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           //code id
           return_data.put("code_id", JsonUtils.getLong(docs, "code_id", 0));

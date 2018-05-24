@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DOECODEUtils {
+
      public static final DateTimeFormatter MONTH_DAY_YEAR_TIME_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
 
      private final static Logger log = LoggerFactory.getLogger(DOECODEUtils.class.getName());
@@ -41,12 +42,15 @@ public class DOECODEUtils {
      }
 
      public static String makeTokenSeparatedList(ArrayNode list, String token) {
-          String[] str_list = new String[list.size()];
-          for (int i = 0; i < list.size(); i++) {
-               str_list[i] = list.get(i).asText();
+          String return_data = "";
+          if (list != null) {
+               String[] str_list = new String[list.size()];
+               for (int i = 0; i < list.size(); i++) {
+                    str_list[i] = list.get(i).asText();
+               }
+               return_data = StringUtils.join(str_list, token);
           }
-
-          return StringUtils.join(str_list, token);
+          return return_data;
      }
 
      public static String getDisplayVersionOfValue(ArrayNode array, String value) {
