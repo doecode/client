@@ -65,12 +65,12 @@ public class DisseminationServlet extends HttpServlet {
                     default:
                          response.setContentType("application/json");
                          response.setHeader("Content-Disposition", "attachment; filename=Search-results.json");
-                         InputStream input = new ByteArrayInputStream(search_result_data.toString().getBytes("UTF-8"));
+
+                         InputStream input = new ByteArrayInputStream(ReportFunctions.getJsonSearchExports(search_result_data).getBytes("UTF-8"));
                          int read = 0;
                          byte[] bytes = new byte[BYTES_DOWNLOAD];
                          OutputStream os = response.getOutputStream();
 
-                         
                          while ((read = input.read(bytes)) != -1) {
                               os.write(bytes, 0, read);
                          }

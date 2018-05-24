@@ -70,7 +70,6 @@ public class UserFunctions {
 
      public static boolean isUserLoggedIn(HttpServletRequest request) {
           ObjectNode user_data = UserFunctions.getUserDataFromCookie(request);
-          log.info("User data in is logged in: "+user_data.toString());
           boolean is_logged_in = JsonUtils.getBoolean(user_data, "is_logged_in", false);
           boolean is_within_time = false;
           if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, JsonUtils.getString(user_data, "session_timeout", ""))) {
@@ -136,7 +135,6 @@ public class UserFunctions {
      }
 
      public static void redirectUserToLogin(HttpServletRequest request, HttpServletResponse response, String site_url) throws IOException {
-          log.info("Redirecting to login");
           StringBuilder requested_url = new StringBuilder();
           String after_server = request.getRequestURI();
           requested_url.append(after_server);

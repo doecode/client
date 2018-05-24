@@ -91,7 +91,6 @@ public class SearchFunctions {
                String result = getRawSearchResultData(api_url, post_data);
                if (JsonUtils.isValidObjectNode(result)) {
                     search_result_data = JsonUtils.parseObjectNode(result);
-                    log.info(result);
                } else {
                     invalid_search_data = true;
                }
