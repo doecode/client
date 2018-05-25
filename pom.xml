@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>gov.osti</groupId>
     <artifactId>doecode</artifactId>
@@ -31,7 +30,7 @@
         <profile>
             <id>profile-name</id>
             <properties>
-                <environment_url>URL of the tomcat you are deploying the application to</environment_url>
+                <environment>Name of the properties file you're pulling values from</environment>
                 <username>Username of the tomcat manager you deploy the application to</username>
                 <password>Password of the tomcat manager you deploy the application to</password>
                 <apiURL>The URL to the DOECODE API instance that you use</apiURL>
@@ -261,6 +260,7 @@
                             <server>[Id of server you declared above]</server>
                             <host>URL to tomcat you're deploying to</host>
                             <port>Port of tomcat you're deploying to</port>
+                            <environment>Name of properties file you're loading in the properties-maven-plugin</environment>
                         </properties>
                     </profile>
                 </profiles>
