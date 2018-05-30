@@ -1,5 +1,124 @@
 {{> wrapper/header}}
 <input type="hidden" id="biblio-page-identifier"/>
+<style type="text/css">
+     .no-btn-padding-top {
+	 padding-top: 0px;
+     }
+     .no-btn-padding-bottom {
+	 padding-bottom: 0px;
+     }
+     .biblio-description {
+	 padding-right: 10px;
+	 padding-left: 10px;
+	 padding-bottom: 15px;
+	 font-size: 16px;
+     }
+     .biblio-main-content {
+	 border-left: 1px solid #CCCCCC;
+	 padding-left: 30px;
+     }
+     .doi-subnotice {
+	 font-style: italic;
+	 font-size: 13.6px;
+	 color: rgb(153, 153, 153);
+     }
+     .biblio-sidebar-subtitle {
+	 text-transform: uppercase;
+	 font-weight: 300;
+	 color: #777;
+	 margin-bottom: 0;
+	 margin-top: 10px;
+	 padding-bottom: 10px;
+     }
+     .biblio-sidebar-secondary-subtitle {
+	 margin-bottom: 5px;
+	 color: rgb(0, 0, 0);
+	 font-size: 13.6px;;
+     }
+     .biblio-sidebar-traditional-anchor {
+	 font-size: 15px;
+	 font-weight: 400;
+     }
+     .biblio-sidebar-row {
+	 border-bottom: 1px solid #DDDDDD;
+	 padding-bottom: 10px;
+	 padding-top: 10px;
+     }
+
+     .biblio-sidebar-row:last-child {
+	 border-bottom: none;
+     }
+     .biblio-row {
+	 padding-top: 10px;
+	 padding-bottom: 10px;
+     }
+
+     .biblio-row>dl {
+	 margin-bottom: 0px;
+     }
+     .biblio-field-header {
+	 font-weight: normal;
+	 font-size: 13.6px;
+	 margin-left: 0px;
+	 color: #929292;
+	 padding-top:0px;
+     }
+     .biblio-field-value {
+	 padding-bottom: 10px;
+	 font-size: 13.6px;
+     }
+     /*Puts spacing between the contents of the resource section of the biblio sidebar*/
+     .biblio-sidebar-row > div > div.link-content{
+	 padding-bottom:20px;
+     }
+     .bibtex-entry{
+	 padding-left:30px;
+     }
+     .biblio-social-link {
+	 border-right: 1px solid rgba(0, 0, 0, 0.1);
+	 font-size: 13.6px;
+	 padding-right: 15px !important;
+	 padding-left: 15px !important;
+	 padding-top: 5px !important;
+	 padding-bottom: 5px !important;
+     }
+     .biblio-social-link:last-child {
+	 border-right: none;
+     }
+
+     @media only screen and (max-width:767px) and (min-width: 320px) {
+	 .biblio-main-content {
+	     border-left: none;
+	     padding-left: 0px;
+	     border-right: none;
+	 }
+     }
+     @media only screen and (max-width:991px) and (min-width: 768px) {
+	 .biblio-main-content {
+	     border-left: none;
+	     padding-left: 0px;
+	     border-right: none;
+	 }
+	 .bibtex-entry{
+	     padding-left:20px;
+	 }
+     }
+     @media only screen and (max-width:479px) and (min-width: 320px) {
+	 .bibtex-entry{
+	     padding-left:0px;
+	 }
+     }
+     @media only screen and (max-width:767px) and (min-width: 480px) {
+	 .bibtex-entry{
+	     padding-left:20px;
+	 }
+     }
+     @media only screen and (max-width:1199px) and (min-width: 992px) {
+	 .bibtex-entry{
+	     padding-left:30px;
+	 }
+     }
+</style>
 <div class="row not-so-wide-row">
      <div class="col-xs-12">
 	  {{#if is_invalid_code_id}}

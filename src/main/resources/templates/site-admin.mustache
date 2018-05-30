@@ -1,4 +1,31 @@
 {{> wrapper/header}}
+<style type='text/css'>
+     .poc-add-new-email{
+	 color:green;
+	 cursor: pointer;
+	 font-size:23px !important;
+	 padding-top:5px;
+     }
+
+     .poc-remove-email{
+	 color:red;
+	 cursor: pointer;
+	 font-size:23px !important;
+	 padding-top:5px;
+     }
+
+     #poc-admin-email-list thead > tr > th:first-child{
+	 padding-left:0px;
+     }
+
+     #poc-admin-email-list > tbody > tr > td:first-child{
+	 padding-left:0px;
+     }
+
+     .poc-large-text{
+	 font-size:20px;
+     }
+</style>
 <input type="hidden" id="site-admin-page-identifier"/>
 <div class="row not-so-wide-row">
      <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1 col-xs-12">
@@ -60,7 +87,7 @@
 			 </table>
 		    </div>
 		    <div class="col-xs-12 right-text">
-			 <button id="save-changes-btn" title="Save Entry" type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn"><span class='fa fa-save'></span> Save</button>
+			 <button id="save-changes-btn" title="Save Entry" type="button" class="pure-button pure-button-primary btn-lg pull-right" style='margin-bottom:5px'><span class='fa fa-save'></span> Save</button>
 		    </div>
 	       </div>
 	  </div>

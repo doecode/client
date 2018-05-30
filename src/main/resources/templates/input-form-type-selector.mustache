@@ -1,4 +1,48 @@
 {{> wrapper/header}}
+<style type='text/css'>
+     .form-select-container {
+	 margin-left: auto;
+	 margin-right: auto;
+	 display: flex;
+     }
+
+     #scientific-form-select-container {
+	 width: 314px;
+	 padding-right:10px;
+     }
+
+     #scientific-form-select-container a{
+	 background-color:#277091 !important;
+	 padding-left: 50px;
+	 padding-right: 50px;
+	 padding-top: 20px;
+	 padding-bottom: 20px;
+     }
+
+     #or-form-select-container {
+	 text-align: center !important;
+     }
+
+     #business-form-select-container {
+	 width: 314px;
+	 padding-left:10px;
+     }
+
+     #business-form-select-container a{
+	 background-color:#277091 !important;
+	 padding-left: 50px;
+	 padding-right: 50px;
+	 padding-top: 20px;
+	 padding-bottom: 20px;
+     }
+     .form-select-btn{
+	 padding-top: 15px;
+	 padding-bottom: 15px;
+	 padding-left: 20px;
+	 padding-right: 20px;
+	 font-size: 30px;
+     }
+</style>
 <div class="row not-so-wide-row">
      <div class="col-lg-3 col-md-1">  
 
@@ -19,7 +63,7 @@
 	       <div class="form-select-container">
 		    <div class="right-text" id="scientific-form-select-container">
 			 <div>
-			      <a title='Add New Scientific Software Project' href="/${app_name}/submit?software_type=Scientific" class="pure-button pure-button-primary workflow-publish-btn white form-select-btn">
+			      <a title='Add New Scientific Software Project' href="/${app_name}/submit?software_type=Scientific" class="pure-button pure-button-primary white form-select-btn" style='margin-bottom:5px;'>
 				   Scientific
 			      </a>
 			 </div>
@@ -37,7 +81,7 @@
 		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		    <div class="left-text" id="business-form-select-container">
 			 <div>
-			      <a title='Add New Business Software Project' href="/${app_name}/submit?software_type=Business" class="pure-button pure-button-primary workflow-publish-btn white form-select-btn">
+			      <a title='Add New Business Software Project' href="/${app_name}/submit?software_type=Business" class="pure-button pure-button-primary white form-select-btn" style='margin-bottom:5px;'>
 				   Business
 			      </a>
 			 </div>

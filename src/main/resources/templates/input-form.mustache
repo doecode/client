@@ -5,6 +5,89 @@
 <input type='hidden' id='page_req_id' value="{{page_req_id}}"/>
 <input type='hidden' id='current_datatable_id' value="-1"/>
 <input type='hidden' id='table_msg' value="To edit data, click on the row containing the information to modify." />
+<style type="text/css">
+     .upload-file {
+	 margin-right: 25px;
+	 display: inline;
+     }
+
+     legend.entry-legend {
+	 padding: 5px;
+	 margin-left: 10px;
+	 font-size: inherit;
+	 color: inherit;
+	 border-bottom: none;
+	 margin-bottom: 7px;
+	 width: auto;
+     }
+     textarea.form-text-area {
+	 resize: none;
+	 height: 150px;
+     }
+     fieldset.entry-group {
+	 border: 1.25px #ccc solid;
+	 border-radius: 5px;
+	 margin-top: -15px;
+	 margin-bottom: 15px;
+	 margin-left: -15px;
+	 margin-right: -15px;
+     }
+     fieldset div {
+	 margin-left: 12px;
+     }
+     .error-color {
+	 color: #a94442;
+     }
+     .required a {
+	 color: #990000 !important
+     }
+
+
+     .req:before {
+	 content: "* ";
+	 position: relative;
+     }
+
+     .req:not(.has-success):before, .req_rf:not(.has-success):after {
+	 color: #a94442;
+     }
+
+     .req:before {
+	 content: "* ";
+	 position: relative;
+     }
+
+     .req_rf:after {
+	 content: " (Required Field)";
+	 position: relative;
+     }
+
+     .req_of:after {
+	 content: " (Optional Field)";
+	 position: relative;
+     }
+
+     .req_fr:after {
+	 content: " (Fields Required)";
+	 position: relative;
+	 color: #a94442;
+     }
+
+     .req_arfc:after {
+	 content: " (All Required Fields Completed)";
+	 position: relative;
+	 color: #3c763d;
+     }
+     .doecode-wizard-btn {
+	 margin-bottom: 5px;
+     }
+     .wizard-margin-style {
+	 margin-bottom: 5px;
+     }
+     #file-upload-dropzone{
+	 max-width:200px;
+     }
+</style>
 <div class='row not-so-wide-row'>
      <div class="col-md-3"></div>
      <div class='col-md-6 col-xs-12'>
@@ -16,13 +99,13 @@
 		    {{/if}}
 		    <a id="input-help-anchor" title="More detailed information on this process can be found on our Help page" href="/${app_name}/help">More detailed information on this process can be found on our Help page</a>
 		    <div id="input-approve-msg-top" style="display: none; font-weight:bold">
-                <br/>
-                <span class="error-color">NOTICE: This is an Approval Only form!  ANY CHANGES MADE WILL BE LOST!</span>
-            </div>
+			 <br/>
+			 <span class="error-color">NOTICE: This is an Approval Only form!  ANY CHANGES MADE WILL BE LOST!</span>
+		    </div>
 		    <div id="input-overwrite-msg-top" style="display: none; font-weight:bold">
-                <br/>
-                <span class="error-color">NOTICE: This record is pending approval.  If these updates are also needed in E-Link, select "Announce to E-Link" after submission.</span>
-            </div>
+			 <br/>
+			 <span class="error-color">NOTICE: This record is pending approval.  If these updates are also needed in E-Link, select "Announce to E-Link" after submission.</span>
+		    </div>
 	       </div>
 	  </div>
 	  <div class="panel-group" id="input-page-accordion" role="tablist" aria-multiselectable="true">
@@ -50,12 +133,12 @@
 	       <span class="fa fa-plus-square-o"></span>&nbsp;Show Additional Optional Fields
 	  </button>
 	  {{/if}}
-      <div id="input-approve-msg-bottom" class="col-xs-12 center-text" style="display:none; font-weight:bold; margin-bottom:15px">
-		    <span id="" class="error-color">NOTICE: This is an Approval Only form!  ANY CHANGES MADE WILL BE LOST!</span>
-      </div>
-      <div id="input-overwrite-msg-bottom" class="col-xs-12 center-text" style="display:none; font-weight:bold; margin-bottom:15px; margin-top:15px">
-		    <span id="input-overwrite-msg2" class="error-color">NOTICE: This record is pending approval.  If these updates are also needed in E-Link, select "Announce to E-Link" after submission.</span>
-      </div>
+	  <div id="input-approve-msg-bottom" class="col-xs-12 center-text" style="display:none; font-weight:bold; margin-bottom:15px">
+	       <span id="" class="error-color">NOTICE: This is an Approval Only form!  ANY CHANGES MADE WILL BE LOST!</span>
+	  </div>
+	  <div id="input-overwrite-msg-bottom" class="col-xs-12 center-text" style="display:none; font-weight:bold; margin-bottom:15px; margin-top:15px">
+	       <span id="input-overwrite-msg2" class="error-color">NOTICE: This record is pending approval.  If these updates are also needed in E-Link, select "Announce to E-Link" after submission.</span>
+	  </div>
 	  <button id="input-submit-btn" title='Submit Project' type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style" style="display: none">
 	       Submit Project
 	  </button>

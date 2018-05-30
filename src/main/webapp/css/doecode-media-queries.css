@@ -22,27 +22,16 @@
     .search-btn {
         width: 40px;
     }
-    .search-results-count {
-        margin-top: 0px;
-        margin-bottom: 0px;
-        font-size: 20px !important;
-    }
+
     .breadcrumbTrail {
         font-size: 13.6px;
     }
     .breadcrumbTrail a {
         font-size: 13.6px;
     }
-    .search-for-sidebar-row {
-        border-bottom: none;
-    }
+
     .biblio-title {
         font-size: 25px;
-    }
-    .biblio-main-content {
-        border-left: none;
-        padding-left: 0px;
-        border-right: none;
     }
     #repository-github-img {
         width: 280px;
@@ -51,9 +40,6 @@
     #repository-gitlab-img {
         width: 280px;
         height: 150px;
-    }
-    .padblock {
-        padding: 0px;
     }
     .faq-page-btn {
         font-size: 15.6px;
@@ -105,30 +91,14 @@
         text-align: center;
         padding: 0px;
     }
-    .containerStyle {
-        max-width: none !important;
-    }
+
     #or-repository-container {
         text-align: left !important;
     }
     .search-box {
         padding-bottom: 3px;
     }
-    .homepage-search-btn {
-        height: 35px !important;
-    }
-    .homepage-searchbar {
-        height: inherit !important;
-        font-size: 16px !important;
-    }
-    .homepage-adv-search-btn {
-        top: 10px !important;
-    }
-    .homepage-search-btn {
-        width: 40px !important;
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-    }
+
     .signin-btn-icon {
         opacity: 1;
     }
@@ -164,9 +134,7 @@
     .nav-menu li {
         border-right: none;
     }
-    .biblio-page-header {
-        text-align: center;
-    }
+
     .homepage-signin-bar {
         text-align: center;
     }
@@ -220,9 +188,7 @@
     .faq-page-anchor{
         font-size:15px;
     }
-    .bibtex-entry{
-        padding-left:0px;
-    }
+
 }
 
 
@@ -232,9 +198,7 @@
     .nav-menu li {
         border-right: none;
     }
-    .biblio-page-header {
-        text-align: center;
-    }
+
     .homepage-signin-bar {
         text-align: center;
     }
@@ -270,21 +234,15 @@
     .tiny-center-text{
         text-align:center !important;
     }
-    .bibtex-entry{
-        padding-left:20px;
-    }
+
 }
 
-
 /* Small Devices, Tablets IPAD*/
-
 @media only screen and (max-width:991px) and (min-width: 768px) {
     .nav-menu li {
         border-right: none;
     }
-    .biblio-page-header {
-        text-align: center;
-    }
+
     .homepage-signin-bar {
         text-align: center;
     }
@@ -328,20 +286,14 @@
     .nav-menu-item-text {
         font-size: 13px !important;
     }
-    .biblio-main-content {
-        border-left: none;
-        padding-left: 0px;
-        border-right: none;
-    }
+
     .active-menu-item-text {
         font-size: 14px !important;
     }
     .navbar .navbar-collapse {
         margin-bottom: -2px;
     }
-    .search-for-sidebar-row {
-        border-bottom: none;
-    }
+
     .biblio-summary-main-content {
         border-left: none;
         padding-left: 0px;
@@ -361,10 +313,7 @@
     .center-text-sm{
         text-align:center;
     }
-    .search-results-count {
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
+
     /*Gets rid of the margins around the pagination buttons*/
     div>ul.pagination {
         margin-top: 0px;
@@ -376,9 +325,7 @@
     .adv-search-date-container-homepage {
         display: inline-block;
     }
-    .containerStyle {
-        max-width: none !important;
-    }
+
     .navbar-datepicker{
         max-width:45%;
     }
@@ -391,9 +338,7 @@
     .small-screen-no-col-padding-right{
         padding-right:0px;
     }
-    .bibtex-entry{
-        padding-left:20px;
-    }
+
 }
 
 
@@ -403,9 +348,7 @@
     .nav-menu li {
         border-right: 1px solid rgba(255, 255, 255, 0.2);
     }
-    .biblio-page-header {
-        text-align: right;
-    }
+
     .homepage-signin-bar {
         text-align: right;
     }
@@ -442,9 +385,7 @@
     .small-screen-collapse{
         display:block;
     }
-    .bibtex-entry{
-        padding-left:30px;
-    }
+
 }
 
 
@@ -454,9 +395,7 @@
     .nav-menu li {
         border-right: 1px solid rgba(255, 255, 255, 0.2);
     }
-    .biblio-page-header {
-        text-align: right;
-    }
+
     .navbar-logo-img {
         display: none;
     }
@@ -476,12 +415,7 @@
         max-width: 150px;
         margin-left: 10px;
     }
-    .homepage-searchbar-container {
-        padding-left: 37px;
-    }
-    .homepage-adv-search-dropdown {
-        left: 22px !important;
-    }
+
     .navbar-datepicker{
         max-width:45%;
     }
