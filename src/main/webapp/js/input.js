@@ -18,6 +18,7 @@ var form = mobx.observable({
     "workflowStatus": ""
 });
 form.co_repo = "";
+form.last_filename = "";
 
 var developers_data_tbl_opts = {
     order: [[0, 'asc']],
@@ -238,9 +239,15 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
 
     // if CO project, we need to store original repo link, in case they change type
     form.co_repo = "";
-    if (metadata.getValue("accessibility") == "CO") {
+    form.last_filename = "";
+    var accessibility = metadata.getValue("accessibility");
+    if (accessibility == "CO") {
         var orig_repo = metadata.getValue("repository_link");
         form.co_repo = orig_repo ? orig_repo : form.co_repo;
+    }
+    if (accessibility != 'OS') {
+        var orig_file = metadata.getValue("file_name");
+        form.last_filename = orig_file ? orig_file : form.last_filename;
     }
 
     form.workflowStatus = data.metadata.workflow_status;
@@ -542,6 +549,10 @@ mobx.autorun("Project Type", function () {
     }
     else if ($("#input-form-optional-toggle").is(":visible")) {
         $("#supplemental-step").hide();
+    }
+
+    if (project_type != 'OS') {
+        metadata.setValue("file_name", form.last_filename);
     }
 
     setSuccess("project-type-lbl", project_type != null);
@@ -1484,6 +1495,7 @@ const FILE_EXTENSION_REGEX = new RegExp(/\.(zip|tar|tar[.]gz|tar[.]bz2)$/);
 var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
     metadata.setValue("file_name", "");
     metadata.setValue("files", []);
+    form.last_filename = "";
 
     // if dropzone has a file associated, remove it via click event
     var existingFile = $(".dz-remove")[0];
@@ -1524,6 +1536,7 @@ var FILE_UPLOAD_CONFIG = {url: 'someurl',
                 //Button to make the file uploader work
                 metadata.setValue("file_name", file.name);
                 metadata.setValue("files", [file]);
+                form.last_filename = file.name;
 
                 //Make the remove button included hide the right content
                 $(".dz-remove").on('click', function () {
