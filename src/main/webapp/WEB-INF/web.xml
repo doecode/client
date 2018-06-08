@@ -98,6 +98,7 @@
     <servlet-mapping>
         <servlet-name>DisseminationServlet</servlet-name>
         <url-pattern>/dissemination/export-search-results</url-pattern>
+        <url-pattern>/dissemination/export-biblio-results</url-pattern>
     </servlet-mapping>
     <!--Input pages, such as the announce, submit, and approve pages-->
     <servlet>

@@ -60,12 +60,11 @@ public class ReportFunctions {
           SEARCH_RESULTS_HEADER_LIST.add("Related Identifiers");
      }
 
-     public static String getCSVSearchExports(ObjectNode search_data) {
+     public static String getCSVSearchExports(ArrayNode search_data) {
 
           ArrayNode docs_rows = new ArrayNode(JsonUtils.INSTANCE);
-          ArrayNode docs = (ArrayNode) search_data.get("docs");
-          for (int i = 0; i < docs.size(); i++) {
-               ObjectNode rec = getSearchResultsReportVersion((ObjectNode) docs.get(i));
+          for (int i = 0; i < search_data.size(); i++) {
+               ObjectNode rec = getSearchResultsReportVersion((ObjectNode) search_data.get(i));
 
                ArrayNode row_vals = new ArrayNode(JsonUtils.INSTANCE);
                //Code ID
@@ -148,7 +147,7 @@ public class ReportFunctions {
           return return_data;
      }
 
-     public static Workbook getExcelSearchExports(ObjectNode search_data) {
+     public static Workbook getExcelSearchExports(ArrayNode search_data) {
           Workbook book = new HSSFWorkbook();
           Sheet sheet1;
           Row row;
@@ -174,10 +173,10 @@ public class ReportFunctions {
           //Put out all of the data rows
           CellStyle cell_style = book.createCellStyle();
           cell_style.setAlignment(HorizontalAlignment.CENTER);
-          ArrayNode docs = (ArrayNode) search_data.get("docs");
-          for (int i = 0; i < docs.size(); i++) {
+          
+          for (int i = 0; i < search_data.size(); i++) {
                row = sheet1.createRow(i + 1);
-               ObjectNode rec = getSearchResultsReportVersion((ObjectNode) docs.get(i));
+               ObjectNode rec = getSearchResultsReportVersion((ObjectNode) search_data.get(i));
 
                //Code ID
                cell = row.createCell(0);
@@ -302,9 +301,9 @@ public class ReportFunctions {
           return book;
      }
 
-     public static String getJsonSearchExports(ObjectNode search_data) {
+     public static String getJsonSearchExports(ArrayNode search_data) {
           ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
-          for (JsonNode doc : (ArrayNode) search_data.get("docs")) {
+          for (JsonNode doc : search_data) {
                return_data.add(getSearchResultsReportVersion((ObjectNode) doc));
           }
 

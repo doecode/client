@@ -1,5 +1,6 @@
 package gov.osti.doecode.servlet;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.entity.ReportFunctions;
 import gov.osti.doecode.entity.SearchFunctions;
@@ -45,13 +46,15 @@ public class DisseminationServlet extends HttpServlet {
                     log.error("Exception in getting exported search results: " + e.getMessage());
                }
 
+               ArrayNode docs = (ArrayNode) search_result_data.get("docs");
+
                //Format search results data
                switch (format) {
                     case "excel":
                          response.setContentType("application/vnd.ms-excel; charset=utf-8");
                          response.setHeader("Content-Disposition", "attachment; filename=DOECODE-SearchResults.xls");
                          ServletOutputStream out = response.getOutputStream();
-                         Workbook excel_doc = ReportFunctions.getExcelSearchExports(search_result_data);
+                         Workbook excel_doc = ReportFunctions.getExcelSearchExports(docs);
                          excel_doc.write(response.getOutputStream());
                          out.flush();
                          out.close();
@@ -60,7 +63,7 @@ public class DisseminationServlet extends HttpServlet {
                          response.setContentType("text/csv; charset=utf-8");
                          response.setHeader("Content-Disposition", "attachment; filename=DOECODE-SearchResults.csv");
                          PrintWriter p = response.getWriter();
-                         p.write(ReportFunctions.getCSVSearchExports(search_result_data));
+                         p.write(ReportFunctions.getCSVSearchExports(docs));
                          p.flush();
                          p.close();
                          break;
@@ -68,7 +71,7 @@ public class DisseminationServlet extends HttpServlet {
                          response.setContentType("application/json; charset=utf-8");
                          response.setHeader("Content-Disposition", "attachment; filename=DOECODE-SearchResults.json");
 
-                         InputStream input = new ByteArrayInputStream(ReportFunctions.getJsonSearchExports(search_result_data).getBytes("UTF-8"));
+                         InputStream input = new ByteArrayInputStream(ReportFunctions.getJsonSearchExports(docs).getBytes("UTF-8"));
                          int read = 0;
                          byte[] bytes = new byte[BYTES_DOWNLOAD];
                          OutputStream os = response.getOutputStream();
@@ -80,6 +83,26 @@ public class DisseminationServlet extends HttpServlet {
                          break;
                }
 
+          } else if (remaining.equals("export-biblio-results")) {
+               String format = StringUtils.defaultIfBlank(request.getParameter("format"), "");
+               String code_id = StringUtils.defaultIfBlank(request.getParameter("code_id"), "");
+
+               ObjectNode biblio_data = SearchFunctions.getBiblioJson(Long.parseLong(code_id));
+               if (JsonUtils.getBoolean(biblio_data, "is_valid_record", false)) {
+                    switch (format) {
+                         default:
+                              ArrayNode doc_list = new ArrayNode(JsonUtils.INSTANCE);
+                              doc_list.add(biblio_data);
+                              response.setContentType("application/vnd.ms-excel; charset=utf-8");
+                              response.setHeader("Content-Disposition", "attachment; filename=DOECODE-" + code_id + ".xls");
+                              ServletOutputStream out = response.getOutputStream();
+                              Workbook excel_doc = ReportFunctions.getExcelSearchExports(doc_list);
+                              excel_doc.write(response.getOutputStream());
+                              out.flush();
+                              out.close();
+                              break;
+                    }
+               }
           }
      }
 
