@@ -287,6 +287,8 @@ var parseProjectsPageData = function (data) {
         var workflow_value = item.workflow_status ? item.workflow_status : '';
         if (workflow_value == 'Saved')
             workflow_value = '<span class="datatable-blue-status">' + workflow_value + '</span>';
+        else if (workflow_value == 'Approved' && item.approved_as)
+            workflow_value = workflow_value + '<br><span class="datatable-pending-suffix">as ' + item.approved_as.toLowerCase() + '</span>';
         else if (workflow_value != 'Approved')
             workflow_value = '<span class="datatable-red-status">' + workflow_value + '</span><br><span class="datatable-red-status datatable-pending-suffix">pending approval</span>';
 
