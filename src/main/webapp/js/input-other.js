@@ -1,10 +1,10 @@
 /*Options for loading messages on the account page*/
 const LOADING_PROJECTS_OPTS = {title: 'Loading My Projects List', show_loader: true,
-    message_type: MESSAGE_TYPE_REGULAR, content: "<br/>Loading my projects",
+    message_type: MESSAGE_TYPE_REGULAR, content: "<br/>Loading your projects, this may take a few minutes to load.",
     contentClasses: ['center-text'], showClose: false};
 
 const LOADER_PROJECTS_ERROR_OPTS = {title: 'Error in Loading My Projects List', show_loader: true,
-    message_type: MESSAGE_TYPE_ERROR, content: "<br/>Error in loading my projects",
+    message_type: MESSAGE_TYPE_ERROR, content: "<br/>Error loading your projects",
     contentClasses: ['center-text'], showClose: true};
 
 /*Options for loading messages on the pending page*/
