@@ -1256,19 +1256,17 @@ var saveModalData = function (event) {
 	}
     else
         throw 'Unknown modal table value!';
-    
+
     var edit_idx = $("#current_datatable_id").val();
-    // add
-    if (edit_idx == -1)
-        target_table.rows.add([modal_data]).draw();
-    // edit
-    else
-        target_table.row(edit_idx).data(modal_data).draw();
+
+    // insert original ID back into modal, if editing
+    if (edit_idx > -1)
+        modal_data.id = edit_idx;
 
     //Now, hide the modal
     hideModal({data:{modal_name: modal}});
-    
-    updateModalSourceData(modal, target_table);
+
+    updateModalSourceData(modal, modal_data);
 };
 
 var loadDataIntoModalForm = mobx.action("Load Modal Data", function (event) {
@@ -1339,17 +1337,17 @@ var loadDataIntoModalForm = mobx.action("Load Modal Data", function (event) {
     else
         throw 'Unknown modal table value!';
 
-    $("#current_datatable_id").val(target_table.row( this ).index());
+    $("#current_datatable_id").val(row_data.id);
     showModal({data:{modal_name: modal}});
 });
 
 var deleteModalData = mobx.action("Delete Modal Data", function (event) {
     var modal = event.data.modal_name;
     var edit_idx = $("#current_datatable_id").val();
-    
+
     if (edit_idx == -1)
     	return;
-        
+
     var target_table = null;
     if (modal == "developers")
     	target_table = developers_table;
@@ -1358,29 +1356,30 @@ var deleteModalData = mobx.action("Delete Modal Data", function (event) {
     else if (modal == "research-orgs")
     	target_table = research_orgs_table;
     else if (modal == "contributors")
-    	target_table = contributors_table;		
+    	target_table = contributors_table;
     else if (modal == "contributor-orgs")
     	target_table = contributor_orgs_table;
     else if (modal == "related-identifiers")
     	target_table = related_identifiers_table;
     else
         throw 'Unknown modal table value!';
-    
-    target_table.row(edit_idx).remove().draw();
+
     hideModal({data:{modal_name: modal}});
-    updateModalSourceData(modal, target_table);
+    removeModalSourceData(modal, edit_idx);
 });
 
-var updateModalSourceData = mobx.action("Update Modal Source", function (modal, target_table) {
-    if (!target_table)
+var updateModalSourceData = mobx.action("Update Modal Source", function (modal, row_data) {
+    if (!modal)
         return;
 
-    var updated_data = [];
-    $.each(target_table.rows().data(), function (i, row) {
-        updated_data.push(row);
-    });
-	
-    metadata.setValue(modalToMetadataProperty(modal), updated_data);
+    metadata.saveToArray(modalToMetadataProperty(modal), row_data);
+});
+
+var removeModalSourceData = mobx.action("Remove Modal Source", function (modal, row_data) {
+    if (!modal)
+        return;
+
+    metadata.removeFromArray(modalToMetadataProperty(modal), row_data);
 });
 
 var clearModal = mobx.action("Clear Modal", function (event) {

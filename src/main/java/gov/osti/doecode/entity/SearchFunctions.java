@@ -862,7 +862,7 @@ public class SearchFunctions {
           boolean needsSpacing = false;
 
           //Authors
-          ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("contributors"), (ArrayNode) biblio_data.get("developers"));
+          ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"), (ArrayNode) biblio_data.get("contributors"));
           String author_text = joinWithDelimiters(authors_and_contributors, ", ", ", & ");
           if (StringUtils.isNotBlank(author_text)) {
                author_text += (StringUtils.endsWith(author_text, ".") ? "" : ".");
@@ -924,7 +924,7 @@ public class SearchFunctions {
           String software_title = "{" + JsonUtils.getString(biblio_data, "software_title", "") + "}";
 
           //Authors Text
-          ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("contributors"), (ArrayNode) biblio_data.get("developers"));
+          ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"), (ArrayNode) biblio_data.get("contributors"));
           String author_text = joinWithDelimiters(authors_and_contributors, " and ", null);
           if (StringUtils.isNotBlank(author_text)) {
                author_text = ("{" + author_text + "}");
@@ -975,7 +975,7 @@ public class SearchFunctions {
           boolean needsSpacing = false;
 
           //Authors
-          ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("contributors"), (ArrayNode) biblio_data.get("developers"));
+          ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"), (ArrayNode) biblio_data.get("contributors"));
           String author_text = joinWithDelimiters(authors_and_contributors, ", ", ", and ");
           if (StringUtils.isNotBlank(author_text)) {
                author_text += (StringUtils.endsWith(author_text, ".") ? "" : ".");
@@ -1026,7 +1026,7 @@ public class SearchFunctions {
           boolean needsSpacing = false;
 
           //Authors
-          ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("contributors"), (ArrayNode) biblio_data.get("developers"));
+          ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"), (ArrayNode) biblio_data.get("contributors"));
           String author_text = joinWithDelimiters(authors_and_contributors, ", ", ", and ");
           if (StringUtils.isNotBlank(author_text)) {
                author_text += (StringUtils.endsWith(author_text, ".") ? "" : ".");

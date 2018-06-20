@@ -26,7 +26,7 @@ var Metadata = function (_BaseData) {
   _createClass(Metadata, [{
     key: "saveToArray",
     value: mobx.action("Save to Array", function saveToArray(field, data) {
-      if (typeof data.id != "number") this.addToArray(field, data);else this.modifyElementInArray(field, data);
+      if (isNaN(parseInt(data.id))) this.addToArray(field, data);else this.modifyElementInArray(field, data);
 
       this.infoSchema[field].completed = true;
       this.infoSchema[field].ever_completed = true;
@@ -47,8 +47,7 @@ var Metadata = function (_BaseData) {
     })
   }, {
     key: "removeFromArray",
-    value: mobx.action("Remove from Array", function removeFromArray(field, data) {
-      var index = data.id;
+    value: mobx.action("Remove from Array", function removeFromArray(field, index) {
       this.fieldMap[field].splice(index, 1);
 
       // renumber ids as needed
@@ -75,11 +74,11 @@ var Metadata = function (_BaseData) {
   }, {
     key: "deserializeData",
     value: mobx.action("Deserialize Data", function deserializeData(data) {
-
       for (var field in data) {
 
         if (this.fieldMap[field] !== undefined && data[field] !== undefined && !(Array.isArray(data[field]) && data[field].length === 0)) {
 
+          // preserve an ordering ID based on how data was received from server
           if (parents.indexOf(field) > -1) {
             var end = data[field].length;
             for (var i = 0; i < end; i++) {
