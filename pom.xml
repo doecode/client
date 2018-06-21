@@ -287,8 +287,8 @@
             <!--Building Plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>                
-                <version>3.1.0</version>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.0</version>
                 <configuration>
                     <!--Any file extensions that you don't want to run the filter on should be added here. Make sure any sort of non-plain-text files are added here-->
                     <nonFilteredFileExtensions>
