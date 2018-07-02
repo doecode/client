@@ -1,7 +1,28 @@
 {{> wrapper/header}}
 <input type='hidden' id='about-page-identifier'/>
+<style type='text/css'>
+     .featuresStyle {
+	 text-align: left !important;
+	 color: #1E6F92 !important;
+	 margin-left: 0px !important;
+     }
+     .containerStyle {
+	 max-width: 750px !important;
+	 text-align: center !important;
+     }
+     @media only screen and (max-width:767px) and (min-width: 320px) {
+	 .containerStyle {
+	     max-width: none !important;
+	 }
+     }
+     @media only screen and (max-width:991px) and (min-width: 768px) {
+	 .containerStyle {
+	     max-width: none !important;
+	 }
+     }
+</style>
 <div>
-     <div class="container-fluid bgWhite">
+     <div class="container-fluid" style='background: #F9F9F9 !important'>
           <div class='row'>
 	       <div class="col-lg-3 col-md-1"></div>
 	       <div class="col-lg-6 col-md-10 col-xs-12 static-content">

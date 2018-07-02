@@ -1,10 +1,10 @@
 /*Options for loading messages on the account page*/
 const LOADING_PROJECTS_OPTS = {title: 'Loading My Projects List', show_loader: true,
-    message_type: MESSAGE_TYPE_REGULAR, content: "<br/>Loading my projects",
+    message_type: MESSAGE_TYPE_REGULAR, content: "<br/>Loading your projects, this may take a few minutes to load.",
     contentClasses: ['center-text'], showClose: false};
 
 const LOADER_PROJECTS_ERROR_OPTS = {title: 'Error in Loading My Projects List', show_loader: true,
-    message_type: MESSAGE_TYPE_ERROR, content: "<br/>Error in loading my projects",
+    message_type: MESSAGE_TYPE_ERROR, content: "<br/>Error loading your projects",
     contentClasses: ['center-text'], showClose: true};
 
 /*Options for loading messages on the pending page*/
@@ -54,6 +54,14 @@ var parseConfirmPageData = function (data) {
     var availabilities_list = JSON.parse($("#availabilities-list-json").val());
     //Now, go through, grab the values
     var metadata_list = [];
+
+    //Title
+    if (data.software_title) {
+        metadata_list.push({
+            title: 'Software Title',
+            content: data.software_title
+        });
+    }
 
     //Developers
     if (data.developers && data.developers.length > 0) {
@@ -181,8 +189,22 @@ var parseConfirmPageData = function (data) {
             content: data.keywords
         });
     }
+    //Landing Page
+    if (data.landing_page) {
+        metadata_list.push({
+            title: 'Landing Page',
+            content: '<a target="_blank" href="' + data.landing_page + '">' + data.landing_page + '</a>'
+        });
+    }
+    //Repository URL
+    if (data.repository_link) {
+        metadata_list.push({
+            title: 'Repository URL',
+            content: '<a target="_blank" href="' + data.repository_link + '">' + data.repository_link + '</a>'
+        });
+    }
 
-    //Go through, put all of teh things into an html string
+    //Go through, put all of the things into an html string
     var content_string = "";
     metadata_list.forEach(function (item) {
         content_string += ('<dt class="col-xs-4">' + item.title + '</dt><dd class="col-xs-8">' + item.content + '</dd>');
@@ -265,6 +287,8 @@ var parseProjectsPageData = function (data) {
         var workflow_value = item.workflow_status ? item.workflow_status : '';
         if (workflow_value == 'Saved')
             workflow_value = '<span class="datatable-blue-status">' + workflow_value + '</span>';
+        else if (workflow_value == 'Approved' && item.approved_as)
+            workflow_value = workflow_value + '<br><span class="datatable-pending-suffix">as ' + item.approved_as.toLowerCase() + '</span>';
         else if (workflow_value != 'Approved')
             workflow_value = '<span class="datatable-red-status">' + workflow_value + '</span><br><span class="datatable-red-status datatable-pending-suffix">pending approval</span>';
 
@@ -306,8 +330,8 @@ var parseApprovalPageError = function () {
     setCommonModalMessage(LOADING_PENDING_PROJECTS_ERROR_OPTS);
 };
 
+//Content to be ran at the beginning of the page
 checkIsAuthenticated();
-
 if (document.getElementById('confirmation-page-identifier')) {
     var code_id = $("#code-id").val();
     doAuthenticatedAjax('GET', API_BASE + 'metadata/' + code_id, parseConfirmPageData, null, parseConfirmPageError);
@@ -318,6 +342,34 @@ if (document.getElementById('confirmation-page-identifier')) {
     setCommonModalMessage(LOADING_PROJECTS_OPTS);
     showCommonModalMessage();
     doAuthenticatedAjax('GET', API_BASE + 'metadata/projects', parseProjectsPageData, null, parseProjectsPageError);
+
+    //New stuff
+    /*
+     doAuthenticatedAjax('GET', API_BASE + 'metadata/projects', function (data) {
+     
+     }, null,
+     function () {
+     setCommonModalMessage(LOADER_PROJECTS_ERROR_OPTS);
+     });*/
+    /*
+     $(window).on('scroll', function () {
+     if (document.getElementById('bottom-item')) {
+     var bottom_item = $("#bottom-item");
+     var bottom_pointer_top = Math.ceil($(bottom_item).offset().top);
+     var viewportBottom = $(window).scrollTop() + $(window).height();
+     
+     //If the "bottom-item" is in view
+     if (viewportBottom >= bottom_pointer_top) {
+     $(bottom_item).removeAttr('id');
+     //TODO if therea re more records, add them to the list, and set the id to the one near the bottom
+     if (document.getElementById('bottom-item')) {
+     console.log("Still here");
+     } else {
+     console.log("Not here anymore");
+     }
+     }
+     }
+     });*/
 
 } else if (document.getElementById('approval-page-identifier')) {
     checkHasRole('OSTI');

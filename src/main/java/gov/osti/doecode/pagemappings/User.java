@@ -27,7 +27,7 @@ public class User extends HttpServlet {
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
 
           if (StringUtils.containsIgnoreCase(request.getContentType(), "application/json")) {
-               ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+               ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
                ObjectNode request_data = JsonUtils.parseObjectNode(request.getReader());
                boolean add_signin_html = false;
                switch (remaining) {
@@ -56,8 +56,8 @@ public class User extends HttpServlet {
           } else {
                String page_title = "";
                String template = "";
-               ObjectNode output_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
-               ArrayNode jsFilesList = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+               ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
+               ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
 
                switch (remaining) {
                     case "account":
@@ -86,7 +86,7 @@ public class User extends HttpServlet {
                          page_title = "DOE CODE: Login";
                          template = TemplateUtils.TEMPLATE_USER_LOGIN;
                          if (StringUtils.isNotBlank(request.getParameter("redirect")) && request.getParameter("redirect").equals("true")) {
-                              output_data.put("user_data", new ObjectNode(JsonUtils.FACTORY_INSTANCE));
+                              output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
                               output_data.put("is_redirected", true);
                               response.addCookie(new Cookie("user_data", null));
                          }
@@ -102,7 +102,7 @@ public class User extends HttpServlet {
                     case "logout":
                          page_title = "DOE CODE: Logout";
                          template = TemplateUtils.TEMPLATE_USER_LOGOUT;
-                         output_data.put("user_data", new ObjectNode(JsonUtils.FACTORY_INSTANCE));
+                         output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
                          response.addCookie(new Cookie("user_data", null));
                          response.addCookie(new Cookie("needs_password_reset", null));
                          response.addCookie(new Cookie("requested_url", null));

@@ -76,11 +76,11 @@ var authorSearchDropdownORCID = function () {
 var toggleAffiliationCollapse = function () {
     if ($(this).next('div.toggle-affiliations-collapse').hasClass('in')) {//If is open, close
         $(this).next('div.toggle-affiliations-collapse').removeClass('in');
-        $(this).html('<span class="fa fa-plus-square-o"></span>&nbsp;Show Author Affiliations');
+        $(this).html('<span class="fa fa-plus-square-o"></span>&nbsp;Show Developer Affiliations');
         $(this).attr('title', 'Show Author Affiliations');
     } else {//If is closed, open
         $(this).next('div.toggle-affiliations-collapse').addClass('in');
-        $(this).html('<span class="fa fa-minus-square-o"></span>&nbsp;Hide Author Affiliations');
+        $(this).html('<span class="fa fa-minus-square-o"></span>&nbsp;Hide Developer Affiliations');
         $(this).attr('title', 'Hide Author Affiliations');
     }
 };
@@ -377,6 +377,15 @@ if (document.getElementById('about-page-identifier')) {
 
     //Makes the download links work
     $(".download-link").on('click', pushDownloadMetric);
+
+    //Makes the Search Results Exporter links work
+    $(".results-export-link").on('click', function () {
+        var format = $(this).data('format');
+        var search_form_data = $("#search-page-form").serialize();
+        console.log(format);
+        console.log(search_form_data);
+        window.open('/' + APP_NAME + '/dissemination/export-search-results?format=' + format + "&" + search_form_data, '_blank');
+    });
 
 } else if (document.getElementById('biblio-page-identifier') && !document.getElementById('biblio-code-id-not-found')) {
 

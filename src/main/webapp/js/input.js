@@ -18,6 +18,7 @@ var form = mobx.observable({
     "workflowStatus": ""
 });
 form.co_repo = "";
+form.last_filename = "";
 
 var developers_data_tbl_opts = {
     order: [[0, 'asc']],
@@ -238,9 +239,15 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
 
     // if CO project, we need to store original repo link, in case they change type
     form.co_repo = "";
-    if (metadata.getValue("accessibility") == "CO") {
+    form.last_filename = "";
+    var accessibility = metadata.getValue("accessibility");
+    if (accessibility == "CO") {
         var orig_repo = metadata.getValue("repository_link");
         form.co_repo = orig_repo ? orig_repo : form.co_repo;
+    }
+    if (accessibility != 'OS') {
+        var orig_file = metadata.getValue("file_name");
+        form.last_filename = orig_file ? orig_file : form.last_filename;
     }
 
     form.workflowStatus = data.metadata.workflow_status;
@@ -542,6 +549,10 @@ mobx.autorun("Project Type", function () {
     }
     else if ($("#input-form-optional-toggle").is(":visible")) {
         $("#supplemental-step").hide();
+    }
+
+    if (project_type != 'OS') {
+        metadata.setValue("file_name", form.last_filename);
     }
 
     setSuccess("project-type-lbl", project_type != null);
@@ -1245,19 +1256,17 @@ var saveModalData = function (event) {
 	}
     else
         throw 'Unknown modal table value!';
-    
+
     var edit_idx = $("#current_datatable_id").val();
-    // add
-    if (edit_idx == -1)
-        target_table.rows.add([modal_data]).draw();
-    // edit
-    else
-        target_table.row(edit_idx).data(modal_data).draw();
+
+    // insert original ID back into modal, if editing
+    if (edit_idx > -1)
+        modal_data.id = edit_idx;
 
     //Now, hide the modal
     hideModal({data:{modal_name: modal}});
-    
-    updateModalSourceData(modal, target_table);
+
+    updateModalSourceData(modal, modal_data);
 };
 
 var loadDataIntoModalForm = mobx.action("Load Modal Data", function (event) {
@@ -1328,17 +1337,17 @@ var loadDataIntoModalForm = mobx.action("Load Modal Data", function (event) {
     else
         throw 'Unknown modal table value!';
 
-    $("#current_datatable_id").val(target_table.row( this ).index());
+    $("#current_datatable_id").val(row_data.id);
     showModal({data:{modal_name: modal}});
 });
 
 var deleteModalData = mobx.action("Delete Modal Data", function (event) {
     var modal = event.data.modal_name;
     var edit_idx = $("#current_datatable_id").val();
-    
+
     if (edit_idx == -1)
     	return;
-        
+
     var target_table = null;
     if (modal == "developers")
     	target_table = developers_table;
@@ -1347,29 +1356,30 @@ var deleteModalData = mobx.action("Delete Modal Data", function (event) {
     else if (modal == "research-orgs")
     	target_table = research_orgs_table;
     else if (modal == "contributors")
-    	target_table = contributors_table;		
+    	target_table = contributors_table;
     else if (modal == "contributor-orgs")
     	target_table = contributor_orgs_table;
     else if (modal == "related-identifiers")
     	target_table = related_identifiers_table;
     else
         throw 'Unknown modal table value!';
-    
-    target_table.row(edit_idx).remove().draw();
+
     hideModal({data:{modal_name: modal}});
-    updateModalSourceData(modal, target_table);
+    removeModalSourceData(modal, edit_idx);
 });
 
-var updateModalSourceData = mobx.action("Update Modal Source", function (modal, target_table) {
-    if (!target_table)
+var updateModalSourceData = mobx.action("Update Modal Source", function (modal, row_data) {
+    if (!modal)
         return;
 
-    var updated_data = [];
-    $.each(target_table.rows().data(), function (i, row) {
-        updated_data.push(row);
-    });
-	
-    metadata.setValue(modalToMetadataProperty(modal), updated_data);
+    metadata.saveToArray(modalToMetadataProperty(modal), row_data);
+});
+
+var removeModalSourceData = mobx.action("Remove Modal Source", function (modal, row_data) {
+    if (!modal)
+        return;
+
+    metadata.removeFromArray(modalToMetadataProperty(modal), row_data);
 });
 
 var clearModal = mobx.action("Clear Modal", function (event) {
@@ -1484,6 +1494,7 @@ const FILE_EXTENSION_REGEX = new RegExp(/\.(zip|tar|tar[.]gz|tar[.]bz2)$/);
 var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
     metadata.setValue("file_name", "");
     metadata.setValue("files", []);
+    form.last_filename = "";
 
     // if dropzone has a file associated, remove it via click event
     var existingFile = $(".dz-remove")[0];
@@ -1524,6 +1535,7 @@ var FILE_UPLOAD_CONFIG = {url: 'someurl',
                 //Button to make the file uploader work
                 metadata.setValue("file_name", file.name);
                 metadata.setValue("files", [file]);
+                form.last_filename = file.name;
 
                 //Make the remove button included hide the right content
                 $(".dz-remove").on('click', function () {

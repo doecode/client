@@ -25,7 +25,7 @@ public class Errors extends HttpServlet {
 
           String page_title = "";
           String template = "";
-          ObjectNode output_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
 
           switch (remaining) {
                case "page-not-found":
@@ -44,7 +44,7 @@ public class Errors extends HttpServlet {
                     break;
           }
 
-          output_data = TemplateUtils.GET_COMMON_DATA(output_data, "", new ArrayNode(JsonUtils.FACTORY_INSTANCE),null, request);
+          output_data = TemplateUtils.GET_COMMON_DATA(output_data, "", new ArrayNode(JsonUtils.INSTANCE),null, request);
           TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
      }
 

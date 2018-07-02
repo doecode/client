@@ -1,4 +1,11 @@
 {{> wrapper/header}}
+<style type="text/css">
+     @media only screen and (max-width:479px) and (min-width: 320px) {
+	 .faq-page-blockquote{
+	     font-size:14px;
+	 }
+     }
+</style>
 <div class="row not-so-wide-row">
      <div class="col-lg-3 col-md-1"></div>
 
@@ -175,8 +182,8 @@
 			 <strong>Closed Source, OSTI Hosted</strong>&nbsp;- Software that is not Open Source and for which access must be granted by contacting a licensing 
 			 official. Software is often Closed Source because it is proprietary or has otherwise been deemed appropriate for limited distribution only.  
 			 The upload of source code or a compiled binary is required and a landing page URL is optional for submitting Closed Source, OSTI Hosted code.  
-			 A private GitHub repository will be automatically created using the uploaded resource and a Repository Link will be generated automatically 
-			 with which OSTI will distribute the code/software.  If interested, you may request an OSTI GitHub account 
+			 A private GitLab repository will be automatically created using the uploaded resource and a Repository Link will be generated automatically 
+			 with which OSTI will distribute the code/software. If interested, you may request an OSTI GitLab account 
 			 at <a title="Gitlab Signup" target='_blank' rel="noopener noreferrer" href='https://www.osti.gov/doecode/gitlab-signup'>https://www.osti.gov/doecode/gitlab-signup</a>.
 			 <br/>
 			 <br/>
@@ -403,7 +410,7 @@
 		    <div>
 			 <p>
 			      Users may want to simply submit their business code to DOE CODE. Submitting offers increased discoverability and the option to obtain a Digital Object Identifier (DOI)
-			       for the code, making it more easily citable and shared. Submitting business code to 
+			      for the code, making it more easily citable and shared. Submitting business code to 
 			      DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes that 
 			      are in early development and for developers wanting to obtain DOIs early in the process. 
 			      (See also "<a href='/${app_name}/faq#what-is-a-doi'>What is a Digital Object Identifier (DOI)?</a>").
@@ -655,7 +662,7 @@
 	  <div>
 	       <a name="are-there-apis"></a><span class="faq-page-subtitle">Are there APIs available for DOE CODE?</span>
 	       <blockquote class="faq-page-blockquote">
-		    <p>Yes, there are lots of APIs with stable endpoints. For more information, see the&nbsp;<a title="API Documentation" target='_blank' rel="noopener noreferrer" href="https://www.osti.gov/doecodeapi/services">API documentation</a>.</p>
+		    <p>Yes, there are lots of APIs with stable endpoints. For more information, see the&nbsp;<a title="API Documentation" target='_blank' rel="noopener noreferrer" href="{{api_url}}docs">API documentation</a>.</p>
 	       </blockquote>
 	  </div>
 	  <div>

@@ -1,41 +1,3 @@
-/* local page styles */
-.upload-file {
-    margin-right: 25px;
-    display: inline;
-}
-
-.Select-value-icon, .Select-value-label {
-    display: inline !important;
-}
-
-textarea.form-text-area {
-    resize: none;
-    height: 150px;
-}
-
-fieldset.entry-group {
-    border: 1.25px #ccc solid;
-    border-radius: 5px;
-    margin-top: -15px;
-    margin-bottom: 15px;
-    margin-left: -15px;
-    margin-right: -15px;
-}
-
-legend.entry-legend {
-    padding: 5px;
-    margin-left: 10px;
-    font-size: inherit;
-    color: inherit;
-    border-bottom: none;
-    margin-bottom: 7px;
-    width: auto;
-}
-
-fieldset div {
-    margin-left: 12px;
-}
-
 html h1 {
     font-size: 26px;
     margin-left: 10px;
@@ -54,101 +16,15 @@ html h3 {
 .no-col-padding-left {
     padding-left: 0px;
 }
-
 .no-col-padding-right {
     padding-right: 0px;
 }
-
-.no-btn-padding-top {
-    padding-top: 0px;
-}
-
-.no-btn-padding-bottom {
-    padding-bottom: 0px;
-}
-
-.no-padding {
-    padding: 0px;
-}
-
 .minimal-col-padding-left {
     padding-left: 5px;
 }
 
 .minimal-col-padding-right {
     padding-right: 5px;
-}
-
-.no-margin-left {
-    margin-left: 0;
-}
-
-.required a {
-    color: #990000 !important
-}
-
-.field-error-wrapper {
-    display: inline-block;
-    position: relative;
-}
-
-/*VVV About page VVV*/
-.error-color {
-    color: #a94442;
-}
-
-.bgWhite {
-    background: #F9F9F9 !important;
-}
-
-.featuresStyle {
-    text-align: left !important;
-    color: #1E6F92 !important;
-    margin-left: 0px !important;
-}
-
-.containerStyle {
-    max-width: 750px !important;
-    text-align: center !important;
-}
-
-
-/*^^^ About page ^^^*/
-
-.req:before {
-    content: "* ";
-    position: relative;
-}
-
-.req:not(.has-success):before, .req_rf:not(.has-success):after {
-    color: #a94442;
-}
-
-.req:before {
-    content: "* ";
-    position: relative;
-}
-
-.req_rf:after {
-    content: " (Required Field)";
-    position: relative;
-}
-
-.req_of:after {
-    content: " (Optional Field)";
-    position: relative;
-}
-
-.req_fr:after {
-    content: " (Fields Required)";
-    position: relative;
-    color: #a94442;
-}
-
-.req_arfc:after {
-    content: " (All Required Fields Completed)";
-    position: relative;
-    color: #3c763d;
 }
 
 .loader {
@@ -173,21 +49,8 @@ html h3 {
     animation: spin 2s linear infinite reverse;
 }
 
-.loaderText {
-    font-size: 16px;
-    clear: both;
-    display: block;
-}
-
 .green {
     color: green;
-}
-
-.biblio-description {
-    padding-right: 10px;
-    padding-left: 10px;
-    padding-bottom: 15px;
-    font-size: 16px;
 }
 
 .biblio-title {
@@ -195,161 +58,10 @@ html h3 {
     font-size: 31px;
 }
 
-.biblio-main-content {
-    border-left: 1px solid #CCCCCC;
-    padding-left: 30px;
-}
-
-.doi-subnotice {
-    font-style: italic;
-    font-size: 13.6px;
-    color: rgb(153, 153, 153);
-}
-
-.biblio-sidebar-subtitle {
-    text-transform: uppercase;
-    font-weight: 300;
-    color: #777;
-    margin-bottom: 0;
-    margin-top: 10px;
-    padding-bottom: 10px;
-}
-
-.biblio-sidebar-secondary-subtitle {
-    margin-bottom: 5px;
-    color: rgb(0, 0, 0);
-    font-size: 13.6px;;
-}
-
-.biblio-sidebar-traditional-anchor {
-    font-size: 15px;
-    font-weight: 400;
-}
-
-.biblio-sidebar-row {
-    border-bottom: 1px solid #DDDDDD;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-
-.biblio-sidebar-row:last-child {
-    border-bottom: none;
-}
-
-.biblio-sidebar-collapse-panel {
-    border-color: #F9F9F9;
-    box-shadow: none !important;
-}
-
-.biblio-sidebar-collapse-heading {
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-
-.biblio-sidebar-collapse-item {
-    background-color: #F9F9F9;
-    border-top: none !important;
-}
-
-.biblio-row {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.biblio-row>dl {
-    margin-bottom: 0px;
-}
-
-.biblio-field-header {
-    font-weight: normal;
-    font-size: 13.6px;
-    margin-left: 0px;
-    color: #929292;
-    padding-top:0px;
-}
-
-.biblio-field-value {
-    padding-bottom: 10px;
-    font-size: 13.6px;
-}
-
-/*Puts spacing between the contents of the resource section of the biblio sidebar*/
-.biblio-sidebar-row > div > div.link-content{
-    padding-bottom:20px;
-}
-
-.bibtex-entry{
-    padding-left:30px;
-}
-
 .orc-id-img {
     width: 16px;
     height: 16px;
     vertical-align: top;
-}
-
-.search-result-sub-row {
-    padding-left: 0px;
-}
-
-.search-result-count-column {
-    text-align: right;
-    font-size: 16px;
-    padding-right: 5px;
-    padding-top: 8px;
-}
-
-.search-results-count {
-    font-size: 32px !important;
-    font-weight: 300 !important;
-    margin-left: 0px !important;
-}
-
-.search-result-row {
-    overflow: auto;
-    border-color: #F9F9F9;
-    background-color: #F9F9F9 !important;
-    padding-top: 7px;
-}
-
-.search-result-row:not(:last-child) {
-    border-bottom: 1px solid #ddd;
-}
-
-.search-for-sidebar-row {
-    border-bottom: 1px solid #ddd;
-}
-
-.search-for-modify-search {
-    font-size: 13.6px;
-    opacity: 0.5;
-    font-weight: 300;
-    color: rgb(0, 0, 0);
-}
-
-.search-for-modify-search:hover {
-    opacity: 0.7;
-}
-
-.search-result-author {
-    font-size: 12px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-.search-result-author a {
-    color: #7cb342;
-    font-size: 13.6px;
-}
-
-/*Puts space below the doi and repository link/landing page entries on the search results page*/
-div.search-result-rows-container > div.search-result-row > div > div > div.row > div > div.landing-page-repo-links{
-    padding-bottom:10px;
-}
-
-div.search-result-rows-container > div.search-result-row > div > div > div.row > div > div.landing-page-repo-links:last-child{
-    padding-bottom:15px !important;
 }
 
 .search-result-release-date {
@@ -439,23 +151,6 @@ div.search-result-rows-container > div.search-result-row > div > div > div.row >
     border: none;
 }
 
-.homepage-searchbar {
-    height: 52px !important;
-    font-size: 20px !important;
-}
-
-.homepage-search-btn {
-    height: 51px !important;
-    width: 50px !important;
-    padding-left: 20.8px !important;
-    padding-right: 37.8px !important;
-}
-
-.homepage-adv-search-btn {
-    top: 18px !important;
-    right: 10px !important;
-}
-
 .adv-search-btn {
     font-size: 16px;
 }
@@ -475,11 +170,6 @@ div.search-result-rows-container > div.search-result-row > div > div > div.row >
 .adv-search-single-date-container input {
     padding-left: 0px !important;
     padding-right: 0px !important;
-}
-
-.homepage-adv-search-dropdown {
-    top: 52px !important;
-    right: 4px !important;
 }
 
 .search-box {
@@ -541,11 +231,6 @@ div.search-result-rows-container > div.search-result-row > div > div > div.row >
     margin-right: 0px !important;
     margin-left: 0px !important;
 }
-
-.padblock {
-    padding: 0 35px;
-}
-
 .header-side-text {
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 16px;
@@ -635,15 +320,6 @@ html, body {
 
 /*^^^^MAKES THE FOOTER WORK^^^^*/
 
-.biblio-social-link {
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    font-size: 13.6px;
-    padding-right: 15px !important;
-    padding-left: 15px !important;
-    padding-top: 5px !important;
-    padding-bottom: 5px !important;
-}
-
 .facebook {
     color: #3b5998;
 }
@@ -664,10 +340,6 @@ html, body {
     color: #32506D;
 }
 
-.biblio-social-link:last-child {
-    border-right: none;
-}
-
 .static-content {
     font-size: 16px;
 }
@@ -678,22 +350,9 @@ html, body {
     margin-left: 0px;
 }
 
-.contact-img {
-    opacity: 0.3;
-}
-
-.biblio-page-header {
-    text-align: right;
-}
-
-.doecode-wizard-btn {
-    margin-bottom: 5px;
-}
-
 .required-field-span {
     font-weight: 700;
 }
-
 
 .filter-header {
     color: blue;
@@ -803,26 +462,6 @@ html, body {
 
 .signin-buttons-container {
     padding-bottom: 10px;
-}
-
-.workflow-publish-btn {
-    margin-bottom: 5px;
-}
-
-.wizard-margin-style {
-    margin-bottom: 5px;
-}
-
-.icon-row {
-    color: white;
-}
-
-.icon-row a {
-    color: white !important;
-}
-
-.icon-row a.icon-row-icon {
-    font-size: 40px;
 }
 
 .clickable {
@@ -1398,14 +1037,6 @@ ul.biblio-page-ul>li>a:hover {
     border-right: none;
 }
 
-.icon-row-icon-text:hover {
-    text-decoration: none;
-}
-
-.icon-row-icon-text a {
-    font-size: 40px;
-}
-
 .footer-fa-icon {
     opacity: 0.5;
 }
@@ -1418,149 +1049,7 @@ ul.biblio-page-ul>li>a:hover {
     border-top: none;
 }
 
-/*!!!!!Repository Services page!!!!!!*/
-.repository-services-container {
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-}
-
-#github-repository-container {
-    width: 314px;
-    padding-right:10px;
-}
-
-#or-repository-container {
-    text-align: center !important;
-}
-
-#gitlab-repository-container {
-    width: 314px;
-    padding-left:10px;
-}
-
-#repository-services-header-container {
-    padding-left: 25%;
-}
-
-/*!!!!!!!Form Select page*/
-.form-select-container {
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-}
-
-#scientific-form-select-container {
-    width: 314px;
-    padding-right:10px;
-}
-
-#scientific-form-select-container a{
-    background-color:#277091 !important;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-#or-form-select-container {
-    text-align: center !important;
-}
-
-#business-form-select-container {
-    width: 314px;
-    padding-left:10px;
-}
-
-#business-form-select-container a{
-    background-color:#277091 !important;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-/*!!!!!!!Security Hosting page!!!!!!*/
-
-.security-host-left-text {
-    width: calc(60%);
-}
-
-.security-host-list-text-left>ul {
-    padding-left: 20px;
-}
-
-.security-host-list-text-right>ul {
-    padding-left: 20px;
-}
-
-.security-host-right-image {
-    float: right;
-    margin-right: calc(10%);
-}
-
-.security-host-left-image {
-    float: left;
-    margin-left: calc(10%);
-}
-
-.security-host-right-text-container {
-    text-align: left;
-    width: calc(45%);
-    float: right;
-}
-
-.security-host-left-text-container {
-    text-align: left;
-    width: calc(45%);
-}
-
-.security-host-text {
-    font-size: 15px;
-}
-
-.security-host-row-content {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-right: 20px;
-    padding-left: 35px;
-}
-
-.security-host-odd {
-    background-color: #DFDDDE;
-}
-
-.security-host-even {
-    background-color: #FFFFFF;
-}
-
-.security-host-arrow {
-    width: 50px;
-    position: absolute;
-    height: 50px;
-    transform: rotate(45deg);
-    top: calc(100% - 25px);
-    left: calc(50% - 10px);
-}
-
-.security-host-title-container {
-    background-color: #1E6E91;
-    text-align: center;
-}
-
-.security-host-title {
-    color: white;
-    text-transform: uppercase;
-    font-size: 30px;
-    text-align: center;
-}
-
-#security-host-detonation {
-    font-size: 28px;
-}
-
 /*Fixes an issue where pure-form causes an extra input to show up in react-select's*/
-
 div.Select>div.Select-control input {
     display: inline-block;
     border: none;
@@ -1682,54 +1171,6 @@ div.Select>div.Select-control input {
     display: block;
 }
 
-.form-select-btn{
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 30px;
-}
-
-.full-width-input{
-    width:100%;
-}
-
-/*Gitlab signup styles*/
-.gitlab-signup-input-row{
-    padding-bottom:10px;
-}
-
-.gitlab-signup-row-heading{
-    font-size:20px;
-}
-
-/*Point of Contact Manager*/
-.poc-add-new-email{
-    color:green;
-    cursor: pointer;
-    font-size:23px !important;
-    padding-top:5px;
-}
-
-.poc-remove-email{
-    color:red;
-    cursor: pointer;
-    font-size:23px !important;
-    padding-top:5px;
-}
-
-#poc-admin-email-list thead > tr > th:first-child{
-    padding-left:0px;
-}
-
-#poc-admin-email-list > tbody > tr > td:first-child{
-    padding-left:0px;
-}
-
-.poc-large-text{
-    font-size:20px;
-}
-
 /*
     Override to make sure checkboxes are aligned correctly
 */
@@ -1740,9 +1181,4 @@ div.Select>div.Select-control input {
 /*Allows the tooltips to be wider*/
 .tooltip-inner{
     max-width:300px !important;
-}
-
-/*Fixes an issue where the Drop Zone was getting to wide*/
-#file-upload-dropzone{
-    max-width:200px;
 }

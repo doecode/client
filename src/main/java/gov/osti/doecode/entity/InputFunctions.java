@@ -13,7 +13,7 @@ public class InputFunctions {
      private static Logger log = LoggerFactory.getLogger(InputFunctions.class.getName());
 
      public static ObjectNode getInputFormLists(ServletContext context) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           return_data.put("availabilities_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY));
           return_data.put("licenses_list", DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY));
           return_data.put("affiliations_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AFFILIATIONS_KEY));

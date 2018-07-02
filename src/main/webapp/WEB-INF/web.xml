@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <display-name>DOE CODE Client Web Application</display-name>
-
     <session-config>
         <session-timeout>
             45
@@ -90,6 +89,16 @@
         <url-pattern>/security-hosting</url-pattern>
         <url-pattern>/contact</url-pattern>
         <url-pattern>/disclaimer</url-pattern>
+    </servlet-mapping>
+    <!--Servlet for certain actions on the dissemination pages, such as exporting search results-->
+    <servlet>
+        <servlet-name>DisseminationServlet</servlet-name>
+        <servlet-class>gov.osti.doecode.servlet.DisseminationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisseminationServlet</servlet-name>
+        <url-pattern>/dissemination/export-search-results</url-pattern>
+        <url-pattern>/dissemination/export-biblio-results</url-pattern>
     </servlet-mapping>
     <!--Input pages, such as the announce, submit, and approve pages-->
     <servlet>

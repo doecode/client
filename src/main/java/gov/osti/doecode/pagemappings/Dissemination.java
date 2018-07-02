@@ -34,8 +34,8 @@ public class Dissemination extends HttpServlet {
           String page_title = "";
           String template = "";
           String current_page = "";
-          ObjectNode output_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
-          ArrayNode jsFilesList = new ArrayNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
+          ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
 
           /*Determine what page we're on, and load the appropriate title, template, etc*/
           if (remaining.equals("") || remaining.equals("/")) {//HOMEPAGE
@@ -66,12 +66,13 @@ public class Dissemination extends HttpServlet {
                page_title = "DOE CODE: News Resources";
                template = TemplateUtils.TEMPLATE_NEWS_RESOURCES_PAGE;
                current_page = TemplateUtils.PAGE_NEWS_RESOURCES;
-               output_data.put("api_url", StringUtils.substringBeforeLast(Init.public_api_url, "/"));
+               output_data.put("api_url", Init.public_api_url);
 
           } else if (remaining.equals("/faq")) {
                page_title = "DOE CODE: FAQ's";
                template = TemplateUtils.TEMPLATE_FAQ_PAGE;
                current_page = TemplateUtils.PAGE_FAQ;
+               output_data.put("api_url", Init.public_api_url);
 
           } else if (remaining.startsWith("/results")) {
                page_title = "DOE CODE: Search Results";
@@ -131,7 +132,7 @@ public class Dissemination extends HttpServlet {
 
           //Check if they're logged in, and only do something if they're not logged in
           if (!UserFunctions.isUserLoggedIn(request)) {
-               output_data.put("user_data", new ObjectNode(JsonUtils.FACTORY_INSTANCE));
+               output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
           } else {
                //Increment time
                response.addCookie(UserFunctions.updateUserSessionTimeout(request));

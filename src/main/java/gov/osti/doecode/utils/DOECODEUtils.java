@@ -5,13 +5,12 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import org.apache.commons.codec.binary.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DOECODEUtils {
 
-     //public static final DateTimeFormatter MONTH_DAY_YEAR_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm:ss");
      public static final DateTimeFormatter MONTH_DAY_YEAR_TIME_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
 
      private final static Logger log = LoggerFactory.getLogger(DOECODEUtils.class.getName());
@@ -39,14 +38,19 @@ public class DOECODEUtils {
      }
 
      public static String makeSpaceSeparatedList(ArrayNode list) {
-          StringBuilder b = new StringBuilder();
-          for (int i = 0; i < list.size(); i++) {
-               if (i > 0) {
-                    b.append(" ");
+          return makeTokenSeparatedList(list, " ");
+     }
+
+     public static String makeTokenSeparatedList(ArrayNode list, String token) {
+          String return_data = "";
+          if (list != null) {
+               String[] str_list = new String[list.size()];
+               for (int i = 0; i < list.size(); i++) {
+                    str_list[i] = list.get(i).asText();
                }
-               b.append(list.get(i));
+               return_data = StringUtils.join(str_list, token);
           }
-          return b.toString();
+          return return_data;
      }
 
      public static String getDisplayVersionOfValue(ArrayNode array, String value) {

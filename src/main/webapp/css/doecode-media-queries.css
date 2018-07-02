@@ -1,8 +1,4 @@
-
-/*!!!!!!!MEDIA QUERIES!!!!!!*/
-
 /*Between iphone 5 and right up to ipads*/
-
 @media only screen and (max-width:767px) and (min-width: 320px) {
     .header-logo-img {
         width: 270px;
@@ -22,38 +18,14 @@
     .search-btn {
         width: 40px;
     }
-    .search-results-count {
-        margin-top: 0px;
-        margin-bottom: 0px;
-        font-size: 20px !important;
-    }
     .breadcrumbTrail {
         font-size: 13.6px;
     }
     .breadcrumbTrail a {
         font-size: 13.6px;
     }
-    .search-for-sidebar-row {
-        border-bottom: none;
-    }
     .biblio-title {
         font-size: 25px;
-    }
-    .biblio-main-content {
-        border-left: none;
-        padding-left: 0px;
-        border-right: none;
-    }
-    #repository-github-img {
-        width: 280px;
-        height: 150px;
-    }
-    #repository-gitlab-img {
-        width: 280px;
-        height: 150px;
-    }
-    .padblock {
-        padding: 0px;
     }
     .faq-page-btn {
         font-size: 15.6px;
@@ -63,10 +35,6 @@
     }
     .wrapper {
         min-height: calc(100vh - 230px);
-    }
-    .biblio-summary-main-content {
-        border-left: none;
-        padding-left: 0px;
     }
     .no-col-padding-right-mobile {
         padding-left: 0px;
@@ -85,9 +53,6 @@
         margin-top: 0px;
         margin-bottom: 0px;
     }
-    .repository-services-container {
-        display: block;
-    }
     .security-host-row-content {
         padding-top: 0px;
         padding-bottom: 0px;
@@ -97,44 +62,11 @@
     .security-host-text {
         font-size: 14px;
     }
-    .security-host-title {
-        background-color: #1E6E91;
-        color: white;
-        text-transform: uppercase;
-        font-size: 25px;
-        text-align: center;
-        padding: 0px;
-    }
-    .containerStyle {
-        max-width: none !important;
-    }
-    #or-repository-container {
-        text-align: left !important;
-    }
     .search-box {
         padding-bottom: 3px;
     }
-    .homepage-search-btn {
-        height: 35px !important;
-    }
-    .homepage-searchbar {
-        height: inherit !important;
-        font-size: 16px !important;
-    }
-    .homepage-adv-search-btn {
-        top: 10px !important;
-    }
-    .homepage-search-btn {
-        width: 40px !important;
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-    }
     .signin-btn-icon {
         opacity: 1;
-    }
-    .header-logo-img-homepage {
-        padding-top: 5px;
-        margin-top: 0px;
     }
     .adv-search-date-container-advsearch {
         display: inline-block;
@@ -157,18 +89,10 @@
     }
 }
 
-
 /*Small Devices, Iphone 5 to like iphone plus*/
-
 @media only screen and (max-width:479px) and (min-width: 320px) {
     .nav-menu li {
         border-right: none;
-    }
-    .biblio-page-header {
-        text-align: center;
-    }
-    .homepage-signin-bar {
-        text-align: center;
     }
     .nav-menu {
         margin-bottom: 0px;
@@ -202,17 +126,8 @@
         padding-top: 1px !important;
         padding-bottom: 1px !important;
     }
-    .header-logo-img-homepage {
-        width: 300px;
-    }
-    .small-screen-collapse{
-        display:none;
-    }
     .tiny-center-text{
         text-align:center !important;
-    }
-    .faq-page-blockquote{
-        font-size:14px;
     }
     .faq-page-subtitle{
         font-size:15px;
@@ -220,23 +135,12 @@
     .faq-page-anchor{
         font-size:15px;
     }
-    .bibtex-entry{
-        padding-left:0px;
-    }
 }
 
-
 /* Extra Small Devices, Phones */
-
 @media only screen and (max-width:767px) and (min-width: 480px) {
     .nav-menu li {
         border-right: none;
-    }
-    .biblio-page-header {
-        text-align: center;
-    }
-    .homepage-signin-bar {
-        text-align: center;
     }
     .nav-menu {
         margin-bottom: 0px;
@@ -264,29 +168,15 @@
     .left-text-xs {
         text-align: left;
     }
-    .small-screen-collapse{
-        display:none;
-    }
     .tiny-center-text{
         text-align:center !important;
     }
-    .bibtex-entry{
-        padding-left:20px;
-    }
 }
 
-
 /* Small Devices, Tablets IPAD*/
-
 @media only screen and (max-width:991px) and (min-width: 768px) {
     .nav-menu li {
         border-right: none;
-    }
-    .biblio-page-header {
-        text-align: center;
-    }
-    .homepage-signin-bar {
-        text-align: center;
     }
     .nav-menu {
         margin-bottom: 0px;
@@ -328,23 +218,12 @@
     .nav-menu-item-text {
         font-size: 13px !important;
     }
-    .biblio-main-content {
-        border-left: none;
-        padding-left: 0px;
-        border-right: none;
-    }
+
     .active-menu-item-text {
         font-size: 14px !important;
     }
     .navbar .navbar-collapse {
         margin-bottom: -2px;
-    }
-    .search-for-sidebar-row {
-        border-bottom: none;
-    }
-    .biblio-summary-main-content {
-        border-left: none;
-        padding-left: 0px;
     }
     .no-col-padding-right-mobile {
         padding-left: 0px;
@@ -361,10 +240,6 @@
     .center-text-sm{
         text-align:center;
     }
-    .search-results-count {
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
     /*Gets rid of the margins around the pagination buttons*/
     div>ul.pagination {
         margin-top: 0px;
@@ -376,38 +251,15 @@
     .adv-search-date-container-homepage {
         display: inline-block;
     }
-    .containerStyle {
-        max-width: none !important;
-    }
     .navbar-datepicker{
         max-width:45%;
     }
-    .small-screen-collapse{
-        display:none;
-    }
-    .small-screen-no-col-padding-left{
-        padding-left:0px;
-    }
-    .small-screen-no-col-padding-right{
-        padding-right:0px;
-    }
-    .bibtex-entry{
-        padding-left:20px;
-    }
 }
 
-
 /* Medium Devices, Desktops */
-
 @media only screen and (max-width:1199px) and (min-width: 992px) {
     .nav-menu li {
         border-right: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .biblio-page-header {
-        text-align: right;
-    }
-    .homepage-signin-bar {
-        text-align: right;
     }
     .navbar-logo-img {
         display: none;
@@ -427,35 +279,12 @@
     .nav-menu-item-text {
         font-size: 13px !important;
     }
-    .publication-date-start-container-homepage input {
-        max-width: 190px !important;
-    }
-    .publication-date-end-container-homepage input {
-        max-width: 190px !important;
-    }
-    #repository-github-img {
-        width: 314px;
-    }
-    #repository-gitlab-img {
-        width: 314px;
-    }
-    .small-screen-collapse{
-        display:block;
-    }
-    .bibtex-entry{
-        padding-left:30px;
-    }
 }
 
-
 /* Large Devices, Wide Screens */
-
 @media only screen and (min-width: 1200px) {
     .nav-menu li {
         border-right: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .biblio-page-header {
-        text-align: right;
     }
     .navbar-logo-img {
         display: none;
@@ -469,24 +298,8 @@
     .left-text-lg {
         text-align: left;
     }
-    .publication-date-start-container input {
-        max-width: 150px;
-    }
-    .publication-date-end-container input {
-        max-width: 150px;
-        margin-left: 10px;
-    }
-    .homepage-searchbar-container {
-        padding-left: 37px;
-    }
-    .homepage-adv-search-dropdown {
-        left: 22px !important;
-    }
     .navbar-datepicker{
         max-width:45%;
-    }
-    .small-screen-collapse{
-        display:block;
     }
     .no-col-padding-left-lg{
         padding-left:0px !important;
@@ -499,39 +312,6 @@
     }
 }
 
-@media only screen and (max-width:1724px) and (min-width:1200px) {
-    .publication-date-start-container-homepage input {
-        max-width: 150px !important;
-    }
-    .publication-date-end-container-homepage input {
-        max-width: 150px !important;
-    }
-}
-
-@media only screen and (min-width:1725px) {
-    .publication-date-start-container-homepage input {
-        max-width: 250px !important;
-    }
-    .publication-date-end-container-homepage input {
-        max-width: 250px !important;
-    }
-}
-
-@media only screen and (max-width:1312px) and (min-width:1200px) {
-    .publication-date-start-container-homepage {
-        padding-right: 0px !important;
-    }
-    .publication-date-end-container-homepage {
-        text-align: right !important;
-    }
-}
-
-@media only screen and (max-width:1520px) and (min-width:1200px) {
-    #repository-services-header-container {
-        padding-left: 15%;
-    }
-}
-
 @media only screen and (min-width:1440px) {
     .special-lg-2 {
         width: 25%;
@@ -539,5 +319,4 @@
     .special-lg-8 {
         width: 50%;
     }
-
 }

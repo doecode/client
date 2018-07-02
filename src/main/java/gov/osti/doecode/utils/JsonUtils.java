@@ -46,7 +46,7 @@ public class JsonUtils {
 
      private static Logger log = LoggerFactory.getLogger(JsonUtils.class.getName());
 
-     public static final JsonNodeFactory FACTORY_INSTANCE = JsonNodeFactory.instance;
+     public static final JsonNodeFactory INSTANCE = JsonNodeFactory.instance;
      public static final ObjectMapper MAPPER = new ObjectMapper();
 
      /*
@@ -55,7 +55,7 @@ public class JsonUtils {
      If we do that, it's like getJsonListItem(list,"value",val);
       */
      public static ObjectNode getJsonListItem(ArrayNode array, String key, String value) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           for (JsonNode v : array) {
                ObjectNode row = (ObjectNode) v;
                if (JsonUtils.getString(row, key, "").equals(value)) {
@@ -114,7 +114,7 @@ public class JsonUtils {
      }
 
      public static ObjectNode parseObjectNode(String s) {
-          ObjectNode on = new ObjectNode(FACTORY_INSTANCE);
+          ObjectNode on = new ObjectNode(INSTANCE);
           try {
                on = (ObjectNode) MAPPER.readTree(s);
           } catch (Exception e) {
@@ -124,7 +124,7 @@ public class JsonUtils {
      }
 
      public static ObjectNode parseObjectNode(Reader r) {
-          ObjectNode on = new ObjectNode(FACTORY_INSTANCE);
+          ObjectNode on = new ObjectNode(INSTANCE);
           try {
                on = (ObjectNode) MAPPER.readTree(r);
           } catch (Exception e) {
@@ -134,7 +134,7 @@ public class JsonUtils {
      }
 
      public static ArrayNode parseArrayNode(String s) {
-          ArrayNode an = new ArrayNode(FACTORY_INSTANCE);
+          ArrayNode an = new ArrayNode(INSTANCE);
           try {
                an = (ArrayNode) MAPPER.readTree(s);
           } catch (Exception e) {
@@ -144,7 +144,7 @@ public class JsonUtils {
      }
 
      public static ArrayNode parseArrayNode(Reader r) {
-          ArrayNode an = new ArrayNode(FACTORY_INSTANCE);
+          ArrayNode an = new ArrayNode(INSTANCE);
           try {
                an = (ArrayNode) MAPPER.readTree(r);
           } catch (Exception e) {

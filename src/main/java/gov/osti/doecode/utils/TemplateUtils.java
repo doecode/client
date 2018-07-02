@@ -100,28 +100,28 @@ public class TemplateUtils {
      }
 
      public static final ObjectNode GET_NAVBAR_CLASSES(String current_page) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
-          ObjectNode projects = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+          ObjectNode projects = new ObjectNode(JsonUtils.INSTANCE);
           projects.put("list_item", "nav-menu-item-special");
           projects.put("anchor", "nav-menu-item nav-menu-item-text");
 
-          ObjectNode repositoryServices = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode repositoryServices = new ObjectNode(JsonUtils.INSTANCE);
           repositoryServices.put("list_item", "nav-menu-item-special");
           repositoryServices.put("anchor", "nav-menu-item nav-menu-item-text");
 
-          ObjectNode about = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode about = new ObjectNode(JsonUtils.INSTANCE);
           about.put("list_item", "nav-menu-item-special");
           about.put("anchor", "nav-menu-item nav-menu-item-text");
 
-          ObjectNode policy = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode policy = new ObjectNode(JsonUtils.INSTANCE);
           policy.put("list_item", "nav-menu-item-special");
           policy.put("anchor", "nav-menu-item nav-menu-item-text");
 
-          ObjectNode newsResources = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode newsResources = new ObjectNode(JsonUtils.INSTANCE);
           newsResources.put("list_item", "nav-menu-item-special");
           newsResources.put("anchor", "nav-menu-item nav-menu-item-text");
 
-          ObjectNode faq = new ObjectNode(JsonUtils.FACTORY_INSTANCE);
+          ObjectNode faq = new ObjectNode(JsonUtils.INSTANCE);
           faq.put("list_item", "nav-menu-item-special");
           faq.put("anchor", "nav-menu-item nav-menu-item-text");
 

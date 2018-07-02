@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>gov.osti</groupId>
     <artifactId>doecode</artifactId>
@@ -21,8 +20,6 @@
         </repository>
     </distributionManagement>
     <properties>
-        <handlebars.version>4.0.6</handlebars.version>
-        <logback.version>1.2.3</logback.version>
         <session_timeout>45</session_timeout>
         <app_name>${project.artifactId}</app_name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,7 +30,7 @@
         <profile>
             <id>profile-name</id>
             <properties>
-             <environment_url>URL of the tomcat you are deploying the application to</environment_url>
+                <environment>Name of the properties file you're pulling values from</environment>
                 <username>Username of the tomcat manager you deploy the application to</username>
                 <password>Password of the tomcat manager you deploy the application to</password>
                 <apiURL>The URL to the DOECODE API instance that you use</apiURL>
@@ -43,7 +40,6 @@
                 <siteURL>The base url for the site</siteURL>
                 <authorityapiURL>The base URL for OSTI's Elink Authority API</authorityapiURL>
                 <app_name>The base name of the app. "doecode" by default</app_name>
-                The following fields are entirely optional
                 <smtpHost>The host used to send emails from the application</smtpHost>
                 <gitlab_submit_email>The email address gitlab submissions are sent to</gitlab_submit_email>
                 <gitlab_from_email>The email address gitlab submissions are from</gitlab_from_email>
@@ -64,12 +60,39 @@
             </resource>
         </resources>
         <plugins>
+            <!--
+            This plugin is used as a way for several developers to utilize the same project and configurations. To use it, you must have an application in the location
+            specified in <file>. The properties from that file are loaded as maven properties. This is meant to be a replacement to using traditional maven profiles located
+            in the pom.xml or in a .m2/settings.xml
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${user.home}/shared-resources/doecode/${environment}.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>com.samaxes.maven</groupId>
                 <artifactId>minify-maven-plugin</artifactId>
                 <version>1.7.6</version>
                 <executions>
                     <!--Minify Javascript Files-->
+                    <!--
+                        Each javascript file is minified individually, and is only included on the pages wherever it's specified.
+                        For example, input.js is only included on the input form
+                    -->
                     <execution>
                         <id>minify-base</id>
                         <phase>compile</phase>
@@ -178,7 +201,7 @@
                             <goal>minify</goal>
                         </goals>
                     </execution>
-                     <execution>
+                    <execution>
                         <id>minify-site</id>
                         <phase>compile</phase>
                         <configuration>
@@ -196,7 +219,7 @@
                             <goal>minify</goal>
                         </goals>
                     </execution>
-                    <!--Minify Everything css files-->
+                    <!--Minify The base css file-->
                     <execution>
                         <id>minify-everything-css</id>
                         <phase>compile</phase>
@@ -220,14 +243,35 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--
+                The properties for this could either be located here in the pom.xml, or in the settings.xml in your maven .m2 directory
+                Example: 
+                <servers>
+                    <server>
+                        <id>[ID Goes Here]</id>
+                        <username>tomcat username</username>
+                        <password>tomcat password</password>
+                    </server>
+                </serers>
+                <profiles>
+                    <profile>
+                        <id>[Id of profile, the value you put after -P when calling maven]</id>
+                        <properties>
+                            <server>[Id of server you declared above]</server>
+                            <host>URL to tomcat you're deploying to</host>
+                            <port>Port of tomcat you're deploying to</port>
+                            <environment>Name of properties file you're loading in the properties-maven-plugin</environment>
+                        </properties>
+                    </profile>
+                </profiles>
+            -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>${environment_url}</url>
-                    <username>${username}</username>
-                    <password>${password}</password>
+                    <server>${server}</server>
+                    <url>http://${host}:${port}/manager/text</url>
                     <warFile>${project.build.directory}/${app_name}.war</warFile>
                     <path>/${project.build.finalName}</path>
                 </configuration>
@@ -243,9 +287,10 @@
             <!--Building Plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>                
-                <version>3.1.0</version>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.0</version>
                 <configuration>
+                    <!--Any file extensions that you don't want to run the filter on should be added here. Make sure any sort of non-plain-text files are added here-->
                     <nonFilteredFileExtensions>
                         <nonFilteredFileExtension>gif</nonFilteredFileExtension>
                         <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
@@ -282,39 +327,18 @@
         <dependency>
             <groupId>com.github.jknack</groupId>
             <artifactId>handlebars</artifactId>
-            <version>${handlebars.version}</version>
+            <version>4.0.6</version>
         </dependency>
         <dependency>
             <groupId>com.github.jknack</groupId>
             <artifactId>handlebars-jackson2</artifactId>
-            <version>${handlebars.version}</version>
+            <version>4.0.6</version>
         </dependency>
         <!--Jackson Library for JSON-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.9.0</version>
-        </dependency>
-        <!--Apache Commons-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-email</artifactId>
-            <version>1.5</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.11</version>
         </dependency>
         <!--Jsoup (for scrubbing out script tags to prevent XSS attacks)-->
         <dependency>
@@ -326,17 +350,50 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
+            <version>1.2.3</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>${logback.version}</version>
+            <version>1.2.3</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
+        </dependency>
+        <!--                -->
+        <!--APACHE LIBRARIES-->
+        <!--                -->
+        <dependency>
+            <!--Used for most string manipulation, null checking, etc-->
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
+        </dependency>
+        <dependency>
+            <!--Used to get data from google during the captcha process-->
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <!--Used for email sending-->
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.5</version>
+        </dependency>
+        <dependency>
+            <!--Used for base-64 encoding the user data into a cookie-->
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.11</version>
+        </dependency>
+        <dependency>
+            <!--Used for excel spreadsheet generation-->
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.17</version>
         </dependency>
     </dependencies>
 </project>

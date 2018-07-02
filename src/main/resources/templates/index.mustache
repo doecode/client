@@ -2,6 +2,76 @@
 <html lang="en">
      <head>
 	  {{> wrapper/head-content}}
+	  <style type='text/css'>
+	       .homepage-searchbar {
+		   height: 52px !important;
+		   font-size: 20px !important;
+	       }
+	       .homepage-search-btn {
+		   height: 51px !important;
+		   width: 50px !important;
+		   padding-left: 20.8px !important;
+		   padding-right: 37.8px !important;
+	       }
+	       .homepage-adv-search-btn {
+		   top: 18px !important;
+		   right: 10px !important;
+	       }
+	       .homepage-adv-search-dropdown {
+		   top: 52px !important;
+		   right: 4px !important;
+	       }
+	       .icon-row {
+		   color: white;
+	       }
+
+	       .icon-row a {
+		   color: white !important;
+	       }
+
+	       .icon-row a.icon-row-icon {
+		   font-size: 40px;
+	       }
+	       .icon-row-icon-text:hover {
+		   text-decoration: none;
+	       }
+
+	       .icon-row-icon-text a {
+		   font-size: 40px;
+	       }
+	       @media only screen and (max-width:767px) and (min-width: 320px) {
+		   .homepage-searchbar {
+		       height: inherit !important;
+		       font-size: 16px !important;
+		   }
+		   .homepage-search-btn {
+		       height: 35px !important;
+		       width: 40px !important;
+		       padding-left: 10px !important;
+		       padding-right: 10px !important;
+		   }
+		   .homepage-adv-search-btn {
+		       top: 10px !important;
+		   }
+		   .header-logo-img-homepage {
+		       padding-top: 5px;
+		       margin-top: 0px;
+		   }
+	       }
+	       @media only screen and (min-width: 1200px) {
+		   .homepage-searchbar-container {
+		       padding-left: 37px;
+		   }
+		   .homepage-adv-search-dropdown {
+		       left: 22px !important;
+		   }
+	       }
+	       @media only screen and (max-width:479px) and (min-width: 320px) {
+		   .header-logo-img-homepage {
+		       width: 300px;
+		   }
+	       }
+	  </style>
      </head>
      <body>
 	  <input type='hidden' id='active-page' value='{{active_page}}'/>
@@ -239,7 +309,7 @@
 																  {{/each}}
 															     </select>
 															</div>
-															
+
 															<div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row'>
 															     <label for='navbar-searchbar-programming_languages' class='adv-search-dropdown-label'>Programming Languages:</label>
 															</div>
