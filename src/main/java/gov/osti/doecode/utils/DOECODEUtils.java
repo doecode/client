@@ -109,4 +109,8 @@ public class DOECODEUtils {
           }
           return (isUpperCase) ? month.toUpperCase() : month;
      }
+     
+     public static String getPretifiedTitle(String title){
+          return title.toLowerCase().replaceAll("[^a-zA-Z0-9\\s]", "").replaceAll("\\s{2,}"," ").replaceAll(" ","-");
+     }
 }

@@ -90,8 +90,9 @@ public class Dissemination extends HttpServlet {
                page_title = "DOE CODE: Project Metadata";
                template = TemplateUtils.TEMPLATE_BIBLIO_PAGE;
 
-               if (DOECODEUtils.isValidLong(remaining.replace("/biblio/", ""))) {
-                    long code_id = Long.parseLong(remaining.replace("/biblio/", ""));
+               String just_code_id = StringUtils.substringBefore(remaining.replace("/biblio/", ""), "-");
+               if (DOECODEUtils.isValidLong(just_code_id)) {
+                    long code_id = Long.parseLong(just_code_id);
                     ObjectNode biblio_data = SearchFunctions.getBiblioData(code_id);
 
                     //If, and only if, this is a valid code id

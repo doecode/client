@@ -419,6 +419,7 @@ public class SearchFunctions {
                newRow.put("release_date", JsonUtils.getString(row, "release_date", ""));
                newRow.put("show_release_date", StringUtils.isNotBlank(JsonUtils.getString(row, "release_date", "")));
                newRow.put("software_title", JsonUtils.getString(row, "software_title", ""));
+               newRow.put("pretified_title", DOECODEUtils.getPretifiedTitle(JsonUtils.getString(row, "software_title", "")));
 
                //Devs and contributors
                /*We need to remove all but 3 of the devs and contributors, since this is the search page*/
@@ -706,6 +707,9 @@ public class SearchFunctions {
           //Documentation URL
           return_data.put("documentation_url", JsonUtils.getString(search_data, "documentation_url", ""));
           return_data.put("has_documentation_url", StringUtils.isNotBlank(JsonUtils.getString(search_data, "documentation_url", "")));
+
+          //URL "prettified" title
+          return_data.put("pretified_title", JsonUtils.getString(search_data, "software_title", "").toLowerCase().replaceAll("[^a-zA-Z0-9\\s]", "").replaceAll("\\s{2,}", " ").replaceAll(" ", "-"));
           return return_data;
      }
 
