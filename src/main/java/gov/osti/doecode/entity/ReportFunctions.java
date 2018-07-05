@@ -100,11 +100,17 @@ public class ReportFunctions {
                //Developer(s)
                row_vals.add("\"" + JsonUtils.getString(rec, "developers_list", "").replaceAll("\"", "\"\"") + "\"");
 
+               //Don't show the DOI unless we have a release date
+               String doi = JsonUtils.getString(rec, "doi", "");
+               String release_date = JsonUtils.getString(rec, "release_date", "");
+
+               String display_doi = SearchFunctions.showDOI(doi, release_date) ? doi : "";
                //DOI
-               row_vals.add("\"" + JsonUtils.getString(rec, "doi", "").replaceAll("\"", "\"\"") + "\"");
+               row_vals.add("\"" + display_doi.replaceAll("\"", "\"\"") + "\"");
 
                //Release Date
-               row_vals.add("\"" + JsonUtils.getString(rec, "release_date", "").replaceAll("\"", "\"\"") + "\"");
+               row_vals.add("\"" + release_date.replaceAll("\"", "\"\"") + "\""
+               );
 
                //Short Title 
                row_vals.add("\"" + JsonUtils.getString(rec, "short_title", "").replaceAll("\"", "\"\"") + "\"");
@@ -173,7 +179,7 @@ public class ReportFunctions {
           //Put out all of the data rows
           CellStyle cell_style = book.createCellStyle();
           cell_style.setAlignment(HorizontalAlignment.CENTER);
-          
+
           for (int i = 0; i < search_data.size(); i++) {
                row = sheet1.createRow(i + 1);
                ObjectNode rec = getSearchResultsReportVersion((ObjectNode) search_data.get(i));
@@ -233,15 +239,18 @@ public class ReportFunctions {
                cell.setCellStyle(cell_style);
                cell.setCellValue(JsonUtils.getString(rec, "developers_list", ""));
 
+               //Don't show the DOI unless there is a release date
+               String doi = JsonUtils.getString(rec, "doi", "");
+               String release_date = JsonUtils.getString(rec, "release_date", "");
                //DOI
                cell = row.createCell(11);
                cell.setCellStyle(cell_style);
-               cell.setCellValue(JsonUtils.getString(rec, "doi", ""));
+               cell.setCellValue(SearchFunctions.showDOI(doi, release_date) ? doi : "");
 
                //Release Date
                cell = row.createCell(12);
                cell.setCellStyle(cell_style);
-               cell.setCellValue(JsonUtils.getString(rec, "release_date", ""));
+               cell.setCellValue(release_date);
 
                //Short Title 
                cell = row.createCell(13);
@@ -394,11 +403,14 @@ public class ReportFunctions {
           }
           return_data.put("developers_list", DOECODEUtils.makeTokenSeparatedList(developer_displays, "; "));
 
+          //Don't show the DOI unless there is a doi and a release date
+          String doi = JsonUtils.getString(docs, "doi", "");
+          String release_date = JsonUtils.getString(docs, "release_date", "");
           //DOI
-          return_data.put("doi", JsonUtils.getString(docs, "doi", ""));
+          return_data.put("doi", SearchFunctions.showDOI(doi, release_date) ? doi : "");
 
           //Release Date
-          return_data.put("release_date", JsonUtils.getString(docs, "release_date", ""));
+          return_data.put("release_date", release_date);
 
           //Short Title 
           return_data.put("short_title", JsonUtils.getString(docs, "acronym", ""));

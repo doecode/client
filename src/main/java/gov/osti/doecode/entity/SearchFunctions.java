@@ -680,7 +680,7 @@ public class SearchFunctions {
      public static ObjectNode getBiblioSidebarData(ObjectNode search_data, String public_api_url) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           //DOI and release date
-          return_data.put("has_doi_and_release", (StringUtils.isNotBlank(JsonUtils.getString(search_data, "doi", "")) && StringUtils.isNotBlank(JsonUtils.getString(search_data, "release_date", ""))));
+          return_data.put("has_doi_and_release", showDOI(JsonUtils.getString(search_data, "doi", ""), JsonUtils.getString(search_data, "release_date", "")));
           return_data.put("doi", JsonUtils.getString(search_data, "doi", ""));
 
           //Repository URL
@@ -707,6 +707,10 @@ public class SearchFunctions {
           return_data.put("documentation_url", JsonUtils.getString(search_data, "documentation_url", ""));
           return_data.put("has_documentation_url", StringUtils.isNotBlank(JsonUtils.getString(search_data, "documentation_url", "")));
           return return_data;
+     }
+
+     public static boolean showDOI(String doi, String release_date) {
+          return StringUtils.isNotBlank(doi) && StringUtils.isNotBlank(release_date);
      }
 
      public static ObjectNode getSponsoringOrgData(ArrayNode sponsoring_orgs) {
@@ -899,6 +903,7 @@ public class SearchFunctions {
                doi = ((needsSpacing ? " " : "") + "doi:" + JsonUtils.getString(biblio_data, "doi", "") + ".");
           }
 
+          return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""), JsonUtils.getString(biblio_data, "release_date", "")));
           return_data.put("authors", author_text);
           return_data.put("release_date", release_date);
           return_data.put("software_title", software_title);
@@ -934,7 +939,7 @@ public class SearchFunctions {
           String description = "{" + JsonUtils.getString(biblio_data, "description", "") + "}";
 
           //DOI
-          if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "doi", ""))) {
+          if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "doi", "")) && StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "release_date", ""))) {
                String doi = JsonUtils.getString(biblio_data, "doi", "");
                optional_data.add(getOptionalBibtexObj("url", "{https://dx.doi.org/" + doi + "}"));
                optional_data.add(getOptionalBibtexObj("howpublished", "{[Computer Software] \\url{https://dx.doi.org/" + doi + "}}"));
@@ -951,6 +956,7 @@ public class SearchFunctions {
                optional_data.add(getOptionalBibtexObj("month", "{" + DOECODEUtils.getShortMonth(release_date_month, false) + "}"));
           }
 
+          return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""), JsonUtils.getString(biblio_data, "release_date", "")));
           return_data.put("code_id", JsonUtils.getLong(biblio_data, "code_id", 0));
           return_data.put("authors_text", author_text);
           return_data.put("description", description);
@@ -1013,6 +1019,7 @@ public class SearchFunctions {
                doi = ((needsSpacing ? " " : "") + "doi:" + JsonUtils.getString(biblio_data, "doi", "") + ".");
           }
 
+          return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""), JsonUtils.getString(biblio_data, "release_date", "")));
           return_data.put("authors", author_text);
           return_data.put("software_title", software_title);
           return_data.put("release_date", release_date);
@@ -1078,6 +1085,8 @@ public class SearchFunctions {
           if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "doi", ""))) {
                doi = ((needsSpacing ? " " : "") + "doi:" + JsonUtils.getString(biblio_data, "doi", "") + ".");
           }
+
+          return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""), JsonUtils.getString(biblio_data, "release_date", "")));
           return_data.put("authorsText", author_text);
           return_data.put("softwareTitle", software_title);
           return_data.put("computer_software", computer_software);
