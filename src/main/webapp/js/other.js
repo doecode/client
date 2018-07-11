@@ -14,6 +14,7 @@ var post_gitlab_form_data = function () {
     submission_data.phone_number = $("#phone-number").val();
     submission_data.job_title = $("#job-title").val();
     submission_data.employment_designation = $("#employment-designation").val();
+    submission_data.employment_designation_other_val = $("#employment-designation-other-val").val().trim();
 
     var conditional_required_fields_okay = true;
     //Go through and get the value of each field. If there's a value, mark it as successful. If there's no value, yet the field is required, mark it as erroneous. Otherwise, blank it out
@@ -27,19 +28,17 @@ var post_gitlab_form_data = function () {
 
         //If it's a required field, but only if a value for another field is selected
         if (is_required && is_conditional_required === true) {
-            //Get the field that this field is associated with
-            var associated_field = $(self).data('associatedfield');
-            //Get the values that this element's associated field could have to actually show this field
-            var associated_values = $(self).data('associatedvalues').split(',');
+            //The value of the associated field
+            var associated_field_val = $("#" + $(self).data('associatedfield')).val().trim();
+            //Get teh values that, if found in the associated field, would make this field be required
+            var acceptable_vals = $(self).data('associatedvalues').split(',');
+            //Get whether we have a value in this field
+            var has_value = val != '';
 
-            //Get the value of the associated field
-            var associated_field_value = $("#" + associated_field).val();
-            //See whether or not the associated field has a value that is acceptable for this field
-            var associated_field_has_value = associated_values.indexOf(associated_field_value);
-
-            if (associated_field_has_value && val) {
+            if (acceptable_vals.indexOf(associated_field_val) > -1 && has_value) {//If this is a required field, and it has a value
                 mark_gitlab_form_field(self, SUCCESS_CONDITION);
-            } else if (associated_field_has_value && !val) {
+
+            } else if (acceptable_vals.indexOf(associated_field_val) > -1 && !has_value) {//If this is a required field, and there is no value in it
                 mark_gitlab_form_field(self, ERROR_CONDITION);
                 conditional_required_fields_okay = false;
             } else {
@@ -59,11 +58,12 @@ var post_gitlab_form_data = function () {
 
     //Put up an error if any of the required fields aren't filled out
     if (!submission_data.first_name || !submission_data.last_name
-            || !submission_data.address || !submission_data.city 
+            || !submission_data.address || !submission_data.city
             || !submission_data.postal_code || !submission_data.country
             || !submission_data.email_address || !submission_data.phone_number
             || !submission_data.job_title || !submission_data.employment_designation
-            || !conditional_required_fields_okay) {
+            || submission_data.employment_designation == 'select'
+            || !conditional_required_fields_okay || (submission_data.employment_designation == 'Other' && !submission_data.employment_designation_other_val)) {
         $("#gitlab-signup-error-message").html('You must fill out all required fields');
     } else {
         $("#gitlab-signup-form").submit();
@@ -75,6 +75,21 @@ var gitlab_form_blur_callback = function () {
     var val = $(this).val().trim();
     if (val) {
         mark_gitlab_form_field(self, SUCCESS_CONDITION);
+    } else {
+        mark_gitlab_form_field(self, BLANK_CONDITION);
+    }
+};
+
+var gitlab_form_blur_callback_select = function () {
+    var self = this;
+    var first_invalid = $(self).attr('data-firstinvalid') && $(self).attr('data-firstinvalid') == 'true';
+    var required = $(self).hasClass('gitlab-signup-required');
+    if (required && first_invalid && $(self)[0].selectedIndex > 0) {
+        mark_gitlab_form_field(self, SUCCESS_CONDITION);
+
+    } else if (required && first_invalid && $(self)[0].selectedIndex === 0) {
+        mark_gitlab_form_field(self, ERROR_CONDITION);
+
     } else {
         mark_gitlab_form_field(self, BLANK_CONDITION);
     }
@@ -98,8 +113,23 @@ var mark_gitlab_form_field = function (element, condition) {
     }
 };
 
+var clearField = function (id) {
+    $("#" + id).val('');
+    $("#" + id).click();
+    $("#" + id).blur();
+};
+
 var showRequiredEmploymentDesignationFields = function () {
     var val = $(this).val();
+    //Hide the containers
+    $("#contract-number").parent().hide();
+    $("#contracting-organization").parent().hide();
+    $("#employment-designation-other-val").parent().hide();
+    $("#employment-designation-other-val").parent().prev('div').hide();
+
+    clearField('contract-number');
+    clearField('contracting-organization');
+    clearField('employment-designation-other-val');
 
     switch (val) {
         case "DOE Prime Contractor":
@@ -107,9 +137,9 @@ var showRequiredEmploymentDesignationFields = function () {
             $("#contract-number").parent().show();
             $("#contracting-organization").parent().show();
             break;
-        default:
-            $("#contract-number").parent().hide();
-            $("#contracting-organization").parent().hide();
+        case "Other":
+            $("#employment-designation-other-val").parent().show();
+            $("#employment-designation-other-val").parent().prev('div').show();
             break;
     }
 };
@@ -134,7 +164,8 @@ var gitlab_recaptcha_error_callback = function () {
 if (document.getElementById('gitlab-signup-page-identifier')) {
     $("#submit-btn").on('click', post_gitlab_form_data);
     //Makes the on-blur's work
-    $(".gitlab-signup-input").on('blur', gitlab_form_blur_callback);
+    $(".gitlab-signup-input:not(select)").on('blur', gitlab_form_blur_callback);
+    $("select.gitlab-signup-input").on('change', gitlab_form_blur_callback_select);
     //Show extra, required fields (conditionally)
-    $("#employment-designation").on('click', showRequiredEmploymentDesignationFields);
+    $("#employment-designation").on('change', showRequiredEmploymentDesignationFields);
 }

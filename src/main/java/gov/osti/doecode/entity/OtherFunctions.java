@@ -55,6 +55,7 @@ public class OtherFunctions {
                requested_data.put("employment_designation", request.getParameter("employment_designation"));
                requested_data.put("contract_number", request.getParameter("contract_number"));
                requested_data.put("contracting_organization", request.getParameter("contracting_organization"));
+               requested_data.put("employment_designation_other_value", request.getParameter("employment_designation_other_value"));
                return_data = sendGitlabSubmissionEmail(request.getServletContext(), requested_data);
           }
 
@@ -176,7 +177,11 @@ public class OtherFunctions {
           email_message.append(JsonUtils.getString(request_data, "job_title", ""));
           email_message.append(", ");
           //Employment Designation
-          email_message.append(JsonUtils.getString(request_data, "employment_designation", ""));
+          String employment_designation = JsonUtils.getString(request_data, "employment_designation","");
+          email_message.append(employment_designation);
+          if(StringUtils.isNotBlank(employment_designation) && StringUtils.equals(employment_designation, "Other")){
+               email_message.append(" (").append(JsonUtils.getString(request_data,"employment_designation_other_value","")).append(")");
+          }
 
           /*Contract Number/Organization*/
           String contract_number = JsonUtils.getString(request_data, "contract_number", "");

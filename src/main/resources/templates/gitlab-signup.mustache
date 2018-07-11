@@ -99,11 +99,10 @@
 			 </div>
 		    </div>
 		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-			 <select class='pure-input-1 full-width-input form-control gitlab-signup-input' name="state" title='State' id="state">
+			 <select data-firstinvalid='true' class='pure-input-1 full-width-input form-control gitlab-signup-input' name="state" title='State' id="state">
 			      {{#each state_list}}
 			      <option value="{{value}}" title="{{title}}">{{label}}</option>
 			      {{/each}}
-
 			 </select>		
 			 <span class="fa fa-check form-control-feedback errorCheck" style="display:none;"></span>
 			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
@@ -175,7 +174,8 @@
 			 </div>
 		    </div>
 		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-			 <select class='pure-input-1 full-width-input form-control gitlab-signup-input gitlab-signup-required' name="employment_designation" title='Employment Designation' id="employment-designation">
+			 <select data-firstinvalid='true' class='pure-input-1 full-width-input form-control gitlab-signup-input gitlab-signup-required' name="employment_designation" title='Employment Designation' id="employment-designation">
+			      <option value='select' title='Select an Option'>Select An Option</option>
 			      <option value="DOE Federal Employee" title="DOE Federal Employee">DOE Federal Employee</option>
 			      <option value="DOE Prime Contractor" title="DOE Prime Contractor">DOE Prime Contractor</option>
 			      <option value="DOE Sub-Contractor" title="DOE Sub-Contractor">DOE Sub-Contractor</option>
@@ -201,6 +201,16 @@
 			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 			 <div>
 			      <small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Contracting Organization *</label></small>
+			 </div>
+		    </div>
+		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
+		    </div>
+		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
+			 <input id='employment-designation-other-val' name='employment_designation_other_value' type='text' data-associatedfield='employment-designation' data-associatedvalues='Other' class='pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required' title='Employment Designation Other'/>
+			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+			 <div>
+			      <small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Describe Designation *</label></small>
 			 </div>
 		    </div>
 	       </div>
