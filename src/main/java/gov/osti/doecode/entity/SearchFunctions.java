@@ -1134,6 +1134,7 @@ public class SearchFunctions {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           ObjectNode biblio_data = getBiblioJson(osti_id);
 
+          log.info(biblio_data.toString());
           //Massage any data that needs it
           if (JsonUtils.getBoolean(biblio_data, "is_valid_record", false)) {
                ArrayNode meta_tags = new ArrayNode(JsonUtils.INSTANCE);
@@ -1228,6 +1229,10 @@ public class SearchFunctions {
                /*Version Number*/
                return_data.put("version_number", JsonUtils.getString(biblio_data, "version_number", ""));
                return_data.put("has_version_number", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "version_number", "")));
+
+               /*Keywords*/
+               return_data.put("keywords", JsonUtils.getString(biblio_data, "keywords", ""));
+               return_data.put("has_keywords", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "keywords", "")));
 
                /*Citation formats*/
                return_data.put("mla", getMLAFormat(biblio_data));
