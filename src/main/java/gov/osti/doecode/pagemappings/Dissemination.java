@@ -126,6 +126,9 @@ public class Dissemination extends HttpServlet {
                page_title = "DOE CODE: Contact Us";
                template = TemplateUtils.TEMPLATE_CONTACT_PAGE;
 
+          }else{
+               page_title = "DOE CODE: Page Not Found";
+               template = TemplateUtils.TEMPLATE_404_PAGE;
           }
 
           //Add the common dissemination js file
