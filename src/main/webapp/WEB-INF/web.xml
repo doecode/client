@@ -133,6 +133,15 @@
         <url-pattern>/confirmuser</url-pattern>
         <url-pattern>/help</url-pattern>
     </servlet-mapping>
+    <!--User data, such as the currently logged in user's information-->
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>gov.osti.doecode.servlet.UserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/user-data/get-current-user-data</url-pattern>
+    </servlet-mapping>
     <!--Miscellaneous-->
     <servlet>
         <servlet-name>Other</servlet-name>

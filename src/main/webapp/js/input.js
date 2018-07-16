@@ -1745,6 +1745,18 @@ $(document).ready(mobx.action("Document Ready", function () {
     if ($('#page').val() == 'announce' || $('#page').val() == 'approve') {
         //$('.panel-collapse:not(".in")').collapse('show');
     }
+    if ($('#page').val() == 'submit') {
+        $("#autofill-contact-info").on('click', function () {
+            doAjax('GET', '/'+APP_NAME + '/user-data/get-current-user-data', function (data) {
+                console.log(JSON.stringify(data));
+            }, null, function (xhr) {
+                console.log("Error");
+            });
+        });
+    } else {
+        $("#autofill-contact-info").hide();
+    }
+    
 }));
 
 /*
