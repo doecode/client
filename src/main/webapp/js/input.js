@@ -26,9 +26,9 @@ var developers_data_tbl_opts = {
         {name: 'first_name', data: 'first_name', 'defaultContent': ''},
         {name: 'last_name', data: 'last_name', 'defaultContent': ''},
         {name: 'affiliations', data: 'affiliations', 'defaultContent': '', render: function (data, type, row) {
-            var affiliations = data ? data.join(', ') : '';
-            return affiliations;
-        }}
+                var affiliations = data ? data.join(', ') : '';
+                return affiliations;
+            }}
     ]
 };
 
@@ -85,31 +85,29 @@ var accessibilityRepositoryLinkType = mobx.action("Change Project Type", functio
 var setSuccess = function (label, is_completed, error_msg) {
     var is_error = error_msg ? true : false;
     if (is_error) {
-    	$("#" + label).addClass("has-error");
-    	$("#" + label).removeClass("has-success");
-    	$("#" + label).parent().parent().addClass("has-error");
-    	$("#" + label).parent().parent().removeClass("has-success");
-    	$("#" + label + "-error").html(error_msg);
-    	$("#" + label).parent().parent().find(".errorCheck").show();
-    	$("#" + label).parent().parent().find(".successCheck").hide();
-    }
-    else if (is_completed) {
-    	$("#" + label).removeClass("has-error");
-    	$("#" + label).addClass("has-success");
-    	$("#" + label).parent().parent().removeClass("has-error");
-    	$("#" + label).parent().parent().addClass("has-success");
-    	$("#" + label + "-error").text("");
-    	$("#" + label).parent().parent().find(".errorCheck").hide();
-    	$("#" + label).parent().parent().find(".successCheck").show();
-    }
-    else {
-    	$("#" + label).removeClass("has-error");
-    	$("#" + label).removeClass("has-success");
-    	$("#" + label).parent().parent().removeClass("has-error");
-    	$("#" + label).parent().parent().removeClass("has-success");
-    	$("#" + label + "-error").text("");
-    	$("#" + label).parent().parent().find(".errorCheck").hide();
-    	$("#" + label).parent().parent().find(".successCheck").hide();
+        $("#" + label).addClass("has-error");
+        $("#" + label).removeClass("has-success");
+        $("#" + label).parent().parent().addClass("has-error");
+        $("#" + label).parent().parent().removeClass("has-success");
+        $("#" + label + "-error").html(error_msg);
+        $("#" + label).parent().parent().find(".errorCheck").show();
+        $("#" + label).parent().parent().find(".successCheck").hide();
+    } else if (is_completed) {
+        $("#" + label).removeClass("has-error");
+        $("#" + label).addClass("has-success");
+        $("#" + label).parent().parent().removeClass("has-error");
+        $("#" + label).parent().parent().addClass("has-success");
+        $("#" + label + "-error").text("");
+        $("#" + label).parent().parent().find(".errorCheck").hide();
+        $("#" + label).parent().parent().find(".successCheck").show();
+    } else {
+        $("#" + label).removeClass("has-error");
+        $("#" + label).removeClass("has-success");
+        $("#" + label).parent().parent().removeClass("has-error");
+        $("#" + label).parent().parent().removeClass("has-success");
+        $("#" + label + "-error").text("");
+        $("#" + label).parent().parent().find(".errorCheck").hide();
+        $("#" + label).parent().parent().find(".successCheck").hide();
     }
 };
 
@@ -119,10 +117,9 @@ var setRequired = function (label, is_required, exclude_parenthetical_text) {
     var new_class_list = "";
 
     if (is_required) {
-    	new_class_list = use_parenthetical_text ? "req req_rf" : "req";
-    }
-    else if (use_parenthetical_text) {
-    	new_class_list = use_parenthetical_text ? "req_of" : "";
+        new_class_list = use_parenthetical_text ? "req req_rf" : "req";
+    } else if (use_parenthetical_text) {
+        new_class_list = use_parenthetical_text ? "req_of" : "";
     }
 
     $("#" + label).removeClass("req req_rf req_of").addClass(new_class_list);
@@ -208,26 +205,26 @@ var parseErrorResponse = function parseErrorResponse(jqXhr, exception) {
     let msg = "";
 
     if (jqXhr.responseJSON && jqXhr.responseJSON.errors) {
-      for (x = 0; x < jqXhr.responseJSON.errors.length; x++) {
-          msg += (msg == "" ? "" : "; ") + jqXhr.responseJSON.errors[x];
-      }
+        for (x = 0; x < jqXhr.responseJSON.errors.length; x++) {
+            msg += (msg == "" ? "" : "; ") + jqXhr.responseJSON.errors[x];
+        }
     }
 
     if (msg == "")
-      msg = "Internal Server Error: " + jqXhr.status;
+        msg = "Internal Server Error: " + jqXhr.status;
 
     setCommonModalMessage({
         title: 'ERROR',
         show_loader: true,
-    	message_type: MESSAGE_TYPE_ERROR,
-    	content: "<br/>" + msg,
-    	contentClasses: ['center-text'], showClose: true
+        message_type: MESSAGE_TYPE_ERROR,
+        content: "<br/>" + msg,
+        contentClasses: ['center-text'], showClose: true
     });
     showCommonModalMessage();
 };
 
 var parseSearchResponse = mobx.action("Parse Search Response", function parseSearchResponse(data) {
-    if(document.getElementById('owner-email-address')){
+    if (document.getElementById('owner-email-address')) {
         $("#owner-email-address").html(data.metadata.owner);
     }
     metadata.loadRecordFromServer(data.metadata, $("#page").val());
@@ -262,10 +259,10 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     const infix = doi.substr(doi.indexOf('/') + 1, doi.lastIndexOf('/') - doi.indexOf('/') - 1);
 
     if (prefix == "10.5072" || prefix == "10.11578")
-    	metadata.setValue("doi_status", (form.allowSave ? "RES" : "REG"));
+        metadata.setValue("doi_status", (form.allowSave ? "RES" : "REG"));
 
     if (infix)
-    	metadata.setValue("doi_infix", infix);
+        metadata.setValue("doi_infix", infix);
 
 
 
@@ -292,13 +289,13 @@ var doMultipartSubmission = function doMultipartSubmission(url, successCallback)
 var save = function save() {
     var code_id = $("#code_id").val();
     var msg = code_id ? "Project " + code_id : "New Project";
-    
+
     setCommonModalMessage({
         title: 'Saving',
         show_loader: true,
-    	message_type: MESSAGE_TYPE_REGULAR,
-    	content: "<br/>Saving data for " + msg + ".",
-    	contentClasses: ['center-text'], showClose: false
+        message_type: MESSAGE_TYPE_REGULAR,
+        content: "<br/>Saving data for " + msg + ".",
+        contentClasses: ['center-text'], showClose: false
     });
     showCommonModalMessage();
 
@@ -321,9 +318,9 @@ var submit = function submit() {
     setCommonModalMessage({
         title: 'Submitting',
         show_loader: true,
-    	message_type: MESSAGE_TYPE_REGULAR,
-    	content: msg,
-    	contentClasses: ['center-text'], showClose: false
+        message_type: MESSAGE_TYPE_REGULAR,
+        content: msg,
+        contentClasses: ['center-text'], showClose: false
     });
     showCommonModalMessage();
 
@@ -338,13 +335,13 @@ var submit = function submit() {
 var announce = function announce() {
     var code_id = $("#code_id").val();
     var msg = code_id ? "Project " + code_id : "New Project";
-    
+
     setCommonModalMessage({
         title: 'Announcing',
         show_loader: true,
-    	message_type: MESSAGE_TYPE_REGULAR,
-    	content: "<br/>Announcing data for " + msg + ".",
-    	contentClasses: ['center-text'], showClose: false
+        message_type: MESSAGE_TYPE_REGULAR,
+        content: "<br/>Announcing data for " + msg + ".",
+        contentClasses: ['center-text'], showClose: false
     });
     showCommonModalMessage();
 
@@ -359,17 +356,17 @@ var announce = function announce() {
 var approve = function approve() {
     var code_id = $("#code_id").val();
     var msg = code_id ? "Project " + code_id : "New Project";
-    
+
     setCommonModalMessage({
         title: 'Approving',
         show_loader: true,
-    	message_type: MESSAGE_TYPE_REGULAR,
-    	content: "<br/>Approving data for " + msg + ".",
-    	contentClasses: ['center-text'], showClose: false
+        message_type: MESSAGE_TYPE_REGULAR,
+        content: "<br/>Approving data for " + msg + ".",
+        contentClasses: ['center-text'], showClose: false
     });
     showCommonModalMessage();
 
-    doAuthenticatedAjax('GET', API_BASE + 'metadata/approve/'+code_id, parseApproveResponse, null, parseErrorResponse);
+    doAuthenticatedAjax('GET', API_BASE + 'metadata/approve/' + code_id, parseApproveResponse, null, parseErrorResponse);
 };
 
 var parseSaveResponse = mobx.action("Parse Receive Response", function parseSaveResponse(data) {
@@ -441,13 +438,13 @@ var setPanelStatus = function setPanelStatus(panel, anchor, panelStatus) {
         $("#" + anchor).addClass("req_fr required-field-span");
     else if (panelStatus.hasRequired) {
         $("#" + anchor).addClass("req_arfc");
-        $("#" + anchor).next("span").show();		
+        $("#" + anchor).next("span").show();
     }
 
     if (panel == "Contact Information") {
         const successNotice = panelStatus.hasRequired ? panelStatus.remainingRequired == 0 : panelStatus.completedOptional > 0;
 
-        setRequired("contact-lbl", panelStatus.hasRequired, true);    	
+        setRequired("contact-lbl", panelStatus.hasRequired, true);
         setSuccess("contact-lbl", (successNotice && !panelStatus.errors));
     }
 }
@@ -455,7 +452,7 @@ var setPanelStatus = function setPanelStatus(panel, anchor, panelStatus) {
 
 /*********************
  FORM (action)
- *********************/ 
+ *********************/
 mobx.autorun("Allow Save", function () {
     if (form.allowSave)
         $("#input-save-btn").show();
@@ -481,8 +478,7 @@ mobx.autorun("Overwrite", function () {
     if (form.workflowStatus == "Announced" && $("#page").val() == 'submit') {
         $('#input-overwrite-msg-top').show();
         $('#input-overwrite-msg-bottom').show();
-    }
-    else {
+    } else {
         $('#input-overwrite-msg-top').hide();
         $('#input-overwrite-msg-bottom').hide();
     }
@@ -546,8 +542,7 @@ mobx.autorun("Project Type", function () {
     if (project_type == "CO") {
         metadata.setValue("repository_link", form.co_repo);
         $("#supplemental-step").show();
-    }
-    else if ($("#input-form-optional-toggle").is(":visible")) {
+    } else if ($("#input-form-optional-toggle").is(":visible")) {
         $("#supplemental-step").hide();
     }
 
@@ -607,19 +602,19 @@ mobx.autorun("Description", function () {
     //mobx.whyRun();
 });
 
-mobx.autorun("Programming Language(s)", function(){
+mobx.autorun("Programming Language(s)", function () {
     updateSelectStyle(metadata, "programming_languages", "programming-languages-lbl", "programming-languages");
-    
+
     //mobx.whyRun();
 });
-mobx.autorun("Version Number", function(){
+mobx.autorun("Version Number", function () {
     updateInputStyle(metadata, "version_number", "version-number-lbl", "version-number");
-    
+
     //mobx.whyRun();
 });
-mobx.autorun("Documentation URL", function(){
+mobx.autorun("Documentation URL", function () {
     updateInputStyle(metadata, "documentation_url", "documentation-url-lbl", "documentation-url");
-    
+
     //mobx.whyRun();
 });
 
@@ -650,16 +645,16 @@ mobx.autorun("Developers Panel", function () {
 
     //mobx.whyRun();
 });
- 
+
 mobx.autorun("Developers", function () {
     if (developers_table) {
         developers_table.clear();
 
         var data = metadata.getValue("developers").toJS();
-        developers_table.rows.add(data).draw();		
+        developers_table.rows.add(data).draw();
     }
 
-    updateLabelStyle(metadata, "developers", "developers-lbl", true);  	
+    updateLabelStyle(metadata, "developers", "developers-lbl", true);
     setSuccess("developers-lbl", metadata.isCompleted("developers"), metadata.getError("developers"));
 
     //mobx.whyRun();
@@ -669,37 +664,37 @@ mobx.autorun("Developers", function () {
 /*********************
  DEVELOPERS MODAL (action)
  *********************/
-mobx.autorun("Developer First Name", function () {	
+mobx.autorun("Developer First Name", function () {
     updateInputStyle(developer, "first_name", "developer-edit-first-name-lbl", "developer-edit-first-name");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Developer Middle Name", function () {	
+mobx.autorun("Developer Middle Name", function () {
     updateInputStyle(developer, "middle_name", "developer-edit-middle-name-lbl", "developer-edit-middle-name");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Developer Last Name", function () {	
+mobx.autorun("Developer Last Name", function () {
     updateInputStyle(developer, "last_name", "developer-edit-last-name-lbl", "developer-edit-last-name");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Developer Email", function () {	
+mobx.autorun("Developer Email", function () {
     updateInputStyle(developer, "email", "developer-edit-email-lbl", "developer-edit-email");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Developer ORCID", function () {	
+mobx.autorun("Developer ORCID", function () {
     updateInputStyle(developer, "orcid", "developer-edit-orcid-lbl", "developer-edit-orcid");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Developer Affiliations", function () {	
+mobx.autorun("Developer Affiliations", function () {
     updateSelectStyle(developer, "affiliations", "developer-edit-affiliations-lbl", "developer-edit-affiliations");
 
     //mobx.whyRun();
@@ -739,28 +734,27 @@ mobx.autorun("DOI Registration Check", function () {
 
     //flag indicating if doi is already reserved in this session
     const reserving = metadata.getValue("doi_status") === "RES" || registered;
-	
+
     if (reserving) {
         $("#doi-notice").show();
         $("#reserve-text").text("Clear Reserved DOI");
         $("#reserve-icon").removeClass("fa-pencil");
         $("#reserve-icon").addClass("fa-eraser");
         $("#doi-infix-zone").show();
-    }
-    else {
+    } else {
         $("#doi-notice").hide();
         $("#reserve-text").text("Reserve DOI");
         $("#reserve-icon").addClass("fa-pencil");
         $("#reserve-icon").removeClass("fa-eraser");
         $("#doi-infix-zone").hide();
-    }	
+    }
 
     $("#doi").prop("disabled", reserving);
 
     if (registered) {
-            $("#doi-notice").hide();
-            $("#doi-reservation-zone").hide();
-            $("#doi-infix-zone").hide();
+        $("#doi-notice").hide();
+        $("#doi-reservation-zone").hide();
+        $("#doi-infix-zone").hide();
     }
 
     //mobx.whyRun();
@@ -833,7 +827,7 @@ mobx.autorun("Sponsoring Orgs", function () {
         sponsoring_orgs_table.clear();
 
         var data = metadata.getValue("sponsoring_organizations").toJS();
-        sponsoring_orgs_table.rows.add(data).draw();		
+        sponsoring_orgs_table.rows.add(data).draw();
     }
 
     updateLabelStyle(metadata, "sponsoring_organizations", "sponsoring-orgs-lbl", true);
@@ -846,7 +840,7 @@ mobx.autorun("Research Orgs", function () {
         research_orgs_table.clear();
 
         var data = metadata.getValue("research_organizations").toJS();
-        research_orgs_table.rows.add(data).draw();		
+        research_orgs_table.rows.add(data).draw();
     }
 
     updateLabelStyle(metadata, "research_organizations", "research-orgs-lbl", true);
@@ -864,31 +858,31 @@ mobx.autorun("SponsoringOrg DOE", function () {
     //mobx.whyRun();
 });
 
-mobx.autorun("SponsoringOrg Name", function () {	
+mobx.autorun("SponsoringOrg Name", function () {
     updateSelectStyle(sponsor_org, "organization_name", "sponsoring-orgs-edit-organization_name-lbl", "sponsoring-orgs-edit-organization_name");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("SponsoringOrg Primary Award", function () {	
+mobx.autorun("SponsoringOrg Primary Award", function () {
     updateInputStyle(sponsor_org, "primary_award", "sponsoring-orgs-edit-primary_award-lbl", "sponsoring-orgs-edit-primary_award");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("SponsoringOrg Additional Awards", function () {	
+mobx.autorun("SponsoringOrg Additional Awards", function () {
     updateSelectStyle(sponsor_org, "award_numbers", "sponsoring-orgs-edit-award_numbers-lbl", "sponsoring-orgs-edit-award_numbers");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("SponsoringOrg B&R", function () {	
+mobx.autorun("SponsoringOrg B&R", function () {
     updateSelectStyle(sponsor_org, "br_codes", "sponsoring-orgs-edit-br_codes-lbl", "sponsoring-orgs-edit-br_codes");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("SponsoringOrg FWP", function () {	
+mobx.autorun("SponsoringOrg FWP", function () {
     updateSelectStyle(sponsor_org, "fwp_numbers", "sponsoring-orgs-edit-fwp_numbers-lbl", "sponsoring-orgs-edit-fwp_numbers");
 
     //mobx.whyRun();
@@ -910,7 +904,7 @@ mobx.autorun("ResearchOrg DOE", function () {
     //mobx.whyRun();
 });
 
-mobx.autorun("ResearchOrg Name", function () {	
+mobx.autorun("ResearchOrg Name", function () {
     updateSelectStyle(research_org, "organization_name", "research-orgs-edit-organization_name-lbl", "research-orgs-edit-organization_name");
 
     //mobx.whyRun();
@@ -937,7 +931,7 @@ mobx.autorun("Contributors", function () {
         contributors_table.clear();
 
         var data = metadata.getValue("contributors").toJS();
-        contributors_table.rows.add(data).draw();		
+        contributors_table.rows.add(data).draw();
     }
 
     updateLabelStyle(metadata, "contributors", "contributors-lbl", true);
@@ -950,7 +944,7 @@ mobx.autorun("Contributor Orgs", function () {
         contributor_orgs_table.clear();
 
         var data = metadata.getValue("contributing_organizations").toJS();
-        contributor_orgs_table.rows.add(data).draw();		
+        contributor_orgs_table.rows.add(data).draw();
     }
 
     updateLabelStyle(metadata, "contributing_organizations", "contributor-orgs-lbl", true);
@@ -962,43 +956,43 @@ mobx.autorun("Contributor Orgs", function () {
 /*********************
  CONTRIBUTOR MODAL (action)
  *********************/
-mobx.autorun("Contributor First Name", function () {	
+mobx.autorun("Contributor First Name", function () {
     updateInputStyle(contributor, "first_name", "contributor-edit-first_name-lbl", "contributor-edit-first_name");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Contributor Middle Name", function () {	
+mobx.autorun("Contributor Middle Name", function () {
     updateInputStyle(contributor, "middle_name", "contributor-edit-middle_name-lbl", "contributor-edit-middle_name");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Contributor Last Name", function () {	
+mobx.autorun("Contributor Last Name", function () {
     updateInputStyle(contributor, "last_name", "contributor-edit-last_name-lbl", "contributor-edit-last_name");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Contributor Email", function () {	
+mobx.autorun("Contributor Email", function () {
     updateInputStyle(contributor, "email", "contributor-edit-email-lbl", "contributor-edit-email");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Contributor ORCID", function () {	
+mobx.autorun("Contributor ORCID", function () {
     updateInputStyle(contributor, "orcid", "contributor-edit-orcid-lbl", "contributor-edit-orcid");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Contributor Affiliations", function () {	
+mobx.autorun("Contributor Affiliations", function () {
     updateSelectStyle(contributor, "affiliations", "contributor-edit-affiliations-lbl", "contributor-edit-affiliations");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Contributor ContribType", function () {	
+mobx.autorun("Contributor ContribType", function () {
     updateSelectStyle(contributor, "contributor_type", "contributor-edit-contribtype-lbl", "contributor-edit-contribtype");
 
     //mobx.whyRun();
@@ -1020,13 +1014,13 @@ mobx.autorun("ContributingOrg DOE", function () {
     //mobx.whyRun();
 });
 
-mobx.autorun("ContributingOrg Name", function () {	
+mobx.autorun("ContributingOrg Name", function () {
     updateInputStyle(contributing_org, "organization_name", "contributing-organization-edit-organization_name-lbl", "contributing-organization-edit-organization_name");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("ContributingOrg ContribType", function () {	
+mobx.autorun("ContributingOrg ContribType", function () {
     updateSelectStyle(contributing_org, "contributor_type", "contributing-organization-edit-contribtype-lbl", "contributing-organization-edit-contribtype");
 
     //mobx.whyRun();
@@ -1053,7 +1047,7 @@ mobx.autorun("Related Identifiers", function () {
         related_identifiers_table.clear();
 
         var data = metadata.getValue("related_identifiers").toJS();
-        related_identifiers_table.rows.add(data).draw();		
+        related_identifiers_table.rows.add(data).draw();
     }
 
     updateLabelStyle(metadata, "related_identifiers", "related-identifiers-lbl", true);
@@ -1065,19 +1059,19 @@ mobx.autorun("Related Identifiers", function () {
 /*********************
  IDENTIFIERS MODAL (action)
  *********************/
-mobx.autorun("Related Identifier Type", function () {	
+mobx.autorun("Related Identifier Type", function () {
     updateSelectStyle(related_identifier, "identifier_type", "related-identifier-identifier-type-lbl", "related-identifier-identifier-type");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Related Identifier Relation", function () {	
+mobx.autorun("Related Identifier Relation", function () {
     updateSelectStyle(related_identifier, "relation_type", "related-identifier-relation-type-lbl", "related-identifier-relation-type");
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Related Identifier", function () {	
+mobx.autorun("Related Identifier", function () {
     updateInputStyle(related_identifier, "identifier_value", "related-identifier-identifier-value-lbl", "related-identifier-identifier-value");
 
     //mobx.whyRun();
@@ -1092,7 +1086,7 @@ mobx.autorun("Related Identifier Modal", function () {
 
 /*********************
  CONTACT PANEL (action)
- *********************/ 
+ *********************/
 mobx.autorun("Contact Panel", function () {
     setPanelStatus("Contact Information", "contact-info-panel-anchor", metadata.panelStatus.contact);
 
@@ -1174,11 +1168,10 @@ var showModal = function (event) {
         manage_text = " Related Identifier";
 
     if (is_new) {
-        $("#" + modal + "-manage-lbl").text("Enter" + manage_text);	
+        $("#" + modal + "-manage-lbl").text("Enter" + manage_text);
         $("#" + modal_id + " span[name='delete-btn']").hide();
-    }
-    else {
-        $("#" + modal + "-manage-lbl").text("Edit" + manage_text);			
+    } else {
+        $("#" + modal + "-manage-lbl").text("Edit" + manage_text);
         $("#" + modal_id + " span[name='delete-btn']").show();
     }
 
@@ -1195,66 +1188,60 @@ var hideModal = function (event) {
 var saveModalData = function (event) {
     var modal = event.data.modal_name;
     var modal_data = null;
-	
+
     var target_table = null;
     if (modal == "developers") {
-    	target_table = developers_table;
-	    modal_data = {
-	        first_name: $("#developer-edit-first-name").val().trim(),
-	        last_name: $("#developer-edit-last-name").val().trim(),
-	        middle_name: $("#developer-edit-middle-name").val().trim(),
-	        email: $("#developer-edit-email").val().trim(),
-	        orcid: $("#developer-edit-orcid").val().trim(),
-	        affiliations: $("#developer-edit-affiliations").val()
-	    };
-	}
-    else if (modal == "sponsoring-orgs") {
-    	target_table = sponsoring_orgs_table;
-	    modal_data = {
-	        DOE: $("#sponsoring-orgs-edit-DOE").is(':checked'),
-	        organization_name: $("#sponsoring-orgs-edit-organization_name").val(),
-	        primary_award: $("#sponsoring-orgs-edit-primary_award").val(),
-	        award_numbers: $("#sponsoring-orgs-edit-award_numbers").val(),
-	        br_codes: $("#sponsoring-orgs-edit-br_codes").val(),
-	        fwp_numbers: $("#sponsoring-orgs-edit-fwp_numbers").val()
-	    };
-	}
-    else if (modal == "research-orgs") {
-    	target_table = research_orgs_table;
-	    modal_data = {
-	        DOE: $("#research-orgs-edit-DOE").is(':checked'),
-	        organization_name: $("#research-orgs-edit-organization_name").val()
-	    };
-	}
-    else if (modal == "contributors") {
-    	target_table = contributors_table;
-	    modal_data = {
-	        first_name: $("#contributor-edit-first_name").val(),
-	        middle_name: $("#contributor-edit-middle_name").val(),
-	        last_name: $("#contributor-edit-last_name").val(),
-	        email: $("#contributor-edit-email").val(),
-	        orcid: $("#contributor-edit-orcid").val(),
-	        affiliations: $("#contributor-edit-affiliations").val(),
-	        contributor_type: $("#contributor-edit-contribtype").val()
-	    };
-	}
-    else if (modal == "contributor-orgs") {
-    	target_table = contributor_orgs_table;
-	    modal_data = {
-	        DOE: $("#contributing-organization-edit-DOE").is(':checked'),
-	        organization_name: $("#contributing-organization-edit-organization_name").val(),
-	        contributor_type: $("#contributing-organization-edit-contribtype").val()
-	    };
-	}
-    else if (modal == "related-identifiers") {
-    	target_table = related_identifiers_table;
-	    modal_data = {
-	        identifier_type: $("#related-identifier-identifier-type").val(),
-	        relation_type: $("#related-identifier-relation-type").val(),
-	        identifier_value: $("#related-identifier-identifier-value").val()
-	    };
-	}
-    else
+        target_table = developers_table;
+        modal_data = {
+            first_name: $("#developer-edit-first-name").val().trim(),
+            last_name: $("#developer-edit-last-name").val().trim(),
+            middle_name: $("#developer-edit-middle-name").val().trim(),
+            email: $("#developer-edit-email").val().trim(),
+            orcid: $("#developer-edit-orcid").val().trim(),
+            affiliations: $("#developer-edit-affiliations").val()
+        };
+    } else if (modal == "sponsoring-orgs") {
+        target_table = sponsoring_orgs_table;
+        modal_data = {
+            DOE: $("#sponsoring-orgs-edit-DOE").is(':checked'),
+            organization_name: $("#sponsoring-orgs-edit-organization_name").val(),
+            primary_award: $("#sponsoring-orgs-edit-primary_award").val(),
+            award_numbers: $("#sponsoring-orgs-edit-award_numbers").val(),
+            br_codes: $("#sponsoring-orgs-edit-br_codes").val(),
+            fwp_numbers: $("#sponsoring-orgs-edit-fwp_numbers").val()
+        };
+    } else if (modal == "research-orgs") {
+        target_table = research_orgs_table;
+        modal_data = {
+            DOE: $("#research-orgs-edit-DOE").is(':checked'),
+            organization_name: $("#research-orgs-edit-organization_name").val()
+        };
+    } else if (modal == "contributors") {
+        target_table = contributors_table;
+        modal_data = {
+            first_name: $("#contributor-edit-first_name").val(),
+            middle_name: $("#contributor-edit-middle_name").val(),
+            last_name: $("#contributor-edit-last_name").val(),
+            email: $("#contributor-edit-email").val(),
+            orcid: $("#contributor-edit-orcid").val(),
+            affiliations: $("#contributor-edit-affiliations").val(),
+            contributor_type: $("#contributor-edit-contribtype").val()
+        };
+    } else if (modal == "contributor-orgs") {
+        target_table = contributor_orgs_table;
+        modal_data = {
+            DOE: $("#contributing-organization-edit-DOE").is(':checked'),
+            organization_name: $("#contributing-organization-edit-organization_name").val(),
+            contributor_type: $("#contributing-organization-edit-contribtype").val()
+        };
+    } else if (modal == "related-identifiers") {
+        target_table = related_identifiers_table;
+        modal_data = {
+            identifier_type: $("#related-identifier-identifier-type").val(),
+            relation_type: $("#related-identifier-relation-type").val(),
+            identifier_value: $("#related-identifier-identifier-value").val()
+        };
+    } else
         throw 'Unknown modal table value!';
 
     var edit_idx = $("#current_datatable_id").val();
@@ -1264,81 +1251,75 @@ var saveModalData = function (event) {
         modal_data.id = edit_idx;
 
     //Now, hide the modal
-    hideModal({data:{modal_name: modal}});
+    hideModal({data: {modal_name: modal}});
 
     updateModalSourceData(modal, modal_data);
 };
 
 var loadDataIntoModalForm = mobx.action("Load Modal Data", function (event) {
     var modal = event.data.modal_name;
-	
+
     var row_data = null;
     var target_table = null;
     if (modal == "developers") {
-    	target_table = developers_table;
-    	row_data = target_table.row(this).data();
-    	if (!row_data) {
+        target_table = developers_table;
+        row_data = target_table.row(this).data();
+        if (!row_data) {
             $("#add-" + modal + "-modal-btn").trigger("click");
             return;
-    	}
+        }
 
         developer.loadValues(row_data);
-    }
-    else if (modal == "sponsoring-orgs") {
-    	target_table = sponsoring_orgs_table;
-    	row_data = target_table.row(this).data();
-    	if (!row_data) {
+    } else if (modal == "sponsoring-orgs") {
+        target_table = sponsoring_orgs_table;
+        row_data = target_table.row(this).data();
+        if (!row_data) {
             $("#add-" + modal + "-modal-btn").trigger("click");
             return;
-    	}
-    		
+        }
+
         sponsor_org.loadValues(row_data);
-    }
-    else if (modal == "research-orgs") {
-    	target_table = research_orgs_table;
-    	row_data = target_table.row(this).data();
-    	if (!row_data) {
+    } else if (modal == "research-orgs") {
+        target_table = research_orgs_table;
+        row_data = target_table.row(this).data();
+        if (!row_data) {
             $("#add-" + modal + "-modal-btn").trigger("click");
             return;
-    	}
-    		
-    	research_org.loadValues(row_data);
-    }
-    else if (modal == "contributors") {
-    	target_table = contributors_table;
-    	row_data = target_table.row(this).data();
-    	if (!row_data) {
+        }
+
+        research_org.loadValues(row_data);
+    } else if (modal == "contributors") {
+        target_table = contributors_table;
+        row_data = target_table.row(this).data();
+        if (!row_data) {
             $("#add-" + modal + "-modal-btn").trigger("click");
             return;
-    	}
-    	
-    	contributor.loadValues(row_data);
-    }
-    else if (modal == "contributor-orgs") {
-    	target_table = contributor_orgs_table;
-    	row_data = target_table.row(this).data();
-    	if (!row_data) {
+        }
+
+        contributor.loadValues(row_data);
+    } else if (modal == "contributor-orgs") {
+        target_table = contributor_orgs_table;
+        row_data = target_table.row(this).data();
+        if (!row_data) {
             $("#add-" + modal + "-modal-btn").trigger("click");
             return;
-    	}
-    	
-    	contributing_org.loadValues(row_data);   
-    }
-    else if (modal == "related-identifiers") {
-    	target_table = related_identifiers_table;
-    	row_data = target_table.row(this).data();
-    	if (!row_data) {
+        }
+
+        contributing_org.loadValues(row_data);
+    } else if (modal == "related-identifiers") {
+        target_table = related_identifiers_table;
+        row_data = target_table.row(this).data();
+        if (!row_data) {
             $("#add-" + modal + "-modal-btn").trigger("click");
             return;
-    	}
-    	
-    	related_identifier.loadValues(row_data);
-    }	
-    else
+        }
+
+        related_identifier.loadValues(row_data);
+    } else
         throw 'Unknown modal table value!';
 
     $("#current_datatable_id").val(row_data.id);
-    showModal({data:{modal_name: modal}});
+    showModal({data: {modal_name: modal}});
 });
 
 var deleteModalData = mobx.action("Delete Modal Data", function (event) {
@@ -1346,25 +1327,25 @@ var deleteModalData = mobx.action("Delete Modal Data", function (event) {
     var edit_idx = $("#current_datatable_id").val();
 
     if (edit_idx == -1)
-    	return;
+        return;
 
     var target_table = null;
     if (modal == "developers")
-    	target_table = developers_table;
+        target_table = developers_table;
     else if (modal == "sponsoring-orgs")
-    	target_table = sponsoring_orgs_table;
+        target_table = sponsoring_orgs_table;
     else if (modal == "research-orgs")
-    	target_table = research_orgs_table;
+        target_table = research_orgs_table;
     else if (modal == "contributors")
-    	target_table = contributors_table;
+        target_table = contributors_table;
     else if (modal == "contributor-orgs")
-    	target_table = contributor_orgs_table;
+        target_table = contributor_orgs_table;
     else if (modal == "related-identifiers")
-    	target_table = related_identifiers_table;
+        target_table = related_identifiers_table;
     else
         throw 'Unknown modal table value!';
 
-    hideModal({data:{modal_name: modal}});
+    hideModal({data: {modal_name: modal}});
     removeModalSourceData(modal, edit_idx);
 });
 
@@ -1384,47 +1365,41 @@ var removeModalSourceData = mobx.action("Remove Modal Source", function (modal, 
 
 var clearModal = mobx.action("Clear Modal", function (event) {
     var modal = event.data.modal_name;
-	
+
     if (modal == "developers") {
         developer.clear();
         clearChosenList("developer-edit-affiliations");
-    }
-    else if (modal == "sponsoring-orgs") {
+    } else if (modal == "sponsoring-orgs") {
         sponsor_org.clear();
         clearChosenList("sponsoring-orgs-edit-award_numbers");
         clearChosenList("sponsoring-orgs-edit-br_codes");
         clearChosenList("sponsoring-orgs-edit-fwp_numbers");
-    }
-    else if (modal == "research-orgs") {
+    } else if (modal == "research-orgs") {
         research_org.clear();
         clearChosenList("research-orgs-edit-organization_name");
-    }	
-    else if (modal == "contributors") {
+    } else if (modal == "contributors") {
         contributor.clear();
         clearChosenList("contributor-edit-affiliations");
-    }
-    else if (modal == "contributor-orgs") {
+    } else if (modal == "contributor-orgs") {
         contributing_org.clear();
-    }
-    else if (modal == "related-identifiers") {
+    } else if (modal == "related-identifiers") {
         related_identifier.clear();
-    }
-    else
+    } else
         throw 'Unknown modal table value!';
 });
 
 var modalToMetadataProperty = function (modal) {
-    var matadata_property = modal;    
+    var matadata_property = modal;
 
     if (modal == "sponsoring-orgs")
-    	matadata_property = "sponsoring_organizations";
+        matadata_property = "sponsoring_organizations";
     else if (modal == "research-orgs")
-    	matadata_property = "research_organizations";	
+        matadata_property = "research_organizations";
     else if (modal == "contributor-orgs")
-    	matadata_property = "contributing_organizations";
+        matadata_property = "contributing_organizations";
     else if (modal == "related-identifiers")
-    	matadata_property = "related_identifiers";
-    
+        matadata_property = "related_identifiers";
+
     return matadata_property;
 };
 
@@ -1436,20 +1411,20 @@ var modalToMetadataProperty = function (modal) {
 var parseReservationResponse = mobx.action("Reservation Response", function (data) {
     metadata.setValue("doi", data.doi);
     metadata.setValue("doi_status", "RES");
-    
+
     hideCommonModalMessage();
 });
 
 var reserveDOI = mobx.action("Reserve DOI", function () {
     var code_id = $("#code_id").val();
     var msg = code_id ? "Project " + code_id : "New Project";
-    
+
     setCommonModalMessage({
         title: 'Reserve DOI',
         show_loader: true,
-    	message_type: MESSAGE_TYPE_REGULAR,
-    	content: "<br/>Reserving DOI for " + msg + ".",
-    	contentClasses: ['center-text'], showClose: false
+        message_type: MESSAGE_TYPE_REGULAR,
+        content: "<br/>Reserving DOI for " + msg + ".",
+        contentClasses: ['center-text'], showClose: false
     });
     showCommonModalMessage();
     doAuthenticatedAjax('GET', API_BASE + 'metadata/reservedoi', parseReservationResponse, null, parseErrorResponse);
@@ -1473,7 +1448,7 @@ var handleReserve = mobx.action("Handle DOI Reservation", function () {
 var handleInfix = mobx.action("Handle DOI Infix", function (event) {
     //get if currently reserved then toggle
     let infix = event.target.value;
-	
+
     metadata.setValue("doi_infix", infix);
 
     const doi = metadata.getValue("doi");
@@ -1482,7 +1457,7 @@ var handleInfix = mobx.action("Handle DOI Infix", function (event) {
 
     if (infix)
         infix += "/";
-      
+
     metadata.setValue("doi", prefix + infix + id);
 });
 
@@ -1553,10 +1528,10 @@ var FILE_UPLOAD_CONFIG = {url: 'someurl',
 $(document).ready(mobx.action("Document Ready", function () {
     //Above all else, make sure we're allowed to be here
     checkIsAuthenticated();
-    
+
     // Set table input message
     $('.table-msg').html($("#table_msg").val());
-    
+
     // Override Chosen to allow Success/Error marking
     $(".chosen-container").addClass("selectControl");
 
@@ -1593,7 +1568,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     } else {
         // set software type
         metadata.setValue("software_type", $("#software_type").val());
-	    
+
         $("#input-save-btn").show();
     }
 
@@ -1626,7 +1601,7 @@ $(document).ready(mobx.action("Document Ready", function () {
             $(this).hide();
         });
     }
-    
+
     // open first panel
     $("#repository-panel-anchor").trigger('click');
     //Makes the accessibility radio buttons work
@@ -1635,14 +1610,14 @@ $(document).ready(mobx.action("Document Ready", function () {
     // Panel Updates
     $('#repository-link').on('change', {store: metadata, field: "repository_link"}, inputChange);
     $('#landing-page').on('change', {store: metadata, field: "landing_page"}, inputChange);
-    
+
     $('#software-title').on('input', {store: metadata, field: "software_title"}, inputChange);
     $('#description').on('input', {store: metadata, field: "description"}, inputChange);
     $('#programming-languages').on('change', {store: metadata, field: "programming_languages"}, inputChange);
     $('#version-number').on('input', {store: metadata, field: "version_number"}, inputChange);
     $('#documentation-url').on('change', {store: metadata, field: "documentation_url"}, inputChange);
     $('#licenses').on('change', {store: metadata, field: "licenses"}, inputChange);
-    
+
     $('#proprietary-url').on('change', {store: metadata, field: "proprietary_url"}, inputChange);
     $('#doi').on('change', {store: metadata, field: "doi"}, inputChange);
     $('#doi-infix').on('input', {field: "doi_infix"}, handleInfix);
@@ -1652,7 +1627,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#keywords').on('input', {store: metadata, field: "keywords"}, inputChange);
     $('#other-special-requirements').on('input', {store: metadata, field: "other_special_requirements"}, inputChange);
     $('#site-accession-number').on('input', {store: metadata, field: "site_accession_number"}, inputChange);
-    
+
     $('#contact-info-name').on('input', {store: metadata, field: "recipient_name"}, inputChange);
     $('#contact-info-email').on('change', {store: metadata, field: "recipient_email"}, inputChange);
     $('#contact-info-phone').on('change', {store: metadata, field: "recipient_phone"}, inputChange);
@@ -1720,7 +1695,9 @@ $(document).ready(mobx.action("Document Ready", function () {
     /*File uploads*/
     var dropzone = $("#file-upload-dropzone").dropzone(FILE_UPLOAD_CONFIG);
     // bind removal event
-    $("#delete-uploaded-file-btn").on('click', function() {removeFileUploadInfo()});
+    $("#delete-uploaded-file-btn").on('click', function () {
+        removeFileUploadInfo()
+    });
 
     // form buttons
     $('#input-save-btn').on('click', save);
@@ -1747,7 +1724,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     }
     if ($('#page').val() == 'submit') {
         $("#autofill-contact-info").on('click', function () {
-            doAjax('GET', '/'+APP_NAME + '/user-data/get-current-user-data', function (data) {
+            doAjax('GET', '/' + APP_NAME + '/user-data/get-current-user-data', function (data) {
                 console.log(JSON.stringify(data));
             }, null, function (xhr) {
                 console.log("Error");
@@ -1756,14 +1733,14 @@ $(document).ready(mobx.action("Document Ready", function () {
     } else {
         $("#autofill-contact-info").hide();
     }
-    
+
 }));
 
 /*
-mobx.spy(function (spyReport) {
-    // dig in here.  Have fun picking through all the different types.
-    if (spyReport.type) {
-        console.log(spyReport.type + ': rawSpyData: ', spyReport);
-    }
-});
-*/
+ mobx.spy(function (spyReport) {
+ // dig in here.  Have fun picking through all the different types.
+ if (spyReport.type) {
+ console.log(spyReport.type + ': rawSpyData: ', spyReport);
+ }
+ });
+ */
