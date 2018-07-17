@@ -1641,7 +1641,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#developer-edit-orcid').on('change', {store: developer, field: "orcid"}, inputChange);
     $('#developer-edit-affiliations').on('change', {store: developer, field: "affiliations"}, inputChange);
 
-    // SponsorOrg Modal Updates
+    // SponsorOrg Modal Updates 
     $('#sponsoring-orgs-edit-DOE').on('change', {store: sponsor_org, field: "DOE"}, checkboxChange);
     $('#sponsoring-orgs-edit-organization_name').on('change', {store: sponsor_org, field: "organization_name"}, inputChange);
     $('#sponsoring-orgs-edit-primary_award').on('change', {store: sponsor_org, field: "primary_award"}, inputChange);
@@ -1718,18 +1718,26 @@ $(document).ready(mobx.action("Document Ready", function () {
         $('#input-approve-btn').show();
     }
 
+
     // if this is the announce or approve page, we're going to open all of the panels
     if ($('#page').val() == 'announce' || $('#page').val() == 'approve') {
         //$('.panel-collapse:not(".in")').collapse('show');
     }
-    if ($('#page').val() == 'submit') {
-        $("#autofill-contact-info").on('click', function () {
+    if ($('#page').val() == 'submit' || $('#page').val() == 'announce') {
+        $("#autofill-contact-info").on('click', mobx.action("Fill Contact Data", function () {
             doAjax('GET', '/' + APP_NAME + '/user-data/get-current-user-data', function (data) {
-                console.log(JSON.stringify(data));
+                //Contact Name
+                metadata.setValue("recipient_name", data.first_name + ' ' + data.last_name);
+                //Contact Email
+                metadata.setValue("recipient_email", data.email);
+                //Contact Organization
+                if (data.site != 'CONTR') {
+                    metadata.setValue("recipient_org", data.site);
+                }
             }, null, function (xhr) {
-                console.log("Error");
             });
-        });
+        }));
+
     } else {
         $("#autofill-contact-info").hide();
     }
