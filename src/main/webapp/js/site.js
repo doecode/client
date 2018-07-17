@@ -86,7 +86,7 @@ var checkAndMarkPOCDuplicates = function (email_list) {
 var POCListAction = function () {
     var self = this;
     var site_code = $(self).val();
-    var lab_name = $(self).data('sitelabname');
+    var lab_name = $(self).find('option:selected').data('sitelabname');
 
     clearPOCListTable();
 
