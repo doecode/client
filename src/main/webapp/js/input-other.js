@@ -37,14 +37,26 @@ var projects_data_table_opts = {
     columns: [
         {name: 'code_id', data: 'code_id', width: '88px', className: 'text-center'},
         {name: 'software_title', data: 'software_title'},
-        {name: 'workflow_status', data: 'workflow_status', width: '88px', className: 'text-center'},
+        {name: 'workflow_status', data: 'workflow_status', className: 'text-center'},
+        {render: function (data, type, row) {
+                var btn_markup = '';
+
+                if (row.workflow_status && row.workflow_status_value != 'Saved') {
+                    btn_markup = '<a href="/' + APP_NAME + '/submit?load_id=' + row.code_id
+                            + '" class="pure-button button-new-version btn-sm white "><span class="fa fa-code-fork"></span> New Version?</a>';
+                }
+                return btn_markup;
+
+            }, width: '13%', className: 'text-center', orderable:false},
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/submit?code_id=' + row.code_id
                         + '" class="pure-button button-success btn-sm white "><span class="fa fa-pencil"></span> Update Metadata</a>';
+
             }, width: '13%', className: 'text-center', orderable: false},
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/announce?code_id=' + row.code_id
                         + '" class="pure-button pure-button-primary btn-sm white"><span class="fa fa-pencil"></span> Announce to E-Link</a>';
+
             }, width: '13%', className: 'text-center', orderable: false}
     ]
 };
@@ -285,17 +297,21 @@ var parseProjectsPageData = function (data) {
 
     data.records.forEach(function (item) {
         var workflow_value = item.workflow_status ? item.workflow_status : '';
-        if (workflow_value == 'Saved')
+        if (workflow_value == 'Saved') {
             workflow_value = '<span class="datatable-blue-status">' + workflow_value + '</span>';
-        else if (workflow_value == 'Approved' && item.approved_as)
+
+        } else if (workflow_value == 'Approved' && item.approved_as) {
             workflow_value = workflow_value + '<br><span class="datatable-pending-suffix">as ' + item.approved_as.toLowerCase() + '</span>';
-        else if (workflow_value != 'Approved')
+
+        } else if (workflow_value != 'Approved') {
             workflow_value = '<span class="datatable-red-status">' + workflow_value + '</span><br><span class="datatable-red-status datatable-pending-suffix">pending approval</span>';
 
+        }
         new_data.push({
             code_id: item.code_id ? item.code_id : '',
             software_title: item.software_title ? item.software_title : '',
-            workflow_status: workflow_value
+            workflow_status: workflow_value,
+            workflow_status_value: item.workflow_status
         });
     });
     var projects_table = $("#projects-datatable").DataTable(projects_data_table_opts);
@@ -312,9 +328,9 @@ var parseApprovalPageData = function (data) {
 
     data.records.forEach(function (item) {
         var workflow_value = item.workflow_status ? item.workflow_status : '';
-        if (workflow_value == 'Announced')
+        if (workflow_value == 'Announced') {
             workflow_value = '<span class="datatable-blue-status">' + workflow_value + '</span>';
-
+        }
         new_data.push({
             code_id: item.code_id ? item.code_id : '',
             software_title: item.software_title ? item.software_title : '',
@@ -342,34 +358,6 @@ if (document.getElementById('confirmation-page-identifier')) {
     setCommonModalMessage(LOADING_PROJECTS_OPTS);
     showCommonModalMessage();
     doAuthenticatedAjax('GET', API_BASE + 'metadata/projects', parseProjectsPageData, null, parseProjectsPageError);
-
-    //New stuff
-    /*
-     doAuthenticatedAjax('GET', API_BASE + 'metadata/projects', function (data) {
-     
-     }, null,
-     function () {
-     setCommonModalMessage(LOADER_PROJECTS_ERROR_OPTS);
-     });*/
-    /*
-     $(window).on('scroll', function () {
-     if (document.getElementById('bottom-item')) {
-     var bottom_item = $("#bottom-item");
-     var bottom_pointer_top = Math.ceil($(bottom_item).offset().top);
-     var viewportBottom = $(window).scrollTop() + $(window).height();
-     
-     //If the "bottom-item" is in view
-     if (viewportBottom >= bottom_pointer_top) {
-     $(bottom_item).removeAttr('id');
-     //TODO if therea re more records, add them to the list, and set the id to the one near the bottom
-     if (document.getElementById('bottom-item')) {
-     console.log("Still here");
-     } else {
-     console.log("Not here anymore");
-     }
-     }
-     }
-     });*/
 
 } else if (document.getElementById('approval-page-identifier')) {
     checkHasRole('OSTI');
