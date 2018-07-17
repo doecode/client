@@ -13,6 +13,9 @@ var contributors_table = null;
 var contributor_orgs_table = null;
 var related_identifiers_table = null;
 
+//The value that just shows what page we're on
+var page_val = $("#page").val();
+
 var form = mobx.observable({
     "allowSave": true,
     "workflowStatus": ""
@@ -227,7 +230,7 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     if (document.getElementById('owner-email-address')) {
         $("#owner-email-address").html(data.metadata.owner);
     }
-    metadata.loadRecordFromServer(data.metadata, $("#page").val());
+    metadata.loadRecordFromServer(data.metadata, page_val);
 
     // if old record that's not updated, set to default
     var software_type_id = metadata.getValue("software_type");
@@ -475,7 +478,7 @@ mobx.autorun("Toggle Software Type", function () {
 
 mobx.autorun("Overwrite", function () {
     // if submitting and announced project, pre-approval, show a warning.
-    if (form.workflowStatus == "Announced" && $("#page").val() == 'submit') {
+    if (form.workflowStatus == "Announced" && page_val == 'submit') {
         $('#input-overwrite-msg-top').show();
         $('#input-overwrite-msg-bottom').show();
     } else {
@@ -1546,7 +1549,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     contributor_orgs_table = $("#contributor-orgs-data-table").DataTable(contributing_organizations_tbl_opts);
     related_identifiers_table = $("#related-identifiers-data-table").DataTable(related_identifiers_tbl_opts);
 
-    if ($("#page").val() == 'submit') {
+    if (page_val == 'submit') {
         metadata.requireOnlySubmitFields();
     }
 
@@ -1705,13 +1708,13 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#input-submit-btn').on('click', submit);
     $('#input-approve-btn').on('click', approve);
 
-    if ($("#page").val() == 'announce')
+    if (page_val == 'announce')
         $('#input-announce-btn').show();
 
-    if ($("#page").val() == 'submit')
+    if (page_val == 'submit')
         $('#input-submit-btn').show();
 
-    if ($("#page").val() == 'approve') {
+    if (page_val == 'approve') {
         $('#input-help-anchor').hide();
         $('#input-approve-msg-top').show();
         $('#input-approve-msg-bottom').show();
