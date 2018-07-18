@@ -174,7 +174,7 @@ function handleAuthenticatedError(jqXhr, exception, callback) {
         window.location.href = '/' + APP_NAME + '/login?redirect=true';
     } else if (jqXhr.status == 403) {
         window.location.href = '/' + APP_NAME + '/forbidden';
-    } else if (callback != undefined) {
+    } else if (callback !== undefined && (typeof callback == 'function')) {
         callback(jqXhr, exception);
     } else {
         window.location.href = '/' + APP_NAME + '/error';
