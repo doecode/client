@@ -710,6 +710,35 @@ public class SearchFunctions {
 
           //URL "prettified" title
           return_data.put("pretified_title", JsonUtils.getString(search_data, "software_title", "").toLowerCase().replaceAll("[^a-zA-Z0-9\\s]", "").replaceAll("\\s{2,}", " ").replaceAll(" ", "-"));
+
+          //Previous/Next version
+          //Go through the related identifiers list. If we can find any DOI's that are "IsNewVersionOf" or "IsPreviousVersionOf". If so, list them, and put them into the template
+          ArrayNode related_identifiers = (ArrayNode) search_data.get("related_identifiers");
+          if (null != related_identifiers && related_identifiers.size() > 0) {
+               ArrayNode new_version = new ArrayNode(JsonUtils.INSTANCE);
+               ArrayNode prev_version = new ArrayNode(JsonUtils.INSTANCE);
+
+               for (JsonNode j : related_identifiers) {
+                    ObjectNode row = (ObjectNode) j;
+                    //If this particular related identifier is a doi
+                    if (StringUtils.equals("DOI", JsonUtils.getString(row, "identifier_type", ""))) {
+                         //Get the value, and put it into the correct array, if it's one of the types we want
+                         String identifier_value = JsonUtils.getString(row, "identifier_value", "");
+                         switch (JsonUtils.getString(row, "relation_type", "")) {
+                              case "IsNewVersionOf":
+                                   new_version.add(identifier_value);
+                                   break;
+                              case "IsPreviousVersionOf":
+                                   prev_version.add(identifier_value);
+                                   break;
+                         }
+                    }
+               }
+               return_data.put("has_new_version", new_version.size() > 0);
+               return_data.put("new_version", new_version);
+               return_data.put("has_prev_version", prev_version.size() > 0);
+               return_data.put("prev_version", prev_version);
+          }
           return return_data;
      }
 
@@ -1134,7 +1163,6 @@ public class SearchFunctions {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           ObjectNode biblio_data = getBiblioJson(osti_id);
 
-          log.info(biblio_data.toString());
           //Massage any data that needs it
           if (JsonUtils.getBoolean(biblio_data, "is_valid_record", false)) {
                ArrayNode meta_tags = new ArrayNode(JsonUtils.INSTANCE);
