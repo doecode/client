@@ -55,6 +55,8 @@ public class Input extends HttpServlet {
 
           if (remaining.equals("submit")) {
                String code_id = request.getParameter("code_id");
+               String load_id = request.getParameter("load_id");
+               String version_type = request.getParameter("version_type");
                output_data = InputFunctions.getInputFormLists(getServletContext());
                cssFilesList.add("DataTables-1.10.16/css/jquery.dataTables.min");
                cssFilesList.add("Responsive-2.2.0/css/responsive.dataTables.min");
@@ -66,6 +68,13 @@ public class Input extends HttpServlet {
                if (StringUtils.isNotBlank(code_id)) {
                     output_data.put("page_message", "Editing Software Project #" + code_id);
                     output_data.put("code_id", code_id);
+
+               } else if (StringUtils.isNotBlank(load_id)) {
+                    String version_type_display = StringUtils.equals(version_type, "Prev") ? "Previous" : "New";
+                    output_data.put("page_message", version_type_display + " Version of Project #" + load_id);
+                    output_data.put("load_id", load_id);
+                    output_data.put("version_type", version_type);
+
                } else {
                     output_data.put("page_message", "Submit a New Software Project");
                }

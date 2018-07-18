@@ -1,3 +1,8 @@
+/***********************************************************************/
+/***********************************************************************/
+/*********************VARIABLE DECLARATIONS*****************************/
+/***********************************************************************/
+/***********************************************************************/
 var metadata = new Metadata();
 var developer = new Developer();
 var sponsor_org = new SponsoringOrganization();
@@ -76,7 +81,11 @@ var related_identifiers_tbl_opts = {
     ]
 };
 
-
+/***********************************************************************/
+/***********************************************************************/
+/*********************FUNCTION DECLARATIONS*****************************/
+/***********************************************************************/
+/***********************************************************************/
 var toggleCollapsible = function () {
     $(this).prev().prev('a.input-accordion-title').trigger('click');
 };
@@ -202,6 +211,9 @@ var autopopulateFromRepository = function () {
     event.preventDefault();
 };
 
+var parseLoadIdErrorResponse = function (jqXhr, exception) {
+    parseErrorResponse(jqXhr, exception);
+};
 
 var parseErrorResponse = function parseErrorResponse(jqXhr, exception) {
     let x = 0;
@@ -271,6 +283,34 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
 
     hideCommonModalMessage();
 });
+
+//This function eventually calls parseAutopopulateResponse - but it first needs to remove some values 
+var parseLoadIdResponse = function (data) {
+    //TODO remove data that isn't needed
+    data.metadata.code_id = ''
+    data.metadata.workflow_status = '';
+    data.metadata.date_record_added = '';
+    data.metadata.date_record_updated = '';
+
+    //Get the "version_type", and from that, add a related identifier entry
+    var related_identifiers_list = data.metadata.related_identifiers;
+    if ($("#version_type").val() == 'Prev') {//If this is considered to be the previous version of the load id
+        related_identifiers_list.push({
+            identifier_type: 'DOI',
+            identifier_value: data.metadata.doi,
+            relation_type: 'IsPreviousVersionOf'
+        });
+    } else {//If this is considered to be the next or newer version of the load id
+        related_identifiers_list.push({
+            identifier_type: 'DOI',
+            identifier_value: data.metadata.doi,
+            relation_type: 'IsNewVersionOf'
+        });
+    }
+    //Set the list with the new entry as the list from the metadata
+    data.metadata.related_identifiers = related_identifiers_list;
+    parseSearchResponse(data);
+};
 
 var parseAutopopulateResponse = mobx.action("Parse Autopopulate Response", function parseAutopopulateResponse(responseData) {
     if (responseData !== undefined) {
@@ -450,18 +490,36 @@ var setPanelStatus = function setPanelStatus(panel, anchor, panelStatus) {
         setRequired("contact-lbl", panelStatus.hasRequired, true);
         setSuccess("contact-lbl", (successNotice && !panelStatus.errors));
     }
-}
+};
 
+var fillContactDataFromAccount = function () {
+    doAjax('GET', '/' + APP_NAME + '/user-data/get-current-user-data', function (data) {
+        //Contact Name
+        metadata.setValue("recipient_name", data.first_name + ' ' + data.last_name);
+        //Contact Email
+        metadata.setValue("recipient_email", data.email);
+        //Contact Organization
+        if (data.site != 'CONTR') {
+            metadata.setValue("recipient_org", data.site);
+        }
+    }, null, function (xhr) {
+    });
+};
 
+/***********************************************************************/
+/***********************************************************************/
+/************************MOB X DECLARATIONS*****************************/
+/***********************************************************************/
+/***********************************************************************/
 /*********************
  FORM (action)
  *********************/
 mobx.autorun("Allow Save", function () {
-    if (form.allowSave)
+    if (form.allowSave) {
         $("#input-save-btn").show();
-    else
+    } else {
         $("#input-save-btn").hide();
-
+    }
     $("#doi").prop("disabled", !form.allowSave && metadata.getValue("doi"));
 
     //mobx.whyRun();
@@ -1139,9 +1197,11 @@ mobx.autorun("Announce Button", function () {
 
 
 
-/*********************
- MODALS
- *********************/
+/***********************************************************************/
+/***********************************************************************/
+/************************MODAL DECLARATIONS*****************************/
+/***********************************************************************/
+/***********************************************************************/
 //Makes it to where if you close a modal, any new items added are removed, based on an attribute in the option field
 var clearChosenList = function (list_id) {
     $('#' + list_id + ' option[data-iscustom="true"]').remove();
@@ -1394,14 +1454,15 @@ var clearModal = mobx.action("Clear Modal", function (event) {
 var modalToMetadataProperty = function (modal) {
     var matadata_property = modal;
 
-    if (modal == "sponsoring-orgs")
+    if (modal == "sponsoring-orgs") {
         matadata_property = "sponsoring_organizations";
-    else if (modal == "research-orgs")
+    } else if (modal == "research-orgs") {
         matadata_property = "research_organizations";
-    else if (modal == "contributor-orgs")
+    } else if (modal == "contributor-orgs") {
         matadata_property = "contributing_organizations";
-    else if (modal == "related-identifiers")
+    } else if (modal == "related-identifiers") {
         matadata_property = "related_identifiers";
+    }
 
     return matadata_property;
 };
@@ -1528,6 +1589,11 @@ var FILE_UPLOAD_CONFIG = {url: 'someurl',
     }
 };
 
+/***********************************************************************/
+/***********************************************************************/
+/****************************DOCUMENT READY*****************************/
+/***********************************************************************/
+/***********************************************************************/
 $(document).ready(mobx.action("Document Ready", function () {
     //Above all else, make sure we're allowed to be here
     checkIsAuthenticated();
@@ -1558,6 +1624,7 @@ $(document).ready(mobx.action("Document Ready", function () {
 
     // If editing, load the data from server.
     var code_id = $("#code_id").val();
+    var load_id = $("#load_id").val();
     if (code_id) {
         setCommonModalMessage({
             title: 'Loading Projects',
@@ -1568,6 +1635,18 @@ $(document).ready(mobx.action("Document Ready", function () {
         });
         showCommonModalMessage();
         doAuthenticatedAjax('GET', API_BASE + "metadata/" + code_id, parseSearchResponse, undefined, parseErrorResponse);
+    } else if (load_id) {
+        setCommonModalMessage({
+            title: 'Loading Projects',
+            show_loader: true,
+            message_type: MESSAGE_TYPE_REGULAR,
+            content: "<br/>Loading data from project #" + load_id,
+            contentClasses: ['center-text'], showClose: false
+        });
+        showCommonModalMessage();
+        doAuthenticatedAjax('GET', API_BASE + "metadata/" + load_id, parseLoadIdResponse, undefined, parseLoadIdErrorResponse);
+        metadata.setValue("software_type", $("#software_type").val());
+        $("#input-save-btn").show();
     } else {
         // set software type
         metadata.setValue("software_type", $("#software_type").val());
@@ -1699,7 +1778,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     var dropzone = $("#file-upload-dropzone").dropzone(FILE_UPLOAD_CONFIG);
     // bind removal event
     $("#delete-uploaded-file-btn").on('click', function () {
-        removeFileUploadInfo()
+        removeFileUploadInfo();
     });
 
     // form buttons
@@ -1721,26 +1800,9 @@ $(document).ready(mobx.action("Document Ready", function () {
         $('#input-approve-btn').show();
     }
 
-
-    // if this is the announce or approve page, we're going to open all of the panels
-    if ($('#page').val() == 'announce' || $('#page').val() == 'approve') {
-        //$('.panel-collapse:not(".in")').collapse('show');
-    }
-    if ($('#page').val() == 'submit' || $('#page').val() == 'announce') {
-        $("#autofill-contact-info").on('click', mobx.action("Fill Contact Data", function () {
-            doAjax('GET', '/' + APP_NAME + '/user-data/get-current-user-data', function (data) {
-                //Contact Name
-                metadata.setValue("recipient_name", data.first_name + ' ' + data.last_name);
-                //Contact Email
-                metadata.setValue("recipient_email", data.email);
-                //Contact Organization
-                if (data.site != 'CONTR') {
-                    metadata.setValue("recipient_org", data.site);
-                }
-            }, null, function (xhr) {
-            });
-        }));
-
+    //Assign functionality to the Auto Fill Contact Button
+    if (page_val == 'submit' || page_val == 'announce') {
+        $("#autofill-contact-info").on('click', mobx.action("Fill Contact Data", fillContactDataFromAccount));
     } else {
         $("#autofill-contact-info").hide();
     }

@@ -38,16 +38,7 @@ var projects_data_table_opts = {
         {name: 'code_id', data: 'code_id', width: '88px', className: 'text-center'},
         {name: 'software_title', data: 'software_title'},
         {name: 'workflow_status', data: 'workflow_status', className: 'text-center'},
-        {render: function (data, type, row) {
-                var btn_markup = '';
 
-                if (row.workflow_status && row.workflow_status_value != 'Saved') {
-                    btn_markup = '<a href="/' + APP_NAME + '/submit?load_id=' + row.code_id
-                            + '" class="pure-button button-new-version btn-sm white "><span class="fa fa-code-fork"></span> New Version?</a>';
-                }
-                return btn_markup;
-
-            }, width: '13%', className: 'text-center', orderable:false},
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/submit?code_id=' + row.code_id
                         + '" class="pure-button button-success btn-sm white "><span class="fa fa-pencil"></span> Update Metadata</a>';
@@ -56,6 +47,17 @@ var projects_data_table_opts = {
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/announce?code_id=' + row.code_id
                         + '" class="pure-button pure-button-primary btn-sm white"><span class="fa fa-pencil"></span> Announce to E-Link</a>';
+
+            }, width: '13%', className: 'text-center', orderable: false},
+        {render: function (data, type, row) {
+                var btn_markup = '';
+                if (row.workflow_status && row.workflow_status_value != 'Saved') {
+                    btn_markup = '<a href="/' + APP_NAME + '/submit?load_id=' + row.code_id + '&software_type=' + row.software_type + '&version_type=New'
+                            + '" class="pure-button button-new-version btn-sm white "><span class="fa fa-code-fork"></span> New</a>&nbsp;&nbsp;'
+                            + '<a href="/' + APP_NAME + '/submit?load_id=' + row.code_id + '&software_type=' + row.software_type + '&version_type=Prev'
+                            + '" class="pure-button button-new-version btn-sm white "><span class="fa fa-code-fork"></span> Prev</a>';
+                }
+                return btn_markup;
 
             }, width: '13%', className: 'text-center', orderable: false}
     ]
@@ -307,11 +309,24 @@ var parseProjectsPageData = function (data) {
             workflow_value = '<span class="datatable-red-status">' + workflow_value + '</span><br><span class="datatable-red-status datatable-pending-suffix">pending approval</span>';
 
         }
+
+        //Software Type
+        var software_type = item.software_type;
+        switch (software_type) {
+            case 'B':
+                software_type = 'Business';
+                break;
+            case 'S':
+                software_type = 'Scientific';
+                break;
+        }
+
         new_data.push({
             code_id: item.code_id ? item.code_id : '',
             software_title: item.software_title ? item.software_title : '',
             workflow_status: workflow_value,
-            workflow_status_value: item.workflow_status
+            workflow_status_value: item.workflow_status,
+            software_type: software_type
         });
     });
     var projects_table = $("#projects-datatable").DataTable(projects_data_table_opts);
