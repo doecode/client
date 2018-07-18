@@ -117,7 +117,7 @@ public class UserFunctions {
           if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, session_timeout)) {
                user_data.put("session_timeout", LocalDateTime.now().plus(Init.SESSION_TIMEOUT_MINUTES, ChronoUnit.MINUTES).format(SESSION_TIMEOUT_FORMAT));
           }
-          
+
           return makeUserCookie(user_data);
      }
 
@@ -248,5 +248,12 @@ public class UserFunctions {
           return_data.put("has_already_requested", hasAlreadyRequested);
 
           return return_data;
+     }
+
+     public static boolean isCurrentlyLoggedInUserAnAdmin(HttpServletRequest request) {
+          boolean is_admin = false;
+          ObjectNode current_user_data = getUserDataFromCookie(request);
+          is_admin = JsonUtils.getBoolean(current_user_data, "has_osti_role", false);
+          return is_admin;
      }
 }

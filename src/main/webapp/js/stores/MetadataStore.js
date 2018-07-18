@@ -29,6 +29,7 @@ var _metadata = mobx.observable({
     "country_of_origin": 'United States',
     "release_date": '',
     "keywords": '',
+    "administrative_keywords": '',
     "site_accession_number": '',
     "other_special_requirements": '',
     "licenses": [],
@@ -55,9 +56,9 @@ var _metadataInfoSchema = mobx.observable({
     "file_name": {required: "", label: "Upload Source Code", completed: false, ever_completed: false, validations: [], panel: "", error: ''},
     "software_title": {required: "sub", label: "Software Title", completed: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},
     "description": {required: "sub", label: "Description/Abstract", completed: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},
-    "programming_languages":{required: "", label: "Programming Languages", completed: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},
-    "version_number":{required: "", label: "Version Number", completed: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},
-    "documentation_url":{required: "", label: "Documentation URL", completed: false, ever_completed: false, validations: ["url"], panel: "Product Description", error: ''},
+    "programming_languages": {required: "", label: "Programming Languages", completed: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},
+    "version_number": {required: "", label: "Version Number", completed: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},
+    "documentation_url": {required: "", label: "Documentation URL", completed: false, ever_completed: false, validations: ["url"], panel: "Product Description", error: ''},
     "licenses": {required: "sub", label: "Licenses", completed: false, hasError: false, ever_completed: false, validations: [], panel: "Product Description", error: ''},
     "proprietary_url": {required: "", label: "License URL", completed: false, hasError: false, ever_completed: false, validations: ["url"], panel: "", error: ''},
     "developers": {required: "sub", label: "Developers", completed: false, hasError: false, ever_completed: false, validations: ["developers"], panel: "Developers", error: ''},
@@ -71,6 +72,7 @@ var _metadataInfoSchema = mobx.observable({
     "acronym": {required: "", completed: false, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
     "country_of_origin": {required: "announ", label: "Country of Origin", completed: true, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
     "keywords": {required: "", completed: false, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
+    "administrative_keywords": {required: "", completed: false, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
     "site_accession_number": {required: "", completed: false, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
     "other_special_requirements": {required: "", completed: false, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
     "related_identifiers": {required: "", completed: false, hasError: false, ever_completed: false, validations: [], panel: "Identifiers", error: ''},
@@ -721,21 +723,55 @@ var _userSchema = mobx.observable({
     "confirm_password": {required: true, completed: false, validations: ["PWMatch"], error: ''}
 });
 
-  Object.defineProperty(MetadataStore, "metadata", {get: function() {return _metadata;}});
-  Object.defineProperty(MetadataStore, "metadataInfoSchema", {get: function() {return _metadataInfoSchema;}});
-  Object.defineProperty(MetadataStore, "developer", {get: function() {return _developer;}});
-  Object.defineProperty(MetadataStore, "developerInfoSchema", {get: function() {return _developerInfoSchema;}});
-  Object.defineProperty(MetadataStore, "contributor", {get: function() {return _contributor;}});
-  Object.defineProperty(MetadataStore, "contributorInfoSchema", {get: function() {return _contributorInfoSchema;}});
-  Object.defineProperty(MetadataStore, "sponsoringOrganization", {get: function() {return _sponsoringOrganization;}});
-  Object.defineProperty(MetadataStore, "sponsoringOrganizationInfoSchema", {get: function() {return _sponsoringOrganizationInfoSchema;}});
-  Object.defineProperty(MetadataStore, "researchOrganization", {get: function() {return _researchOrganization;}});
-  Object.defineProperty(MetadataStore, "researchOrganizationInfoSchema", {get: function() {return _researchOrganizationInfoSchema;}});
-  Object.defineProperty(MetadataStore, "contributingOrganization", {get: function() {return _contributingOrganization;}});
-  Object.defineProperty(MetadataStore, "contributingOrganizationInfoSchema", {get: function() {return _contributingOrganizationInfoSchema;}});
-  Object.defineProperty(MetadataStore, "relatedIdentifier", {get: function() {return _relatedIdentifier;}});
-  Object.defineProperty(MetadataStore, "relatedIdentifierInfoSchema", {get: function() {return _relatedIdentifierInfoSchema;}});
-  Object.defineProperty(MetadataStore, "user", {get: function() {return _user;}});
-  Object.defineProperty(MetadataStore, "userSchema", {get: function() {return _userSchema;}});
-  Object.defineProperty(MetadataStore, "panelStatus", {get: function() {return _panelStatus;}});
+Object.defineProperty(MetadataStore, "metadata", {get: function () {
+        return _metadata;
+    }});
+Object.defineProperty(MetadataStore, "metadataInfoSchema", {get: function () {
+        return _metadataInfoSchema;
+    }});
+Object.defineProperty(MetadataStore, "developer", {get: function () {
+        return _developer;
+    }});
+Object.defineProperty(MetadataStore, "developerInfoSchema", {get: function () {
+        return _developerInfoSchema;
+    }});
+Object.defineProperty(MetadataStore, "contributor", {get: function () {
+        return _contributor;
+    }});
+Object.defineProperty(MetadataStore, "contributorInfoSchema", {get: function () {
+        return _contributorInfoSchema;
+    }});
+Object.defineProperty(MetadataStore, "sponsoringOrganization", {get: function () {
+        return _sponsoringOrganization;
+    }});
+Object.defineProperty(MetadataStore, "sponsoringOrganizationInfoSchema", {get: function () {
+        return _sponsoringOrganizationInfoSchema;
+    }});
+Object.defineProperty(MetadataStore, "researchOrganization", {get: function () {
+        return _researchOrganization;
+    }});
+Object.defineProperty(MetadataStore, "researchOrganizationInfoSchema", {get: function () {
+        return _researchOrganizationInfoSchema;
+    }});
+Object.defineProperty(MetadataStore, "contributingOrganization", {get: function () {
+        return _contributingOrganization;
+    }});
+Object.defineProperty(MetadataStore, "contributingOrganizationInfoSchema", {get: function () {
+        return _contributingOrganizationInfoSchema;
+    }});
+Object.defineProperty(MetadataStore, "relatedIdentifier", {get: function () {
+        return _relatedIdentifier;
+    }});
+Object.defineProperty(MetadataStore, "relatedIdentifierInfoSchema", {get: function () {
+        return _relatedIdentifierInfoSchema;
+    }});
+Object.defineProperty(MetadataStore, "user", {get: function () {
+        return _user;
+    }});
+Object.defineProperty(MetadataStore, "userSchema", {get: function () {
+        return _userSchema;
+    }});
+Object.defineProperty(MetadataStore, "panelStatus", {get: function () {
+        return _panelStatus;
+    }});
 

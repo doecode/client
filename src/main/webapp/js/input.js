@@ -246,9 +246,9 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
 
     // if old record that's not updated, set to default
     var software_type_id = metadata.getValue("software_type");
-    if (!software_type_id)
+    if (!software_type_id) {
         metadata.setValue("software_type", $("#software_type").val());
-
+    }
     // if CO project, we need to store original repo link, in case they change type
     form.co_repo = "";
     form.last_filename = "";
@@ -273,14 +273,13 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     const id = doi.substr(doi.lastIndexOf('/') + 1, doi.length - 1);
     const infix = doi.substr(doi.indexOf('/') + 1, doi.lastIndexOf('/') - doi.indexOf('/') - 1);
 
-    if (prefix == "10.5072" || prefix == "10.11578")
+    if (prefix == "10.5072" || prefix == "10.11578") {
         metadata.setValue("doi_status", (form.allowSave ? "RES" : "REG"));
+    }
 
-    if (infix)
+    if (infix) {
         metadata.setValue("doi_infix", infix);
-
-
-
+    }
     hideCommonModalMessage();
 });
 
@@ -851,6 +850,12 @@ mobx.autorun("Country of Origin", function () {
 
 mobx.autorun("Keywords", function () {
     updateInputStyle(metadata, "keywords", "keywords-lbl", "keywords");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Administrative Keywords", function () {
+    updateInputStyle(metadata, "administrative_keywords", "administrative-keywords-lbl", "administrative-keywords");
 
     //mobx.whyRun();
 });
@@ -1707,6 +1712,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#short-title').on('input', {store: metadata, field: "acronym"}, inputChange);
     $('#country-of-origin').on('change', {store: metadata, field: "country_of_origin"}, inputChange);
     $('#keywords').on('input', {store: metadata, field: "keywords"}, inputChange);
+    $("#administrative-keywords").on('input', {store: metadata, field: 'administrative_keywords'}, inputChange);
     $('#other-special-requirements').on('input', {store: metadata, field: "other_special_requirements"}, inputChange);
     $('#site-accession-number').on('input', {store: metadata, field: "site_accession_number"}, inputChange);
 

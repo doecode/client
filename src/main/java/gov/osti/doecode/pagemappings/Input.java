@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.entity.DOECODEJson;
 import gov.osti.doecode.entity.InputFunctions;
-import gov.osti.doecode.entity.UserFunctions;
+import static gov.osti.doecode.entity.UserFunctions.isCurrentlyLoggedInUserAnAdmin;
 import gov.osti.doecode.listeners.DOECODEServletContextListener;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.JsonUtils;
@@ -31,7 +31,6 @@ public class Input extends HttpServlet {
           request.setCharacterEncoding("UTF-8");
           String URI = request.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
-          String site_url = Init.site_url;
           String page_title = "";
           String template = "";
           String current_page = "";
@@ -52,7 +51,7 @@ public class Input extends HttpServlet {
 
           //Some of the option steps, and whether or not we should hide them
           boolean show_optional_toggle = false;
-
+          
           if (remaining.equals("submit")) {
                String code_id = request.getParameter("code_id");
                String load_id = request.getParameter("load_id");
@@ -212,6 +211,7 @@ public class Input extends HttpServlet {
 
           //We'll set whether or not this is a collection of collapsible panels
           output_data.put("is_accordion", true);
+          output_data.put("is_logged_in_user_an_admin", isCurrentlyLoggedInUserAnAdmin(request));
 
           //get common data, like the classes needed for the header and footer
           output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, cssFilesList, request);

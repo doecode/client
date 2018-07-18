@@ -58,6 +58,22 @@
 			 </div>
 		    </div>
 		    <br/>
+		    {{#if is_logged_in_user_an_admin}}
+		    <div class="row">
+			 <div class="col-xs-12">
+			      <label id="administrative-keywords-lbl" class='control-label' for='administrative-keywords'>Administrative Keywords</label>{{> tooltips/AdministrativeKeywords}}
+			 </div>
+			 <div class="col-xs-12">
+			      <input type="text" class="pure-input-1 form-control" id="administrative-keywords"/>
+			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+			 </div>
+			 <div class="col-xs-12">
+			      <label id="administrative-keywords-lbl-error" class="control-label errorCheck">Problem</label>
+			 </div>
+		    </div>
+		    <br/>
+		    {{/if}}
 		    <div class="row">
 			 <div class="col-xs-12">
 			      <label id="other-special-requirements-lbl" class='control-label' for='other-special-requirements'>Other Special Requirements</label>{{> tooltips/OtherSpecialRequirements}}
