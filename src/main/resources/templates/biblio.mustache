@@ -321,12 +321,26 @@
 						       {{#if has_keywords}}
 						       <div class="biblio-row">
 							    <div class="col-xs-12">
-								 	 <dl class='row'>
+								 <dl class='row'>
 								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Keywords:</dt>
 								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{keywords}}</dd>
 								 </dl>
 							    </div>
 						       </div>
+						       {{/if}}
+						       
+						       {{#if user_data.has_osti_role}}
+						       <!--Administrative keywords-->
+						       {{#if has_administrative_keywords}}
+						       <div class="biblio-row">
+							    <div class="col-xs-12">
+								 <dl class='row'>
+								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Administrative Keywords:</dt>
+								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{administrative_keywords}}</dd>
+								 </dl>
+							    </div>
+						       </div>
+						       {{/if}}
 						       {{/if}}
 						  </div>
 					     </div>
