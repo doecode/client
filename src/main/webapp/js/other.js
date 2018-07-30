@@ -62,7 +62,7 @@ var post_gitlab_form_data = function () {
             || !submission_data.postal_code || !submission_data.country
             || !submission_data.email_address || !submission_data.phone_number
             || !submission_data.job_title || !submission_data.employment_designation
-            || submission_data.employment_designation == 'select'
+            || submission_data.employment_designation == ''
             || !conditional_required_fields_okay || (submission_data.employment_designation == 'Other' && !submission_data.employment_designation_other_val)) {
         $("#gitlab-signup-error-message").html('You must fill out all required fields');
     } else {
