@@ -39,6 +39,7 @@ var post_gitlab_form_data = function () {
                 mark_gitlab_form_field(self, SUCCESS_CONDITION);
 
             } else if (acceptable_vals.indexOf(associated_field_val) > -1 && !has_value) {//If this is a required field, and there is no value in it
+                console.log("error condition" + $(self).attr('id'));
                 mark_gitlab_form_field(self, ERROR_CONDITION);
                 conditional_required_fields_okay = false;
             } else {
@@ -49,6 +50,7 @@ var post_gitlab_form_data = function () {
             if (val) {
                 mark_gitlab_form_field(self, SUCCESS_CONDITION);
             } else if (!val && is_required) {
+                console.log("Error condition: " + $(self).attr('id'));
                 mark_gitlab_form_field(self, ERROR_CONDITION);
             } else {
                 mark_gitlab_form_field(self, BLANK_CONDITION);

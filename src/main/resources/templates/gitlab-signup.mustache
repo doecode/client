@@ -36,6 +36,7 @@
 	  </div>
 
 	  <form method="POST" id="gitlab-signup-form" action="/${app_name}/gitlab-signup-result">
+	       <input type="hidden" id="token" name="token" value="{{gitlab_token}}"/>
 	       <div class='row'>
 		    <div class="col-xs-12 gitlab-signup-input-row">
 			 <label class="control-label gitlab-signup-row-heading">Name</label>
@@ -188,7 +189,7 @@
 			 </div>
 		    </div>
 		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
-			 <input title='DOE Contract Number' placeholder='DOE Contract Number' id='contract-number' name="contract_number" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required" data-associatedfield='employment-designation' data-associatedvalues='DOE Federal Employee,DOE Sub-Contractor' type="text">
+			 <input title='DOE Contract Number' placeholder='DOE Contract Number' id='contract-number' name="contract_number" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required" data-associatedfield='employment-designation' data-associatedvalues='DOE Prime Contractor,DOE Sub-Contractor' type="text">
 			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
 			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 			 <div>
@@ -196,7 +197,7 @@
 			 </div>
 		    </div>
 		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
-			 <input title='Contracting Organization' placeholder='Contract Organization' id='contracting-organization' name='contracting_organization' class='pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required' data-associatedfield='employment-designation' data-associatedvalues='DOE Federal Employee,DOE Sub-Contractor' type='text'/>
+			 <input title='Contracting Organization' placeholder='Contract Organization' id='contracting-organization' name='contracting_organization' class='pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required' data-associatedfield='employment-designation' data-associatedvalues='DOE Prime Contractor,DOE Sub-Contractor' type='text'/>
 			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
 			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
 			 <div>

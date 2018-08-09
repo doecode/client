@@ -14,6 +14,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class Other extends HttpServlet {
@@ -24,6 +26,7 @@ public class Other extends HttpServlet {
           String URI = request.getRequestURI();
           String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
 
+          HttpSession session = request.getSession(true);
           String page_title = "";
           String template = "";
           String current_page = "";
@@ -32,15 +35,19 @@ public class Other extends HttpServlet {
           ServletContext context = getServletContext();
           switch (remaining) {
                case "gitlab-signup":
+                    String gitlab_token = RandomStringUtils.randomAscii(30);
+                    session.setAttribute("gitlab-token", gitlab_token);
                     page_title = "DOECODE: Gitlab Signup";
                     template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP;
                     output_data = OtherFunctions.getOtherLists(context);
                     output_data.put("recaptcha_sitekey", context.getInitParameter("recaptcha_sitekey"));
+                    output_data.put("gitlab_token", gitlab_token);
                     break;
                case "gitlab-signup-result":
                     page_title = "DOECODE: DOE CODE Repositories Services Access Request";
                     template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP_RESULT;
                     output_data = OtherFunctions.handleGitlabSubmissionForm(request);
+                    session.removeAttribute("gitlab-token");
                     break;
           }
 
