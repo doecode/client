@@ -66,11 +66,17 @@ public class OtherFunctions {
           boolean all_valid = true;
           //Check contract number stuff
           String designation = request.getParameter("employment_designation");
+          
           //If the designation is one of the values that requires a contract number and contracting organization, we'll have to check to make sure we got those values
           if (StringUtils.equals(designation, "DOE Federal Employee") || StringUtils.equals(designation, "DOE Federal Employee")
                   && (StringUtils.isBlank("contracting_organization") || StringUtils.isBlank("contract_number"))) {
                all_valid = false;
           }
+          
+          //Make sure the token is correct
+          String request_token = request.getParameter("token"); //Get the token just sent
+          String session_token = request.getSession(true).getAttribute("gitlab-token").toString();
+          all_valid = StringUtils.isNotBlank(session_token) && StringUtils.equals(session_token, request_token);
 
           return all_valid;
      }
@@ -177,10 +183,10 @@ public class OtherFunctions {
           email_message.append(JsonUtils.getString(request_data, "job_title", ""));
           email_message.append(", ");
           //Employment Designation
-          String employment_designation = JsonUtils.getString(request_data, "employment_designation","");
+          String employment_designation = JsonUtils.getString(request_data, "employment_designation", "");
           email_message.append(employment_designation);
-          if(StringUtils.isNotBlank(employment_designation) && StringUtils.equals(employment_designation, "Other")){
-               email_message.append(" (").append(JsonUtils.getString(request_data,"employment_designation_other_value","")).append(")");
+          if (StringUtils.isNotBlank(employment_designation) && StringUtils.equals(employment_designation, "Other")) {
+               email_message.append(" (").append(JsonUtils.getString(request_data, "employment_designation_other_value", "")).append(")");
           }
 
           /*Contract Number/Organization*/
