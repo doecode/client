@@ -2,6 +2,20 @@
 <input type="hidden" id="code-id" value="{{code_id}}"/>
 <input type='hidden' id='confirmation-page-identifier'/>
 <input type='hidden' id='availabilities-list-json' value='{{availabilities_list_json}}'/>
+<style type="text/css">
+     #confirmation-metadata-container > tbody > tr:nth-of-type(2n+2){
+	 background-color : #e6e6e6;
+     }
+     #confirmation-metadata-container > tbody > tr td{
+	 border-top:none;
+     }
+     #confirmation-metadata-container > tbody > tr > td:first-child{
+	 font-weight:bold;
+     }
+     #confirmation-metadata-container > tbody > tr > td:nth-child(2) > a{
+	 word-break: break-all;
+     }
+</style>
 <div class="row not-so-wide-row">
      <div class='col-md-3'></div>
      <div class='col-md-6 col-xs-12'>
@@ -49,8 +63,11 @@
           <br/>
           <div class='row static-content'>
 	       <div class='col-xs-12'>
-		    <dl class="row confirmation-page-metadata" id='confirmation-metadata-container' style='display:none;'>
-		    </dl>
+		    <table class="table table-striped" id='confirmation-metadata-container' style='display:none;'>
+			 <tbody>
+
+			 </tbody>
+		    </table>
 	       </div>
           </div>
      </div>

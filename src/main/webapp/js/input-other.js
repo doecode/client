@@ -221,9 +221,9 @@ var parseConfirmPageData = function (data) {
     //Go through, put all of the things into an html string
     var content_string = "";
     metadata_list.forEach(function (item) {
-        content_string += ('<dt class="col-xs-4">' + item.title + '</dt><dd class="col-xs-8">' + item.content + '</dd>');
+        content_string += ('<tr><td>' + item.title + '</td><td>' + item.content + '</td></tr>');
     });
-    $("#confirmation-metadata-container").html(content_string);
+    $("#confirmation-metadata-container > tbody").html(content_string);
 
     $("#confirmation-metadata-container").show();
 };
