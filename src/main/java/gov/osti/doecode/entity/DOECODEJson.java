@@ -9,6 +9,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.cert.X509Certificate;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import javax.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -175,7 +180,7 @@ public class DOECODEJson {
           return on;
      }
 
-     public final void UPDATE_REMOTE_LISTS(ServletContext context) throws Exception{
+     public final void UPDATE_REMOTE_LISTS(ServletContext context) throws Exception {
           String authorityapi_base_url = context.getInitParameter("authority_base_url");
 
           //Countries
@@ -251,6 +256,24 @@ public class DOECODEJson {
      private ArrayNode getItemFromElinkAuthority(String api_url) {
           ArrayNode arr = new ArrayNode(JsonUtils.INSTANCE);
           try {
+               //Code added to handle situations where certificates aren't working correctly
+               TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+                    public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                         return null;
+                    }
+
+                    public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                    }
+
+                    public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                    }
+
+               }};
+               SSLContext sc = SSLContext.getInstance("SSL");
+               sc.init(null, trustAllCerts, new java.security.SecureRandom());
+               HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+               //Code added to handle situations where certificates aren't working correctly
+               
                StringBuilder result = new StringBuilder();
                URL url = new URL(api_url);
                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -328,8 +351,8 @@ public class DOECODEJson {
      public ArrayNode getRelationTypesList() {
           return this.relation_types_list;
      }
-     
-     public ArrayNode getProgrammingLanguagesList(){
+
+     public ArrayNode getProgrammingLanguagesList() {
           return this.programming_languages_list;
      }
 }

@@ -285,11 +285,14 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
 
 //This function eventually calls parseAutopopulateResponse - but it first needs to remove some values 
 var parseLoadIdResponse = function (data) {
-    //TODO remove data that isn't needed
     data.metadata.code_id = ''
     data.metadata.workflow_status = '';
     data.metadata.date_record_added = '';
     data.metadata.date_record_updated = '';
+    data.metadata.file_name = '';
+    data.metadata.repository_link = '';
+    data.metadata.landing_page = '';
+    data.metadata.doi = '';
 
     //Get the "version_type", and from that, add a related identifier entry
     var related_identifiers_list = data.metadata.related_identifiers;
