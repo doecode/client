@@ -406,7 +406,7 @@ var approve = function approve() {
         title: 'Approving',
         show_loader: true,
         message_type: MESSAGE_TYPE_REGULAR,
-        content: "<br/>Approving data for " + msg + ".",
+        content: "<br/>Approving data for " + msg + ". Please wait, this may take a few minutes.",
         contentClasses: ['center-text'], showClose: false
     });
     showCommonModalMessage();
