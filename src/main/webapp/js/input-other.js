@@ -51,7 +51,7 @@ var projects_data_table_opts = {
             }, width: '13%', className: 'text-center', orderable: false},
         {render: function (data, type, row) {
                 var btn_markup = '';
-                if (row.workflow_status && row.workflow_status_value != 'Saved') {
+                if (row.workflow_status && row.workflow_status_value != 'Saved' && row.doi) {
                     btn_markup = '<a href="/' + APP_NAME + '/submit?load_id=' + row.code_id + '&software_type=' + row.software_type + '&version_type=New'
                             + '" class="pure-button button-new-version btn-sm white "><span class="fa fa-code-fork"></span> New</a>&nbsp;&nbsp;'
                             + '<a href="/' + APP_NAME + '/submit?load_id=' + row.code_id + '&software_type=' + row.software_type + '&version_type=Prev'
@@ -326,7 +326,8 @@ var parseProjectsPageData = function (data) {
             software_title: item.software_title ? item.software_title : '',
             workflow_status: workflow_value,
             workflow_status_value: item.workflow_status,
-            software_type: software_type
+            software_type: software_type,
+            doi: item.doi
         });
     });
     var projects_table = $("#projects-datatable").DataTable(projects_data_table_opts);
