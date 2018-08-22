@@ -38,25 +38,23 @@
 
 		    <!--Versions-->
 		    {{#if biblio_sidebar.has_new_version}}
-		    <br/>
-		    <br/>
 		    <div class="link-content">
-			 <span class="biblio-sidebar-secondary-subtitle">New Versions:</span>
+			 <span class="biblio-sidebar-secondary-subtitle">New {{#if more_than_one_new}}Versions{{else}}Version{{/if}}:</span>
 			 <br/>
 			 {{#each biblio_sidebar.new_version}}
-			 <a title='New Version of #{{biblio_sidebar.code_id}}' href='{{.}}'>{{.}}</a>
+			 <a title='New Version of #{{biblio_sidebar.code_id}}' href='https://dx.doi.org/{{.}}'>{{.}}</a>
+			 <br/>
 			 {{/each}}
 		    </div>
 		    {{/if}}
 
 		    {{#if biblio_sidebar.has_prev_version}}
-		    <br/>
-		    <br/>
 		    <div class="link-content">
-			 <span class="biblio-sidebar-secondary-subtitle">Previous Versions:</span>
+			 <span class="biblio-sidebar-secondary-subtitle">Previous {{#if more_than_one_previous}}Versions{{else}}Version{{/if}}:</span>
 			 <br/>
 			 {{#each biblio_sidebar.prev_version}}
-			 <a title='Previous Version of #{{biblio_sidebar.code_id}}' href='{{.}}'>{{.}}</a>
+			 <a title='Previous Version of #{{biblio_sidebar.code_id}}' href='https://dx.doi.org/{{.}}'>{{.}}</a>
+			 <br/>
 			 {{/each}}
 		    </div>
 		    {{/if}}

@@ -736,8 +736,10 @@ public class SearchFunctions {
                }
                return_data.put("has_new_version", new_version.size() > 0);
                return_data.put("new_version", new_version);
+               return_data.put("more_than_one_new", new_version.size() > 1);
                return_data.put("has_prev_version", prev_version.size() > 0);
                return_data.put("prev_version", prev_version);
+               return_data.put("more_than_one_previous", prev_version.size() > 0);
           }
           return return_data;
      }
@@ -1261,9 +1263,9 @@ public class SearchFunctions {
                /*Keywords*/
                return_data.put("keywords", JsonUtils.getString(biblio_data, "keywords", ""));
                return_data.put("has_keywords", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "keywords", "")));
-               
+
                /*Administrative Keywords*/
-               return_data.put("administrative_keywords", JsonUtils.getString(biblio_data,"administrative_keywords", ""));
+               return_data.put("administrative_keywords", JsonUtils.getString(biblio_data, "administrative_keywords", ""));
                return_data.put("has_administrative_keywords", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "administrative_keywords", "")));
 
                /*Citation formats*/

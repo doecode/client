@@ -292,7 +292,6 @@ var parseLoadIdResponse = function (data) {
     data.metadata.file_name = '';
     data.metadata.repository_link = '';
     data.metadata.landing_page = '';
-    data.metadata.doi = '';
 
     //Get the "version_type", and from that, add a related identifier entry
     var related_identifiers_list = data.metadata.related_identifiers;
@@ -311,6 +310,8 @@ var parseLoadIdResponse = function (data) {
     }
     //Set the list with the new entry as the list from the metadata
     data.metadata.related_identifiers = related_identifiers_list;
+    data.metadata.doi = '';
+
     parseSearchResponse(data);
 };
 
