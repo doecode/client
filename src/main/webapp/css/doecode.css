@@ -687,6 +687,10 @@ label {
     font-size: 16px;
 }
 
+.small-help-question-mark{
+    font-size:12px !important;
+}
+
 .fake-h2 {
     font-size: 24px;
 }
