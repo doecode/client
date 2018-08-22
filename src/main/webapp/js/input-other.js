@@ -59,7 +59,7 @@ var projects_data_table_opts = {
                 }
                 return btn_markup;
 
-            }, width: '13%', className: 'text-center', orderable: false}
+            }, width: '20%', className: 'text-center', orderable: false}
     ]
 };
 
