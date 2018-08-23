@@ -39,7 +39,6 @@ public class Input extends HttpServlet {
           ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
           ArrayNode cssFilesList = new ArrayNode(JsonUtils.INSTANCE);
           boolean is_inputjs = false;
-          boolean is_accordion = false;
 
           //Software type param
           String software_type_param = request.getParameter("software_type");
@@ -50,8 +49,8 @@ public class Input extends HttpServlet {
           }
 
           //Some of the option steps, and whether or not we should hide them
-          boolean show_optional_toggle = false;
-          
+          boolean show_optional_toggle = true;
+
           if (remaining.equals("submit")) {
                String code_id = request.getParameter("code_id");
                String load_id = request.getParameter("load_id");
@@ -73,20 +72,18 @@ public class Input extends HttpServlet {
                     output_data.put("page_message", version_type_display + " Version of Project #" + load_id);
                     output_data.put("load_id", load_id);
                     output_data.put("version_type", version_type);
+                    show_optional_toggle = false;
 
                } else {
                     output_data.put("page_message", "Submit a New Software Project");
+
                }
 
                output_data.put("programming_languages_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
                output_data.put("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
 
-               //Toggle everything to not be shown, since we're on the submit page
-               show_optional_toggle = true;
-
                current_page = TemplateUtils.PAGE_PROJECTS;
                is_inputjs = true;
-               is_accordion = true;
 
           } else if (remaining.startsWith("announce")) {
                String code_id = request.getParameter("code_id");
