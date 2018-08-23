@@ -294,7 +294,7 @@ var parseLoadIdResponse = function (data) {
     data.metadata.landing_page = '';
 
     //Get the "version_type", and from that, add a related identifier entry
-    var related_identifiers_list = data.metadata.related_identifiers;
+    var related_identifiers_list = [];
     if ($("#version_type").val() == 'Prev') {//If this is considered to be the previous version of the load id
         related_identifiers_list.push({
             identifier_type: 'DOI',
