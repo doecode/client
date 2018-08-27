@@ -740,7 +740,7 @@ public class SearchFunctions {
                return_data.put("more_than_one_new", new_versions.size() > 1);
                return_data.put("has_prev_version", prev_versions.size() > 0);
                return_data.put("prev_version", prev_versions);
-               return_data.put("more_than_one_previous", prev_versions.size() > 0);
+               return_data.put("more_than_one_previous", prev_versions.size() > 1);
           }
           return return_data;
      }
