@@ -715,8 +715,9 @@ public class SearchFunctions {
           //Go through the related identifiers list. If we can find any DOI's that are "IsNewVersionOf" or "IsPreviousVersionOf". If so, list them, and put them into the template
           ArrayNode related_identifiers = (ArrayNode) search_data.get("related_identifiers");
           if (null != related_identifiers && related_identifiers.size() > 0) {
-               ArrayNode new_version = new ArrayNode(JsonUtils.INSTANCE);
-               ArrayNode prev_version = new ArrayNode(JsonUtils.INSTANCE);
+               //The names of the arrays contents will be stored in are the inverse. So, anything in "IsNewVersionOf" will be stored in "prev_versions".
+               ArrayNode new_versions = new ArrayNode(JsonUtils.INSTANCE);
+               ArrayNode prev_versions = new ArrayNode(JsonUtils.INSTANCE);
 
                for (JsonNode j : related_identifiers) {
                     ObjectNode row = (ObjectNode) j;
@@ -726,20 +727,20 @@ public class SearchFunctions {
                          String identifier_value = JsonUtils.getString(row, "identifier_value", "");
                          switch (JsonUtils.getString(row, "relation_type", "")) {
                               case "IsNewVersionOf":
-                                   new_version.add(identifier_value);
+                                   prev_versions.add(identifier_value);
                                    break;
                               case "IsPreviousVersionOf":
-                                   prev_version.add(identifier_value);
+                                   new_versions.add(identifier_value);
                                    break;
                          }
                     }
                }
-               return_data.put("has_new_version", new_version.size() > 0);
-               return_data.put("new_version", new_version);
-               return_data.put("more_than_one_new", new_version.size() > 1);
-               return_data.put("has_prev_version", prev_version.size() > 0);
-               return_data.put("prev_version", prev_version);
-               return_data.put("more_than_one_previous", prev_version.size() > 0);
+               return_data.put("has_new_version", new_versions.size() > 0);
+               return_data.put("new_version", new_versions);
+               return_data.put("more_than_one_new", new_versions.size() > 1);
+               return_data.put("has_prev_version", prev_versions.size() > 0);
+               return_data.put("prev_version", prev_versions);
+               return_data.put("more_than_one_previous", prev_versions.size() > 0);
           }
           return return_data;
      }
