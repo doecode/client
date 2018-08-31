@@ -114,7 +114,7 @@ public class Input extends HttpServlet {
                cssFilesList.add("DataTables-1.10.16/css/jquery.dataTables.min");
                cssFilesList.add("Responsive-2.2.0/css/responsive.dataTables.min");
 
-               page_title = "Announce";
+               page_title = "Approve";
                template = TemplateUtils.TEMPLATE_INPUT_FORM;
                output_data.put("page", "approve");
                output_data.put("page_req_id", "announ");
