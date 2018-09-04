@@ -15,8 +15,8 @@
 	  <ul>
 	       <li><a title="What is DOE CODE?" href="/${app_name}/faq#what-is"><span class="faq-page-anchor">What is DOE CODE?</span></a></li>
 
-	       <li><a title="What does it mean for DOE CODE to be released in Alpha?" href="/${app_name}/faq#what-does-alpha">
-			 <span class="faq-page-anchor">What does it mean for DOE CODE to be released in Alpha?</span></a></li>
+	       <li><a title="What does it mean for DOE CODE to be released in Beta?" href="/${app_name}/faq#what-does-beta">
+			 <span class="faq-page-anchor">What does it mean for DOE CODE to be released in Beta?</span></a></li>
 	       <li>
 		    <a title="How is the DOE CODE software submission and search tool different from DOE CODE Github?" href="/${app_name}/faq#how-is-it-different">
 			 <span class="faq-page-anchor">How is the DOE CODE software submission and search tool different from&nbsp;<a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode">DOE CODE GitHub?</a></span>     
@@ -51,6 +51,12 @@
 
 	       <li><a title="What does it mean to announce business software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-announce-business-software-to-doe-code">
 			 <span class="faq-page-anchor">What does it mean to announce business software to DOE CODE?</span></a></li>  
+
+	       <li><a title="Can I add a new or previous version of software I've previously submitted or announced to DOE CODE?" href="/${app_name}/faq#can-i-add-new-or-previous-version-of-softare">
+			 <span class="faq-page-anchor">Can I add a new or previous version of software I've previously submitted or announced to DOE CODE?</span></a></li>  
+
+	       <li><a title="Does DOE CODE support the upload of container images as part of the submission/announcement process?" href="/${app_name}/faq#does-doe-code-support-upload-of-container-images">
+			 <span class="faq-page-anchor">Does DOE CODE support the upload of container images as part of the submission/announcement process?</span></a></li>  
 
 	       <li><a title="How do I announce CUI, OUO, or ECI software to OSTI" href="/${app_name}/faq#how-do-i-announce-cui-ouo-eci">
 			 <span class="faq-page-anchor">How do I announce CUI, OUO, or ECI software to OSTI?</span></a></li>
@@ -101,13 +107,11 @@
 	       </blockquote>
 	  </div>
 	  <div>
-	       <a name="what-does-alpha"></a><span class="faq-page-subtitle">What does it mean for DOE CODE to be released in Alpha?</span>
+	       <a name="what-does-beta"></a><span class="faq-page-subtitle">What does it mean for DOE CODE to be released in Beta?</span>
 	       <blockquote class="faq-page-blockquote">
 		    <p>
-			 In Alpha, DOE CODE supports submission of software projects, code repository services, and search and discovery of submitted software 
-			 projects. As development of DOE CODE continues toward Beta and Production releases, additional features and functionality will be included. 
-			 Future requirements will include support and archiving of additional repository types, automated alerting for software points of contact, 
-			 authentication using GitHub accounts, and more user profile features.
+			 In Beta, DOE CODE supports submission of software projects, code repository services, and search and discovery of submitted software 
+			 projects. As development of DOE CODE continues toward Production release, additional features and functionality will be included.
 		    </p>
 	       </blockquote>
 	  </div>
@@ -239,7 +243,7 @@
 			 </p>
 			 <p>
 			      In cases where a repository link from which OSTI can access and archive software is not available, the software itself should be submitted to OSTI along with associated metadata.
-			      For submission of limited availability software, please continue to utilize Announcement Notice 241.4 via <a href='https://www.osti.gov/elink/' target='_blank' rel="noopener noreferrer">E-Link</a>. Beta/Future versions of DOE CODE will address submission of 
+			      For submission of limited availability software, please continue to utilize Announcement Notice 241.4 via <a href='https://www.osti.gov/elink/' target='_blank' rel="noopener noreferrer">E-Link</a>. Future versions of DOE CODE will address submission of 
 			      limited availability software.
 			 </p>
 			 <br/>
@@ -501,15 +505,51 @@
 		    </div>
 	       </blockquote>
 	  </div>
+
+	  <div>
+	       <a name="can-i-add-new-or-previous-version-of-softare"></a><span class="faq-page-subtitle">Can I add a new or previous version of software I’ve already submitted or announced to DOE CODE?</span>
+	       <blockquote class="faq-page-blockquote">
+		    <div>
+			 <p>
+			      Yes. DOE CODE has the option to create a DOE CODE record that is a newer or previous version of any DOE CODE record you have already 
+			      submitted or announced.  This functionality can be found on the “Manage My Projects” page (see also, 
+			      <a title="Do I need an account" href="#do-i-need-account">Do I need an account to use DOE CODE?</a>).  
+			      By selecting either the "New" or "Prev" button associated with a record you will be taken to the submission form with most of the 
+			      metadata already filled.  Once you’ve submitted or announced this new record, DOE CODE will automatically add metadata to all 
+			      newer/previous records to reflect the appropriate relationship using the related Identifier fields.
+			 </p>
+			 For information regarding semantic versioning best practices, visit 
+			 <a title='Semver.org' target='_blank' rel='noopener noreferrer' href='https://semver.org'>https://semver.org</a>.
+		    </div>
+	       </blockquote>
+	  </div>
+	  <div>
+	       <a name="does-doe-code-support-upload-of-container-images"></a><span class="faq-page-subtitle">Does DOE CODE support the upload of container images as part of the submission/announcement process?</span>
+	       <blockquote class="faq-page-blockquote">
+		    <div>
+			 <p>
+			      Yes.  DOE CODE allows users to upload container images in the form of binary files. Currently 
+			      <a title='Docker' target='_blank' rel='noopener noreferrer' href='https://www.docker.com/'>Docker</a>, 
+			      <a title='Singularity' target='_blank' rel='noopener noreferrer' href='https://www.sylabs.io/'>Singularity</a>, and 
+			      <a title='Virtual Box' target='_blank' rel='noopener noreferrer' href='https://www.virtualbox.org/'>VirtualBox</a> 
+			      image files are supported.  If you have any issues uploading large container files, please reach out to 
+			      <a title="Email doecode@osti.gov" href="mailto:doecode@osti.gov">doecode@osti.gov</a>.
+			 </p>
+		    </div>
+	       </blockquote>
+	  </div>
+
 	  <div>
 	       <a name="how-do-i-announce-cui-ouo-eci"></a><span class="faq-page-subtitle">How do I announce CUI, OUO, or ECI software to OSTI?</span>
 	       <blockquote class="faq-page-blockquote">
 		    <div>
 			 <p>
-			      Announcement and discovery of Controlled Unclassified Information (CUI), including DOE Official Use Only (OUO) and Export Controlled 
-			      Information (ECI), are not included in the Beta version of DOE CODE. Future versions of DOE CODE will address submission of limited 
-			      availability software. Until then, please continue to utilize Announcement Notice 241.4 for submission of limited availability software. 
-			      If you are unsure of the software sensitivity, please work with your site's Dissemination Authority.
+			      The current version of DOE CODE is designed to support submission and announcement of DOE-funded unlimited availability software 
+			      (including closed source, proprietary software). Announcement and discovery of Controlled Unclassified Information (CUI), including 
+			      DOE Official Use Only (OUO) and Export Controlled Information (ECI), are not included in the current version of DOE CODE. 
+			      Future versions of DOE CODE will address submission of limited availability software. Until then, please continue to utilize 
+			      Announcement Notice 241.4 for submission of limited availability software. If you are unsure of the software sensitivity, 
+			      please work with your site's Dissemination Authority.
 			 </p>
 		    </div>
 	       </blockquote>
@@ -538,7 +578,7 @@
 		    <p>
 			 In cases where a Repository Link from which OSTI can access and archive software is not available, the software itself should be submitted to OSTI along with associated metadata.
 			 For submission of limited availability software, please continue to utilize Announcement Notice 241.4 via <a href="https://www.osti.gov/elink/" target="_blank" rel="noopener noreferrer">E-Link</a>. 
-			 Beta/Future versions of DOE CODE will address submission of 
+			 Future versions of DOE CODE will address submission of 
 			 limited availability software.
 		    </p>
 	       </blockquote>
@@ -597,7 +637,7 @@
 	       <a name="advanced-search"></a><span class="faq-page-subtitle">How do I use the Advanced Search?</span>
 	       <blockquote class="faq-page-blockquote">
 		    <div>
-			 The advanced search will allow you to perform more complex searches and retrieve more specific results, offering you a number of fields, 
+			 The advanced search will allow you to perform more complex searches and retrieve more specific results, offering you several of fields, 
 			 such as Title, Developer(s), or Release date to help you refine your search results.
 			 <br/>
 			 <br/>
