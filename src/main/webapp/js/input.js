@@ -424,6 +424,20 @@ var parseSaveResponse = mobx.action("Parse Receive Response", function parseSave
     }
 });
 
+var fillContactDataFromAccount = mobx.action("Fill Contact Data", function () {
+    doAjax('GET', '/' + APP_NAME + '/user-data/get-current-user-data', function (data) {
+        //Contact Name
+        metadata.setValue("recipient_name", data.first_name + ' ' + data.last_name);
+        //Contact Email
+        metadata.setValue("recipient_email", data.email);
+        //Contact Organization
+        if (data.site != 'CONTR') {
+            metadata.setValue("recipient_org", data.site);
+        }
+    }, null, function (xhr) {
+    });
+});
+
 
 var parseSubmitResponse = function parseSubmitResponse(data) {
     hideCommonModalMessage();
@@ -495,19 +509,6 @@ var setPanelStatus = function setPanelStatus(panel, anchor, panelStatus) {
     }
 };
 
-var fillContactDataFromAccount = function () {
-    doAjax('GET', '/' + APP_NAME + '/user-data/get-current-user-data', function (data) {
-        //Contact Name
-        metadata.setValue("recipient_name", data.first_name + ' ' + data.last_name);
-        //Contact Email
-        metadata.setValue("recipient_email", data.email);
-        //Contact Organization
-        if (data.site != 'CONTR') {
-            metadata.setValue("recipient_org", data.site);
-        }
-    }, null, function (xhr) {
-    });
-};
 
 /***********************************************************************/
 /***********************************************************************/
@@ -1812,7 +1813,7 @@ $(document).ready(mobx.action("Document Ready", function () {
 
     //Assign functionality to the Auto Fill Contact Button
     if (page_val == 'submit' || page_val == 'announce') {
-        $("#autofill-contact-info").on('click', mobx.action("Fill Contact Data", fillContactDataFromAccount));
+        $("#autofill-contact-info").on('click', fillContactDataFromAccount);
     } else {
         $("#autofill-contact-info").hide();
     }
