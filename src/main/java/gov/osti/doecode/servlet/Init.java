@@ -24,6 +24,7 @@ public class Init extends HttpServlet {
      public static String backend_api_url;
      public static String authority_api_base;
      public static String site_url;
+     public static String containers_dir;
 
      public static int SESSION_TIMEOUT_MINUTES;
 
@@ -58,7 +59,10 @@ public class Init extends HttpServlet {
           //Google analytics info
           google_analytics_id = context.getInitParameter("ga_id");
           google_analytics_domain = context.getInitParameter("ga_domain");
-          
+
+          //Set the file upload directory
+          containers_dir = context.getInitParameter("containers_dir");
+
           //Get the session timeout from the web.xml
           SESSION_TIMEOUT_MINUTES = Integer.parseInt(context.getInitParameter("session_timeout"));
 

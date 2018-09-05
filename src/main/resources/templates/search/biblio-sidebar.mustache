@@ -51,8 +51,13 @@
 		    </div>
 		    {{/if}}
 
-
-
+		    {{#if biblio_sidebar.has_file_to_download}}
+		    <!--Container Download-->
+		    <div class="link-content">
+			 Download:&nbsp;<a title='Download Container for {{biblio_sidebar.doi}}' href='/${app_name}/download-repository/container-download/{{biblio_sidebar.code_id}}' download='{{biblio_sidebar.file_name}}' rel="noopener noreferrer" class='biblio-sidebar-traditional-anchor'>Container</a>
+		    </div>
+		    {{/if}}
+		    
 		    <!--Documentation URL-->
 		    {{#if biblio_sidebar.has_documentation_url}}
 		    <div class='link-content'>

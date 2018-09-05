@@ -13,56 +13,74 @@
     </welcome-file-list>
     <!--Context Parameters-->
     <context-param>
+        <description>The back-facing URL to an instance of the doe code API. This is used in the java.</description>
         <param-name>api_backend_url</param-name>
         <param-value>${apiBackendURL}</param-value>
     </context-param>
     <context-param>
+        <description>The public-facing URL to an instance of the doe code API. Used in the javascript.</description>
         <param-name>api_url</param-name>
         <param-value>${apiURL}</param-value>
     </context-param>
     <context-param>
+        <description>The full (proxied) url for an instance of the site. Ends in a "/"</description>
         <param-name>site_url</param-name>
         <param-value>${siteURL}</param-value>
     </context-param>
     <context-param>
+        <description>The base URL from which certain data points can be retrieved, such as a list of sites, programming languages, etc.</description>
         <param-name>authority_base_url</param-name>
         <param-value>${authorityapiURL}</param-value>
     </context-param>
     <context-param>
+        <description>The integer value for "session timeout". Since this application doesn't use tomcat session timeouts, timeout is determined via cookie.</description>
         <param-name>session_timeout</param-name>
         <param-value>${session_timeout}</param-value>
     </context-param>
     <context-param>
+        <description>Name of the application. Used for prefixing to URL's and such. Separated here so you can rename the application with a build parameter.</description>
         <param-name>app_name</param-name>
         <param-value>${app_name}</param-value>
     </context-param>
     <context-param>
+        <description>The address a gitlab request is sent to</description>
         <param-name>gitlab_submit_email</param-name>
         <param-value>${gitlab_submit_email}</param-value>
     </context-param>
     <context-param>
+        <description>The address in the "from" field in the email sent when a user signs up for a gitlab account.</description>
         <param-name>gitlab_from_email</param-name>
         <param-value>${gitlab_from_email}</param-value>
     </context-param>
     <context-param>
+        <description>The smtp host used for sending emails from the client application.</description>
         <param-name>smtpHost</param-name>
         <param-value>${smtpHost}</param-value>
     </context-param>
     <context-param>
+        <description>The public key given to you when you sign up for reCaptcha. Shown on the front end.</description>
         <param-name>recaptcha_sitekey</param-name>
         <param-value>${gitlab_recaptcha_site_key}</param-value>
     </context-param>
     <context-param>
+        <description>The "secret key" given to you when you sign up for reCaptcha. Used to validate your requests to google's reCaptcha service. MUST NOT BE SHOWN TO USERS!</description>
         <param-name>recaptcha_secretkey</param-name>
         <param-value>${gitlab_recaptcha_secret_key}</param-value>
     </context-param>
     <context-param>
+        <description>The ID unique to your instance of google analytics.</description>
         <param-name>ga_id</param-name>
         <param-value>${google_analytics_id}</param-value>
     </context-param>
     <context-param>
+        <description>The google analytics domain. Will probably change based on whether you're in a development or production environment.</description>
         <param-name>ga_domain</param-name>
         <param-value>${google_analytics_domain}</param-value>
+    </context-param>
+    <context-param>
+        <description>The base directory that containers (such as .tar files) can be downloaded from.</description>
+        <param-name>containers_dir</param-name>
+        <param-value>${file.containers}</param-value>
     </context-param>
     <!--Servlet Context Listener-->
     <listener>
@@ -160,6 +178,15 @@
     <servlet-mapping>
         <servlet-name>Site</servlet-name>
         <url-pattern>/site-admin</url-pattern>
+    </servlet-mapping>
+    <!--Download servlet-->
+    <servlet>
+        <servlet-name>FileDownloadServlet</servlet-name>
+        <servlet-class>gov.osti.doecode.servlet.FileDownloadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FileDownloadServlet</servlet-name>
+        <url-pattern>/download-repository/container-download/*</url-pattern>
     </servlet-mapping>
     <!--500 pages, 404's, etc-->
     <servlet>
