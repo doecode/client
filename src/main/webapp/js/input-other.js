@@ -41,25 +41,25 @@ var projects_data_table_opts = {
 
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/submit?code_id=' + row.code_id
-                        + '" class="pure-button button-success btn-sm white "><span class="fa fa-pencil"></span> Update Metadata</a>';
+                        + '" class="pure-button button-success btn-sm white ">Update Metadata</a>';
 
-            }, width: '13%', className: 'text-center', orderable: false},
+            }, width: '12%', className: 'text-center', orderable: false},
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/announce?code_id=' + row.code_id
-                        + '" class="pure-button pure-button-primary btn-sm white"><span class="fa fa-pencil"></span> Announce to E-Link</a>';
+                        + '" class="pure-button pure-button-primary btn-sm white">Announce to E-Link</a>';
 
-            }, width: '13%', className: 'text-center', orderable: false},
+            }, width: '12%', className: 'text-center', orderable: false},
         {render: function (data, type, row) {
                 var btn_markup = '';
                 if (row.workflow_status && row.workflow_status_value != 'Saved' && row.doi) {
                     btn_markup = '<a href="/' + APP_NAME + '/submit?load_id=' + row.code_id + '&software_type=' + row.software_type + '&version_type=New'
-                            + '" class="pure-button button-new-version btn-sm white " title="New Version of ' + row.code_id + '"><span class="fa fa-code-fork"></span> New</a>&nbsp;&nbsp;'
+                            + '" class="pure-button button-new-version btn-sm white " title="New Version of ' + row.code_id + '">New</a>&nbsp;&nbsp;'
                             + '<a href="/' + APP_NAME + '/submit?load_id=' + row.code_id + '&software_type=' + row.software_type + '&version_type=Prev'
-                            + '" class="pure-button button-new-version btn-sm white " title="Previous Version of ' + row.code_id + '"><span class="fa fa-code-fork"></span> Prev</a>';
+                            + '" class="pure-button button-new-version btn-sm white " title="Previous Version of ' + row.code_id + '">Prev</a>';
                 }
                 return btn_markup;
 
-            }, width: '13%', className: 'text-center', orderable: false}
+            }, width: '15%', className: 'text-center', orderable: false}
     ]
 };
 
