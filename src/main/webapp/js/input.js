@@ -174,9 +174,9 @@ var updateDropzoneStyle = function (store, field, label, input, exclude_parenthe
     $("#" + input).html(value);
 
     if (value)
-        $("#uploaded-file-div").show();
+        $("#" + input).closest(".upload-remove-div").show();
     else
-        $("#uploaded-file-div").hide();
+        $("#" + input).closest(".upload-remove-div").hide();
 
 };
 
@@ -290,6 +290,9 @@ var parseLoadIdResponse = function (data) {
     data.metadata.date_record_added = '';
     data.metadata.date_record_updated = '';
     data.metadata.file_name = '';
+    data.metadata.files = [];
+    data.metadata.container_name = '';
+    data.metadata.containers = [];
     data.metadata.repository_link = '';
     data.metadata.landing_page = '';
 
@@ -325,8 +328,12 @@ var parseAutopopulateResponse = mobx.action("Parse Autopopulate Response", funct
 
 var doMultipartSubmission = function doMultipartSubmission(url, successCallback) {
     const files = metadata.getValue("files");
+    const containers = metadata.getValue("containers");
     let formData = new FormData();
-    formData.append('file', files[0]);
+    if (Array.isArray(files.slice()) && files.length > 0)
+        formData.append('file', files[0]);
+    if (Array.isArray(containers.slice()) && containers.length > 0)
+        formData.append('container', containers[0]);
     formData.append('metadata', JSON.stringify(metadata.serializeData()));
     doAuthenticatedMultipartRequest(url, formData, successCallback, parseErrorResponse);
 };
@@ -345,10 +352,11 @@ var save = function save() {
     });
     showCommonModalMessage();
 
-    if (metadata.getValue("accessibility") == 'OS' || (Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length == 0))
-        doAuthenticatedAjax('POST', API_BASE + 'metadata/save', parseSaveResponse, metadata.serializeData(), parseErrorResponse);
-    else
+    if ((Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length > 0)
+        || (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
         doMultipartSubmission(API_BASE + 'metadata/save', parseSaveResponse);
+    else
+        doAuthenticatedAjax('POST', API_BASE + 'metadata/save', parseSaveResponse, metadata.serializeData(), parseErrorResponse);
 };
 
 
@@ -370,10 +378,11 @@ var submit = function submit() {
     });
     showCommonModalMessage();
 
-    if (metadata.getValue("accessibility") == 'OS' || (Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length == 0))
-        doAuthenticatedAjax('POST', API_BASE + 'metadata/submit', parseSubmitResponse, metadata.serializeData(), parseErrorResponse);
-    else
+    if ((Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length > 0)
+        || (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
         doMultipartSubmission(API_BASE + 'metadata/submit', parseSubmitResponse);
+    else
+        doAuthenticatedAjax('POST', API_BASE + 'metadata/submit', parseSubmitResponse, metadata.serializeData(), parseErrorResponse);
 };
 
 
@@ -391,10 +400,11 @@ var announce = function announce() {
     });
     showCommonModalMessage();
 
-    if (metadata.getValue("accessibility") == 'OS' || (Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length == 0))
-        doAuthenticatedAjax('POST', API_BASE + 'metadata/announce', parseAnnounceResponse, metadata.serializeData(), parseErrorResponse);
-    else
+    if ((Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length > 0)
+        || (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
         doMultipartSubmission(API_BASE + 'metadata/announce', parseAnnounceResponse);
+    else
+        doAuthenticatedAjax('POST', API_BASE + 'metadata/announce', parseAnnounceResponse, metadata.serializeData(), parseErrorResponse);
 };
 
 
@@ -879,6 +889,12 @@ mobx.autorun("Accession Number", function () {
 
 mobx.autorun("File Upload", function () {
     updateDropzoneStyle(metadata, "file_name", "uploaded-file-name-lbl", "uploaded-file-name");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Container Upload", function () {
+    updateDropzoneStyle(metadata, "container_name", "uploaded-container-name-lbl", "uploaded-container-name");
 
     //mobx.whyRun();
 });
@@ -1538,6 +1554,7 @@ var handleInfix = mobx.action("Handle DOI Infix", function (event) {
 
 //Keeps the dropzone thing from auto-searching for anything with the dropzone class
 Dropzone.autoDiscover = false;
+
 //Regex to see if the file is allowed
 const FILE_EXTENSION_REGEX = new RegExp(/\.(zip|tar|tar[.]gz|tar[.]bz2)$/);
 var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
@@ -1546,7 +1563,7 @@ var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
     form.last_filename = "";
 
     // if dropzone has a file associated, remove it via click event
-    var existingFile = $(".dz-remove")[0];
+    var existingFile = $("#file-upload-dropzone .dz-remove")[0];
 
     if (existingFile)
         existingFile.click();
@@ -1579,7 +1596,7 @@ var FILE_UPLOAD_CONFIG = {url: 'someurl',
             var file_extension = FILE_EXTENSION_REGEX.exec(file.name);
             if (file_extension) {
                 //Unbinding the event on the remove anchor
-                $(".dz-remove").unbind();
+                $("#file-upload-dropzone .dz-remove").unbind();
 
                 //Button to make the file uploader work
                 metadata.setValue("file_name", file.name);
@@ -1587,12 +1604,71 @@ var FILE_UPLOAD_CONFIG = {url: 'someurl',
                 form.last_filename = file.name;
 
                 //Make the remove button included hide the right content
-                $(".dz-remove").on('click', function () {
+                $("#file-upload-dropzone .dz-remove").on('click', function () {
                     removeFileUploadInfo();
                 });
 
                 //Hide the progress bar because we don't want to see it
-                $(".dz-progress").hide();
+                $("#file-upload-dropzone .dz-progress").hide();
+            }
+        }));
+
+    }
+};
+
+//Regex to see if the container is allowed
+const CONTAINER_EXTENSION_REGEX = new RegExp(/\.(tar|simg)$/);
+var removeContainerUploadInfo = mobx.action("Remove Container Drop", function () {
+    metadata.setValue("container_name", "");
+    metadata.setValue("containers", []);
+
+    // if dropzone has a file associated, remove it via click event
+    var existingFile = $("#container-upload-dropzone .dz-remove")[0];
+
+    if (existingFile)
+        existingFile.click();
+});
+//Configuration for the container upload dropzone
+var CONTAINER_UPLOAD_CONFIG = {url: 'someurl',
+    autoProcessQueue: false,
+    acceptedFiles: '.tar,.simg',
+    addRemoveLinks: true,
+    maxFiles: 1,
+    init: function () {
+        var self = this;
+
+        /*Runs when you try to add more files than allowed*/
+        self.on("maxfilesexceeded", function (file) {
+            this.removeAllFiles();
+            this.addFile(file);
+        });
+
+        /*Runs when you add a file that isn't allowed*/
+        this.on("error", function (file, message, xhr) {
+            if (xhr == null) {
+                this.removeFile(file);
+            }
+        });
+
+        /*Runs when you add any kind of file*/
+        self.on("addedfile", mobx.action("Add Container Drop", function (file) {
+            //Make sure that this file is allowed
+            var file_extension = CONTAINER_EXTENSION_REGEX.exec(file.name);
+            if (file_extension) {
+                //Unbinding the event on the remove anchor
+                $("#container-upload-dropzone .dz-remove").unbind();
+
+                //Button to make the container uploader work
+                metadata.setValue("container_name", file.name);
+                metadata.setValue("containers", [file]);
+
+                //Make the remove button included hide the right content
+                $("#container-upload-dropzone .dz-remove").on('click', function () {
+                    removeContainerUploadInfo();
+                });
+
+                //Hide the progress bar because we don't want to see it
+                $("#container-upload-dropzone .dz-progress").hide();
             }
         }));
 
@@ -1790,6 +1866,13 @@ $(document).ready(mobx.action("Document Ready", function () {
     // bind removal event
     $("#delete-uploaded-file-btn").on('click', function () {
         removeFileUploadInfo();
+    });
+
+    /*Container uploads*/
+    var dropzone2 = $("#container-upload-dropzone").dropzone(CONTAINER_UPLOAD_CONFIG);
+    // bind removal event
+    $("#delete-uploaded-container-btn").on('click', function () {
+        removeContainerUploadInfo();
     });
 
     // form buttons

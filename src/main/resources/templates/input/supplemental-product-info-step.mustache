@@ -104,7 +104,7 @@
 		    <div id="file-upload-zone">
 			 <br/>
 			 <div class="row">
-			      <div class="col-xs-12">
+			      <div class="col-xs-12" style="border-top: 1px solid #ddd; padding-top: 10px;">
 				   <label id="uploaded-file-name-lbl" class='control-label' for='file-upload-dropzone'></label>{{> tooltips/FileUpload}}
 				   <br/>
 				   <small>Please upload an archive file containing your source code. This will be used for archiving purposes.</small>
@@ -119,14 +119,42 @@
 			      <div class="col-xs-12">
 				   <label id="uploaded-file-name-lbl-error" class="control-label errorCheck">Problem</label>
 			      </div>
-			      <div id='uploaded-file-div' class="col-xs-12" style='display:none;'>
+			      <div id='uploaded-file-div' class="col-xs-12 upload-remove-div" style='display:none;'>
 				   <br/>
 				   <label class="upload-file">Uploaded File</label>&nbsp;
 				   <div class="upload-file" id='uploaded-file-name'></div>
 				   <div class="upload-file">
 					<button type="button" id='delete-uploaded-file-btn' class="pure-button button-error">Remove File</button>
 				   </div>
-			      </div>		      
+			      </div>
+			 </div>
+		    </div>
+		    <div id="container-upload-zone">
+			 <br/>
+			 <div class="row">
+			      <div class="col-xs-12" style="border-top: 1px solid #ddd; padding-top: 10px;">
+				   <label id="uploaded-container-name-lbl" class='control-label' for='container-upload-dropzone'></label>
+				   <br/>
+				   <small>You may upload a container image file that encapsulates a runtime environment for your source code.</small>
+				   <br/>
+				   <small>Supported file types include (Docker, Singularity): .tar, .simg</small>
+				   <br/>
+				   <br/>
+			      </div>
+			      <div class="col-xs-12">
+				   <div class='dropzone' id="container-upload-dropzone"></div>
+			      </div>
+			      <div class="col-xs-12">
+				   <label id="uploaded-container-name-lbl-error" class="control-label errorCheck">Problem</label>
+			      </div>
+			      <div id='uploaded-container-div' class="col-xs-12 upload-remove-div" style='display:none;'>
+				   <br/>
+				   <label class="upload-file">Uploaded Image</label>&nbsp;
+				   <div class="upload-file" id='uploaded-container-name'></div>
+				   <div class="upload-file">
+					<button type="button" id='delete-uploaded-container-btn' class="pure-button button-error">Remove Image</button>
+				   </div>
+			      </div>
 			 </div>
 		    </div>
 		    <br/>
