@@ -1556,7 +1556,7 @@ var handleInfix = mobx.action("Handle DOI Infix", function (event) {
 Dropzone.autoDiscover = false;
 
 //Regex to see if the file is allowed
-const FILE_EXTENSION_REGEX = new RegExp(/\.(zip|tar|tar[.]gz|tar[.]bz2)$/);
+const FILE_EXTENSION_REGEX = new RegExp(/[.](?:zip|tar(?:[.](?:gz|bz2))?)$/);
 var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
     metadata.setValue("file_name", "");
     metadata.setValue("files", []);
