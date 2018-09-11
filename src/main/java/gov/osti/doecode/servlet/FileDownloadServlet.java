@@ -33,14 +33,14 @@ public class FileDownloadServlet extends HttpServlet {
                }
                //Get the json for the file
                ObjectNode code_id_data = SearchFunctions.getBiblioJson(Long.parseLong(code_id));
-               String file_name = code_id_data.findPath("file_name").asText("");
-               if (StringUtils.isBlank(file_name)) {
+               String container_name = code_id_data.findPath("container_name").asText("");
+               if (StringUtils.isBlank(container_name)) {
                     response.sendError(HttpServletResponse.SC_NOT_FOUND, "No container file found for your requested code id.");
                     return;
                }
 
                //Now, to grab the file
-               File file_to_serve = new File(Init.containers_dir + "/" + code_id + "/" + file_name);
+               File file_to_serve = new File(Init.containers_dir + "/" + code_id + "/" + container_name);
                if (!file_to_serve.exists()) {
                     response.sendError(HttpServletResponse.SC_NOT_FOUND, "Your requested file no longer exists");
                     return;

@@ -744,10 +744,10 @@ public class SearchFunctions {
           }
 
           //See if this record has a downloadable file
-          String file_name = search_data.findPath("file_name").asText("");
-          boolean has_file_to_download = StringUtils.isNotBlank(file_name);
+          String container_name = search_data.findPath("container_name").asText("");
+          boolean has_file_to_download = StringUtils.isNotBlank(container_name);
           return_data.put("has_file_to_download", has_file_to_download);
-          return_data.put("file_name", file_name);
+          return_data.put("container_name", container_name);
           return return_data;
      }
 

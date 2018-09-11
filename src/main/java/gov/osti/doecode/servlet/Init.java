@@ -60,7 +60,7 @@ public class Init extends HttpServlet {
           google_analytics_id = context.getInitParameter("ga_id");
           google_analytics_domain = context.getInitParameter("ga_domain");
 
-          //Set the file upload directory
+          //Set the container upload directory
           containers_dir = context.getInitParameter("containers_dir");
 
           //Get the session timeout from the web.xml
