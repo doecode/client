@@ -87,12 +87,12 @@ public class Dissemination extends HttpServlet {
                template = TemplateUtils.TEMPLATE_ADVANCED_SEARCH;
 
           } else if (remaining.trim().startsWith("/biblio/")) {
-               page_title = "DOE CODE: Project Metadata";
                template = TemplateUtils.TEMPLATE_BIBLIO_PAGE;
 
                String just_code_id = StringUtils.substringBefore(remaining.replace("/biblio/", ""), "-");
                if (DOECODEUtils.isValidLong(just_code_id)) {
                     long code_id = Long.parseLong(just_code_id);
+                    page_title = "DOE CODE: Project Metadata for Code ID " + code_id;
                     ObjectNode biblio_data = SearchFunctions.getBiblioData(code_id);
 
                     //If, and only if, this is a valid code id
@@ -126,7 +126,7 @@ public class Dissemination extends HttpServlet {
                page_title = "DOE CODE: Contact Us";
                template = TemplateUtils.TEMPLATE_CONTACT_PAGE;
 
-          }else{
+          } else {
                page_title = "DOE CODE: Page Not Found";
                template = TemplateUtils.TEMPLATE_404_PAGE;
           }

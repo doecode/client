@@ -52,6 +52,7 @@ public class FileDownloadServlet extends HttpServlet {
                        FileInputStream input = new FileInputStream(file_to_serve)) {
                     response.setContentType(mime_type);
                     response.setContentLength((int) file_to_serve.length());
+                    response.setHeader("Content-Disposition", "filename="+file_to_serve.getName());
                     IOUtils.copy(input, response.getOutputStream());
                }
           } else {
