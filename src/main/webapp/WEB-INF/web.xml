@@ -80,7 +80,7 @@
     <context-param>
         <description>The base directory that containers (such as .tar files) can be downloaded from.</description>
         <param-name>containers_dir</param-name>
-        <param-value>${file.containers}</param-value>
+        <param-value>${file.containers.approved}</param-value>
     </context-param>
     <!--Servlet Context Listener-->
     <listener>
