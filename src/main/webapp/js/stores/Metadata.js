@@ -28,9 +28,7 @@ var Metadata = function (_BaseData) {
     value: mobx.action("Save to Array", function saveToArray(field, data) {
       if (isNaN(parseInt(data.id))) this.addToArray(field, data);else this.modifyElementInArray(field, data);
 
-      this.infoSchema[field].completed = true;
-      this.infoSchema[field].ever_completed = true;
-      this.infoSchema[field].error = '';
+      this.validateField(field);
     })
   }, {
     key: "addToArray",
@@ -56,7 +54,7 @@ var Metadata = function (_BaseData) {
         this.fieldMap[field][i].id = i;
       }
 
-      if (this.fieldMap[field].length == 0) this.infoSchema[field].completed = false;
+      this.validateField(field);
     })
   }, {
     key: "loadRecordFromServer",
