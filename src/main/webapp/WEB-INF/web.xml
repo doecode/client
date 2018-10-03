@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+<web-app version="3.0" 
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <display-name>DOE CODE Client Web Application</display-name>
     <session-config>
         <session-timeout>
@@ -98,7 +100,8 @@
         <url-pattern>/repository-services</url-pattern>
         <url-pattern>/about</url-pattern>
         <url-pattern>/policy</url-pattern>
-        <url-pattern>/news-resources</url-pattern>
+        <url-pattern>/resources</url-pattern>
+        <url-pattern>/news</url-pattern>
         <url-pattern>/faq</url-pattern>
         <url-pattern>/results</url-pattern>
         <url-pattern>/search</url-pattern>
