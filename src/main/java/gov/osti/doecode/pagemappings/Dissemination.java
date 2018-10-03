@@ -75,7 +75,7 @@ public class Dissemination extends HttpServlet {
                         page_title = "DOE CODE: News";
                         template = TemplateUtils.TEMPLATE_NEWS_PAGE;
                         current_page = TemplateUtils.PAGE_NEWS;
-                        output_data.put("api_url", Init.public_api_url);
+                        output_data = SearchFunctions.getNewsPageData(Init.news_page_data_url);
 
                 } else if (remaining.equals("/faq")) {
                         page_title = "DOE CODE: FAQ's";

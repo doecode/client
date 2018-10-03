@@ -22,6 +22,7 @@ public class Init extends HttpServlet {
      public static String google_analytics_domain;
      public static String public_api_url;
      public static String backend_api_url;
+     public static String news_page_data_url;
      public static String authority_api_base;
      public static String site_url;
      public static String containers_dir;
@@ -59,6 +60,9 @@ public class Init extends HttpServlet {
           //Google analytics info
           google_analytics_id = context.getInitParameter("ga_id");
           google_analytics_domain = context.getInitParameter("ga_domain");
+
+          //News page data url
+          news_page_data_url = context.getInitParameter("news_page_data_url");
 
           //Set the container upload directory
           containers_dir = context.getInitParameter("containers_dir");
