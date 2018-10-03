@@ -20,71 +20,76 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Other extends HttpServlet {
 
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-          request.setCharacterEncoding("UTF-8");
-          String URI = request.getRequestURI();
-          String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
+                request.setCharacterEncoding("UTF-8");
+                String URI = request.getRequestURI();
+                String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
 
-          HttpSession session = request.getSession(true);
-          String page_title = "";
-          String template = "";
-          String current_page = "";
-          ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
-          ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
-          ServletContext context = getServletContext();
-          switch (remaining) {
-               case "gitlab-signup":
-                    String gitlab_token = RandomStringUtils.randomAscii(30);
-                    session.setAttribute("gitlab-token", gitlab_token);
-                    page_title = "DOECODE: Gitlab Signup";
-                    template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP;
-                    output_data = OtherFunctions.getOtherLists(context);
-                    output_data.put("recaptcha_sitekey", context.getInitParameter("recaptcha_sitekey"));
-                    output_data.put("gitlab_token", gitlab_token);
-                    break;
-               case "gitlab-signup-result":
-                    page_title = "DOECODE: DOE CODE Repositories Services Access Request";
-                    template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP_RESULT;
-                    output_data = OtherFunctions.handleGitlabSubmissionForm(request);
-                    session.removeAttribute("gitlab-token");
-                    break;
-          }
+                HttpSession session = request.getSession(true);
+                String page_title = "";
+                String template = "";
+                String current_page = "";
+                ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
+                ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
+                ArrayNode jsLibrariesList = JsonUtils.MAPPER.createArrayNode();
+                ServletContext context = getServletContext();
+                switch (remaining) {
+                case "gitlab-signup":
+                        String gitlab_token = RandomStringUtils.randomAscii(30);
+                        session.setAttribute("gitlab-token", gitlab_token);
+                        page_title = "DOECODE: Gitlab Signup";
+                        template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP;
+                        output_data = OtherFunctions.getOtherLists(context);
+                        output_data.put("recaptcha_sitekey", context.getInitParameter("recaptcha_sitekey"));
+                        output_data.put("gitlab_token", gitlab_token);
+                        break;
+                case "gitlab-signup-result":
+                        page_title = "DOECODE: DOE CODE Repositories Services Access Request";
+                        template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP_RESULT;
+                        output_data = OtherFunctions.handleGitlabSubmissionForm(request);
+                        session.removeAttribute("gitlab-token");
+                        break;
+                }
 
-          //Add the common dissemination js file
-          jsFilesList.add("other");
+                // Add the common dissemination js file
+                jsFilesList.add("other");
 
-          //Check if they're logged in, and only do something if they're not logged in
-          if (!UserFunctions.isUserLoggedIn(request)) {
-               output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
-          } else {
-               //Increment time
-               response.addCookie(UserFunctions.updateUserSessionTimeout(request));
-               if (StringUtils.equals(UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"), "true")) {
-                    Cookie needs_reset_cookie = UserFunctions.getOtherUserCookie(request, "needs_password_reset");
-                    needs_reset_cookie.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
-                    response.addCookie(needs_reset_cookie);
-               }
-          }
+                // Check if they're logged in, and only do something if they're not logged in
+                if (!UserFunctions.isUserLoggedIn(request)) {
+                        output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
+                } else {
+                        // Increment time
+                        response.addCookie(UserFunctions.updateUserSessionTimeout(request));
+                        if (StringUtils.equals(UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"),
+                                        "true")) {
+                                Cookie needs_reset_cookie = UserFunctions.getOtherUserCookie(request,
+                                                "needs_password_reset");
+                                needs_reset_cookie.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
+                                response.addCookie(needs_reset_cookie);
+                        }
+                }
 
-          //Send in this object, and get a hold of the common data, like the classes needed to render the homepage correctly and such
-          output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, null, request);
+                // Send in this object, and get a hold of the common data, like the classes
+                // needed to render the homepage correctly and such
+                output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, jsLibrariesList,
+                                null, request);
 
-          //Write the template out
-          TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
+                // Write the template out
+                TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
 
-     }
+        }
 
-     @Override
-     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-          processRequest(request, response);
-     }
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
+                processRequest(request, response);
+        }
 
-     @Override
-     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-          processRequest(request, response);
-     }
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
+                processRequest(request, response);
+        }
 
 }

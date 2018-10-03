@@ -24,6 +24,9 @@
         <app_name>${project.artifactId}</app_name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--Timestamp is used to give a unique name to javascript files upon build time-->
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy.MM.dd.HH.mm.ss</maven.build.timestamp.format>
     </properties>
     <!--
         You will need to add your own profiles into this pom.xml, or use profiles stored in your local settings.xml
@@ -104,7 +107,7 @@
                             <jsSourceFiles>
                                 <jsSourceFile>doecode.js</jsSourceFile>
                             </jsSourceFiles>
-                            <jsFinalFile>doecode.js</jsFinalFile>
+                            <jsFinalFile>doecode.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
                         </configuration>
                         <goals>
@@ -122,7 +125,7 @@
                             <jsSourceFiles>
                                 <jsSourceFile>dissemination.js</jsSourceFile>
                             </jsSourceFiles>
-                            <jsFinalFile>dissemination.js</jsFinalFile>
+                            <jsFinalFile>dissemination.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
                         </configuration>
                         <goals>
@@ -140,7 +143,25 @@
                             <jsSourceFiles>
                                 <jsSourceFile>input.js</jsSourceFile>
                             </jsSourceFiles>
-                            <jsFinalFile>input.js</jsFinalFile>
+                            <jsFinalFile>input.${timestamp}.js</jsFinalFile>
+                            <nosuffix>true</nosuffix>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>minify-input-other</id>
+                        <phase>compile</phase>
+                        <configuration>
+                            <charset>UTF-8</charset>
+                            <webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+                            <webappTargetDir>${basedir}/target/${app_name}/</webappTargetDir>
+                            <jsSourceDir>js</jsSourceDir>
+                            <jsSourceFiles>
+                                <jsSourceFile>input-other.js</jsSourceFile>
+                            </jsSourceFiles>
+                            <jsFinalFile>input-other.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
                         </configuration>
                         <goals>
@@ -158,7 +179,7 @@
                             <jsSourceFiles>
                                 <jsSourceFile>user.js</jsSourceFile>
                             </jsSourceFiles>
-                            <jsFinalFile>user.js</jsFinalFile>
+                            <jsFinalFile>user.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
                         </configuration>
                         <goals>
@@ -176,7 +197,7 @@
                             <jsSourceFiles>
                                 <jsSourceFile>utils.js</jsSourceFile>
                             </jsSourceFiles>
-                            <jsFinalFile>utils.js</jsFinalFile>
+                            <jsFinalFile>utils.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
                         </configuration>
                         <goals>
@@ -194,7 +215,7 @@
                             <jsSourceFiles>
                                 <jsSourceFile>other.js</jsSourceFile>
                             </jsSourceFiles>
-                            <jsFinalFile>other.js</jsFinalFile>
+                            <jsFinalFile>other.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
                         </configuration>
                         <goals>
@@ -212,7 +233,7 @@
                             <jsSourceFiles>
                                 <jsSourceFile>site.js</jsSourceFile>
                             </jsSourceFiles>
-                            <jsFinalFile>site.js</jsFinalFile>
+                            <jsFinalFile>site.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
                         </configuration>
                         <goals>
@@ -234,7 +255,7 @@
                                 <cssSourceFile>doecode.css</cssSourceFile>
                                 <cssSourceFile>doecode-media-queries.css</cssSourceFile>
                             </cssSourceFiles>
-                            <cssFinalFile>doecode-css.css</cssFinalFile>
+                            <cssFinalFile>doecode-css.${timestamp}.css</cssFinalFile>
                             <nosuffix>true</nosuffix>
                         </configuration>
                         <goals>

@@ -16,12 +16,17 @@
 <script src='/${app_name}/js/utils/utils.js' type='text/javascript' defer></script>
 <noscript>Your browser does not support JavaScript!</noscript>
 
-{{#each jsFiles}}
-<script src='/${app_name}/js/{{.}}.js' type='text/javascript' defer></script>
+{{#each jsLibraries}}
+<script src='/${app_name}/js/libraries/{{.}}.js' type='text/javascript' defer></script>
 <noscript>Your browser does not support JavaScript!</noscript>
 {{/each}}
 
-<script src='/${app_name}/js/doecode.js' type='text/javascript' defer></script>
+{{#each jsFiles}}
+<script src='/${app_name}/js/{{.}}.${timestamp}.js' type='text/javascript' defer></script>
+<noscript>Your browser does not support JavaScript!</noscript>
+{{/each}}
+
+<script src='/${app_name}/js/doecode.${timestamp}.js' type='text/javascript' defer></script>
 <noscript>Your browser does not support JavaScript!</noscript>
 
 <!--Extra CSS files that needed to be loaded later so they aren't render blocking-->

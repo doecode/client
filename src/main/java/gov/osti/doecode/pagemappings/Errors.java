@@ -16,48 +16,50 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Errors extends HttpServlet {
 
-     private Logger log = LoggerFactory.getLogger(Errors.class.getName());
+        private Logger log = LoggerFactory.getLogger(Errors.class.getName());
 
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-          String URI = request.getRequestURI();
-          String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
+                String URI = request.getRequestURI();
+                String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
 
-          String page_title = "";
-          String template = "";
-          ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
+                String page_title = "";
+                String template = "";
+                ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
 
-          switch (remaining) {
-               case "page-not-found":
-                    page_title = "Page Not Found";
-                    template = TemplateUtils.TEMPLATE_404_PAGE;
-                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                switch (remaining) {
+                case "page-not-found":
+                        page_title = "Page Not Found";
+                        template = TemplateUtils.TEMPLATE_404_PAGE;
+                        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
-                    break;
-               default:
-                    page_title = "Error Page";
-                    template = TemplateUtils.TEMPLATE_ERROR_PAGE;
-                    String error_msg = request.getParameter("message");
-                    output_data.put("message", StringUtils.isNotBlank(error_msg) ? error_msg : "An error has occurred");
-                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                        break;
+                default:
+                        page_title = "Error Page";
+                        template = TemplateUtils.TEMPLATE_ERROR_PAGE;
+                        String error_msg = request.getParameter("message");
+                        output_data.put("message",
+                                        StringUtils.isNotBlank(error_msg) ? error_msg : "An error has occurred");
+                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
-                    break;
-          }
+                        break;
+                }
 
-          output_data = TemplateUtils.GET_COMMON_DATA(output_data, "", new ArrayNode(JsonUtils.INSTANCE),null, request);
-          TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
-     }
+                output_data = TemplateUtils.GET_COMMON_DATA(output_data, "", JsonUtils.MAPPER.createArrayNode(),
+                                JsonUtils.MAPPER.createArrayNode(), null, request);
+                TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
+        }
 
-     @Override
-     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-          processRequest(request, response);
-     }
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
+                processRequest(request, response);
+        }
 
-     @Override
-     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-          processRequest(request, response);
-     }
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
+                processRequest(request, response);
+        }
 
 }
