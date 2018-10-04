@@ -138,6 +138,10 @@ html h3 {
     text-align: left !important;
 }
 
+.blue-text{
+    color:blue;
+}
+
 .italic-text {
     font-style: italic !important;
 }

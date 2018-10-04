@@ -1677,7 +1677,8 @@ public class SearchFunctions {
                         featured_article.put("article_type", featured_article_first_type);
 
                         return_data.set("featured_article", featured_article);
-                        return_data.set("refined_articles_list", refined_articles_list.remove(1));
+                        //take out the first because it's teh featured article
+                        return_data.set("refined_articles_list", refined_articles_list);
 
                 } catch (Exception e) {
                         log.error("Exception in getting news data: " + e.getMessage());
