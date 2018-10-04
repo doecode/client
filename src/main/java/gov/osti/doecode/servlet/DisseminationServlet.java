@@ -103,6 +103,8 @@ public class DisseminationServlet extends HttpServlet {
                               break;
                     }
                }
+          }else if(remaining.equals("news-article-search")){
+                  //TODO return news article data based on some parameters
           }
      }
 

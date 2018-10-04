@@ -84,11 +84,6 @@
         <param-name>containers_dir</param-name>
         <param-value>${file.containers.approved}</param-value>
     </context-param>
-    <context-param>
-        <description>Source from which you can get news information</description>
-        <param-name>news_page_data_url</param-name>
-        <param-value>${news_page_data_url}</param-value>
-    </context-param>
     <!--Servlet Context Listener-->
     <listener>
         <description>ServletContextListener</description>

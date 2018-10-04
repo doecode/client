@@ -1,12 +1,5 @@
 package gov.osti.doecode.entity;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import gov.osti.doecode.listeners.DOECODEServletContextListener;
-import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.DOECODEUtils;
-import gov.osti.doecode.utils.JsonUtils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -18,15 +11,28 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.lang3.StringUtils;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.github.jknack.handlebars.internal.lang3.ArrayUtils;
+
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import gov.osti.doecode.listeners.DOECODEServletContextListener;
+import gov.osti.doecode.servlet.Init;
+import gov.osti.doecode.utils.DOECODEUtils;
+import gov.osti.doecode.utils.JsonUtils;
 
 public class SearchFunctions {
 
@@ -37,6 +43,10 @@ public class SearchFunctions {
         public static final DateTimeFormatter MLA_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM. yyyy.");
         public static final DateTimeFormatter SEARCH_RESULTS_DESCRIPTION_FORMAT = DateTimeFormatter
                         .ofPattern("MM-dd-yyyy");
+        public static final DateTimeFormatter SOLR_DATE_ONLY_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        public static final DateTimeFormatter NEWS_ARTICLE_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        public static int MAX_WORD_IN_FEATURED_ARTICLE = 75;
 
         public static ObjectNode conductSearch(HttpServletRequest request, ServletContext context, long page_num) {
                 ObjectNode return_data = doSearchPost(request, Init.backend_api_url);
@@ -1538,9 +1548,142 @@ public class SearchFunctions {
                 return return_data;
         }
 
-        public static ObjectNode getNewsPageData(String url) {
+        /**
+         * Gets news article data from a specific source. In this case, it gets the
+         * number of articles, an array of different article types and the number of
+         * each type found, an array of publication date years and the number of
+         * instances of each year, and a list of the articles themselves
+         */
+        public static ObjectNode getNewsPageData(String news_url) {
                 ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
-                
+                ArrayNode news_data_raw_list = JsonUtils.MAPPER.createArrayNode();
+                try {
+                        StringBuilder result = new StringBuilder();
+                        URL url = new URL(news_url);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("GET");
+                        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                        String line;
+                        while ((line = rd.readLine()) != null) {
+                                result.append(line);
+                        }
+                        rd.close();
+                        conn.disconnect();
+                        ObjectNode news_data_raw = JsonUtils.parseObjectNode(result.toString());
+                        if (news_data_raw.has("response")) {
+                                news_data_raw_list = (ArrayNode) news_data_raw.get("response").get("docs");
+                        } else {
+                                return_data.put("error", "An error occurred. News data couldn't be loaded.");
+                        }
+
+                        // Unpack the data, and construct what we need from it
+                        HashMap<String, Integer> article_types_map = new HashMap();
+                        HashMap<Integer, Integer> publication_year_map = new HashMap();
+                        ArrayNode refined_articles_list = JsonUtils.MAPPER.createArrayNode();
+
+                        for (JsonNode jn : news_data_raw_list) {
+                                ObjectNode article = (ObjectNode) jn;
+                                ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                                row.put("url", article.findPath("url").asText(""));
+                                row.put("title", article.findPath("label").asText(""));
+                                row.put("content", article.findPath("content").asText(""));
+                                LocalDate publication_date = LocalDate.parse(StringUtils.substringBefore(
+                                                article.findPath("ds_created").asText(""), "T"), SOLR_DATE_ONLY_FORMAT);
+                                row.put("publication_date", publication_date.format(NEWS_ARTICLE_DATE_FORMAT));
+                                // If we already have a publication year, just increment the amount that we have
+                                // it by 1. Otherwise, make a new entry into the map
+                                int year = publication_date.getYear();
+                                if (publication_year_map.keySet().contains(year)) {
+                                        publication_year_map.put(year, publication_year_map.get(year) + 1);
+                                } else {
+                                        publication_year_map.put(year, 1);
+                                }
+
+                                // Get the article types, and add them to the list too
+                                ArrayNode article_types_with_other = JsonUtils.MAPPER.createArrayNode();
+                                ArrayNode article_types_list = (ArrayNode) article.get("sm_vid_Article_Type");
+                                for (JsonNode n : article_types_list) {
+                                        String article_type = n.asText("");
+                                        // Go through the article types. If we already have this type, increment its
+                                        // count by 1. Otherwise, add the new one to the map
+                                        if (article_types_map.containsKey(article_type)) {
+                                                article_types_map.put(article_type,
+                                                                article_types_map.get(article_type) + 1);
+                                        } else {
+                                                article_types_map.put(article_type, 1);
+                                        }
+
+                                        ObjectNode single_article_type = JsonUtils.MAPPER.createObjectNode();
+                                        single_article_type.put("type", article_type);
+                                        switch (article_type) {
+                                        case "News":
+                                                single_article_type.put("is_news", true);
+                                                break;
+                                        case "Blog":
+                                                single_article_type.put("is_blog", true);
+                                                break;
+                                        case "Updates and Tips":
+                                                single_article_type.put("is_updates_and_tips", true);
+                                                break;
+                                        }
+                                        article_types_with_other.add(single_article_type);
+                                }
+                                row.set("article_types", article_types_with_other);
+                                refined_articles_list.add(row);
+                        }
+
+                        // Convert article types to arraynode
+                        ArrayNode article_types = JsonUtils.MAPPER.createArrayNode();
+                        for (String type : article_types_map.keySet()) {
+                                ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                                row.put("art_type", type);
+                                row.put("count", article_types_map.get(type));
+                                article_types.add(row);
+                        }
+
+                        ArrayNode publication_date_years = JsonUtils.MAPPER.createArrayNode();
+                        // Take out the keyset, organize it to be in reverse order, so it's newest
+                        ArrayList<Integer> pub_date_years_sorted = new ArrayList(publication_year_map.keySet());
+                        Collections.sort(pub_date_years_sorted, Collections.reverseOrder());
+                        for (Integer year : pub_date_years_sorted) {
+                                ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                                row.put("pub_year", year);
+                                row.put("count", publication_year_map.get(year));
+                                publication_date_years.add(row);
+                        }
+
+                        return_data.put("total_results", refined_articles_list.size());
+                        return_data.set("article_types", article_types);
+                        return_data.set("publication_date_years", publication_date_years);
+
+                        // Take the feature article, and make it a separate object. Put the rest of this
+                        // in the list
+                        ObjectNode featured_article = (ObjectNode) refined_articles_list.get(0);
+                        String featured_article_content = featured_article.findPath("content").asText("");
+                        featured_article.put("content", featured_article_content);
+                        // Split the article content into words
+                        String[] featured_content_words = StringUtils.split(featured_article_content, " ");
+                        if (featured_content_words.length > MAX_WORD_IN_FEATURED_ARTICLE) {
+                                featured_article.put(
+                                                "content", StringUtils
+                                                                .join(ArrayUtils.subarray(featured_content_words, 0,
+                                                                                MAX_WORD_IN_FEATURED_ARTICLE), " ")
+                                                                + "...");
+                                featured_article.put("content_over_limit", true);
+                        }
+                        // Grab the first article type, and say that it will be the type we show
+                        ObjectNode featured_article_first_type = (ObjectNode) ((ArrayNode) featured_article
+                                        .get("article_types")).get(0);
+                        featured_article.put("article_type", featured_article_first_type);
+
+                        return_data.set("featured_article", featured_article);
+                        return_data.set("refined_articles_list", refined_articles_list.remove(1));
+
+                } catch (Exception e) {
+                        log.error("Exception in getting news data: " + e.getMessage());
+                        return_data.put("error", "An error occurred. News data couldn't be loaded.");
+                }
+
                 return return_data;
         }
 }
