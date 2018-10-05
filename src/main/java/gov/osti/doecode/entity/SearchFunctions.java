@@ -1590,6 +1590,7 @@ public class SearchFunctions {
                                 LocalDate publication_date = LocalDate.parse(StringUtils.substringBefore(
                                                 article.findPath("ds_created").asText(""), "T"), SOLR_DATE_ONLY_FORMAT);
                                 row.put("publication_date", publication_date.format(NEWS_ARTICLE_DATE_FORMAT));
+                                row.put("publication_year", publication_date.getYear());
                                 // If we already have a publication year, just increment the amount that we have
                                 // it by 1. Otherwise, make a new entry into the map
                                 int year = publication_date.getYear();
@@ -1628,6 +1629,7 @@ public class SearchFunctions {
                                         }
                                         article_types_with_other.add(single_article_type);
                                 }
+                                row.put("article_type_str", article_types_list.toString());
                                 row.set("article_types", article_types_with_other);
                                 refined_articles_list.add(row);
                         }
@@ -1677,7 +1679,7 @@ public class SearchFunctions {
                         featured_article.put("article_type", featured_article_first_type);
 
                         return_data.set("featured_article", featured_article);
-                        //take out the first because it's teh featured article
+                        // take out the first because it's teh featured article
                         return_data.set("refined_articles_list", refined_articles_list);
 
                 } catch (Exception e) {

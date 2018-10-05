@@ -46,7 +46,7 @@ var toggleDescriptionMoreLess = function () {
         $(this).attr('title', 'More');
         $(this).html('More&gt;&gt;');
 
-    } else {//else hidden, show
+    } else { //else hidden, show
         $(this).prev('span.description-pt2-container').show();
         $(this).attr('title', 'Less');
         $(this).html('&lt;&lt;Less');
@@ -74,11 +74,11 @@ var authorSearchDropdownORCID = function () {
 
 /*Opens and closes the affiliations collapse on the biblio page*/
 var toggleAffiliationCollapse = function () {
-    if ($(this).next('div.toggle-affiliations-collapse').hasClass('in')) {//If is open, close
+    if ($(this).next('div.toggle-affiliations-collapse').hasClass('in')) { //If is open, close
         $(this).next('div.toggle-affiliations-collapse').removeClass('in');
         $(this).html('<span class="fa fa-plus-square-o"></span>&nbsp;Show Developer Affiliations');
         $(this).attr('title', 'Show Author Affiliations');
-    } else {//If is closed, open
+    } else { //If is closed, open
         $(this).next('div.toggle-affiliations-collapse').addClass('in');
         $(this).html('<span class="fa fa-minus-square-o"></span>&nbsp;Hide Developer Affiliations');
         $(this).attr('title', 'Hide Author Affiliations');
@@ -142,10 +142,10 @@ var addSearchCheckboxToSearch = function () {
 
     var current_value = isValidJSON($("#search-" + name).val()) ? JSON.parse($("#search-" + name).val()) : [];
     var new_value = [];
-    if (isChecked) {//Meaning, we want to add it
+    if (isChecked) { //Meaning, we want to add it
         current_value.push(value);
         new_value = current_value;
-    } else {//Meaning we want to remove it
+    } else { //Meaning we want to remove it
         current_value.forEach(function (item) {
             if (item !== value) {
                 new_value.push(item);
@@ -169,9 +169,9 @@ var goBackToSearch = function () {
     var current_page = window.location.href.toString();
     var environment = current_page.substring(0, current_page.indexOf('/biblio'));
 
-    if (previous_page.indexOf(environment + "/results") == 0) {//If the previous page was a search page, go there
+    if (previous_page.indexOf(environment + "/results") == 0) { //If the previous page was a search page, go there
         window.history.back();
-    } else {//If the previous page wasn't a search page, just go back to the search
+    } else { //If the previous page wasn't a search page, just go back to the search
         window.location.href = '/' + APP_NAME + '/results?page=1';
     }
 };
@@ -212,17 +212,26 @@ var modify_search = function () {
 };
 
 var setUpDateSlider = function () {
-    google.charts.load('current', {packages: ['table', 'controls']});
+    google.charts.load('current', {
+        packages: ['table', 'controls']
+    });
     google.charts.setOnLoadCallback(drawVisualization);
+
     function drawVisualization() {
         var style = 'stroke-color: #337ab7; stroke-opacity: 0.6; stroke-width: 1; fill-color: #337ab7; fill-opacity: 0.2';
-        var years_array = [['Year', 'Results', {role: 'style'}]];
+        var years_array = [
+            ['Year', 'Results', {
+                role: 'style'
+            }]
+        ];
         var year_facets = JSON.parse($("#facets-year-data").val());
         year_facets.forEach(function (item) {
             years_array.push([new Date(item.year, 0, 1), item.count, style]);
         });
         var data = google.visualization.arrayToDataTable(years_array);
-        var formatter = new google.visualization.DateFormat({pattern: 'yyyy'});
+        var formatter = new google.visualization.DateFormat({
+            pattern: 'yyyy'
+        });
         formatter.format(data, 0);
 
         // daterangefilter slider control on 'Year' column
@@ -231,7 +240,12 @@ var setUpDateSlider = function () {
             'containerId': 'control',
             'options': {
                 'filterColumnLabel': 'Year',
-                'ui': {'format': {'pattern': 'yyyy'}, 'label': ''}
+                'ui': {
+                    'format': {
+                        'pattern': 'yyyy'
+                    },
+                    'label': ''
+                }
             }
         });
 
@@ -267,7 +281,9 @@ var setUpDateSlider = function () {
                 'backgroundColor': '#f9f9f9',
                 'width': 200,
                 'height': 100,
-                'bar': {groupWidth: 2},
+                'bar': {
+                    groupWidth: 2
+                },
                 vAxis: {
                     minValue: 0,
                     baselineColor: '#ddd',
@@ -280,7 +296,10 @@ var setUpDateSlider = function () {
                         color: 'transparent'
                     }
                 },
-                'chartArea': {width: '100%', height: '100%'}
+                'chartArea': {
+                    width: '100%',
+                    height: '100%'
+                }
             }
         });
 
@@ -327,10 +346,10 @@ if (document.getElementById('about-page-identifier')) {
     $(".description-pt2-toggle").on('click', toggleDescriptionMoreLess);
 
     /*Toggles sidebar filter on small screens*/
-    $(".toggle-sidebar").on('click',
-            {open_name: '<span class="fa fa-caret-right fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search',
-                close_name: '<span class="fa fa-caret-down fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search'}
-    , toggleCollapse);
+    $(".toggle-sidebar").on('click', {
+        open_name: '<span class="fa fa-caret-right fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search',
+        close_name: '<span class="fa fa-caret-down fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search'
+    }, toggleCollapse);
 
     /*Makes the previous and next buttons work*/
     $(".pagination-prev-btn,.pagination-next-btn").on('click', searchPagePaginate);
@@ -429,4 +448,72 @@ if (document.getElementById('about-page-identifier')) {
         populateAdvancedSearchForm("advanced-search-");
     }
     localStorage.isRefinedSearch = "false";
-} 
+
+} else if (document.getElementById('news-page-indicator')) {
+    var active_pubyears = {};
+    var active_article_types = {};
+
+    var conductSearchByObjects = function () {
+        //Go through each article, and see if it has any of the attributes of what's selected
+        var all_article_types = [];
+        for (var key in active_article_types) {
+            all_article_types.push(key);
+        }
+        var all_pubyears = [];
+        for (var key in active_pubyears) {
+            all_pubyears.push(key);
+        }
+
+        if (all_article_types.length === 0 && all_pubyears.length === 0) {
+            $(".news-article-card").show();
+        } else {
+            $(".news-article-card").each(function () {
+                var self = this;
+                var self_article_types = $(self).data('articletypelist');
+                var self_pubyear = $(self).data('pubyear');
+
+                var has_matching_article_type = false;
+                for (var x = 0; x < self_article_types.length; x++) {
+                    if (all_article_types.indexOf(self_article_types[x]) > -1) {
+                        has_matching_article_type = true;
+                        break;
+                    }
+                }
+                console.log("SElf pubyear: " + self_pubyear);
+                console.log("All year: " + JSON.stringify(all_pubyears));
+                var has_matching_pubyear = all_pubyears.indexOf(self_pubyear.toString()) > -1;
+
+                if (has_matching_article_type === true || has_matching_pubyear === true) {
+                    $(self).show();
+                } else {
+                    $(self).hide();
+                }
+            });
+        }
+    };
+
+    $(".search-article-type").on('click', function () {
+        var self = this;
+        var val = $(self).val();
+        var is_checked = $(self).is(':checked');
+        //If this is unchecked, remove this attribute from it
+        if (!is_checked) {
+            delete active_article_types[val];
+        } else {
+            active_article_types[val] = true;
+        }
+        conductSearchByObjects();
+    });
+
+    $(".search-publication-year").on('click', function () {
+        var self = this;
+        var val = $(self).val();
+        var is_checked = $(self).is(':checked');
+        if (!is_checked) {
+            delete active_pubyears[val];
+        } else {
+            active_pubyears[val] = true;
+        }
+        conductSearchByObjects();
+    });
+}

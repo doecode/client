@@ -1,142 +1,196 @@
 {{> wrapper/header}}
+<input type='hidden' id='news-page-indicator' />
 <style type='text/css'>
-   .news-article-card {
-      padding-top: 5px;
-      border-bottom: 1px solid #D6D5D4;
-   }
+  .publication-date {
+    float: left;
+    text-muted;
+  }
 
-   .publication-date {
-      float: left;
-      text-muted;
-   }
+  .article-type {
+    float: right;
+    text-muted;
+    text-align: right;
+  }
 
-   .article-type {
-      float: right;
-      text-muted;
-      text-align: right;
-   }
+  .row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-   .row.display-flex {
-      display: flex;
-      flex-wrap: wrap;
-   }
+  .row.display-flex>[class*='col-'] {
+    display: flex;
+    flex-direction: column;
+  }
 
-   .row.display-flex>[class*='col-'] {
-      display: flex;
-      flex-direction: column;
-   }
+  .news-article-card {
+    padding-top: 5px;
+    border-bottom: 1px solid #D6D5D4;
+  }
 
-   #article-list {
+  #article-list {
+    /*border-top: 1px solid #D6D5D4;*/
+    border-left: 1px solid #D6D5D4;
+    padding-left: 10px;
+  }
+
+  #article-list>div.news-article-card:nth-child(3n+2) {
+    border-left: 1px solid #D6D5D4;
+    border-right: 1px solid #D6D5D4;
+  }
+
+  #article-list>div.news-article-card:nth-child(-n+3) {
+    border-top: 1px solid #D6D5D4;
+  }
+
+  #article-list>div.news-article-card>span.article-type {
+    margin-top: -20px;
+  }
+
+  .article-title {
+    font-weight: 300;
+    font-size: 20px;
+  }
+
+  /*Treat teh cards differently on phones*/
+  @media only screen and (max-width:479px) and (min-width: 320px) {
+    #article-list>div.news-article-card {
       border-top: 1px solid #D6D5D4;
-   }
+      border-bottom: 1px solid #D6D5D4;
+      border-left: none;
+      border-right: none;
+    }
 
-   #article-list>div.news-article-card:nth-child(3n+2) {
-      border-left: 1px solid #D6D5D4;
-      border-right: 1px solid #D6D5D4;
-   }
+    #article-list>div.news-article-card:nth-child(3n+2) {
+      border-left: none;
+      border-right: none;
+    }
 
-   #article-list>div.news-article-card>span.article-type {
-      margin-top: -20px;
-   }
+  }
 
-   .article-title {
-      font-weight: 300;
-      font-size: 20px;
-   }
+  /*Treat teh cards differently on a tablet*/
+  @media only screen and (max-width:991px) and (min-width: 480px) {
+    #article-list>div.news-article-card {
+      border: 1px solid #D6D5D4;
+    }
+  }
 </style>
-<!--
-<div class="row">
-   <div class="col-lg-3 col-md-1"></div>
-   <div class="col-lg-6 col-md-10 col-xs-12 static-content">
--->
 <div class='container'>
-   <div class='row'>
-      <div class='col-xs-12'>
-         <br />
-         <div class="static-content-title">{{total_results}} Results</div>
-         <br />
-         <br />
+  <br />
+  <div class='row'>
+    <div class='col-sm-3 hide-xs'>
+      <div style='border-bottom: 1px solid #D6D5D4;'>
+        <br />
+        <div class="static-content-title">{{total_results}} Results</div>
+        <br />
       </div>
-   </div>
-   <div class='row'>
-      <div class='col-sm-3' style='border-top:1px solid #D6D5D4;'>
-         Left Sidebar
+      <br />
+      <span class='text-muted' style='font-size:16px;'>Article Types</span>
+      <div class="search-sidebar-checkbox-text">
+        {{#each article_types}}
+          <div>
+            <span>
+              <label style='font-size:15px;'>
+                <input class='search-checkbox search-article-type' name='article-type-filter' id='article-type-{{art_type}}' value='{{art_type}}' type='checkbox' /> <label title='{{value}}' class='search-input-label'
+                  for='article-type-{{art_type}}'><span style='display:none;'>text</span></label>&nbsp;{{art_type}} ({{count}})
+              </label>
+            </span>
+          </div>
+        {{/each}}
       </div>
-      <div class='col-sm-9' style='border-left:1px solid #D6D5D4;'>
-         <!--Right Side Title-->
-         <div class='row' style='border-bottom:1px solid #D6D5D4;'>
-            <div class='col-xs-12'>
-               <div class="static-content-title">News</div>
-               <br />
-            </div>
+      <br />
+      <span class='text-muted' style='font-size:16px;'>Publication Date</span>
+      <div class="search-sidebar-checkbox-text">
+        {{#each publication_date_years}}
+          <div>
+            <span>
+              <label style='font-size:15px;'>
+                <input class='search-checkbox search-publication-year' name='publication-date-filter' id='publication_date-{{pub_year}}' value='{{pub_year}}' type='checkbox' /> <label title='{{pub_year}}'
+                  class='search-input-label' for='publication_date-{{pub_year}}'><span style='display:none;'>text</span></label>&nbsp;{{pub_year}} ({{count}})
+              </label>
+            </span>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class='col-sm-9'>
+      <!--Right Side Title-->
+      <div class='row'>
+        <div class='col-xs-12'>
+          <br />
+          <br />
+          <br />
+        </div>
+        <br />
+      </div>
+      <div class='row' style='border-left:1px solid #D6D5D4;'>
+        <div class='col-xs-12'>
+          <br />
+          <div class="static-content-title" style='border-bottom:1px solid #D6D5D4;font-size:34px;padding-bottom:15px;'>News<br /></div>
+          <br />
+        </div>
+        <br />
+      </div>
+      <!--Latest article-->
+      <div class='row'>
+        <div class='col-xs-12' style='padding-top:20px;border-left:1px solid #D6D5D4;'>
+          <div class='text-muted publication-date'>{{featured_article.publication_date}}</div>
+          <div class='text-muted article-type'>
+            {{!--Comes out like <icon> Type--}}
+            {{#if featured_article.article_type.is_news}}
+              <span class='fa fa-newspaper-o'></span>
+            {{else if featured_article.article_type.is_updates_and_tips}}
+              <span class='fa fa-info-circle'></span>
+            {{else if featured_article.article_type.is_blog}}
+              <span class='fa fa-file-text-o'></span>
+            {{/if}}
+            {{featured_article.article_type.type}}
+          </div>
+          <br />
+          <a href='{{featured_article.url}}' style='font-size:28px;font-weight:300' title='{{featured_article.title}}' target="_blank" rel="noopener noreferrer">{{featured_article.title}}</a>
+          <br />
+          <br />
+          <p style='line-height:30px;'>
+            {{featured_article.content}}
             <br />
-         </div>
-         <!--Latest article-->
-         <div class='row'>
-            <div class='col-xs-12' style='padding-top:20px;'>
-               <div class='text-muted publication-date'>{{featured_article.publication_date}}</div>
-               <div class='text-muted article-type'>
-                  {{!--Comes out like <icon> Type--}}
-                  {{#if featured_article.article_type.is_news}}
-                     <span class='fa fa-newspaper-o'></span>
-                  {{else if featured_article.article_type.is_updates_and_tips}}
-                     <span class='fa fa-info-circle'></span>
-                  {{else if featured_article.article_type.is_blog}}
-                     <span class='fa fa-file-text-o'></span>
-                  {{/if}}
-                  {{featured_article.article_type.type}}
-               </div>
-               <br />
-               <a href='{{featured_article.url}}' style='font-size:28px;font-weight:300' title='{{featured_article.title}}' target="_blank" rel="noopener noreferrer">{{featured_article.title}}</a>
-               <br />
-               <br />
-               <p style='line-height:30px;'>
-                  {{featured_article.content}}
-                  <br />
-                  <br />
-                  {{#if featured_article.content_over_limit}}
-                     <a href='{{featured_article.url}}' title='{{featured_article.title}}' target="_blank" rel="noopener noreferrer">Read More</a>
-                  {{/if}}
-               </p>
-            </div>
-         </div>
-         <!--All of the other articles-->
-         <div class='row not-so-wide-row display-flex' id='article-list'>
-            {{#each refined_articles_list}}
-               <div class='col-md-4 col-sm-6 col-xs-12 news-article-card'>
-                  <span class='text-muted publication-date'>{{publication_date}}</span>
-                  <span class='text-muted article-type'>
-                     {{#each article_types}}
-                        {{#if is_news}}
-                           <span class='fa fa-newspaper-o'></span>
-                        {{else if is_updates_and_tips}}
-                           <span class='fa fa-info-circle'></span>
-                        {{else if is_blog}}
-                           <span class='fa fa-file-text-o'></span>
-                        {{/if}}
-                        {{type}}
-                        <br />
-                     {{/each}}
-                  </span>
-                  <br />
-                  <br />
-                  <div>
-                     <br />
-                     <br />
-                     <a href='{{url}}' class='article-title' title='{{title}}' target="_blank" rel="noopener noreferrer">{{title}}</a>
-                     <br />
-                     <br />
-                     <br />
-                  </div>
-               </div>
-            {{/each}}
-         </div>
+            <br />
+            {{#if featured_article.content_over_limit}}
+              <a href='{{featured_article.url}}' title='{{featured_article.title}}' target="_blank" rel="noopener noreferrer">Read More</a>
+            {{/if}}
+          </p>
+        </div>
       </div>
-   </div>
+      <!--All of the other articles-->
+      <div class='row display-flex' id='article-list'>
+        {{#each refined_articles_list}}
+          <div class='col-md-4 col-sm-6 col-xs-12 news-article-card' data-pubyear='{{publication_year}}' data-articletypelist='{{article_type_str}}'>
+            <span class='text-muted publication-date'>{{publication_date}}</span>
+            <span class='text-muted article-type'>
+              {{#each article_types}}
+                {{#if is_news}}
+                  <span class='fa fa-newspaper-o'></span>
+                {{else if is_updates_and_tips}}
+                  <span class='fa fa-info-circle'></span>
+                {{else if is_blog}}
+                  <span class='fa fa-file-text-o'></span>
+                {{/if}}
+                {{type}}
+                <br />
+              {{/each}}
+            </span>
+            <br />
+            <br />
+            <div>
+              <br />
+              <br />
+              <a href='{{url}}' class='article-title' title='{{title}}' target="_blank" rel="noopener noreferrer">{{title}}</a>
+              <br />
+              <br />
+              <br />
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
 </div>
-<!--
-   </div>
-   <div class="col-lg-3 col-md-1"></div>
-</div>
-  -->
 {{> wrapper/footer}}

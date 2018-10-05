@@ -1,78 +1,78 @@
 <div class='row hide-sm hide-md hide-lg'>
-     <div class='col-xs-12'>
-	  <div class='search-sort-dropdown'>
-	       {{> search/sort-dropdown}}
-	  </div>
-     </div>
+	<div class='col-xs-12'>
+		<div class='search-sort-dropdown'>
+			{{> search/sort-dropdown}}
+		</div>
+	</div>
 </div>
 <div class="row">
-     <div class="col-md-1"></div>
-     <div class="col-md-12 col-xs-12">
-	  <br/>
-	  <h4 class="search-sidebar-filter-title">REFINE BY:</h4>
-	  <span class='search-for-filter-text search-for-filter-header'>Project Type</span>
-	  <div class="search-sidebar-checkbox-text">
-	       {{#each availabilities_list}}
-	       <div>
-		    <span>
-			 <label>
-			      <input class='search-checkbox' id='availabilitycheck-{{value}}' name='accessibility' value='{{value}}' type='checkbox' {{#if is_checked}}checked{{/if}}/>
-				     <label title='{{label}}' class='search-input-label' for='availabilitycheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
-			 </label>
-		    </span>
-	       </div>
-	       {{/each}}
-	  </div>
-     </div>
-     <div class="col-md-1"></div>
+	<div class="col-md-1"></div>
+	<div class="col-md-12 col-xs-12">
+		<br />
+		<h4 class="search-sidebar-filter-title">REFINE BY:</h4>
+		<span class='search-for-filter-text search-for-filter-header'>Project Type</span>
+		<div class="search-sidebar-checkbox-text">
+			{{#each availabilities_list}}
+				<div>
+					<span>
+						<label>
+							<input class='search-checkbox' id='availabilitycheck-{{value}}' name='accessibility' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{label}}' class='search-input-label'
+							 for='availabilitycheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
+						</label>
+					</span>
+				</div>
+			{{/each}}
+		</div>
+	</div>
+	<div class="col-md-1"></div>
 </div>
 <div class="row">
-     <div class="col-md-12 col-xs-12">
-	  <br/>
-	  <span class='search-for-filter-text search-for-filter-header'>LICENSES</span>
-	  <div class="search-sidebar-checkbox-text">
-	       {{#each license_options_list}}
-	       <div>
-		    <span>
-			 <label>
-			      <input class='search-checkbox' id='licensescheck-{{value}}' name='licenses' value='{{value}}' type='checkbox' {{#if is_checked}}checked{{/if}}/>
-				     <label title='{{label}}' class='search-input-label' for='licensescheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
-			 </label>
-		    </span>
-	       </div>
-	       {{/each}}
-	  </div>
-     </div>
+	<div class="col-md-12 col-xs-12">
+		<br />
+		<span class='search-for-filter-text search-for-filter-header'>LICENSES</span>
+		<div class="search-sidebar-checkbox-text">
+			{{#each license_options_list}}
+				<div>
+					<span>
+						<label>
+							<input class='search-checkbox' id='licensescheck-{{value}}' name='licenses' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{label}}' class='search-input-label'
+							 for='licensescheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
+						</label>
+					</span>
+				</div>
+			{{/each}}
+		</div>
+	</div>
 </div>
 <div class="row">
-     <div class="col-md-12 col-xs-12">
-	  <br/>
-	  <span class='search-for-filter-text search-for-filter-header'>SOFTWARE TYPE</span>
-	  <div class="search-sidebar-checkbox-text">
-	       {{#each software_type_options_list}}
-	       <div>
-		    <span>
-			 <label>
-			      <input class='search-checkbox' id='softwaretypecheck-{{value}}' name='software_type' value='{{value}}' type='checkbox' {{#if is_checked}}checked{{/if}}/>
-				     <label title='{{label}}' class='search-input-label' for='softwaretypecheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
-			 </label>
-		    </span>
-	       </div>
-	       {{/each}}
-	  </div>
-     </div>
+	<div class="col-md-12 col-xs-12">
+		<br />
+		<span class='search-for-filter-text search-for-filter-header'>SOFTWARE TYPE</span>
+		<div class="search-sidebar-checkbox-text">
+			{{#each software_type_options_list}}
+				<div>
+					<span>
+						<label>
+							<input class='search-checkbox' id='softwaretypecheck-{{value}}' name='software_type' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{label}}' class='search-input-label'
+							 for='softwaretypecheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
+						</label>
+					</span>
+				</div>
+			{{/each}}
+		</div>
+	</div>
 </div>
 <div class="row hide-sm hide-xs release-date-sidebar-container">
-     <div class="col-md-12 col-xs-12">
-	  <br/>
-	  <span class='search-for-filter-text search-for-filter-header'>Release Date</span>
-	  <div class="">
-	       <!--Date filter-->
-	       <div class="daterange_div">
-		    <div id="chart"></div>
-                    <div id="control"></div>
-	       </div>
-	  </div>
-     </div>
+	<div class="col-md-12 col-xs-12">
+		<br />
+		<span class='search-for-filter-text search-for-filter-header'>Release Date</span>
+		<div class="">
+			<!--Date filter-->
+			<div class="daterange_div">
+				<div id="chart"></div>
+				<div id="control"></div>
+			</div>
+		</div>
+	</div>
 </div>
-<br/>
+<br />
