@@ -401,8 +401,7 @@ if (document.getElementById('about-page-identifier')) {
     $(".results-export-link").on('click', function () {
         var format = $(this).data('format');
         var search_form_data = $("#search-page-form").serialize();
-        console.log(format);
-        console.log(search_form_data);
+
         window.open('/' + APP_NAME + '/dissemination/export-search-results?format=' + format + "&" + search_form_data, '_blank');
     });
 
@@ -479,8 +478,7 @@ if (document.getElementById('about-page-identifier')) {
                         break;
                     }
                 }
-                console.log("SElf pubyear: " + self_pubyear);
-                console.log("All year: " + JSON.stringify(all_pubyears));
+
                 var has_matching_pubyear = all_pubyears.indexOf(self_pubyear.toString()) > -1;
 
                 if (has_matching_article_type === true || has_matching_pubyear === true) {
