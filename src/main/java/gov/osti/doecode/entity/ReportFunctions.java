@@ -142,7 +142,7 @@ public class ReportFunctions {
                //Related Identifiers
                row_vals.add("\"" + JsonUtils.getString(rec, "related_identifiers", "").replaceAll("\"", "\"\"") + "\"");
 
-               docs_rows.add(DOECODEUtils.makeTokenSeparatedList(row_vals, ", "));
+               docs_rows.add(DOECODEUtils.makeTokenSeparatedList(row_vals, ","));
           }
 
           String return_data = StringUtils.join(SEARCH_RESULTS_HEADER_LIST, ",") + "\n";
