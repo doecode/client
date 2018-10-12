@@ -44,7 +44,7 @@ public class SearchFunctions {
         public static final DateTimeFormatter SEARCH_RESULTS_DESCRIPTION_FORMAT = DateTimeFormatter
                         .ofPattern("MM-dd-yyyy");
         public static final DateTimeFormatter SOLR_DATE_ONLY_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        public static final DateTimeFormatter NEWS_ARTICLE_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        public static final DateTimeFormatter NEWS_ARTICLE_DATE_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
         public static int MAX_WORD_IN_FEATURED_ARTICLE = 75;
 
@@ -1631,6 +1631,7 @@ public class SearchFunctions {
                                 }
                                 row.put("article_type_str", article_types_list.toString());
                                 row.set("article_types", article_types_with_other);
+                                row.put("need_break", (article_types_with_other.size() == 1));
                                 refined_articles_list.add(row);
                         }
 
