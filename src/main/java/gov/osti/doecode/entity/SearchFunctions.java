@@ -51,7 +51,7 @@ public class SearchFunctions {
         public static ObjectNode conductSearch(HttpServletRequest request, ServletContext context, long page_num) {
                 ObjectNode return_data = doSearchPost(request, Init.backend_api_url);
 
-                // Get the search form data and get teh page number
+                // Get the search form data and get the page number
                 ObjectNode search_form_data = (ObjectNode) return_data.get("search_form_data");
                 search_form_data.put("pageNum", page_num);
 
@@ -296,7 +296,7 @@ public class SearchFunctions {
                 String accessibility_array = JsonUtils.getString(post_data, "accessibility", "");
                 if (StringUtils.isNotBlank(accessibility_array)
                                 && JsonUtils.parseArrayNode(accessibility_array).size() > 0) {
-                        // Get teh accessibility array so we can get some display values
+                        // Get the accessibility array so we can get some display values
                         ArrayNode accessiblity_display_vals = DOECODEServletContextListener
                                         .getJsonList(DOECODEJson.AVAILABILITY_KEY);
 
@@ -1679,7 +1679,7 @@ public class SearchFunctions {
                         featured_article.put("article_type", featured_article_first_type);
 
                         return_data.set("featured_article", featured_article);
-                        // take out the first because it's teh featured article
+                        // take out the first because it's the featured article
                         return_data.set("refined_articles_list", refined_articles_list);
 
                 } catch (Exception e) {

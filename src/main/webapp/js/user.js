@@ -780,7 +780,7 @@ if (document.getElementById('login-page-identifier')) {
     //Makes the create account button work
     $("#create-account-btn").on('click', createAccount);
 
-    //trigger the create account function when you press enter on teh confirm password field
+    //trigger the create account function when you press enter on the confirm password field
     $("#confirm-password").on('keyup', {callback: createAccount}, triggerByEnter);
 
 } else if (document.getElementById('forgot-password-page-identifier')) {
@@ -826,7 +826,7 @@ if (document.getElementById('login-page-identifier')) {
     doAuthenticatedAjax('GET', API_BASE + 'user/users', parseGetUserListData, null, parseGetUserListError);
 
 
-    //Makes teh "Users Requesting Roles" work
+    //Makes the "Users Requesting Roles" work
     $("#requesting-roles-collapse-btn").on('click',
             {open_name: '<strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>',
                 close_name: '<strong><span class="fa fa-caret-down fa-page-caret clickable"></span> Users Requesting Roles</strong>'}

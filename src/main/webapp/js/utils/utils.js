@@ -485,7 +485,7 @@ var setCommonModalMessage = function (options) {
         });
     }
 
-    //If they want to show teh close button, we will
+    //If they want to show the close button, we will
     if (options.showClose && options.showClose === true) {
         $("#common-message-dialog-close-btn").show();
     }

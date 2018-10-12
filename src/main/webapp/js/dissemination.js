@@ -15,7 +15,7 @@ const ABOUT_TOP_URLS = [
     '/' + APP_NAME + '/images/Submit-min.png', '/' + APP_NAME + '/images/Submit_hover-min.png'
 ];
 
-/*Handles the 3 images on teh top of the about page*/
+/*Handles the 3 images on the top of the about page*/
 var handleAboutTopMouseEnter = function () {
     var dataHover = $(this).data('hover');
     $(this).attr('src', ABOUT_TOP_URLS[parseInt(dataHover)]);
@@ -164,7 +164,7 @@ var restartSearchToFirstpage = function () {
 };
 
 var goBackToSearch = function () {
-    //If the previous was teh search page, we'll go there. Otherwise, we'll just take them to a blank search
+    //If the previous was the search page, we'll go there. Otherwise, we'll just take them to a blank search
     var previous_page = document.referrer;
     var current_page = window.location.href.toString();
     var environment = current_page.substring(0, current_page.indexOf('/biblio'));
@@ -252,19 +252,19 @@ var setUpDateSlider = function () {
         //When you drag the slider, this is triggered
         $('.daterange_div').on('mouseup', '.google-visualization-controls-slider-thumb', function (event) {
             if (event.which == 1) {
-                //Values pulled from teh slider
+                //Values pulled from the slider
                 var yr_until = formatter.formatValue(slider.getState().highValue);
                 var yr_from = formatter.formatValue(slider.getState().lowValue);
 
                 //The dates from the search form
                 var current_start_date = $("#search-date_earliest").val();
                 var current_end_date = $("#search-date_latest").val();
-                //The years from waht we found in teh search form
+                //The years from what we found in the search form
                 var date_pattern = new RegExp(/^\d{4}/);
                 var date_start_found = date_pattern.exec(current_start_date);
                 var date_end_found = date_pattern.exec(current_end_date);
 
-                //If there's no value for teh start date, or no value for the end date, or if the date we have isn't equal to what was triggered by the slider, we continue with re-submitting the search
+                //If there's no value for the start date, or no value for the end date, or if the date we have isn't equal to what was triggered by the slider, we continue with re-submitting the search
                 if (!current_start_date || !current_end_date || (date_start_found && date_start_found[0] != yr_from) || (date_end_found && date_end_found[0] != yr_until)) {
                     $('#search-date_earliest').val(yr_from + "-01-01T05:00:01.000Z");
                     $('#search-date_latest').val(yr_until + "-12-31T23:59:59.001Z");
@@ -382,7 +382,7 @@ if (document.getElementById('about-page-identifier')) {
     //Allows you to search by author name
     $(".author-search-name").on('click', authorSearchDropdownName);
 
-    //Makes the x next to the items in teh search results description work
+    //Makes the x next to the items in the search results description work
     $(".search-for-filter-x").on('click', removeSearchResultDescriptionItem);
 
     $(".search-for-modify-search").on('click', modify_search);

@@ -30,7 +30,7 @@ var post_gitlab_form_data = function () {
         if (is_required && is_conditional_required === true) {
             //The value of the associated field
             var associated_field_val = $("#" + $(self).data('associatedfield')).val().trim();
-            //Get teh values that, if found in the associated field, would make this field be required
+            //Get the values that, if found in the associated field, would make this field be required
             var acceptable_vals = $(self).data('associatedvalues').split(',');
             //Get whether we have a value in this field
             var has_value = val != '';
