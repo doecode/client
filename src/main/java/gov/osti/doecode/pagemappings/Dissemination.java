@@ -36,7 +36,7 @@ public class Dissemination extends HttpServlet {
                 String current_page = "";
                 ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
                 ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
-                ArrayNode librariesList = JsonUtils.MAPPER.createArrayNode();
+                ArrayNode extrasList = JsonUtils.MAPPER.createArrayNode();
 
                 /*
                  * Determine what page we're on, and load the appropriate title, template, etc
@@ -90,7 +90,7 @@ public class Dissemination extends HttpServlet {
                         String page_num_param = request.getParameter("page");
                         long page_num = StringUtils.isNumeric(page_num_param) ? Long.parseLong(page_num_param) : 1;
                         output_data = SearchFunctions.conductSearch(request, getServletContext(), page_num);
-                        librariesList.add("google-chart-loader.min");
+                        extrasList.add("libraries/google-chart-loader.min");
 
                 } else if (remaining.equals("/search")) {
                         page_title = "DOE CODE: Advanced Search";
@@ -107,7 +107,7 @@ public class Dissemination extends HttpServlet {
 
                                 // If, and only if, this is a valid code id
                                 if (JsonUtils.getBoolean(biblio_data, "is_valid", false)) {
-                                        librariesList.add("clipboard.min");
+                                        extrasList.add("libraries/clipboard.min");
                                         output_data = biblio_data;
 
                                 } else {
@@ -161,7 +161,7 @@ public class Dissemination extends HttpServlet {
 
                 // Send in this object, and get a hold of the common data, like the classes
                 // needed to render the homepage correctly and such
-                output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, librariesList, null,
+                output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, extrasList, null,
                                 request);
 
                 // Write the template out

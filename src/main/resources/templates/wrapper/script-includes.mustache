@@ -17,19 +17,19 @@
 <noscript>Your browser does not support JavaScript!</noscript>
 
 {{#each jsLibraries}}
-<script src='/${app_name}/js/libraries/{{.}}.js' type='text/javascript' defer></script>
-<noscript>Your browser does not support JavaScript!</noscript>
+   <script src='/${app_name}/js/{{.}}.js' type='text/javascript' defer></script>
+   <noscript>Your browser does not support JavaScript!</noscript>
 {{/each}}
 
 {{#each jsFiles}}
-<script src='/${app_name}/js/{{.}}.${timestamp}.js' type='text/javascript' defer></script>
-<noscript>Your browser does not support JavaScript!</noscript>
+   <script src='/${app_name}/js/{{.}}.${timestamp}.js' type='text/javascript' defer></script>
+   <noscript>Your browser does not support JavaScript!</noscript>
 {{/each}}
 
 <script src='/${app_name}/js/doecode.${timestamp}.js' type='text/javascript' defer></script>
 <noscript>Your browser does not support JavaScript!</noscript>
 
 <!--Extra CSS files that needed to be loaded later so they aren't render blocking-->
-<link rel='stylesheet' href='/${app_name}/css/font-awesome-4.7.0/css/font-awesome.min.css'/>
-<link rel='stylesheet' href='/${app_name}/css/jquery-ui-1.12.1.custom/jquery-ui.min.css'/>
-<link rel='stylesheet' href='/${app_name}/css/chosen/chosen.min.css'/>
+<link rel='stylesheet' href='/${app_name}/css/font-awesome-4.7.0/css/font-awesome.min.css' />
+<link rel='stylesheet' href='/${app_name}/css/jquery-ui-1.12.1.custom/jquery-ui.min.css' />
+<link rel='stylesheet' href='/${app_name}/css/chosen/chosen.min.css' />

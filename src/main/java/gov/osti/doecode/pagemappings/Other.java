@@ -32,7 +32,7 @@ public class Other extends HttpServlet {
                 String current_page = "";
                 ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
                 ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
-                ArrayNode jsLibrariesList = JsonUtils.MAPPER.createArrayNode();
+                ArrayNode extraJSList = JsonUtils.MAPPER.createArrayNode();
                 ServletContext context = getServletContext();
                 switch (remaining) {
                 case "gitlab-signup":
@@ -72,7 +72,7 @@ public class Other extends HttpServlet {
 
                 // Send in this object, and get a hold of the common data, like the classes
                 // needed to render the homepage correctly and such
-                output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, jsLibrariesList,
+                output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, extraJSList,
                                 null, request);
 
                 // Write the template out

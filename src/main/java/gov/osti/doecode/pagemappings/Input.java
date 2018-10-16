@@ -37,7 +37,7 @@ public class Input extends HttpServlet {
 
                 ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
                 ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
-                ArrayNode librariesList = JsonUtils.MAPPER.createArrayNode();
+                ArrayNode extraJSList = JsonUtils.MAPPER.createArrayNode();
                 ArrayNode cssFilesList = new ArrayNode(JsonUtils.INSTANCE);
                 boolean is_inputjs = false;
 
@@ -210,26 +210,26 @@ public class Input extends HttpServlet {
                 output_data.put("software_type", software_type_param.substring(0, 1).toUpperCase());
 
                 // These js files are needed on all input pages
-                librariesList.add("jquery.dataTables.min");
-                librariesList.add("dataTables.responsive.min");
+                extraJSList.add("libraries/jquery.dataTables.min");
+                extraJSList.add("libraries/dataTables.responsive.min");
                 // Only on the input form (Not on the projects or pending pages)
                 if (is_inputjs) {
-                        librariesList.add("mobx.umd-3.3.1");
-                        librariesList.add("validator.min-9.1.1");
-                        librariesList.add("libphonenumber-js.min-0.4.39");
-                        librariesList.add("dropzone-5.2.0-IEfix.min"); // NOTE: custom "handlefiles" function
-                                                                                 // fix for IE issue. Test in IE if
-                                                                                 // library is updated.
-                        librariesList.add("utils/Validation");
-                        librariesList.add("stores/MetadataStore");
-                        librariesList.add("stores/BaseData");
-                        librariesList.add("stores/Contributor");
-                        librariesList.add("stores/Developer");
-                        librariesList.add("stores/SponsoringOrganization");
-                        librariesList.add("stores/ResearchOrganization");
-                        librariesList.add("stores/ContributingOrganization");
-                        librariesList.add("stores/RelatedIdentifier");
-                        librariesList.add("stores/Metadata");
+                        extraJSList.add("libraries/mobx.umd-3.3.1");
+                        extraJSList.add("libraries/validator.min-9.1.1");
+                        extraJSList.add("libraries/libphonenumber-js.min");
+                        extraJSList.add("libraries/dropzone-5.2.0-IEfix.min"); // NOTE: custom "handlefiles" function
+                                                                               // fix for IE issue. Test in IE if
+                                                                               // library is updated.
+                        extraJSList.add("utils/Validation");
+                        extraJSList.add("stores/MetadataStore");
+                        extraJSList.add("stores/BaseData");
+                        extraJSList.add("stores/Contributor");
+                        extraJSList.add("stores/Developer");
+                        extraJSList.add("stores/SponsoringOrganization");
+                        extraJSList.add("stores/ResearchOrganization");
+                        extraJSList.add("stores/ContributingOrganization");
+                        extraJSList.add("stores/RelatedIdentifier");
+                        extraJSList.add("stores/Metadata");
                         jsFilesList.add("input");
 
                         cssFilesList = getInputFormCssFiles(cssFilesList);
@@ -240,7 +240,7 @@ public class Input extends HttpServlet {
                 output_data.put("is_logged_in_user_an_admin", isCurrentlyLoggedInUserAnAdmin(request));
 
                 // get common data, like the classes needed for the header and footer
-                output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, librariesList,
+                output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, extraJSList,
                                 cssFilesList, request);
 
                 // Write it out

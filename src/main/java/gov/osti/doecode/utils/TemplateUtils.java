@@ -82,13 +82,13 @@ public class TemplateUtils {
       public static final String PAGE_NEWS = "news";
       public static final String PAGE_FAQ = "faq";
 
-      public static final ObjectNode GET_COMMON_DATA(ObjectNode output_data, String current_page, ArrayNode jsFilesList, ArrayNode jsLibrariesList,
+      public static final ObjectNode GET_COMMON_DATA(ObjectNode output_data, String current_page, ArrayNode jsFilesList, ArrayNode extraJSList,
                   ArrayNode cssFilesList, HttpServletRequest request) throws IOException {
             output_data.put("active_page", current_page);
             if (!JsonUtils.containsKey(output_data, "user_data")) {
                   output_data.put("user_data", UserFunctions.getUserDataFromCookie(request));
             }
-            output_data.put("jsLibraries", jsLibrariesList);
+            output_data.put("jsLibraries", extraJSList);
             output_data.put("jsFiles", jsFilesList);
             output_data.put("cssFiles", cssFilesList);
             output_data.put("navbar", GET_NAVBAR_CLASSES(current_page));
