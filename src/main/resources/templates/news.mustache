@@ -23,8 +23,10 @@
   }
 
   .news-article-card {
-    padding-top: 5px;
+    padding: 25px 15px 20px;
     border-bottom: 1px solid #D6D5D4;
+    min-height: 250px;
+    height: 250px;
   }
 
   #article-list {
@@ -51,7 +53,7 @@
     font-size: 20px;
   }
 
-  /*Treat teh cards differently on phones*/
+  /*Treat the cards differently on phones*/
   @media only screen and (max-width:479px) and (min-width: 320px) {
     #article-list>div.news-article-card {
       border-top: 1px solid #D6D5D4;
@@ -67,7 +69,7 @@
 
   }
 
-  /*Treat teh cards differently on a tablet*/
+  /*Treat the cards differently on a tablet*/
   @media only screen and (max-width:991px) and (min-width: 480px) {
     #article-list>div.news-article-card {
       border: 1px solid #D6D5D4;
@@ -177,15 +179,13 @@
                 <br />
               {{/each}}
             </span>
+            {{#need_break}}
+              <br />
+            {{/need_break}}
             <br />
             <br />
             <div>
-              <br />
-              <br />
               <a href='{{url}}' class='article-title' title='{{title}}' target="_blank" rel="noopener noreferrer">{{title}}</a>
-              <br />
-              <br />
-              <br />
             </div>
           </div>
         {{/each}}
