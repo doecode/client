@@ -20,6 +20,7 @@ public class Init extends HttpServlet {
         private static Logger log = LoggerFactory.getLogger(Init.class.getName());
         public static Handlebars handlebars;
         public static Handlebars handlebarsUser;
+        public static Handlebars handlebarsSearch;
         public static String app_name;
         public static String google_analytics_id;
         public static String google_analytics_domain;
@@ -51,6 +52,10 @@ public class Init extends HttpServlet {
                 TemplateLoader loader2 = new ServletContextTemplateLoader(context, "/WEB-INF/classes/templates/user",
                                 ".mustache");
                 handlebarsUser = new Handlebars(loader2);
+
+                TemplateLoader loader3 = new ServletContextTemplateLoader(context, "/WEB-INF/class/templates/search",
+                                ".mustache");
+                handlebarsSearch = new Handlebars(loader3);
 
                 // Load up the properties file, and begin pulling data from it
                 try {
