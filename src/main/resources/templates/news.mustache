@@ -86,12 +86,12 @@
         <br />
       </div>
       <br />
-      <span class='text-muted' style='font-size:16px;'>Article Types</span>
-      <div class="search-sidebar-checkbox-text">
+      <span class='search-for-filter-text search-for-filter-header'>Article Types</span>
+      <div class="search-sidebar-checkbox-text" style='margin-top:8px;'>
         {{#each article_types}}
           <div>
             <span>
-              <label style='font-size:15px;'>
+              <label style='font-size:14.45px;'>
                 <input class='search-checkbox search-article-type' name='article-type-filter' id='article-type-{{art_type}}' value='{{art_type}}' type='checkbox' /> <label title='{{value}}' class='search-input-label'
                   for='article-type-{{art_type}}'><span style='display:none;'>text</span></label>&nbsp;{{art_type}} ({{count}})
               </label>
@@ -100,12 +100,12 @@
         {{/each}}
       </div>
       <br />
-      <span class='text-muted' style='font-size:16px;'>Publication Date</span>
-      <div class="search-sidebar-checkbox-text">
+      <span class='search-for-filter-text search-for-filter-header'>Publication Date</span>
+      <div class="search-sidebar-checkbox-text" style='margin-top:8px;'>
         {{#each publication_date_years}}
           <div>
             <span>
-              <label style='font-size:15px;'>
+              <label style='font-size:14.45px;'>
                 <input class='search-checkbox search-publication-year' name='publication-date-filter' id='publication_date-{{pub_year}}' value='{{pub_year}}' type='checkbox' /> <label title='{{pub_year}}'
                   class='search-input-label' for='publication_date-{{pub_year}}'><span style='display:none;'>text</span></label>&nbsp;{{pub_year}} ({{count}})
               </label>
