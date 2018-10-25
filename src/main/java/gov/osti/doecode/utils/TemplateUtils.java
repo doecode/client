@@ -3,7 +3,6 @@ package gov.osti.doecode.utils;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.jknack.handlebars.Context;
-import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.JsonNodeValueResolver;
 import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.context.FieldValueResolver;
@@ -83,8 +82,8 @@ public class TemplateUtils {
       public static final String PAGE_NEWS = "news";
       public static final String PAGE_FAQ = "faq";
 
-      public static final ObjectNode GET_COMMON_DATA(ObjectNode output_data, String current_page, ArrayNode jsFilesList,
-                  ArrayNode extraJSList, ArrayNode cssFilesList, HttpServletRequest request) throws IOException {
+      public static final ObjectNode GET_COMMON_DATA(ObjectNode output_data, String current_page, ArrayNode jsFilesList, ArrayNode extraJSList,
+                  ArrayNode cssFilesList, HttpServletRequest request) throws IOException {
             output_data.put("active_page", current_page);
             if (!JsonUtils.containsKey(output_data, "user_data")) {
                   output_data.put("user_data", UserFunctions.getUserDataFromCookie(request));
@@ -194,22 +193,15 @@ public class TemplateUtils {
             HashMap data_for_template = new HashMap();
             data_for_template.put("user_data", user_data);
             data_for_template.put("app_name", Init.app_name);
-            template_data = compileTemplateToString(context, Init.handlebarsUser, data_for_template,
-                        TEMPLATE_SIGNIN_STATUS);
+            try {
+                  Template t = Init.handlebarsUser.compile(TEMPLATE_SIGNIN_STATUS);
+                  template_data = t.apply(data_for_template);
+
+            } catch (Exception e) {
+                  log.error("Exception: " + e);
+            }
 
             return template_data;
-      }
-
-      public static String compileTemplateToString(ServletContext context, Handlebars handlebars, HashMap data,
-                  String template) {
-            String template_string = "";
-            try {
-                  Template t = handlebars.compile(template);
-                  template_string = t.apply(data);
-            } catch (Exception e) {
-                  log.error("Exception in compiling template to string: " + e.getMessage());
-            }
-            return template_string;
       }
 
       public static void writeOutTemplateData(String page_title, String template, HttpServletResponse response,

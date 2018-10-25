@@ -1558,8 +1558,18 @@ public class SearchFunctions {
                 ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
                 ArrayNode news_data_raw_list = JsonUtils.MAPPER.createArrayNode();
                 try {
-                        String result = getRawNewsData(null, null);
-                        ObjectNode news_data_raw = JsonUtils.parseObjectNode(result);
+                        StringBuilder result = new StringBuilder();
+                        URL url = new URL(news_url);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("GET");
+                        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                        String line;
+                        while ((line = rd.readLine()) != null) {
+                                result.append(line);
+                        }
+                        rd.close();
+                        conn.disconnect();
+                        ObjectNode news_data_raw = JsonUtils.parseObjectNode(result.toString());
                         if (news_data_raw.has("response")) {
                                 news_data_raw_list = (ArrayNode) news_data_raw.get("response").get("docs");
                         } else {
@@ -1679,56 +1689,5 @@ public class SearchFunctions {
                 }
 
                 return return_data;
-        }
-
-        /**
-         * Since mustache templates don't allow the application of json when using
-         * templates compiled to strings, we need a method that packages the news data
-         * into hashmaps, which the mustache compiler does accept when compiling to
-         * strings
-         */
-        public static ObjectNode getNewsData(ArrayNode article_types, ArrayNode publication_years) {
-                ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
-
-                try {
-                        String raw_results = getRawNewsData(article_types, publication_years);
-                        ArrayNode news_data_raw_list = JsonUtils.MAPPER.createArrayNode();
-                        ObjectNode news_data_raw = JsonUtils.parseObjectNode(raw_results);
-                        if (news_data_raw.has("response")) {
-                                news_data_raw_list = (ArrayNode) news_data_raw.get("response").get("docs");
-                        } else {
-                                return_data.put("error", "An error occurred. News data couldn't be loaded.");
-                        }
-
-                        // Package the data into maps
-
-                        // Compile into a template
-                } catch (Exception e) {
-                        log.error("Exception in getting news article data: " + e.getMessage());
-                }
-                return return_data;
-        }
-
-        private static String getRawNewsData(ArrayNode article_types, ArrayNode publication_years) throws Exception {
-                // Get the data
-                StringBuilder result = new StringBuilder();
-                URL url = new URL(Init.news_page_data_url
-                                + getNewsArticlePageURLParams(article_types, publication_years));
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                String line;
-                while ((line = rd.readLine()) != null) {
-                        result.append(line);
-                }
-                rd.close();
-                conn.disconnect();
-                return result.toString();
-        }
-
-        private static String getNewsArticlePageURLParams(ArrayNode article_types, ArrayNode publication_years) {
-                String url = "";
-
-                return url;
         }
 }
