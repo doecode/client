@@ -53,7 +53,7 @@ public class Init extends HttpServlet {
                                 ".mustache");
                 handlebarsUser = new Handlebars(loader2);
 
-                TemplateLoader loader3 = new ServletContextTemplateLoader(context, "/WEB-INF/class/templates/search",
+                TemplateLoader loader3 = new ServletContextTemplateLoader(context, "/WEB-INF/classes/templates/search",
                                 ".mustache");
                 handlebarsSearch = new Handlebars(loader3);
 

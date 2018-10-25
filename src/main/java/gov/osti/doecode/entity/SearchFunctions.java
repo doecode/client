@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,7 +44,8 @@ public class SearchFunctions {
         public static final DateTimeFormatter MLA_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM. yyyy.");
         public static final DateTimeFormatter SEARCH_RESULTS_DESCRIPTION_FORMAT = DateTimeFormatter
                         .ofPattern("MM-dd-yyyy");
-        public static final DateTimeFormatter SOLR_DATE_ONLY_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // MUST REMOVE "T" and "Z" from string
+        public static final DateTimeFormatter SOLR_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm:ss");
         public static final DateTimeFormatter NEWS_ARTICLE_DATE_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
         public static int MAX_WORD_IN_FEATURED_ARTICLE = 75;
@@ -1554,12 +1556,12 @@ public class SearchFunctions {
          * each type found, an array of publication date years and the number of
          * instances of each year, and a list of the articles themselves
          */
-        public static ObjectNode getNewsPageData(String news_url) {
+        public static ObjectNode getNewsPageData(String news_url, ObjectNode request_data) {
                 ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
                 ArrayNode news_data_raw_list = JsonUtils.MAPPER.createArrayNode();
                 try {
                         StringBuilder result = new StringBuilder();
-                        URL url = new URL(news_url);
+                        URL url = new URL(news_url + makeNewsURLParams(request_data));
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         conn.setRequestMethod("GET");
                         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
@@ -1587,8 +1589,8 @@ public class SearchFunctions {
                                 row.put("url", article.findPath("url").asText(""));
                                 row.put("title", article.findPath("label").asText(""));
                                 row.put("content", article.findPath("content").asText(""));
-                                LocalDate publication_date = LocalDate.parse(StringUtils.substringBefore(
-                                                article.findPath("ds_created").asText(""), "T"), SOLR_DATE_ONLY_FORMAT);
+                                LocalDateTime publication_date = LocalDateTime.parse(article.findPath("ds_created")
+                                                .asText("").replaceAll("T", "").replaceAll("Z", ""), SOLR_DATE_FORMAT);
                                 row.put("publication_date", publication_date.format(NEWS_ARTICLE_DATE_FORMAT));
                                 row.put("publication_year", publication_date.getYear());
                                 // If we already have a publication year, just increment the amount that we have
@@ -1688,6 +1690,35 @@ public class SearchFunctions {
                         return_data.put("error", "An error occurred. News data couldn't be loaded.");
                 }
 
+                return return_data;
+        }
+
+        private static String makeNewsURLParams(ObjectNode request_params) {
+                String return_data = "";
+                if (request_params != null) {
+                        // Check for article types
+                        ArrayNode article_types = request_params.has("article_types")
+                                        ? (ArrayNode) request_params.get("article_types")
+                                        : JsonUtils.MAPPER.createArrayNode();
+                        ArrayList<String> article_types_join_list = new ArrayList<String>();
+                        for (JsonNode jn : article_types) {
+                                String type = "" + jn.asText("") + "";
+                                article_types_join_list.add(type);
+                        }
+                        if (article_types_join_list.size() > 0) {
+                                return_data += ("&fq=sm_vid_Article_Type:("
+                                                + StringUtils.join(article_types_join_list, " OR ") + ")");
+                        }
+
+                        // Check for publication dates
+                        if (request_params.has("publication_date")) {
+                                String publication_date = request_params.get("publication_date").asText("");
+                                LocalDateTime pub_date_time = LocalDateTime.parse(publication_date, SOLR_DATE_FORMAT);
+                                int year = pub_date_time.getYear();
+                                return_data += ("&fq=ds_created:[" + year + "-01-01T00:00:01Z TO " + year
+                                                + "-12-31T11:59:59Z]");
+                        }
+                }
                 return return_data;
         }
 }
