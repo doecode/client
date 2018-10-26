@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -25,6 +26,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.jknack.handlebars.internal.lang3.ArrayUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.javalite.http.Get;
+import org.javalite.http.Http;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 import org.slf4j.Logger;
@@ -1560,18 +1563,14 @@ public class SearchFunctions {
                 ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
                 ArrayNode news_data_raw_list = JsonUtils.MAPPER.createArrayNode();
                 try {
-                        StringBuilder result = new StringBuilder();
-                        URL url = new URL(news_url + makeNewsURLParams(request_data));
-                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                        conn.setRequestMethod("GET");
-                        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                        String line;
-                        while ((line = rd.readLine()) != null) {
-                                result.append(line);
-                        }
-                        rd.close();
-                        conn.disconnect();
-                        ObjectNode news_data_raw = JsonUtils.parseObjectNode(result.toString());
+
+                        String search_string = news_url + makeNewsURLParams(request_data);
+                        log.info(search_string);
+                        // URL encode the query part of the sting
+                        Get get = Http.get(search_string).header("Accept", "application/json").header("Content-Type",
+                                        "application/json");
+                        String response = get.text("UTF-8");
+                        ObjectNode news_data_raw = JsonUtils.parseObjectNode(response.toString());
                         if (news_data_raw.has("response")) {
                                 news_data_raw_list = (ArrayNode) news_data_raw.get("response").get("docs");
                         } else {
@@ -1637,16 +1636,34 @@ public class SearchFunctions {
                                 refined_articles_list.add(row);
                         }
 
+                        // Requested article types
+                        ArrayNode requested_article_types = null != request_data && request_data.has("article_types")
+                                        ? (ArrayNode) request_data.get("article_types")
+                                        : JsonUtils.MAPPER.createArrayNode();
+                        ArrayList<String> requested_art_types = new ArrayList<String>();
+                        for (JsonNode jn : requested_article_types) {
+                                requested_art_types.add(jn.asText(""));
+                        }
+                        // requested publication date
+                        int requested_pub_year = 0;
+                        if (null != request_data && request_data.has("publication_date")
+                                        && StringUtils.isNotBlank(request_data.get("publication_date").asText(""))) {
+                                LocalDateTime pub_date_time = LocalDateTime.parse(
+                                                request_data.get("publication_date").asText(""), SOLR_DATE_FORMAT);
+                                requested_pub_year = pub_date_time.getYear();
+                        }
+
                         // Convert article types to arraynode
-                        ArrayNode article_types = JsonUtils.MAPPER.createArrayNode();
+                        ArrayNode filter_article_types = JsonUtils.MAPPER.createArrayNode();
                         for (String type : article_types_map.keySet()) {
                                 ObjectNode row = JsonUtils.MAPPER.createObjectNode();
                                 row.put("art_type", type);
                                 row.put("count", article_types_map.get(type));
-                                article_types.add(row);
+                                row.put("is_checked", requested_art_types.contains(type));
+                                filter_article_types.add(row);
                         }
 
-                        ArrayNode publication_date_years = JsonUtils.MAPPER.createArrayNode();
+                        ArrayNode filter_publication_date_years = JsonUtils.MAPPER.createArrayNode();
                         // Take out the keyset, organize it to be in reverse order, so it's newest
                         ArrayList<Integer> pub_date_years_sorted = new ArrayList(publication_year_map.keySet());
                         Collections.sort(pub_date_years_sorted, Collections.reverseOrder());
@@ -1654,12 +1671,14 @@ public class SearchFunctions {
                                 ObjectNode row = JsonUtils.MAPPER.createObjectNode();
                                 row.put("pub_year", year);
                                 row.put("count", publication_year_map.get(year));
-                                publication_date_years.add(row);
+                                row.put("is_checked", year == requested_pub_year);
+                                filter_publication_date_years.add(row);
                         }
 
                         return_data.put("total_results", refined_articles_list.size());
-                        return_data.set("article_types", article_types);
-                        return_data.set("publication_date_years", publication_date_years);
+                        return_data.set("article_types", filter_article_types);
+                        return_data.set("publication_date_years", filter_publication_date_years);
+                        return_data.put("hide_featured", requested_art_types.size() > 0 || requested_pub_year > 0);
 
                         // Take the feature article, and make it a separate object. Put the rest of this
                         // in the list
@@ -1687,13 +1706,16 @@ public class SearchFunctions {
 
                 } catch (Exception e) {
                         log.error("Exception in getting news data: " + e.getMessage());
+                        log.error("Exception in getting news data: " + DOECODEUtils.getStackTrace(e));
+
                         return_data.put("error", "An error occurred. News data couldn't be loaded.");
+                        return_data.put("has_error", true);
                 }
 
                 return return_data;
         }
 
-        private static String makeNewsURLParams(ObjectNode request_params) {
+        private static String makeNewsURLParams(ObjectNode request_params) throws Exception {
                 String return_data = "";
                 if (request_params != null) {
                         // Check for article types
@@ -1702,12 +1724,12 @@ public class SearchFunctions {
                                         : JsonUtils.MAPPER.createArrayNode();
                         ArrayList<String> article_types_join_list = new ArrayList<String>();
                         for (JsonNode jn : article_types) {
-                                String type = "" + jn.asText("") + "";
+                                String type = "\"" + jn.asText("") + "\"";
                                 article_types_join_list.add(type);
                         }
                         if (article_types_join_list.size() > 0) {
-                                return_data += ("&fq=sm_vid_Article_Type:("
-                                                + StringUtils.join(article_types_join_list, " OR ") + ")");
+                                return_data += ("&fq=" + URLEncoder.encode("sm_vid_Article_Type:("
+                                                + StringUtils.join(article_types_join_list, " OR ") + ")", "UTF-8"));
                         }
 
                         // Check for publication dates
@@ -1715,8 +1737,8 @@ public class SearchFunctions {
                                 String publication_date = request_params.get("publication_date").asText("");
                                 LocalDateTime pub_date_time = LocalDateTime.parse(publication_date, SOLR_DATE_FORMAT);
                                 int year = pub_date_time.getYear();
-                                return_data += ("&fq=ds_created:[" + year + "-01-01T00:00:01Z TO " + year
-                                                + "-12-31T11:59:59Z]");
+                                return_data += ("&fq=" + URLEncoder.encode("ds_created:[\"" + year
+                                                + "-01-01T00:00:01Z\" TO \"" + year + "-12-31T11:59:59Z\"]", "UTF-8"));
                         }
                 }
                 return return_data;

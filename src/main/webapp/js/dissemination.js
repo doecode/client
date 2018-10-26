@@ -449,69 +449,38 @@ if (document.getElementById('about-page-identifier')) {
     localStorage.isRefinedSearch = "false";
 
 } else if (document.getElementById('news-page-indicator')) {
-    var active_pubyears = {};
-    var active_article_types = {};
+    $(document).on('click', ".search-article-type,.search-publication-year", function () {
+        //Get article types
+        var art_types = [];
+        $(".search-article-type:checked").each(function () {
+            var val = $(this).val();
+            art_types.push(val);
+        });
+        //Get publication year
+        var publication_year = $(".search-publication-year:checked").val();
 
-    var conductSearchByObjects = function () {
-        //Go through each article, and see if it has any of the attributes of what's selected
-        var all_article_types = [];
-        for (var key in active_article_types) {
-            all_article_types.push(key);
+        var post_data = {};
+        if (art_types.length > 0) {
+            post_data.article_types = art_types;
         }
-        var all_pubyears = [];
-        for (var key in active_pubyears) {
-            all_pubyears.push(key);
+        if (publication_year) {
+            //yyyy-MM-ddHH:mm:ss
+            post_data.publication_date = publication_year + '-01-0100:00:01';
         }
 
-        if (all_article_types.length === 0 && all_pubyears.length === 0) {
-            $(".news-article-card").show();
-        } else {
-            $(".news-article-card").each(function () {
-                var self = this;
-                var self_article_types = $(self).data('articletypelist');
-                var self_pubyear = $(self).data('pubyear');
-
-                var has_matching_article_type = false;
-                for (var x = 0; x < self_article_types.length; x++) {
-                    if (all_article_types.indexOf(self_article_types[x]) > -1) {
-                        has_matching_article_type = true;
-                        break;
-                    }
-                }
-
-                var has_matching_pubyear = all_pubyears.indexOf(self_pubyear.toString()) > -1;
-
-                if (has_matching_article_type === true || has_matching_pubyear === true) {
-                    $(self).show();
-                } else {
-                    $(self).hide();
-                }
-            });
-        }
-    };
-
-    $(".search-article-type").on('click', function () {
-        var self = this;
-        var val = $(self).val();
-        var is_checked = $(self).is(':checked');
-        //If this is unchecked, remove this attribute from it
-        if (!is_checked) {
-            delete active_article_types[val];
-        } else {
-            active_article_types[val] = true;
-        }
-        conductSearchByObjects();
-    });
-
-    $(".search-publication-year").on('click', function () {
-        var self = this;
-        var val = $(self).val();
-        var is_checked = $(self).is(':checked');
-        if (!is_checked) {
-            delete active_pubyears[val];
-        } else {
-            active_pubyears[val] = true;
-        }
-        conductSearchByObjects();
+        $("#news-article-main-row").html('');
+        $.ajax({
+            url: '/doecode/dissemination/news-article-search',
+            method: 'POST',
+            data: JSON.stringify(post_data),
+            dataType: 'html',
+            contentType: 'application/json',
+            success: function (data) {
+                $("#news-article-main-row").html(data);
+            },
+            error: function () {
+                console.log("Borked");
+            }
+        });
     });
 }
