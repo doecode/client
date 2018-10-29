@@ -4,6 +4,18 @@
                   <br />
                   <div class="static-content-title">{{total_results}} Results</div>
                   <br />
+                  {{#if has_filter_params}}
+                        <div>
+                              <span class="search-for-filter-text search-for-filter-header">SEARCH FOR:</span>
+                              {{#each filter_params_list}}
+                                    <br>
+                                    <span>
+                                          <span class="search-for-filter-text">{{label}}</span>
+                                          <span class="search-for-filter-x clickable" data-relatedfield='{{related_field}}' data-relatedvalue='{{related_value}}'>[&nbsp;×&nbsp;]</span>
+                                    </span>
+                              {{/each}}
+                        </div>
+                  {{/if}}
             </div>
             <br />
             <span class='search-for-filter-text search-for-filter-header'>Article Types</span>
@@ -37,7 +49,55 @@
                                     </span>
                               </div>
                         {{/each}}
+                        {{#each month_year_filter}}
+                              <div>
+                                    <span>
+                                          <label style='font-size:14.45px;'>
+                                                <input class='search-checkbox search-publication-month-year' name='publication-date-month-year-filter' id='publication_date-month-year-{{pub_month_year}}'
+                                                      data-month='{{month}}' data-year='{{year}}' value='{{month}}{{year}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{pub_month_year}}'
+                                                      class='search-input-label' for='publication_date-month-year-{{pub_month_year}}'>
+                                                <span style='display:none;'>text</span></label>&nbsp;{{pub_month_year}} ({{count}})
+                                          </label>
+                                    </span>
+                              </div>
+                        {{/each}}
+                        {{#each month_year_day_filter}}
+                              <div>
+                                    <span>
+                                          <label style='font-size:14.45px;'>
+                                                <input class='search-checkbox search-publication-month-year-day' name='publication-date-month-year-day-filter' id='publication_date-month-year-day-{{month_day_year}}'
+                                                      data-month='{{month}}' data-year='{{year}}' data-day='{{day}}' value='{{month}}{{year}}{{day}}' type='checkbox' {{#if is_checked}} checked{{/if}}/>
+                                                      <label title='{{month_day_year}}' class='search-input-label' for='publication_date-month-year-day-{{month_day_year}}'>
+                                                <span style='display:none;'>text</span></label>&nbsp;{{month_day_year}} ({{count}})
+                                          </label>
+                                    </span>
+                              </div>
+                        {{/each}}
+                        {{#each hour_filter}}
+                              <div>
+                                    <span>
+                                          <label style='font-size:14.45px;'>
+                                                <input class='search-checkbox search-publication-hour' name='publication-date-hour-filter' id='publication_date-hour-{{hour}}' value='{{hour}}' type='checkbox'
+                                                      data-hour='{{hour}}' value='{{hour}}' {{#if is_checked}} checked{{/if}}/> <label title='{{hour}}' class='search-input-label' for='publication_date-hour-{{hour}}'>
+                                                <span style='display:none;'>text</span></label>&nbsp;{{hour}} ({{count}})
+                                          </label>
+                                    </span>
+                              </div>
+                        {{/each}}
+                        {{#each minute_filter}}
+                              <div>
+                                    <span>
+                                          <label style='font-size:14.45px;'>
+                                                <input class='search-checkbox search-publication-minute' name='publication-date-minute-filter' id='publication_date-minute-{{minute}}' value='{{minute}}'
+                                                      data-minute='{{minute}}' value='{{minute}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{minute}}' class='search-input-label'
+                                                      for='publication_date-minute-{{minute}}'>
+                                                <span style='display:none;'>text</span></label>&nbsp;{{minute}} ({{count}})
+                                          </label>
+                                    </span>
+                              </div>
+                        {{/each}}
                   </div>
+
             </form>
       </div>
       <div class='col-sm-9'>

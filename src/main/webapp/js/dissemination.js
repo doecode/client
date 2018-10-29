@@ -456,19 +456,44 @@ if (document.getElementById('about-page-identifier')) {
             var val = $(this).val();
             art_types.push(val);
         });
-        //Get publication year
-        var publication_year = $(".search-publication-year:checked").val();
 
         var post_data = {};
-        if (art_types.length > 0) {
-            post_data.article_types = art_types;
-        }
-        if (publication_year) {
-            //yyyy-MM-ddHH:mm:ss
-            post_data.publication_date = publication_year + '-01-0100:00:01';
+        var publication_date_parts = {};
+        //Get the publication year, if applicable
+        if ($(".search-publication-year:checked").val() && $(".search-publication-year:checked").val().length > 0) {
+            publication_date_parts.publication_date_year = $(".search-publication-year:checked").val();
         }
 
-        $("#news-article-main-row").html('');
+        //Get the publication month/year, if applicable
+        if ($(".search-publication-month-year:checked").val() && $(".search-publication-month-year:checked").val().length > 0) {
+            publication_date_parts.publication_month_year = {
+                month: $(".search-publication-month-year:checked").data('month'),
+                year: $(".search-publication-month-year:checked").data('year')
+            };
+        }
+
+        //Get the publication month/year/day, if applicable
+        if ($(".search-publication-month-year-day:checked").val() && $(".search-publication-month-year-day:checked").val().length > 0) {
+            publication_date_parts.publication_month_day_year = {
+                month: $(".search-publication-month-year-day:checked").data('month'),
+                day: $(".search-publication-month-year-day:checked").data('day'),
+                year: $(".search-publication-month-year-day:checked").data('year')
+            };
+        }
+
+        //Get the publication hour, if applicable
+        if ($('.search-publication-hour:checked').val() && $('.search-publication-hour:checked').val().length > 0) {
+            publication_date_parts.publication_hour = $(".search-publication-hour:checked").val();
+        }
+
+        //Get the publication minute, if applicable
+        if ($(".search-publication-minute:checked").val() && $(".search-publication-minute:checked").val().length > 0) {
+            publication_date_parts.publication_minute = $(".search-publication-minute:checked").val();
+        }
+
+        post_data.article_types = art_types;
+        post_data.publication_date = publication_date_parts;
+
         $.ajax({
             url: '/doecode/dissemination/news-article-search',
             method: 'POST',
