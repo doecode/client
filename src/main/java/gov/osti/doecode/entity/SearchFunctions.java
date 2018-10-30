@@ -2090,6 +2090,8 @@ public class SearchFunctions {
 
                 return_data.set("filter_params_list", filter_list);
                 return_data.put("has_filter_params", filter_list.size() > 0);
+
+        
                 return return_data;
         }
 
