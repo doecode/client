@@ -10,12 +10,16 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -47,6 +51,8 @@ public class SearchFunctions {
         public static final DateTimeFormatter MLA_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM. yyyy.");
         public static final DateTimeFormatter SEARCH_RESULTS_DESCRIPTION_FORMAT = DateTimeFormatter
                         .ofPattern("MM-dd-yyyy");
+        public static final DateTimeFormatter NEWS_TIME_HOUR_AMPM_ONLY = DateTimeFormatter.ofPattern("h a");
+        public static final DateTimeFormatter NEWS_HOUR_MINUTE_AMPM = DateTimeFormatter.ofPattern("hh:mm a");
         // MUST REMOVE "T" and "Z" from string
         public static final DateTimeFormatter SOLR_DATE_ONLY = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         public static final DateTimeFormatter SOLR_TIME_ONLY = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -99,15 +105,15 @@ public class SearchFunctions {
                 post_data.put("orcid", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("orcid"), ""),
                                 Whitelist.basic()));
 
-                post_data.put("accessibility", handleRequestArray(request.getParameter("accessibility")));
-                post_data.put("licenses", handleRequestArray(request.getParameter("licenses")));
-                post_data.put("programming_languages",
+                post_data.set("accessibility", handleRequestArray(request.getParameter("accessibility")));
+                post_data.set("licenses", handleRequestArray(request.getParameter("licenses")));
+                post_data.set("programming_languages",
                                 handleRequestArray(request.getParameter("programming_languages")));
-                post_data.put("research_organization",
+                post_data.set("research_organization",
                                 handleRequestArray(request.getParameter("research_organization")));
-                post_data.put("sponsoring_organization",
+                post_data.set("sponsoring_organization",
                                 handleRequestArray(request.getParameter("sponsoring_organization")));
-                post_data.put("software_type", handleRequestArray(request.getParameter("software_type")));
+                post_data.set("software_type", handleRequestArray(request.getParameter("software_type")));
                 return post_data;
         }
 
@@ -162,26 +168,26 @@ public class SearchFunctions {
                 return_data.put("search_result_count", num_found);
                 return_data.put("had_error", had_error);
                 return_data.put("error_message", error_message);
-                return_data.put("search_form_data", search_form_data);
-                return_data.put("search_results_list", search_results_list);
-                return_data.put("pagination_btn", getPaginationData(search_form_data, num_found));
-                return_data.put("breadcrumbTrailItem", getSearchBreadcrumbTrailList(post_data, num_found));
-                return_data.put("search_sort_dropdown",
+                return_data.set("search_form_data", search_form_data);
+                return_data.set("search_results_list", search_results_list);
+                return_data.set("pagination_btn", getPaginationData(search_form_data, num_found));
+                return_data.set("breadcrumbTrailItem", getSearchBreadcrumbTrailList(post_data, num_found));
+                return_data.set("search_sort_dropdown",
                                 sort_dropdownOptions(JsonUtils.getString(post_data, "sort", "")));
-                return_data.put("availabilities_list",
+                return_data.set("availabilities_list",
                                 getSearchDropdownList(
                                                 DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY),
                                                 handleRequestArray(request.getParameter("accessibility"))));
-                return_data.put("license_options_list",
+                return_data.set("license_options_list",
                                 getSearchDropdownList(
                                                 DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY),
                                                 handleRequestArray(request.getParameter("licenses"))));
-                return_data.put("software_type_options_list",
+                return_data.set("software_type_options_list",
                                 getSearchDropdownList(
                                                 DOECODEServletContextListener
                                                                 .getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY),
                                                 handleRequestArray(request.getParameter("software_type"))));
-                return_data.put("search_description", getSearchResultsDescription(post_data));
+                return_data.set("search_description", getSearchResultsDescription(post_data));
                 if (!invalid_search_data) {
                         return_data.put("search_facets_data", search_result_data.get("facets"));
                         return_data.put("year_facets_data",
@@ -1562,7 +1568,6 @@ public class SearchFunctions {
          * instances of each year, and a list of the articles themselves
          */
         public static ObjectNode getNewsPageData(String news_url, ObjectNode request_data) {
-                log.info("Request data: " + request_data.toString());
                 ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
                 ArrayNode news_data_raw_list = JsonUtils.MAPPER.createArrayNode();
                 try {
@@ -1579,20 +1584,30 @@ public class SearchFunctions {
                         // Get the date and time we're using for the
                         boolean use_publicationdate = true;
                         LocalDateTime requested_publication_date = LocalDateTime.now();
-
+                        LocalDateTime publication_date_end = LocalDateTime.now().withMonth(Month.DECEMBER.getValue())
+                                        .withDayOfMonth(31).withHour(23).withMinute(59);
+                        ObjectNode publication_date_filters = null;
                         // See whether or not they've sent a publication date object, and whether it has
                         // anything in it
                         if (request_data.has("publication_date") && JsonUtils
                                         .getKeys((ObjectNode) request_data.get("publication_date")).size() > 0) {
-                                requested_publication_date = getLocalPublicationDateTime(
-                                                (ObjectNode) request_data.get("publication_date"));
+                                // Get the publication date data
+                                ObjectNode publication_date_obj = (ObjectNode) request_data.get("publication_date");
+                                requested_publication_date = getStartPublicationDateTime(publication_date_obj);
+
+                                // Get what parts of publication date were used, and put the filter together
+                                publication_date_filters = getWhatPublicationDateFilters(publication_date_obj);
+
+                                // Get the end date, based on what we filtered on
+                                publication_date_end = getEndPublicationDateTime(requested_publication_date,
+                                                publication_date_filters);
+
                         } else {
                                 use_publicationdate = false;
                         }
 
                         String search_string = news_url + makeNewsURLParams(requested_art_types,
-                                        requested_publication_date, use_publicationdate);
-                        log.info("Search string: " + search_string);
+                                        requested_publication_date, publication_date_end, use_publicationdate);
                         // URL encode the query part of the sting
                         Get get = Http.get(search_string).header("Accept", "application/json").header("Content-Type",
                                         "application/json");
@@ -1607,7 +1622,7 @@ public class SearchFunctions {
 
                         // Unpack the data, and construct what we need from it
                         HashMap<String, Integer> article_types_map = new HashMap();
-                        HashMap<Integer, Integer> publication_year_map = new HashMap();
+                        ArrayList<LocalDateTime> publication_date_list = new ArrayList<LocalDateTime>();
                         ArrayNode refined_articles_list = JsonUtils.MAPPER.createArrayNode();
 
                         for (JsonNode jn : news_data_raw_list) {
@@ -1619,15 +1634,7 @@ public class SearchFunctions {
                                 LocalDateTime publication_date = LocalDateTime.parse(article.findPath("ds_created")
                                                 .asText("").replaceAll("T", "").replaceAll("Z", ""), SOLR_DATE_FORMAT);
                                 row.put("publication_date", publication_date.format(NEWS_ARTICLE_DATE_FORMAT));
-                                row.put("publication_year", publication_date.getYear());
-                                // If we already have a publication year, just increment the amount that we have
-                                // it by 1. Otherwise, make a new entry into the map
-                                int year = publication_date.getYear();
-                                if (publication_year_map.keySet().contains(year)) {
-                                        publication_year_map.put(year, publication_year_map.get(year) + 1);
-                                } else {
-                                        publication_year_map.put(year, 1);
-                                }
+                                publication_date_list.add(publication_date);
 
                                 // Get the article types, and add them to the list too
                                 ArrayNode article_types_with_other = JsonUtils.MAPPER.createArrayNode();
@@ -1674,25 +1681,200 @@ public class SearchFunctions {
                                 filter_article_types.add(row);
                         }
 
+                        HashMap<Integer, Integer> publication_year_map = new HashMap<Integer, Integer>();
+                        for (LocalDateTime ldt : publication_date_list) {
+                                int year = ldt.getYear();
+                                if (publication_year_map.containsKey(year)) {
+                                        publication_year_map.put(year, publication_year_map.get(year) + 1);
+                                } else {
+                                        publication_year_map.put(year, 1);
+                                }
+                        }
+
                         ArrayNode filter_publication_date_years = JsonUtils.MAPPER.createArrayNode();
-                        // Take out the keyset, organize it to be in reverse order, so it's newest
-                        ArrayList<Integer> pub_date_years_sorted = new ArrayList<Integer>(
+                        ArrayList<Integer> publication_year_list = new ArrayList<Integer>(
                                         publication_year_map.keySet());
-                        Collections.sort(pub_date_years_sorted, Collections.reverseOrder());
-                        for (Integer year : pub_date_years_sorted) {
+                        Collections.sort(publication_year_list, Collections.reverseOrder());
+                        for (Integer key : publication_year_list) {
                                 ObjectNode row = JsonUtils.MAPPER.createObjectNode();
-                                row.put("pub_year", year);
-                                row.put("count", publication_year_map.get(year));
-                                row.put("is_checked",
-                                                year == requested_publication_date.getYear() && use_publicationdate);
+                                row.put("pub_year", key);
+                                row.put("count", publication_year_map.get(key));
+                                row.put("is_checked", publication_date_filters != null && publication_date_filters
+                                                .findPath("has_publication_date_year").asBoolean(false));
                                 filter_publication_date_years.add(row);
+                        }
+
+                        boolean did_date_filter = false;
+                        if (publication_date_filters != null) {
+                                did_date_filter = true;
+                                if (publication_date_filters.get("has_publication_date_year").asBoolean(false)) {
+                                        int checked_count = 0;
+
+                                        return_data.put("has_publication_year_filter", true);
+                                        // Get how many groups there are of each publication month/year combinations
+                                        // there are
+                                        HashMap<String, Integer> pub_monthyears = new HashMap<String, Integer>();
+                                        for (LocalDateTime ldt : publication_date_list) {
+                                                String monthyear_key = StringUtils
+                                                                .leftPad(Integer.toString(ldt.getMonthValue()), 2, "0")
+                                                                + Integer.toString(ldt.getYear());
+                                                // If we already have this combination, just increment the amount that
+                                                // we have by 1. Otherwise, set the starting value of 1
+                                                if (pub_monthyears.keySet().contains(monthyear_key)) {
+                                                        pub_monthyears.put(monthyear_key,
+                                                                        pub_monthyears.get(monthyear_key) + 1);
+                                                } else {
+                                                        pub_monthyears.put(monthyear_key, 1);
+                                                }
+                                        }
+                                        ArrayNode filter_publication_month_years = JsonUtils.MAPPER.createArrayNode();
+                                        for (String key : pub_monthyears.keySet()) {
+                                                ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                                                int month = Integer.parseInt(StringUtils.substring(key, 0, 2));
+                                                int year = Integer
+                                                                .parseInt(StringUtils.substring(key, 2, key.length()));
+                                                row.put("month", month);
+                                                row.put("year", year);
+                                                row.put("pub_month_year", key);
+                                                row.put("count", pub_monthyears.get(key));
+                                                // Gives you the full month name, followed by the year. So, "September
+                                                // 2018", for example
+                                                String month_display = Month.of(month).getDisplayName(TextStyle.FULL,
+                                                                Locale.getDefault());
+                                                row.put("display", StringUtils.capitalize(month_display) + " " + year);
+                                                // If publication month year was checked on the front end, then this
+                                                // will be the only one that will show up, so we'll set it as checked
+
+                                                if (publication_date_filters.get("has_publication_month_year")
+                                                                .asBoolean(false)) {
+                                                        row.put("is_checked", true);
+                                                        checked_count++;
+                                                }
+                                                filter_publication_month_years.add(row);
+                                        }
+                                        return_data.put("has_month_year_filter", checked_count > 0);
+                                        return_data.set("month_year_filter", filter_publication_month_years);
+                                }
+                                if (publication_date_filters.get("has_publication_month_year").asBoolean(false)) {
+                                        int checked_count = 0;
+                                        // Get how many groups there are of each publication month year
+                                        HashMap<String, Integer> pub_month_dayyears = new HashMap<String, Integer>();
+                                        for (LocalDateTime ldt : publication_date_list) {
+                                                // Makes a key that looks solmething like 01012018
+                                                String key = StringUtils.leftPad(Integer.toString(ldt.getMonthValue()),
+                                                                2, "0")
+                                                                + StringUtils.leftPad(
+                                                                                Integer.toString(ldt.getDayOfMonth()),
+                                                                                2, "0")
+                                                                + ldt.getYear();
+                                                if (pub_month_dayyears.containsKey(key)) {
+                                                        pub_month_dayyears.put(key, pub_month_dayyears.get(key) + 1);
+                                                } else {
+                                                        pub_month_dayyears.put(key, 1);
+                                                }
+                                        }
+                                        ArrayNode filter_publication_month_day_year = JsonUtils.MAPPER
+                                                        .createArrayNode();
+                                        for (String key : pub_month_dayyears.keySet()) {
+                                                ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                                                String month_str = StringUtils.substring(key, 0, 2);
+                                                String day_str = StringUtils.substring(key, 2, 4);
+                                                int month = Integer.parseInt(month_str);
+                                                int day = Integer.parseInt(day_str);
+                                                int year = Integer
+                                                                .parseInt(StringUtils.substring(key, 4, key.length()));
+                                                row.put("month", month);
+                                                row.put("year", year);
+                                                row.put("day", day);
+                                                row.put("count", pub_month_dayyears.get(key));
+                                                String month_display = Month.of(month).getDisplayName(TextStyle.FULL,
+                                                                Locale.getDefault());
+                                                row.put("display", month_display + " " + day_str + ", " + year);
+                                                row.put("month_day_year", key);
+                                                if (publication_date_filters.get("has_publication_month_day_year")
+                                                                .asBoolean(false)) {
+                                                        row.put("is_checked", true);
+                                                        checked_count++;
+                                                }
+                                                filter_publication_month_day_year.add(row);
+                                        }
+                                        return_data.put("has_month_day_year_filter", checked_count > 0);
+                                        return_data.set("month_day_year_filter", filter_publication_month_day_year);
+
+                                }
+                                if (publication_date_filters.get("has_publication_month_day_year").asBoolean(false)) {
+                                        int checked_count = 0;
+                                        HashMap<Integer, Integer> pub_hour = new HashMap<Integer, Integer>();
+                                        for (LocalDateTime ldt : publication_date_list) {
+                                                int key = ldt.getHour();
+                                                if (pub_hour.containsKey(key)) {
+                                                        pub_hour.put(key, (pub_hour.get(key)) + 1);
+                                                } else {
+                                                        pub_hour.put(key, 1);
+                                                }
+                                        }
+                                        ArrayNode filter_publication_hour = JsonUtils.MAPPER.createArrayNode();
+                                        for (Integer key : pub_hour.keySet()) {
+                                                ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                                                row.put("hour", key);
+                                                LocalTime lt = LocalTime.of(key, 1);
+                                                row.put("display", lt.format(NEWS_TIME_HOUR_AMPM_ONLY));
+                                                row.put("count", pub_hour.get(key));
+                                                if (publication_date_filters.get("has_publication_hour")
+                                                                .asBoolean(false)) {
+                                                        row.put("is_checked", true);
+                                                        checked_count++;
+                                                }
+                                                filter_publication_hour.add(row);
+                                        }
+                                        return_data.put("has_hour_filter", checked_count > 0);
+                                        return_data.set("hour_filter", filter_publication_hour);
+
+                                }
+                                if (publication_date_filters.get("has_publication_hour").asBoolean(false)) {
+                                        int checked_count = 0;
+                                        HashMap<String, Integer> pub_minute = new HashMap<String, Integer>();
+                                        for (LocalDateTime ldt : publication_date_list) {
+                                                int hour = ldt.getHour();
+                                                int minute = ldt.getMinute();
+                                                String key = StringUtils.leftPad(Integer.toString(hour), 2, "0")
+                                                                + StringUtils.leftPad(Integer.toString(minute), 2, "0");
+
+                                                if (pub_minute.containsKey(key)) {
+                                                        pub_minute.put(key,
+                                                                        pub_minute.get(Integer.toString(minute)) + 1);
+                                                } else {
+                                                        pub_minute.put(key, 1);
+                                                }
+                                        }
+                                        ArrayNode filter_publication_minute = JsonUtils.MAPPER.createArrayNode();
+                                        for (String key : pub_minute.keySet()) {
+                                                ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                                                LocalTime time = LocalTime.parse(key,
+                                                                DateTimeFormatter.ofPattern("HHmm"));
+                                                row.put("minute", time.getMinute());
+
+                                                row.put("display", time.format(NEWS_HOUR_MINUTE_AMPM));
+                                                row.put("count", pub_minute.get(key));
+                                                if (publication_date_filters.get("has_publication_minute")
+                                                                .asBoolean(false)) {
+                                                        row.put("is_checked", true);
+                                                        checked_count++;
+                                                }
+
+                                                filter_publication_minute.add(row);
+                                        }
+                                        return_data.put("has_minute_filter", checked_count > 0);
+                                        return_data.set("minute_filter", filter_publication_minute);
+
+                                }
                         }
 
                         return_data.put("total_results", refined_articles_list.size());
                         return_data.set("article_types", filter_article_types);
                         return_data.set("publication_date_years", filter_publication_date_years);
-                        return_data.put("hide_featured",
-                                        requested_art_types.size() > 0 || requested_publication_date.getYear() > 0);
+
+                        return_data.put("hide_featured", requested_art_types.size() > 0 || did_date_filter);
 
                         // Take the feature article, and make it a separate object. Put the rest of this
                         // in the list
@@ -1725,11 +1907,14 @@ public class SearchFunctions {
                         return_data.put("has_error", true);
                 }
 
+                log.info("REturn data: " + return_data.toString());
+
                 return return_data;
         }
 
-        private static String makeNewsURLParams(ArrayList article_types_join_list, LocalDateTime publication_date,
-                        boolean use_pubdate) throws Exception {
+        private static String makeNewsURLParams(ArrayList<String> article_types_join_list,
+                        LocalDateTime publication_date_start, LocalDateTime publication_date_end, boolean use_pubdate)
+                        throws Exception {
                 String return_data = "";
                 if (article_types_join_list.size() > 0) {
                         // Joins all of the items in the list with [type wrapped in quotes] OR [next
@@ -1742,15 +1927,17 @@ public class SearchFunctions {
 
                 if (use_pubdate) {
                         // Make publication date range
-                        return_data += ("&fq="
-                                        + URLEncoder.encode("ds_created:[\"" + publication_date.format(SOLR_DATE_ONLY)
-                                                        + "T" + publication_date.format(SOLR_TIME_ONLY) + "Z\" TO \""
-                                                        + publication_date.getYear() + "-12-31T11:59:59Z\"]", "UTF-8"));
+                        return_data += ("&fq=" + URLEncoder.encode(
+                                        "ds_created:[\"" + publication_date_start.format(SOLR_DATE_ONLY) + "T"
+                                                        + publication_date_start.format(SOLR_TIME_ONLY) + "Z\" TO \""
+                                                        + publication_date_end.format(SOLR_DATE_ONLY) + "T"
+                                                        + publication_date_end.format(SOLR_TIME_ONLY) + "Z\"]",
+                                        "UTF-8"));
                 }
                 return return_data;
         }
 
-        private static LocalDateTime getLocalPublicationDateTime(ObjectNode date_obj) {
+        private static LocalDateTime getStartPublicationDateTime(ObjectNode date_obj) {
                 LocalDateTime return_time = LocalDateTime.of(LocalDateTime.now().getYear(), 1, 1, 0, 0, 1);
                 int year = return_time.getYear();
                 int month = return_time.getMonthValue();
@@ -1796,6 +1983,35 @@ public class SearchFunctions {
                 return_time = LocalDateTime.of(year, month, day, hour, minute, second);
 
                 return return_time;
+        }
+
+        private static LocalDateTime getEndPublicationDateTime(LocalDateTime start_pub_date, ObjectNode obj_filters) {
+                LocalDateTime return_data = LocalDateTime.now();
+                if (obj_filters.findPath("has_publication_date_year").asBoolean(false)) {
+                        return_data = return_data.withYear(start_pub_date.getYear()).withMonth(12).withDayOfMonth(31)
+                                        .withHour(23).withMinute(59).withSecond(59);
+                }
+
+                // check for publication month and year
+                if (obj_filters.findPath("has_publication_month_year").asBoolean(false)) {
+                        return_data = return_data.withMonth(start_pub_date.getMonthValue());
+                }
+
+                // check for publication month/day/year
+                if (obj_filters.findPath("has_publication_month_day_year").asBoolean(false)) {
+                        return_data = return_data.withDayOfMonth(start_pub_date.getDayOfMonth());
+                }
+
+                // check for publication hour
+                if (obj_filters.findPath("has_publication_hour").asBoolean(false)) {
+                        return_data = return_data.withHour(start_pub_date.getHour());
+                }
+
+                // check for publication minute
+                if (obj_filters.findPath("has_publication_minute").asBoolean(false)) {
+                        return_data = return_data.withMinute(start_pub_date.getMinute());
+                }
+                return return_data;
         }
 
         private static ObjectNode getWhatPublicationDateFilters(ObjectNode pub_obj) {

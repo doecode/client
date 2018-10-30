@@ -449,7 +449,47 @@ if (document.getElementById('about-page-identifier')) {
     localStorage.isRefinedSearch = "false";
 
 } else if (document.getElementById('news-page-indicator')) {
-    $(document).on('click', ".search-article-type,.search-publication-year", function () {
+    //Search article type
+    $(document).on('click', '.search-article-type', function () {
+        get_news_page_markup();
+    });
+
+    //Search publication year
+    $(document).on('click', '.search-publication-year', function () {
+        $(".search-publication-month-year").prop('checked', false);
+        $(".search-publication-month-year-day").prop("checked", false);
+        $(".search-publication-hour").prop('checked', false);
+        $('.search-publication-minute').prop('checked', false);
+        get_news_page_markup();
+    });
+
+    //Search publication month year
+    $(document).on('click', '.search-publication-month-year', function () {
+        $(".search-publication-month-year-day").prop("checked", false);
+        $(".search-publication-hour").prop('checked', false);
+        $('.search-publication-minute').prop('checked', false);
+        get_news_page_markup();
+    });
+
+    //Search publication month year day
+    $(document).on('click', '.search-publication-month-year-day', function () {
+        $(".search-publication-hour").prop('checked', false);
+        $('.search-publication-minute').prop('checked', false);
+        get_news_page_markup();
+    });
+
+    //Search publication hour
+    $(document).on('click', '.search-publication-hour', function () {
+        $('.search-publication-minute').prop('checked', false);
+        get_news_page_markup();
+    });
+
+    //Search publication minute
+    $(document).on('click', '.search-publication-minute', function () {
+        get_news_page_markup();
+    });
+
+    var get_news_page_markup = function () {
         //Get article types
         var art_types = [];
         $(".search-article-type:checked").each(function () {
@@ -507,5 +547,5 @@ if (document.getElementById('about-page-identifier')) {
                 console.log("Borked");
             }
         });
-    });
+    };
 }
