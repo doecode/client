@@ -548,4 +548,12 @@ if (document.getElementById('about-page-identifier')) {
             }
         });
     };
+
+    $(document).on('click', ".filter-type-icon", function () {
+        var filter_type = $(this).data('filter');
+        var article_type_id = "#article-type-" + filter_type;
+        if (!$(article_type_id).prop('checked')) {
+            $(article_type_id).trigger('click');
+        }
+    });
 }

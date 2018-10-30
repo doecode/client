@@ -25,9 +25,11 @@
                               <div>
                                     <span>
                                           <label style='font-size:14.45px;'>
-                                                <input class='search-checkbox search-article-type' name='article-type-filter' id='article-type-{{art_type}}' value='{{art_type}}' type='checkbox' {{#if is_checked}} checked{{/if}} /> <label title='{{value}}' class='search-input-label' for='article-type-{{art_type}}'><span
+                                                <input class='search-checkbox search-article-type' name='article-type-filter' id='article-type-{{art_type_id}}' value='{{art_type}}' type='checkbox' {{#if is_checked}} checked{{/if}} /> <label title='{{value}}' class='search-input-label' for='article-type-{{art_type_id}}'><span
                                                             style='display:none;'>text</span></label>&nbsp;{{art_type}}
-                                                ({{count}})
+                                                {{#unless is_checked}}
+                                                      ({{count}})
+                                                {{/unless}}
                                           </label>
                                     </span>
                               </div>
@@ -141,11 +143,11 @@
                               <div class='text-muted article-type'>
                                     {{!--Comes out like <icon> Type--}}
                                     {{#if featured_article.article_type.is_news}}
-                                          <span class='fa fa-newspaper-o'></span>
+                                          <span class='fa fa-newspaper-o clickable filter-type-icon' data-filter='News'></span>
                                     {{else if featured_article.article_type.is_updates_and_tips}}
-                                          <span class='fa fa-info-circle'></span>
+                                          <span class='fa fa-file-text-o clickable filter-type-icon' data-filter='Blog'></span>
                                     {{else if featured_article.article_type.is_blog}}
-                                          <span class='fa fa-file-text-o'></span>
+                                          <span class='fa fa-info-circle clickable filter-type-icon' data-filter='Updates-and-Tips'></span>
                                     {{/if}}
                                     {{featured_article.article_type.type}}
                               </div>
@@ -172,11 +174,11 @@
                               <span class='text-muted article-type'>
                                     {{#each article_types}}
                                           {{#if is_news}}
-                                                <span class='fa fa-newspaper-o'></span>
+                                                <span class='fa fa-newspaper-o clickable filter-type-icon' data-filter='News'></span>
                                           {{else if is_updates_and_tips}}
-                                                <span class='fa fa-info-circle'></span>
+                                                <span class='fa fa-info-circle clickable filter-type-icon' data-filter='Updates-and-Tips'></span>
                                           {{else if is_blog}}
-                                                <span class='fa fa-file-text-o'></span>
+                                                <span class='fa fa-file-text-o clickable filter-type-icon' data-filter='Blog'></span>
                                           {{/if}}
                                           {{type}}
                                           <br />

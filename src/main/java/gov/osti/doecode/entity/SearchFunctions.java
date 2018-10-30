@@ -1676,6 +1676,7 @@ public class SearchFunctions {
                         for (String type : article_types_map.keySet()) {
                                 ObjectNode row = JsonUtils.MAPPER.createObjectNode();
                                 row.put("art_type", type);
+                                row.put("art_type_id", type.replaceAll(" ", "-"));
                                 row.put("count", article_types_map.get(type));
                                 row.put("is_checked", requested_art_types.contains(type));
                                 filter_article_types.add(row);
