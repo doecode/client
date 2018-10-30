@@ -1900,6 +1900,10 @@ public class SearchFunctions {
                         // take out the first because it's the featured article
                         return_data.set("refined_articles_list", refined_articles_list);
 
+                        // Put all of the filter params in
+                        return_data.set("filter_params", getFilterParamList(filter_article_types,
+                                        requested_publication_date, publication_date_filters));
+
                 } catch (Exception e) {
                         log.error("Exception in getting news data: " + e.getMessage());
                         log.error("Exception in getting news data: " + DOECODEUtils.getStackTrace(e));
@@ -1907,8 +1911,6 @@ public class SearchFunctions {
                         return_data.put("error", "An error occurred. News data couldn't be loaded.");
                         return_data.put("has_error", true);
                 }
-
-                log.info("REturn data: " + return_data.toString());
 
                 return return_data;
         }
@@ -2022,6 +2024,79 @@ public class SearchFunctions {
                 return_data.put("has_publication_month_day_year", pub_obj.has("publication_month_day_year"));
                 return_data.put("has_publication_hour", pub_obj.has("publication_hour"));
                 return_data.put("has_publication_minute", pub_obj.has("publication_minute"));
+                return return_data;
+        }
+
+        public static ObjectNode getFilterParamList(ArrayNode article_type_list, LocalDateTime publication_date_start,
+                        ObjectNode date_filter_obj) {
+                ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+                ArrayNode filter_list = JsonUtils.MAPPER.createArrayNode();
+
+                log.info("Article type list: " + article_type_list.toString());
+                // Check article types
+                for (JsonNode type : article_type_list) {
+                        ObjectNode type_data = (ObjectNode) type;
+                        if (type_data.findPath("is_checked").asBoolean(false)) {
+                                String art_type = type_data.findPath("art_type").asText("");
+                                ObjectNode row = makeNewsFilterNode(art_type,
+                                                "article-type-" + art_type.replaceAll(" ", "-"));
+                                filter_list.add(row);
+                        }
+                }
+
+                // Check dates
+                if (date_filter_obj != null) {
+                        String pub_year = Integer.toString(publication_date_start.getYear());
+                        String pub_month_display = StringUtils.capitalize(publication_date_start.getMonth()
+                                        .getDisplayName(TextStyle.FULL, Locale.getDefault()));
+                        String pub_month_val = StringUtils
+                                        .leftPad(Integer.toString(publication_date_start.getMonthValue()), 2, "0");
+                        String pub_day = Integer.toString(publication_date_start.getDayOfMonth());
+
+                        if (date_filter_obj.findPath("has_publication_date_year").asBoolean(false)) {
+                                filter_list.add(makeNewsFilterNode(pub_year, "publication_date-" + pub_year));
+                        }
+
+                        // check for publication month and year
+                        if (date_filter_obj.findPath("has_publication_month_year").asBoolean(false)) {
+                                // publication_date-month-year-MonthYear
+                                filter_list.add(makeNewsFilterNode(pub_month_display + " " + pub_year,
+                                                "publication_date-month-year-" + pub_month_val + pub_year));
+                        }
+
+                        // check for publication month/day/year
+                        if (date_filter_obj.findPath("has_publication_month_day_year").asBoolean(false)) {
+                                // publication_date-month-year-day-MonthDayYear
+                                filter_list.add(makeNewsFilterNode(pub_month_display + " " + pub_day + ", " + pub_year,
+                                                "publication_date-month-year-day-" + pub_month_val + pub_day
+                                                                + pub_year));
+                        }
+
+                        // check for publication hour
+                        if (date_filter_obj.findPath("has_publication_hour").asBoolean(false)) {
+                                // publication_date-hour-Hour
+                                filter_list.add(makeNewsFilterNode(
+                                                publication_date_start.format(NEWS_TIME_HOUR_AMPM_ONLY),
+                                                "publication_date-hour-" + publication_date_start.getHour()));
+                        }
+
+                        // check for publication minute
+                        if (date_filter_obj.findPath("has_publication_minute").asBoolean(false)) {
+                                // publication_date-minute-Minute
+                                filter_list.add(makeNewsFilterNode(publication_date_start.format(NEWS_HOUR_MINUTE_AMPM),
+                                                "publication_date-minute-" + publication_date_start.getMinute()));
+                        }
+                }
+
+                return_data.set("filter_params_list", filter_list);
+                return_data.put("has_filter_params", filter_list.size() > 0);
+                return return_data;
+        }
+
+        private static ObjectNode makeNewsFilterNode(String label, String related_field) {
+                ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+                return_data.put("label", label);
+                return_data.put("related_field", related_field);
                 return return_data;
         }
 }

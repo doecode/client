@@ -4,16 +4,16 @@
                   <br />
                   <div class="static-content-title">{{total_results}} Results</div>
                   <br />
-                  {{#if has_filter_params}}
+                  {{#if filter_params.has_filter_params}}
                         <div>
-                              <span class="search-for-filter-text search-for-filter-header">SEARCH FOR:</span>
-                              {{#each filter_params_list}}
-                                    <br>
-                                    <span>
+                              <span class="search-for-filter-text search-for-filter-header" style='font-size:16px;'>SEARCH FOR:</span>
+                              {{#each filter_params.filter_params_list}}
+                                    <div style='margin-top:5px;'>
                                           <span class="search-for-filter-text">{{label}}</span>
-                                          <span class="search-for-filter-x clickable" data-relatedfield='{{related_field}}' data-relatedvalue='{{related_value}}'>[&nbsp;×&nbsp;]</span>
-                                    </span>
+                                          <span class="search-for-filter-x clickable" data-relatedfield='{{related_field}}'>[&nbsp;×&nbsp;]</span>
+                                    </div>
                               {{/each}}
+                              <br />
                         </div>
                   {{/if}}
             </div>
@@ -123,7 +123,7 @@
                   </div>
                   <br />
             </div>
-            <div class='row' style='border-left:1px solid #D6D5D4;'>
+            <div class='row hide-xs' style='border-left:1px solid #D6D5D4;'>
                   <div class='col-xs-12'>
                         <br />
                         {{#unless hide_featured}}
@@ -140,7 +140,7 @@
                   <div class='row'>
                         <div class='col-xs-12' style='padding-top:20px;border-left:1px solid #D6D5D4;'>
                               <div class='text-muted publication-date'>{{featured_article.publication_date}}</div>
-                              <div class='text-muted article-type'>
+                              <div class='text-muted article-type hide-xs'>
                                     {{!--Comes out like <icon> Type--}}
                                     {{#if featured_article.article_type.is_news}}
                                           <span class='fa fa-newspaper-o clickable filter-type-icon' data-filter='News'></span>
@@ -171,7 +171,7 @@
                   {{#each refined_articles_list}}
                         <div class='col-md-4 col-sm-6 col-xs-12 news-article-card'>
                               <span class='text-muted publication-date'>{{publication_date}}</span>
-                              <span class='text-muted article-type'>
+                              <span class='text-muted article-type hide-xs'>
                                     {{#each article_types}}
                                           {{#if is_news}}
                                                 <span class='fa fa-newspaper-o clickable filter-type-icon' data-filter='News'></span>
