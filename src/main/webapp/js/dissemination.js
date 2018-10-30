@@ -556,4 +556,9 @@ if (document.getElementById('about-page-identifier')) {
             $(article_type_id).trigger('click');
         }
     });
+
+    $(document).on('click', '.clear-filter-x', function () {
+        var id_of_item = $(this).data('relatedfield');
+        $("#" + id_of_item).trigger('click');
+    });
 }
