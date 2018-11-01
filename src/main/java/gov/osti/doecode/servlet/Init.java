@@ -30,6 +30,7 @@ public class Init extends HttpServlet {
         public static String authority_api_base;
         public static String site_url;
         public static String containers_dir;
+        public static String news_environment_url;
 
         public static int SESSION_TIMEOUT_MINUTES;
 
@@ -62,6 +63,7 @@ public class Init extends HttpServlet {
                         Properties props = new Properties();
                         props.load(Init.class.getResourceAsStream("/params.properties"));
                         news_page_data_url = props.getProperty("news_page_data_url", "");
+                        news_environment_url = props.getProperty("news_environment_url", "");
                 } catch (Exception e) {
                         log.error("Exception occurred in loading properties!" + e.getMessage());
                 }

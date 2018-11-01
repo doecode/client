@@ -2,6 +2,8 @@ package gov.osti.doecode.servlet;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import gov.osti.doecode.entity.DOECODEJson;
+import gov.osti.doecode.entity.NewsFunctions;
 import gov.osti.doecode.entity.ReportFunctions;
 import gov.osti.doecode.entity.SearchFunctions;
 import gov.osti.doecode.utils.JsonUtils;
@@ -115,7 +117,7 @@ public class DisseminationServlet extends HttpServlet {
                         }
                 } else if (remaining.equals("news-article-search")) {
                         ObjectNode request_data = JsonUtils.parseObjectNode(request.getReader());
-                        ObjectNode output_data = SearchFunctions.getNewsPageData(Init.news_page_data_url, request_data);
+                        ObjectNode output_data = NewsFunctions.getNewsPageData(Init.news_page_data_url, request_data);
                         
                         TemplateUtils.writeOutTemplateData("", "news-article", Init.handlebarsSearch, response,
                                         output_data);

@@ -5,6 +5,8 @@ package gov.osti.doecode.pagemappings;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import gov.osti.doecode.entity.DOECODEJson;
+import gov.osti.doecode.entity.NewsFunctions;
 import gov.osti.doecode.entity.SearchFunctions;
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
@@ -75,7 +77,7 @@ public class Dissemination extends HttpServlet {
                         page_title = "DOE CODE: News";
                         template = TemplateUtils.TEMPLATE_NEWS_PAGE;
                         current_page = TemplateUtils.PAGE_NEWS;
-                        output_data = SearchFunctions.getNewsPageData(Init.news_page_data_url,
+                        output_data = NewsFunctions.getNewsPageData(Init.news_page_data_url,
                                         JsonUtils.MAPPER.createObjectNode());
 
                 } else if (remaining.equals("/faq")) {
