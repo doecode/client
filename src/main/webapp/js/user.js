@@ -1,7 +1,12 @@
 /*Options for loading message on the account page in the event of a failed login when using a passcode*/
-const FAILED_TO_LOGIN_WITH_PASSCODE = {title: 'Failed to Sign In', show_loader: true,
-    message_type: MESSAGE_TYPE_ERROR, content: '<br/>Passcode login failed<br/>Page will redirect in 1 second',
-    contentClasses: ['center-text'], showClose: true};
+const FAILED_TO_LOGIN_WITH_PASSCODE = {
+    title: 'Failed to Sign In',
+    show_loader: true,
+    message_type: MESSAGE_TYPE_ERROR,
+    content: '<br/>Passcode login failed<br/>Page will redirect in 1 second',
+    contentClasses: ['center-text'],
+    showClose: true
+};
 
 var parseNameStatusData = function (return_data) {
     if (return_data.requested_url) {
@@ -27,9 +32,9 @@ var parseLoginError = function (xhr) {
 
     if (xhr.responseJSON) {
         var response = xhr.responseJSON;
-        error_msg = (response.status === 401 && response.errors && response.errors.length > 0 && response.errors[0] == 'Password is expired.')
-                ? 'Your password has expired. Please go to the <a href="/' + APP_NAME + '/forgot-password">password reset page</a> to reset your password.'
-                : "Invalid Username/Password. If you believe this to be in error, please contact&nbsp;<a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>&nbsp;for further information."
+        error_msg = (response.status === 401 && response.errors && response.errors.length > 0 && response.errors[0] == 'Password is expired.') ?
+            'Your password has expired. Please go to the <a href="/' + APP_NAME + '/forgot-password">password reset page</a> to reset your password.' :
+            "Invalid Username/Password. If you believe this to be in error, please contact&nbsp;<a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>&nbsp;for further information."
     } else {
         error_msg = "An error has occurred, and the DOE CODE API couldn't be reached.";
     }
@@ -189,8 +194,7 @@ var markRegistrationFieldWithStatus = function (condition, element, message) {
     }
 
     //Set the message, if there is one
-    $(element).next('label.registration-msg').html(message ? message : '');
-    $(element).next().next('label.registration-msg').html(message ? message : '');
+    $(element).parent().find('label.registration-msg').html(message ? message : '');
 };
 
 var markUserFieldWithStatus = function (condition, element, message) {
@@ -377,7 +381,7 @@ var saveUserAccountChanges = function () {
         last_name: $("#last_name").val()
     };
 
-    if (original_first_name != name_post_data.first_name || original_last_name != name_post_data.last_name) {//This means we'll try to do some changes
+    if (original_first_name != name_post_data.first_name || original_last_name != name_post_data.last_name) { //This means we'll try to do some changes
         save_name_changes = true;
     }
 
@@ -416,19 +420,19 @@ var saveUserAccountChanges = function () {
 
 var savePasswordChanges = function (post_data, update_login_status_name, login_name_status_data) {
     doAuthenticatedAjax('POST', API_BASE + 'user/changepassword', function (data) {
-        console.log("Update login name status: " + update_login_status_name);
-        if (update_login_status_name) {
-            updateLoginNameStatus(login_name_status_data);
-        } else {
-            $("#user-account-success-message").html('Changes saved successfully. Your page will reload in 3 seconds');
-            setTimeout(function () {
-                window.location.href = '/' + APP_NAME + '/account';
-            }, 3000);
-        }
-    }, post_data,
-            function (xhr) {
-                $("#account-error-message").html('Error in updating password: Password is not acceptable.');
-            });
+            console.log("Update login name status: " + update_login_status_name);
+            if (update_login_status_name) {
+                updateLoginNameStatus(login_name_status_data);
+            } else {
+                $("#user-account-success-message").html('Changes saved successfully. Your page will reload in 3 seconds');
+                setTimeout(function () {
+                    window.location.href = '/' + APP_NAME + '/account';
+                }, 3000);
+            }
+        }, post_data,
+        function (xhr) {
+            $("#account-error-message").html('Error in updating password: Password is not acceptable.');
+        });
 
 };
 
@@ -470,7 +474,9 @@ var generateNewAPIKey = function () {
 };
 
 var parseRequestAdminData = function (data) {
-    var post_data = {pending_roles: [JSON.parse(localStorage.user_data).user_site]};
+    var post_data = {
+        pending_roles: [JSON.parse(localStorage.user_data).user_site]
+    };
     updateLoginNameStatus(post_data, function (data) {
         $("#request-admin-role-message").html('Administrative role successfully requested');
     }, function (xhr) {
@@ -549,9 +555,11 @@ var loadUserDataForAdminForm = function () {
 };
 
 var saveUserAdminForm = function () {
-    var password_check_ids = {email_id: "email",
+    var password_check_ids = {
+        email_id: "email",
         password_id: "password",
-        confirm_password_id: "confirm-password"};
+        confirm_password_id: "confirm-password"
+    };
 
     //See if anything was even changed
     $("#user-admin-error-messages").html("");
@@ -676,17 +684,19 @@ var parseGetUserListData = function (data) {
     //Go through the users list, and populate the select with the values
     var pending_roles_list = [];
     data.forEach(function (item) {
-        var role = (item.roles.length > 0) ? item.roles[0] : '';//Since we only have a one-role system at the moment, we're just going to grab the first role from the list, because that's all there will be
+        var role = (item.roles.length > 0) ? item.roles[0] : ''; //Since we only have a one-role system at the moment, we're just going to grab the first role from the list, because that's all there will be
         //Because data attributes
         //Comes out like <option value="email@email.com" data-firstname="john" data-lastname="doe" data-awardnum="3135" data-role="BAPL" data-isactive="true" data-isverified="false" data-pendingroles='SITE1,SITE2,SITE3'>John DOE (email@email.com)</option>
-        var user_option = '<option value="' + item.email + '" data-firstname="' + item.first_name + '" data-lastname="'
-                + item.last_name + '" data-awardnum="' + item.contract_number + '" data-role="' + role + '" data-isactive="'
-                + item.active + '" data-isverified="' + item.verified + '" data-ispassexpired="'
-                + item.password_expired + '" data-pendingroles="' + item.pending_roles.join(',') + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
+        var user_option = '<option value="' + item.email + '" data-firstname="' + item.first_name + '" data-lastname="' +
+            item.last_name + '" data-awardnum="' + item.contract_number + '" data-role="' + role + '" data-isactive="' +
+            item.active + '" data-isverified="' + item.verified + '" data-ispassexpired="' +
+            item.password_expired + '" data-pendingroles="' + item.pending_roles.join(',') + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
         $("#user-admin-box").append(user_option);
         if (item.pending_roles.length > 0) {
-            pending_roles_list.push(
-                    {name: item.first_name + ' ' + item.last_name, roles: item.pending_roles.join(',')});
+            pending_roles_list.push({
+                name: item.first_name + ' ' + item.last_name,
+                roles: item.pending_roles.join(',')
+            });
         }
     });
     //If we have pending roles, we'll add them to the container
@@ -708,17 +718,25 @@ var parseGetUserListError = function (xhr) {
 
 var setUpUserAccountPage = function () {
 
-    var password_check_ids = {email_id: "email",
+    var password_check_ids = {
+        email_id: "email",
         password_id: "password",
-        confirm_password_id: "confirm-password"};
+        confirm_password_id: "confirm-password"
+    };
     //Makes the account save button work
     $("#save-user-btn").on('click', saveUserAccountChanges);
 
     //Validation for the various fields
     $("#first_name").on('blur', markUserFieldAsValidOrEmpty);
     $("#last_name").on('blur', markUserFieldAsValidOrEmpty);
-    $("#password").on('blur', {password_ids: password_check_ids, is_confirm: false}, validateUserPagePasswordField);
-    $("#confirm-password").on('blur', {password_ids: password_check_ids, is_confirm: true}, validateUserPagePasswordField);
+    $("#password").on('blur', {
+        password_ids: password_check_ids,
+        is_confirm: false
+    }, validateUserPagePasswordField);
+    $("#confirm-password").on('blur', {
+        password_ids: password_check_ids,
+        is_confirm: true
+    }, validateUserPagePasswordField);
 
     //Set content for the check password utility
     $("#password").on('keyup', password_check_ids, checkPassword);
@@ -735,19 +753,29 @@ if (document.getElementById('login-page-identifier')) {
     $("#signin-btn").on('click', login);
 
     //Make enter work on email and password
-    $("#password").on('keyup', {callback: login}, triggerByEnter);
+    $("#password").on('keyup', {
+        callback: login
+    }, triggerByEnter);
 
 } else if (document.getElementById('user-registration-page-identifier')) {
-    var password_check_ids = {email_id: "email",
+    var password_check_ids = {
+        email_id: "email",
         password_id: "password",
-        confirm_password_id: "confirm-password"};
+        confirm_password_id: "confirm-password"
+    };
 
     //Bindings to make the password validators work correctly
     $("#email").on('blur', password_check_ids, checkPassword);
     //Put check mark or x or nothing next to thing
-    $("#password").on('blur', {password_ids: password_check_ids, is_confirm: false}, validateRegistrationPasswordField);
+    $("#password").on('blur', {
+        password_ids: password_check_ids,
+        is_confirm: false
+    }, validateRegistrationPasswordField);
     //Put check mark or x or nothing next to thing
-    $("#confirm-password").on('blur', {password_ids: password_check_ids, is_confirm: true}, validateRegistrationPasswordField);
+    $("#confirm-password").on('blur', {
+        password_ids: password_check_ids,
+        is_confirm: true
+    }, validateRegistrationPasswordField);
 
     $("#email").on('keyup', password_check_ids, checkPassword);
     $("#password").on('keyup', password_check_ids, checkPassword);
@@ -781,11 +809,15 @@ if (document.getElementById('login-page-identifier')) {
     $("#create-account-btn").on('click', createAccount);
 
     //trigger the create account function when you press enter on the confirm password field
-    $("#confirm-password").on('keyup', {callback: createAccount}, triggerByEnter);
+    $("#confirm-password").on('keyup', {
+        callback: createAccount
+    }, triggerByEnter);
 
 } else if (document.getElementById('forgot-password-page-identifier')) {
     $("#forgot-password-btn").on('click', sendForgotPasswordRequest);
-    $("#email-address").on('keyup', {callback: sendForgotPasswordRequest}, triggerByEnter);
+    $("#email-address").on('keyup', {
+        callback: sendForgotPasswordRequest
+    }, triggerByEnter);
 
 } else if (document.getElementById('user-account-page-identifier')) {
     var passcode = $("#user-passcode").val();
@@ -794,19 +826,22 @@ if (document.getElementById('login-page-identifier')) {
             cache: false,
             contentType: "application/json",
             method: "POST",
-            data: JSON.stringify({confirmation_code: passcode}),
+            data: JSON.stringify({
+                confirmation_code: passcode
+            }),
             success: function (data) {
                 //Now that we're logged in, let's set some local storage attributes
                 setLoggedInAttributes(data);
                 //Send up our login data for java to do content with
                 setLoginNameStatus(data,
-                        function (return_data) {
-                            $("#signin-status-big-screens,#signin-status-small-screens").html(return_data.signin_html);
-                            $("#email").val(return_data.email);
-                            $("#first_name").val(return_data.first_name);
-                            $("#last_name").val(return_data.last_name);
-                            setUpUserAccountPage();
-                        }, function () {});
+                    function (return_data) {
+                        $("#signin-status-big-screens,#signin-status-small-screens").html(return_data.signin_html);
+                        $("#email").val(return_data.email);
+                        $("#first_name").val(return_data.first_name);
+                        $("#last_name").val(return_data.last_name);
+                        setUpUserAccountPage();
+                    },
+                    function () {});
 
             },
             error: function (xhr) {
@@ -827,22 +862,30 @@ if (document.getElementById('login-page-identifier')) {
 
 
     //Makes the "Users Requesting Roles" work
-    $("#requesting-roles-collapse-btn").on('click',
-            {open_name: '<strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>',
-                close_name: '<strong><span class="fa fa-caret-down fa-page-caret clickable"></span> Users Requesting Roles</strong>'}
-    , toggleCollapse);
+    $("#requesting-roles-collapse-btn").on('click', {
+        open_name: '<strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>',
+        close_name: '<strong><span class="fa fa-caret-down fa-page-caret clickable"></span> Users Requesting Roles</strong>'
+    }, toggleCollapse);
 
     //Makes the dropdown list work
     $("#user-admin-box").on('change', loadUserDataForAdminForm);
 
-    var password_check_ids = {email_id: "email",
+    var password_check_ids = {
+        email_id: "email",
         password_id: "password",
-        confirm_password_id: "confirm-password"};
+        confirm_password_id: "confirm-password"
+    };
     //Makes the input form validation content work
     $("#first_name").on('blur', markUserFieldAsValidOrEmpty);
     $("#last_name").on('blur', markUserFieldAsValidOrEmpty);
-    $("#password").on('blur', {password_ids: password_check_ids, is_confirm: false}, validateUserPagePasswordField);
-    $("#confirm-password").on('blur', {password_ids: password_check_ids, is_confirm: true}, validateUserPagePasswordField);
+    $("#password").on('blur', {
+        password_ids: password_check_ids,
+        is_confirm: false
+    }, validateUserPagePasswordField);
+    $("#confirm-password").on('blur', {
+        password_ids: password_check_ids,
+        is_confirm: true
+    }, validateUserPagePasswordField);
 
     //content for the password validation
     $("#password").on('keyup', password_check_ids, checkPassword);
