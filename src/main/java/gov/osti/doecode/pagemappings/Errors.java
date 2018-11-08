@@ -1,22 +1,23 @@
 package gov.osti.doecode.pagemappings;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.JsonUtils;
-import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.apache.commons.lang3.StringUtils;
+
+import gov.osti.doecode.servlet.Init;
+import gov.osti.doecode.utils.JsonUtils;
+import gov.osti.doecode.utils.TemplateUtils;
 
 public class Errors extends HttpServlet {
 
-        private Logger log = LoggerFactory.getLogger(Errors.class.getName());
+        private static final long serialVersionUID = 5788017362238476487L;
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {

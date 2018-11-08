@@ -1,24 +1,26 @@
 package gov.osti.doecode.pagemappings;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import gov.osti.doecode.entity.UserFunctions;
-import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.JsonUtils;
-import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.apache.commons.lang3.StringUtils;
+
+import gov.osti.doecode.entity.UserFunctions;
+import gov.osti.doecode.servlet.Init;
+import gov.osti.doecode.utils.JsonUtils;
+import gov.osti.doecode.utils.TemplateUtils;
 
 public class User extends HttpServlet {
 
-        private Logger log = LoggerFactory.getLogger(User.class.getName());
+        private static final long serialVersionUID = 1546530624730778400L;
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
@@ -76,7 +78,7 @@ public class User extends HttpServlet {
                                         output_data.put("passcode", request.getParameter("passcode"));
                                         output_data.put("page_warning_message", "Please change your password");
                                 } else {
-                                        output_data.put("current_user_data", UserFunctions.getAccountPageData(request));
+                                        output_data.set("current_user_data", UserFunctions.getAccountPageData(request));
                                 }
 
                                 if (StringUtils.equals(
@@ -94,7 +96,7 @@ public class User extends HttpServlet {
                                 template = TemplateUtils.TEMPLATE_USER_LOGIN;
                                 if (StringUtils.isNotBlank(request.getParameter("redirect"))
                                                 && request.getParameter("redirect").equals("true")) {
-                                        output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
+                                        output_data.set("user_data", new ObjectNode(JsonUtils.INSTANCE));
                                         output_data.put("is_redirected", true);
                                         response.addCookie(new Cookie("user_data", null));
                                 }
@@ -110,7 +112,7 @@ public class User extends HttpServlet {
                         case "logout":
                                 page_title = "DOE CODE: Logout";
                                 template = TemplateUtils.TEMPLATE_USER_LOGOUT;
-                                output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
+                                output_data.set("user_data", new ObjectNode(JsonUtils.INSTANCE));
                                 response.addCookie(new Cookie("user_data", null));
                                 response.addCookie(new Cookie("needs_password_reset", null));
                                 response.addCookie(new Cookie("requested_url", null));

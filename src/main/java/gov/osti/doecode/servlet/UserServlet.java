@@ -15,33 +15,36 @@ import org.apache.commons.lang3.StringUtils;
  * @author smithwa
  */
 public class UserServlet extends HttpServlet {
-     
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-          request.setCharacterEncoding("UTF-8");
-          String remaining = StringUtils.substringAfterLast(request.getRequestURI(), "/" + Init.app_name + "/user-data/");
-          
-          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-          
-          switch (remaining) {
-               case "get-current-user-data":
-                    return_data = UserFunctions.getUserDataFromCookie(request);
-                    break;
-          }
-          
-          JsonUtils.writeTo(return_data, response);
-     }
-     
-     @Override
-     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-          processRequest(request, response);
-     }
-     
-     @Override
-     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-          processRequest(request, response);
-     }
-     
+
+        private static final long serialVersionUID = -7558668872421453995L;
+
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
+                request.setCharacterEncoding("UTF-8");
+                String remaining = StringUtils.substringAfterLast(request.getRequestURI(),
+                                "/" + Init.app_name + "/user-data/");
+
+                ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+
+                switch (remaining) {
+                case "get-current-user-data":
+                        return_data = UserFunctions.getUserDataFromCookie(request);
+                        break;
+                }
+
+                JsonUtils.writeTo(return_data, response);
+        }
+
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
+                processRequest(request, response);
+        }
+
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
+                processRequest(request, response);
+        }
+
 }

@@ -1,22 +1,25 @@
 package gov.osti.doecode.pagemappings;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import gov.osti.doecode.entity.DOECODEJson;
-import gov.osti.doecode.entity.InputFunctions;
 import static gov.osti.doecode.entity.UserFunctions.isCurrentlyLoggedInUserAnAdmin;
-import gov.osti.doecode.listeners.DOECODEServletContextListener;
-import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.JsonUtils;
-import gov.osti.doecode.utils.TemplateUtils;
+
 import java.io.IOException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.apache.commons.lang3.StringUtils;
+
+import gov.osti.doecode.entity.DOECODEJson;
+import gov.osti.doecode.entity.InputFunctions;
+import gov.osti.doecode.listeners.DOECODEServletContextListener;
+import gov.osti.doecode.servlet.Init;
+import gov.osti.doecode.utils.JsonUtils;
+import gov.osti.doecode.utils.TemplateUtils;
 
 /**
  *
@@ -24,7 +27,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class Input extends HttpServlet {
 
-        private Logger log = LoggerFactory.getLogger(Input.class.getName());
+        private static final long serialVersionUID = -557715523485856278L;
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
@@ -83,9 +86,9 @@ public class Input extends HttpServlet {
 
                         }
 
-                        output_data.put("programming_languages_list", DOECODEServletContextListener
+                        output_data.set("programming_languages_list", DOECODEServletContextListener
                                         .getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
-                        output_data.put("relation_type",
+                        output_data.set("relation_type",
                                         DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
 
                         current_page = TemplateUtils.PAGE_PROJECTS;
@@ -108,9 +111,9 @@ public class Input extends HttpServlet {
                                 output_data.put("page_message", "Submit a New Software Project");
                         }
 
-                        output_data.put("programming_languages_list", DOECODEServletContextListener
+                        output_data.set("programming_languages_list", DOECODEServletContextListener
                                         .getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
-                        output_data.put("relation_type",
+                        output_data.set("relation_type",
                                         DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
 
                         is_inputjs = true;
@@ -134,9 +137,9 @@ public class Input extends HttpServlet {
                         }
                         output_data.put("show_owner_message", true);
 
-                        output_data.put("programming_languages_list", DOECODEServletContextListener
+                        output_data.set("programming_languages_list", DOECODEServletContextListener
                                         .getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
-                        output_data.put("relation_type",
+                        output_data.set("relation_type",
                                         DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
                         is_inputjs = true;
                         current_page = TemplateUtils.PAGE_PROJECTS;
@@ -176,7 +179,7 @@ public class Input extends HttpServlet {
                                         .getJsonList(DOECODEJson.AVAILABILITY_KEY);
                         output_data.put("availabilities_list_json", availabilityList.toString());
 
-                        output_data.put("relation_type",
+                        output_data.set("relation_type",
                                         DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
 
                         current_page = TemplateUtils.PAGE_PROJECTS;

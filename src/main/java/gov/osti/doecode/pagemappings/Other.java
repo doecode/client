@@ -20,6 +20,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Other extends HttpServlet {
 
+        private static final long serialVersionUID = -6637956247980588309L;
+
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
                 request.setCharacterEncoding("UTF-8");
@@ -57,7 +59,7 @@ public class Other extends HttpServlet {
 
                 // Check if they're logged in, and only do something if they're not logged in
                 if (!UserFunctions.isUserLoggedIn(request)) {
-                        output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
+                        output_data.set("user_data", new ObjectNode(JsonUtils.INSTANCE));
                 } else {
                         // Increment time
                         response.addCookie(UserFunctions.updateUserSessionTimeout(request));
@@ -72,8 +74,8 @@ public class Other extends HttpServlet {
 
                 // Send in this object, and get a hold of the common data, like the classes
                 // needed to render the homepage correctly and such
-                output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, extraJSList,
-                                null, request);
+                output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, extraJSList, null,
+                                request);
 
                 // Write the template out
                 TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);

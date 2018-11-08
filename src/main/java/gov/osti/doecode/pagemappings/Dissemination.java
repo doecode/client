@@ -3,9 +3,21 @@
  */
 package gov.osti.doecode.pagemappings;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import gov.osti.doecode.entity.DOECODEJson;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import gov.osti.doecode.entity.NewsFunctions;
 import gov.osti.doecode.entity.SearchFunctions;
 import gov.osti.doecode.entity.UserFunctions;
@@ -13,18 +25,10 @@ import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class Dissemination extends HttpServlet {
 
+        private static final long serialVersionUID = 282315618723126267L;
         protected Logger log = LoggerFactory.getLogger(Dissemination.class.getName());
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -148,7 +152,7 @@ public class Dissemination extends HttpServlet {
 
                 // Check if they're logged in, and only do something if they're not logged in
                 if (!UserFunctions.isUserLoggedIn(request)) {
-                        output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
+                        output_data.set("user_data", new ObjectNode(JsonUtils.INSTANCE));
                 } else {
                         // Increment time
                         response.addCookie(UserFunctions.updateUserSessionTimeout(request));

@@ -222,8 +222,8 @@ public class OtherFunctions {
      public static ObjectNode getOtherLists(ServletContext context) {
           ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
           try {
-               return_data.put("countries_list", DOECODEServletContextListener.getJsonList(DOECODEJson.COUNTRIES_KEY));
-               return_data.put("state_list", DOECODEServletContextListener.getJsonList(DOECODEJson.STATES_KEY));
+               return_data.set("countries_list", DOECODEServletContextListener.getJsonList(DOECODEJson.COUNTRIES_KEY));
+               return_data.set("state_list", DOECODEServletContextListener.getJsonList(DOECODEJson.STATES_KEY));
           } catch (Exception e) {
                log.error("Error in loading input json lists: " + e.getMessage());
           }

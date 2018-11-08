@@ -18,6 +18,8 @@ import gov.osti.doecode.utils.TemplateUtils;
 
 public class Site extends HttpServlet {
 
+        private static final long serialVersionUID = 9211014467465771916L;
+
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
                 request.setCharacterEncoding("UTF-8");

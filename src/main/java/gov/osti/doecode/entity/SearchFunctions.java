@@ -672,7 +672,7 @@ public class SearchFunctions {
                                 for (Integer value : countList) {
                                         countArray.add(value);
                                 }
-                                current_row.put("sup_count", countArray);
+                                current_row.set("sup_count", countArray);
                                 current_row.put("show_sup", countArray.size() > 0);
                         }
 
@@ -1397,7 +1397,7 @@ public class SearchFunctions {
                                         (ArrayNode) biblio_data.get("developers"), null);
                         ObjectNode devs_contributors_obj = getDevAndContributorLink(developers_combined, true, false,
                                         true);
-                        return_data.put("developers_list", devs_contributors_obj);
+                        return_data.set("developers_list", devs_contributors_obj);
                         return_data.put("has_developers",
                                         JsonUtils.getBoolean(devs_contributors_obj, "had_list", false));
                         ArrayNode developerslist = new ArrayNode(JsonUtils.INSTANCE);
@@ -1534,7 +1534,7 @@ public class SearchFunctions {
                                         refined_meta_tags.add(v);
                                 }
                         }
-                        return_data.put("meta_tag", refined_meta_tags);
+                        return_data.set("meta_tag", refined_meta_tags);
                 }
 
                 return_data.put("is_valid", JsonUtils.getBoolean(biblio_data, "is_valid_record", false));

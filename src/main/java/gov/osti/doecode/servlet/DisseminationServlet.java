@@ -1,31 +1,34 @@
 package gov.osti.doecode.servlet;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import gov.osti.doecode.entity.DOECODEJson;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import gov.osti.doecode.entity.NewsFunctions;
 import gov.osti.doecode.entity.ReportFunctions;
 import gov.osti.doecode.entity.SearchFunctions;
 import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class DisseminationServlet extends HttpServlet {
 
+        private static final long serialVersionUID = -7808019940521145092L;
         private static final int BYTES_DOWNLOAD = 1024;
         private Logger log = LoggerFactory.getLogger(DisseminationServlet.class);
 
@@ -118,7 +121,7 @@ public class DisseminationServlet extends HttpServlet {
                 } else if (remaining.equals("news-article-search")) {
                         ObjectNode request_data = JsonUtils.parseObjectNode(request.getReader());
                         ObjectNode output_data = NewsFunctions.getNewsPageData(Init.news_page_data_url, request_data);
-                        
+
                         TemplateUtils.writeOutTemplateData("", "news-article", Init.handlebarsSearch, response,
                                         output_data);
                         return;

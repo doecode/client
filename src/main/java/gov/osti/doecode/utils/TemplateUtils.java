@@ -87,14 +87,14 @@ public class TemplateUtils {
                   ArrayNode extraJSList, ArrayNode cssFilesList, HttpServletRequest request) throws IOException {
             output_data.put("active_page", current_page);
             if (!JsonUtils.containsKey(output_data, "user_data")) {
-                  output_data.put("user_data", UserFunctions.getUserDataFromCookie(request));
+                  output_data.set("user_data", UserFunctions.getUserDataFromCookie(request));
             }
-            output_data.put("jsLibraries", extraJSList);
-            output_data.put("jsFiles", jsFilesList);
-            output_data.put("cssFiles", cssFilesList);
-            output_data.put("navbar", GET_NAVBAR_CLASSES(current_page));
+            output_data.set("jsLibraries", extraJSList);
+            output_data.set("jsFiles", jsFilesList);
+            output_data.set("cssFiles", cssFilesList);
+            output_data.set("navbar", GET_NAVBAR_CLASSES(current_page));
             output_data.put("app_name", Init.app_name);
-            output_data.put("adv_search_lists", SearchFunctions.getAdvancedSearchPageLists());
+            output_data.set("adv_search_lists", SearchFunctions.getAdvancedSearchPageLists());
             output_data.put("google_analytics_id", Init.google_analytics_id);
             output_data.put("ga_domain", Init.google_analytics_domain);
             output_data.put("session_timeout", Init.SESSION_TIMEOUT_MINUTES);
@@ -172,26 +172,26 @@ public class TemplateUtils {
                   break;
             }
 
-            return_data.put("projects", projects);
-            return_data.put("repository_services", repositoryServices);
-            return_data.put("about", about);
-            return_data.put("policy", policy);
-            return_data.put("resources", resources);
-            return_data.put("news", news);
-            return_data.put("faq", faq);
+            return_data.set("projects", projects);
+            return_data.set("repository_services", repositoryServices);
+            return_data.set("about", about);
+            return_data.set("policy", policy);
+            return_data.set("resources", resources);
+            return_data.set("news", news);
+            return_data.set("faq", faq);
 
             return return_data;
       }
 
       public static String getNewSigninStatusHtml(ServletContext context, ObjectNode data) {
             String template_data = "";
-            HashMap user_data = new HashMap();
+            HashMap<Object, Object> user_data = new HashMap<Object, Object>();
             user_data.put("first_name", JsonUtils.getString(data, "first_name", ""));
             user_data.put("last_name", JsonUtils.getString(data, "last_name", ""));
             user_data.put("is_logged_in", true);
             ArrayNode roles_list = JsonUtils.parseArrayNode(JsonUtils.getString(data, "roles", "[]"));
             user_data.put("has_osti_role", JsonUtils.arrayContains(roles_list, "OSTI"));
-            HashMap data_for_template = new HashMap();
+            HashMap<Object, Object> data_for_template = new HashMap<Object, Object>();
             data_for_template.put("user_data", user_data);
             data_for_template.put("app_name", Init.app_name);
             try {

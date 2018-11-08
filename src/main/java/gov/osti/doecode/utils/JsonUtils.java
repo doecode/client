@@ -96,7 +96,7 @@ public class JsonUtils {
      }
 
      public static ArrayList<String> getKeys(ObjectNode on) {
-          ArrayList<String> keys = new ArrayList();
+          ArrayList<String> keys = new ArrayList<String>();
           on.fieldNames().forEachRemaining((s) -> {
                keys.add(s);
           });
