@@ -1,241 +1,245 @@
 {{> wrapper/header}}
-<input type="hidden" id="gitlab-signup-page-identifier"/>
+<input type="hidden" id="gitlab-signup-page-identifier" />
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <noscript>Your browser does not support JavaScript!</noscript>
 <style type='text/css'>
-     .full-width-input{
-	 width:100%;
-     }
-     .gitlab-signup-input-row{
-	 padding-bottom:10px;
-     }
+	.full-width-input {
+		width: 100%;
+	}
 
-     .gitlab-signup-row-heading{
-	 font-size:20px;
-     }
+	.gitlab-signup-input-row {
+		padding-bottom: 10px;
+	}
+
+	.gitlab-signup-row-heading {
+		font-size: 20px;
+	}
 </style>
 <div class="row not-so-wide-row">
-     <div class="col-lg-3 col-md-1"></div>
-     <div class="col-lg-8 special-lg-8 col-md-10 col-sm-11 col-xs-11 static-content">
-	  <h2 class="static-content-title">DOE CODE Repositories Services Access Request</h2>
-	  <div class='row'>
-	       <div class='col-xs-12 '>
-		    <small><label class="control-label">*=required field</label></small>
-	       </div>
-	  </div>
-          <br/>
-	  <div class='row'>
-	       <div class='col-xs-12 center-text has-success'>
-		    <label class='control-label' id='gitlab-signup-success-message'></label>
-	       </div>
-	  </div>
-	  <div class='row'>
-	       <div class='col-xs-12 center-text has-error'>
-		    <label class='control-label' id='gitlab-signup-error-message'></label>
-	       </div>
-	  </div>
+	<div class="col-lg-3 col-md-1"></div>
+	<div class="col-lg-8 special-lg-8 col-md-10 col-sm-11 col-xs-11 static-content">
+		<h2 class="static-content-title">DOE CODE Repositories Services Access Request</h2>
+		<div class='row'>
+			<div class='col-xs-12 '>
+				<small><label class="control-label">*=required field</label></small>
+			</div>
+		</div>
+		<br />
+		<div class='row'>
+			<div class='col-xs-12 center-text has-success'>
+				<label class='control-label' id='gitlab-signup-success-message'></label>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='col-xs-12 center-text has-error'>
+				<label class='control-label' id='gitlab-signup-error-message'></label>
+			</div>
+		</div>
 
-	  <form method="POST" id="gitlab-signup-form" action="/${app_name}/gitlab-signup-result">
-	       <input type="hidden" id="token" name="token" value="{{gitlab_token}}"/>
-	       <div class='row'>
-		    <div class="col-xs-12 gitlab-signup-input-row">
-			 <label class="control-label gitlab-signup-row-heading">Name</label>
-			 <br/>
-		    </div>
-		    <div class='col-lg-5 col-sm-5 col-xs-12 gitlab-signup-input-row'>
-			 <input title='First Name' placeholder='First Name' id='first-name' name="first_name" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='first_name'>&nbsp;First Name *</label></small>
-			 </div>
-		    </div>
-		    <div class='col-lg-5 col-sm-5 col-xs-12 gitlab-signup-input-row'>
-			 <input title='Middle Name' placeholder='Middle Name' id='middle-name' name="middle_name" class="pure-input-1 form-control full-width-input gitlab-signup-input" type="text">
-			 <span class="fa fa-check form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight ' for='middle_name'>&nbsp;Middle Name</label></small>
-			 </div>
-		    </div> 
-		    <div class='col-lg-5 col-sm-5 col-xs-12 gitlab-signup-input-row'>
-			 <input title='Last Name' placeholder='Last Name' id='last-name' name="last_name" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight ' for='last_name'>&nbsp;Last Name *</label></small>
-			 </div>
-		    </div> 
-		    <div class='col-lg-2 col-sm-2 col-xs-4 gitlab-signup-input-row'>
-			 <input title='Suffix' placeholder='Suffix' id='suffix' name="suffix" class="pure-input-1 form-control gitlab-signup-input" size="4" type="text">
-			 <span class="fa fa-check form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight ' for='suffix'>&nbsp;Suffix</label></small>
-			 </div>
-		    </div>
-	       </div>
-	       <br/>
-	       <br/>
+		<form method="POST" id="gitlab-signup-form" action="/${app_name}/gitlab-signup-result">
+			<input type="hidden" id="token" name="token" value="{{gitlab_token}}" />
+			<div class='row'>
+				<div class="col-xs-12 gitlab-signup-input-row">
+					<label class="control-label gitlab-signup-row-heading">Name</label>
+					<br />
+				</div>
+				<div class='col-lg-5 col-sm-5 col-xs-12 gitlab-signup-input-row'>
+					<input title='First Name' placeholder='First Name' id='first-name' name="first_name" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='first_name'>&nbsp;First Name *</label></small>
+					</div>
+				</div>
+				<div class='col-lg-5 col-sm-5 col-xs-12 gitlab-signup-input-row'>
+					<input title='Middle Name' placeholder='Middle Name' id='middle-name' name="middle_name" class="pure-input-1 form-control full-width-input gitlab-signup-input" type="text">
+					<span class="fa fa-check form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight ' for='middle_name'>&nbsp;Middle Name</label></small>
+					</div>
+				</div>
+				<div class='col-lg-5 col-sm-5 col-xs-12 gitlab-signup-input-row'>
+					<input title='Last Name' placeholder='Last Name' id='last-name' name="last_name" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight ' for='last_name'>&nbsp;Last Name *</label></small>
+					</div>
+				</div>
+				<div class='col-lg-2 col-sm-2 col-xs-4 gitlab-signup-input-row'>
+					<input title='Suffix' placeholder='Suffix' id='suffix' name="suffix" class="pure-input-1 form-control gitlab-signup-input" size="4" type="text">
+					<span class="fa fa-check form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight ' for='suffix'>&nbsp;Suffix</label></small>
+					</div>
+				</div>
+			</div>
+			<br />
+			<br />
 
-	       <div class='row'>
-		    <div class="col-xs-12 gitlab-signup-input-row">
-			 <label class="control-label gitlab-signup-row-heading">Mailing Address</label>
-			 <br/>
-		    </div>
-		    <div class='col-lg-10 col-xs-12 gitlab-signup-input-row'>
-			 <input title='Street Address' placeholder='Street Address' id='address' name="address" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='address'>&nbsp;Street Address *</label></small>
-			 </div>
-		    </div>
-		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-			 <input title='City' placeholder='City' id='city' name="city" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='city'>&nbsp;City *</label></small>
-			 </div>
-		    </div>
-		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-			 <select data-firstinvalid='true' class='pure-input-1 full-width-input form-control gitlab-signup-input' name="state" title='State' id="state">
-			      {{#each state_list}}
-			      <option value="{{value}}" title="{{title}}">{{label}}</option>
-			      {{/each}}
-			 </select>		
-			 <span class="fa fa-check form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='state'>&nbsp;State</label> </small>
-			 </div>
-		    </div>
-		    <div class='col-lg-3 col-sm-4 col-xs-12 gitlab-signup-input-row'>
-			 <input title='Postal Code' placeholder='Postal Code' id='postal-code' name="postal_code" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='postal-code'>&nbsp;Postal Code *</label></small>
-			 </div>
-		    </div>
-		    <div class='col-sm-2 hide-xs'></div>
-		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-			 <select class='pure-input-1 full-width-input form-control gitlab-signup-input gitlab-signup-required' name="country" title='Country' id="country">
-			      <option value="United States" title="United States">United States</option>
-			      {{#each countries_list}}
-			      <option value="{{value}}" title="{{title}}">{{label}}</option>
-			      {{/each}}
-			 </select>
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='country'>&nbsp;Country *</label></small>
-			 </div>
-		    </div>
-	       </div>
-	       <br/>
-	       <br/>
+			<div class='row'>
+				<div class="col-xs-12 gitlab-signup-input-row">
+					<label class="control-label gitlab-signup-row-heading">Mailing Address</label>
+					<br />
+				</div>
+				<div class='col-lg-10 col-xs-12 gitlab-signup-input-row'>
+					<input title='Street Address' placeholder='Street Address' id='address' name="address" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='address'>&nbsp;Street Address *</label></small>
+					</div>
+				</div>
+				<div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+					<input title='City' placeholder='City' id='city' name="city" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='city'>&nbsp;City *</label></small>
+					</div>
+				</div>
+				<div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+					<select data-firstinvalid='true' class='pure-input-1 full-width-input form-control gitlab-signup-input' name="state" title='State' id="state">
+						{{#each state_list}}
+							<option value="{{value}}" title="{{title}}">{{label}}</option>
+						{{/each}}
+					</select>
+					<span class="fa fa-check form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='state'>&nbsp;State</label> </small>
+					</div>
+				</div>
+				<div class='col-lg-3 col-sm-4 col-xs-12 gitlab-signup-input-row'>
+					<input title='Postal Code' placeholder='Postal Code' id='postal-code' name="postal_code" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='postal-code'>&nbsp;Postal Code *</label></small>
+					</div>
+				</div>
+				<div class='col-sm-2 hide-xs'></div>
+				<div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+					<select class='pure-input-1 full-width-input form-control gitlab-signup-input gitlab-signup-required' name="country" title='Country' id="country">
+						<option value="United States" title="United States">United States</option>
+						{{#each countries_list}}
+							<option value="{{value}}" title="{{title}}">{{label}}</option>
+						{{/each}}
+					</select>
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='country'>&nbsp;Country *</label></small>
+					</div>
+				</div>
+			</div>
+			<br />
+			<br />
 
-	       <div class='row'>
-		    <div class="col-xs-12 gitlab-signup-input-row">
-			 <label class="control-label gitlab-signup-row-heading">Contact information</label>
-			 <br/>
-		    </div>
-		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-			 <input title='Email Address' placeholder='Email Address' id='email' name="email_address" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='email'>&nbsp;Email Address *</label></small>
-			 </div>
-		    </div>
-		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-			 <input title='Phone Number' placeholder='Phone Number' id='phone-number' name="phone_number" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='phone-number'>&nbsp;Phone Number *</label></small>
-			 </div>
-		    </div>
-	       </div>
-	       <br/>
-	       <br/>
-	       <div class='row'>
-		    <div class="col-xs-12 gitlab-signup-input-row">
-			 <label class="control-label gitlab-signup-row-heading">Employment</label>
-			 <br/>
-		    </div>
-		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-			 <input title='Job Title' placeholder='Job Title' id='job-title' name="job_title" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='job-title'>&nbsp;Job Title *</label></small>
-			 </div>
-		    </div>
-		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
-			 <select data-firstinvalid='true' class='pure-input-1 full-width-input form-control gitlab-signup-input gitlab-signup-required' name="employment_designation" title='Employment Designation' id="employment-designation">
-			      <option value='' title='Select an Option'>Select An Option</option>
-			      <option value="DOE Federal Employee" title="DOE Federal Employee">DOE Federal Employee</option>
-			      <option value="DOE Prime Contractor" title="DOE Prime Contractor">DOE Prime Contractor</option>
-			      <option value="DOE Sub-Contractor" title="DOE Sub-Contractor">DOE Sub-Contractor</option>
-			      <option value="Other" title="Other">Other</option>
-			 </select>
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Employment Designation *</label></small>
-			 </div>
-		    </div>
-		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
-			 <input title='DOE Contract Number' placeholder='DOE Contract Number' id='contract-number' name="contract_number" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required" data-associatedfield='employment-designation' data-associatedvalues='DOE Prime Contractor,DOE Sub-Contractor' type="text">
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='job-title'>&nbsp;DOE Contract Number *</label></small>
-			 </div>
-		    </div>
-		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
-			 <input title='Contracting Organization' placeholder='Contract Organization' id='contracting-organization' name='contracting_organization' class='pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required' data-associatedfield='employment-designation' data-associatedvalues='DOE Prime Contractor,DOE Sub-Contractor' type='text'/>
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Contracting Organization *</label></small>
-			 </div>
-		    </div>
-		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
-		    </div>
-		    <div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
-			 <input id='employment-designation-other-val' name='employment_designation_other_value' type='text' data-associatedfield='employment-designation' data-associatedvalues='Other' class='pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required' title='Employment Designation Other'/>
-			 <span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
-			 <span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
-			 <div>
-			      <small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Describe Designation *</label></small>
-			 </div>
-		    </div>
-	       </div>
-	       <div class="row">
-		    <br/>
-		    <div class="col-xs-12">
-			 Please verify that you are not a bot
-		    </div>
-		    <br/>
-		    <div class="col-xs-12 left-text">
-			 <div class='g-recaptcha' id="gitlab-signup-recaptcha-div" data-error-callback="gitlab_recaptcha_error_callback" data-callback="gitlab_recaptcha_success_callback" data-expired-callback="gitlab_recaptcha_expiration_callback" data-sitekey='{{recaptcha_sitekey}}'></div>
-		    </div>
-	       </div>
-	  </form>
-	  <br/>
-	  <br/>
-	  <div class="row">
-	       <div class='col-md-10 col-sm-11 col-xs-12 right-text'>
-		    <button id="submit-btn" title="Submit" type="button" class="pure-button pure-button-primary btn-lg" disabled>
-			 Submit
-		    </button>
-	       </div>
-	  </div>
-     </div>
-     <div class="col-lg-3 col-md-1"></div>
+			<div class='row'>
+				<div class="col-xs-12 gitlab-signup-input-row">
+					<label class="control-label gitlab-signup-row-heading">Contact information</label>
+					<br />
+				</div>
+				<div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+					<input title='Email Address' placeholder='Email Address' id='email' name="email_address" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='email'>&nbsp;Email Address *</label></small>
+					</div>
+				</div>
+				<div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+					<input title='Phone Number' placeholder='Phone Number' id='phone-number' name="phone_number" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='phone-number'>&nbsp;Phone Number *</label></small>
+					</div>
+				</div>
+			</div>
+			<br />
+			<br />
+			<div class='row'>
+				<div class="col-xs-12 gitlab-signup-input-row">
+					<label class="control-label gitlab-signup-row-heading">Employment</label>
+					<br />
+				</div>
+				<div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+					<input title='Job Title' placeholder='Job Title' id='job-title' name="job_title" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required" type="text">
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='job-title'>&nbsp;Job Title *</label></small>
+					</div>
+				</div>
+				<div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row'>
+					<select data-firstinvalid='true' class='pure-input-1 full-width-input form-control gitlab-signup-input gitlab-signup-required' name="employment_designation" title='Employment Designation' id="employment-designation">
+						<option value='' title='Select an Option'>Select An Option</option>
+						<option value="DOE Federal Employee" title="DOE Federal Employee">DOE Federal Employee</option>
+						<option value="DOE Prime Contractor" title="DOE Prime Contractor">DOE Prime Contractor</option>
+						<option value="DOE Sub-Contractor" title="DOE Sub-Contractor">DOE Sub-Contractor</option>
+						<option value="Other" title="Other">Other</option>
+					</select>
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Employment Designation *</label></small>
+					</div>
+				</div>
+				<div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
+					<input title='DOE Contract Number' placeholder='DOE Contract Number' id='contract-number' name="contract_number" class="pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required" data-associatedfield='employment-designation'
+					 data-associatedvalues='DOE Prime Contractor,DOE Sub-Contractor' type="text">
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='job-title'>&nbsp;DOE Contract Number *</label></small>
+					</div>
+				</div>
+				<div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
+					<input title='Contracting Organization' placeholder='Contract Organization' id='contracting-organization' name='contracting_organization' class='pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required' data-associatedfield='employment-designation'
+					 data-associatedvalues='DOE Prime Contractor,DOE Sub-Contractor' type='text' />
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Contracting Organization *</label></small>
+					</div>
+				</div>
+				<div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
+				</div>
+				<div class='col-lg-5 col-sm-6 col-xs-12 gitlab-signup-input-row' style='display:none;'>
+					<input id='employment-designation-other-val' name='employment_designation_other_value' type='text' data-associatedfield='employment-designation' data-associatedvalues='Other' class='pure-input-1 form-control full-width-input gitlab-signup-input gitlab-signup-required conditional-required'
+					 title='Employment Designation Other' />
+					<span class="fa fa-times form-control-feedback errorCheck" style="display:none;"></span>
+					<span class="fa fa-check form-control-feedback successCheck" style="display:none;"></span>
+					<div>
+						<small><label class='control-label normal-weight' for='employment-designation'>&nbsp;Describe Designation *</label></small>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<br />
+				<div class="col-xs-12">
+					Please verify that you are not a bot
+				</div>
+				<br />
+				<div class="col-xs-12 left-text">
+					<div class='g-recaptcha' id="gitlab-signup-recaptcha-div" data-error-callback="gitlab_recaptcha_error_callback" data-callback="gitlab_recaptcha_success_callback" data-expired-callback="gitlab_recaptcha_expiration_callback" data-sitekey='{{recaptcha_sitekey}}'></div>
+				</div>
+			</div>
+		</form>
+		<br />
+		<br />
+		<div class="row">
+			<div class='col-md-10 col-sm-11 col-xs-12 right-text'>
+				<button id="submit-btn" title="Submit" type="button" class="pure-button pure-button-primary btn-lg" disabled>
+					Submit
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-1"></div>
 </div>
 {{> wrapper/footer}}
