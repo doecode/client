@@ -28,232 +28,246 @@ import org.slf4j.LoggerFactory;
  */
 public class UserFunctions {
 
-     public static final DateTimeFormatter SESSION_TIMEOUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm:ss");
+        public static final DateTimeFormatter SESSION_TIMEOUT_FORMAT = DateTimeFormatter
+                        .ofPattern("yyyy-MM-ddHH:mm:ss");
 
-     private static Logger log = LoggerFactory.getLogger(UserFunctions.class.getName());
+        private static Logger log = LoggerFactory.getLogger(UserFunctions.class.getName());
 
-     /*
-     Looks for a user data cookie. If one is found, it takes it, parses the value as a json object, and returns it
-      */
-     public static ObjectNode getUserDataFromCookie(HttpServletRequest request) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-          if (request.getCookies() != null) {
-               for (Cookie c : request.getCookies()) {
-                    if (StringUtils.equals(c.getName(), "user_data")) {
-                         try {
-                              byte[] decoded = Base64.decodeBase64(c.getValue());
-                              if (StringUtils.isNotBlank(new String(decoded)) && JsonUtils.isValidObjectNode(new String(decoded))) {
-                                   return_data = JsonUtils.parseObjectNode(new String(decoded));
-                                   break;
-                              }
-                         } catch (Exception ex) {
-                              log.error("Couldn't decode: " + ex.getMessage());
-                         }
-                    }
-               }
-          }
-          return return_data;
-     }
+        /*
+         * Looks for a user data cookie. If one is found, it takes it, parses the value
+         * as a json object, and returns it
+         */
+        public static ObjectNode getUserDataFromCookie(HttpServletRequest request) {
+                ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+                if (request.getCookies() != null) {
+                        for (Cookie c : request.getCookies()) {
+                                if (StringUtils.equals(c.getName(), "user_data")) {
+                                        try {
+                                                byte[] decoded = Base64.decodeBase64(c.getValue());
+                                                if (StringUtils.isNotBlank(new String(decoded))
+                                                                && JsonUtils.isValidObjectNode(new String(decoded))) {
+                                                        return_data = JsonUtils.parseObjectNode(new String(decoded));
+                                                        break;
+                                                }
+                                        } catch (Exception ex) {
+                                                log.error("Couldn't decode: " + ex.getMessage());
+                                        }
+                                }
+                        }
+                }
+                return return_data;
+        }
 
-     public static String getOtherUserCookieValue(HttpServletRequest request, String key) {
-          String return_data = "";
-          if (request.getCookies() != null) {
-               for (Cookie c : request.getCookies()) {
-                    if (StringUtils.equals(c.getName(), key)) {
-                         return_data = c.getValue();
-                         break;
-                    }
-               }
-          }
-          return return_data;
-     }
+        public static String getOtherUserCookieValue(HttpServletRequest request, String key) {
+                String return_data = "";
+                if (request.getCookies() != null) {
+                        for (Cookie c : request.getCookies()) {
+                                if (StringUtils.equals(c.getName(), key)) {
+                                        return_data = c.getValue();
+                                        break;
+                                }
+                        }
+                }
+                return return_data;
+        }
 
-     public static boolean isUserLoggedIn(HttpServletRequest request) {
-          ObjectNode user_data = UserFunctions.getUserDataFromCookie(request);
-          boolean is_logged_in = JsonUtils.getBoolean(user_data, "is_logged_in", false);
-          boolean is_within_time = false;
-          if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, JsonUtils.getString(user_data, "session_timeout", ""))) {
-               LocalDateTime last_timeout = LocalDateTime.parse(JsonUtils.getString(user_data, "session_timeout", ""), SESSION_TIMEOUT_FORMAT);
-               LocalDateTime right_now = LocalDateTime.now();
-               long minutes = ChronoUnit.MINUTES.between(right_now, last_timeout);
-               is_within_time = Math.abs(minutes) < Init.SESSION_TIMEOUT_MINUTES;
-          }
+        public static boolean isUserLoggedIn(HttpServletRequest request) {
+                ObjectNode user_data = UserFunctions.getUserDataFromCookie(request);
+                boolean is_logged_in = JsonUtils.getBoolean(user_data, "is_logged_in", false);
+                boolean is_within_time = false;
+                if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT,
+                                JsonUtils.getString(user_data, "session_timeout", ""))) {
+                        LocalDateTime last_timeout = LocalDateTime.parse(
+                                        JsonUtils.getString(user_data, "session_timeout", ""), SESSION_TIMEOUT_FORMAT);
+                        LocalDateTime right_now = LocalDateTime.now();
+                        long minutes = ChronoUnit.MINUTES.between(right_now, last_timeout);
+                        is_within_time = Math.abs(minutes) < Init.SESSION_TIMEOUT_MINUTES;
+                }
 
-          return is_logged_in && is_within_time;
-     }
+                return is_logged_in && is_within_time;
+        }
 
-     public static Cookie makeUserCookie(ObjectNode user_data) {
-          String user_data_encoded = Base64.encodeBase64String(user_data.toString().getBytes());
+        public static Cookie makeUserCookie(ObjectNode user_data) {
+                String user_data_encoded = Base64.encodeBase64String(user_data.toString().getBytes());
 
-          Cookie c = new Cookie("user_data", user_data_encoded);
-          return c;
-     }
+                Cookie c = new Cookie("user_data", user_data_encoded);
+                return c;
+        }
 
-     public static ObjectNode setUserDataForCookie(ObjectNode user_data) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-          return_data.put("first_name", JsonUtils.getString(user_data, "first_name", ""));
-          return_data.put("last_name", JsonUtils.getString(user_data, "last_name", ""));
-          return_data.put("email", JsonUtils.getString(user_data, "email", ""));
-          return_data.put("site", JsonUtils.getString(user_data, "site", ""));
-          ArrayNode roles = JsonUtils.parseArrayNode(JsonUtils.getString(user_data, "roles", "[]"));
-          ArrayNode pending_roles = JsonUtils.parseArrayNode(JsonUtils.getString(user_data, "pending_roles", "[]"));
-          return_data.put("roles", roles);
-          return_data.put("pending_roles", pending_roles);
-          return_data.put("has_osti_role", hasRole(roles, "OSTI"));
-          return_data.put("is_logged_in", true);
-          return_data.put("session_timeout", LocalDateTime.now().plus(Init.SESSION_TIMEOUT_MINUTES, ChronoUnit.MINUTES).format(SESSION_TIMEOUT_FORMAT));
-          return return_data;
-     }
+        public static ObjectNode setUserDataForCookie(ObjectNode user_data) {
+                ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+                return_data.put("first_name", JsonUtils.getString(user_data, "first_name", ""));
+                return_data.put("last_name", JsonUtils.getString(user_data, "last_name", ""));
+                return_data.put("email", JsonUtils.getString(user_data, "email", ""));
+                return_data.put("site", JsonUtils.getString(user_data, "site", ""));
+                ArrayNode roles = JsonUtils.parseArrayNode(JsonUtils.getString(user_data, "roles", "[]"));
+                ArrayNode pending_roles = JsonUtils
+                                .parseArrayNode(JsonUtils.getString(user_data, "pending_roles", "[]"));
+                return_data.put("roles", roles);
+                return_data.put("pending_roles", pending_roles);
+                return_data.put("has_osti_role", hasRole(roles, "OSTI"));
+                return_data.put("is_logged_in", true);
+                return_data.put("session_timeout", LocalDateTime.now()
+                                .plus(Init.SESSION_TIMEOUT_MINUTES, ChronoUnit.MINUTES).format(SESSION_TIMEOUT_FORMAT));
+                return return_data;
+        }
 
-     public static boolean hasRecentlyDonePasswordReset(HttpServletRequest request) {
-          String needs_password_reset = UserFunctions.getOtherUserCookieValue(request, "needs_password_reset");
+        public static boolean hasRecentlyDonePasswordReset(HttpServletRequest request) {
+                String needs_password_reset = UserFunctions.getOtherUserCookieValue(request, "needs_password_reset");
 
-          return StringUtils.equals(needs_password_reset, "true");
-     }
+                return StringUtils.equals(needs_password_reset, "true");
+        }
 
-     public static Cookie updateUserSessionTimeout(HttpServletRequest request) {
-          ObjectNode user_data = getUserDataFromCookie(request);
-          String session_timeout = JsonUtils.getString(user_data, "session_timeout", "");
-          if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, session_timeout)) {
-               user_data.put("session_timeout", LocalDateTime.now().plus(Init.SESSION_TIMEOUT_MINUTES, ChronoUnit.MINUTES).format(SESSION_TIMEOUT_FORMAT));
-          }
+        public static Cookie updateUserSessionTimeout(HttpServletRequest request) {
+                ObjectNode user_data = getUserDataFromCookie(request);
+                String session_timeout = JsonUtils.getString(user_data, "session_timeout", "");
+                if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, session_timeout)) {
+                        user_data.put("session_timeout",
+                                        LocalDateTime.now().plus(Init.SESSION_TIMEOUT_MINUTES, ChronoUnit.MINUTES)
+                                                        .format(SESSION_TIMEOUT_FORMAT));
+                }
 
-          return makeUserCookie(user_data);
-     }
+                return makeUserCookie(user_data);
+        }
 
-     public static Cookie getOtherUserCookie(HttpServletRequest request, String cookie_name) {
-          Cookie return_cookie = null;
-          if (request.getCookies() != null) {
-               for (Cookie c : request.getCookies()) {
-                    if (StringUtils.equals(c.getName(), cookie_name)) {
-                         return_cookie = c;
-                         break;
-                    }
-               }
-          }
-          return return_cookie;
-     }
+        public static Cookie getOtherUserCookie(HttpServletRequest request, String cookie_name) {
+                Cookie return_cookie = null;
+                if (request.getCookies() != null) {
+                        for (Cookie c : request.getCookies()) {
+                                if (StringUtils.equals(c.getName(), cookie_name)) {
+                                        return_cookie = c;
+                                        break;
+                                }
+                        }
+                }
+                return return_cookie;
+        }
 
-     public static void redirectUserToLogin(HttpServletRequest request, HttpServletResponse response, String site_url) throws IOException {
-          StringBuilder requested_url = new StringBuilder();
-          String after_server = request.getRequestURI();
-          requested_url.append(after_server);
-          if (StringUtils.isNotBlank(request.getQueryString())) {
-               requested_url.append("?");
-               requested_url.append(request.getQueryString());
-          }
-          //Add their last url to a cookie so we can redirect them later
-          response.addCookie(new Cookie("requested_url", requested_url.toString()));
-          response.addCookie(new Cookie("user_data", ""));
-          response.sendRedirect(site_url + "login?redirect=true");
-     }
+        public static void redirectUserToLogin(HttpServletRequest request, HttpServletResponse response,
+                        String site_url) throws IOException {
+                StringBuilder requested_url = new StringBuilder();
+                String after_server = request.getRequestURI();
+                requested_url.append(after_server);
+                if (StringUtils.isNotBlank(request.getQueryString())) {
+                        requested_url.append("?");
+                        requested_url.append(request.getQueryString());
+                }
+                // Add their last url to a cookie so we can redirect them later
+                response.addCookie(new Cookie("requested_url", requested_url.toString()));
+                response.addCookie(new Cookie("user_data", ""));
+                response.sendRedirect(site_url + "login?redirect=true");
+        }
 
-     public static ObjectNode updateUserCookie(HttpServletRequest request, ObjectNode new_user_data) {
-          ObjectNode return_data = getUserDataFromCookie(request);
-          //If we have new data, let's go through each item in the new object, and set it in our current user cookie
-          if (JsonUtils.getKeys(new_user_data).size() > 0) {
-               JsonUtils.getKeys(new_user_data).forEach((s) -> {
-                    return_data.set(s, new_user_data.get(s));
-               });
-          }
-          return return_data;
-     }
+        public static ObjectNode updateUserCookie(HttpServletRequest request, ObjectNode new_user_data) {
+                ObjectNode return_data = getUserDataFromCookie(request);
+                // If we have new data, let's go through each item in the new object, and set it
+                // in our current user cookie
+                if (JsonUtils.getKeys(new_user_data).size() > 0) {
+                        JsonUtils.getKeys(new_user_data).forEach((s) -> {
+                                return_data.set(s, new_user_data.get(s));
+                        });
+                }
+                return return_data;
+        }
 
-     public static boolean hasRole(ArrayNode roles, String role) {
-          boolean has = false;
+        public static boolean hasRole(ArrayNode roles, String role) {
+                boolean has = false;
 
-          for (JsonNode v : roles) {
-               if (StringUtils.equals(v.asText(), role)) {
-                    has = true;
-                    break;
-               }
-          }
+                for (JsonNode v : roles) {
+                        if (StringUtils.equals(v.asText(), role)) {
+                                has = true;
+                                break;
+                        }
+                }
 
-          return has;
-     }
+                return has;
+        }
 
-     public static ObjectNode getUserRegistrationData(String confirmation_code) {
-          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-          String api_url = Init.backend_api_url;
+        public static ObjectNode getUserRegistrationData(String confirmation_code) {
+                ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+                String api_url = Init.backend_api_url;
 
-          HttpURLConnection conn = null;
-          ObjectNode response_json = new ObjectNode(JsonUtils.INSTANCE);
-          try {
-               URL url = new URL(api_url + "user/confirm?confirmation=" + confirmation_code);
-               conn = (HttpURLConnection) url.openConnection();
-               conn.setConnectTimeout(5000);
-               conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-               conn.setRequestProperty("Accept", "application/json");
-               conn.setRequestMethod("GET");
+                HttpURLConnection conn = null;
+                ObjectNode response_json = new ObjectNode(JsonUtils.INSTANCE);
+                try {
+                        URL url = new URL(api_url + "user/confirm?confirmation=" + confirmation_code);
+                        conn = (HttpURLConnection) url.openConnection();
+                        conn.setConnectTimeout(5000);
+                        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        conn.setRequestProperty("Accept", "application/json");
+                        conn.setRequestMethod("GET");
 
-               BufferedReader in = new BufferedReader(
-                       new InputStreamReader(conn.getInputStream()));
-               String inputLine;
-               StringBuilder response = new StringBuilder();
+                        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                        String inputLine;
+                        StringBuilder response = new StringBuilder();
 
-               while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-               }
-               in.close();
+                        while ((inputLine = in.readLine()) != null) {
+                                response.append(inputLine);
+                        }
+                        in.close();
 
-               if (JsonUtils.isValidObjectNode(response.toString())) {
-                    response_json = JsonUtils.parseObjectNode(response.toString());
-               }
+                        if (JsonUtils.isValidObjectNode(response.toString())) {
+                                response_json = JsonUtils.parseObjectNode(response.toString());
+                        }
 
-          } catch (Exception e) {
-               log.error("Exception getting user registration data: " + e.getMessage());
-          } finally {
-               try {
-                    conn.disconnect();
-               } catch (Exception e) {
-               }
-          }
+                } catch (Exception e) {
+                        log.error("Exception getting user registration data: " + e.getMessage());
+                } finally {
+                        try {
+                                conn.disconnect();
+                        } catch (Exception e) {
+                        }
+                }
 
-          String api_key = JsonUtils.getString(response_json, "apiKey", "");
-          String url_key = StringUtils.substringBeforeLast(api_url, "/");
+                String api_key = JsonUtils.getString(response_json, "apiKey", "");
+                String url_key = Init.public_api_url + "docs";
 
-          return_data.put("url_key", url_key);
-          return_data.put("api_key", api_key);
-          return_data.put("successful_signup", StringUtils.isNotBlank(api_key));
+                return_data.put("url_key", url_key);
+                return_data.put("api_key", api_key);
+                return_data.put("successful_signup", StringUtils.isNotBlank(api_key));
 
-          return return_data;
-     }
+                return return_data;
+        }
 
-     public static ObjectNode getAccountPageData(HttpServletRequest request) {
-          ObjectNode return_data = UserFunctions.getUserDataFromCookie(request);
-          ArrayNode roles = (ArrayNode) return_data.get("roles");
-          ArrayNode pending_roles = (ArrayNode) return_data.get("pending_roles");
-          String site = JsonUtils.getString(return_data, "site", "");
-          //See if their site is in their roles
-          boolean site_in_roles = false;
-          for (JsonNode v : roles) {
-               if (StringUtils.equals(v.asText(), site)) {
-                    site_in_roles = true;
-                    break;
-               }
-          }
-          //See if their site is in pending
-          boolean site_in_pending = false;
-          for (JsonNode v : pending_roles) {
-               if (StringUtils.equals(v.asText(), site)) {
-                    site_in_pending = true;
-                    break;
-               }
-          }
+        public static ObjectNode getAccountPageData(HttpServletRequest request) {
+                ObjectNode return_data = UserFunctions.getUserDataFromCookie(request);
+                ArrayNode roles = (ArrayNode) return_data.get("roles");
+                ArrayNode pending_roles = (ArrayNode) return_data.get("pending_roles");
+                String site = JsonUtils.getString(return_data, "site", "");
+                // See if their site is in their roles
+                boolean site_in_roles = false;
+                for (JsonNode v : roles) {
+                        if (StringUtils.equals(v.asText(), site)) {
+                                site_in_roles = true;
+                                break;
+                        }
+                }
+                // See if their site is in pending
+                boolean site_in_pending = false;
+                for (JsonNode v : pending_roles) {
+                        if (StringUtils.equals(v.asText(), site)) {
+                                site_in_pending = true;
+                                break;
+                        }
+                }
 
-          boolean showAdminRole = (!StringUtils.equals(site, "CONTR") && !site_in_roles);//If they aren't a contractor and the site they are a part of isn't in their roles list
-          boolean hasAlreadyRequested = site_in_pending;
+                boolean showAdminRole = (!StringUtils.equals(site, "CONTR") && !site_in_roles);// If they aren't a
+                                                                                               // contractor and the
+                                                                                               // site they are a part
+                                                                                               // of isn't in their
+                                                                                               // roles list
+                boolean hasAlreadyRequested = site_in_pending;
 
-          return_data.put("can_request_admin_role", showAdminRole);
-          return_data.put("has_already_requested", hasAlreadyRequested);
+                return_data.put("can_request_admin_role", showAdminRole);
+                return_data.put("has_already_requested", hasAlreadyRequested);
 
-          return return_data;
-     }
+                return return_data;
+        }
 
-     public static boolean isCurrentlyLoggedInUserAnAdmin(HttpServletRequest request) {
-          boolean is_admin = false;
-          ObjectNode current_user_data = getUserDataFromCookie(request);
-          is_admin = JsonUtils.getBoolean(current_user_data, "has_osti_role", false);
-          return is_admin;
-     }
+        public static boolean isCurrentlyLoggedInUserAnAdmin(HttpServletRequest request) {
+                boolean is_admin = false;
+                ObjectNode current_user_data = getUserDataFromCookie(request);
+                is_admin = JsonUtils.getBoolean(current_user_data, "has_osti_role", false);
+                return is_admin;
+        }
 }

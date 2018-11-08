@@ -110,7 +110,7 @@ public class User extends HttpServlet {
                         case "logout":
                                 page_title = "DOE CODE: Logout";
                                 template = TemplateUtils.TEMPLATE_USER_LOGOUT;
-                                output_data.put("user_data", new ObjectNode(JsonUtils.INSTANCE));
+                                output_data.set("user_data", new ObjectNode(JsonUtils.INSTANCE));
                                 response.addCookie(new Cookie("user_data", null));
                                 response.addCookie(new Cookie("needs_password_reset", null));
                                 response.addCookie(new Cookie("requested_url", null));

@@ -1,26 +1,26 @@
 {{> wrapper/header}}
 <div class="row not-so-wide-row">
-     <div class="col-md-3"></div>
-     <div class="col-md-6 col-xs-12 center-text">
-	  {{#if successful_signup}}
-          <div>
-	       <h2>Thank you for registering with DOE CODE. Your account has been confirmed.
-	       </h2>
-	       <br/>
-	       <div>
-		    Your API key is listed below, please keep this in your records for future use. This key can be used to interact with DOE CODE APIs and documentation for those can be found
-		    &nbsp;<a target='_blank' rel="noopener noreferrer" href='{{url_key}}'>here</a>. If you happen to misplace your API key, a new one can be generated on the DOE CODE account page.
-		    <br/>
-		    <br/>
-		    API Key:&nbsp;
-		    <strong>{{api_key}}</strong>
-	       </div>
-          </div>
-	  {{else}}
-	  <h2>The confirmation code provided does not exist or has expired. To register a new account click&nbsp;<a href="/register">here</a>.
-          </h2>
-	  {{/if}}
-     </div>
-     <div class="col-md-3"></div>
+	<div class="col-md-3"></div>
+	<div class="col-md-6 col-xs-12 center-text">
+		{{#if successful_signup}}
+			<div>
+				<h2>Thank you for registering with DOE CODE. Your account has been confirmed.
+				</h2>
+				<br />
+				<div>
+					Your API key is listed below, please keep this in your records for future use. This key can be used to interact with DOE CODE APIs and documentation for those can be found
+					&nbsp;<a target='_blank' rel="noopener noreferrer" href='{{url_key}}'>here</a>. If you happen to misplace your API key, a new one can be generated on the DOE CODE account page.
+					<br />
+					<br />
+					API Key:&nbsp;
+					<strong>{{api_key}}</strong>
+				</div>
+			</div>
+		{{else}}
+			<h2>The confirmation code provided does not exist or has expired. To register a new account click&nbsp;<a href="/register">here</a>.
+			</h2>
+		{{/if}}
+	</div>
+	<div class="col-md-3"></div>
 </div>
 {{> wrapper/footer}}
