@@ -100,21 +100,6 @@
         <url-pattern>/dissemination/export-biblio-results</url-pattern>
         <url-pattern>/dissemination/news-article-search</url-pattern>
     </servlet-mapping>
-    <!--Input pages, such as the announce, submit, and approve pages-->
-    <servlet>
-        <servlet-name>Input</servlet-name>
-        <servlet-class>gov.osti.doecode.pagemappings.Input</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Input</servlet-name>
-        <url-pattern>/submit</url-pattern>
-        <url-pattern>/form-select</url-pattern>
-        <url-pattern>/announce</url-pattern>
-        <url-pattern>/approve</url-pattern>
-        <url-pattern>/confirm</url-pattern>
-        <url-pattern>/projects</url-pattern>
-        <url-pattern>/pending</url-pattern>
-    </servlet-mapping>
     <!--User pages, such as admin and account-->
     <servlet>
         <servlet-name>User</servlet-name>
