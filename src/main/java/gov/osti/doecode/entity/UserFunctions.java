@@ -103,8 +103,8 @@ public class UserFunctions {
                 ArrayNode roles = JsonUtils.parseArrayNode(JsonUtils.getString(user_data, "roles", "[]"));
                 ArrayNode pending_roles = JsonUtils
                                 .parseArrayNode(JsonUtils.getString(user_data, "pending_roles", "[]"));
-                return_data.put("roles", roles);
-                return_data.put("pending_roles", pending_roles);
+                return_data.set("roles", roles);
+                return_data.set("pending_roles", pending_roles);
                 return_data.put("has_osti_role", hasRole(roles, "OSTI"));
                 return_data.put("is_logged_in", true);
                 return_data.put("session_timeout", LocalDateTime.now()

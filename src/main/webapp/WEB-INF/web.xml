@@ -89,28 +89,6 @@
         <description>ServletContextListener</description>
         <listener-class>gov.osti.doecode.listeners.DOECODEServletContextListener</listener-class>
     </listener>
-    <!--Servlet to give the Dissemination pages, like search, about, etc-->
-    <servlet>
-        <servlet-name>Dissemination</servlet-name>
-        <servlet-class>gov.osti.doecode.pagemappings.Dissemination</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Dissemination</servlet-name>
-        <url-pattern>/Index</url-pattern>
-        <url-pattern>/repository-services</url-pattern>
-        <url-pattern>/about</url-pattern>
-        <url-pattern>/policy</url-pattern>
-        <url-pattern>/resources</url-pattern>
-        <url-pattern>/news</url-pattern>
-        <url-pattern>/faq</url-pattern>
-        <url-pattern>/results</url-pattern>
-        <url-pattern>/search</url-pattern>
-        <url-pattern>/biblio/*</url-pattern>
-        <url-pattern>/forbidden</url-pattern>
-        <url-pattern>/security-hosting</url-pattern>
-        <url-pattern>/contact</url-pattern>
-        <url-pattern>/disclaimer</url-pattern>
-    </servlet-mapping>
     <!--Servlet for certain actions on the dissemination pages, such as exporting search results-->
     <servlet>
         <servlet-name>DisseminationServlet</servlet-name>
