@@ -38,7 +38,7 @@ public class Dissemination extends HttpServlet {
 
         // Routes for this servlet
         private final Router PAGEMAPPING_ROUTES = new TreeRouter();
-        private Route HOMEPAGE_ROUTE_ALT = new Route(Init.app_name);
+        private Route HOMEPAGE_ROUTE_ALT = new Route("/" + Init.app_name);
         private Route HOMEPAGE_ROUTE = new Route("/" + Init.app_name + "/");
         private Route REPOSITORY_SERVICES_ROUTE = new Route("/" + Init.app_name + "/repository-services");
         private Route ABOUT_ROUTE = new Route("/" + Init.app_name + "/about");

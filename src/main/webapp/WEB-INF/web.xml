@@ -170,16 +170,6 @@
         <servlet-name>FileDownloadServlet</servlet-name>
         <url-pattern>/download-repository/container-download/*</url-pattern>
     </servlet-mapping>
-    <!--500 pages, 404's, etc-->
-    <servlet>
-        <servlet-name>Errors</servlet-name>
-        <servlet-class>gov.osti.doecode.pagemappings.Errors</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Errors</servlet-name>
-        <url-pattern>/page-not-found</url-pattern>
-        <url-pattern>/error</url-pattern>
-    </servlet-mapping>
     <error-page>
         <error-code>404</error-code>
         <location>/page-not-found</location>
