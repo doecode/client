@@ -1170,9 +1170,9 @@ public class SearchFunctions {
                 if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "doi", ""))
                                 && StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "release_date", ""))) {
                         String doi = JsonUtils.getString(biblio_data, "doi", "");
-                        optional_data.add(getOptionalBibtexObj("url", "{https://dx.doi.org/" + doi + "}"));
+                        optional_data.add(getOptionalBibtexObj("url", "{https://doi.org/" + doi + "}"));
                         optional_data.add(getOptionalBibtexObj("howpublished",
-                                        "{[Computer Software] \\url{https://dx.doi.org/" + doi + "}}"));
+                                        "{[Computer Software] \\url{https://doi.org/" + doi + "}}"));
                 }
 
                 // Release Date
