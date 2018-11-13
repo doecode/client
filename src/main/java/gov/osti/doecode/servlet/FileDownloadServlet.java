@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,28 +16,39 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.bigtesting.routd.Route;
+import org.bigtesting.routd.Router;
+import org.bigtesting.routd.TreeRouter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import gov.osti.doecode.entity.SearchFunctions;
 
+@WebServlet(urlPatterns = { "/download-repository/container-download/*" })
 public class FileDownloadServlet extends HttpServlet {
 
         private static final long serialVersionUID = 6971159895665994563L;
+        private Logger log = LoggerFactory.getLogger(FileDownloadServlet.class);
+        private final Router FILE_DOWNLOAD_ROUTES = new TreeRouter();
+        private Route CONTAINER_DOWNLOAD = new Route(
+                        "/" + Init.app_name + "/download-repository/container-download/:id<[0-9]+>");
+
+        @Override
+        public void init() {
+                FILE_DOWNLOAD_ROUTES.add(CONTAINER_DOWNLOAD);
+        }
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
-                // Get the code id and code_id_dir name from the URL
-                String remaining = StringUtils.substringAfterLast(request.getRequestURI(),
-                                Init.app_name + "/download-repository/");
+                request.setCharacterEncoding("UTF-8");
+                String path = request.getRequestURI();
+                Route route = FILE_DOWNLOAD_ROUTES.route(path);
 
-                if (remaining.startsWith("container-download/")) {
-                        String code_id = StringUtils.substringAfterLast(remaining, "container-download/");
-                        if (!StringUtils.isNumeric(code_id)) {
-                                response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-                                                "Your request contained an invalid code id.");
-                                return;
-                        }
+                if (route.equals(CONTAINER_DOWNLOAD)) {
+                        long code_id = NumberUtils.toInt(route.getNamedParameter("id", path));
                         // Get the json for the file
-                        ObjectNode code_id_data = SearchFunctions.getBiblioJson(Long.parseLong(code_id));
+                        ObjectNode code_id_data = SearchFunctions.getBiblioJson(code_id);
                         String container_name = code_id_data.findPath("container_name").asText("");
                         if (StringUtils.isBlank(container_name)) {
                                 response.sendError(HttpServletResponse.SC_NOT_FOUND,
@@ -64,6 +76,7 @@ public class FileDownloadServlet extends HttpServlet {
                 } else {
                         response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                                         "Your request contained an invalid URL.");
+                        log.error("Invalid ur: " + request.getRequestURI());
                 }
         }
 

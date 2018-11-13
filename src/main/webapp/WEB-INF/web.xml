@@ -18,15 +18,6 @@
         <description>ServletContextListener</description>
         <listener-class>gov.osti.doecode.listeners.DOECODEServletContextListener</listener-class>
     </listener>
-    <!--Download servlet-->
-    <servlet>
-        <servlet-name>FileDownloadServlet</servlet-name>
-        <servlet-class>gov.osti.doecode.servlet.FileDownloadServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>FileDownloadServlet</servlet-name>
-        <url-pattern>/download-repository/container-download/*</url-pattern>
-    </servlet-mapping>
     <error-page>
         <error-code>404</error-code>
         <location>/page-not-found</location>
@@ -58,10 +49,4 @@
         <!--Site-->
         <url-pattern>/site-admin</url-pattern>
     </filter-mapping>
-    <!-- configuration servlet class -->
-    <servlet>
-        <servlet-name>Config</servlet-name>
-        <servlet-class>gov.osti.doecode.servlet.Init</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
 </web-app>

@@ -12,8 +12,10 @@ import java.util.Properties;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
+@WebServlet(urlPatterns = { "/init" }, loadOnStartup = 1)
 public class Init extends HttpServlet {
 
         private static final long serialVersionUID = 1L;
