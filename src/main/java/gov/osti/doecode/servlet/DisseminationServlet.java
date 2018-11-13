@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.bigtesting.routd.Route;
+import org.bigtesting.routd.Router;
+import org.bigtesting.routd.TreeRouter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,19 +30,34 @@ import gov.osti.doecode.entity.SearchFunctions;
 import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 
+@WebServlet(urlPatterns = { "/dissemination/export-search-results", "/dissemination/export-biblio-results",
+                "/dissemination/news-article-search" })
 public class DisseminationServlet extends HttpServlet {
 
         private static final long serialVersionUID = -7808019940521145092L;
         private static final int BYTES_DOWNLOAD = 1024;
         private Logger log = LoggerFactory.getLogger(DisseminationServlet.class);
 
+        // Routes for this servlet
+        private final Router DISSEMINATION_ROUTES = new TreeRouter();
+        private Route EXPORT_SEARCH_ROUTE = new Route("/" + Init.app_name + "/dissemination/export-search-results");
+        private Route EXPORT_BIBLIO_ROUTE = new Route("/" + Init.app_name + "/dissemination/export-biblio-results");
+        private Route EXPORT_NEWS_ROUTE = new Route("/" + Init.app_name + "/dissemination/news-article-search");
+
+        @Override
+        public void init() {
+                DISSEMINATION_ROUTES.add(EXPORT_SEARCH_ROUTE);
+                DISSEMINATION_ROUTES.add(EXPORT_BIBLIO_ROUTE);
+                DISSEMINATION_ROUTES.add(EXPORT_NEWS_ROUTE);
+        }
+
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
                 request.setCharacterEncoding("UTF-8");
-                String remaining = StringUtils.substringAfterLast(request.getRequestURI(),
-                                "/" + Init.app_name + "/dissemination/");
+                String path = request.getRequestURI();
+                Route route = DISSEMINATION_ROUTES.route(path);
 
-                if (remaining.equals("export-search-results")) {
+                if (route.equals(EXPORT_SEARCH_ROUTE)) {
                         String format = StringUtils.defaultIfBlank(request.getParameter("format"), "json");
 
                         // Get search results
@@ -97,7 +116,7 @@ public class DisseminationServlet extends HttpServlet {
                                 break;
                         }
 
-                } else if (remaining.equals("export-biblio-results")) {
+                } else if (route.equals(EXPORT_BIBLIO_ROUTE)) {
                         String format = StringUtils.defaultIfBlank(request.getParameter("format"), "");
                         String code_id = StringUtils.defaultIfBlank(request.getParameter("code_id"), "");
 
@@ -118,7 +137,7 @@ public class DisseminationServlet extends HttpServlet {
                                         break;
                                 }
                         }
-                } else if (remaining.equals("news-article-search")) {
+                } else if (route.equals(EXPORT_NEWS_ROUTE)) {
                         ObjectNode request_data = JsonUtils.parseObjectNode(request.getReader());
                         ObjectNode output_data = NewsFunctions.getNewsPageData(Init.news_page_data_url, request_data);
 

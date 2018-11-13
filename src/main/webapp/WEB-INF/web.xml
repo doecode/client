@@ -18,17 +18,6 @@
         <description>ServletContextListener</description>
         <listener-class>gov.osti.doecode.listeners.DOECODEServletContextListener</listener-class>
     </listener>
-    <!--Servlet for certain actions on the dissemination pages, such as exporting search results-->
-    <servlet>
-        <servlet-name>DisseminationServlet</servlet-name>
-        <servlet-class>gov.osti.doecode.servlet.DisseminationServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DisseminationServlet</servlet-name>
-        <url-pattern>/dissemination/export-search-results</url-pattern>
-        <url-pattern>/dissemination/export-biblio-results</url-pattern>
-        <url-pattern>/dissemination/news-article-search</url-pattern>
-    </servlet-mapping>
     <!--User pages, such as admin and account-->
     <servlet>
         <servlet-name>User</servlet-name>

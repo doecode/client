@@ -42,6 +42,7 @@ public class Init extends HttpServlet {
         static {
                 // Load up the properties file
                 try {
+                        log.info("Loading Properties");
                         props.load(Init.class.getResourceAsStream("/params.properties"));
                         news_page_data_url = props.getProperty("news_page_data_url", "");
                         news_environment_url = props.getProperty("news_environment_url", "");
@@ -49,7 +50,6 @@ public class Init extends HttpServlet {
                         public_api_url = props.getProperty("api_url");
                         backend_api_url = props.getProperty("api_backend_url");
                         authority_api_base = props.getProperty("authority_base_url");
-                        log.info("Authority api base: " + authority_api_base);
 
                         // Get the name of the app from the web.xml
                         app_name = props.getProperty("app_name");
@@ -75,7 +75,7 @@ public class Init extends HttpServlet {
 
                         // Get the session timeout from the web.xml
                         SESSION_TIMEOUT_MINUTES = Integer.parseInt(props.getProperty("session_timeout"));
-                        log.info("Authority api base: " + authority_api_base);
+                        log.info("Done loading properties");
                 } catch (Exception e) {
 
                 }
