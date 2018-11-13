@@ -18,15 +18,6 @@
         <description>ServletContextListener</description>
         <listener-class>gov.osti.doecode.listeners.DOECODEServletContextListener</listener-class>
     </listener>
-    <!--Site-->
-    <servlet>
-        <servlet-name>Site</servlet-name>
-        <servlet-class>gov.osti.doecode.pagemappings.Site</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Site</servlet-name>
-        <url-pattern>/site-admin</url-pattern>
-    </servlet-mapping>
     <!--Download servlet-->
     <servlet>
         <servlet-name>FileDownloadServlet</servlet-name>
