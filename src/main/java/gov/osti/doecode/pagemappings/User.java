@@ -30,7 +30,7 @@ public class User extends HttpServlet {
 
         private final Router USER_ROUTES = new TreeRouter();
         private Route LOGIN_NAME_STATUS_ROUTE = new Route("/" + Init.app_name + "/set-login-status-name");
-        private Route UPDATE_LOGIN_STATUS_NAME = new Route("/" + Init.app_name + "/update-login-status-name");
+        private Route UPDATE_LOGIN_STATUS_NAME_ROUTE = new Route("/" + Init.app_name + "/update-login-status-name");
         private Route ACCOUNT_ROUTE = new Route("/" + Init.app_name + "/account");
         private Route USER_ADMIN_ROUTE = new Route("/" + Init.app_name + "/user-admin");
         private Route LOGIN_ROUTE = new Route("/" + Init.app_name + "/login");
@@ -43,7 +43,7 @@ public class User extends HttpServlet {
         @Override
         public void init() {
                 USER_ROUTES.add(LOGIN_NAME_STATUS_ROUTE);
-                USER_ROUTES.add(UPDATE_LOGIN_STATUS_NAME);
+                USER_ROUTES.add(UPDATE_LOGIN_STATUS_NAME_ROUTE);
                 USER_ROUTES.add(ACCOUNT_ROUTE);
                 USER_ROUTES.add(USER_ADMIN_ROUTE);
                 USER_ROUTES.add(LOGIN_ROUTE);
@@ -58,23 +58,21 @@ public class User extends HttpServlet {
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
                 request.setCharacterEncoding("UTF-8");
-                String URI = request.getRequestURI();
-                String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
+                String path = request.getRequestURI();
+                Route route = USER_ROUTES.route(path);
 
                 if (StringUtils.containsIgnoreCase(request.getContentType(), "application/json")) {
                         ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
                         ObjectNode request_data = JsonUtils.parseObjectNode(request.getReader());
                         boolean add_signin_html = false;
-                        switch (remaining) {
-                        case "set-login-status-name":
+                        if (route.equals(LOGIN_NAME_STATUS_ROUTE)) {
                                 return_data = UserFunctions.setUserDataForCookie(request_data);
                                 Cookie last_location = UserFunctions.getOtherUserCookie(request, "requested_url");
                                 if (null != last_location) {
                                         return_data.put("requested_url", last_location.getValue());
                                 }
                                 add_signin_html = true;
-                                break;
-                        case "update-login-status-name":
+                        } else if (route.equals(UPDATE_LOGIN_STATUS_NAME_ROUTE)) {
                                 return_data = UserFunctions.updateUserCookie(request, request_data);
                                 // If this is being called, and there are values for needs_password_reset &
                                 // passcode, clear them out
@@ -82,8 +80,8 @@ public class User extends HttpServlet {
                                         response.addCookie(new Cookie("needs_password_reset", null));
                                 }
                                 add_signin_html = true;
-                                break;
                         }
+
                         response.addCookie(UserFunctions.makeUserCookie(return_data));
                         if (add_signin_html) {
                                 return_data.put("signin_html", TemplateUtils.getNewSigninStatusHtml(getServletContext(),
@@ -96,8 +94,7 @@ public class User extends HttpServlet {
                         ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
                         ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
 
-                        switch (remaining) {
-                        case "account":
+                        if (route.equals(ACCOUNT_ROUTE)) {
                                 page_title = "DOE CODE: Account";
                                 template = TemplateUtils.TEMPLATE_USER_ACCOUNT;
                                 // If they have a passcode, we need to let them on in, and then take care of
@@ -119,12 +116,10 @@ public class User extends HttpServlet {
                                                 "true")) {
                                         output_data.put("page_warning_message", "Please change your password");
                                 }
-                                break;
-                        case "user-admin":
+                        } else if (route.equals(USER_ADMIN_ROUTE)) {
                                 page_title = "DOE CODE: User Administration";
                                 template = TemplateUtils.TEMPLATE_USER_ADMIN;
-                                break;
-                        case "login":
+                        } else if (route.equals(LOGIN_ROUTE)) {
                                 page_title = "DOE CODE: Login";
                                 template = TemplateUtils.TEMPLATE_USER_LOGIN;
                                 if (StringUtils.isNotBlank(request.getParameter("redirect"))
@@ -133,35 +128,27 @@ public class User extends HttpServlet {
                                         output_data.put("is_redirected", true);
                                         response.addCookie(new Cookie("user_data", null));
                                 }
-                                break;
-                        case "register":
+                        } else if (route.equals(REGISTER_ROUTE)) {
                                 page_title = "DOE CODE: Register";
                                 template = TemplateUtils.TEMPLATE_USER_REGISTRATION;
-                                break;
-                        case "forgot-password":
+                        } else if (route.equals(FORGOT_PASSWORD_ROUTE)) {
                                 page_title = "DOE CODE: Forgot Password";
                                 template = TemplateUtils.TEMPLATE_USER_FORGOT_PASSWORD;
-                                break;
-                        case "logout":
+                        } else if (route.equals(LOGOUT_ROUTE)) {
                                 page_title = "DOE CODE: Logout";
                                 template = TemplateUtils.TEMPLATE_USER_LOGOUT;
                                 output_data.set("user_data", new ObjectNode(JsonUtils.INSTANCE));
                                 response.addCookie(new Cookie("user_data", null));
                                 response.addCookie(new Cookie("needs_password_reset", null));
                                 response.addCookie(new Cookie("requested_url", null));
-                                break;
-                        case "confirmuser":
+                        } else if (route.equals(CONFIRM_USER_ROUTE)) {
                                 page_title = "DOE CODE: Confirm User";
                                 template = TemplateUtils.TEMPLATE_USER_CONFIRMATION;
                                 output_data = UserFunctions
                                                 .getUserRegistrationData(request.getParameter("confirmation"));
-                                break;
-                        case "help":
+                        } else if (route.equals(HELP_ROUTE)) {
                                 page_title = "DOE CODE: Help";
                                 template = TemplateUtils.TEMPLATE_HELP;
-                                break;
-                        default:
-                                break;
                         }
 
                         jsFilesList.add("user");
