@@ -3,6 +3,7 @@ package gov.osti.doecode.pagemappings;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,15 +13,47 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bigtesting.routd.Route;
+import org.bigtesting.routd.Router;
+import org.bigtesting.routd.TreeRouter;
 
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 
+@WebServlet(urlPatterns = { "/set-login-status-name", "/update-login-status-name", "/account", "/user-admin", "/login",
+                "/register", "/forgot-password", "/logout", "/confirmuser", "/help" })
 public class User extends HttpServlet {
 
         private static final long serialVersionUID = 1546530624730778400L;
+
+        private final Router USER_ROUTES = new TreeRouter();
+        private Route LOGIN_NAME_STATUS_ROUTE = new Route("/" + Init.app_name + "/set-login-status-name");
+        private Route UPDATE_LOGIN_STATUS_NAME = new Route("/" + Init.app_name + "/update-login-status-name");
+        private Route ACCOUNT_ROUTE = new Route("/" + Init.app_name + "/account");
+        private Route USER_ADMIN_ROUTE = new Route("/" + Init.app_name + "/user-admin");
+        private Route LOGIN_ROUTE = new Route("/" + Init.app_name + "/login");
+        private Route REGISTER_ROUTE = new Route("/" + Init.app_name + "/register");
+        private Route FORGOT_PASSWORD_ROUTE = new Route("/" + Init.app_name + "/forgot-password");
+        private Route LOGOUT_ROUTE = new Route("/" + Init.app_name + "/logout");
+        private Route CONFIRM_USER_ROUTE = new Route("/" + Init.app_name + "/confirmuser");
+        private Route HELP_ROUTE = new Route("/" + Init.app_name + "/help");
+
+        @Override
+        public void init() {
+                USER_ROUTES.add(LOGIN_NAME_STATUS_ROUTE);
+                USER_ROUTES.add(UPDATE_LOGIN_STATUS_NAME);
+                USER_ROUTES.add(ACCOUNT_ROUTE);
+                USER_ROUTES.add(USER_ADMIN_ROUTE);
+                USER_ROUTES.add(LOGIN_ROUTE);
+                USER_ROUTES.add(REGISTER_ROUTE);
+                USER_ROUTES.add(FORGOT_PASSWORD_ROUTE);
+                USER_ROUTES.add(LOGOUT_ROUTE);
+                USER_ROUTES.add(CONFIRM_USER_ROUTE);
+                USER_ROUTES.add(HELP_ROUTE);
+
+        }
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {

@@ -18,24 +18,6 @@
         <description>ServletContextListener</description>
         <listener-class>gov.osti.doecode.listeners.DOECODEServletContextListener</listener-class>
     </listener>
-    <!--User pages, such as admin and account-->
-    <servlet>
-        <servlet-name>User</servlet-name>
-        <servlet-class>gov.osti.doecode.pagemappings.User</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>User</servlet-name>
-        <url-pattern>/account</url-pattern>
-        <url-pattern>/user-admin</url-pattern>
-        <url-pattern>/login</url-pattern>
-        <url-pattern>/set-login-status-name</url-pattern>
-        <url-pattern>/update-login-status-name</url-pattern>
-        <url-pattern>/logout</url-pattern>
-        <url-pattern>/register</url-pattern>
-        <url-pattern>/forgot-password</url-pattern>
-        <url-pattern>/confirmuser</url-pattern>
-        <url-pattern>/help</url-pattern>
-    </servlet-mapping>
     <!--User data, such as the currently logged in user's information-->
     <servlet>
         <servlet-name>UserServlet</servlet-name>
