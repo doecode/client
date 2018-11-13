@@ -10,6 +10,7 @@ import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,16 +18,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.bigtesting.routd.Route;
+import org.bigtesting.routd.Router;
+import org.bigtesting.routd.TreeRouter;
 
+@WebServlet(urlPatterns = { "/gitlab-signup", "/gitlab-signup-result" })
 public class Other extends HttpServlet {
 
         private static final long serialVersionUID = -6637956247980588309L;
 
+        private final Router OTHER_ROUTES = new TreeRouter();
+        private Route GITLAB_SIGNUP_ROUTE = new Route("/" + Init.app_name + "/gitlab-signup");
+        private Route GITLAB_SIGNUP_RESULT_ROUTE = new Route("/" + Init.app_name + "/gitlab-signup-result");
+
+        public void init() {
+                OTHER_ROUTES.add(GITLAB_SIGNUP_ROUTE);
+                OTHER_ROUTES.add(GITLAB_SIGNUP_RESULT_ROUTE);
+        }
+
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
                 request.setCharacterEncoding("UTF-8");
-                String URI = request.getRequestURI();
-                String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
+                String path = request.getRequestURI();
+                Route route = OTHER_ROUTES.route(path);
 
                 HttpSession session = request.getSession(true);
                 String page_title = "";
@@ -36,8 +50,7 @@ public class Other extends HttpServlet {
                 ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
                 ArrayNode extraJSList = JsonUtils.MAPPER.createArrayNode();
                 ServletContext context = getServletContext();
-                switch (remaining) {
-                case "gitlab-signup":
+                if (route.equals(GITLAB_SIGNUP_ROUTE)) {
                         String gitlab_token = RandomStringUtils.randomAscii(30);
                         session.setAttribute("gitlab-token", gitlab_token);
                         page_title = "DOECODE: Gitlab Signup";
@@ -45,13 +58,11 @@ public class Other extends HttpServlet {
                         output_data = OtherFunctions.getOtherLists(context);
                         output_data.put("recaptcha_sitekey", Init.recaptcha_sitekey);
                         output_data.put("gitlab_token", gitlab_token);
-                        break;
-                case "gitlab-signup-result":
+                } else if (route.equals(GITLAB_SIGNUP_RESULT_ROUTE)) {
                         page_title = "DOECODE: DOE CODE Repositories Services Access Request";
                         template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP_RESULT;
                         output_data = OtherFunctions.handleGitlabSubmissionForm(request);
                         session.removeAttribute("gitlab-token");
-                        break;
                 }
 
                 // Add the common dissemination js file

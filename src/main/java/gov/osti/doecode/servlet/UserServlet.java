@@ -28,6 +28,11 @@ public class UserServlet extends HttpServlet {
         private final Router USER_SERVLET_ROUTES = new TreeRouter();
         private Route GET_CURRENT_USER_DATA_ROUTE = new Route("/" + Init.app_name + "/user-data/get-current-user-data");
 
+        @Override
+        public void init() {
+                USER_SERVLET_ROUTES.add(GET_CURRENT_USER_DATA_ROUTE);
+        }
+
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
                 request.setCharacterEncoding("UTF-8");
