@@ -13,11 +13,6 @@
             Index
         </welcome-file>
     </welcome-file-list>
-    <!--Servlet Context Listener-->
-    <listener>
-        <description>ServletContextListener</description>
-        <listener-class>gov.osti.doecode.listeners.DOECODEServletContextListener</listener-class>
-    </listener>
     <error-page>
         <error-code>404</error-code>
         <location>/page-not-found</location>
@@ -26,27 +21,4 @@
         <error-code>500</error-code>
         <location>/error</location>
     </error-page>
-    <!--Filters-->
-    <!--User filter. Make sure that you put any pages that need user checking here-->
-    <filter>
-        <filter-name>UserFilter</filter-name>
-        <filter-class>gov.osti.doecode.filters.UserFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>UserFilter</filter-name>
-        <!--Input-->
-        <url-pattern>/submit</url-pattern>
-        <url-pattern>/form-select</url-pattern>
-        <url-pattern>/announce</url-pattern>
-        <url-pattern>/approve</url-pattern>
-        <url-pattern>/confirm</url-pattern>
-        <url-pattern>/projects</url-pattern>
-        <url-pattern>/pending</url-pattern>
-        <!--User-->
-        <url-pattern>/account</url-pattern>
-        <url-pattern>/user-admin</url-pattern>
-        <url-pattern>/help</url-pattern>
-        <!--Site-->
-        <url-pattern>/site-admin</url-pattern>
-    </filter-mapping>
 </web-app>
