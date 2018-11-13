@@ -43,7 +43,7 @@ public class Other extends HttpServlet {
                         page_title = "DOECODE: Gitlab Signup";
                         template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP;
                         output_data = OtherFunctions.getOtherLists(context);
-                        output_data.put("recaptcha_sitekey", context.getInitParameter("recaptcha_sitekey"));
+                        output_data.put("recaptcha_sitekey", Init.recaptcha_sitekey);
                         output_data.put("gitlab_token", gitlab_token);
                         break;
                 case "gitlab-signup-result":

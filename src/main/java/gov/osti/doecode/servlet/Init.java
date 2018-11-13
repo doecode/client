@@ -31,8 +31,55 @@ public class Init extends HttpServlet {
         public static String site_url;
         public static String containers_dir;
         public static String news_environment_url;
+        public static String recaptcha_secretkey;
+        public static String recaptcha_sitekey;
+        public static String gitlab_from_email;
+        public static String gitlab_submit_email;
+        public static String smtp_host;
 
         public static int SESSION_TIMEOUT_MINUTES;
+        private static Properties props = new Properties();
+        static {
+                // Load up the properties file
+                try {
+                        props.load(Init.class.getResourceAsStream("/params.properties"));
+                        news_page_data_url = props.getProperty("news_page_data_url", "");
+                        news_environment_url = props.getProperty("news_environment_url", "");
+                        // Get the URL's used for searching and validation
+                        public_api_url = props.getProperty("api_url");
+                        backend_api_url = props.getProperty("api_backend_url");
+                        authority_api_base = props.getProperty("authority_base_url");
+                        log.info("Authority api base: " + authority_api_base);
+
+                        // Get the name of the app from the web.xml
+                        app_name = props.getProperty("app_name");
+                        site_url = props.getProperty("site_url");
+
+                        // Google analytics info
+                        google_analytics_id = props.getProperty("ga_id");
+                        google_analytics_domain = props.getProperty("ga_domain");
+
+                        // Set the container upload directory
+                        containers_dir = props.getProperty("containers_dir");
+
+                        // Recaptcha
+                        recaptcha_secretkey = props.getProperty("recaptcha_secretkey");
+                        recaptcha_sitekey = props.getProperty("recaptcha_sitekey");
+
+                        // Gitlab
+                        gitlab_from_email = props.getProperty("gitlab_from_email");
+                        gitlab_submit_email = props.getProperty("gitlab_submit_email");
+
+                        // SMTP Host
+                        smtp_host = props.getProperty("smtpHost");
+
+                        // Get the session timeout from the web.xml
+                        SESSION_TIMEOUT_MINUTES = Integer.parseInt(props.getProperty("session_timeout"));
+                        log.info("Authority api base: " + authority_api_base);
+                } catch (Exception e) {
+
+                }
+        }
 
         public Init() {
         }
@@ -57,35 +104,6 @@ public class Init extends HttpServlet {
                 TemplateLoader loader3 = new ServletContextTemplateLoader(context, "/WEB-INF/classes/templates/search",
                                 ".mustache");
                 handlebarsSearch = new Handlebars(loader3);
-
-                // Load up the properties file, and begin pulling data from it
-                try {
-                        Properties props = new Properties();
-                        props.load(Init.class.getResourceAsStream("/params.properties"));
-                        news_page_data_url = props.getProperty("news_page_data_url", "");
-                        news_environment_url = props.getProperty("news_environment_url", "");
-                } catch (Exception e) {
-                        log.error("Exception occurred in loading properties!" + e.getMessage());
-                }
-
-                // Get the URL's used for searching and validation
-                public_api_url = context.getInitParameter("api_url");
-                backend_api_url = context.getInitParameter("api_backend_url");
-                authority_api_base = context.getInitParameter("authority_base_url");
-
-                // Get the name of the app from the web.xml
-                app_name = context.getInitParameter("app_name");
-                site_url = context.getInitParameter("site_url");
-
-                // Google analytics info
-                google_analytics_id = context.getInitParameter("ga_id");
-                google_analytics_domain = context.getInitParameter("ga_domain");
-
-                // Set the container upload directory
-                containers_dir = context.getInitParameter("containers_dir");
-
-                // Get the session timeout from the web.xml
-                SESSION_TIMEOUT_MINUTES = Integer.parseInt(context.getInitParameter("session_timeout"));
 
                 log.info("DOE CODE Application Started");
         }
