@@ -27,6 +27,7 @@
         <!--Timestamp is used to give a unique name to javascript files upon build time-->
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy.MM.dd.HH.mm.ss</maven.build.timestamp.format>
+        <environment>development</environment>
     </properties>
     <!--
         You will need to add your own profiles into this pom.xml, or use profiles stored in your local settings.xml
