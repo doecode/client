@@ -788,7 +788,7 @@ public class SearchFunctions {
                                                 ? JsonUtils.getString(search_form_data, "all_fields", "")
                                                 : "All Projects");
                 String filter_suffix = (getWasAnythingFilteredFor(search_form_data))
-                                ? "<span class='search-for-filter-crumb'>(filtered)</span>"
+                                ? "<span class='search-for-filter-crumb'>&nbsp;(filtered)</span>"
                                 : "";
                 return_data.add(all_fields_text + filter_suffix);
 
@@ -824,6 +824,10 @@ public class SearchFunctions {
                                                 && JsonUtils.parseArrayNode(
                                                                 JsonUtils.getString(request_data, "licenses", ""))
                                                                 .size() > 0)
+                                || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "programming_languages", ""))
+                                                && JsonUtils.parseArrayNode(
+                                                                JsonUtils.getString(request_data, "programming_languages", ""))
+                                                                .size() > 0)
                                 || (StringUtils.isNotBlank(
                                                 JsonUtils.getString(request_data, "research_organization", ""))
                                                 && JsonUtils.parseArrayNode(JsonUtils.getString(request_data,
@@ -832,6 +836,10 @@ public class SearchFunctions {
                                                 JsonUtils.getString(request_data, "sponsoring_organization", ""))
                                                 && JsonUtils.parseArrayNode(JsonUtils.getString(request_data,
                                                                 "sponsoring_organization", "")).size() > 0)
+                                || (StringUtils.isNotBlank(
+                                                JsonUtils.getString(request_data, "software_type", ""))
+                                                && JsonUtils.parseArrayNode(JsonUtils.getString(request_data,
+                                                                "software_type", "")).size() > 0)
                                 || StringUtils.isNotBlank(JsonUtils.getString(request_data, "orcid", ""));
         }
 
