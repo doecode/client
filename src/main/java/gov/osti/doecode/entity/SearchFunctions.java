@@ -330,7 +330,7 @@ public class SearchFunctions {
                 String programming_languages_array = JsonUtils.getString(post_data, "programming_languages", "");
                 if (StringUtils.isNotBlank(programming_languages_array)
                                 && JsonUtils.parseArrayNode(programming_languages_array).size() > 0) {
-                        search_description_list.add(makeSearchDescriptionObjectArray("Programming Language:",
+                        search_description_list.add(makeSearchDescriptionObjectArray("Programming Language",
                                         JsonUtils.parseArrayNode(programming_languages_array), "programming_languages",
                                         null));
                 }
