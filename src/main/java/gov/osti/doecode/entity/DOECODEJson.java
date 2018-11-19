@@ -241,15 +241,15 @@ public class DOECODEJson {
           if (relation_types.size() > 0) {
                this.relation_types_list = translateElinkAuthorityList(relation_types);
           } else {
-               log.error("Relation types Json Array returned empty");
+               log.error("Relation Types Json Array returned empty");
           }
 
-          //Programming languages
+          //Programming Languages
           ArrayNode programming_languages = getItemFromElinkAuthority(authorityapi_base_url + "simple/programming-languages-list");
           if (programming_languages.size() > 0) {
                this.programming_languages_list = translateElinkAuthorityList(programming_languages);
           } else {
-               log.error("Programming languages Json Array returned empty");
+               log.error("Programming Languages Json Array returned empty");
           }
      }
 
