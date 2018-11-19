@@ -4,7 +4,7 @@ var repo_fields = ["accessibility", "repository_link", "landing_page"];
 var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "licenses", "proprietary_url"];
 var developers_fields = ["developers"];
 var doi_fields = ["doi", "doi_infix", "release_date"];
-var supplemental_fields = ["acronym", "country_of_origin", "keywords", "site_accession_number", "other_special_requirements", "file_name", "container_name"];
+var supplemental_fields = ["acronym", "country_of_origin", "keywords", "project_keywords", "site_accession_number", "other_special_requirements", "file_name", "container_name"];
 var organizations_fields = ["sponsoring_organizations", "research_organizations"];
 var contribs_fields = ["contributors", "contributing_organizations"];
 var identifiers_fields = ["related_identifiers"];
@@ -29,7 +29,7 @@ var _metadata = mobx.observable({
     "country_of_origin": 'United States',
     "release_date": '',
     "keywords": '',
-    "administrative_keywords": '',
+    "project_keywords": [],
     "site_accession_number": '',
     "other_special_requirements": '',
     "licenses": [],
@@ -75,7 +75,7 @@ var _metadataInfoSchema = mobx.observable({
     "acronym": {required: "", completed: false, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
     "country_of_origin": {required: "announ", label: "Country of Origin", completed: true, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
     "keywords": {required: "", completed: false, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
-    "administrative_keywords": {required: "", completed: false, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
+    "project_keywords": {required: "", completed: false, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
     "site_accession_number": {required: "", completed: false, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
     "other_special_requirements": {required: "", completed: false, ever_completed: false, validations: [], panel: "Supplemental Product Information", error: ''},
     "related_identifiers": {required: "", completed: false, hasError: false, ever_completed: false, validations: [], panel: "Identifiers", error: ''},

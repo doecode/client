@@ -63,6 +63,9 @@ public class DOECODEServletContextListener implements ServletContextListener {
                case DOECODEJson.PROGRAMMING_LANGUAGES_KEY:
                     return_list = doecode_json_lists.getProgrammingLanguagesList();
                     break;
+               case DOECODEJson.PROJECT_KEYWORDS_KEY:
+                    return_list = doecode_json_lists.getProjectKeywordsList();
+                    break;
           }
 
           return return_list;

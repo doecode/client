@@ -34,6 +34,7 @@ public class DOECODEJson {
      public static final String STATES_KEY = "states";
      public static final String RELATION_TYPES_KEY = "relation_types";
      public static final String PROGRAMMING_LANGUAGES_KEY = "programming_languages";
+     public static final String PROJECT_KEYWORDS_KEY = "project_keywords";
 
      //Json Array lists
      private ArrayNode affiliations_list;
@@ -48,6 +49,7 @@ public class DOECODEJson {
      private ArrayNode states_list;
      private ArrayNode relation_types_list;
      private ArrayNode programming_languages_list;
+     private ArrayNode project_keywords_list;
 
      /**
       * Initializes all of the json lists DOE CODE Uses. Fills up the lists that don't pull data from OSTI's ELINK AUthority API
@@ -64,6 +66,7 @@ public class DOECODEJson {
           this.sponsor_orgs_list = new ArrayNode(JsonUtils.INSTANCE);
           this.states_list = new ArrayNode(JsonUtils.INSTANCE);
           this.relation_types_list = new ArrayNode(JsonUtils.INSTANCE);
+          this.project_keywords_list = new ArrayNode(JsonUtils.INSTANCE);
 
           //Since some of the lists have content that isn't pulled from OSTI's Elink Authority API, we'll go ahead and fill those lists up
           //Search Sort Options
@@ -251,6 +254,14 @@ public class DOECODEJson {
           } else {
                log.error("Programming Languages Json Array returned empty");
           }
+
+          //Project Keywords
+          ArrayNode project_keywords = getItemFromElinkAuthority(authorityapi_base_url + "simple/doecode-project-keywords-list");
+          if (project_keywords.size() > 0) {
+               this.project_keywords_list = translateElinkAuthorityList(project_keywords);
+          } else {
+               log.error("Project Keywords Json Array returned empty");
+          }
      }
 
      private ArrayNode getItemFromElinkAuthority(String api_url) {
@@ -354,5 +365,9 @@ public class DOECODEJson {
 
      public ArrayNode getProgrammingLanguagesList() {
           return this.programming_languages_list;
+     }
+
+     public ArrayNode getProjectKeywordsList() {
+          return this.project_keywords_list;
      }
 }

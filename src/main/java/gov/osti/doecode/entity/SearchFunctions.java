@@ -1517,11 +1517,11 @@ public class SearchFunctions {
                         return_data.put("has_keywords",
                                         StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "keywords", "")));
 
-                        /* Administrative Keywords */
-                        return_data.put("administrative_keywords",
-                                        JsonUtils.getString(biblio_data, "administrative_keywords", ""));
-                        return_data.put("has_administrative_keywords", StringUtils
-                                        .isNotBlank(JsonUtils.getString(biblio_data, "administrative_keywords", "")));
+                        /* Project Keywords */
+                        return_data.put("project_keywords",
+                                        JsonUtils.getString(biblio_data, "project_keywords", ""));
+                        return_data.put("has_project_keywords", StringUtils
+                                        .isNotBlank(JsonUtils.getString(biblio_data, "project_keywords", "")));
 
                         /* Citation formats */
                         return_data.set("mla", getMLAFormat(biblio_data));

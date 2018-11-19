@@ -87,6 +87,8 @@ public class Input extends HttpServlet {
                                         .getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
                         output_data.put("relation_type",
                                         DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
+                        output_data.set("project_keywords_list", DOECODEServletContextListener
+                                        .getJsonList(DOECODEJson.PROJECT_KEYWORDS_KEY));
 
                         current_page = TemplateUtils.PAGE_PROJECTS;
                         is_inputjs = true;
@@ -112,6 +114,8 @@ public class Input extends HttpServlet {
                                         .getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
                         output_data.put("relation_type",
                                         DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
+                        output_data.set("project_keywords_list", DOECODEServletContextListener
+                                        .getJsonList(DOECODEJson.PROJECT_KEYWORDS_KEY));
 
                         is_inputjs = true;
                         current_page = TemplateUtils.PAGE_PROJECTS;
@@ -138,6 +142,8 @@ public class Input extends HttpServlet {
                                         .getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
                         output_data.put("relation_type",
                                         DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
+                        output_data.set("project_keywords_list", DOECODEServletContextListener
+                                        .getJsonList(DOECODEJson.PROJECT_KEYWORDS_KEY));
                         is_inputjs = true;
                         current_page = TemplateUtils.PAGE_PROJECTS;
 
