@@ -1556,7 +1556,7 @@ var handleInfix = mobx.action("Handle DOI Infix", function (event) {
 Dropzone.autoDiscover = false;
 
 //Regex to see if the file is allowed
-const FILE_EXTENSION_REGEX = new RegExp(/[.](?:zip|tar(?:[.](?:gz|bz2))?)$/);
+const FILE_EXTENSION_REGEX = new RegExp(/[.](?:zip|tgz|tar(?:[.](?:gz|bz2))?)$/);
 var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
     metadata.setValue("file_name", "");
     metadata.setValue("files", []);
@@ -1571,7 +1571,7 @@ var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
 //Configuration for the file upload dropzone
 var FILE_UPLOAD_CONFIG = {url: 'someurl',
     autoProcessQueue: false,
-    acceptedFiles: '.zip,.tar,.tar.gz,.tar.bz2',
+    acceptedFiles: '.zip,.tar,.tgz,.tar.gz,.tar.bz2',
     addRemoveLinks: true,
     maxFiles: 1,
     init: function () {
