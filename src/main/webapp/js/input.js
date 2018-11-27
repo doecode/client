@@ -869,8 +869,8 @@ mobx.autorun("Keywords", function () {
     //mobx.whyRun();
 });
 
-mobx.autorun("Administrative Keywords", function () {
-    updateInputStyle(metadata, "administrative_keywords", "administrative-keywords-lbl", "administrative-keywords");
+mobx.autorun("Project Keywords", function () {
+    updateSelectStyle(metadata, "project_keywords", "project-keywords-lbl", "project-keywords");
 
     //mobx.whyRun();
 });
@@ -1556,7 +1556,7 @@ var handleInfix = mobx.action("Handle DOI Infix", function (event) {
 Dropzone.autoDiscover = false;
 
 //Regex to see if the file is allowed
-const FILE_EXTENSION_REGEX = new RegExp(/[.](?:zip|tar(?:[.](?:gz|bz2))?)$/);
+const FILE_EXTENSION_REGEX = new RegExp(/[.](?:zip|tgz|tar(?:[.](?:gz|bz2))?)$/);
 var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
     metadata.setValue("file_name", "");
     metadata.setValue("files", []);
@@ -1571,7 +1571,7 @@ var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
 //Configuration for the file upload dropzone
 var FILE_UPLOAD_CONFIG = {url: 'someurl',
     autoProcessQueue: false,
-    acceptedFiles: '.zip,.tar,.tar.gz,.tar.bz2',
+    acceptedFiles: '.zip,.tar,.tgz,.tar.gz,.tar.bz2',
     addRemoveLinks: true,
     maxFiles: 1,
     init: function () {
@@ -1708,6 +1708,7 @@ $(document).ready(mobx.action("Document Ready", function () {
 
     clearChosenList("licenses");
     clearChosenList("programming-languages");
+    clearChosenList("product_keywords");
 
     // If editing, load the data from server.
     var code_id = $("#code_id").val();
@@ -1794,7 +1795,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#short-title').on('input', {store: metadata, field: "acronym"}, inputChange);
     $('#country-of-origin').on('change', {store: metadata, field: "country_of_origin"}, inputChange);
     $('#keywords').on('input', {store: metadata, field: "keywords"}, inputChange);
-    $("#administrative-keywords").on('input', {store: metadata, field: 'administrative_keywords'}, inputChange);
+    $("#project-keywords").on('change', {store: metadata, field: 'project_keywords'}, inputChange);
     $('#other-special-requirements').on('input', {store: metadata, field: "other_special_requirements"}, inputChange);
     $('#site-accession-number').on('input', {store: metadata, field: "site_accession_number"}, inputChange);
 

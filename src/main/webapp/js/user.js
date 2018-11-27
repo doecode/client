@@ -501,6 +501,11 @@ var clearAdminForm = function () {
     $("#active-state").prop('checked', false);
     $("#user-admin-warning-message").html('');
     $("#useradmin-warning-message-container").hide();
+    $("#password").val('');
+    $("#confirm-password").val('');
+    markUserFieldWithStatus(BLANK_CONDITION, $("#password"));
+    markUserFieldWithStatus(BLANK_CONDITION, $("#confirm-password"));
+    $("#password").trigger('keyup');
 };
 var loadUserDataForAdminForm = function () {
     //Clear the form
