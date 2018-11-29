@@ -576,7 +576,7 @@ var saveUserAdminForm = function () {
         email: $("#email").val(),
         first_name: $("#first_name").val(),
         last_name: $("#last_name").val(),
-        award_number: $("#award_number").val(),
+        contract_number: $("#award_number").val(),
         roles: [$("#roles-box").val()],
         active: $("#active-state").is(':checked')
     };
