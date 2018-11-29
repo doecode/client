@@ -1617,7 +1617,7 @@ var FILE_UPLOAD_CONFIG = {url: 'someurl',
 };
 
 //Regex to see if the container is allowed
-const CONTAINER_EXTENSION_REGEX = new RegExp(/[.](?:simg|tar(?:[.]gz)?)$/);
+const CONTAINER_EXTENSION_REGEX = new RegExp(/[.](?:simg|tgz|tar(?:[.]gz)?)$/);
 var removeContainerUploadInfo = mobx.action("Remove Container Drop", function () {
     metadata.setValue("container_name", "");
     metadata.setValue("containers", []);
@@ -1631,7 +1631,7 @@ var removeContainerUploadInfo = mobx.action("Remove Container Drop", function ()
 //Configuration for the container upload dropzone
 var CONTAINER_UPLOAD_CONFIG = {url: 'someurl',
     autoProcessQueue: false,
-    acceptedFiles: '.tar,.tar.gz,.simg',
+    acceptedFiles: '.tar,.tgz,.tar.gz,.simg',
     addRemoveLinks: true,
     maxFiles: 1,
     init: function () {
