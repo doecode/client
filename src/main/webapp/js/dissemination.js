@@ -544,7 +544,6 @@ if (document.getElementById('about-page-identifier')) {
                 $("#news-article-main-row").html(data);
             },
             error: function () {
-                console.log("Borked");
             }
         });
     };
