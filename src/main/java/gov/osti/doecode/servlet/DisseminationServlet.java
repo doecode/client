@@ -118,7 +118,6 @@ public class DisseminationServlet extends HttpServlet {
                 } else if (remaining.equals("news-article-search")) {
                         ObjectNode request_data = JsonUtils.parseObjectNode(request.getReader());
                         ObjectNode output_data = NewsFunctions.getNewsPageData(Init.news_page_data_url, request_data);
-                        
                         TemplateUtils.writeOutTemplateData("", "news-article", Init.handlebarsSearch, response,
                                         output_data);
                         return;
