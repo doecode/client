@@ -142,14 +142,17 @@
                               <div class='text-muted publication-date'>{{featured_article.publication_date}}</div>
                               <div class='text-muted article-type hide-xs'>
                                     {{!--Comes out like <icon> Type--}}
-                                    {{#if featured_article.article_type.is_news}}
-                                          <span class='fa fa-newspaper-o clickable filter-type-icon' data-filter='News'></span>
-                                    {{else if featured_article.article_type.is_updates_and_tips}}
-                                          <span class='fa fa-file-text-o clickable filter-type-icon' data-filter='Blog'></span>
-                                    {{else if featured_article.article_type.is_blog}}
-                                          <span class='fa fa-info-circle clickable filter-type-icon' data-filter='Updates-and-Tips'></span>
-                                    {{/if}}
-                                    {{featured_article.article_type.type}}
+                                    {{#each featured_article.article_types}}
+                                          {{#if is_news}}
+                                                <span class='fa fa-newspaper-o clickable filter-type-icon' data-filter='News'></span>
+                                          {{else if is_updates_and_tips}}
+                                                <span class='fa fa-file-text-o clickable filter-type-icon' data-filter='Blog'></span>
+                                          {{else if is_blog}}
+                                                <span class='fa fa-info-circle clickable filter-type-icon' data-filter='Updates-and-Tips'></span>
+                                          {{/if}}
+                                          {{type}}
+                                          <br />
+                                    {{/each}}
                               </div>
                               <br />
                               <a href='{{featured_article.url}}' style='font-size:28px;font-weight:300' title='{{featured_article.title}}' target="_blank" rel="noopener noreferrer">{{featured_article.title}}</a>
