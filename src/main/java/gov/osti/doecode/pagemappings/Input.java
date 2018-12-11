@@ -1,60 +1,36 @@
 package gov.osti.doecode.pagemappings;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import gov.osti.doecode.entity.DOECODEJson;
+import gov.osti.doecode.entity.InputFunctions;
 import static gov.osti.doecode.entity.UserFunctions.isCurrentlyLoggedInUserAnAdmin;
-
+import gov.osti.doecode.listeners.DOECODEServletContextListener;
+import gov.osti.doecode.servlet.Init;
+import gov.osti.doecode.utils.JsonUtils;
+import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import org.apache.commons.lang3.StringUtils;
-import org.bigtesting.routd.Route;
-import org.bigtesting.routd.Router;
-import org.bigtesting.routd.TreeRouter;
-
-import gov.osti.doecode.entity.DOECODEJson;
-import gov.osti.doecode.entity.InputFunctions;
-import gov.osti.doecode.listeners.DOECODEServletContextListener;
-import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.JsonUtils;
-import gov.osti.doecode.utils.TemplateUtils;
 
 @WebServlet(urlPatterns = { "/submit", "/form-select", "/announce", "/approve", "/confirm", "/projects", "/pending" })
 public class Input extends HttpServlet {
 
         private static final long serialVersionUID = -557715523485856278L;
 
-        private final Router INPUT_ROUTES = new TreeRouter();
-        private Route SUBMIT_ROUTE = new Route("/" + Init.app_name + "/submit");
-        private Route FORM_SELECT_ROUTE = new Route("/" + Init.app_name + "/form-select");
-        private Route ANNOUNCE_ROUTE = new Route("/" + Init.app_name + "/announce");
-        private Route APPROVE_ROUTE = new Route("/" + Init.app_name + "/approve");
-        private Route CONFIRM_ROUTE = new Route("/" + Init.app_name + "/confirm");
-        private Route PROJECTS_ROUTE = new Route("/" + Init.app_name + "/projects");
-        private Route PENDING_ROUTE = new Route("/" + Init.app_name + "/pending");
-
-        @Override
-        public void init() {
-                INPUT_ROUTES.add(SUBMIT_ROUTE);
-                INPUT_ROUTES.add(FORM_SELECT_ROUTE);
-                INPUT_ROUTES.add(ANNOUNCE_ROUTE);
-                INPUT_ROUTES.add(APPROVE_ROUTE);
-                INPUT_ROUTES.add(CONFIRM_ROUTE);
-                INPUT_ROUTES.add(PROJECTS_ROUTE);
-                INPUT_ROUTES.add(PENDING_ROUTE);
-        }
+        private Logger log = LoggerFactory.getLogger(Input.class.getName());
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
                 request.setCharacterEncoding("UTF-8");
-                String path = request.getRequestURI();
-                Route route = INPUT_ROUTES.route(path);
+                String URI = request.getRequestURI();
+                String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
                 String page_title = "";
                 String template = "";
                 String current_page = "";
@@ -77,7 +53,7 @@ public class Input extends HttpServlet {
                 // Some of the option steps, and whether or not we should hide them
                 boolean show_optional_toggle = true;
 
-                if (route.equals(SUBMIT_ROUTE)) {
+                if (remaining.equals("submit")) {
                         String code_id = request.getParameter("code_id");
                         String load_id = request.getParameter("load_id");
                         String version_type = request.getParameter("version_type");
@@ -117,7 +93,7 @@ public class Input extends HttpServlet {
                         current_page = TemplateUtils.PAGE_PROJECTS;
                         is_inputjs = true;
 
-                } else if (route.equals(ANNOUNCE_ROUTE)) {
+                } else if (remaining.startsWith("announce")) {
                         String code_id = request.getParameter("code_id");
                         output_data = InputFunctions.getInputFormLists(getServletContext());
                         cssFilesList.add("DataTables-1.10.16/css/jquery.dataTables.min");
@@ -144,7 +120,7 @@ public class Input extends HttpServlet {
                         is_inputjs = true;
                         current_page = TemplateUtils.PAGE_PROJECTS;
 
-                } else if (route.equals(APPROVE_ROUTE)) {
+                } else if (remaining.startsWith("approve")) {
                         String code_id = request.getParameter("code_id");
                         output_data = InputFunctions.getInputFormLists(getServletContext());
                         cssFilesList.add("DataTables-1.10.16/css/jquery.dataTables.min");
@@ -171,7 +147,7 @@ public class Input extends HttpServlet {
                         is_inputjs = true;
                         current_page = TemplateUtils.PAGE_PROJECTS;
 
-                } else if (route.equals(CONFIRM_ROUTE)) {
+                } else if (remaining.startsWith("confirm")) {
                         String code_id = request.getParameter("code_id");
                         String workflow = request.getParameter("workflow");
                         String minted_doi = request.getParameter("mintedDoi");
@@ -210,7 +186,7 @@ public class Input extends HttpServlet {
                                         DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
 
                         current_page = TemplateUtils.PAGE_PROJECTS;
-                } else if (route.equals(PROJECTS_ROUTE)) {
+                } else if (remaining.startsWith("projects")) {
                         page_title = "DOE CODE: Projects";
                         template = TemplateUtils.TEMPLATE_MY_PROJECTS;
                         current_page = TemplateUtils.PAGE_PROJECTS;
@@ -218,7 +194,7 @@ public class Input extends HttpServlet {
                         cssFilesList.add("DataTables-1.10.16/css/jquery.dataTables.min");
                         cssFilesList.add("Responsive-2.2.0/css/responsive.dataTables.min");
 
-                } else if (route.equals(PENDING_ROUTE)) {
+                } else if (remaining.startsWith("pending")) {
                         page_title = "DOE CODE: Pending";
                         template = TemplateUtils.TEMPLATE_PENDING_APPROVAL;
                         current_page = TemplateUtils.PAGE_PROJECTS;
@@ -226,7 +202,7 @@ public class Input extends HttpServlet {
                         cssFilesList.add("DataTables-1.10.16/css/jquery.dataTables.min");
                         cssFilesList.add("Responsive-2.2.0/css/responsive.dataTables.min");
 
-                } else if (route.equals(FORM_SELECT_ROUTE)) {
+                } else if (remaining.equals("form-select")) {
                         page_title = "DOE CODE: Form Select";
                         template = TemplateUtils.TEMPLATE_FORM_SELECT;
                         current_page = TemplateUtils.PAGE_PROJECTS;

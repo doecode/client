@@ -424,14 +424,5 @@
             <artifactId>poi</artifactId>
             <version>3.17</version>
         </dependency>
-        <!--                   -->
-        <!--  Other Libraries  -->
-        <!--                    -->
-        <!--Used for routes in the servlets-->
-        <dependency>
-            <groupId>org.bigtesting</groupId>
-            <artifactId>routd</artifactId>
-            <version>1.0.5</version>
-        </dependency>
     </dependencies>
 </project>
