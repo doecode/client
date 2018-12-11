@@ -23,9 +23,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 @WebServlet(urlPatterns = { "/Index", "/repository-services", "/about", "/policy", "/resources", "/news", "/faq",
-                "/results", "/search", "/biblio/*", "/forbidden", "/security-hosting", "/contact" })
+                "/results", "/search", "/biblio/*", "/forbidden", "/security-hosting", "/contact", "/homepage-alt" })
 public class Dissemination extends HttpServlet {
 
         private static final long serialVersionUID = 282315618723126267L;
@@ -135,10 +134,14 @@ public class Dissemination extends HttpServlet {
                         page_title = "DOE CODE: Security Hosting";
                         template = TemplateUtils.TEMPLATE_SECURITY_HOSTING_PAGE;
 
-                }else if (remaining.equals("/contact")) {
+                } else if (remaining.equals("/contact")) {
                         page_title = "DOE CODE: Contact Us";
                         template = TemplateUtils.TEMPLATE_CONTACT_PAGE;
 
+                } else if (remaining.equals("/homepage-alt")) {
+                        page_title = "DOE CODE: Alternate Homepage";
+                        template = "homepage_alt";
+                        output_data.put("is_homepage", true);
                 } else {
                         page_title = "DOE CODE: Page Not Found";
                         template = TemplateUtils.TEMPLATE_404_PAGE;

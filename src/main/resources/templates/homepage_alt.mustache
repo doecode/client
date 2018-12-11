@@ -1,0 +1,131 @@
+{{> wrapper/header}}
+<style>
+	#outermost-container {
+		background-image: linear-gradient(rgb(30, 111, 146), rgb(1, 53, 88) 100%);
+	}
+
+	.wrapper {
+		background-color: transparent;
+	}
+
+	.footer-bottom {
+		background-color: transparent;
+	}
+
+	.footer-separator {
+		background-color: transparent;
+		border-bottom: none;
+		box-shadow: none;
+	}
+
+	.main-header {
+		background-image: none !important;
+		background-color: transparent !important;
+	}
+
+	.adv-search-button {
+		position: inherit;
+	}
+
+
+	#homepage-searchbar-container {
+		display: flex;
+		flex-direction: row;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#homepage-searchbar-container>input.homepage-searchbar {
+		height: 52px !important;
+		font-size: 20px !important;
+	}
+
+	#homepage-searchbar-container>button.homepage-adv-search-btn {
+		margin-left: -30px;
+	}
+
+	#homepage-searchbar-container>button.search-btn {
+		padding-right: 22px;
+		padding-left: 22px;
+		margin-left: 10px;
+	}
+
+	.navbar {
+		min-height: 0px;
+	}
+
+	@media only screen and (max-width:479px) and (min-width: 320px) {}
+
+	/* Extra Small Devices, Phones */
+	@media only screen and (max-width:767px) and (min-width: 480px) {
+		#homepage-searchbar-container {
+			width: 55%;
+		}
+	}
+
+	/* Small Devices, Tablets IPAD*/
+	@media only screen and (max-width:991px) and (min-width: 768px) {
+		#homepage-searchbar-container {
+			width: 55%;
+		}
+	}
+
+	/* Medium Devices, Desktops */
+	@media only screen and (max-width:1199px) and (min-width: 992px) {
+		#homepage-searchbar-container {
+			width: 55%;
+		}
+	}
+
+	/* Large Devices, Wide Screens */
+	@media only screen and (max-width:1400px) and (min-width: 1200px) {
+		#homepage-searchbar-container {
+			width: 50%;
+		}
+	}
+
+	@media only screen and (min-width: 1400px) {
+		#homepage-searchbar-container {
+			width: 40%;
+		}
+	}
+
+	@media only screen and (max-width:991px) and (min-width: 768px) {
+		.main-header {
+			border-bottom: none;
+		}
+	}
+</style>
+<div class='row not-so-wide-row'>
+
+</div>
+<div class="row not-so-wide-row">
+	<div class="col-xs-12">
+		<div class='center-text'>
+			<img src='/${app_name}/images/DOEcodeTitle_395-min.png' alt="DOE CODE" title='DOE CODE' class='header-logo-img-homepage' />
+		</div>
+		<br />
+		<div class='homepage-subtext center-text'>
+			U.S. Department of Energy
+			<br>
+			Office of Scientific and Technical Information
+		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<div id='homepage-searchbar-container'>
+			<!--Homepage search bar-->
+			<input class="pure-input-1 search-box homepage-searchbar" title="Search DOE CODE" placeholder="Search DOE CODE for submitted software entries" type="text">
+			<!--Advanced search button-->
+			<button title="Toggle Advanced Search Dropdown" class="adv-search-button homepage-adv-search-btn hide-xs" type="button">
+				<span class="fa fa-caret-down adv-search-button-icon"></span>
+			</button>
+			<!--Search Button-->
+			<button title="Submit" type="button" class="pure-button button-success search-btn homepage-search-btn">
+				<span class="fa fa-search"></span>
+			</button>
+		</div>
+	</div>
+</div>
+{{> wrapper/footer}}

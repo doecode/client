@@ -10,13 +10,15 @@
 	<span class="hidden">
 		{{> search/search-form}}
 	</span>
-	<div>
+	<div id='outermost-container'>
 		<div class='wrapper'>
+			
 			<nav class='navbar navbar-default main-header'>
 				<div class="container-fluid header-container-fluid no-col-padding-right no-col-padding-left">
 					<div class="pull-right hidden-xs visible-sm visible-md visible-lg header-signin-links" id="signin-status-big-screens">
 						{{> user/SigninStatus}}
 					</div>
+					{{#unless is_homepage}}
 					<div class='container hidden-xs visible-sm visible-md visible-lg header-search-container'>
 						<br />
 						<br />
@@ -38,8 +40,9 @@
 						</div>
 						<br />
 					</div>
+					{{/unless}}
 					<!--VV Navigation Bar VV-->
-					<div class=' container'>
+					<div class='hidden-lg hidden-md hidden-sm container'>
 						<div class='row'>
 							<div class='col-xs-12 no-col-padding-left no-col-padding-right'>
 								<div class="navbar-header">
