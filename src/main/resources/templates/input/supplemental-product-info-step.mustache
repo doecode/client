@@ -1,178 +1,178 @@
-<div id="supplemental-step" class="panel panel-default" {{#if show_optional_toggle}}style='display:none'{{/if}}>
-     <div class="panel-heading" role="tab" id="heading-supplemental-product-info">
-	  <div class="panel-title">
-	       <a id='supplemental-product-info-panel-anchor' class='input-accordion-title' role="button" data-toggle="collapse" {{#if is_accordion}}data-parent="#input-page-accordion"{{/if}} href="#collapse-supplemental-product-info" aria-expanded="false" aria-controls="collapse-supplemental-product-info">
-		  Supplemental Product Information
-	  </a>
-	  <span class="green fa fa-check" style="display: none"></span>
-	  <span title="Open" class="pull-right fa fa-chevron-right clickable accordion-toggle-arrow"></span>
-     </div>
-</div>
-<div id="collapse-supplemental-product-info" class="panel-collapse collapse input-panel-collapse" role="tabpanel" aria-labelledby="heading-supplemental-product-info">
-     <div class="panel-body">
-	  <div class='row'>
-	       <div class='col-xs-8'>
-		    <div class="row">
-			 <div class="col-xs-12">
-			      <label id="short-title-lbl" class='control-label' for='short_title'>Short Title or Acronym</label>{{> tooltips/ShortTitle}}
-			 </div>
-			 <div class="col-xs-12">
-			      <input type='text' class='pure-input-1 form-control' id='short-title'/>
-			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
-			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
-			 </div>
-			 <div class="col-xs-12">
-			      <label id="short-title-lbl-error" class="control-label errorCheck">Problem</label>
-			 </div>
-		    </div>
-		    <br/>
-		    <div class="row">
-			 <div class="col-xs-12">
-			      <label id="country-of-origin-lbl" class='control-label' for='country-of-origin'>Country of Origin</label>{{> tooltips/CountryOfOrigin}}
-			 </div>
-			 <div class="col-xs-12">
-			      <select class='pure-input-1 form-control doecode-chosen-select' title='Sort' id='country-of-origin' data-placeholder='Select your Options' data-allowcustom="true" data-issingle='true' >
-				   {{#each countries_list}}
-				   <option title='{{title}}' value='{{value}}'>{{label}}</option>
-				   {{/each}}
-			      </select>
-			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
-			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
-			 </div>
-			 <div class="col-xs-12">
-			      <label id="country-of-origin-lbl-error" class="control-label errorCheck">Problem</label>
-			 </div>
-		    </div>
-		    <br/>
-		    <div class="row">
-			 <div class="col-xs-12">
-			      <label id="keywords-lbl" class='control-label' for='keywords'>Keywords</label>{{> tooltips/Keywords}}
-			 </div>
-			 <div class="col-xs-12">
-			      <input type='text' class='pure-input-1 form-control' id='keywords'/>
-			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
-			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
-			 </div>
-			 <div class="col-xs-12">
-			      <label id="keywords-lbl-error" class="control-label errorCheck">Problem</label>
-			 </div>
-		    </div>
-		    <br/>
-		    {{#if is_logged_in_user_an_admin}}
-		    <div class="row">
-			 <div class="col-xs-12">
-			      <label id="project-keywords-lbl" class='control-label' for='project-keywords'>Project Keywords</label>{{> tooltips/ProjectKeywords}}
-			 </div>
-			 <div class="col-xs-12">
-			      <select class='pure-input-1 doecode-chosen-select' title='Project Keywords' id='project-keywords' data-allowcustom="false" data-placeholder='Select your project keyword(s)' multiple>
-				   {{#each project_keywords_list}}
-				   <option title='{{title}}' value='{{value}}'>{{label}}</option>
-				   {{/each}}
-			      </select>
-			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
-			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
-			 </div>
-			 <div class="col-xs-12">
-			      <label id="projecte-keywords-lbl-error" class="control-label errorCheck">Problem</label>
-			 </div>
-		    </div>
-		    <br/>
-		    {{/if}}
-		    <div class="row">
-			 <div class="col-xs-12">
-			      <label id="other-special-requirements-lbl" class='control-label' for='other-special-requirements'>Other Special Requirements</label>{{> tooltips/OtherSpecialRequirements}}
-			 </div>
-			 <div class="col-xs-12">
-			      <input type='text' class='pure-input-1 form-control' id='other-special-requirements'/>
-			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
-			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
-			 </div>
-			 <div class="col-xs-12">
-			      <label id="other-special-requirements-lbl-error" class="control-label errorCheck">Problem</label>
-			 </div>
-		    </div>
-		    <br/>
-		    <div class="row">
-			 <div class="col-xs-12">
-			      <label id="site-accession-number-lbl" class='control-label' for='site-accession-number'>Site Accession Number</label>{{> tooltips/SiteAccessionNumber}}
-			 </div>
-			 <div class="col-xs-12">
-			      <input type='text' id='site-accession-number' class='pure-input-1 form-control'/>
-			      <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
-			      <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
-			 </div>
-			 <div class="col-xs-12">
-			      <label id="site-accession-number-lbl-error" class="control-label errorCheck">Problem</label>
-			 </div>
-		    </div>
-		    <div id="file-upload-zone">
-			 <br/>
-			 <div class="row">
-			      <div class="col-xs-12" style="border-top: 1px solid #ddd; padding-top: 10px;">
-				   <label id="uploaded-file-name-lbl" class='control-label' for='file-upload-dropzone'></label>{{> tooltips/FileUpload}}
-				   <br/>
-				   <small>Please upload an archive file containing your source code. This will be used for archiving purposes.</small>
-				   <br/>
-				   <small>Supported file types include: .zip, .tar, .tgz, .tar.gz, and .tar.bz2</small>
-				   <br/>
-				   <br/>
-			      </div>
-			      <div class="col-xs-12">
-				   <div class='dropzone' id="file-upload-dropzone"></div>
-			      </div>
-			      <div class="col-xs-12">
-				   <label id="uploaded-file-name-lbl-error" class="control-label errorCheck">Problem</label>
-			      </div>
-			      <div class="col-xs-12">
-				   <small class="upload-msg"></small>
-			      </div>
-			      <div id='uploaded-file-div' class="col-xs-12 upload-remove-div" style='display:none;'>
-				   <br/>
-				   <label class="upload-file">Uploaded File</label>&nbsp;
-				   <div class="upload-file" id='uploaded-file-name'></div>
-				   <div class="upload-file">
-					<button type="button" id='delete-uploaded-file-btn' class="pure-button button-error">Remove File</button>
-				   </div>
-			      </div>
-			 </div>
-		    </div>
-		    <div id="container-upload-zone">
-			 <br/>
-			 <div class="row">
-			      <div class="col-xs-12" style="border-top: 1px solid #ddd; padding-top: 10px;">
-				   <label id="uploaded-container-name-lbl" class='control-label' for='container-upload-dropzone'></label>{{> tooltips/UploadContainerImage}}
-				   <br/>
-				   <small>You may upload a container image file that encapsulates a runtime environment for your source code.</small>
-				   <br/>
-				   <small>Supported file types include (Docker, Singularity): .tar, .simg</small>
-				   <br/>
-				   <br/>
-			      </div>
-			      <div class="col-xs-12">
-				   <div class='dropzone' id="container-upload-dropzone"></div>
-			      </div>
-			      <div class="col-xs-12">
-				   <label id="uploaded-container-name-lbl-error" class="control-label errorCheck">Problem</label>
-			      </div>
-			      <div class="col-xs-12">
-				   <small class="upload-msg"></small>
-			      </div>
-			      <div id='uploaded-container-div' class="col-xs-12 upload-remove-div" style='display:none;'>
-				   <br/>
-				   <label class="upload-file">Uploaded Image</label>&nbsp;
-				   <div class="upload-file" id='uploaded-container-name'></div>
-				   <div class="upload-file">
-					<button type="button" id='delete-uploaded-container-btn' class="pure-button button-error">Remove Image</button>
-				   </div>
-			      </div>
-			 </div>
-		    </div>
-		    <br/>
-	       </div>
-	       <div class='col-xs-4'>
+<div id="supplemental-step" class="panel panel-default" {{#if show_optional_toggle}} style='display:none' {{/if}}>
+	<div class="panel-heading" role="tab" id="heading-supplemental-product-info">
+		<div class="panel-title">
+			<a id='supplemental-product-info-panel-anchor' class='input-accordion-title' role="button" data-toggle="collapse" {{#if is_accordion}} data-parent="#input-page-accordion" {{/if}} href="#collapse-supplemental-product-info" aria-expanded="false" aria-controls="collapse-supplemental-product-info">
+				Supplemental Product Information
+			</a>
+			<span class="green fa fa-check" style="display: none"></span>
+			<span title="Open" class="pull-right fa fa-chevron-right clickable accordion-toggle-arrow"></span>
+		</div>
+	</div>
+	<div id="collapse-supplemental-product-info" class="panel-collapse collapse input-panel-collapse" role="tabpanel" aria-labelledby="heading-supplemental-product-info">
+		<div class="panel-body">
+			<div class='row'>
+				<div class='col-xs-8'>
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="short-title-lbl" class='control-label' for='short_title'>Short Title or Acronym</label>{{> tooltips/ShortTitle}}
+						</div>
+						<div class="col-xs-12">
+							<input type='text' class='pure-input-1 form-control' id='short-title' title='Short Title or Acronym' />
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="short-title-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="country-of-origin-lbl" class='control-label' for='country-of-origin'>Country of Origin</label>{{> tooltips/CountryOfOrigin}}
+						</div>
+						<div class="col-xs-12">
+							<select class='pure-input-1 form-control doecode-chosen-select' title='Sort' id='country-of-origin' data-placeholder='Select your Options' data-allowcustom="true" data-issingle='true'>
+								{{#each countries_list}}
+									<option title='{{title}}' value='{{value}}'>{{label}}</option>
+								{{/each}}
+							</select>
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="country-of-origin-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="keywords-lbl" class='control-label' for='keywords'>Keywords</label>{{> tooltips/Keywords}}
+						</div>
+						<div class="col-xs-12">
+							<input type='text' class='pure-input-1 form-control' id='keywords' title='Keywords' />
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="keywords-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+					<br />
+					{{#if is_logged_in_user_an_admin}}
+						<div class="row">
+							<div class="col-xs-12">
+								<label id="project-keywords-lbl" class='control-label' for='project-keywords'>Project Keywords</label>{{> tooltips/ProjectKeywords}}
+							</div>
+							<div class="col-xs-12">
+								<select class='pure-input-1 doecode-chosen-select' title='Project Keywords' id='project-keywords' data-allowcustom="false" data-placeholder='Select your project keyword(s)' multiple>
+									{{#each project_keywords_list}}
+										<option title='{{title}}' value='{{value}}'>{{label}}</option>
+									{{/each}}
+								</select>
+								<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+								<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+							</div>
+							<div class="col-xs-12">
+								<label id="projecte-keywords-lbl-error" class="control-label errorCheck">Problem</label>
+							</div>
+						</div>
+						<br />
+					{{/if}}
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="other-special-requirements-lbl" class='control-label' for='other-special-requirements'>Other Special Requirements</label>{{> tooltips/OtherSpecialRequirements}}
+						</div>
+						<div class="col-xs-12">
+							<input type='text' class='pure-input-1 form-control' id='other-special-requirements' title='Other Special Requirements' />
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="other-special-requirements-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col-xs-12">
+							<label id="site-accession-number-lbl" class='control-label' for='site-accession-number'>Site Accession Number</label>{{> tooltips/SiteAccessionNumber}}
+						</div>
+						<div class="col-xs-12">
+							<input type='text' id='site-accession-number' class='pure-input-1 form-control' title='Site Accession Number' />
+							<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+							<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+						</div>
+						<div class="col-xs-12">
+							<label id="site-accession-number-lbl-error" class="control-label errorCheck">Problem</label>
+						</div>
+					</div>
+					<div id="file-upload-zone">
+						<br />
+						<div class="row">
+							<div class="col-xs-12" style="border-top: 1px solid #ddd; padding-top: 10px;">
+								<label id="uploaded-file-name-lbl" class='control-label' for='file-upload-dropzone'></label>{{> tooltips/FileUpload}}
+								<br />
+								<small>Please upload an archive file containing your source code. This will be used for archiving purposes.</small>
+								<br />
+								<small>Supported file types include: .zip, .tar, .tgz, .tar.gz, and .tar.bz2</small>
+								<br />
+								<br />
+							</div>
+							<div class="col-xs-12">
+								<div class='dropzone' id="file-upload-dropzone"></div>
+							</div>
+							<div class="col-xs-12">
+								<label id="uploaded-file-name-lbl-error" class="control-label errorCheck">Problem</label>
+							</div>
+							<div class="col-xs-12">
+								<small class="upload-msg"></small>
+							</div>
+							<div id='uploaded-file-div' class="col-xs-12 upload-remove-div" style='display:none;'>
+								<br />
+								<label class="upload-file">Uploaded File</label>&nbsp;
+								<div class="upload-file" id='uploaded-file-name'></div>
+								<div class="upload-file">
+									<button type="button" id='delete-uploaded-file-btn' class="pure-button button-error">Remove File</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="container-upload-zone">
+						<br />
+						<div class="row">
+							<div class="col-xs-12" style="border-top: 1px solid #ddd; padding-top: 10px;">
+								<label id="uploaded-container-name-lbl" class='control-label' for='container-upload-dropzone'></label>{{> tooltips/UploadContainerImage}}
+								<br />
+								<small>You may upload a container image file that encapsulates a runtime environment for your source code.</small>
+								<br />
+								<small>Supported file types include (Docker, Singularity): .tar, .simg</small>
+								<br />
+								<br />
+							</div>
+							<div class="col-xs-12">
+								<div class='dropzone' id="container-upload-dropzone"></div>
+							</div>
+							<div class="col-xs-12">
+								<label id="uploaded-container-name-lbl-error" class="control-label errorCheck">Problem</label>
+							</div>
+							<div class="col-xs-12">
+								<small class="upload-msg"></small>
+							</div>
+							<div id='uploaded-container-div' class="col-xs-12 upload-remove-div" style='display:none;'>
+								<br />
+								<label class="upload-file">Uploaded Image</label>&nbsp;
+								<div class="upload-file" id='uploaded-container-name'></div>
+								<div class="upload-file">
+									<button type="button" id='delete-uploaded-container-btn' class="pure-button button-error">Remove Image</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br />
+				</div>
+				<div class='col-xs-4'>
 
-	       </div>
-	  </div>
-     </div>
-</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
