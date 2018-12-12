@@ -1,30 +1,31 @@
 package gov.osti.doecode.pagemappings;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import gov.osti.doecode.entity.DOECODEJson;
-import gov.osti.doecode.entity.InputFunctions;
 import static gov.osti.doecode.entity.UserFunctions.isCurrentlyLoggedInUserAnAdmin;
-import gov.osti.doecode.listeners.DOECODEServletContextListener;
-import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.JsonUtils;
-import gov.osti.doecode.utils.TemplateUtils;
+
 import java.io.IOException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.apache.commons.lang3.StringUtils;
+
+import gov.osti.doecode.entity.DOECODEJson;
+import gov.osti.doecode.entity.InputFunctions;
+import gov.osti.doecode.listeners.DOECODEServletContextListener;
+import gov.osti.doecode.servlet.Init;
+import gov.osti.doecode.utils.JsonUtils;
+import gov.osti.doecode.utils.TemplateUtils;
 
 @WebServlet(urlPatterns = { "/submit", "/form-select", "/announce", "/approve", "/confirm", "/projects", "/pending" })
 public class Input extends HttpServlet {
 
         private static final long serialVersionUID = -557715523485856278L;
-
-        private Logger log = LoggerFactory.getLogger(Input.class.getName());
 
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
@@ -87,8 +88,8 @@ public class Input extends HttpServlet {
                                         .getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
                         output_data.set("relation_type",
                                         DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
-                        output_data.set("project_keywords_list", DOECODEServletContextListener
-                                        .getJsonList(DOECODEJson.PROJECT_KEYWORDS_KEY));
+                        output_data.set("project_keywords_list",
+                                        DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_KEYWORDS_KEY));
 
                         current_page = TemplateUtils.PAGE_PROJECTS;
                         is_inputjs = true;
@@ -114,8 +115,8 @@ public class Input extends HttpServlet {
                                         .getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
                         output_data.set("relation_type",
                                         DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
-                        output_data.set("project_keywords_list", DOECODEServletContextListener
-                                        .getJsonList(DOECODEJson.PROJECT_KEYWORDS_KEY));
+                        output_data.set("project_keywords_list",
+                                        DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_KEYWORDS_KEY));
 
                         is_inputjs = true;
                         current_page = TemplateUtils.PAGE_PROJECTS;
@@ -142,8 +143,8 @@ public class Input extends HttpServlet {
                                         .getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
                         output_data.set("relation_type",
                                         DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
-                        output_data.set("project_keywords_list", DOECODEServletContextListener
-                                        .getJsonList(DOECODEJson.PROJECT_KEYWORDS_KEY));
+                        output_data.set("project_keywords_list",
+                                        DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_KEYWORDS_KEY));
                         is_inputjs = true;
                         current_page = TemplateUtils.PAGE_PROJECTS;
 
