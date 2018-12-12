@@ -36,8 +36,8 @@
 	}
 
 	#homepage-searchbar-container>input.homepage-searchbar {
-		height: 52px !important;
-		font-size: 20px !important;
+		height: 52px;
+		font-size: 20px;
 	}
 
 	#homepage-searchbar-container>button.homepage-adv-search-btn {
@@ -54,7 +54,28 @@
 		min-height: 0px;
 	}
 
-	@media only screen and (max-width:479px) and (min-width: 320px) {}
+
+	.icon-row {
+		color: white;
+	}
+
+	.icon-row a {
+		color: white !important;
+	}
+
+	.icon-row a.icon-row-icon {
+		font-size: 40px;
+	}
+
+	.icon-row-icon-text:hover {
+		text-decoration: none;
+	}
+
+	.icon-row-icon-text a {
+		font-size: 40px;
+	}
+
+	/*Media Queries*/
 
 	/* Extra Small Devices, Phones */
 	@media only screen and (max-width:767px) and (min-width: 480px) {
@@ -84,9 +105,13 @@
 		}
 	}
 
-	@media only screen and (min-width: 1400px) {
+	@media only screen and (min-width: 1401px) {
 		#homepage-searchbar-container {
 			width: 40%;
+		}
+
+		#homepage-searchbar-container>input.homepage-searchbar {
+			margin-left: 25px;
 		}
 	}
 
@@ -95,25 +120,46 @@
 			border-bottom: none;
 		}
 	}
-</style>
-<div class='row not-so-wide-row'>
 
-</div>
+	@media only screen and (max-width:479px) and (min-width: 320px) {
+		.header-logo-img-homepage {
+			width: 300px;
+		}
+
+		#homepage-searchbar-container>input.homepage-searchbar {
+			height: inherit !important;
+			font-size: 16px !important;
+		}
+
+		#homepage-searchbar-container>button.search-btn{
+			padding-left:0px;
+			padding-right:0px;
+			margin-left:5px;
+		}
+	}
+</style>
 <div class="row not-so-wide-row">
 	<div class="col-xs-12">
+		<span class='hide-md hide-sm hide-lg'>
+			<br />
+			<br />
+			<br />
+		</span>
 		<div class='center-text'>
 			<img src='/${app_name}/images/DOEcodeTitle_395-min.png' alt="DOE CODE" title='DOE CODE' class='header-logo-img-homepage' />
 		</div>
 		<br />
-		<div class='homepage-subtext center-text'>
+		<div class='homepage-subtext center-text hide-xs'>
 			U.S. Department of Energy
 			<br>
 			Office of Scientific and Technical Information
 		</div>
 		<br />
 		<br />
-		<br />
-		<br />
+		<span class='hide-xs'>
+			<br />
+			<br />
+		</span>
 		<div id='homepage-searchbar-container'>
 			<!--Homepage search bar-->
 			<input class="pure-input-1 search-box homepage-searchbar" title="Search DOE CODE" placeholder="Search DOE CODE for submitted software entries" type="text">
@@ -125,6 +171,76 @@
 			<button title="Submit" type="button" class="pure-button button-success search-btn homepage-search-btn">
 				<span class="fa fa-search"></span>
 			</button>
+		</div>
+		<span class='hide-md hide-sm hide-lg'>
+			<br />
+			<br />
+			<br />
+			<div class='homepage-subtext center-text'>
+				U.S. Department of Energy
+				<br>
+				Office of Scientific and Technical Information
+			</div>
+		</span>
+	</div>
+</div>
+<div class='container hidden-xs visible-sm visible-md visible-lg'>
+	<div class='row'>
+		<div class='col-xs-12'>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<div class="row icon-row center-text">
+				<div class="col-sm-3">
+					<a title="Submit Software/Code" href="/${app_name}/projects" class="icon-row-icon"><span class="fa fa-sign-in"></span></a>
+					<br>
+					<a class="icon-row-icon-text" title="Submit Software/Code" href="/${app_name}/projects">Submit Software/Code</a>
+				</div>
+				<div class="col-sm-3">
+					<a title="Repository Services" href="/${app_name}/repository-services" class="icon-row-icon"><span class="fa fa-home clickable"></span></a>
+					<br>
+					<a class="icon-row-icon-text" title="Repository Services" href="/${app_name}/repository-services">Repository Services</a>
+				</div>
+				<div class="col-sm-3">
+					<a title="Software Policy" href="/${app_name}/policy" class="icon-row-icon"><span class="fa fa-folder-open-o"></span></a>
+					<br>
+					<a class="icon-row-icon-text" title="Software Policy" href="/${app_name}/policy">Software Policy</a>
+				</div>
+				<div class="col-sm-3">
+					<a title="Resources" href="/${app_name}/resources" class="icon-row-icon"><span class="fa fa-users"></span></a>
+					<br>
+					<a class="icon-row-icon-text" title="Resources" href="/${app_name}/resources">Resources</a>
+				</div>
+			</div>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<div class="row icon-row center-text">
+				<div class="col-sm-4">
+					<a title="About" href="/${app_name}/about" class="icon-row-icon"><span class="fa fa-info"></span></a>
+					<br>
+					<a class="icon-row-icon-text" title="About" href="/${app_name}/about">About</a>
+				</div>
+				<div class="col-sm-4"><a title="FAQs" href="/${app_name}/faq" class="icon-row-icon"><span class="fa fa-question"></span></a>
+					<br>
+					<a class="icon-row-icon-text" title="FAQs" href="/${app_name}/faq">FAQs</a>
+				</div>
+				<div class="col-sm-4"><a title="News" href="/${app_name}/news" class="icon-row-icon"><span class="fa fa-newspaper-o"></span></a>
+					<br>
+					<a class="icon-row-icon-text" title="News" href="/${app_name}/news">News</a>
+				</div>
+			</div>
+			<br />
+			<br />
 		</div>
 	</div>
 </div>
