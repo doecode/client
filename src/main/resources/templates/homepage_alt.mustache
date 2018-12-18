@@ -23,38 +23,6 @@
 		background-color: transparent !important;
 	}
 
-	.adv-search-button {
-		position: inherit;
-	}
-
-
-	#homepage-searchbar-container {
-		display: flex;
-		flex-direction: row;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	#homepage-searchbar-container>input.homepage-searchbar {
-		height: 52px;
-		font-size: 20px;
-	}
-
-	#homepage-searchbar-container>button.homepage-adv-search-btn {
-		margin-left: -30px;
-	}
-
-	#homepage-searchbar-container>button.search-btn {
-		padding-right: 22px;
-		padding-left: 22px;
-		margin-left: 10px;
-	}
-
-	.navbar {
-		min-height: 0px;
-	}
-
-
 	.icon-row {
 		color: white;
 	}
@@ -75,66 +43,81 @@
 		font-size: 40px;
 	}
 
+
+
+	#homepage-searchbar-container {
+		display: flex;
+		flex-wrap: wrap;
+		margin-left: 32%;
+		margin-right: 25%;
+	}
+
+	#homepage-searchbar-container::after {
+		content: '';
+		width: 100%;
+	}
+
+	.homepage-adv-search-dropdown {
+		order: 1;
+		background-color: #fff;
+		width: 85%;
+	}
+
+	#homepage-searchbar-container>input.homepage-searchbar {
+		width: 85%;
+		height: 52px;
+		font-size: 20px;
+	}
+
+	.adv-search-button {
+		position: inherit;
+		margin-left: -25px;
+	}
+
+	#homepage-searchbar-container>button.search-btn {
+		padding-left: 20px;
+		padding-right: 20px;
+		margin-left: 5px;
+	}
+
+	.navbar {
+		min-height: 0px;
+	}
+
 	/*Media Queries*/
+	@media only screen and (max-width:479px) and (min-width: 320px) {
 
-	/* Extra Small Devices, Phones */
-	@media only screen and (max-width:767px) and (min-width: 480px) {
 		#homepage-searchbar-container {
-			width: 55%;
-		}
-	}
-
-	/* Small Devices, Tablets IPAD*/
-	@media only screen and (max-width:991px) and (min-width: 768px) {
-		#homepage-searchbar-container {
-			width: 55%;
-		}
-	}
-
-	/* Medium Devices, Desktops */
-	@media only screen and (max-width:1199px) and (min-width: 992px) {
-		#homepage-searchbar-container {
-			width: 55%;
-		}
-	}
-
-	/* Large Devices, Wide Screens */
-	@media only screen and (max-width:1400px) and (min-width: 1200px) {
-		#homepage-searchbar-container {
-			width: 50%;
-		}
-	}
-
-	@media only screen and (min-width: 1401px) {
-		#homepage-searchbar-container {
-			width: 40%;
+			margin-left: 0px;
+			margin-right: 0px;
 		}
 
 		#homepage-searchbar-container>input.homepage-searchbar {
-			margin-left: 25px;
+			width: 83%;
+			height: auto;
+			font-size: 16px;
+		}
+
+		#homepage-searchbar-container>button.search-btn {
+			padding-left: 0px;
+			padding-right: 0px;
+			margin-left: 5px;
 		}
 	}
+
+	@media only screen and (max-width:767px) and (min-width: 480px) {}
+
+	@media only screen and (max-width:991px) and (min-width: 768px) {}
+
+	@media only screen and (max-width:1199px) and (min-width: 992px) {}
+
+	@media only screen and (max-width:1400px) and (min-width: 1200px) {}
+
+	@media only screen and (min-width: 1401px) {}
 
 	@media only screen and (max-width:991px) and (min-width: 768px) {
 		.main-header {
 			border-bottom: none;
-		}
-	}
-
-	@media only screen and (max-width:479px) and (min-width: 320px) {
-		.header-logo-img-homepage {
-			width: 300px;
-		}
-
-		#homepage-searchbar-container>input.homepage-searchbar {
-			height: inherit !important;
-			font-size: 16px !important;
-		}
-
-		#homepage-searchbar-container>button.search-btn{
-			padding-left:0px;
-			padding-right:0px;
-			margin-left:5px;
 		}
 	}
 </style>
@@ -171,6 +154,20 @@
 			<button title="Submit" type="button" class="pure-button button-success search-btn homepage-search-btn">
 				<span class="fa fa-search"></span>
 			</button>
+			<!--ADV Search Dropdown-->
+			<div class='homepage-adv-search-dropdown hide-xs'>
+				<div style='border-bottom:1px solid #ccc;'>
+					<br />
+					<label class='adv-search-dropdown-label'>Advanced Search Options</label>
+				</div>
+			</div>
+			<br />
+			<div class='adv-dropdown-section'>
+				<label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-software_title'>Software Title:</label>
+			</div>
+			<div class='adv-dropdown-section'>
+
+			</div>
 		</div>
 		<span class='hide-md hide-sm hide-lg'>
 			<br />
