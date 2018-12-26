@@ -74,10 +74,11 @@ var contributing_organizations_tbl_opts = {
 
 var related_identifiers_tbl_opts = {
     order: [[0, 'asc']],
+    autoWidth:false,
     columns: [
-        {name: 'identifier_type', data: 'identifier_type', 'defaultContent': ''},
-        {name: 'relation_type', data: 'relation_type', 'defaultContent': ''},
-        {name: 'identifier_value', data: 'identifier_value', 'defaultContent': ''}
+        {name: 'identifier_type', data: 'identifier_type', 'defaultContent': '', width:'20%'},
+        {name: 'relation_type', data: 'relation_type', 'defaultContent': '', width:'25%'},
+        {name: 'identifier_value', data: 'identifier_value', 'defaultContent': '', className:'word-break'}
     ]
 };
 

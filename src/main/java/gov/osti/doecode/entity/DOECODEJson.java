@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
+
+import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.JsonUtils;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -184,7 +186,7 @@ public class DOECODEJson {
      }
 
      public final void UPDATE_REMOTE_LISTS(ServletContext context) throws Exception {
-          String authorityapi_base_url = context.getInitParameter("authority_base_url");
+          String authorityapi_base_url = Init.authority_api_base;
 
           //Countries
           ArrayNode country = getItemFromElinkAuthority(authorityapi_base_url + "simple/countries-list?sort=description");
