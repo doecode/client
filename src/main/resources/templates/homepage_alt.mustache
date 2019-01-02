@@ -84,6 +84,18 @@
 		min-height: 0px;
 	}
 
+	.adv-dropdown-section{
+		padding-top:10px;
+	}
+
+	.homepage-range-fields{
+		display:flex;
+	}
+
+	.adv-dropdown-border-bottom{
+		border-bottom:1px solid #ccc;
+	}
+
 	/*Media Queries*/
 	@media only screen and (max-width:479px) and (min-width: 320px) {
 
@@ -107,7 +119,11 @@
 
 	@media only screen and (max-width:767px) and (min-width: 480px) {}
 
-	@media only screen and (max-width:991px) and (min-width: 768px) {}
+	@media only screen and (max-width:991px) and (min-width: 768px) {
+		.homepage-range-fields{
+			display:inline-block;
+		}
+	}
 
 	@media only screen and (max-width:1199px) and (min-width: 992px) {}
 
@@ -156,18 +172,45 @@
 			</button>
 			<!--ADV Search Dropdown-->
 			<div class='homepage-adv-search-dropdown hide-xs'>
-				<div style='border-bottom:1px solid #ccc;'>
+				<div style='padding-left:25px;padding-right:25px;' class='pure-form'>
+					<div class='adv-dropdown-border-bottom'>
+						<br />
+						<label class='adv-search-dropdown-label'>Advanced Search Options</label>
+					</div>
 					<br />
-					<label class='adv-search-dropdown-label'>Advanced Search Options</label>
+					<!--Software Title-->
+					<div class='adv-dropdown-section'>
+						<label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-software_title'>Software Title:</label>
+						<input id='homepage-searchbar-software_title' class='pure-input-1' title='Software title' data-field='software_title' type='text' />
+					</div>
+					<!--Developers/Contributors-->
+					<div class='adv-dropdown-section'>
+						<label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-developers_contributors'>Developers / Contributors:</label>
+						<input id="homepage-searchbar-developers_contributors" title="Developers / Contributors" class="pure-input-1" type="text">
+					</div>
+					<!--Identifier Numbers-->
+					<div class='adv-dropdown-section'>
+						<label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-identifier_numbers'>Identifier Numbers:</label>
+						<input id="homepage-searchbar-identifier_numbers" title="Identifier Numbers" class="pure-input-1" type="text">
+					</div>
+					<!--Release Date-->
+					<div class='adv-dropdown-section'>
+						<label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-date_earliest'>Release Date:</label>
+						<div class='homepage-range-fields'>
+							<input placeholder="MM/DD/YYYY" class="pure-input-1 doecode-datepicker " id="homepage-searchbar-date_earliest" title="Earliest Release Date" type="text">
+							<span class="to-field hide-sm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="homepage-searchbar-date_latest" class="homepage-adv-search-dropdown-label">to</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<input placeholder="MM/DD/YYYY" class="pure-input-1 doecode-datepicker " id="homepage-searchbar-date_latest" title="Latest Release Date" type="text">
+						</div>
+					</div>
+					<div class='adv-dropdown-border-bottom'>
+						<br />
+					</div>
+					<div class='adv-dropdown-section'>
+
+					</div>
 				</div>
 			</div>
 			<br />
-			<div class='adv-dropdown-section'>
-				<label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-software_title'>Software Title:</label>
-			</div>
-			<div class='adv-dropdown-section'>
-
-			</div>
 		</div>
 		<span class='hide-md hide-sm hide-lg'>
 			<br />
