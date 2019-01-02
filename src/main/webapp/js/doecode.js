@@ -17,7 +17,6 @@ var toggleSearchDropdown = function () {
     }
 };
 
-
 var triggerAdvancedSearch = function () {
     clearSearchFormFields();
 
@@ -189,17 +188,21 @@ var logout = function () {
 
 //Toggles the advanced search extended dropdown
 var toggleAdvExtendedDropdown = function (action) {
-    if ($("#adv-search-toggle-extra-container").is(':visible') || action === ADV_DROPDOWN_CLOSE) {//close
+    if ($("#adv-search-toggle-extra-container").is(':visible') || action === ADV_DROPDOWN_CLOSE) { //close
         if (document.getElementById('homepage-indicator')) {
             $("#outtermost-homepage-style").css('padding-bottom', '0px');
+        } else if (document.getElementById('index-indicator')) {
+            $("#outermost-container").css('padding-bottom', '0px');
         }
         $("#adv-search-toggle-extra-container").hide();
         $("#adv-search-toggle-btn-icon").removeClass('fa-minus-square-o');
         $("#adv-search-toggle-btn-icon").addClass('fa-plus-square-o');
         $("#adv-search-toggle-btn-icon-text").html('More Options');
-    } else {//open
+    } else { //open
         if (document.getElementById('homepage-indicator')) {
             $("#outtermost-homepage-style").css('padding-bottom', '200px');
+        } else if (document.getElementById('index-indicator')) {
+            $("#outermost-container").css('padding-bottom', '210px');
         }
         $("#adv-search-toggle-extra-container").show();
         $("#adv-search-toggle-btn-icon").removeClass('fa-plus-square-o');
@@ -245,11 +248,14 @@ $("#common-message-dialog").on('hidden.bs.modal', clearCommonModal);
 $(".tooltip-item").each(function () {
     var related_html = $(this).find('span.tooltip-content').html();
     var hide_val = $(this).data('hidecount') ? parseInt($(this).data('hidecount')) : 1000;
-    $(this).tooltip({placement: 'top',
+    $(this).tooltip({
+        placement: 'top',
         html: true,
         title: related_html,
-        delay: {'hide': hide_val,
-            'show': 100}
+        delay: {
+            'hide': hide_val,
+            'show': 100
+        }
     });
 });
 

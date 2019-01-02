@@ -60,7 +60,11 @@
 	.homepage-adv-search-dropdown {
 		order: 1;
 		background-color: #fff;
-		width: 85%;
+		/*width: 85%;*/
+		width:35.9%;
+	   position: absolute;
+		margin-top: 53px;
+		z-index: 100;
 	}
 
 	#homepage-searchbar-container>input.homepage-searchbar {
@@ -123,11 +127,36 @@
 		.homepage-range-fields{
 			display:inline-block;
 		}
+
+		#homepage-searchbar-container {
+			margin-left: 22%;
+			margin-right: 20%;
+		}
+		.homepage-adv-search-dropdown{
+			width:47.7%;
+		}
+
 	}
 
-	@media only screen and (max-width:1199px) and (min-width: 992px) {}
+	@media only screen and (max-width:1199px) and (min-width: 992px) {
+		#homepage-searchbar-container {
+			margin-left: 22%;
+			margin-right: 18%;
+		}
+		.homepage-adv-search-dropdown{
+			width:49.5%;
+		}
+	}
 
-	@media only screen and (max-width:1400px) and (min-width: 1200px) {}
+	@media only screen and (max-width:1400px) and (min-width: 1200px) {
+		#homepage-searchbar-container {
+			margin-left: 25%;
+			margin-right: 23%;
+		}
+		.homepage-adv-search-dropdown{
+			width:43%;
+		}
+	}
 
 	@media only screen and (min-width: 1401px) {}
 
@@ -137,6 +166,7 @@
 		}
 	}
 </style>
+<input type='hidden' id='index-indicator' />
 <div class="row not-so-wide-row">
 	<div class="col-xs-12">
 		<span class='hide-md hide-sm hide-lg'>
@@ -163,7 +193,7 @@
 			<!--Homepage search bar-->
 			<input class="pure-input-1 search-box homepage-searchbar" title="Search DOE CODE" placeholder="Search DOE CODE for submitted software entries" type="text">
 			<!--Advanced search button-->
-			<button title="Toggle Advanced Search Dropdown" class="adv-search-button homepage-adv-search-btn hide-xs" type="button">
+			<button title="Toggle Advanced Search Dropdown" class="adv-search-button homepage-adv-search-btn hide-xs" type="button" id='homepage-adv-dropdown-btn'>
 				<span class="fa fa-caret-down adv-search-button-icon"></span>
 			</button>
 			<!--Search Button-->
@@ -171,7 +201,7 @@
 				<span class="fa fa-search"></span>
 			</button>
 			<!--ADV Search Dropdown-->
-			<div class='homepage-adv-search-dropdown hide-xs'>
+			<div class='homepage-adv-search-dropdown hide-xs' style='display:none;' id='homepage-adv-dropdown-container'>
 				<div style='padding-left:25px;padding-right:25px;' class='pure-form'>
 					<div class='adv-dropdown-border-bottom'>
 						<br />
@@ -202,12 +232,87 @@
 							<input placeholder="MM/DD/YYYY" class="pure-input-1 doecode-datepicker " id="homepage-searchbar-date_latest" title="Latest Release Date" type="text">
 						</div>
 					</div>
+					<br />
 					<div class='adv-dropdown-border-bottom'>
+						<a title='Advanced Search Page' id="adv-search-toggle-btn" class="clickable">
+							<span id="adv-search-toggle-btn-icon" class='fa fa-plus-square-o '></span>&nbsp;<span id="adv-search-toggle-btn-icon-text">More Options</span>&hellip;
+						</a>
 						<br />
 					</div>
-					<div class='adv-dropdown-section'>
+					<br />
 
+					<div id="adv-search-toggle-extra-container" style="display:none;">
+						<!--Project Type-->
+						<div class='adv-dropdown-section'>
+							<label for='navbar-searchbar-accessibility' class='adv-search-dropdown-label'>Project Type:</label>
+							<select class='pure-input-1 doecode-chosen-select' title='Code Accessibilty' id='navbar-searchbar-accessibility' data-allowcustom="false" data-placeholder='Select your Options' multiple>
+								{{#each adv_search_lists.availabilities_list}}
+									<option title="{{title}}" value="{{value}}">{{label}}</option>
+								{{/each}}
+							</select>
+						</div>
+						<!--License-->
+						<div class='adv-dropdown-section'>
+							<label for='navbar-searchbar-licenses' class='adv-search-dropdown-label'>Licenses:</label>
+							<select class='pure-input-1 doecode-chosen-select' title='Licenses' id='navbar-searchbar-licenses' data-allowcustom="false" data-placeholder='Select your Options' multiple>
+								{{#each adv_search_lists.licenses_list}}
+									<option title="{{title}}" value="{{value}}">{{label}}</option>
+								{{/each}}
+							</select>
+						</div>
+						<!--Programming Languages-->
+						<div class='adv-dropdown-section'>
+							<label for='navbar-searchbar-programming_languages' class='adv-search-dropdown-label'>Programming Languages:</label>
+							<select class='pure-input-1 doecode-chosen-select' title='Programming Languages' id='navbar-searchbar-programming_languages' data-allowcustom="true" data-placeholder='Select your programming language(s)' multiple>
+								{{#each adv_search_lists.programming_languages_list}}
+									<option title='{{title}}' value='{{value}}'>{{label}}</option>
+								{{/each}}
+							</select>
+						</div>
+						<!--Research Organization-->
+						<div class='adv-dropdown-section'>
+							<label for='navbar-searchbar-research_organization' class='adv-search-dropdown-label'>Research Organization:</label>
+							<select class='pure-input-1 doecode-chosen-select' title='Research Organization' id='navbar-searchbar-research_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+								{{#each adv_search_lists.research_org_list}}
+									<option title="{{title}}" value="{{value}}">{{label}}</option>
+								{{/each}}
+							</select>
+						</div>
+						<!--Sponsoring Organization-->
+						<div class='adv-dropdown-section'>
+							<label for='navbar-searchbar-sponsoring_organization' class='adv-search-dropdown-label'>Sponsoring Organization:</label>
+							<select class='pure-input-1 doecode-chosen-select' title='Sponsoring Organization' id='navbar-searchbar-sponsoring_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+								{{#each adv_search_lists.sponsor_org_list}}
+									<option title="{{title}}" value="{{value}}">{{label}}</option>
+								{{/each}}
+							</select>
+						</div>
+						<!--Software Title-->
+						<div class='adv-dropdown-section'>
+							<label for='navbar-searchbar-software_type' class='adv-search-dropdown-label'>Software Type:</label>
+							<select class='pure-input-1 doecode-chosen-select' title='Software Type' id='navbar-searchbar-software_type' data-allowcustom="false" data-placeholder='Select your Options' multiple>
+								{{#each adv_search_lists.software_type}}
+									<option title="{{title}}" value="{{value}}">{{label}}</option>
+								{{/each}}
+							</select>
+						</div>
+						<!--Sort-->
+						<div class='adv-dropdown-section'>
+							<label for='navbar-searchbar-sort' class='adv-search-dropdown-label'>Sort:</label>
+							<select class='pure-input-1' title='Sort' id='navbar-searchbar-sort' data-placeholder='Select your Options'>
+								{{#each adv_search_lists.sort_list}}
+									<option title="{{title}}" value="{{value}}">{{label}}</option>
+								{{/each}}
+							</select>
+						</div>
+						<br />
 					</div>
+					<div class='right-text'>
+						<button title="Advanced Search" type="button" data-idprefix="homepage-searchbar" class="pure-button button-success adv-search-btn adv-search-btn-dropdown">
+							<span class="fa fa-search"></span>&nbsp; Search
+						</button>
+					</div>
+					<br />
 				</div>
 			</div>
 			<br />

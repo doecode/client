@@ -543,8 +543,7 @@ if (document.getElementById('about-page-identifier')) {
             success: function (data) {
                 $("#news-article-main-row").html(data);
             },
-            error: function () {
-            }
+            error: function () {}
         });
     };
 
@@ -559,5 +558,18 @@ if (document.getElementById('about-page-identifier')) {
     $(document).on('click', '.clear-filter-x', function () {
         var id_of_item = $(this).data('relatedfield');
         $("#" + id_of_item).trigger('click');
+    });
+} else if (document.getElementById('index-indicator')) {
+    $("#homepage-adv-dropdown-btn").on('click', function () {
+        var self = this;
+        var adv_search_element = $(self).next('button').next('div.homepage-adv-search-dropdown');
+        if ($(adv_search_element).is(':visible')) {
+            if ($("#adv-search-toggle-extra-container").is(':visible')) {
+                $("#adv-search-toggle-btn").trigger('click');
+            }
+            $(adv_search_element).hide();
+        } else {
+            $(adv_search_element).show();
+        }
     });
 }
