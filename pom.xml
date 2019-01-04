@@ -360,7 +360,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.9.7</version>
+            <version>2.9.8</version>
         </dependency>
         <!--Jsoup (for scrubbing out script tags to prevent XSS attacks)-->
         <dependency>
