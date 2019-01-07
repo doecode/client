@@ -169,7 +169,6 @@ public class Dissemination extends HttpServlet {
                 // needed to render the homepage correctly and such
                 output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, extrasList, null,
                                 request);
-
                 // Write the template out
                 TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
         }
