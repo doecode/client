@@ -41,12 +41,12 @@ var projects_data_table_opts = {
 
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/submit?code_id=' + row.code_id
-                        + '" class="pure-button button-success btn-sm white ">Update Metadata</a>';
+                        + '" class="pure-button button-success btn-sm white " title="Update Metadata for '+row.code_id+'">Update Metadata</a>';
 
             }, width: '12%', className: 'text-center', orderable: false},
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/announce?code_id=' + row.code_id
-                        + '" class="pure-button pure-button-primary btn-sm white">Announce to E-Link</a>';
+                        + '" class="pure-button pure-button-primary btn-sm white" title="Announce '+row.code_id+' to E-Link">Announce to E-Link</a>';
 
             }, width: '12%', className: 'text-center', orderable: false},
         {render: function (data, type, row) {
