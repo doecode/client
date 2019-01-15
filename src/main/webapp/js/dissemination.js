@@ -430,11 +430,23 @@ if (document.getElementById('about-page-identifier')) {
 
     var clipboard = new Clipboard(".clip-cite-bib");
     //Unhighlights the text copied to the clipboard
-    clipboard.on('success', function () {
+    clipboard.on('success', function (e) {
+        $(e.trigger).html("<span class='fa fa-check'></span> Copied to clipboard");
+        var self = this;
         if (document.selection) {
             document.selection.empty();
         } else if (window.getSelection) {
             window.getSelection().removeAllRanges();
+        }
+    });
+
+    //Makes it such that when you click on a tab, the "Copy to clipboard" text is set correctly
+    $("a.citation-tab[data-toggle='tab']").on('shown.bs.tab', function (e) {
+        var self = this;
+        //get id of tab we're working on
+        var tab = $(self).attr('href').toString().replace(/#/g, '');
+        if (document.getElementById(tab)) {
+            $("#" + tab).find('div.copy-btn-container > button.clip-cite-bib').html('<span class="fa fa-files-o"></span> Copy to clipboard');
         }
     });
 

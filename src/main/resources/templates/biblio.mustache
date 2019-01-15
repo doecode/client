@@ -1,422 +1,447 @@
 {{> wrapper/header}}
-<input type="hidden" id="biblio-page-identifier"/>
+<input type="hidden" id="biblio-page-identifier" />
 <style type="text/css">
-     .no-btn-padding-top {
-	 padding-top: 0px;
-     }
-     .no-btn-padding-bottom {
-	 padding-bottom: 0px;
-     }
-     .biblio-description {
-	 padding-right: 10px;
-	 padding-left: 10px;
-	 padding-bottom: 15px;
-	 font-size: 16px;
-     }
-     .biblio-main-content {
-	 border-left: 1px solid #CCCCCC;
-	 padding-left: 30px;
-     }
-     .doi-subnotice {
-	 font-style: italic;
-	 font-size: 13.6px;
-	 color: rgb(153, 153, 153);
-     }
-     .biblio-sidebar-subtitle {
-	 text-transform: uppercase;
-	 font-weight: 300;
-	 color: #777;
-	 margin-bottom: 0;
-	 margin-top: 10px;
-	 padding-bottom: 10px;
-     }
-     .biblio-sidebar-secondary-subtitle {
-	 margin-bottom: 5px;
-	 color: rgb(0, 0, 0);
-	 font-size: 13.6px;;
-     }
-     .biblio-sidebar-traditional-anchor {
-	 font-size: 15px;
-	 font-weight: 400;
-     }
-     .biblio-sidebar-row {
-	 border-bottom: 1px solid #DDDDDD;
-	 padding-bottom: 10px;
-	 padding-top: 10px;
-     }
+	.no-btn-padding-top {
+		padding-top: 0px;
+	}
 
-     .biblio-sidebar-row:last-child {
-	 border-bottom: none;
-     }
-     .biblio-row {
-	 padding-top: 10px;
-	 padding-bottom: 10px;
-     }
+	.no-btn-padding-bottom {
+		padding-bottom: 0px;
+	}
 
-     .biblio-row>dl {
-	 margin-bottom: 0px;
-     }
-     .biblio-field-header {
-	 font-weight: normal;
-	 font-size: 13.6px;
-	 margin-left: 0px;
-	 color: #929292;
-	 padding-top:0px;
-     }
-     .biblio-field-value {
-	 padding-bottom: 10px;
-	 font-size: 13.6px;
-     }
-     /*Puts spacing between the contents of the resource section of the biblio sidebar*/
-     .biblio-sidebar-row > div > div.link-content{
-	 padding-bottom:20px;
-     }
-     .bibtex-entry{
-	 padding-left:30px;
-     }
-     .biblio-social-link {
-	 border-right: 1px solid rgba(0, 0, 0, 0.1);
-	 font-size: 13.6px;
-	 padding-right: 15px !important;
-	 padding-left: 15px !important;
-	 padding-top: 5px !important;
-	 padding-bottom: 5px !important;
-     }
-     .biblio-social-link:last-child {
-	 border-right: none;
-     }
+	.biblio-description {
+		padding-right: 10px;
+		padding-left: 10px;
+		padding-bottom: 15px;
+		font-size: 16px;
+	}
 
-     @media only screen and (max-width:767px) and (min-width: 320px) {
-	 .biblio-main-content {
-	     border-left: none;
-	     padding-left: 0px;
-	     border-right: none;
-	 }
-     }
-     @media only screen and (max-width:991px) and (min-width: 768px) {
-	 .biblio-main-content {
-	     border-left: none;
-	     padding-left: 0px;
-	     border-right: none;
-	 }
-	 .bibtex-entry{
-	     padding-left:20px;
-	 }
-     }
-     @media only screen and (max-width:479px) and (min-width: 320px) {
-	 .bibtex-entry{
-	     padding-left:0px;
-	 }
-     }
-     @media only screen and (max-width:767px) and (min-width: 480px) {
-	 .bibtex-entry{
-	     padding-left:20px;
-	 }
-     }
-     @media only screen and (max-width:1199px) and (min-width: 992px) {
-	 .bibtex-entry{
-	     padding-left:30px;
-	 }
-     }
+	.biblio-main-content {
+		border-left: 1px solid #CCCCCC;
+		padding-left: 30px;
+	}
+
+	.doi-subnotice {
+		font-style: italic;
+		font-size: 13.6px;
+		color: rgb(153, 153, 153);
+	}
+
+	.biblio-sidebar-subtitle {
+		text-transform: uppercase;
+		font-weight: 300;
+		color: #777;
+		margin-bottom: 0;
+		margin-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.biblio-sidebar-secondary-subtitle {
+		margin-bottom: 5px;
+		color: rgb(0, 0, 0);
+		font-size: 13.6px;
+		;
+	}
+
+	.biblio-sidebar-traditional-anchor {
+		font-size: 15px;
+		font-weight: 400;
+	}
+
+	.biblio-sidebar-row {
+		border-bottom: 1px solid #DDDDDD;
+		padding-bottom: 10px;
+		padding-top: 10px;
+	}
+
+	.biblio-sidebar-row:last-child {
+		border-bottom: none;
+	}
+
+	.biblio-row {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.biblio-row>dl {
+		margin-bottom: 0px;
+	}
+
+	.biblio-field-header {
+		font-weight: normal;
+		font-size: 13.6px;
+		margin-left: 0px;
+		color: #929292;
+		padding-top: 0px;
+	}
+
+	.biblio-field-value {
+		padding-bottom: 10px;
+		font-size: 13.6px;
+	}
+
+	/*Puts spacing between the contents of the resource section of the biblio sidebar*/
+	.biblio-sidebar-row>div>div.link-content {
+		padding-bottom: 20px;
+	}
+
+	.bibtex-entry {
+		padding-left: 30px;
+	}
+
+	.biblio-social-link {
+		border-right: 1px solid rgba(0, 0, 0, 0.1);
+		font-size: 13.6px;
+		padding-right: 15px !important;
+		padding-left: 15px !important;
+		padding-top: 5px !important;
+		padding-bottom: 5px !important;
+	}
+
+	.biblio-social-link:last-child {
+		border-right: none;
+	}
+
+	@media only screen and (max-width:767px) and (min-width: 320px) {
+		.biblio-main-content {
+			border-left: none;
+			padding-left: 0px;
+			border-right: none;
+		}
+	}
+
+	@media only screen and (max-width:991px) and (min-width: 768px) {
+		.biblio-main-content {
+			border-left: none;
+			padding-left: 0px;
+			border-right: none;
+		}
+
+		.bibtex-entry {
+			padding-left: 20px;
+		}
+	}
+
+	@media only screen and (max-width:479px) and (min-width: 320px) {
+		.bibtex-entry {
+			padding-left: 0px;
+		}
+	}
+
+	@media only screen and (max-width:767px) and (min-width: 480px) {
+		.bibtex-entry {
+			padding-left: 20px;
+		}
+	}
+
+	@media only screen and (max-width:1199px) and (min-width: 992px) {
+		.bibtex-entry {
+			padding-left: 30px;
+		}
+	}
 </style>
 <div class="row not-so-wide-row">
-     <div class="col-xs-12">
-	  {{#if is_invalid_code_id}}
-	  <div class='center-text biblio-title has-error'>
-	       <br/>
-	       <br/>
-	       <label id='biblio-code-id-not-found' class='control-label normal-weight'>CODE ID Not Found</label>
-	  </div>
-	  {{/if}}
+	<div class="col-xs-12">
+		{{#if is_invalid_code_id}}
+			<div class='center-text biblio-title has-error'>
+				<br />
+				<br />
+				<label id='biblio-code-id-not-found' class='control-label normal-weight'>CODE ID Not Found</label>
+			</div>
+		{{/if}}
 
-	  {{#unless is_invalid_code_id}}
-	  <!--Biblio Breadcrumb trail-->
-	  <div class="container">
-	       <div class="row">
-		    <div class="no-col-padding-left col-xs-12">
-			 <div class="breadcrumbTrail">
-			      <span class="text-muted">
-				   <span><a title="DOE CODE Homepage" href="/${app_name}/">DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;</span>
-			      </span>
-			      <span class="text-muted">
-				   <span><a title="Search Results" class='clickable biblio-breadcrumb-trail'>Search Results</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;</span>
-			      </span>
-			      <span class="text-muted">
-				   <span>{{title}}</span>
-			      </span>
-			 </div>
-		    </div>
-	       </div>
-	  </div>
-          <br/> 
-	  <div class='container'>
-	       <div class="row">
-		    <div class="col-xs-12 no-col-padding-left no-col-padding-right" style="margin-bottom: 15px;">
-			 <div class="biblio-title">
-			      {{title}}
-			 </div>
-			 <br/>
-		    </div>
-	       </div>
-	       <div class='row'>
-		    <div class='col-xs-12'>
-			 <ul class="nav nav-tabs biblio-page-ul">
-			      <li class="active">
-				   <a title='Full Project View' data-toggle="tab" href="#fullrecord">Full Project</a>
-			      </li>
-			 </ul>
-			 <div class="tab-content">
-			      <div id="fullrecord" class="tab-pane fade in active">
-				   <div class="row">
-					<div class='no-col-padding-left-mobile no-col-padding-right-mobile hide-xs hide-sm col-md-3 col-xs-12 biblio-sidebar'>
-					     {{> search/biblio-sidebar}}
+		{{#unless is_invalid_code_id}}
+			<!--Biblio Breadcrumb trail-->
+			<div class="container">
+				<div class="row">
+					<div class="no-col-padding-left col-xs-12">
+						<div class="breadcrumbTrail">
+							<span class="text-muted">
+								<span><a title="DOE CODE Homepage" href="/${app_name}/">DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;</span>
+							</span>
+							<span class="text-muted">
+								<span><a title="Search Results" class='clickable biblio-breadcrumb-trail'>Search Results</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;</span>
+							</span>
+							<span class="text-muted">
+								<span>{{title}}</span>
+							</span>
+						</div>
 					</div>
-					<div class="col-md-9 col-xs-12 biblio-main-content">
-					     <div class="row">
-						  <div class="col-xs-12 biblio-description  no-col-padding-left no-col-padding-right">
-						       <h3 class='citation-formats'>Abstract</h3>
-						       {{> search/description}}
-						  </div>
-					     </div>
-					     <div class="row" >
-						  <div class="col-xs-12  no-col-padding-left no-col-padding-right" style="font-size: 16px;">
-						       <!--Developers-->
-						       {{#if has_developers}}
-						       <div class='biblio-row'>
-							    <div class='col-xs-12'>
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Developers:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{> search/developerLinks}}</dd>
-								 </dl>
-							    </div>
-						       </div>
-						       {{/if}}
-						       <!--Release Date-->
-						       {{#if has_release_date}}
-						       <div class='biblio-row'>
-							    <div class='col-xs-12'>
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Release Date:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{release_date}}</dd>
-								 </dl>
-							    </div>
-						       </div>
-						       {{/if}}
-						       <!--Project Type-->
-						       {{#if has_availability}}
-						       <div class='biblio-row'>
-							    <div class='col-xs-12'>
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Project Type:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{availability}}</dd>
-								 </dl>
-							    </div>
-						       </div>
-						       {{/if}}
-						       <!--Software Type-->
-						       <div class='biblio-row'>
-							    <div class='col-xs-12'>
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Software Type</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{software_type}}</dd>
-								 </dl>
-							    </div>
-						       </div>
-						       <!--Programming Languages-->
-						       {{#if has_programming_languages}}
-						       <div class='biblio-row'>
-							    <div class='col-xs-12'>
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Programming Languages:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>
-									   {{#each programming_languages_list}}
-									   {{.}}
-									   <br/>
-									   {{/each}}
-								      </dd>
-								 </dl>
-							    </div>
-						       </div>
-						       {{/if}}
-						       <!--Version Number-->
-						       {{#if has_version_number}}
-						       <div class='biblio-row'>
-							    <div class='col-xs-12'>
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Version:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{version_number}}</dd>
-								 </dl>
-							    </div>
-						       </div>
-						       {{/if}}
-						       <!--Licenses-->
-						       {{#if has_licenses}}
-						       <div class='biblio-row'>
-							    <div class='col-xs-12'>
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Licenses:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>
-									   {{#each licenses}}
-									   {{.}}<br/>
-									   {{/each}}
-								      </dd>
-								 </dl>
-							    </div>
-						       </div>
-						       {{/if}}
-						       <!--Sponsoring Organization-->
-						       {{#if has_sponsoring_org}}
-						       <div class='biblio-row'>
-							    <div class='col-xs-12'>
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Sponsoring Organizations:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{> search/biblio-sponsoring-org}}</dd>
-								 </dl>
-							    </div>
-						       </div>
-						       {{/if}}
-						       <!--Code id-->
-						       <div class='biblio-row'>
-							    <div class='col-xs-12'>
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Code ID:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{code_id}}</dd>
-								 </dl>
-							    </div>
-						       </div>
-						       <!--Site accession number-->
-						       {{#if has_site_accession_number}}
-						       <div class='biblio-row'>
-							    <div class='col-xs-12'>
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Site Accesion Number:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{site_accession_number}}</dd>
-								 </dl>
-							    </div>
-						       </div>
-						       {{/if}}
-						       <!--research orgs-->
-						       {{#if has_research_org}}
-						       <div class='biblio-row'>
-							    <div class='col-xs-12'>
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Research Organizations:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{> search/biblio-research-org}}</dd>
-								 </dl>
-							    </div>
-						       </div>
-						       {{/if}}
-						       <!--country of origin-->
-						       {{#if has_country_of_origin}}
-						       <div class='biblio-row'>
-							    <div class='col-xs-12'>
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Country of Origin:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{country_of_origin}}</dd>
-								 </dl>
-							    </div>
-						       </div>
-						       {{/if}}
-						       <!--Keywords-->
-						       {{#if has_keywords}}
-						       <div class="biblio-row">
-							    <div class="col-xs-12">
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Keywords:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{keywords}}</dd>
-								 </dl>
-							    </div>
-						       </div>
-						       {{/if}}
-						       
-						       {{#if user_data.has_osti_role}}
-						       <!--Project Keywords-->
-						       {{#if has_project_keywords}}
-						       <div class="biblio-row">
-							    <div class="col-xs-12">
-								 <dl class='row'>
-								      <dt class='col-md-3 col-xs-12 biblio-field-header'>Project Keywords:</dt>
-								      <dd class='col-md-9 col-xs-12 biblio-field-value'>{{project_keywords}}</dd>
-								 </dl>
-							    </div>
-						       </div>
-						       {{/if}}
-						       {{/if}}
-						  </div>
-					     </div>
-					     <div class='no-col-padding-left-mobile no-col-padding-right-mobile hide-md hide-lg col-md-3 col-xs-12 biblio-sidebar'>
-						  {{> search/biblio-sidebar}}
-					     </div>
-					     <div class='row' >
-						  <div class='col-xs-12' style='border-top: 1px solid #ccc;'>
-						       <h3 class='citation-formats'>Citation Formats</h3>
-						       <ul class="nav nav-tabs biblio-page-ul">
-							    <li class="active">
-								 <a class='clickable' title='MLA Citation' data-toggle="tab" href="#mla">MLA</a>
-							    </li>
-							    <li>
-								 <a class='clickable' title='APA Citation' data-toggle="tab" href="#apa">APA</a>
-							    </li>
-							    <li>
-								 <a class='clickable' title='Chicago Citation' data-toggle="tab" href="#chicago">Chicago</a>
-							    </li>
-							    <li>
-								 <a class='clickable' title='BibTex Citation' data-toggle="tab" href="#bibtex">BibTex</a>
-							    </li>
-						       </ul>
+				</div>
+			</div>
+			<br />
+			<div class='container'>
+				<div class="row">
+					<div class="col-xs-12 no-col-padding-left no-col-padding-right" style="margin-bottom: 15px;">
+						<div class="biblio-title">
+							{{title}}
+						</div>
+						<br />
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col-xs-12'>
+						<ul class="nav nav-tabs biblio-page-ul">
+							<li class="active">
+								<a title='Full Project View' data-toggle="tab" href="#fullrecord">Full Project</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div id="fullrecord" class="tab-pane fade in active">
+								<div class="row">
+									<div class='no-col-padding-left-mobile no-col-padding-right-mobile hide-xs hide-sm col-md-3 col-xs-12 biblio-sidebar'>
+										{{> search/biblio-sidebar}}
+									</div>
+									<div class="col-md-9 col-xs-12 biblio-main-content">
+										<div class="row">
+											<div class="col-xs-12 biblio-description  no-col-padding-left no-col-padding-right">
+												<h3 class='citation-formats'>Abstract</h3>
+												{{> search/description}}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-12  no-col-padding-left no-col-padding-right" style="font-size: 16px;">
+												<!--Developers-->
+												{{#if has_developers}}
+													<div class='biblio-row'>
+														<div class='col-xs-12'>
+															<dl class='row'>
+																<dt class='col-md-3 col-xs-12 biblio-field-header'>Developers:</dt>
+																<dd class='col-md-9 col-xs-12 biblio-field-value'>{{> search/developerLinks}}</dd>
+															</dl>
+														</div>
+													</div>
+												{{/if}}
+												<!--Release Date-->
+												{{#if has_release_date}}
+													<div class='biblio-row'>
+														<div class='col-xs-12'>
+															<dl class='row'>
+																<dt class='col-md-3 col-xs-12 biblio-field-header'>Release Date:</dt>
+																<dd class='col-md-9 col-xs-12 biblio-field-value'>{{release_date}}</dd>
+															</dl>
+														</div>
+													</div>
+												{{/if}}
+												<!--Project Type-->
+												{{#if has_availability}}
+													<div class='biblio-row'>
+														<div class='col-xs-12'>
+															<dl class='row'>
+																<dt class='col-md-3 col-xs-12 biblio-field-header'>Project Type:</dt>
+																<dd class='col-md-9 col-xs-12 biblio-field-value'>{{availability}}</dd>
+															</dl>
+														</div>
+													</div>
+												{{/if}}
+												<!--Software Type-->
+												<div class='biblio-row'>
+													<div class='col-xs-12'>
+														<dl class='row'>
+															<dt class='col-md-3 col-xs-12 biblio-field-header'>Software Type</dt>
+															<dd class='col-md-9 col-xs-12 biblio-field-value'>{{software_type}}</dd>
+														</dl>
+													</div>
+												</div>
+												<!--Programming Languages-->
+												{{#if has_programming_languages}}
+													<div class='biblio-row'>
+														<div class='col-xs-12'>
+															<dl class='row'>
+																<dt class='col-md-3 col-xs-12 biblio-field-header'>Programming Languages:</dt>
+																<dd class='col-md-9 col-xs-12 biblio-field-value'>
+																	{{#each programming_languages_list}}
+																		{{.}}
+																		<br />
+																	{{/each}}
+																</dd>
+															</dl>
+														</div>
+													</div>
+												{{/if}}
+												<!--Version Number-->
+												{{#if has_version_number}}
+													<div class='biblio-row'>
+														<div class='col-xs-12'>
+															<dl class='row'>
+																<dt class='col-md-3 col-xs-12 biblio-field-header'>Version:</dt>
+																<dd class='col-md-9 col-xs-12 biblio-field-value'>{{version_number}}</dd>
+															</dl>
+														</div>
+													</div>
+												{{/if}}
+												<!--Licenses-->
+												{{#if has_licenses}}
+													<div class='biblio-row'>
+														<div class='col-xs-12'>
+															<dl class='row'>
+																<dt class='col-md-3 col-xs-12 biblio-field-header'>Licenses:</dt>
+																<dd class='col-md-9 col-xs-12 biblio-field-value'>
+																	{{#each licenses}}
+																		{{.}}<br />
+																	{{/each}}
+																</dd>
+															</dl>
+														</div>
+													</div>
+												{{/if}}
+												<!--Sponsoring Organization-->
+												{{#if has_sponsoring_org}}
+													<div class='biblio-row'>
+														<div class='col-xs-12'>
+															<dl class='row'>
+																<dt class='col-md-3 col-xs-12 biblio-field-header'>Sponsoring Organizations:</dt>
+																<dd class='col-md-9 col-xs-12 biblio-field-value'>{{> search/biblio-sponsoring-org}}</dd>
+															</dl>
+														</div>
+													</div>
+												{{/if}}
+												<!--Code id-->
+												<div class='biblio-row'>
+													<div class='col-xs-12'>
+														<dl class='row'>
+															<dt class='col-md-3 col-xs-12 biblio-field-header'>Code ID:</dt>
+															<dd class='col-md-9 col-xs-12 biblio-field-value'>{{code_id}}</dd>
+														</dl>
+													</div>
+												</div>
+												<!--Site accession number-->
+												{{#if has_site_accession_number}}
+													<div class='biblio-row'>
+														<div class='col-xs-12'>
+															<dl class='row'>
+																<dt class='col-md-3 col-xs-12 biblio-field-header'>Site Accesion Number:</dt>
+																<dd class='col-md-9 col-xs-12 biblio-field-value'>{{site_accession_number}}</dd>
+															</dl>
+														</div>
+													</div>
+												{{/if}}
+												<!--research orgs-->
+												{{#if has_research_org}}
+													<div class='biblio-row'>
+														<div class='col-xs-12'>
+															<dl class='row'>
+																<dt class='col-md-3 col-xs-12 biblio-field-header'>Research Organizations:</dt>
+																<dd class='col-md-9 col-xs-12 biblio-field-value'>{{> search/biblio-research-org}}</dd>
+															</dl>
+														</div>
+													</div>
+												{{/if}}
+												<!--country of origin-->
+												{{#if has_country_of_origin}}
+													<div class='biblio-row'>
+														<div class='col-xs-12'>
+															<dl class='row'>
+																<dt class='col-md-3 col-xs-12 biblio-field-header'>Country of Origin:</dt>
+																<dd class='col-md-9 col-xs-12 biblio-field-value'>{{country_of_origin}}</dd>
+															</dl>
+														</div>
+													</div>
+												{{/if}}
+												<!--Keywords-->
+												{{#if has_keywords}}
+													<div class="biblio-row">
+														<div class="col-xs-12">
+															<dl class='row'>
+																<dt class='col-md-3 col-xs-12 biblio-field-header'>Keywords:</dt>
+																<dd class='col-md-9 col-xs-12 biblio-field-value'>{{keywords}}</dd>
+															</dl>
+														</div>
+													</div>
+												{{/if}}
 
-						       <div class="tab-content">
-							    <div id="mla" class="tab-pane fade in active">
-								 <div class='row'>
-								      <div id="mla-clip" class='col-xs-12 citation-format-div'>{{> search/export_formats/mla}}</div>
-								 </div>
-								 <div class="text-right medium">
-								      <button title='Copy MLA to clipboard' data-clipboard-action='copy' class="clip-cite-bib" data-clipboard-target="#mla-clip">
-									   <span class="fa fa-files-o"></span>
-									   Copy to clipboard</button>
-								 </div>
-							    </div>
-							    <div id="apa" class="tab-pane fade">
-								 <div class='row'>
-								      <div id="apa-clip" class='col-xs-12 citation-format-div'>{{> search/export_formats/apa}}</div>
-								 </div>
-								 <div class="text-right medium">
-								      <button title='Copy APA to clipboard' data-clipboard-action='copy' class="clip-cite-bib" data-clipboard-target="#apa-clip">
-									   <span class="fa fa-files-o"></span>
-									   Copy to clipboard</button>
-								 </div>
-							    </div>
-							    <div id="chicago" class="tab-pane fade">
-								 <div class='row'>
-								      <div id="chicago-clip" class='col-xs-12 citation-format-div'>{{> search/export_formats/chicago}}</div>
-								 </div>
-								 <div class="text-right medium">
-								      <button title='Copy Chicago to clipboard' data-clipboard-action='copy' class="clip-cite-bib" data-clipboard-target="#chicago-clip">
-									   <span class="fa fa-files-o"></span>
-									   Copy to clipboard</button>
-								 </div>
-							    </div>
-							    <div id="bibtex" class="tab-pane fade">
-								 <div class='row'>
-								      <div id="bibtex-clip" class='col-xs-12 citation-format-div'>{{> search/export_formats/bibtex}}</div>
-								 </div>
-								 <div class="text-right medium">
-								      <button title='Copy Bibtex to clipboard' data-clipboard-action='copy' class="clip-cite-bib" data-clipboard-target="#bibtex-clip">
-									   <span class="fa fa-files-o"></span>
-									   Copy to clipboard</button>
-								 </div>
-							    </div>
-						       </div>
-						  </div>
-					     </div><!--End citation export formats div-->
-					</div><!--End main content div-->
-				   </div>
-			      </div><!--End full record tab-->
-			 </div><!--End tab content-->
-		    </div>
-	       </div>
-          </div>
-	  {{/unless}}
-     </div>
+												{{#if user_data.has_osti_role}}
+													<!--Project Keywords-->
+													{{#if has_project_keywords}}
+														<div class="biblio-row">
+															<div class="col-xs-12">
+																<dl class='row'>
+																	<dt class='col-md-3 col-xs-12 biblio-field-header'>Project Keywords:</dt>
+																	<dd class='col-md-9 col-xs-12 biblio-field-value'>{{project_keywords}}</dd>
+																</dl>
+															</div>
+														</div>
+													{{/if}}
+												{{/if}}
+											</div>
+										</div>
+										<div class='no-col-padding-left-mobile no-col-padding-right-mobile hide-md hide-lg col-md-3 col-xs-12 biblio-sidebar'>
+											{{> search/biblio-sidebar}}
+										</div>
+										<div class='row'>
+											<div class='col-xs-12' style='border-top: 1px solid #ccc;'>
+												<h3 class='citation-formats'>Citation Formats</h3>
+												<ul class="nav nav-tabs biblio-page-ul">
+													<li class="active">
+														<a class='clickable citation-tab' title='MLA Citation' data-toggle="tab" href="#mla">MLA</a>
+													</li>
+													<li>
+														<a class='clickable citation-tab' title='APA Citation' data-toggle="tab" href="#apa">APA</a>
+													</li>
+													<li>
+														<a class='clickable citation-tab' title='Chicago Citation' data-toggle="tab" href="#chicago">Chicago</a>
+													</li>
+													<li>
+														<a class='clickable citation-tab' title='BibTex Citation' data-toggle="tab" href="#bibtex">BibTex</a>
+													</li>
+												</ul>
+
+												<div class="tab-content">
+													<div id="mla" class="tab-pane fade in active">
+														<div class='row'>
+															<div id="mla-clip" class='col-xs-12 citation-format-div'>{{> search/export_formats/mla}}</div>
+														</div>
+														<div class="text-right medium copy-btn-container">
+															<button title='Copy MLA to clipboard' data-clipboard-action='copy' class="clip-cite-bib" data-clipboard-target="#mla-clip">
+																<span class="fa fa-files-o"></span>
+																Copy to clipboard</button>
+														</div>
+													</div>
+													<div id="apa" class="tab-pane fade">
+														<div class='row'>
+															<div id="apa-clip" class='col-xs-12 citation-format-div'>{{> search/export_formats/apa}}</div>
+														</div>
+														<div class="text-right medium copy-btn-container">
+															<button title='Copy APA to clipboard' data-clipboard-action='copy' class="clip-cite-bib" data-clipboard-target="#apa-clip">
+																<span class="fa fa-files-o"></span>
+																Copy to clipboard</button>
+														</div>
+													</div>
+													<div id="chicago" class="tab-pane fade">
+														<div class='row'>
+															<div id="chicago-clip" class='col-xs-12 citation-format-div'>{{> search/export_formats/chicago}}</div>
+														</div>
+														<div class="text-right medium copy-btn-container">
+															<button title='Copy Chicago to clipboard' data-clipboard-action='copy' class="clip-cite-bib" data-clipboard-target="#chicago-clip">
+																<span class="fa fa-files-o"></span>
+																Copy to clipboard</button>
+														</div>
+													</div>
+													<div id="bibtex" class="tab-pane fade">
+														<div class='row'>
+															<div id="bibtex-clip" class='col-xs-12 citation-format-div'>{{> search/export_formats/bibtex}}</div>
+														</div>
+														<div class="text-right medium copy-btn-container">
+															<button title='Copy Bibtex to clipboard' data-clipboard-action='copy' class="clip-cite-bib" data-clipboard-target="#bibtex-clip">
+																<span class="fa fa-files-o"></span>
+																Copy to clipboard</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--End citation export formats div-->
+									</div>
+									<!--End main content div-->
+								</div>
+							</div>
+							<!--End full record tab-->
+						</div>
+						<!--End tab content-->
+					</div>
+				</div>
+			</div>
+		{{/unless}}
+	</div>
 </div>
 {{> wrapper/footer}}
