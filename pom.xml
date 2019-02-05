@@ -64,6 +64,15 @@
             </resource>
         </resources>
         <plugins>
+            <!-- support checking for latest versions -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <rulesUri>file:///${project.basedir}/plugin_rules.xml</rulesUri>
+                </configuration>
+            </plugin>
             <!--
             This plugin is used as a way for several developers to utilize the same project and configurations. To use it, you must have an application in the location
             specified in <file>. The properties from that file are loaded as maven properties. This is meant to be a replacement to using traditional maven profiles located
@@ -342,19 +351,19 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
         <!--Templating-->
         <dependency>
             <groupId>com.github.jknack</groupId>
             <artifactId>handlebars</artifactId>
-            <version>4.1.0</version>
+            <version>4.1.2</version>
         </dependency>
         <dependency>
             <groupId>com.github.jknack</groupId>
             <artifactId>handlebars-jackson2</artifactId>
-            <version>4.1.0</version>
+            <version>4.1.2</version>
         </dependency>
         <!--Jackson Library for JSON-->
         <dependency>
@@ -398,7 +407,7 @@
             <!--Used for most string manipulation, null checking, etc-->
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
+            <version>3.8.1</version>
         </dependency>
         <dependency>
             <!--Used to get data from google during the captcha process-->
