@@ -29,7 +29,7 @@ var BaseData = function () {
     value: mobx.action("Set Value", function setValue(field, data) {
       this.fieldMap[field] = data;
 
-      if (field === 'accessibility') {
+      if (field === 'project_type') {
 	      var schemaRepo = this.infoSchema["repository_link"];
 	      var schemaLanding = this.infoSchema["landing_page"];
 	      var schemaFile = this.infoSchema["file_name"];

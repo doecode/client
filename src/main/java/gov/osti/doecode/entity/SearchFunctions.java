@@ -93,7 +93,7 @@ public class SearchFunctions {
                 post_data.put("orcid", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("orcid"), ""),
                                 Whitelist.basic()));
 
-                post_data.set("accessibility", handleRequestArray(request.getParameter("accessibility")));
+                post_data.set("project_type", handleRequestArray(request.getParameter("project_type")));
                 post_data.set("licenses", handleRequestArray(request.getParameter("licenses")));
                 post_data.set("programming_languages",
                                 handleRequestArray(request.getParameter("programming_languages")));
@@ -165,7 +165,7 @@ public class SearchFunctions {
                 return_data.set("availabilities_list",
                                 getSearchDropdownList(
                                                 DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY),
-                                                handleRequestArray(request.getParameter("accessibility"))));
+                                                handleRequestArray(request.getParameter("project_type"))));
                 return_data.set("license_options_list",
                                 getSearchDropdownList(
                                                 DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY),
@@ -293,16 +293,16 @@ public class SearchFunctions {
                                         date_latest_trimmed, "date_latest"));
                 }
 
-                // Accessibility
-                String accessibility_array = JsonUtils.getString(post_data, "accessibility", "");
-                if (StringUtils.isNotBlank(accessibility_array)
-                                && JsonUtils.parseArrayNode(accessibility_array).size() > 0) {
-                        // Get the accessibility array so we can get some display values
+                // Project Type
+                String project_type_array = JsonUtils.getString(post_data, "project_type", "");
+                if (StringUtils.isNotBlank(project_type_array)
+                                && JsonUtils.parseArrayNode(project_type_array).size() > 0) {
+                        // Get the project type array so we can get some display values
                         ArrayNode accessiblity_display_vals = DOECODEServletContextListener
                                         .getJsonList(DOECODEJson.AVAILABILITY_KEY);
 
-                        search_description_list.add(makeSearchDescriptionObjectArray("Accessibility",
-                                        JsonUtils.parseArrayNode(accessibility_array), "accessibility",
+                        search_description_list.add(makeSearchDescriptionObjectArray("Project Type",
+                                        JsonUtils.parseArrayNode(project_type_array), "project_type",
                                         accessiblity_display_vals));
                 }
 
@@ -816,9 +816,9 @@ public class SearchFunctions {
                                 || StringUtils.isNotBlank(JsonUtils.getString(request_data, "identifiers", ""))
                                 || StringUtils.isNotBlank(JsonUtils.getString(request_data, "date_earliest", ""))
                                 || StringUtils.isNotBlank(JsonUtils.getString(request_data, "date_latest", ""))
-                                || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "accessibility", ""))
+                                || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "project_type", ""))
                                                 && JsonUtils.parseArrayNode(
-                                                                JsonUtils.getString(request_data, "accessibility", ""))
+                                                                JsonUtils.getString(request_data, "project_type", ""))
                                                                 .size() > 0)
                                 || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "licenses", ""))
                                                 && JsonUtils.parseArrayNode(
@@ -1427,10 +1427,10 @@ public class SearchFunctions {
                                         .getJsonList(DOECODEJson.AVAILABILITY_KEY);
 
                         ObjectNode availabilityObj = JsonUtils.getJsonListItem(availabilityList, "value",
-                                        JsonUtils.getString(biblio_data, "accessibility", ""));
+                                        JsonUtils.getString(biblio_data, "project_type", ""));
                         return_data.put("availability", JsonUtils.getString(availabilityObj, "label", ""));
                         return_data.put("has_availability",
-                                        StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "accessibility", "")));
+                                        StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "project_type", "")));
                         meta_tags.add(makeMetaTag("availability", JsonUtils.getString(availabilityObj, "label", "")));
 
                         /* Software Type */

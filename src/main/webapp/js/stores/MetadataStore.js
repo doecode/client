@@ -1,6 +1,6 @@
 var MetadataStore = function MetadataStore() {};
 
-var repo_fields = ["accessibility", "repository_link", "landing_page"];
+var repo_fields = ["project_type", "repository_link", "landing_page"];
 var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "licenses", "proprietary_url"];
 var developers_fields = ["developers"];
 var doi_fields = ["doi", "doi_infix", "release_date"];
@@ -21,7 +21,7 @@ var _metadata = mobx.observable({
     "doi": '',
     "doi_infix": '',
     "doi_status": "",
-    "accessibility": null,
+    "project_type": null,
     "description": '',
     "programming_languages": [],
     "version_number": '',
@@ -52,7 +52,7 @@ var _metadata = mobx.observable({
 });
 
 var _metadataInfoSchema = mobx.observable({
-    "accessibility": {required: "sub", label: "Project Type", completed: false, ever_completed: false, validations: [], panel: "Repository Information", error: ''},
+    "project_type": {required: "sub", label: "Project Type", completed: false, ever_completed: false, validations: [], panel: "Repository Information", error: ''},
     "repository_link": {required: "sub", label: "Repository Link", completed: false, ever_completed: false, validations: [], panel: "Repository Information", error: ''},
     "landing_page": {required: "", label: "Landing Page", completed: false, ever_completed: false, validations: ["url"], panel: "", error: ''},
     "file_name": {required: "", label: "Upload Source Code", completed: false, ever_completed: false, validations: [], panel: "", error: ''},

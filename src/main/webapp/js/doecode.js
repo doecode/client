@@ -44,9 +44,9 @@ var triggerAdvancedSearch = function () {
     }
 
     //Project Type
-    var accessibility_vals = $("#advanced-search-accessibility").val();
-    if (accessibility_vals.length > 0) {
-        $("#search-accessibility").val(JSON.stringify(accessibility_vals));
+    var project_type_vals = $("#advanced-search-project-type").val();
+    if (project_type_vals.length > 0) {
+        $("#search-project-type").val(JSON.stringify(project_type_vals));
     }
 
     //Licenses
@@ -111,9 +111,9 @@ var triggerDropdownAdvancedSearch = function () {
     }
 
     //Project Type
-    var accessibility_vals = $("#navbar-searchbar-accessibility").val();
-    if (accessibility_vals.length > 0) {
-        $("#search-accessibility").val(JSON.stringify(accessibility_vals));
+    var project_type_vals = $("#navbar-searchbar-project-type").val();
+    if (project_type_vals.length > 0) {
+        $("#search-project-type").val(JSON.stringify(project_type_vals));
     }
 
     //Licenses

@@ -91,8 +91,8 @@ var toggleCollapsible = function () {
     $(this).prev().prev('a.input-accordion-title').trigger('click');
 };
 
-var accessibilityRepositoryLinkType = mobx.action("Change Project Type", function () {
-    metadata.setValue("accessibility", $(this).val());
+var projectTypeRepositoryLinkType = mobx.action("Change Project Type", function () {
+    metadata.setValue("project_type", $(this).val());
 });
 
 var setSuccess = function (label, is_completed, error_msg) {
@@ -253,12 +253,12 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     // if CO project, we need to store original repo link, in case they change type
     form.co_repo = "";
     form.last_filename = "";
-    var accessibility = metadata.getValue("accessibility");
-    if (accessibility == "CO") {
+    var project_type = metadata.getValue("project_type");
+    if (project_type == "CO") {
         var orig_repo = metadata.getValue("repository_link");
         form.co_repo = orig_repo ? orig_repo : form.co_repo;
     }
-    if (accessibility != 'OS') {
+    if (project_type != 'OS') {
         var orig_file = metadata.getValue("file_name");
         form.last_filename = orig_file ? orig_file : form.last_filename;
     }
@@ -367,7 +367,7 @@ var submit = function submit() {
     var msg = code_id ? "Project " + code_id : "New Project";
 
     msg = "<br/>Submitting data for " + msg + ".";
-    if (metadata.getValue("accessibility").charAt(0) == 'C')
+    if (metadata.getValue("project_type").charAt(0) == 'C')
         msg += "<br/><br/>Please wait while your record and the associated files are being sent to DOE CODE. This may take a few minutes to complete.";
 
     setCommonModalMessage({
@@ -573,7 +573,7 @@ mobx.autorun("Repository Info Panel", function () {
 });
 
 mobx.autorun("Project Type", function () {
-    var project_type = metadata.getValue("accessibility");
+    var project_type = metadata.getValue("project_type");
     switch (project_type) {
         case "OS":
             $("#git-repo-only-div").show();
@@ -639,7 +639,7 @@ mobx.autorun("Repository Link", function () {
 });
 
 mobx.autorun("Repository Link CO", function () {
-    updateTextStyle(metadata, "repository_link", "repository-link-co-lbl", "repository-link-co", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "The repository link will be automatically generated for you as part of the submission process.");
+    updateTextStyle(metadata, "repository_link", "repository-link-co-lbl", "repository-link-co", metadata.getValue("project_type") == "CO", form.co_repo ? form.co_repo : "The repository link will be automatically generated for you as part of the submission process.");
 
     //mobx.whyRun();
 });
@@ -661,7 +661,7 @@ mobx.autorun("Product Description Panel", function () {
 });
 
 mobx.autorun("Repository Link Display", function () {
-    updateTextStyle(metadata, "repository_link", "repository-link-display-lbl", "repository-link-display", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "The repository link will be automatically generated for you as part of the submission process.");
+    updateTextStyle(metadata, "repository_link", "repository-link-display-lbl", "repository-link-display", metadata.getValue("project_type") == "CO", form.co_repo ? form.co_repo : "The repository link will be automatically generated for you as part of the submission process.");
 
     //mobx.whyRun();
 });
@@ -1775,8 +1775,8 @@ $(document).ready(mobx.action("Document Ready", function () {
 
     // open first panel
     $("#repository-panel-anchor").trigger('click');
-    //Makes the accessibility radio buttons work
-    $('input[name="repository-info-group"]').on('change', accessibilityRepositoryLinkType);
+    //Makes the project type radio buttons work
+    $('input[name="repository-info-group"]').on('change', projectTypeRepositoryLinkType);
 
     // Panel Updates
     $('#repository-link').on('change', {store: metadata, field: "repository_link"}, inputChange);
