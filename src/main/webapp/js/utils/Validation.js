@@ -96,13 +96,14 @@ var Validation = function () {
   }, {
     key: "validateBR",
     value: function validateBR(value) {
-      var brRegex = /[A-Za-z]{2}\d{7}/g;
+      var brRegex = /^[A-Za-z]{2}\d{7}$/g;
       var badCodes = [];
       var allCodes = value.slice();
       var errors = "";
 
       for (var i = 0; i < allCodes.length; i++) {
-        if (allCodes[i].length != 9 || allCodes[i].match(brRegex).length !== 1) {
+        var m = allCodes[i].match(brRegex);
+        if (m === null || m.length !== 1) {
           badCodes.push(allCodes[i]);
         }
       }
