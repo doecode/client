@@ -72,7 +72,7 @@ public class Dissemination extends HttpServlet {
                         current_page = TemplateUtils.PAGE_POLICY;
 
                 } else if (remaining.equals("/resources")) {
-                        page_title = "DOE CODE:Resources";
+                        page_title = "DOE CODE: Resources";
                         template = TemplateUtils.TEMPLATE_RESOURCES_PAGE;
                         current_page = TemplateUtils.PAGE_RESOURCES;
                         output_data.put("api_url", Init.public_api_url);
