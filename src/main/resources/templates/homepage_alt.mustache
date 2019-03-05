@@ -1,406 +1,410 @@
 {{> wrapper/header}}
 <style>
-	#outermost-container {
-		background-image: linear-gradient(rgb(30, 111, 146), rgb(1, 53, 88) 100%);
-	}
+    #outermost-container {
+        background-image: linear-gradient(rgb(30, 111, 146), rgb(1, 53, 88) 100%);
+    }
 
-	.wrapper {
-		background-color: transparent;
-	}
+    .wrapper {
+        background-color: transparent;
+    }
 
-	.footer-bottom {
-		background-color: transparent;
-	}
+    .footer-bottom {
+        background-color: transparent;
+    }
 
-	.footer-separator {
-		background-color: transparent;
-		border-bottom: none;
-		box-shadow: none;
-	}
+    .footer-separator {
+        background-color: transparent;
+        border-bottom: none;
+        box-shadow: none;
+    }
 
-	.main-header {
-		background-image: none !important;
-		background-color: transparent !important;
-	}
+    .main-header {
+        background-image: none !important;
+        background-color: transparent !important;
+    }
 
-	.icon-row {
-		color: white;
-	}
+    .icon-row {
+        color: white;
+    }
 
-	.icon-row a {
-		color: white !important;
-	}
+    .icon-row a {
+        color: white !important;
+    }
 
-	.icon-row a.icon-row-icon {
-		font-size: 40px;
-	}
+    .icon-row a.icon-row-icon {
+        font-size: 40px;
+    }
 
-	.icon-row-icon-text:hover {
-		text-decoration: none;
-	}
+    .icon-row-icon-text:hover {
+        text-decoration: none;
+    }
 
-	.icon-row-icon-text a {
-		font-size: 40px;
-	}
+    .icon-row-icon-text a {
+        font-size: 40px;
+    }
 
 
 
-	#homepage-searchbar-container {
-		display: flex;
-		flex-wrap: wrap;
-		margin-left: 32%;
-		margin-right: 25%;
-	}
+    #homepage-searchbar-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 32%;
+        margin-right: 25%;
+    }
 
-	#homepage-searchbar-container::after {
-		content: '';
-		width: 100%;
-	}
+    #homepage-searchbar-container::after {
+        content: '';
+        width: 100%;
+    }
 
-	.homepage-adv-search-dropdown {
-		order: 1;
-		background-color: #fff;
-		/*width: 85%;*/
-		width: 35.9%;
-		position: absolute;
-		margin-top: 53px;
-		z-index: 100;
-	}
+    .homepage-adv-search-dropdown {
+        order: 1;
+        background-color: #fff;
+        /*width: 85%;*/
+        width: 35.9%;
+        position: absolute;
+        margin-top: 53px;
+        z-index: 100;
+    }
 
-	#homepage-searchbar-container>input.homepage-searchbar {
-		width: 85%;
-		height: 52px;
-		font-size: 20px;
-	}
+    #homepage-searchbar-container>input.homepage-searchbar {
+        width: 85%;
+        height: 52px;
+        font-size: 20px;
+    }
 
-	.adv-search-button {
-		position: inherit;
-		margin-left: -25px;
-	}
+    .adv-search-button {
+        position: inherit;
+        margin-left: -25px;
+    }
 
-	#homepage-searchbar-container>button.search-btn {
-		padding-left: 20px;
-		padding-right: 20px;
-		margin-left: 5px;
-	}
+    #homepage-searchbar-container>button.search-btn {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-left: 5px;
+    }
 
-	.navbar {
-		min-height: 0px;
-	}
+    .navbar {
+        min-height: 0px;
+    }
 
-	.adv-dropdown-section {
-		padding-top: 10px;
-	}
+    .adv-dropdown-section {
+        padding-top: 10px;
+    }
 
-	.homepage-range-fields {
-		display: flex;
-	}
+    .homepage-range-fields {
+        display: flex;
+    }
 
-	.adv-dropdown-border-bottom {
-		border-bottom: 1px solid #ccc;
-	}
+    .adv-dropdown-border-bottom {
+        border-bottom: 1px solid #ccc;
+    }
 
-	/*Media Queries*/
-	@media only screen and (max-width:479px) and (min-width: 320px) {
+    /*Media Queries*/
+    @media only screen and (max-width:479px) and (min-width: 320px) {
 
-		#homepage-searchbar-container {
-			margin-left: 0px;
-			margin-right: 0px;
-		}
+        #homepage-searchbar-container {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
 
-		#homepage-searchbar-container>input.homepage-searchbar {
-			width: 83%;
-			height: auto;
-			font-size: 16px;
-		}
+        #homepage-searchbar-container>input.homepage-searchbar {
+            width: 83%;
+            height: auto;
+            font-size: 16px;
+        }
 
-		#homepage-searchbar-container>button.search-btn {
-			padding-left: 0px;
-			padding-right: 0px;
-			margin-left: 5px;
-		}
-	}
+        #homepage-searchbar-container>button.search-btn {
+            padding-left: 0px;
+            padding-right: 0px;
+            margin-left: 5px;
+        }
+        .header-logo-img-homepage {
+            width: 300px;
+        }
+    }
 
-	@media only screen and (max-width:767px) and (min-width: 480px) {}
+    @media only screen and (max-width:767px) and (min-width: 480px) {}
 
-	@media only screen and (max-width:991px) and (min-width: 768px) {
-		.homepage-range-fields {
-			display: inline-block;
-		}
+    @media only screen and (max-width:991px) and (min-width: 768px) {
+        .homepage-range-fields {
+            display: inline-block;
+        }
 
-		#homepage-searchbar-container {
-			margin-left: 22%;
-			margin-right: 20%;
-		}
+        #homepage-searchbar-container {
+            margin-left: 22%;
+            margin-right: 20%;
+        }
 
-		.homepage-adv-search-dropdown {
-			width: 47.7%;
-		}
+        .homepage-adv-search-dropdown {
+            width: 47.7%;
+        }
 
-	}
+    }
 
-	@media only screen and (max-width:1199px) and (min-width: 992px) {
-		#homepage-searchbar-container {
-			margin-left: 22%;
-			margin-right: 18%;
-		}
+    @media only screen and (max-width:1199px) and (min-width: 992px) {
+        #homepage-searchbar-container {
+            margin-left: 22%;
+            margin-right: 18%;
+        }
 
-		.homepage-adv-search-dropdown {
-			width: 49.5%;
-		}
-	}
+        .homepage-adv-search-dropdown {
+            width: 49.5%;
+        }
+    }
 
-	@media only screen and (max-width:1400px) and (min-width: 1200px) {
-		#homepage-searchbar-container {
-			margin-left: 25%;
-			margin-right: 23%;
-		}
+    @media only screen and (max-width:1400px) and (min-width: 1200px) {
+        #homepage-searchbar-container {
+            margin-left: 25%;
+            margin-right: 23%;
+        }
 
-		.homepage-adv-search-dropdown {
-			width: 43%;
-		}
-	}
+        .homepage-adv-search-dropdown {
+            width: 43%;
+        }
+    }
 
-	@media only screen and (max-width:1527px) and (min-width: 1389px) {
-		#homepage-searchbar-container {
-			margin-left: 25%;
-			margin-right: 23%;
-		}
+    @media only screen and (max-width:1527px) and (min-width: 1389px) {
+        #homepage-searchbar-container {
+            margin-left: 25%;
+            margin-right: 23%;
+        }
 
-		.homepage-adv-search-dropdown {
-			width: 43%;
-		}
-	}
+        .homepage-adv-search-dropdown {
+            width: 43%;
+        }
+    }
 
-	@media only screen and (min-width: 1401px) {}
+    @media only screen and (min-width: 1401px) {}
 
-	@media only screen and (max-width:991px) and (min-width: 768px) {
-		.main-header {
-			border-bottom: none;
-		}
-	}
+    @media only screen and (max-width:991px) and (min-width: 768px) {
+        .main-header {
+            border-bottom: none;
+        }
+    }
+
 </style>
 <input type='hidden' id='index-indicator' />
 <div class="row not-so-wide-row">
-	<div class="col-xs-12">
-		<span class='hide-md hide-sm hide-lg'>
-			<br />
-			<br />
-			<br />
-		</span>
-		<div class='center-text'>
-			<img src='/${app_name}/images/DOEcodeTitle_395-min.png' alt="DOE CODE" title='DOE CODE' class='header-logo-img-homepage' />
-		</div>
-		<br />
-		<div class='homepage-subtext center-text hide-xs'>
-			U.S. Department of Energy
-			<br>
-			Office of Scientific and Technical Information
-		</div>
-		<br />
-		<br />
-		<span class='hide-xs'>
-			<br />
-			<br />
-		</span>
-		<div id='homepage-searchbar-container'>
-			<!--Homepage search bar-->
-			<input class="pure-input-1 search-box homepage-searchbar" title="Search DOE CODE" placeholder="Search DOE CODE for submitted software entries" type="text">
-			<!--Advanced search button-->
-			<button title="Toggle Advanced Search Dropdown" class="adv-search-button homepage-adv-search-btn hide-xs" type="button" id='homepage-adv-dropdown-btn'>
-				<span class="fa fa-caret-down adv-search-button-icon"></span>
-			</button>
-			<!--Search Button-->
-			<button title="Submit" type="button" class="pure-button button-success search-btn homepage-search-btn">
-				<span class="fa fa-search"></span>
-			</button>
-			<!--ADV Search Dropdown-->
-			<div class='homepage-adv-search-dropdown hide-xs' style='display:none;' id='homepage-adv-dropdown-container'>
-				<div style='padding-left:25px;padding-right:25px;' class='pure-form'>
-					<div class='adv-dropdown-border-bottom'>
-						<br />
-						<label class='adv-search-dropdown-label'>Advanced Search Options</label>
-					</div>
-					<br />
-					<!--Software Title-->
-					<div class='adv-dropdown-section'>
-						<label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-software_title'>Software Title:</label>
-						<input id='homepage-searchbar-software_title' class='pure-input-1' title='Software title' data-field='software_title' type='text' />
-					</div>
-					<!--Developers/Contributors-->
-					<div class='adv-dropdown-section'>
-						<label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-developers_contributors'>Developers / Contributors:</label>
-						<input id="homepage-searchbar-developers_contributors" title="Developers / Contributors" class="pure-input-1" type="text">
-					</div>
-					<!--Identifier Numbers-->
-					<div class='adv-dropdown-section'>
-						<label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-identifier_numbers'>Identifier Numbers:</label>
-						<input id="homepage-searchbar-identifier_numbers" title="Identifier Numbers" class="pure-input-1" type="text">
-					</div>
-					<!--Release Date-->
-					<div class='adv-dropdown-section'>
-						<label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-date_earliest'>Release Date:</label>
-						<div class='homepage-range-fields'>
-							<input placeholder="MM/DD/YYYY" class="pure-input-1 doecode-datepicker " id="homepage-searchbar-date_earliest" title="Earliest Release Date" type="text">
-							<span class="to-field hide-sm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="homepage-searchbar-date_latest" class="homepage-adv-search-dropdown-label">to</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-							<input placeholder="MM/DD/YYYY" class="pure-input-1 doecode-datepicker " id="homepage-searchbar-date_latest" title="Latest Release Date" type="text">
-						</div>
-					</div>
-					<br />
-					<div class='adv-dropdown-border-bottom'>
-						<a title='Advanced Search Page' id="adv-search-toggle-btn" class="clickable">
-							<span id="adv-search-toggle-btn-icon" class='fa fa-plus-square-o '></span>&nbsp;<span id="adv-search-toggle-btn-icon-text">More Options</span>&hellip;
-						</a>
-						<br />
-					</div>
-					<br />
+    <div class="col-xs-12">
+        <span class='hide-md hide-sm hide-lg'>
+            <br />
+            <br />
+            <br />
+        </span>
+        <div class='center-text'>
+            <img src='/${app_name}/images/DOEcodeTitle_395-min.png' alt="DOE CODE" title='DOE CODE' class='header-logo-img-homepage' />
+        </div>
+        <br />
+        <div class='homepage-subtext center-text hide-xs'>
+            U.S. Department of Energy
+            <br>
+            Office of Scientific and Technical Information
+        </div>
+        <br />
+        <br />
+        <span class='hide-xs'>
+            <br />
+            <br />
+        </span>
+        <div id='homepage-searchbar-container'>
+            <!--Homepage search bar-->
+            <input class="pure-input-1 search-box homepage-searchbar" title="Search DOE CODE" placeholder="Search DOE CODE for submitted software entries" type="text">
+            <!--Advanced search button-->
+            <button title="Toggle Advanced Search Dropdown" class="adv-search-button homepage-adv-search-btn hide-xs" type="button" id='homepage-adv-dropdown-btn'>
+                <span class="fa fa-caret-down adv-search-button-icon"></span>
+            </button>
+            <!--Search Button-->
+            <button title="Submit" type="button" class="pure-button button-success search-btn homepage-search-btn">
+                <span class="fa fa-search"></span>
+            </button>
+            <!--ADV Search Dropdown-->
+            <div class='homepage-adv-search-dropdown hide-xs' style='display:none;' id='homepage-adv-dropdown-container'>
+                <div style='padding-left:25px;padding-right:25px;' class='pure-form'>
+                    <div class='adv-dropdown-border-bottom'>
+                        <br />
+                        <label class='adv-search-dropdown-label'>Advanced Search Options</label>
+                    </div>
+                    <br />
+                    <!--Software Title-->
+                    <div class='adv-dropdown-section'>
+                        <label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-software_title'>Software Title:</label>
+                        <input id='homepage-searchbar-software_title' class='pure-input-1' title='Software title' data-field='software_title' type='text' />
+                    </div>
+                    <!--Developers/Contributors-->
+                    <div class='adv-dropdown-section'>
+                        <label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-developers_contributors'>Developers / Contributors:</label>
+                        <input id="homepage-searchbar-developers_contributors" title="Developers / Contributors" class="pure-input-1" type="text">
+                    </div>
+                    <!--Identifier Numbers-->
+                    <div class='adv-dropdown-section'>
+                        <label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-identifier_numbers'>Identifier Numbers:</label>
+                        <input id="homepage-searchbar-identifier_numbers" title="Identifier Numbers" class="pure-input-1" type="text">
+                    </div>
+                    <!--Release Date-->
+                    <div class='adv-dropdown-section'>
+                        <label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-date_earliest'>Release Date:</label>
+                        <div class='homepage-range-fields'>
+                            <input placeholder="MM/DD/YYYY" class="pure-input-1 doecode-datepicker " id="homepage-searchbar-date_earliest" title="Earliest Release Date" type="text">
+                            <span class="to-field hide-sm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="homepage-searchbar-date_latest" class="homepage-adv-search-dropdown-label">to</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <input placeholder="MM/DD/YYYY" class="pure-input-1 doecode-datepicker " id="homepage-searchbar-date_latest" title="Latest Release Date" type="text">
+                        </div>
+                    </div>
+                    <br />
+                    <div class='adv-dropdown-border-bottom'>
+                        <a title='Advanced Search Page' id="adv-search-toggle-btn" class="clickable">
+                            <span id="adv-search-toggle-btn-icon" class='fa fa-plus-square-o '></span>&nbsp;<span id="adv-search-toggle-btn-icon-text">More Options</span>&hellip;
+                        </a>
+                        <br />
+                    </div>
+                    <br />
 
-					<div id="adv-search-toggle-extra-container" style="display:none;">
-						<!--Project Type-->
-						<div class='adv-dropdown-section'>
-							<label for='navbar-searchbar-accessibility' class='adv-search-dropdown-label'>Project Type:</label>
-							<select class='pure-input-1 doecode-chosen-select' title='Code Accessibilty' id='navbar-searchbar-accessibility' data-allowcustom="false" data-placeholder='Select your Options' multiple>
-								{{#each adv_search_lists.availabilities_list}}
-									<option title="{{title}}" value="{{value}}">{{label}}</option>
-								{{/each}}
-							</select>
-						</div>
-						<!--License-->
-						<div class='adv-dropdown-section'>
-							<label for='navbar-searchbar-licenses' class='adv-search-dropdown-label'>Licenses:</label>
-							<select class='pure-input-1 doecode-chosen-select' title='Licenses' id='navbar-searchbar-licenses' data-allowcustom="false" data-placeholder='Select your Options' multiple>
-								{{#each adv_search_lists.licenses_list}}
-									<option title="{{title}}" value="{{value}}">{{label}}</option>
-								{{/each}}
-							</select>
-						</div>
-						<!--Programming Languages-->
-						<div class='adv-dropdown-section'>
-							<label for='navbar-searchbar-programming_languages' class='adv-search-dropdown-label'>Programming Languages:</label>
-							<select class='pure-input-1 doecode-chosen-select' title='Programming Languages' id='navbar-searchbar-programming_languages' data-allowcustom="true" data-placeholder='Select your programming language(s)' multiple>
-								{{#each adv_search_lists.programming_languages_list}}
-									<option title='{{title}}' value='{{value}}'>{{label}}</option>
-								{{/each}}
-							</select>
-						</div>
-						<!--Research Organization-->
-						<div class='adv-dropdown-section'>
-							<label for='navbar-searchbar-research_organization' class='adv-search-dropdown-label'>Research Organization:</label>
-							<select class='pure-input-1 doecode-chosen-select' title='Research Organization' id='navbar-searchbar-research_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
-								{{#each adv_search_lists.research_org_list}}
-									<option title="{{title}}" value="{{value}}">{{label}}</option>
-								{{/each}}
-							</select>
-						</div>
-						<!--Sponsoring Organization-->
-						<div class='adv-dropdown-section'>
-							<label for='navbar-searchbar-sponsoring_organization' class='adv-search-dropdown-label'>Sponsoring Organization:</label>
-							<select class='pure-input-1 doecode-chosen-select' title='Sponsoring Organization' id='navbar-searchbar-sponsoring_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
-								{{#each adv_search_lists.sponsor_org_list}}
-									<option title="{{title}}" value="{{value}}">{{label}}</option>
-								{{/each}}
-							</select>
-						</div>
-						<!--Software Title-->
-						<div class='adv-dropdown-section'>
-							<label for='navbar-searchbar-software_type' class='adv-search-dropdown-label'>Software Type:</label>
-							<select class='pure-input-1 doecode-chosen-select' title='Software Type' id='navbar-searchbar-software_type' data-allowcustom="false" data-placeholder='Select your Options' multiple>
-								{{#each adv_search_lists.software_type}}
-									<option title="{{title}}" value="{{value}}">{{label}}</option>
-								{{/each}}
-							</select>
-						</div>
-						<!--Sort-->
-						<div class='adv-dropdown-section'>
-							<label for='navbar-searchbar-sort' class='adv-search-dropdown-label'>Sort:</label>
-							<select class='pure-input-1' title='Sort' id='navbar-searchbar-sort' data-placeholder='Select your Options'>
-								{{#each adv_search_lists.sort_list}}
-									<option title="{{title}}" value="{{value}}">{{label}}</option>
-								{{/each}}
-							</select>
-						</div>
-						<br />
-					</div>
-					<div class='right-text'>
-						<button title="Advanced Search" type="button" data-idprefix="homepage-searchbar" class="pure-button button-success adv-search-btn adv-search-btn-dropdown">
-							<span class="fa fa-search"></span>&nbsp; Search
-						</button>
-					</div>
-					<br />
-				</div>
-			</div>
-			<br />
-		</div>
-		<span class='hide-md hide-sm hide-lg'>
-			<br />
-			<br />
-			<br />
-			<div class='homepage-subtext center-text'>
-				U.S. Department of Energy
-				<br>
-				Office of Scientific and Technical Information
-			</div>
-		</span>
-	</div>
+                    <div id="adv-search-toggle-extra-container" style="display:none;">
+                        <!--Project Type-->
+                        <div class='adv-dropdown-section'>
+                            <label for='navbar-searchbar-accessibility' class='adv-search-dropdown-label'>Project Type:</label>
+                            <select class='pure-input-1 doecode-chosen-select' title='Code Accessibilty' id='navbar-searchbar-accessibility' data-allowcustom="false" data-placeholder='Select your Options' multiple>
+                                {{#each adv_search_lists.availabilities_list}}
+                                <option title="{{title}}" value="{{value}}">{{label}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <!--License-->
+                        <div class='adv-dropdown-section'>
+                            <label for='navbar-searchbar-licenses' class='adv-search-dropdown-label'>Licenses:</label>
+                            <select class='pure-input-1 doecode-chosen-select' title='Licenses' id='navbar-searchbar-licenses' data-allowcustom="false" data-placeholder='Select your Options' multiple>
+                                {{#each adv_search_lists.licenses_list}}
+                                <option title="{{title}}" value="{{value}}">{{label}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <!--Programming Languages-->
+                        <div class='adv-dropdown-section'>
+                            <label for='navbar-searchbar-programming_languages' class='adv-search-dropdown-label'>Programming Languages:</label>
+                            <select class='pure-input-1 doecode-chosen-select' title='Programming Languages' id='navbar-searchbar-programming_languages' data-allowcustom="true" data-placeholder='Select your programming language(s)' multiple>
+                                {{#each adv_search_lists.programming_languages_list}}
+                                <option title='{{title}}' value='{{value}}'>{{label}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <!--Research Organization-->
+                        <div class='adv-dropdown-section'>
+                            <label for='navbar-searchbar-research_organization' class='adv-search-dropdown-label'>Research Organization:</label>
+                            <select class='pure-input-1 doecode-chosen-select' title='Research Organization' id='navbar-searchbar-research_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+                                {{#each adv_search_lists.research_org_list}}
+                                <option title="{{title}}" value="{{value}}">{{label}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <!--Sponsoring Organization-->
+                        <div class='adv-dropdown-section'>
+                            <label for='navbar-searchbar-sponsoring_organization' class='adv-search-dropdown-label'>Sponsoring Organization:</label>
+                            <select class='pure-input-1 doecode-chosen-select' title='Sponsoring Organization' id='navbar-searchbar-sponsoring_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
+                                {{#each adv_search_lists.sponsor_org_list}}
+                                <option title="{{title}}" value="{{value}}">{{label}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <!--Software Title-->
+                        <div class='adv-dropdown-section'>
+                            <label for='navbar-searchbar-software_type' class='adv-search-dropdown-label'>Software Type:</label>
+                            <select class='pure-input-1 doecode-chosen-select' title='Software Type' id='navbar-searchbar-software_type' data-allowcustom="false" data-placeholder='Select your Options' multiple>
+                                {{#each adv_search_lists.software_type}}
+                                <option title="{{title}}" value="{{value}}">{{label}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <!--Sort-->
+                        <div class='adv-dropdown-section'>
+                            <label for='navbar-searchbar-sort' class='adv-search-dropdown-label'>Sort:</label>
+                            <select class='pure-input-1' title='Sort' id='navbar-searchbar-sort' data-placeholder='Select your Options'>
+                                {{#each adv_search_lists.sort_list}}
+                                <option title="{{title}}" value="{{value}}">{{label}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <br />
+                    </div>
+                    <div class='right-text'>
+                        <button title="Advanced Search" type="button" data-idprefix="homepage-searchbar" class="pure-button button-success adv-search-btn adv-search-btn-dropdown">
+                            <span class="fa fa-search"></span>&nbsp; Search
+                        </button>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <br />
+        </div>
+        <span class='hide-md hide-sm hide-lg'>
+            <br />
+            <br />
+            <br />
+            <div class='homepage-subtext center-text'>
+                U.S. Department of Energy
+                <br>
+                Office of Scientific and Technical Information
+            </div>
+        </span>
+    </div>
 </div>
 <div class='container hidden-xs visible-sm visible-md visible-lg'>
-	<div class='row'>
-		<div class='col-xs-12'>
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<div class="row icon-row center-text">
-				<div class="col-sm-3">
-					<a title="Submit Software/Code" href="/${app_name}/projects" class="icon-row-icon"><span class="fa fa-sign-in"></span></a>
-					<br>
-					<a class="icon-row-icon-text" title="Submit Software/Code" href="/${app_name}/projects">Submit Software/Code</a>
-				</div>
-				<div class="col-sm-3">
-					<a title="Repository Services" href="/${app_name}/repository-services" class="icon-row-icon"><span class="fa fa-home clickable"></span></a>
-					<br>
-					<a class="icon-row-icon-text" title="Repository Services" href="/${app_name}/repository-services">Repository Services</a>
-				</div>
-				<div class="col-sm-3">
-					<a title="Software Policy" href="/${app_name}/policy" class="icon-row-icon"><span class="fa fa-folder-open-o"></span></a>
-					<br>
-					<a class="icon-row-icon-text" title="Software Policy" href="/${app_name}/policy">Software Policy</a>
-				</div>
-				<div class="col-sm-3">
-					<a title="Resources" href="/${app_name}/resources" class="icon-row-icon"><span class="fa fa-users"></span></a>
-					<br>
-					<a class="icon-row-icon-text" title="Resources" href="/${app_name}/resources">Resources</a>
-				</div>
-			</div>
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<div class="row icon-row center-text">
-				<div class="col-sm-4">
-					<a title="About" href="/${app_name}/about" class="icon-row-icon"><span class="fa fa-info"></span></a>
-					<br>
-					<a class="icon-row-icon-text" title="About" href="/${app_name}/about">About</a>
-				</div>
-				<div class="col-sm-4"><a title="FAQs" href="/${app_name}/faq" class="icon-row-icon"><span class="fa fa-question"></span></a>
-					<br>
-					<a class="icon-row-icon-text" title="FAQs" href="/${app_name}/faq">FAQs</a>
-				</div>
-				<div class="col-sm-4"><a title="News" href="/${app_name}/news" class="icon-row-icon"><span class="fa fa-newspaper-o"></span></a>
-					<br>
-					<a class="icon-row-icon-text" title="News" href="/${app_name}/news">News</a>
-				</div>
-			</div>
-			<br />
-			<br />
-		</div>
-	</div>
+    <div class='row'>
+        <div class='col-xs-12'>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="row icon-row center-text">
+                <div class="col-sm-3">
+                    <a title="Submit Software/Code" href="/${app_name}/projects" class="icon-row-icon"><span class="fa fa-sign-in"></span></a>
+                    <br>
+                    <a class="icon-row-icon-text" title="Submit Software/Code" href="/${app_name}/projects">Submit Software/Code</a>
+                </div>
+                <div class="col-sm-3">
+                    <a title="Repository Services" href="/${app_name}/repository-services" class="icon-row-icon"><span class="fa fa-home clickable"></span></a>
+                    <br>
+                    <a class="icon-row-icon-text" title="Repository Services" href="/${app_name}/repository-services">Repository Services</a>
+                </div>
+                <div class="col-sm-3">
+                    <a title="Software Policy" href="/${app_name}/policy" class="icon-row-icon"><span class="fa fa-folder-open-o"></span></a>
+                    <br>
+                    <a class="icon-row-icon-text" title="Software Policy" href="/${app_name}/policy">Software Policy</a>
+                </div>
+                <div class="col-sm-3">
+                    <a title="Resources" href="/${app_name}/resources" class="icon-row-icon"><span class="fa fa-users"></span></a>
+                    <br>
+                    <a class="icon-row-icon-text" title="Resources" href="/${app_name}/resources">Resources</a>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="row icon-row center-text">
+                <div class="col-sm-4">
+                    <a title="About" href="/${app_name}/about" class="icon-row-icon"><span class="fa fa-info"></span></a>
+                    <br>
+                    <a class="icon-row-icon-text" title="About" href="/${app_name}/about">About</a>
+                </div>
+                <div class="col-sm-4"><a title="FAQs" href="/${app_name}/faq" class="icon-row-icon"><span class="fa fa-question"></span></a>
+                    <br>
+                    <a class="icon-row-icon-text" title="FAQs" href="/${app_name}/faq">FAQs</a>
+                </div>
+                <div class="col-sm-4"><a title="News" href="/${app_name}/news" class="icon-row-icon"><span class="fa fa-newspaper-o"></span></a>
+                    <br>
+                    <a class="icon-row-icon-text" title="News" href="/${app_name}/news">News</a>
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>
 </div>
 {{> wrapper/footer}}

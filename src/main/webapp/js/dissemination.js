@@ -1,18 +1,18 @@
 const ABOUT_IMG_URLS = [
-    '/' + APP_NAME + '/images/DOEcodeFeatures_main710px-min.png',
-    '/' + APP_NAME + '/images/DOEcodeFeatures_doi710px-min.png',
-    '/' + APP_NAME + '/images/DOEcodeFeatures_Repository710px-min.png',
-    '/' + APP_NAME + '/images/DOEcodeFeatures_Catalog710px-min.png',
-    '/' + APP_NAME + '/images/DOEcodeFeatures_Policy710px-min.png',
-    '/' + APP_NAME + '/images/DOEcodeFeatures_GitHub710px-min.png',
-    '/' + APP_NAME + '/images/DOEcodeFeatures_SocialCode710px-min.png',
-    '/' + APP_NAME + '/images/DOEcodeFeatures_Easy710px-min.png'
+    '/' + APP_NAME + '/images/about/DOEcodeFeatures_main710px-min.png',
+    '/' + APP_NAME + '/images/about/DOEcodeFeatures_doi710px-min.png',
+    '/' + APP_NAME + '/images/about/DOEcodeFeatures_Repository710px-min.png',
+    '/' + APP_NAME + '/images/about/DOEcodeFeatures_Catalog710px-min.png',
+    '/' + APP_NAME + '/images/about/DOEcodeFeatures_Policy710px-min.png',
+    '/' + APP_NAME + '/images/about/DOEcodeFeatures_GitHub710px-min.png',
+    '/' + APP_NAME + '/images/about/DOEcodeFeatures_SocialCode710px-min.png',
+    '/' + APP_NAME + '/images/about/DOEcodeFeatures_Easy710px-min.png'
 ];
 
 const ABOUT_TOP_URLS = [
-    '/' + APP_NAME + '/images/Discover-min.png', '/' + APP_NAME + '/images/Discover_hover-min.png',
-    '/' + APP_NAME + '/images/Create-min.png', '/' + APP_NAME + '/images/Create_hover-min.png',
-    '/' + APP_NAME + '/images/Submit-min.png', '/' + APP_NAME + '/images/Submit_hover-min.png'
+    '/' + APP_NAME + '/images/about/Discover-min.png', '/' + APP_NAME + '/images/about/Discover_hover-min.png',
+    '/' + APP_NAME + '/images/about/Create-min.png', '/' + APP_NAME + '/images/about/Create_hover-min.png',
+    '/' + APP_NAME + '/images/about/Submit-min.png', '/' + APP_NAME + '/images/about/Submit_hover-min.png'
 ];
 
 /*Handles the 3 images on the top of the about page*/
