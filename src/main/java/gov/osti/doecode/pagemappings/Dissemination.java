@@ -82,8 +82,10 @@ public class Dissemination extends HttpServlet {
                         page_title = "DOE CODE: News";
                         template = TemplateUtils.TEMPLATE_NEWS_PAGE;
                         current_page = TemplateUtils.PAGE_NEWS;
-                        output_data = NewsFunctions.getNewsPageData(Init.news_page_data_url,
-                                        JsonUtils.MAPPER.createObjectNode());
+                        //Get the params
+                        String article_type_query = StringUtils.defaultIfBlank(request.getParameter("articletype"),"");
+                        String year_query = StringUtils.defaultIfBlank(request.getParameter("year"),"");
+                        output_data = NewsFunctions.getNewsPageJson(article_type_query,year_query);
 
                 } else if (remaining.equals("/faq")) {
                         page_title = "DOE CODE: FAQ's";

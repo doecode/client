@@ -19,13 +19,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import gov.osti.doecode.entity.NewsFunctions;
 import gov.osti.doecode.entity.ReportFunctions;
 import gov.osti.doecode.entity.SearchFunctions;
 import gov.osti.doecode.utils.JsonUtils;
-import gov.osti.doecode.utils.TemplateUtils;
 
-@WebServlet(urlPatterns = {"/dissemination/export-search-results", "/dissemination/news-article-search"})
+@WebServlet(urlPatterns = {"/dissemination/export-search-results"})
 public class DisseminationServlet extends HttpServlet {
 
     private static final long serialVersionUID = -7808019940521145092L;
@@ -88,12 +86,6 @@ public class DisseminationServlet extends HttpServlet {
                     break;
             }
 
-        } else if (remaining.equals("news-article-search")) {
-            ObjectNode request_data = JsonUtils.parseObjectNode(request.getReader());
-            ObjectNode output_data = NewsFunctions.getNewsPageData(Init.news_page_data_url, request_data);
-            TemplateUtils.writeOutTemplateData("", "news-article", Init.handlebarsSearch, response,
-                    output_data);
-            return;
         }
     }
 

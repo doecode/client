@@ -221,8 +221,8 @@ var setUpDateSlider = function () {
         var style = 'stroke-color: #337ab7; stroke-opacity: 0.6; stroke-width: 1; fill-color: #337ab7; fill-opacity: 0.2';
         var years_array = [
             ['Year', 'Results', {
-                role: 'style'
-            }]
+                    role: 'style'
+                }]
         ];
         var year_facets = JSON.parse($("#facets-year-data").val());
         year_facets.forEach(function (item) {
@@ -461,116 +461,69 @@ if (document.getElementById('about-page-identifier')) {
     localStorage.isRefinedSearch = "false";
 
 } else if (document.getElementById('news-page-indicator')) {
-    //Search article type
-    $(document).on('click', '.search-article-type', function () {
-        get_news_page_markup();
-    });
-
-    //Search publication year
-    $(document).on('click', '.search-publication-year', function () {
-        $(".search-publication-month-year").prop('checked', false);
-        $(".search-publication-month-year-day").prop("checked", false);
-        $(".search-publication-hour").prop('checked', false);
-        $('.search-publication-minute').prop('checked', false);
-        get_news_page_markup();
-    });
-
-    //Search publication month year
-    $(document).on('click', '.search-publication-month-year', function () {
-        $(".search-publication-month-year-day").prop("checked", false);
-        $(".search-publication-hour").prop('checked', false);
-        $('.search-publication-minute').prop('checked', false);
-        get_news_page_markup();
-    });
-
-    //Search publication month year day
-    $(document).on('click', '.search-publication-month-year-day', function () {
-        $(".search-publication-hour").prop('checked', false);
-        $('.search-publication-minute').prop('checked', false);
-        get_news_page_markup();
-    });
-
-    //Search publication hour
-    $(document).on('click', '.search-publication-hour', function () {
-        $('.search-publication-minute').prop('checked', false);
-        get_news_page_markup();
-    });
-
-    //Search publication minute
-    $(document).on('click', '.search-publication-minute', function () {
-        get_news_page_markup();
-    });
-
-    var get_news_page_markup = function () {
-        //Get article types
-        var art_types = [];
-        $(".search-article-type:checked").each(function () {
-            var val = $(this).val();
-            art_types.push(val);
-        });
-
-        var post_data = {};
-        var publication_date_parts = {};
-        //Get the publication year, if applicable
-        if ($(".search-publication-year:checked").val() && $(".search-publication-year:checked").val().length > 0) {
-            publication_date_parts.publication_date_year = $(".search-publication-year:checked").val();
+    var redirectToNews = function (action, param_name, param_value) {
+        var page = window.location.href.toString();
+        if (action == 'add') {//tack on teh new parameter and value
+            if (page.indexOf('?') == -1) {
+                page += '?' + param_name + '=' + param_value;
+            } else {
+                page += ('&' + param_name + '=' + param_value);
+            }
+        } else if (action == 'remove') {//Parse teh various URL parms, and remove teh one we're wanting to take out
+            var query_params = page.substr(page.indexOf('?') + 1);
+            page = page.substr(0, page.indexOf('?'));
+            var params = query_params.split("&");
+            var new_params_list = [];
+            params.forEach(function (item) {
+                if (item.indexOf(param_name) == -1) {
+                    new_params_list.push(item);
+                }
+            });
+            //Add the parameters to teh URL, if we had any
+            if (new_params_list.length > 0) {
+                page += '?' + new_params_list.join('&');
+            }
         }
 
-        //Get the publication month/year, if applicable
-        if ($(".search-publication-month-year:checked").val() && $(".search-publication-month-year:checked").val().length > 0) {
-            publication_date_parts.publication_month_year = {
-                month: $(".search-publication-month-year:checked").data('month'),
-                year: $(".search-publication-month-year:checked").data('year')
-            };
-        }
-
-        //Get the publication month/year/day, if applicable
-        if ($(".search-publication-month-year-day:checked").val() && $(".search-publication-month-year-day:checked").val().length > 0) {
-            publication_date_parts.publication_month_day_year = {
-                month: $(".search-publication-month-year-day:checked").data('month'),
-                day: $(".search-publication-month-year-day:checked").data('day'),
-                year: $(".search-publication-month-year-day:checked").data('year')
-            };
-        }
-
-        //Get the publication hour, if applicable
-        if ($('.search-publication-hour:checked').val() && $('.search-publication-hour:checked').val().length > 0) {
-            publication_date_parts.publication_hour = $(".search-publication-hour:checked").val();
-        }
-
-        //Get the publication minute, if applicable
-        if ($(".search-publication-minute:checked").val() && $(".search-publication-minute:checked").val().length > 0) {
-            publication_date_parts.publication_minute = $(".search-publication-minute:checked").val();
-        }
-
-        post_data.article_types = art_types;
-        post_data.publication_date = publication_date_parts;
-
-        $.ajax({
-            url: '/doecode/dissemination/news-article-search',
-            method: 'POST',
-            data: JSON.stringify(post_data),
-            dataType: 'html',
-            contentType: 'application/json',
-            success: function (data) {
-                $("#news-article-main-row").html(data);
-            },
-            error: function () {}
-        });
+        window.location.href = page;
     };
 
-    $(document).on('click', ".filter-type-icon", function () {
-        var filter_type = $(this).data('filter');
-        var article_type_id = "#article-type-" + filter_type;
-        if (!$(article_type_id).prop('checked')) {
-            $(article_type_id).trigger('click');
+    $(".search-article-type").on('change', function () {
+        var self = this;
+        if ($(self).is(':checked')) {
+            redirectToNews('add', 'articletype', $(self).val());
+        } else {
+            redirectToNews('remove', 'articletype');
         }
     });
 
-    $(document).on('click', '.clear-filter-x', function () {
-        var id_of_item = $(this).data('relatedfield');
-        $("#" + id_of_item).trigger('click');
+    $(".search-publication-year").on('change', function () {
+        var self = this;
+        if ($(self).is(':checked')) {
+            redirectToNews('add', 'year', $(self).val());
+        } else {
+            redirectToNews('remove', 'year');
+        }
     });
+
+    $('.clear-filter-x').on('click', function () {
+        var self = this;
+        var val = $(self).data('value');
+        $('input[type=checkbox][value="' + val + '"]').trigger('click');
+    });
+
+    $(".filter-type-icon").on('click', function () {
+        var self = this;
+        var filter = $(self).data('filter');
+
+
+        var current_page = window.location.href.toString();
+        if (current_page.indexOf('?') > -1) {
+            current_page = current_page.substr(0, current_page.indexOf('?'));
+        }
+        window.location.href = current_page + '?articletype=' + filter;
+    });
+
 } else if (document.getElementById('index-indicator')) {
     $("#homepage-adv-dropdown-btn").on('click', function () {
         var self = this;
