@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @WebServlet(urlPatterns = { "/Index", "/repository-services", "/about", "/policy", "/resources", "/news", "/faq",
-                "/results", "/search", "/biblio/*", "/forbidden", "/security-hosting", "/contact", "/homepage-alt" })
+                "/results", "/search", "/biblio/*", "/forbidden", "/security-hosting", "/contact" })
 public class Dissemination extends HttpServlet {
 
         private static final long serialVersionUID = 282315618723126267L;
@@ -50,6 +50,7 @@ public class Dissemination extends HttpServlet {
                 if (remaining.equals("") || remaining.equals("/")) {// HOMEPAGE
                         page_title = "DOE CODE: Your software services platform and search tool to easily submit, announce, and discover code funded by the U.S. Department of Energy";
                         template = TemplateUtils.TEMPLATE_HOMEPAGE;
+                        output_data.put("is_homepage", true);
 
                 } else if (remaining.equals("/projects")) {
                         page_title = "DOE CODE: Projects";
@@ -138,10 +139,6 @@ public class Dissemination extends HttpServlet {
                         page_title = "DOE CODE: Contact Us";
                         template = TemplateUtils.TEMPLATE_CONTACT_PAGE;
 
-                } else if (remaining.equals("/homepage-alt")) {
-                        page_title = "DOE CODE: Alternate Homepage";
-                        template = "homepage_alt";
-                        output_data.put("is_homepage", true);
                 } else {
                         page_title = "DOE CODE: Page Not Found";
                         template = TemplateUtils.TEMPLATE_404_PAGE;
