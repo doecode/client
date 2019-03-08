@@ -84,6 +84,10 @@ html h3 {
     max-width: 100%;
 }
 
+.error-color {
+    color: #a94442;
+}
+
 .white {
     color: white;
 }
