@@ -1205,15 +1205,21 @@ div.Select>div.Select-control input {
     color: #990000;
 }
 
+.datatable-green-status {
+    color: #009900;
+}
+
 .datatable-blue-status {
     color: #000099;
 }
 
-.datatable-pending-suffix {
-    font-style: italic;
+td.datatable-vertical-center {
+    font-size: 12px;
+    vertical-align: middle !important;
+}
+
+.datatable-altered-text {
     font-size: 11px;
-    margin-top: -3px;
-    display: block;
 }
 
 /*

@@ -37,18 +37,13 @@ var projects_data_table_opts = {
     columns: [
         {name: 'code_id', data: 'code_id', width: '88px', className: 'text-center'},
         {name: 'software_title', data: 'software_title'},
-        {name: 'workflow_status', data: 'workflow_status', className: 'text-center'},
-
         {render: function (data, type, row) {
-                return '<a href="/' + APP_NAME + '/submit?code_id=' + row.code_id
+                return '<a href="/' + APP_NAME + '/' + row.edit_endpoint + '?code_id=' + row.code_id
                         + '" class="pure-button button-success btn-sm white " title="Update Metadata for '+row.code_id+'">Update Metadata</a>';
 
-            }, width: '12%', className: 'text-center', orderable: false},
-        {render: function (data, type, row) {
-                return '<a href="/' + APP_NAME + '/announce?code_id=' + row.code_id
-                        + '" class="pure-button pure-button-primary btn-sm white" title="Announce '+row.code_id+' to E-Link">Announce to E-Link</a>';
-
-            }, width: '12%', className: 'text-center', orderable: false},
+            }, width: '115px', className: 'text-center datatable-vertical-center', orderable: false},
+        {name: 'workflow_status', data: 'workflow_status', width: '115px', className: 'text-center datatable-vertical-center'},
+        {name: 'system_status', data: 'system_status', width: '115px', className: 'text-center datatable-vertical-center', orderable: false},
         {render: function (data, type, row) {
                 var btn_markup = '';
                 if (row.workflow_status && row.workflow_status_value != 'Saved' && row.doi) {
@@ -59,7 +54,7 @@ var projects_data_table_opts = {
                 }
                 return btn_markup;
 
-            }, width: '15%', className: 'text-center', orderable: false}
+            }, width: '115px', className: 'text-center datatable-vertical-center', orderable: false}
     ]
 };
 
@@ -298,19 +293,40 @@ var parseProjectsPageData = function (data) {
     var new_data = [];
 
     data.records.forEach(function (item) {
-        var workflow_value = item.workflow_status ? item.workflow_status : '';
-        if (workflow_value == 'Saved') {
-            workflow_value = '<span class="datatable-blue-status">' + workflow_value + '</span>';
+        // format Status value
+        var current_status = item.workflow_status ? item.workflow_status : '';
+        var workflow_status = current_status;
 
-        } else if (workflow_value == 'Approved' && item.approved_as) {
-            workflow_value = workflow_value + '<br><span class="datatable-pending-suffix">as ' + item.approved_as.toLowerCase() + '</span>';
+        if (current_status == 'Approved' && item.approved_as)
+            workflow_status = item.approved_as;
+        else if (current_status != 'Approved')
+            workflow_status = workflow_status;
 
-        } else if (workflow_value != 'Approved') {
-            workflow_value = '<span class="datatable-red-status">' + workflow_value + '</span><br><span class="datatable-red-status datatable-pending-suffix">pending approval</span>';
+        if (workflow_status == 'Submitted')
+            workflow_status = 'Submission';
+        else if (workflow_status == 'Announced')
+            workflow_status = 'Announcement';
 
+        if (current_status == 'Saved')
+            workflow_status = '<span class="datatable-blue-status">' + workflow_status.toUpperCase() + '</span>';
+        else if (current_status == 'Approved' && item.approved_as)
+            workflow_status = '<span class="datatable-green-status">APPROVED</span><br><span class="">' + workflow_status + '</span>';
+        else if (current_status != 'Approved')
+            workflow_status = '<span class="datatable-red-status">PENDING APPROVAL</span><br><span class="">' + workflow_status + '</span>';
+        else
+            workflow_status = '<span class="datatable-green-status">' + workflow_status.toUpperCase() + '</span>';
+
+
+        // format Availability value
+        var system_status = '';
+        if (item.system_status) {
+            system_status = '<span class="datatable-altered-text">' + item.system_status + ' to:</span>';
+            system_status += '<br>DOE CODE';
+            if (item.system_status == 'Announced')
+                system_status += '<br>E-Link';
         }
 
-        //Software Type
+        // Software Type
         var software_type = item.software_type;
         switch (software_type) {
             case 'B':
@@ -324,9 +340,11 @@ var parseProjectsPageData = function (data) {
         new_data.push({
             code_id: item.code_id ? item.code_id : '',
             software_title: item.software_title ? item.software_title : '',
-            workflow_status: workflow_value,
+            workflow_status: workflow_status,
             workflow_status_value: item.workflow_status,
+            system_status: system_status,
             software_type: software_type,
+            edit_endpoint: (item.system_status == 'Announced' || item.workflow_status == 'Announced') ? 'announce' : 'submit',
             doi: item.doi
         });
     });
@@ -343,14 +361,14 @@ var parseApprovalPageData = function (data) {
     var new_data = [];
 
     data.records.forEach(function (item) {
-        var workflow_value = item.workflow_status ? item.workflow_status : '';
-        if (workflow_value == 'Announced') {
-            workflow_value = '<span class="datatable-blue-status">' + workflow_value + '</span>';
+        var workflow_status = item.workflow_status ? item.workflow_status : '';
+        if (workflow_status == 'Announced') {
+            workflow_status = '<span class="datatable-blue-status">' + workflow_status + '</span>';
         }
         new_data.push({
             code_id: item.code_id ? item.code_id : '',
             software_title: item.software_title ? item.software_title : '',
-            workflow_status: workflow_value
+            workflow_status: workflow_status
         });
     });
     var approval_table = $("#pending-datatable").DataTable(pending_data_table_opts);
