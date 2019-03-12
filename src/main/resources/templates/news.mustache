@@ -75,6 +75,10 @@
         color: #337ab7
     }
 
+    #featured-container{
+        padding-left:30px;
+    }
+
     /*Treat the cards differently on phones*/
     @media only screen and (max-width:479px) and (min-width: 320px) {
         #article-list>div.news-article-card {
@@ -87,6 +91,9 @@
         #article-list>div.news-article-card:nth-child(3n+2) {
             border-left: none;
             border-right: none;
+        }
+        #featured-container{
+            padding-left:10px;
         }
 
     }
@@ -104,7 +111,7 @@
         <div class='col-sm-3 hide-xs'>
             <div style='border-bottom: 1px solid #D6D5D4;'>
                 <br />
-                <div class="static-content-title">{{total_found}} Result{{#if more_than_one}}s{{/if}}</div>
+                <div class="static-content-title" style="font-size:34px;">{{total_found}} Result{{#if more_than_one}}s{{/if}}</div>
                 <br />
                 {{#if has_search_filter}}
                 <div>
@@ -177,7 +184,7 @@
             <!--Latest article-->
             {{#if show_featured}}
             <div class='row'>
-                <div class='col-xs-12' style='padding-top:20px;border-left:1px solid #D6D5D4;'>
+                <div id="featured-container" class='col-xs-12' style='padding-top:20px;border-left:1px solid #D6D5D4;'>
                     <div class='text-muted publication-date'>{{featured.publication_date}}</div>
                     <div class='text-muted article-type hide-xs'>
                         {{!--Comes out like <icon> Type--}}
@@ -196,15 +203,14 @@
                         {{/each}}
                     </div>
                     <br />
-                    <a href='{{news_environment_url}}{{featured.link_suffix}}' style='font-size:28px;font-weight:300' title='{{featured.title}}' target="_blank" rel="noopener noreferrer">{{featured.title}}</a>
+                    <a href='{{news_environment_url}}{{featured.link_suffix}}' style='font-size:28px !important;font-weight:300' title='{{featured.title}}' target="_blank" rel="noopener noreferrer">{{featured.title}}</a>
                     <br />
-                    <br />
-                    <p style='line-height:30px;'>
+                    <div style='font-size:17px;line-height:1.5;margin-bottom:-10px;margin-top: 10px;'>
                         {{{featured.abstract}}}
-                        <br />
-                        <br />
                         <a href="{{news_environment_url}}{{featured.link_suffix}}" class="text-muted" title="Read more of {{featured.abstract}}" target="_blank" rel="noopener noreferrer">Read More</a>
-                    </p>
+                        <br/>
+                        <br/>
+                    </div>
                 </div>
             </div>
             {{/if}}
