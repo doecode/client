@@ -144,6 +144,10 @@ html h3 {
     text-align: left !important;
 }
 
+.bold-text{
+    font-weight:700 !important;
+}
+
 .blue-text {
     color: blue;
 }
