@@ -39,9 +39,9 @@ var projects_data_table_opts = {
         {name: 'software_title', data: 'software_title'},
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/' + row.edit_endpoint + '?code_id=' + row.code_id
-                        + '" class="pure-button button-success btn-sm white " title="Update Metadata for '+row.code_id+'">Update Metadata</a>';
+                        + '" class="pure-button button-success btn-sm white " title="Update Metadata for ' + row.code_id + '">Update Metadata</a>';
 
-            }, width: '115px', className: 'text-center datatable-vertical-center', orderable: false},
+            }, width: '105px', className: 'text-center datatable-vertical-center', orderable: false},
         {name: 'workflow_status', data: 'workflow_status', width: '115px', className: 'text-center datatable-vertical-center'},
         {name: 'system_status', data: 'system_status', width: '115px', className: 'text-center datatable-vertical-center', orderable: false},
         {render: function (data, type, row) {
@@ -54,7 +54,7 @@ var projects_data_table_opts = {
                 }
                 return btn_markup;
 
-            }, width: '115px', className: 'text-center datatable-vertical-center', orderable: false}
+            }, width: '125px', className: 'text-center datatable-vertical-center', orderable: false}
     ]
 };
 
