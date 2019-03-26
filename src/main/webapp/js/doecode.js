@@ -154,8 +154,14 @@ var triggerDropdownAdvancedSearch = function () {
 };
 
 var triggerBasicSearch = function () {
+    var self = this;
     clearSearchFormFields();
-    $("#search-all_fields").val($(this).parent().prev('div').find('input[type=text]').val());
+    if ($(self).hasClass('homepage-search-btn')) {
+        $("#search-all_fields").val($(self).prev('button').prev('input').val().trim());
+    } else {
+        $("#search-all_fields").val($(this).parent().prev('div').find('input[type=text]').val());
+    }
+
     $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
     $("#search-page-form").submit();
 };
@@ -221,7 +227,13 @@ $(".adv-search-btn-dropdown").on('click', triggerDropdownAdvancedSearch);
 $(".search-btn").on('click', triggerBasicSearch);
 $(".search-box").on('keyup', function (event) {
     if (event.which === 13) {
-        $(this).parent().next('div').find('button').trigger('click');
+        var is_homepage_input = $(this).hasClass('homepage-searchbar');
+        if (is_homepage_input) {
+            $(this).next('button').next('button').trigger('click');
+        } else {
+            $(this).parent().next('div').find('button').trigger('click');
+        }
+
     }
 });
 

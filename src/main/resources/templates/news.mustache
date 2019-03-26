@@ -78,6 +78,10 @@
     #featured-container{
         padding-left:30px;
     }
+    
+    .article-date-and-types{
+        height:60px;
+    }
 
     /*Treat the cards differently on phones*/
     @media only screen and (max-width:479px) and (min-width: 320px) {
@@ -190,19 +194,19 @@
                     <div class='text-muted publication-date'>{{featured.publication_date}}</div>
                     <div class='text-muted article-type hide-xs'>
                         {{!--Comes out like <icon> Type--}}
-                        {{#each featured.article_types}}
-                        {{#if is_news}}
-                        <span class='fa fa-newspaper-o clickable filter-type-icon' data-filter='{{article_type_newspaper}}'></span>
-                        {{else if is_updates_and_tips}}
-                        <span class='fa fa-file-text-o clickable filter-type-icon' data-filter='{{article_type_updates}}'></span>
-                        {{else if is_blog}}
-                        <span class='fa fa-info-circle clickable filter-type-icon' data-filter='{{article_type_blog}}'></span>
-                        {{else if is_event}}
-                        <span class='fa fa-calendar clickable filter-type-icon' data-filter='{{article_type_event}}'></span>
-                        {{/if}}
-                        {{display}}
-                        <br />
-                        {{/each}}
+                            {{#each featured.article_types}}
+                            {{#if is_news}}
+                            <span class='fa fa-newspaper-o clickable filter-type-icon' data-filter='{{article_type_newspaper}}'></span>
+                            {{else if is_updates_and_tips}}
+                            <span class='fa fa-file-text-o clickable filter-type-icon' data-filter='{{article_type_updates}}'></span>
+                            {{else if is_blog}}
+                            <span class='fa fa-info-circle clickable filter-type-icon' data-filter='{{article_type_blog}}'></span>
+                            {{else if is_event}}
+                            <span class='fa fa-calendar clickable filter-type-icon' data-filter='{{article_type_event}}'></span>
+                            {{/if}}
+                            {{display}}
+                            <br />
+                            {{/each}}
                     </div>
                     <br />
                     <a href='{{news_environment_url}}{{featured.link_suffix}}' style='font-size:28px !important;font-weight:300' title='{{featured.title}}' target="_blank" rel="noopener noreferrer">{{featured.title}}</a>
@@ -221,24 +225,24 @@
             <div class='row display-flex' id='article-list'>
                 {{#each article_list}}
                 <div class='col-md-4 col-sm-6 col-xs-12 news-article-card'>
-                    <span class='text-muted publication-date'>{{publication_date}}</span>
-                    <span class='text-muted article-type hide-xs'>
-                        {{#each article_types}}
-                        {{#if is_news}}
-                        <span class='fa fa-newspaper-o clickable filter-type-icon' data-filter='{{article_type_newspaper}}'></span>
-                        {{else if is_updates_and_tips}}
-                        <span class='fa fa-file-text-o clickable filter-type-icon' data-filter='{{article_type_updates}}'></span>
-                        {{else if is_blog}}
-                        <span class='fa fa-info-circle clickable filter-type-icon' data-filter='{{article_type_blog}}'></span>
-                        {{else if is_event}}
-                        <span class='fa fa-calendar clickable filter-type-icon' data-filter='{{article_type_event}}'></span>
-                        {{/if}}
-                        {{display}}
-                        <br />
-                        {{/each}}
-                    </span>
-                    <br />
-                    <br />
+                    <div class="article-date-and-types">
+                        <span class='text-muted publication-date'>{{publication_date}}</span>
+                        <span class='text-muted article-type hide-xs'>
+                            {{#each article_types}}
+                            {{#if is_news}}
+                            <span class='fa fa-newspaper-o clickable filter-type-icon' data-filter='{{article_type_newspaper}}'></span>
+                            {{else if is_updates_and_tips}}
+                            <span class='fa fa-file-text-o clickable filter-type-icon' data-filter='{{article_type_updates}}'></span>
+                            {{else if is_blog}}
+                            <span class='fa fa-info-circle clickable filter-type-icon' data-filter='{{article_type_blog}}'></span>
+                            {{else if is_event}}
+                            <span class='fa fa-calendar clickable filter-type-icon' data-filter='{{article_type_event}}'></span>
+                            {{/if}}
+                            {{display}}
+                            <br />
+                            {{/each}}
+                        </span>
+                    </div>
                     <div>
                         <a href='{{news_environment_url}}{{link_suffix}}' class='article-title' title='{{title}}' target="_blank" rel="noopener noreferrer">{{title}}</a>
                     </div>

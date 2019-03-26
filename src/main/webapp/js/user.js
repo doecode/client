@@ -420,7 +420,6 @@ var saveUserAccountChanges = function () {
 
 var savePasswordChanges = function (post_data, update_login_status_name, login_name_status_data) {
     doAuthenticatedAjax('POST', API_BASE + 'user/changepassword', function (data) {
-            console.log("Update login name status: " + update_login_status_name);
             if (update_login_status_name) {
                 updateLoginNameStatus(login_name_status_data);
             } else {
