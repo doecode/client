@@ -195,22 +195,21 @@ var logout = function () {
 //Toggles the advanced search extended dropdown
 var toggleAdvExtendedDropdown = function (action) {
     if ($("#adv-search-toggle-extra-container").is(':visible') || action === ADV_DROPDOWN_CLOSE) { //close
-        if (document.getElementById('homepage-indicator')) {
-            $("#outtermost-homepage-style").css('padding-bottom', '0px');
-        } else if (document.getElementById('index-indicator')) {
-            $("#outermost-container").css('padding-bottom', '0px');
-        }
+        $("#outtermost-homepage-style,#outermost-container").css('padding-bottom', '0px');
         $("#adv-search-toggle-extra-container").hide();
         $("#adv-search-toggle-btn-icon").removeClass('fa-minus-square-o');
         $("#adv-search-toggle-btn-icon").addClass('fa-plus-square-o');
         $("#adv-search-toggle-btn-icon-text").html('More Options');
     } else { //open
-        if (document.getElementById('homepage-indicator')) {
-            $("#outtermost-homepage-style").css('padding-bottom', '200px');
-        } else if (document.getElementById('index-indicator')) {
-            $("#outermost-container").css('padding-bottom', '210px');
-        }
         $("#adv-search-toggle-extra-container").show();
+        //Do a quick calculation to see how much we need to change teh bottom padding to
+        //Get some measurements
+        var outmost_height = Math.round($("#outermost-container").height());
+        var adv_height = Math.round($("#homepage-adv-dropdown-container").height());
+        var adv_offset = Math.round($("#homepage-adv-dropdown-container").offset().top);
+        //If from the top of the page, to the bottom of the advanced search, you have a height greater than the height of outermost container, get that distance, subtract the height of the container, and add 20. Otherwise, add nothing
+        var new_padding_val = ((adv_height + adv_offset) > outmost_height) ? ((adv_height + adv_offset) - outmost_height) + 100 : 100;
+        $("#outtermost-homepage-style,#outermost-container").css('padding-bottom', new_padding_val + 'px');
         $("#adv-search-toggle-btn-icon").removeClass('fa-plus-square-o');
         $("#adv-search-toggle-btn-icon").addClass('fa-minus-square-o');
         $("#adv-search-toggle-btn-icon-text").html('Less Options');
