@@ -537,14 +537,4 @@ if (document.getElementById('about-page-identifier')) {
             $(adv_search_element).show();
         }
     });
-
-    $(".adv-chosen-select").on('change', function (event, data) {
-        //Make sure the base amount of padding (300) is changed here if it's changed in doecode.js
-        var current_padding = parseInt($("#outermost-container").css('padding-bottom').replace(/px/, ''));
-        if ('selected' in data) {
-            $("#outermost-container").css({'padding-bottom': (current_padding + 20) + 'px'});
-        } else if ('deselected' in data && current_padding > 300) {
-            $("#outermost-container").css({'padding-bottom': (current_padding - 20) + 'px'});
-        }
-    });
 }
