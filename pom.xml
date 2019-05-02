@@ -383,16 +383,6 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
         </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>1.2.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
-        </dependency>
         <!--Used for HTTP calls (not all use this yet. They are being transitioned)-->
         <dependency>
             <groupId>org.javalite</groupId>
@@ -407,7 +397,7 @@
             <!--Used for most string manipulation, null checking, etc-->
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.8.1</version>
+            <version>3.9</version>
         </dependency>
         <dependency>
             <!--Used to get data from google during the captcha process-->
@@ -425,7 +415,7 @@
             <!--Used for base-64 encoding the user data into a cookie-->
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.11</version>
+            <version>1.12</version>
         </dependency>
     </dependencies>
 </project>
