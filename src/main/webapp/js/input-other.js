@@ -394,6 +394,7 @@ if (document.getElementById('confirmation-page-identifier')) {
     doAuthenticatedAjax('GET', API_BASE + 'metadata/projects', parseProjectsPageData, null, parseProjectsPageError);
 
 } else if (document.getElementById('approval-page-identifier')) {
+    //TODO check for Is Approval ADmin role
     checkHasRole('OSTI');
     checkIsAuthenticated();
     //LOADING_PENDING_PROJECTS_OPTS

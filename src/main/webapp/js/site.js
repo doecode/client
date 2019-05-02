@@ -219,7 +219,7 @@ var submitPOCChanges = function () {
     });
 
 };
-
+//TODO Check for has user admin role
 checkHasRole('OSTI');
 checkIsAuthenticated();
 if (document.getElementById('site-admin-page-identifier')) {

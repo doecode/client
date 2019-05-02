@@ -860,6 +860,7 @@ if (document.getElementById('login-page-identifier')) {
         setUpUserAccountPage();
     }
 } else if (document.getElementById('user-admin-page-identifier')) {
+    //TODO check for has user admin role
     checkHasRole('OSTI');
     checkIsAuthenticated();
     doAuthenticatedAjax('GET', API_BASE + 'user/users', parseGetUserListData, null, parseGetUserListError);
