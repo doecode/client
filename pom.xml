@@ -39,7 +39,7 @@
                 <password>Password of the tomcat manager you deploy the application to</password>
                 <apiURL>The URL to the DOECODE API instance that you use</apiURL>
                 <apiBackendURL>The URL the java side of the application uses to call the DOE CODE API. </apiBackendURL>
-                (This separation is optional, and is mainly used for those that have the DOE CODE running locally and prefer to access it via localhost on the java side. 
+                (This separation is optional, and is mainly used for those that have the DOE CODE running locally and prefer to access it via localhost on the java side.
                 If you don't have the api running on the same tomcat, make this value the same as your api_url)
                 <siteURL>The base url for the site</siteURL>
                 <authorityapiURL>The base URL for OSTI's Elink Authority API</authorityapiURL>
@@ -297,7 +297,7 @@
             </plugin>
             <!--
                 The properties for this could either be located here in the pom.xml, or in the settings.xml in your maven .m2 directory
-                Example: 
+                Example:
                 <servers>
                     <server>
                         <id>[ID Goes Here]</id>
