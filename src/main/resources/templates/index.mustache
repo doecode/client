@@ -82,7 +82,7 @@
         padding-right: 20px;
         margin-left: 10px;
     }
-    
+
     @-moz-document url-prefix(){
         #homepage-searchbar-container>button.search-btn{
             margin-left:5px;
@@ -281,7 +281,7 @@
                     <div id="adv-search-toggle-extra-container" style="display:none;">
                         <!--Project Type-->
                         <div class='adv-dropdown-section'>
-                            <label for='navbar-searchbar-accessibility' class='adv-search-dropdown-label'>Project Type:</label>
+                            <label for='navbar-searchbar-accessibility' class='homepage-adv-search-dropdown-label'>Project Type:</label>
                             <select class='pure-input-1 doecode-chosen-select' title='Code Accessibilty' id='navbar-searchbar-accessibility' data-allowcustom="false" data-placeholder='Select your Options' multiple>
                                 {{#each adv_search_lists.availabilities_list}}
                                 <option title="{{title}}" value="{{value}}">{{label}}</option>
@@ -290,7 +290,7 @@
                         </div>
                         <!--License-->
                         <div class='adv-dropdown-section'>
-                            <label for='navbar-searchbar-licenses' class='adv-search-dropdown-label'>Licenses:</label>
+                            <label for='navbar-searchbar-licenses' class='homepage-adv-search-dropdown-label'>Licenses:</label>
                             <select class='pure-input-1 doecode-chosen-select' title='Licenses' id='navbar-searchbar-licenses' data-allowcustom="false" data-placeholder='Select your Options' multiple>
                                 {{#each adv_search_lists.licenses_list}}
                                 <option title="{{title}}" value="{{value}}">{{label}}</option>
@@ -299,34 +299,22 @@
                         </div>
                         <!--Programming Languages-->
                         <div class='adv-dropdown-section'>
-                            <label for='navbar-searchbar-programming_languages' class='adv-search-dropdown-label'>Programming Languages:</label>
-                            <select class='pure-input-1 doecode-chosen-select' title='Programming Languages' id='navbar-searchbar-programming_languages' data-allowcustom="true" data-placeholder='Select your programming language(s)' multiple>
-                                {{#each adv_search_lists.programming_languages_list}}
-                                <option title='{{title}}' value='{{value}}'>{{label}}</option>
-                                {{/each}}
-                            </select>
+                            <label for='navbar-searchbar-programming_languages' class='homepage-adv-search-dropdown-label'>Programming Languages:</label>
+                            <input id='navbar-searchbar-programming_languages' class='pure-input-1' title='Programming Languages' data-field='programming_languages' type='text' />
                         </div>
                         <!--Research Organization-->
                         <div class='adv-dropdown-section'>
-                            <label for='navbar-searchbar-research_organization' class='adv-search-dropdown-label'>Research Organization:</label>
-                            <select class='pure-input-1 doecode-chosen-select' title='Research Organization' id='navbar-searchbar-research_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
-                                {{#each adv_search_lists.research_org_list}}
-                                <option title="{{title}}" value="{{value}}">{{label}}</option>
-                                {{/each}}
-                            </select>
+                            <label class='homepage-adv-search-dropdown-label' for='navbar-searchbar-research_organization'>Research Organization:</label>
+                            <input id='navbar-searchbar-research_organization' class='pure-input-1' title='Research Organization' data-field='research_organization' type='text' />
                         </div>
                         <!--Sponsoring Organization-->
                         <div class='adv-dropdown-section'>
-                            <label for='navbar-searchbar-sponsoring_organization' class='adv-search-dropdown-label'>Sponsoring Organization:</label>
-                            <select class='pure-input-1 doecode-chosen-select' title='Sponsoring Organization' id='navbar-searchbar-sponsoring_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
-                                {{#each adv_search_lists.sponsor_org_list}}
-                                <option title="{{title}}" value="{{value}}">{{label}}</option>
-                                {{/each}}
-                            </select>
+                            <label for='navbar-searchbar-sponsoring_organization' class='homepage-adv-search-dropdown-label'>Sponsoring Organization:</label>
+                            <input id='navbar-searchbar-sponsoring_organization' class='pure-input-1' title='Sponsoring Organization' data-field='sponsoring_organization' type='text' />
                         </div>
-                        <!--Software Title-->
+                        <!--Software Type-->
                         <div class='adv-dropdown-section'>
-                            <label for='navbar-searchbar-software_type' class='adv-search-dropdown-label'>Software Type:</label>
+                            <label for='navbar-searchbar-software_type' class='homepage-adv-search-dropdown-label'>Software Type:</label>
                             <select class='pure-input-1 doecode-chosen-select' title='Software Type' id='navbar-searchbar-software_type' data-allowcustom="false" data-placeholder='Select your Options' multiple>
                                 {{#each adv_search_lists.software_type}}
                                 <option title="{{title}}" value="{{value}}">{{label}}</option>
@@ -335,7 +323,7 @@
                         </div>
                         <!--Sort-->
                         <div class='adv-dropdown-section'>
-                            <label for='navbar-searchbar-sort' class='adv-search-dropdown-label'>Sort:</label>
+                            <label for='navbar-searchbar-sort' class='homepage-adv-search-dropdown-label'>Sort:</label>
                             <select class='pure-input-1' title='Sort' id='navbar-searchbar-sort' data-placeholder='Select your Options'>
                                 {{#each adv_search_lists.sort_list}}
                                 <option title="{{title}}" value="{{value}}">{{label}}</option>

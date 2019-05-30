@@ -64,37 +64,26 @@
 				   {{/each}}
 			      </select>
 			 </div>
-
+                        <!--Programming Languages-->
 			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
 			      <label for='advanced-search-programming_languages' class='advsearch-adv-search-dropdown-label'>Programming Languages:</label>
 			 </div>
 			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>
-			      <select class='pure-input-1 doecode-chosen-select' title='Programming Languages' id='advanced-search-programming_languages' data-allowcustom="true" data-placeholder='Select your programming language(s)' multiple>
-				   {{#each adv_search_lists.programming_languages_list}}
-				   <option title='{{title}}' value='{{value}}'>{{label}}</option>
-				   {{/each}}
-			      </select>
+                             <input type='text' id='advanced-search-programming_languages' title='Programming Languages' data-field='programming_languages' class='pure-input-1'/>
 			 </div>
-
+                         <!--Research Organization-->
 			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
 			      <label for='advanced-search-research_organization' class='advsearch-adv-search-dropdown-label'>Research Organization:</label>
 			 </div>
 			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>
-			      <select class='pure-input-1 doecode-chosen-select' title='Research Organization' id='advanced-search-research_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
-				   {{#each adv_search_lists.research_org_list}}
-				   <option title="{{title}}" value="{{value}}">{{label}}</option>
-				   {{/each}}
-			      </select>
+                             <input type='text' id='advanced-search-research_organization' title='Research Organization' data-field='research_organization' class='pure-input-1'/>
 			 </div>
+                         <!--Sponsoring Orgs-->
 			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
 			      <label for='advanced-search-sponsoring_organization' class='advsearch-adv-search-dropdown-label'>Sponsoring Organization:</label>
 			 </div>
 			 <div class='col-xs-12 no-col-padding-left no-col-padding-right tiny-col-padding'>
-			      <select class='pure-input-1 doecode-chosen-select' title='Sponsoring Organization' id='advanced-search-sponsoring_organization' data-allowcustom="true" data-placeholder='Select your Options' multiple>
-				   {{#each adv_search_lists.sponsor_org_list}}
-				   <option title="{{title}}" value="{{value}}">{{label}}</option>
-				   {{/each}}
-			      </select>
+                             <input type='text' id='advanced-search-sponsoring_organization' title='Sponsoring Organization' data-field='sponsoring_organization' class='pure-input-1'/>
 			 </div>
 			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
 			      <label for='advanced-search-software_type' class='advsearch-adv-search-dropdown-label'>Software Type:</label>

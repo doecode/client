@@ -124,20 +124,20 @@ var triggerDropdownAdvancedSearch = function () {
 
     //Programming Languages
     var programming_languages_vals = $("#navbar-searchbar-programming_languages").val();
-    if (programming_languages_vals.length > 0) {
-        $("#search-programming_languages").val(JSON.stringify(programming_languages_vals));
+    if (programming_languages_vals) {
+        $("#search-programming_languages").val(programming_languages_vals);
     }
 
     //Research Organization
     var research_orgs = $("#navbar-searchbar-research_organization").val();
-    if (research_orgs.length > 0) {
-        $("#search-research_organization").val(JSON.stringify(research_orgs));
+    if (research_orgs) {
+        $("#search-research_organization").val(research_orgs.trim());
     }
 
     //Sponsoring Organization
     var sponsoring_orgs = $("#navbar-searchbar-sponsoring_organization").val();
-    if (sponsoring_orgs.length > 0) {
-        $("#search-sponsoring_organization").val(JSON.stringify(sponsoring_orgs));
+    if (sponsoring_orgs.length) {
+        $("#search-sponsoring_organization").val(sponsoring_orgs.trim());
     }
 
     //Software Type
