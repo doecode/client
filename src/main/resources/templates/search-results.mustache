@@ -3,240 +3,241 @@
 <input type='hidden' id='search-results-page-identifier' />
 <input type='hidden' id='facets-year-data' value='{{year_facets_data}}' />
 <input type='hidden' id='search-results-count' value='{{search_result_count}}' />
+<input type='hidden' id='is-pagespeed-insights' value='{{is_pagespeed_insights}}'/>
 <style type='text/css'>
-	.search-result-sub-row {
-		padding-left: 0px;
-	}
+    .search-result-sub-row {
+        padding-left: 0px;
+    }
 
-	.search-result-count-column {
-		text-align: right;
-		font-size: 16px;
-		padding-right: 5px;
-		padding-top: 8px;
-	}
+    .search-result-count-column {
+        text-align: right;
+        font-size: 16px;
+        padding-right: 5px;
+        padding-top: 8px;
+    }
 
-	.search-results-count {
-		font-size: 32px !important;
-		font-weight: 300 !important;
-		margin-left: 0px !important;
-	}
+    .search-results-count {
+        font-size: 32px !important;
+        font-weight: 300 !important;
+        margin-left: 0px !important;
+    }
 
-	.search-result-row {
-		overflow: auto;
-		border-color: #F9F9F9;
-		background-color: #F9F9F9 !important;
-		padding-top: 7px;
-	}
+    .search-result-row {
+        overflow: auto;
+        border-color: #F9F9F9;
+        background-color: #F9F9F9 !important;
+        padding-top: 7px;
+    }
 
-	.search-result-row:not(:last-child) {
-		border-bottom: 1px solid #ddd;
-	}
+    .search-result-row:not(:last-child) {
+        border-bottom: 1px solid #ddd;
+    }
 
-	.search-for-sidebar-row {
-		border-bottom: 1px solid #ddd;
-	}
+    .search-for-sidebar-row {
+        border-bottom: 1px solid #ddd;
+    }
 
-	.search-for-modify-search {
-		font-size: 13.6px;
-		opacity: 0.5;
-		font-weight: 300;
-		color: rgb(0, 0, 0);
-	}
+    .search-for-modify-search {
+        font-size: 13.6px;
+        opacity: 0.5;
+        font-weight: 300;
+        color: rgb(0, 0, 0);
+    }
 
-	.search-for-modify-search:hover {
-		opacity: 0.7;
-	}
+    .search-for-modify-search:hover {
+        opacity: 0.7;
+    }
 
-	.search-result-author {
-		font-size: 12px;
-		padding-top: 5px;
-		padding-bottom: 5px;
-	}
+    .search-result-author {
+        font-size: 12px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
 
-	.search-result-author a {
-		color: #7cb342;
-		font-size: 13.6px;
-	}
+    .search-result-author a {
+        color: #7cb342;
+        font-size: 13.6px;
+    }
 
-	/*Puts space below the doi and repository link/landing page entries on the search results page*/
-	div.search-result-rows-container>div.search-result-row>div>div>div.row>div>div.landing-page-repo-links {
-		padding-bottom: 10px;
-	}
+    /*Puts space below the doi and repository link/landing page entries on the search results page*/
+    div.search-result-rows-container>div.search-result-row>div>div>div.row>div>div.landing-page-repo-links {
+        padding-bottom: 10px;
+    }
 
-	div.search-result-rows-container>div.search-result-row>div>div>div.row>div>div.landing-page-repo-links:last-child {
-		padding-bottom: 15px !important;
-	}
+    div.search-result-rows-container>div.search-result-row>div>div>div.row>div>div.landing-page-repo-links:last-child {
+        padding-bottom: 15px !important;
+    }
 
-	.small-screen-collapse {
-		display: block;
-	}
+    .small-screen-collapse {
+        display: block;
+    }
 
-	@media only screen and (max-width:767px) and (min-width: 320px) {
-		.search-results-count {
-			margin-top: 0px;
-			margin-bottom: 0px;
-			font-size: 20px !important;
-		}
+    @media only screen and (max-width:767px) and (min-width: 320px) {
+        .search-results-count {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-size: 20px !important;
+        }
 
-		.search-for-sidebar-row {
-			border-bottom: none;
-		}
-	}
+        .search-for-sidebar-row {
+            border-bottom: none;
+        }
+    }
 
-	@media only screen and (max-width:991px) and (min-width: 768px) {
-		.search-results-count {
-			margin-top: 0px;
-			margin-bottom: 0px;
-		}
+    @media only screen and (max-width:991px) and (min-width: 768px) {
+        .search-results-count {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
 
-		.search-for-sidebar-row {
-			border-bottom: none;
-		}
+        .search-for-sidebar-row {
+            border-bottom: none;
+        }
 
-		.small-screen-collapse {
-			display: none;
-		}
-	}
+        .small-screen-collapse {
+            display: none;
+        }
+    }
 
-	@media only screen and (max-width:479px) and (min-width: 320px) {
-		.small-screen-collapse {
-			display: none;
-		}
-	}
+    @media only screen and (max-width:479px) and (min-width: 320px) {
+        .small-screen-collapse {
+            display: none;
+        }
+    }
 
-	@media only screen and (max-width:767px) and (min-width: 480px) {
-		.small-screen-collapse {
-			display: none;
-		}
-	}
+    @media only screen and (max-width:767px) and (min-width: 480px) {
+        .small-screen-collapse {
+            display: none;
+        }
+    }
 </style>
 <div class="row not-so-wide-row">
-	<div class='col-xs-12'>
-		<div class='row'>
-			<div class='col-lg-2'></div>
-			<div class='col-lg-8 col-xs-12'>
-				{{> search/breadcrumbTrail}}
-				<br />
-			</div>
-			<div class='col-lg-2'></div>
-		</div>
-		<div class='row'>
-			<div class='col-lg-2'></div>
-			<div class='col-lg-4 col-md-6 col-xs-12'>
-				<span class='search-results-count fake-h2'>{{search_result_count}}&nbsp;&nbsp;Search Results</span>
-			</div>
-			<div class='col-lg-4 col-md-6 col-xs-12 right-text-lg hide-xs'>
-				{{> search/sort-dropdown}}
-			</div>
-			<div class='col-lg-2'></div>
-		</div>
-		<div class='row'>
-			<div class='col-lg-2'></div>
-			<!--VV Sidebar VV-->
-			<div class='col-lg-2 col-md-4 col-xs-12 sidebar'>
-				<!--Checkbox Filters-->
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="row search-for-sidebar-row">
-							<div class="col-md-1"></div>
-							<div class="col-md-12 col-xs-12">
-								<br />
-								<span class="search-sidebar-filter-title" style='padding-bottom:5px;'>SEARCH FOR:</span>
-								<div class="search-sidebar-text">
-									{{> search/search-results-description}}
-								</div>
-								<br />
-							</div>
-							<div class="col-md-1"></div>
-						</div>
-						<!--Sidebar Filters screens-->
-						<button title='Filter Search' type='button' class='btn btn-link toggle-sidebar faq-page-btn hide-md hide-lg'>
-							<span class="fa fa-caret-right fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search
-						</button>
-						<div class='collapse small-screen-collapse'>
-							{{> search/sidebar-filters}}
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--^^ Sidebar ^^-->
-			<div class="col-lg-6 col-md-8 col-xs-12" style="border-left: 1px solid #ddd;">
-				<div>
-					<div class='row right-text '>
-						<div class='col-xs-12'>
-							<input type="hidden" id="pagination-btn-thing" value="{{pagination_btn}}" />
-							{{#if had_results}}
-								{{> search/pagination-buttons}}
-							{{/if}}
-						</div>
-					</div>
-					<br />
-					<div class="row">
-						<div class="col-xs-12 no-col-padding-left">
-							{{#if had_results}}
-								<div class='search-result-rows-container'>
-									<!--Each Search Result Item-->
-									{{#each search_results_list}}
-										<div class='search-result-row'>
-											<div>
-												<div class='{{result_column_classes}}'>
-													{{list_number}}.
-												</div>
-												<div class='{{result_subrow_classes}}'>
-													<div class="row">
-														<div class="col-xs-12">
-															<!--Title-->
-															<div>
-																<a title='Bibliographic Data for Code ID #{{code_id}}' href="/${app_name}/biblio/{{code_id}}-{{pretified_title}}" style="font-size: 24px;font-weight: 300;">{{software_title}}</a>
-															</div>
-															<!--Developers and Contributors-->
-															<div class='row'>
-																<div class="search-result-author col-md-8 col-xs-12">
-																	{{> search/devAndContributorLinks}}
-																</div>
-															</div>
-															<!--Description-->
-															{{> search/description}}
-															<div class='right-text landing-page-repo-links'>
-																<br />
-																{{#each repository_links_list}}
-																	{{pretext}}<a title='{{title}}' class="{{css_class}}" target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' href='{{href}}'>{{display}}</a>
-																	{{#unless is_last}}
-																		<span class='hide-xs' style="color: rgba(0, 0, 0, 0.2);">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-																		<span class='hide-sm hide-md hide-lg'><br /></span>
-																	{{/unless}}
-																{{/each}}
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
+    <div class='col-xs-12'>
+        <div class='row'>
+            <div class='col-lg-2'></div>
+            <div class='col-lg-8 col-xs-12'>
+                {{> search/breadcrumbTrail}}
+                <br />
+            </div>
+            <div class='col-lg-2'></div>
+        </div>
+        <div class='row'>
+            <div class='col-lg-2'></div>
+            <div class='col-lg-4 col-md-6 col-xs-12'>
+                <span class='search-results-count fake-h2'>{{search_result_count}}&nbsp;&nbsp;Search Results</span>
+            </div>
+            <div class='col-lg-4 col-md-6 col-xs-12 right-text-lg hide-xs'>
+                {{> search/sort-dropdown}}
+            </div>
+            <div class='col-lg-2'></div>
+        </div>
+        <div class='row'>
+            <div class='col-lg-2'></div>
+            <!--VV Sidebar VV-->
+            <div class='col-lg-2 col-md-4 col-xs-12 sidebar'>
+                <!--Checkbox Filters-->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row search-for-sidebar-row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-12 col-xs-12">
+                                <br />
+                                <span class="search-sidebar-filter-title" style='padding-bottom:5px;'>SEARCH FOR:</span>
+                                <div class="search-sidebar-text">
+                                    {{> search/search-results-description}}
+                                </div>
+                                <br />
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <!--Sidebar Filters screens-->
+                        <button title='Filter Search' type='button' class='btn btn-link toggle-sidebar faq-page-btn hide-md hide-lg'>
+                            <span class="fa fa-caret-right fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search
+                        </button>
+                        <div class='collapse small-screen-collapse'>
+                            {{> search/sidebar-filters}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--^^ Sidebar ^^-->
+            <div class="col-lg-6 col-md-8 col-xs-12" style="border-left: 1px solid #ddd;">
+                <div>
+                    <div class='row right-text '>
+                        <div class='col-xs-12'>
+                            <input type="hidden" id="pagination-btn-thing" value="{{pagination_btn}}" />
+                            {{#if had_results}}
+                            {{> search/pagination-buttons}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-12 no-col-padding-left">
+                            {{#if had_results}}
+                            <div class='search-result-rows-container'>
+                                <!--Each Search Result Item-->
+                                {{#each search_results_list}}
+                                <div class='search-result-row'>
+                                    <div>
+                                        <div class='{{result_column_classes}}'>
+                                            {{list_number}}.
+                                        </div>
+                                        <div class='{{result_subrow_classes}}'>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <!--Title-->
+                                                    <div>
+                                                        <a title='Bibliographic Data for Code ID #{{code_id}}' href="/${app_name}/biblio/{{code_id}}-{{pretified_title}}" style="font-size: 24px;font-weight: 300;">{{software_title}}</a>
+                                                    </div>
+                                                    <!--Developers and Contributors-->
+                                                    <div class='row'>
+                                                        <div class="search-result-author col-md-8 col-xs-12">
+                                                            {{> search/devAndContributorLinks}}
+                                                        </div>
+                                                    </div>
+                                                    <!--Description-->
+                                                    {{> search/description}}
+                                                    <div class='right-text landing-page-repo-links'>
+                                                        <br />
+                                                        {{#each repository_links_list}}
+                                                        {{pretext}}<a title='{{title}}' class="{{css_class}}" target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' href='{{href}}'>{{display}}</a>
+                                                        {{#unless is_last}}
+                                                        <span class='hide-xs' style="color: rgba(0, 0, 0, 0.2);">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+                                                        <span class='hide-sm hide-md hide-lg'><br /></span>
+                                                        {{/unless}}
+                                                        {{/each}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-									{{/each}}
-								</div>
-							{{else}}
-								<div class='has-error center-text'>
-									{{#if had_error}}
-										<label class='control-label'>{{error_message}}</label>
-									{{else}}
-										<label class='control-label'>No results found for your search parameters</label>
-									{{/if}}
-								</div>
-							{{/if}}
-						</div>
-					</div>
-					<div class='row right-text '>
-						<div class='col-xs-12'>
-							{{#if had_results}}
-								{{> search/pagination-buttons}}
-							{{/if}}
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class='col-lg-2'></div>
-		</div>
-	</div>
+                                {{/each}}
+                            </div>
+                            {{else}}
+                            <div class='has-error center-text'>
+                                {{#if had_error}}
+                                <label class='control-label'>{{error_message}}</label>
+                                {{else}}
+                                <label class='control-label'>No results found for your search parameters</label>
+                                {{/if}}
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class='row right-text '>
+                        <div class='col-xs-12'>
+                            {{#if had_results}}
+                            {{> search/pagination-buttons}}
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='col-lg-2'></div>
+        </div>
+    </div>
 </div>
 {{> wrapper/footer}}

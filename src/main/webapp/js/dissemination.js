@@ -388,7 +388,11 @@ if (document.getElementById('about-page-identifier')) {
     $(".search-for-modify-search").on('click', modify_search);
 
     //Makes the date range slider work
-    if (isValidJSON($("#facets-year-data").val()) && JSON.parse($("#facets-year-data").val()).length > 0 && isValidInt($("#search-results-count").val()) && parseInt($("#search-results-count").val()) > 0) {
+    if (isValidJSON($("#facets-year-data").val())
+            && JSON.parse($("#facets-year-data").val()).length > 0
+            && isValidInt($("#search-results-count").val())
+            && parseInt($("#search-results-count").val()) > 0
+            && $("#is-pagespeed-insights").val() != 'true') {
         setUpDateSlider();
     } else {
         $(".release-date-sidebar-container").hide();

@@ -5,7 +5,9 @@ import com.github.jknack.handlebars.Jackson2Helper;
 import com.github.jknack.handlebars.io.ServletContextTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
 import gov.osti.doecode.entity.NewsFunctions;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +42,7 @@ public class Init extends HttpServlet {
     public static String gitlab_submit_email;
     public static String smtp_host;
     public static String ostigov_news_xml;
+    public static List<String> pagespeed_ips;
 
     public static final HashMap<String, String> NEWS_ARTICLE_TYPES_OBJ = new HashMap<String, String>();
     public static final HashMap<String, String> NEWS_ARTICLE_TYPES_INVERSE_OBJ = new HashMap<String, String>();
@@ -81,6 +84,9 @@ public class Init extends HttpServlet {
 
             //OSTI GOV News XML
             ostigov_news_xml = PROPS.getProperty("ostigov_news_xml");
+            
+            //Pagespeed ips
+            pagespeed_ips = Arrays.asList(PROPS.getProperty("pagespeed_ips").split(" "));
 
             // Get the session timeout from the web.xml
             SESSION_TIMEOUT_MINUTES = Integer.parseInt(PROPS.getProperty("session_timeout"));
