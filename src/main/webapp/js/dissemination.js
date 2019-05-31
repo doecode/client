@@ -377,7 +377,9 @@ if (document.getElementById('about-page-identifier')) {
     $(".sort-dropdown-option").on('click', updateSearchSort);
 
     //Makes it where clicking on a checkbox on the search results page adds or removes that value from the search
-    $(".search-checkbox").on('click', addSearchCheckboxToSearch);
+    $(".search-checkbox:not(input[type=checkbox].single-val-search-checkbox)").on('click', addSearchCheckboxToSearch);
+    
+    //Makes it where clicking on one of the single-val-search-checkbox checkbox triggers a search, single value
 
     //Allows you to search by author name
     $(".author-search-name").on('click', authorSearchDropdownName);
