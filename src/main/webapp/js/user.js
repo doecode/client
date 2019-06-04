@@ -8,7 +8,10 @@ const FAILED_TO_LOGIN_WITH_PASSCODE = {
     showClose: true
 };
 
-var parseNameStatusData = function (return_data) {
+var parseLoginData = function (return_data) {
+    //Now that we're logged in, let's set some local storage attributes
+    setLoggedInAttributes(return_data);
+    //Send up our login data for java to do content with
     if (return_data.requested_url) {
         window.location.href = return_data.requested_url;
     } else if (window.sessionStorage.lastLocation && window.sessionStorage.lastLocation.length > 0) {
@@ -16,13 +19,6 @@ var parseNameStatusData = function (return_data) {
     } else {
         window.location.href = '/' + APP_NAME + '/projects';
     }
-};
-
-var parseLoginData = function (data) {
-    //Now that we're logged in, let's set some local storage attributes
-    setLoggedInAttributes(data);
-    //Send up our login data for java to do content with
-    doAjax('POST', '/' + APP_NAME + '/set-login-status-name', parseNameStatusData, data);
 };
 
 var parseLoginError = function (xhr) {
@@ -33,8 +29,8 @@ var parseLoginError = function (xhr) {
     if (xhr.responseJSON) {
         var response = xhr.responseJSON;
         error_msg = (response.status === 401 && response.errors && response.errors.length > 0 && response.errors[0] == 'Password is expired.') ?
-            'Your password has expired. Please go to the <a href="/' + APP_NAME + '/forgot-password">password reset page</a> to reset your password.' :
-            "Invalid Username/Password. If you believe this to be in error, please contact&nbsp;<a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>&nbsp;for further information."
+                'Your password has expired. Please go to the <a href="/' + APP_NAME + '/forgot-password">password reset page</a> to reset your password.' :
+                "Invalid Username/Password. If you believe this to be in error, please contact&nbsp;<a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>&nbsp;for further information."
     } else {
         error_msg = "An error has occurred, and the DOE CODE API couldn't be reached.";
     }
@@ -70,7 +66,7 @@ var login = function () {
     }
 
     if (try_login === true) {
-        doAjax('POST', API_BASE + 'user/login', parseLoginData, post_data, parseLoginError);
+        doAjax('POST', '/' + APP_NAME + '/user-data/login', parseLoginData, post_data, parseLoginError);
     } else {
         $("#login-errors").html(error_messages);
         $("#login-errors-container").show();
@@ -420,18 +416,18 @@ var saveUserAccountChanges = function () {
 
 var savePasswordChanges = function (post_data, update_login_status_name, login_name_status_data) {
     doAuthenticatedAjax('POST', API_BASE + 'user/changepassword', function (data) {
-            if (update_login_status_name) {
-                updateLoginNameStatus(login_name_status_data);
-            } else {
-                $("#user-account-success-message").html('Changes saved successfully. Your page will reload in 3 seconds');
-                setTimeout(function () {
-                    window.location.href = '/' + APP_NAME + '/account';
-                }, 3000);
-            }
-        }, post_data,
-        function (xhr) {
-            $("#account-error-message").html('Error in updating password: Password is not acceptable.');
-        });
+        if (update_login_status_name) {
+            updateLoginNameStatus(login_name_status_data);
+        } else {
+            $("#user-account-success-message").html('Changes saved successfully. Your page will reload in 3 seconds');
+            setTimeout(function () {
+                window.location.href = '/' + APP_NAME + '/account';
+            }, 3000);
+        }
+    }, post_data,
+            function (xhr) {
+                $("#account-error-message").html('Error in updating password: Password is not acceptable.');
+            });
 
 };
 
@@ -692,9 +688,9 @@ var parseGetUserListData = function (data) {
         //Because data attributes
         //Comes out like <option value="email@email.com" data-firstname="john" data-lastname="doe" data-awardnum="3135" data-role="BAPL" data-isactive="true" data-isverified="false" data-pendingroles='SITE1,SITE2,SITE3'>John DOE (email@email.com)</option>
         var user_option = '<option value="' + item.email + '" data-firstname="' + item.first_name + '" data-lastname="' +
-            item.last_name + '" data-awardnum="' + item.contract_number + '" data-role="' + role + '" data-isactive="' +
-            item.active + '" data-isverified="' + item.verified + '" data-ispassexpired="' +
-            item.password_expired + '" data-pendingroles="' + item.pending_roles.join(',') + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
+                item.last_name + '" data-awardnum="' + item.contract_number + '" data-role="' + role + '" data-isactive="' +
+                item.active + '" data-isverified="' + item.verified + '" data-ispassexpired="' +
+                item.password_expired + '" data-pendingroles="' + item.pending_roles.join(',') + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
         $("#user-admin-box").append(user_option);
         if (item.pending_roles.length > 0) {
             pending_roles_list.push({
@@ -838,14 +834,14 @@ if (document.getElementById('login-page-identifier')) {
                 setLoggedInAttributes(data);
                 //Send up our login data for java to do content with
                 setLoginNameStatus(data,
-                    function (return_data) {
-                        $("#signin-status-big-screens,#signin-status-small-screens").html(return_data.signin_html);
-                        $("#email").val(return_data.email);
-                        $("#first_name").val(return_data.first_name);
-                        $("#last_name").val(return_data.last_name);
-                        setUpUserAccountPage();
-                    },
-                    function () {});
+                        function (return_data) {
+                            $("#signin-status-big-screens,#signin-status-small-screens").html(return_data.signin_html);
+                            $("#email").val(return_data.email);
+                            $("#first_name").val(return_data.first_name);
+                            $("#last_name").val(return_data.last_name);
+                            setUpUserAccountPage();
+                        },
+                        function () {});
 
             },
             error: function (xhr) {

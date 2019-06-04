@@ -22,93 +22,94 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebFilter(servletNames = "UserFilter", urlPatterns = { "/submit", "/form-select", "/announce", "/approve", "/confirm",
-      "/projects", "/pending", "/account", "/user-admin", "/help", "/site-admin" })
+@WebFilter(servletNames = "UserFilter", urlPatterns = {"/submit", "/form-select", "/announce", "/approve", "/confirm",
+    "/projects", "/pending", "/account", "/user-admin", "/help", "/site-admin"})
 public class UserFilter implements Filter {
 
-   protected static Logger log = LoggerFactory.getLogger(UserFilter.class.getName());
-   private FilterConfig filterConfig = null;
+    protected static Logger log = LoggerFactory.getLogger(UserFilter.class.getName());
+    private FilterConfig filterConfig = null;
 
-   protected final String[] REQUIRES_OSTI_ROLE = { "site-admin", "user-admin", "pending", "approve" };
+    protected final String[] REQUIRES_OSTI_ROLE = {"site-admin", "user-admin", "pending", "approve"};
 
-   public UserFilter() {
-   }
+    public UserFilter() {
+    }
 
-   @Override
-   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-         throws IOException, ServletException {
-      request.setCharacterEncoding("UTF-8");
-      HttpServletRequest req = (HttpServletRequest) request;
-      HttpServletResponse res = (HttpServletResponse) response;
-      String URI = req.getRequestURI();
-      String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        request.setCharacterEncoding("UTF-8");
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        String URI = req.getRequestURI();
+        String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
+        for(Cookie c:req.getCookies()){
+            log.info(c.getName());
+        }
+        boolean is_logged_in = UserFunctions.isUserLoggedIn(req);
+        boolean password_needs_reset = StringUtils.equals(UserFunctions.getOtherUserCookieValue(req, "needs_password_reset"), "true");
 
-      boolean is_logged_in = UserFunctions.isUserLoggedIn(req);
-      boolean password_needs_reset = StringUtils
-            .equals(UserFunctions.getOtherUserCookieValue(req, "needs_password_reset"), "true");
+        /* Determine the course of action, based on the need for a login */
+        if (is_logged_in && !password_needs_reset) {
+            // If they are logged in, and don't need a password reset, continue
+            res.addCookie(UserFunctions.updateUserSessionTimeout(req));
 
-      /* Determine the course of action, based on the need for a login */
-      if (is_logged_in && !password_needs_reset) {
-         // If they are logged in, and don't need a password reset, continue
-         res.addCookie(UserFunctions.updateUserSessionTimeout(req));
+            // If the user doesn't have an OSTI role, yet is trying to access osti-only
+            // content, they need to be redirected
+            boolean has_osti_role = JsonUtils.getBoolean(UserFunctions.getUserDataFromCookie(req), "has_osti_role", false);
+            if (!has_osti_role && Arrays.asList(REQUIRES_OSTI_ROLE).contains(remaining)) {
+                res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                res.sendRedirect(Init.site_url + "forbidden");
+                return;
+            }
 
-         // If the user doesn't have an OSTI role, yet is trying to access osti-only
-         // content, they need to be redirected
-         boolean has_osti_role = JsonUtils.getBoolean(UserFunctions.getUserDataFromCookie(req), "has_osti_role", false);
-         if (!has_osti_role && Arrays.asList(REQUIRES_OSTI_ROLE).contains(remaining)) {
-            res.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            res.sendRedirect(Init.site_url + "forbidden");
+        } else if (is_logged_in && password_needs_reset && StringUtils.equals(remaining, "account")) {
+            // If they are logged in, but need a password reset, and are going to the
+            // account page
+            res.addCookie(UserFunctions.updateUserSessionTimeout(req));
+            Cookie needs_reset_cookie = UserFunctions.getOtherUserCookie(req, "needs_password_reset");
+            needs_reset_cookie.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
+            res.addCookie(needs_reset_cookie);
+
+        } else if (is_logged_in && password_needs_reset && !StringUtils.equals(remaining, "account")) {
+            // If they try to redirect to a logged-in page (that isn't account), but need a
+            // password reset, redirect them to the account page
+            res.sendRedirect(Init.site_url + "account");
             return;
-         }
 
-      } else if (is_logged_in && password_needs_reset && StringUtils.equals(remaining, "account")) {
-         // If they are logged in, but need a password reset, and are going to the
-         // account page
-         res.addCookie(UserFunctions.updateUserSessionTimeout(req));
-         Cookie needs_reset_cookie = UserFunctions.getOtherUserCookie(req, "needs_password_reset");
-         needs_reset_cookie.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
-         res.addCookie(needs_reset_cookie);
+        } else if (!is_logged_in && StringUtils.equals(remaining, "account")) {
+            // If they are not logged in, but are going to the account page with a passcode
+            String passcode_param = req.getParameter("passcode");
 
-      } else if (is_logged_in && password_needs_reset && !StringUtils.equals(remaining, "account")) {
-         // If they try to redirect to a logged-in page (that isn't account), but need a
-         // password reset, redirect them to the account page
-         res.sendRedirect(Init.site_url + "account");
-         return;
+            // If they don't have a passcode either way, redirect them to the login
+            if (StringUtils.isBlank(passcode_param)) {
+                UserFunctions.redirectUserToLogin(req, res, Init.site_url);
+                return;
+            }
 
-      } else if (!is_logged_in && StringUtils.equals(remaining, "account")) {
-         // If they are not logged in, but are going to the account page with a passcode
-         String passcode_param = req.getParameter("passcode");
+            res.addCookie(UserFunctions.updateUserSessionTimeout(req));
 
-         // If they don't have a passcode either way, redirect them to the login
-         if (StringUtils.isBlank(passcode_param)) {
+        } else {
             UserFunctions.redirectUserToLogin(req, res, Init.site_url);
             return;
-         }
 
-         res.addCookie(UserFunctions.updateUserSessionTimeout(req));
+        }
+        chain.doFilter(request, response);
+    }
 
-      } else {
-         UserFunctions.redirectUserToLogin(req, res, Init.site_url);
-         return;
+    public FilterConfig getFilterConfig() {
+        return (this.filterConfig);
+    }
 
-      }
-      chain.doFilter(request, response);
-   }
+    public void setFilterConfig(FilterConfig filterConfig) {
+        this.filterConfig = filterConfig;
+    }
 
-   public FilterConfig getFilterConfig() {
-      return (this.filterConfig);
-   }
+    public void destroy() {
+        log.info("User filter destroyed");
+    }
 
-   public void setFilterConfig(FilterConfig filterConfig) {
-      this.filterConfig = filterConfig;
-   }
-
-   public void destroy() {
-      log.info("User filter destroyed");
-   }
-
-   public void init(FilterConfig filterConfig) {
-      this.filterConfig = filterConfig;
-   }
+    public void init(FilterConfig filterConfig) {
+        this.filterConfig = filterConfig;
+    }
 
 }
