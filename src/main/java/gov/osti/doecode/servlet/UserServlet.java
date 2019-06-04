@@ -35,12 +35,20 @@ public class UserServlet extends HttpServlet {
                 break;
             case "login":
                 ObjectNode login_request = JsonUtils.parseObjectNode(request.getReader());
-                return_data = UserFunctions.doLogin(login_request);
-                String response_code = return_data.findPath("response_code").asText("");
+                String email = login_request.findPath("email").asText("");
+                String password = login_request.findPath("password").asText("");
+
+                //If they didn't pass their email or password, send back an error
+                if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    return;
+                }
+
+                //Make post for login
+                return_data = DOECODEUtils.makePostAjaxRequest(Init.backend_api_url + "user/login", login_request, response);
                 //If we didn't get a proper 200, return with the status code that we got from the AJAX call
-                if (StringUtils.isNumeric(response_code) && !StringUtils.equals(response_code, "200")) {
-                    response.setStatus(Integer.parseInt(response_code));
-                } else {
+
+                if (response.getStatus() == 200) {
                     //Set the user cookie, because the login was successful
                     ObjectNode user_cookie_data = UserFunctions.setUserDataForCookie(return_data);
                     Cookie last_location = UserFunctions.getOtherUserCookie(request, "requested_url");

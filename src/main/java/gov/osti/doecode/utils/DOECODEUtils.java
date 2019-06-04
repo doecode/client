@@ -12,6 +12,7 @@ import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.javalite.http.Get;
@@ -136,7 +137,7 @@ public class DOECODEUtils {
      * //Makes a javalite GET request using the XSRF token from the user
      * cookie, and the access token from the cookie received from the API
      */
-    public static ObjectNode makeAuthenticatedGetAjaxRequest(String url, HttpServletRequest request) {
+    public static ObjectNode makeAuthenticatedGetAjaxRequest(String url, HttpServletRequest request, HttpServletResponse servlet_response) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         //Check for xsrf and access tokens
         ObjectNode user_data = UserFunctions.getUserDataFromCookie(request);
@@ -150,7 +151,6 @@ public class DOECODEUtils {
         String response = get.text("UTF-8");
         if (JsonUtils.isValidObjectNode(response)) {
             return_data = JsonUtils.parseObjectNode(response);
-            return_data.put("response_code", Integer.toString(get.responseCode()));
         } else {
             return_data = JsonUtils.MAPPER.createObjectNode().put("error", "Didn't get valid json response.");
         }
@@ -161,7 +161,7 @@ public class DOECODEUtils {
      * Makes a javalite POST request using the XSRF token from the user cookie,
      * and the access token from the cookie received from the API
      */
-    public static ObjectNode makeAuthenticatedPostAjaxRequest(String url, HttpServletRequest request, ObjectNode post_data) {
+    public static ObjectNode makeAuthenticatedPostAjaxRequest(String url, HttpServletRequest request, ObjectNode post_data, HttpServletResponse servlet_response) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
 
         //Check for xsrf and access tokens
@@ -173,35 +173,36 @@ public class DOECODEUtils {
         String response = post.text("UTF-8");
         if (JsonUtils.isValidObjectNode(response)) {
             return_data = JsonUtils.parseObjectNode(response);
-            return_data.put("response_code", Integer.toString(post.responseCode()));
         } else {
             return_data = JsonUtils.MAPPER.createObjectNode().put("error", "Didn't get valid json response.");
         }
         return return_data;
     }
 
-    public static ObjectNode makeGetAjaxRequest(String url) {
+    public static ObjectNode makeGetAjaxRequest(String url, HttpServletResponse servlet_response) {
         ObjectNode return_data = null;
         Get get = Http.get(url).header("Accept", "application/json").header("Content-Type", "application/json");
         String response = get.text("UTF-8");
         if (JsonUtils.isValidObjectNode(response)) {
             return_data = JsonUtils.parseObjectNode(response);
-            return_data.put("response_code", Integer.toString(get.responseCode()));
         } else {
             return_data = JsonUtils.MAPPER.createObjectNode().put("error", "Didn't get valid json response.");
         }
         return return_data;
     }
 
-    public static ObjectNode makePostAjaxRequest(String url, ObjectNode post_data) {
+    public static ObjectNode makePostAjaxRequest(String url, ObjectNode post_data, HttpServletResponse servlet_response) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
 
         Post post = Http.post(url, post_data.toString()).header("Accept", "application/json").header("Content-Type", "application/json");
         String response = post.text("UTF-8");
         if (JsonUtils.isValidObjectNode(response)) {
             return_data = JsonUtils.parseObjectNode(response);
-            return_data.put("response_code", Integer.toString(post.responseCode()));
-            return_data.put("access_token", StringUtils.substringBetween(post.headers().get("Set-Cookie").get(0), "accessToken=", ";"));
+            servlet_response.setStatus(post.responseCode());
+            //If an access token cookie was sent, get the value out, and send it back, in case the calling funtion needs it
+            if (post.headers().containsKey("Set-Cookie")) {
+                return_data.put("access_token", StringUtils.substringBetween(post.headers().get("Set-Cookie").get(0), "accessToken=", ";"));
+            }
         } else {
             return_data = JsonUtils.MAPPER.createObjectNode().put("error", "Didn't get valid json response.");
         }

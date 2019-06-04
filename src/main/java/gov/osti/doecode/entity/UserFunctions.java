@@ -265,21 +265,5 @@ public class UserFunctions {
         is_admin = JsonUtils.getBoolean(current_user_data, "has_osti_role", false);
         return is_admin;
     }
-    
-    public static ObjectNode doLogin(ObjectNode request_data) {
-        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
-        String email = request_data.findPath("email").asText("");
-        String password = request_data.findPath("password").asText("");
 
-        //If they don't provide one of the two, return immediately
-        if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
-            return_data.put("error", "You must enter an email and password to attempt login.");
-            return return_data;
-        }
-
-        //Make post for login
-        return_data = DOECODEUtils.makePostAjaxRequest(Init.public_api_url + "user/login", request_data);
-        
-        return return_data;
-    }
 }
