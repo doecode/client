@@ -38,8 +38,7 @@ public class SearchFunctions {
     public static final DateTimeFormatter APA_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy, MMMM dd");
     public static final DateTimeFormatter CHICAGO_DATE_FORMAT = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
     public static final DateTimeFormatter MLA_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM. yyyy.");
-    public static final DateTimeFormatter SEARCH_RESULTS_DESCRIPTION_FORMAT = DateTimeFormatter
-            .ofPattern("MM-dd-yyyy");
+    public static final DateTimeFormatter SEARCH_RESULTS_DESCRIPTION_FORMAT = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 
     // MUST REMOVE "T" and "Z" from string
     public static final DateTimeFormatter SOLR_DATE_ONLY = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -120,8 +119,7 @@ public class SearchFunctions {
         // want, assume we got correct data
         ArrayNode search_results_list = new ArrayNode(JsonUtils.INSTANCE);
         if (search_result_data.get("docs") != null) {
-            search_results_list = processSearchResultData((ArrayNode) search_result_data.get("docs"), start,
-                    num_found);
+            search_results_list = processSearchResultData((ArrayNode) search_result_data.get("docs"), start, num_found);
         }
 
         // Go through, and stringify all of the json array values, so they can sit on
@@ -205,33 +203,27 @@ public class SearchFunctions {
 
         // All Fields
         if (StringUtils.isNotBlank(JsonUtils.getString(post_data, "all_fields", ""))) {
-            search_description_list.add(makeSearchDescriptionObject("All Fields",
-                    JsonUtils.getString(post_data, "all_fields", ""), "all_fields"));
+            search_description_list.add(makeSearchDescriptionObject("All Fields", JsonUtils.getString(post_data, "all_fields", ""), "all_fields"));
         }
 
         // Software Title
         if (StringUtils.isNotBlank(JsonUtils.getString(post_data, "software_title", ""))) {
-            search_description_list.add(makeSearchDescriptionObject("Software Title",
-                    JsonUtils.getString(post_data, "software_title", ""), "software_title"));
+            search_description_list.add(makeSearchDescriptionObject("Software Title", JsonUtils.getString(post_data, "software_title", ""), "software_title"));
         }
 
         // Developers/Contributors
         if (StringUtils.isNotBlank(JsonUtils.getString(post_data, "developers_contributors", ""))) {
-            search_description_list.add(makeSearchDescriptionObject("Developers/Contributors",
-                    JsonUtils.getString(post_data, "developers_contributors", ""),
-                    "developers_contributors"));
+            search_description_list.add(makeSearchDescriptionObject("Developers/Contributors", JsonUtils.getString(post_data, "developers_contributors", ""), "developers_contributors"));
         }
 
         // Biblio Data
         if (StringUtils.isNotBlank(JsonUtils.getString(post_data, "biblio_data", ""))) {
-            search_description_list.add(makeSearchDescriptionObject("Bibliographic Data",
-                    JsonUtils.getString(post_data, "biblio_data", ""), "biblio_data"));
+            search_description_list.add(makeSearchDescriptionObject("Bibliographic Data", JsonUtils.getString(post_data, "biblio_data", ""), "biblio_data"));
         }
 
         // Identifiers
         if (StringUtils.isNotBlank(JsonUtils.getString(post_data, "identifiers", ""))) {
-            search_description_list.add(makeSearchDescriptionObject("Identifiers",
-                    JsonUtils.getString(post_data, "identifiers", ""), "identifiers"));
+            search_description_list.add(makeSearchDescriptionObject("Identifiers", JsonUtils.getString(post_data, "identifiers", ""), "identifiers"));
         }
 
         // Date Earliest
@@ -242,12 +234,10 @@ public class SearchFunctions {
             // Test the date, and see whether it's valid or not
             if (DOECODEUtils.isValidDateOfPattern(RELEASE_DATE_FORMAT, date_earliest_trimmed)) {
                 // Format it to a date that we want to see
-                date_earliest_trimmed = LocalDate.parse(date_earliest_trimmed, RELEASE_DATE_FORMAT)
-                        .format(SEARCH_RESULTS_DESCRIPTION_FORMAT);
+                date_earliest_trimmed = LocalDate.parse(date_earliest_trimmed, RELEASE_DATE_FORMAT).format(SEARCH_RESULTS_DESCRIPTION_FORMAT);
             }
             // Now, we show it
-            search_description_list.add(makeSearchDescriptionObject("Earliest Release Date",
-                    date_earliest_trimmed, "date_earliest"));
+            search_description_list.add(makeSearchDescriptionObject("Earliest Release Date", date_earliest_trimmed, "date_earliest"));
         }
 
         // Date Latest
@@ -258,81 +248,60 @@ public class SearchFunctions {
             // Test the date, and see whether it's valid or not
             if (DOECODEUtils.isValidDateOfPattern(RELEASE_DATE_FORMAT, date_latest_trimmed)) {
                 // Format it to a date that we want to see
-                date_latest_trimmed = LocalDate.parse(date_latest_trimmed, RELEASE_DATE_FORMAT)
-                        .format(SEARCH_RESULTS_DESCRIPTION_FORMAT);
+                date_latest_trimmed = LocalDate.parse(date_latest_trimmed, RELEASE_DATE_FORMAT).format(SEARCH_RESULTS_DESCRIPTION_FORMAT);
             }
             // Show it
-            search_description_list.add(makeSearchDescriptionObject("Latest Release Date",
-                    date_latest_trimmed, "date_latest"));
+            search_description_list.add(makeSearchDescriptionObject("Latest Release Date", date_latest_trimmed, "date_latest"));
         }
 
         // Accessibility
         String accessibility_array = JsonUtils.getString(post_data, "accessibility", "");
-        if (StringUtils.isNotBlank(accessibility_array)
-                && JsonUtils.parseArrayNode(accessibility_array).size() > 0) {
+        if (StringUtils.isNotBlank(accessibility_array) && JsonUtils.parseArrayNode(accessibility_array).size() > 0) {
             // Get the accessibility array so we can get some display values
-            ArrayNode accessiblity_display_vals = DOECODEServletContextListener
-                    .getJsonList(DOECODEJson.AVAILABILITY_KEY);
+            ArrayNode accessiblity_display_vals = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
 
-            search_description_list.add(makeSearchDescriptionObjectArray("Accessibility",
-                    JsonUtils.parseArrayNode(accessibility_array), "accessibility",
-                    accessiblity_display_vals));
+            search_description_list.add(makeSearchDescriptionObjectArray("Accessibility", JsonUtils.parseArrayNode(accessibility_array), "accessibility", accessiblity_display_vals));
         }
 
         // Software Type
         String software_type_array = JsonUtils.getString(post_data, "software_type", "");
-        if (StringUtils.isNotBlank(software_type_array)
-                && JsonUtils.parseArrayNode(software_type_array).size() > 0) {
+        if (StringUtils.isNotBlank(software_type_array) && JsonUtils.parseArrayNode(software_type_array).size() > 0) {
             // Get the software_type array so we can get display values
-            ArrayNode software_type_display_vals = DOECODEServletContextListener
-                    .getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY);
+            ArrayNode software_type_display_vals = DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY);
 
-            search_description_list.add(makeSearchDescriptionObjectArray("Software Type",
-                    JsonUtils.parseArrayNode(software_type_array), "software_type",
-                    software_type_display_vals));
+            search_description_list.add(makeSearchDescriptionObjectArray("Software Type", JsonUtils.parseArrayNode(software_type_array), "software_type", software_type_display_vals));
         }
 
         // Licenses
         String license_array = JsonUtils.getString(post_data, "licenses", "");
         if (StringUtils.isNotBlank(license_array) && JsonUtils.parseArrayNode(license_array).size() > 0) {
-            search_description_list.add(makeSearchDescriptionObjectArray("Licenses",
-                    JsonUtils.parseArrayNode(license_array), "licenses", null));
+            search_description_list.add(makeSearchDescriptionObjectArray("Licenses", JsonUtils.parseArrayNode(license_array), "licenses", null));
         }
 
         // Programming Languages
         String programming_languages_array = JsonUtils.getString(post_data, "programming_languages", "");
-        if (StringUtils.isNotBlank(programming_languages_array)
-                && JsonUtils.parseArrayNode(programming_languages_array).size() > 0) {
-            search_description_list.add(makeSearchDescriptionObjectArray("Programming Language",
-                    JsonUtils.parseArrayNode(programming_languages_array), "programming_languages",
-                    null));
+        if (StringUtils.isNotBlank(programming_languages_array) && JsonUtils.parseArrayNode(programming_languages_array).size() > 0) {
+            search_description_list.add(makeSearchDescriptionObjectArray("Programming Language", JsonUtils.parseArrayNode(programming_languages_array), "programming_languages", null));
         }
 
         // Research Organization
         String research_org_array = JsonUtils.getString(post_data, "research_organization", "");
-        if (StringUtils.isNotBlank(research_org_array)
-                && JsonUtils.parseArrayNode(research_org_array).size() > 0) {
-            search_description_list.add(makeSearchDescriptionObjectArray("Research Organization",
-                    JsonUtils.parseArrayNode(research_org_array), "research_organization", null));
+        if (StringUtils.isNotBlank(research_org_array) && JsonUtils.parseArrayNode(research_org_array).size() > 0) {
+            search_description_list.add(makeSearchDescriptionObjectArray("Research Organization", JsonUtils.parseArrayNode(research_org_array), "research_organization", null));
         }
 
         // Sponsoring Organization
         String sponsoring_organization = JsonUtils.getString(post_data, "sponsoring_organization", "");
-        if (StringUtils.isNotBlank(sponsoring_organization)
-                && JsonUtils.parseArrayNode(sponsoring_organization).size() > 0) {
-            search_description_list.add(makeSearchDescriptionObjectArray("Sponsoring Organization",
-                    JsonUtils.parseArrayNode(sponsoring_organization), "sponsoring_organization",
-                    null));
+        if (StringUtils.isNotBlank(sponsoring_organization) && JsonUtils.parseArrayNode(sponsoring_organization).size() > 0) {
+            search_description_list.add(makeSearchDescriptionObjectArray("Sponsoring Organization", JsonUtils.parseArrayNode(sponsoring_organization), "sponsoring_organization", null));
         }
 
         // ORCID
         if (StringUtils.isNotBlank(JsonUtils.getString(post_data, "orcid", ""))) {
-            search_description_list.add(makeSearchDescriptionObject("ORCID",
-                    JsonUtils.getString(post_data, "orcid", ""), "orcid"));
+            search_description_list.add(makeSearchDescriptionObject("ORCID", JsonUtils.getString(post_data, "orcid", ""), "orcid"));
         }
         return_data.set("search_description_list", search_description_list);
-        return_data.put("is_targeted_search",
-                StringUtils.isNotBlank(JsonUtils.getString(post_data, "all_fields", "")));
+        return_data.put("is_targeted_search", StringUtils.isNotBlank(JsonUtils.getString(post_data, "all_fields", "")));
         return_data.put("had_things_to_search_by", search_description_list.size() > 0);
         return return_data;
     }
@@ -473,19 +442,16 @@ public class SearchFunctions {
             Long code_id = JsonUtils.getLong(row, "code_id", 0);
             newRow.put("code_id", code_id);
             newRow.put("release_date", JsonUtils.getString(row, "release_date", ""));
-            newRow.put("show_release_date",
-                    StringUtils.isNotBlank(JsonUtils.getString(row, "release_date", "")));
+            newRow.put("show_release_date", StringUtils.isNotBlank(JsonUtils.getString(row, "release_date", "")));
             newRow.put("software_title", JsonUtils.getString(row, "software_title", ""));
-            newRow.put("pretified_title",
-                    DOECODEUtils.getPretifiedTitle(JsonUtils.getString(row, "software_title", "")));
+            newRow.put("pretified_title", DOECODEUtils.getPretifiedTitle(JsonUtils.getString(row, "software_title", "")));
 
             // Devs and contributors
             /*
                          * We need to remove all but 3 of the devs and contributors, since this is the
                          * search page
              */
-            ArrayNode devContributors = combineDevContributorNames((ArrayNode) row.get("developers"),
-                    (ArrayNode) row.get("contributors"));
+            ArrayNode devContributors = combineDevContributorNames((ArrayNode) row.get("developers"), (ArrayNode) row.get("contributors"));
             ArrayNode devContributorsTrimmed = new ArrayNode(JsonUtils.INSTANCE);
             boolean is_more_than_3 = false;
             if (devContributors.size() > 3) {// If we have more than 3, then we want to trim the list down
@@ -498,26 +464,17 @@ public class SearchFunctions {
                 devContributorsTrimmed = devContributors;
             }
 
-            newRow.set("dev_contributors",
-                    getDevAndContributorLink(devContributorsTrimmed, false, is_more_than_3, false));
+            newRow.set("dev_contributors", getDevAndContributorLink(devContributorsTrimmed, false, is_more_than_3, false));
             newRow.set("descriptionObj", getDescription(JsonUtils.getString(row, "description", ""), 100));
-            newRow.set("repository_links_list",
-                    getDoiReposLinks(code_id.toString(), JsonUtils.getString(row, "doi", ""),
-                            JsonUtils.getString(row, "repository_link", ""),
-                            JsonUtils.getString(row, "landing_page", ""),
-                            JsonUtils.getString(row, "release_date", "")));
+            newRow.set("repository_links_list", getDoiReposLinks(code_id.toString(), JsonUtils.getString(row, "doi", ""), JsonUtils.getString(row, "repository_link", ""), JsonUtils.getString(row, "landing_page", ""), JsonUtils.getString(row, "release_date", "")));
 
             // Get the sponsorOrgRow number. The sponsorOrgRow number is where we start,
             // plus 1, plus the index we're on
             newRow.put("list_number", ((start + 1) + i));
 
             // Get the classes that will contain the result sponsorOrgRow
-            newRow.put("result_column_classes",
-                    (num_found > 9999) ? "col-sm-2 col-xs-12 search-result-count-column"
-                            : "col-sm-1 col-xs-2 search-result-count-column");
-            newRow.put("result_subrow_classes",
-                    (num_found > 9999) ? "col-sm-10 col-xs-12 search-result-sub-row"
-                            : "col-sm-11 col-xs-10 search-result-sub-row");
+            newRow.put("result_column_classes", (num_found > 9999) ? "col-sm-2 col-xs-12 search-result-count-column" : "col-sm-1 col-xs-2 search-result-count-column");
+            newRow.put("result_subrow_classes", (num_found > 9999) ? "col-sm-10 col-xs-12 search-result-sub-row" : "col-sm-11 col-xs-10 search-result-sub-row");
 
             return_data.add(newRow);
         }
@@ -533,21 +490,15 @@ public class SearchFunctions {
                 ObjectNode row = (ObjectNode) v;
                 // Get the first and last names, strip out any nulls, undefineds, and such from
                 // bad, old data
-                String first_name = JsonUtils.getString(row, "first_name", "")
-                        .replaceAll("(undefined), ", "").replaceAll(" (undefined)", "")
-                        .replaceAll(" null", "").replaceAll("null ", "");
-                String last_name = JsonUtils.getString(row, "last_name", "")
-                        .replaceAll("(undefined), ", "").replaceAll(" (undefined)", "")
-                        .replaceAll(" null", "").replaceAll("null ", "");
+                String first_name = JsonUtils.getString(row, "first_name", "").replaceAll("(undefined), ", "").replaceAll(" (undefined)", "").replaceAll(" null", "").replaceAll("null ", "");
+                String last_name = JsonUtils.getString(row, "last_name", "").replaceAll("(undefined), ", "").replaceAll(" (undefined)", "").replaceAll(" null", "").replaceAll("null ", "");
 
                 // Combine the names
                 String combined_name = last_name + ", " + first_name;
 
                 // If we still had anything left over, we'll assume we have a properly combined
                 // name
-                if (StringUtils.isNotBlank(combined_name.replaceAll(" ", "").replaceAll(",", ""))
-                        && !first_name.equalsIgnoreCase("none")
-                        && !last_name.equalsIgnoreCase("none")) {
+                if (StringUtils.isNotBlank(combined_name.replaceAll(" ", "").replaceAll(",", "")) && !first_name.equalsIgnoreCase("none") && !last_name.equalsIgnoreCase("none")) {
                     row.put("combined_name", combined_name);
                     row.put("author_type", "developer");
                     return_data.add(row);
@@ -560,21 +511,15 @@ public class SearchFunctions {
                 ObjectNode row = (ObjectNode) v;
                 // Get the first and last names, strip out any nulls, undefineds, and such from
                 // bad, old data
-                String first_name = JsonUtils.getString(row, "first_name", "")
-                        .replaceAll("(undefined), ", "").replaceAll(" (undefined)", "")
-                        .replaceAll(" null", "").replaceAll("null ", "");
-                String last_name = JsonUtils.getString(row, "last_name", "")
-                        .replaceAll("(undefined), ", "").replaceAll(" (undefined)", "")
-                        .replaceAll(" null", "").replaceAll("null ", "");
+                String first_name = JsonUtils.getString(row, "first_name", "").replaceAll("(undefined), ", "").replaceAll(" (undefined)", "").replaceAll(" null", "").replaceAll("null ", "");
+                String last_name = JsonUtils.getString(row, "last_name", "").replaceAll("(undefined), ", "").replaceAll(" (undefined)", "").replaceAll(" null", "").replaceAll("null ", "");
 
                 // Combine the names
                 String combined_name = last_name + ", " + first_name;
 
                 // If we still had anything left over, we'll assume we have a properly combined
                 // name
-                if (StringUtils.isNotBlank(combined_name.replaceAll(" ", "").replaceAll(",", ""))
-                        && !first_name.equalsIgnoreCase("none")
-                        && !last_name.equalsIgnoreCase("none")) {
+                if (StringUtils.isNotBlank(combined_name.replaceAll(" ", "").replaceAll(",", "")) && !first_name.equalsIgnoreCase("none") && !last_name.equalsIgnoreCase("none")) {
                     row.put("combined_name", combined_name);
                     row.put("author_type", "contributor");
                     return_data.add(row);
@@ -603,9 +548,7 @@ public class SearchFunctions {
             ObjectNode current_row = (ObjectNode) authorlist.get(i);
 
             // We need to know whether this author has an orcid or not
-            current_row.put("showOrcid",
-                    StringUtils.isNotBlank(JsonUtils.getString(current_row, "orcid", ""))
-                    && showOrcid);
+            current_row.put("showOrcid", StringUtils.isNotBlank(JsonUtils.getString(current_row, "orcid", "")) && showOrcid);
 
             if (showAffiliations) {
                 ArrayNode countArray = new ArrayNode(JsonUtils.INSTANCE);
@@ -621,9 +564,7 @@ public class SearchFunctions {
                             // if affiliation is already in the list, use previous
                             boolean matchFound = false;
                             for (int j = 0; j < affiliations_list.size(); j++) {
-                                if (StringUtils.equalsIgnoreCase(
-                                        affiliations_list.get(j).asText(),
-                                        v.asText())) {
+                                if (StringUtils.equalsIgnoreCase(affiliations_list.get(j).asText(), v.asText())) {
                                     matchFound = true;
                                     // countArray.add(j + 1);
                                     countList.add(j + 1);
@@ -672,8 +613,7 @@ public class SearchFunctions {
             // Take out only the first moreLessValue words. Man, this is easier in
             // javascript
             description_pt1 = String.join(" ", Arrays.asList(description_words).subList(0, moreLessValue));
-            description_pt2 = String.join(" ", Arrays.asList(description_words).subList(moreLessValue,
-                    description_words.length));
+            description_pt2 = String.join(" ", Arrays.asList(description_words).subList(moreLessValue, description_words.length));
         }
 
         return_data.put("description_pt1", description_pt1);
@@ -689,26 +629,19 @@ public class SearchFunctions {
         // doi
         if (StringUtils.isNotBlank(release_date) && StringUtils.isNotBlank(doi)) {
             String fixed_doi = "https://doi.org/" + doi;
-            return_data.add(makeDOIRepoLinkObj("DOI: ", "DOI for Code ID " + code_id, code_id, fixed_doi,
-                    doi, ""));
+            return_data.add(makeDOIRepoLinkObj("DOI: ", "DOI for Code ID " + code_id, code_id, fixed_doi, doi, ""));
         }
 
         // repository link
         if (StringUtils.isNotBlank(repository_link)) {
-            repository_link = (StringUtils.startsWith(repository_link, "http:")
-                    || StringUtils.startsWith(repository_link, "https:")) ? repository_link
-                    : "http://" + repository_link;
-            return_data.add(makeDOIRepoLinkObj("", "Repository Link for Code ID", code_id, repository_link,
-                    "Repository Link", "download-link"));
+            repository_link = (StringUtils.startsWith(repository_link, "http:") || StringUtils.startsWith(repository_link, "https:")) ? repository_link : "http://" + repository_link;
+            return_data.add(makeDOIRepoLinkObj("", "Repository Link for Code ID", code_id, repository_link, "Repository Link", "download-link"));
         }
 
         // Landing page
         if (StringUtils.isNotBlank(landing_page)) {
-            landing_page = (StringUtils.startsWith(landing_page, "http:")
-                    || StringUtils.startsWith(landing_page, "https:")) ? landing_page
-                    : "http://" + landing_page;
-            return_data.add(makeDOIRepoLinkObj("", "Landing Page for Code ID", code_id, landing_page,
-                    "Landing Page", "download-link"));
+            landing_page = (StringUtils.startsWith(landing_page, "http:") || StringUtils.startsWith(landing_page, "https:")) ? landing_page : "http://" + landing_page;
+            return_data.add(makeDOIRepoLinkObj("", "Landing Page for Code ID", code_id, landing_page, "Landing Page", "download-link"));
         }
 
         // Mark the last one as "is_last"
@@ -735,34 +668,23 @@ public class SearchFunctions {
 
     public static ObjectNode getAdvancedSearchPageLists() {
         ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-        return_data.set("availabilities_list",
-                DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY));
+        return_data.set("availabilities_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY));
         return_data.set("licenses_list", DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY));
-        return_data.set("software_type",
-                DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY));
-        return_data.set("research_org_list",
-                DOECODEServletContextListener.getJsonList(DOECODEJson.RESEARCH_KEY));
-        return_data.set("sponsor_org_list",
-                DOECODEServletContextListener.getJsonList(DOECODEJson.SPONSOR_ORG_KEY));
+        return_data.set("software_type", DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY));
+        return_data.set("research_org_list", DOECODEServletContextListener.getJsonList(DOECODEJson.RESEARCH_KEY));
+        return_data.set("sponsor_org_list", DOECODEServletContextListener.getJsonList(DOECODEJson.SPONSOR_ORG_KEY));
         return_data.set("sort_list", DOECODEServletContextListener.getJsonList(DOECODEJson.SEARCH_SORT_KEY));
-        return_data.set("programming_languages_list",
-                DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
+        return_data.set("programming_languages_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
 
         return return_data;
     }
 
     public static ArrayNode getSearchBreadcrumbTrailList(ObjectNode search_form_data, long num_found) {
         ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
-        return_data.add("<a title='DOE CODE Homepage' href='/" + Init.app_name
-                + "/'> DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;");
+        return_data.add("<a title='DOE CODE Homepage' href='/" + Init.app_name + "/'> DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;");
 
-        String all_fields_text = "Search for "
-                + (StringUtils.isNotBlank(JsonUtils.getString(search_form_data, "all_fields", ""))
-                ? JsonUtils.getString(search_form_data, "all_fields", "")
-                : "All Projects");
-        String filter_suffix = (getWasAnythingFilteredFor(search_form_data))
-                ? "<span class='search-for-filter-crumb'>&nbsp;(filtered)</span>"
-                : "";
+        String all_fields_text = "Search for " + (StringUtils.isNotBlank(JsonUtils.getString(search_form_data, "all_fields", "")) ? JsonUtils.getString(search_form_data, "all_fields", "") : "All Projects");
+        String filter_suffix = (getWasAnythingFilteredFor(search_form_data)) ? "<span class='search-for-filter-crumb'>&nbsp;(filtered)</span>" : "";
         return_data.add(all_fields_text + filter_suffix);
 
         if (num_found > 0) {
@@ -773,8 +695,7 @@ public class SearchFunctions {
             long max_pages = ((int) (num_found / rows) + 1);
 
             if (max_pages > 1) {
-                return_data.add("&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Page&nbsp;" + Long.toString(page)
-                        + "&nbsp;of&nbsp;" + Long.toString(max_pages) + "&nbsp;");
+                return_data.add("&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Page&nbsp;" + Long.toString(page) + "&nbsp;of&nbsp;" + Long.toString(max_pages) + "&nbsp;");
             }
         }
 
@@ -783,44 +704,24 @@ public class SearchFunctions {
 
     public static boolean getWasAnythingFilteredFor(ObjectNode request_data) {
         return StringUtils.isNotBlank(JsonUtils.getString(request_data, "software_title", ""))
-                || StringUtils.isNotBlank(
-                        JsonUtils.getString(request_data, "developers_contributors", ""))
+                || StringUtils.isNotBlank(JsonUtils.getString(request_data, "developers_contributors", ""))
                 || StringUtils.isNotBlank(JsonUtils.getString(request_data, "biblio_data", ""))
                 || StringUtils.isNotBlank(JsonUtils.getString(request_data, "identifiers", ""))
                 || StringUtils.isNotBlank(JsonUtils.getString(request_data, "date_earliest", ""))
                 || StringUtils.isNotBlank(JsonUtils.getString(request_data, "date_latest", ""))
-                || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "accessibility", ""))
-                && JsonUtils.parseArrayNode(
-                        JsonUtils.getString(request_data, "accessibility", ""))
-                        .size() > 0)
-                || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "licenses", ""))
-                && JsonUtils.parseArrayNode(
-                        JsonUtils.getString(request_data, "licenses", ""))
-                        .size() > 0)
-                || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "programming_languages", ""))
-                && JsonUtils.parseArrayNode(
-                        JsonUtils.getString(request_data, "programming_languages", ""))
-                        .size() > 0)
-                || (StringUtils.isNotBlank(
-                        JsonUtils.getString(request_data, "research_organization", ""))
-                && JsonUtils.parseArrayNode(JsonUtils.getString(request_data,
-                        "research_organization", "")).size() > 0)
-                || (StringUtils.isNotBlank(
-                        JsonUtils.getString(request_data, "sponsoring_organization", ""))
-                && JsonUtils.parseArrayNode(JsonUtils.getString(request_data,
-                        "sponsoring_organization", "")).size() > 0)
-                || (StringUtils.isNotBlank(
-                        JsonUtils.getString(request_data, "software_type", ""))
-                && JsonUtils.parseArrayNode(JsonUtils.getString(request_data,
-                        "software_type", "")).size() > 0)
+                || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "accessibility", "")) && JsonUtils.parseArrayNode(JsonUtils.getString(request_data, "accessibility", "")).size() > 0)
+                || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "licenses", "")) && JsonUtils.parseArrayNode(JsonUtils.getString(request_data, "licenses", "")).size() > 0)
+                || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "programming_languages", "")) && JsonUtils.parseArrayNode(JsonUtils.getString(request_data, "programming_languages", "")).size() > 0)
+                || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "research_organization", "")) && JsonUtils.parseArrayNode(JsonUtils.getString(request_data, "research_organization", "")).size() > 0)
+                || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "sponsoring_organization", "")) && JsonUtils.parseArrayNode(JsonUtils.getString(request_data, "sponsoring_organization", "")).size() > 0)
+                || (StringUtils.isNotBlank(JsonUtils.getString(request_data, "software_type", "")) && JsonUtils.parseArrayNode(JsonUtils.getString(request_data, "software_type", "")).size() > 0)
                 || StringUtils.isNotBlank(JsonUtils.getString(request_data, "orcid", ""));
     }
 
     public static ObjectNode getBiblioSidebarData(ObjectNode search_data, String public_api_url) {
         ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
         // DOI and release date
-        return_data.put("has_doi_and_release", showDOI(JsonUtils.getString(search_data, "doi", ""),
-                JsonUtils.getString(search_data, "release_date", "")));
+        return_data.put("has_doi_and_release", showDOI(JsonUtils.getString(search_data, "doi", ""), JsonUtils.getString(search_data, "release_date", "")));
         return_data.put("doi", JsonUtils.getString(search_data, "doi", ""));
 
         // Repository URL
@@ -829,20 +730,12 @@ public class SearchFunctions {
 
         if (StringUtils.isNotBlank(repository_link)) {
             return_data.put("has_repo_link", true);
-            return_data.put("repo_link",
-                    (StringUtils.startsWith(repository_link, "https://")
-                    || StringUtils.startsWith(repository_link, "http://"))
-                    ? repository_link
-                    : "http://" + repository_link);
+            return_data.put("repo_link", (StringUtils.startsWith(repository_link, "https://") || StringUtils.startsWith(repository_link, "http://")) ? repository_link : "http://" + repository_link);
         }
 
         if (StringUtils.isNotBlank(landing_page)) {
             return_data.put("has_landing_page", true);
-            return_data.put("landing_page",
-                    (StringUtils.startsWith(landing_page, "https://")
-                    || StringUtils.startsWith(landing_page, "http://"))
-                    ? landing_page
-                    : "http://" + landing_page);
+            return_data.put("landing_page", (StringUtils.startsWith(landing_page, "https://") || StringUtils.startsWith(landing_page, "http://")) ? landing_page : "http://" + landing_page);
         }
 
         // Code ID
@@ -853,12 +746,10 @@ public class SearchFunctions {
 
         // Documentation URL
         return_data.put("documentation_url", JsonUtils.getString(search_data, "documentation_url", ""));
-        return_data.put("has_documentation_url",
-                StringUtils.isNotBlank(JsonUtils.getString(search_data, "documentation_url", "")));
+        return_data.put("has_documentation_url", StringUtils.isNotBlank(JsonUtils.getString(search_data, "documentation_url", "")));
 
         // URL "prettified" title
-        return_data.put("pretified_title", JsonUtils.getString(search_data, "software_title", "").toLowerCase()
-                .replaceAll("[^a-zA-Z0-9\\s]", "").replaceAll("\\s{2,}", " ").replaceAll(" ", "-"));
+        return_data.put("pretified_title", JsonUtils.getString(search_data, "software_title", "").toLowerCase().replaceAll("[^a-zA-Z0-9\\s]", "").replaceAll("\\s{2,}", " ").replaceAll(" ", "-"));
 
         // Previous/Next version
         // Go through the related identifiers list. If we can find any DOI's that are
@@ -916,8 +807,7 @@ public class SearchFunctions {
             ObjectNode sponsorOrgRow = (ObjectNode) sponsoring_orgs.get(i);
             ObjectNode refinedSponsorOrgRow = new ObjectNode(JsonUtils.INSTANCE);
 
-            refinedSponsorOrgRow.put("org_name",
-                    JsonUtils.getString(sponsorOrgRow, "organization_name", ""));
+            refinedSponsorOrgRow.put("org_name", JsonUtils.getString(sponsorOrgRow, "organization_name", ""));
             ArrayNode AwardNums = new ArrayNode(JsonUtils.INSTANCE);
             ArrayNode FWPNums = new ArrayNode(JsonUtils.INSTANCE);
             ArrayNode BRCodes = new ArrayNode(JsonUtils.INSTANCE);
@@ -942,8 +832,7 @@ public class SearchFunctions {
 
             // Primary Award
             String primary_award = JsonUtils.getString(sponsorOrgRow, "primary_award", "");
-            refinedSponsorOrgRow.put("has_primary_award", StringUtils.isNotBlank(primary_award)
-                    && !StringUtils.equals(primary_award.toLowerCase(), "unknown"));
+            refinedSponsorOrgRow.put("has_primary_award", StringUtils.isNotBlank(primary_award) && !StringUtils.equals(primary_award.toLowerCase(), "unknown"));
             refinedSponsorOrgRow.put("primary_award", primary_award);
 
             // Award Numbers
@@ -988,8 +877,7 @@ public class SearchFunctions {
             String middle_name = JsonUtils.getString(row, "middle_name", "");
             String last_name = JsonUtils.getString(row, "last_name", "");
             // Make sure they're not a "none" entry
-            if (!first_name.equalsIgnoreCase("none") && !middle_name.equalsIgnoreCase("none")
-                    && !last_name.equalsIgnoreCase("none")) {
+            if (!first_name.equalsIgnoreCase("none") && !middle_name.equalsIgnoreCase("none") && !last_name.equalsIgnoreCase("none")) {
                 String combinedName = combineName(first_name, middle_name, last_name);
 
                 if (StringUtils.isNotBlank(combinedName)) {
@@ -1004,8 +892,7 @@ public class SearchFunctions {
             String middle_name = JsonUtils.getString(row, "middle_name", "");
             String last_name = JsonUtils.getString(row, "last_name", "");
 
-            if (!first_name.equalsIgnoreCase("none") && !middle_name.equalsIgnoreCase("none")
-                    && !last_name.equalsIgnoreCase("none")) {
+            if (!first_name.equalsIgnoreCase("none") && !middle_name.equalsIgnoreCase("none") && !last_name.equalsIgnoreCase("none")) {
                 String combinedName = combineName(first_name, middle_name, last_name);
 
                 if (StringUtils.isNotBlank(combinedName)) {
@@ -1028,8 +915,7 @@ public class SearchFunctions {
             fullname += (", " + first_name);
         }
 
-        if (StringUtils.isNotBlank(fullname) && StringUtils.isNotBlank(middle_name.trim())
-                && StringUtils.length(middle_name.trim()) > 0) {
+        if (StringUtils.isNotBlank(fullname) && StringUtils.isNotBlank(middle_name.trim()) && StringUtils.length(middle_name.trim()) > 0) {
             fullname += (" " + middle_name.substring(0, 1) + ".");
         }
 
@@ -1067,8 +953,7 @@ public class SearchFunctions {
         boolean needsSpacing = false;
 
         // Authors
-        ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"),
-                (ArrayNode) biblio_data.get("contributors"));
+        ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"), (ArrayNode) biblio_data.get("contributors"));
         String author_text = joinWithDelimiters(authors_and_contributors, ", ", ", & ");
         if (StringUtils.isNotBlank(author_text)) {
             author_text += (StringUtils.endsWith(author_text, ".") ? "" : ".");
@@ -1078,18 +963,14 @@ public class SearchFunctions {
         // Release Date
         String release_date = "";
         if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "release_date", ""))) {
-            release_date = ((needsSpacing ? " " : "") + "("
-                    + LocalDate.parse(JsonUtils.getString(biblio_data, "release_date", ""),
-                            RELEASE_DATE_FORMAT).format(APA_DATE_FORMAT)
-                    + ").");
+            release_date = ((needsSpacing ? " " : "") + "(" + LocalDate.parse(JsonUtils.getString(biblio_data, "release_date", ""), RELEASE_DATE_FORMAT).format(APA_DATE_FORMAT) + ").");
         }
         needsSpacing = needsSpacing || StringUtils.isNotBlank(release_date);
 
         // Software Title
         String software_title = "";
         if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "software_title", ""))) {
-            software_title = (needsSpacing ? " " : "")
-                    + JsonUtils.getString(biblio_data, "software_title", "") + ".";
+            software_title = (needsSpacing ? " " : "") + JsonUtils.getString(biblio_data, "software_title", "") + ".";
         }
         needsSpacing = needsSpacing || StringUtils.isNotBlank(software_title);
 
@@ -1099,8 +980,7 @@ public class SearchFunctions {
         // URL
         String url = "";
         if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "repository_link", ""))) {
-            url = ((needsSpacing ? " " : "") + JsonUtils.getString(biblio_data, "repository_link", "")
-                    + ".");
+            url = ((needsSpacing ? " " : "") + JsonUtils.getString(biblio_data, "repository_link", "") + ".");
         }
         needsSpacing = needsSpacing || StringUtils.isNotBlank(url);
 
@@ -1110,8 +990,7 @@ public class SearchFunctions {
             doi = ((needsSpacing ? " " : "") + "doi:" + JsonUtils.getString(biblio_data, "doi", "") + ".");
         }
 
-        return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""),
-                JsonUtils.getString(biblio_data, "release_date", "")));
+        return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""), JsonUtils.getString(biblio_data, "release_date", "")));
         return_data.put("authors", author_text);
         return_data.put("release_date", release_date);
         return_data.put("software_title", software_title);
@@ -1137,8 +1016,7 @@ public class SearchFunctions {
         String software_title = "{" + JsonUtils.getString(biblio_data, "software_title", "") + "}";
 
         // Authors Text
-        ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"),
-                (ArrayNode) biblio_data.get("contributors"));
+        ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"), (ArrayNode) biblio_data.get("contributors"));
         String author_text = joinWithDelimiters(authors_and_contributors, " and ", null);
         if (StringUtils.isNotBlank(author_text)) {
             author_text = ("{" + author_text + "}");
@@ -1148,29 +1026,24 @@ public class SearchFunctions {
         String description = "{" + JsonUtils.getString(biblio_data, "description", "") + "}";
 
         // DOI
-        if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "doi", ""))
-                && StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "release_date", ""))) {
+        if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "doi", "")) && StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "release_date", ""))) {
             String doi = JsonUtils.getString(biblio_data, "doi", "");
             optional_data.add(getOptionalBibtexObj("url", "{https://doi.org/" + doi + "}"));
-            optional_data.add(getOptionalBibtexObj("howpublished",
-                    "{[Computer Software] \\url{https://doi.org/" + doi + "}}"));
+            optional_data.add(getOptionalBibtexObj("howpublished", "{[Computer Software] \\url{https://doi.org/" + doi + "}}"));
         }
 
         // Release Date
         String release_date_year = "";
         String release_date_month = "";
         if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "release_date", ""))) {
-            LocalDate release_date = LocalDate.parse(JsonUtils.getString(biblio_data, "release_date", ""),
-                    RELEASE_DATE_FORMAT);
+            LocalDate release_date = LocalDate.parse(JsonUtils.getString(biblio_data, "release_date", ""), RELEASE_DATE_FORMAT);
             release_date_year = Integer.toString(release_date.getYear());
             release_date_month = Integer.toString(release_date.getMonthValue());
             optional_data.add(getOptionalBibtexObj("year", "{" + release_date_year + "}"));
-            optional_data.add(getOptionalBibtexObj("month",
-                    "{" + DOECODEUtils.getShortMonth(release_date_month, false) + "}"));
+            optional_data.add(getOptionalBibtexObj("month", "{" + DOECODEUtils.getShortMonth(release_date_month, false) + "}"));
         }
 
-        return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""),
-                JsonUtils.getString(biblio_data, "release_date", "")));
+        return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""), JsonUtils.getString(biblio_data, "release_date", "")));
         return_data.put("code_id", JsonUtils.getLong(biblio_data, "code_id", 0));
         return_data.put("authors_text", author_text);
         return_data.put("description", description);
@@ -1197,8 +1070,7 @@ public class SearchFunctions {
         boolean needsSpacing = false;
 
         // Authors
-        ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"),
-                (ArrayNode) biblio_data.get("contributors"));
+        ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"), (ArrayNode) biblio_data.get("contributors"));
         String author_text = joinWithDelimiters(authors_and_contributors, ", ", ", and ");
         if (StringUtils.isNotBlank(author_text)) {
             author_text += (StringUtils.endsWith(author_text, ".") ? "" : ".");
@@ -1208,33 +1080,24 @@ public class SearchFunctions {
         // Software Title
         String software_title = "";
         if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "software_title", ""))) {
-            String after_title = StringUtils
-                    .endsWith(JsonUtils.getString(biblio_data, "software_title", ""), ".")
-                    || StringUtils.endsWith(JsonUtils.getString(biblio_data, "software_title", ""),
-                            "!")
-                    || StringUtils.endsWith(JsonUtils.getString(biblio_data, "software_title", ""),
-                            "?") ? "" : ".";
-            software_title = (needsSpacing ? " " : "") + "\""
-                    + JsonUtils.getString(biblio_data, "software_title", "") + after_title
-                    + "\" Computer software.";
+            String after_title = StringUtils.endsWith(JsonUtils.getString(biblio_data, "software_title", ""), ".")
+                    || StringUtils.endsWith(JsonUtils.getString(biblio_data, "software_title", ""), "!")
+                    || StringUtils.endsWith(JsonUtils.getString(biblio_data, "software_title", ""), "?") ? "" : ".";
+            software_title = (needsSpacing ? " " : "") + "\"" + JsonUtils.getString(biblio_data, "software_title", "") + after_title + "\" Computer software.";
         }
         needsSpacing = needsSpacing || StringUtils.isNotBlank(software_title);
 
         // Release Date
         String release_date = "";
         if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "release_date", ""))) {
-            release_date = (needsSpacing ? " " : "")
-                    + LocalDate.parse(JsonUtils.getString(biblio_data, "release_date", ""))
-                            .format(CHICAGO_DATE_FORMAT)
-                    + ".";
+            release_date = (needsSpacing ? " " : "") + LocalDate.parse(JsonUtils.getString(biblio_data, "release_date", "")).format(CHICAGO_DATE_FORMAT) + ".";
         }
         needsSpacing = needsSpacing || StringUtils.isNotBlank(release_date);
 
         // URL
         String url = "";
         if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "repository_link", ""))) {
-            url = ((needsSpacing ? " " : "") + JsonUtils.getString(biblio_data, "repository_link", "")
-                    + ".");
+            url = ((needsSpacing ? " " : "") + JsonUtils.getString(biblio_data, "repository_link", "") + ".");
         }
         needsSpacing = needsSpacing || StringUtils.isNotBlank(url);
 
@@ -1244,8 +1107,7 @@ public class SearchFunctions {
             doi = ((needsSpacing ? " " : "") + "doi:" + JsonUtils.getString(biblio_data, "doi", "") + ".");
         }
 
-        return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""),
-                JsonUtils.getString(biblio_data, "release_date", "")));
+        return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""), JsonUtils.getString(biblio_data, "release_date", "")));
         return_data.put("authors", author_text);
         return_data.put("software_title", software_title);
         return_data.put("release_date", release_date);
@@ -1259,8 +1121,7 @@ public class SearchFunctions {
         boolean needsSpacing = false;
 
         // Authors
-        ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"),
-                (ArrayNode) biblio_data.get("contributors"));
+        ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"), (ArrayNode) biblio_data.get("contributors"));
         String author_text = joinWithDelimiters(authors_and_contributors, ", ", ", and ");
         if (StringUtils.isNotBlank(author_text)) {
             author_text += (StringUtils.endsWith(author_text, ".") ? "" : ".");
@@ -1270,8 +1131,7 @@ public class SearchFunctions {
         // Software Title
         String software_title = "";
         if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "software_title", ""))) {
-            software_title = (needsSpacing ? " " : "")
-                    + JsonUtils.getString(biblio_data, "software_title", "") + ".";
+            software_title = (needsSpacing ? " " : "") + JsonUtils.getString(biblio_data, "software_title", "") + ".";
         }
         needsSpacing = needsSpacing || StringUtils.isNotBlank(software_title);
 
@@ -1294,17 +1154,14 @@ public class SearchFunctions {
         }
         if (sponsor_orgs_list.size() > 0) {
             sponsor_orgs = joinWithDelimiters(sponsor_orgs_list, ", ", null);
-            sponsor_orgs = (needsSpacing ? " " : "") + sponsor_orgs
-                    + (StringUtils.endsWith(sponsor_orgs, ".") ? "" : ".");
+            sponsor_orgs = (needsSpacing ? " " : "") + sponsor_orgs + (StringUtils.endsWith(sponsor_orgs, ".") ? "" : ".");
         }
         needsSpacing = needsSpacing || StringUtils.isNotBlank(sponsor_orgs);
 
         // Release Date
         String release_date = "";
         if (StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "release_date", ""))) {
-            release_date = (needsSpacing ? " " : "")
-                    + LocalDate.parse(JsonUtils.getString(biblio_data, "release_date", ""),
-                            RELEASE_DATE_FORMAT).format(MLA_DATE_FORMAT);
+            release_date = (needsSpacing ? " " : "") + LocalDate.parse(JsonUtils.getString(biblio_data, "release_date", ""), RELEASE_DATE_FORMAT).format(MLA_DATE_FORMAT);
         }
         needsSpacing = needsSpacing || StringUtils.isNotBlank(release_date);
 
@@ -1317,8 +1174,7 @@ public class SearchFunctions {
             doi = ((needsSpacing ? " " : "") + "doi:" + JsonUtils.getString(biblio_data, "doi", "") + ".");
         }
 
-        return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""),
-                JsonUtils.getString(biblio_data, "release_date", "")));
+        return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""), JsonUtils.getString(biblio_data, "release_date", "")));
         return_data.put("authorsText", author_text);
         return_data.put("softwareTitle", software_title);
         return_data.put("computer_software", computer_software);
@@ -1369,18 +1225,14 @@ public class SearchFunctions {
             meta_tags.add(makeMetaTag("title", JsonUtils.getString(biblio_data, "software_title", "")));
 
             /* Description */
-            return_data.set("descriptionObj",
-                    getDescription(JsonUtils.getString(biblio_data, "description", ""), 200));
+            return_data.set("descriptionObj", getDescription(JsonUtils.getString(biblio_data, "description", ""), 200));
             meta_tags.add(makeMetaTag("description", JsonUtils.getString(biblio_data, "description", "")));
 
             /* Developers and contributors */
-            ArrayNode developers_combined = combineDevContributorNames(
-                    (ArrayNode) biblio_data.get("developers"), null);
-            ObjectNode devs_contributors_obj = getDevAndContributorLink(developers_combined, true, false,
-                    true);
+            ArrayNode developers_combined = combineDevContributorNames((ArrayNode) biblio_data.get("developers"), null);
+            ObjectNode devs_contributors_obj = getDevAndContributorLink(developers_combined, true, false, true);
             return_data.set("developers_list", devs_contributors_obj);
-            return_data.put("has_developers",
-                    JsonUtils.getBoolean(devs_contributors_obj, "had_list", false));
+            return_data.put("has_developers", JsonUtils.getBoolean(devs_contributors_obj, "had_list", false));
             ArrayNode developerslist = new ArrayNode(JsonUtils.INSTANCE);
             for (JsonNode v : developers_combined) {
                 ObjectNode vObj = (ObjectNode) v;
@@ -1390,27 +1242,20 @@ public class SearchFunctions {
 
             // Release Date
             return_data.put("release_date", JsonUtils.getString(biblio_data, "release_date", ""));
-            return_data.put("has_release_date",
-                    StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "release_date", "")));
-            meta_tags.add(makeMetaTag("release_date",
-                    JsonUtils.getString(biblio_data, "release_date", "")));
+            return_data.put("has_release_date", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "release_date", "")));
+            meta_tags.add(makeMetaTag("release_date", JsonUtils.getString(biblio_data, "release_date", "")));
 
             /* Code Availability */
-            ArrayNode availabilityList = DOECODEServletContextListener
-                    .getJsonList(DOECODEJson.AVAILABILITY_KEY);
+            ArrayNode availabilityList = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
 
-            ObjectNode availabilityObj = JsonUtils.getJsonListItem(availabilityList, "value",
-                    JsonUtils.getString(biblio_data, "accessibility", ""));
+            ObjectNode availabilityObj = JsonUtils.getJsonListItem(availabilityList, "value", JsonUtils.getString(biblio_data, "accessibility", ""));
             return_data.put("availability", JsonUtils.getString(availabilityObj, "label", ""));
-            return_data.put("has_availability",
-                    StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "accessibility", "")));
+            return_data.put("has_availability", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "accessibility", "")));
             meta_tags.add(makeMetaTag("availability", JsonUtils.getString(availabilityObj, "label", "")));
 
             /* Software Type */
-            ArrayNode softwareTypeList = DOECODEServletContextListener
-                    .getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY);
-            ObjectNode softwareTypeObj = JsonUtils.getJsonListItem(softwareTypeList, "value",
-                    JsonUtils.getString(biblio_data, "software_type", ""));
+            ArrayNode softwareTypeList = DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY);
+            ObjectNode softwareTypeObj = JsonUtils.getJsonListItem(softwareTypeList, "value", JsonUtils.getString(biblio_data, "software_type", ""));
             return_data.put("software_type", JsonUtils.getString(softwareTypeObj, "label", ""));
             meta_tags.add(makeMetaTag("software_type", JsonUtils.getString(softwareTypeObj, "label", "")));
 
@@ -1421,80 +1266,60 @@ public class SearchFunctions {
                 for (JsonNode row : licenses) {
                     String rowVal = row.asText();
                     license_displays.add(
-                            DOECODEUtils.getDisplayVersionOfValue(
-                                    DOECODEServletContextListener.getJsonList(
-                                            DOECODEJson.LICENSE_KEY),
-                                    rowVal));
+                            DOECODEUtils.getDisplayVersionOfValue(DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY), rowVal));
                 }
             }
             return_data.set("licenses", license_displays);
             return_data.put("has_licenses", licenses != null && licenses.size() > 0);
-            meta_tags.add(makeMetaTag("licenses",
-                    DOECODEUtils.makeSpaceSeparatedList((ArrayNode) biblio_data.get("licenses"))));
+            meta_tags.add(makeMetaTag("licenses", DOECODEUtils.makeSpaceSeparatedList((ArrayNode) biblio_data.get("licenses"))));
 
             /* Sponsoring Org */
-            ObjectNode sponsor_orgs = getSponsoringOrgData(
-                    (ArrayNode) biblio_data.get("sponsoring_organizations"));
+            ObjectNode sponsor_orgs = getSponsoringOrgData((ArrayNode) biblio_data.get("sponsoring_organizations"));
             return_data.set("sponsoring_org", sponsor_orgs);
-            return_data.put("has_sponsoring_org",
-                    JsonUtils.getBoolean(sponsor_orgs, "has_sponsoring_org", false));
+            return_data.put("has_sponsoring_org", JsonUtils.getBoolean(sponsor_orgs, "has_sponsoring_org", false));
             ArrayNode sponsororgslist = new ArrayNode(JsonUtils.INSTANCE);
             for (JsonNode v : (ArrayNode) sponsor_orgs.get("list")) {
                 ObjectNode vObj = (ObjectNode) v;
                 sponsororgslist.add(JsonUtils.getString(vObj, "org_name", ""));
             }
-            meta_tags.add(makeMetaTag("sponsoring_org",
-                    DOECODEUtils.makeSpaceSeparatedList(sponsororgslist)));
+            meta_tags.add(makeMetaTag("sponsoring_org", DOECODEUtils.makeSpaceSeparatedList(sponsororgslist)));
 
             /* Code ID */
             return_data.put("code_id", JsonUtils.getLong(biblio_data, "code_id", 0));
-            meta_tags.add(makeMetaTag("code_id",
-                    Long.toString(JsonUtils.getLong(biblio_data, "code_id", 0))));
+            meta_tags.add(makeMetaTag("code_id", Long.toString(JsonUtils.getLong(biblio_data, "code_id", 0))));
 
             /* Site accession Number */
-            return_data.put("site_accession_number",
-                    JsonUtils.getString(biblio_data, "site_accession_number", ""));
-            return_data.put("has_site_accession_number", StringUtils
-                    .isNotBlank(JsonUtils.getString(biblio_data, "site_accession_number", "")));
-            meta_tags.add(makeMetaTag("site_accession_number",
-                    JsonUtils.getString(biblio_data, "site_accession_number", "")));
+            return_data.put("site_accession_number", JsonUtils.getString(biblio_data, "site_accession_number", ""));
+            return_data.put("has_site_accession_number", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "site_accession_number", "")));
+            meta_tags.add(makeMetaTag("site_accession_number", JsonUtils.getString(biblio_data, "site_accession_number", "")));
 
             /* Research Orgs */
-            ArrayNode research_org_data = getResearchOrganizations(
-                    (ArrayNode) biblio_data.get("research_organizations"));
+            ArrayNode research_org_data = getResearchOrganizations((ArrayNode) biblio_data.get("research_organizations"));
             return_data.set("research_orgs", research_org_data);
             return_data.put("has_research_org", research_org_data.size() > 0);
-            meta_tags.add(makeMetaTag("research_orgs",
-                    DOECODEUtils.makeSpaceSeparatedList(research_org_data)));
+            meta_tags.add(makeMetaTag("research_orgs", DOECODEUtils.makeSpaceSeparatedList(research_org_data)));
 
             /* Country of origin */
             return_data.put("country_of_origin", JsonUtils.getString(biblio_data, "country_of_origin", ""));
-            return_data.put("has_country_of_origin", StringUtils
-                    .isNotBlank(JsonUtils.getString(biblio_data, "country_of_origin", "")));
-            meta_tags.add(makeMetaTag("country_of_origin",
-                    JsonUtils.getString(biblio_data, "country_of_origin", "")));
+            return_data.put("has_country_of_origin", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "country_of_origin", "")));
+            meta_tags.add(makeMetaTag("country_of_origin", JsonUtils.getString(biblio_data, "country_of_origin", "")));
 
             /* Programming Languages */
             ArrayNode programming_languages = (ArrayNode) biblio_data.get("programming_languages");
             return_data.set("programming_languages_list", programming_languages);
-            return_data.put("has_programming_languages",
-                    programming_languages != null && programming_languages.size() > 0);
+            return_data.put("has_programming_languages", programming_languages != null && programming_languages.size() > 0);
 
             /* Version Number */
             return_data.put("version_number", JsonUtils.getString(biblio_data, "version_number", ""));
-            return_data.put("has_version_number",
-                    StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "version_number", "")));
+            return_data.put("has_version_number", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "version_number", "")));
 
             /* Keywords */
             return_data.put("keywords", JsonUtils.getString(biblio_data, "keywords", ""));
-            return_data.put("has_keywords",
-                    StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "keywords", "")));
+            return_data.put("has_keywords", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "keywords", "")));
 
             /* Project Keywords */
-            return_data.put("project_keywords",
-                    JsonUtils.getString(biblio_data, "project_keywords", ""));
-            return_data.put("has_project_keywords", StringUtils
-                    .isNotBlank(JsonUtils.getString(biblio_data, "project_keywords", "")));
+            return_data.put("project_keywords", JsonUtils.getString(biblio_data, "project_keywords", ""));
+            return_data.put("has_project_keywords", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "project_keywords", "")));
 
             /* Citation formats */
             return_data.set("mla", getMLAFormat(biblio_data));
