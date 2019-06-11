@@ -8,6 +8,19 @@
         <h2 class="static-content-title">Help</h2>
         <br/>
         <br/>
+        {{#unless user_data.is_logged_in}}
+            <strong class="help-page-subtitle">Do I need an account to submit or announce software to DOE CODE?</strong>
+            <br/>
+            <br/>
+            <p>Yes, an account is needed to provide scientific and business software to DOE CODE. 
+                Users meeting minimum criteria can directly create a DOE CODE account. All you need 
+                is your first and last name, government email address or valid contract number, 
+                and a password. From the top right of any DOE CODE page, you may register for an account 
+                by clicking <a title="Create Account" href="register">Create Account</a> 
+                (or <a title="Sign In" href="login">Sign In</a> if you already have an account). 
+            </p>
+            <br/>
+        {{/unless}}
         <strong class="help-page-subtitle">How is Software Submitted?</strong>
         <br/>
         <br/>
