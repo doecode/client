@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @WebFilter(servletNames = "UserFilter", urlPatterns = { "/submit", "/form-select", "/announce", "/approve", "/confirm",
-      "/projects", "/pending", "/account", "/user-admin", "/help", "/site-admin" })
+      "/projects", "/pending", "/account", "/user-admin", "/site-admin" })
 public class UserFilter implements Filter {
 
    protected static Logger log = LoggerFactory.getLogger(UserFilter.class.getName());
