@@ -83,6 +83,7 @@ public class SearchFunctions {
         post_data.put("research_organization", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("research_organization"), ""), Whitelist.basic()));
         post_data.put("sponsoring_organization", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("sponsoring_organization"), ""), Whitelist.basic()));
         post_data.set("software_type", handleRequestArray(request.getParameter("software_type")));
+        post_data.put("show_facets", true);
         return post_data;
     }
 
