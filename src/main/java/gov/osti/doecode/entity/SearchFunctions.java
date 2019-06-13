@@ -144,13 +144,59 @@ public class SearchFunctions {
         return_data.set("availabilities_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY), handleRequestArray(request.getParameter("accessibility"))));
         return_data.set("license_options_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY), handleRequestArray(request.getParameter("licenses"))));
         return_data.set("software_type_options_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY), handleRequestArray(request.getParameter("software_type"))));
-        return_data.set("research_org_list", null);
-        //TODO Put in the research org list from facets
         return_data.set("search_description", getSearchResultsDescription(post_data));
+
+        //If the search was valid, and had no errors, pull out the facet data        
         if (!invalid_search_data) {
-            return_data.set("search_facets_data", search_result_data.get("facets"));
-            return_data.set("year_facets_data",
-                    getYearFacetsData((ObjectNode) search_result_data.get("facets")));
+            //Get the facet data for release dates
+            return_data.set("year_facets_data", getYearFacetsData((ObjectNode) search_result_data.get("facets")));
+
+            //Pull out the facet counts fields
+            ObjectNode facet_fields = (ObjectNode) search_result_data.get("facet_counts").get("facet_fields");
+
+            //Research Organization Facets
+            ObjectNode facet_research_orgs = (ObjectNode) facet_fields.get("fResearchOrganizations");
+            ArrayList<String> fResearchOrgsKeys = JsonUtils.getKeys(facet_research_orgs);
+            ArrayNode research_orgs_counts = JsonUtils.MAPPER.createArrayNode();
+            ArrayNode research_orgs_counts_additional = JsonUtils.MAPPER.createArrayNode();
+            //Put the facet counts in
+            //Get the value that was searched for in the research_organization field
+            String requested_research_org = search_form_data.findPath("research_organization").asText("");
+
+            //If the research org sent in is found in the facet data, then we only want to render that particular organization
+            if (StringUtils.isNotBlank(requested_research_org) && fResearchOrgsKeys.contains(requested_research_org)) {
+                ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                row.put("label", requested_research_org);
+                row.put("value", facet_research_orgs.findPath(requested_research_org).asInt());
+                row.put("value_compressed", requested_research_org.replaceAll("\\s", "-"));
+                row.put("is_checked", true);
+                research_orgs_counts.add(row);
+            } else {//Otherwise, show all available research orgs, if available
+                for (int i = 0; i < fResearchOrgsKeys.size(); i++) {
+                    ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                    row.put("label", fResearchOrgsKeys.get(i));
+                    row.put("value", facet_research_orgs.findPath(fResearchOrgsKeys.get(i)).asInt());
+                    row.put("value_compressed", fResearchOrgsKeys.get(i).replaceAll("\\s", "-"));
+                    research_orgs_counts.add(row);
+                    if (i == 6) {
+                        break;
+                    }
+                }
+                //If the amount of orgs in teh facet exceeds 5, put any past 5 into a different array
+                if (research_orgs_counts.size() > 5) {
+                    for (int i = 4; i < research_orgs_counts.size(); i++) {
+                        research_orgs_counts_additional.add(research_orgs_counts.get(i));
+                    }
+                    //Remove those 5 from the list
+                    for (int i = 4; i < research_orgs_counts.size(); i++) {
+                        research_orgs_counts.remove(i);
+                    }
+                    return_data.put("had_additional_orgs",true);
+                    return_data.set("research_orgs_counts_additional", research_orgs_counts_additional);
+                }
+            }
+
+            return_data.set("research_orgs_facets", research_orgs_counts);
         }
 
         return return_data;
@@ -280,20 +326,20 @@ public class SearchFunctions {
 
         // Programming Languages
         String programming_languages_array = JsonUtils.getString(post_data, "programming_languages", "");
-        if (StringUtils.isNotBlank(programming_languages_array) && JsonUtils.parseArrayNode(programming_languages_array).size() > 0) {
-            search_description_list.add(makeSearchDescriptionObjectArray("Programming Language", JsonUtils.parseArrayNode(programming_languages_array), "programming_languages", null));
+        if (StringUtils.isNotBlank(programming_languages_array) ) {
+            search_description_list.add(makeSearchDescriptionObject("Programming Languages", JsonUtils.getString(post_data, "programming_languages", ""), "programming_languages"));
         }
 
         // Research Organization
         String research_org_array = JsonUtils.getString(post_data, "research_organization", "");
-        if (StringUtils.isNotBlank(research_org_array) && JsonUtils.parseArrayNode(research_org_array).size() > 0) {
-            search_description_list.add(makeSearchDescriptionObjectArray("Research Organization", JsonUtils.parseArrayNode(research_org_array), "research_organization", null));
+        if (StringUtils.isNotBlank(research_org_array)) {
+            search_description_list.add(makeSearchDescriptionObject("Research Organization", JsonUtils.getString(post_data, "research_organization", ""), "research_organization"));
         }
 
         // Sponsoring Organization
         String sponsoring_organization = JsonUtils.getString(post_data, "sponsoring_organization", "");
-        if (StringUtils.isNotBlank(sponsoring_organization) && JsonUtils.parseArrayNode(sponsoring_organization).size() > 0) {
-            search_description_list.add(makeSearchDescriptionObjectArray("Sponsoring Organization", JsonUtils.parseArrayNode(sponsoring_organization), "sponsoring_organization", null));
+        if (StringUtils.isNotBlank(sponsoring_organization) ) {
+            search_description_list.add(makeSearchDescriptionObject("Sponsoring Organization", JsonUtils.getString(post_data, "sponsoring_organization", ""), "sponsoring_organization"));
         }
 
         // ORCID

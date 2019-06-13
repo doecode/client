@@ -378,7 +378,7 @@ if (document.getElementById('about-page-identifier')) {
 
     //Makes it where clicking on a checkbox on the search results page adds or removes that value from the search
     $(".search-checkbox:not(input[type=checkbox].single-val-search-checkbox)").on('click', addSearchCheckboxToSearch);
-    
+
     //Makes it where clicking on one of the single-val-search-checkbox checkbox triggers a search, single value
 
     //Allows you to search by author name
@@ -409,6 +409,47 @@ if (document.getElementById('about-page-identifier')) {
         var search_form_data = $("#search-page-form").serialize();
 
         window.open('/' + APP_NAME + '/dissemination/export-search-results?format=' + format + "&" + search_form_data, '_blank');
+    });
+
+    //Toggle for research orgs more/less
+    $("#research-org-facets-more-less").on('click', function () {
+        var self = this;
+        if ($(self).hasClass('more')) {//Open the div right before this
+            $(self).prev('div').show();
+            $(self).html('Less');
+            $(self).removeClass('more');
+            $(self).next('span.fa').removeClass('fa-angle-down');
+            $(self).next('span.fa').addClass('fa-angle-up');
+        } else {//Close the div right before this
+            $(self).prev('div').hide();
+            $(self).html('More');
+            $(self).addClass('more');
+            $(self).next('span.fa').removeClass('fa-angle-up');
+            $(self).next('span.fa').addClass('fa-angle-down');
+        }
+    });
+
+    $("#research-orgs-facets-input").on('keyup', function (event) {
+        if (event.which === 13) {
+            $("#research-orgs-facets-search").trigger('click');
+        }
+    });
+    $("#research-orgs-facets-search").on('click', function () {
+        //TODO put the value they entered into the search form, and post said form
+        var search_val = $("#research-orgs-facets-input").val();
+        $("#search-research_organization").val(search_val);
+        restartSearchToFirstpage();
+    });
+
+    $(".single-val-search-checkbox").on('change', function () {
+        var self = this;
+        var val = $(self).val();
+        if ($(self).is(':checked')) {//If checked, put in the value into the search
+            $("#search-research_organization").val(val);
+        } else {//If not checked, remove teh value from the search
+            $("#search-research_organization").val('');
+        }
+        restartSearchToFirstpage();
     });
 
 } else if (document.getElementById('biblio-page-identifier') && !document.getElementById('biblio-code-id-not-found')) {

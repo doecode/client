@@ -530,7 +530,7 @@ hr {
     margin-left: 18px;
 }
 
-.search-sidebar-checkbox-text span {
+.search-sidebar-checkbox-text span:not(.facet-item-count):not(.fa.fa-angle-down):not(.fa.fa-angle-up) {
     margin-left: 18px;
 }
 
@@ -1236,4 +1236,16 @@ td.datatable-vertical-center {
 /*Allows the tooltips to be wider*/
 .tooltip-inner {
     max-width: 300px !important;
+}
+
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
 }

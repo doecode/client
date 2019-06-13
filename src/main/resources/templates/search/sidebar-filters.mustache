@@ -79,21 +79,46 @@
         </div>
     </div>
 </div>
+<br/>
 <!--Research Org-->
 <div class="row">
     <div class="col-md-12 col-xs-12">
         <br />
         <span class='search-for-filter-text search-for-filter-header'>RESEARCH ORGANIZATION</span>
         <div class="search-sidebar-checkbox-text">
-            {{#each research_org_list}}
+            {{#each research_orgs_facets}}
             <div>
                 <span>
                     <label>
-                        <input class='search-checkbox single-val-search-checkbox' id='researchorgcheck-{{value_compressed}}' name='research_organization' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{label}}' class='search-input-label'                                                                                                                                           for='softwaretypecheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
+                        <input class='search-checkbox single-val-search-checkbox' id='researchorgcheck-{{value_compressed}}' name='research_organization' value='{{label}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> 
+                               <label title='{{label}}' class='search-input-label' for='researchorgcheck-{{value_compressed}}'>
+                            <span style='display:none;'>text</span>
+                        </label>&nbsp;{{label}}&nbsp;<span class="facet-item-count">({{value}})</span>
                     </label>
                 </span>
             </div>
             {{/each}}
+            {{#if had_additional_orgs}}
+            <div style="display:none;">
+                {{#each research_orgs_counts_additional}}
+                <div>
+                    <span>
+                        <label>
+                            <input class='search-checkbox single-val-search-checkbox' id='researchorgcheck-{{value_compressed}}' name='research_organization' value='{{label}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> 
+                                   <label title='{{label}}' class='search-input-label' for='researchorgcheck-{{value_compressed}}'>
+                                <span style='display:none;'>text</span>
+                            </label>&nbsp;{{label}}&nbsp;<span class="facet-item-count">({{value}})</span>
+                        </label>
+                    </span>
+                </div>
+                {{/each}}
+                <div class='form-inline' style='margin-left:-36px;padding-top:5px;'>
+                    <label class="sr-only" for="research-orgs-facets-input">Search research orgs:</label>
+                    <input type='text' placeholder='Search research orgs...' class='form-control' id='research-orgs-facets-input'/>&nbsp;<button type='button' class='pure-button' id='research-orgs-facets-search'><span class='fa fa-angle-right'></span></button>
+                </div>
+            </div>
+            <a class="clickable more" id="research-org-facets-more-less" style='margin-left:-18px;'>More</a>&nbsp;&nbsp;<span class='fa fa-angle-down' style='color:#ccc;'></span>
+            {{/if}}
         </div>
     </div>
 </div>

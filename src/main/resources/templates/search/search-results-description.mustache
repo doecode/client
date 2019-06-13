@@ -1,42 +1,42 @@
 <div>
-     {{#unless search_description.is_targeted_search}}
-     <div>All Projects</div>
-     {{/unless}}
+    {{#unless search_description.is_targeted_search}}
+    <div>All Projects</div>
+    {{/unless}}
 
-     <!--VV Search Results Description list thing VV-->
-     {{#each search_description.search_description_list}}
-     {{#if is_array}}
-     <div>
-	  <span class='search-for-filter-text search-for-filter-header'>{{displayField}}:&nbsp;</span>
-	  <br/> 
-	  {{#each value}}
-	  <span>
-	       {{#unless is_first}}
-	       <span>,
-	       </span>
-	       {{/unless}}
-	       <span class='search-for-filter-text'>{{value}}</span>
-	       <span class='search-for-filter-x clickable' data-field="{{field}}" data-fieldvalue="{{value}}" data-origvalue="{{orig_value}}" data-isarray="true">[&nbsp;&times;&nbsp;]</span>
-	  </span>
-	  {{/each}}
-     </div>
-     {{else}}
-     <div >
-	  <span class='search-for-filter-text search-for-filter-header'>{{displayField}}:&nbsp;</span>
-	  <br/>
-	  <span class='search-for-filter-text'>{{value}}</span>
-	  <span class='search-for-filter-x clickable' data-field="{{field}}" data-fieldvalue="{{value}}" data-isarray="false">[ &times; ]</span>
-     </div>
-     {{/if}}
-     {{/each}}
-     <!--^^ Search Results Description list thing ^^-->
+    <!--VV Search Results Description list thing VV-->
+    {{#each search_description.search_description_list}}
+    {{#if is_array}}
+    <div>
+        <span class='search-for-filter-text search-for-filter-header'>{{displayField}}:&nbsp;</span>
+        <br/> 
+        {{#each value}}
+        <span>
+            {{#unless is_first}}
+            <span>,
+            </span>
+            {{/unless}}
+            <span class='search-for-filter-text'>{{value}}</span>
+            <span class='search-for-filter-x clickable' data-field="{{field}}" data-fieldvalue="{{value}}" data-origvalue="{{orig_value}}" data-isarray="true">[&nbsp;&times;&nbsp;]</span>
+        </span>
+        {{/each}}
+    </div>
+    {{else}}
+    <div >
+        <span class='search-for-filter-text search-for-filter-header'>{{displayField}}:&nbsp;</span>
+        <br/>
+        <span class='search-for-filter-text'>{{value}}</span>
+        <span class='search-for-filter-x clickable' data-field="{{field}}" data-fieldvalue="{{value}}" data-isarray="false">[ &times; ]</span>
+    </div>
+    {{/if}}
+    {{/each}}
+    <!--^^ Search Results Description list thing ^^-->
 
-     {{#if search_description.had_things_to_search_by}}
-     <div class='center-text'>
-          <br/>
-          <span class='clickable search-for-modify-search' title='Modify this search' >
-	       [&nbsp;<span class='fa fa-search' style="opacity: 0.35;"></span>&nbsp;modify this search&nbsp;]
-	  </span>
-     </div>
-     {{/if}}
+    {{#if search_description.had_things_to_search_by}}
+    <div class='center-text'>
+        <br/>
+        <span class='clickable search-for-modify-search' title='Modify this search' >
+            [&nbsp;<span class='fa fa-search' style="opacity: 0.35;"></span>&nbsp;modify this search&nbsp;]
+        </span>
+    </div>
+    {{/if}}
 </div>
