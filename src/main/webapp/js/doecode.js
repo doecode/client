@@ -156,7 +156,7 @@ var triggerDropdownAdvancedSearch = function () {
 var triggerBasicSearch = function () {
     var self = this;
     //If the advanced search modal is open, trigger that one's click
-    if ($("#advanced-search-dropdown").is(':visible') || $("#homepage-adv-dropdown-btn").is(':visible')) {
+    if ($("#advanced-search-dropdown").is(':visible') || $("#homepage-adv-dropdown-container").is(':visible')) {
         $(".adv-search-btn-dropdown").trigger('click');
     } else {
         clearSearchFormFields();
