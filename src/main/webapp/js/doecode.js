@@ -155,15 +155,20 @@ var triggerDropdownAdvancedSearch = function () {
 
 var triggerBasicSearch = function () {
     var self = this;
-    clearSearchFormFields();
-    if ($(self).hasClass('homepage-search-btn')) {
-        $("#search-all_fields").val($(self).prev('button').prev('input').val().trim());
+    //If the advanced search modal is open, trigger that one's click
+    if ($("#advanced-search-dropdown").is(':visible') || $("#homepage-adv-dropdown-btn").is(':visible')) {
+        $(".adv-search-btn-dropdown").trigger('click');
     } else {
-        $("#search-all_fields").val($(this).parent().prev('div').find('input[type=text]').val());
-    }
+        clearSearchFormFields();
+        if ($(self).hasClass('homepage-search-btn')) {
+            $("#search-all_fields").val($(self).prev('button').prev('input').val().trim());
+        } else {
+            $("#search-all_fields").val($(this).parent().prev('div').find('input[type=text]').val());
+        }
 
-    $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
-    $("#search-page-form").submit();
+        $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
+        $("#search-page-form").submit();
+    }
 };
 
 var clearSearchFormFields = function () {

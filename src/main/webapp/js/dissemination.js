@@ -584,4 +584,10 @@ if (document.getElementById('about-page-identifier')) {
             $(adv_search_element).show();
         }
     });
+    
+    $(".homepage-searchbar").on('focusin',function(){
+        if($("#homepage-adv-dropdown-container").is(':visible')){
+            $("#homepage-adv-dropdown-btn").trigger('click');
+        }
+    });
 }
