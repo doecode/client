@@ -387,7 +387,13 @@ if (document.getElementById('about-page-identifier')) {
     //Makes the x next to the items in the search results description work
     $(".search-for-filter-x").on('click', removeSearchResultDescriptionItem);
 
+    //Populates the advanced search dropdown with the values you currently have for your search
     $(".search-for-modify-search").on('click', modify_search);
+
+    $(".search-for-clear-all").on('click', function () {
+        clearSearchFormFields();
+        restartSearchToFirstpage();
+    });
 
     //Makes the date range slider work
     if (isValidJSON($("#facets-year-data").val())
@@ -584,9 +590,9 @@ if (document.getElementById('about-page-identifier')) {
             $(adv_search_element).show();
         }
     });
-    
-    $(".homepage-searchbar").on('focusin',function(){
-        if($("#homepage-adv-dropdown-container").is(':visible')){
+
+    $(".homepage-searchbar").on('focusin', function () {
+        if ($("#homepage-adv-dropdown-container").is(':visible')) {
             $("#homepage-adv-dropdown-btn").trigger('click');
         }
     });
