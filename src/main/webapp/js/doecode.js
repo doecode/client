@@ -88,7 +88,20 @@ var triggerAdvancedSearch = function () {
 
 var triggerDropdownAdvancedSearch = function () {
     var name_prefix = "#" + $(this).data('idprefix');
+    //See if the user had a value in the All fields field. If so, add that to the search
+    var had_val = false;
+    var all_fields_val = $("#search-all_fields").val();
+    if (all_fields_val) {
+        had_val = true;
+    }
+
     clearSearchFormFields();
+    
+    //All fields (if applicable)
+    if(had_val){
+        $("#search-all_fields").val(all_fields_val);
+    }
+    
     //Software title
     $("#search-software_title").val($(name_prefix + "-software_title").val());
 

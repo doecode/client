@@ -249,7 +249,7 @@ public class SearchFunctions {
 
         // All Fields
         if (StringUtils.isNotBlank(JsonUtils.getString(post_data, "all_fields", ""))) {
-            search_description_list.add(makeSearchDescriptionObject("All Fields", JsonUtils.getString(post_data, "all_fields", ""), "all_fields"));
+            search_description_list.add(makeSearchDescriptionObject("Keywords", JsonUtils.getString(post_data, "all_fields", ""), "all_fields"));
         }
 
         // Software Title
