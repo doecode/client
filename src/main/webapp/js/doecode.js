@@ -96,12 +96,12 @@ var triggerDropdownAdvancedSearch = function () {
     }
 
     clearSearchFormFields();
-    
+
     //All fields (if applicable)
-    if(had_val){
+    if (had_val) {
         $("#search-all_fields").val(all_fields_val);
     }
-    
+
     //Software title
     $("#search-software_title").val($(name_prefix + "-software_title").val());
 
@@ -320,4 +320,15 @@ var clearOutMicrosoftCharacters = function (value) {
 
 $("input[type=text],textarea").on('blur', function () {
     $(this).val(clearOutMicrosoftCharacters($(this).val()));
+});
+
+/*Causes the advanced search to close in the event that you click outside of the advanced search modal*/
+var modal_id = (document.getElementById('index-indicator')) ? 'homepage-adv-dropdown-container' : 'advanced-search-dropdown';
+$(document).mouseup(function (e) {
+    var container = $("#" + modal_id);
+
+    // If the target of the click isn't the container
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+        container.hide();
+    }
 });
