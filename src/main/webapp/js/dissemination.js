@@ -199,6 +199,10 @@ var removeSearchResultDescriptionItem = function () {
 };
 
 var modify_search = function () {
+    //Populate all of the advanced search fields
+    $('.search-box').val($("#search-all_fields").val());
+    populateAdvancedSearchForm("navbar-searchbar-");
+    
     var width = $(document).width();
     if (width < 768) {
         localStorage.isRefinedSearch = "true";
@@ -588,12 +592,6 @@ if (document.getElementById('about-page-identifier')) {
             $(adv_search_element).hide();
         } else {
             $(adv_search_element).show();
-        }
-    });
-
-    $(".homepage-searchbar").on('focusin', function () {
-        if ($("#homepage-adv-dropdown-container").is(':visible')) {
-            $("#homepage-adv-dropdown-btn").trigger('click');
         }
     });
 }

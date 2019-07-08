@@ -87,19 +87,15 @@ var triggerAdvancedSearch = function () {
 };
 
 var triggerDropdownAdvancedSearch = function () {
+    var self = this;
     var name_prefix = "#" + $(this).data('idprefix');
-    //See if the user had a value in the All fields field. If so, add that to the search
-    var had_val = false;
-    var all_fields_val = $("#search-all_fields").val();
-    if (all_fields_val) {
-        had_val = true;
-    }
 
     clearSearchFormFields();
 
     //All fields (if applicable)
-    if (had_val) {
-        $("#search-all_fields").val(all_fields_val);
+    var searchbar_val = ($(self).hasClass('homepage-search-btn')) ? $(self).prev('button').prev('input').val().trim() : $(self).parent().prev('div').find('input[type=text]').val();
+    if (searchbar_val) {
+        $("#search-all_fields").val(searchbar_val);
     }
 
     //Software title
@@ -149,7 +145,7 @@ var triggerDropdownAdvancedSearch = function () {
 
     //Sponsoring Organization
     var sponsoring_orgs = $("#navbar-searchbar-sponsoring_organization").val();
-    if (sponsoring_orgs.length) {
+    if (sponsoring_orgs) {
         $("#search-sponsoring_organization").val(sponsoring_orgs.trim());
     }
 
@@ -164,24 +160,6 @@ var triggerDropdownAdvancedSearch = function () {
 
     $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
     $("#search-page-form").submit();
-};
-
-var triggerBasicSearch = function () {
-    var self = this;
-    //If the advanced search modal is open, trigger that one's click
-    if ($("#advanced-search-dropdown").is(':visible') || $("#homepage-adv-dropdown-container").is(':visible')) {
-        $(".adv-search-btn-dropdown").trigger('click');
-    } else {
-        clearSearchFormFields();
-        if ($(self).hasClass('homepage-search-btn')) {
-            $("#search-all_fields").val($(self).prev('button').prev('input').val().trim());
-        } else {
-            $("#search-all_fields").val($(this).parent().prev('div').find('input[type=text]').val());
-        }
-
-        $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
-        $("#search-page-form").submit();
-    }
 };
 
 var clearSearchFormFields = function () {
@@ -237,8 +215,10 @@ $(".adv-search-button").on('click', toggleSearchDropdown);
 
 //Makes all of the advanced search and search buttons work
 $("#adv-search-page-search-btn").on('click', triggerAdvancedSearch);
-$(".adv-search-btn-dropdown").on('click', triggerDropdownAdvancedSearch);
-$(".search-btn").on('click', triggerBasicSearch);
+$(".adv-search-btn-dropdown").on('click', function(){
+    $('button.search-btn:visible').trigger('click');
+});
+$(".search-btn").on('click', triggerDropdownAdvancedSearch);
 $(".search-box").on('keyup', function (event) {
     if (event.which === 13) {
         var is_homepage_input = $(this).hasClass('homepage-searchbar');
@@ -293,11 +273,6 @@ $(".signin-btn-container").on('click', function () {
 /*Toggles the advanced search button*/
 $("#adv-search-toggle-btn").on('click', toggleAdvExtendedDropdown);
 
-/*If we have content in the advanced search, let's populate the advanced search dropdown with it*/
-if (isValidJSON(localStorage.latestSearchParams) && Array.isArray(JSON.parse(localStorage.latestSearchParams))) {
-    populateAdvancedSearchForm("navbar-searchbar-");
-}
-
 //Makes the chosen js inputs work with custom content
 $("li.search-field > .chosen-search-input").on('keyup', modifyChosenSelectForCustomEntry);
 $("li.search-field > .chosen-search-input").on('keydown', modifyChosenSelectForCustomEntryTabKey);
@@ -326,9 +301,9 @@ $("input[type=text],textarea").on('blur', function () {
 var modal_id = (document.getElementById('index-indicator')) ? 'homepage-adv-dropdown-container' : 'advanced-search-dropdown';
 $(document).mouseup(function (e) {
     var container = $("#" + modal_id);
-
-    // If the target of the click isn't the container
-    if (!container.is(e.target) && container.has(e.target).length === 0) {
+    var datepicker_container = $("#ui-datepicker-div");
+    // Check to see if the item clicked on was in the advanced search, or in the datepicker in the advanced search modal
+    if (!container.is(e.target) && container.has(e.target).length === 0 && !datepicker_container.is(e.target) && $(datepicker_container).has(e.target).length === 0) {
         container.hide();
     }
 });
