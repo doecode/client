@@ -103,13 +103,12 @@ public class Dissemination extends HttpServlet {
             long page_num = StringUtils.isNumeric(page_num_param) ? Long.parseLong(page_num_param) : 1;
             output_data = SearchFunctions.conductSearch(request, getServletContext(), page_num);
             //Check the user agent. If it's of a specific type, we'll treat the page a little differently
-            String x_forwarded_for = request.getHeader("x-forwarded-for");
             boolean is_pagespeed_insights = false;
-            for (String s : Init.pagespeed_ips) {
-                if (StringUtils.contains(x_forwarded_for, s)) {
-                    is_pagespeed_insights = true;
-                    break;
-                }
+            try {
+                String userAgent = request.getHeader("User-Agent");
+                is_pagespeed_insights = StringUtils.containsIgnoreCase(userAgent, "Chrome-Lighthouse") || StringUtils.containsIgnoreCase(userAgent, "Page Speed Insights");
+            } catch (Exception e) {
+                log.error("Exception in getting user agent: " + e.getMessage());
             }
             if (!is_pagespeed_insights) {
                 extrasList.add("libraries/google-chart-loader.min");
