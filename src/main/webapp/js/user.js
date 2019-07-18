@@ -901,7 +901,4 @@ if (document.getElementById('login-page-identifier')) {
     $("#award_number").on('blur', handleUserAdminContractNumberValidation);
 
 
-} else if (document.getElementById('help-page-identifier')) {
-    checkIsAuthenticated();
-
 }
