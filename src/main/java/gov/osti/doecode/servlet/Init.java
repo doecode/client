@@ -5,7 +5,9 @@ import com.github.jknack.handlebars.Jackson2Helper;
 import com.github.jknack.handlebars.io.ServletContextTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
 import gov.osti.doecode.entity.NewsFunctions;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

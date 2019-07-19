@@ -57,20 +57,20 @@ var triggerAdvancedSearch = function () {
 
     //Programming Languages
     var programming_languages_vals = $("#advanced-search-programming_languages").val();
-    if (programming_languages_vals.length > 0) {
-        $("#search-programming_languages").val(JSON.stringify(programming_languages_vals));
+    if (programming_languages_vals.length) {
+        $("#search-programming_languages").val(programming_languages_vals);
     }
 
     //Research Organization
     var research_orgs = $("#advanced-search-research_organization").val();
-    if (research_orgs.length > 0) {
+    if (research_orgs.length) {
         $("#search-research_organization").val(JSON.stringify(research_orgs));
     }
 
     //Sponsoring Organization
     var sponsoring_orgs = $("#advanced-search-sponsoring_organization").val();
-    if (sponsoring_orgs.length > 0) {
-        $("#search-sponsoring_organization").val(JSON.stringify(sponsoring_orgs));
+    if (sponsoring_orgs.length) {
+        $("#search-sponsoring_organization").val(sponsoring_orgs);
     }
 
     //Software Type
@@ -87,8 +87,17 @@ var triggerAdvancedSearch = function () {
 };
 
 var triggerDropdownAdvancedSearch = function () {
+    var self = this;
     var name_prefix = "#" + $(this).data('idprefix');
+
     clearSearchFormFields();
+
+    //All fields (if applicable)
+    var searchbar_val = ($(self).hasClass('homepage-search-btn')) ? $(self).prev('button').prev('input').val().trim() : $(self).parent().prev('div').find('input[type=text]').val();
+    if (searchbar_val) {
+        $("#search-all_fields").val(searchbar_val);
+    }
+
     //Software title
     $("#search-software_title").val($(name_prefix + "-software_title").val());
 
@@ -124,20 +133,20 @@ var triggerDropdownAdvancedSearch = function () {
 
     //Programming Languages
     var programming_languages_vals = $("#navbar-searchbar-programming_languages").val();
-    if (programming_languages_vals.length > 0) {
-        $("#search-programming_languages").val(JSON.stringify(programming_languages_vals));
+    if (programming_languages_vals) {
+        $("#search-programming_languages").val(programming_languages_vals);
     }
 
     //Research Organization
     var research_orgs = $("#navbar-searchbar-research_organization").val();
-    if (research_orgs.length > 0) {
-        $("#search-research_organization").val(JSON.stringify(research_orgs));
+    if (research_orgs) {
+        $("#search-research_organization").val(research_orgs.trim());
     }
 
     //Sponsoring Organization
     var sponsoring_orgs = $("#navbar-searchbar-sponsoring_organization").val();
-    if (sponsoring_orgs.length > 0) {
-        $("#search-sponsoring_organization").val(JSON.stringify(sponsoring_orgs));
+    if (sponsoring_orgs) {
+        $("#search-sponsoring_organization").val(sponsoring_orgs.trim());
     }
 
     //Software Type
@@ -148,19 +157,6 @@ var triggerDropdownAdvancedSearch = function () {
 
     //Sort
     $("#search-sort").val($("#navbar-searchbar-sort").val());
-
-    $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
-    $("#search-page-form").submit();
-};
-
-var triggerBasicSearch = function () {
-    var self = this;
-    clearSearchFormFields();
-    if ($(self).hasClass('homepage-search-btn')) {
-        $("#search-all_fields").val($(self).prev('button').prev('input').val().trim());
-    } else {
-        $("#search-all_fields").val($(this).parent().prev('div').find('input[type=text]').val());
-    }
 
     $("#search-page-form").attr('action', '/' + APP_NAME + '/results?page=1');
     $("#search-page-form").submit();
@@ -219,8 +215,10 @@ $(".adv-search-button").on('click', toggleSearchDropdown);
 
 //Makes all of the advanced search and search buttons work
 $("#adv-search-page-search-btn").on('click', triggerAdvancedSearch);
-$(".adv-search-btn-dropdown").on('click', triggerDropdownAdvancedSearch);
-$(".search-btn").on('click', triggerBasicSearch);
+$(".adv-search-btn-dropdown").on('click', function(){
+    $('button.search-btn:visible').trigger('click');
+});
+$(".search-btn").on('click', triggerDropdownAdvancedSearch);
 $(".search-box").on('keyup', function (event) {
     if (event.which === 13) {
         var is_homepage_input = $(this).hasClass('homepage-searchbar');
@@ -275,11 +273,6 @@ $(".signin-btn-container").on('click', function () {
 /*Toggles the advanced search button*/
 $("#adv-search-toggle-btn").on('click', toggleAdvExtendedDropdown);
 
-/*If we have content in the advanced search, let's populate the advanced search dropdown with it*/
-if (isValidJSON(localStorage.latestSearchParams) && Array.isArray(JSON.parse(localStorage.latestSearchParams))) {
-    populateAdvancedSearchForm("navbar-searchbar-");
-}
-
 //Makes the chosen js inputs work with custom content
 $("li.search-field > .chosen-search-input").on('keyup', modifyChosenSelectForCustomEntry);
 $("li.search-field > .chosen-search-input").on('keydown', modifyChosenSelectForCustomEntryTabKey);
@@ -302,4 +295,15 @@ var clearOutMicrosoftCharacters = function (value) {
 
 $("input[type=text],textarea").on('blur', function () {
     $(this).val(clearOutMicrosoftCharacters($(this).val()));
+});
+
+/*Causes the advanced search to close in the event that you click outside of the advanced search modal*/
+var modal_id = (document.getElementById('index-indicator')) ? 'homepage-adv-dropdown-container' : 'advanced-search-dropdown';
+$(document).mouseup(function (e) {
+    var container = $("#" + modal_id);
+    var datepicker_container = $("#ui-datepicker-div");
+    // Check to see if the item clicked on was in the advanced search, or in the datepicker in the advanced search modal
+    if (!container.is(e.target) && container.has(e.target).length === 0 && !datepicker_container.is(e.target) && $(datepicker_container).has(e.target).length === 0) {
+        container.hide();
+    }
 });
