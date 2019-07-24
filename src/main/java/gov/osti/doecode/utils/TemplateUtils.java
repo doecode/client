@@ -83,12 +83,12 @@ public class TemplateUtils {
     public static final String PAGE_NEWS = "news";
     public static final String PAGE_FAQ = "faq";
 
-    public static final ObjectNode GET_COMMON_DATA(ObjectNode output_data, String current_page, ArrayNode jsFilesList,
-            ArrayNode extraJSList, ArrayNode cssFilesList, HttpServletRequest request) throws IOException {
+    public static final ObjectNode GET_COMMON_DATA(ObjectNode output_data, String current_page, ArrayNode jsFilesList, ArrayNode extraJSList, ArrayNode cssFilesList, HttpServletRequest request) throws IOException {
         output_data.put("active_page", current_page);
-        if (!JsonUtils.containsKey(output_data, "user_data")) {
+        if (!output_data.has("user_data")) {
             output_data.set("user_data", UserFunctions.getUserDataFromCookie(request));
         }
+
         output_data.set("jsLibraries", extraJSList);
         output_data.set("jsFiles", jsFilesList);
         output_data.set("cssFiles", cssFilesList);
@@ -100,7 +100,6 @@ public class TemplateUtils {
         output_data.put("session_timeout", Init.SESSION_TIMEOUT_MINUTES);
         output_data.put("api_url_js", Init.public_api_url);
         output_data.put("auth_api_base", Init.authority_api_base);
-
         return output_data;
     }
 

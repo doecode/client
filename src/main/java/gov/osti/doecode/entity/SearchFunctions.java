@@ -30,6 +30,7 @@ import gov.osti.doecode.listeners.DOECODEServletContextListener;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonUtils;
+import java.math.BigDecimal;
 
 public class SearchFunctions {
 
@@ -191,7 +192,7 @@ public class SearchFunctions {
                     for (int i = 4; i < research_orgs_counts.size(); i++) {
                         research_orgs_counts.remove(i);
                     }
-                    return_data.put("had_additional_orgs",true);
+                    return_data.put("had_additional_orgs", true);
                     return_data.set("research_orgs_counts_additional", research_orgs_counts_additional);
                 }
             }
@@ -326,7 +327,7 @@ public class SearchFunctions {
 
         // Programming Languages
         String programming_languages_array = JsonUtils.getString(post_data, "programming_languages", "");
-        if (StringUtils.isNotBlank(programming_languages_array) ) {
+        if (StringUtils.isNotBlank(programming_languages_array)) {
             search_description_list.add(makeSearchDescriptionObject("Programming Languages", JsonUtils.getString(post_data, "programming_languages", ""), "programming_languages"));
         }
 
@@ -338,7 +339,7 @@ public class SearchFunctions {
 
         // Sponsoring Organization
         String sponsoring_organization = JsonUtils.getString(post_data, "sponsoring_organization", "");
-        if (StringUtils.isNotBlank(sponsoring_organization) ) {
+        if (StringUtils.isNotBlank(sponsoring_organization)) {
             search_description_list.add(makeSearchDescriptionObject("Sponsoring Organization", JsonUtils.getString(post_data, "sponsoring_organization", ""), "sponsoring_organization"));
         }
 
@@ -717,10 +718,7 @@ public class SearchFunctions {
         return_data.set("availabilities_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY));
         return_data.set("licenses_list", DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY));
         return_data.set("software_type", DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY));
-        return_data.set("research_org_list", DOECODEServletContextListener.getJsonList(DOECODEJson.RESEARCH_KEY));
-        return_data.set("sponsor_org_list", DOECODEServletContextListener.getJsonList(DOECODEJson.SPONSOR_ORG_KEY));
         return_data.set("sort_list", DOECODEServletContextListener.getJsonList(DOECODEJson.SEARCH_SORT_KEY));
-        return_data.set("programming_languages_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
 
         return return_data;
     }
@@ -1263,6 +1261,7 @@ public class SearchFunctions {
     public static ObjectNode getBiblioData(long osti_id) {
         ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
         ObjectNode biblio_data = getBiblioJson(osti_id);
+        log.debug(biblio_data.toString());
         // Massage any data that needs it
         if (JsonUtils.getBoolean(biblio_data, "is_valid_record", false)) {
             ArrayNode meta_tags = new ArrayNode(JsonUtils.INSTANCE);
@@ -1364,8 +1363,13 @@ public class SearchFunctions {
             return_data.put("has_keywords", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "keywords", "")));
 
             /* Project Keywords */
-            return_data.put("project_keywords", JsonUtils.getString(biblio_data, "project_keywords", ""));
-            return_data.put("has_project_keywords", StringUtils.isNotBlank(JsonUtils.getString(biblio_data, "project_keywords", "")));
+            ArrayNode project_keywords_list = JsonUtils.MAPPER.createArrayNode();
+            if (biblio_data.has("project_keywords")) {
+                project_keywords_list = (ArrayNode) biblio_data.get("project_keywords");
+                String project_keywords = DOECODEUtils.makeTokenSeparatedList(project_keywords_list, "; ");
+                return_data.put("project_keywords", project_keywords);
+                return_data.put("has_project_keywords", StringUtils.isNotBlank(project_keywords));
+            }
 
             /* Citation formats */
             return_data.set("mla", getMLAFormat(biblio_data));
@@ -1387,6 +1391,38 @@ public class SearchFunctions {
                 }
             }
             return_data.set("meta_tag", refined_meta_tags);
+
+            /* Badges */
+            //Check for the site ownership badge
+            boolean has_lab_badge = false;
+            String site_ownership_code = biblio_data.findPath("site_ownership_code").asText("");
+            String lab_badge_link = DOECODEUtils.getLabBadge(site_ownership_code);
+            if (StringUtils.isNotBlank(lab_badge_link)) {
+                has_lab_badge = true;
+                return_data.put("has_lab_badge", true);
+                return_data.put("lab_badge_link", lab_badge_link);
+                return_data.put("site_ownership_code", site_ownership_code);
+            }
+            //Check for project badges
+            boolean has_project_badges = false;
+            if (project_keywords_list.size() > 0) {
+                has_project_badges = true;
+                ArrayNode badge_link_list = JsonUtils.MAPPER.createArrayNode();
+                for (JsonNode jn : project_keywords_list) {
+                    //Get teh badge link, if we have it
+                    String badge_link = DOECODEUtils.getProjectBadge(jn.asText(""));
+                    //If we have it, add it to teh list
+                    if (StringUtils.isNotBlank(badge_link)) {
+                        ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                        row.put("link", badge_link);
+                        row.put("project_keyword", jn.asText(""));
+                        badge_link_list.add(row);
+                    }
+                }
+                return_data.set("project_badges", badge_link_list);
+            }
+            //IF we have any badge, whether it be lab or site code, we will want to show the container
+            return_data.put("has_badges", has_lab_badge || has_project_badges);
         }
 
         return_data.put("is_valid", JsonUtils.getBoolean(biblio_data, "is_valid_record", false));

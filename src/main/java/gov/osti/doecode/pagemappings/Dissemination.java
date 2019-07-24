@@ -13,8 +13,6 @@ import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -22,7 +20,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.javalite.common.Collections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -177,8 +174,7 @@ public class Dissemination extends HttpServlet {
 
         // Send in this object, and get a hold of the common data, like the classes
         // needed to render the homepage correctly and such
-        output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, extrasList, null,
-                request);
+        output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, extrasList, null, request);
         // Write the template out
         TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
     }

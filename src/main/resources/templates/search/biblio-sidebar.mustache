@@ -132,6 +132,22 @@
                                 </span>
                             </li>
                         </ul>
+                        {{#if has_badges}}
+                        <br/>
+                        <!--Lab/Project Badges-->
+                        <div class="biblio-badges-container">
+                            {{#if has_lab_badge}}
+                            <div>
+                                <img title="{{site_ownership_code}} Badge" src="/${app_name}/images/badges/{{lab_badge_link}}" alt="{{site_ownership_code}} Badge"/>
+                            </div>
+                            {{/if}}
+                            {{#each project_badges}}
+                            <div>
+                                <img title="{{project_keyword}} Badge" src="/${app_name}/images/badges/{{link}}" alt="{{project_keyword}} Badge"/>
+                            </div>
+                            {{/each}}
+                        </div>
+                        {{/if}}
                     </div>
                 </div>
             </div>
