@@ -86,7 +86,7 @@ public class UserFunctions {
     public static Cookie makeUserCookie(ObjectNode user_data) {
         String user_data_encoded = Base64.encodeBase64String(user_data.toString().getBytes());
 
-        Cookie c = new Cookie("user_data", user_data_encoded);
+        Cookie c = makeCookie("user_data", user_data_encoded);
         return c;
     }
 
@@ -151,8 +151,8 @@ public class UserFunctions {
             requested_url.append(request.getQueryString());
         }
         // Add their last url to a cookie so we can redirect them later
-        response.addCookie(new Cookie("requested_url", requested_url.toString()));
-        response.addCookie(new Cookie("user_data", ""));
+        response.addCookie(makeCookie("requested_url", requested_url.toString()));
+        response.addCookie(deleteCookie("user_data"));
         response.sendRedirect(site_url + "login?redirect=true");
     }
 
@@ -234,9 +234,9 @@ public class UserFunctions {
         //TODO get rejected roles
         String site = JsonUtils.getString(return_data, "site", "");
         // See if their site is in their roles
-        boolean site_in_roles = hasRole(roles,site);
+        boolean site_in_roles = hasRole(roles, site);
         // See if their site is in pending
-        boolean site_in_pending = hasRole(pending_roles,site);
+        boolean site_in_pending = hasRole(pending_roles, site);
 
         boolean showAdminRole = (!StringUtils.equals(site, "CONTR") && !site_in_roles);// If they aren't a contractor and the site they are a part of isn't in their
         // roles list
@@ -254,5 +254,17 @@ public class UserFunctions {
         is_admin = JsonUtils.getBoolean(current_user_data, "has_osti_role", false);
         //TODO Change this to is_record_admin
         return is_admin;
+    }
+
+    public static Cookie makeCookie(String name, String value) {
+        Cookie c = new Cookie(name, value);
+        c.setPath("/" + Init.app_name + "/");
+        return c;
+    }
+
+    public static Cookie deleteCookie(String name) {
+        Cookie c = makeCookie(name, "");
+        c.setMaxAge(0);
+        return c;
     }
 }

@@ -47,9 +47,9 @@ public class User extends HttpServlet {
                 case "update-login-status-name":
                     return_data = UserFunctions.updateUserCookie(request, request_data);
                     // If this is being called, and there are values for needs_password_reset &
-                    // passcode, clear them out
+                    // passcode, clear them outs
                     if (UserFunctions.hasRecentlyDonePasswordReset(request)) {
-                        response.addCookie(new Cookie("needs_password_reset", null));
+                        response.addCookie(UserFunctions.deleteCookie("needs_password_reset"));
                     }
                     add_signin_html = true;
                     break;
@@ -75,7 +75,7 @@ public class User extends HttpServlet {
                     if (StringUtils.isNotBlank(request.getParameter("passcode")) && !StringUtils.equals(
                             UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"),
                             "true")) {
-                        Cookie c = new Cookie("needs_password_reset", "true");
+                        Cookie c = UserFunctions.makeCookie("needs_password_reset", "true");
                         c.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
                         response.addCookie(c);
                         output_data.put("passcode", request.getParameter("passcode"));
@@ -97,11 +97,10 @@ public class User extends HttpServlet {
                 case "login":
                     page_title = "DOE CODE: Login";
                     template = TemplateUtils.TEMPLATE_USER_LOGIN;
-                    if (StringUtils.isNotBlank(request.getParameter("redirect"))
-                            && request.getParameter("redirect").equals("true")) {
+                    if (StringUtils.isNotBlank(request.getParameter("redirect")) && request.getParameter("redirect").equals("true")) {
                         output_data.set("user_data", new ObjectNode(JsonUtils.INSTANCE));
                         output_data.put("is_redirected", true);
-                        response.addCookie(new Cookie("user_data", null));
+                        response.addCookie(UserFunctions.deleteCookie("user_data"));
                     }
                     break;
                 case "register":
@@ -116,9 +115,9 @@ public class User extends HttpServlet {
                     page_title = "DOE CODE: Logout";
                     template = TemplateUtils.TEMPLATE_USER_LOGOUT;
                     output_data.set("user_data", new ObjectNode(JsonUtils.INSTANCE));
-                    response.addCookie(new Cookie("user_data", null));
-                    response.addCookie(new Cookie("needs_password_reset", null));
-                    response.addCookie(new Cookie("requested_url", null));
+                    response.addCookie(UserFunctions.deleteCookie("user_data"));
+                    response.addCookie(UserFunctions.deleteCookie("needs_password_reset"));
+                    response.addCookie(UserFunctions.deleteCookie("requested_url"));
                     break;
                 case "confirmuser":
                     page_title = "DOE CODE: Confirm User";

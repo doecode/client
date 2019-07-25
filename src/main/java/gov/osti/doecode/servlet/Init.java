@@ -5,9 +5,7 @@ import com.github.jknack.handlebars.Jackson2Helper;
 import com.github.jknack.handlebars.io.ServletContextTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
 import gov.osti.doecode.entity.NewsFunctions;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,21 +25,21 @@ public class Init extends HttpServlet {
     public static Handlebars handlebars;
     public static Handlebars handlebarsUser;
     public static Handlebars handlebarsSearch;
-    public static String app_name;
-    public static String google_analytics_id;
-    public static String google_analytics_domain;
-    public static String public_api_url;
-    public static String backend_api_url;
-    public static String authority_api_base;
-    public static String site_url;
-    public static String containers_dir;
-    public static String news_environment_url;
-    public static String recaptcha_secretkey;
-    public static String recaptcha_sitekey;
-    public static String gitlab_from_email;
-    public static String gitlab_submit_email;
-    public static String smtp_host;
-    public static String ostigov_news_xml;
+    public static String app_name; //The actual name of the application build. This can be different, based on some switches with maven
+    public static String google_analytics_id; //The ID your google analytics account has for this application
+    public static String google_analytics_domain; //The domain of the application, specifically for google analytics. Needs to match your domain, or your google analytics counts might not work
+    public static String public_api_url; //The front-end, usually proxied URL to the DOE CODE API
+    public static String backend_api_url; //The back-end, usually un-proxied URL to the DOE CODE API
+    public static String authority_api_base; //The URL to the Elink Authority API
+    public static String site_url; //The actual full URL (proxied) to this instance of DOE CODE
+    public static String containers_dir; //The directory that containers are in
+    public static String news_environment_url; //The URL that news article links need to go to (prefix)
+    public static String recaptcha_secretkey; //THe secret key given by google when using recaptcha
+    public static String recaptcha_sitekey; //The public key given by google hwen using recaptcha
+    public static String gitlab_from_email; //The from email address used in gitlab signups
+    public static String gitlab_submit_email; //The email that gitlab signups are sent to
+    public static String smtp_host; //The mail host needed to send gitlab emails
+    public static String ostigov_news_xml; //The URL to the OSTI.gov news data feed
 
     public static final HashMap<String, String> NEWS_ARTICLE_TYPES_OBJ = new HashMap<String, String>();
     public static final HashMap<String, String> NEWS_ARTICLE_TYPES_INVERSE_OBJ = new HashMap<String, String>();
@@ -83,7 +81,7 @@ public class Init extends HttpServlet {
 
             //OSTI GOV News XML
             ostigov_news_xml = PROPS.getProperty("ostigov_news_xml");
-
+            
             // Get the session timeout from the web.xml
             SESSION_TIMEOUT_MINUTES = Integer.parseInt(PROPS.getProperty("session_timeout"));
             log.info("Done loading properties");
