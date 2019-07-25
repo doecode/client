@@ -3,15 +3,10 @@ package gov.osti.doecode.entity;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.listeners.DOECODEServletContextListener;
 import gov.osti.doecode.servlet.Init;
+import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonUtils;
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
@@ -95,37 +90,19 @@ public class OtherFunctions {
     }
 
     private static boolean isValidreCaptcha(String key, String secret_key, String ip_address) {
-        boolean is_valid = false;
-        String recaptcha_url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secret_key
-                + "&response=" + key;
+        String recaptcha_url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secret_key + "&response=" + key;
         if (StringUtils.isNotBlank(ip_address)) {
             recaptcha_url += ("&remoteip=" + ip_address);
         }
 
-        ObjectNode response = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode response = JsonUtils.MAPPER.createObjectNode();
         try {
-            URL url = new URL(recaptcha_url);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(5000);
-            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
-            conn.setRequestMethod("POST");
-
-            OutputStream os = conn.getOutputStream();
-            os.close();
-
-            InputStream in = new BufferedInputStream(conn.getInputStream());
-            String result = IOUtils.toString(in, "UTF-8");
-            response = JsonUtils.parseObjectNode(result);
-            in.close();
-            conn.disconnect();
-
+            response = DOECODEUtils.makePOSTRequest(recaptcha_url, JsonUtils.MAPPER.createObjectNode());
         } catch (Exception ex) {
             log.error("Exception in gitlab submission: " + ex.getMessage());
         }
 
-        is_valid = JsonUtils.getBoolean(response, "success", false);
+        boolean is_valid = response.findPath("success").asBoolean(false);
 
         return is_valid;
     }

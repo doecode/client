@@ -10,10 +10,17 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.apache.commons.lang3.StringUtils;
+import org.javalite.http.Get;
+import org.javalite.http.Http;
+import org.javalite.http.Post;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DOECODEUtils {
 
     public static final DateTimeFormatter MONTH_DAY_YEAR_TIME_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+
+    private static Logger log = LoggerFactory.getLogger(DOECODEUtils.class);
 
     public static boolean isValidDateOfPattern(DateTimeFormatter format, String date) {
         boolean is_valid = true;
@@ -167,5 +174,44 @@ public class DOECODEUtils {
         }
 
         return badge_name;
+    }
+
+    public static ObjectNode makeGetRequest(String url) {
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        Get get = Http.get(url).header("Accept", "application/json").header("Content-Type", "application/json");
+        String response = get.text("UTF-8");
+        try {
+            return_data = JsonUtils.parseObjectNode(response);
+        } catch (Exception e) {
+            log.error("Exception in making get request: " + e.getMessage());
+            return_data.put("invalid_object_parse", true);
+        }
+        return return_data;
+    }
+
+    public static ObjectNode makePOSTRequest(String url, ObjectNode post_data) {
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        Post post = Http.post(url, post_data.toString()).header("Accept", "application/json").header("Content-Type", "application/json");
+        String response = post.text("UTF-8");
+
+        try {
+            return_data = JsonUtils.parseObjectNode(response);
+        } catch (Exception e) {
+            log.error("Exception in making POST request: " + e.getMessage());
+            return_data.put("invalid_object_parse", true);
+        }
+        return return_data;
+    }
+
+    public static ArrayNode makeArrayGetRequest(String url) {
+        ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
+        Get get = Http.get(url).header("Accept", "application/json").header("Content-Type", "application/json");
+        String response = get.text("UTF-8");
+        try {
+            return_data = JsonUtils.parseArrayNode(response);
+        } catch (Exception e) {
+            log.error("Exception in making get request: " + e.getMessage());
+        }
+        return return_data;
     }
 }

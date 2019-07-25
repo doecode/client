@@ -6,11 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonUtils;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -182,42 +178,11 @@ public class UserFunctions {
     }
 
     public static ObjectNode getUserRegistrationData(String confirmation_code) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-        String api_url = Init.backend_api_url;
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
 
-        HttpURLConnection conn = null;
-        ObjectNode response_json = new ObjectNode(JsonUtils.INSTANCE);
-        try {
-            URL url = new URL(api_url + "user/confirm?confirmation=" + confirmation_code);
-            conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(5000);
-            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestMethod("GET");
+        ObjectNode response_json = DOECODEUtils.makeGetRequest(Init.backend_api_url + "user/confirm?confirmation=" + confirmation_code);
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            if (JsonUtils.isValidObjectNode(response.toString())) {
-                response_json = JsonUtils.parseObjectNode(response.toString());
-            }
-
-        } catch (Exception e) {
-            log.error("Exception getting user registration data: " + e.getMessage());
-        } finally {
-            try {
-                conn.disconnect();
-            } catch (Exception e) {
-            }
-        }
-
-        String api_key = JsonUtils.getString(response_json, "apiKey", "");
+        String api_key = response_json.findPath("apiKey").asText("");
         String url_key = Init.public_api_url + "docs";
 
         return_data.put("url_key", url_key);

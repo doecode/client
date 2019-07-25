@@ -1,12 +1,5 @@
 package gov.osti.doecode.entity;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -30,7 +23,6 @@ import gov.osti.doecode.listeners.DOECODEServletContextListener;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonUtils;
-import java.math.BigDecimal;
 
 public class SearchFunctions {
 
@@ -100,10 +92,8 @@ public class SearchFunctions {
 
         ObjectNode search_result_data = new ObjectNode(JsonUtils.INSTANCE);
         try {
-            String result = getRawSearchResultData(api_url, post_data);
-            if (JsonUtils.isValidObjectNode(result)) {
-                search_result_data = JsonUtils.parseObjectNode(result);
-            } else {
+            search_result_data = DOECODEUtils.makePOSTRequest(api_url + "search", post_data);
+            if (search_result_data.findPath("invalid_object_parse").asBoolean(false)) {
                 invalid_search_data = true;
             }
         } catch (Exception ex) {
@@ -118,7 +108,7 @@ public class SearchFunctions {
 
         // Pull out the list of results and process the data so we only get what we
         // want, assume we got correct data
-        ArrayNode search_results_list = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode search_results_list = JsonUtils.MAPPER.createArrayNode();
         if (search_result_data.get("docs") != null) {
             search_results_list = processSearchResultData((ArrayNode) search_result_data.get("docs"), start, num_found);
         }
@@ -201,31 +191,6 @@ public class SearchFunctions {
         }
 
         return return_data;
-    }
-
-    public static String getRawSearchResultData(String api_url, ObjectNode post_data) throws IOException {
-        URL url = new URL(api_url + "search");
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setConnectTimeout(5000);
-        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-        conn.setDoOutput(true);
-        conn.setDoInput(true);
-        conn.setRequestMethod("POST");
-
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream(), "UTF-8"));
-        bw.write(post_data.toString());
-        bw.flush();
-        bw.close();
-
-        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-        StringBuilder result = new StringBuilder();
-        String line;
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
-        }
-
-        conn.disconnect();
-        return result.toString();
     }
 
     private static ArrayNode getYearFacetsData(ObjectNode facets) {
@@ -1230,40 +1195,20 @@ public class SearchFunctions {
         return return_data;
     }
 
-    public static ObjectNode getBiblioJson(long osti_id) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-        boolean is_valid = true;
-        String api_url = Init.backend_api_url;
+    public static ObjectNode getBiblioData(long code_id) {
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        ObjectNode biblio_data = JsonUtils.MAPPER.createObjectNode();
 
-        try {
-            StringBuilder result = new StringBuilder();
-            URL url = new URL(api_url + "search/" + osti_id);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-            String line;
-            while ((line = rd.readLine()) != null) {
-                result.append(line);
-            }
-            rd.close();
-            conn.disconnect();
-            return_data = (ObjectNode) JsonUtils.parseObjectNode(result.toString()).get("metadata");
-
-        } catch (Exception e) {
-            log.error("Error: " + e.getMessage());
-            is_valid = false;
+        //Get the biblio data
+        ObjectNode raw_biblio_call = DOECODEUtils.makeGetRequest(Init.backend_api_url + "search/" + code_id);
+        if (raw_biblio_call.has("metadata")) {
+            biblio_data = (ObjectNode) raw_biblio_call.get("metadata");
+            biblio_data.put("is_valid_record", true);
         }
-        return_data.put("is_valid_record", is_valid);
 
-        return return_data;
-    }
-
-    public static ObjectNode getBiblioData(long osti_id) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-        ObjectNode biblio_data = getBiblioJson(osti_id);
         log.debug(biblio_data.toString());
         // Massage any data that needs it
-        if (JsonUtils.getBoolean(biblio_data, "is_valid_record", false)) {
+        if (biblio_data.findPath("is_valid_record").asBoolean(false)) {
             ArrayNode meta_tags = new ArrayNode(JsonUtils.INSTANCE);
             /* Title */
             return_data.put("title", JsonUtils.getString(biblio_data, "software_title", ""));
