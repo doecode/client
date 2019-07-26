@@ -2,177 +2,193 @@
 <input type="hidden" id="user-admin-page-identifier"/>
 <input type="hidden" id="current-user-values-obj"/>
 <div class="row not-so-wide-row">
-     <div class="col-xs-12">
-	  <div class="row">
-	       <div class="col-xs-12 center-text">
-		    <br>
-		    <div class="has-error center-text">
-			 <label class="control-label" id="user-admin-error-messages"></label>
-		    </div>
-		    <div class="has-success center-text">
-			 <label class="control-label" id="user-admin-success-message"></label>
-		    </div>
-		    <h2 class="static-content-title">User Administration</h2>
-	       </div>
-	  </div>
-	  <div class="row">
-	       <div class="col-md-4"></div>
-	       <div class="col-md-4">
-		    <div class="form-group">
-			 <div class="row">
-			      <label class="control-label col-xs-1" for="user-admin-box">Users:</label>
-			      <div class="col-xs-11">
-				   <select title="Users" class="form-control" id="user-admin-box">
-					<option value=""></option>
-				   </select>
-			      </div>
-			 </div>
-		    </div>
-	       </div>
-	       <div class="col-md-4"></div>	    
-	  </div>
-	  <div class="row">
-	       <div class="col-md-4"></div>
-	       <div class="col-md-4 col-xs-12">
-		    <div id="requesting-roles-container" style="display:none">
-			 <button type="button" class="btn btn-link" id="requesting-roles-collapse-btn">
-			      <strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>
-			 </button>
-			 <div class="collapse" id="requesting-roles-collapse-container">
-			 </div> 
-		    </div>		 
-	       </div>
-	       <div class="col-md-4"></div>    
-	  </div>
-	  <div class="row">
-	       <div class="col-md-2"></div>
-	       <div class="col-md-8 col-xs-12">
-		    <hr>
-	       </div>
-	       <div class="col-md-2"></div>    
-	  </div>
-	  <br>
-	  <div id="user-admin-input-form-container" style='display:none'>
-	       <div class='row'>
-		    <div class='col-lg-2 special-lg-2 col-md-1'></div>    
-		    <div class='col-lg-8 special-lg-8 col-md-10 col-xs-12'>
-			 <div class='row'>
-			      <div class="col-xs-12">
-				   <br/>
-				   <div class="alert alert-warning center-text" id="useradmin-warning-message-container" style="display:none;">
-					<span id="user-admin-warning-message" style='font-size:15px;'></span>
-				   </div>
-			      </div>
-			      <div class='col-lg-6 col-md-10 col-sm-10 col-xs-12 right-text-lg right-text-md right-text-sm no-col-padding-left-lg no-col-padding-right-lg'>
-				   <br/>
-				   <div class='row'>
-					<div class='col-xs-12'>
-					     <div class="form-inline">
-						  <label class='control-label normal-weight' for='email'>Email:&nbsp;&nbsp;</label>
-						  <input title='Email' id='email' class="form-control pure-input-1 user-account-input" value='{{current_user_data.email}}' type="text" readonly disabled>
-					     </div>
-					</div>
-				   </div>
-				   <br/>
-				   <div class='row'>
-					<div class='col-xs-12'>
-					     <div class="form-inline">
-						  <label class='control-label normal-weight' for='first_name'>First Name:&nbsp;&nbsp;</label>
-						  <input title='First Name' placeholder='First Name' id='first_name' class="form-control pure-input-1 user-account-input" type="text">
-					     </div>
-					</div>
-				   </div>
-				   <br/>
-				   <div class='row'>
-					<div class='col-xs-12'>
-					     <div class="form-inline">
-						  <label class='control-label normal-weight' for='last_name'>Last Name:&nbsp;&nbsp;</label>
-						  <input title='Last Name' placeholder='Last Name' id='last_name' class="form-control pure-input-1 user-account-input" type="text">
-					     </div>
-					</div>
-				   </div>
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12 center-text">
+                <br>
+                <div class="has-error center-text">
+                    <label class="control-label" id="user-admin-error-messages"></label>
+                </div>
+                <div class="has-success center-text">
+                    <label class="control-label" id="user-admin-success-message"></label>
+                </div>
+                <h2 class="static-content-title">User Administration</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="row">
+                        <label class="control-label col-xs-1" for="user-admin-box">Users:</label>
+                        <div class="col-xs-11">
+                            <select title="Users" class="form-control" id="user-admin-box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"></div>	    
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 col-xs-12">
+                <div id="requesting-roles-container" style="display:none">
+                    <button type="button" class="btn btn-link" id="requesting-roles-collapse-btn">
+                        <strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>
+                    </button>
+                    <!--TODO start pulling this list from the pending-roles table-->
+                    <div class="collapse" id="requesting-roles-collapse-container">
+                    </div> 
+                </div>		 
+            </div>
+            <div class="col-md-4"></div>    
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 col-xs-12">
+                <hr>
+            </div>
+            <div class="col-md-2"></div>    
+        </div>
+        <br>
+        <div id="user-admin-input-form-container" style='display:none'>
+            <div class='row'>
+                <div class='col-lg-2 special-lg-2 col-md-1'></div>    
+                <div class='col-lg-8 special-lg-8 col-md-10 col-xs-12'>
+                    <div class='row'>
+                        <div class="col-xs-12">
+                            <br/>
+                            <div class="alert alert-warning center-text" id="useradmin-warning-message-container" style="display:none;">
+                                <span id="user-admin-warning-message" style='font-size:15px;'></span>
+                            </div>
+                        </div>
+                        <!--TODO add this in when USER ID's are added-->
+                        <!--<input type='hidden' id='current-user-id'/>-->
+                        <div class='col-lg-6 col-md-10 col-sm-10 col-xs-12 right-text-lg right-text-md right-text-sm no-col-padding-left-lg no-col-padding-right-lg'>
+                            <br/>
+                            <!-- Make email editable  -->
+                            <div class='row'>
+                                <div class='col-xs-12'>
+                                    <div class="form-inline">
+                                        <label class='control-label normal-weight' for='email'>Email:&nbsp;&nbsp;</label>
+                                        <input title='Email' id='email' class="form-control pure-input-1 user-account-input" value='{{current_user_data.email}}' type="text" readonly disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class='row'>
+                                <div class='col-xs-12'>
+                                    <div class="form-inline">
+                                        <label class='control-label normal-weight' for='first_name'>First Name:&nbsp;&nbsp;</label>
+                                        <input title='First Name' placeholder='First Name' id='first_name' class="form-control pure-input-1 user-account-input" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class='row'>
+                                <div class='col-xs-12'>
+                                    <div class="form-inline">
+                                        <label class='control-label normal-weight' for='last_name'>Last Name:&nbsp;&nbsp;</label>
+                                        <input title='Last Name' placeholder='Last Name' id='last_name' class="form-control pure-input-1 user-account-input" type="text">
+                                    </div>
+                                </div>
+                            </div>
 
-				   <br/>
-				   <div class='row'>
-					<div class='col-xs-12'>
-					     <div class="form-inline">
-						  <label class='control-label normal-weight' for='award_number'>Contract Number:&nbsp;&nbsp;</label>
-						  <input title='Award/Contract Number' placeholder='Award/Contract Number' id='award_number' class="form-control pure-input-1 user-account-input" type="text">
-						  <label class='control-label user-msg'></label>
-					     </div>
-					</div>
-				   </div>
-				   <br/>
-				   <div class='row'>
-					<div class='col-xs-12'>
-					     <div class="form-inline">
-						  <label class='control-label normal-weight' for='roles-box'>Roles:&nbsp;&nbsp;</label>
-						  <select title="User Roles" class="form-control pure-input-1 user-account-input" id="roles-box">
-						       <option value=""></option>
-						       <option title="AMES" value="AMES">AMES</option>
-						       <option title="ANL" value="ANL">ANL</option>
-						       <option title="BNL" value="BNL">BNL</option>
-						       <option title="FNAL" value="FNAL">FNAL</option>
-						       <option title="INL" value="INL">INL</option>
-						       <option title="LANL" value="LANL">LANL</option>
-						       <option title="LBNL" value="LBNL">LBNL</option>
-						       <option title="LLNL" value="LLNL">LLNL</option>
-						       <option title="NETL" value="NETL">NETL</option>
-						       <option title="NREL" value="NREL">NREL</option>
-						       <option title="ORNL" value="ORNL">ORNL</option>
-						       <option title="OSTI" value="OSTI">OSTI</option>
-						       <option title="PNNL" value="PNNL">PNNL</option>
-						       <option title="PPPL" value="PPPL">PPPL</option>
-						       <option title="SLAC" value="SLAC">SLAC</option>
-						       <option title="SNL" value="SNL">SNL</option>
-						       <option title="SRNL" value="SRNL">SRNL</option>
-						       <option title="TJNAF" value="TJNAF">TJNAF</option>
-						  </select>
-					     </div>
-					</div>
-				   </div>
-				   <br/>
-				   <div class='row'>
-					<div class='col-xs-12'>
-					     <div class="form-inline">
-						  <label class='control-label normal-weight' for='active-state'>Is Active?:&nbsp;&nbsp;</label>
-						  <input id="active-state" value="on" type="checkbox" style='margin-right:62%'/>
-					     </div>
-					</div>
-				   </div>
-				   <br/>
-				   <div class='row'>
-					<div class='col-xs-12'>
-					     <div class="form-inline">
-						  <label class='control-label normal-weight' for='password'>Password:&nbsp;&nbsp;</label>
-						  <input title="Password" placeholder="Password" id="password" class="pure-input-1-3 form-control user-account-input" type="password">
-					     </div>
-					</div>
-				   </div>
-				   <br/>
-				   <div class='row'>
-					<div class='col-xs-12'>
-					     <div class="form-inline">
-						  <label class='control-label normal-weight' for='confirm-password'>Confirm Password:&nbsp;&nbsp;</label>
-						  <input title="Confirm Password" placeholder="Confirm Password" id="confirm-password" class="pure-input-1-3 form-control user-account-input" type="password">
-					     </div>
-					</div>
-				   </div>
-			      </div>
-			      <div class='col-lg-6 col-lg-offset-0 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-2 col-xs-12 no-col-padding-right-xs no-col-padding-left-xs'>
-				   {{> user/password-rules}}
-			      </div>
-			 </div>
-			 <br/>
-			 <div class='row'>
-			      <div class='col-xs-12 center-text'>
-				   <button title="Save User" id='save-user-admin-btn' type="button" class="pure-button button-success btn-lg">Save</button>
-			      </div>
-			 </div>
-		    </div>
-		    <div class='col-lg-2 special-lg-2 col-md-1'></div>    
-	       </div>
-	  </div>
-     </div>
+                            <br/>
+                            <div class='row'>
+                                <div class='col-xs-12'>
+                                    <div class="form-inline">
+                                        <label class='control-label normal-weight' for='award_number'>Contract Number:&nbsp;&nbsp;</label>
+                                        <input title='Award/Contract Number' placeholder='Award/Contract Number' id='award_number' class="form-control pure-input-1 user-account-input" type="text">
+                                        <label class='control-label user-msg'></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class='row'>
+                                <div class='col-xs-12'>
+                                    <div class="form-inline">
+                                        <label class='control-label normal-weight' for='roles-box'>Roles:&nbsp;&nbsp;</label>
+                                        <select title="User Roles" class="form-control pure-input-1 user-account-input" id="roles-box">
+                                            <option value=""></option>
+                                            <option title="AMES" value="AMES">AMES</option>
+                                            <option title="ANL" value="ANL">ANL</option>
+                                            <option title="BNL" value="BNL">BNL</option>
+                                            <option title="FNAL" value="FNAL">FNAL</option>
+                                            <option title="INL" value="INL">INL</option>
+                                            <option title="LANL" value="LANL">LANL</option>
+                                            <option title="LBNL" value="LBNL">LBNL</option>
+                                            <option title="LLNL" value="LLNL">LLNL</option>
+                                            <option title="NETL" value="NETL">NETL</option>
+                                            <option title="NREL" value="NREL">NREL</option>
+                                            <option title="ORNL" value="ORNL">ORNL</option>
+                                            <option title="OSTI" value="OSTI">OSTI</option>
+                                            <option title="PNNL" value="PNNL">PNNL</option>
+                                            <option title="PPPL" value="PPPL">PPPL</option>
+                                            <option title="SLAC" value="SLAC">SLAC</option>
+                                            <option title="SNL" value="SNL">SNL</option>
+                                            <option title="SRNL" value="SRNL">SRNL</option>
+                                            <option title="TJNAF" value="TJNAF">TJNAF</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class='row'>
+                                <div class='col-xs-12'>
+                                    <div class="form-inline">
+                                        <label class='control-label normal-weight' for='roles-box'>Roles:&nbsp;&nbsp;</label>
+                                        <select title="User's Roles" class="pure-input-1 user-account-input doecode-chosen-select" id="users-roles" data-allowcustom='false' data-placeholder="User's Role" multiple>
+                                            <!-- TODO Pull list from API. List should contain sites and roles lists -->
+                                            <!-- TODO Note: If user is given site role, and the role is found in Pending or Reject roles tables, remove their entry from said table -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class='row'>
+                                <div class='col-xs-12'>
+                                    <div class="form-inline">
+                                        <label class='control-label normal-weight' for='active-state'>Is Active?:&nbsp;&nbsp;</label>
+                                        <input id="active-state" value="on" type="checkbox" style='margin-right:62%'/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class='row'>
+                                <div class='col-xs-12'>
+                                    <div class="form-inline">
+                                        <label class='control-label normal-weight' for='password'>Password:&nbsp;&nbsp;</label>
+                                        <input title="Password" placeholder="Password" id="password" class="pure-input-1-3 form-control user-account-input" type="password">
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class='row'>
+                                <div class='col-xs-12'>
+                                    <div class="form-inline">
+                                        <label class='control-label normal-weight' for='confirm-password'>Confirm Password:&nbsp;&nbsp;</label>
+                                        <input title="Confirm Password" placeholder="Confirm Password" id="confirm-password" class="pure-input-1-3 form-control user-account-input" type="password">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-lg-6 col-lg-offset-0 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-2 col-xs-12 no-col-padding-right-xs no-col-padding-left-xs'>
+                            {{> user/password-rules}}
+                        </div>
+                    </div>
+                    <br/>
+                    <div class='row'>
+                        <div class='col-xs-12 center-text'>
+                            <button title="Save User" id='save-user-admin-btn' type="button" class="pure-button button-success btn-lg">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-lg-2 special-lg-2 col-md-1'></div>    
+            </div>
+        </div>
+    </div>
 </div>
 {{> wrapper/footer}}
