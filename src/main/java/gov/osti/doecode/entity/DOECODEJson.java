@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public class DOECODEJson {
 
-    private Logger log = LoggerFactory.getLogger(DOECODEJson.class.getName());
+    private final Logger log = LoggerFactory.getLogger(DOECODEJson.class.getName());
 
     public static final String AFFILIATIONS_KEY = "affiliations";
     public static final String AVAILABILITY_KEY = "availability";
@@ -50,18 +50,18 @@ public class DOECODEJson {
      * don't pull data from OSTI's ELINK AUthority API
      */
     public DOECODEJson() {
-        this.affiliations_list = new ArrayNode(JsonUtils.INSTANCE);
-        this.availability_list = new ArrayNode(JsonUtils.INSTANCE);
-        this.contributor_types = new ArrayNode(JsonUtils.INSTANCE);
-        this.countries_list = new ArrayNode(JsonUtils.INSTANCE);
-        this.license_options_list = new ArrayNode(JsonUtils.INSTANCE);
-        this.research_org_list = new ArrayNode(JsonUtils.INSTANCE);
-        this.search_sort_options_list = new ArrayNode(JsonUtils.INSTANCE);
-        this.software_type_list = new ArrayNode(JsonUtils.INSTANCE);
-        this.sponsor_orgs_list = new ArrayNode(JsonUtils.INSTANCE);
-        this.states_list = new ArrayNode(JsonUtils.INSTANCE);
-        this.relation_types_list = new ArrayNode(JsonUtils.INSTANCE);
-        this.project_keywords_list = new ArrayNode(JsonUtils.INSTANCE);
+        this.affiliations_list = JsonUtils.MAPPER.createArrayNode();
+        this.availability_list = JsonUtils.MAPPER.createArrayNode();
+        this.contributor_types = JsonUtils.MAPPER.createArrayNode();
+        this.countries_list = JsonUtils.MAPPER.createArrayNode();
+        this.license_options_list = JsonUtils.MAPPER.createArrayNode();
+        this.research_org_list = JsonUtils.MAPPER.createArrayNode();
+        this.search_sort_options_list = JsonUtils.MAPPER.createArrayNode();
+        this.software_type_list = JsonUtils.MAPPER.createArrayNode();
+        this.sponsor_orgs_list = JsonUtils.MAPPER.createArrayNode();
+        this.states_list = JsonUtils.MAPPER.createArrayNode();
+        this.relation_types_list = JsonUtils.MAPPER.createArrayNode();
+        this.project_keywords_list = JsonUtils.MAPPER.createArrayNode();
 
         //Since some of the lists have content that isn't pulled from OSTI's Elink Authority API, we'll go ahead and fill those lists up
         //Search Sort Options
@@ -170,7 +170,7 @@ public class DOECODEJson {
 
     }
 
-    private final ObjectNode makeListObj(String label, String value, String title) {
+    private ObjectNode makeListObj(String label, String value, String title) {
         ObjectNode on = new ObjectNode(JsonUtils.INSTANCE);
         on.put("label", label);
         on.put("value", value);
@@ -190,7 +190,7 @@ public class DOECODEJson {
         }
 
         //Sponsoring Orgs
-        ArrayNode sponsoring_orgs = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode sponsoring_orgs = JsonUtils.MAPPER.createArrayNode();
         //These two items have to be added to the top of the sponsoring org list
         ObjectNode blank = new ObjectNode(JsonUtils.INSTANCE);
         blank.put("name", "");
@@ -260,7 +260,7 @@ public class DOECODEJson {
     }
 
     private ArrayNode getItemFromElinkAuthority(String api_url) {
-        ArrayNode arr = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode arr = JsonUtils.MAPPER.createArrayNode();
         try {
             arr = DOECODEUtils.makeArrayGetRequest(api_url);
         } catch (Exception e) {
@@ -270,7 +270,7 @@ public class DOECODEJson {
     }
 
     private ArrayNode translateElinkAuthorityList(ArrayNode original_list) {
-        ArrayNode new_list = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode new_list = JsonUtils.MAPPER.createArrayNode();
         for (JsonNode n : original_list) {
             ObjectNode new_row = new ObjectNode(JsonUtils.INSTANCE);
             String name_val = "";
