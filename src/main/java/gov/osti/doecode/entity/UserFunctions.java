@@ -67,7 +67,7 @@ public class UserFunctions {
 
     public static boolean isUserLoggedIn(HttpServletRequest request) {
         ObjectNode user_data = UserFunctions.getUserDataFromCookie(request);
-        boolean is_logged_in = JsonUtils.getBoolean(user_data, "is_logged_in", false);
+        boolean is_logged_in = user_data.findPath("is_logged_in").asBoolean(false);
         boolean is_within_time = false;
         if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, JsonUtils.getString(user_data, "session_timeout", ""))) {
             LocalDateTime last_timeout = LocalDateTime.parse(JsonUtils.getString(user_data, "session_timeout", ""), SESSION_TIMEOUT_FORMAT);
@@ -216,7 +216,7 @@ public class UserFunctions {
     public static boolean isCurrentlyLoggedInUserAnAdmin(HttpServletRequest request) {
         boolean is_admin = false;
         ObjectNode current_user_data = getUserDataFromCookie(request);
-        is_admin = JsonUtils.getBoolean(current_user_data, "has_osti_role", false);
+        is_admin = current_user_data.findPath("has_osti_role").asBoolean(false);
         //TODO Change this to is_record_admin
         return is_admin;
     }

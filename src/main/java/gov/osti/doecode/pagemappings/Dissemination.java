@@ -125,7 +125,7 @@ public class Dissemination extends HttpServlet {
                 ObjectNode biblio_data = SearchFunctions.getBiblioData(code_id);
 
                 // If, and only if, this is a valid code id
-                if (JsonUtils.getBoolean(biblio_data, "is_valid", false)) {
+                if (biblio_data.findPath("is_valid").asBoolean(false)) {
                     extrasList.add("libraries/clipboard.min");
                     output_data = biblio_data;
 

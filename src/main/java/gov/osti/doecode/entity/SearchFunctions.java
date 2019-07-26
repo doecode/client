@@ -1222,7 +1222,7 @@ public class SearchFunctions {
             ArrayNode developers_combined = combineDevContributorNames((ArrayNode) biblio_data.get("developers"), null);
             ObjectNode devs_contributors_obj = getDevAndContributorLink(developers_combined, true, false, true);
             return_data.set("developers_list", devs_contributors_obj);
-            return_data.put("has_developers", JsonUtils.getBoolean(devs_contributors_obj, "had_list", false));
+            return_data.put("has_developers", devs_contributors_obj.findPath("had_list").asBoolean(false));
             ArrayNode developerslist = new ArrayNode(JsonUtils.INSTANCE);
             for (JsonNode v : developers_combined) {
                 ObjectNode vObj = (ObjectNode) v;
@@ -1266,7 +1266,7 @@ public class SearchFunctions {
             /* Sponsoring Org */
             ObjectNode sponsor_orgs = getSponsoringOrgData((ArrayNode) biblio_data.get("sponsoring_organizations"));
             return_data.set("sponsoring_org", sponsor_orgs);
-            return_data.put("has_sponsoring_org", JsonUtils.getBoolean(sponsor_orgs, "has_sponsoring_org", false));
+            return_data.put("has_sponsoring_org", sponsor_orgs.findPath("has_sponsoring_org").asBoolean(false));
             ArrayNode sponsororgslist = new ArrayNode(JsonUtils.INSTANCE);
             for (JsonNode v : (ArrayNode) sponsor_orgs.get("list")) {
                 ObjectNode vObj = (ObjectNode) v;
@@ -1370,7 +1370,7 @@ public class SearchFunctions {
             return_data.put("has_badges", has_lab_badge || has_project_badges);
         }
 
-        return_data.put("is_valid", JsonUtils.getBoolean(biblio_data, "is_valid_record", false));
+        return_data.put("is_valid", biblio_data.findPath("is_valid_record").asBoolean(false));
 
         return return_data;
     }

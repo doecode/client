@@ -272,7 +272,7 @@ public class ReportFunctions {
          // Name
          String org_name = JsonUtils.getString(row, "organization_name", "");
          // is doe
-         boolean is_doe = JsonUtils.getBoolean(row, "DOE", false);
+         boolean is_doe = row.findPath("DOE").asBoolean(false);
          // Contrat num
          String primary_award = JsonUtils.getString(row, "primary_award", "");
 
@@ -320,7 +320,7 @@ public class ReportFunctions {
       for (JsonNode j : (ArrayNode) docs.get("research_organizations")) {
          ObjectNode row = (ObjectNode) j;
          String organization_name = JsonUtils.getString(row, "organization_name", "");
-         boolean is_doe = JsonUtils.getBoolean(row, "DOE", false);
+         boolean is_doe = row.findPath("DOE").asBoolean(false);
          if (StringUtils.isNotBlank(organization_name)) {
             organization_name += " (DOE Organization: " + (is_doe ? "Y" : "N") + ")";
          }
@@ -379,7 +379,7 @@ public class ReportFunctions {
          ObjectNode row = (ObjectNode) j;
          String name = JsonUtils.getString(row, "organization_name", "");
          String contributor_type = JsonUtils.getString(row, "contributor_type", "");
-         boolean is_doe = JsonUtils.getBoolean(row, "DOE", false);
+         boolean is_doe = row.findPath("DOE").asBoolean(false);
          contributing_orgs_list.add(
                name + " (DOE Organization: " + (is_doe ? "Y" : "N") + ", Contributor Type: " + contributor_type + ")");
       }

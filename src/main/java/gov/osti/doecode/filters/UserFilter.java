@@ -55,7 +55,7 @@ public class UserFilter implements Filter {
             // If the user doesn't have an OSTI role, yet is trying to access osti-only
             // content, they need to be redirected
             //TODO change to has USER ADMIN ROLE
-            boolean has_osti_role = JsonUtils.getBoolean(UserFunctions.getUserDataFromCookie(req), "has_osti_role", false);
+            boolean has_osti_role = UserFunctions.getUserDataFromCookie(req).findPath("has_osti_role").asBoolean(false);
             if (!has_osti_role && Arrays.asList(REQUIRES_OSTI_ROLE).contains(remaining)) {
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 res.sendRedirect(Init.site_url + "forbidden");

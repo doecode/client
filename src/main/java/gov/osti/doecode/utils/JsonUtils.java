@@ -78,14 +78,6 @@ public class JsonUtils {
           return (obj.has(key) && obj.get(key) != null) ? obj.get(key).asLong(defaultValue) : defaultValue;
      }
 
-     public static boolean getBoolean(ObjectNode obj, String key, boolean defaultValue) {
-          return (obj.has(key) && obj.get(key) != null) ? obj.get(key).asBoolean(defaultValue) : defaultValue;
-     }
-
-     public static boolean containsKey(ObjectNode on, String key) {
-          return getKeys(on).contains(key);
-     }
-     
      public static boolean arrayContains(ArrayNode arr,String s){
           for(JsonNode j:arr){
                if(StringUtils.equals(j.asText(),s)){
