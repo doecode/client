@@ -58,7 +58,7 @@ public class ReportFunctions {
 
          ArrayNode row_vals = new ArrayNode(JsonUtils.INSTANCE);
          // Code ID
-         row_vals.add("\"" + JsonUtils.getLong(rec, "code_id", 0) + "\"");
+         row_vals.add("\"" + rec.findPath("code_id").asLong(0) + "\"");
 
          // Software type
          row_vals.add("\"" + JsonUtils.getString(rec, "software_type", "") + "\"");
@@ -156,7 +156,7 @@ public class ReportFunctions {
    private static ObjectNode getSearchResultsReportVersion(ObjectNode docs) {
       ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
       // code id
-      return_data.put("code_id", JsonUtils.getLong(docs, "code_id", 0));
+      return_data.put("code_id", docs.findPath("code_id").asLong(0));
 
       // Software type
       String software_type = JsonUtils.getString(docs, "software_type", "");

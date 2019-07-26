@@ -48,7 +48,7 @@ public class SearchFunctions {
         search_form_data.put("pageNum", page_num);
 
         // Add together all of the data, send it out
-        return_data.put("had_results", JsonUtils.getLong(return_data, "search_result_count", 0) > 0);
+        return_data.put("had_results", return_data.findPath("search_result_count").asLong(0) > 0);
         return_data.set("search_form_data", search_form_data);
 
         return return_data;
@@ -104,7 +104,7 @@ public class SearchFunctions {
         }
 
         // Get the num found
-        long num_found = JsonUtils.getLong(search_result_data, "num_found", 0);
+        long num_found = search_result_data.findPath("num_found").asLong(0);
 
         // Pull out the list of results and process the data so we only get what we
         // want, assume we got correct data
@@ -415,8 +415,8 @@ public class SearchFunctions {
 
     private static ObjectNode getPaginationData(ObjectNode search_form_data, long num_found) {
         ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-        long start = JsonUtils.getLong(search_form_data, "start", 0);
-        long rows = JsonUtils.getLong(search_form_data, "rows", 10);
+        long start = search_form_data.findPath("start").asLong(0);
+        long rows = search_form_data.findPath("rows").asLong(0);
 
         long page = ((int) (start / rows) + 1);
         long max_pages = ((int) (num_found / rows) + 1);
@@ -451,7 +451,7 @@ public class SearchFunctions {
             ObjectNode row = (ObjectNode) search_result_list.get(i);
 
             ObjectNode newRow = new ObjectNode(JsonUtils.INSTANCE);
-            Long code_id = JsonUtils.getLong(row, "code_id", 0);
+            Long code_id = row.findPath("code_id").asLong(0);
             newRow.put("code_id", code_id);
             newRow.put("release_date", JsonUtils.getString(row, "release_date", ""));
             newRow.put("show_release_date", StringUtils.isNotBlank(JsonUtils.getString(row, "release_date", "")));
@@ -697,8 +697,8 @@ public class SearchFunctions {
         return_data.add(all_fields_text + filter_suffix);
 
         if (num_found > 0) {
-            long start = JsonUtils.getLong(search_form_data, "start", 0);
-            long rows = JsonUtils.getLong(search_form_data, "rows", 10);
+            long start = search_form_data.findPath("start").asLong(0);
+            long rows = search_form_data.findPath("rows").asLong(0);
 
             long page = ((int) (start / rows) + 1);
             long max_pages = ((int) (num_found / rows) + 1);
@@ -748,7 +748,7 @@ public class SearchFunctions {
         }
 
         // Code ID
-        return_data.put("code_id", JsonUtils.getLong(search_data, "code_id", 0));
+        return_data.put("code_id", search_data.findPath("code_id").asLong(0));
 
         // DOE CODE API URL
         return_data.put("api_url", public_api_url);
@@ -1053,7 +1053,7 @@ public class SearchFunctions {
         }
 
         return_data.put("show_doi", showDOI(JsonUtils.getString(biblio_data, "doi", ""), JsonUtils.getString(biblio_data, "release_date", "")));
-        return_data.put("code_id", JsonUtils.getLong(biblio_data, "code_id", 0));
+        return_data.put("code_id", biblio_data.findPath("code_id").asLong(0));
         return_data.put("authors_text", author_text);
         return_data.put("description", description);
         return_data.put("software_title", software_title);
@@ -1275,8 +1275,8 @@ public class SearchFunctions {
             meta_tags.add(makeMetaTag("sponsoring_org", DOECODEUtils.makeSpaceSeparatedList(sponsororgslist)));
 
             /* Code ID */
-            return_data.put("code_id", JsonUtils.getLong(biblio_data, "code_id", 0));
-            meta_tags.add(makeMetaTag("code_id", Long.toString(JsonUtils.getLong(biblio_data, "code_id", 0))));
+            return_data.put("code_id", biblio_data.findPath("code_id").asLong(0));
+            meta_tags.add(makeMetaTag("code_id", Long.toString(biblio_data.findPath("code_id").asLong(0))));
 
             /* Site accession Number */
             return_data.put("site_accession_number", JsonUtils.getString(biblio_data, "site_accession_number", ""));

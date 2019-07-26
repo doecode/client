@@ -70,14 +70,6 @@ public class JsonUtils {
           return (obj.has(key) && obj.get(key) != null) ? obj.get(key).asText(defaultValue) : defaultValue;
      }
 
-     public static int getInt(ObjectNode obj, String key, int defaultValue) {
-          return (obj.has(key) && obj.get(key) != null) ? obj.get(key).asInt(defaultValue) : defaultValue;
-     }
-
-     public static long getLong(ObjectNode obj, String key, long defaultValue) {
-          return (obj.has(key) && obj.get(key) != null) ? obj.get(key).asLong(defaultValue) : defaultValue;
-     }
-
      public static boolean arrayContains(ArrayNode arr,String s){
           for(JsonNode j:arr){
                if(StringUtils.equals(j.asText(),s)){
