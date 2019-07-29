@@ -117,34 +117,34 @@ public class OtherFunctions {
         /* Name */
         email_message.append("----- NAME ----- \n");
         // First Name
-        email_message.append(JsonUtils.getString(request_data, "first_name", ""));
+        email_message.append(request_data.findPath("first_name").asText(""));
         email_message.append(" ");
 
         // Middle Name
-        String middle_name = JsonUtils.getString(request_data, "middle_name", "");
+        String middle_name = request_data.findPath("middle_name").asText("");
         if (StringUtils.isNotBlank(middle_name)) {
             email_message.append(middle_name);
             email_message.append(" ");
         }
 
         // Last Name
-        email_message.append(JsonUtils.getString(request_data, "last_name", ""));
+        email_message.append(request_data.findPath("last_name").asText(""));
         email_message.append(" ");
 
         // Suffix
-        email_message.append(JsonUtils.getString(request_data, "suffix", ""));
+        email_message.append(request_data.findPath("suffix").asText(""));
         email_message.append("\n\n");
 
         /* Address */
         email_message.append("----- Mailing Address ----- \n");
         // Street Address
-        email_message.append(JsonUtils.getString(request_data, "address", ""));
+        email_message.append(request_data.findPath("address").asText(""));
         email_message.append("\n");
         // City
-        email_message.append(JsonUtils.getString(request_data, "city", ""));
+        email_message.append(request_data.findPath("city").asText(""));
 
         // State
-        String state = JsonUtils.getString(request_data, "state", "");
+        String state = request_data.findPath("state").asText("");
         if (StringUtils.isNotBlank(state)) {
             email_message.append(", ");
             email_message.append(state);
@@ -153,38 +153,36 @@ public class OtherFunctions {
             email_message.append(" ");
         }
         // Postal Code
-        email_message.append(JsonUtils.getString(request_data, "postal_code", ""));
+        email_message.append(request_data.findPath("postal_code").asText(""));
         email_message.append(" ");
         // Country
-        email_message.append(JsonUtils.getString(request_data, "country", ""));
+        email_message.append(request_data.findPath("country").asText(""));
         email_message.append("\n\n");
 
         /* Contact Info */
         email_message.append("----- Contact Information ----- \n");
         // Email Address
-        email_message.append(JsonUtils.getString(request_data, "email_address", ""));
+        email_message.append(request_data.findPath("email_address").asText(""));
         email_message.append("\n");
         // PHone Number
-        email_message.append(JsonUtils.getString(request_data, "phone_number", ""));
+        email_message.append(request_data.findPath("phone_number").asText(""));
         email_message.append("\n\n");
 
         /* Job */
         email_message.append("----- Job Title/Designation ----- \n");
         // Job Title
-        email_message.append(JsonUtils.getString(request_data, "job_title", ""));
+        email_message.append(request_data.findPath("job_title").asText(""));
         email_message.append(", ");
         // Employment Designation
-        String employment_designation = JsonUtils.getString(request_data, "employment_designation", "");
+        String employment_designation = request_data.findPath("employment_designation").asText("");
         email_message.append(employment_designation);
         if (StringUtils.isNotBlank(employment_designation)
                 && StringUtils.equals(employment_designation, "Other")) {
-            email_message.append(" (").append(
-                    JsonUtils.getString(request_data, "employment_designation_other_value", ""))
-                    .append(")");
+            email_message.append(" (").append(request_data.findPath("employment_designation_other_value").asText("")).append(")");
         }
 
         /* Contract Number/Organization */
-        String contract_number = JsonUtils.getString(request_data, "contract_number", "");
+        String contract_number = request_data.findPath("contract_number").asText("");
         if (StringUtils.isNotBlank(contract_number)) {
             email_message.append("\n\n");
             email_message.append("----- Contract Number Information -----\n");
@@ -192,7 +190,7 @@ public class OtherFunctions {
             email_message.append(contract_number);
             email_message.append("     ");
             // Contracting Organization
-            email_message.append(JsonUtils.getString(request_data, "contracting_organization", ""));
+            email_message.append(request_data.findPath("contracting_organization").asText(""));
         }
 
         HtmlEmail email = new HtmlEmail();

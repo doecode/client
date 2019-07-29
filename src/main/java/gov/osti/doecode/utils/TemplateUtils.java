@@ -185,10 +185,10 @@ public class TemplateUtils {
     public static String getNewSigninStatusHtml(ServletContext context, ObjectNode data) {
         String template_data = "";
         HashMap<Object, Object> user_data = new HashMap<Object, Object>();
-        user_data.put("first_name", JsonUtils.getString(data, "first_name", ""));
-        user_data.put("last_name", JsonUtils.getString(data, "last_name", ""));
+        user_data.put("first_name", data.findPath("first_name").asText(""));
+        user_data.put("last_name", data.findPath("last_name").asText(""));
         user_data.put("is_logged_in", true);
-        ArrayNode roles_list = JsonUtils.parseArrayNode(JsonUtils.getString(data, "roles", "[]"));
+        ArrayNode roles_list = JsonUtils.parseArrayNode(data.findPath("roles").asText("[]"));
         //TODO change to has_user_admin role and has_record_admin_role
         user_data.put("has_osti_role", JsonUtils.arrayContains(roles_list, "OSTI"));
         HashMap<Object, Object> data_for_template = new HashMap<Object, Object>();

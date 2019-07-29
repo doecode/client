@@ -69,8 +69,8 @@ public class UserFunctions {
         ObjectNode user_data = UserFunctions.getUserDataFromCookie(request);
         boolean is_logged_in = user_data.findPath("is_logged_in").asBoolean(false);
         boolean is_within_time = false;
-        if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, JsonUtils.getString(user_data, "session_timeout", ""))) {
-            LocalDateTime last_timeout = LocalDateTime.parse(JsonUtils.getString(user_data, "session_timeout", ""), SESSION_TIMEOUT_FORMAT);
+        if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, user_data.findPath("session_timeout").asText(""))) {
+            LocalDateTime last_timeout = LocalDateTime.parse(user_data.findPath("session_timeout").asText(""), SESSION_TIMEOUT_FORMAT);
             LocalDateTime right_now = LocalDateTime.now();
             long minutes = ChronoUnit.MINUTES.between(right_now, last_timeout);
             is_within_time = Math.abs(minutes) < Init.SESSION_TIMEOUT_MINUTES;
@@ -89,12 +89,12 @@ public class UserFunctions {
     public static ObjectNode setUserDataForCookie(ObjectNode user_data) {
         ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
         //TODO start pulling user_id
-        return_data.put("first_name", JsonUtils.getString(user_data, "first_name", ""));
-        return_data.put("last_name", JsonUtils.getString(user_data, "last_name", ""));
-        return_data.put("email", JsonUtils.getString(user_data, "email", ""));
-        return_data.put("site", JsonUtils.getString(user_data, "site", ""));
-        ArrayNode roles = JsonUtils.parseArrayNode(JsonUtils.getString(user_data, "roles", "[]"));
-        ArrayNode pending_roles = JsonUtils.parseArrayNode(JsonUtils.getString(user_data, "pending_roles", "[]"));
+        return_data.put("first_name", user_data.findPath("first_name").asText(""));
+        return_data.put("last_name", user_data.findPath("last_name").asText(""));
+        return_data.put("email", user_data.findPath("email").asText(""));
+        return_data.put("site", user_data.findPath("site").asText(""));
+        ArrayNode roles = JsonUtils.parseArrayNode(user_data.findPath("roles").asText("[]"));
+        ArrayNode pending_roles = JsonUtils.parseArrayNode(user_data.findPath("pending_roles").asText("[]"));
         //TODO get rejected roles
         return_data.set("roles", roles);
         return_data.set("pending_roles", pending_roles);
@@ -116,7 +116,7 @@ public class UserFunctions {
 
     public static Cookie updateUserSessionTimeout(HttpServletRequest request) {
         ObjectNode user_data = getUserDataFromCookie(request);
-        String session_timeout = JsonUtils.getString(user_data, "session_timeout", "");
+        String session_timeout = user_data.findPath("session_timeout").asText("");
         if (DOECODEUtils.isValidDateOfPattern(SESSION_TIMEOUT_FORMAT, session_timeout)) {
             user_data.put("session_timeout", LocalDateTime.now().plus(Init.SESSION_TIMEOUT_MINUTES, ChronoUnit.MINUTES).format(SESSION_TIMEOUT_FORMAT));
         }
@@ -197,7 +197,7 @@ public class UserFunctions {
         ArrayNode roles = (ArrayNode) return_data.get("roles");
         ArrayNode pending_roles = (ArrayNode) return_data.get("pending_roles");
         //TODO get rejected roles
-        String site = JsonUtils.getString(return_data, "site", "");
+        String site = return_data.findPath("site").asText("");
         // See if their site is in their roles
         boolean site_in_roles = hasRole(roles, site);
         // See if their site is in pending
