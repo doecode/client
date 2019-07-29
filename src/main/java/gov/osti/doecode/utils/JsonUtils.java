@@ -134,7 +134,7 @@ public class JsonUtils {
     }
 
     public static void writeTo(ObjectNode obj, HttpServletResponse response) throws IOException {
-        response.setContentType("application/json");
+        response.setContentType("application/json; charset=UTF-8");
         PrintWriter p = response.getWriter();
         p.print(obj.toString());
         p.flush();

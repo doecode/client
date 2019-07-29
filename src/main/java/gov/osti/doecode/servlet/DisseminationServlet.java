@@ -54,7 +54,7 @@ public class DisseminationServlet extends HttpServlet {
             // Format search results data
             switch (format) {
                 case "csv":
-                    response.setContentType("text/csv; charset=utf-8");
+                    response.setContentType("text/csv; charset=UTF-8");
                     response.setHeader("Content-Disposition", "attachment; filename=DOECODE-SearchResults.csv");
                     PrintWriter p = response.getWriter();
                     p.write(ReportFunctions.getCSVSearchExports(docs));
@@ -62,7 +62,7 @@ public class DisseminationServlet extends HttpServlet {
                     p.close();
                     break;
                 default:
-                    response.setContentType("application/json; charset=utf-8");
+                    response.setContentType("application/json; UTF-8");
                     response.setHeader("Content-Disposition", "attachment; filename=DOECODE-SearchResults.json");
 
                     InputStream input = new ByteArrayInputStream(ReportFunctions.getJsonSearchExports(docs).getBytes("UTF-8"));
