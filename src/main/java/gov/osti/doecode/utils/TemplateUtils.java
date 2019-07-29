@@ -104,24 +104,24 @@ public class TemplateUtils {
     }
 
     public static final ObjectNode GET_NAVBAR_CLASSES(String current_page) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-        ObjectNode projects = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        ObjectNode projects = JsonUtils.MAPPER.createObjectNode();
         projects.put("list_item", "nav-menu-item-special");
         projects.put("anchor", "nav-menu-item nav-menu-item-text");
 
-        ObjectNode repositoryServices = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode repositoryServices = JsonUtils.MAPPER.createObjectNode();
         repositoryServices.put("list_item", "nav-menu-item-special");
         repositoryServices.put("anchor", "nav-menu-item nav-menu-item-text");
 
-        ObjectNode about = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode about = JsonUtils.MAPPER.createObjectNode();
         about.put("list_item", "nav-menu-item-special");
         about.put("anchor", "nav-menu-item nav-menu-item-text");
 
-        ObjectNode policy = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode policy = JsonUtils.MAPPER.createObjectNode();
         policy.put("list_item", "nav-menu-item-special");
         policy.put("anchor", "nav-menu-item nav-menu-item-text");
 
-        ObjectNode resources = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode resources = JsonUtils.MAPPER.createObjectNode();
         resources.put("list_item", "nav-menu-item-special");
         resources.put("anchor", "nav-menu-item nav-menu-item-text");
 
@@ -129,7 +129,7 @@ public class TemplateUtils {
         news.put("list_item", "nav-menu-item-special");
         news.put("anchor", "nav-menu-item nav-menu-item-text");
 
-        ObjectNode faq = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode faq = JsonUtils.MAPPER.createObjectNode();
         faq.put("list_item", "nav-menu-item-special");
         faq.put("anchor", "nav-menu-item nav-menu-item-text");
 

@@ -171,7 +171,7 @@ public class DOECODEJson {
     }
 
     private ObjectNode makeListObj(String label, String value, String title) {
-        ObjectNode on = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode on = JsonUtils.MAPPER.createObjectNode();
         on.put("label", label);
         on.put("value", value);
         on.put("title", title);
@@ -192,11 +192,11 @@ public class DOECODEJson {
         //Sponsoring Orgs
         ArrayNode sponsoring_orgs = JsonUtils.MAPPER.createArrayNode();
         //These two items have to be added to the top of the sponsoring org list
-        ObjectNode blank = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode blank = JsonUtils.MAPPER.createObjectNode();
         blank.put("name", "");
         blank.put("code", "");
         blank.put("status", "");
-        ObjectNode usdoe = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode usdoe = JsonUtils.MAPPER.createObjectNode();
         blank.put("name", "USDOE");
         blank.put("code", "USDOE");
         blank.put("status", "C");
@@ -272,7 +272,7 @@ public class DOECODEJson {
     private ArrayNode translateElinkAuthorityList(ArrayNode original_list) {
         ArrayNode new_list = JsonUtils.MAPPER.createArrayNode();
         for (JsonNode n : original_list) {
-            ObjectNode new_row = new ObjectNode(JsonUtils.INSTANCE);
+            ObjectNode new_row = JsonUtils.MAPPER.createObjectNode();
             String name_val = "";
             if (n instanceof TextNode) {
                 name_val = n.asText("");

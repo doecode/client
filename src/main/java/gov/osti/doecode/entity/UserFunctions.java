@@ -33,7 +33,7 @@ public class UserFunctions {
          * as a json object, and returns it
      */
     public static ObjectNode getUserDataFromCookie(HttpServletRequest request) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         if (request.getCookies() != null) {
             for (Cookie c : request.getCookies()) {
                 if (StringUtils.equals(c.getName(), "user_data")) {
@@ -87,7 +87,7 @@ public class UserFunctions {
     }
 
     public static ObjectNode setUserDataForCookie(ObjectNode user_data) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         //TODO start pulling user_id
         return_data.put("first_name", user_data.findPath("first_name").asText(""));
         return_data.put("last_name", user_data.findPath("last_name").asText(""));

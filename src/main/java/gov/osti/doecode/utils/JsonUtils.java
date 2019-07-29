@@ -55,7 +55,7 @@ public class JsonUtils {
      If we do that, it's like getJsonListItem(list,"value",val);
      */
     public static ObjectNode getJsonListItem(ArrayNode array, String key, String value) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         for (JsonNode v : array) {
             ObjectNode row = (ObjectNode) v;
             if (StringUtils.equals(row.findPath(key).asText(""), value)) {

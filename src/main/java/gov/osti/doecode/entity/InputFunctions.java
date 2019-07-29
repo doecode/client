@@ -10,7 +10,7 @@ import gov.osti.doecode.utils.JsonUtils;
 public class InputFunctions {
 
    public static ObjectNode getInputFormLists(ServletContext context) {
-      ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+      ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
       return_data.set("availabilities_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY));
       return_data.set("licenses_list", DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY));
       return_data.set("affiliations_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AFFILIATIONS_KEY));

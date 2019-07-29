@@ -36,10 +36,10 @@ public class Input extends HttpServlet {
                 String template = "";
                 String current_page = "";
 
-                ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
-                ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
+                ObjectNode output_data = JsonUtils.MAPPER.createObjectNode();
+                ArrayNode jsFilesList = JsonUtils.MAPPER.createArrayNode();
                 ArrayNode extraJSList = JsonUtils.MAPPER.createArrayNode();
-                ArrayNode cssFilesList = new ArrayNode(JsonUtils.INSTANCE);
+                ArrayNode cssFilesList = JsonUtils.MAPPER.createArrayNode();
                 boolean is_inputjs = false;
 
                 // Software type param

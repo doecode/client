@@ -18,7 +18,7 @@ public class OtherFunctions {
     private static Logger log = LoggerFactory.getLogger(OtherFunctions.class.getName());
 
     public static ObjectNode handleGitlabSubmissionForm(HttpServletRequest request) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         String captcha_response = request.getParameter("g-recaptcha-response");
         String recaptcha_secretkey = Init.recaptcha_secretkey;
         String ip_address = "";
@@ -41,7 +41,7 @@ public class OtherFunctions {
             return_data.put("message", "You must enter all required fields and validate the captcha.");
         } else {
             // Submit form
-            ObjectNode requested_data = new ObjectNode(JsonUtils.INSTANCE);
+            ObjectNode requested_data = JsonUtils.MAPPER.createObjectNode();
             requested_data.put("first_name", request.getParameter("first_name"));
             requested_data.put("middle_name", request.getParameter("middle_name"));
             requested_data.put("last_name", request.getParameter("last_name"));
@@ -108,7 +108,7 @@ public class OtherFunctions {
     }
 
     public static ObjectNode sendGitlabSubmissionEmail(ServletContext context, ObjectNode request_data) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
 
         // Check all of the values before submitting
         // Let's go ahead and put the message together
@@ -212,7 +212,7 @@ public class OtherFunctions {
     }
 
     public static ObjectNode getOtherLists(ServletContext context) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         try {
             return_data.set("countries_list",
                     DOECODEServletContextListener.getJsonList(DOECODEJson.COUNTRIES_KEY));

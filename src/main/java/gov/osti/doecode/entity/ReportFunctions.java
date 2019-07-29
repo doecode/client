@@ -52,11 +52,11 @@ public class ReportFunctions {
 
     public static String getCSVSearchExports(ArrayNode search_data) {
 
-        ArrayNode docs_rows = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode docs_rows = JsonUtils.MAPPER.createArrayNode();
         for (int i = 0; i < search_data.size(); i++) {
             ObjectNode rec = getSearchResultsReportVersion((ObjectNode) search_data.get(i));
 
-            ArrayNode row_vals = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode row_vals = JsonUtils.MAPPER.createArrayNode();
             // Code ID
             row_vals.add("\"" + rec.findPath("code_id").asLong(0) + "\"");
 
@@ -143,7 +143,7 @@ public class ReportFunctions {
     }
 
     public static String getJsonSearchExports(ArrayNode search_data) {
-        ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
         for (JsonNode doc : search_data) {
             return_data.add(getSearchResultsReportVersion((ObjectNode) doc));
         }
@@ -152,7 +152,7 @@ public class ReportFunctions {
     }
 
     private static ObjectNode getSearchResultsReportVersion(ObjectNode docs) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         // code id
         return_data.put("code_id", docs.findPath("code_id").asLong(0));
 
@@ -200,10 +200,10 @@ public class ReportFunctions {
 
         // Developer(s)
         ArrayNode developers = (ArrayNode) docs.get("developers");
-        ArrayNode developer_displays = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode developer_displays = JsonUtils.MAPPER.createArrayNode();
         for (JsonNode n : developers) {
             ObjectNode row = (ObjectNode) n;
-            ArrayNode name_parts = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode name_parts = JsonUtils.MAPPER.createArrayNode();
             String last_name = row.findPath("last_name").asText("");
             if (StringUtils.isNotBlank(last_name)) {
                 name_parts.add(last_name);
@@ -214,7 +214,7 @@ public class ReportFunctions {
             }
             String name = DOECODEUtils.makeTokenSeparatedList(name_parts, ", ");
 
-            ArrayNode other_parts = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode other_parts = JsonUtils.MAPPER.createArrayNode();
             String orc_id = row.findPath("orcid").asText("");
             if (StringUtils.isNotBlank(orc_id)) {
                 other_parts.add("ORCID: " + orc_id);
@@ -260,7 +260,7 @@ public class ReportFunctions {
         return_data.put("site_accession_number", docs.findPath("site_accession_number").asText(""));
 
         // Sponsoring orgs
-        ArrayNode sponsor_orgs_list = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode sponsor_orgs_list = JsonUtils.MAPPER.createArrayNode();
         for (JsonNode j : (ArrayNode) docs.get("sponsoring_organizations")) {
             ObjectNode row = (ObjectNode) j;
 
@@ -272,9 +272,9 @@ public class ReportFunctions {
             // Contrat num
             String primary_award = row.findPath("primary_award").asText("");
 
-            ArrayNode additional_rewards = new ArrayNode(JsonUtils.INSTANCE);
-            ArrayNode br_codes = new ArrayNode(JsonUtils.INSTANCE);
-            ArrayNode fwp_nums = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode additional_rewards = JsonUtils.MAPPER.createArrayNode();
+            ArrayNode br_codes = JsonUtils.MAPPER.createArrayNode();
+            ArrayNode fwp_nums = JsonUtils.MAPPER.createArrayNode();
             for (JsonNode jn : (ArrayNode) row.get("funding_identifiers")) {
                 ObjectNode f_identifiers = (ObjectNode) jn;
                 String value = f_identifiers.findPath("identifier_value").asText("");
@@ -292,7 +292,7 @@ public class ReportFunctions {
             }
 
             // Assemble the string
-            ArrayNode value_str = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode value_str = JsonUtils.MAPPER.createArrayNode();
             value_str.add("DOE Organization (" + (is_doe ? "Y" : "N"));
             value_str.add("Primary Award/Contract: " + primary_award);
 
@@ -311,7 +311,7 @@ public class ReportFunctions {
         return_data.put("sponsor_orgs", DOECODEUtils.makeTokenSeparatedList(sponsor_orgs_list, "; "));
 
         // Researh Orgs
-        ArrayNode research_orgs_list = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode research_orgs_list = JsonUtils.MAPPER.createArrayNode();
         for (JsonNode j : (ArrayNode) docs.get("research_organizations")) {
             ObjectNode row = (ObjectNode) j;
             String organization_name = row.findPath("organization_name").asText("");
@@ -324,12 +324,12 @@ public class ReportFunctions {
         return_data.put("research_orgs", DOECODEUtils.makeTokenSeparatedList(research_orgs_list, "; "));
 
         // Contributors
-        ArrayNode contributors_list = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode contributors_list = JsonUtils.MAPPER.createArrayNode();
         ArrayNode contributors = (ArrayNode) docs.get("contributors");
         for (JsonNode j : contributors) {
             ObjectNode row = (ObjectNode) j;
             // Name
-            ArrayNode name_parts = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode name_parts = JsonUtils.MAPPER.createArrayNode();
             String last_name = row.findPath("last_name").asText("");
             if (StringUtils.isNotBlank(last_name)) {
                 name_parts.add(last_name);
@@ -340,7 +340,7 @@ public class ReportFunctions {
             }
             String name = DOECODEUtils.makeTokenSeparatedList(name_parts, ", ");
             // Other Info
-            ArrayNode other_parts = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode other_parts = JsonUtils.MAPPER.createArrayNode();
             String orc_id = row.findPath("orcid").asText("");
             if (StringUtils.isNotBlank(orc_id)) {
                 other_parts.add("ORCID: " + orc_id);
@@ -366,7 +366,7 @@ public class ReportFunctions {
         return_data.put("contributors", DOECODEUtils.makeTokenSeparatedList(contributors_list, "; "));
 
         // Contributing Orgs
-        ArrayNode contributing_orgs_list = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode contributing_orgs_list = JsonUtils.MAPPER.createArrayNode();
         for (JsonNode j : (ArrayNode) docs.get("contributing_organizations")) {
             ObjectNode row = (ObjectNode) j;
             String name = row.findPath("organization_name").asText("");
@@ -377,7 +377,7 @@ public class ReportFunctions {
         return_data.put("contributing_orgs", DOECODEUtils.makeTokenSeparatedList(contributing_orgs_list, "; "));
 
         // Related Identifiers
-        ArrayNode related_identifiers_list = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode related_identifiers_list = JsonUtils.MAPPER.createArrayNode();
         for (JsonNode j : (ArrayNode) docs.get("related_identifiers")) {
             ObjectNode row = (ObjectNode) j;
             String value = row.findPath("identifier_value").asText("");

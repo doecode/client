@@ -41,7 +41,7 @@ public class DisseminationServlet extends HttpServlet {
 
             // Get search results
             ObjectNode search_request_data = SearchFunctions.createPostDataObj(request, 0, ReportFunctions.MAX_RECS_BY_TYPE.get(format));
-            ObjectNode search_result_data = new ObjectNode(JsonUtils.INSTANCE);
+            ObjectNode search_result_data = JsonUtils.MAPPER.createObjectNode();
 
             try {
                 search_result_data = DOECODEUtils.makePOSTRequest(Init.backend_api_url + "search", search_request_data);

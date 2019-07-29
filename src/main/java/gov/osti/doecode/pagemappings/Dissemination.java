@@ -40,8 +40,8 @@ public class Dissemination extends HttpServlet {
         String page_title = "";
         String template = "";
         String current_page = "";
-        ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
-        ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
+        ObjectNode output_data = JsonUtils.MAPPER.createObjectNode();
+        ArrayNode jsFilesList = JsonUtils.MAPPER.createArrayNode();
         ArrayNode extrasList = JsonUtils.MAPPER.createArrayNode();
 
         /*
@@ -161,7 +161,7 @@ public class Dissemination extends HttpServlet {
 
         // Check if they're logged in, and only do something if they're not logged in
         if (!UserFunctions.isUserLoggedIn(request)) {
-            output_data.set("user_data", new ObjectNode(JsonUtils.INSTANCE));
+            output_data.set("user_data", JsonUtils.MAPPER.createObjectNode());
         } else {
             // Increment time
             response.addCookie(UserFunctions.updateUserSessionTimeout(request));

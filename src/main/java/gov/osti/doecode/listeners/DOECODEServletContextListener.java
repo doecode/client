@@ -25,7 +25,7 @@ public class DOECODEServletContextListener implements ServletContextListener {
      private static final DOECODEJson doecode_json_lists = new DOECODEJson();
 
      public static ArrayNode getJsonList(String list) {
-          ArrayNode return_list = new ArrayNode(JsonUtils.INSTANCE);
+          ArrayNode return_list = JsonUtils.MAPPER.createArrayNode();
           switch (list) {
                case DOECODEJson.AFFILIATIONS_KEY:
                     return_list = doecode_json_lists.getAffiliationsList();

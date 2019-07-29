@@ -32,7 +32,7 @@ public class User extends HttpServlet {
         String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
 
         if (StringUtils.containsIgnoreCase(request.getContentType(), "application/json")) {
-            ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+            ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
             ObjectNode request_data = JsonUtils.parseObjectNode(request.getReader());
             boolean add_signin_html = false;
             switch (remaining) {
@@ -63,8 +63,8 @@ public class User extends HttpServlet {
         } else {
             String page_title = "";
             String template = "";
-            ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
-            ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
+            ObjectNode output_data = JsonUtils.MAPPER.createObjectNode();
+            ArrayNode jsFilesList = JsonUtils.MAPPER.createArrayNode();
 
             switch (remaining) {
                 case "account":
@@ -98,7 +98,7 @@ public class User extends HttpServlet {
                     page_title = "DOE CODE: Login";
                     template = TemplateUtils.TEMPLATE_USER_LOGIN;
                     if (StringUtils.isNotBlank(request.getParameter("redirect")) && request.getParameter("redirect").equals("true")) {
-                        output_data.set("user_data", new ObjectNode(JsonUtils.INSTANCE));
+                        output_data.set("user_data", JsonUtils.MAPPER.createObjectNode());
                         output_data.put("is_redirected", true);
                         response.addCookie(UserFunctions.deleteCookie("user_data"));
                     }
@@ -114,7 +114,7 @@ public class User extends HttpServlet {
                 case "logout":
                     page_title = "DOE CODE: Logout";
                     template = TemplateUtils.TEMPLATE_USER_LOGOUT;
-                    output_data.set("user_data", new ObjectNode(JsonUtils.INSTANCE));
+                    output_data.set("user_data", JsonUtils.MAPPER.createObjectNode());
                     response.addCookie(UserFunctions.deleteCookie("user_data"));
                     response.addCookie(UserFunctions.deleteCookie("needs_password_reset"));
                     response.addCookie(UserFunctions.deleteCookie("requested_url"));

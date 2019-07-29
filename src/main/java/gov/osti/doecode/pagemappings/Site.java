@@ -30,8 +30,8 @@ public class Site extends HttpServlet {
 
                 String page_title = "";
                 String template = "";
-                ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
-                ArrayNode jsFilesList = new ArrayNode(JsonUtils.INSTANCE);
+                ObjectNode output_data = JsonUtils.MAPPER.createObjectNode();
+                ArrayNode jsFilesList = JsonUtils.MAPPER.createArrayNode();
 
                 switch (remaining) {
                 case "site-admin":

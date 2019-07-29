@@ -56,7 +56,7 @@ public class SearchFunctions {
 
     public static ObjectNode createPostDataObj(HttpServletRequest request, long start, long rows) {
         // Get all of the data into a postable object
-        ObjectNode post_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode post_data = JsonUtils.MAPPER.createObjectNode();
         post_data.put("all_fields", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("all_fields"), ""), Whitelist.basic()));
         post_data.put("software_title", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("software_title"), ""), Whitelist.basic()));
         post_data.put("developers_contributors", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("developers_contributors"), ""), Whitelist.basic()));
@@ -80,7 +80,7 @@ public class SearchFunctions {
     }
 
     public static ObjectNode doSearchPost(HttpServletRequest request, String api_url) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         boolean had_error = false;
         boolean invalid_search_data = false;
         String error_message = "";
@@ -90,7 +90,7 @@ public class SearchFunctions {
 
         ObjectNode post_data = createPostDataObj(request, start, rows);
 
-        ObjectNode search_result_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode search_result_data = JsonUtils.MAPPER.createObjectNode();
         try {
             search_result_data = DOECODEUtils.makePOSTRequest(api_url + "search", post_data);
             if (search_result_data.findPath("invalid_object_parse").asBoolean(false)) {
@@ -194,11 +194,11 @@ public class SearchFunctions {
     }
 
     private static ArrayNode getYearFacetsData(ObjectNode facets) {
-        ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
 
         for (String key : JsonUtils.getKeys(facets)) {
             // Get our needed values
-            ObjectNode row = new ObjectNode(JsonUtils.INSTANCE);
+            ObjectNode row = JsonUtils.MAPPER.createObjectNode();
             int year = Integer.parseInt(StringUtils.substring(key, 0, 4));
             int count = facets.get(key).asInt();
             row.put("year", year);
@@ -210,8 +210,8 @@ public class SearchFunctions {
     }
 
     private static ObjectNode getSearchResultsDescription(ObjectNode post_data) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-        ArrayNode search_description_list = new ArrayNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        ArrayNode search_description_list = JsonUtils.MAPPER.createArrayNode();
 
         // All Fields
         String all_fields = post_data.findPath("all_fields").asText("");
@@ -327,7 +327,7 @@ public class SearchFunctions {
     }
 
     private static ObjectNode makeSearchDescriptionObject(String displayField, String display_value, String field) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         return_data.put("displayField", displayField);
         return_data.put("value", display_value);
         return_data.put("field", field);
@@ -336,14 +336,14 @@ public class SearchFunctions {
 
     private static ObjectNode makeSearchDescriptionObjectArray(String displayField, ArrayNode values, String field,
             ArrayNode display_vals_array) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         return_data.put("displayField", displayField);
 
         ArrayNode values_to_show = values;
         // If we have a display vals array, we'll through there and grab the display
         // values we actually want to show
         if (display_vals_array != null) {
-            ArrayNode new_vals = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode new_vals = JsonUtils.MAPPER.createArrayNode();
             for (JsonNode v : values) {
                 String val = v.asText();
                 // Go through array we passed in, and find the label, which is the display value
@@ -360,9 +360,9 @@ public class SearchFunctions {
         }
 
         // Add some content to the objects in the array we send back
-        ArrayNode values_arr = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode values_arr = JsonUtils.MAPPER.createArrayNode();
         for (int i = 0; i < values_to_show.size(); i++) {
-            ObjectNode row = new ObjectNode(JsonUtils.INSTANCE);
+            ObjectNode row = JsonUtils.MAPPER.createObjectNode();
             row.put("value", values_to_show.get(i).asText());
             row.put("orig_value", values.get(i).asText());
             row.put("field", field);
@@ -404,7 +404,7 @@ public class SearchFunctions {
     }
 
     private static ObjectNode sort_dropdownOptions(String sort_value) {
-        ObjectNode options_obj = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode options_obj = JsonUtils.MAPPER.createObjectNode();
         ArrayNode options = DOECODEServletContextListener.getJsonList(DOECODEJson.SEARCH_SORT_KEY);
         String current = "";
 
@@ -422,7 +422,7 @@ public class SearchFunctions {
     }
 
     private static ObjectNode getPaginationData(ObjectNode search_form_data, long num_found) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         long start = search_form_data.findPath("start").asLong(0);
         long rows = search_form_data.findPath("rows").asLong(0);
 
@@ -440,9 +440,9 @@ public class SearchFunctions {
     }
 
     private static ArrayNode handleRequestArray(String value) {
-        ArrayNode request_array = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode request_array = JsonUtils.MAPPER.createArrayNode();
         if (StringUtils.isNotBlank(value) && !StringUtils.equals("[]", value)) {
-            ArrayNode temp_array = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode temp_array = JsonUtils.MAPPER.createArrayNode();
             for (JsonNode v : JsonUtils.parseArrayNode(value)) {
                 temp_array.add(Jsoup.clean(v.asText(), Whitelist.basic()));
             }
@@ -453,12 +453,12 @@ public class SearchFunctions {
     }
 
     private static ArrayNode processSearchResultData(ArrayNode search_result_list, long start, long num_found) {
-        ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
 
         for (int i = 0; i < search_result_list.size(); i++) {
             ObjectNode row = (ObjectNode) search_result_list.get(i);
 
-            ObjectNode newRow = new ObjectNode(JsonUtils.INSTANCE);
+            ObjectNode newRow = JsonUtils.MAPPER.createObjectNode();
             Long code_id = row.findPath("code_id").asLong(0);
             newRow.put("code_id", code_id);
             newRow.put("release_date", row.findPath("release_date").asText(""));
@@ -472,7 +472,7 @@ public class SearchFunctions {
              * search page
              */
             ArrayNode devContributors = combineDevContributorNames((ArrayNode) row.get("developers"), (ArrayNode) row.get("contributors"));
-            ArrayNode devContributorsTrimmed = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode devContributorsTrimmed = JsonUtils.MAPPER.createArrayNode();
             boolean is_more_than_3 = false;
             if (devContributors.size() > 3) {// If we have more than 3, then we want to trim the list down
                 // to just 3
@@ -503,7 +503,7 @@ public class SearchFunctions {
     }
 
     private static ArrayNode combineDevContributorNames(ArrayNode developers, ArrayNode contributors) {
-        ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
 
         if (developers != null) {
             for (JsonNode v : developers) {
@@ -552,7 +552,7 @@ public class SearchFunctions {
 
     private static ObjectNode getDevAndContributorLink(ArrayNode authorlist, boolean showAffiliations,
             boolean showEllipsis, boolean showOrcid) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         // We need to go ahead and tack on the lack of a need of a semi-colon after a
         // given author
         if (authorlist.size() > 0) {
@@ -563,7 +563,7 @@ public class SearchFunctions {
 
         // Now, we have a lot to do with each author
         int affiliations_count = 1;
-        ArrayNode affiliations_list = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode affiliations_list = JsonUtils.MAPPER.createArrayNode();
         for (int i = 0; i < authorlist.size(); i++) {
             ObjectNode current_row = (ObjectNode) authorlist.get(i);
 
@@ -571,7 +571,7 @@ public class SearchFunctions {
             current_row.put("showOrcid", StringUtils.isNotBlank(current_row.findPath("orcid").asText("")) && showOrcid);
 
             if (showAffiliations) {
-                ArrayNode countArray = new ArrayNode(JsonUtils.INSTANCE);
+                ArrayNode countArray = JsonUtils.MAPPER.createArrayNode();
                 List<Integer> countList = new ArrayList<Integer>();
                 // Go through each affiliation. If it's a valid one, tack on another number to
                 // show in the superscript thing in the link
@@ -622,7 +622,7 @@ public class SearchFunctions {
     }
 
     private static ObjectNode getDescription(String description, int moreLessValue) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         String description_pt1 = description;
         String description_pt2 = "";
 
@@ -644,7 +644,7 @@ public class SearchFunctions {
 
     private static ArrayNode getDoiReposLinks(String code_id, String doi, String repository_link,
             String landing_page, String release_date) {
-        ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
 
         // doi
         if (StringUtils.isNotBlank(release_date) && StringUtils.isNotBlank(doi)) {
@@ -676,7 +676,7 @@ public class SearchFunctions {
 
     private static ObjectNode makeDOIRepoLinkObj(String pretext, String title, String code_id, String href,
             String display, String css_class) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         return_data.put("pretext", pretext);
         return_data.put("title", title);
         return_data.put("code_id", code_id);
@@ -687,7 +687,7 @@ public class SearchFunctions {
     }
 
     public static ObjectNode getAdvancedSearchPageLists() {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         return_data.set("availabilities_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY));
         return_data.set("licenses_list", DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY));
         return_data.set("software_type", DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY));
@@ -697,7 +697,7 @@ public class SearchFunctions {
     }
 
     public static ArrayNode getSearchBreadcrumbTrailList(ObjectNode search_form_data, long num_found) {
-        ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
         return_data.add("<a title='DOE CODE Homepage' href='/" + Init.app_name + "/'> DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;");
 
         String all_fields_text = "Search for " + (StringUtils.isNotBlank(search_form_data.findPath("all_fields").asText("")) ? search_form_data.findPath("all_fields").asText("") : "All Projects");
@@ -736,7 +736,7 @@ public class SearchFunctions {
     }
 
     public static ObjectNode getBiblioSidebarData(ObjectNode search_data, String public_api_url) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         // DOI and release date
         return_data.put("has_doi_and_release", showDOI(search_data.findPath("doi").asText(""), search_data.findPath("release_date").asText("")));
         return_data.put("doi", search_data.findPath("doi").asText(""));
@@ -776,8 +776,8 @@ public class SearchFunctions {
         if (null != related_identifiers && related_identifiers.size() > 0) {
             // The names of the arrays contents will be stored in are the inverse. So,
             // anything in "IsNewVersionOf" will be stored in "prev_versions".
-            ArrayNode new_versions = new ArrayNode(JsonUtils.INSTANCE);
-            ArrayNode prev_versions = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode new_versions = JsonUtils.MAPPER.createArrayNode();
+            ArrayNode prev_versions = JsonUtils.MAPPER.createArrayNode();
 
             for (JsonNode j : related_identifiers) {
                 ObjectNode row = (ObjectNode) j;
@@ -817,17 +817,17 @@ public class SearchFunctions {
     }
 
     public static ObjectNode getSponsoringOrgData(ArrayNode sponsoring_orgs) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-        ArrayNode list = new ArrayNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        ArrayNode list = JsonUtils.MAPPER.createArrayNode();
 
         for (int i = 0; i < sponsoring_orgs.size(); i++) {
             ObjectNode sponsorOrgRow = (ObjectNode) sponsoring_orgs.get(i);
-            ObjectNode refinedSponsorOrgRow = new ObjectNode(JsonUtils.INSTANCE);
+            ObjectNode refinedSponsorOrgRow = JsonUtils.MAPPER.createObjectNode();
 
             refinedSponsorOrgRow.put("org_name", sponsorOrgRow.findPath("organization_name").asText(""));
-            ArrayNode AwardNums = new ArrayNode(JsonUtils.INSTANCE);
-            ArrayNode FWPNums = new ArrayNode(JsonUtils.INSTANCE);
-            ArrayNode BRCodes = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode AwardNums = JsonUtils.MAPPER.createArrayNode();
+            ArrayNode FWPNums = JsonUtils.MAPPER.createArrayNode();
+            ArrayNode BRCodes = JsonUtils.MAPPER.createArrayNode();
 
             // Go through the array, look for the different types of numbers, and add them
             // to the list
@@ -877,7 +877,7 @@ public class SearchFunctions {
     }
 
     public static ArrayNode getResearchOrganizations(ArrayNode researchOrgs) {
-        ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
         for (JsonNode v : researchOrgs) {
             ObjectNode vObj = (ObjectNode) v;
             return_data.add(vObj.findPath("organization_name").asText(""));
@@ -886,7 +886,7 @@ public class SearchFunctions {
     }
 
     public static ArrayNode combineAuthorLists(ArrayNode arr1, ArrayNode arr2) {
-        ArrayNode return_data = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
 
         for (JsonNode v : arr1) {
             ObjectNode row = (ObjectNode) v;
@@ -965,7 +965,7 @@ public class SearchFunctions {
     }
 
     private static ObjectNode getAPAFormat(ObjectNode biblio_data) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
 
         boolean needsSpacing = false;
 
@@ -1019,15 +1019,15 @@ public class SearchFunctions {
     }
 
     private static ObjectNode getOptionalBibtexObj(String label, String value) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         return_data.put("label", label);
         return_data.put("value", value);
         return return_data;
     }
 
     private static ObjectNode getBibtexFormat(ObjectNode biblio_data) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
-        ArrayNode optional_data = new ArrayNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        ArrayNode optional_data = JsonUtils.MAPPER.createArrayNode();
 
         // Software Title
         String software_title = "{" + biblio_data.findPath("software_title").asText("") + "}";
@@ -1082,7 +1082,7 @@ public class SearchFunctions {
     }
 
     private static ObjectNode getChicagoFormat(ObjectNode biblio_data) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
 
         boolean needsSpacing = false;
 
@@ -1134,7 +1134,7 @@ public class SearchFunctions {
     }
 
     private static ObjectNode getMLAFormat(ObjectNode biblio_data) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         boolean needsSpacing = false;
 
         // Authors
@@ -1164,7 +1164,7 @@ public class SearchFunctions {
 
         // Sponsor Orgs
         String sponsor_orgs = "";
-        ArrayNode sponsor_orgs_list = new ArrayNode(JsonUtils.INSTANCE);
+        ArrayNode sponsor_orgs_list = JsonUtils.MAPPER.createArrayNode();
         for (JsonNode v : (ArrayNode) biblio_data.get("sponsoring_organizations")) {
             ObjectNode vObj = (ObjectNode) v;
             sponsor_orgs_list.add(vObj.findPath("organization_name").asText(""));
@@ -1217,7 +1217,7 @@ public class SearchFunctions {
         log.debug(biblio_data.toString());
         // Massage any data that needs it
         if (biblio_data.findPath("is_valid_record").asBoolean(false)) {
-            ArrayNode meta_tags = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode meta_tags = JsonUtils.MAPPER.createArrayNode();
             /* Title */
             return_data.put("title", biblio_data.findPath("software_title").asText(""));
             meta_tags.add(makeMetaTag("title", biblio_data.findPath("software_title").asText("")));
@@ -1259,7 +1259,7 @@ public class SearchFunctions {
 
             /* Licenses */
             ArrayNode licenses = (ArrayNode) biblio_data.get("licenses");
-            ArrayNode license_displays = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode license_displays = JsonUtils.MAPPER.createArrayNode();
             if (licenses != null) {
                 for (JsonNode row : licenses) {
                     String rowVal = row.asText();
@@ -1275,7 +1275,7 @@ public class SearchFunctions {
             ObjectNode sponsor_orgs = getSponsoringOrgData((ArrayNode) biblio_data.get("sponsoring_organizations"));
             return_data.set("sponsoring_org", sponsor_orgs);
             return_data.put("has_sponsoring_org", sponsor_orgs.findPath("has_sponsoring_org").asBoolean(false));
-            ArrayNode sponsororgslist = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode sponsororgslist = JsonUtils.MAPPER.createArrayNode();
             for (JsonNode v : (ArrayNode) sponsor_orgs.get("list")) {
                 ObjectNode vObj = (ObjectNode) v;
                 sponsororgslist.add(vObj.findPath("org_name").asText(""));
@@ -1336,7 +1336,7 @@ public class SearchFunctions {
             /* Meta tags */
             // Before we send the meta tags down, let's go ahead and remove all of the ones
             // that didn't have any actual content
-            ArrayNode refined_meta_tags = new ArrayNode(JsonUtils.INSTANCE);
+            ArrayNode refined_meta_tags = JsonUtils.MAPPER.createArrayNode();
             for (JsonNode v : meta_tags) {
                 ObjectNode vObj = (ObjectNode) v;
                 if (StringUtils.isNotBlank(vObj.findPath("content").asText(""))) {
@@ -1384,7 +1384,7 @@ public class SearchFunctions {
     }
 
     private static ObjectNode makeMetaTag(String name, String value) {
-        ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         return_data.put("name", name);
         return_data.put("content", value);
         return return_data;

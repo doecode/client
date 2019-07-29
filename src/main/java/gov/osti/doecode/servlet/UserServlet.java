@@ -21,7 +21,7 @@ public class UserServlet extends HttpServlet {
           request.setCharacterEncoding("UTF-8");
           String remaining = StringUtils.substringAfterLast(request.getRequestURI(), "/" + Init.app_name + "/user-data/");
 
-          ObjectNode return_data = new ObjectNode(JsonUtils.INSTANCE);
+          ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
 
           switch (remaining) {
                case "get-current-user-data":

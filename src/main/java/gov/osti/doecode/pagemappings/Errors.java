@@ -28,7 +28,7 @@ public class Errors extends HttpServlet {
 
                 String page_title = "";
                 String template = "";
-                ObjectNode output_data = new ObjectNode(JsonUtils.INSTANCE);
+                ObjectNode output_data = JsonUtils.MAPPER.createObjectNode();
 
                 switch (remaining) {
                 case "page-not-found":
