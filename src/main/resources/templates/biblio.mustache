@@ -101,7 +101,7 @@
     .biblio-social-link:last-child {
         border-right: none;
     }
-    
+
     .biblio-badges-container{
         display:flex;
         flex-direction: row;
@@ -109,6 +109,19 @@
     }
     .biblio-badges-container > div:not(:first-child){
         padding-left:15px;
+    }
+
+    div.biblio-divider.row{
+        margin-top:5px;
+        margin-bottom:10px;
+    }
+
+    div.biblio-divider.row > div:nth-child(2){
+        margin-top: 5px;
+        border-bottom: 1px solid #DDDDDD;
+    }
+    div.sponsor-org-group-list > div:not(:last-child){
+        margin-bottom:20px;
     }
 
     @media only screen and (max-width:767px) and (min-width: 320px) {
