@@ -166,7 +166,7 @@ public class DOECODEUtils {
         String badge_name = "";
 
         switch (project_name) {
-            case "ECP-CI":
+            case "ECP":
             case "ESnet":
             case "SciDAC":
                 badge_name = project_name + "-badge-min.png";
