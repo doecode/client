@@ -72,9 +72,7 @@ public class User extends HttpServlet {
                     template = TemplateUtils.TEMPLATE_USER_ACCOUNT;
                     // If they have a passcode, we need to let them on in, and then take care of
                     // things from there
-                    if (StringUtils.isNotBlank(request.getParameter("passcode")) && !StringUtils.equals(
-                            UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"),
-                            "true")) {
+                    if (StringUtils.isNotBlank(request.getParameter("passcode")) && !StringUtils.equals(UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"), "true")) {
                         Cookie c = UserFunctions.makeCookie("needs_password_reset", "true");
                         c.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
                         response.addCookie(c);
@@ -85,14 +83,16 @@ public class User extends HttpServlet {
                     }
 
                     if (StringUtils.equals(
-                            UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"),
-                            "true")) {
+                            UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"), "true")) {
                         output_data.put("page_warning_message", "Please change your password");
                     }
                     break;
                 case "user-admin":
+                    //TODO has_admin role check
                     page_title = "DOE CODE: User Administration";
                     template = TemplateUtils.TEMPLATE_USER_ADMIN;
+                    //TODO get user admin data
+                    UserFunctions.getUserAdminPageData(request);
                     break;
                 case "login":
                     page_title = "DOE CODE: Login";

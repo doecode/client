@@ -7,14 +7,18 @@ import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonUtils;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
+import org.javalite.http.Get;
+import org.javalite.http.Http;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -231,5 +235,48 @@ public class UserFunctions {
         Cookie c = makeCookie(name, "");
         c.setMaxAge(0);
         return c;
+    }
+
+    public static ObjectNode getUserAdminPageData(HttpServletRequest request) {
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        ObjectNode current_user = UserFunctions.getUserDataFromCookie(request);
+        log.info("User data: " + current_user.toString());
+        //Get xsrf token
+        String xsrfToken = current_user.findPath("xsrfToken").asText("");
+        String accessToken = UserFunctions.getOtherUserCookieValue(request, "accessToken");
+        //Get roles list
+        ArrayNode roles_list = DOECODEUtils.makeAuthenticatedGetArrRequest(Init.backend_api_url + "users/roles", xsrfToken, accessToken);//TODO get correct endpoint
+        return_data.set("roles_list", roles_list);
+
+        //Get user list
+        ArrayNode users_list = DOECODEUtils.makeAuthenticatedGetArrRequest(Init.backend_api_url + "user/users", xsrfToken, accessToken);
+        return_data.set("users_list", users_list);
+
+        //Put a pending roles list together
+        ArrayNode pending_roles_list = JsonUtils.MAPPER.createArrayNode();
+        for (JsonNode user : users_list) {
+            ObjectNode user_data = (ObjectNode) user;
+
+            //If the user has any pending roles, add them to the list
+            ArrayNode p_roles = user_data.withArray("pending_roles");
+            if (p_roles.size() > 0) {
+                ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+
+                //Get the user's name;
+                row.put("name", user_data.findPath("first_name").asText("") + " " + user_data.findPath("last_name").asText(""));
+
+                //Get the user's pending roles
+                ArrayList<String> pending_roles = new ArrayList<String>();
+                for(JsonNode jn:p_roles){
+                    pending_roles.add(jn.asText(""));
+                }
+                row.put("roles", StringUtils.join(pending_roles, ", "));
+                pending_roles_list.add(row);
+            }
+        }
+        return_data.set("pending_roles", pending_roles_list);
+        return_data.put("has_pending_roles", pending_roles_list.size()>0);
+
+        return return_data;
     }
 }

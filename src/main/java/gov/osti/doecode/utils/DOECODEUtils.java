@@ -176,6 +176,9 @@ public class DOECODEUtils {
         return badge_name;
     }
 
+    /**
+     * Make a regular get request, no authentication needed
+     */
     public static ObjectNode makeGetRequest(String url) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         Get get = Http.get(url).header("Accept", "application/json").header("Content-Type", "application/json");
@@ -189,6 +192,9 @@ public class DOECODEUtils {
         return return_data;
     }
 
+    /**
+     * Makes a post request, with just the URL and the data we're posting
+     */
     public static ObjectNode makePOSTRequest(String url, ObjectNode post_data) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         Post post = Http.post(url, post_data.toString()).header("Accept", "application/json").header("Content-Type", "application/json");
@@ -203,6 +209,9 @@ public class DOECODEUtils {
         return return_data;
     }
 
+    /**
+     * Makes a request for an array
+     */
     public static ArrayNode makeArrayGetRequest(String url) {
         ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
         Get get = Http.get(url).header("Accept", "application/json").header("Content-Type", "application/json");
@@ -214,4 +223,34 @@ public class DOECODEUtils {
         }
         return return_data;
     }
+
+    private static String getAuthentictedGetRequestStr(String url, String xsrfToken, String accessToken) {
+        Get get = Http.get(url).header("Accept", "application/json").header("Content-Type", "application/json").header("X-XSRF-TOKEN", xsrfToken).header("Cookie", "accessToken=" + accessToken);
+        String response = get.text("UTF-8");
+        return response;
+    }
+
+    public static ObjectNode makeAuthenticatedGetRequest(String url, String xsrfToken, String accessToken) {
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        String response = getAuthentictedGetRequestStr(url, xsrfToken, accessToken);
+        try {
+            return_data = JsonUtils.parseObjectNode(response);
+        } catch (Exception e) {
+            log.error("Exception in making get request: " + e.getMessage());
+            return_data.put("invalid_object_parse", true);
+        }
+        return return_data;
+    }
+
+    public static ArrayNode makeAuthenticatedGetArrRequest(String url, String xsrfToken, String accessToken) {
+        ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
+        String response = getAuthentictedGetRequestStr(url, xsrfToken, accessToken);
+        try {
+            return_data = JsonUtils.parseArrayNode(response);
+        } catch (Exception e) {
+            log.error("Exception in making get request: " + e.getMessage());
+        }
+        return return_data;
+    }
+
 }

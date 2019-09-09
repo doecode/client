@@ -24,6 +24,9 @@
                         <div class="col-xs-11">
                             <select title="Users" class="form-control" id="user-admin-box">
                                 <option value=""></option>
+                                {{#each users_list}}
+                                <option value='{{email}}'>{{first_name}} {{last_name}} ({{email}})</option>
+                                {{/each}}
                             </select>
                         </div>
                     </div>
@@ -34,14 +37,16 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4 col-xs-12">
-                <div id="requesting-roles-container" style="display:none">
-                    <button type="button" class="btn btn-link" id="requesting-roles-collapse-btn">
-                        <strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>
-                    </button>
-                    <!--TODO start pulling this list from the pending-roles table-->
-                    <div class="collapse" id="requesting-roles-collapse-container">
-                    </div> 
-                </div>		 
+                {{#if has_pending_roles}}
+                <button type="button" class="btn btn-link" id="requesting-roles-collapse-btn">
+                    <strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>
+                </button>
+                <div class="collapse">
+                    {{#each pending_roles}}
+                    <div>{{name}} - {{roles}}</div>
+                    {{/each}}
+                </div> 
+                {{/if}}
             </div>
             <div class="col-md-4"></div>    
         </div>
@@ -73,7 +78,7 @@
                                 <div class='col-xs-12'>
                                     <div class="form-inline">
                                         <label class='control-label normal-weight' for='email'>Email:&nbsp;&nbsp;</label>
-                                        <input title='Email' id='email' class="form-control pure-input-1 user-account-input" value='{{current_user_data.email}}' type="text" readonly disabled>
+                                        <input title='Email' id='email' class="form-control pure-input-1 user-account-input" type="text" readonly disabled>
                                     </div>
                                 </div>
                             </div>
@@ -111,38 +116,10 @@
                                 <div class='col-xs-12'>
                                     <div class="form-inline">
                                         <label class='control-label normal-weight' for='roles-box'>Roles:&nbsp;&nbsp;</label>
-                                        <select title="User Roles" class="form-control pure-input-1 user-account-input" id="roles-box">
-                                            <option value=""></option>
-                                            <option title="AMES" value="AMES">AMES</option>
-                                            <option title="ANL" value="ANL">ANL</option>
-                                            <option title="BNL" value="BNL">BNL</option>
-                                            <option title="FNAL" value="FNAL">FNAL</option>
-                                            <option title="INL" value="INL">INL</option>
-                                            <option title="LANL" value="LANL">LANL</option>
-                                            <option title="LBNL" value="LBNL">LBNL</option>
-                                            <option title="LLNL" value="LLNL">LLNL</option>
-                                            <option title="NETL" value="NETL">NETL</option>
-                                            <option title="NREL" value="NREL">NREL</option>
-                                            <option title="ORNL" value="ORNL">ORNL</option>
-                                            <option title="OSTI" value="OSTI">OSTI</option>
-                                            <option title="PNNL" value="PNNL">PNNL</option>
-                                            <option title="PPPL" value="PPPL">PPPL</option>
-                                            <option title="SLAC" value="SLAC">SLAC</option>
-                                            <option title="SNL" value="SNL">SNL</option>
-                                            <option title="SRNL" value="SRNL">SRNL</option>
-                                            <option title="TJNAF" value="TJNAF">TJNAF</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                            <div class='row'>
-                                <div class='col-xs-12'>
-                                    <div class="form-inline">
-                                        <label class='control-label normal-weight' for='roles-box'>Roles:&nbsp;&nbsp;</label>
                                         <select title="User's Roles" class="pure-input-1 user-account-input doecode-chosen-select" id="users-roles" data-allowcustom='false' data-placeholder="User's Role" multiple>
-                                            <!-- TODO Pull list from API. List should contain sites and roles lists -->
-                                            <!-- TODO Note: If user is given site role, and the role is found in Pending or Reject roles tables, remove their entry from said table -->
+                                            {{#each roles_list}}
+                                            <option value='{{.}}' title='{{.}}'>{{.}}</option>
+                                            {{/each}}
                                         </select>
                                     </div>
                                 </div>

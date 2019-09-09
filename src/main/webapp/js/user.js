@@ -33,8 +33,8 @@ var parseLoginError = function (xhr) {
     if (xhr.responseJSON) {
         var response = xhr.responseJSON;
         error_msg = (response.status === 401 && response.errors && response.errors.length > 0 && response.errors[0] == 'Password is expired.') ?
-            'Your password has expired. Please go to the <a href="/' + APP_NAME + '/forgot-password">password reset page</a> to reset your password.' :
-            "Invalid Username/Password. If you believe this to be in error, please contact&nbsp;<a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>&nbsp;for further information."
+                'Your password has expired. Please go to the <a href="/' + APP_NAME + '/forgot-password">password reset page</a> to reset your password.' :
+                "Invalid Username/Password. If you believe this to be in error, please contact&nbsp;<a href='mailto:doecode@osti.gov'>doecode@osti.gov</a>&nbsp;for further information."
     } else {
         error_msg = "An error has occurred, and the DOE CODE API couldn't be reached.";
     }
@@ -420,18 +420,18 @@ var saveUserAccountChanges = function () {
 
 var savePasswordChanges = function (post_data, update_login_status_name, login_name_status_data) {
     doAuthenticatedAjax('POST', API_BASE + 'user/changepassword', function (data) {
-            if (update_login_status_name) {
-                updateLoginNameStatus(login_name_status_data);
-            } else {
-                $("#user-account-success-message").html('Changes saved successfully. Your page will reload in 3 seconds');
-                setTimeout(function () {
-                    window.location.href = '/' + APP_NAME + '/account';
-                }, 3000);
-            }
-        }, post_data,
-        function (xhr) {
-            $("#account-error-message").html('Error in updating password: Password is not acceptable.');
-        });
+        if (update_login_status_name) {
+            updateLoginNameStatus(login_name_status_data);
+        } else {
+            $("#user-account-success-message").html('Changes saved successfully. Your page will reload in 3 seconds');
+            setTimeout(function () {
+                window.location.href = '/' + APP_NAME + '/account';
+            }, 3000);
+        }
+    }, post_data,
+            function (xhr) {
+                $("#account-error-message").html('Error in updating password: Password is not acceptable.');
+            });
 
 };
 
@@ -506,155 +506,6 @@ var clearAdminForm = function () {
     markUserFieldWithStatus(BLANK_CONDITION, $("#confirm-password"));
     $("#password").trigger('keyup');
 };
-var loadUserDataForAdminForm = function () {
-    //Clear the form
-    clearAdminForm();
-    var chosen_option = $(this).find('option:selected');
-    var value = $(chosen_option).val();
-    if (value !== '') {
-        var email = value;
-        var first_name = chosen_option.data('firstname');
-        var last_name = chosen_option.data('lastname');
-        var award_number = chosen_option.data('awardnum');
-        var role = chosen_option.data('role');
-        var is_active = chosen_option.data('isactive');
-        var is_verified = chosen_option.data('isverified');
-        var is_password_expired = chosen_option.data('ispassexpired');
-        var pending_roles = chosen_option.data('pendingroles').split(',');
-
-        $("#email").val(email);
-        $("#first_name").val(first_name);
-        $("#last_name").val(last_name);
-        if (award_number && award_number != 'undefined' && award_number != undefined) {
-            $("#award_number").val(award_number);
-        }
-        $("#roles-box").val(role);
-        $("#active-state").prop('checked', is_active);
-        $("#user-admin-input-form-container").show();
-
-        if (is_verified == false) {
-            $("#user-admin-warning-message").html('User has not been verified');
-            $("#useradmin-warning-message-container").show();
-        } else if (is_password_expired == true) {
-            $("#user-admin-warning-message").html("User's password has expired.");
-            $("#useradmin-warning-message-container").show();
-        }
-
-        var current_user_obj = {
-            email: email,
-            first_name: first_name,
-            last_name: last_name,
-            award_number: award_number,
-            roles: [role],
-            active: is_active,
-            is_verified: is_verified,
-            pending_roles: pending_roles
-        };
-
-        $("#current-user-values-obj").val(JSON.stringify(current_user_obj));
-    } else {
-        $("#user-admin-input-form-container").hide();
-        $("#current-user-values-obj").val('');
-    }
-};
-
-var saveUserAdminForm = function () {
-    var password_check_ids = {
-        email_id: "email",
-        password_id: "password",
-        confirm_password_id: "confirm-password"
-    };
-
-    //See if anything was even changed
-    $("#user-admin-error-messages").html("");
-    var try_save = true;
-    var do_password_save = true;
-    var error_message = "";
-    var current_user_data = JSON.parse($("#current-user-values-obj").val());
-    var new_user_data = {
-        email: $("#email").val(),
-        first_name: $("#first_name").val(),
-        last_name: $("#last_name").val(),
-        contract_number: $("#award_number").val(),
-        roles: [$("#roles-box").val()],
-        active: $("#active-state").is(':checked')
-    };
-
-    //Validate the passwords, if any passwords were entered. If no passwords were entered, then we won't add them to the post object
-    var password = $("#password").val();
-    var confirm_password = $("#confirm-password").val();
-
-    if (password.length > 0 || confirm_password.length > 0) {
-        var password_valid = doPasswordValidation(password_check_ids, false);
-        var confirm_password_valid = doPasswordValidation(password_check_ids, true);
-        if (password_valid.is_valid_password === true && confirm_password_valid.is_valid_password === true) {
-            new_user_data.new_password = password;
-            new_user_data.confirm_password = confirm_password;
-            do_password_save = true;
-        } else {
-            error_message = "You must enter and confirm a valid password to save password changes.";
-            try_save = false;
-        }
-    }
-
-    //If changes were made, we'll put the field into this object, and post it
-    var post_data = {};
-    for (var key in new_user_data) {
-        if ((Array.isArray(new_user_data[key]) && (new_user_data[key].toString()) != current_user_data[key].toString()) || (new_user_data[key] != current_user_data[key])) {
-            post_data[key] = new_user_data[key];
-        }
-    }
-
-    //TODO If business rules allow more than one permission per user, this will need to made smarter. 
-    //Currently, since there is only one permission per user (even though the data structures allow for multiples), it's assumed that if you have a permission, that you won't need
-    //to request any more
-    if (post_data.roles && current_user_data.pending_roles && current_user_data.pending_roles.length > 0) {
-        post_data.pending_roles = [];
-    }
-
-    //Now, if we had anything put into the post data object, we'll post the data
-    if (Object.keys(post_data).length > 0 && try_save === true) {
-        $.ajax({
-            url: API_BASE + 'user/update/' + new_user_data.email,
-            cache: false,
-            contentType: "application/json",
-            method: "POST",
-            beforeSend: function beforeSend(request) {
-                request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
-            },
-            data: JSON.stringify(post_data),
-            success: function (data) {
-                clearAdminForm();
-                $("#user-admin-input-form-container").hide();
-                //If this user is the one currently logged in, we have to update their content
-                //We have to update the back-end
-                if (new_user_data.email == JSON.parse(localStorage.user_data).user_email) {
-                    updateLoginNameStatus(post_data, function (data) {
-                        window.scrollTo(0, 0);
-                        $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh in 3 seconds');
-                        setTimeout(function () {
-                            window.location.href = '/' + APP_NAME + '/user-admin';
-                        }, 3000);
-                    }, function () {});
-                } else {
-                    window.scrollTo(0, 0);
-                    $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh in 3 seconds');
-                    setTimeout(function () {
-                        window.location.href = '/' + APP_NAME + '/user-admin';
-                    }, 3000);
-                }
-
-            },
-            error: function (xhr) {
-                window.scrollTo(0, 0);
-                $("#user-admin-error-messages").html("An error has occurred in trying to save your changes");
-            }
-        });
-    } else {
-        window.scrollTo(0, 0);
-        $("#user-admin-error-messages").html(error_message ? error_message : "No changes were made");
-    }
-};
 
 var validateRegistrationPasswordField = function (event) {
     markRegistrationFieldWithStatus(BLANK_CONDITION, this);
@@ -682,38 +533,6 @@ var validateUserPagePasswordField = function (event) {
         validation_status = SUCCESS_CONDITION;
     }
     markUserFieldWithStatus(validation_status, this);
-};
-
-var parseGetUserListData = function (data) {
-    //Go through the users list, and populate the select with the values
-    var pending_roles_list = [];
-    data.forEach(function (item) {
-        var role = (item.roles.length > 0) ? item.roles[0] : ''; //Since we only have a one-role system at the moment, we're just going to grab the first role from the list, because that's all there will be
-        //Because data attributes
-        //Comes out like <option value="email@email.com" data-firstname="john" data-lastname="doe" data-awardnum="3135" data-role="BAPL" data-isactive="true" data-isverified="false" data-pendingroles='SITE1,SITE2,SITE3'>John DOE (email@email.com)</option>
-        var user_option = '<option value="' + item.email + '" data-firstname="' + item.first_name + '" data-lastname="' +
-            item.last_name + '" data-awardnum="' + item.contract_number + '" data-role="' + role + '" data-isactive="' +
-            item.active + '" data-isverified="' + item.verified + '" data-ispassexpired="' +
-            item.password_expired + '" data-pendingroles="' + item.pending_roles.join(',') + '">' + item.first_name + ' ' + item.last_name + ' (' + item.email + ')' + '</option>';
-        $("#user-admin-box").append(user_option);
-        if (item.pending_roles.length > 0) {
-            pending_roles_list.push({
-                name: item.first_name + ' ' + item.last_name,
-                roles: item.pending_roles.join(',')
-            });
-        }
-    });
-    //If we have pending roles, we'll add them to the container
-    if (pending_roles_list.length > 0) {
-        var pending_roles_html = "";
-        pending_roles_list.forEach(function (item) {
-            pending_roles_html += ("<div>" + item.name + " - " + item.roles + "</div>");
-        });
-        //Set the html to show the things
-        $("#requesting-roles-collapse-container").html(pending_roles_html);
-        //Show the container
-        $("#requesting-roles-container").show();
-    }
 };
 
 var parseGetUserListError = function (xhr) {
@@ -838,14 +657,14 @@ if (document.getElementById('login-page-identifier')) {
                 setLoggedInAttributes(data);
                 //Send up our login data for java to do content with
                 setLoginNameStatus(data,
-                    function (return_data) {
-                        $("#signin-status-big-screens,#signin-status-small-screens").html(return_data.signin_html);
-                        $("#email").val(return_data.email);
-                        $("#first_name").val(return_data.first_name);
-                        $("#last_name").val(return_data.last_name);
-                        setUpUserAccountPage();
-                    },
-                    function () {});
+                        function (return_data) {
+                            $("#signin-status-big-screens,#signin-status-small-screens").html(return_data.signin_html);
+                            $("#email").val(return_data.email);
+                            $("#first_name").val(return_data.first_name);
+                            $("#last_name").val(return_data.last_name);
+                            setUpUserAccountPage();
+                        },
+                        function () {});
 
             },
             error: function (xhr) {
@@ -861,19 +680,45 @@ if (document.getElementById('login-page-identifier')) {
     }
 } else if (document.getElementById('user-admin-page-identifier')) {
     //TODO check for has user admin role
-    checkHasRole('OSTI');
-    checkIsAuthenticated();
-    doAuthenticatedAjax('GET', API_BASE + 'user/users', parseGetUserListData, null, parseGetUserListError);
-
-
-    //Makes the "Users Requesting Roles" work
-    $("#requesting-roles-collapse-btn").on('click', {
-        open_name: '<strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>',
-        close_name: '<strong><span class="fa fa-caret-down fa-page-caret clickable"></span> Users Requesting Roles</strong>'
-    }, toggleCollapse);
+    checkHasRole('OSTI'); //TODO relegate to the backend
+    checkIsAuthenticated(); //TODO relegate to the backend
 
     //Makes the dropdown list work
-    $("#user-admin-box").on('change', loadUserDataForAdminForm);
+    $("#user-admin-box").on('change', function () {
+        //Clear the form
+        clearAdminForm();
+        var chosen_option = $(this).find('option:selected');
+        var value = $(chosen_option).val();
+        if (value !== '') {
+            //TODO start pulling this data from an endpoint
+
+            doAuthenticatedAjax('GET', API_BASE + 'user/' + value, function (data) {
+                console.log("user data get success");
+                $("#email").val(value);
+                $("#first_name").val(data.first_name);
+                $("#last_name").val(data.last_name);
+                $("#award_number").val(data.award_number);
+                $("#roles-box").val(data.roles);
+                $("#roles-box").trigger('chosen:updated');
+                $("#active-state").prop('checked', data.active);
+                if (data.verified === false) {
+                    $("#user-admin-warning-message").html('User has not been verified');
+                    $("#useradmin-warning-message-container").show();
+                } else if (data.password_expired === true) {
+                    $("#user-admin-warning-message").html("User's password has expired.");
+                    $("#useradmin-warning-message-container").show();
+                }
+                $("#current-user-values-obj").val(JSON.stringify(data));
+            }, null, function () {
+                $("#user-admin-warning-message").html("An error has occurred. This user data couldn't be loaded.");
+                $("#useradmin-warning-message-container").show();
+            });
+
+        } else {
+            $("#user-admin-input-form-container").hide();
+            $("#current-user-values-obj").val('');
+        }
+    });
 
     var password_check_ids = {
         email_id: "email",
@@ -896,10 +741,102 @@ if (document.getElementById('login-page-identifier')) {
     $("#password").on('keyup', password_check_ids, checkPassword);
     $("#confirm-password").on('keyup', password_check_ids, checkPassword);
 
-    $("#save-user-admin-btn").on('click', saveUserAdminForm);
+    $("#save-user-admin-btn").on('click', function () {
+        var password_check_ids = {
+            email_id: "email",
+            password_id: "password",
+            confirm_password_id: "confirm-password"
+        };
+
+        //See if anything was even changed
+        $("#user-admin-error-messages").html("");
+        var try_save = true;
+        var error_message = "";
+        var current_user_data = JSON.parse($("#current-user-values-obj").val());
+        var new_user_data = {
+            email: $("#email").val(),
+            first_name: $("#first_name").val(),
+            last_name: $("#last_name").val(),
+            contract_number: $("#award_number").val(),
+            roles: $("#roles-box").val(),
+            active: $("#active-state").is(':checked')
+        };
+
+        //Validate the passwords, if any passwords were entered. If no passwords were entered, then we won't add them to the post object
+        var password = $("#password").val();
+        var confirm_password = $("#confirm-password").val();
+
+        if (password.length > 0 || confirm_password.length > 0) {
+            var password_valid = doPasswordValidation(password_check_ids, false);
+            var confirm_password_valid = doPasswordValidation(password_check_ids, true);
+            if (password_valid.is_valid_password === true && confirm_password_valid.is_valid_password === true) {
+                new_user_data.new_password = password;
+                new_user_data.confirm_password = confirm_password;
+            } else {
+                error_message = "You must enter and confirm a valid password to save password changes.";
+                try_save = false;
+            }
+        }
+
+        //If changes were made, we'll put the field into this object, and post it
+        var post_data = {};
+        for (var key in new_user_data) {
+            if ((Array.isArray(new_user_data[key]) && (new_user_data[key].toString()) != current_user_data[key].toString()) || (new_user_data[key] != current_user_data[key])) {
+                post_data[key] = new_user_data[key];
+            }
+        }
+
+        //TODO If business rules allow more than one permission per user, this will need to made smarter. 
+        //Currently, since there is only one permission per user (even though the data structures allow for multiples), it's assumed that if you have a permission, that you won't need
+        //to request any more
+        if (post_data.roles && current_user_data.pending_roles && current_user_data.pending_roles.length > 0) {
+            post_data.pending_roles = [];
+        }
+
+        //Now, if we had anything put into the post data object, we'll post the data
+        if (Object.keys(post_data).length > 0 && try_save === true) {
+            $.ajax({
+                url: API_BASE + 'user/update/' + new_user_data.email,
+                cache: false,
+                contentType: "application/json",
+                method: "POST",
+                beforeSend: function beforeSend(request) {
+                    request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
+                },
+                data: JSON.stringify(post_data),
+                success: function (data) {
+                    clearAdminForm();
+                    $("#user-admin-input-form-container").hide();
+                    //If this user is the one currently logged in, we have to update their content
+                    //We have to update the back-end
+                    if (new_user_data.email == JSON.parse(localStorage.user_data).user_email) {
+                        updateLoginNameStatus(post_data, function (data) {
+                            window.scrollTo(0, 0);
+                            $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh in 3 seconds');
+                            setTimeout(function () {
+                                window.location.href = '/' + APP_NAME + '/user-admin';
+                            }, 3000);
+                        }, function () {});
+                    } else {
+                        window.scrollTo(0, 0);
+                        $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh in 3 seconds');
+                        setTimeout(function () {
+                            window.location.href = '/' + APP_NAME + '/user-admin';
+                        }, 3000);
+                    }
+
+                },
+                error: function (xhr) {
+                    window.scrollTo(0, 0);
+                    $("#user-admin-error-messages").html("An error has occurred in trying to save your changes");
+                }
+            });
+        } else {
+            window.scrollTo(0, 0);
+            $("#user-admin-error-messages").html(error_message ? error_message : "No changes were made");
+        }
+    });
 
     //the contract number is a bit special
     $("#award_number").on('blur', handleUserAdminContractNumberValidation);
-
-
 }
