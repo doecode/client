@@ -92,7 +92,7 @@ public class User extends HttpServlet {
                     page_title = "DOE CODE: User Administration";
                     template = TemplateUtils.TEMPLATE_USER_ADMIN;
                     //TODO get user admin data
-                    UserFunctions.getUserAdminPageData(request);
+                    output_data = UserFunctions.getUserAdminPageData(request);
                     break;
                 case "login":
                     page_title = "DOE CODE: Login";

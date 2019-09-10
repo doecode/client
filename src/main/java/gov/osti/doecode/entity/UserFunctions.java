@@ -7,7 +7,6 @@ import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonUtils;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -17,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
-import org.javalite.http.Get;
-import org.javalite.http.Http;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +26,11 @@ import org.slf4j.LoggerFactory;
 public class UserFunctions {
 
     public static final DateTimeFormatter SESSION_TIMEOUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm:ss");
-
+    public static final String USER_ADMIN_ROLE = "UserAdmin";
+    public static final String RECORD_ADMIN_ROLE = "RecordAdmin";
+    public static final String SITE_ADMIN_ROLE = "SiteAdmin";
+    public static final String APPROVAL_ADMIN_ROLE = "ApprovalAdmin";
+    public static final String CONTENT_ADMIN_ROLE = "ContentAdmin";
     private static Logger log = LoggerFactory.getLogger(UserFunctions.class.getName());
 
     /*
@@ -92,23 +93,24 @@ public class UserFunctions {
 
     public static ObjectNode setUserDataForCookie(ObjectNode user_data) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
-        //TODO start pulling user_id
+        return_data.put("user_id", user_data.findPath("user_id").asText(""));
         return_data.put("first_name", user_data.findPath("first_name").asText(""));
         return_data.put("last_name", user_data.findPath("last_name").asText(""));
         return_data.put("email", user_data.findPath("email").asText(""));
         return_data.put("site", user_data.findPath("site").asText(""));
-        ArrayNode roles = JsonUtils.parseArrayNode(user_data.findPath("roles").asText("[]"));
-        ArrayNode pending_roles = JsonUtils.parseArrayNode(user_data.findPath("pending_roles").asText("[]"));
+        ArrayNode roles = user_data.withArray("roles");
+        ArrayNode pending_roles = user_data.withArray("pending_roles");
         //TODO get rejected roles
         return_data.set("roles", roles);
         return_data.set("pending_roles", pending_roles);
         //TODO set rejected roles 
-        //TODO remove osti role
-        return_data.put("has_osti_role", hasRole(roles, "OSTI"));
-        //TODO Check for User Admin Role
-        //TODO Check for Record Admin Role
-        //TODO Chceck for Approver
+        return_data.put("has_user_admin_role", hasRole(roles, USER_ADMIN_ROLE));
+        return_data.put("has_record_admin_role", hasRole(roles, RECORD_ADMIN_ROLE));
+        return_data.put("has_site_admin_role", hasRole(roles, SITE_ADMIN_ROLE));
+        return_data.put("has_approval_admin_role", hasRole(roles, APPROVAL_ADMIN_ROLE));
+        return_data.put("has_content_admin_role", hasRole(roles, CONTENT_ADMIN_ROLE));
         return_data.put("is_logged_in", true);
+        return_data.put("xsrfToken", user_data.findPath("xsrfToken").asText(""));
         return_data.put("session_timeout", LocalDateTime.now().plus(Init.SESSION_TIMEOUT_MINUTES, ChronoUnit.MINUTES).format(SESSION_TIMEOUT_FORMAT));
         return return_data;
     }
@@ -208,7 +210,6 @@ public class UserFunctions {
         boolean site_in_pending = hasRole(pending_roles, site);
 
         boolean showAdminRole = (!StringUtils.equals(site, "CONTR") && !site_in_roles);// If they aren't a contractor and the site they are a part of isn't in their
-        // roles list
         boolean hasAlreadyRequested = site_in_pending;
         //TODO See if user's role request has been rejected
         return_data.put("can_request_admin_role", showAdminRole);
@@ -220,8 +221,8 @@ public class UserFunctions {
     public static boolean isCurrentlyLoggedInUserAnAdmin(HttpServletRequest request) {
         boolean is_admin = false;
         ObjectNode current_user_data = getUserDataFromCookie(request);
-        is_admin = current_user_data.findPath("has_osti_role").asBoolean(false);
-        //TODO Change this to is_record_admin
+        is_admin = hasRole(current_user_data.withArray("roles"), RECORD_ADMIN_ROLE);
+        
         return is_admin;
     }
 
@@ -240,16 +241,19 @@ public class UserFunctions {
     public static ObjectNode getUserAdminPageData(HttpServletRequest request) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         ObjectNode current_user = UserFunctions.getUserDataFromCookie(request);
-        log.info("User data: " + current_user.toString());
         //Get xsrf token
         String xsrfToken = current_user.findPath("xsrfToken").asText("");
+        log.info("XSRF token: " + xsrfToken);
         String accessToken = UserFunctions.getOtherUserCookieValue(request, "accessToken");
+        log.info("Access token: " + accessToken);
         //Get roles list
-        ArrayNode roles_list = DOECODEUtils.makeAuthenticatedGetArrRequest(Init.backend_api_url + "users/roles", xsrfToken, accessToken);//TODO get correct endpoint
-        return_data.set("roles_list", roles_list);
+        ObjectNode roles_list = DOECODEUtils.makeAuthenticatedGetRequest(Init.backend_api_url + "user/roles", xsrfToken, accessToken);
+        log.info("Roles list: " + roles_list.toString());
+        return_data.set("roles_obj", roles_list);
 
         //Get user list
-        ArrayNode users_list = DOECODEUtils.makeAuthenticatedGetArrRequest(Init.backend_api_url + "user/users", xsrfToken, accessToken);
+        ArrayNode users_list = DOECODEUtils.makeAuthenticatedGetArrRequest(Init.public_api_url + "user/users", xsrfToken, accessToken);
+        log.info("Users list: " + users_list.toString());
         return_data.set("users_list", users_list);
 
         //Put a pending roles list together
@@ -267,7 +271,7 @@ public class UserFunctions {
 
                 //Get the user's pending roles
                 ArrayList<String> pending_roles = new ArrayList<String>();
-                for(JsonNode jn:p_roles){
+                for (JsonNode jn : p_roles) {
                     pending_roles.add(jn.asText(""));
                 }
                 row.put("roles", StringUtils.join(pending_roles, ", "));
@@ -275,7 +279,7 @@ public class UserFunctions {
             }
         }
         return_data.set("pending_roles", pending_roles_list);
-        return_data.put("has_pending_roles", pending_roles_list.size()>0);
+        return_data.put("has_pending_roles", pending_roles_list.size() > 0);
 
         return return_data;
     }

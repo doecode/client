@@ -680,8 +680,7 @@ if (document.getElementById('login-page-identifier')) {
     }
 } else if (document.getElementById('user-admin-page-identifier')) {
     //TODO check for has user admin role
-    checkHasRole('OSTI'); //TODO relegate to the backend
-    checkIsAuthenticated(); //TODO relegate to the backend
+    checkIsAuthenticated(); 
 
     //Makes the dropdown list work
     $("#user-admin-box").on('change', function () {
@@ -693,11 +692,10 @@ if (document.getElementById('login-page-identifier')) {
             //TODO start pulling this data from an endpoint
 
             doAuthenticatedAjax('GET', API_BASE + 'user/' + value, function (data) {
-                console.log("user data get success");
                 $("#email").val(value);
                 $("#first_name").val(data.first_name);
                 $("#last_name").val(data.last_name);
-                $("#award_number").val(data.award_number);
+                $("#award_number").val(data.contract_number);
                 $("#roles-box").val(data.roles);
                 $("#roles-box").trigger('chosen:updated');
                 $("#active-state").prop('checked', data.active);
@@ -709,6 +707,8 @@ if (document.getElementById('login-page-identifier')) {
                     $("#useradmin-warning-message-container").show();
                 }
                 $("#current-user-values-obj").val(JSON.stringify(data));
+                $("#user-admin-input-form-container").show();
+
             }, null, function () {
                 $("#user-admin-warning-message").html("An error has occurred. This user data couldn't be loaded.");
                 $("#useradmin-warning-message-container").show();
@@ -810,19 +810,25 @@ if (document.getElementById('login-page-identifier')) {
                     //If this user is the one currently logged in, we have to update their content
                     //We have to update the back-end
                     if (new_user_data.email == JSON.parse(localStorage.user_data).user_email) {
-                        updateLoginNameStatus(post_data, function (data) {
+                        var current_user_data = JSON.parse(localStorage.user_data);
+                        var user_update_obj = {};
+                        user_update_obj.first_name = post_data.hasOwnProperty('first_name') ? post_data.first_name : current_user_data.first_name;
+                        user_update_obj.last_name = post_data.hasOwnProperty('last_name') ? post_data.last_name : current_user_data.last_name;
+                        user_update_obj.roles = new_user_data.roles;
+
+                        updateLoginNameStatus(user_update_obj, function (data) {
                             window.scrollTo(0, 0);
-                            $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh in 3 seconds');
+                            $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh shortly');
                             setTimeout(function () {
                                 window.location.href = '/' + APP_NAME + '/user-admin';
-                            }, 3000);
+                            }, 1000);
                         }, function () {});
                     } else {
                         window.scrollTo(0, 0);
-                        $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh in 3 seconds');
+                        $("#user-admin-success-message").html('Your changes have saved successfully. Your page will refresh in shortly');
                         setTimeout(function () {
                             window.location.href = '/' + APP_NAME + '/user-admin';
-                        }, 3000);
+                        }, 1000);
                     }
 
                 },
@@ -837,6 +843,14 @@ if (document.getElementById('login-page-identifier')) {
         }
     });
 
-    //the contract number is a bit special
+    //Put some special functionality on the contract number validation
     $("#award_number").on('blur', handleUserAdminContractNumberValidation);
+
+    //If there are any users requesting roles, make the custom toggle work
+    if (document.getElementById('requesting-roles-collapse-btn')) {
+        $("#requesting-roles-collapse-btn").on('click', {
+            open_name: '<strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>',
+            close_name: '<strong><span class="fa fa-caret-down fa-page-caret clickable"></span> Users Requesting Roles</strong>'
+        }, toggleCollapse);
+    }
 }

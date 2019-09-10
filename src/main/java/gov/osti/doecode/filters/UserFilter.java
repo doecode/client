@@ -3,11 +3,11 @@
  */
 package gov.osti.doecode.filters;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
-import gov.osti.doecode.utils.JsonUtils;
 import java.io.IOException;
-import java.util.Arrays;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -48,17 +48,23 @@ public class UserFilter implements Filter {
         boolean password_needs_reset = StringUtils.equals(UserFunctions.getOtherUserCookieValue(req, "needs_password_reset"), "true");
 
         /* Determine the course of action, based on the need for a login */
-        if (is_logged_in && !password_needs_reset) {
-            // If they are logged in, and don't need a password reset, continue
+        if (is_logged_in && !password_needs_reset) { // If they are logged in, and don't need a password reset, continue
             res.addCookie(UserFunctions.updateUserSessionTimeout(req));
 
-            // If the user doesn't have an OSTI role, yet is trying to access osti-only
-            // content, they need to be redirected
-            //TODO change to has USER ADMIN ROLE
-            boolean has_osti_role = UserFunctions.getUserDataFromCookie(req).findPath("has_osti_role").asBoolean(false);
-            if (!has_osti_role && Arrays.asList(REQUIRES_OSTI_ROLE).contains(remaining)) {
+            //If the user is trying to access role_specific pages, but doesn't have said role, redirect them to a forbidden page
+            ObjectNode current_user_data = UserFunctions.getUserDataFromCookie(req);
+            ArrayNode roles = current_user_data.withArray("roles");
+            if (StringUtils.equals(remaining, "site-admin") && UserFunctions.hasRole(roles, UserFunctions.SITE_ADMIN_ROLE)) {//Site administration 
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                res.sendRedirect(Init.site_url + "forbidden");
+                res.sendRedirect(Init.site_url + "forbidden?message=You must be a Site Administrator to access this content.");
+                return;
+            } else if (StringUtils.equalsAny(remaining, "pending", "approve") && UserFunctions.hasRole(roles, UserFunctions.APPROVAL_ADMIN_ROLE)) {//Pending Approval Page
+                res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                res.sendRedirect(Init.site_url + "forbidden?message=You must be an Approval Administrator to access this content.");
+                return;
+            } else if (StringUtils.equals(remaining, "user-admin") && UserFunctions.hasRole(roles, UserFunctions.USER_ADMIN_ROLE)) {
+                res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                res.sendRedirect(Init.site_url + "forbidden?message=You must be a User Administrator to access this content.");
                 return;
             }
 

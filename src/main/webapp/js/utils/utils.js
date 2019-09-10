@@ -141,25 +141,6 @@ function checkIsAuthenticated() {
     });
 }
 
-function checkHasRole(role) {
-    $.ajax({
-        url: API_BASE + 'user/hasrole/' + role,
-        cache: false,
-        method: 'GET',
-        beforeSend: function beforeSend(request) {
-            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
-        },
-        success: function success() {
-            var user_data = JSON.parse(localStorage.user_data);
-            user_data.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
-            localStorage.user_data = JSON.stringify(user_data);
-        },
-        error: function error(jqXhr, exception) {
-            handleAuthenticatedError(jqXhr, exception);
-        }
-    });
-}
-
 function handleAuthenticatedSuccess(data, callback) {
     var user_data = JSON.parse(localStorage.user_data);
     user_data.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
@@ -193,9 +174,9 @@ function setLoggedInAttributes(data) {
     user_data.first_name = data.first_name;
     user_data.last_name = data.last_name;
     user_data.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
-    user_data.roles = JSON.stringify(data.roles);
+    user_data.roles = data.roles;
     user_data.user_site = data.site;
-    user_data.pending_roles = JSON.stringify(data.pending_roles);
+    user_data.pending_roles = data.pending_roles;
 
     localStorage.user_data = JSON.stringify(user_data);
 }

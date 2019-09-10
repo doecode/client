@@ -16,20 +16,21 @@
                 <span class='fa fa-user-circle'></span>&nbsp;Account
             </a>
         </li>
-        {{!--Check for Record Admin Role--}}
-        {{#if user_data.has_osti_role}}
+        {{#if user_data.has_approval_admin_role}}
         <li>
             <a title='Pending Approval' href="/${app_name}/pending">
                 <span class='fa fa-clock-o'></span>&nbsp;Pending Approval
             </a>
         </li>
-        {{!--Check for User Admin Role--}}
+        {{/if}}
+        {{#if user_data.has_user_admin_role}}
         <li>
             <a title='User Admin' href='/${app_name}/user-admin'>
                 <span class='fa fa-user-plus'></span>&nbsp;User Admin
             </a>
         </li>
-        {{!--Check for User Admin Role--}}
+        {{/if}}
+        {{#if user_data.has_site_admin_role}}
         <li>
             <a title='Site Admin' href='/${app_name}/site-admin'>
                 <span class='fa fa-id-card'></span>&nbsp;Site Admin

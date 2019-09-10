@@ -1,6 +1,24 @@
 {{> wrapper/header}}
 <input type="hidden" id="user-admin-page-identifier"/>
 <input type="hidden" id="current-user-values-obj"/>
+<style type="text/css">
+    #roles_box_chosen > div.chosen-drop > ul.chosen-results > li{
+        text-align: left;
+    }
+    #roles_box_chosen{
+        width:60% !important;
+    }
+    @media only screen and (max-width:767px) and (min-width: 320px) {
+        #roles_box_chosen{
+            width:100% !important;
+        }
+    }
+    @media only screen and (max-width:1199px) and (min-width: 768px) {
+        #roles_box_chosen{
+            width:70% !important;
+        }
+    }
+</style>
 <div class="row not-so-wide-row">
     <div class="col-xs-12">
         <div class="row">
@@ -116,10 +134,17 @@
                                 <div class='col-xs-12'>
                                     <div class="form-inline">
                                         <label class='control-label normal-weight' for='roles-box'>Roles:&nbsp;&nbsp;</label>
-                                        <select title="User's Roles" class="pure-input-1 user-account-input doecode-chosen-select" id="users-roles" data-allowcustom='false' data-placeholder="User's Role" multiple>
-                                            {{#each roles_list}}
-                                            <option value='{{.}}' title='{{.}}'>{{.}}</option>
-                                            {{/each}}
+                                        <select title="User's Roles" class="pure-input-1 user-account-input doecode-chosen-select" id="roles-box" data-allowcustom='false' data-placeholder="User's Role" multiple>
+                                            <optgroup label="Admin Roles">
+                                                {{#each roles_obj.admin}}
+                                                <option value='{{value}}' title='{{description}}'>{{label}}</option>
+                                                {{/each}}
+                                            </optgroup>
+                                            <optgroup label='Site Roles'>
+                                                {{#each roles_obj.standard}}
+                                                <option value='{{value}}' title='{{description}}'>{{label}}</option>
+                                                {{/each}}
+                                            </optgroup>
                                         </select>
                                     </div>
                                 </div>

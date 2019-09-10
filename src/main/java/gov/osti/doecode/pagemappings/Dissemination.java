@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -142,6 +144,9 @@ public class Dissemination extends HttpServlet {
         } else if (remaining.equals("/forbidden")) {
             page_title = "DOE CODE: Forbidden Access";
             template = TemplateUtils.TEMPLATE_FORBIDDEN_PAGE;
+            String message = StringUtils.defaultIfBlank(request.getParameter("message"), "");
+            message = Jsoup.clean(message, Whitelist.basic());
+            output_data.put("message", message);
 
         } else if (remaining.equals("/security-hosting")) {
             page_title = "DOE CODE: Security Hosting";
