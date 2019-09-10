@@ -679,7 +679,6 @@ if (document.getElementById('login-page-identifier')) {
         setUpUserAccountPage();
     }
 } else if (document.getElementById('user-admin-page-identifier')) {
-    //TODO check for has user admin role
     checkIsAuthenticated(); 
 
     //Makes the dropdown list work
@@ -689,8 +688,6 @@ if (document.getElementById('login-page-identifier')) {
         var chosen_option = $(this).find('option:selected');
         var value = $(chosen_option).val();
         if (value !== '') {
-            //TODO start pulling this data from an endpoint
-
             doAuthenticatedAjax('GET', API_BASE + 'user/' + value, function (data) {
                 $("#email").val(value);
                 $("#first_name").val(data.first_name);

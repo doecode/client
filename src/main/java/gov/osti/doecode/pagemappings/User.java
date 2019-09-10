@@ -18,12 +18,15 @@ import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @WebServlet(urlPatterns = {"/set-login-status-name", "/update-login-status-name", "/account", "/user-admin", "/login",
     "/register", "/forgot-password", "/logout", "/confirmuser", "/help"})
 public class User extends HttpServlet {
 
     private static final long serialVersionUID = 1546530624730778400L;
+    private Logger log = LoggerFactory.getLogger(User.class);
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -56,8 +59,7 @@ public class User extends HttpServlet {
             }
             response.addCookie(UserFunctions.makeUserCookie(return_data));
             if (add_signin_html) {
-                return_data.put("signin_html", TemplateUtils.getNewSigninStatusHtml(getServletContext(),
-                        request_data));
+                return_data.put("signin_html", TemplateUtils.getNewSigninStatusHtml(getServletContext(), request_data));
             }
             JsonUtils.writeTo(return_data, response);
         } else {

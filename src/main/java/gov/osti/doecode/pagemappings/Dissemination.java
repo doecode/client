@@ -147,6 +147,7 @@ public class Dissemination extends HttpServlet {
             String message = StringUtils.defaultIfBlank(request.getParameter("message"), "");
             message = Jsoup.clean(message, Whitelist.basic());
             output_data.put("message", message);
+            output_data.put("has_message", StringUtils.isNotBlank(message));
 
         } else if (remaining.equals("/security-hosting")) {
             page_title = "DOE CODE: Security Hosting";

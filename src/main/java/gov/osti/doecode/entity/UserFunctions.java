@@ -143,8 +143,7 @@ public class UserFunctions {
         return return_cookie;
     }
 
-    public static void redirectUserToLogin(HttpServletRequest request, HttpServletResponse response,
-            String site_url) throws IOException {
+    public static void redirectUserToLogin(HttpServletRequest request, HttpServletResponse response, String site_url) throws IOException {
         StringBuilder requested_url = new StringBuilder();
         String after_server = request.getRequestURI();
         requested_url.append(after_server);
@@ -158,15 +157,29 @@ public class UserFunctions {
         response.sendRedirect(site_url + "login?redirect=true");
     }
 
+    /**
+     *  Take the current user data, and update it with teh contents of new_user_data
+     */
     public static ObjectNode updateUserCookie(HttpServletRequest request, ObjectNode new_user_data) {
-        ObjectNode return_data = getUserDataFromCookie(request);
-        // If we have new data, let's go through each item in the new object, and set it
-        // in our current user cookie
-        if (JsonUtils.getKeys(new_user_data).size() > 0) {
-            JsonUtils.getKeys(new_user_data).forEach((s) -> {
-                return_data.set(s, new_user_data.get(s));
-            });
+        //Get the current user data
+        ObjectNode current_user_data = getUserDataFromCookie(request);
+        log.info("Current user data; "+current_user_data);
+        //Get each of the fields (keys) from new_user_data. We'll use this to know what in return_data needs updating
+        ArrayList<String> new_user_keys = JsonUtils.getKeys(new_user_data);
+        for(String key:new_user_keys){
+            JsonNode new_field_val = new_user_data.get(key);
+            //If it's an arraynode,we have to use set to set the new value. Otherwise, we can do put
+            if(new_field_val instanceof ArrayNode){
+                current_user_data.set(key, new_field_val);
+            }else{
+                current_user_data.put(key, new_field_val);
+            }
         }
+        
+        //Create a new user cookie, using the newly modified user data
+        ObjectNode return_data = setUserDataForCookie(current_user_data);
+        
+        log.info("What we're sending back "+return_data.toString());
         return return_data;
     }
 
@@ -222,7 +235,7 @@ public class UserFunctions {
         boolean is_admin = false;
         ObjectNode current_user_data = getUserDataFromCookie(request);
         is_admin = hasRole(current_user_data.withArray("roles"), RECORD_ADMIN_ROLE);
-        
+
         return is_admin;
     }
 

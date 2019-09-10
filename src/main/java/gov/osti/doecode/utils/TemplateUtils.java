@@ -183,24 +183,23 @@ public class TemplateUtils {
     }
 
     public static String getNewSigninStatusHtml(ServletContext context, ObjectNode data) {
-        log.info("Signin status html "+data.toString());
         String template_data = "";
         HashMap<Object, Object> user_data = new HashMap<Object, Object>();
         user_data.put("first_name", data.findPath("first_name").asText(""));
         user_data.put("last_name", data.findPath("last_name").asText(""));
         user_data.put("is_logged_in", true);
         ArrayNode roles_list = data.withArray("roles");
-        //TODO change to has_user_admin role and has_record_admin_role
-                user_data.put("has_user_admin_role", UserFunctions.hasRole(roles_list, UserFunctions.USER_ADMIN_ROLE));
+        user_data.put("has_user_admin_role", UserFunctions.hasRole(roles_list, UserFunctions.USER_ADMIN_ROLE));
         user_data.put("has_record_admin_role", UserFunctions.hasRole(roles_list, UserFunctions.RECORD_ADMIN_ROLE));
         user_data.put("has_site_admin_role", UserFunctions.hasRole(roles_list, UserFunctions.SITE_ADMIN_ROLE));
         user_data.put("has_approval_admin_role", UserFunctions.hasRole(roles_list, UserFunctions.APPROVAL_ADMIN_ROLE));
         user_data.put("has_content_admin_role", UserFunctions.hasRole(roles_list, UserFunctions.CONTENT_ADMIN_ROLE));
-        
+
         HashMap<Object, Object> data_for_template = new HashMap<Object, Object>();
         data_for_template.put("user_data", user_data);
         data_for_template.put("app_name", Init.app_name);
         try {
+            log.info(data_for_template.toString());
             Template t = Init.handlebarsUser.compile(TEMPLATE_SIGNIN_STATUS);
             template_data = t.apply(data_for_template);
 
