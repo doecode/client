@@ -98,7 +98,7 @@ public class JsonUtils {
         try {
             on = (ObjectNode) MAPPER.readTree(s);
         } catch (Exception e) {
-            log.error("Exception in parsing object" + e.getMessage());
+            log.debug("Exception in parsing object" + e.getMessage());
         }
         return on;
     }
@@ -108,7 +108,7 @@ public class JsonUtils {
         try {
             on = (ObjectNode) MAPPER.readTree(r);
         } catch (Exception e) {
-            log.error("Exception in parsing object " + e.getMessage());
+            log.debug("Exception in parsing object " + e.getMessage());
         }
         return on;
     }
@@ -118,7 +118,7 @@ public class JsonUtils {
         try {
             an = (ArrayNode) MAPPER.readTree(s);
         } catch (Exception e) {
-            log.error("Exception in parsing array: " + e.getMessage());
+            log.debug("Exception in parsing array: " + e.getMessage());
         }
         return an;
     }
@@ -128,7 +128,7 @@ public class JsonUtils {
         try {
             an = (ArrayNode) MAPPER.readTree(r);
         } catch (Exception e) {
-            log.error("Exception in parsing array: " + e.getMessage());
+            log.debug("Exception in parsing array: " + e.getMessage());
         }
         return an;
     }

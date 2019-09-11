@@ -164,7 +164,6 @@ public class UserFunctions {
     public static ObjectNode updateUserCookie(HttpServletRequest request, ObjectNode new_user_data) {
         //Get the current user data
         ObjectNode current_user_data = getUserDataFromCookie(request);
-        log.info("Current user data; " + current_user_data);
         //Get each of the fields (keys) from new_user_data. We'll use this to know what in return_data needs updating
         ArrayList<String> new_user_keys = JsonUtils.getKeys(new_user_data);
         for (String key : new_user_keys) {
@@ -180,7 +179,6 @@ public class UserFunctions {
         //Create a new user cookie, using the newly modified user data
         ObjectNode return_data = setUserDataForCookie(current_user_data);
 
-        log.info("What we're sending back " + return_data.toString());
         return return_data;
     }
 
@@ -196,13 +194,12 @@ public class UserFunctions {
      * used in scenarios where integrity is key, such as visiting a page with
      * sensitive data (ie User Admin)
      */
-    public static boolean hasRole(String email, String xsrfToken, String access_token, String role) {
+    public static boolean hasRole(String xsrfToken, String access_token, String role) {
         //Get user's data
-        ObjectNode user_data = DOECODEUtils.makeAuthenticatedGetRequest(Init.backend_api_url + "user/" + email, xsrfToken, access_token);
-        //Extract roles array
-        ArrayNode roles = user_data.withArray("roles");
-        //DO check using existing functionality
-        return hasRole(roles, role);
+        ObjectNode user_data = DOECODEUtils.makeAuthenticatedGetRequest(Init.backend_api_url + "user/hasrole/" + role, xsrfToken, access_token);
+        log.info("User data in has role: " + user_data.toString());
+        //If the object didn't parse, it means we got a 403. 
+        return StringUtils.equals(user_data.findPath("status").asText(""), "success");
     }
 
     public static ObjectNode getUserRegistrationData(String confirmation_code) {
@@ -268,12 +265,19 @@ public class UserFunctions {
         String accessToken = UserFunctions.getOtherUserCookieValue(request, "accessToken");
         //Get roles list
         ObjectNode roles_list = DOECODEUtils.makeAuthenticatedGetRequest(Init.backend_api_url + "user/roles", xsrfToken, accessToken);
+        log.info("Roles list: " + roles_list.toString());
         return_data.set("roles_obj", roles_list);
 
         //Get user list
-        ArrayNode users_list = DOECODEUtils.makeAuthenticatedGetArrRequest(Init.public_api_url + "user/users", xsrfToken, accessToken);
+        ArrayNode users_list = DOECODEUtils.makeAuthenticatedGetArrRequest(Init.backend_api_url + "user/users", xsrfToken, accessToken);
+        log.info("Users list: " + users_list.toString());
         return_data.set("users_list", users_list);
 
+        //Get pending roles list
+        ArrayNode pending_roles_list = DOECODEUtils.makeAuthenticatedGetArrRequest(Init.backend_api_url + "user/requested", xsrfToken, accessToken);
+        
+
+        /*
         //Put a pending roles list together
         ArrayNode pending_roles_list = JsonUtils.MAPPER.createArrayNode();
         for (JsonNode user : users_list) {
@@ -295,10 +299,9 @@ public class UserFunctions {
                 row.put("roles", StringUtils.join(pending_roles, ", "));
                 pending_roles_list.add(row);
             }
-        }
-        return_data.set("pending_roles", pending_roles_list);
-        return_data.put("has_pending_roles", pending_roles_list.size() > 0);
-
+        }*/
+        //return_data.set("pending_roles", pending_roles_list);
+        //return_data.put("has_pending_roles", pending_roles_list.size() > 0);
         return return_data;
     }
 }

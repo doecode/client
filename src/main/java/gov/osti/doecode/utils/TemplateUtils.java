@@ -199,7 +199,6 @@ public class TemplateUtils {
         data_for_template.put("user_data", user_data);
         data_for_template.put("app_name", Init.app_name);
         try {
-            log.info(data_for_template.toString());
             Template t = Init.handlebarsUser.compile(TEMPLATE_SIGNIN_STATUS);
             template_data = t.apply(data_for_template);
 

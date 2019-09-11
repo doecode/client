@@ -236,7 +236,6 @@ public class DOECODEUtils {
         try {
             return_data = JsonUtils.parseObjectNode(response);
         } catch (Exception e) {
-            log.error("Exception in making get request: " + e.getMessage());
             return_data.put("invalid_object_parse", true);
         }
         return return_data;
@@ -248,7 +247,6 @@ public class DOECODEUtils {
         try {
             return_data = JsonUtils.parseArrayNode(response);
         } catch (Exception e) {
-            log.error("Exception in making get request: " + e.getMessage());
         }
         return return_data;
     }
