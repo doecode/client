@@ -582,5 +582,18 @@ var checkForDuplicates = function (list, ignoreBlanks) {
     return duplicate_indexes;
 };
 
+function checkHasRole(role, successCallback, errorCallback) {
+    $.ajax({
+        url: API_BASE + 'user/hasrole/' + role,
+        cache: false,
+        method: 'GET',
+        beforeSend: function beforeSend(request) {
+            request.setRequestHeader("X-XSRF-TOKEN", JSON.parse(localStorage.user_data).xsrfToken);
+        },
+        success: successCallback,
+        error: errorCallback
+    });
+}
+
 const ADV_DROPDOWN_CLOSE = 'CLOSE';
 const ADV_DROPDOWN_OPEN = 'OPEN';

@@ -48,7 +48,7 @@ public class Input extends HttpServlet {
         if (StringUtils.isBlank(software_type_param) || !(software_type_param.equalsIgnoreCase("Scientific") || software_type_param.equalsIgnoreCase("Business"))) {
             software_type_param = "Scientific";
         }
-
+        
         // Some of the option steps, and whether or not we should hide them
         boolean show_optional_toggle = true;
         //TODO put in check to ensure that if they are submitting or editing, and it's not a record for their site, and they're not a record admin, send them to the forbidden page

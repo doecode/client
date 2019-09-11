@@ -74,11 +74,11 @@ var contributing_organizations_tbl_opts = {
 
 var related_identifiers_tbl_opts = {
     order: [[0, 'asc']],
-    autoWidth:false,
+    autoWidth: false,
     columns: [
-        {name: 'identifier_type', data: 'identifier_type', 'defaultContent': '', width:'20%'},
-        {name: 'relation_type', data: 'relation_type', 'defaultContent': '', width:'25%'},
-        {name: 'identifier_value', data: 'identifier_value', 'defaultContent': '', className:'word-break'}
+        {name: 'identifier_type', data: 'identifier_type', 'defaultContent': '', width: '20%'},
+        {name: 'relation_type', data: 'relation_type', 'defaultContent': '', width: '25%'},
+        {name: 'identifier_value', data: 'identifier_value', 'defaultContent': '', className: 'word-break'}
     ]
 };
 
@@ -239,7 +239,22 @@ var parseErrorResponse = function parseErrorResponse(jqXhr, exception) {
     showCommonModalMessage();
 };
 
+
 var parseSearchResponse = mobx.action("Parse Search Response", function parseSearchResponse(data) {
+    if ($("#page").val() == 'submit' || $("#page").val() == 'announce') {
+        /*Make a quick site ownership code check, to ensure that this user should be working on this record*/
+        var site_code_check = data.metadata.site_ownership_code;
+        checkHasRole(site_code_check, function () {/*If they have permissions for this site, then we need not make any further checks*/
+        }, function () {
+            /*This means they didn't have a permission for this site, but they might be a record admin. We will make that check too.*/
+            checkHasRole('RecordAdmin', function () {/*If they are a record admin, then we need not make any further checks*/
+            }, function () {
+                /*This means the user isn't a record admin, and don't have permissions for this site. They need to be redirected.*/
+                window.location.href = '/' + APP_NAME + '/forbidden?message=You do not have permission to edit ' + data.code_id + ';';
+            });
+        });
+    }
+
     if (document.getElementById('owner-email-address')) {
         $("#owner-email-address").html(data.metadata.owner);
     }
@@ -286,6 +301,18 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
 
 //This function eventually calls parseAutopopulateResponse - but it first needs to remove some values 
 var parseLoadIdResponse = function (data) {
+    if ($("#page").val() == 'submit' || $("#page").val() == 'announce') {
+        var site_code_check = data.metadata.site_ownership_code;
+        checkHasRole(site_code_check, function () {/*If they have permissions for this site, then we need not make any further checks*/
+        }, function () {
+            /*This means they didn't have a permission for this site, but they might be a record admin. We will make that check too.*/
+            checkHasRole('RecordAdmin', function () {/*If they are a record admin, then we need not make any further checks*/
+            }, function () {
+                /*This means the user isn't a record admin, and don't have permissions for this site. They need to be redirected.*/
+                window.location.href = '/' + APP_NAME + '/forbidden?message=You do not have permission to create that record.';
+            });
+        });
+    }
     data.metadata.code_id = ''
     data.metadata.workflow_status = '';
     data.metadata.date_record_added = '';
@@ -354,7 +381,7 @@ var save = function save() {
     showCommonModalMessage();
 
     if ((Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length > 0)
-        || (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
+            || (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
         doMultipartSubmission(API_BASE + 'metadata/save', parseSaveResponse);
     else
         doAuthenticatedAjax('POST', API_BASE + 'metadata/save', parseSaveResponse, metadata.serializeData(), parseErrorResponse);
@@ -380,7 +407,7 @@ var submit = function submit() {
     showCommonModalMessage();
 
     if ((Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length > 0)
-        || (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
+            || (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
         doMultipartSubmission(API_BASE + 'metadata/submit', parseSubmitResponse);
     else
         doAuthenticatedAjax('POST', API_BASE + 'metadata/submit', parseSubmitResponse, metadata.serializeData(), parseErrorResponse);
@@ -402,7 +429,7 @@ var announce = function announce() {
     showCommonModalMessage();
 
     if ((Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length > 0)
-        || (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
+            || (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
         doMultipartSubmission(API_BASE + 'metadata/announce', parseAnnounceResponse);
     else
         doAuthenticatedAjax('POST', API_BASE + 'metadata/announce', parseAnnounceResponse, metadata.serializeData(), parseErrorResponse);
