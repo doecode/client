@@ -229,11 +229,54 @@
                                                 <div class='col-xs-12'>
                                                     <dl class='row'>
                                                         <dt class='col-md-3 col-xs-12 biblio-field-header'>Developers:</dt>
-                                                        <dd class='col-md-9 col-xs-12 biblio-field-value'>{{> search/developerLinks}}</dd>
+                                                        <dd class='col-md-9 col-xs-12 biblio-field-value'>
+                                                            <div>
+                                                                {{#each developers}}
+                                                                <!--Orcid or Regular Link-->
+                                                                {{#if show_orcid}}
+                                                                <span class='dropdown'>
+                                                                    <button class="btn btn-link dropdown-toggle biblio-author-btn" type="button" data-toggle="dropdown">{{name}}</button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li><a class='clickable author-search-name' data-authorname="{{name}}">Search DOE CODE for&nbsp;developer&nbsp;"{{name}}"</a></li>
+                                                                        <li><a class='clickable author-dropdown-search-orcid' data-orcid="{{orcid}}">Search DOE CODE for ORCID&nbsp;{{orcid}}</a></li>
+                                                                        <li><a href="https://orcid.org/orcid-search/quick-search?searchQuery={{orcid}}" target='_blank' rel="noopener noreferrer">Search orcid.org for ORCID&nbsp;"{{orcid}}"</a></li>
+                                                                    </ul>
+                                                                </span>
+                                                                <a href="https://orcid.org/{{orcid}}" target="_new"><img title='ORCID' alt='ORCID' class='orc-id-img' src='/${app_name}/images/orcid_16x16(1).png'/></a>
+                                                                {{else}}
+                                                                <a class="clickable author-search-name" data-authorname='{{name}}' title='Search for developer {{name}}'>{{name}}</a>
+                                                                {{/if}}
+                                                                <!--Superscript-->
+                                                                {{#if show_superscript}}
+                                                                <sup>{{superscript_str}}</sup>
+                                                                {{/if}}
+                                                                <!--Semicolon and space separation between the items in this list-->
+                                                                {{#unless is_last}}
+                                                                ;&nbsp;
+                                                                {{/unless}}
+                                                                {{/each}}
+                                                                <!--Affilitions, if applicable-->
+                                                                {{#if show_dev_affiliations_list}}
+                                                                <div class='affiliations-div'>
+                                                                    <button title='Show Developer Affiliations' type='button' class='btn btn-link toggle-affiliations '><span class="fa fa-plus-square-o"></span>&nbsp;Show Developer Affiliations</button>
+                                                                    <div class='collapse toggle-affiliations-collapse'>
+                                                                        <div>
+                                                                            <ol>
+                                                                                {{#each dev_affiliations_list}}
+                                                                                <li>{{.}}</li>
+                                                                                {{/each}}
+                                                                            </ol>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {{/if}}
+                                                            </div>
+                                                        </dd>
                                                     </dl>
                                                 </div>
                                             </div>
                                             {{/if}}
+                                            <!-- TODO contributors -->
                                             <!--Release Date-->
                                             {{#if has_release_date}}
                                             <div class='biblio-row'>
@@ -312,7 +355,7 @@
                                             <div class='biblio-row'>
                                                 <div class='col-xs-12'>
                                                     <dl class='row'>
-                                                        <dt class='col-md-3 col-xs-12 biblio-field-header'>Sponsoring Organizations:</dt>
+                                                        <dt class='col-md-3 col-xs-12 biblio-field-header'>Sponsoring Org:</dt>
                                                         <dd class='col-md-9 col-xs-12 biblio-field-value'>{{> search/biblio-sponsoring-org}}</dd>
                                                     </dl>
                                                 </div>
