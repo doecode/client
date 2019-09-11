@@ -93,7 +93,7 @@ public class UserFunctions {
 
     public static ObjectNode setUserDataForCookie(ObjectNode user_data) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
-        return_data.put("user_id", user_data.findPath("user_id").asText(""));
+        return_data.put("user_id", user_data.findPath("userid").asText(""));
         return_data.put("first_name", user_data.findPath("first_name").asText(""));
         return_data.put("last_name", user_data.findPath("last_name").asText(""));
         return_data.put("email", user_data.findPath("email").asText(""));
@@ -158,42 +158,51 @@ public class UserFunctions {
     }
 
     /**
-     *  Take the current user data, and update it with teh contents of new_user_data
+     * Take the current user data, and update it with teh contents of
+     * new_user_data
      */
     public static ObjectNode updateUserCookie(HttpServletRequest request, ObjectNode new_user_data) {
         //Get the current user data
         ObjectNode current_user_data = getUserDataFromCookie(request);
-        log.info("Current user data; "+current_user_data);
+        log.info("Current user data; " + current_user_data);
         //Get each of the fields (keys) from new_user_data. We'll use this to know what in return_data needs updating
         ArrayList<String> new_user_keys = JsonUtils.getKeys(new_user_data);
-        for(String key:new_user_keys){
+        for (String key : new_user_keys) {
             JsonNode new_field_val = new_user_data.get(key);
             //If it's an arraynode,we have to use set to set the new value. Otherwise, we can do put
-            if(new_field_val instanceof ArrayNode){
+            if (new_field_val instanceof ArrayNode) {
                 current_user_data.set(key, new_field_val);
-            }else{
+            } else {
                 current_user_data.put(key, new_field_val);
             }
         }
-        
+
         //Create a new user cookie, using the newly modified user data
         ObjectNode return_data = setUserDataForCookie(current_user_data);
-        
-        log.info("What we're sending back "+return_data.toString());
+
+        log.info("What we're sending back " + return_data.toString());
         return return_data;
     }
 
+    /*
+        Checks to see if the user has a given role, based on the roles list passed in.
+     */
     public static boolean hasRole(ArrayNode roles, String role) {
-        boolean has = false;
+        return JsonUtils.arrayContains(roles, role);
+    }
 
-        for (JsonNode v : roles) {
-            if (StringUtils.equals(v.asText(), role)) {
-                has = true;
-                break;
-            }
-        }
-
-        return has;
+    /*
+     * Directly checks the API to see if a user has a given role. Should only be
+     * used in scenarios where integrity is key, such as visiting a page with
+     * sensitive data (ie User Admin)
+     */
+    public static boolean hasRole(String email, String xsrfToken, String access_token, String role) {
+        //Get user's data
+        ObjectNode user_data = DOECODEUtils.makeAuthenticatedGetRequest(Init.backend_api_url + "user/" + email, xsrfToken, access_token);
+        //Extract roles array
+        ArrayNode roles = user_data.withArray("roles");
+        //DO check using existing functionality
+        return hasRole(roles, role);
     }
 
     public static ObjectNode getUserRegistrationData(String confirmation_code) {
@@ -256,17 +265,13 @@ public class UserFunctions {
         ObjectNode current_user = UserFunctions.getUserDataFromCookie(request);
         //Get xsrf token
         String xsrfToken = current_user.findPath("xsrfToken").asText("");
-        log.info("XSRF token: " + xsrfToken);
         String accessToken = UserFunctions.getOtherUserCookieValue(request, "accessToken");
-        log.info("Access token: " + accessToken);
         //Get roles list
         ObjectNode roles_list = DOECODEUtils.makeAuthenticatedGetRequest(Init.backend_api_url + "user/roles", xsrfToken, accessToken);
-        log.info("Roles list: " + roles_list.toString());
         return_data.set("roles_obj", roles_list);
 
         //Get user list
         ArrayNode users_list = DOECODEUtils.makeAuthenticatedGetArrRequest(Init.public_api_url + "user/users", xsrfToken, accessToken);
-        log.info("Users list: " + users_list.toString());
         return_data.set("users_list", users_list);
 
         //Put a pending roles list together

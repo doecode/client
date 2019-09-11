@@ -50,17 +50,21 @@ public class UserFilter implements Filter {
 
             //If the user is trying to access role_specific pages, but doesn't have said role, redirect them to a forbidden page
             ObjectNode current_user_data = UserFunctions.getUserDataFromCookie(req);
-            ArrayNode roles = current_user_data.withArray("roles");
-            log.info("Roles: "+roles.toString());
-            if (StringUtils.equals(remaining, "site-admin") && !UserFunctions.hasRole(roles, UserFunctions.SITE_ADMIN_ROLE)) {//Site administration 
+            String email = current_user_data.findPath("email").asText("");
+            String xsrfToken = current_user_data.findPath("xsrfToken").asText("");
+            String accessToken = UserFunctions.getOtherUserCookieValue(req, "accessToken");
+
+            if (StringUtils.equals(remaining, "site-admin") && !UserFunctions.hasRole(email, xsrfToken, accessToken, UserFunctions.SITE_ADMIN_ROLE)) {//Site administration 
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 res.sendRedirect(Init.site_url + "forbidden?message=You must be a Site Administrator to access this content.");
                 return;
-            } else if (StringUtils.equalsAny(remaining, "pending", "approve") && !UserFunctions.hasRole(roles, UserFunctions.APPROVAL_ADMIN_ROLE)) {//Pending Approval Page
+                
+            } else if (StringUtils.equalsAny(remaining, "pending", "approve") && !UserFunctions.hasRole(email, xsrfToken, accessToken, UserFunctions.APPROVAL_ADMIN_ROLE)) {//Pending Approval Page
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 res.sendRedirect(Init.site_url + "forbidden?message=You must be an Approval Administrator to access this content.");
                 return;
-            } else if (StringUtils.equals(remaining, "user-admin") && !UserFunctions.hasRole(roles, UserFunctions.USER_ADMIN_ROLE)) {
+                
+            } else if (StringUtils.equals(remaining, "user-admin") && !UserFunctions.hasRole(email, xsrfToken, accessToken, UserFunctions.USER_ADMIN_ROLE)) {
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 res.sendRedirect(Init.site_url + "forbidden?message=You must be a User Administrator to access this content.");
                 return;

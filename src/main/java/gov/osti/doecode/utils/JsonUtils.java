@@ -68,7 +68,7 @@ public class JsonUtils {
 
     public static boolean arrayContains(ArrayNode arr, String s) {
         for (JsonNode j : arr) {
-            if (StringUtils.equals(j.asText(), s)) {
+            if (StringUtils.equals(j.asText(""), s)) {
                 return true;
             }
         }

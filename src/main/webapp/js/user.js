@@ -19,6 +19,7 @@ var parseNameStatusData = function (return_data) {
 };
 
 var parseLoginData = function (data) {
+    console.log(data);
     //Now that we're logged in, let's set some local storage attributes
     setLoggedInAttributes(data);
     //Send up our login data for java to do content with
