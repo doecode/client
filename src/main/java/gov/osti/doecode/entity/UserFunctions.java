@@ -265,43 +265,17 @@ public class UserFunctions {
         String accessToken = UserFunctions.getOtherUserCookieValue(request, "accessToken");
         //Get roles list
         ObjectNode roles_list = DOECODEUtils.makeAuthenticatedGetRequest(Init.backend_api_url + "user/roles", xsrfToken, accessToken);
-        log.info("Roles list: " + roles_list.toString());
         return_data.set("roles_obj", roles_list);
 
         //Get user list
         ArrayNode users_list = DOECODEUtils.makeAuthenticatedGetArrRequest(Init.backend_api_url + "user/users", xsrfToken, accessToken);
-        log.info("Users list: " + users_list.toString());
         return_data.set("users_list", users_list);
 
         //Get pending roles list
-        ArrayNode pending_roles_list = DOECODEUtils.makeAuthenticatedGetArrRequest(Init.backend_api_url + "user/requested", xsrfToken, accessToken);
-        
-
-        /*
-        //Put a pending roles list together
-        ArrayNode pending_roles_list = JsonUtils.MAPPER.createArrayNode();
-        for (JsonNode user : users_list) {
-            ObjectNode user_data = (ObjectNode) user;
-
-            //If the user has any pending roles, add them to the list
-            ArrayNode p_roles = user_data.withArray("pending_roles");
-            if (p_roles.size() > 0) {
-                ObjectNode row = JsonUtils.MAPPER.createObjectNode();
-
-                //Get the user's name;
-                row.put("name", user_data.findPath("first_name").asText("") + " " + user_data.findPath("last_name").asText(""));
-
-                //Get the user's pending roles
-                ArrayList<String> pending_roles = new ArrayList<String>();
-                for (JsonNode jn : p_roles) {
-                    pending_roles.add(jn.asText(""));
-                }
-                row.put("roles", StringUtils.join(pending_roles, ", "));
-                pending_roles_list.add(row);
-            }
-        }*/
-        //return_data.set("pending_roles", pending_roles_list);
-        //return_data.put("has_pending_roles", pending_roles_list.size() > 0);
+        ObjectNode pending_roles_obj = DOECODEUtils.makeAuthenticatedGetRequest(Init.backend_api_url + "user/requests", xsrfToken, accessToken);
+        ArrayNode pending_roles_list = pending_roles_obj.withArray("requests");
+        return_data.set("pending_roles_list", pending_roles_list);
+        return_data.put("has_pending_roles_list", pending_roles_list.size() > 0);
         return return_data;
     }
 }

@@ -55,13 +55,13 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4 col-xs-12">
-                {{#if has_pending_roles}}
+                {{#if has_pending_roles_list}}
                 <button type="button" class="btn btn-link" id="requesting-roles-collapse-btn">
                     <strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>
                 </button>
                 <div class="collapse">
-                    {{#each pending_roles}}
-                    <div>{{name}} - {{roles}}</div>
+                    {{#each pending_roles_list}}
+                    <div>{{user}} - {{#each requested_roles}}{{.}} {{/each}}</div>
                     {{/each}}
                 </div> 
                 {{/if}}
