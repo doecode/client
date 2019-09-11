@@ -23,6 +23,8 @@ import gov.osti.doecode.listeners.DOECODEServletContextListener;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonUtils;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 
 public class SearchFunctions {
 
@@ -1226,18 +1228,68 @@ public class SearchFunctions {
             return_data.set("descriptionObj", getDescription(biblio_data.findPath("description").asText(""), 200));
             meta_tags.add(makeMetaTag("description", biblio_data.findPath("description").asText("")));
 
-            /* Developers and contributors */
-            ArrayNode developers_combined = combineDevContributorNames((ArrayNode) biblio_data.get("developers"), null);
-            ObjectNode devs_contributors_obj = getDevAndContributorLink(developers_combined, true, false, true);
-            return_data.set("developers_list", devs_contributors_obj);
-            return_data.put("has_developers", devs_contributors_obj.findPath("had_list").asBoolean(false));
-            ArrayNode developerslist = JsonUtils.MAPPER.createArrayNode();
-            for (JsonNode v : developers_combined) {
-                ObjectNode vObj = (ObjectNode) v;
-                developerslist.add(vObj.findPath("combined_name").asText(""));
-            }
-            meta_tags.add(makeMetaTag("developers", DOECODEUtils.makeSpaceSeparatedList(developerslist)));
+            /* Developers and their Affiliations */
+            LinkedHashMap<String, Integer> dev_affiliations_map = new LinkedHashMap<String, Integer>();
+            int affiliations_pointer = 1;
+            //Go through the developer list, and gather some information 
+            ArrayNode raw_developers_list = biblio_data.withArray("developers");
+            ArrayNode refined_developers_list = JsonUtils.MAPPER.createArrayNode();
+            for (JsonNode developer : raw_developers_list) {
+                ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                ObjectNode developer_obj = (ObjectNode) developer;
+                //Get their name (combined)
+                row.put("name", developer_obj.findPath("last_name").asText("") + ", " + developer_obj.findPath("first_name").asText(""));
 
+                //Orcid
+                if (StringUtils.isNotBlank(developer_obj.findPath("orcid").asText(""))) {
+                    row.put("show_orcid", true);
+                    row.put("orcid", developer_obj.findPath("orcid").asText(""));
+                }
+
+                //Go through this user's affiliations, and add them to the affiliations map (if they're unique)
+                ArrayNode dev_affiliations = developer_obj.withArray("affiliations");
+                if (dev_affiliations.size() > 0) {
+                    ArrayList<Integer> superscript_list = new ArrayList<Integer>(); //Store all of the affiliations they'll have here
+                    for (JsonNode aff : dev_affiliations) {
+                        if (!dev_affiliations_map.containsKey(aff.asText(""))) {
+                            dev_affiliations_map.put(aff.asText(""), affiliations_pointer);
+                            superscript_list.add(affiliations_pointer);
+                            affiliations_pointer++;
+                        } else {
+                            superscript_list.add(dev_affiliations_map.get(aff.asText("")));
+                        }
+                    }
+
+                    //Now, if the superscript list has anything, sort it, and stick the data in our row object
+                    if (superscript_list.size() > 0) {
+                        Collections.sort(superscript_list);//Numerical sort, 1-n
+                        //Create an affiliations string
+                        String supersscript_str = "[" + StringUtils.join(superscript_list, "][") + "]";
+                        //Add it to this developer object
+                        row.put("superscript_str", supersscript_str);
+                        row.put("show_superscript", true);
+                    }
+                }
+                refined_developers_list.add(row);
+            }
+
+            if (refined_developers_list.size() > 1) {
+                ObjectNode first_item = (ObjectNode) refined_developers_list.get(refined_developers_list.size() - 1);
+                first_item.put("is_last", true);
+                refined_developers_list.set(refined_developers_list.size() - 1, first_item);
+            }
+            //Put the affiliation list together. Since we used a LinkedHashMap, the insertion order was stored, meaning if we get the keyset, it should come out in numerical order
+            ArrayNode dev_distinct_affiliations_list = JsonUtils.MAPPER.createArrayNode();
+            for (String key : dev_affiliations_map.keySet()) {
+                dev_distinct_affiliations_list.add(key);
+            }
+            return_data.put("developers", refined_developers_list);
+            return_data.put("has_developers", refined_developers_list.size() > 0);
+            return_data.put("dev_affiliations_list", dev_distinct_affiliations_list);
+            return_data.put("show_dev_affiliations_list", dev_distinct_affiliations_list.size() > 0);
+
+            /* Contributors */
+            //TODO contributors 
             // Release Date
             return_data.put("release_date", biblio_data.findPath("release_date").asText(""));
             return_data.put("has_release_date", StringUtils.isNotBlank(biblio_data.findPath("release_date").asText("")));
@@ -1249,7 +1301,7 @@ public class SearchFunctions {
             ObjectNode availabilityObj = JsonUtils.getJsonListItem(availabilityList, "value", biblio_data.findPath("accessibility").asText(""));
             return_data.put("availability", availabilityObj.findPath("label").asText(""));
             return_data.put("has_availability", StringUtils.isNotBlank(biblio_data.findPath("accessibility").asText("")));
-            meta_tags.add(makeMetaTag("availability",availabilityObj.findPath("label").asText("")));
+            meta_tags.add(makeMetaTag("availability", availabilityObj.findPath("label").asText("")));
 
             /* Software Type */
             ArrayNode softwareTypeList = DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY);
@@ -1312,7 +1364,7 @@ public class SearchFunctions {
             return_data.put("has_version_number", StringUtils.isNotBlank(biblio_data.findPath("version_number").asText("")));
 
             /* Keywords */
-            return_data.put("keywords",biblio_data.findPath("keywords").asText(""));
+            return_data.put("keywords", biblio_data.findPath("keywords").asText(""));
             return_data.put("has_keywords", StringUtils.isNotBlank(biblio_data.findPath("keywords").asText("")));
 
             /* Project Keywords */
