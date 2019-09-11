@@ -81,6 +81,54 @@ var checkAndMarkPOCDuplicates = function (email_list) {
 };
 
 /**
+ * Triggers when you click on a site in the list at the top of the POC admin page
+ */
+var POCListAction = function () {
+    var self = this;
+    var site_code = $(self).val();
+    var lab_name = $(self).find('option:selected').data('sitelabname');
+
+    clearPOCListTable();
+
+    if (site_code === '') {
+        //Clear
+        $("#site-code").html('');
+        $("#site-list-container").hide();
+    } else {
+        //Existing Site
+        $("#site-code").html(site_code);
+        $("#lab-name").html(lab_name);
+        //Get data from api
+        doAuthenticatedAjax('GET', API_BASE + 'site/info/' + site_code, function (data) {
+            //Get all of the email domains
+            var email_domains_list = "";
+            data.email_domains.forEach(function (item) {
+                email_domains_list += (item + '<br/>');
+            });
+            $("#email-domains").html(email_domains_list);
+
+            //Load all of the emails
+            if (data.poc_emails.length > 0) {
+                data.poc_emails.forEach(function (item) {
+                    $("#poc-admin-email-list > tbody > tr:last-child").before('<tr><td><input id="new-poc-email-address" value="' + item + '" class="form-control pure-input-1" type="text"></td>'
+                            + '<td><span class="fa fa-minus-circle poc-remove-email" title="Remove Email"></span></td></tr>');
+                });
+            } else {
+                $("#poc-admin-email-list > tbody > tr:last-child").before('<tr><td><input id="new-poc-email-address" class="form-control pure-input-1" type="text"></td>'
+                            + '<td><span class="fa fa-minus-circle poc-remove-email" title="Remove Email"></span></td></tr>');
+            }
+
+            $("#site-list-container").show();
+        }, null, function () {
+            setCommonModalMessage(POC_LIST_LOADER_ERROR);
+            showCommonModalMessage();
+        });
+
+    }
+
+};
+
+/**
  * Gathers all emails from the list, with the exception of the last entry. The user is expected to click the green plus to add their email to the list
  */
 var gatherAllPOCEmails = function () {
@@ -161,10 +209,10 @@ var submitPOCChanges = function () {
         $("#site-list").attr('disabled', 'disabled');
         $("#site-list-container").hide();
 
-        showSiteAdminMessage(true, 'Changes saved. This page will reload in 3 seconds', 'has-success');
+        showSiteAdminMessage(true, 'Changes saved. This page will reload shortly', 'has-success');
         setTimeout(function () {
             window.location.href = '/' + APP_NAME + '/site-admin';
-        }, 3000);
+        }, 1000);
     }, post_data, function () {
         setCommonModalMessage(POC_POST_LOADER_ERROR);
         showCommonModalMessage();
@@ -193,52 +241,7 @@ if (document.getElementById('site-admin-page-identifier')) {
     });
 
     //OnClick for when you select a site from the dropdown
-    $("#site-list").on('change', function () {
-        var self = this;
-        var site_code = $(self).val();
-        var lab_name = $(self).find('option:selected').data('sitelabname');
-
-        clearPOCListTable();
-
-        if (site_code === '') {
-            //Clear
-            $("#site-code").html('');
-            $("#site-list-container").hide();
-        } else if (site_code == 'add-new-site') {
-            $("#site-code").val('');
-            $("#lab-name").val('');
-            $("#email-domains").val('');
-            //Clear Out email List
-            $("#poc-admin-email-list > tbody > tr:last-child").before('<tr><td><input id="new-poc-email-address" class="form-control pure-input-1" type="text"></td>'
-                    + '<td><span class="fa fa-minus-circle poc-remove-email" title="Remove Email"></span></td></tr>');
-        } else {
-            //Existing Site
-            $("#site-code").val(site_code);
-            $("#lab-name").val(lab_name);
-            //Get data from api
-            doAuthenticatedAjax('GET', API_BASE + 'site/info/' + site_code, function (data) {
-                //Get all of the email domains
-                $("#email-domains").val(data.email_domains.join(' '));
-                //Load all of the emails
-                if (data.poc_emails.length > 0) {
-                    data.poc_emails.forEach(function (item) {
-                        $("#poc-admin-email-list > tbody > tr:last-child").before('<tr><td><input id="new-poc-email-address" value="' + item + '" class="form-control pure-input-1" type="text"></td>'
-                                + '<td><span class="fa fa-minus-circle poc-remove-email" title="Remove Email"></span></td></tr>');
-                    });
-                } else {
-                    $("#poc-admin-email-list > tbody > tr:last-child").before('<tr><td><input id="new-poc-email-address" class="form-control pure-input-1" type="text"></td>'
-                            + '<td><span class="fa fa-minus-circle poc-remove-email" title="Remove Email"></span></td></tr>');
-                }
-
-                $("#site-list-container").show();
-            }, null, function () {
-                setCommonModalMessage(POC_LIST_LOADER_ERROR);
-                showCommonModalMessage();
-            });
-
-        }
-
-    });
+    $("#site-list").on('change', POCListAction);
 
     //OnClick for adding a adding a new site
     $("#poc-admin-email-list > tbody tr td span.poc-add-new-email").on('click', addNewPOCToTable);
