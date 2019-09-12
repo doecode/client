@@ -280,49 +280,6 @@ var markUserFieldAsValidOrEmpty = function (event) {
     }
 };
 
-var doContractNumberValidationCheck = function () {
-    var email_val = $(this).val();
-    if ($(this).val()) {
-        $.get(API_BASE + 'user/getsitecode/' + email_val, function (data) {
-            if (data.site_code && data.site_code === 'CONTR') {
-                $("#contract-number-container").show();
-            } else {
-                $("#contract-number-container").hide();
-            }
-        }, 'json');
-    } else {
-        $("#contract-number-container").hide();
-    }
-};
-
-var parseRegisterData = function (data) {
-    $("#create-account-container").hide();
-    $("#successful-signup-container").show();
-};
-
-var parseRegisterError = function (xhr) {
-    var error_text = "";
-    var responseText = JSON.parse(xhr.responseText);
-    var errorMessages = [];
-
-    if (xhr.status == 400) {
-        errorMessages = responseText.errors;
-        //If this message shows up, we do something special
-        if (errorMessages.indexOf('An account with this email address already exists.') > -1) {
-            $("#forgot-password-reminder-text").show();
-        }
-        //check for contract error
-    } else {
-        errorMessages.push("A server error has occurred that is preventing registration from functioning properly.");
-    }
-
-    //Put all of the errors into a string, and show them
-    errorMessages.forEach(function (item) {
-        error_text += (item + "<br/>");
-    });
-    $("#signup-errors").html(error_text);
-};
-
 var createAccount = function () {
     var user_data = {
         first_name: $("#first-name").val(),
@@ -334,7 +291,32 @@ var createAccount = function () {
     };
     $("#forgot-password-reminder-text").hide();
 
-    doAjax('POST', API_BASE + 'user/register', parseRegisterData, user_data, parseRegisterError);
+    doAjax('POST', API_BASE + 'user/register', function () {
+        $("#create-account-container").hide();
+        $("#successful-signup-container").show();
+        
+    }, user_data, function (xhr) {
+        var error_text = "";
+        var responseText = JSON.parse(xhr.responseText);
+        var errorMessages = [];
+
+        if (xhr.status == 400) {
+            errorMessages = responseText.errors;
+            //If this message shows up, we do something special
+            if (errorMessages.indexOf('An account with this email address already exists.') > -1) {
+                $("#forgot-password-reminder-text").show();
+            }
+            //check for contract error
+        } else {
+            errorMessages.push("A server error has occurred that is preventing registration from functioning properly.");
+        }
+
+        //Put all of the errors into a string, and show them
+        errorMessages.forEach(function (item) {
+            error_text += (item + "<br/>");
+        });
+        $("#signup-errors").html(error_text);
+    });
 };
 
 var parseForgotPasswordData = function (data) {
@@ -627,7 +609,22 @@ if (document.getElementById('login-page-identifier')) {
     $("#contract-number").on('blur', handleRegistrationContractNumberValidation);
 
     //Checker to ensure whether or not we need to be showing the contract number field
-    $("#email").on('blur', doContractNumberValidationCheck);
+    $("#email").on('blur', function () {
+        var email_val = $(this).val();
+        if ($(this).val()) {
+            $.get(API_BASE + 'user/getsitecode/' + email_val, function (data) {
+                if (data.site_code && data.site_code === 'CONTR') {
+                    $("#contract-number-container").show();
+                } else if (data.site_code && data.site_code === 'HQ') {
+                    //TODO show 
+                } else {
+                    $("#contract-number-container").hide();
+                }
+            }, 'json');
+        } else {
+            $("#contract-number-container").hide();
+        }
+    });
 
     //Makes the create account button work
     $("#create-account-btn").on('click', createAccount);
@@ -680,7 +677,7 @@ if (document.getElementById('login-page-identifier')) {
         setUpUserAccountPage();
     }
 } else if (document.getElementById('user-admin-page-identifier')) {
-    checkIsAuthenticated(); 
+    checkIsAuthenticated();
 
     //Makes the dropdown list work
     $("#user-admin-box").on('change', function () {
