@@ -197,7 +197,6 @@ public class UserFunctions {
     public static boolean hasRole(String xsrfToken, String access_token, String role) {
         //Get user's data
         ObjectNode user_data = DOECODEUtils.makeAuthenticatedGetRequest(Init.backend_api_url + "user/hasrole/" + role, xsrfToken, access_token);
-        log.info("User data in has role: " + user_data.toString());
         //If the object didn't parse, it means we got a 403. 
         return StringUtils.equals(user_data.findPath("status").asText(""), "success");
     }

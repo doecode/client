@@ -17,16 +17,16 @@
                 <div>
                     {{#if has_primary_award}}
                     <div class='row'>
-                        <div class='col-md-1'></div>
-                        <div class='col-md-5 col-xs-12'>Primary Award/Contract Number:</div>
-                        <div class='col-md-6 col-xs-12'>{{primary_award}}</div>
+                        <div class='col-md-1 col-xs-1'></div>
+                        <div class='col-md-5 col-xs-6 no-col-padding-left'>Primary Award/Contract Number:</div>
+                        <div class='col-md-6 col-xs-5'>{{primary_award}}</div>
                     </div>
                     {{/if}}
                     {{#if has_award_numbers}}
                     <div class='row'>
-                        <div class='col-md-1'></div>
-                        <div class='col-md-5 col-xs-12'>Other Award/Contract Number:</div>
-                        <div class='col-md-6 col-xs-12'>
+                        <div class='col-md-1 col-xs-1'></div>
+                        <div class='col-md-5 col-xs-6 no-col-padding-left'>Other Award/Contract Number:</div>
+                        <div class='col-md-6 col-xs-5'>
                             {{#each award_nums}}
                             <div >{{.}}</div>
                             {{/each}}
@@ -35,9 +35,9 @@
                     {{/if}}
                     {{#if has_fwp_numbers}}
                     <div class='row'>
-                        <div class='col-md-1'></div>
-                        <div class='col-md-3 col-xs-12'>FWP Numbers:</div>
-                        <div class='col-md-8 col-xs-12'>
+                        <div class='col-md-1 col-xs-1'></div>
+                        <div class='col-md-3 col-xs-6 no-col-padding-left'>FWP Numbers:</div>
+                        <div class='col-md-8 col-xs-5'>
                             {{#each fwp_nums}}
                             <div>{{.}}</div>
                             {{/each}}
@@ -46,9 +46,9 @@
                     {{/if}}
                     {{#if has_br_codes}}
                     <div class='row'>
-                        <div class='col-md-1'></div>
-                        <div class='col-md-3 col-xs-12'>B&amp;R Codes:</div>
-                        <div class='col-md-8 col-xs-12'>
+                        <div class='col-md-1 col-xs-1'></div>
+                        <div class='col-md-3 col-xs-6 no-col-padding-left'>B&amp;R Codes:</div>
+                        <div class='col-md-8 col-xs-5'>
                             {{#each br_codes}}
                             <div>{{.}}</div>
                             {{/each}}

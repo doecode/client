@@ -254,6 +254,9 @@
     .navbar-datepicker{
         max-width:45%;
     }
+    .no-col-padding-left-sm{
+        padding-left:0px !important;
+    }
 }
 
 /* Medium Devices, Desktops */
