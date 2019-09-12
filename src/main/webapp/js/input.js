@@ -242,17 +242,20 @@ var parseErrorResponse = function parseErrorResponse(jqXhr, exception) {
 
 var parseSearchResponse = mobx.action("Parse Search Response", function parseSearchResponse(data) {
     if ($("#page").val() == 'submit' || $("#page").val() == 'announce') {
-        /*Make a quick site ownership code check, to ensure that this user should be working on this record*/
-        var site_code_check = data.metadata.site_ownership_code;
-        checkHasRole(site_code_check, function () {/*If they have permissions for this site, then we need not make any further checks*/
-        }, function () {
-            /*This means they didn't have a permission for this site, but they might be a record admin. We will make that check too.*/
-            checkHasRole('RecordAdmin', function () {/*If they are a record admin, then we need not make any further checks*/
+        //First, check if the user is the owner of this record
+        if (data.metadata.owner != JSON.parse(localStorage.user_data).user_email) {
+            /*Make a quick site ownership code check, to ensure that this user should be working on this record*/
+            var site_code_check = data.metadata.site_ownership_code;
+            checkHasRole(site_code_check, function () {/*If they have permissions for this site, then we need not make any further checks*/
             }, function () {
-                /*This means the user isn't a record admin, and don't have permissions for this site. They need to be redirected.*/
-                window.location.href = '/' + APP_NAME + '/forbidden?message=You do not have permission to edit ' + data.code_id + ';';
+                /*This means they didn't have a permission for this site, but they might be a record admin. We will make that check too.*/
+                checkHasRole('RecordAdmin', function () {/*If they are a record admin, then we need not make any further checks*/
+                }, function () {
+                    /*This means the user isn't a record admin, and don't have permissions for this site. They need to be redirected.*/
+                    window.location.href = '/' + APP_NAME + '/forbidden?message=You do not have permission to edit ' + data.code_id + ';';
+                });
             });
-        });
+        }
     }
 
     if (document.getElementById('owner-email-address')) {
@@ -302,16 +305,19 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
 //This function eventually calls parseAutopopulateResponse - but it first needs to remove some values 
 var parseLoadIdResponse = function (data) {
     if ($("#page").val() == 'submit' || $("#page").val() == 'announce') {
-        var site_code_check = data.metadata.site_ownership_code;
-        checkHasRole(site_code_check, function () {/*If they have permissions for this site, then we need not make any further checks*/
-        }, function () {
-            /*This means they didn't have a permission for this site, but they might be a record admin. We will make that check too.*/
-            checkHasRole('RecordAdmin', function () {/*If they are a record admin, then we need not make any further checks*/
+        //First, check if this is the owner or not
+        if (data.metadata.owner != JSON.parse(localStorage.user_data).user_email) {
+            var site_code_check = data.metadata.site_ownership_code;
+            checkHasRole(site_code_check, function () {/*If they have permissions for this site, then we need not make any further checks*/
             }, function () {
-                /*This means the user isn't a record admin, and don't have permissions for this site. They need to be redirected.*/
-                window.location.href = '/' + APP_NAME + '/forbidden?message=You do not have permission to create that record.';
+                /*This means they didn't have a permission for this site, but they might be a record admin. We will make that check too.*/
+                checkHasRole('RecordAdmin', function () {/*If they are a record admin, then we need not make any further checks*/
+                }, function () {
+                    /*This means the user isn't a record admin, and don't have permissions for this site. They need to be redirected.*/
+                    window.location.href = '/' + APP_NAME + '/forbidden?message=You do not have permission to create that record.';
+                });
             });
-        });
+        }
     }
     data.metadata.code_id = ''
     data.metadata.workflow_status = '';

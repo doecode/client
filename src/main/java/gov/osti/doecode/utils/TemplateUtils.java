@@ -68,7 +68,6 @@ public class TemplateUtils {
 
     // Site
     public static final String TEMPLATE_SITE_ADMIN = "site-admin";
-    public static final String TEMPLATE_POC_ADMIN = "poc-admin";
 
     // Error Pages
     public static final String TEMPLATE_404_PAGE = "page-not-found";

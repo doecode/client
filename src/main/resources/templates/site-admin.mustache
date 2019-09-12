@@ -41,10 +41,13 @@
 			 </div>
 		    </div>
 		    <div class='col-lg-6 col-lg-offset-3 col-xs-12 center-text'>
-			 <label for='site-list' id='sites-list-label' class='control-label'></label>
+			 <label for='site-list' id='sites-list-label' class='control-label'>Sites</label>
 			 <br/>
-			 <select id='site-list' class='form-control pure-input-1' disabled="">
+			 <select id='site-list' class='form-control pure-input-1' >
 			      <option value='' selected></option>
+                              {{#each sites_list}}
+                              <option value='{{site_code}}' data-sitelabname="{{lab}}" title="{{lab}}" >{{lab}} ({{site_code}})</option>
+                              {{/each}}
 			 </select>
 		    </div>
 		    <div class='col-xs-12'>
