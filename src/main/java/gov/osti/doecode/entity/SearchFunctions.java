@@ -24,7 +24,9 @@ import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonUtils;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 public class SearchFunctions {
 
@@ -486,7 +488,7 @@ public class SearchFunctions {
                 devContributorsTrimmed = devContributors;
             }
 
-            newRow.set("dev_contributors", getDevAndContributorLink(devContributorsTrimmed, false, is_more_than_3, false));
+            newRow.set("dev_contributors", getDevAndContributorLink(devContributorsTrimmed, is_more_than_3));
             newRow.set("descriptionObj", getDescription(row.findPath("description").asText(""), 100));
             newRow.set("repository_links_list", getDoiReposLinks(code_id.toString(), row.findPath("doi").asText(""), row.findPath("repository_link").asText(""), row.findPath("landing_page").asText(""), row.findPath("release_date").asText("")));
 
@@ -552,8 +554,7 @@ public class SearchFunctions {
         return return_data;
     }
 
-    private static ObjectNode getDevAndContributorLink(ArrayNode authorlist, boolean showAffiliations,
-            boolean showEllipsis, boolean showOrcid) {
+    private static ObjectNode getDevAndContributorLink(ArrayNode authorlist, boolean showEllipsis) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         // We need to go ahead and tack on the lack of a need of a semi-colon after a
         // given author
@@ -563,63 +564,9 @@ public class SearchFunctions {
             authorlist.set(authorlist.size() - 1, last_row);
         }
 
-        // Now, we have a lot to do with each author
-        int affiliations_count = 1;
-        ArrayNode affiliations_list = JsonUtils.MAPPER.createArrayNode();
-        for (int i = 0; i < authorlist.size(); i++) {
-            ObjectNode current_row = (ObjectNode) authorlist.get(i);
-
-            // We need to know whether this author has an orcid or not
-            current_row.put("showOrcid", StringUtils.isNotBlank(current_row.findPath("orcid").asText("")) && showOrcid);
-
-            if (showAffiliations) {
-                ArrayNode countArray = JsonUtils.MAPPER.createArrayNode();
-                List<Integer> countList = new ArrayList<Integer>();
-                // Go through each affiliation. If it's a valid one, tack on another number to
-                // show in the superscript thing in the link
-                if (current_row.get("affiliations") != null
-                        && ((ArrayNode) current_row.get("affiliations")).size() > 0) {
-                    // Go through each affiliation, and if it's not "null", add a number for it to
-                    // the authorlist of developers/contributors
-                    for (JsonNode v : (ArrayNode) current_row.get("affiliations")) {
-                        if (!v.isNull() && !StringUtils.equalsIgnoreCase(v.asText(), "null")) {
-                            // if affiliation is already in the list, use previous
-                            boolean matchFound = false;
-                            for (int j = 0; j < affiliations_list.size(); j++) {
-                                if (StringUtils.equalsIgnoreCase(affiliations_list.get(j).asText(), v.asText())) {
-                                    matchFound = true;
-                                    // countArray.add(j + 1);
-                                    countList.add(j + 1);
-                                    break;
-                                }
-                            }
-
-                            if (!matchFound) {
-                                // countArray.add(affiliations_count);
-                                countList.add(affiliations_count);
-                                affiliations_list.add(v.asText());
-                                affiliations_count++;
-                            }
-                        }
-                    }
-                }
-                // Add the counts needed to this given developer/contributor
-                countList.sort(null);
-                for (Integer value : countList) {
-                    countArray.add(value);
-                }
-                current_row.set("sup_count", countArray);
-                current_row.put("show_sup", countArray.size() > 0);
-            }
-
-            authorlist.set(i, current_row);
-        }
-
         return_data.put("had_list", authorlist.size() > 0);
-        return_data.set("affiliations_list", affiliations_list);
         return_data.set("list", authorlist);
         return_data.put("show_ellipsis", showEllipsis);
-        return_data.put("show_affiliations", showAffiliations && affiliations_list.size() > 0);
         return return_data;
     }
 
@@ -1229,8 +1176,9 @@ public class SearchFunctions {
             meta_tags.add(makeMetaTag("description", biblio_data.findPath("description").asText("")));
 
             /* Developers and their Affiliations */
+            ArrayList<String> meta_developer_list = new ArrayList<String>();
             LinkedHashMap<String, Integer> dev_affiliations_map = new LinkedHashMap<String, Integer>();
-            int affiliations_pointer = 1;
+            int dev_affiliations_pointer = 1;
             //Go through the developer list, and gather some information 
             ArrayNode raw_developers_list = biblio_data.withArray("developers");
             ArrayNode refined_developers_list = JsonUtils.MAPPER.createArrayNode();
@@ -1238,7 +1186,9 @@ public class SearchFunctions {
                 ObjectNode row = JsonUtils.MAPPER.createObjectNode();
                 ObjectNode developer_obj = (ObjectNode) developer;
                 //Get their name (combined)
-                row.put("name", developer_obj.findPath("last_name").asText("") + ", " + developer_obj.findPath("first_name").asText(""));
+                String name = developer_obj.findPath("last_name").asText("") + ", " + developer_obj.findPath("first_name").asText("");
+                row.put("name", name);
+                meta_developer_list.add(name);
 
                 //Orcid
                 if (StringUtils.isNotBlank(developer_obj.findPath("orcid").asText(""))) {
@@ -1252,9 +1202,9 @@ public class SearchFunctions {
                     ArrayList<Integer> superscript_list = new ArrayList<Integer>(); //Store all of the affiliations they'll have here
                     for (JsonNode aff : dev_affiliations) {
                         if (!dev_affiliations_map.containsKey(aff.asText(""))) {
-                            dev_affiliations_map.put(aff.asText(""), affiliations_pointer);
-                            superscript_list.add(affiliations_pointer);
-                            affiliations_pointer++;
+                            dev_affiliations_map.put(aff.asText(""), dev_affiliations_pointer);
+                            superscript_list.add(dev_affiliations_pointer);
+                            dev_affiliations_pointer++;
                         } else {
                             superscript_list.add(dev_affiliations_map.get(aff.asText("")));
                         }
@@ -1273,10 +1223,11 @@ public class SearchFunctions {
                 refined_developers_list.add(row);
             }
 
-            if (refined_developers_list.size() > 1) {
-                ObjectNode first_item = (ObjectNode) refined_developers_list.get(refined_developers_list.size() - 1);
-                first_item.put("is_last", true);
-                refined_developers_list.set(refined_developers_list.size() - 1, first_item);
+            //If we have any developers, we need to mark teh last one as last, so we don't put too many ";" on the page
+            if (refined_developers_list.size() > 0) {
+                ObjectNode last_item = (ObjectNode) refined_developers_list.get(refined_developers_list.size() - 1);
+                last_item.put("is_last", true);
+                refined_developers_list.set(refined_developers_list.size() - 1, last_item);
             }
             //Put the affiliation list together. Since we used a LinkedHashMap, the insertion order was stored, meaning if we get the keyset, it should come out in numerical order
             ArrayNode dev_distinct_affiliations_list = JsonUtils.MAPPER.createArrayNode();
@@ -1287,9 +1238,112 @@ public class SearchFunctions {
             return_data.put("has_developers", refined_developers_list.size() > 0);
             return_data.put("dev_affiliations_list", dev_distinct_affiliations_list);
             return_data.put("show_dev_affiliations_list", dev_distinct_affiliations_list.size() > 0);
+            meta_tags.add(makeMetaTag("developers", StringUtils.join(meta_developer_list, " ")));
 
             /* Contributors */
-            //TODO contributors 
+            //Contributors affiliations list
+            ArrayList<String> contr_meta_list = new ArrayList<String>();
+            LinkedHashMap<String, Integer> contr_affiliations_map = new LinkedHashMap<String, Integer>();
+            int contr_affiliations_pointer = 1;
+            //Contributor types list. This will be useful for something we will use later
+            ArrayList<String> contributor_types = new ArrayList<String>();
+            //Contributors list
+            ArrayNode raw_contributors_list = biblio_data.withArray("contributors");
+            //Store a list of contributors in a map, with the keys being contributor types
+            HashMap<String, ArrayNode> contrib_map = new HashMap<String, ArrayNode>();
+            for (JsonNode contributor : raw_contributors_list) {
+                ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                ObjectNode contributor_obj = (ObjectNode) contributor;
+
+                //Name
+                String name = contributor_obj.findPath("last_name").asText("") + ", " + contributor_obj.findPath("first_name").asText("");
+                row.put("name", name);
+                contr_meta_list.add(name);
+
+                //Orcid
+                if (StringUtils.isNotBlank(contributor_obj.findPath("orcid").asText(""))) {
+                    row.put("show_orcid", true);
+                    row.put("orcid", contributor_obj.findPath("orcid").asText(""));
+                }
+
+                //Map affiliations
+                ArrayNode contrib_affiliations = contributor_obj.withArray("affiliations");
+                if (contrib_affiliations.size() > 0) {
+                    ArrayList<Integer> superscript_list = new ArrayList<Integer>(); //Store all of the affiliations they'll have here
+                    for (JsonNode aff : contrib_affiliations) {
+                        //If we don't already have this affiliation(and its pointer), add it to the map and increment the pointer
+                        if (!contr_affiliations_map.containsKey(aff.asText(""))) {
+                            contr_affiliations_map.put(aff.asText(""), contr_affiliations_pointer);
+                            superscript_list.add(contr_affiliations_pointer);
+                            contr_affiliations_pointer++;
+                        } else {
+                            superscript_list.add(contr_affiliations_map.get(aff.asText("")));
+                        }
+                    }
+
+                    //Now, if there is anything in the superscript list, sort it, and stick the data in our new row object
+                    if (superscript_list.size() > 0) {
+                        Collections.sort(superscript_list);//Numerical sort, 1-n
+                        //Create a string of affiliations
+                        String superscript_str = "[" + StringUtils.join(superscript_list, "][") + "]";
+                        //Add it to the contributor object
+                        row.put("superscript_str", superscript_str);
+                        row.put("show_superscript", true);
+                    }
+                }
+
+                //Contributor type
+                String contributor_type = StringUtils.defaultIfBlank(DOECODEUtils.CONTRIBUTORS_MAP.get(contributor_obj.findPath("contributor_type").asText("")), "Unknown");
+                row.put("contributor_type", contributor_type);
+                contributor_types.add(contributor_type);
+
+                //Add this to our map
+                if (contrib_map.containsKey(contributor_type)) {
+                    contrib_map.get(contributor_type).add(row);
+                } else {
+                    ArrayNode new_row = JsonUtils.MAPPER.createArrayNode();
+                    new_row.add(row);
+                    contrib_map.put(contributor_type, new_row);
+                }
+            }
+
+            //Contributors object (this one will end up being compiled into the template)
+            ObjectNode contributors_obj = JsonUtils.MAPPER.createObjectNode();
+            //if we had any contributors, go through and do some refinement
+            if (contrib_map.keySet().size() > 0) {//If we had any contributors
+                //Add an "is_last" flag to every row
+                for (String key : contrib_map.keySet()) {
+                    int last_index = contrib_map.get(key).size() - 1;
+                    ObjectNode last_obj = (ObjectNode) contrib_map.get(key).get(last_index);
+                    last_obj.put("is_last", true);
+                    contrib_map.get(key).set(last_index, last_obj);
+                }
+
+                //Now, sort the contributor type keys, and then add them to our contributors object that will be put into the page template
+                ArrayList<String> contrib_keys = new ArrayList(contrib_map.keySet());//I didn't know you could make an arraylist with a set. Weird, right?
+                Collections.sort(contrib_keys);
+
+                ArrayNode contributors_list = JsonUtils.MAPPER.createArrayNode();
+                for (String key : contrib_keys) {
+                    ObjectNode row = JsonUtils.MAPPER.createObjectNode();
+                    row.put("label", key);
+                    row.set("list", contrib_map.get(key));
+                    contributors_list.add(row);
+                }
+                contributors_obj.set("contributors_list", contributors_list);
+                contributors_obj.put("has_contributors", true);
+
+                //Affiliations
+                ArrayNode distinct_contrib_affiliations = JsonUtils.MAPPER.createArrayNode();
+                for (String key : contr_affiliations_map.keySet()) {
+                    distinct_contrib_affiliations.add(key);
+                }
+                contributors_obj.set("affiliations_list", distinct_contrib_affiliations);
+                contributors_obj.put("has_affiliations", distinct_contrib_affiliations.size() > 0);
+            }
+            return_data.set("contributors_obj", contributors_obj);
+            meta_tags.add(makeMetaTag("contributors", StringUtils.join(contr_meta_list, " ")));
+
             // Release Date
             return_data.put("release_date", biblio_data.findPath("release_date").asText(""));
             return_data.put("has_release_date", StringUtils.isNotBlank(biblio_data.findPath("release_date").asText("")));

@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import java.util.LinkedHashMap;
+
 import org.apache.commons.lang3.StringUtils;
 import org.javalite.http.Get;
 import org.javalite.http.Http;
@@ -19,6 +21,32 @@ import org.slf4j.LoggerFactory;
 public class DOECODEUtils {
 
     public static final DateTimeFormatter MONTH_DAY_YEAR_TIME_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+
+    public static final LinkedHashMap<String, String> CONTRIBUTORS_MAP = new LinkedHashMap<String, String>();
+
+    static {//TODO consolidate with DOECODEJson later
+        CONTRIBUTORS_MAP.put("ContactPerson", "Contact Person");
+        CONTRIBUTORS_MAP.put("DataCollector", "Data Collector");
+        CONTRIBUTORS_MAP.put("DataCurator", "Data Curator");
+        CONTRIBUTORS_MAP.put("DataManager", "Data Manager");
+        CONTRIBUTORS_MAP.put("Distributor", "Distributor");
+        CONTRIBUTORS_MAP.put("Editor", "Editor");
+        CONTRIBUTORS_MAP.put("HostingInstitution", "Hosting Institution");
+        CONTRIBUTORS_MAP.put("Producer", "Producer");
+        CONTRIBUTORS_MAP.put("ProjectLeader", "Project Leader");
+        CONTRIBUTORS_MAP.put("ProjectManager", "Project Manager");
+        CONTRIBUTORS_MAP.put("ProjectMember", "Project Member");
+        CONTRIBUTORS_MAP.put("RegistrationAgency", "Registration Agency");
+        CONTRIBUTORS_MAP.put("RegistrationAuthority", "Registration Authority");
+        CONTRIBUTORS_MAP.put("RelatedPerson", "Related Person");
+        CONTRIBUTORS_MAP.put("Researcher", "Researcher");
+        CONTRIBUTORS_MAP.put("ResearchGroup", "Research Group");
+        CONTRIBUTORS_MAP.put("RightsHolder", "Rights Holder");
+        CONTRIBUTORS_MAP.put("Sponsor", "Sponsor");
+        CONTRIBUTORS_MAP.put("Supervisor", "Supervisor");
+        CONTRIBUTORS_MAP.put("WorkPackageLeader", "Work Package Leader");
+        CONTRIBUTORS_MAP.put("Other", "Other");
+    }
 
     private static Logger log = LoggerFactory.getLogger(DOECODEUtils.class);
 

@@ -74,14 +74,15 @@ var authorSearchDropdownORCID = function () {
 
 /*Opens and closes the affiliations collapse on the biblio page*/
 var toggleAffiliationCollapse = function () {
+    var affiltype = $(this).data('affiltype');
     if ($(this).next('div.toggle-affiliations-collapse').hasClass('in')) { //If is open, close
         $(this).next('div.toggle-affiliations-collapse').removeClass('in');
-        $(this).html('<span class="fa fa-plus-square-o"></span>&nbsp;Show Developer Affiliations');
-        $(this).attr('title', 'Show Author Affiliations');
+        $(this).html('+ Show ' + affiltype + ' Affiliations');
+        $(this).attr('title', 'Show ' + affiltype + ' Affiliations');
     } else { //If is closed, open
         $(this).next('div.toggle-affiliations-collapse').addClass('in');
-        $(this).html('<span class="fa fa-minus-square-o"></span>&nbsp;Hide Developer Affiliations');
-        $(this).attr('title', 'Hide Author Affiliations');
+        $(this).html('- Hide ' + affiltype + ' Affiliations');
+        $(this).attr('title', 'Hide ' + affiltype + ' Affiliations');
     }
 };
 
@@ -202,7 +203,7 @@ var modify_search = function () {
     //Populate all of the advanced search fields
     $('.search-box').val($("#search-all_fields").val());
     populateAdvancedSearchForm("navbar-searchbar-");
-    
+
     var width = $(document).width();
     if (width < 768) {
         localStorage.isRefinedSearch = "true";
