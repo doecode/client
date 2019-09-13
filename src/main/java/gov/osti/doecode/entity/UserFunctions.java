@@ -277,4 +277,11 @@ public class UserFunctions {
         return_data.put("has_pending_roles_list", pending_roles_list.size() > 0);
         return return_data;
     }
+
+    public static ObjectNode getRegistrationPageData() {
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        ObjectNode roles_list = DOECODEUtils.makeGetRequest(Init.backend_api_url + "user/roles");
+        return_data.set("hq_roles", roles_list.withArray("hq"));
+        return return_data;
+    }
 }

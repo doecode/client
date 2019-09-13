@@ -235,23 +235,6 @@ var markRegisterAsValidOrEmpty = function (event) {
     }
 };
 
-var handleRegistrationContractNumberValidation = function () {
-    markRegistrationFieldWithStatus(BLANK_CONDITION, this);
-    var contract_val = $(this).val().trim();
-
-    if (contract_val) {
-        var self = this;
-        //Look up the contract number, and ensure that it's valid
-        $.get(AUTHORITY_API_BASE + "contract/validate/" + contract_val, function (data) {
-            if (data.isValid === true) {
-                markRegistrationFieldWithStatus(SUCCESS_CONDITION, self);
-            } else {
-                markRegistrationFieldWithStatus(ERROR_CONDITION, self, 'Invalid DOE Contract Number');
-            }
-        }, 'json');
-    }
-};
-
 var handleUserAdminContractNumberValidation = function () {
     markUserFieldWithStatus(BLANK_CONDITION, this);
     var contract_val = $(this).val().trim();
@@ -290,10 +273,15 @@ var createAccount = function () {
     };
     $("#forgot-password-reminder-text").hide();
 
+    //If the user has a site id, grab it
+    if ($("#site-id").is(':visible')) {
+        user_data.site_id = $("#site-id").val();
+    }
+
     doAjax('POST', API_BASE + 'user/register', function () {
         $("#create-account-container").hide();
         $("#successful-signup-container").show();
-        
+
     }, user_data, function (xhr) {
         var error_text = "";
         var responseText = JSON.parse(xhr.responseText);
@@ -605,7 +593,22 @@ if (document.getElementById('login-page-identifier')) {
     $("#last-name").on('keyup', markRegisterAsValidOrEmpty);
 
     //the contract number is a bit special
-    $("#contract-number").on('blur', handleRegistrationContractNumberValidation);
+    $("#contract-number").on('blur', function () {
+        markRegistrationFieldWithStatus(BLANK_CONDITION, this);
+        var contract_val = $(this).val().trim();
+
+        if (contract_val) {
+            var self = this;
+            //Look up the contract number, and ensure that it's valid
+            $.get(AUTHORITY_API_BASE + "contract/validate/" + contract_val, function (data) {
+                if (data.isValid === true) {
+                    markRegistrationFieldWithStatus(SUCCESS_CONDITION, self);
+                } else {
+                    markRegistrationFieldWithStatus(ERROR_CONDITION, self, 'Invalid DOE Contract Number');
+                }
+            }, 'json');
+        }
+    });
 
     //Checker to ensure whether or not we need to be showing the contract number field
     $("#email").on('blur', function () {
@@ -615,13 +618,14 @@ if (document.getElementById('login-page-identifier')) {
                 if (data.site_code && data.site_code === 'CONTR') {
                     $("#contract-number-container").show();
                 } else if (data.site_code && data.site_code === 'HQ') {
-                    //TODO show 
+                    $("#program-office-container").show();
                 } else {
                     $("#contract-number-container").hide();
                 }
             }, 'json');
         } else {
             $("#contract-number-container").hide();
+            $("#program-office-container").hide();
         }
     });
 

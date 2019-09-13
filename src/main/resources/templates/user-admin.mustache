@@ -140,8 +140,13 @@
                                                 <option value='{{value}}' title='{{description}}'>{{label}}</option>
                                                 {{/each}}
                                             </optgroup>
-                                            <optgroup label='Site Roles'>
+                                            <optgroup label="Site Roles">
                                                 {{#each roles_obj.standard}}
+                                                <option value='{{value}}' title='{{description}}'>{{label}}</option>
+                                                {{/each}}
+                                            </optgroup>
+                                            <optgroup label="Headquarters Roles">
+                                                {{#each roles_obj.hq}}
                                                 <option value='{{value}}' title='{{description}}'>{{label}}</option>
                                                 {{/each}}
                                             </optgroup>

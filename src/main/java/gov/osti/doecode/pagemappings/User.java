@@ -90,10 +90,8 @@ public class User extends HttpServlet {
                     }
                     break;
                 case "user-admin":
-                    //TODO has_admin role check
                     page_title = "DOE CODE: User Administration";
                     template = TemplateUtils.TEMPLATE_USER_ADMIN;
-                    //TODO get user admin data
                     output_data = UserFunctions.getUserAdminPageData(request);
                     break;
                 case "login":
@@ -108,6 +106,7 @@ public class User extends HttpServlet {
                 case "register":
                     page_title = "DOE CODE: Register";
                     template = TemplateUtils.TEMPLATE_USER_REGISTRATION;
+                    output_data = UserFunctions.getRegistrationPageData();
                     break;
                 case "forgot-password":
                     page_title = "DOE CODE: Forgot Password";

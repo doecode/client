@@ -106,8 +106,26 @@
                                                 </div>
                                                 <div class="col-md-6 col-xs-12 small-screen-no-col-padding-left small-screen-no-col-padding-right">
                                                     <div class="form-group">
-                                                        <input title="Contract Number" placeholder="Award/Contract Number" id="contract-number" value="" class="pure-input-1-3 form-control" type="text">
+                                                        <input title="Contract Number" placeholder="Award/Contract Number" id="contract-number" class="pure-input-1-3 form-control" type="text">
                                                         <div>Please do not include DE or DE- in your Award or Contract Number.</div>
+                                                        <label class='control-label registration-msg'></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Site ID-->
+                                            <div class="row login-email-container" id='program-office-container' style='display:none'>
+                                                <div class="col-md-4 col-xs-12 right-text-md right-text-lg no-col-padding-right no-col-padding-left tiny-center-text">
+                                                    <label class="control-label input-label-adjusted" for="site-id">Program Office:</label>
+                                                </div>
+                                                <div class="col-md-6 col-xs-12 small-screen-no-col-padding-left small-screen-no-col-padding-right">
+                                                    <div class="form-group">
+                                                        <select title="Program Office" placeholder="Program Office" id="site-id" class="pure-input-1-3 form-control">
+                                                            <option value="">Select a Program Office</option>
+                                                            {{#each hq_roles}}
+                                                            <option value='{{value}}' title='{{description}}'>{{label}}</option>
+                                                            {{/each}}
+                                                        </select>
+                                                        <div>Please select your program office.</div>
                                                         <label class='control-label registration-msg'></label>
                                                     </div>
                                                 </div>
