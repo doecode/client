@@ -446,7 +446,6 @@ if (document.getElementById('about-page-identifier')) {
         }
     });
     $("#research-orgs-facets-search").on('click', function () {
-        //TODO put the value they entered into the search form, and post said form
         var search_val = $("#research-orgs-facets-input").val();
         $("#search-research_organization").val(search_val);
         restartSearchToFirstpage();

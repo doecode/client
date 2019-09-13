@@ -51,7 +51,6 @@ public class Input extends HttpServlet {
         
         // Some of the option steps, and whether or not we should hide them
         boolean show_optional_toggle = true;
-        //TODO put in check to ensure that if they are submitting or editing, and it's not a record for their site, and they're not a record admin, send them to the forbidden page
         if (remaining.equals("submit")) {
             String code_id = request.getParameter("code_id");
             String load_id = request.getParameter("load_id");

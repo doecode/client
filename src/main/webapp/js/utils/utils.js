@@ -391,7 +391,6 @@ $("select.doecode-chosen-select[data-issingle=true]").each(function () {
         no_results_text: allows_custom_text,
         search_contains: true
     });
-    //TODO on change, see if the value chosen is custom. If it isn't, then remove the custom value 
     if ($(self).data('allowcustom') == true) {
         $(self).on('change', function () {
             var custom_field = $("#" + $(self).attr('id') + "-custom-option");
