@@ -1467,14 +1467,22 @@ public class SearchFunctions {
             if (project_keywords_list.size() > 0) {
                 has_project_badges = true;
                 ArrayNode badge_link_list = JsonUtils.MAPPER.createArrayNode();
+                
+                //Get a list of the keywords in an arraylist, so we have a sortable version.
+                ArrayList<String> keywords_list = new ArrayList<String>();
                 for (JsonNode jn : project_keywords_list) {
+                    keywords_list.add(jn.asText(""));
+                }
+                //Sort the list alphabetically, and get everything together for the template
+                Collections.sort(keywords_list);
+                for(String keyword:keywords_list){
                     //Get teh badge link, if we have it
-                    String badge_link = DOECODEUtils.getProjectBadge(jn.asText(""));
+                    String badge_link = DOECODEUtils.getProjectBadge(keyword);
                     //If we have it, add it to teh list
                     if (StringUtils.isNotBlank(badge_link)) {
                         ObjectNode row = JsonUtils.MAPPER.createObjectNode();
                         row.put("link", badge_link);
-                        row.put("project_keyword", jn.asText(""));
+                        row.put("project_keyword", keyword);
                         badge_link_list.add(row);
                     }
                 }
