@@ -613,19 +613,16 @@ if (document.getElementById('login-page-identifier')) {
     //Checker to ensure whether or not we need to be showing the contract number field
     $("#email").on('blur', function () {
         var email_val = $(this).val();
+        $("#contract-number-container").hide();
+        $("#program-office-container").hide();
         if ($(this).val()) {
             $.get(API_BASE + 'user/getsitecode/' + email_val, function (data) {
                 if (data.site_code && data.site_code === 'CONTR') {
                     $("#contract-number-container").show();
                 } else if (data.site_code && data.site_code === 'HQ') {
                     $("#program-office-container").show();
-                } else {
-                    $("#contract-number-container").hide();
                 }
             }, 'json');
-        } else {
-            $("#contract-number-container").hide();
-            $("#program-office-container").hide();
         }
     });
 
