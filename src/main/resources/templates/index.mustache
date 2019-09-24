@@ -201,7 +201,16 @@
             border-bottom: none;
         }
     }
-
+    
+    /* IE 11 specific code*/
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active){
+        #homepage-adv-dropdown-container{
+            position: static;
+            width:85%;
+            margin-top:0px;            
+        }
+    }
+    
 </style>
 <input type='hidden' id='index-indicator' />
 <div class="row not-so-wide-row">
