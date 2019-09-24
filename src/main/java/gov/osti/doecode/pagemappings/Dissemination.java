@@ -120,7 +120,7 @@ public class Dissemination extends HttpServlet {
         } else if (remaining.trim().startsWith("/biblio/")) {
             template = TemplateUtils.TEMPLATE_BIBLIO_PAGE;
 
-            String just_code_id = StringUtils.substringBefore(remaining.replace("/biblio/", ""), "-");
+            String just_code_id = StringUtils.substringAfterLast(remaining, "/biblio/");
             if (DOECODEUtils.isValidLong(just_code_id)) {
                 long code_id = Long.parseLong(just_code_id);
                 page_title = "DOE CODE: Project Metadata for Code ID " + code_id;

@@ -468,7 +468,6 @@ public class SearchFunctions {
             newRow.put("release_date", row.findPath("release_date").asText(""));
             newRow.put("show_release_date", StringUtils.isNotBlank(row.findPath("release_date").asText("")));
             newRow.put("software_title", row.findPath("software_title").asText(""));
-            newRow.put("pretified_title", DOECODEUtils.getPretifiedTitle(row.findPath("software_title").asText("")));
 
             // Devs and contributors
             /*
@@ -713,9 +712,6 @@ public class SearchFunctions {
         // Documentation URL
         return_data.put("documentation_url", search_data.findPath("documentation_url").asText(""));
         return_data.put("has_documentation_url", StringUtils.isNotBlank(search_data.findPath("documentation_url").asText("")));
-
-        // URL "prettified" title
-        return_data.put("pretified_title", search_data.findPath("software_title").asText("").toLowerCase().replaceAll("[^a-zA-Z0-9\\s]", "").replaceAll("\\s{2,}", " ").replaceAll(" ", "-"));
 
         // Previous/Next version
         // Go through the related identifiers list. If we can find any DOI's that are
