@@ -167,23 +167,23 @@ public class SearchFunctions {
                 row.put("is_checked", true);
                 research_orgs_counts.add(row);
             } else {//Otherwise, show all available research orgs, if available
-                for (int i = 0; i < fResearchOrgsKeys.size(); i++) {
+                int max_orgs = fResearchOrgsKeys.size() >= 8 ? 8 : fResearchOrgsKeys.size();
+                for (int i = 0; i < max_orgs; i++) {
                     ObjectNode row = JsonUtils.MAPPER.createObjectNode();
                     row.put("label", fResearchOrgsKeys.get(i));
                     row.put("value", facet_research_orgs.findPath(fResearchOrgsKeys.get(i)).asInt());
                     row.put("value_compressed", fResearchOrgsKeys.get(i).replaceAll("\\s", "-"));
                     research_orgs_counts.add(row);
-                    if (i == 6) {
-                        break;
-                    }
                 }
-                //If the amount of orgs in teh facet exceeds 5, put any past 5 into a different array
+                //If our list is more than 5 organizations long, then we need to remove the first 5, and put the others in a separate list
                 if (research_orgs_counts.size() > 5) {
-                    for (int i = 4; i < research_orgs_counts.size(); i++) {
+                    int research_orgs_length = research_orgs_counts.size() - 1;
+                    //Copy any past 5 (or index 4) to the additional array
+                    for (int i = 5; i < research_orgs_counts.size(); i++) {
                         research_orgs_counts_additional.add(research_orgs_counts.get(i));
                     }
-                    //Remove those 5 from the list
-                    for (int i = 4; i < research_orgs_counts.size(); i++) {
+                    //Remove the ones that we copied from the original array
+                    for (int i = research_orgs_length; i > 4; i--) {
                         research_orgs_counts.remove(i);
                     }
                     return_data.put("had_additional_orgs", true);
@@ -1463,7 +1463,7 @@ public class SearchFunctions {
             if (project_keywords_list.size() > 0) {
                 has_project_badges = true;
                 ArrayNode badge_link_list = JsonUtils.MAPPER.createArrayNode();
-                
+
                 //Get a list of the keywords in an arraylist, so we have a sortable version.
                 ArrayList<String> keywords_list = new ArrayList<String>();
                 for (JsonNode jn : project_keywords_list) {
@@ -1471,7 +1471,7 @@ public class SearchFunctions {
                 }
                 //Sort the list alphabetically, and get everything together for the template
                 Collections.sort(keywords_list);
-                for(String keyword:keywords_list){
+                for (String keyword : keywords_list) {
                     //Get teh badge link, if we have it
                     String badge_link = DOECODEUtils.getProjectBadge(keyword);
                     //If we have it, add it to teh list
