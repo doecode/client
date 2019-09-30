@@ -218,8 +218,8 @@ public class UserFunctions {
 
     public static ObjectNode getAccountPageData(HttpServletRequest request) {
         ObjectNode return_data = UserFunctions.getUserDataFromCookie(request);
-        ArrayNode roles = (ArrayNode) return_data.get("roles");
-        ArrayNode pending_roles = (ArrayNode) return_data.get("pending_roles");
+        ArrayNode roles = return_data.withArray("roles");
+        ArrayNode pending_roles = return_data.withArray("pending_roles");
         //TODO get rejected roles
         String site = return_data.findPath("site").asText("");
         // See if their site is in their roles

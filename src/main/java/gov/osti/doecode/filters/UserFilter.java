@@ -68,14 +68,6 @@ public class UserFilter implements Filter {
                 return;
             }
 
-        } else if (is_logged_in && password_needs_reset && StringUtils.equals(remaining, "account")) {
-            // If they are logged in, but need a password reset, and are going to the
-            // account page
-            res.addCookie(UserFunctions.updateUserSessionTimeout(req));
-            Cookie needs_reset_cookie = UserFunctions.getOtherUserCookie(req, "needs_password_reset");
-            needs_reset_cookie.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
-            res.addCookie(needs_reset_cookie);
-
         } else if (is_logged_in && password_needs_reset && !StringUtils.equals(remaining, "account")) {
             // If they try to redirect to a logged-in page (that isn't account), but need a
             // password reset, redirect them to the account page

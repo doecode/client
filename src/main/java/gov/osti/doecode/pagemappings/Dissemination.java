@@ -171,11 +171,6 @@ public class Dissemination extends HttpServlet {
         } else {
             // Increment time
             response.addCookie(UserFunctions.updateUserSessionTimeout(request));
-            if (StringUtils.equals(UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"), "true")) {
-                Cookie needs_reset_cookie = UserFunctions.getOtherUserCookie(request, "needs_password_reset");
-                needs_reset_cookie.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
-                response.addCookie(needs_reset_cookie);
-            }
         }
 
         // Send in this object, and get a hold of the common data, like the classes

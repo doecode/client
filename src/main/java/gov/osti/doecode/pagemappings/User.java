@@ -18,6 +18,7 @@ import gov.osti.doecode.entity.UserFunctions;
 import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
+import java.math.BigDecimal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,9 +75,12 @@ public class User extends HttpServlet {
                     template = TemplateUtils.TEMPLATE_USER_ACCOUNT;
                     // If they have a passcode, we need to let them on in, and then take care of
                     // things from there
+                    log.info("passcode: " + request.getParameter("passcode"));
+                    log.info("Cookie thing: " + UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"));
                     if (StringUtils.isNotBlank(request.getParameter("passcode")) && !StringUtils.equals(UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"), "true")) {
                         Cookie c = UserFunctions.makeCookie("needs_password_reset", "true");
-                        c.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
+                        c.setMaxAge(-1);
+
                         response.addCookie(c);
                         output_data.put("passcode", request.getParameter("passcode"));
                         output_data.put("page_warning_message", "Please change your password");
@@ -84,8 +88,7 @@ public class User extends HttpServlet {
                         output_data.set("current_user_data", UserFunctions.getAccountPageData(request));
                     }
 
-                    if (StringUtils.equals(
-                            UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"), "true")) {
+                    if (StringUtils.equals(UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"), "true")) {
                         output_data.put("page_warning_message", "Please change your password");
                     }
                     break;
@@ -101,6 +104,16 @@ public class User extends HttpServlet {
                         output_data.set("user_data", JsonUtils.MAPPER.createObjectNode());
                         output_data.put("is_redirected", true);
                         response.addCookie(UserFunctions.deleteCookie("user_data"));
+                    }
+                    if (StringUtils.isNotBlank(request.getParameter("message"))) {
+                        String message = request.getParameter("message");
+                        switch (message) {
+                            case "InvalidToken":
+                                output_data.put("is_invalid_token", true);
+                                response.addCookie(UserFunctions.deleteCookie("needs_password_reset"));
+                                response.addCookie(UserFunctions.deleteCookie("user_data"));
+                                break;
+                        }
                     }
                     break;
                 case "register":
@@ -136,6 +149,7 @@ public class User extends HttpServlet {
             jsFilesList.add("user");
 
             output_data = TemplateUtils.GET_COMMON_DATA(output_data, "", jsFilesList, null, null, request);
+            log.info("output data: " + output_data.toString());
             TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
         }
     }

@@ -306,33 +306,6 @@ var createAccount = function () {
     });
 };
 
-var parseForgotPasswordData = function (data) {
-    $("#forgot-password-container").hide();
-    $("#forgot-password-confirmation-container").show();
-};
-
-var parseForgotPasswordError = function (xhr) {
-    if (xhr.status === 400) {
-        $("#forgot-password-container").hide();
-        $("#forgot-password-confirmation-container").show();
-    } else {
-        $("#forgot-password-error").html('An error has occurred, preventing your request from being processed.');
-    }
-};
-
-var sendForgotPasswordRequest = function () {
-    $("#approval-error-msg").html('');
-    var post_data = {
-        email: $("#email-address").val()
-    };
-
-    if (post_data.email) {
-        doAjax('POST', API_BASE + 'user/forgotpassword', parseForgotPasswordData, post_data, parseForgotPasswordError);
-    } else {
-        $("#forgot-password-error").html('Please enter an email adddress');
-    }
-};
-
 var parseAccountUpdateError = function (xhr) {
     $("#account-error-message").html('An error has occurred, preventing your first/last name changes from saving.');
 };
@@ -635,9 +608,32 @@ if (document.getElementById('login-page-identifier')) {
     }, triggerByEnter);
 
 } else if (document.getElementById('forgot-password-page-identifier')) {
-    $("#forgot-password-btn").on('click', sendForgotPasswordRequest);
+    $("#forgot-password-btn").on('click', function () {
+        $("#approval-error-msg").html('');
+        var post_data = {
+            email: $("#email-address").val()
+        };
+
+        if (post_data.email) {
+            doAjax('POST', API_BASE + 'user/forgotpassword', function (data) {
+                $("#forgot-password-container").hide();
+                $("#forgot-password-confirmation-container").show();
+            }, post_data, function (xhr) {
+                if (xhr.status === 400) {
+                    $("#forgot-password-container").hide();
+                    $("#forgot-password-confirmation-container").show();
+                } else {
+                    $("#forgot-password-error").html('An error has occurred, preventing your request from being processed.');
+                }
+            });
+        } else {
+            $("#forgot-password-error").html('Please enter an email adddress');
+        }
+    });
     $("#email-address").on('keyup', {
-        callback: sendForgotPasswordRequest
+        callback: function () {
+            $("#forgot-password-btn").trigger('click');
+        }
     }, triggerByEnter);
 
 } else if (document.getElementById('user-account-page-identifier')) {
@@ -668,7 +664,7 @@ if (document.getElementById('login-page-identifier')) {
             error: function (xhr) {
                 setCommonModalMessage(FAILED_TO_LOGIN_WITH_PASSCODE);
                 setTimeout(function () {
-                    window.location.href = '/' + APP_NAME + '/login';
+                    window.location.href = '/' + APP_NAME + '/login?message=InvalidToken';
                 }, 1000);
             }
         });

@@ -114,7 +114,7 @@ public class SearchFunctions {
         // want, assume we got correct data
         ArrayNode search_results_list = JsonUtils.MAPPER.createArrayNode();
         if (search_result_data.get("docs") != null) {
-            search_results_list = processSearchResultData((ArrayNode) search_result_data.get("docs"), start, num_found);
+            search_results_list = processSearchResultData(search_result_data.withArray("docs"), start, num_found);
         }
 
         // Go through, and stringify all of the json array values, so they can sit on

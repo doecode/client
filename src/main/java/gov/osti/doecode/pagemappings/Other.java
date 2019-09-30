@@ -22,78 +22,71 @@ import org.apache.commons.lang3.StringUtils;
 @WebServlet(urlPatterns = {"/gitlab-signup", "/gitlab-signup-result"})
 public class Other extends HttpServlet {
 
-     private static final long serialVersionUID = -6637956247980588309L;
+    private static final long serialVersionUID = -6637956247980588309L;
 
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-          request.setCharacterEncoding("UTF-8");
-          String URI = request.getRequestURI();
-          String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String URI = request.getRequestURI();
+        String remaining = StringUtils.substringAfterLast(URI, "/" + Init.app_name + "/");
 
-          HttpSession session = request.getSession(true);
-          String page_title = "";
-          String template = "";
-          String current_page = "";
-          ObjectNode output_data = JsonUtils.MAPPER.createObjectNode();
-          ArrayNode jsFilesList = JsonUtils.MAPPER.createArrayNode();
-          ArrayNode extraJSList = JsonUtils.MAPPER.createArrayNode();
-          ServletContext context = getServletContext();
-          switch (remaining) {
-               case "gitlab-signup":
-                    String gitlab_token = RandomStringUtils.randomAscii(30);
-                    session.setAttribute("gitlab-token", gitlab_token);
-                    page_title = "DOECODE: Gitlab Signup";
-                    template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP;
-                    output_data = OtherFunctions.getOtherLists(context);
-                    output_data.put("recaptcha_sitekey", Init.recaptcha_sitekey);
-                    output_data.put("gitlab_token", gitlab_token);
-                    break;
-               case "gitlab-signup-result":
-                    page_title = "DOECODE: DOE CODE Repositories Services Access Request";
-                    template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP_RESULT;
-                    output_data = OtherFunctions.handleGitlabSubmissionForm(request);
-                    session.removeAttribute("gitlab-token");
-                    break;
-          }
+        HttpSession session = request.getSession(true);
+        String page_title = "";
+        String template = "";
+        String current_page = "";
+        ObjectNode output_data = JsonUtils.MAPPER.createObjectNode();
+        ArrayNode jsFilesList = JsonUtils.MAPPER.createArrayNode();
+        ArrayNode extraJSList = JsonUtils.MAPPER.createArrayNode();
+        ServletContext context = getServletContext();
+        switch (remaining) {
+            case "gitlab-signup":
+                String gitlab_token = RandomStringUtils.randomAscii(30);
+                session.setAttribute("gitlab-token", gitlab_token);
+                page_title = "DOECODE: Gitlab Signup";
+                template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP;
+                output_data = OtherFunctions.getOtherLists(context);
+                output_data.put("recaptcha_sitekey", Init.recaptcha_sitekey);
+                output_data.put("gitlab_token", gitlab_token);
+                break;
+            case "gitlab-signup-result":
+                page_title = "DOECODE: DOE CODE Repositories Services Access Request";
+                template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP_RESULT;
+                output_data = OtherFunctions.handleGitlabSubmissionForm(request);
+                session.removeAttribute("gitlab-token");
+                break;
+        }
 
-          // Add the common dissemination js file
-          jsFilesList.add("other");
+        // Add the common dissemination js file
+        jsFilesList.add("other");
 
-          // Check if they're logged in, and only do something if they're not logged in
-          if (!UserFunctions.isUserLoggedIn(request)) {
-               output_data.set("user_data", JsonUtils.MAPPER.createObjectNode());
-          } else {
-               // Increment time
-               response.addCookie(UserFunctions.updateUserSessionTimeout(request));
-               if (StringUtils.equals(UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"),
-                       "true")) {
-                    Cookie needs_reset_cookie = UserFunctions.getOtherUserCookie(request,
-                            "needs_password_reset");
-                    needs_reset_cookie.setMaxAge(Init.SESSION_TIMEOUT_MINUTES * 60);
-                    response.addCookie(needs_reset_cookie);
-               }
-          }
+        // Check if they're logged in, and only do something if they're not logged in
+        if (!UserFunctions.isUserLoggedIn(request)) {
+            output_data.set("user_data", JsonUtils.MAPPER.createObjectNode());
+        } else {
+            // Increment time
+            response.addCookie(UserFunctions.updateUserSessionTimeout(request));
+        }
 
-          // Send in this object, and get a hold of the common data, like the classes
-          // needed to render the homepage correctly and such
-          output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, extraJSList,
-                  null, request);
+        // Send in this object, and get a hold of the common data, like the classes
+        // needed to render the homepage correctly and such
+        output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, extraJSList,
+                null, request);
 
-          // Write the template out
-          TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
+        // Write the template out
+        TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
 
-     }
+    }
 
-     @Override
-     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-          processRequest(request, response);
-     }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-     @Override
-     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-          processRequest(request, response);
-     }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
 }

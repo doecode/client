@@ -2,85 +2,91 @@
 <input type="hidden" id='login-page-identifier'/>
 
 <div class="row not-so-wide-row">
-     <div class="col-lg-3 col-md-1 col-sm-1">
+    <div class="col-lg-3 col-md-1 col-sm-1">
 
-     </div>
-     <div class="col-lg-6 col-md-10 col-sm-10 col-xs-12 ">
-	  <div>
-	       <br>
-	       <h2 class="static-content-title">Sign In</h2>
-	       <br>
-	  </div>
-	  <div class='row' style='display:none' id='login-errors-container'>
-	       <div class='col-xs-12 has-error'>
-		    <label class='control-label' id='login-errors'></label>		    
-	       </div>
-	  </div>
-	  {{#if is_redirected}}
-	  <div class='row' id="redirect-errors-container">
-	       <div class='col-xs-12 has-error'>
-		    <label class='control-label'>The page you are trying to access requires you to be signed in.</label>		    
-	       </div>
-	  </div>
-	  {{/if}}
-	  <br/>
-	  <div class="row">
-	       <div class="col-xs-12" style="font-size: 16px;">If you already have a DOE CODE account, enter your email address and password below to sign in. If you wish to create an account, please select "Create Account" and follow the instructions provided</div>	    
-	  </div>
-	  <br>
-	  <div class="row login-email-container" id='login-email-container'>
-	       <div class="col-md-2 col-xs-12 right-text-md right-text-lg no-col-padding-right ">
-		    <label class="control-label input-label-adjusted" for="email-address">Email Address:</label>
-		    &nbsp;
-		    <span class="hide-md hide-lg">
-			 <label class="control-label input-label-adjusted text-muted">(required)</label>
-		    </span>
-	       </div>
-	       <div class="col-md-5 col-xs-12">
-		    <div class="form-group">
-			 <input title="Email Address" placeholder="Email Address" id="email-address" class="pure-input-1-3 form-control login-input-box" type="text">
-		    </div>
-	       </div>
-	       <div class="col-md-2 left-text col-xs-12 no-col-padding-left hide-xs hide-sm">
-		    <label class="control-label input-label-adjusted text-muted">(required)</label>
-	       </div>
-	  </div>
-	  <div class="row signin-page-container" id='login-password-container'>
-	       <div class="col-md-2 col-xs-12 right-text-md right-text-lg no-col-padding-right">
-		    <label class="control-label input-label-adjusted" for="password">Password:</label>&nbsp;
-		    <span class="hide-md hide-lg">
-			 <label class="control-label input-label-adjusted text-muted">(required)</label>
-		    </span>
-	       </div>
-	       <div class="col-md-5 col-xs-12">
-		    <div class="form-group">
-			 <input title="Password" placeholder="Password" id="password" class="pure-input-1-3 form-control login-input-box" type="password">
-		    </div>
-	       </div>
-	       <div class="col-md-2 left-text col-xs-12 no-col-padding-left hide-xs hide-sm">
-		    <label class="control-label input-label-adjusted text-muted">(required)</label>
-	       </div>
-	       <div class="col-xs-12">
-		    <br>
-		    <br>
-	       </div>
-	  </div>
-	  <br>
-	  <div class="row">
-	       <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12  signin-buttons-container">
-		    <a href='/${app_name}/forgot-password' title="Forgot Password Page"  class="pure-button signin-buttons black">Forgot Password?</a>
-	       </div>
-	       <div class="col-lg-4 col-md-4 col-sm-4"></div>
-	       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12  signin-buttons-container right-text-lg right-text-md right-text-sm">
-		    <a href='/${app_name}/register' title="Create Account Page" class="pure-button signin-buttons black">Create Account</a>
-	       </div>
-	       <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12  signin-buttons-container">
-		    <button title="Sign In" type="button" id='signin-btn' class="pure-button button-success signin-buttons white">Sign In</button>
-	       </div>
-	  </div>
-     </div>
-     <div class="col-lg-3 col-md-1 col-sm-1">
+    </div>
+    <div class="col-lg-6 col-md-10 col-sm-10 col-xs-12 ">
+        <div>
+            <br>
+            <h2 class="static-content-title">Sign In</h2>
+            <br>
+        </div>
+        <div class='row' style='display:none' id='login-errors-container'>
+            <div class='col-xs-12 has-error'>
+                <label class='control-label' id='login-errors'></label>		    
+            </div>
+        </div>
+        {{#if is_redirected}}
+        <div class='row' id="redirect-errors-container">
+            <div class='col-xs-12 has-error'>
+                <label class='control-label'>The page you are trying to access requires you to be signed in.</label>		    
+            </div>
+        </div>
+        {{else if is_invalid_token}}
+        <div class='row'>
+            <div class='col-xs-12 has-error'>
+                <label class='control-label'>You can only use the Password Reset link once. Please use "Forgot Password" again to reset your password.</label>		    
+            </div>
+        </div>
+        {{/if}}
+        <br/>
+        <div class="row">
+            <div class="col-xs-12" style="font-size: 16px;">If you already have a DOE CODE account, enter your email address and password below to sign in. If you wish to create an account, please select "Create Account" and follow the instructions provided</div>	    
+        </div>
+        <br>
+        <div class="row login-email-container" id='login-email-container'>
+            <div class="col-md-2 col-xs-12 right-text-md right-text-lg no-col-padding-right ">
+                <label class="control-label input-label-adjusted" for="email-address">Email Address:</label>
+                &nbsp;
+                <span class="hide-md hide-lg">
+                    <label class="control-label input-label-adjusted text-muted">(required)</label>
+                </span>
+            </div>
+            <div class="col-md-5 col-xs-12">
+                <div class="form-group">
+                    <input title="Email Address" placeholder="Email Address" id="email-address" class="pure-input-1-3 form-control login-input-box" type="text">
+                </div>
+            </div>
+            <div class="col-md-2 left-text col-xs-12 no-col-padding-left hide-xs hide-sm">
+                <label class="control-label input-label-adjusted text-muted">(required)</label>
+            </div>
+        </div>
+        <div class="row signin-page-container" id='login-password-container'>
+            <div class="col-md-2 col-xs-12 right-text-md right-text-lg no-col-padding-right">
+                <label class="control-label input-label-adjusted" for="password">Password:</label>&nbsp;
+                <span class="hide-md hide-lg">
+                    <label class="control-label input-label-adjusted text-muted">(required)</label>
+                </span>
+            </div>
+            <div class="col-md-5 col-xs-12">
+                <div class="form-group">
+                    <input title="Password" placeholder="Password" id="password" class="pure-input-1-3 form-control login-input-box" type="password">
+                </div>
+            </div>
+            <div class="col-md-2 left-text col-xs-12 no-col-padding-left hide-xs hide-sm">
+                <label class="control-label input-label-adjusted text-muted">(required)</label>
+            </div>
+            <div class="col-xs-12">
+                <br>
+                <br>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12  signin-buttons-container">
+                <a href='/${app_name}/forgot-password' title="Forgot Password Page"  class="pure-button signin-buttons black">Forgot Password?</a>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12  signin-buttons-container right-text-lg right-text-md right-text-sm">
+                <a href='/${app_name}/register' title="Create Account Page" class="pure-button signin-buttons black">Create Account</a>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12  signin-buttons-container">
+                <button title="Sign In" type="button" id='signin-btn' class="pure-button button-success signin-buttons white">Sign In</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-1 col-sm-1">
 
-     </div>
+    </div>
 </div>
 {{> wrapper/footer}}
