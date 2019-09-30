@@ -39,14 +39,14 @@
                 <div class="form-group">
                     <div class="row">
                         <label class="control-label col-xs-1" for="user-admin-box">Users:</label>
-                        <div class="col-xs-11">
-                            <select title="Users" class="form-control" id="user-admin-box">
+                        <form class="col-xs-11" autocomplete="off">
+                            <select title="Users" class="pure-input-1 doecode-chosen-select" id="user-admin-box" data-issingle='true' data-allowsingledeselect="true">
                                 <option value=""></option>
                                 {{#each users_list}}
                                 <option value='{{email}}'>{{first_name}} {{last_name}} ({{email}})</option>
                                 {{/each}}
                             </select>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

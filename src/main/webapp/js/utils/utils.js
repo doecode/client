@@ -386,10 +386,12 @@ $("select.doecode-chosen-select:not([data-issingle=true])").each(function () {
 $("select.doecode-chosen-select[data-issingle=true]").each(function () {
     var self = this;
     var allows_custom_text = ($(self).data('allowcustom') == false) ? 'No match found for:' : '';
+    var allow_single_deselect = $(self).data('allowsingledeselect') == true;
     $(self).chosen({
         width: '100%',
         no_results_text: allows_custom_text,
-        search_contains: true
+        search_contains: true,
+        allow_single_deselect: allow_single_deselect
     });
     if ($(self).data('allowcustom') == true) {
         $(self).on('change', function () {
