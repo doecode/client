@@ -51,7 +51,7 @@ public class User extends HttpServlet {
                 case "update-login-status-name":
                     return_data = UserFunctions.updateUserCookie(request, request_data);
                     // If this is being called, and there are values for needs_password_reset &
-                    // passcode, clear them outs
+                    // passcode, clear them out
                     if (UserFunctions.hasRecentlyDonePasswordReset(request)) {
                         response.addCookie(UserFunctions.deleteCookie("needs_password_reset"));
                     }
