@@ -126,7 +126,6 @@ public class Input extends HttpServlet {
             } else {
                 output_data.put("page_message", "Submit a New Software Project");
             }
-            output_data.put("show_owner_message", true);
 
             output_data.set("programming_languages_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
             output_data.set("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));

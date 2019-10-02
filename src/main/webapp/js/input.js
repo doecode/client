@@ -241,15 +241,19 @@ var parseErrorResponse = function parseErrorResponse(jqXhr, exception) {
 
 
 var parseSearchResponse = mobx.action("Parse Search Response", function parseSearchResponse(data) {
+    //Set the owner email, though we won't actually show it if the user doesn't have specific permissions
+    $("#owner-email-address").html(data.metadata.owner);
     if ($("#page").val() == 'submit' || $("#page").val() == 'announce') {
         //First, check if the user is the owner of this record
         if (data.metadata.owner != JSON.parse(localStorage.user_data).user_email) {
             /*Make a quick site ownership code check, to ensure that this user should be working on this record*/
             var site_code_check = data.metadata.site_ownership_code;
             checkHasRole(site_code_check, function () {/*If they have permissions for this site, then we need not make any further checks*/
+                $("#owner-email-address").parent().show();
             }, function () {
                 /*This means they didn't have a permission for this site, but they might be a record admin. We will make that check too.*/
                 checkHasRole('RecordAdmin', function () {/*If they are a record admin, then we need not make any further checks*/
+                    $("#owner-email-address").parent().show();
                 }, function () {
                     /*This means the user isn't a record admin, and don't have permissions for this site. They need to be redirected.*/
                     window.location.href = '/' + APP_NAME + '/forbidden?message=You do not have permission to edit ' + data.code_id + ';';
@@ -258,9 +262,6 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
         }
     }
 
-    if (document.getElementById('owner-email-address')) {
-        $("#owner-email-address").html(data.metadata.owner);
-    }
     metadata.loadRecordFromServer(data.metadata, page_val);
 
     // if old record that's not updated, set to default
@@ -1917,17 +1918,20 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#input-submit-btn').on('click', submit);
     $('#input-approve-btn').on('click', approve);
 
-    if (page_val == 'announce')
+    if (page_val == 'announce') {
         $('#input-announce-btn').show();
+    }
 
-    if (page_val == 'submit')
+    if (page_val == 'submit') {
         $('#input-submit-btn').show();
+    }
 
     if (page_val == 'approve') {
         $('#input-help-anchor').hide();
         $('#input-approve-msg-top').show();
         $('#input-approve-msg-bottom').show();
         $('#input-approve-btn').show();
+        $("#owner-email-address").parent().show();
     }
 
     //Assign functionality to the Auto Fill Contact Button
