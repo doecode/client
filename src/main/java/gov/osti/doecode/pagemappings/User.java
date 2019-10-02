@@ -149,7 +149,6 @@ public class User extends HttpServlet {
             jsFilesList.add("user");
 
             output_data = TemplateUtils.GET_COMMON_DATA(output_data, "", jsFilesList, null, null, request);
-            log.info("output data: " + output_data.toString());
             TemplateUtils.writeOutTemplateData(page_title, template, response, output_data);
         }
     }
