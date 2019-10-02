@@ -40,7 +40,7 @@
                     <div class="row">
                         <label class="control-label col-xs-1" for="user-admin-box">Users:</label>
                         <form class="col-xs-11" autocomplete="off">
-                            <select title="Users" class="pure-input-1 doecode-chosen-select" id="user-admin-box" data-issingle='true' data-allowsingledeselect="true">
+                            <select title="Users" class="pure-input-1 doecode-chosen-select" id="user-admin-box" data-issingle='true' data-allowsingledeselect="true" data-placeholder='Select a User'>
                                 <option value=""></option>
                                 {{#each users_list}}
                                 <option value='{{email}}'>{{display_name_lastname_first}} ({{email}})</option>
