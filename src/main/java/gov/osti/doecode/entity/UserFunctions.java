@@ -96,6 +96,8 @@ public class UserFunctions {
         return_data.put("user_id", user_data.findPath("userid").asText(""));
         return_data.put("first_name", user_data.findPath("first_name").asText(""));
         return_data.put("last_name", user_data.findPath("last_name").asText(""));
+        return_data.put("display_name", user_data.findPath("display_name").asText(""));
+        return_data.put("display_name_lastname_first", user_data.findPath("display_name_lastname_first").asText(""));
         return_data.put("email", user_data.findPath("email").asText(""));
         return_data.put("site", user_data.findPath("site").asText(""));
         ArrayNode roles = user_data.withArray("roles");

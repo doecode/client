@@ -173,6 +173,8 @@ function setLoggedInAttributes(data) {
     user_data.user_email = data.email;
     user_data.first_name = data.first_name;
     user_data.last_name = data.last_name;
+    user_data.display_name = data.display_name;
+    user_data.display_name_lastname_first = data.display_name_lastname_first;
     user_data.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
     user_data.roles = data.roles;
     user_data.user_site = data.site;

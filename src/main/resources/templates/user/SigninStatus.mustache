@@ -1,7 +1,7 @@
 {{#if user_data.is_logged_in}}
 <div class="dropdown">
-    <button title="{{user_data.first_name}} {{user_data.last_name}}" class="btn btn-link dropdown-toggle" style="color: white !important;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        <span class='hide-xs'>{{user_data.first_name}} {{user_data.last_name}}</span>
+    <button title="{{user_data.display_name}}" class="btn btn-link dropdown-toggle" style="color: white !important;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <span class='hide-xs'>{{user_data.display_name}}</span>
         <span style='font-size:20px;' class='hide-sm hide-md hide-lg'><span class='fa fa-user-circle-o signin-icon signin-btn-icon'></span></span>
         &nbsp;<span class="caret"></span>
     </button>

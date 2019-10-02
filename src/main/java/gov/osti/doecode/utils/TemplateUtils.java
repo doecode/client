@@ -186,6 +186,8 @@ public class TemplateUtils {
         HashMap<Object, Object> user_data = new HashMap<Object, Object>();
         user_data.put("first_name", data.findPath("first_name").asText(""));
         user_data.put("last_name", data.findPath("last_name").asText(""));
+        user_data.put("display_name", data.findPath("display_name").asText(""));
+        user_data.put("display_name_lastname_first", data.findPath("display_name_lastname_first").asText(""));
         user_data.put("is_logged_in", true);
         ArrayNode roles_list = data.withArray("roles");
         user_data.put("has_user_admin_role", UserFunctions.hasRole(roles_list, UserFunctions.USER_ADMIN_ROLE));
