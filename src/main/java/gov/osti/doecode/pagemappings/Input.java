@@ -50,8 +50,11 @@ public class Input extends HttpServlet {
         }
         
         // Some of the option steps, and whether or not we should hide them
-        boolean show_optional_toggle = true;
+        boolean show_optional_toggle = false;
         if (remaining.equals("submit")) {
+            //Toggle everything to not be shown, since we're on the submit page
+            show_optional_toggle = true;
+
             String code_id = request.getParameter("code_id");
             String load_id = request.getParameter("load_id");
             String version_type = request.getParameter("version_type");
@@ -72,6 +75,7 @@ public class Input extends HttpServlet {
                 output_data.put("page_message", version_type_display + " Version of Project #" + load_id);
                 output_data.put("load_id", load_id);
                 output_data.put("version_type", version_type);
+                //Toggle everything to be shown, since we're using a load_id
                 show_optional_toggle = false;
 
             } else {
