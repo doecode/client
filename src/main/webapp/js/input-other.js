@@ -16,12 +16,17 @@ const LOADING_PENDING_PROJECTS_ERROR_OPTS = {title: 'Error in Loading Pending Pr
     contentClasses: ['center-text'], showClose: true};
 
 var pending_data_table_opts = {
-    order: [[0, 'asc']],
+    order: [[2, 'asc']],
     autoWidth: false,
     responsive: true,
     columns: [
         {name: 'code_id', data: 'code_id', width: '88px', className: 'text-center'},
         {name: 'software_title', data: 'software_title'},
+        {name: 'date_record_updated', data: null, render: {
+            "_": "date_record_updated",
+            "filter": "date_record_updated_display",
+            "display": "date_record_updated_display"
+            }, width: '88px', orderData: [2,0], className: 'text-center'},
         {name: 'workflow_status', data: 'workflow_status', width: '88px', className: 'text-center'},
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/approve?code_id=' + row.code_id
@@ -368,6 +373,8 @@ var parseApprovalPageData = function (data) {
         new_data.push({
             code_id: item.code_id ? item.code_id : '',
             software_title: item.software_title ? item.software_title : '',
+            date_record_updated: item.date_record_updated ? item.date_record_updated : '',
+            date_record_updated_display: item.date_record_updated ? moment(item.date_record_updated, BACK_END_DATE_FORMAT).format(FRONT_END_DATE_FORMAT) : '',            
             workflow_status: workflow_status
         });
     });
