@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +25,6 @@ import gov.osti.doecode.utils.JsonUtils;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Set;
 
 public class SearchFunctions {
 
@@ -1182,41 +1180,45 @@ public class SearchFunctions {
                 ObjectNode row = JsonUtils.MAPPER.createObjectNode();
                 ObjectNode developer_obj = (ObjectNode) developer;
                 //Get their name (combined)
-                String name = developer_obj.findPath("last_name").asText("") + ", " + developer_obj.findPath("first_name").asText("");
-                row.put("name", name);
-                meta_developer_list.add(name);
+                String first_name = developer_obj.findPath("first_name").asText("").trim();
+                String last_name = developer_obj.findPath("last_name").asText("").trim();
+                String name = last_name + ", " + first_name;
+                if (StringUtils.isNotBlank(name.replaceAll(" ", "").replaceAll(",", "")) && !StringUtils.equalsIgnoreCase(first_name, "none") && !StringUtils.equalsIgnoreCase(last_name, "none")) {
+                    row.put("name", name);
+                    meta_developer_list.add(name);
 
-                //Orcid
-                if (StringUtils.isNotBlank(developer_obj.findPath("orcid").asText(""))) {
-                    row.put("show_orcid", true);
-                    row.put("orcid", developer_obj.findPath("orcid").asText(""));
-                }
+                    //Orcid
+                    if (StringUtils.isNotBlank(developer_obj.findPath("orcid").asText(""))) {
+                        row.put("show_orcid", true);
+                        row.put("orcid", developer_obj.findPath("orcid").asText(""));
+                    }
 
-                //Go through this user's affiliations, and add them to the affiliations map (if they're unique)
-                ArrayNode dev_affiliations = developer_obj.withArray("affiliations");
-                if (dev_affiliations.size() > 0) {
-                    ArrayList<Integer> superscript_list = new ArrayList<Integer>(); //Store all of the affiliations they'll have here
-                    for (JsonNode aff : dev_affiliations) {
-                        if (!dev_affiliations_map.containsKey(aff.asText(""))) {
-                            dev_affiliations_map.put(aff.asText(""), dev_affiliations_pointer);
-                            superscript_list.add(dev_affiliations_pointer);
-                            dev_affiliations_pointer++;
-                        } else {
-                            superscript_list.add(dev_affiliations_map.get(aff.asText("")));
+                    //Go through this user's affiliations, and add them to the affiliations map (if they're unique)
+                    ArrayNode dev_affiliations = developer_obj.withArray("affiliations");
+                    if (dev_affiliations.size() > 0) {
+                        ArrayList<Integer> superscript_list = new ArrayList<Integer>(); //Store all of the affiliations they'll have here
+                        for (JsonNode aff : dev_affiliations) {
+                            if (!dev_affiliations_map.containsKey(aff.asText(""))) {
+                                dev_affiliations_map.put(aff.asText(""), dev_affiliations_pointer);
+                                superscript_list.add(dev_affiliations_pointer);
+                                dev_affiliations_pointer++;
+                            } else {
+                                superscript_list.add(dev_affiliations_map.get(aff.asText("")));
+                            }
+                        }
+
+                        //Now, if the superscript list has anything, sort it, and stick the data in our row object
+                        if (superscript_list.size() > 0) {
+                            Collections.sort(superscript_list);//Numerical sort, 1-n
+                            //Create an affiliations string
+                            String supersscript_str = "[" + StringUtils.join(superscript_list, "][") + "]";
+                            //Add it to this developer object
+                            row.put("superscript_str", supersscript_str);
+                            row.put("show_superscript", true);
                         }
                     }
-
-                    //Now, if the superscript list has anything, sort it, and stick the data in our row object
-                    if (superscript_list.size() > 0) {
-                        Collections.sort(superscript_list);//Numerical sort, 1-n
-                        //Create an affiliations string
-                        String supersscript_str = "[" + StringUtils.join(superscript_list, "][") + "]";
-                        //Add it to this developer object
-                        row.put("superscript_str", supersscript_str);
-                        row.put("show_superscript", true);
-                    }
+                    refined_developers_list.add(row);
                 }
-                refined_developers_list.add(row);
             }
 
             //If we have any developers, we need to mark teh last one as last, so we don't put too many ";" on the page
@@ -1252,55 +1254,61 @@ public class SearchFunctions {
                 ObjectNode contributor_obj = (ObjectNode) contributor;
 
                 //Name
-                String name = contributor_obj.findPath("last_name").asText("") + ", " + contributor_obj.findPath("first_name").asText("");
-                row.put("name", name);
-                contr_meta_list.add(name);
+                String last_name = contributor_obj.findPath("last_name").asText("");
+                String first_name = contributor_obj.findPath("first_name").asText("");
 
-                //Orcid
-                if (StringUtils.isNotBlank(contributor_obj.findPath("orcid").asText(""))) {
-                    row.put("show_orcid", true);
-                    row.put("orcid", contributor_obj.findPath("orcid").asText(""));
-                }
+                String name = last_name + ", " + first_name;
+                if (StringUtils.isNotBlank(name.replaceAll(" ", "").replaceAll(",", "")) && !StringUtils.equalsIgnoreCase(first_name, "none") && !StringUtils.equalsIgnoreCase(last_name, "none")) {
+                    row.put("name", name);
+                    contr_meta_list.add(name);
 
-                //Map affiliations
-                ArrayNode contrib_affiliations = contributor_obj.withArray("affiliations");
-                if (contrib_affiliations.size() > 0) {
-                    ArrayList<Integer> superscript_list = new ArrayList<Integer>(); //Store all of the affiliations they'll have here
-                    for (JsonNode aff : contrib_affiliations) {
-                        //If we don't already have this affiliation(and its pointer), add it to the map and increment the pointer
-                        if (!contr_affiliations_map.containsKey(aff.asText(""))) {
-                            contr_affiliations_map.put(aff.asText(""), contr_affiliations_pointer);
-                            superscript_list.add(contr_affiliations_pointer);
-                            contr_affiliations_pointer++;
-                        } else {
-                            superscript_list.add(contr_affiliations_map.get(aff.asText("")));
+                    //Orcid
+                    if (StringUtils.isNotBlank(contributor_obj.findPath("orcid").asText(""))) {
+                        row.put("show_orcid", true);
+                        row.put("orcid", contributor_obj.findPath("orcid").asText(""));
+                    }
+
+                    //Map affiliations
+                    ArrayNode contrib_affiliations = contributor_obj.withArray("affiliations");
+                    if (contrib_affiliations.size() > 0) {
+                        ArrayList<Integer> superscript_list = new ArrayList<Integer>(); //Store all of the affiliations they'll have here
+                        for (JsonNode aff : contrib_affiliations) {
+                            //If we don't already have this affiliation(and its pointer), add it to the map and increment the pointer
+                            if (!contr_affiliations_map.containsKey(aff.asText(""))) {
+                                contr_affiliations_map.put(aff.asText(""), contr_affiliations_pointer);
+                                superscript_list.add(contr_affiliations_pointer);
+                                contr_affiliations_pointer++;
+                            } else {
+                                superscript_list.add(contr_affiliations_map.get(aff.asText("")));
+                            }
+                        }
+
+                        //Now, if there is anything in the superscript list, sort it, and stick the data in our new row object
+                        if (superscript_list.size() > 0) {
+                            Collections.sort(superscript_list);//Numerical sort, 1-n
+                            //Create a string of affiliations
+                            String superscript_str = "[" + StringUtils.join(superscript_list, "][") + "]";
+                            //Add it to the contributor object
+                            row.put("superscript_str", superscript_str);
+                            row.put("show_superscript", true);
                         }
                     }
 
-                    //Now, if there is anything in the superscript list, sort it, and stick the data in our new row object
-                    if (superscript_list.size() > 0) {
-                        Collections.sort(superscript_list);//Numerical sort, 1-n
-                        //Create a string of affiliations
-                        String superscript_str = "[" + StringUtils.join(superscript_list, "][") + "]";
-                        //Add it to the contributor object
-                        row.put("superscript_str", superscript_str);
-                        row.put("show_superscript", true);
+                    //Contributor type
+                    String contributor_type = StringUtils.defaultIfBlank(DOECODEUtils.CONTRIBUTORS_MAP.get(contributor_obj.findPath("contributor_type").asText("")), "Unknown");
+                    row.put("contributor_type", contributor_type);
+                    contributor_types.add(contributor_type);
+
+                    //Add this to our map
+                    if (contrib_map.containsKey(contributor_type)) {
+                        contrib_map.get(contributor_type).add(row);
+                    } else {
+                        ArrayNode new_row = JsonUtils.MAPPER.createArrayNode();
+                        new_row.add(row);
+                        contrib_map.put(contributor_type, new_row);
                     }
                 }
 
-                //Contributor type
-                String contributor_type = StringUtils.defaultIfBlank(DOECODEUtils.CONTRIBUTORS_MAP.get(contributor_obj.findPath("contributor_type").asText("")), "Unknown");
-                row.put("contributor_type", contributor_type);
-                contributor_types.add(contributor_type);
-
-                //Add this to our map
-                if (contrib_map.containsKey(contributor_type)) {
-                    contrib_map.get(contributor_type).add(row);
-                } else {
-                    ArrayNode new_row = JsonUtils.MAPPER.createArrayNode();
-                    new_row.add(row);
-                    contrib_map.put(contributor_type, new_row);
-                }
             }
 
             //Contributors object (this one will end up being compiled into the template)

@@ -75,8 +75,6 @@ public class User extends HttpServlet {
                     template = TemplateUtils.TEMPLATE_USER_ACCOUNT;
                     // If they have a passcode, we need to let them on in, and then take care of
                     // things from there
-                    log.info("passcode: " + request.getParameter("passcode"));
-                    log.info("Cookie thing: " + UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"));
                     if (StringUtils.isNotBlank(request.getParameter("passcode")) && !StringUtils.equals(UserFunctions.getOtherUserCookieValue(request, "needs_password_reset"), "true")) {
                         Cookie c = UserFunctions.makeCookie("needs_password_reset", "true");
                         c.setMaxAge(-1);

@@ -5,6 +5,7 @@ import com.github.jknack.handlebars.Jackson2Helper;
 import com.github.jknack.handlebars.io.ServletContextTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
 import gov.osti.doecode.entity.NewsFunctions;
+import gov.osti.doecode.utils.DOECODEUtils;
 import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +50,6 @@ public class Init extends HttpServlet {
     static {
         // Load up the properties file
         try {
-            log.info("Loading Properties");
             PROPS.load(Init.class.getResourceAsStream("/params.properties"));
             news_environment_url = PROPS.getProperty("news_environment_url", "");
             // Get the URL's used for searching and validation
@@ -81,12 +81,11 @@ public class Init extends HttpServlet {
 
             //OSTI GOV News XML
             ostigov_news_xml = PROPS.getProperty("ostigov_news_xml");
-            
+
             // Get the session timeout from the web.xml
             SESSION_TIMEOUT_MINUTES = Integer.parseInt(PROPS.getProperty("session_timeout"));
-            log.info("Done loading properties");
         } catch (Exception e) {
-
+            log.error("Exception in loading properties: " + DOECODEUtils.getStackTrace(e));
         }
     }
 
@@ -100,18 +99,15 @@ public class Init extends HttpServlet {
         ServletContext context = getServletContext();
 
         // Initialize the main template loader
-        TemplateLoader loader = new ServletContextTemplateLoader(context, "/WEB-INF/classes/templates",
-                ".mustache");
+        TemplateLoader loader = new ServletContextTemplateLoader(context, "/WEB-INF/classes/templates", ".mustache");
         handlebars = new Handlebars(loader);
         handlebars.registerHelper("json", Jackson2Helper.INSTANCE);
 
         // Initialize the user template loader
-        TemplateLoader loader2 = new ServletContextTemplateLoader(context, "/WEB-INF/classes/templates/user",
-                ".mustache");
+        TemplateLoader loader2 = new ServletContextTemplateLoader(context, "/WEB-INF/classes/templates/user", ".mustache");
         handlebarsUser = new Handlebars(loader2);
 
-        TemplateLoader loader3 = new ServletContextTemplateLoader(context, "/WEB-INF/classes/templates/search",
-                ".mustache");
+        TemplateLoader loader3 = new ServletContextTemplateLoader(context, "/WEB-INF/classes/templates/search", ".mustache");
         handlebarsSearch = new Handlebars(loader3);
 
         //Load some news data
