@@ -215,7 +215,7 @@ $(".adv-search-button").on('click', toggleSearchDropdown);
 
 //Makes all of the advanced search and search buttons work
 $("#adv-search-page-search-btn").on('click', triggerAdvancedSearch);
-$(".adv-search-btn-dropdown").on('click', function(){
+$(".adv-search-btn-dropdown").on('click', function () {
     $('button.search-btn:visible').trigger('click');
 });
 $(".search-btn").on('click', triggerDropdownAdvancedSearch);
@@ -238,10 +238,6 @@ $(".doecode-datepicker").datepicker(DATEPICKER_OPTS);
 if (document.getElementById('search-results-page-identifier')) {
     /*Store the latest search parameters on the search results page*/
     localStorage.latestSearchParams = JSON.stringify($("#search-page-form").serializeArray());
-
-} else {
-    /*Clear out the latest search params*/
-    localStorage.latestSearchParams = JSON.stringify({});
 }
 
 /*Makes the logout button work*/
