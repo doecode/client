@@ -29,56 +29,123 @@ form.co_repo = "";
 form.last_filename = "";
 
 var developers_data_tbl_opts = {
-    order: [[0, 'asc']],
-    columns: [
-        {name: 'first_name', data: 'first_name', 'defaultContent': ''},
-        {name: 'last_name', data: 'last_name', 'defaultContent': ''},
-        {name: 'affiliations', data: 'affiliations', 'defaultContent': '', render: function (data, type, row) {
+    order: [
+        [0, 'asc']
+    ],
+    columns: [{
+            name: 'first_name',
+            data: 'first_name',
+            'defaultContent': ''
+        },
+        {
+            name: 'last_name',
+            data: 'last_name',
+            'defaultContent': ''
+        },
+        {
+            name: 'affiliations',
+            data: 'affiliations',
+            'defaultContent': '',
+            render: function (data, type, row) {
                 var affiliations = data ? data.join(', ') : '';
                 return affiliations;
-            }}
-    ]
+            }
+        }
+    ],
+    // Disable search bar for Developers datatable
+    sDom: 'lrtip'
 };
 
 var sponsoring_org_tbl_opts = {
-    order: [[0, 'asc']],
-    columns: [
-        {name: 'organization_name', data: 'organization_name', 'defaultContent': ''},
-        {name: 'primary_award', data: 'primary_award', 'defaultContent': ''}
+    order: [
+        [0, 'asc']
+    ],
+    columns: [{
+            name: 'organization_name',
+            data: 'organization_name',
+            'defaultContent': ''
+        },
+        {
+            name: 'primary_award',
+            data: 'primary_award',
+            'defaultContent': ''
+        }
     ]
 };
 
 var research_org_tbl_opts = {
-    order: [[0, 'asc']],
-    columns: [
-        {name: 'organization_name', data: 'organization_name', 'defaultContent': ''}
-    ]
+    order: [
+        [0, 'asc']
+    ],
+    columns: [{
+        name: 'organization_name',
+        data: 'organization_name',
+        'defaultContent': ''
+    }]
 };
 
 var contributors_org_tbl_opts = {
-    order: [[0, 'asc']],
-    columns: [
-        {name: 'first_name', data: 'first_name', 'defaultContent': ''},
-        {name: 'last_name', data: 'last_name', 'defaultContent': ''},
-        {name: 'contributor_type', data: 'contributor_type', 'defaultContent': ''}
+    order: [
+        [0, 'asc']
+    ],
+    columns: [{
+            name: 'first_name',
+            data: 'first_name',
+            'defaultContent': ''
+        },
+        {
+            name: 'last_name',
+            data: 'last_name',
+            'defaultContent': ''
+        },
+        {
+            name: 'contributor_type',
+            data: 'contributor_type',
+            'defaultContent': ''
+        }
     ]
 };
 
 var contributing_organizations_tbl_opts = {
-    order: [[0, 'asc']],
-    columns: [
-        {name: 'organization_name', data: 'organization_name', 'defaultContent': ''},
-        {name: 'contributor_type', data: 'contributor_type', 'defaultContent': ''}
+    order: [
+        [0, 'asc']
+    ],
+    columns: [{
+            name: 'organization_name',
+            data: 'organization_name',
+            'defaultContent': ''
+        },
+        {
+            name: 'contributor_type',
+            data: 'contributor_type',
+            'defaultContent': ''
+        }
     ]
 };
 
 var related_identifiers_tbl_opts = {
-    order: [[0, 'asc']],
+    order: [
+        [0, 'asc']
+    ],
     autoWidth: false,
-    columns: [
-        {name: 'identifier_type', data: 'identifier_type', 'defaultContent': '', width: '20%'},
-        {name: 'relation_type', data: 'relation_type', 'defaultContent': '', width: '25%'},
-        {name: 'identifier_value', data: 'identifier_value', 'defaultContent': '', className: 'word-break'}
+    columns: [{
+            name: 'identifier_type',
+            data: 'identifier_type',
+            'defaultContent': '',
+            width: '20%'
+        },
+        {
+            name: 'relation_type',
+            data: 'relation_type',
+            'defaultContent': '',
+            width: '25%'
+        },
+        {
+            name: 'identifier_value',
+            data: 'identifier_value',
+            'defaultContent': '',
+            className: 'word-break'
+        }
     ]
 };
 
@@ -204,7 +271,8 @@ var autopopulateFromRepository = function () {
         show_loader: true,
         message_type: MESSAGE_TYPE_REGULAR,
         content: "<br/> Loading Data from Repository: <br> " + $("#repository-link").val(),
-        contentClasses: ['center-text'], showClose: false
+        contentClasses: ['center-text'],
+        showClose: false
     });
     showCommonModalMessage();
 
@@ -234,7 +302,8 @@ var parseErrorResponse = function parseErrorResponse(jqXhr, exception) {
         show_loader: true,
         message_type: MESSAGE_TYPE_ERROR,
         content: "<br/>" + msg,
-        contentClasses: ['center-text'], showClose: true
+        contentClasses: ['center-text'],
+        showClose: true
     });
     showCommonModalMessage();
 };
@@ -248,11 +317,13 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
         if (data.metadata.owner != JSON.parse(localStorage.user_data).user_email) {
             /*Make a quick site ownership code check, to ensure that this user should be working on this record*/
             var site_code_check = data.metadata.site_ownership_code;
-            checkHasRole(site_code_check, function () {/*If they have permissions for this site, then we need not make any further checks*/
+            checkHasRole(site_code_check, function () {
+                /*If they have permissions for this site, then we need not make any further checks*/
                 $("#owner-email-address").parent().show();
             }, function () {
                 /*This means they didn't have a permission for this site, but they might be a record admin. We will make that check too.*/
-                checkHasRole('RecordAdmin', function () {/*If they are a record admin, then we need not make any further checks*/
+                checkHasRole('RecordAdmin', function () {
+                    /*If they are a record admin, then we need not make any further checks*/
                     $("#owner-email-address").parent().show();
                 }, function () {
                     /*This means the user isn't a record admin, and don't have permissions for this site. They need to be redirected.*/
@@ -309,10 +380,12 @@ var parseLoadIdResponse = function (data) {
         //First, check if this is the owner or not
         if (data.metadata.owner != JSON.parse(localStorage.user_data).user_email) {
             var site_code_check = data.metadata.site_ownership_code;
-            checkHasRole(site_code_check, function () {/*If they have permissions for this site, then we need not make any further checks*/
+            checkHasRole(site_code_check, function () {
+                /*If they have permissions for this site, then we need not make any further checks*/
             }, function () {
                 /*This means they didn't have a permission for this site, but they might be a record admin. We will make that check too.*/
-                checkHasRole('RecordAdmin', function () {/*If they are a record admin, then we need not make any further checks*/
+                checkHasRole('RecordAdmin', function () {
+                    /*If they are a record admin, then we need not make any further checks*/
                 }, function () {
                     /*This means the user isn't a record admin, and don't have permissions for this site. They need to be redirected.*/
                     window.location.href = '/' + APP_NAME + '/forbidden?message=You do not have permission to create that record.';
@@ -333,13 +406,13 @@ var parseLoadIdResponse = function (data) {
 
     //Get the "version_type", and from that, add a related identifier entry
     var related_identifiers_list = [];
-    if ($("#version_type").val() == 'Prev') {//If this is considered to be the previous version of the load id
+    if ($("#version_type").val() == 'Prev') { //If this is considered to be the previous version of the load id
         related_identifiers_list.push({
             identifier_type: 'DOI',
             identifier_value: data.metadata.doi,
             relation_type: 'IsPreviousVersionOf'
         });
-    } else {//If this is considered to be the next or newer version of the load id
+    } else { //If this is considered to be the next or newer version of the load id
         related_identifiers_list.push({
             identifier_type: 'DOI',
             identifier_value: data.metadata.doi,
@@ -383,12 +456,13 @@ var save = function save() {
         show_loader: true,
         message_type: MESSAGE_TYPE_REGULAR,
         content: "<br/>Saving data for " + msg + ".",
-        contentClasses: ['center-text'], showClose: false
+        contentClasses: ['center-text'],
+        showClose: false
     });
     showCommonModalMessage();
 
-    if ((Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length > 0)
-            || (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
+    if ((Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length > 0) ||
+        (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
         doMultipartSubmission(API_BASE + 'metadata/save', parseSaveResponse);
     else
         doAuthenticatedAjax('POST', API_BASE + 'metadata/save', parseSaveResponse, metadata.serializeData(), parseErrorResponse);
@@ -409,12 +483,13 @@ var submit = function submit() {
         show_loader: true,
         message_type: MESSAGE_TYPE_REGULAR,
         content: msg,
-        contentClasses: ['center-text'], showClose: false
+        contentClasses: ['center-text'],
+        showClose: false
     });
     showCommonModalMessage();
 
-    if ((Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length > 0)
-            || (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
+    if ((Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length > 0) ||
+        (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
         doMultipartSubmission(API_BASE + 'metadata/submit', parseSubmitResponse);
     else
         doAuthenticatedAjax('POST', API_BASE + 'metadata/submit', parseSubmitResponse, metadata.serializeData(), parseErrorResponse);
@@ -431,12 +506,13 @@ var announce = function announce() {
         show_loader: true,
         message_type: MESSAGE_TYPE_REGULAR,
         content: "<br/>Announcing data for " + msg + ".",
-        contentClasses: ['center-text'], showClose: false
+        contentClasses: ['center-text'],
+        showClose: false
     });
     showCommonModalMessage();
 
-    if ((Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length > 0)
-            || (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
+    if ((Array.isArray(metadata.getValue("files").slice()) && metadata.getValue("files").length > 0) ||
+        (Array.isArray(metadata.getValue("containers").slice()) && metadata.getValue("containers").length > 0))
         doMultipartSubmission(API_BASE + 'metadata/announce', parseAnnounceResponse);
     else
         doAuthenticatedAjax('POST', API_BASE + 'metadata/announce', parseAnnounceResponse, metadata.serializeData(), parseErrorResponse);
@@ -453,7 +529,8 @@ var approve = function approve() {
         show_loader: true,
         message_type: MESSAGE_TYPE_REGULAR,
         content: "<br/>Approving data for " + msg + ". Please wait, this may take a few minutes.",
-        contentClasses: ['center-text'], showClose: false
+        contentClasses: ['center-text'],
+        showClose: false
     });
     showCommonModalMessage();
 
@@ -479,8 +556,7 @@ var fillContactDataFromAccount = mobx.action("Fill Contact Data", function () {
         if (data.site != 'CONTR') {
             metadata.setValue("recipient_org", data.site);
         }
-    }, null, function (xhr) {
-    });
+    }, null, function (xhr) {});
 });
 
 
@@ -504,17 +580,29 @@ var parseApproveResponse = function parseApproveResponse(data) {
 
 var setModalActions = function setModalActions(modal) {
     //Clears out the lists upon closing the modals
-    $("#" + modal + "-edit-modal").on('hidden.bs.modal', {modal_name: modal}, clearModal);
+    $("#" + modal + "-edit-modal").on('hidden.bs.modal', {
+        modal_name: modal
+    }, clearModal);
     //Show the add modal
-    $("#add-" + modal + "-modal-btn").on('click', {modal_name: modal}, showModal);
+    $("#add-" + modal + "-modal-btn").on('click', {
+        modal_name: modal
+    }, showModal);
     //Hide the modal
-    $("#" + modal + "-close-btn").on('click', {modal_name: modal}, hideModal);
+    $("#" + modal + "-close-btn").on('click', {
+        modal_name: modal
+    }, hideModal);
     //Delete the item
-    $("#" + modal + "-delete-btn").on('click', {modal_name: modal}, deleteModalData);
+    $("#" + modal + "-delete-btn").on('click', {
+        modal_name: modal
+    }, deleteModalData);
     //Save the item
-    $("#" + modal + "-save-btn").on('click', {modal_name: modal}, saveModalData);
+    $("#" + modal + "-save-btn").on('click', {
+        modal_name: modal
+    }, saveModalData);
     //Load the item data
-    $("#" + modal + "-data-table tbody").on('click', 'tr', {modal_name: modal}, loadDataIntoModalForm);
+    $("#" + modal + "-data-table tbody").on('click', 'tr', {
+        modal_name: modal
+    }, loadDataIntoModalForm);
 };
 
 var setModalStatus = function setModalStatus(modal, store) {
@@ -1375,7 +1463,11 @@ var saveModalData = function (event) {
         modal_data.id = edit_idx;
 
     //Now, hide the modal
-    hideModal({data: {modal_name: modal}});
+    hideModal({
+        data: {
+            modal_name: modal
+        }
+    });
 
     updateModalSourceData(modal, modal_data);
 };
@@ -1443,7 +1535,11 @@ var loadDataIntoModalForm = mobx.action("Load Modal Data", function (event) {
         throw 'Unknown modal table value!';
 
     $("#current_datatable_id").val(row_data.id);
-    showModal({data: {modal_name: modal}});
+    showModal({
+        data: {
+            modal_name: modal
+        }
+    });
 });
 
 var deleteModalData = mobx.action("Delete Modal Data", function (event) {
@@ -1469,7 +1565,11 @@ var deleteModalData = mobx.action("Delete Modal Data", function (event) {
     else
         throw 'Unknown modal table value!';
 
-    hideModal({data: {modal_name: modal}});
+    hideModal({
+        data: {
+            modal_name: modal
+        }
+    });
     removeModalSourceData(modal, edit_idx);
 });
 
@@ -1549,7 +1649,8 @@ var reserveDOI = mobx.action("Reserve DOI", function () {
         show_loader: true,
         message_type: MESSAGE_TYPE_REGULAR,
         content: "<br/>Reserving DOI for " + msg + ".",
-        contentClasses: ['center-text'], showClose: false
+        contentClasses: ['center-text'],
+        showClose: false
     });
     showCommonModalMessage();
     doAuthenticatedAjax('GET', API_BASE + 'metadata/reservedoi', parseReservationResponse, null, parseErrorResponse);
@@ -1604,7 +1705,8 @@ var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
         existingFile.click();
 });
 //Configuration for the file upload dropzone
-var FILE_UPLOAD_CONFIG = {url: 'someurl',
+var FILE_UPLOAD_CONFIG = {
+    url: 'someurl',
     autoProcessQueue: false,
     acceptedFiles: '.zip,.tar,.tgz,.tar.gz,.tar.bz2',
     addRemoveLinks: true,
@@ -1664,7 +1766,8 @@ var removeContainerUploadInfo = mobx.action("Remove Container Drop", function ()
         existingFile.click();
 });
 //Configuration for the container upload dropzone
-var CONTAINER_UPLOAD_CONFIG = {url: 'someurl',
+var CONTAINER_UPLOAD_CONFIG = {
+    url: 'someurl',
     autoProcessQueue: false,
     acceptedFiles: '.tar,.tgz,.tar.gz,.simg',
     addRemoveLinks: true,
@@ -1729,6 +1832,8 @@ $(document).ready(mobx.action("Document Ready", function () {
     // Clear radio group in case of back button usage.
     $('input:radio[name="repository-info-group"]:checked').prop('checked', false);
 
+
+
     //Datatables declarations
     developers_table = $("#developers-data-table").DataTable(developers_data_tbl_opts);
     sponsoring_orgs_table = $("#sponsoring-orgs-data-table").DataTable(sponsoring_org_tbl_opts);
@@ -1736,6 +1841,8 @@ $(document).ready(mobx.action("Document Ready", function () {
     contributors_table = $("#contributors-data-table").DataTable(contributors_org_tbl_opts);
     contributor_orgs_table = $("#contributor-orgs-data-table").DataTable(contributing_organizations_tbl_opts);
     related_identifiers_table = $("#related-identifiers-data-table").DataTable(related_identifiers_tbl_opts);
+
+
 
     if (page_val == 'submit') {
         metadata.requireOnlySubmitFields();
@@ -1754,7 +1861,8 @@ $(document).ready(mobx.action("Document Ready", function () {
             show_loader: true,
             message_type: MESSAGE_TYPE_REGULAR,
             content: "<br/>Loading Project " + code_id,
-            contentClasses: ['center-text'], showClose: false
+            contentClasses: ['center-text'],
+            showClose: false
         });
         showCommonModalMessage();
         doAuthenticatedAjax('GET', API_BASE + "metadata/" + code_id, parseSearchResponse, undefined, parseErrorResponse);
@@ -1764,7 +1872,8 @@ $(document).ready(mobx.action("Document Ready", function () {
             show_loader: true,
             message_type: MESSAGE_TYPE_REGULAR,
             content: "<br/>Loading data from project #" + load_id,
-            contentClasses: ['center-text'], showClose: false
+            contentClasses: ['center-text'],
+            showClose: false
         });
         showCommonModalMessage();
         doAuthenticatedAjax('GET', API_BASE + "metadata/" + load_id, parseLoadIdResponse, undefined, parseLoadIdErrorResponse);
@@ -1813,70 +1922,216 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('input[name="repository-info-group"]').on('change', accessibilityRepositoryLinkType);
 
     // Panel Updates
-    $('#repository-link').on('change', {store: metadata, field: "repository_link"}, inputChange);
-    $('#landing-page').on('change', {store: metadata, field: "landing_page"}, inputChange);
+    $('#repository-link').on('change', {
+        store: metadata,
+        field: "repository_link"
+    }, inputChange);
+    $('#landing-page').on('change', {
+        store: metadata,
+        field: "landing_page"
+    }, inputChange);
 
-    $('#software-title').on('input', {store: metadata, field: "software_title"}, inputChange);
-    $('#description').on('input', {store: metadata, field: "description"}, inputChange);
-    $('#programming-languages').on('change', {store: metadata, field: "programming_languages"}, inputChange);
-    $('#version-number').on('input', {store: metadata, field: "version_number"}, inputChange);
-    $('#documentation-url').on('change', {store: metadata, field: "documentation_url"}, inputChange);
-    $('#licenses').on('change', {store: metadata, field: "licenses"}, inputChange);
+    $('#software-title').on('input', {
+        store: metadata,
+        field: "software_title"
+    }, inputChange);
+    $('#description').on('input', {
+        store: metadata,
+        field: "description"
+    }, inputChange);
+    $('#programming-languages').on('change', {
+        store: metadata,
+        field: "programming_languages"
+    }, inputChange);
+    $('#version-number').on('input', {
+        store: metadata,
+        field: "version_number"
+    }, inputChange);
+    $('#documentation-url').on('change', {
+        store: metadata,
+        field: "documentation_url"
+    }, inputChange);
+    $('#licenses').on('change', {
+        store: metadata,
+        field: "licenses"
+    }, inputChange);
 
-    $('#proprietary-url').on('change', {store: metadata, field: "proprietary_url"}, inputChange);
-    $('#doi').on('change', {store: metadata, field: "doi"}, inputChange);
-    $('#doi-infix').on('input', {field: "doi_infix"}, handleInfix);
-    $('#release-date').on('change', {store: metadata, field: "release_date"}, inputChange);
-    $('#short-title').on('input', {store: metadata, field: "acronym"}, inputChange);
-    $('#country-of-origin').on('change', {store: metadata, field: "country_of_origin"}, inputChange);
-    $('#keywords').on('input', {store: metadata, field: "keywords"}, inputChange);
-    $("#project-keywords").on('change', {store: metadata, field: 'project_keywords'}, inputChange);
-    $('#other-special-requirements').on('input', {store: metadata, field: "other_special_requirements"}, inputChange);
-    $('#site-accession-number').on('input', {store: metadata, field: "site_accession_number"}, inputChange);
+    $('#proprietary-url').on('change', {
+        store: metadata,
+        field: "proprietary_url"
+    }, inputChange);
+    $('#doi').on('change', {
+        store: metadata,
+        field: "doi"
+    }, inputChange);
+    $('#doi-infix').on('input', {
+        field: "doi_infix"
+    }, handleInfix);
+    $('#release-date').on('change', {
+        store: metadata,
+        field: "release_date"
+    }, inputChange);
+    $('#short-title').on('input', {
+        store: metadata,
+        field: "acronym"
+    }, inputChange);
+    $('#country-of-origin').on('change', {
+        store: metadata,
+        field: "country_of_origin"
+    }, inputChange);
+    $('#keywords').on('input', {
+        store: metadata,
+        field: "keywords"
+    }, inputChange);
+    $("#project-keywords").on('change', {
+        store: metadata,
+        field: 'project_keywords'
+    }, inputChange);
+    $('#other-special-requirements').on('input', {
+        store: metadata,
+        field: "other_special_requirements"
+    }, inputChange);
+    $('#site-accession-number').on('input', {
+        store: metadata,
+        field: "site_accession_number"
+    }, inputChange);
 
-    $('#contact-info-name').on('input', {store: metadata, field: "recipient_name"}, inputChange);
-    $('#contact-info-email').on('change', {store: metadata, field: "recipient_email"}, inputChange);
-    $('#contact-info-phone').on('change', {store: metadata, field: "recipient_phone"}, inputChange);
-    $('#contact-info-organization').on('input', {store: metadata, field: "recipient_org"}, inputChange);
+    $('#contact-info-name').on('input', {
+        store: metadata,
+        field: "recipient_name"
+    }, inputChange);
+    $('#contact-info-email').on('change', {
+        store: metadata,
+        field: "recipient_email"
+    }, inputChange);
+    $('#contact-info-phone').on('change', {
+        store: metadata,
+        field: "recipient_phone"
+    }, inputChange);
+    $('#contact-info-organization').on('input', {
+        store: metadata,
+        field: "recipient_org"
+    }, inputChange);
 
     // Dev Modal Updates
-    $('#developer-edit-first-name').on('input', {store: developer, field: "first_name"}, inputChange);
-    $('#developer-edit-middle-name').on('input', {store: developer, field: "middle_name"}, inputChange);
-    $('#developer-edit-last-name').on('input', {store: developer, field: "last_name"}, inputChange);
-    $('#developer-edit-email').on('change', {store: developer, field: "email"}, inputChange);
-    $('#developer-edit-orcid').on('change', {store: developer, field: "orcid"}, inputChange);
-    $('#developer-edit-affiliations').on('change', {store: developer, field: "affiliations"}, inputChange);
+    $('#developer-edit-first-name').on('input', {
+        store: developer,
+        field: "first_name"
+    }, inputChange);
+    $('#developer-edit-middle-name').on('input', {
+        store: developer,
+        field: "middle_name"
+    }, inputChange);
+    $('#developer-edit-last-name').on('input', {
+        store: developer,
+        field: "last_name"
+    }, inputChange);
+    $('#developer-edit-email').on('change', {
+        store: developer,
+        field: "email"
+    }, inputChange);
+    $('#developer-edit-orcid').on('change', {
+        store: developer,
+        field: "orcid"
+    }, inputChange);
+    $('#developer-edit-affiliations').on('change', {
+        store: developer,
+        field: "affiliations"
+    }, inputChange);
 
     // SponsorOrg Modal Updates 
-    $('#sponsoring-orgs-edit-DOE').on('change', {store: sponsor_org, field: "DOE"}, checkboxChange);
-    $('#sponsoring-orgs-edit-organization_name').on('change', {store: sponsor_org, field: "organization_name"}, inputChange);
-    $('#sponsoring-orgs-edit-primary_award').on('change', {store: sponsor_org, field: "primary_award"}, inputChange);
-    $('#sponsoring-orgs-edit-award_numbers').on('change', {store: sponsor_org, field: "award_numbers"}, inputChange);
-    $('#sponsoring-orgs-edit-br_codes').on('change', {store: sponsor_org, field: "br_codes"}, inputChange);
-    $('#sponsoring-orgs-edit-fwp_numbers').on('change', {store: sponsor_org, field: "fwp_numbers"}, inputChange);
+    $('#sponsoring-orgs-edit-DOE').on('change', {
+        store: sponsor_org,
+        field: "DOE"
+    }, checkboxChange);
+    $('#sponsoring-orgs-edit-organization_name').on('change', {
+        store: sponsor_org,
+        field: "organization_name"
+    }, inputChange);
+    $('#sponsoring-orgs-edit-primary_award').on('change', {
+        store: sponsor_org,
+        field: "primary_award"
+    }, inputChange);
+    $('#sponsoring-orgs-edit-award_numbers').on('change', {
+        store: sponsor_org,
+        field: "award_numbers"
+    }, inputChange);
+    $('#sponsoring-orgs-edit-br_codes').on('change', {
+        store: sponsor_org,
+        field: "br_codes"
+    }, inputChange);
+    $('#sponsoring-orgs-edit-fwp_numbers').on('change', {
+        store: sponsor_org,
+        field: "fwp_numbers"
+    }, inputChange);
 
     // ResearchOrg Modal Updates
-    $('#research-orgs-edit-DOE').on('change', {store: research_org, field: "DOE"}, checkboxChange);
-    $('#research-orgs-edit-organization_name').on('change', {store: research_org, field: "organization_name"}, inputChange);
+    $('#research-orgs-edit-DOE').on('change', {
+        store: research_org,
+        field: "DOE"
+    }, checkboxChange);
+    $('#research-orgs-edit-organization_name').on('change', {
+        store: research_org,
+        field: "organization_name"
+    }, inputChange);
 
     // Contributor Modal Updates
-    $('#contributor-edit-first_name').on('input', {store: contributor, field: "first_name"}, inputChange);
-    $('#contributor-edit-middle_name').on('input', {store: contributor, field: "middle_name"}, inputChange);
-    $('#contributor-edit-last_name').on('input', {store: contributor, field: "last_name"}, inputChange);
-    $('#contributor-edit-email').on('change', {store: contributor, field: "email"}, inputChange);
-    $('#contributor-edit-orcid').on('change', {store: contributor, field: "orcid"}, inputChange);
-    $('#contributor-edit-affiliations').on('change', {store: contributor, field: "affiliations"}, inputChange);
-    $('#contributor-edit-contribtype').on('change', {store: contributor, field: "contributor_type"}, inputChange);
+    $('#contributor-edit-first_name').on('input', {
+        store: contributor,
+        field: "first_name"
+    }, inputChange);
+    $('#contributor-edit-middle_name').on('input', {
+        store: contributor,
+        field: "middle_name"
+    }, inputChange);
+    $('#contributor-edit-last_name').on('input', {
+        store: contributor,
+        field: "last_name"
+    }, inputChange);
+    $('#contributor-edit-email').on('change', {
+        store: contributor,
+        field: "email"
+    }, inputChange);
+    $('#contributor-edit-orcid').on('change', {
+        store: contributor,
+        field: "orcid"
+    }, inputChange);
+    $('#contributor-edit-affiliations').on('change', {
+        store: contributor,
+        field: "affiliations"
+    }, inputChange);
+    $('#contributor-edit-contribtype').on('change', {
+        store: contributor,
+        field: "contributor_type"
+    }, inputChange);
 
     // ContributingOrg Modal Updates
-    $('#contributing-organization-edit-DOE').on('change', {store: contributing_org, field: "DOE"}, checkboxChange);
-    $('#contributing-organization-edit-organization_name').on('input', {store: contributing_org, field: "organization_name"}, inputChange);
-    $('#contributing-organization-edit-contribtype').on('change', {store: contributing_org, field: "contributor_type"}, inputChange);
+    $('#contributing-organization-edit-DOE').on('change', {
+        store: contributing_org,
+        field: "DOE"
+    }, checkboxChange);
+    $('#contributing-organization-edit-organization_name').on('input', {
+        store: contributing_org,
+        field: "organization_name"
+    }, inputChange);
+    $('#contributing-organization-edit-contribtype').on('change', {
+        store: contributing_org,
+        field: "contributor_type"
+    }, inputChange);
 
     // Related Identifier Modal Updates
-    $('#related-identifier-identifier-type').on('change', {store: related_identifier, field: "identifier_type"}, inputChange);
-    $('#related-identifier-relation-type').on('change', {store: related_identifier, field: "relation_type"}, inputChange);
-    $('#related-identifier-identifier-value').on('input', {store: related_identifier, field: "identifier_value"}, inputChange);
+    $('#related-identifier-identifier-type').on('change', {
+        store: related_identifier,
+        field: "identifier_type"
+    }, inputChange);
+    $('#related-identifier-relation-type').on('change', {
+        store: related_identifier,
+        field: "relation_type"
+    }, inputChange);
+    $('#related-identifier-identifier-value').on('input', {
+        store: related_identifier,
+        field: "identifier_value"
+    }, inputChange);
 
     //Makes the autopopualte from repository work
     $("#autopopulate-from-repository").on('click', autopopulateFromRepository);
