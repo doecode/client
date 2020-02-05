@@ -11,16 +11,12 @@
 
     <div class="col-lg-6 col-md-10 col-xs-12 static-content">
         <h1 class="static-content-title">FAQs</h1>
-        <br /><br />
+        <br />
+        <h1 class="faq-page-title">General FAQs</h1>
         <ul>
             <li>
                 <a title="What is DOE CODE?" href="/${app_name}/faq#what-is">
                     <span class="faq-page-anchor">What is DOE CODE?</span></a>
-            </li>
-
-            <li>
-                <a title="What does it mean for DOE CODE to be released in Beta?" href="/${app_name}/faq#what-does-beta">
-                    <span class="faq-page-anchor">What does it mean for DOE CODE to be released in Beta?</span></a>
             </li>
             <li>
                 <a title="How is the DOE CODE software submission and search tool different from DOE CODE Github?" href="/${app_name}/faq#how-is-it-different">
@@ -30,6 +26,10 @@
             <li>
                 <a title="What does DOE CODE contain?" href="/${app_name}/faq#what-does-it-contain">
                     <span class="faq-page-anchor">What does DOE CODE contain?</span></a>
+            </li>
+            <li>
+                <a title="Is DOE CODE connected to Code.gov?" href="/${app_name}/faq#is-it-connected-to-codegov">
+                    <span class="faq-page-anchor">Is DOE CODE connected to Code.gov?</span></a>
             </li>
             <li>
                 <a title="Does DOE CODE provide repository services?" href="/${app_name}/faq#what-does-it-provide">
@@ -42,11 +42,14 @@
             <li>
                 <a title="Why is uploading code required for certain Project Types?" href="/${app_name}/faq#why-is-uploading-code-required-for-certain-project-types">
                     <span class="faq-page-anchor">Why is uploading code required for certain Project Types?</span></a>
-            </li>                
+            </li>
             <li>
                 <a title="Are there restrictions on the use of the material in DOE CODE?" href="/${app_name}/faq#are-there-restrictions">
                     <span class="faq-page-anchor">Are there restrictions on the use of the material in DOE CODE?</span></a>
             </li>
+        </ul>
+        <h1 class="faq-page-title">Submission FAQs</h1>
+        <ul>
             <li>
                 <a title="How is scientific software provided to DOE CODE?" href="/${app_name}/faq#how-is-software-submitted">
                     <span class="faq-page-anchor">How is scientific software provided to DOE CODE?</span></a>
@@ -115,9 +118,28 @@
                 <a title="What if I need to have a project removed from DOE CODE?" href="/${app_name}/faq#removal">
                     <span class="faq-page-anchor">What if I need to have a project removed from DOE CODE?</span></a>
             </li>
+        </ul>
+        <h1 class="faq-page-title">Search FAQs</h1>
+        <ul>
+            <li>
+                <a title="How do I search DOE CODE?" href="/${app_name}/faq#search">
+                    <span class="faq-page-anchor">How do I search DOE CODE?</span></a>
+            </li>
             <li>
                 <a title="How do I use the Advanced Search?" href="/${app_name}/faq#advanced-search">
                     <span class="faq-page-anchor">How do I use the Advanced Search?</span></a>
+            </li>
+            <li>
+                <a title="What information is found on the Full Project page in DOE Code?" href="/${app_name}/faq#information">
+                    <span class="faq-page-anchor">What information is found on the Full Project page in DOE Code?</span></a>
+            </li>
+            <li>
+                <a title="Can I sort or refine my results?" href="/${app_name}/faq#sort-or-refine">
+                    <span class="faq-page-anchor">Can I sort or refine my results?</span></a>
+            </li>
+            <li>
+                <a title="Can I save or download the results of a search?" href="/${app_name}/faq#save-or-download">
+                    <span class="faq-page-anchor">Can I save or download the results of a search?</span></a>
             </li>
             <li>
                 <a title="Are there APIs available for DOE CODE?" href="/${app_name}/faq#are-there-apis">
@@ -132,7 +154,9 @@
                     <span class="faq-page-anchor">How can I find out more?</span></a>
             </li>
         </ul>
+
         <br />
+        <h1 class="faq-page-title">General FAQs</h1>
         <div>
             <a name="what-is"></a>
             <span class="faq-page-subtitle">What is DOE CODE?</span>
@@ -142,15 +166,6 @@
                     that provides functionality for collaboration, archiving, and discovery of scientific and business software funded by DOE. DOE CODE replaces the 
                     Energy Science and Technology Software Center (ESTSC). DOE CODE is an open source project and is available on GitHub. Throughout these FAQs, the 
                     terms "software" and "code" are used interchangeably, though it is understood there are discrete definitions in various communities.
-                </p>
-            </blockquote>
-        </div>
-        <div>
-            <a name="what-does-beta"></a><span class="faq-page-subtitle">What does it mean for DOE CODE to be released in Beta?</span>
-            <blockquote class="faq-page-blockquote">
-                <p>
-                    In Beta, DOE CODE supports submission of software projects, code repository services, and search and discovery of submitted software projects. 
-                    As development of DOE CODE continues a Production release, additional features and functionality will be included.
                 </p>
             </blockquote>
         </div>
@@ -177,6 +192,18 @@
                 <p>
                     DOE CODE contains records for DOE-funded scientific and business software and links to the software or code repository. 
                     In addition to the code, the repositories may include manuals, examples, test data, etc.
+                </p>
+            </blockquote>
+        </div>
+        <div>
+            <a name="is-it-connected-to-codegov"></a><span class="faq-page-subtitle">Is DOE CODE connected to Code.gov?</span>
+            <blockquote class="faq-page-blockquote">
+                <p>
+                    To fulfill Departmental requirements to maintain an inventory of all DOE-funded custom-developed software 
+                    and to report this inventory to the government-wide Code.gov website, metadata for all scientific 
+                    and non-scientific (e.g., business) software should be submitted to DOE CODE. 
+                    This inventory will foster scientific progress, provide transparency to and promote public uptake of DOE-funded open source software (OSS), 
+                    and enable DOE to fulfill requirements for government-wide reporting of custom-developed software to Code.gov.
                 </p>
             </blockquote>
         </div>
@@ -221,21 +248,9 @@
                     distribution by OSTI.
                     <br />
                     <br />
-                    <strong>Closed Source, Site Hosted (CS-SH)</strong>&nbsp;- Software that is not Open Source and for which access must be granted by contacting a 
+                    <strong>Closed Source (CS)</strong>&nbsp;- Software that is not Open Source and for which access must be granted by contacting a 
                     licensing official. Software is often Closed Source because it is proprietary or has otherwise been deemed appropriate for limited distribution only. 
-                    A landing page URL is required for submitting Closed Source, Site Hosted code; the URL should provide additional information on how to obtain access 
-                    to the code. 
-                    <br />
-                    <br />
-                    <strong>Closed Source, OSTI Hosted (CS-OH)</strong>&nbsp;- Software that is not Open Source and for which access must be granted by contacting a 
-                    licensing official. Software is often Closed Source because it is proprietary or has otherwise been deemed appropriate for limited distribution only. 
-                    The source code is required (or compiled binary as a last resort when the code is not available), and a landing page URL is optional for submitting 
-                    Closed Source, OSTI Hosted code. A private GitLab repository will be automatically created using the uploaded resource and a Repository Link will be 
-                    generated automatically with which OSTI will distribute the code/software. If interested, you may request an OSTI GitLab account
-                    at <a title="Gitlab Signup" target='_blank' rel="noopener noreferrer" href='https://www.osti.gov/doecode/gitlab-signup'>https://www.osti.gov/doecode/gitlab-signup</a>.
-                    <br />
-                    <br />
-                    DOE CODE also maintains a comprehensive inventory of DOE-funded custom-developed business software.
+                    A landing page URL is required for submitting Closed Source code; the URL should provide additional information on how to obtain access to the code.
                 </div>
             </blockquote>
         </div>
@@ -244,11 +259,9 @@
             <span class="faq-page-subtitle">Why is uploading code required for certain Project Types?</span>
             <blockquote class="faq-page-blockquote">
                 <p>
-                    The source code is required (1) when submitting or announcing codes with Project Type CS-OH and (2) for announcing codes with Project Types OS-NPAR 
-                    and CS-SH.  For the first Project Type, CS-OH, compiled binary may be provided as a last resort when the code is not available.  
-                    For Project Type, CS-OH, the source code is required because the system takes the uploaded file and automatically creates a GitLab 
-                    repository for the project, and adds the Repository Link back into the record for the user. For Project Types OS-NPAR and CS-SH, 
-                    the code is required for preservation purposes only; i.e., not for distribution by OSTI. (See also 
+                    The source code is required when submitting or announcing codes with Project Types OS-NPAR and CS. 
+                    For Project Type CS, compiled binary may be provided as a last resort when the code is not available. 
+                    The code is required for preservation purposes only; i.e., not for distribution by OSTI. (See also 
                     “<a title='Project Types' href='#what-are-the-types'>What are the Project Types found in DOE CODE?</a>”, “What does it mean to 
                     <a title='Submit Scientific Software' href='#what-does-it-mean-to-submit'>submit</a> 
                     / <a title='Announce Scientific Software' href='#what-does-it-mean-to-announce'>announce</a> 
@@ -291,6 +304,8 @@
                 </div>
             </blockquote>
         </div>
+        <br />
+        <h1 class="faq-page-title">Submission FAQs</h1>
         <div>
             <a name="how-is-software-submitted"></a><span class="faq-page-subtitle">How is scientific software provided to DOE CODE?</span>
             <blockquote class="faq-page-blockquote">
@@ -354,25 +369,24 @@
                         <a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href='https://www.github.com/doecode/doecode'>https://www.github.com/doecode/doecode</a>
                         whereas the project landing page is 
                         <a title='DOE CODE Github Landing Page' target='_blank' rel='noopener noreferrer' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>.
-                        There are plans to expand this functionality in future releases to support other repository types such as CVS.
                     </p>
                     <p>
-                        **A landing page is required when submitting or announcing Closed Source, Site Hosted code. A landing page is optional when submitting
-                        or announcing Closed Source, OSTI Hosted.
+                        **A landing page is required when submitting or announcing Closed Source code. 
+                        This page should provide additional information on how to obtain access to the code.
                     </p>
                     <p>
-                        ***The source code is required (1) when submitting or announcing codes with Project Type CS-OH and (2) for announcing codes with Project Types 
-                        OS-NPAR and CS-SH.  For the first Project Type, CS-OH, compiled binary may be provided as a last resort when the code is not available. 
-                        For Project Type, CS-OH, the source code is required because the system takes the uploaded file and automatically creates a GitLab repository 
-                        for the project, and adds the Repository Link back into the record for the user.  For Project Types OS-NPAR and CS-SH, the code is required for 
-                        preservation purposes only; i.e., not for distribution by OSTI.
+                        ***The source code is required when announcing codes with Project Types OS-NPAR and CS.  
+                        For Project Type CS, compiled binary may be provided as a last resort when the code is not available. 
+                        The code is required for preservation purposes only; i.e., not for distribution by OSTI.
                     </p>
                     <p>
-                        <span class='bold-text'>CS-OH</span> - Refers to the Closed Source, OSTI Hosted (CS-OH) Project Type
-                        <br/>
+                        ****For closed source software, you will be required to provide a landing page URL in which valid contact 
+                        information is available on the page OR provide a valid contact email address.
+                    </p>
+                    <p>
                         <span class='bold-text'>OS-NPAR</span> - Refers to the Open Source, No Public Repository (OS NPAR) Project Type
                         <br/>
-                        <span class='bold-text'>CS-SH</span> - Refers to the Closed Source, Site Hosted (CS-SH) Project Type
+                        <span class='bold-text'>CS</span> - Refers to the Closed Source (CS) Project Type
                     </p>
                 </div>
             </blockquote>
@@ -429,7 +443,7 @@
                             <li>Repository Link;* Landing Page;** Source Code***</li>
                             <li>Software Title</li>
                             <li>Description/Abstract</li>
-                            <li>License(s)</li>
+                            <li>License(s)****</li>
                             <li>Developers</li>
                             <li>Release Date</li>
                             <li>Sponsoring Organization Name</li>
@@ -449,25 +463,23 @@
                         <a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href='https://www.github.com/doecode/doecode'>https://www.github.com/doecode/doecode</a>
                         whereas the project landing page is 
                         <a title='DOE CODE Github Landing Page' target='_blank' rel='noopener noreferrer' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>.
-                        There are plans to expand this functionality in future releases to support other repository types such as CVS.
                     </p>
                     <p>
                         **A landing page is required when submitting or announcing Closed Source, Site Hosted code. A landing page is optional when submitting
                         or announcing Closed Source, OSTI Hosted.
                     </p>
                     <p>
-                        ***The source code is required (1) when submitting or announcing codes with Project Type CS-OH and (2) for announcing codes with Project 
-                        Types OS-NPAR and CS-SH.  For the first Project Type, CS-OH, compiled binary may be provided as a last resort when the code is not available. 
-                        For Project Type, CS-OH, the source code is required because the system takes the uploaded file and automatically creates a GitLab repository 
-                        for the project, and adds the Repository Link back into the record for the user. For Project Types OS-NPAR and CS-SH, 
-                        the code is required for preservation purposes only; i.e., not for distribution by OSTI.
+                        ***The source code is required (1) when announcing codes with Project Types OS-NPAR and CS. For Project Type CS, compiled binary may be 
+                        provided as a last resort when the code is not available.  The code is required for preservation purposes only; i.e., not for distribution by OSTI.
                     </p>
                     <p>
-                        <span class='bold-text'>CS-OH</span> - Refers to the Closed Source, OSTI Hosted (CS-OH) Project Type
-                        <br/>
+                        ****For closed source software, you will be required to provide a landing page URL in which valid contact information is available on the page 
+                        OR provide a valid contact email address.
+                    </p>
+                    <p>
                         <span class='bold-text'>OS-NPAR</span> - Refers to the Open Source, No Public Repository (OS NPAR) Project Type
                         <br/>
-                        <span class='bold-text'>CS-SH</span> - Refers to the Closed Source, Site Hosted (CS-SH) Project Type
+                        <span class='bold-text'>CS</span> - Refers to the Closed Source (CS) Project Type
                     </p>
                 </div>
             </blockquote>
@@ -477,11 +489,10 @@
             <blockquote class="faq-page-blockquote">
                 <div>
                     <p>
-                        To efficiently fulfill Departmental requirements to maintain an inventory of all DOE-funded custom-developed software and to report
-                        this inventory to the government-wide Code.gov website, metadata for all scientific and non-scientific (e.g., business) software
-                        should be submitted to DOE CODE. This inventory will foster scientific progress, provide transparency to and promote public uptake
-                        of DOE-funded open source software (OSS), and enable DOE to fulfill requirements for government-wide reporting of custom-developed
-                        software to Code.gov.
+                        To efficiently fulfill Departmental requirements to maintain an inventory of all DOE-funded custom-developed software and to report 
+                        this inventory to the government-wide Code.gov website, metadata for all scientific and non-scientific (e.g., business) software should 
+                        be submitted to DOE CODE. This inventory will foster scientific progress, provide transparency to and promote public uptake of DOE-funded 
+                        open source software (OSS), and enable DOE to fulfill requirements for government-wide reporting of custom-developed software to Code.gov.
                     </p>
                     <p>
                         DOE CODE offers two paths for users to provide business software. Users can (1) submit code to DOE CODE, and (2) announce code to the
@@ -498,10 +509,9 @@
             <blockquote class="faq-page-blockquote">
                 <div>
                     <p>
-                        Users may want to simply submit their business code to DOE CODE. Submitting offers increased discoverability and the option to obtain a Digital Object Identifier (DOI)
-                        for the code, making it more easily citable and shared. Submitting business code to
-                        DOE CODE is easy, with only a minimal set of metadata required. The primary use case for this functionality includes codes that
-                        are in early development and for developers wanting to obtain DOIs early in the process.
+                        Users may want to simply submit their business code to DOE CODE. Submitting offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) 
+                        for the code, making it more easily citable and shared. Submitting business code to DOE CODE is easy, with only a minimal set of metadata required. 
+                        The primary use case for this functionality includes codes that are in early development and for developers wanting to obtain DOIs early in the process. 
                         (See also "<a href='/${app_name}/faq#what-is-a-doi' title='What is a Digital Object Identifier (DOI)?'>What is a Digital Object Identifier (DOI)?</a>").
                     </p>
                     <div>
@@ -519,32 +529,28 @@
                     </div>
                     <br/>
                     <p>
-                        *Currently only Git and SVN-based repositories are supported. Most repositories hosted at GitHub, Bitbucket, SourceForge, and
-                        GitLab support Git and SVN-based repositories. When submitting a repository, users should be certain to use the direct URL to
+                        *Currently only Git and SVN-based repositories are supported. Most repositories hosted at GitHub, Bitbucket, SourceForge, and 
+                        GitLab support Git and SVN-based repositories. When submitting a repository, users should be certain to use the direct URL to 
                         the actual repository. As an example, the direct Repository Link for DOE CODE is 
                         <a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href='https://www.github.com/doecode/doecode'>https://www.github.com/doecode/doecode</a>
                         whereas the project landing page is 
                         <a title='DOE CODE Github Landing Page' target='_blank' rel='noopener noreferrer' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>.
-                        There are plans to expand this functionality in future releases to
-                        support other repository types such as CVS.
                     </p>
                     <p>
-                        **A landing page is required for when submitting or announcing Closed Source, Site Hosted code. A landing page is optional when
-                        submitting or announcing Closed Source, OSTI Hosted.
+                        **A landing page is required when submitting or announcing Closed Source. This page should provide additional information on how to obtain access to the code.
                     </p>
                     <p>
-                        ***The source code is required (1) when submitting or announcing codes with Project Type CS-OH and (2) for announcing codes with Project Types 
-                        OS-NPAR and CS-SH.  For the first Project Type, CS-OH, compiled binary may be provided as a last resort when the code is not available. 
-                        For Project Type, CS-OH, the source code is required because the system takes the uploaded file and automatically creates a GitLab repository 
-                        for the project, and adds the Repository Link back into the record for the user.  For Project Types OS-NPAR and CS-SH, the code is required 
-                        for preservation purposes only; i.e., not for distribution by OSTI.
+                        ***The source code is required (1) when announcing codes with Project Types OS-NPAR and CS. For Project Type CS, compiled binary may be provided 
+                        as a last resort when the code is not available.  The code is required for preservation purposes only; i.e., not for distribution by OSTI.
                     </p>
                     <p>
-                        <span class="bold-text">CS-OH</span> - Refers to the Closed Source, OSTI Hosted (CS-OH) Project Type
-                        <br/>
+                        ****For closed source software, you will be required to provide a landing page URL in which valid contact information is available 
+                        on the page OR provide a valid contact email address.
+                    </p>
+                    <p>
                         <span class="bold-text">OS-NPAR</span> - Refers to the Open Source, No Public Repository (OS NPAR) Project Type
                         <br/>
-                        <span class="bold-text">CS-SH</span> - Refers to the Closed Source, Site Hosted Project Type
+                        <span class="bold-text">CS</span> - Refers to the Closed Source (CS) Project Type
                     </p>
                 </div>
             </blockquote>
@@ -554,9 +560,9 @@
             <blockquote class="faq-page-blockquote">
                 <div>
                     <p>
-                        Users may need to announce their business code to the Department of Energy to ensure announcement and dissemination in accordance
-                        with DOE statutory responsibilities. Business codes in later stages of development are the primary use cases for this functionality.
-                        For announcement to the Department of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory
+                        Users may need to announce their business code to the Department of Energy to ensure announcement and dissemination in accordance 
+                        with DOE statutory responsibilities. Business codes in later stages of development are the primary use cases for this functionality. 
+                        For announcement to the Department of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory 
                         data fields should be included during announcement when possible.
                     </p>
                     <div>
@@ -566,7 +572,7 @@
                             <li>Repository Link;* Landing Page;** Source Code***</li>
                             <li>Software Title</li>
                             <li>Description/Abstract</li>
-                            <li>License(s)</li>
+                            <li>License(s)****</li>
                             <li>Developers</li>
                             <li>Release Date</li>
                             <li>Sponsoring Organization Name</li>
@@ -577,31 +583,30 @@
                     </div>
                     <br/>
                     <p>
-                        *Currently only Git and SVN-based repositories are supported. Most repositories hosted at GitHub, Bitbucket, SourceForge, and GitLab
-                        support Git and SVN-based repositories. When submitting a repository, users should be certain to use the direct URL to the actual
-                        repository. As an example, the direct Repository Link for DOE CODE is 
+                        *Currently only Git and SVN-based repositories are supported. Most repositories hosted at GitHub, Bitbucket, 
+                        SourceForge, and GitLab support Git and SVN-based repositories. When submitting a repository, users should be certain 
+                        to use the direct URL to the actual repository. As an example, the direct Repository Link for DOE CODE is 
                         <a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href='https://www.github.com/doecode/doecode'>https://www.github.com/doecode/doecode</a>
                         whereas the project landing page is 
                         <a title='DOE CODE Github Landing Page' target='_blank' rel='noopener noreferrer' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>.
                         There are plans to expand this functionality in future releases to support other repository types such as CVS.
                     </p>
                     <p>
-                        **A landing page is required when submitting or announcing Closed Source, Site Hosted code. A landing page is optional when submitting
-                        or announcing Closed Source, OSTI Hosted.
+                        **A landing page is required when submitting or announcing Closed Source. 
+                        This page should provide additional information on how to obtain access to the code.
                     </p>
                     <p>
-                        ***The source code is required (1) when submitting or announcing codes with Project Type CS-OH and (2) for announcing codes with Project 
-                        Types OS-NPAR and CS-SH.  For the first Project Type, CS-OH, compiled binary may be provided as a last resort when the code is not available. 
-                        For Project Type, CS-OH, the source code is required because the system takes the uploaded file and automatically creates a GitLab repository 
-                        for the project, and adds the Repository Link back into the record for the user.  For Project Types OS-NPAR and CS-SH, the code is required 
-                        for preservation purposes only; i.e., not for distribution by OSTI.
+                        ***The source code is required (1) when announcing codes with Project Types OS-NPAR and CS. For Project Type CS, compiled binary may be provided 
+                        as a last resort when the code is not available.  The code is required for preservation purposes only; i.e., not for distribution by OSTI.
                     </p>
                     <p>
-                        <span class="bold-text">CS-OH</span> - Refers to the Closed Source, OSTI Hosted (CS-OH) Project Type
-                        <br/>
+                        ****For closed source software, you will be required to provide a landing page URL in which valid contact information is available on the page 
+                        OR provide a valid contact email address.
+                    </p>
+                    <p>
                         <span class="bold-text">OS-NPAR</span> - Refers to the Open Source, No Public Repository (OS NPAR) Project Type
                         <br/>
-                        <span class="bold-text">CS-SH</span> - Refers to the Closed Source, Site Hosted (CS-SH) Project Type
+                        <span class="bold-text">CS</span> - Refers to the Closed Source (CS) Project Type
                     </p>
                 </div>
             </blockquote>
@@ -612,10 +617,10 @@
                 <div>
                     <p>
                         Yes. DOE CODE has the option to create a DOE CODE record that is a newer or previous version of any DOE CODE record you have already 
-                        submitted or announced.  You can see this functionality by logging in to your DOE CODE account, and looking on the “Manage My Projects” page. 
-                        Selecting either of the Make Version buttons, "New" or "Prev," associated with a record will take you to the entry form with most of the metadata 
-                        fields already filled.  Once you have submitted or announced your "New" or "Prev" record, DOE CODE will automatically add metadata to all 
-                        newer/previous records to reflect the appropriate relationship using the related Identifier fields. 
+                        submitted or announced.  You can see this functionality by logging in to your DOE CODE account, and looking on the “Manage My Projects” page. 
+                        Selecting either of the Make Version buttons, "New" or "Prev," associated with a record will take you to the entry form with most of the 
+                        metadata fields already filled.  Once you have submitted or announced your "New" or "Prev" record, DOE CODE will automatically add metadata 
+                        to all newer/previous records to reflect the appropriate relationship using the related Identifier fields. 
                         (See also, “<a title="Do I need an account" href="#do-i-need-account">Do I need an account to use DOE CODE?</a>”)
                     </p>
                     <div class="center-text" style="padding-top:15px;">
@@ -628,7 +633,6 @@
                 </div>
             </blockquote>
         </div>
-        <!--Add new stuff-->
         <div>
             <a name="can-i-see-the-status-and-availability"></a><span class="faq-page-subtitle">Can I see the status and availability of my submitted/announced records?</span>
             <blockquote class="faq-page-blockquote">
@@ -707,18 +711,16 @@
                 </div>
             </blockquote>
         </div>
-
         <div>
             <a name="how-do-i-announce-cui-ouo-eci"></a><span class="faq-page-subtitle">How do I announce CUI, OUO, or ECI software to OSTI?</span>
             <blockquote class="faq-page-blockquote">
                 <div>
                     <p>
-                        The current version of DOE CODE is designed to support submission and announcement of DOE-funded unlimited availability software
-                        (including closed source, proprietary software). Announcement and discovery of Controlled Unclassified Information (CUI), including
-                        DOE Official Use Only (OUO) and Export Controlled Information (ECI), are not included in the current version of DOE CODE.
-                        Future versions of DOE CODE will address submission of limited availability software. Until then, please continue to utilize
-                        Announcement Notice 241.4 for submission of limited availability software. If you are unsure of the software sensitivity,
-                        please work with your site's Dissemination Authority.
+                        The current version of DOE CODE is designed to support submission and announcement of DOE-funded unlimited availability software 
+                        (including closed source, proprietary software). Announcement and discovery of Controlled Unclassified Information (CUI), 
+                        including DOE Official Use Only (OUO) and Export Controlled Information (ECI), are not included in the current version of DOE CODE. 
+                        Continue to utilize Announcement Notice 241.4 for submission of limited availability software. If you are unsure of the software 
+                        sensitivity, please work with your site's Dissemination Authority.
                     </p>
                 </div>
             </blockquote>
@@ -727,10 +729,10 @@
             <a name="what-is-a-yaml"></a><span class="faq-page-subtitle">What is a YAML file? How do I auto populate the YAML file?</span>
             <blockquote class="faq-page-blockquote">
                 <p>
-                    <a title="YAML" target='_blank' rel="noopener noreferrer" href="http://www.yaml.org/start.html">YAML</a> is a human friendly data
-                    serialization standard for all programming languages. DOE CODE provides functionality to allow users to
-                    auto-populate metadata in DOE CODE by placing a specifically formatted YAML file in their repository's root main
-                    directory. The file must be named "metadata.yml" or "doecode.yml", and the file must be formatted correctly.&nbsp;
+                    <a title="YAML" target='_blank' rel="noopener noreferrer" href="http://www.yaml.org/start.html">YAML</a> is a human friendly 
+                    data serialization standard for all programming languages. DOE CODE provides functionality to allow users to auto-populate 
+                    metadata in DOE CODE by placing a specifically formatted YAML file in their repository's root main directory. The file must be 
+                    named "metadata.yml" or "doecode.yml", and the file must be formatted correctly.&nbsp;
                     <a title="YAML Schema" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode/doecode/tree/master/metadata-schema">See detailed YAML information and an example file.</a>
                 </p>
             </blockquote>
@@ -755,15 +757,16 @@
             <a name="do-i-need-account"></a><span class="faq-page-subtitle">Do I need an account to use DOE CODE?</span>
             <blockquote class="faq-page-blockquote">
                 <p>
-                    A DOE CODE account is not needed to search for DOE-funded software, but an account is needed to provide scientific and business software.
-                    Users meeting minimum criteria can directly create a DOE CODE account. All you need is your first and last name, government email address
-                    or valid contract number, and a password. From the top right of any DOE CODE page, you may register for an account by clicking 
+                    A DOE CODE account is not needed to search for DOE-funded software, but an account is needed to provide scientific and business 
+                    software. Users meeting minimum criteria can directly create a DOE CODE account. All you need is your first and last name, 
+                    government email address or valid contract number, and a password. From the top right of any DOE CODE page, you may register 
+                    for an account by clicking 
                     <a href='/${app_name}/register'>Create Account</a> (or <a href='/${app_name}/login'>Sign In</a> if you already have an account).
                     <br />
                     <br />
-                    Both of the repository services we provide require a separate account in addition to the account for submitting or announcing to DOE
-                    CODE. To use repositories on OSTI's GitLab installation and DOE CODE GitHub, those interested must request an account by filling out
-                    the <a href='/${app_name}/gitlab-signup' title='DOE CODE Gitlab Signup Form'>request form</a>.
+                    Both of the repository services we provide require a separate account in addition to the account for submitting or announcing to DOE 
+                    CODE. To use repositories on OSTI's GitLab installation and DOE CODE GitHub, those interested must request an account by filling 
+                    out the <a href='/${app_name}/gitlab-signup' title='DOE CODE Gitlab Signup Form'>request form</a>.
                     DOE CODE Product Manager(s) will follow up with the requester.
                 </p>
             </blockquote>
@@ -772,11 +775,11 @@
             <a name="what-is-a-doi"></a><span class="faq-page-subtitle">What is a Digital Object Identifier (DOI)?</span>
             <blockquote class="faq-page-blockquote">
                 <p>
-                    What is a Digital Object Identifier (DOI)? A DOI is a unique persistent identifier that references a digital object and provides long
-                    term access; DOIs remain stable even if the underlying address or URL for the content changes. OSTI is a member of and registering
-                    agency for DataCite and has the authority to assign Digital Object Identifiers to software and code that are submitted by DOE and
-                    its contractors or grantees. The assigning and registration of a DOI for software is a free service provided by OSTI to enhance DOE's
-                    management of this important resource.
+                    A DOI is a unique persistent identifier that references a digital object and provides long term access; DOIs remain 
+                    stable even if the underlying address or URL for the content changes. OSTI is a member of and registering agency 
+                    for DataCite and has the authority to assign Digital Object Identifiers to software and code that are submitted by DOE 
+                    and its contractors or grantees. The assigning and registration of a DOI for software is a free service provided by 
+                    OSTI to enhance DOE's management of this important resource.
                 </p>
             </blockquote>
         </div>
@@ -786,15 +789,15 @@
             <blockquote class="faq-page-blockquote">
                 <div>
                     <ul>
-                        <li>Announcing and registering code or software with DOIs enables researchers, especially future researchers, to more easily discover, access, and reuse the code or software for verification of
-                            the original experiment and to produce new results with the latest methods.</li>
+                        <li>Announcing and registering code or software with DOIs enables researchers, especially future researchers, to more easily discover, access, 
+                            and reuse the code or software for verification of the original experiment and to produce new results with the latest methods.</li>
                         <li>DOIs facilitate accurate linkage between a document or published article and the specific underlying code or software.</li>
-                        <li>DOIs make code easy to cite in a standardized way (DOIs have become recognizable as pointers to important information around the globe), encouraging authors to include this step in their
-                            writing/publishing activities.</li>
-                        <li>Enabling your code or software to be easily citable means that code developers, contributors, and others involved in the development, but not necessarily in the authoring of a publication,
-                            can receive proper attribution.</li>
-                        <li>DOIs are designed to be more stable and persistent links than normal URLs. Registering the DOI with an international organization such as DataCite provides global resolving and the prospect
-                            of steadily increasing visibility of your research.</li>
+                        <li>DOIs make code easy to cite in a standardized way (DOIs have become recognizable as pointers to important information around the globe), 
+                            encouraging authors to include this step in their writing/publishing activities.</li>
+                        <li>Enabling your code or software to be easily citable means that code developers, contributors, and others involved in the development, 
+                            but not necessarily in the authoring of a publication, can receive proper attribution.</li>
+                        <li>DOIs are designed to be more stable and persistent links than normal URLs. Registering the DOI with an international organization such as 
+                            DataCite provides global resolving and the prospect of steadily increasing visibility of your research.</li>
                     </ul>
                 </div>
             </blockquote>
@@ -807,13 +810,61 @@
                 </p>
             </blockquote>
         </div>
+        <br />
+        <h1 class="faq-page-title">Search FAQs</h1>
+        <div>
+            <a name="search"></a><span class="faq-page-subtitle">How do I search DOE CODE?</span>
+            <blockquote class="faq-page-blockquote">
+                <div>
+                    DOE CODE search works much like a basic Google search, where you can enter your terms into the basic search box to retrieve results. 
+                    You can search for a single term or a phrase by putting it in "double quotes." Additionally, DOE CODE supports Boolean and proximity 
+                    operators, wildcards, and parentheses for grouping:
+                    <br />
+                    <br />
+                    <div style="padding-left: 40px;">
+                        <strong>Boolean Operators</strong>
+                        <br />
+                        DOE CODE recognizes the operators AND, OR, and NOT.
+                        <br />
+                        <br />
+                        Example: A search for <strong>algorithm AND "quantum simulator"</strong> will return results that include both the term <strong>algorithm</strong> and the phrase <strong>quantum simulator</strong>.
+                        <br />
+                        <br />
+                        Example: A search for <strong>algorithm OR "quantum simulator"</strong> will return results that include either the term <strong>algorithm</strong> or the phrase <strong>quantum simulator</strong>.
+                        <br />
+                        <br />
+                        Example: A search for <strong>algorithm NOT "quantum simulator"</strong> will return results that include the term <strong>algorithm</strong> but not the phrase <strong>quantum simulator</strong>.
+                        <br />
+                        <br />
+                        + and - allow for a search to either be required or forbidden in the search results.
+                        <br />
+                        <br />
+                        Example: A search for <strong>simulation +algorithm</strong> will return results that include the term <strong>simulation</strong> and also include the term <strong>algorithm</strong>.
+                        <br />
+                        <br />
+                        Example: A search for <strong>simulation -algorithm</strong> will return results that include the term <strong>simulation</strong> but not the term <strong>algorithm</strong>.
+                        <br />
+                        <br />
+                        <strong>Proximity Operators</strong>
+                        <br />
+                        Example: <strong>"quantum simulator"~3</strong> will return results where <strong>quantum</strong> and <strong>simulator</strong> are within three words of each other in the bibliographic record.
+                        <br />
+                        <br />
+                        <strong>Parentheses for Grouping</strong>
+                        <br />
+                        Example: A search for <strong>algorithm AND ("quantum simulator" OR energy)</strong> will return results that include both the term <strong>algorithm</strong> and either the phrase <strong>quantum simulator</strong> or the term <strong>energy</strong>.
+                    </div>
+                </div>
+            </blockquote>
+        </div>
         <div>
             <a name="advanced-search"></a><span class="faq-page-subtitle">How do I use the Advanced Search?</span>
             <blockquote class="faq-page-blockquote">
                 <div>
-                    The advanced search will allow you to perform more complex searches and retrieve more specific results, offering you several fields,
-                    such as Title, Developer(s), or Release date to help you refine your search results.
-                    <br />
+                    <p>The advanced search will allow you to perform more complex searches and retrieve more specific results, offering you several fields,
+                    such as Title, Developer(s), or Release date to help you refine your search results.</p>
+                    <p>To access the advanced search, select the green drop-down arrow from the search bar, either on the homepage or at the top of any subsequent page.</p>
+                    <p>To access all the advanced search features, click on the “More Options” selection at the bottom of the advanced search.</p>
                     <br />
                     <div style="padding-left: 40px;">
                         <strong>All Fields</strong>
@@ -846,7 +897,7 @@
                         <strong>Project Type</strong>
                         <br />
                         Searches the fields for Open Source, Publicly Available Repository (OS-PAR); Open Source, Not Publicly Available Repository (OS-NPAR); 
-                        Closed Source, Site Hosted (CS-SH); and Closed Source, OSTI Hosted (CS-OH).
+                        and Closed Source (CS). 
                         <br />
                         <br />
                         <strong>Licenses</strong>
@@ -865,10 +916,114 @@
                         to the software.
                         <br />
                         <br />
+                        <strong>Software Type</strong>
+                        <br />
+                        Searches the field for Business or Scientific software.
+                        <br />
+                        <br />
                         <strong>Sort</strong>
                         <br />You can choose for your results to be sorted by Relevance, Release Date (newest to oldest) or Release Date (oldest to newest).
                     </div>
                 </div>
+            </blockquote>
+        </div>
+        <div>
+            <a name="information"></a><span class="faq-page-subtitle">What information is found on the Full Project page in DOE CODE?</span>
+            <blockquote class="faq-page-blockquote">
+                <div>
+                    The information on the Full Project page is bibliographic metadata/information unique to and descriptive of a particular project.  
+                    Basic information includes the Title, Developer(s), and Release Date.  Below is a list of metadata that OSTI collects and 
+                    displays in DOE CODE, with those that can be searched using the advanced search fields indicated with an asterisk(*):
+                    <br />
+                    <br />
+                    <div style="padding-left: 40px;">
+                        <strong>Software Title*</strong> - the title of the software
+                        <br />
+                        <br />
+                        <strong>Abstract</strong> - summary of the software, usually including the purpose, function, and capabilities
+                        <br />
+                        <br />
+                        <strong>Developer(s)*</strong> - the person(s) concerned with facets of the software development process, including research, 
+                        design, programming, and testing of the software, along with their affiliations.
+                        <br />
+                        <br />
+                        <strong>Contributor(s)</strong> - the person(s) or institution(s) that have contributed to the software but is not listed as a developer
+                        <br />
+                        <br />
+                        <strong>Release Date*</strong> - the date the software was released
+                        <br />
+                        <br />
+                        <strong>Version Number</strong> - the version of the software
+                        <br />
+                        <br />
+                        <strong>Project Type*</strong> - will be Open Source, Publicly Available Repository (OS-PAR); Open Source, 
+                        Not Publicly Available Repository (OS-NPAR); and Closed Source (CS). 
+                        See “<a href='#what-are-the-types'>What are the Project Types found in DOE CODE?</a>” for definitions of these types
+                        <br />
+                        <br />
+                        <strong>Software Type*</strong> - will be Scientific or Business. 
+                        See “<a href="#how-is-software-submitted">How is scientific software provided to DOE CODE?</a>” and 
+                        “<a href="#how-is-business-software-provided-to-doe-code">How is business software provided to DOE CODE?</a>” 
+                        for definitions of these types
+                        <br />
+                        <br />
+                        <strong>Programming Languages*</strong> - the specific language or languages in which the code being submitted was written
+                        <br />
+                        <br />
+                        <strong>Licenses*</strong> - the software licenses or rights information about the software
+                        <br />
+                        <br />
+                        <strong>Sponsoring Org.*</strong> - the sponsoring or funding office of the software product
+                        <br />
+                        <br />
+                        <strong>Primary Contract/Award Number*</strong> - DOE award/contract number that is largely responsible for funding the project
+                        <br />
+                        <br />
+                        <strong>Code ID*</strong> - the unique identifier assigned by OSTI upon submission
+                        <br />
+                        <br />
+                        <strong>Site Accession Number*</strong> - the accession or other identifying numbers assigned by the submitting site, 
+                        university, or repository’s database, records, etc.
+                        <br />
+                        <br />
+                        <strong>Research Org.*</strong> - the research organization, such as a DOE national laboratory or university, 
+                        which had primary responsibility for developing the software
+                        <br />
+                        <br />
+                        <strong>Related Identifiers*</strong> - any related links, such as DOIs to published works, additional versions, or 
+                        documentation information relevant to the software
+                        <br />
+                        <br />
+                        <strong>Country of Origin</strong> - the country in which the software was developed
+                        <br />
+                        <br />
+                        <strong>Keywords</strong> - a list of words or phrases that describe the software
+                        <br />
+                        <br />
+                        <strong>DOI*</strong> - a unique persistent identifier that references the software and provides long-term access; 
+                        DOIs remain stable even if the underlying address or URL for the content changes
+                        <br />
+                        <br />
+                        <strong>Software URL</strong> - the URL where the source code can be found, or if the project is not available open source, 
+                        the URL describing the project and contact information for obtaining the source code
+                    </div>
+                </div>
+            </blockquote>
+        </div>
+        <div>
+            <a name="sort-or-refine"></a><span class="faq-page-subtitle">Can I sort or refine my results?</span>
+            <blockquote class="faq-page-blockquote">
+                <p>Yes, you may refine your results by Project Type, License, Software Type, Release Date, and Research Organization. 
+                These options are available via the results page on the left-hand side of the screen.  Sort options on the results page 
+                include sorting by relevance and release date.</p>
+            </blockquote>
+        </div>
+        <div>
+            <a name="save-or-download"></a><span class="faq-page-subtitle">Can I save or download the results of a search?</span>
+            <blockquote class="faq-page-blockquote">
+                <p>Yes, you can save the bibliographic/metadata information for a set of results as an CSV/Excel or JSON file from the results screen.</p>
+                <p>From an individual Project page you can save the metadata in XML, YAML, or JSON file format.  You also have the option to generate a 
+                citation for the record in various formats, including MLA, APA, Chicago, and BibTex.</p>
             </blockquote>
         </div>
         <div>

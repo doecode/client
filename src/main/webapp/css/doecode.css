@@ -144,8 +144,8 @@ html h3 {
     text-align: left !important;
 }
 
-.bold-text{
-    font-weight:700 !important;
+.bold-text {
+    font-weight: 700 !important;
 }
 
 .blue-text {
@@ -673,6 +673,11 @@ label {
 }
 
 /*FAQ PAGE*/
+
+.faq-page-title {
+    font-size: 26px;
+    margin-left: 0px;
+}
 
 .faq-page-subtitle {
     color: rgb(49, 112, 143);
@@ -1246,6 +1251,6 @@ td.datatable-vertical-center {
     padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0,0,0,0);
+    clip: rect(0, 0, 0, 0);
     border: 0;
 }
