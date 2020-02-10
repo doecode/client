@@ -63,7 +63,7 @@ public class SearchFunctions {
         post_data.put("software_title", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("software_title"), ""), Whitelist.basic()));
         post_data.put("developers_contributors", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("developers_contributors"), ""), Whitelist.basic()));
         post_data.put("biblio_data", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("biblio_data"), ""), Whitelist.basic()));
-        post_data.put("identifiers", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("identifiers"), ""), Whitelist.basic()));
+        post_data.put("identifiers", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("identifier_numbers"), ""), Whitelist.basic()));
         post_data.put("date_earliest", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("date_earliest"), ""), Whitelist.basic()));
         post_data.put("date_latest", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("date_latest"), ""), Whitelist.basic()));
         post_data.put("start", start);
@@ -242,7 +242,7 @@ public class SearchFunctions {
         // Identifiers
         String identifiers = post_data.findPath("identifiers").asText("");
         if (StringUtils.isNotBlank(identifiers)) {
-            search_description_list.add(makeSearchDescriptionObject("Identifiers", identifiers, "identifiers"));
+            search_description_list.add(makeSearchDescriptionObject("Identifiers", identifiers, "identifier_numbers"));
         }
 
         // Date Earliest

@@ -105,7 +105,7 @@ var triggerDropdownAdvancedSearch = function () {
     $("#search-developers_contributors").val($(name_prefix + "-developers_contributors").val());
 
     //Identifier Numbers
-    $("#search-identifiers").val($(name_prefix + "-identifier_numbers").val());
+    $("#search-identifier_numbers").val($(name_prefix + "-identifier_numbers").val());
 
     //Release Date Start 
     var date_earliest = $(name_prefix + "-date_earliest").val();

@@ -199,23 +199,6 @@ var removeSearchResultDescriptionItem = function () {
     restartSearchToFirstpage();
 };
 
-var modify_search = function () {
-    //Populate all of the advanced search fields
-    $('.search-box').val($("#search-all_fields").val());
-    populateAdvancedSearchForm("navbar-searchbar-");
-
-    var width = $(document).width();
-    if (width < 768) {
-        localStorage.isRefinedSearch = "true";
-        window.location.href = '/' + APP_NAME + '/search';
-    } else {
-        if (!$("#advanced-search-dropdown").is(':visible')) {
-            $("#advanced-search-dropdown-btn").trigger('click');
-        }
-        toggleAdvExtendedDropdown(ADV_DROPDOWN_OPEN);
-    }
-};
-
 var setUpDateSlider = function () {
     google.charts.load('current', {
         packages: ['table', 'controls']
@@ -393,7 +376,22 @@ if (document.getElementById('about-page-identifier')) {
     $(".search-for-filter-x").on('click', removeSearchResultDescriptionItem);
 
     //Populates the advanced search dropdown with the values you currently have for your search
-    $(".search-for-modify-search").on('click', modify_search);
+    $(".search-for-modify-search").on('click', function () {
+        //Populate all of the advanced search fields
+        $('.search-box').val($("#search-all_fields").val());
+        populateAdvancedSearchForm("navbar-searchbar-");
+
+        var width = $(document).width();
+        if (width < 768) {
+            localStorage.isRefinedSearch = "true";
+            window.location.href = '/' + APP_NAME + '/search';
+        } else {
+            if (!$("#advanced-search-dropdown").is(':visible')) {
+                $("#advanced-search-dropdown-btn").trigger('click');
+            }
+            toggleAdvExtendedDropdown(ADV_DROPDOWN_OPEN);
+        }
+    });
 
     $(".search-for-clear-all").on('click', function () {
         clearSearchFormFields();
