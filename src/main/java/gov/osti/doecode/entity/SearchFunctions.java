@@ -1373,8 +1373,19 @@ public class SearchFunctions {
             if (licenses != null) {
                 for (JsonNode row : licenses) {
                     String rowVal = row.asText();
-                    license_displays.add(
-                            DOECODEUtils.getDisplayVersionOfValue(DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY), rowVal));
+                    String displyText = DOECODEUtils.getDisplayVersionOfValue(DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY), rowVal);
+
+                    if (rowVal.equalsIgnoreCase("other")) {
+                        // there is only ever one single "Other" type
+                        String url = biblio_data.findPath("proprietary_url").asText("");                        
+
+                        return_data.put("has_other_license", true);
+                        return_data.put("other_license_display", displyText);
+                        return_data.put("other_license", url);
+                    }
+                    else {
+                        license_displays.add(displyText);
+                    }
                 }
             }
             return_data.set("licenses", license_displays);

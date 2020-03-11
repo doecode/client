@@ -421,6 +421,9 @@
                                                             {{#each licenses}}
                                                             {{.}}<br />
                                                             {{/each}}
+                                                            {{#if has_other_license}}
+                                                                {{other_license_display}}: <a title='{{other_license}}' href='{{other_license}}' target='_blank' rel='noopener noreferrer' class='clickable'>{{other_license}}</a><br />
+                                                            {{/if}}
                                                         </dd>
                                                     </dl>
                                                 </div>
