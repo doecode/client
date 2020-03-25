@@ -39,7 +39,8 @@ var BaseData = function () {
 	      if (data == 'OS') {
 	        schemaRepo.required = "sub";
 	        schemaRepo.panel = "Repository Information";
-            schemaRepo.validations = ["repositorylink"];
+          schemaRepo.validations = ["repositorylink"];
+          schemaRepo.extra_info = "";
 	        schemaLanding.required = "";
 	        schemaLanding.panel = "";
 	        schemaLanding.error = "";
@@ -59,7 +60,8 @@ var BaseData = function () {
 	        schemaRepo.panel = "";
 	        schemaRepo.error = "";
 	        schemaRepo.completed = false;
-            schemaRepo.validations = [];
+          schemaRepo.validations = [];
+          schemaRepo.extra_info = "";
 	        schemaLanding.required = "";
 	        schemaLanding.panel = 'Repository Information';
 	        schemaLanding.error = "";
@@ -75,7 +77,8 @@ var BaseData = function () {
 	        schemaRepo.panel = "";
 	        schemaRepo.error = "";
 	        schemaRepo.completed = false;
-            schemaRepo.validations = ["repositorylink"];
+          schemaRepo.validations = ["repositorylink"];
+          schemaRepo.extra_info = "";
 	        schemaLanding.required = "sub";
 	        schemaLanding.panel = 'Repository Information';
 	        schemaFile.required = this.page == 'announce' ? "announ" : "";
@@ -172,13 +175,15 @@ var BaseData = function () {
       if (value === null || value.length === 0) {
         info.completed = false;
         info.error = '';
+        if (field == "repository_link")
+          info.extra_info = "";
       } else {
-        validation.validate(value, info, this.validationCallback);
+        validation.validate(field, value, info, this.validationCallback);
       }
     })
   }, {
     key: 'validationCallback',
-    value: mobx.action("Validation Callback", function validationCallback(information, errors) {
+    value: mobx.action("Validation Callback", function validationCallback(field, information, errors) {
       information.error = errors;
       if (errors)
       	information.completed = false;
@@ -186,6 +191,10 @@ var BaseData = function () {
         information.completed = true;
         information.ever_completed = true;
       }
+
+      // if validated repo link with extra info and version is nto set, update version
+      if (!errors && field == 'repository_link' && information.extra_info && !this.getValue('version_number'))
+        this.setValue('version_number', information.extra_info);
     })
   }, {
     key: 'validateSchema',

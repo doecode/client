@@ -9,7 +9,7 @@ var Validation = function () {
 
   _createClass(Validation, [{
     key: "validate",
-    value: mobx.action("Validate", function validate(value, validationObj, validationCallback) {
+    value: mobx.action("Validate", function validate(field, value, validationObj, validationCallback) {
       var errors = "";
       var validations = validationObj.validations;
 
@@ -29,7 +29,7 @@ var Validation = function () {
       var filtered = validations.filter(this.needsServer);
 
       if (filtered.length == 0) {
-        validationCallback(validationObj, errors);
+        validationCallback(field, validationObj, errors);
         return;
       }
 
@@ -49,12 +49,14 @@ var Validation = function () {
 
           for (var i = 0; i < data.length; i++) {
             var error = data[i].error;
+            var extraInfo = data[i].extraInfo;
 
             if (error != "") errors += error;
+            if (extraInfo != "") validationObj.extra_info = extraInfo;
           }
-          validationCallback(validationObj, errors);
+          validationCallback(field, validationObj, errors);
         }, json, function error(x, y, z) {
-          validationCallback(validationObj, "Field encountered Network issue");
+          validationCallback(field, validationObj, "Field encountered Network issue");
         });
     })
   }, {

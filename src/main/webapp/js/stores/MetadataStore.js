@@ -53,7 +53,7 @@ var _metadata = mobx.observable({
 
 var _metadataInfoSchema = mobx.observable({
     "accessibility": {required: "sub", label: "Project Type", completed: false, ever_completed: false, validations: [], panel: "Repository Information", error: ''},
-    "repository_link": {required: "sub", label: "Repository Link", completed: false, ever_completed: false, validations: [], panel: "Repository Information", error: ''},
+    "repository_link": {required: "sub", label: "Repository Link", completed: false, ever_completed: false, validations: [], panel: "Repository Information", error: '', extra_info: ''},
     "landing_page": {required: "", label: "Landing Page", completed: false, ever_completed: false, validations: ["url"], panel: "", error: ''},
     "file_name": {required: "", label: "Upload Source Code", completed: false, ever_completed: false, validations: [], panel: "", error: ''},
     "container_name": {required: "", label: "Upload Container Image", completed: false, ever_completed: false, validations: [], panel: "", error: ''},
