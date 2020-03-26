@@ -29,6 +29,9 @@ var triggerAdvancedSearch = function () {
     //Developers/Contributors
     $("#search-developers_contributors").val($("#advanced-search-developers_contributors").val());
 
+    //DOI
+    $("#search-doi").val($("#advanced-search-doi").val());
+
     //Identifier Numbers
     $("#search-identifiers").val($("#advanced-search-identifier_numbers").val());
 
@@ -103,6 +106,9 @@ var triggerDropdownAdvancedSearch = function () {
 
     //Developers/Contributors
     $("#search-developers_contributors").val($(name_prefix + "-developers_contributors").val());
+
+    //DOI
+    $("#search-doi").val($(name_prefix + "-doi").val());
 
     //Identifier Numbers
     $("#search-identifier_numbers").val($(name_prefix + "-identifier_numbers").val());
