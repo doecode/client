@@ -264,6 +264,23 @@ var updateSelectStyle = function (store, field, label, input, exclude_parentheti
     loadSelectData(input, current_list);
 };
 
+var updateActiveDataPage = function (table, data) {
+    if (table) {
+        var previousPageIdx = table.page.info().page;
+        var previousTotal = table.page.info().recordsTotal;
+
+        table.clear();
+        table.rows.add(data).draw();
+
+        // if not first draw and adding records, or page is no longer valid, then go to last page
+        var lastPageIdx = table.page.info().pages - 1;
+        if ((previousTotal > 0 && table.page.info().recordsTotal > previousTotal) ||  previousPageIdx > lastPageIdx)
+            table.page(lastPageIdx).draw(false);
+        else
+            table.page(previousPageIdx).draw(false);
+    }
+};
+
 
 var autopopulateFromRepository = function () {
     setCommonModalMessage({
@@ -845,13 +862,7 @@ mobx.autorun("Developers Panel", function () {
 });
 
 mobx.autorun("Developers", function () {
-    if (developers_table) {
-        developers_table.clear();
-
-        var data = metadata.getValue("developers").toJS();
-        developers_table.rows.add(data).draw();
-    }
-
+    updateActiveDataPage(developers_table, metadata.getValue("developers").toJS());
     updateLabelStyle(metadata, "developers", "developers-lbl", true);
     setSuccess("developers-lbl", metadata.isCompleted("developers"), metadata.getError("developers"));
 
@@ -1033,26 +1044,14 @@ mobx.autorun("Organizations Panel", function () {
 });
 
 mobx.autorun("Sponsoring Orgs", function () {
-    if (sponsoring_orgs_table) {
-        sponsoring_orgs_table.clear();
-
-        var data = metadata.getValue("sponsoring_organizations").toJS();
-        sponsoring_orgs_table.rows.add(data).draw();
-    }
-
+    updateActiveDataPage(sponsoring_orgs_table, metadata.getValue("sponsoring_organizations").toJS());
     updateLabelStyle(metadata, "sponsoring_organizations", "sponsoring-orgs-lbl", true);
 
     //mobx.whyRun();
 });
 
 mobx.autorun("Research Orgs", function () {
-    if (research_orgs_table) {
-        research_orgs_table.clear();
-
-        var data = metadata.getValue("research_organizations").toJS();
-        research_orgs_table.rows.add(data).draw();
-    }
-
+    updateActiveDataPage(research_orgs_table, metadata.getValue("research_organizations").toJS());
     updateLabelStyle(metadata, "research_organizations", "research-orgs-lbl", true);
 
     //mobx.whyRun();
@@ -1137,26 +1136,14 @@ mobx.autorun("Contributors and Contributing Organizations Panel", function () {
 });
 
 mobx.autorun("Contributors", function () {
-    if (contributors_table) {
-        contributors_table.clear();
-
-        var data = metadata.getValue("contributors").toJS();
-        contributors_table.rows.add(data).draw();
-    }
-
+    updateActiveDataPage(contributors_table, metadata.getValue("contributors").toJS());
     updateLabelStyle(metadata, "contributors", "contributors-lbl", true);
 
     //mobx.whyRun();
 });
 
 mobx.autorun("Contributor Orgs", function () {
-    if (contributor_orgs_table) {
-        contributor_orgs_table.clear();
-
-        var data = metadata.getValue("contributing_organizations").toJS();
-        contributor_orgs_table.rows.add(data).draw();
-    }
-
+    updateActiveDataPage(contributor_orgs_table, metadata.getValue("contributing_organizations").toJS());
     updateLabelStyle(metadata, "contributing_organizations", "contributor-orgs-lbl", true);
 
     //mobx.whyRun();
