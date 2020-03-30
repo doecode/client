@@ -33,13 +33,13 @@ var Metadata = function (_BaseData) {
   }, {
     key: "addToArray",
     value: mobx.action("Add to Array", function addToArray(field, data) {
-      data.id = this.fieldMap[field].length;
+      data.id = this.fieldMap[field].length + 1;
       this.fieldMap[field].push(data);
     })
   }, {
     key: "modifyElementInArray",
     value: mobx.action("Modify Element Array", function modifyElementInArray(field, data) {
-      var index = data.id;
+      var index = data.id - 1;
 
       if (index > -1) this.fieldMap[field][index] = data;
     })
@@ -51,7 +51,7 @@ var Metadata = function (_BaseData) {
       // renumber ids as needed
       var end = this.fieldMap[field].length;
       for (var i = index; i < end; i++) {
-        this.fieldMap[field][i].id = i;
+        this.fieldMap[field][i].id = i + 1;
       }
 
       this.validateField(field);
@@ -80,7 +80,7 @@ var Metadata = function (_BaseData) {
           if (parents.indexOf(field) > -1) {
             var end = data[field].length;
             for (var i = 0; i < end; i++) {
-              data[field][i].id = i;
+              data[field][i].id = i + 1;
             }
           }
 

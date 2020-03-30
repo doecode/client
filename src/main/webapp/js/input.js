@@ -28,11 +28,48 @@ var form = mobx.observable({
 form.co_repo = "";
 form.last_filename = "";
 
+
+var datatableCallback = function(settings) {
+    var api = this.api();
+    var data = api.rows( {page:'current'} ).data();
+
+    // if not approval, and first column is sorted ascending while not being searched, enable reordering
+    if (page_val != 'approve' && data.search() == "" && data.order()[0][0] == 0 && data.order()[0][1] == 'asc') {
+        data.rowReorder.enable();
+        data.columns(0).every(function() {
+            this.nodes().to$().each(function() {
+                $(this).removeClass('reorder-disabled');
+                $(this).addClass('reorder');
+            });
+        });
+    }
+    else {
+        data.rowReorder.disable();
+        data.columns(0).every(function() {
+            this.nodes().to$().each(function() {
+                $(this).removeClass('reorder');
+                $(this).addClass('reorder-disabled');
+            });
+        });
+    } 
+};
+
 var developers_data_tbl_opts = {
+    drawCallback: datatableCallback,
+    rowReorder: {
+        update: false
+    },
     order: [
         [0, 'asc']
     ],
-    columns: [{
+    columns: [
+        {
+            className: 'reorder',
+            name: 'id',
+            data: 'id',
+            'defaultContent': ''
+        },
+        {
             name: 'first_name',
             data: 'first_name',
             'defaultContent': ''
@@ -85,10 +122,21 @@ var research_org_tbl_opts = {
 };
 
 var contributors_org_tbl_opts = {
+    drawCallback: datatableCallback,
+    rowReorder: {
+        update: false
+    },
     order: [
         [0, 'asc']
     ],
-    columns: [{
+    columns: [
+        {
+            className: 'reorder',
+            name: 'id',
+            data: 'id',
+            'defaultContent': ''
+        },
+        {
             name: 'first_name',
             data: 'first_name',
             'defaultContent': ''
@@ -1443,11 +1491,11 @@ var saveModalData = function (event) {
     } else
         throw 'Unknown modal table value!';
 
-    var edit_idx = $("#current_datatable_id").val();
+    var edit_idx = $("#current_datatable_id").val() - 1;
 
     // insert original ID back into modal, if editing
     if (edit_idx > -1)
-        modal_data.id = edit_idx;
+        modal_data.id = edit_idx + 1;
 
     //Now, hide the modal
     hideModal({
@@ -1531,7 +1579,7 @@ var loadDataIntoModalForm = mobx.action("Load Modal Data", function (event) {
 
 var deleteModalData = mobx.action("Delete Modal Data", function (event) {
     var modal = event.data.modal_name;
-    var edit_idx = $("#current_datatable_id").val();
+    var edit_idx = $("#current_datatable_id").val() - 1;
 
     if (edit_idx == -1)
         return;
@@ -1672,6 +1720,65 @@ var handleInfix = mobx.action("Handle DOI Infix", function (event) {
         infix += "/";
 
     metadata.setValue("doi", prefix + infix + id);
+});
+
+var handleReorderingDevs = function ( e, diff, edit ) {
+    handleReordering(e, diff, edit, developers_table, "developers");
+};
+
+var handleReorderingContribs = function ( e, diff, edit ) {
+    handleReordering(e, diff, edit, contributors_table, "contributors");
+};
+
+var handleReordering = mobx.action("Reorder Rows", function ( e, diff, edit, table, metadata_name ) {
+    var data = metadata.getValue(metadata_name);
+
+    var reorderSourceId = edit.triggerRow.data().id;
+
+    var changeArray = [];
+    var offset = table.page.info().length * table.page.info().page;
+
+    // row was moved
+    if (diff.length > 0) {
+        for ( var i = 0; i < diff.length; i++ ) {
+            var rowData = table.row( diff[i].node ).data();
+
+            var movingIdx = rowData.id - 1;
+            var newIndex = diff[i].newPosition + offset;
+
+            changeArray[newIndex] = mobx.toJS(data[movingIdx]);
+            changeArray[newIndex].id = newIndex + 1;
+        }
+    }
+    // do we need to move across pages
+    else {
+        var totalRecs = table.page.info().recordsTotal;
+        var firstOnPage = table.page.info().start + 1; // start is 0 based
+        var lastOnPage = table.page.info().end; // start is 1 based?
+        // if not first/last item (unless last and only item on page 2+), but is first/last on page, then move across pages
+        if ((reorderSourceId != 1 && (reorderSourceId != totalRecs || (reorderSourceId == totalRecs && reorderSourceId == firstOnPage && totalRecs > 1))) && (reorderSourceId == firstOnPage || reorderSourceId == lastOnPage)) {
+            var movingIdx = reorderSourceId - 1;
+            var newIndex = movingIdx;
+
+            // if first, move back
+            if (reorderSourceId == firstOnPage) 
+                newIndex -= 1;
+            else
+                newIndex += 1;
+
+            changeArray[newIndex] = mobx.toJS(data[movingIdx]);
+            changeArray[newIndex].id = newIndex + 1;
+
+            changeArray[movingIdx] = mobx.toJS(data[newIndex]);
+            changeArray[movingIdx].id = movingIdx + 1;
+        }
+
+    }
+
+    // apply changes to data
+    for (var key in changeArray) {
+        data[key] = changeArray[key];
+    }
 });
 
 
@@ -1829,6 +1936,9 @@ $(document).ready(mobx.action("Document Ready", function () {
     contributor_orgs_table = $("#contributor-orgs-data-table").DataTable(contributing_organizations_tbl_opts);
     related_identifiers_table = $("#related-identifiers-data-table").DataTable(related_identifiers_tbl_opts);
 
+    // datatable functionality
+    developers_table.on('row-reorder', handleReorderingDevs);
+    contributors_table.on('row-reorder', handleReorderingContribs);
 
 
     if (page_val == 'submit') {
