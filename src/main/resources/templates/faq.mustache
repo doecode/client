@@ -80,6 +80,10 @@
                     <span class="faq-page-anchor">Can I add a new or previous version of software I have previously submitted or announced to DOE CODE?</span></a>
             </li>
             <li>
+                <a title="Can I submit a tagged release as an individual record to DOE CODE?" href="/${app_name}/faq#can-i-submit-a-tagged-release-as-an-individual-record-to-doe-code">
+                    <span class="faq-page-anchor">Can I submit a tagged release as an individual record to DOE CODE?</span></a>
+            </li>
+            <li>
                 <a title="Can I see the status and availability of my submitted/announced records?" href="/${app_name}/faq#can-i-see-the-status-and-availability">
                     <span class="faq-page-anchor">Can I see the status and availability of my submitted/announced records?</span></a>
             </li>
@@ -250,18 +254,9 @@
                     distribution by OSTI.
                     <br />
                     <br />
-                    <strong>Closed Source, Site Hosted (CS-SH)</strong>&nbsp;- Software that is not Open Source and for which access must be granted by contacting a 
-                    licensing official. Software is often Closed Source because it is proprietary or has otherwise been deemed appropriate for limited distribution only. 
-                    A landing page URL is required for submitting Closed Source, Site Hosted code; the URL should provide additional information on how to obtain access 
-                    to the code. 
-                    <br />
-                    <br />
-                    <strong>Closed Source, OSTI Hosted (CS-OH)</strong>&nbsp;- Software that is not Open Source and for which access must be granted by contacting a 
-                    licensing official. Software is often Closed Source because it is proprietary or has otherwise been deemed appropriate for limited distribution only. 
-                    The source code is required (or compiled binary as a last resort when the code is not available), and a landing page URL is optional for submitting 
-                    Closed Source, OSTI Hosted code. A private GitLab repository will be automatically created using the uploaded resource and a Repository Link will be 
-                    generated automatically with which OSTI will distribute the code/software. If interested, you may request an OSTI GitLab account
-                    at <a title="Gitlab Signup" target='_blank' rel="noopener noreferrer" href='https://www.osti.gov/doecode/gitlab-signup'>https://www.osti.gov/doecode/gitlab-signup</a>.
+                    <strong>Closed Source</strong>&nbsp;- Software that is not Open Source and for which access must be granted by contacting a licensing official. 
+                    Software is often Closed Source because it is proprietary or has otherwise been deemed appropriate for limited distribution only. 
+                    A landing page URL is required for submitting Closed Source code; the URL should provide additional information on how to obtain access to the code.
                 </div>
             </blockquote>
         </div>
@@ -270,11 +265,8 @@
             <span class="faq-page-subtitle">Why is uploading code required for certain Project Types?</span>
             <blockquote class="faq-page-blockquote">
                 <p>
-                    The source code is required (1) when submitting or announcing codes with Project Type CS-OH and (2) for announcing codes with Project Types OS-NPAR 
-                    and CS-SH.  For the first Project Type, CS-OH, compiled binary may be provided as a last resort when the code is not available.  
-                    For Project Type, CS-OH, the source code is required because the system takes the uploaded file and automatically creates a GitLab 
-                    repository for the project, and adds the Repository Link back into the record for the user. For Project Types OS-NPAR and CS-SH, 
-                    the code is required for preservation purposes only; i.e., not for distribution by OSTI. (See also 
+                    The source code is required for announcing codes with Project Types OS-NPAR and CS. For Project Type CS, compiled binary may be provided as a 
+                    last resort when the code is not available. The code is required for preservation purposes only; i.e., not for distribution by OSTI. (See also 
                     “<a title='Project Types' href='#what-are-the-types'>What are the Project Types found in DOE CODE?</a>”, “What does it mean to 
                     <a title='Submit Scientific Software' href='#what-does-it-mean-to-submit'>submit</a> 
                     / <a title='Announce Scientific Software' href='#what-does-it-mean-to-announce'>announce</a> 
@@ -370,7 +362,7 @@
                             <li>Repository Link;* Landing Page;** Source Code***</li>
                             <li>Software Title</li>
                             <li>Description/Abstract</li>
-                            <li>License(s)</li>
+                            <li>License(s)****</li>
                             <li>Developers</li>
                         </ul>
                     </div>
@@ -381,25 +373,28 @@
                         repository. As an example, the direct Repository Link for DOE CODE is 
                         <a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href='https://www.github.com/doecode/doecode'>https://www.github.com/doecode/doecode</a>
                         whereas the project landing page is 
-                        <a title='DOE CODE Github Landing Page' target='_blank' rel='noopener noreferrer' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>.
+                        <a title='DOE CODE Github Landing Page' target='_blank' rel='noopener noreferrer' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>. 
+                        Users can also submit a tagged release of code as an individual record by providing the URL specific to that release in GitHub. 
+                        As an example, the tagged release URL 
+                        <a title='DOE CODE Server release 2.0.1' target='_blank' rel='noopener noreferrer' href="https://github.com/doecode/server/releases/tag/v2.0.1">https://github.com/doecode/server/releases/tag/v2.0.1</a> 
+                        can be submitted as a valid Repository Link to DOE CODE.
                     </p>
                     <p>
-                        **A landing page is required when submitting or announcing Closed Source, Site Hosted code. A landing page is optional when submitting
-                        or announcing Closed Source, OSTI Hosted.
+                        **A landing page is required when submitting or announcing Closed Source code. This page should provide additional information on how to obtain 
+                        access to the code.
                     </p>
                     <p>
-                        ***The source code is required (1) when submitting or announcing codes with Project Type CS-OH and (2) for announcing codes with Project Types 
-                        OS-NPAR and CS-SH.  For the first Project Type, CS-OH, compiled binary may be provided as a last resort when the code is not available. 
-                        For Project Type, CS-OH, the source code is required because the system takes the uploaded file and automatically creates a GitLab repository 
-                        for the project, and adds the Repository Link back into the record for the user.  For Project Types OS-NPAR and CS-SH, the code is required for 
-                        preservation purposes only; i.e., not for distribution by OSTI.
+                        ***The source code is required when announcing codes with Project Types OS-NPAR and CS.  For Project Type CS, compiled binary may be provided as 
+                        a last resort when the code is not available. The code is required for preservation purposes only; i.e., not for distribution by OSTI.
                     </p>
                     <p>
-                        <span class='bold-text'>CS-OH</span> - Refers to the Closed Source, OSTI Hosted (CS-OH) Project Type
-                        <br/>
+                        ****For closed source software, you will be required to provide a landing page URL in which valid contact information is available on the 
+                        page OR provide a valid contact email address.
+                    </p>
+                    <p>
                         <span class='bold-text'>OS-NPAR</span> - Refers to the Open Source, No Public Repository (OS NPAR) Project Type
                         <br/>
-                        <span class='bold-text'>CS-SH</span> - Refers to the Closed Source, Site Hosted (CS-SH) Project Type
+                        <span class='bold-text'>CS</span> - Refers to the Closed Source (CS) Project Type
                     </p>
                 </div>
             </blockquote>
@@ -456,7 +451,7 @@
                             <li>Repository Link;* Landing Page;** Source Code***</li>
                             <li>Software Title</li>
                             <li>Description/Abstract</li>
-                            <li>License(s)</li>
+                            <li>License(s)****</li>
                             <li>Developers</li>
                             <li>Release Date</li>
                             <li>Sponsoring Organization Name</li>
@@ -476,24 +471,27 @@
                         <a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href='https://www.github.com/doecode/doecode'>https://www.github.com/doecode/doecode</a>
                         whereas the project landing page is 
                         <a title='DOE CODE Github Landing Page' target='_blank' rel='noopener noreferrer' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>.
+                        Users can also submit a tagged release of code as an individual record by providing the URL specific to that release in GitHub. 
+                        As an example, the tagged release URL 
+                        <a title='DOE CODE Server release 2.0.1' target='_blank' rel='noopener noreferrer' href="https://github.com/doecode/server/releases/tag/v2.0.1">https://github.com/doecode/server/releases/tag/v2.0.1</a> 
+                        can be submitted as a valid Repository Link to DOE CODE.
                     </p>
                     <p>
-                        **A landing page is required when submitting or announcing Closed Source, Site Hosted code. A landing page is optional when submitting
-                        or announcing Closed Source, OSTI Hosted.
+                        **A landing page is required when submitting or announcing Closed Source. 
+                        This page should provide additional information on how to obtain access to the code.
                     </p>
                     <p>
-                        ***The source code is required (1) when submitting or announcing codes with Project Type CS-OH and (2) for announcing codes with Project 
-                        Types OS-NPAR and CS-SH.  For the first Project Type, CS-OH, compiled binary may be provided as a last resort when the code is not available. 
-                        For Project Type, CS-OH, the source code is required because the system takes the uploaded file and automatically creates a GitLab repository 
-                        for the project, and adds the Repository Link back into the record for the user. For Project Types OS-NPAR and CS-SH, 
-                        the code is required for preservation purposes only; i.e., not for distribution by OSTI.
+                        ***The source code is required (1) when announcing codes with Project Types OS-NPAR and CS. For Project Type CS, compiled binary may be 
+                        provided as a last resort when the code is not available.  The code is required for preservation purposes only; i.e., not for distribution by OSTI.
                     </p>
                     <p>
-                        <span class='bold-text'>CS-OH</span> - Refers to the Closed Source, OSTI Hosted (CS-OH) Project Type
-                        <br/>
+                        ****For closed source software, you will be required to provide a landing page URL in which valid contact information is available on the page 
+                        OR provide a valid contact email address.
+                    </p>
+                    <p>
                         <span class='bold-text'>OS-NPAR</span> - Refers to the Open Source, No Public Repository (OS NPAR) Project Type
                         <br/>
-                        <span class='bold-text'>CS-SH</span> - Refers to the Closed Source, Site Hosted (CS-SH) Project Type
+                        <span class='bold-text'>CS</span> - Refers to the Closed Source (CS) Project Type
                     </p>
                 </div>
             </blockquote>
@@ -504,9 +502,10 @@
                 <div>
                     <p>
                         To efficiently fulfill Departmental requirements to maintain an inventory of all DOE-funded custom-developed software and to report 
-                        this inventory to the government-wide Code.gov website, metadata for all scientific and non-scientific (e.g., business) software should 
-                        be submitted to DOE CODE. This inventory will foster scientific progress, provide transparency to and promote public uptake of DOE-funded 
-                        open source software (OSS), and enable DOE to fulfill requirements for government-wide reporting of custom-developed software to Code.gov.
+                        this inventory to the government-wide Code.gov website, metadata for all scientific and non-scientific (e.g., business) software 
+                        should be submitted to DOE CODE. This inventory will foster scientific progress, provide transparency to and promote public uptake of 
+                        DOE-funded open source software (OSS), and enable DOE to fulfill requirements for government-wide reporting of custom-developed 
+                        software to Code.gov.
                     </p>
                     <p>
                         DOE CODE offers two paths for users to provide business software. Users can (1) submit code to DOE CODE, and (2) announce code to the
@@ -523,9 +522,10 @@
             <blockquote class="faq-page-blockquote">
                 <div>
                     <p>
-                        Users may want to simply submit their business code to DOE CODE. Submitting offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) 
-                        for the code, making it more easily citable and shared. Submitting business code to DOE CODE is easy, with only a minimal set of metadata required. 
-                        The primary use case for this functionality includes codes that are in early development and for developers wanting to obtain DOIs early in the process. 
+                        Users may want to simply submit their business code to DOE CODE. Submitting offers increased discoverability and the option to obtain 
+                        a Digital Object Identifier (DOI) for the code, making it more easily citable and shared. Submitting business code to DOE CODE is easy, 
+                        with only a minimal set of metadata required. The primary use case for this functionality includes codes that are in early development 
+                        and for developers wanting to obtain DOIs early in the process. 
                         (See also "<a href='/${app_name}/faq#what-is-a-doi' title='What is a Digital Object Identifier (DOI)?'>What is a Digital Object Identifier (DOI)?</a>").
                     </p>
                     <div>
@@ -535,7 +535,7 @@
                             <li>Repository Link;* Landing Page;** Source Code***</li>
                             <li>Software Title</li>
                             <li>Description/Abstract</li>
-                            <li>License(s)</li>
+                            <li>License(s)****</li>
                             <li>Developers</li>
                             <li>Sponsoring Organization Name</li>
 
@@ -549,24 +549,28 @@
                         <a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href='https://www.github.com/doecode/doecode'>https://www.github.com/doecode/doecode</a>
                         whereas the project landing page is 
                         <a title='DOE CODE Github Landing Page' target='_blank' rel='noopener noreferrer' href='https://www.github.com/doecode'>https://www.github.com/doecode</a>.
+                        Users can also submit a tagged release of code as an individual record by providing the URL specific to that release in GitHub. 
+                        As an example, the tagged release URL 
+                        <a title='DOE CODE Server release 2.0.1' target='_blank' rel='noopener noreferrer' href="https://github.com/doecode/server/releases/tag/v2.0.1">https://github.com/doecode/server/releases/tag/v2.0.1</a> 
+                        can be submitted as a valid Repository Link to DOE CODE.
                     </p>
                     <p>
-                        **A landing page is required for when submitting or announcing Closed Source, Site Hosted code. A landing page is optional when
-                        submitting or announcing Closed Source, OSTI Hosted.
+                        **A landing page is required when submitting or announcing Closed Source.  This page should provide additional information on 
+                        how to obtain access to the code.
                     </p>
                     <p>
-                        ***The source code is required (1) when submitting or announcing codes with Project Type CS-OH and (2) for announcing codes with Project Types 
-                        OS-NPAR and CS-SH.  For the first Project Type, CS-OH, compiled binary may be provided as a last resort when the code is not available. 
-                        For Project Type, CS-OH, the source code is required because the system takes the uploaded file and automatically creates a GitLab repository 
-                        for the project, and adds the Repository Link back into the record for the user.  For Project Types OS-NPAR and CS-SH, the code is required 
-                        for preservation purposes only; i.e., not for distribution by OSTI.
+                        ***The source code is required (1) when announcing codes with Project Types OS-NPAR and CS. For Project Type CS, compiled binary 
+                        may be provided as a last resort when the code is not available.  The code is required for preservation purposes only; i.e., not 
+                        for distribution by OSTI.
                     </p>
                     <p>
-                        <span class="bold-text">CS-OH</span> - Refers to the Closed Source, OSTI Hosted (CS-OH) Project Type
-                        <br/>
+                        **** For closed source software, you will be required to provide a landing page URL in which valid contact information is 
+                        available on the page OR provide a valid contact email address.
+                    </p>
+                    <p>
                         <span class="bold-text">OS-NPAR</span> - Refers to the Open Source, No Public Repository (OS NPAR) Project Type
                         <br/>
-                        <span class="bold-text">CS-SH</span> - Refers to the Closed Source, Site Hosted Project Type
+                        <span class="bold-text">CS</span> - Refers to the Closed Source (CS) Project Type
                     </p>
                 </div>
             </blockquote>
@@ -576,11 +580,35 @@
             <blockquote class="faq-page-blockquote">
                 <div>
                     <p>
-                        Users may need to announce their business code to the Department of Energy to ensure announcement and dissemination in accordance 
-                        with DOE statutory responsibilities. Business codes in later stages of development are the primary use cases for this functionality. 
+                        Users may need to announce their scientific code to the Department of Energy to ensure announcement and dissemination in accordance with 
+                        DOE statutory responsibilities. Scientific codes in later stages of development are the primary use cases for this functionality. 
                         For announcement to the Department of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory 
                         data fields should be included during announcement when possible.
                     </p>
+                    <p>
+                        DOE national laboratories and other DOE facilities/contractors who have developed and/or modified software during work supported by DOE 
+                        or during work carried out for others at DOE facilities are required to announce a record of the software to the Department of Energy, 
+                        if the software meets the following criteria:
+                    </p>
+                    <ul>
+                        <li>the software meets the definition of <a title="STI" target="_blank" rel="noopener noreferrer" href='https://www.osti.gov/stip/stidefined'>STI</a>;</li>
+                        <li>the software is known or expected to be useful inside or outside the DOE community, or is not specific to the originating site;</li>
+                        <li>a stable, usable, documented version of the software exists (i.e., the software is not under initial development); and</li>
+                        <li>the software has undergone all appropriate reviews for sensitivity and export control.</li>
+                    </ul>
+                    <p>
+                        Scientific software that meets the following criteria need not be announced to the Department of Energy:
+                    </p>
+                    <ul>
+                        <li>operational systems software that is site-specific, unique to a hardware, or necessary to ensure the fundamental operability of 
+                        automated data processing equipment, whether supplied by the manufacturer of the system hardware or others;</li>
+                        <li>computer software programs developed and/or modified during work carried out for others at DOE facilities that are specifically 
+                        excluded in the agreement under which the non-DOE funded work was performed;</li>
+                        <li>software generated under the auspices of the Energy Information Administration; and</li>
+                        <li>specific software used by power administrations for the operation, control, planning, and modeling of electric power transmission 
+                        systems and the interconnected utilities; however, modifications/enhancements to portions of this software that are not an integral 
+                        part of the whole and have potential application outside the power administrations should be announced.</li>
+                    </ul>
                     <div>
                         Requirements to Announce Business Software to the Department of Energy through DOE CODE:
                         <ul>
@@ -588,7 +616,7 @@
                             <li>Repository Link;* Landing Page;** Source Code***</li>
                             <li>Software Title</li>
                             <li>Description/Abstract</li>
-                            <li>License(s)</li>
+                            <li>License(s)****</li>
                             <li>Developers</li>
                             <li>Release Date</li>
                             <li>Sponsoring Organization Name</li>
@@ -598,6 +626,10 @@
                         </ul>
                     </div>
                     <br/>
+                    <p>
+                        In addition to the basic requirements for metadata fields (above), other optional/non-mandatory data fields should be included 
+                        during announcement when possible.
+                    </p>
                     <p>
                         *Currently only Git and SVN-based repositories are supported. Most repositories hosted at GitHub, Bitbucket, 
                         SourceForge, and GitLab support Git and SVN-based repositories. When submitting a repository, users should be certain 
@@ -618,11 +650,13 @@
                         for preservation purposes only; i.e., not for distribution by OSTI.
                     </p>
                     <p>
-                        <span class="bold-text">CS-OH</span> - Refers to the Closed Source, OSTI Hosted (CS-OH) Project Type
-                        <br/>
+                        ****For closed source software, you will be required to provide a landing page URL in which valid contact information is available on the 
+                        page OR provide a valid contact email address.
+                    </p>                    
+                    <p>
                         <span class="bold-text">OS-NPAR</span> - Refers to the Open Source, No Public Repository (OS NPAR) Project Type
                         <br/>
-                        <span class="bold-text">CS-SH</span> - Refers to the Closed Source, Site Hosted (CS-SH) Project Type
+                        <span class="bold-text">CS-SH</span> - Refers to the Closed Source (CS) Project Type
                     </p>
                 </div>
             </blockquote>
@@ -633,10 +667,14 @@
                 <div>
                     <p>
                         Yes. DOE CODE has the option to create a DOE CODE record that is a newer or previous version of any DOE CODE record you have already 
-                        submitted or announced.  You can see this functionality by logging in to your DOE CODE account, and looking on the “Manage My Projects” page. 
-                        Selecting either of the Make Version buttons, "New" or "Prev," associated with a record will take you to the entry form with most of the 
-                        metadata fields already filled.  Once you have submitted or announced your "New" or "Prev" record, DOE CODE will automatically add metadata 
-                        to all newer/previous records to reflect the appropriate relationship using the related Identifier fields. 
+                        submitted or announced.  You can see this functionality by logging in to your DOE CODE account, and looking on the 
+                        “Manage My Projects” page. Selecting either of the Make Version buttons, "New" or "Prev," associated with a record will take you to 
+                        the entry form with most of the metadata fields already filled.  You can also use this option to submit a tagged release of your code 
+                        by entering the specific URL to the tagged release in GitHub 
+                        (ex. <a title='DOE CODE Server release 2.0.1' target='_blank' rel='noopener noreferrer' href="https://github.com/doecode/server/releases/tag/v2.0.1">https://github.com/doecode/server/releases/tag/v2.0.1</a>).
+                        The Version Number field will autopopulate with the tagged release number but can still be edited if desired.  Once you have submitted 
+                        or announced your "New" or "Prev" record, DOE CODE will automatically add metadata to all newer/previous records to reflect the appropriate 
+                        relationship using the related Identifier fields. 
                         (See also, “<a title="Do I need an account" href="#do-i-need-account">Do I need an account to use DOE CODE?</a>”)
                     </p>
                     <div class="center-text" style="padding-top:15px;">
@@ -645,6 +683,25 @@
                     <p style="padding-top:20px;">
                         For information regarding semantic versioning best practices, visit
                         <a title='Semver.org' target='_blank' rel='noopener noreferrer' href='https://semver.org'>https://semver.org</a>.
+                    </p>
+                </div>
+            </blockquote>
+        </div>
+        <div>
+            <a name="can-i-submit-a-tagged-release-as-an-individual-record-to-doe-code"></a><span class="faq-page-subtitle">Can I submit a tagged release as an individual record to DOE CODE?</span>
+            <blockquote class="faq-page-blockquote">
+                <div>
+                    <p>
+                        Yes, DOE CODE allows for you to submit a tagged release of software hosted in GitHub as an individual record and 
+                        obtain a separate DOI for the release. A release is a deployable software iteration that is packaged and can be 
+                        made available to download and use. There are two ways to submit a tagged release; either by (1) selecting 
+                        “Add New Project” and creating a completely new record or by (2) making a new or previous version of an existing DOE CODE record 
+                        (see “<a name="can-i-add-new-or-previous-version-of-software">Can I add a new or previous version of software I have previously submitted or announced to DOE CODE?</a>” for more information on this option). 
+                        For either option, you will enter the specific URL for the tagged release into the Repository Link field. As an example, the tagged release 
+                        URL <a title="DOE CODE release 2.0.1" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode/server/releases/tag/v2.0.1">https://github.com/doecode/server/releases/tag/v2.0.1</a> 
+                        can be submitted as a valid Repository Link to DOE CODE. If a valid repository URL is provided, DOE CODE will attempt 
+                        to automatically populate metadata fields based on information included in the repository, including populating the Version field with the tagged release 
+                        number (this can be edited if desired).
                     </p>
                 </div>
             </blockquote>
@@ -732,8 +789,8 @@
             <blockquote class="faq-page-blockquote">
                 <div>
                     <p>
-                        The current version of DOE CODE is designed to support submission and announcement of DOE-funded unlimited availability software 
-                        (including closed source, proprietary software). Announcement and discovery of Controlled Unclassified Information (CUI), 
+                        The current version of DOE CODE is designed to support submission and announcement of DOE-funded unlimited availability 
+                        software (including closed source, proprietary software). Announcement and discovery of Controlled Unclassified Information (CUI), 
                         including DOE Official Use Only (OUO) and Export Controlled Information (ECI), are not included in the current version of DOE CODE. 
                         Continue to utilize Announcement Notice 241.4 for submission of limited availability software. If you are unsure of the software 
                         sensitivity, please work with your site's Dissemination Authority.
@@ -764,8 +821,7 @@
                 <p>
                     In cases where a Repository Link from which OSTI can access and archive software is not available, the software itself should be submitted to OSTI along with associated metadata.
                     For submission of limited availability software, please continue to utilize Announcement Notice 241.4 via <a href="https://www.osti.gov/elink/" title='E-Link' target="_blank" rel="noopener noreferrer">E-Link</a>.
-                    Future versions of DOE CODE will address submission of
-                    limited availability software.
+                    Future versions of DOE CODE will address submission of limited availability software.
                 </p>
             </blockquote>
         </div>
@@ -919,6 +975,11 @@
                         <strong>Licenses</strong>
                         <br />
                         Searches by names of licenses.
+                        <br />
+                        <br />
+                        <strong>Programming Languages</strong>
+                        <br />
+                        Searches the specific language or languages in which the code being submitted was written.
                         <br />
                         <br />
                         <strong>Research Organization</strong>
