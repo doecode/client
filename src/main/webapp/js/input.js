@@ -29,29 +29,30 @@ form.co_repo = "";
 form.last_filename = "";
 
 
-var datatableCallback = function(settings) {
+var datatableCallback = function (settings) {
     var api = this.api();
-    var data = api.rows( {page:'current'} ).data();
+    var data = api.rows({
+        page: 'current'
+    }).data();
 
     // if not approval, and first column is sorted ascending while not being searched, enable reordering
     if (page_val != 'approve' && data.search() == "" && data.order()[0][0] == 0 && data.order()[0][1] == 'asc') {
         data.rowReorder.enable();
-        data.columns(0).every(function() {
-            this.nodes().to$().each(function() {
+        data.columns(0).every(function () {
+            this.nodes().to$().each(function () {
                 $(this).removeClass('reorder-disabled');
                 $(this).addClass('reorder');
             });
         });
-    }
-    else {
+    } else {
         data.rowReorder.disable();
-        data.columns(0).every(function() {
-            this.nodes().to$().each(function() {
+        data.columns(0).every(function () {
+            this.nodes().to$().each(function () {
                 $(this).removeClass('reorder');
                 $(this).addClass('reorder-disabled');
             });
         });
-    } 
+    }
 };
 
 var developers_data_tbl_opts = {
@@ -62,8 +63,7 @@ var developers_data_tbl_opts = {
     order: [
         [0, 'asc']
     ],
-    columns: [
-        {
+    columns: [{
             className: 'reorder',
             name: 'id',
             data: 'id',
@@ -129,8 +129,7 @@ var contributors_org_tbl_opts = {
     order: [
         [0, 'asc']
     ],
-    columns: [
-        {
+    columns: [{
             className: 'reorder',
             name: 'id',
             data: 'id',
@@ -322,7 +321,7 @@ var updateActiveDataPage = function (table, data) {
 
         // if not first draw and adding records, or page is no longer valid, then go to last page
         var lastPageIdx = table.page.info().pages - 1;
-        if ((previousTotal > 0 && table.page.info().recordsTotal > previousTotal) ||  previousPageIdx > lastPageIdx)
+        if ((previousTotal > 0 && table.page.info().recordsTotal > previousTotal) || previousPageIdx > lastPageIdx)
             table.page(lastPageIdx).draw(false);
         else
             table.page(previousPageIdx).draw(false);
@@ -818,15 +817,15 @@ mobx.autorun("Project Type", function () {
     //mobx.whyRun();
 });
 
-mobx.autorun("Repository Link", function () {
+mobx.autorun("Repository URL", function () {
     updateInputStyle(metadata, "repository_link", "repository-link-lbl", "repository-link");
     $("#autopopulate-from-repository").prop('disabled', !metadata.isCompleted("repository_link"));
 
     //mobx.whyRun();
 });
 
-mobx.autorun("Repository Link CO", function () {
-    updateTextStyle(metadata, "repository_link", "repository-link-co-lbl", "repository-link-co", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "The repository link will be automatically generated for you as part of the submission process.");
+mobx.autorun("Repository URL CO", function () {
+    updateTextStyle(metadata, "repository_link", "repository-link-co-lbl", "repository-link-co", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "The repository URL will be automatically generated for you as part of the submission process.");
 
     //mobx.whyRun();
 });
@@ -847,8 +846,8 @@ mobx.autorun("Product Description Panel", function () {
     //mobx.whyRun();
 });
 
-mobx.autorun("Repository Link Display", function () {
-    updateTextStyle(metadata, "repository_link", "repository-link-display-lbl", "repository-link-display", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "The repository link will be automatically generated for you as part of the submission process.");
+mobx.autorun("Repository URL Display", function () {
+    updateTextStyle(metadata, "repository_link", "repository-link-display-lbl", "repository-link-display", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "The repository URL will be automatically generated for you as part of the submission process.");
 
     //mobx.whyRun();
 });
@@ -1722,15 +1721,15 @@ var handleInfix = mobx.action("Handle DOI Infix", function (event) {
     metadata.setValue("doi", prefix + infix + id);
 });
 
-var handleReorderingDevs = function ( e, diff, edit ) {
+var handleReorderingDevs = function (e, diff, edit) {
     handleReordering(e, diff, edit, developers_table, "developers");
 };
 
-var handleReorderingContribs = function ( e, diff, edit ) {
+var handleReorderingContribs = function (e, diff, edit) {
     handleReordering(e, diff, edit, contributors_table, "contributors");
 };
 
-var handleReordering = mobx.action("Reorder Rows", function ( e, diff, edit, table, metadata_name ) {
+var handleReordering = mobx.action("Reorder Rows", function (e, diff, edit, table, metadata_name) {
     var data = metadata.getValue(metadata_name);
 
     var reorderSourceId = edit.triggerRow.data().id;
@@ -1740,8 +1739,8 @@ var handleReordering = mobx.action("Reorder Rows", function ( e, diff, edit, tab
 
     // row was moved
     if (diff.length > 0) {
-        for ( var i = 0; i < diff.length; i++ ) {
-            var rowData = table.row( diff[i].node ).data();
+        for (var i = 0; i < diff.length; i++) {
+            var rowData = table.row(diff[i].node).data();
 
             var movingIdx = rowData.id - 1;
             var newIndex = diff[i].newPosition + offset;
@@ -1761,7 +1760,7 @@ var handleReordering = mobx.action("Reorder Rows", function ( e, diff, edit, tab
             var newIndex = movingIdx;
 
             // if first, move back
-            if (reorderSourceId == firstOnPage) 
+            if (reorderSourceId == firstOnPage)
                 newIndex -= 1;
             else
                 newIndex += 1;

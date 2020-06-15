@@ -653,13 +653,13 @@ public class SearchFunctions {
             return_data.add(makeDOIRepoLinkObj("DOI: ", "DOI for Code ID " + code_id, code_id, fixed_doi, doi, ""));
         }
 
-        // repository link
+        // Repository URL
         if (StringUtils.isNotBlank(repository_link)) {
             repository_link = (StringUtils.startsWith(repository_link, "http:")
                     || StringUtils.startsWith(repository_link, "https:")) ? repository_link
                             : "http://" + repository_link;
-            return_data.add(makeDOIRepoLinkObj("", "Repository Link for Code ID", code_id, repository_link,
-                    "Repository Link", "download-link"));
+            return_data.add(makeDOIRepoLinkObj("", "Repository URL for Code ID", code_id, repository_link,
+                    "Repository URL", "download-link"));
         }
 
         // Landing page
