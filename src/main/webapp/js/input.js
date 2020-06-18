@@ -18,6 +18,9 @@ var contributors_table = null;
 var contributor_orgs_table = null;
 var related_identifiers_table = null;
 
+// modal redirect
+var modal_redirect = null;
+
 //The value that just shows what page we're on
 var page_val = $("#page").val();
 
@@ -344,7 +347,14 @@ var autopopulateFromRepository = function () {
     event.preventDefault();
 };
 
-var parseLoadIdErrorResponse = function (jqXhr, exception) {
+var parseEditErrorResponse = function (jqXhr, exception) {
+    modal_redirect = '/' + APP_NAME;
+
+    if (page_val == 'approve')
+        modal_redirect += '/pending';
+    else
+        modal_redirect += '/projects';
+
     parseErrorResponse(jqXhr, exception);
 };
 
@@ -1939,6 +1949,12 @@ $(document).ready(mobx.action("Document Ready", function () {
     developers_table.on('row-reorder', handleReorderingDevs);
     contributors_table.on('row-reorder', handleReorderingContribs);
 
+    // modal redirect function
+    $("#common-message-dialog").on("hidden.bs.modal", function () {
+        if (modal_redirect)
+            window.location.href  = modal_redirect;
+    });
+
 
     if (page_val == 'submit') {
         metadata.requireOnlySubmitFields();
@@ -1961,7 +1977,7 @@ $(document).ready(mobx.action("Document Ready", function () {
             showClose: false
         });
         showCommonModalMessage();
-        doAuthenticatedAjax('GET', API_BASE + "metadata/" + code_id, parseSearchResponse, undefined, parseErrorResponse);
+        doAuthenticatedAjax('GET', API_BASE + "metadata/" + code_id, parseSearchResponse, undefined, parseEditErrorResponse);
     } else if (load_id) {
         setCommonModalMessage({
             title: 'Loading Projects',
@@ -1972,7 +1988,7 @@ $(document).ready(mobx.action("Document Ready", function () {
             showClose: false
         });
         showCommonModalMessage();
-        doAuthenticatedAjax('GET', API_BASE + "metadata/" + load_id, parseLoadIdResponse, undefined, parseLoadIdErrorResponse);
+        doAuthenticatedAjax('GET', API_BASE + "metadata/" + load_id, parseLoadIdResponse, undefined, parseEditErrorResponse);
         metadata.setValue("software_type", $("#software_type").val());
         $("#input-save-btn").show();
     } else {
