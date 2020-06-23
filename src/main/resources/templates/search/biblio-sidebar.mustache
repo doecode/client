@@ -34,7 +34,7 @@
                     <span class="biblio-sidebar-secondary-subtitle">New {{#if biblio_sidebar.more_than_one_new}}Versions{{else}}Version{{/if}}</span>
                     <br />
                     {{#each biblio_sidebar.new_version}}
-                    <a title='Previous Version #{{biblio_sidebar.code_id}}' href='https://doi.org/{{.}}'>{{.}}</a>
+                    <a title='Previous Version #{{biblio_sidebar.code_id}}' href='https://doi.org/{{.}}' rel="noopener noreferrer">{{.}}</a>
                     <br />
                     {{/each}}
                 </div>
@@ -45,7 +45,7 @@
                     <span class="biblio-sidebar-secondary-subtitle">Previous {{#if biblio_sidebar.more_than_one_previous}}Versions{{else}}Version{{/if}}</span>
                     <br />
                     {{#each biblio_sidebar.prev_version}}
-                    <a title='New Version #{{biblio_sidebar.code_id}}' href='https://doi.org/{{.}}'>{{.}}</a>
+                    <a title='New Version #{{biblio_sidebar.code_id}}' href='https://doi.org/{{.}}' rel="noopener noreferrer">{{.}}</a>
                     <br />
                     {{/each}}
                 </div>
