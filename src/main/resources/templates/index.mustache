@@ -57,12 +57,12 @@
     }
 
     .homepage-adv-search-dropdown {
+        display: block;
         order: 1;
         background-color: #fff;
-        /*width: 85%;*/
-        width: 35.9%;
+        width: auto;
         position: absolute;
-        margin-top: 53px;
+        margin: 57px 15% 0 0;
         z-index: 100;
     }
 
@@ -124,8 +124,17 @@
             padding-right: 0px;
             margin-left: 5px;
         }
+
         .header-logo-img-homepage {
             width: 300px;
+        }
+
+        .wrapper {
+            min-height: calc(150vh);
+        }
+
+        .homepage-adv-search-dropdown {
+            width: 88%;
         }
     }
     @media only screen and (max-width:767px) and (min-width: 480px) {
@@ -144,8 +153,13 @@
             height: inherit !important;
             font-size: 16px !important;
         }
+        .wrapper {
+            min-height: calc(125vh);
+        }
+        .homepage-adv-search-dropdown {
+            margin: 60px 15% 0 0;
+        }
     }
-
     @media only screen and (max-width:991px) and (min-width: 768px) {
         .homepage-range-fields {
             display: inline-block;
@@ -157,11 +171,18 @@
         }
 
         .homepage-adv-search-dropdown {
-            width: 47.7%;
+            width: 55%;
+            margin: 60px 15% 0 0;
         }
 
-    }
+        .wrapper {
+            min-height: calc(100vh + 205px);
+        }
 
+        .main-header {
+            border-bottom: none;
+        }
+    }
     @media only screen and (max-width:1199px) and (min-width: 992px) {
         #homepage-searchbar-container {
             margin-left: 22%;
@@ -171,8 +192,11 @@
         .homepage-adv-search-dropdown {
             width: 49.5%;
         }
-    }
 
+        .wrapper {
+            min-height: calc(100vh);
+        }
+    }
     @media only screen and (max-width:1400px) and (min-width: 1200px) {
         #homepage-searchbar-container {
             margin-left: 25%;
@@ -182,8 +206,11 @@
         .homepage-adv-search-dropdown {
             width: 43%;
         }
-    }
 
+        .wrapper {
+            min-height: calc(100vh);
+        }
+    }
     @media only screen and (max-width:1527px) and (min-width: 1389px) {
         #homepage-searchbar-container {
             margin-left: 25%;
@@ -193,15 +220,21 @@
         .homepage-adv-search-dropdown {
             width: 43%;
         }
-    }
 
-
-    @media only screen and (max-width:991px) and (min-width: 768px) {
-        .main-header {
-            border-bottom: none;
+        .wrapper {
+            min-height: calc(100vh);
         }
     }
-    
+    @media only screen and (min-width: 1528px) {
+        
+        .homepage-adv-search-dropdown {
+            width: 36%;
+        }
+
+        .wrapper {
+            min-height: calc(100vh);
+        }
+    }
     /* IE 11 specific code*/
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active){
         #homepage-adv-dropdown-container{
@@ -239,7 +272,7 @@
             <!--Homepage search bar-->
             <input class="pure-input-1 search-box homepage-searchbar" title="Search DOE CODE" placeholder="Search DOE CODE for submitted software entries" type="text">
             <!--Advanced search button-->
-            <button title="Toggle Advanced Search Dropdown" class="adv-search-button homepage-adv-search-btn hide-xs" type="button" id='homepage-adv-dropdown-btn'>
+            <button title="Toggle Advanced Search Dropdown" class="adv-search-button homepage-adv-search-btn" type="button" id='homepage-adv-dropdown-btn'>
                 <span class="fa fa-caret-down adv-search-button-icon"></span>
             </button>
             <!--Search Button-->
@@ -247,7 +280,7 @@
                 <span class="fa fa-search"></span>
             </button>
             <!--ADV Search Dropdown-->
-            <div class='homepage-adv-search-dropdown hide-xs' style='display:none;' id='homepage-adv-dropdown-container'>
+            <div class='homepage-adv-search-dropdown' style='display:none;' id='homepage-adv-dropdown-container'>
                 <div style='padding-left:25px;padding-right:25px;' class='pure-form'>
                     <div class='adv-dropdown-border-bottom'>
                         <br />
@@ -279,7 +312,7 @@
                         <label class='homepage-adv-search-dropdown-label' for='homepage-searchbar-date_earliest'>Release Date:</label>
                         <div class='homepage-range-fields'>
                             <input placeholder="MM/DD/YYYY" class="pure-input-1 doecode-datepicker " id="homepage-searchbar-date_earliest" title="Earliest Release Date" type="text">
-                            <span class="to-field hide-sm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="homepage-searchbar-date_latest" class="homepage-adv-search-dropdown-label">to</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span class="to-field"><label for="homepage-searchbar-date_latest" class="homepage-adv-search-dropdown-label">to</label></span>
                             <input placeholder="MM/DD/YYYY" class="pure-input-1 doecode-datepicker " id="homepage-searchbar-date_latest" title="Latest Release Date" type="text">
                         </div>
                     </div>

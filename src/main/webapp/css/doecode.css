@@ -194,9 +194,11 @@ html h3 {
     border-radius: 4px;
     border: 1px solid #ccc;
     padding-left: 9.6px;
-    padding-right: 9.6px;
+    padding-right: 26px;
     padding-top: 8px;
     padding-bottom: 8px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .search-box::-webkit-input-placeholder {
@@ -661,7 +663,7 @@ label {
 }
 
 .to-field {
-    padding-top: 7px;
+    padding: 7px 5px;
 }
 
 .help-page-subtitle {

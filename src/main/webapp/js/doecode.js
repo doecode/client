@@ -5,16 +5,19 @@ const DATEPICKER_OPTS = {
 };
 
 var toggleSearchDropdown = function () {
-    var dropdownElement = $(this).next('div.adv-search-dropdown');
+    // var dropdownElement = $(this).next('div.adv-search-dropdown');
+    $('#homepage-adv-dropdown-btn').click(function () {
+        $(dropdownElement).toggle(display);
+    })
 
-    if ($(dropdownElement).is(':visible')) {
-        if ($("#adv-search-toggle-extra-container").is(':visible')) {
-            $("#adv-search-toggle-btn").trigger('click');
-        }
-        $(dropdownElement).hide();
-    } else {
-        $(dropdownElement).show();
-    }
+    // if ($(dropdownElement).is(':visible')) {
+    //     if ($("#adv-search-toggle-extra-container").is(':visible')) {
+    //         $("#adv-search-toggle-btn").trigger('click');
+    //     }
+    //     $(dropdownElement).hide();
+    // } else {
+    //     $(dropdownElement).show();
+    // }
 };
 
 var triggerAdvancedSearch = function () {
@@ -199,7 +202,14 @@ var toggleAdvExtendedDropdown = function (action) {
     if ($("#adv-search-toggle-extra-container").is(':visible') || action === ADV_DROPDOWN_CLOSE) { //close
         if (document.getElementById('index-indicator')) {
             $("#outermost-container").css('padding-bottom', '0px');
-            $("#outermost-container>.wrapper").css('min-height', 'calc(100vh - 205px)');
+            $("#outermost-container>.wrapper").css('min-height', 'calc(100vh - 855px)');
+            if ($(window).width() < 768 && $(window).width() > 319) {
+                $("#outermost-container>.wrapper").css('min-height', 'calc(100vh + 605px)');
+            } else if ($(window).width() < 992 && $(window).width() > 767) {
+                $("#outermost-container>.wrapper").css('min-height', 'calc(100vh + 205px)');
+            } else {
+                $("#outermost-container>.wrapper").css('min-height', 'calc(100vh + 5px)');
+            }
         }
         $("#adv-search-toggle-extra-container").hide();
         $("#adv-search-toggle-btn-icon").removeClass('fa-minus-square-o');
@@ -207,8 +217,14 @@ var toggleAdvExtendedDropdown = function (action) {
         $("#adv-search-toggle-btn-icon-text").html('More Options');
     } else { //open
         if (document.getElementById('index-indicator')) {
-            $("#outermost-container").css('padding-bottom', '300px');
-            $("#outermost-container>.wrapper").css('min-height', 'calc(150vh - 205px)');
+            $("#outermost-container>.wrapper").css('min-height', 'calc(100vh - 855px)');
+            if ($(window).width() < 768 && $(window).width() > 319) {
+                $("#outermost-container>.wrapper").css('min-height', 'calc(100vh + 1040px)');
+            } else if ($(window).width() < 992 && $(window).width() > 767) {
+                $("#outermost-container>.wrapper").css('min-height', 'calc(100vh + 640px)');
+            } else {
+                $("#outermost-container>.wrapper").css('min-height', 'calc(100vh + 440px)');
+            }
         }
         $("#adv-search-toggle-extra-container").show();
         $("#adv-search-toggle-btn-icon").removeClass('fa-plus-square-o');
@@ -219,7 +235,7 @@ var toggleAdvExtendedDropdown = function (action) {
 
 /*Initialize Everything*/
 //Toggles the advanced search button dropdown
-$(".adv-search-button").on('click', toggleSearchDropdown);
+$(".adv-search-button").click(toggleSearchDropdown);
 
 //Makes all of the advanced search and search buttons work
 $("#adv-search-page-search-btn").on('click', triggerAdvancedSearch);

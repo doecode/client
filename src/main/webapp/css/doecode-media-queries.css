@@ -3,89 +3,139 @@
     .header-logo-img {
         width: 270px;
     }
+
     .signin-text {
         display: none;
     }
+
     .signin-btn {
         font-size: 30px;
     }
+
     .signin-btn-container {
         padding: 0px
     }
+
     .hide-xs {
         display: none;
     }
+
     .search-btn {
         width: 40px;
     }
+
     .breadcrumbTrail {
         font-size: 13.6px;
     }
+
     .breadcrumbTrail a {
         font-size: 13.6px;
     }
+
     .biblio-title {
         font-size: 25px;
     }
+
     .faq-page-btn {
         font-size: 15.6px;
     }
+
     .footer {
         height: 230px;
     }
+
     .wrapper {
         min-height: calc(100vh - 230px);
     }
+
     .no-col-padding-right-mobile {
         padding-left: 0px;
     }
+
     .no-col-padding-left-mobile {
         padding-left: 0px;
     }
+
     ul.biblio-page-ul>li {
         padding-left: 0px;
         padding-right: 0px;
         margin-left: -3px;
         margin-right: -3px;
     }
+
     /*Gets rid of the margins around the pagination buttons*/
     div>ul.pagination {
         margin-top: 0px;
         margin-bottom: 0px;
     }
+
     .security-host-row-content {
         padding-top: 0px;
         padding-bottom: 0px;
         padding-right: 0px;
         padding-left: 0px;
     }
+
     .security-host-text {
         font-size: 14px;
     }
+
     .search-box {
         padding-bottom: 3px;
     }
+
     .signin-btn-icon {
         opacity: 1;
     }
+
     .adv-search-date-container-advsearch {
         display: inline-block;
     }
-    .tiny-col-padding{
-        padding-left:15px !important;
-        padding-right:15px !important;
+
+    .tiny-col-padding {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
     }
-    .user-account-input{
-        width:100% !important;
+
+    .user-account-input {
+        width: 100% !important;
     }
-    .successCheck-account, .errorCheck-account{
-        padding-top:20px;
+
+    .successCheck-account,
+    .errorCheck-account {
+        padding-top: 20px;
     }
-    .no-col-padding-right-xs{
-        padding-right:0px !important;
+
+    .no-col-padding-right-xs {
+        padding-right: 0px !important;
     }
-    .no-col-padding-left-xs{
-        padding-left:0px !important;
+
+    .no-col-padding-left-xs {
+        padding-left: 0px !important;
+    }
+
+    .hamburger-menu-btn {
+        display: inline-block;
+        float: none;
+        border: none;
+        vertical-align: middle;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-left: 15px;
+    }
+
+    .homepage-range-fields {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .to-field {
+        /* display: none; */
+        padding: 0%;
+    }
+
+    .to-field>label {
+        margin: 0em;
     }
 }
 
@@ -94,46 +144,57 @@
     .nav-menu li {
         border-right: none;
     }
+
     .nav-menu {
         margin-bottom: 0px;
     }
+
     .main-header {
         background-image: linear-gradient(to bottom, #1B6A8D 0, #1B6A8D 100%);
         border-bottom: 1px solid;
         border-bottom-color: #4989A5 !important;
         min-height: 30px;
     }
+
     .header-search-container {
         padding-left: 0px;
         padding-right: 0px;
     }
+
     .header-container-fluid {
         padding-left: 0px;
         padding-right: 0px;
     }
+
     .right-text-tiny {
         text-align: right;
     }
+
     .left-text-tiny {
         text-align: left;
     }
+
     .first-signin-text {
         border-right: none;
     }
+
     .signin-btn-container {
         padding-right: 5px !important;
         padding-left: 5px !important;
         padding-top: 1px !important;
         padding-bottom: 1px !important;
     }
-    .tiny-center-text{
-        text-align:center !important;
+
+    .tiny-center-text {
+        text-align: center !important;
     }
-    .faq-page-subtitle{
-        font-size:15px;
+
+    .faq-page-subtitle {
+        font-size: 15px;
     }
-    .faq-page-anchor{
-        font-size:15px;
+
+    .faq-page-anchor {
+        font-size: 15px;
     }
 }
 
@@ -142,34 +203,42 @@
     .nav-menu li {
         border-right: none;
     }
+
     .nav-menu {
         margin-bottom: 0px;
     }
+
     .main-header {
         background-image: linear-gradient(to bottom, #1B6A8D 0, #1B6A8D 100%);
         border-bottom: 1px solid;
         border-bottom-color: #4989A5 !important;
         min-height: 30px;
     }
+
     .header-search-container {
         padding-left: 0px;
         padding-right: 0px;
     }
+
     .header-container-fluid {
         padding-left: 0px;
         padding-right: 0px;
     }
-    .center-text-xs{
-        text-align:center !important;
+
+    .center-text-xs {
+        text-align: center !important;
     }
+
     .right-text-xs {
         text-align: right;
     }
+
     .left-text-xs {
         text-align: left;
     }
-    .tiny-center-text{
-        text-align:center !important;
+
+    .tiny-center-text {
+        text-align: center !important;
     }
 }
 
@@ -178,43 +247,54 @@
     .nav-menu li {
         border-right: none;
     }
+
     .nav-menu {
         margin-bottom: 0px;
     }
+
     .main-header {
         background-image: linear-gradient(to bottom, #1B6A8D 0, #1B6A8D 100%);
         border-bottom: 1px solid;
         border-bottom-color: #4989A5 !important;
         min-height: 30px;
     }
+
     .header-search-container {
         padding-left: 0px;
         padding-right: 0px;
     }
+
     .header-container-fluid {
         padding-left: 0px;
         padding-right: 0px;
     }
+
     .hide-sm {
         display: none !important;
     }
+
     .nav-menu-item {
         padding-left: 5px !important;
         padding-right: 5px !important;
     }
+
     .footer {
         height: 245px;
     }
+
     .wrapper {
         min-height: calc(100vh - 245px);
     }
+
     .footer-homepage {
         height: 195px;
     }
+
     .homepage-wrapper {
         min-height: calc(100vh - 195px);
         /*height of footer*/
     }
+
     .nav-menu-item-text {
         font-size: 13px !important;
     }
@@ -222,40 +302,51 @@
     .active-menu-item-text {
         font-size: 14px !important;
     }
+
     .navbar .navbar-collapse {
         margin-bottom: -2px;
     }
+
     .no-col-padding-right-mobile {
         padding-left: 0px;
     }
+
     .no-col-padding-left-mobile {
         padding-left: 0px;
     }
+
     .right-text-sm {
         text-align: right;
     }
+
     .left-text-sm {
         text-align: left;
     }
-    .center-text-sm{
-        text-align:center;
+
+    .center-text-sm {
+        text-align: center;
     }
+
     /*Gets rid of the margins around the pagination buttons*/
     div>ul.pagination {
         margin-top: 0px;
         margin-bottom: 0px;
     }
+
     .navbar-logo-img {
         display: none
     }
+
     .adv-search-date-container-homepage {
         display: inline-block;
     }
-    .navbar-datepicker{
-        max-width:45%;
+
+    .navbar-datepicker {
+        max-width: 45%;
     }
-    .no-col-padding-left-sm{
-        padding-left:0px !important;
+
+    .no-col-padding-left-sm {
+        padding-left: 0px !important;
     }
 }
 
@@ -264,21 +355,27 @@
     .nav-menu li {
         border-right: 1px solid rgba(255, 255, 255, 0.2);
     }
+
     .navbar-logo-img {
         display: none;
     }
+
     .hide-md {
         display: none !important;
     }
+
     .right-text-md {
         text-align: right;
     }
+
     .left-text-md {
         text-align: left;
     }
+
     .center-text-md {
         text-align: center;
     }
+
     .nav-menu-item-text {
         font-size: 13px !important;
     }
@@ -289,29 +386,37 @@
     .nav-menu li {
         border-right: 1px solid rgba(255, 255, 255, 0.2);
     }
+
     .navbar-logo-img {
         display: none;
     }
+
     .hide-lg {
         display: none !important;
     }
+
     .right-text-lg {
         text-align: right !important;
     }
+
     .left-text-lg {
         text-align: left;
     }
-    .navbar-datepicker{
-        max-width:45%;
+
+    .navbar-datepicker {
+        max-width: 45%;
     }
-    .no-col-padding-left-lg{
-        padding-left:0px !important;
+
+    .no-col-padding-left-lg {
+        padding-left: 0px !important;
     }
-    .no-col-padding-right-lg{
-        padding-right:0px !important;
+
+    .no-col-padding-right-lg {
+        padding-right: 0px !important;
     }
-    .user-account-input{
-        width:60% !important;
+
+    .user-account-input {
+        width: 60% !important;
     }
 }
 
@@ -319,6 +424,7 @@
     .special-lg-2 {
         width: 25%;
     }
+
     .special-lg-8 {
         width: 50%;
     }
