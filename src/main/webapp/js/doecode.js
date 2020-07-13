@@ -5,19 +5,19 @@ const DATEPICKER_OPTS = {
 };
 
 var toggleSearchDropdown = function () {
-    // var dropdownElement = $(this).next('div.adv-search-dropdown');
+    var dropdownElement = $(this).next('div.adv-search-dropdown');
     $('#homepage-adv-dropdown-btn').click(function () {
         $(dropdownElement).toggle(display);
     })
 
-    // if ($(dropdownElement).is(':visible')) {
-    //     if ($("#adv-search-toggle-extra-container").is(':visible')) {
-    //         $("#adv-search-toggle-btn").trigger('click');
-    //     }
-    //     $(dropdownElement).hide();
-    // } else {
-    //     $(dropdownElement).show();
-    // }
+    if ($(dropdownElement).is(':visible')) {
+        if ($("#adv-search-toggle-extra-container").is(':visible')) {
+            $("#adv-search-toggle-btn").trigger('click');
+        }
+        $(dropdownElement).hide();
+    } else {
+        $(dropdownElement).show();
+    }
 };
 
 var triggerAdvancedSearch = function () {
