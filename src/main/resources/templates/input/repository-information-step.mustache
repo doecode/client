@@ -16,24 +16,43 @@
 					</div>
 				</div>
 				<div class='row'>
-					<div class='col-xs-12'>
-						<fieldset class="entry-group radiogroup has-success">
-							<legend class="entry-legend"><label id="project-type-lbl" class="control-label req">Project Type</label></legend>
-							<div class="radio">
-								<label style="font-weight: bold"><input title="Open Source, Publicly Available Repository" value="OS" name="repository-info-group" type="radio">Open Source, Publicly Available Repository</label>{{> tooltips/OpenSourcePublic}}
+					<div class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-12">
+								<label id="project-type-lbl" class="control-label input-form-push-left req">Project Type</label>
 							</div>
-							<div class="radio">
-								<label style="font-weight: bold"><input title="Open Source, No Publicly Available Repository" value="ON" name="repository-info-group" type="radio">Open Source, No Publicly Available Repository</label>{{> tooltips/OpenSourceNotPublic}}
+						</div>
+						<div class="col-xs-12"><br></div>
+						<div class="col-xs-12">
+							<div class="row">
+								<div class="col-xs-12">
+									<label id="is-opensource-lbl" class="control-label req">Is this software project Open Source or Closed Source?</label>{{> tooltips/IsOpenClosedSource}}
+								</div>
 							</div>
-							<div class="radio">
-								<label style="font-weight: bold"><input title="Closed Source, Site Hosted" value="CS" name="repository-info-group" type="radio">Closed Source, Site Hosted</label>{{> tooltips/ClosedSourceSite}}
+						</div>
+						<div class="col-xs-9" style="margin-left: 50px; margin-top: 7px;">
+							<button id="input-opensource-btn" title="Open Source" type="button" class="pure-button pure-button-primary btn-lg pull-left doecode-wizard-btn wizard-margin-style faded" style="width: 175px">
+								Open Source
+							</button>
+							<button id="input-closedsource-btn" title="Closed Source" type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style faded" style="width: 175px">
+								Closed Source
+							</button>
+						</div>
+						<div class="col-xs-12"><br></div>
+						<div id="is-public-osti-div" style="display: none">
+							<div class="col-xs-12">
+								<label id="is-publicosti-lbl" class="control-label req">Is this software project available in a Publicly Accessible Repository?</label><span id="tooltip-opensource-yesno">{{> tooltips/IsPublic}}</span><span id="tooltip-closedsource-yesno">{{> tooltips/IsOsti}}</span>
 							</div>
-							<div class="radio">
-								<label style="font-weight: bold"><input title="Closed Source, OSTI Hosted" value="CO" name="repository-info-group" type="radio">Closed Source, OSTI Hosted</label>{{> tooltips/ClosedSourceOSTI}}
+							<div class="col-xs-9" style="margin-left: 50px; margin-top: 7px;">
+								<button id="input-pubyes-btn" title="Yes" type="button" class="pure-button pure-button-primary btn-lg pull-left doecode-wizard-btn wizard-margin-style faded" style="width: 175px">
+									Yes
+								</button>
+								<button id="input-pubno-btn" title="No" type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style faded" style="width: 175px">
+									No
+								</button>
 							</div>
-							<br>
-						</fieldset>
-						<br />
+							<div class="col-xs-12"><br></div>
+						</div>
 					</div>
 					<div class="col-xs-8">
 						<div class="row">

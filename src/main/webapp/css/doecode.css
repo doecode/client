@@ -1108,52 +1108,6 @@ div.Select>div.Select-control input {
     box-shadow: none;
 }
 
-.selectControl.chosen-container-multi:not(.chosen-container-active) .chosen-choices,
-.selectControl.chosen-container-single:not(.chosen-container-active) .chosen-single {
-    border-color: #ccc;
-}
-
-.selectControl.chosen-container-active .chosen-choices,
-.selectControl.chosen-container-active .chosen-single {
-    border-color: #66afe9;
-}
-
-.selectControl .chosen-choices,
-.selectControl .chosen-single {
-    background-image: none !important;
-    min-height: 34px !important;
-}
-
-.selectControl .chosen-choices {
-    border-radius: 4px;
-}
-
-.selectControl .chosen-single {
-    padding: 5px 12px;
-}
-
-.selectControl.chosen-container-single .chosen-drop {
-    margin-top: inherit;
-}
-
-.selectControl.chosen-container-active.chosen-with-drop .chosen-single {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-.selectControl.chosen-container-active .chosen-single {
-    box-shadow: inherit;
-}
-
-.has-success .selectControl .chosen-choices,
-.has-success .selectControl .chosen-single {
-    border-color: #3c763d !important;
-}
-
-.has-error .selectControl .chosen-choices,
-.has-error .selectControl .chosen-single {
-    border-color: #a94442 !important;
-}
-
 .search-choice {
     background-color: #EBF5FF !important;
     color: #007eff !important;

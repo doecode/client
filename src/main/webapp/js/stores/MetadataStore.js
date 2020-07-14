@@ -1,7 +1,7 @@
 var MetadataStore = function MetadataStore() {};
 
 var repo_fields = ["accessibility", "repository_link", "landing_page"];
-var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "licenses", "proprietary_url"];
+var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "license_closedsource_available", "license_closedsource_contactinfo", "licenses", "proprietary_url","license_contact_email"];
 var developers_fields = ["developers"];
 var doi_fields = ["doi", "doi_infix", "release_date"];
 var supplemental_fields = ["acronym", "country_of_origin", "keywords", "project_keywords", "site_accession_number", "other_special_requirements", "file_name", "container_name"];
@@ -22,6 +22,8 @@ var _metadata = mobx.observable({
     "doi_infix": '',
     "doi_status": "",
     "accessibility": null,
+    "project_type_opensource": null,
+    "project_type_publicosti": null,
     "description": '',
     "programming_languages": [],
     "version_number": '',
@@ -32,8 +34,11 @@ var _metadata = mobx.observable({
     "project_keywords": [],
     "site_accession_number": '',
     "other_special_requirements": '',
+    "license_closedsource_available": null,
+    "license_closedsource_contactinfo": null,
     "licenses": [],
     "proprietary_url": [],
+    "license_contact_email": '',
     "access_limitations": ["UNL"],
     "developers": [],
     "contributors": [],
@@ -55,6 +60,24 @@ var _metadataInfoSchema = mobx.observable({
     "accessibility": {
         required: "sub",
         label: "Project Type",
+        completed: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Repository Information",
+        error: ''
+    },
+    "project_type_opensource": {
+        required: "sub",
+        label: "Is this software project Open Source or Closed Source?",
+        completed: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Repository Information",
+        error: ''
+    },
+    "project_type_publicosti": {
+        required: "sub",
+        label: "Is this software project available in a Publicly Accessible Repository?",
         completed: false,
         ever_completed: false,
         validations: [],
@@ -143,6 +166,24 @@ var _metadataInfoSchema = mobx.observable({
         panel: "Product Description",
         error: ''
     },
+    "license_closedsource_available": {
+        required: "",
+        label: "Does this software project have a license?",
+        completed: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: ''
+    },
+    "license_closedsource_contactinfo": {
+        required: "",
+        label: "Does this license have up-to-date contact information?",
+        completed: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: ''
+    },
     "licenses": {
         required: "sub",
         label: "Licenses",
@@ -160,6 +201,16 @@ var _metadataInfoSchema = mobx.observable({
         hasError: false,
         ever_completed: false,
         validations: ["url"],
+        panel: "",
+        error: ''
+    },
+    "license_contact_email": {
+        required: "",
+        label: "License Contact Email",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: ["email"],
         panel: "",
         error: ''
     },

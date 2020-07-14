@@ -33,8 +33,32 @@ var BaseData = function () {
 	      var schemaRepo = this.infoSchema["repository_link"];
 	      var schemaLanding = this.infoSchema["landing_page"];
 	      var schemaFile = this.infoSchema["file_name"];
+	      var schemaPropUrl = this.infoSchema["proprietary_url"];
+        var schemaLicenseContact = this.infoSchema["license_contact_email"];
+	      var schemaLicenseClosedAvail = this.infoSchema["license_closedsource_available"];
+        var schemaLicenseClosedContact = this.infoSchema["license_closedsource_contactinfo"];
+        var schemaProjectTypePublicOsti = this.infoSchema["project_type_publicosti"];
 
-	      this.setValue("open_source", (data.charAt(0) == 'O'));
+        var openSource = data.charAt(0) == 'O';
+
+        this.setValue("open_source", openSource);
+        
+        if (openSource) {
+	        schemaLicenseClosedAvail.required = "";
+          schemaLicenseClosedAvail.panel = "";
+	        schemaLicenseClosedContact.required = "";
+          schemaLicenseClosedContact.panel = "";
+          
+          schemaProjectTypePublicOsti.label = "Is this software project available in a Publicly Accessible Repository?";
+        }
+        else {
+	        schemaLicenseClosedAvail.required = "sub";
+          schemaLicenseClosedAvail.panel = "Product Description";
+	        schemaLicenseClosedContact.required = "sub";
+          schemaLicenseClosedContact.panel = "Product Description";
+
+          schemaProjectTypePublicOsti.label = "Is this software project hosted at OSTI?";
+        }
 
 	      if (data == 'OS') {
 	        schemaRepo.required = "sub";
@@ -105,6 +129,52 @@ var BaseData = function () {
 	        schema.panel = "";
       }
 
+      if (field === "project_type_opensource") {
+        var schema = this.infoSchema["licenses"];
+        
+	      if (data === true) {
+	        schema.required = "sub";
+	        schema.panel = "Product Description";
+	      }
+      }
+
+      if (field === "license_closedsource_available") {
+        var schema = this.infoSchema["licenses"];
+        
+        if (data === true)
+          this.setValue("licenses", ["Other"]);
+        else {
+          this.setValue("licenses", []);
+
+          if (data === false)
+            this.setValue("license_closedsource_contactinfo", false);
+        }
+        
+	      if (data === true) {
+	        schema.required = "sub";
+	        schema.panel = "Product Description";
+	      }
+	      else if (data === false) {
+	        schema.required = "";
+	        schema.panel = "";
+	      }
+      }
+
+      if (field === "license_closedsource_contactinfo") {
+	      var schema = this.infoSchema["license_contact_email"];
+        
+	      if (data === false) {
+	        schema.required = "sub";
+	        schema.panel = "Product Description";
+	      }
+	      else {
+	        schema.required = "";
+          schema.panel = "";
+          
+          this.setValue("license_contact_email", "");
+	      }
+      }
+
       if (field === "licenses") {
 	      var schema = this.infoSchema["proprietary_url"];
 	      if (data && data.indexOf('Other') > -1) {
@@ -172,7 +242,7 @@ var BaseData = function () {
 
       var value = this.getValue(field);
 
-      if (value === null || value.length === 0) {
+      if (value === null || value === undefined || value.length === 0) {
         info.completed = false;
         info.error = '';
         if (field == "repository_link")

@@ -18,6 +18,9 @@ var contributors_table = null;
 var contributor_orgs_table = null;
 var related_identifiers_table = null;
 
+// project type control
+var is_osti_host_admin = false;
+
 // modal redirect
 var modal_redirect = null;
 
@@ -31,6 +34,13 @@ var form = mobx.observable({
 form.co_repo = "";
 form.last_filename = "";
 
+form.open_licenses = [];
+form.open_propurl = "";
+form.closed_licenses = [];
+form.closed_propurl = "";
+form.closed_licensecontact = "";
+form.closedsource_available = null;
+form.closedsource_contactinfo = null;
 
 var datatableCallback = function (settings) {
     var api = this.api();
@@ -208,9 +218,216 @@ var toggleCollapsible = function () {
     $(this).prev().prev('a.input-accordion-title').trigger('click');
 };
 
-var accessibilityRepositoryLinkType = mobx.action("Change Project Type", function () {
-    metadata.setValue("accessibility", $(this).val());
+// If you close a modal, any new items added are removed, based on an attribute in the option field
+var clearChosenList = function (list_id) {
+    $('#' + list_id + ' option[data-iscustom="true"]').remove();
+    $('#' + list_id + ' option').each(function () {
+        $(this).prop('selected', false);
+    });
+    $("#" + list_id).trigger('chosen:updated');
+};
+
+var trackOpenClosedInfo = mobx.action("Track OpenClosed Info", function (projectType) {
+    if (!projectType)
+        return;
+
+    var openSource = projectType.charAt(0) == 'O';
+
+    if (openSource) {
+        form.open_licenses = metadata.getValue("licenses");
+        form.open_propurl = metadata.getValue("proprietary_url");
+    }
+    else {
+        form.closed_licenses = metadata.getValue("licenses");
+        form.closed_propurl = metadata.getValue("proprietary_url");
+        form.closed_licensecontact = metadata.getValue("license_contact_email");
+
+        form.closedsource_available = metadata.getValue("license_closedsource_available");
+        form.closedsource_contactinfo = metadata.getValue("license_closedsource_contactinfo");
+    }
 });
+
+var updateFromOpenClosedInfo = mobx.action("Update From OpenClosed Info", function (openSource) {
+    if (openSource) {
+        metadata.setValue('license_closedsource_available', null);
+        metadata.setValue('license_closedsource_contactinfo', null);
+
+        metadata.setValue('licenses', form.open_licenses);
+        metadata.setValue('proprietary_url', form.open_propurl);
+    } else {
+        metadata.setValue('license_closedsource_available', form.closedsource_available);
+        metadata.setValue('license_closedsource_contactinfo', form.closedsource_contactinfo);
+
+        metadata.setValue('licenses', form.closed_licenses);
+        metadata.setValue('proprietary_url', form.closed_propurl);
+        metadata.setValue('license_contact_email', form.closed_licensecontact);
+    }
+});
+
+var projectTypeButtonClick = mobx.action("Project Type Click", function () {
+    var project_type = metadata.getValue("accessibility");
+    trackOpenClosedInfo(project_type);
+
+    var id = $(this).attr("id");
+    if (id == "input-opensource-btn") {
+        metadata.setValue("project_type_opensource", true);
+
+        metadata.setValue("license_closedsource_available", null);
+        metadata.setValue("license_closedsource_contactinfo", null);
+    }
+    else if (id == "input-closedsource-btn") {
+        metadata.setValue("project_type_opensource", false);
+
+        if (!is_osti_host_admin) {
+            metadata.setValue("project_type_publicosti", false);
+        }
+    }
+    else if (id == "input-pubyes-btn") {
+        metadata.setValue("project_type_publicosti", true);
+    }
+    else if (id == "input-pubno-btn") {
+        metadata.setValue("project_type_publicosti", false);
+    }
+});
+
+var projectTypeButtonUpdate = function () {
+    var is_opensource = metadata.getValue("project_type_opensource");
+    var is_public_or_osti = metadata.getValue("project_type_publicosti");
+    if (is_opensource == null) {
+        $("#is-public-osti-div").hide();
+        
+        $("#input-opensource-btn").addClass("faded");
+        $("#input-closedsource-btn").addClass("faded");
+    }
+    else {
+        $("#is-public-osti-div").show();
+
+        if (is_opensource) {
+            $("#input-opensource-btn").removeClass("faded");
+            $("#input-closedsource-btn").addClass("faded");
+        }
+        else {
+            $("#input-opensource-btn").addClass("faded");
+            $("#input-closedsource-btn").removeClass("faded");
+
+            if (!is_osti_host_admin)
+                $("#is-public-osti-div").hide();
+        }
+
+        if (is_public_or_osti == null) {
+            $("#input-pubyes-btn").addClass("faded");
+            $("#input-pubno-btn").addClass("faded");
+        }
+        else {
+            if (is_public_or_osti) {
+                $("#input-pubyes-btn").removeClass("faded");
+                $("#input-pubno-btn").addClass("faded");
+            }
+            else {
+                $("#input-pubyes-btn").addClass("faded");
+                $("#input-pubno-btn").removeClass("faded");
+            }
+        }
+    }
+};
+
+var setAccessibility = mobx.action("Set Project Type", function () {
+    var is_opensource = metadata.getValue("project_type_opensource");
+    var is_public_or_osti = metadata.getValue("project_type_publicosti");
+
+    if (is_opensource == null || is_opensource == null)
+        return;
+
+    if (is_opensource && is_public_or_osti)
+        val = "OS";
+    else if (is_opensource && !is_public_or_osti)
+        val = "ON";
+    else if (!is_opensource && !is_public_or_osti)
+        val = "CS";
+    else if (!is_opensource && is_public_or_osti)
+        val = "CO";
+
+    updateFromOpenClosedInfo(val.charAt(0) == 'O');
+    trackOpenClosedInfo(val);
+
+    metadata.setValue("accessibility", val);
+});
+
+var licensesButtonClick = mobx.action("License Options Click", function () {
+    var id = $(this).attr("id");
+    if (id == "input-licenseyes-btn") {
+        metadata.setValue("license_closedsource_available", true);
+    }
+    else if (id == "input-licenseno-btn") {
+        metadata.setValue("license_closedsource_available", false);
+    }
+    else if (id == "input-contactyes-btn") {
+        metadata.setValue("license_closedsource_contactinfo", true);
+    }
+    else if (id == "input-contactno-btn") {
+        metadata.setValue("license_closedsource_contactinfo", false);
+    }
+});
+
+var licenseButtonUpdate = function () {
+    var is_opensource = metadata.getValue("project_type_opensource");
+    var has_license = metadata.getValue("license_closedsource_available");
+    var has_contact = metadata.getValue("license_closedsource_contactinfo");
+
+    if (is_opensource || is_opensource == null) {
+        $("#licence-select-zone").show();
+        $("#has-license-div").hide();
+
+        $("#license-contact-div").hide();
+        $("#license-contact-zone").hide();
+    }
+    else {
+        $("#licence-select-zone").hide();
+        $("#has-license-div").show();
+    }
+
+    if (has_license == null) {
+        $("#license-contact-div").hide();
+        $("#license-contact-zone").hide();
+        
+        $("#input-licenseyes-btn").addClass("faded");
+        $("#input-licenseno-btn").addClass("faded");
+    }
+    else {
+        $("#license-contact-div").show();
+
+        if (has_license) {
+            $("#input-licenseyes-btn").removeClass("faded");
+            $("#input-licenseno-btn").addClass("faded");
+            $("#proprietary-url-zone").show();
+        }
+        else {
+            $("#license-contact-div").hide();
+
+            $("#input-licenseyes-btn").addClass("faded");
+            $("#input-licenseno-btn").removeClass("faded");
+            $("#proprietary-url-zone").hide();
+        }
+
+        if (has_contact == null) {
+            $("#input-contactyes-btn").addClass("faded");
+            $("#input-contactno-btn").addClass("faded");
+            $("#license-contact-zone").hide();
+        }
+        else {
+            if (has_contact) {
+                $("#input-contactyes-btn").removeClass("faded");
+                $("#input-contactno-btn").addClass("faded");
+                $("#license-contact-zone").hide();
+            }
+            else {
+                $("#input-contactyes-btn").addClass("faded");
+                $("#input-contactno-btn").removeClass("faded");
+                $("#license-contact-zone").show();
+            }
+        }
+    }
+};
 
 var setSuccess = function (label, is_completed, error_msg) {
     var is_error = error_msg ? true : false;
@@ -310,6 +527,7 @@ var updateTextStyle = function (store, field, label, input, exclude_parenthetica
 var updateSelectStyle = function (store, field, label, input, exclude_parenthetical_text) {
     updateLabelStyle(store, field, label, exclude_parenthetical_text);
     var current_list = mobx.toJS(store.getValue(field));
+    clearChosenList(field);
     populateSelectWithCustomData(input, current_list);
     loadSelectData(input, current_list);
 };
@@ -425,6 +643,49 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     if (accessibility != 'OS') {
         var orig_file = metadata.getValue("file_name");
         form.last_filename = orig_file ? orig_file : form.last_filename;
+    }
+
+    if (accessibility != null) {
+        switch (accessibility) {
+            case "OS":
+                metadata.setValue("project_type_opensource", true);
+                metadata.setValue("project_type_publicosti", true);
+                break;
+            case "ON":
+                metadata.setValue("project_type_opensource", true);
+                metadata.setValue("project_type_publicosti", false);
+                break;
+            case "CS":
+                metadata.setValue("project_type_opensource", false);
+                metadata.setValue("project_type_publicosti", false);
+                break;
+            case "CO":
+                metadata.setValue("project_type_opensource", false);
+                metadata.setValue("project_type_publicosti", true);
+                break;
+            default:
+                break;
+        }
+        
+        projectTypeButtonUpdate();
+        
+        var openSource = accessibility.charAt(0) == 'O';
+        if (!openSource) {
+            var closed_propurl = metadata.getValue('proprietary_url');
+            var closed_licensecontact = metadata.getValue('license_contact_email');
+
+            if (closed_propurl != null && closed_propurl != "")
+                metadata.setValue('license_closedsource_available', true);
+            else
+                metadata.setValue('license_closedsource_available', false);
+
+            if (closed_licensecontact != null && closed_licensecontact != "")
+                metadata.setValue('license_closedsource_contactinfo', false);
+            else
+                metadata.setValue('license_closedsource_contactinfo', true);
+        }
+
+        trackOpenClosedInfo(accessibility);
     }
 
     form.workflowStatus = data.metadata.workflow_status;
@@ -755,7 +1016,7 @@ mobx.autorun("Overwrite", function () {
         $('#input-overwrite-msg-bottom').hide();
     }
 
-    // mobx.whyRun();
+    //mobx.whyRun();
 });
 
 
@@ -809,7 +1070,6 @@ mobx.autorun("Project Type", function () {
             $("#file-upload-zone").show();
             break;
     }
-    $("input[name=repository-info-group][value=" + project_type + "]").prop('checked', true);
 
     if (project_type == "CO") {
         metadata.setValue("repository_link", form.co_repo);
@@ -822,7 +1082,41 @@ mobx.autorun("Project Type", function () {
         metadata.setValue("file_name", form.last_filename);
     }
 
-    setSuccess("project-type-lbl", project_type != null);
+    //mobx.whyRun();
+});
+
+mobx.autorun("Project Group Success", function () {
+    var is_opensource = metadata.getValue("project_type_opensource");
+    var is_publicosti = metadata.getValue("project_type_publicosti");
+    setSuccess("project-type-lbl", is_opensource != null && is_publicosti != null);
+
+    if (is_opensource === false) {
+        $("#tooltip-opensource-yesno").hide();
+        $("#tooltip-closedsource-yesno").show();
+    }
+    else {
+        $("#tooltip-opensource-yesno").show();
+        $("#tooltip-closedsource-yesno").hide();
+    }
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Project Button Update", function () {
+    projectTypeButtonUpdate();
+    setAccessibility();
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Project Type Open Source", function () {
+    updateLabelStyle(metadata, "project_type_opensource", "is-opensource-lbl");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Project Type Public", function () {
+    updateLabelStyle(metadata, "project_type_publicosti", "is-publicosti-lbl");
 
     //mobx.whyRun();
 });
@@ -890,6 +1184,24 @@ mobx.autorun("Documentation URL", function () {
     //mobx.whyRun();
 });
 
+mobx.autorun("License Button Update", function () {
+    licenseButtonUpdate();
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("License CS Available", function () {
+    updateLabelStyle(metadata, "license_closedsource_available", "has-license-lbl");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("License CS Contact Info", function () {
+    updateLabelStyle(metadata, "license_closedsource_contactinfo", "has-contactinfo-lbl");
+
+    //mobx.whyRun();
+});
+
 mobx.autorun("Licenses", function () {
     updateSelectStyle(metadata, "licenses", "licenses-lbl", "licenses");
 
@@ -904,6 +1216,12 @@ mobx.autorun("Licenses", function () {
 
 mobx.autorun("Proprietary URL", function () {
     updateInputStyle(metadata, "proprietary_url", "proprietary-url-lbl", "proprietary-url");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("License Contact Email", function () {
+    updateInputStyle(metadata, "license_contact_email", "license-contact-email-lbl", "license-contact-email");
 
     //mobx.whyRun();
 });
@@ -1395,14 +1713,6 @@ mobx.autorun("Announce Button", function () {
 /************************MODAL DECLARATIONS*****************************/
 /***********************************************************************/
 /***********************************************************************/
-//Makes it to where if you close a modal, any new items added are removed, based on an attribute in the option field
-var clearChosenList = function (list_id) {
-    $('#' + list_id + ' option[data-iscustom="true"]').remove();
-    $('#' + list_id + ' option').each(function () {
-        $(this).prop('selected', false);
-    });
-    $("#" + list_id).trigger('chosen:updated');
-};
 
 var showModal = function (event) {
     var is_new = $("#current_datatable_id").val() == -1;
@@ -1925,15 +2235,19 @@ $(document).ready(mobx.action("Document Ready", function () {
     //Above all else, make sure we're allowed to be here
     checkIsAuthenticated();
 
+    // OSTI Hosted check
+    checkHasRole('OSTIHostedAdmin', function () {
+        is_osti_host_admin = true;
+    }, function () {
+        is_osti_host_admin = false;
+    });
+
     // Set input messages
     $('.table-msg').html($("#table_msg").val());
     $('.upload-msg').html($("#upload_msg").val());
 
     // Override Chosen to allow Success/Error marking
     $(".chosen-container").addClass("selectControl");
-
-    // Clear radio group in case of back button usage.
-    $('input:radio[name="repository-info-group"]:checked').prop('checked', false);
 
 
 
@@ -2030,8 +2344,18 @@ $(document).ready(mobx.action("Document Ready", function () {
 
     // open first panel
     $("#repository-panel-anchor").trigger('click');
-    //Makes the accessibility radio buttons work
-    $('input[name="repository-info-group"]').on('change', accessibilityRepositoryLinkType);
+
+    // Project Type
+    $('#input-opensource-btn').on('click', projectTypeButtonClick);
+    $('#input-closedsource-btn').on('click', projectTypeButtonClick);
+    $('#input-pubyes-btn').on('click', projectTypeButtonClick);
+    $('#input-pubno-btn').on('click', projectTypeButtonClick);
+    
+    // License Closed Source
+    $('#input-licenseyes-btn').on('click', licensesButtonClick);
+    $('#input-licenseno-btn').on('click', licensesButtonClick);
+    $('#input-contactyes-btn').on('click', licensesButtonClick);
+    $('#input-contactno-btn').on('click', licensesButtonClick);
 
     // Panel Updates
     $('#repository-link').on('change', {
@@ -2067,10 +2391,13 @@ $(document).ready(mobx.action("Document Ready", function () {
         store: metadata,
         field: "licenses"
     }, inputChange);
-
     $('#proprietary-url').on('change', {
         store: metadata,
         field: "proprietary_url"
+    }, inputChange);
+    $('#license-contact-email').on('change', {
+        store: metadata,
+        field: "license_contact_email"
     }, inputChange);
     $('#doi').on('change', {
         store: metadata,
