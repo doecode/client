@@ -228,12 +228,18 @@ var modifyChosenSelectForCustomEntry = function (event) {
             sessionStorage.last_chosen_input_position = caret_position;
 
             //If we don't have an index for this in the underlying select, make it so
-            if (!document.getElementById(related_select_id + "-custom-option")) {
-                $(related_select).prepend("<option id=" + related_select_id + "-custom-option" + " value='" + val + "'>Add: " + val + "</option>");
+            if (val != null && val.trim() != "") {
+                if (!document.getElementById(related_select_id + "-custom-option")) {
+                    $(related_select).prepend("<option id=" + related_select_id + "-custom-option" + " value='" + val + "'>Add: " + val + "</option>");
 
-            } else {
-                $("#" + related_select_id + "-custom-option").val(val);
-                $("#" + related_select_id + "-custom-option").html("Add: " + val);
+                } else {
+                    $("#" + related_select_id + "-custom-option").val(val);
+                    $("#" + related_select_id + "-custom-option").html("Add: " + val);
+                }
+            }
+            // remove unneeded Add option
+            else if (document.getElementById(related_select_id + "-custom-option")) {
+                $("#" + related_select_id + "-custom-option").remove();
             }
 
             $(related_select).trigger("chosen:updated");
@@ -264,11 +270,17 @@ var modifyChosenSelectForCustomEntrySingle = function (event) {
             var related_select_id = $(related_select).attr('id');
             //See if there's a custom entry field
             //If we don't have an index for this in the underlying select, make it so
-            if (!document.getElementById(related_select_id + "-custom-option")) {
-                $(related_select).prepend("<option id=" + related_select_id + "-custom-option" + " value='" + val + "'>Add: " + val + "</option>");
-            } else {
-                $("#" + related_select_id + "-custom-option").val(val);
-                $("#" + related_select_id + "-custom-option").html("Add: " + val);
+            if (val != null && val.trim() != "") {
+                if (!document.getElementById(related_select_id + "-custom-option")) {
+                    $(related_select).prepend("<option id=" + related_select_id + "-custom-option" + " value='" + val + "'>Add: " + val + "</option>");
+                } else {
+                    $("#" + related_select_id + "-custom-option").val(val);
+                    $("#" + related_select_id + "-custom-option").html("Add: " + val);
+                }
+            }
+            // remove unneeded Add option
+            else if (document.getElementById(related_select_id + "-custom-option")) {
+                $("#" + related_select_id + "-custom-option").remove();
             }
             $(related_select).trigger('chosen:updated');
             $(self).val(val);
