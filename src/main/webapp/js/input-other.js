@@ -251,6 +251,17 @@ var makeSponsorOrgExtraInfoRow = function (data) {
         html += "</div>";
     }
 
+    //Award DOIs
+    if (data.award_dois && data.award_dois.length > 0) {
+        html += "<div class='row'>";
+        html += "<div class='col-md-1'></div>";
+        html += "<div class='col-md-5 col-xs-12'>Award DOIs:</div>";
+        html += "<div class='col-md-6 col-xs-12'>";
+        html += makeDelimitedList(data.award_dois, '<br/>');
+        html += "</div>";
+        html += "</div>";
+    }
+
     //FWP Numbers
     if (data.fwp_numbers && data.fwp_numbers.length > 0) {
         html += "<div class='row'>";

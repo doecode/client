@@ -1031,6 +1031,7 @@ var _sponsoringOrganization = mobx.observable({
     organization_name: '',
     primary_award: '',
     award_numbers: [],
+    award_dois: [],
     fwp_numbers: [],
     br_codes: [],
     id: ''
@@ -1050,6 +1051,12 @@ var _sponsoringOrganizationInfoSchema = mobx.observable({
         error: ''
     },
     "award_numbers": {
+        required: false,
+        completed: false,
+        validations: [],
+        error: ''
+    },
+    "award_dois": {
         required: false,
         completed: false,
         validations: [],

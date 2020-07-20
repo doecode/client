@@ -33,6 +33,17 @@
                         </div>
                     </div>
                     {{/if}}
+                    {{#if has_award_dois}}
+                    <div class='row'>
+                        <div class='col-md-1 col-xs-1'></div>
+                        <div class='col-md-5 col-xs-6 no-col-padding-left'>Award DOIs:</div>
+                        <div class='col-md-6 col-xs-5'>
+                            {{#each award_dois}}
+                            <div >{{.}}</div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
                     {{#if has_fwp_numbers}}
                     <div class='row'>
                         <div class='col-md-1 col-xs-1'></div>

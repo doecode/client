@@ -101,6 +101,7 @@ var Metadata = function (_BaseData) {
 
         var fundingIDs = sponsoringOrganizations[i].funding_identifiers;
         var awardNumbers = [];
+        var awardDois = [];
         var brCodes = [];
         var fwpNumbers = [];
 
@@ -111,6 +112,8 @@ var Metadata = function (_BaseData) {
             var val = new String(fundingIDs[x].identifier_value);
             if (fundingIDs[x].identifier_type === 'AwardNumber') {
               awardNumbers.push(val.toString());
+            } else if (fundingIDs[x].identifier_type === 'AwardDOI') {
+              awardDois.push(val.toString());
             } else if (fundingIDs[x].identifier_type === 'BRCode') {
               brCodes.push(val.toString());
             } else if (fundingIDs[x].identifier_type === 'FWPNumber') {
@@ -120,6 +123,7 @@ var Metadata = function (_BaseData) {
         }
 
         data.sponsoring_organizations[i].award_numbers = awardNumbers;
+        data.sponsoring_organizations[i].award_dois = awardDois;
         data.sponsoring_organizations[i].br_codes = brCodes;
         data.sponsoring_organizations[i].fwp_numbers = fwpNumbers;
 
@@ -146,11 +150,16 @@ var Metadata = function (_BaseData) {
         var fundingIdentifiers = [];
 
         var awardNumbers = sponsor.award_numbers;
+        var awardDois = sponsor.award_dois;
         var brCodes = sponsor.br_codes;
         var fwpNumbers = sponsor.fwp_numbers;
 
         for (var x = 0; x < awardNumbers.length; x++) {
           fundingIdentifiers.push({ identifier_type: "AwardNumber", identifier_value: awardNumbers[x] });
+        }
+
+        for (var x = 0; x < awardDois.length; x++) {
+          fundingIdentifiers.push({ identifier_type: "AwardDOI", identifier_value: awardDois[x] });
         }
 
         for (var x = 0; x < brCodes.length; x++) {

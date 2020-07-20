@@ -848,6 +848,7 @@ public class SearchFunctions {
 
             refinedSponsorOrgRow.put("org_name", sponsorOrgRow.findPath("organization_name").asText(""));
             ArrayNode AwardNums = JsonUtils.MAPPER.createArrayNode();
+            ArrayNode AwardDois = JsonUtils.MAPPER.createArrayNode();
             ArrayNode FWPNums = JsonUtils.MAPPER.createArrayNode();
             ArrayNode BRCodes = JsonUtils.MAPPER.createArrayNode();
 
@@ -859,6 +860,9 @@ public class SearchFunctions {
                 switch (identifierRow.findPath("identifier_type").asText("")) {
                     case "AwardNumber":
                         AwardNums.add(identifier_value);
+                        break;
+                    case "AwardDOI":
+                        AwardDois.add(identifier_value);
                         break;
                     case "FWPNumber":
                         FWPNums.add(identifier_value);
@@ -878,6 +882,10 @@ public class SearchFunctions {
             // Award Numbers
             refinedSponsorOrgRow.put("has_award_numbers", AwardNums.size() > 0);
             refinedSponsorOrgRow.set("award_nums", AwardNums);
+
+            // Award DOIs
+            refinedSponsorOrgRow.put("has_award_dois", AwardDois.size() > 0);
+            refinedSponsorOrgRow.set("award_dois", AwardDois);
 
             // FWP NumberS
             refinedSponsorOrgRow.put("has_fwp_numbers", FWPNums.size() > 0);

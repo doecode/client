@@ -273,6 +273,7 @@ public class ReportFunctions {
             String primary_award = row.findPath("primary_award").asText("");
 
             ArrayNode additional_rewards = JsonUtils.MAPPER.createArrayNode();
+            ArrayNode award_dois = JsonUtils.MAPPER.createArrayNode();
             ArrayNode br_codes = JsonUtils.MAPPER.createArrayNode();
             ArrayNode fwp_nums = JsonUtils.MAPPER.createArrayNode();
             for (JsonNode jn : (ArrayNode) row.get("funding_identifiers")) {
@@ -281,6 +282,9 @@ public class ReportFunctions {
                 switch (f_identifiers.findPath("identifier_type").asText("")) {
                     case "AwardNumber":
                         additional_rewards.add(value);
+                        break;
+                    case "AwardDOI":
+                        award_dois.add(value);
                         break;
                     case "FWPNumber":
                         fwp_nums.add(value);
@@ -298,6 +302,9 @@ public class ReportFunctions {
 
             if (additional_rewards.size() > 0) {
                 value_str.add("Additional Awards/Contracts: " + DOECODEUtils.makeTokenSeparatedList(additional_rewards, "; "));
+            }
+            if (award_dois.size() > 0) {
+                value_str.add("Award DOIs: " + DOECODEUtils.makeTokenSeparatedList(award_dois, "; "));
             }
             if (fwp_nums.size() > 0) {
                 value_str.add("FWP Numbers: " + DOECODEUtils.makeTokenSeparatedList(fwp_nums, "; "));

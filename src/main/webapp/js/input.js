@@ -1460,6 +1460,12 @@ mobx.autorun("SponsoringOrg Additional Awards", function () {
     //mobx.whyRun();
 });
 
+mobx.autorun("SponsoringOrg Award DOIs", function () {
+    updateSelectStyle(sponsor_org, "award_dois", "sponsoring-orgs-edit-award_dois-lbl", "sponsoring-orgs-edit-award_dois");
+
+    //mobx.whyRun();
+});
+
 mobx.autorun("SponsoringOrg B&R", function () {
     updateSelectStyle(sponsor_org, "br_codes", "sponsoring-orgs-edit-br_codes-lbl", "sponsoring-orgs-edit-br_codes");
 
@@ -1773,6 +1779,7 @@ var saveModalData = function (event) {
             organization_name: $("#sponsoring-orgs-edit-organization_name").val(),
             primary_award: $("#sponsoring-orgs-edit-primary_award").val(),
             award_numbers: $("#sponsoring-orgs-edit-award_numbers").val(),
+            award_dois: $("#sponsoring-orgs-edit-award_dois").val(),
             br_codes: $("#sponsoring-orgs-edit-br_codes").val(),
             fwp_numbers: $("#sponsoring-orgs-edit-fwp_numbers").val()
         };
@@ -1950,6 +1957,7 @@ var clearModal = mobx.action("Clear Modal", function (event) {
     } else if (modal == "sponsoring-orgs") {
         sponsor_org.clear();
         clearChosenList("sponsoring-orgs-edit-award_numbers");
+        clearChosenList("sponsoring-orgs-edit-award_dois");
         clearChosenList("sponsoring-orgs-edit-br_codes");
         clearChosenList("sponsoring-orgs-edit-fwp_numbers");
     } else if (modal == "research-orgs") {
@@ -2494,6 +2502,10 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#sponsoring-orgs-edit-award_numbers').on('change', {
         store: sponsor_org,
         field: "award_numbers"
+    }, inputChange);
+    $('#sponsoring-orgs-edit-award_dois').on('change', {
+        store: sponsor_org,
+        field: "award_dois"
     }, inputChange);
     $('#sponsoring-orgs-edit-br_codes').on('change', {
         store: sponsor_org,
