@@ -12,6 +12,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 import gov.osti.doecode.entity.DOECODEJson;
 import gov.osti.doecode.entity.InputFunctions;
@@ -41,7 +43,7 @@ public class Input extends HttpServlet {
         boolean is_inputjs = false;
 
         // Software type param
-        String software_type_param = request.getParameter("software_type");
+        String software_type_param = CleanInput(request.getParameter("software_type"));
 
         // Default, if invalid type
         if (StringUtils.isBlank(software_type_param) || !(software_type_param.equalsIgnoreCase("Scientific") || software_type_param.equalsIgnoreCase("Business"))) {
@@ -54,9 +56,9 @@ public class Input extends HttpServlet {
             //Toggle everything to not be shown, since we're on the submit page
             show_optional_toggle = true;
 
-            String code_id = request.getParameter("code_id");
-            String load_id = request.getParameter("load_id");
-            String version_type = request.getParameter("version_type");
+            String code_id = CleanInput(request.getParameter("code_id"));
+            String load_id = CleanInput(request.getParameter("load_id"));
+            String version_type = CleanInput(request.getParameter("version_type"));
             output_data = InputFunctions.getInputFormLists(getServletContext());
             cssFilesList.add("DataTables-1.10.20/css/jquery.dataTables.min");
             cssFilesList.add("Responsive-2.2.3/css/responsive.dataTables.min");
@@ -91,7 +93,7 @@ public class Input extends HttpServlet {
             is_inputjs = true;
 
         } else if (remaining.startsWith("announce")) {
-            String code_id = request.getParameter("code_id");
+            String code_id = CleanInput(request.getParameter("code_id"));
             output_data = InputFunctions.getInputFormLists(getServletContext());
             cssFilesList.add("DataTables-1.10.20/css/jquery.dataTables.min");
             cssFilesList.add("Responsive-2.2.3/css/responsive.dataTables.min");
@@ -116,7 +118,7 @@ public class Input extends HttpServlet {
             current_page = TemplateUtils.PAGE_PROJECTS;
 
         } else if (remaining.startsWith("approve")) {
-            String code_id = request.getParameter("code_id");
+            String code_id = CleanInput(request.getParameter("code_id"));
             output_data = InputFunctions.getInputFormLists(getServletContext());
             cssFilesList.add("DataTables-1.10.20/css/jquery.dataTables.min");
             cssFilesList.add("Responsive-2.2.3/css/responsive.dataTables.min");
@@ -140,9 +142,9 @@ public class Input extends HttpServlet {
             current_page = TemplateUtils.PAGE_PROJECTS;
 
         } else if (remaining.startsWith("confirm")) {
-            String code_id = request.getParameter("code_id");
-            String workflow = request.getParameter("workflow");
-            String minted_doi = request.getParameter("mintedDoi");
+            String code_id = CleanInput(request.getParameter("code_id"));
+            String workflow = CleanInput(request.getParameter("workflow"));
+            String minted_doi = CleanInput(request.getParameter("mintedDoi"));
             jsFilesList.add("input-other");
 
             boolean is_submitted = false;
@@ -249,6 +251,15 @@ public class Input extends HttpServlet {
         return_data.add("dropzone/dropzone.min");
 
         return return_data;
+    }
+
+    private String CleanInput(String input) {
+        String str = input;
+
+        if (!StringUtils.isBlank(str))
+            str = Jsoup.clean(str, Whitelist.basic());
+
+        return str;
     }
 
     @Override
