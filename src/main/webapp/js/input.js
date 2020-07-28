@@ -1129,7 +1129,7 @@ mobx.autorun("Repository URL", function () {
 });
 
 mobx.autorun("Repository URL CO", function () {
-    updateTextStyle(metadata, "repository_link", "repository-link-co-lbl", "repository-link-co", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "The repository URL will be automatically generated for you as part of the submission process.");
+    updateTextStyle(metadata, "repository_link", "repository-link-co-lbl", "repository-link-co", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "The Repository URL will be automatically generated for you as part of the submission process.");
 
     //mobx.whyRun();
 });
@@ -1151,7 +1151,7 @@ mobx.autorun("Product Description Panel", function () {
 });
 
 mobx.autorun("Repository URL Display", function () {
-    updateTextStyle(metadata, "repository_link", "repository-link-display-lbl", "repository-link-display", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "The repository URL will be automatically generated for you as part of the submission process.");
+    updateTextStyle(metadata, "repository_link", "repository-link-display-lbl", "repository-link-display", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "The Repository URL will be automatically generated for you as part of the submission process.");
 
     //mobx.whyRun();
 });
