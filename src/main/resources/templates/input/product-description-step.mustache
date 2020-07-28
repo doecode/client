@@ -54,12 +54,12 @@
 						</div>
 					</div>
 					<br />
-					<div id="licence-select-zone">
+					<div>
 						<div class="row">
 							<div class="col-xs-12">
 								<label id='licenses-lbl' for='licenses' class='control-label'>[from data store]</label>{{> tooltips/License}}
 							</div>
-							<div class="col-xs-8">
+							<div class="col-xs-8" id="licence-select-zone">
 								<select class='pure-input-1 doecode-chosen-select' title='Licenses' id='licenses' data-allowcustom="false" data-placeholder='Select your license(s)' multiple>
 									{{#each licenses_list}}
 										<option title='{{title}}' value='{{value}}'>{{label}}</option>
