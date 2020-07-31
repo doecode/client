@@ -196,6 +196,7 @@ public class DOECODEUtils {
         switch (project_name) {
             case "ECP":
             case "ESnet":
+            case "KBase":
             case "SciDAC":
                 badge_name = project_name + "-badge-min.png";
                 break;
