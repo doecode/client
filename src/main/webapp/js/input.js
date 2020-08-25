@@ -335,7 +335,7 @@ var setAccessibility = mobx.action("Set Project Type", function () {
     var is_opensource = metadata.getValue("project_type_opensource");
     var is_public_or_osti = metadata.getValue("project_type_publicosti");
 
-    if (is_opensource == null || is_opensource == null)
+    if (is_opensource == null || is_public_or_osti == null)
         return;
 
     if (is_opensource && is_public_or_osti)
