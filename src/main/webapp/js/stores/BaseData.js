@@ -37,7 +37,6 @@ var BaseData = function () {
                 var schemaLicenseContact = this.infoSchema["license_contact_email"];
                 var schemaLicenseClosedAvail = this.infoSchema["license_closedsource_available"];
                 var schemaLicenseClosedContact = this.infoSchema["license_closedsource_contactinfo"];
-                var schemaProjectTypePublicOsti = this.infoSchema["project_type_publicosti"];
 
                 var openSource = data.charAt(0) == 'O';
 
@@ -48,16 +47,12 @@ var BaseData = function () {
                     schemaLicenseClosedAvail.panel = "";
                     schemaLicenseClosedContact.required = "";
                     schemaLicenseClosedContact.panel = "";
-
-                    schemaProjectTypePublicOsti.label = "Is this software project available in a Publicly Accessible Repository?";
                 }
                 else {
                     schemaLicenseClosedAvail.required = "sub";
                     schemaLicenseClosedAvail.panel = "Product Description";
                     schemaLicenseClosedContact.required = "sub";
                     schemaLicenseClosedContact.panel = "Product Description";
-
-                    schemaProjectTypePublicOsti.label = "Is this software project hosted at OSTI?";
                 }
 
                 if (data == 'OS') {
@@ -131,10 +126,16 @@ var BaseData = function () {
 
             if (field === "project_type_opensource") {
                 var schema = this.infoSchema["licenses"];
+                var schemaProjectTypePublicOsti = this.infoSchema["project_type_publicosti"];
 
                 if (data === true) {
                     schema.required = "sub";
                     schema.panel = "Product Description";
+                    
+                    schemaProjectTypePublicOsti.label = "Is this software project available in a Publicly Accessible Repository?";
+                }
+                if (data === false) {
+                    schemaProjectTypePublicOsti.label = "Is this software project hosted at OSTI?";
                 }
             }
 
