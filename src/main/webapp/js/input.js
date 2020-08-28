@@ -266,16 +266,32 @@ var updateFromOpenClosedInfo = mobx.action("Update From OpenClosed Info", functi
 
 var projectTypeButtonClick = mobx.action("Project Type Click", function () {
     var project_type = metadata.getValue("accessibility");
+    var openSource = project_type == null ? null : project_type.charAt(0) == 'O';
     trackOpenClosedInfo(project_type);
 
     var id = $(this).attr("id");
     if (id == "input-opensource-btn") {
+        // if not already OS, blank out some things
+        if (!openSource) {
+            metadata.setValue("accessibility", null);
+            metadata.setValue("project_type_publicosti", null);
+        }
+
         metadata.setValue("project_type_opensource", true);
 
         metadata.setValue("license_closedsource_available", null);
         metadata.setValue("license_closedsource_contactinfo", null);
     }
     else if (id == "input-closedsource-btn") {
+        // if not already CS, blank out some things
+        if (openSource) {
+            metadata.setValue("accessibility", null);
+
+            if (is_osti_host_admin) {
+                metadata.setValue("project_type_publicosti", null);
+            }
+        }
+
         metadata.setValue("project_type_opensource", false);
 
         if (!is_osti_host_admin) {

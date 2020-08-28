@@ -38,7 +38,7 @@ var BaseData = function () {
                 var schemaLicenseClosedAvail = this.infoSchema["license_closedsource_available"];
                 var schemaLicenseClosedContact = this.infoSchema["license_closedsource_contactinfo"];
 
-                var openSource = data.charAt(0) == 'O';
+                var openSource = data == null ? null : data.charAt(0) == 'O';
 
                 this.setValue("open_source", openSource);
 
