@@ -650,7 +650,8 @@ public class SearchFunctions {
         // doi
         if (StringUtils.isNotBlank(release_date) && StringUtils.isNotBlank(doi)) {
             String fixed_doi = "https://doi.org/" + doi;
-            return_data.add(makeDOIRepoLinkObj("DOI: ", "DOI for Code ID " + code_id, code_id, fixed_doi, doi, ""));
+            return_data.add(makeDOIRepoLinkObj("DOI: ", "DOI for Code ID " + code_id, code_id, fixed_doi,
+                    "https://" + doi, ""));
         }
 
         // Repository URL
@@ -1032,7 +1033,7 @@ public class SearchFunctions {
         // DOI
         String doi = biblio_data.findPath("doi").asText("");
         if (StringUtils.isNotBlank(doi)) {
-            doi = ((needsSpacing ? " " : "") + "doi:" + doi + ".");
+            doi = ((needsSpacing ? " " : "") + "doi:" + "https://" + doi + ".");
         }
 
         return_data.put("show_doi", showDOI(doi, biblio_data.findPath("release_date").asText("")));
@@ -1159,7 +1160,7 @@ public class SearchFunctions {
         // DOI
         String doi = "";
         if (StringUtils.isNotBlank(biblio_data.findPath("doi").asText(""))) {
-            doi = ((needsSpacing ? " " : "") + "doi:" + biblio_data.findPath("doi").asText("") + ".");
+            doi = ((needsSpacing ? " " : "") + "doi:" + "https://" + biblio_data.findPath("doi").asText("") + ".");
         }
 
         return_data.put("show_doi",
