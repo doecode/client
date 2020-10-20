@@ -6,19 +6,6 @@
     <version>2.1.0</version>
     <name>DOE CODE Web Application (Client)</name>
     <packaging>war</packaging>
-    <repositories>
-        <repository>
-            <id>nexus</id>
-            <url>http://git.osti.gov/repository/maven-releases</url>
-        </repository>
-    </repositories>
-    <distributionManagement>
-        <repository>
-            <id>nexus</id>
-            <name>Releases</name>
-            <url>http://git.osti.gov/repository/maven-releases</url>
-        </repository>
-    </distributionManagement>
     <properties>
         <session_timeout>45</session_timeout>
         <app_name>${project.artifactId}</app_name>
