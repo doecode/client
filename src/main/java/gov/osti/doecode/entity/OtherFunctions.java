@@ -7,6 +7,8 @@ import gov.osti.doecode.utils.DOECODEUtils;
 import gov.osti.doecode.utils.JsonUtils;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
@@ -22,9 +24,18 @@ public class OtherFunctions {
         String captcha_response = request.getParameter("g-recaptcha-response");
         String recaptcha_secretkey = Init.recaptcha_secretkey;
         String ip_address = "";
+
+        HttpSession session = request.getSession(true);
+
+        // if gitlab has been requested this session, show a different message
+        Object isRequested = session.getAttribute("gitlab_requested");
+        if (isRequested != null && isRequested.toString().equals("true")) {
+            return_data.put("had_error", true);
+            return_data.put("message", "The DOE CODE Repositories Services Access Request has already been submitted. If you have issues with your submission, please contact doecoderepositories@osti.gov.");
+        }
         // Make sure there's a value for everything that's required. If any one of these
         // dont' have values, return an error
-        if (StringUtils.isBlank(request.getParameter("first_name"))
+        else if (StringUtils.isBlank(request.getParameter("first_name"))
                 || StringUtils.isBlank(request.getParameter("last_name"))
                 || StringUtils.isBlank(request.getParameter("address"))
                 || StringUtils.isBlank(request.getParameter("city"))
@@ -61,6 +72,10 @@ public class OtherFunctions {
             requested_data.put("employment_designation_other_value",
                     request.getParameter("employment_designation_other_value"));
             return_data = sendGitlabSubmissionEmail(request.getServletContext(), requested_data);
+
+            // if no error, mark success
+            if (!return_data.get("had_error").asBoolean(false))
+                session.setAttribute("gitlab_requested", "true");
         }
 
         return return_data;
@@ -83,8 +98,8 @@ public class OtherFunctions {
 
         // Make sure the token is correct
         String request_token = request.getParameter("token"); // Get the token just sent
-        String session_token = request.getSession(true).getAttribute("gitlab-token").toString();
-        all_valid = StringUtils.isNotBlank(session_token) && StringUtils.equals(session_token, request_token);
+        Object session_token = request.getSession(true).getAttribute("gitlab-token");
+        all_valid = session_token != null && StringUtils.isNotBlank(session_token.toString()) && StringUtils.equals(session_token.toString(), request_token);
 
         return all_valid;
     }

@@ -40,6 +40,7 @@ public class Other extends HttpServlet {
         ServletContext context = getServletContext();
         switch (remaining) {
             case "gitlab-signup":
+                session.removeAttribute("gitlab_requested");
                 String gitlab_token = RandomStringUtils.randomAscii(30);
                 session.setAttribute("gitlab-token", gitlab_token);
                 page_title = "DOECODE: Gitlab Signup";
