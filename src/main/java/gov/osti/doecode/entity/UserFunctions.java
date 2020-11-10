@@ -248,6 +248,14 @@ public class UserFunctions {
         return is_admin;
     }
 
+    public static boolean isCurrentlyLoggedInUserAnApprover(HttpServletRequest request) {
+        boolean is_approver = false;
+        ObjectNode current_user_data = getUserDataFromCookie(request);
+        is_approver = hasRole(current_user_data.withArray("roles"), APPROVAL_ADMIN_ROLE);
+
+        return is_approver;
+    }
+
     public static Cookie makeCookie(String name, String value) {
         Cookie c = new Cookie(name, value);
         c.setPath("/" + Init.app_name + "/");

@@ -58,7 +58,7 @@
 						</div>
 					</div>
 					<br />
-					{{#if is_logged_in_user_an_admin}}
+					{{#if should_display_project_keywords}}
 						<div class="row">
 							<div class="col-xs-12">
 								<label id="project-keywords-lbl" class='control-label' for='project-keywords'>Project Keywords</label>{{> tooltips/ProjectKeywords}}

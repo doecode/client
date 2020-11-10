@@ -234,9 +234,13 @@ public class Input extends HttpServlet {
             cssFilesList = getInputFormCssFiles(cssFilesList);
         }
 
+        boolean isAdmin = UserFunctions.isCurrentlyLoggedInUserAnAdmin(request);
+        boolean isAprovePage = (remaining.startsWith("approve"));
+        boolean isAprover = UserFunctions.isCurrentlyLoggedInUserAnApprover(request);
+
         // We'll set whether or not this is a collection of collapsible panels
         output_data.put("is_accordion", true);
-        output_data.put("is_logged_in_user_an_admin", UserFunctions.isCurrentlyLoggedInUserAnAdmin(request));
+        output_data.put("should_display_project_keywords", isAdmin || (isAprovePage && isAprover));
 
         // get common data, like the classes needed for the header and footer
         output_data = TemplateUtils.GET_COMMON_DATA(output_data, current_page, jsFilesList, extraJSList, cssFilesList, request);
