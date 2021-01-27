@@ -8,6 +8,7 @@ var supplemental_fields = ["acronym", "country_of_origin", "keywords", "project_
 var organizations_fields = ["sponsoring_organizations", "research_organizations"];
 var contribs_fields = ["contributors", "contributing_organizations"];
 var identifiers_fields = ["related_identifiers"];
+var awards_fields = ["award_dois"];
 var contact_fields = ["recipient_name", "recipient_email", "recipient_phone", "recipient_org"];
 
 var _metadata = mobx.observable({
@@ -46,6 +47,7 @@ var _metadata = mobx.observable({
     "contributing_organizations": [],
     "research_organizations": [],
     "related_identifiers": [],
+    "award_dois": [],
     "recipient_name": '',
     "recipient_email": '',
     "recipient_phone": '',
@@ -345,6 +347,15 @@ var _metadataInfoSchema = mobx.observable({
         ever_completed: false,
         validations: [],
         panel: "Identifiers",
+        error: ''
+    },
+    "award_dois": {
+        required: "",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Award DOIs",
         error: ''
     },
     "recipient_name": {
@@ -858,6 +869,65 @@ var _panelStatus = mobx.observable({
             return errors;
         }
     },
+    "awards": {
+        get remainingRequired() {
+            var remainingRequired = 0;
+
+            for (var i = 0, len = awards_fields.length; i < len; i++) {
+                var field = awards_fields[i];
+                var obj = _metadataInfoSchema[field];
+
+                if (obj.panel && obj.required && !obj.completed) {
+                    remainingRequired++;
+                }
+            }
+
+            return remainingRequired;
+        },
+        get completedOptional() {
+            var completedOptional = 0;
+
+            for (var i = 0, len = awards_fields.length; i < len; i++) {
+                var field = awards_fields[i];
+                var obj = _metadataInfoSchema[field];
+
+                if (obj.panel && !obj.required && obj.completed) {
+                    completedOptional++;
+                }
+            }
+
+            return completedOptional;
+        },
+        get hasRequired() {
+            var hasRequired = false;
+
+            for (var i = 0, len = awards_fields.length; i < len; i++) {
+                var field = awards_fields[i];
+                var obj = _metadataInfoSchema[field];
+
+                if (obj.panel && obj.required) {
+                    hasRequired = true;
+                    break;
+                }
+            }
+
+            return hasRequired;
+        },
+        get errors() {
+            var errors = "";
+
+            for (var i = 0, len = awards_fields.length; i < len; i++) {
+                var field = awards_fields[i];
+                var obj = _metadataInfoSchema[field];
+
+                if (obj.panel && obj.error) {
+                    errors += (errors ? "; " : "") + obj.error;
+                }
+            }
+
+            return errors;
+        }
+    },
     "contact": {
         get remainingRequired() {
             var remainingRequired = 0;
@@ -1134,6 +1204,27 @@ var _relatedIdentifierInfoSchema = mobx.observable({
     }
 });
 
+var _awardDOI = mobx.observable({
+    award_doi: '',
+    funder_name: '',
+    id: ''
+});
+
+var _awardDOIInfoSchema = mobx.observable({
+    "award_doi": {
+        required: true,
+        completed: false,
+        validations: ['doi'],
+        error: ''
+    },
+    "funder_name": {
+        required: true,
+        completed: false,
+        validations: [],
+        error: ''
+    }
+});
+
 var _user = mobx.observable({
     email: '',
     password: '',
@@ -1229,6 +1320,16 @@ Object.defineProperty(MetadataStore, "relatedIdentifier", {
 Object.defineProperty(MetadataStore, "relatedIdentifierInfoSchema", {
     get: function () {
         return _relatedIdentifierInfoSchema;
+    }
+});
+Object.defineProperty(MetadataStore, "awardDOI", {
+    get: function () {
+        return _awardDOI;
+    }
+});
+Object.defineProperty(MetadataStore, "awardDOIInfoSchema", {
+    get: function () {
+        return _awardDOIInfoSchema;
     }
 });
 Object.defineProperty(MetadataStore, "user", {

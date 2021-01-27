@@ -10,6 +10,7 @@ var research_org = new ResearchOrganization();
 var contributor = new Contributor();
 var contributing_org = new ContributingOrganization();
 var related_identifier = new RelatedIdentifier();
+var award_doi = new AwardDOI();
 
 var developers_table = null;
 var sponsoring_orgs_table = null;
@@ -17,6 +18,7 @@ var research_orgs_table = null;
 var contributors_table = null;
 var contributor_orgs_table = null;
 var related_identifiers_table = null;
+var award_dois_table = null;
 
 // project type control
 var is_osti_host_admin = false;
@@ -203,6 +205,26 @@ var related_identifiers_tbl_opts = {
         {
             name: 'identifier_value',
             data: 'identifier_value',
+            'defaultContent': '',
+            className: 'word-break'
+        }
+    ]
+};
+
+var award_dois_tbl_opts = {
+    order: [
+        [0, 'asc']
+    ],
+    autoWidth: false,
+    columns: [
+        {
+            name: 'award_doi',
+            data: 'award_doi',
+            'defaultContent': ''
+        },
+        {
+            name: 'funder_name',
+            data: 'funder_name',
             'defaultContent': '',
             className: 'word-break'
         }
@@ -1673,6 +1695,51 @@ mobx.autorun("Related Identifier Modal", function () {
 
 
 /*********************
+ AWARD DOIS PANEL (action)
+ *********************/
+mobx.autorun("Award DOIs Panel", function () {
+    setPanelStatus("Award DOIs", "awards-panel-anchor", metadata.panelStatus.awards);
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Award DOIs", function () {
+    if (award_dois_table) {
+        award_dois_table.clear();
+
+        var data = metadata.getValue("award_dois").toJS();
+        award_dois_table.rows.add(data).draw();
+    }
+
+    updateLabelStyle(metadata, "award_dois", "award-dois-lbl", true);
+
+    //mobx.whyRun();
+});
+
+
+/*********************
+ AWARD DOIS MODAL (action)
+ *********************/
+mobx.autorun("Award DOI", function () {
+    updateInputStyle(award_doi, "award_doi", "award-doi-value-lbl", "award-doi-value");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Award DOI Funder Name", function () {
+    updateInputStyle(award_doi, "funder_name", "award-doi-funder-name-lbl", "award-doi-funder-name");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Award DOI Modal", function () {
+    setModalStatus("award-dois", award_doi);
+
+    //mobx.whyRun();
+});
+
+
+/*********************
  CONTACT PANEL (action)
  *********************/
 mobx.autorun("Contact Panel", function () {
@@ -1735,19 +1802,21 @@ var showModal = function (event) {
     var modal = event.data.modal_name;
     var modal_id = event.data.modal_name + "-edit-modal";
 
-    var manage_text = "";
+    var manage_text = " ";
     if (modal == "developers")
-        manage_text = " Developer";
+        manage_text += "Developer";
     else if (modal == "sponsoring-orgs")
-        manage_text = " Sponsoring Organization";
+        manage_text += "Sponsoring Organization";
     else if (modal == "research-orgs")
-        manage_text = " Research Organization";
+        manage_text += "Research Organization";
     else if (modal == "contributors")
-        manage_text = " Contributor";
+        manage_text += "Contributor";
     else if (modal == "contributor-orgs")
-        manage_text = " Contributing Organization";
+        manage_text += "Contributing Organization";
     else if (modal == "related-identifiers")
-        manage_text = " Related Identifier";
+        manage_text += "Related Identifier";
+    else if (modal == "award-dois")
+        manage_text += "Award DOIs";
 
     if (is_new) {
         $("#" + modal + "-manage-lbl").text("Enter" + manage_text);
@@ -1822,6 +1891,12 @@ var saveModalData = function (event) {
             identifier_type: $("#related-identifier-identifier-type").val(),
             relation_type: $("#related-identifier-relation-type").val(),
             identifier_value: $("#related-identifier-identifier-value").val()
+        };
+    } else if (modal == "award-dois") {
+        target_table = award_dois_table;
+        modal_data = {
+            award_doi: $("#award-doi-value").val(),
+            funder_name: $("#award-doi-funder-name").val()
         };
     } else
         throw 'Unknown modal table value!';
@@ -1901,6 +1976,15 @@ var loadDataIntoModalForm = mobx.action("Load Modal Data", function (event) {
         }
 
         related_identifier.loadValues(row_data);
+    } else if (modal == "award-dois") {
+        target_table = award_dois_table;
+        row_data = target_table.row(this).data();
+        if (!row_data) {
+            $("#add-" + modal + "-modal-btn").trigger("click");
+            return;
+        }
+
+        award_doi.loadValues(row_data);
     } else
         throw 'Unknown modal table value!';
 
@@ -1932,6 +2016,8 @@ var deleteModalData = mobx.action("Delete Modal Data", function (event) {
         target_table = contributor_orgs_table;
     else if (modal == "related-identifiers")
         target_table = related_identifiers_table;
+    else if (modal == "award-dois")
+        target_table = award_dois_table;
     else
         throw 'Unknown modal table value!';
 
@@ -1978,6 +2064,8 @@ var clearModal = mobx.action("Clear Modal", function (event) {
         contributing_org.clear();
     } else if (modal == "related-identifiers") {
         related_identifier.clear();
+    } else if (modal == "award-dois") {
+        award_doi.clear();
     } else
         throw 'Unknown modal table value!';
 });
@@ -1993,6 +2081,8 @@ var modalToMetadataProperty = function (modal) {
         matadata_property = "contributing_organizations";
     } else if (modal == "related-identifiers") {
         matadata_property = "related_identifiers";
+    } else if (modal == "award-dois") {
+        matadata_property = "award_dois";
     }
 
     return matadata_property;
@@ -2274,6 +2364,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     contributors_table = $("#contributors-data-table").DataTable(contributors_org_tbl_opts);
     contributor_orgs_table = $("#contributor-orgs-data-table").DataTable(contributing_organizations_tbl_opts);
     related_identifiers_table = $("#related-identifiers-data-table").DataTable(related_identifiers_tbl_opts);
+    award_dois_table = $("#award-dois-data-table").DataTable(award_dois_tbl_opts);
 
     // datatable functionality
     developers_table.on('row-reorder', handleReorderingDevs);
@@ -2588,6 +2679,16 @@ $(document).ready(mobx.action("Document Ready", function () {
         field: "identifier_value"
     }, inputChange);
 
+    // Award DOI Modal Updates
+    $('#award-doi-value').on('change', {
+        store: award_doi,
+        field: "award_doi"
+    }, inputChange);
+    $('#award-doi-funder-name').on('change', {
+        store: award_doi,
+        field: "funder_name"
+    }, inputChange);
+
     //Makes the autopopualte from repository work
     $("#autopopulate-from-repository").on('click', autopopulateFromRepository);
 
@@ -2607,6 +2708,9 @@ $(document).ready(mobx.action("Document Ready", function () {
 
     /*Related identifiers*/
     setModalActions("related-identifiers");
+
+    /*Award DOIs*/
+    setModalActions("award-dois");
 
     /*File uploads*/
     var dropzone = $("#file-upload-dropzone").dropzone(FILE_UPLOAD_CONFIG);

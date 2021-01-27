@@ -228,6 +228,7 @@ public class Input extends HttpServlet {
             extraJSList.add("stores/ResearchOrganization");
             extraJSList.add("stores/ContributingOrganization");
             extraJSList.add("stores/RelatedIdentifier");
+            extraJSList.add("stores/AwardDOI");
             extraJSList.add("stores/Metadata");
             jsFilesList.add("input");
 

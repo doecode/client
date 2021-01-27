@@ -1,0 +1,100 @@
+<div class="panel panel-default" {{#if show_optional_toggle}} style='display:none' {{/if}}>
+	<div class="panel-heading" role="tab" id="heading-identifiers">
+		<div class="panel-title">
+			<a id='awards-panel-anchor' class='input-accordion-title' role="button" data-toggle="collapse" {{#if is_accordion}} data-parent="#input-page-accordion" {{/if}} href="#collapse-awards" aria-expanded="false" aria-controls="collapse-awards">
+				Awards
+			</a>
+			<span class="green fa fa-check" style="display: none"></span>
+			<span title="Open" class="pull-right fa fa-chevron-right clickable accordion-toggle-arrow"></span>
+		</div>
+	</div>
+	<div id="collapse-awards" class="panel-collapse collapse input-panel-collapse" role="tabpanel" aria-labelledby="heading-awards">
+		<div class="panel-body">
+			<div class="row">
+				<div class='col-xs-12'>
+					<label id="award-dois-lbl" class='control-label'>Award DOIs</label>{{> tooltips/AwardDOI}}
+					<br />
+					<br />
+					<span class="table-msg"></span>
+					<br />
+					<br />
+					<table id='award-dois-data-table' class="table table-condensed table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Award DOI</th>
+								<th>Funder Name</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-xs-12 center-text'>
+					<button type="button" title="Award DOIs" id='add-award-dois-modal-btn' class="pure-button pure-button-primary btn-lg">Add Award DOI</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Award DOIs Edit modal-->
+	<div class="modal fade" id="award-dois-edit-modal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 id="award-dois-manage-lbl" class="modal-title">Manage Award DOIs</h4>
+				</div>
+				<div class="modal-body dl-horizontal">
+					<div id="award-dois-modal-error-zone" class='row'>
+						<div class='col-xs-12'>
+							<div class="error-color">
+								<h2 id="award-dois-modal-error"></h2>
+								<br />
+							</div>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='col-xs-12'>
+							<div class="row">
+								<div class="col-xs-12">
+									<label id="award-doi-value-lbl" for='award-doi-value' class='control-label'>Award DOI</label>{{> tooltips/Identifier}}
+								</div>
+								<div class="col-xs-12">
+									<input type='text' id='award-doi-value' class='pure-input-1 form-control' title='Identifier' />
+									<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+									<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+								</div>
+								<div class="col-xs-12">
+									<label id="award-doi-value-lbl-error" class="control-label errorCheck">Problem</label>
+								</div>
+							</div>
+							<br />
+							<div class="row">
+								<div class="col-xs-12">
+									<label id="award-doi-funder-name-lbl" for='award-doi-funder-name' class='control-label'>Funder Name</label>{{> tooltips/AwardDOI}}
+								</div>
+								<div class="col-xs-12">
+									<input type='text' id='award-doi-funder-name' class='pure-input-1 form-control' title='Funder Name' />
+									<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+									<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+								</div>
+								<div class="col-xs-12">
+									<label id="award-doi-funder-name-lbl-error" class="control-label errorCheck">Problem</label>
+								</div>
+							</div>
+							<br />
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id='award-dois-close-btn' class="pure-button">Close</button>&nbsp;&nbsp;
+					<span name="delete-btn"><button type="button" id='award-dois-delete-btn' title="Delete" class="pure-button button-error">Delete</button>&nbsp;</span>
+					<button type="button" id='award-dois-save-btn' title="Save and Close" class="pure-button pure-button-primary">Save and Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
