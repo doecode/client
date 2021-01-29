@@ -29,6 +29,30 @@ var BaseData = function () {
         value: mobx.action("Set Value", function setValue(field, data) {
             this.fieldMap[field] = data;
 
+            if (field === 'is_migration') {
+                var schemaFile = this.infoSchema["file_name"];
+                var projectType = this.fieldMap['accessibility'];
+                
+                if (data === true) {
+                    schemaFile.required = "";
+                    
+                    if (projectType == 'CO') {
+                        schemaFile.required = "sub";
+                    }
+                    else {
+                        schemaFile.required = "";
+                    }
+                }
+                else {
+                    if (projectType == 'OS') {
+                        schemaFile.required = "";
+                    }
+                    else {
+                        schemaFile.required = this.page == 'announce' ? "announ" : "";
+                    }
+                }
+            }
+
             if (field === 'accessibility') {
                 var schemaRepo = this.infoSchema["repository_link"];
                 var schemaLanding = this.infoSchema["landing_page"];
@@ -37,6 +61,7 @@ var BaseData = function () {
                 var schemaLicenseContact = this.infoSchema["license_contact_email"];
                 var schemaLicenseClosedAvail = this.infoSchema["license_closedsource_available"];
                 var schemaLicenseClosedContact = this.infoSchema["license_closedsource_contactinfo"];
+                var isMigration = this.fieldMap['is_migration'];
 
                 var openSource = data == null ? null : data.charAt(0) == 'O';
 
@@ -100,7 +125,7 @@ var BaseData = function () {
                     schemaRepo.extra_info = "";
                     schemaLanding.required = "sub";
                     schemaLanding.panel = 'Repository Information';
-                    schemaFile.required = this.page == 'announce' ? "announ" : "";
+                    schemaFile.required = this.page == 'announce' && isMigration === false ? "announ" : "";
                     schemaFile.panel = 'Supplemental Product Information';
 
                     this.setValue("landing_page", this.getValue("landing_page") || this.getValue("repository_link"));

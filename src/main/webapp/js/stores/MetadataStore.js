@@ -4,7 +4,7 @@ var repo_fields = ["accessibility", "repository_link", "landing_page"];
 var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "license_closedsource_available", "license_closedsource_contactinfo", "licenses", "proprietary_url","license_contact_email"];
 var developers_fields = ["developers"];
 var doi_fields = ["doi", "doi_infix", "release_date"];
-var supplemental_fields = ["acronym", "country_of_origin", "keywords", "project_keywords", "site_accession_number", "other_special_requirements", "file_name", "container_name"];
+var supplemental_fields = ["acronym", "country_of_origin", "keywords", "project_keywords", "site_accession_number", "other_special_requirements", "is_migration", "file_name", "container_name"];
 var organizations_fields = ["sponsoring_organizations", "research_organizations"];
 var contribs_fields = ["contributors", "contributing_organizations"];
 var identifiers_fields = ["related_identifiers"];
@@ -52,6 +52,7 @@ var _metadata = mobx.observable({
     "recipient_email": '',
     "recipient_phone": '',
     "recipient_org": '',
+    "is_migration": false,
     "file_name": '',
     "files": [],
     "container_name": '',
@@ -103,6 +104,14 @@ var _metadataInfoSchema = mobx.observable({
         ever_completed: false,
         validations: ["url"],
         panel: "",
+        error: ''
+    },
+    "is_migration": {
+        required: "",
+        completed: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Supplemental Product Information",
         error: ''
     },
     "file_name": {

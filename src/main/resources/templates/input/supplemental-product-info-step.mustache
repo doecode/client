@@ -58,7 +58,7 @@
 						</div>
 					</div>
 					<br />
-					{{#if should_display_project_keywords}}
+					{{#if should_display_admin_only}}
 						<div class="row">
 							<div class="col-xs-12">
 								<label id="project-keywords-lbl" class='control-label' for='project-keywords'>Project Keywords</label>{{> tooltips/ProjectKeywords}}
@@ -109,6 +109,12 @@
 						<br />
 						<div class="row">
 							<div class="col-xs-12" style="border-top: 1px solid #ddd; padding-top: 10px;">
+                                {{#if should_display_admin_only}}
+                                <label class='control-label' for='project-is-migration'>Is this a migration record?</label>{{> tooltips/MigrationRecord}}
+                                <br />
+                                <input type='checkbox' id='project-is-migration' class='pure-input1' checked title='Migration Record' />
+                                <br /><br />
+                                {{/if}}
 								<label id="uploaded-file-name-lbl" class='control-label' for='file-upload-dropzone'></label>{{> tooltips/FileUpload}}
 								<br />
 								<small>Please upload an archive file containing your source code. This will be used for archiving purposes.</small>

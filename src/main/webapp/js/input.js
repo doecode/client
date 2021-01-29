@@ -741,6 +741,21 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
         metadata.setValue("doi_status", (form.allowSave ? "RES" : "REG"));
     }
 
+    // Allow Is Migrated Flag
+    checkHasRole('RecordAdmin', function () {
+        // do nothing
+    }, function () {
+        checkHasRole('ApprovalAdmin', function () {
+            if ($("#page").val() != 'approve') {
+                // not approver on approval page, so wipe out migration flag
+                metadata.setValue('is_migration', false);
+            }
+        }, function () {
+            // not admin, so wipe out migration flag
+            metadata.setValue('is_migration', false);
+        });
+    });
+
     if (infix) {
         metadata.setValue("doi_infix", infix);
     }
@@ -1430,6 +1445,12 @@ mobx.autorun("Other Special Requirements", function () {
 
 mobx.autorun("Accession Number", function () {
     updateInputStyle(metadata, "site_accession_number", "site-accession-number-lbl", "site-accession-number");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Is Migration", function () {
+    $("#project-is-migration").prop('checked', metadata.getValue("is_migration"));
 
     //mobx.whyRun();
 });
@@ -2713,6 +2734,11 @@ $(document).ready(mobx.action("Document Ready", function () {
     setModalActions("award-dois");
 
     /*File uploads*/
+    $('#project-is-migration').on('change', {
+        store: metadata,
+        field: "is_migration"
+    }, checkboxChange);
+
     var dropzone = $("#file-upload-dropzone").dropzone(FILE_UPLOAD_CONFIG);
     // bind removal event
     $("#delete-uploaded-file-btn").on('click', function () {
