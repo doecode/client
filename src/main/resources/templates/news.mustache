@@ -84,7 +84,7 @@
     }
 
     {{! Put an external link icon from Font Awesome after any <a> tag that isn't inside the "osti.gov" domain }}
-    a:not([href*='osti.gov']):not([href^='#']):not([href^='/']):after {
+    :not(.footer-link) > a:not([href*='osti.gov']):not([href^='#']):not([href^='/']):after {
         font-family: 'FontAwesome';
         font-size: 11px;
         content: " \f08e";
