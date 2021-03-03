@@ -763,6 +763,7 @@ public class SearchFunctions {
         // Repository URL
         String repository_link = search_data.findPath("repository_link").asText("");
         String landing_page = search_data.findPath("landing_page").asText("");
+        String doc_link = search_data.findPath("documentation_url").asText("");
 
         if (StringUtils.isNotBlank(repository_link)) {
             return_data.put("has_repo_link", true);
@@ -787,9 +788,10 @@ public class SearchFunctions {
         return_data.put("api_url", public_api_url);
 
         // Documentation URL
-        return_data.put("documentation_url", search_data.findPath("documentation_url").asText(""));
-        return_data.put("has_documentation_url",
-                StringUtils.isNotBlank(search_data.findPath("documentation_url").asText("")));
+        if (StringUtils.isNotBlank(doc_link)) {
+            return_data.put("has_documentation_url", true);
+            return_data.put("documentation_url", doc_link);
+        }
 
         // Previous/Next version
         // Go through the related identifiers list. If we can find any DOI's that are
