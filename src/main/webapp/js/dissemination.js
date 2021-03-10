@@ -314,8 +314,10 @@ var setUpDateSlider = function () {
 var pushDownloadMetric = function () {
     //code id we care about
     var code_id = $(this).data('codeid');
+    var software_type = $(this).data('softwaretype');
     var href = $(this).attr('href');
     var ga_link = '/' + APP_NAME + "/downloads/" + code_id + "/" + href;
+    _gaq.push(['_setCustomVar', 1, 'Software Type', software_type, 3]);
     _gaq.push(['_trackPageview', ga_link]);
 };
 

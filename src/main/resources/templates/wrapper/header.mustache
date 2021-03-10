@@ -24,6 +24,7 @@
         <script type="text/javascript">
             _gaq.push(['_setAccount', '{{google_analytics_id}}']);
             _gaq.push(['_setDomainName', '{{ga_domain}}']);
+            {{#if software_type}}_gaq.push(['_setCustomVar', 1, 'Software Type', '{{software_type}}', 3]);{{/if}}
             _gaq.push(['_trackPageview']);
             (function () {
                 var ga = document.createElement('script');

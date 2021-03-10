@@ -504,6 +504,10 @@ public class SearchFunctions {
 
             ObjectNode newRow = JsonUtils.MAPPER.createObjectNode();
             Long code_id = row.findPath("code_id").asLong(0);
+            String software_type = row.findPath("software_type").asText("");
+            ArrayNode software_types = DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY);
+            String software_type_display = DOECODEUtils.getDisplayVersionOfValue(software_types, software_type);
+
             newRow.put("code_id", code_id);
             newRow.put("release_date", row.findPath("release_date").asText(""));
             newRow.put("show_release_date", StringUtils.isNotBlank(row.findPath("release_date").asText("")));
@@ -531,7 +535,7 @@ public class SearchFunctions {
             newRow.set("dev_contributors", getDevAndContributorLink(devContributorsTrimmed, is_more_than_3));
             newRow.set("descriptionObj", getDescription(row.findPath("description").asText(""), 100));
             newRow.set("repository_links_list",
-                    getDoiReposLinks(code_id.toString(), row.findPath("doi").asText(""),
+                    getDoiReposLinks(code_id.toString(), software_type_display, row.findPath("doi").asText(""),
                             row.findPath("repository_link").asText(""), row.findPath("landing_page").asText(""),
                             row.findPath("release_date").asText("")));
 
@@ -643,15 +647,15 @@ public class SearchFunctions {
         return return_data;
     }
 
-    private static ArrayNode getDoiReposLinks(String code_id, String doi, String repository_link, String landing_page,
+    private static ArrayNode getDoiReposLinks(String code_id, String software_type, String doi, String repository_link, String landing_page,
             String release_date) {
         ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
 
         // doi
         if (StringUtils.isNotBlank(release_date) && StringUtils.isNotBlank(doi)) {
             String fixed_doi = "https://doi.org/" + doi;
-            return_data.add(makeDOIRepoLinkObj("", "DOI for Code ID " + code_id, code_id, fixed_doi,
-                    "https://doi.org/" + doi, ""));
+            return_data.add(makeDOIRepoLinkObj("", "DOI for Code ID " + code_id, code_id, software_type, fixed_doi,
+                    "https://doi.org/" + doi, "download-link"));
         }
 
         // Repository URL
@@ -659,7 +663,7 @@ public class SearchFunctions {
             repository_link = (StringUtils.startsWith(repository_link, "http:")
                     || StringUtils.startsWith(repository_link, "https:")) ? repository_link
                             : "http://" + repository_link;
-            return_data.add(makeDOIRepoLinkObj("", "Repository URL for Code ID", code_id, repository_link,
+            return_data.add(makeDOIRepoLinkObj("", "Repository URL for Code ID", code_id, software_type, repository_link,
                     "Repository URL", "download-link"));
         }
 
@@ -667,7 +671,7 @@ public class SearchFunctions {
         if (StringUtils.isNotBlank(landing_page)) {
             landing_page = (StringUtils.startsWith(landing_page, "http:")
                     || StringUtils.startsWith(landing_page, "https:")) ? landing_page : "http://" + landing_page;
-            return_data.add(makeDOIRepoLinkObj("", "Landing Page for Code ID", code_id, landing_page, "Landing Page",
+            return_data.add(makeDOIRepoLinkObj("", "Landing Page for Code ID", code_id, software_type, landing_page, "Landing Page",
                     "download-link"));
         }
 
@@ -681,12 +685,13 @@ public class SearchFunctions {
         return return_data;
     }
 
-    private static ObjectNode makeDOIRepoLinkObj(String pretext, String title, String code_id, String href,
+    private static ObjectNode makeDOIRepoLinkObj(String pretext, String title, String code_id, String software_type, String href,
             String display, String css_class) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         return_data.put("pretext", pretext);
         return_data.put("title", title);
         return_data.put("code_id", code_id);
+        return_data.put("software_type", software_type);
         return_data.put("href", href);
         return_data.put("display", display);
         return_data.put("css_class", css_class);
