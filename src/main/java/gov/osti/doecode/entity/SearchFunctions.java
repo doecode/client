@@ -650,8 +650,8 @@ public class SearchFunctions {
         // doi
         if (StringUtils.isNotBlank(release_date) && StringUtils.isNotBlank(doi)) {
             String fixed_doi = "https://doi.org/" + doi;
-            return_data.add(makeDOIRepoLinkObj("DOI: ", "DOI for Code ID " + code_id, code_id, fixed_doi,
-                    "https://" + doi, ""));
+            return_data.add(makeDOIRepoLinkObj("", "DOI for Code ID " + code_id, code_id, fixed_doi,
+                    "https://doi.org/" + doi, ""));
         }
 
         // Repository URL
@@ -1033,7 +1033,7 @@ public class SearchFunctions {
         // DOI
         String doi = biblio_data.findPath("doi").asText("");
         if (StringUtils.isNotBlank(doi)) {
-            doi = ((needsSpacing ? " " : "") + "doi:" + "https://" + doi + ".");
+            doi = ((needsSpacing ? " " : "") + "https://doi.org/" + doi + ".");
         }
 
         return_data.put("show_doi", showDOI(doi, biblio_data.findPath("release_date").asText("")));
@@ -1076,6 +1076,7 @@ public class SearchFunctions {
         if (StringUtils.isNotBlank(biblio_data.findPath("doi").asText(""))
                 && StringUtils.isNotBlank(biblio_data.findPath("release_date").asText(""))) {
             String doi = biblio_data.findPath("doi").asText("");
+            optional_data.add(getOptionalBibtexObj("doi", "{" + doi.replaceAll("_", "{_}") + "}"));
             optional_data.add(getOptionalBibtexObj("url", "{https://doi.org/" + doi + "}"));
             optional_data.add(
                     getOptionalBibtexObj("howpublished", "{[Computer Software] \\url{https://doi.org/" + doi + "}}"));
@@ -1160,7 +1161,7 @@ public class SearchFunctions {
         // DOI
         String doi = "";
         if (StringUtils.isNotBlank(biblio_data.findPath("doi").asText(""))) {
-            doi = ((needsSpacing ? " " : "") + "doi:" + "https://" + biblio_data.findPath("doi").asText("") + ".");
+            doi = ((needsSpacing ? " " : "") + "https://doi.org/" + biblio_data.findPath("doi").asText("") + ".");
         }
 
         return_data.put("show_doi",

@@ -239,7 +239,7 @@ public class ReportFunctions {
         String doi = docs.findPath("doi").asText("");
         String release_date = docs.findPath("release_date").asText("");
         // DOI
-        return_data.put("doi", SearchFunctions.showDOI(doi, release_date) ? doi : "");
+        return_data.put("doi", SearchFunctions.showDOI(doi, release_date) ? "https://doi.org/" + doi : "");
 
         // Release Date
         return_data.put("release_date", release_date);
