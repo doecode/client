@@ -471,7 +471,7 @@ public class SearchFunctions {
         long rows = search_form_data.findPath("rows").asLong(0);
 
         long page = ((int) (start / rows) + 1);
-        long max_pages = ((int) (num_found / rows) + 1);
+        long max_pages = ((int) java.lang.Math.ceil(num_found / (double) rows));
 
         return_data.put("pagination_btn_prev_disabled", page < 2);
         return_data.put("pagination_btn_next_disabled", (start + rows >= num_found));
@@ -727,7 +727,7 @@ public class SearchFunctions {
             long rows = search_form_data.findPath("rows").asLong(0);
 
             long page = ((int) (start / rows) + 1);
-            long max_pages = ((int) (num_found / rows) + 1);
+            long max_pages = ((int) java.lang.Math.ceil(num_found / (double) rows));
 
             if (max_pages > 1) {
                 return_data.add("&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Page&nbsp;" + Long.toString(page) + "&nbsp;of&nbsp;"
