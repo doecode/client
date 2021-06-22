@@ -136,9 +136,14 @@ html h3 {
     text-align: center !important;
 }
 
-.center-text>img {
+.center-text>img, .footer-image-zone {
     max-width: 80%;
     height: auto;
+}
+
+.footer-image-container, .footer-image {
+    max-width: 400px;
+    max-height: 44px;
 }
 
 .right-text {

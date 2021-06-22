@@ -7,15 +7,14 @@
         <div class="row center-text">
             <div class='col-md-3'></div>
             <div class="col-md-6 col-xs-12 center-text">
-                <img alt='usdoeimg' src='{{#unless is_homepage}}/${app_name}/images/DOE_SC_OSTI_666_sm.png{{else}}/${app_name}/images/DOE_SC_OSTI_FFF.png{{/unless}}' class="mt-3 mb-1 img-responsive center-block" alt="U.S. Department of Energy" id="footer-banner" useMap="#footer-banner-map" />
-                <map name="footer-banner-map" id="footer-banner-map">
-                    <area alt="Office of Scientific and Technical Information" title="Office of Scientific and Technical Information" href="/" shape="rect" coords="236,1,400,44" target="_self" />
-                    <area alt="Office of Science" title="Office of Science" href="https://www.energy.gov/science/office-science" shape="rect" coords="157,0,235,44" target='_blank' rel="noopener noreferrer" />
-                    <area alt="U.S. Department of Energy" title="U.S. Department of Energy" href="https://energy.gov" shape="rect" coords="0,1,157,44" target='_blank' rel="noopener noreferrer" />
-                </map>
-                {{!--Here just for the sake of 508 compliance--}}
-                <a style='display:none;' href='/'>Office of Scientific and Technical Information</a><a style='display:none;' href='https://www.energy.gov/science/office-science'>Office of Science</a><a style='display:none;' href='https://energy.gov'>U.S.
-                    Department of Energy</a>
+                <div class="footer-image-zone mt-3 mb-1 img-responsive center-block">
+                    <div style="position: relative;" class="footer-image-container center-block">
+                        <img src="{{#unless is_homepage}}/${app_name}/images/DOE_SC_OSTI_666_sm.png{{else}}/${app_name}/images/DOE_SC_OSTI_FFF.png{{/unless}}" style="width: 100%; height: auto;" class="footer-image">
+                        <a alt="U.S. Department of Energy" title="U.S. Department of Energy" href="https://energy.gov" target='_blank' rel="noopener noreferrer"><div style="position: absolute;left: 0%;top: 0%;width: 39.5%;height: 100%;background-color: rgba(255, 0, 0, 0);"></div></a>
+                        <a alt="Office of Science" title="Office of Science" href="https://www.energy.gov/science/office-science" target='_blank' rel="noopener noreferrer"><div style="position: absolute;left: 39.5%;top: 0%;width: 19.5%;height: 100%;background-color: rgba(0, 255, 0, 0);"></div></a>
+                        <a alt="Office of Scientific and Technical Information" title="Office of Scientific and Technical Information" href="/" target='_blank' rel="noopener noreferrer"><div style="position: absolute; left: 59%; top: 0%; width: 41%; height: 100%; background-color: rgba(0, 0, 255, 0);"></div></a>
+                    </div>
+                </div>
             </div>
             <div class='col-md-3'></div>
         </div>
