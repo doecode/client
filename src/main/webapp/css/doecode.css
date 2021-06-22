@@ -146,6 +146,12 @@ html h3 {
     max-height: 44px;
 }
 
+@media print {
+    #yml-anchor:after {
+      content: none !important;
+    }
+  }
+
 .right-text {
     text-align: right !important;
 }
