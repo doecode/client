@@ -360,7 +360,7 @@ public class SearchFunctions {
         }
 
         // ORCID
-        String orcid = post_data.findPath("").asText("");
+        String orcid = post_data.findPath("orcid").asText("");
         if (StringUtils.isNotBlank(orcid)) {
             search_description_list.add(makeSearchDescriptionObject("ORCID", orcid, "orcid"));
         }
