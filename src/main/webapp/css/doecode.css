@@ -548,8 +548,8 @@ hr {
     margin-left: 18px;
 }
 
-.search-sidebar-checkbox-text span:not(.facet-item-count):not(.fa.fa-angle-down):not(.fa.fa-angle-up) {
-    margin-left: 18px;
+.search-sidebar-checkbox-text span.search-sidebar-margin {
+        margin-left: 18px;
 }
 
 .search-sidebar-checkbox-text label:first-of-type {

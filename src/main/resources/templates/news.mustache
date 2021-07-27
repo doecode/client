@@ -147,7 +147,7 @@
                 <div class="search-sidebar-checkbox-text" style='margin-top:8px;'>
                     {{#each article_types}}
                     <div>
-                        <span>
+                        <span class="search-sidebar-margin">
                             <label style='font-size:14.45px;'>
                                 <input class='search-checkbox search-article-type' name='article-type-filter' id='article-type-{{art_type_id}}' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}} /> <label title='{{type}}' class='search-input-label' for='article-type-{{art_type_id}}'><span
                                         style='display:none;'>text</span></label>&nbsp;{{type}}
@@ -164,7 +164,7 @@
                 <div class="search-sidebar-checkbox-text" style='margin-top:8px;'>
                     {{#each publication_years}}
                     <div>
-                        <span>
+                        <span class="search-sidebar-margin">
                             <label style='font-size:14.45px;'>
                                 <input class='search-checkbox search-publication-year' name='publication-date-filter' id='publication_date-{{year}}' value='{{year}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{year}}' class='search-input-label' for='publication_date-{{year}}'><span style='display:none;'>text</span></label>&nbsp;{{year}}
                                 ({{count}})

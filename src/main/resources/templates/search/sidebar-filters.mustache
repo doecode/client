@@ -15,7 +15,7 @@
         <div class="search-sidebar-checkbox-text">
             {{#each availabilities_list}}
             <div>
-                <span>
+                <span class="search-sidebar-margin">
                     <label>
                         <input class='search-checkbox' id='availabilitycheck-{{value}}' name='accessibility' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{label}}' class='search-input-label'
                                                                                                                                                                                           for='availabilitycheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
@@ -35,7 +35,7 @@
         <div class="search-sidebar-checkbox-text">
             {{#each license_options_list}}
             <div>
-                <span>
+                <span class="search-sidebar-margin">
                     <label>
                         <input class='search-checkbox' id='licensescheck-{{value}}' name='licenses' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{label}}' class='search-input-label'
                                                                                                                                                                                  for='licensescheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
@@ -54,7 +54,7 @@
         <div class="search-sidebar-checkbox-text">
             {{#each software_type_options_list}}
             <div>
-                <span>
+                <span class="search-sidebar-margin">
                     <label>
                         <input class='search-checkbox' id='softwaretypecheck-{{value}}' name='software_type' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{label}}' class='search-input-label'
                                                                                                                                                                                           for='softwaretypecheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
@@ -88,7 +88,7 @@
         <div class="search-sidebar-checkbox-text">
             {{#each research_orgs_facets}}
             <div>
-                <span>
+                <span class="search-sidebar-margin">
                     <label>
                         <input class='search-checkbox single-val-search-checkbox' id='researchorgcheck-{{value_compressed}}' name='research_organization' value='{{label}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> 
                                <label title='{{label}}' class='search-input-label' for='researchorgcheck-{{value_compressed}}'>
