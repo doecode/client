@@ -55,6 +55,11 @@ html h3 {
     color: green;
 }
 
+.panelError {
+    color: #990000;
+    margin: 4px;
+}
+
 .biblio-title {
     font-weight: 300;
     font-size: 31px;

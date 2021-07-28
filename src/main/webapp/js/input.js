@@ -237,7 +237,7 @@ var award_dois_tbl_opts = {
 /***********************************************************************/
 /***********************************************************************/
 var toggleCollapsible = function () {
-    $(this).prev().prev('a.input-accordion-title').trigger('click');
+    $(this).prev().prev().prev('a.input-accordion-title').trigger('click');
 };
 
 // If you close a modal, any new items added are removed, based on an attribute in the option field
@@ -1014,6 +1014,7 @@ var setModalStatus = function setModalStatus(modal, store) {
 var setPanelStatus = function setPanelStatus(panel, anchor, panelStatus) {
     $("#" + anchor).removeClass("req_fr req_arfc required-field-span");
     $("#" + anchor).next("span").hide();
+    $("#" + anchor).next("span").next("span").hide();
 
     if (panelStatus.remainingRequired > 0)
         $("#" + anchor).addClass("req_fr required-field-span");
@@ -1021,6 +1022,9 @@ var setPanelStatus = function setPanelStatus(panel, anchor, panelStatus) {
         $("#" + anchor).addClass("req_arfc");
         $("#" + anchor).next("span").show();
     }
+    
+    if (panelStatus.errors)
+        $("#" + anchor).next("span").next("span").show();
 
     if (panel == "Contact Information") {
         const successNotice = panelStatus.hasRequired ? panelStatus.remainingRequired == 0 : panelStatus.completedOptional > 0;
