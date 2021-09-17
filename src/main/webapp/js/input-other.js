@@ -344,7 +344,7 @@ var parseProjectsPageData = function (data) {
 
         new_data.push({
             code_id: item.code_id ? item.code_id : '',
-            software_title: item.software_title ? item.software_title : '',
+            software_title: item.software_title ? item.software_title.replace(/</g, "&lt;").replace(/>/g, "&gt;") : '',
             workflow_status: workflow_status,
             workflow_status_value: item.workflow_status,
             system_status: system_status,
