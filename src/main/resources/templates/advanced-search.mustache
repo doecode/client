@@ -50,10 +50,10 @@
 			      <input type='text' placeholder='MM/DD/YYYY' class='pure-input-1 doecode-datepicker' id='advanced-search-date_latest' title='Latest Release Date'/>
 			 </div>
 			 <div class='col-xs-12 left-text no-col-padding-left adv-dropdown-row tiny-center-text'>
-			      <label for='advanced-search-accessibility' class='advsearch-adv-search-dropdown-label'>Project Type:</label>
+			      <label for='advanced-search-project_type' class='advsearch-adv-search-dropdown-label'>Project Type:</label>
 			 </div>
 			 <div class='col-xs-12 no-col-padding-left no-col-padding-right  tiny-col-padding'>
-			      <select class='pure-input-1 doecode-chosen-select' title='Code Accessibilty' id='advanced-search-accessibility'  data-allowcustom="false" data-placeholder='Select your Options' multiple>
+			      <select class='pure-input-1 doecode-chosen-select' title='Project Type' id='advanced-search-project_type'  data-allowcustom="false" data-placeholder='Select your Options' multiple>
 				   {{#each adv_search_lists.availabilities_list}}
 				   <option title="{{title}}" value="{{value}}">{{label}}</option>
 				   {{/each}}

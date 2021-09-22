@@ -283,7 +283,7 @@ var updateFromOpenClosedInfo = mobx.action("Update From OpenClosed Info", functi
 });
 
 var projectTypeButtonClick = mobx.action("Project Type Click", function () {
-    var project_type = metadata.getValue("accessibility");
+    var project_type = metadata.getValue("project_type");
     var openSource = project_type == null ? null : project_type.charAt(0) == 'O';
     trackOpenClosedInfo(project_type);
 
@@ -291,7 +291,7 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
     if (id == "input-opensource-btn") {
         // if not already OS, blank out some things
         if (!openSource) {
-            metadata.setValue("accessibility", null);
+            metadata.setValue("project_type", null);
             metadata.setValue("project_type_public", null);
         }
 
@@ -303,7 +303,7 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
     else if (id == "input-closedsource-btn") {
         // if not already CS, blank out some things
         if (openSource) {
-            metadata.setValue("accessibility", null);
+            metadata.setValue("project_type", null);
         }
 
         metadata.setValue("project_type_opensource", false);
@@ -358,7 +358,7 @@ var projectTypeButtonUpdate = function () {
     }
 };
 
-var setAccessibility = mobx.action("Set Project Type", function () {
+var setProjectType = mobx.action("Set Project Type", function () {
     var is_opensource = metadata.getValue("project_type_opensource");
     var is_public = metadata.getValue("project_type_public");
 
@@ -377,7 +377,7 @@ var setAccessibility = mobx.action("Set Project Type", function () {
     updateFromOpenClosedInfo(val.charAt(0) == 'O');
     trackOpenClosedInfo(val);
 
-    metadata.setValue("accessibility", val);
+    metadata.setValue("project_type", val);
 });
 
 var licensesButtonClick = mobx.action("License Options Click", function () {
@@ -661,14 +661,14 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     }
 
     form.last_filename = "";
-    var accessibility = metadata.getValue("accessibility");
-    if (accessibility != 'OS') {
+    var project_type = metadata.getValue("project_type");
+    if (project_type != 'OS') {
         var orig_file = metadata.getValue("file_name");
         form.last_filename = orig_file ? orig_file : form.last_filename;
     }
 
-    if (accessibility != null) {
-        switch (accessibility) {
+    if (project_type != null) {
+        switch (project_type) {
             case "OS":
                 metadata.setValue("project_type_opensource", true);
                 metadata.setValue("project_type_public", true);
@@ -687,7 +687,7 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
         
         projectTypeButtonUpdate();
         
-        var openSource = accessibility.charAt(0) == 'O';
+        var openSource = project_type.charAt(0) == 'O';
         if (!openSource) {
             var closed_propurl = metadata.getValue('proprietary_url');
             var closed_licensecontact = metadata.getValue('license_contact_email');
@@ -703,7 +703,7 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
                 metadata.setValue('license_closedsource_contactinfo', true);
         }
 
-        trackOpenClosedInfo(accessibility);
+        trackOpenClosedInfo(project_type);
     }
 
     form.workflowStatus = data.metadata.workflow_status;
@@ -843,7 +843,7 @@ var submit = function submit() {
     var msg = code_id ? "Project " + code_id : "New Project";
 
     msg = "<br/>Submitting data for " + msg + ".";
-    if (metadata.getValue("accessibility").charAt(0) == 'C')
+    if (metadata.getValue("project_type").charAt(0) == 'C')
         msg += "<br/><br/>Please wait while your record and the associated files are being sent to DOE CODE. This may take a few minutes to complete.";
 
     setCommonModalMessage({
@@ -1067,7 +1067,7 @@ mobx.autorun("Repository Info Panel", function () {
 });
 
 mobx.autorun("Project Type", function () {
-    var project_type = metadata.getValue("accessibility");
+    var project_type = metadata.getValue("project_type");
     switch (project_type) {
         case "OS":
             $("#git-repo-only-div").show();
@@ -1124,7 +1124,7 @@ mobx.autorun("Project Group Success", function () {
 
 mobx.autorun("Project Button Update", function () {
     projectTypeButtonUpdate();
-    setAccessibility();
+    setProjectType();
 
     //mobx.whyRun();
 });

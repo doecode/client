@@ -1,6 +1,6 @@
 var MetadataStore = function MetadataStore() {};
 
-var repo_fields = ["accessibility", "repository_link", "landing_page"];
+var repo_fields = ["project_type", "repository_link", "landing_page"];
 var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "license_closedsource_available", "license_closedsource_contactinfo", "licenses", "proprietary_url","license_contact_email"];
 var developers_fields = ["developers"];
 var doi_fields = ["doi", "doi_infix", "release_date"];
@@ -22,7 +22,7 @@ var _metadata = mobx.observable({
     "doi": '',
     "doi_infix": '',
     "doi_status": "",
-    "accessibility": null,
+    "project_type": null,
     "project_type_opensource": null,
     "project_type_public": null,
     "description": '',
@@ -60,7 +60,7 @@ var _metadata = mobx.observable({
 });
 
 var _metadataInfoSchema = mobx.observable({
-    "accessibility": {
+    "project_type": {
         required: "sub",
         label: "Project Type",
         completed: false,

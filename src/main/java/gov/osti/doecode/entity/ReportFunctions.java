@@ -162,7 +162,7 @@ public class ReportFunctions {
         return_data.put("software_type", DOECODEUtils.getDisplayVersionOfValue(software_types, software_type));
 
         // Project Type
-        String project_type = docs.findPath("accessibility").asText("");
+        String project_type = docs.findPath("project_type").asText("");
         ArrayNode project_types = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
         return_data.put("project_type", DOECODEUtils.getDisplayVersionOfValue(project_types, project_type));
 

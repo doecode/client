@@ -31,7 +31,7 @@ var BaseData = function () {
 
             if (field === 'is_migration') {
                 var schemaFile = this.infoSchema["file_name"];
-                var projectType = this.fieldMap['accessibility'];
+                var projectType = this.fieldMap['project_type'];
                 
                 if (data === true) {
                     schemaFile.required = "";
@@ -48,7 +48,7 @@ var BaseData = function () {
                 }
             }
 
-            if (field === 'accessibility') {
+            if (field === 'project_type') {
                 var schemaRepo = this.infoSchema["repository_link"];
                 var schemaLanding = this.infoSchema["landing_page"];
                 var schemaFile = this.infoSchema["file_name"];

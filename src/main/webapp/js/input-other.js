@@ -96,11 +96,11 @@ var parseConfirmPageData = function (data) {
             content: moment(data.release_date, BACK_END_DATE_FORMAT).format(FRONT_END_DATE_FORMAT)
         });
     }
-    //Accessibility
-    if (data.accessibility) {
+    //Project Type
+    if (data.project_type) {
         var display_val = "";
         availabilities_list.forEach(function (item) {
-            if (data.accessibility === item.value) {
+            if (data.project_type === item.value) {
                 display_val = item.label;
                 return true;
             }

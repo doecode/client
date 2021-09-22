@@ -82,7 +82,7 @@ public class SearchFunctions {
         post_data.put("orcid",
                 Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("orcid"), ""), Whitelist.basic()));
 
-        post_data.set("accessibility", handleRequestArray(request.getParameter("accessibility")));
+        post_data.set("project_type", handleRequestArray(request.getParameter("project_type")));
         post_data.set("licenses", handleRequestArray(request.getParameter("licenses")));
         post_data.put("programming_languages", Jsoup.clean(
                 StringUtils.defaultIfBlank(request.getParameter("programming_languages"), ""), Whitelist.basic()));
@@ -150,7 +150,7 @@ public class SearchFunctions {
         return_data.set("search_sort_dropdown", sort_dropdownOptions(post_data.findPath("sort").asText("")));
         return_data.set("availabilities_list",
                 getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY),
-                        handleRequestArray(request.getParameter("accessibility"))));
+                        handleRequestArray(request.getParameter("project_type"))));
         return_data.set("license_options_list",
                 getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY),
                         handleRequestArray(request.getParameter("licenses"))));
@@ -309,15 +309,15 @@ public class SearchFunctions {
                     .add(makeSearchDescriptionObject("Latest Release Date", date_latest_trimmed, "date_latest"));
         }
 
-        // Accessibility
-        String accessibility_array = post_data.findPath("accessibility").asText("");
-        if (StringUtils.isNotBlank(accessibility_array) && JsonUtils.parseArrayNode(accessibility_array).size() > 0) {
-            // Get the accessibility array so we can get some display values
+        // Project Type
+        String project_type_array = post_data.findPath("project_type").asText("");
+        if (StringUtils.isNotBlank(project_type_array) && JsonUtils.parseArrayNode(project_type_array).size() > 0) {
+            // Get the project_type array so we can get some display values
             ArrayNode accessiblity_display_vals = DOECODEServletContextListener
                     .getJsonList(DOECODEJson.AVAILABILITY_KEY);
 
-            search_description_list.add(makeSearchDescriptionObjectArray("Accessibility",
-                    JsonUtils.parseArrayNode(accessibility_array), "accessibility", accessiblity_display_vals));
+            search_description_list.add(makeSearchDescriptionObjectArray("Project Type",
+                    JsonUtils.parseArrayNode(project_type_array), "project_type", accessiblity_display_vals));
         }
 
         // Software Type
@@ -746,8 +746,8 @@ public class SearchFunctions {
                 || StringUtils.isNotBlank(request_data.findPath("identifiers").asText(""))
                 || StringUtils.isNotBlank(request_data.findPath("date_earliest").asText(""))
                 || StringUtils.isNotBlank(request_data.findPath("date_latest").asText(""))
-                || (StringUtils.isNotBlank(request_data.findPath("accessibility").asText(""))
-                        && JsonUtils.parseArrayNode(request_data.findPath("accessibility").asText("")).size() > 0)
+                || (StringUtils.isNotBlank(request_data.findPath("project_type").asText(""))
+                        && JsonUtils.parseArrayNode(request_data.findPath("project_type").asText("")).size() > 0)
                 || (StringUtils.isNotBlank(request_data.findPath("licenses").asText(""))
                         && JsonUtils.parseArrayNode(request_data.findPath("licenses").asText("")).size() > 0)
                 || StringUtils.isNotBlank(request_data.findPath("programming_languages").asText(""))
@@ -1486,10 +1486,10 @@ public class SearchFunctions {
             ArrayNode availabilityList = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
 
             ObjectNode availabilityObj = JsonUtils.getJsonListItem(availabilityList, "value",
-                    biblio_data.findPath("accessibility").asText(""));
+                    biblio_data.findPath("project_type").asText(""));
             return_data.put("availability", availabilityObj.findPath("label").asText(""));
             return_data.put("has_availability",
-                    StringUtils.isNotBlank(biblio_data.findPath("accessibility").asText("")));
+                    StringUtils.isNotBlank(biblio_data.findPath("project_type").asText("")));
             meta_tags.add(makeMetaTag("availability", availabilityObj.findPath("label").asText("")));
 
             /* Software Type */
