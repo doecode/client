@@ -195,7 +195,6 @@ public class TemplateUtils {
         user_data.put("has_site_admin_role", UserFunctions.hasRole(roles_list, UserFunctions.SITE_ADMIN_ROLE));
         user_data.put("has_approval_admin_role", UserFunctions.hasRole(roles_list, UserFunctions.APPROVAL_ADMIN_ROLE));
         user_data.put("has_content_admin_role", UserFunctions.hasRole(roles_list, UserFunctions.CONTENT_ADMIN_ROLE));
-        user_data.put("has_osti_hosted_admin_role", UserFunctions.hasRole(roles_list, UserFunctions.OSTI_HOSTED_ADMIN_ROLE));
 
         HashMap<Object, Object> data_for_template = new HashMap<Object, Object>();
         data_for_template.put("user_data", user_data);

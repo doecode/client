@@ -24,7 +24,7 @@ var _metadata = mobx.observable({
     "doi_status": "",
     "accessibility": null,
     "project_type_opensource": null,
-    "project_type_publicosti": null,
+    "project_type_public": null,
     "description": '',
     "programming_languages": [],
     "version_number": '',
@@ -78,7 +78,7 @@ var _metadataInfoSchema = mobx.observable({
         panel: "Repository Information",
         error: ''
     },
-    "project_type_publicosti": {
+    "project_type_public": {
         required: "sub",
         label: "Is this software project available in a Publicly Accessible Repository?",
         completed: false,

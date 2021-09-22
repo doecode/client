@@ -20,9 +20,6 @@ var contributor_orgs_table = null;
 var related_identifiers_table = null;
 var award_dois_table = null;
 
-// project type control
-var is_osti_host_admin = false;
-
 // modal redirect
 var modal_redirect = null;
 
@@ -33,7 +30,6 @@ var form = mobx.observable({
     "allowSave": true,
     "workflowStatus": ""
 });
-form.co_repo = "";
 form.last_filename = "";
 
 form.open_licenses = [];
@@ -296,7 +292,7 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
         // if not already OS, blank out some things
         if (!openSource) {
             metadata.setValue("accessibility", null);
-            metadata.setValue("project_type_publicosti", null);
+            metadata.setValue("project_type_public", null);
         }
 
         metadata.setValue("project_type_opensource", true);
@@ -308,37 +304,31 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
         // if not already CS, blank out some things
         if (openSource) {
             metadata.setValue("accessibility", null);
-
-            if (is_osti_host_admin) {
-                metadata.setValue("project_type_publicosti", null);
-            }
         }
 
         metadata.setValue("project_type_opensource", false);
 
-        if (!is_osti_host_admin) {
-            metadata.setValue("project_type_publicosti", false);
-        }
+        metadata.setValue("project_type_public", false);
     }
     else if (id == "input-pubyes-btn") {
-        metadata.setValue("project_type_publicosti", true);
+        metadata.setValue("project_type_public", true);
     }
     else if (id == "input-pubno-btn") {
-        metadata.setValue("project_type_publicosti", false);
+        metadata.setValue("project_type_public", false);
     }
 });
 
 var projectTypeButtonUpdate = function () {
     var is_opensource = metadata.getValue("project_type_opensource");
-    var is_public_or_osti = metadata.getValue("project_type_publicosti");
+    var is_public = metadata.getValue("project_type_public");
     if (is_opensource == null) {
-        $("#is-public-osti-div").hide();
+        $("#is-public-div").hide();
         
         $("#input-opensource-btn").addClass("faded");
         $("#input-closedsource-btn").addClass("faded");
     }
     else {
-        $("#is-public-osti-div").show();
+        $("#is-public-div").show();
 
         if (is_opensource) {
             $("#input-opensource-btn").removeClass("faded");
@@ -348,16 +338,15 @@ var projectTypeButtonUpdate = function () {
             $("#input-opensource-btn").addClass("faded");
             $("#input-closedsource-btn").removeClass("faded");
 
-            if (!is_osti_host_admin)
-                $("#is-public-osti-div").hide();
+            $("#is-public-div").hide();
         }
 
-        if (is_public_or_osti == null) {
+        if (is_public == null) {
             $("#input-pubyes-btn").addClass("faded");
             $("#input-pubno-btn").addClass("faded");
         }
         else {
-            if (is_public_or_osti) {
+            if (is_public) {
                 $("#input-pubyes-btn").removeClass("faded");
                 $("#input-pubno-btn").addClass("faded");
             }
@@ -371,19 +360,19 @@ var projectTypeButtonUpdate = function () {
 
 var setAccessibility = mobx.action("Set Project Type", function () {
     var is_opensource = metadata.getValue("project_type_opensource");
-    var is_public_or_osti = metadata.getValue("project_type_publicosti");
+    var is_public = metadata.getValue("project_type_public");
 
-    if (is_opensource == null || is_public_or_osti == null)
+    if (is_opensource == null || is_public == null)
         return;
 
-    if (is_opensource && is_public_or_osti)
+    val = null;
+
+    if (is_opensource && is_public)
         val = "OS";
-    else if (is_opensource && !is_public_or_osti)
+    else if (is_opensource && !is_public)
         val = "ON";
-    else if (!is_opensource && !is_public_or_osti)
+    else if (!is_opensource && !is_public)
         val = "CS";
-    else if (!is_opensource && is_public_or_osti)
-        val = "CO";
 
     updateFromOpenClosedInfo(val.charAt(0) == 'O');
     trackOpenClosedInfo(val);
@@ -670,14 +659,9 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     if (!software_type_id) {
         metadata.setValue("software_type", $("#software_type").val());
     }
-    // if CO project, we need to store original repo link, in case they change type
-    form.co_repo = "";
+
     form.last_filename = "";
     var accessibility = metadata.getValue("accessibility");
-    if (accessibility == "CO") {
-        var orig_repo = metadata.getValue("repository_link");
-        form.co_repo = orig_repo ? orig_repo : form.co_repo;
-    }
     if (accessibility != 'OS') {
         var orig_file = metadata.getValue("file_name");
         form.last_filename = orig_file ? orig_file : form.last_filename;
@@ -687,19 +671,15 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
         switch (accessibility) {
             case "OS":
                 metadata.setValue("project_type_opensource", true);
-                metadata.setValue("project_type_publicosti", true);
+                metadata.setValue("project_type_public", true);
                 break;
             case "ON":
                 metadata.setValue("project_type_opensource", true);
-                metadata.setValue("project_type_publicosti", false);
+                metadata.setValue("project_type_public", false);
                 break;
             case "CS":
                 metadata.setValue("project_type_opensource", false);
-                metadata.setValue("project_type_publicosti", false);
-                break;
-            case "CO":
-                metadata.setValue("project_type_opensource", false);
-                metadata.setValue("project_type_publicosti", true);
+                metadata.setValue("project_type_public", false);
                 break;
             default:
                 break;
@@ -1095,7 +1075,6 @@ mobx.autorun("Project Type", function () {
             $("#landing-page-div").hide();
             $("#autopop-div").show();
             $("#repository-link-display-div").show();
-            $("#repository-link-co-div").hide();
             $("#file-upload-zone").hide();
             break;
         case "ON":
@@ -1105,16 +1084,6 @@ mobx.autorun("Project Type", function () {
             $("#landing-page-div").show();
             $("#autopop-div").hide();
             $("#repository-link-display-div").hide();
-            $("#repository-link-co-div").hide();
-            $("#file-upload-zone").show();
-            break;
-        case "CO":
-            $("#git-repo-only-div").hide();
-            $("#repository-link-div").hide();
-            $("#landing-page-div").show();
-            $("#autopop-div").hide();
-            $("#repository-link-display-div").show();
-            $("#repository-link-co-div").show();
             $("#file-upload-zone").show();
             break;
         default:
@@ -1123,15 +1092,11 @@ mobx.autorun("Project Type", function () {
             $("#landing-page-div").hide();
             $("#autopop-div").hide();
             $("#repository-link-display-div").hide();
-            $("#repository-link-co-div").hide();
             $("#file-upload-zone").show();
             break;
     }
 
-    if (project_type == "CO") {
-        metadata.setValue("repository_link", form.co_repo);
-        $("#supplemental-step").show();
-    } else if ($("#input-form-optional-toggle").is(":visible")) {
+    if ($("#input-form-optional-toggle").is(":visible")) {
         $("#supplemental-step").hide();
     }
 
@@ -1144,16 +1109,14 @@ mobx.autorun("Project Type", function () {
 
 mobx.autorun("Project Group Success", function () {
     var is_opensource = metadata.getValue("project_type_opensource");
-    var is_publicosti = metadata.getValue("project_type_publicosti");
-    setSuccess("project-type-lbl", is_opensource != null && is_publicosti != null);
+    var is_public = metadata.getValue("project_type_public");
+    setSuccess("project-type-lbl", is_opensource != null && is_public != null);
 
     if (is_opensource === false) {
         $("#tooltip-opensource-yesno").hide();
-        $("#tooltip-closedsource-yesno").show();
     }
     else {
         $("#tooltip-opensource-yesno").show();
-        $("#tooltip-closedsource-yesno").hide();
     }
 
     //mobx.whyRun();
@@ -1173,7 +1136,7 @@ mobx.autorun("Project Type Open Source", function () {
 });
 
 mobx.autorun("Project Type Public", function () {
-    updateLabelStyle(metadata, "project_type_publicosti", "is-publicosti-lbl");
+    updateLabelStyle(metadata, "project_type_public", "is-public-lbl");
 
     //mobx.whyRun();
 });
@@ -1181,12 +1144,6 @@ mobx.autorun("Project Type Public", function () {
 mobx.autorun("Repository URL", function () {
     updateInputStyle(metadata, "repository_link", "repository-link-lbl", "repository-link");
     $("#autopopulate-from-repository").prop('disabled', !metadata.isCompleted("repository_link"));
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Repository URL CO", function () {
-    updateTextStyle(metadata, "repository_link", "repository-link-co-lbl", "repository-link-co", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "The Repository URL will be automatically generated for you as part of the submission process.");
 
     //mobx.whyRun();
 });
@@ -1208,7 +1165,7 @@ mobx.autorun("Product Description Panel", function () {
 });
 
 mobx.autorun("Repository URL Display", function () {
-    updateTextStyle(metadata, "repository_link", "repository-link-display-lbl", "repository-link-display", metadata.getValue("accessibility") == "CO", form.co_repo ? form.co_repo : "The Repository URL will be automatically generated for you as part of the submission process.");
+    updateTextStyle(metadata, "repository_link", "repository-link-display-lbl", "repository-link-display");
 
     //mobx.whyRun();
 });
@@ -2365,13 +2322,6 @@ var CONTAINER_UPLOAD_CONFIG = {
 $(document).ready(mobx.action("Document Ready", function () {
     //Above all else, make sure we're allowed to be here
     checkIsAuthenticated();
-
-    // OSTI Hosted check
-    checkHasRole('OSTIHostedAdmin', function () {
-        is_osti_host_admin = true;
-    }, function () {
-        is_osti_host_admin = false;
-    });
 
     // Set input messages
     $('.table-msg').html($("#table_msg").val());

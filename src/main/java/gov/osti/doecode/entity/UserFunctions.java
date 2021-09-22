@@ -31,7 +31,6 @@ public class UserFunctions {
     public static final String SITE_ADMIN_ROLE = "SiteAdmin";
     public static final String APPROVAL_ADMIN_ROLE = "ApprovalAdmin";
     public static final String CONTENT_ADMIN_ROLE = "ContentAdmin";
-    public static final String OSTI_HOSTED_ADMIN_ROLE = "OSTIHostedAdmin";
     private static Logger log = LoggerFactory.getLogger(UserFunctions.class.getName());
 
     /*
@@ -112,7 +111,6 @@ public class UserFunctions {
         return_data.put("has_site_admin_role", hasRole(roles, SITE_ADMIN_ROLE));
         return_data.put("has_approval_admin_role", hasRole(roles, APPROVAL_ADMIN_ROLE));
         return_data.put("has_content_admin_role", hasRole(roles, CONTENT_ADMIN_ROLE));
-        return_data.put("has_osti_hosted_admin_role", hasRole(roles, OSTI_HOSTED_ADMIN_ROLE));
         return_data.put("is_logged_in", true);
         return_data.put("xsrfToken", user_data.findPath("xsrfToken").asText(""));
         return_data.put("session_timeout", LocalDateTime.now().plus(Init.SESSION_TIMEOUT_MINUTES, ChronoUnit.MINUTES).format(SESSION_TIMEOUT_FORMAT));

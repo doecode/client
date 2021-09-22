@@ -36,12 +36,7 @@ var BaseData = function () {
                 if (data === true) {
                     schemaFile.required = "";
                     
-                    if (projectType == 'CO') {
-                        schemaFile.required = "sub";
-                    }
-                    else {
-                        schemaFile.required = "";
-                    }
+                    schemaFile.required = "";
                 }
                 else {
                     if (projectType == 'OS') {
@@ -99,23 +94,6 @@ var BaseData = function () {
                     this.setValue("file_name", "");
                     this.setValue("files", []);
                 }
-                else if (data == 'CO') {
-                    schemaRepo.required = "";
-                    schemaRepo.panel = "";
-                    schemaRepo.error = "";
-                    schemaRepo.completed = false;
-                    schemaRepo.validations = [];
-                    schemaRepo.extra_info = "";
-                    schemaLanding.required = "";
-                    schemaLanding.panel = 'Repository Information';
-                    schemaLanding.error = "";
-                    schemaLanding.completed = false;
-                    schemaFile.required = "sub";
-                    schemaFile.panel = 'Supplemental Product Information';
-
-                    this.setValue("landing_page", this.getValue("landing_page"));
-                    this.setValue("repository_link", this.getValue("repository_link"));
-                }
                 else {
                     schemaRepo.required = "";
                     schemaRepo.panel = "";
@@ -157,17 +135,10 @@ var BaseData = function () {
 
             if (field === "project_type_opensource") {
                 var schema = this.infoSchema["licenses"];
-                var schemaProjectTypePublicOsti = this.infoSchema["project_type_publicosti"];
 
                 if (data === true) {
                     schema.required = "sub";
-                    schema.panel = "Product Description";
-                    
-                    schemaProjectTypePublicOsti.label = "Is this software project available in a Publicly Accessible Repository?";
-                }
-                if (data === false) {
-                    schemaProjectTypePublicOsti.label = "Is this software project hosted at OSTI?";
-                }
+                    schema.panel = "Product Description";                }
             }
 
             if (field === "license_closedsource_available") {
