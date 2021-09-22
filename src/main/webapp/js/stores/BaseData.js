@@ -123,8 +123,14 @@ var BaseData = function () {
                     schemaRepo.completed = false;
                     schemaRepo.validations = ["repositorylink"];
                     schemaRepo.extra_info = "";
-                    schemaLanding.required = "sub";
-                    schemaLanding.panel = 'Repository Information';
+                    if (data == 'ON') {
+                        schemaLanding.required = "sub";
+                        schemaLanding.panel = 'Repository Information';
+                    }
+                    else {
+                        schemaLanding.required = "";
+                        schemaLanding.panel = "";
+                    }
                     schemaFile.required = this.page == 'announce' && isMigration === false ? "announ" : "";
                     schemaFile.panel = 'Supplemental Product Information';
 
