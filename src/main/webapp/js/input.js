@@ -1070,7 +1070,6 @@ mobx.autorun("Project Type", function () {
     var project_type = metadata.getValue("project_type");
     switch (project_type) {
         case "OS":
-            $("#git-repo-only-div").show();
             $("#repository-link-div").show();
             $("#landing-page-div").hide();
             $("#autopop-div").show();
@@ -1079,7 +1078,6 @@ mobx.autorun("Project Type", function () {
             break;
         case "ON":
         case "CS":
-            $("#git-repo-only-div").hide();
             $("#repository-link-div").hide();
             $("#landing-page-div").show();
             $("#autopop-div").hide();
@@ -1087,7 +1085,6 @@ mobx.autorun("Project Type", function () {
             $("#file-upload-zone").show();
             break;
         default:
-            $("#git-repo-only-div").hide();
             $("#repository-link-div").hide();
             $("#landing-page-div").hide();
             $("#autopop-div").hide();
