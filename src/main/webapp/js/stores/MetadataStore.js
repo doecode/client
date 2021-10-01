@@ -1,6 +1,6 @@
 var MetadataStore = function MetadataStore() {};
 
-var repo_fields = ["project_type", "repository_link", "landing_page"];
+var repo_fields = ["project_type", "repository_link", "landing_page", "landing_contact"];
 var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "license_closedsource_available", "license_closedsource_contactinfo", "licenses", "proprietary_url","license_contact_email"];
 var developers_fields = ["developers"];
 var doi_fields = ["doi", "doi_infix", "release_date"];
@@ -17,6 +17,7 @@ var _metadata = mobx.observable({
     "open_source": false,
     "repository_link": '',
     "landing_page": '',
+    "landing_contact": '',
     "software_title": '',
     "acronym": '',
     "doi": '',
@@ -25,6 +26,7 @@ var _metadata = mobx.observable({
     "project_type": null,
     "project_type_opensource": null,
     "project_type_public": null,
+    "project_type_landing": null,
     "description": '',
     "programming_languages": [],
     "version_number": '',
@@ -87,6 +89,15 @@ var _metadataInfoSchema = mobx.observable({
         panel: "Repository Information",
         error: ''
     },
+    "project_type_landing": {
+        required: "sub",
+        label: "Does this project have a landing page?",
+        completed: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Repository Information",
+        error: ''
+    },
     "repository_link": {
         required: "sub",
         label: "Repository URL",
@@ -103,6 +114,15 @@ var _metadataInfoSchema = mobx.observable({
         completed: false,
         ever_completed: false,
         validations: ["url"],
+        panel: "",
+        error: ''
+    },
+    "landing_contact": {
+        required: "",
+        label: "Contact Email",
+        completed: false,
+        ever_completed: false,
+        validations: ["email"],
         panel: "",
         error: ''
     },

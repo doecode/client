@@ -293,6 +293,7 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
         if (!openSource) {
             metadata.setValue("project_type", null);
             metadata.setValue("project_type_public", null);
+            metadata.setValue("project_type_landing", null);
         }
 
         metadata.setValue("project_type_opensource", true);
@@ -309,6 +310,7 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
         metadata.setValue("project_type_opensource", false);
 
         metadata.setValue("project_type_public", false);
+        metadata.setValue("project_type_landing", null);
     }
     else if (id == "input-pubyes-btn") {
         metadata.setValue("project_type_public", true);
@@ -316,29 +318,39 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
     else if (id == "input-pubno-btn") {
         metadata.setValue("project_type_public", false);
     }
+    else if (id == "input-landyes-btn") {
+        metadata.setValue("project_type_landing", true);
+        metadata.setValue("landing_contact", "");
+    }
+    else if (id == "input-landno-btn") {
+        metadata.setValue("project_type_landing", false);
+        metadata.setValue("landing_page", "");
+    }
 });
 
 var projectTypeButtonUpdate = function () {
     var is_opensource = metadata.getValue("project_type_opensource");
     var is_public = metadata.getValue("project_type_public");
+    var is_landing = metadata.getValue("project_type_landing");
     if (is_opensource == null) {
         $("#is-public-div").hide();
+        $("#is-landing-div").hide();
         
         $("#input-opensource-btn").addClass("faded");
         $("#input-closedsource-btn").addClass("faded");
     }
     else {
-        $("#is-public-div").show();
-
         if (is_opensource) {
+            $("#is-public-div").show();
+            $("#is-landing-div").hide();
             $("#input-opensource-btn").removeClass("faded");
             $("#input-closedsource-btn").addClass("faded");
         }
         else {
+            $("#is-public-div").hide();
+            $("#is-landing-div").show();
             $("#input-opensource-btn").addClass("faded");
             $("#input-closedsource-btn").removeClass("faded");
-
-            $("#is-public-div").hide();
         }
 
         if (is_public == null) {
@@ -355,14 +367,30 @@ var projectTypeButtonUpdate = function () {
                 $("#input-pubno-btn").removeClass("faded");
             }
         }
+
+        if (is_landing == null) {
+            $("#input-landyes-btn").addClass("faded");
+            $("#input-landno-btn").addClass("faded");
+        }
+        else {
+            if (is_landing) {
+                $("#input-landyes-btn").removeClass("faded");
+                $("#input-landno-btn").addClass("faded");
+            }
+            else {
+                $("#input-landyes-btn").addClass("faded");
+                $("#input-landno-btn").removeClass("faded");
+            }
+        }
     }
 };
 
 var setProjectType = mobx.action("Set Project Type", function () {
     var is_opensource = metadata.getValue("project_type_opensource");
     var is_public = metadata.getValue("project_type_public");
+    var is_landing = metadata.getValue("project_type_landing");
 
-    if (is_opensource == null || is_public == null)
+    if (is_opensource == null || (is_opensource === true && is_public == null) || (is_opensource === false && is_landing == null))
         return;
 
     val = null;
@@ -371,7 +399,7 @@ var setProjectType = mobx.action("Set Project Type", function () {
         val = "OS";
     else if (is_opensource && !is_public)
         val = "ON";
-    else if (!is_opensource && !is_public)
+    else if (!is_opensource && is_landing != null)
         val = "CS";
 
     updateFromOpenClosedInfo(val.charAt(0) == 'O');
@@ -679,7 +707,17 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
                 break;
             case "CS":
                 metadata.setValue("project_type_opensource", false);
-                metadata.setValue("project_type_public", false);
+                metadata.setValue("project_type_public", null);
+
+                var closed_landingpage = metadata.getValue('landing_page');
+                var closed_landingcontact = metadata.getValue('landing_contact');
+
+                if (closed_landingcontact != null && closed_landingcontact != "") {
+                    metadata.setValue('project_type_landing', false);
+                }
+                else if (closed_landingpage != null && closed_landingpage != "") {
+                    metadata.setValue('project_type_landing', true);
+                }
                 break;
             default:
                 break;
@@ -771,6 +809,7 @@ var parseLoadIdResponse = function (data) {
     data.metadata.containers = [];
     data.metadata.repository_link = '';
     data.metadata.landing_page = '';
+    data.metadata.landing_contact = '';
 
     //Get the "version_type", and from that, add a related identifier entry
     var related_identifiers_list = [];
@@ -1068,18 +1107,20 @@ mobx.autorun("Repository Info Panel", function () {
 
 mobx.autorun("Project Type", function () {
     var project_type = metadata.getValue("project_type");
+    var project_landing = metadata.getValue("project_type_landing");
     switch (project_type) {
         case "OS":
             $("#repository-link-div").show();
             $("#landing-page-div").hide();
+            $("#landing-contact-div").hide();
             $("#autopop-div").show();
             $("#repository-link-display-div").show();
             $("#file-upload-zone").hide();
             break;
         case "ON":
-        case "CS":
             $("#repository-link-div").hide();
             $("#landing-page-div").show();
+            $("#landing-contact-div").hide();
             $("#autopop-div").hide();
             $("#repository-link-display-div").hide();
             $("#file-upload-zone").show();
@@ -1087,6 +1128,15 @@ mobx.autorun("Project Type", function () {
         default:
             $("#repository-link-div").hide();
             $("#landing-page-div").hide();
+            $("#landing-contact-div").hide();
+            if (project_landing === true) {
+                $("#landing-page-div").show();
+                $("#landing-contact-div").hide();
+            }
+            else if (project_landing === false) {
+                $("#landing-page-div").hide();
+                $("#landing-contact-div").show();
+            }
             $("#autopop-div").hide();
             $("#repository-link-display-div").hide();
             $("#file-upload-zone").show();
@@ -1107,14 +1157,12 @@ mobx.autorun("Project Type", function () {
 mobx.autorun("Project Group Success", function () {
     var is_opensource = metadata.getValue("project_type_opensource");
     var is_public = metadata.getValue("project_type_public");
-    setSuccess("project-type-lbl", is_opensource != null && is_public != null);
+    var is_landing = metadata.getValue("project_type_landing");
 
-    if (is_opensource === false) {
-        $("#tooltip-opensource-yesno").hide();
-    }
-    else {
-        $("#tooltip-opensource-yesno").show();
-    }
+    var grp_success = (is_opensource === true && is_public != null) ||
+        (is_opensource === false && is_landing != null);
+
+    setSuccess("project-type-lbl", grp_success);
 
     //mobx.whyRun();
 });
@@ -1138,6 +1186,12 @@ mobx.autorun("Project Type Public", function () {
     //mobx.whyRun();
 });
 
+mobx.autorun("Project Type Landing", function () {
+    updateLabelStyle(metadata, "project_type_landing", "is-landing-lbl");
+
+    //mobx.whyRun();
+});
+
 mobx.autorun("Repository URL", function () {
     updateInputStyle(metadata, "repository_link", "repository-link-lbl", "repository-link");
     $("#autopopulate-from-repository").prop('disabled', !metadata.isCompleted("repository_link"));
@@ -1147,6 +1201,12 @@ mobx.autorun("Repository URL", function () {
 
 mobx.autorun("Landing Page", function () {
     updateInputStyle(metadata, "landing_page", "landing-page-lbl", "landing-page");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Landing Contact", function () {
+    updateInputStyle(metadata, "landing_contact", "landing-contact-lbl", "landing-contact");
 
     //mobx.whyRun();
 });
@@ -2429,6 +2489,8 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#input-closedsource-btn').on('click', projectTypeButtonClick);
     $('#input-pubyes-btn').on('click', projectTypeButtonClick);
     $('#input-pubno-btn').on('click', projectTypeButtonClick);
+    $('#input-landyes-btn').on('click', projectTypeButtonClick);
+    $('#input-landno-btn').on('click', projectTypeButtonClick);
     
     // License Closed Source
     $('#input-licenseyes-btn').on('click', licensesButtonClick);
@@ -2444,6 +2506,10 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#landing-page').on('change', {
         store: metadata,
         field: "landing_page"
+    }, inputChange);
+    $('#landing-contact').on('change', {
+        store: metadata,
+        field: "landing_contact"
     }, inputChange);
 
     $('#software-title').on('input', {

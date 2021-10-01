@@ -51,6 +51,8 @@ var BaseData = function () {
             if (field === 'project_type') {
                 var schemaRepo = this.infoSchema["repository_link"];
                 var schemaLanding = this.infoSchema["landing_page"];
+                var schemaProjectTypePublic = this.infoSchema["project_type_public"];
+                var schemaProjectTypeLanding = this.infoSchema["project_type_landing"];                
                 var schemaFile = this.infoSchema["file_name"];
                 var schemaPropUrl = this.infoSchema["proprietary_url"];
                 var schemaLicenseContact = this.infoSchema["license_contact_email"];
@@ -67,12 +69,22 @@ var BaseData = function () {
                     schemaLicenseClosedAvail.panel = "";
                     schemaLicenseClosedContact.required = "";
                     schemaLicenseClosedContact.panel = "";
+
+                    schemaProjectTypePublic.required = "sub";
+                    schemaProjectTypePublic.panel = "Repository Information";
+                    schemaProjectTypeLanding.required = "";
+                    schemaProjectTypeLanding.panel = "";
                 }
                 else {
                     schemaLicenseClosedAvail.required = "sub";
                     schemaLicenseClosedAvail.panel = "Product Description";
                     schemaLicenseClosedContact.required = "sub";
                     schemaLicenseClosedContact.panel = "Product Description";
+
+                    schemaProjectTypePublic.required = "";
+                    schemaProjectTypePublic.panel = "";
+                    schemaProjectTypeLanding.required = "sub";
+                    schemaProjectTypeLanding.panel = "Repository Information";
                 }
 
                 if (data == 'OS') {
@@ -90,6 +102,7 @@ var BaseData = function () {
 
                     this.setValue("repository_link", this.getValue("repository_link") || this.getValue("landing_page"));
                     this.setValue("landing_page", "");
+                    this.setValue("landing_contact", "");
 
                     this.setValue("file_name", "");
                     this.setValue("files", []);
@@ -114,6 +127,14 @@ var BaseData = function () {
 
                     this.setValue("landing_page", this.getValue("landing_page") || this.getValue("repository_link"));
                     this.setValue("repository_link", "");
+
+                    if (data == 'ON') {
+                        this.setValue("landing_contact", "");
+                    }
+                    else {
+                        if (this.getValue("landing_contact"))
+                            this.setValue("landing_page", "");
+                    }
                 }
             }
 

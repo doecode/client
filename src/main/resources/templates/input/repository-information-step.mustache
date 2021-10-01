@@ -42,13 +42,27 @@
 						<div class="col-xs-12"><br></div>
 						<div id="is-public-div" style="display: none">
 							<div class="col-xs-12">
-								<label id="is-public-lbl" class="control-label req">Is this software project available in a Publicly Accessible Repository?</label><span id="tooltip-opensource-yesno">{{> tooltips/IsPublic}}</span>
+								<label id="is-public-lbl" class="control-label req">Is this software project available in a Publicly Accessible Repository?</label>{{> tooltips/IsPublic}}
 							</div>
 							<div class="col-xs-9" style="margin-left: 50px; margin-top: 7px;">
 								<button id="input-pubyes-btn" title="Yes" type="button" class="pure-button pure-button-primary btn-lg pull-left doecode-wizard-btn wizard-margin-style faded" style="width: 175px">
 									Yes
 								</button>
 								<button id="input-pubno-btn" title="No" type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style faded" style="width: 175px">
+									No
+								</button>
+							</div>
+							<div class="col-xs-12"><br></div>
+						</div>
+						<div id="is-landing-div" style="display: none">
+							<div class="col-xs-12">
+								<label id="is-landing-lbl" class="control-label req">Does this project have a landing page?</label><span id="tooltip-landing-yesno">{{> tooltips/IsLanding}}</span>
+							</div>
+							<div class="col-xs-9" style="margin-left: 50px; margin-top: 7px;">
+								<button id="input-landyes-btn" title="Yes" type="button" class="pure-button pure-button-primary btn-lg pull-left doecode-wizard-btn wizard-margin-style faded" style="width: 175px">
+									Yes
+								</button>
+								<button id="input-landno-btn" title="No" type="button" class="pure-button pure-button-primary btn-lg pull-right doecode-wizard-btn wizard-margin-style faded" style="width: 175px">
 									No
 								</button>
 							</div>
@@ -89,6 +103,26 @@
 									</div>
 									<div class="col-xs-12">
 										<label id="landing-page-lbl-error" class="control-label errorCheck">Problem</label>
+									</div>
+								</div>
+							</div>
+							<div id="landing-contact-div">
+								<div class="row">
+									<div class="col-xs-12">
+										<label for="landing-contact" id="landing-contact-lbl" class="control-label">Contact Email</label>{{> tooltips/LandingContact}}
+									</div>
+									<div class="col-xs-12">
+										<input type="text" class="pure-input-1 form-control" id="landing-contact" title='Contact Email'>
+										<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+										<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+									</div>
+									<div class="col-xs-12">
+										<label id="landing-contact-lbl-error" class="control-label errorCheck">Problem</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div>Note: Please enter the Software Group email address for your site if available.</div>
 									</div>
 								</div>
 							</div>
