@@ -582,7 +582,7 @@ var updateTextStyle = function (store, field, label, input, exclude_parenthetica
 var updateSelectStyle = function (store, field, label, input, exclude_parenthetical_text) {
     updateLabelStyle(store, field, label, exclude_parenthetical_text);
     var current_list = mobx.toJS(store.getValue(field));
-    clearChosenList(field);
+    clearChosenList(input);
     populateSelectWithCustomData(input, current_list);
     loadSelectData(input, current_list);
 };
@@ -2415,7 +2415,7 @@ $(document).ready(mobx.action("Document Ready", function () {
 
     clearChosenList("licenses");
     clearChosenList("programming-languages");
-    clearChosenList("product_keywords");
+    clearChosenList("product-keywords");
 
     // If editing, load the data from server.
     var code_id = $("#code_id").val();
