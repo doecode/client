@@ -290,7 +290,7 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
     var id = $(this).attr("id");
     if (id == "input-opensource-btn") {
         // if not already OS, blank out some things
-        if (!openSource) {
+        if (!openSource || openSource == null) {
             metadata.setValue("project_type", null);
             metadata.setValue("project_type_public", null);
             metadata.setValue("project_type_landing", null);
@@ -303,7 +303,7 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
     }
     else if (id == "input-closedsource-btn") {
         // if not already CS, blank out some things
-        if (openSource) {
+        if (openSource || openSource == null) {
             metadata.setValue("project_type", null);
         }
 
