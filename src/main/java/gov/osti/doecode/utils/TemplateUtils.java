@@ -216,7 +216,7 @@ public class TemplateUtils {
         // Turn our json object into jackson
         data.put("page_title", page_title);
         // Put the jackson context together
-        Context context = Context.newBuilder(data).resolver(JsonNodeValueResolver.INSTANCE, JavaBeanValueResolver.INSTANCE, FieldValueResolver.INSTANCE, MapValueResolver.INSTANCE, MethodValueResolver.INSTANCE).build();
+        Context context = Context.newBuilder(data).resolver(JsonNodeValueResolver.INSTANCE).build();
         Template t = Init.handlebars.compile(template);
         PrintWriter out = response.getWriter();
         t.apply(context, out);
@@ -228,7 +228,7 @@ public class TemplateUtils {
         // Turn our json object into jackson
         data.put("page_title", page_title);
         // Put the jackson context together
-        Context context = Context.newBuilder(data).resolver(JsonNodeValueResolver.INSTANCE, JavaBeanValueResolver.INSTANCE, FieldValueResolver.INSTANCE, MapValueResolver.INSTANCE, MethodValueResolver.INSTANCE).build();
+        Context context = Context.newBuilder(data).resolver(JsonNodeValueResolver.INSTANCE).build();
         Template t = handlebars.compile(template);
         PrintWriter out = response.getWriter();
         t.apply(context, out);

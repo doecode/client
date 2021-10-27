@@ -368,12 +368,12 @@
         <dependency>
             <groupId>com.github.jknack</groupId>
             <artifactId>handlebars</artifactId>
-            <version>4.2.0</version>
+            <version>4.3.0</version>
         </dependency>
         <dependency>
             <groupId>com.github.jknack</groupId>
             <artifactId>handlebars-jackson2</artifactId>
-            <version>4.2.0</version>
+            <version>4.3.0</version>
         </dependency>
         <!--Jackson Library for JSON-->
         <dependency>
