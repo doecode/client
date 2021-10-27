@@ -153,9 +153,9 @@ html h3 {
 
 @media print {
     #yml-anchor:after {
-      content: none !important;
+        content: none !important;
     }
-  }
+}
 
 .right-text {
     text-align: right !important;
@@ -379,6 +379,10 @@ body {
     color: #32506D;
 }
 
+/*****************/
+/* Static Styles */
+/*****************/
+
 .static-content {
     font-size: 16px;
 }
@@ -388,6 +392,21 @@ body {
     font-size: 2em;
     margin-left: 0px;
 }
+.static-content h2, .static-content h3, .static-content h4{
+    margin-left:0px;
+    margin-right:0px;
+    font-weight:bold;
+}
+.static-content h2.static{
+    font-size:24px;
+}
+.static-content h3.static{
+    font-size:20px;    
+}
+.static-content h4.static{
+    font-size:18px;
+}
+
 
 .required-field-span {
     font-weight: 700;
@@ -554,7 +573,7 @@ hr {
 }
 
 .search-sidebar-checkbox-text span.search-sidebar-margin {
-        margin-left: 18px;
+    margin-left: 18px;
 }
 
 .search-sidebar-checkbox-text label:first-of-type {
@@ -1230,4 +1249,8 @@ td.datatable-vertical-center {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+}
+
+.marginless{
+    margin:0px;
 }

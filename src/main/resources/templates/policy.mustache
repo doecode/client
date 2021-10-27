@@ -1,258 +1,329 @@
 {{> wrapper/header}}
+<style type='text/css'>
+    h4.static{
+        margin-top:20px;
+    }
+</style>
 <div class="row not-so-wide-row">
-     <div class="col-lg-3 col-md-1"></div>
-     <div class="col-lg-6 col-md-10 col-xs-12 static-content">
-          <h1 class="static-content-title">Software Policy</h1>
-          <br/>
-          <p>
-	       DOE CODE is a software service platform and search tool that allows for scientific and business software to be provided to the U.S. Department 
-	       of Energy (DOE). DOE CODE provides functionality for collaboration, archiving, and discovery of scientific and business software. DOE CODE replaces the Energy
-	       Science and Technology Software Center (ESTSC).
-	  </p>
-          <p>
-	       The DOE Office of Scientific and Technical Information (OSTI) is charged with fulfilling the Department's responsibilities to collect, preserve, 
-	       and disseminate scientific and technical information, including software, emanating from DOE R&D activities. 	       
-	  </p>
-	  <p>
-	       In addition to OSTI's charge for scientific software, 
-	       the Office of the Chief Information Officer (OCIO) and OSTI are partnering to leverage DOE CODE to maintain a comprehensive inventory of 
-	       DOE-funded custom-developed business software. In accordance with Office of Management and Budget Memorandum M-16-21, 
-	       <cite>Federal Source Code Policy: Achieving Efficiency, Transparency, and Innovation through Reusable and Open Source Software</cite>, 
-	       DOE CODE will fulfill requirements to maintain an inventory of all DOE-funded custom-developed software and to report this inventory to the 
-	       government-wide Code.gov website.
-	  </p>
-          <p>
-	       When providing software and code to DOE CODE, users will first need to identify what type of software they are submitting - scientific or business 
-	       software.  Users who are unsure of the type of software are encouraged to please work with their site's Dissemination Authority.
-	  </p>
-	  <p>
-	       In cases where a Repository URL from which OSTI can access and archive software is not available, the software itself should be submitted to OSTI along with associated metadata.
-	       For submission of limited availability software, please continue to utilize Announcement Notice 241.4 via <a href="https://www.osti.gov/elink/" target="_blank" rel="noopener noreferrer">E-Link</a>. 
-	       Future versions of DOE CODE will address submission of limited availability software.
-	  </p>
-	  <p>
-	       Note: Throughout this policy, the terms "software" and "code" are used interchangeably.
-          </p>
-          <br/>
-	  <div>
-	       <ul>
-		    <li>
-			 <a href='#providing-scientific-software-to-doe-code'>Providing Scientific Software to DOE CODE</a>
-			 <ul>
-			      <li>
-				   <a title="Submit Scientific Software to DOE CODE" href='#submit-scientific-code-to-doe-code'>Submit Scientific Software to DOE CODE</a>
-			      </li>
-			      <li>
-				   <a title="Required Metadata to Submit Scientific Software to DOE CODE" href='#required-metadata-tosubmit-scientific-software-to-doecode'>Required Metadata to Submit Scientific Software to DOE CODE</a>
-			      </li>
-			      <li>
-				   <a title="Announce Scientific Software to the Department of Energy through DOE CODE" href='#announce-scientific-code-to-the-department-of-energy-through-doecode'>Announce Scientific Software to the Department of Energy through DOE CODE</a>
-			      </li>
-			      <li>
-				   <a title="Required Metadata to Announce Scientific Software to the Department of Energy through DOE CODE" href='#required-metadata-to-announce-scientific-software-to-the-department-of-energy-through-doecode'>Required Metadata to Announce Scientific Software to the Department of Energy through DOE CODE</a>
-			      </li>
-			      <li>
-				   <a title="Scientific Software Categories" href='#software-categories'>Scientific Software Categories</a>
-			      </li>
-			 </ul>
-		    </li>
-		    <li>
-			 <a href='#providing-business-software-to-doe-code'>Providing Business Software to DOE CODE</a>
-			 <ul>
-			      <li>
-				   <a href='#submit-business-software-to-doe-code'>Submit Business Software to DOE CODE</a>
-			      </li>
-			      <li>
-				   <a href='#required-metadata-to-submit-business-software-to-doe-code'>Required Metadata to Submit Business Software to DOE CODE</a>
-			      </li>
-			      <li>
-				   <a href='#announce-business-software-to-the-department-of-energy-through-doe-code'>Announce Business Software to the Department of Energy through DOE CODE</a>
-			      </li>
-			      <li>
-				   <a href='#required-metadata-to-provide-business-software-to-doe-code'>Required Metadata to Announce Business Software to DOE CODE</a>
-			      </li>
-			 </ul>
-		    </li>
-	       </ul>
-	  </div>
-          <br/>
-	  <div>
-	       <a name='providing-scientific-software-to-doe-code'></a>
-	       <strong style='font-size:22px;'>Providing Scientific Software to DOE CODE</strong>
-	       <br/>
-	       DOE CODE offers two paths for users to provide scientific code. Users can (1) Submit code to DOE CODE, and (2) Announce code to the Department 
-	       of Energy for official review and release through DOE CODE. (See <a title="Help" href="help">Help</a> for information about submitting and announcing scientific software.)
-	  </div>
-	  <br/>
-	  <div>
-	       <a name="submit-scientific-code-to-doe-code"></a>
-	       <strong>Submit Scientific Software to DOE CODE</strong>
-	       <br/>
-	       Users may want to submit their code to DOE CODE. Submitting to DOE CODE is easy, with only a minimal set of metadata required. 
-	       Submitting offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, making it 
-	       more easily citable and shared. Codes in early development, along with those wanting to obtain DOIs early in the process, are the primary use 
-	       case for this functionality.
-	  </div>
-	  <br/>
-	  <div>
-	       <a name="required-metadata-tosubmit-scientific-software-to-doecode"></a>
-	       <strong>Required Metadata to Submit Scientific Software to DOE CODE:</strong>
-	       <br/>
-	       <ul>
-		    <li>Project Type</li>
-		    <li>Repository URL; Landing Page; Source Code or Compiled Binary</li>
-		    <li>Software Title</li>
-		    <li>Description/Abstract</li>
-		    <li>License(s)</li>
-		    <li>Developers</li>
-	       </ul>
-	  </div>
-	  <br/>
-	  <div>
-	       <a name="announce-scientific-code-to-the-department-of-energy-through-doecode"></a>
-	       <strong>Announce Scientific Software to the Department of Energy through DOE CODE</strong>
-	       <br/>
-	       Users may need to announce their code to the Department of Energy to ensure announcement and dissemination in accordance with DOE statutory 
-	       responsibilities. Codes in later stages of development are the primary use cases for this functionality. For announcement to the Department 
-	       of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory data fields should be included during 
-	       announcement when possible.
-	       <br/>
-	       <br/>
-	       DOE national laboratories and other DOE facilities/contractors who have developed and/or modified software during work supported by DOE or 
-	       during work carried out for others at DOE facilities are required to announce a record of the software to the Department of Energy, if the 
-	       software meets the following criteria:
-	       <br/>
-	       <ul>
-		    <li>the software meets the definition of <a href="https://www.osti.gov/stip/about/sti-defined" target="_blank" rel="noopener noreferrer">STI</a></li>
-		    <li>the software is known or expected to be useful inside or outside the DOE community, or is not specific to the originating site;</li>
-		    <li>a stable, usable, documented version of the software exists (i.e., the software is not under initial development); and</li>
-		    <li>the software has undergone all appropriate reviews for sensitivity and export control.</li>
-	       </ul>
-	       <br/>
-	       Software that meets the following criteria need not be announced to the Department of Energy:
-	       <ul>
-		    <li>
-			 operational systems software that is site-specific, unique to a particular hardware, or necessary to ensure the fundamental operability 
-			 of automated data processing equipment, whether supplied by the manufacturer of the system hardware or others;
-		    </li>
-		    <li>
-			 computer software programs developed and/or modified during work carried out for others at DOE facilities that are specifically 
-			 excluded in the agreement under which the non-DOE funded work was performed;
-		    </li>
-		    <li>
-			 software generated under the auspices of the Energy Information Administration; and
-		    </li>
-		    <li>
-			 specific software used by power administrations for the operation, control, planning, and modeling of electric power transmission 
-			 systems and the interconnected utilities; however, modifications/enhancements to portions of this software that are not an integral
-			 part of the whole and have potential application outside the power administrations should be announced.
-		    </li>
-	       </ul>
-	  </div>
-	  <br/>
-	  <div>
-	       <a name="required-metadata-to-announce-scientific-software-to-the-department-of-energy-through-doecode"></a>
-	       <strong>Required Metadata to Announce Scientific Software to the Department of Energy through DOE CODE:</strong>
-	       <br/>
-	       <ul>
-		    <li>Project Type</li>
-		    <li>Repository URL; Landing Page; Source Code or Compiled Binary</li>
-		    <li>Software Title</li>
-		    <li>Description/Abstract</li>
-		    <li>License(s)</li>
-		    <li>Developers</li>
-		    <li>Release Date</li>
-		    <li>Sponsoring Organization Name</li>
-		    <li>Primary Award Number</li>
-		    <li>Research Organization Name</li>
-		    <li>Contact Information</li>
-	       </ul>
-	  </div>
-	  <br/>
-	  <div>
-	       <a name="software-categories"></a>
-	       <strong>Scientific Software Categories</strong>
-	       <br/>
-	       Different categories of scientific software have different distribution requirements, limitations, and appropriate distribution channels, 
-	       which are defined in the Scientific <a href='https://www.osti.gov/stip/softwarecategories' target="_blank" rel="noopener noreferrer">Software Categories table</a>. 
-	       The table is not intended to provide an exhaustive list. Contact DOE CODE at 
-	       (865) 576-2606 or <a href='mailto:doecode@osti.gov'>doecode@osti.gov</a> with questions.
-	       <br/>
-	       <br/>
-	       In cases where a Repository URL from which OSTI can access and archive software is not available, the software itself should be submitted to OSTI along with
-	       associated metadata. For submission of limited availability software, please continue to utilize Announcement Notice 241.4 via <a href="https://www.osti.gov/elink/" target="_blank" rel="noopener noreferrer">E-Link</a>. Future
-	       versions of DOE CODE will address submission of limited availability software.
-	  </div>
-	  <br/>
-	  <div>
-	       <a name='providing-business-software-to-doe-code'></a>
-	       <strong style='font-size:22px;'>Providing Business Software to DOE CODE</strong>
-	       <br/>
-	       To efficiently fulfill Departmental requirements to maintain an inventory of all DOE-funded custom-developed software and to report this 
-	       inventory to the government-wide Code.gov website, metadata for all scientific and non-scientific (e.g., business) software should be 
-	       submitted to DOE CODE. This inventory will foster scientific progress, provide transparency to and promote public uptake of DOE-funded 
-	       open source software (OSS), and enable DOE to fulfill requirements for government-wide reporting of custom-developed software to Code.gov.
-	       <br/>
-	       <br/>
-	       DOE CODE offers two paths for users to provide business software. Users can (1) Submit code to DOE CODE, and (2) Announce code to the 
-	       Department of Energy for official review and release through DOE CODE.  (See <a title="Help" href="help">Help</a> for information about 
-               submitting and announcing business software.)
-	  </div>
-	  <br/>
-	  <div>
-	       <a name="submit-business-software-to-doe-code"></a>
-	       <strong>Submit Business Software to DOE CODE</strong>
-	       <br/>
-	       Users may want to simply submit their business code to DOE CODE. Submitting offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) 
-	       for the code, making it more easily citable and shared. Submitting business code to DOE CODE is easy, 
-	       with only a minimal set of metadata required. The primary use cases for this functionality includes codes that are in early development 
-	       and for developers wanting to obtain DOIs early in the process.
-	  </div>
-	  <br/>
-	  <div>
-	       <a name='required-metadata-to-submit-business-software-to-doe-code'></a>
-	       <strong>Required Metadata to Submit Business Software to DOE CODE</strong>
-	       <br/>
-	       <ul>
-		    <li>Project Type</li>
-		    <li>Repository URL; Landing Page; Source Code or Compiled Binary</li>
-		    <li>Software Title</li>
-		    <li>Description/Abstract</li>
-		    <li>License(s)</li>
-		    <li>Developers</li>
-		    <li>Sponsoring Organization Name</li>
-	       </ul>
-	  </div>
-	  <br/>
-	  <div>
-	       <a name='announce-business-software-to-the-department-of-energy-through-doe-code'></a>
-	       <strong>Announce Business Software to DOE CODE</strong>
-	       <br/>
-	       Users may need to announce their business code to the Department of Energy to ensure announcement and dissemination in accordance with 
-	       DOE statutory responsibilities. Business codes in later stages of development are the primary use cases for this functionality. 
-	       For announcement to the Department of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory data 
-	       fields should be included during announcement when possible.
-	  </div>
-	  <br/>
-	  <div>
-	       <a name='required-metadata-to-provide-business-software-to-doe-code'></a>
-	       <strong>Required Metadata to Announce Business Software to DOE CODE</strong>
-	       <br/>
-	       <ul>
-		    <li>Project Type</li>
-		    <li>Repository URL; Landing Page; Source Code or Compiled Binary</li>
-		    <li>Software Title</li>
-		    <li>Description/Abstract</li>
-		    <li>License(s)</li>
-		    <li>Developers</li>
-		    <li>Release Date</li>
-		    <li>Sponsoring Organization Name</li>
-		    <li>Primary Award Number</li>
-		    <li>Research Organization Name</li>
-		    <li>Contact Information</li>
-	       </ul>
-	  </div>
-     </div>
-     <div class="col-lg-3 col-md-1"></div>
+    <div class="col-lg-3 col-md-1"></div>
+    <div class="col-lg-6 col-md-10 col-xs-12 static-content">
+        <h1 class="static-content-title">Software Policy</h1>
+        <br/>
+        {{!-- Starting Portion --}}
+        <p>
+            DOE CODE is the software services platform and search tool that allows for scientific and business software to be provided to the U.S. Department of Energy (DOE). 
+            The DOE Office of Scientific and Technical Information (DOE OSTI) developed DOE CODE, providing functionality for collaboration, archiving, 
+            and discovery of scientific and business software. DOE OSTI is charged with fulfilling the Department's responsibilities to collect, preserve, 
+            and disseminate scientific and technical information (STI), including software, emanating from DOE research and development activities.
+        </p>
+        <p>
+            In addition to DOE OSTI's charge for scientific software, the Office of the Chief Information Officer (OCIO) and DOE OSTI partnered to leverage DOE CODE 
+            to maintain a comprehensive inventory of DOE-funded custom-developed business software. In accordance with the Office of Management and Budget Memorandum M-16-21, 
+            <cite>Federal Source Code Policy: Achieving Efficiency, Transparency, and Innovation through Reusable and Open Source Software</cite>, 
+            DOE CODE fulfills requirements to maintain an inventory of all DOE-funded custom-developed software and to report this inventory to the government-wide Code.gov 
+            website.
+        </p>
+
+        <div>
+            <a href='#sofware-collection'>Software Collection</a>
+            <ul>
+                <li>
+                    <a href='#scientific-and-business-software'>Scope - Scientific and Business Software</a>
+                </li>
+                <li>
+                    <a href='providing-software-to-doe'>Providing Software to DOE CODE </a>
+                    <ul>
+                        <li>
+                            <a href='#submitting-software-to-doe-code'>Submitting Software to DOE CODE</a>
+                        </li>
+                        <li>
+                            <a href='#announcing-software-to-doe-through-doe-code'>Announcing Software to DOE through DOE CODE</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href='#metadata'>Metadata</a>
+                </li>
+                <li>
+                    <a href=''>DOI Assignment</a>
+                </li>
+                <li>
+                    <a href=''>Licenses</a>
+                </li>
+                <li>
+                    <a href=''>Access Limitations</a>
+                </li>
+            </ul>
+            <a href=''>Software Discovery and Access</a>
+            <ul>
+                <li>
+                    <a href=''>Finding Software</a>
+                </li>
+                <li>
+                    <a href=''>Licenses</a>
+                </li>
+                <li>
+                    <a href=''>Access Limitations</a>
+                </li>
+            </ul>
+            <a href=''>Software Preservation</a>
+            <ul>
+                <li>
+                    <a href=''>Archival Policy</a>
+                </li>
+                <li>
+                    <a href=''>Repositories</a>
+                </li>
+                <li>
+                    <a href=''>Deleting Records</a>
+                </li>
+            </ul>
+        </div>
+        <br/>
+
+        <a name='sofware-collection'></a>
+        <h2 class='static'>Software Collection</h2>
+        <a name='scientific-and-business-software'></a>
+        <h3 class='static'>Scientific and Business Software</h3>
+        <p>
+            DOE-funded scientific and business software are collected by DOE CODE. Software records within DOE CODE provide software details and links to the software itself, 
+            a code repository, or project contact information for access to the software. The repositories may also include manuals, examples, and test data.
+            <br/>
+            <br/>
+            When providing software and code to DOE CODE, users need to identify what type of software they are submitting—scientific or business software. 
+            Users who are unsure of the type of software are encouraged to please work with 
+            their site's <a href='https://www.osti.gov/stip/about/stip-community#SoftwareContacts' rel='noopener noreferrer'>Software Point of Contact</a>.
+        </p>
+        <a name='providing-software-to-doe'></a>
+        <h3 class='static'>Providing Software to DOE</h3>
+        <p>
+            Software records should be provided directly to DOE CODE either by a developer or the developing organization. DOE CODE offers two paths for users to provide 
+            scientific code. Users can (1) submit code to DOE CODE to make the software discoverable and optionally assign a DOI, and (2) formally announce code to DOE 
+            complying with DOE funding responsibilities. 
+        </p>
+        <a href='submitting-software-to-doe-code'></a>
+        <h4 class='static'>Submitting Software to DOE CODE</h4>
+        <p>
+            Users can submit their code to DOE CODE. The submission process is for code in early stages of development, which can be shared with unlimited distribution, 
+            and for those wanting to obtain a DOI early in the process. Software that has limited distribution (OUO, CUI, etc.) 
+            and an access limitation cannot be provided via the submission process; that software must go through the DOE CODE announcement process. 
+            Only a minimal set of metadata is required for submission to DOE CODE (details on required metadata are below). 
+        </p>
+        <a href='announcing-software-to-doe-through-doe-code'></a>
+        <h4 class='static'>Announcing Software to DOE through DOE CODE</h4>
+        <p>
+            Users may need to announce their code to DOE to ensure announcement and dissemination in accordance with DOE statutory responsibilities, 
+            complying with DOE funding responsibilities. The announcement process is for code in later stages of development that have gone through internal 
+            review and release processes. The DOE CODE announcement process requires additional basic metadata above the submission process 
+            (details on required metadata are below).
+        </p>
+        <div>
+            DOE national laboratories, DOE facilities, and DOE contractors who have developed and/or modified software during work supported by DOE or during work 
+            carried out for others at DOE facilities are required to announce software to DOE using DOE CODE, if the software meets the following criteria:
+            <ul>
+                <li>
+                    the software meets the <a href='https://www.osti.gov/stip/about/sti-defined'>definition of STI</a>; 
+                </li>
+                <li>the software is known or expected to be useful inside or outside the DOE community, or is not specific to the originating site;</li>
+                <li>a stable, usable, documented version of the software exists (i.e., the software is not under initial development); and</li>
+                <li>the software has undergone all appropriate reviews for sensitivity and export control.</li>
+            </ul>
+        </div>
+        <div>
+            Software that meets the following criteria do not need to be announced to the Department of Energy through DOE CODE:
+            <ul>
+                <li>
+                    operational systems software that is site-specific, unique to a particular hardware, or necessary to ensure the fundamental operability of 
+                    automated data processing equipment, whether supplied by the manufacturer of the system hardware or others; 
+                </li>
+                <li>
+                    computer software programs developed and/or modified during work carried out for others at DOE facilities that are specifically excluded 
+                    in the agreement under which the non-DOE funded work was performed; 
+                </li>
+                <li>
+                    software generated under the auspices of the Energy Information Administration; and 
+                </li>
+                <li>
+                    specific software used by power administrations for the operation, control, planning, and modeling of electric power transmission systems 
+                    and the interconnected utilities; however, modifications/enhancements to portions of this software that are not an integral part of the 
+                    whole and have potential application outside the power administrations should be announced.
+                </li>
+            </ul>
+        </div>
+        <a name='metadata'></a>
+        <h2 class='static'>Metadata</h2>
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        <br/>
+        <div>
+            <a name="required-metadata-tosubmit-scientific-software-to-doecode"></a>
+            <strong>Required Metadata to Submit Scientific Software to DOE CODE:</strong>
+            <br/>
+            <ul>
+                <li>Project Type</li>
+                <li>Repository URL; Landing Page; Source Code or Compiled Binary</li>
+                <li>Software Title</li>
+                <li>Description/Abstract</li>
+                <li>License(s)</li>
+                <li>Developers</li>
+            </ul>
+        </div>
+        <br/>
+        <div>
+            <a name="announce-scientific-code-to-the-department-of-energy-through-doecode"></a>
+            <strong>Announce Scientific Software to the Department of Energy through DOE CODE</strong>
+            <br/>
+            Users may need to announce their code to the Department of Energy to ensure announcement and dissemination in accordance with DOE statutory 
+            responsibilities. Codes in later stages of development are the primary use cases for this functionality. For announcement to the Department 
+            of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory data fields should be included during 
+            announcement when possible.
+            <br/>
+            <br/>
+            DOE national laboratories and other DOE facilities/contractors who have developed and/or modified software during work supported by DOE or 
+            during work carried out for others at DOE facilities are required to announce a record of the software to the Department of Energy, if the 
+            software meets the following criteria:
+            <br/>
+            <ul>
+                <li>the software meets the definition of <a href="https://www.osti.gov/stip/about/sti-defined" target="_blank" rel="noopener noreferrer">STI</a></li>
+                <li>the software is known or expected to be useful inside or outside the DOE community, or is not specific to the originating site;</li>
+                <li>a stable, usable, documented version of the software exists (i.e., the software is not under initial development); and</li>
+                <li>the software has undergone all appropriate reviews for sensitivity and export control.</li>
+            </ul>
+            <br/>
+            Software that meets the following criteria need not be announced to the Department of Energy:
+            <ul>
+                <li>
+                    operational systems software that is site-specific, unique to a particular hardware, or necessary to ensure the fundamental operability 
+                    of automated data processing equipment, whether supplied by the manufacturer of the system hardware or others;
+                </li>
+                <li>
+                    computer software programs developed and/or modified during work carried out for others at DOE facilities that are specifically 
+                    excluded in the agreement under which the non-DOE funded work was performed;
+                </li>
+                <li>
+                    software generated under the auspices of the Energy Information Administration; and
+                </li>
+                <li>
+                    specific software used by power administrations for the operation, control, planning, and modeling of electric power transmission 
+                    systems and the interconnected utilities; however, modifications/enhancements to portions of this software that are not an integral
+                    part of the whole and have potential application outside the power administrations should be announced.
+                </li>
+            </ul>
+        </div>
+        <br/>
+        <div>
+            <a name="required-metadata-to-announce-scientific-software-to-the-department-of-energy-through-doecode"></a>
+            <strong>Required Metadata to Announce Scientific Software to the Department of Energy through DOE CODE:</strong>
+            <br/>
+            <ul>
+                <li>Project Type</li>
+                <li>Repository URL; Landing Page; Source Code or Compiled Binary</li>
+                <li>Software Title</li>
+                <li>Description/Abstract</li>
+                <li>License(s)</li>
+                <li>Developers</li>
+                <li>Release Date</li>
+                <li>Sponsoring Organization Name</li>
+                <li>Primary Award Number</li>
+                <li>Research Organization Name</li>
+                <li>Contact Information</li>
+            </ul>
+        </div>
+        <br/>
+        <div>
+            <a name="software-categories"></a>
+            <strong>Scientific Software Categories</strong>
+            <br/>
+            Different categories of scientific software have different distribution requirements, limitations, and appropriate distribution channels, 
+            which are defined in the Scientific <a href='https://www.osti.gov/stip/softwarecategories' target="_blank" rel="noopener noreferrer">Software Categories table</a>. 
+            The table is not intended to provide an exhaustive list. Contact DOE CODE at 
+            (865) 576-2606 or <a href='mailto:doecode@osti.gov'>doecode@osti.gov</a> with questions.
+            <br/>
+            <br/>
+            In cases where a Repository URL from which OSTI can access and archive software is not available, the software itself should be submitted to OSTI along with
+            associated metadata. For submission of limited availability software, please continue to utilize Announcement Notice 241.4 via <a href="https://www.osti.gov/elink/" target="_blank" rel="noopener noreferrer">E-Link</a>. Future
+            versions of DOE CODE will address submission of limited availability software.
+        </div>
+        <br/>
+        <div>
+            <a name='providing-business-software-to-doe-code'></a>
+            <strong style='font-size:22px;'>Providing Business Software to DOE CODE</strong>
+            <br/>
+            To efficiently fulfill Departmental requirements to maintain an inventory of all DOE-funded custom-developed software and to report this 
+            inventory to the government-wide Code.gov website, metadata for all scientific and non-scientific (e.g., business) software should be 
+            submitted to DOE CODE. This inventory will foster scientific progress, provide transparency to and promote public uptake of DOE-funded 
+            open source software (OSS), and enable DOE to fulfill requirements for government-wide reporting of custom-developed software to Code.gov.
+            <br/>
+            <br/>
+            DOE CODE offers two paths for users to provide business software. Users can (1) Submit code to DOE CODE, and (2) Announce code to the 
+            Department of Energy for official review and release through DOE CODE.  (See <a title="Help" href="help">Help</a> for information about 
+            submitting and announcing business software.)
+        </div>
+        <br/>
+        <div>
+            <a name="submit-business-software-to-doe-code"></a>
+            <strong>Submit Business Software to DOE CODE</strong>
+            <br/>
+            Users may want to simply submit their business code to DOE CODE. Submitting offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) 
+            for the code, making it more easily citable and shared. Submitting business code to DOE CODE is easy, 
+            with only a minimal set of metadata required. The primary use cases for this functionality includes codes that are in early development 
+            and for developers wanting to obtain DOIs early in the process.
+        </div>
+        <br/>
+        <div>
+            <a name='required-metadata-to-submit-business-software-to-doe-code'></a>
+            <strong>Required Metadata to Submit Business Software to DOE CODE</strong>
+            <br/>
+            <ul>
+                <li>Project Type</li>
+                <li>Repository URL; Landing Page; Source Code or Compiled Binary</li>
+                <li>Software Title</li>
+                <li>Description/Abstract</li>
+                <li>License(s)</li>
+                <li>Developers</li>
+                <li>Sponsoring Organization Name</li>
+            </ul>
+        </div>
+        <br/>
+        <div>
+            <a name='announce-business-software-to-the-department-of-energy-through-doe-code'></a>
+            <strong>Announce Business Software to DOE CODE</strong>
+            <br/>
+            Users may need to announce their business code to the Department of Energy to ensure announcement and dissemination in accordance with 
+            DOE statutory responsibilities. Business codes in later stages of development are the primary use cases for this functionality. 
+            For announcement to the Department of Energy, there are basic requirements for metadata fields; however, other optional/non-mandatory data 
+            fields should be included during announcement when possible.
+        </div>
+        <br/>
+        <div>
+            <a name='required-metadata-to-provide-business-software-to-doe-code'></a>
+            <strong>Required Metadata to Announce Business Software to DOE CODE</strong>
+            <br/>
+            <ul>
+                <li>Project Type</li>
+                <li>Repository URL; Landing Page; Source Code or Compiled Binary</li>
+                <li>Software Title</li>
+                <li>Description/Abstract</li>
+                <li>License(s)</li>
+                <li>Developers</li>
+                <li>Release Date</li>
+                <li>Sponsoring Organization Name</li>
+                <li>Primary Award Number</li>
+                <li>Research Organization Name</li>
+                <li>Contact Information</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-1"></div>
 </div>
 {{> wrapper/footer}}
