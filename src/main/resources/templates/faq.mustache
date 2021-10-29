@@ -1,9 +1,23 @@
 {{> wrapper/header}}
 <style type="text/css">
     @media only screen and (max-width:479px) and (min-width: 320px) {
-        .faq-page-blockquote {
+        .answer {
             font-size: 14px;
         }
+    }
+    h3.static.subtitle,a.toc.anchor,.faq-blue{
+        color: rgb(49, 112, 143);
+    }
+    h3.static.subtitle {
+        font-weight: 400;
+        font-size: 19.8833px;
+    }
+    a.toc.anchor {
+        font-size: 17px;
+    }
+    blockquote.answer{
+        font-size: 17px;
+        color: rgb(51, 51, 51);
     }
 </style>
 <div class="row not-so-wide-row">
@@ -12,160 +26,194 @@
     <div class="col-lg-6 col-md-10 col-xs-12 static-content">
         <h1 class="static-content-title">FAQs</h1>
         <br />
-        <h1 class="faq-page-title">General FAQs</h1>
+        <h2 class='static'>General FAQs</h2>
         <ul>
             <li>
-                <a title="What is DOE CODE?" href="/${app_name}/faq#what-is">
-                    <span class="faq-page-anchor">What is DOE CODE?</span></a>
-            </li>
-            <li>
-                <a title="How is the DOE CODE software submission and search tool different from DOE CODE Github?" href="/${app_name}/faq#how-is-it-different">
-                    <span class="faq-page-anchor">How is the DOE CODE software submission and search tool different from </span>
+                <a class='toc anchor' title="What is DOE CODE?" href="/${app_name}/faq#what-is">
+                    What is DOE CODE?
                 </a>
-                <a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode" style="text-decoration:underline;">DOE CODE GitHub</a><a title="How is the DOE CODE software submission and search tool different from DOE CODE Github?" href="/${app_name}/faq#how-is-it-different">?</a>
             </li>
             <li>
-                <a title="What does DOE CODE contain?" href="/${app_name}/faq#what-does-it-contain">
-                    <span class="faq-page-anchor">What does DOE CODE contain?</span></a>
+                <a class='toc anchor' title="How is the DOE CODE software submission and search tool different from DOE CODE Github?" href="/${app_name}/faq#how-is-it-different">
+                    How is the DOE CODE software submission and search tool different from 
+                </a>
+                <a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode" style="text-decoration:underline;">DOE CODE GitHub</a>
+                <a class='toc anchor' title="How is the DOE CODE software submission and search tool different from DOE CODE Github?" href="/${app_name}/faq#how-is-it-different">?</a>
             </li>
             <li>
-                <a title="Is DOE CODE connected to Code.gov?" href="/${app_name}/faq#is-it-connected-to-codegov">
-                    <span class="faq-page-anchor">Is DOE CODE connected to Code.gov?</span></a>
+                <a class='toc anchor' title="What does DOE CODE contain?" href="/${app_name}/faq#what-does-it-contain">
+                    What does DOE CODE contain?
+                </a>
             </li>
             <li>
-                <a title="Does DOE CODE provide repository services?" href="/${app_name}/faq#what-does-it-provide">
-                    <span class="faq-page-anchor">Does DOE CODE provide repository services?</span></a>
+                <a class='toc anchor' title="Is DOE CODE connected to Code.gov?" href="/${app_name}/faq#is-it-connected-to-codegov">
+                    Is DOE CODE connected to Code.gov?
+                </a>
             </li>
             <li>
-                <a title="What are the Project Types found in DOE CODE?" href="/${app_name}/faq#what-are-the-types">
-                    <span class="faq-page-anchor">What are the Project Types found in DOE CODE?</span></a>
+                <a class='toc anchor' title="Does DOE CODE provide repository services?" href="/${app_name}/faq#what-does-it-provide">
+                    Does DOE CODE provide repository services?
+                </a>
             </li>
             <li>
-                <a title="Why is uploading code required for certain Project Types?" href="/${app_name}/faq#why-is-uploading-code-required-for-certain-project-types">
-                    <span class="faq-page-anchor">Why is uploading code required for certain Project Types?</span></a>
+                <a class='toc anchor' title="What are the Project Types found in DOE CODE?" href="/${app_name}/faq#what-are-the-types">
+                    What are the Project Types found in DOE CODE?
+                </a>
             </li>
             <li>
-                <a title="Are there restrictions on the use of the material in DOE CODE?" href="/${app_name}/faq#are-there-restrictions">
-                    <span class="faq-page-anchor">Are there restrictions on the use of the material in DOE CODE?</span></a>
-            </li>
-        </ul>
-        <h1 class="faq-page-title">Submission FAQs</h1>
-        <ul>
-            <li>
-                <a title="How is scientific software provided to DOE CODE?" href="/${app_name}/faq#how-is-software-submitted">
-                    <span class="faq-page-anchor">How is scientific software provided to DOE CODE?</span></a>
+                <a class='toc anchor' title="Why is uploading code required for certain Project Types?" href="/${app_name}/faq#why-is-uploading-code-required-for-certain-project-types">
+                    Why is uploading code required for certain Project Types?
+                </a>
             </li>
             <li>
-                <a title="What does it mean to submit scientific software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-submit">
-                    <span class="faq-page-anchor">What does it mean to submit scientific software to DOE CODE?</span></a>
-            </li>
-            <li>
-                <a title="What does it mean to announce scientific software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-announce">
-                    <span class="faq-page-anchor">What does it mean to announce scientific software to DOE CODE?</span></a>
-            </li>
-            <li>
-                <a title="How is business software provided to DOE CODE?" href="/${app_name}/faq#how-is-business-software-provided-to-doe-code">
-                    <span class="faq-page-anchor">How is business software provided to DOE CODE?</span></a>
-            </li>
-            <li>
-                <a title="What does it mean to submit business software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-submit-business-software-to-doe-code">
-                    <span class="faq-page-anchor">What does it mean to submit business software to DOE CODE?</span></a>
-            </li>
-            <li>
-                <a title="What does it mean to announce business software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-announce-business-software-to-doe-code">
-                    <span class="faq-page-anchor">What does it mean to announce business software to DOE CODE?</span></a>
-            </li>
-            <li>
-                <a title="Can I add a new or previous version of software I have previously submitted or announced to DOE CODE?" href="/${app_name}/faq#can-i-add-new-or-previous-version-of-software">
-                    <span class="faq-page-anchor">Can I add a new or previous version of software I have previously submitted or announced to DOE CODE?</span></a>
-            </li>
-            <li>
-                <a title="Can I submit a tagged release as an individual record to DOE CODE?" href="/${app_name}/faq#can-i-submit-a-tagged-release-as-an-individual-record-to-doe-code">
-                    <span class="faq-page-anchor">Can I submit a tagged release as an individual record to DOE CODE?</span></a>
-            </li>
-            <li>
-                <a title="Can I see the status and availability of my submitted/announced records?" href="/${app_name}/faq#can-i-see-the-status-and-availability">
-                    <span class="faq-page-anchor">Can I see the status and availability of my submitted/announced records?</span></a>
-            </li>
-            <li>
-                <a title="Does DOE CODE archive software?" href="/${app_name}/faq#does-doe-code-archive">
-                    <span class="faq-page-anchor">Does DOE CODE archive software?</span></a>
-            </li>
-            <li>
-                <a title="Does DOE CODE support the upload of container images as part of the submission/announcement process?" href="/${app_name}/faq#does-doe-code-support-upload-of-container-images">
-                    <span class="faq-page-anchor">Does DOE CODE support the upload of container images as part of the submission/announcement process?</span></a>
-            </li>
-            <li>
-                <a title="How do I announce CUI, OUO, or ECI software to OSTI" href="/${app_name}/faq#how-do-i-announce-cui-ouo-eci">
-                    <span class="faq-page-anchor">How do I announce CUI, OUO, or ECI software to OSTI?</span></a>
-            </li>
-            <li>
-                <a title="What is a YAML file? How do I auto populate the YAML file?" href="/${app_name}/faq#what-is-a-yaml">
-                    <span class="faq-page-anchor">What is a YAML file? How do I auto populate the YAML file?</span></a>
-            </li>
-            <li>
-                <a title="What are the Categories of Software?" href="/${app_name}/faq#what-are-the-categories">
-                    <span class="faq-page-anchor">What are the Categories of Software?</span></a>
-            </li>
-            <li>
-                <a title="Do I need an account to use DOE CODE?" href="/${app_name}/faq#do-i-need-account">
-                    <span class="faq-page-anchor">Do I need an account to use DOE CODE?</span></a>
-            </li>
-            <li>
-                <a title="What is a Digital Object Identifier (DOI)?" href="/${app_name}/faq#what-is-a-doi">
-                    <span class="faq-page-anchor">What is a Digital Object Identifier (DOI)?</span></a>
-            </li>
-            <li>
-                <a title="What are the benefits of getting a DOI for code or software?" href="/${app_name}/faq#what-are-the-benefits">
-                    <span class="faq-page-anchor">What are the benefits of getting a DOI for code or software?</span></a>
-            </li>
-            <li>
-                <a title="What if I need to have a project removed from DOE CODE?" href="/${app_name}/faq#removal">
-                    <span class="faq-page-anchor">What if I need to have a project removed from DOE CODE?</span></a>
+                <a class='toc anchor' title="Are there restrictions on the use of the material in DOE CODE?" href="/${app_name}/faq#are-there-restrictions">
+                    Are there restrictions on the use of the material in DOE CODE?
+                </a>
             </li>
         </ul>
-        <h1 class="faq-page-title">Search FAQs</h1>
+        <h2 class='static'>Submission FAQs</h2>
         <ul>
             <li>
-                <a title="How do I search DOE CODE?" href="/${app_name}/faq#search">
-                    <span class="faq-page-anchor">How do I search DOE CODE?</span></a>
+                <a class='toc anchor' title="How is scientific software provided to DOE CODE?" href="/${app_name}/faq#how-is-software-submitted">
+                    How is scientific software provided to DOE CODE?
+                </a>
             </li>
             <li>
-                <a title="How do I use the Advanced Search?" href="/${app_name}/faq#advanced-search">
-                    <span class="faq-page-anchor">How do I use the Advanced Search?</span></a>
+                <a class='toc anchor' title="What does it mean to submit scientific software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-submit">
+                    What does it mean to submit scientific software to DOE CODE?
+                </a>
             </li>
             <li>
-                <a title="What information is found on the Full Project page in DOE Code?" href="/${app_name}/faq#information">
-                    <span class="faq-page-anchor">What information is found on the Full Project page in DOE Code?</span></a>
+                <a class='toc anchor' title="What does it mean to announce scientific software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-announce">
+                    What does it mean to announce scientific software to DOE CODE?
+                </a>
             </li>
             <li>
-                <a title="Can I sort or refine my results?" href="/${app_name}/faq#sort-or-refine">
-                    <span class="faq-page-anchor">Can I sort or refine my results?</span></a>
+                <a class='toc anchor' title="How is business software provided to DOE CODE?" href="/${app_name}/faq#how-is-business-software-provided-to-doe-code">
+                    How is business software provided to DOE CODE?
+                </a>
             </li>
             <li>
-                <a title="Can I save or download the results of a search?" href="/${app_name}/faq#save-or-download">
-                    <span class="faq-page-anchor">Can I save or download the results of a search?</span></a>
+                <a class='toc anchor' title="What does it mean to submit business software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-submit-business-software-to-doe-code">
+                    What does it mean to submit business software to DOE CODE?
+                </a>
             </li>
             <li>
-                <a title="Are there APIs available for DOE CODE?" href="/${app_name}/faq#are-there-apis">
-                    <span class="faq-page-anchor">Are there APIs available for DOE CODE?</span></a>
+                <a class='toc anchor' title="What does it mean to announce business software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-announce-business-software-to-doe-code">
+                    What does it mean to announce business software to DOE CODE?
+                </a>
             </li>
             <li>
-                <a title="Do I need to have cookies enabled to use DOE CODE?" href="/${app_name}/faq#do-i-need-cookies">
-                    <span class="faq-page-anchor">Do I need to have cookies enabled to use DOE CODE?</span></a>
+                <a class='toc anchor' title="Can I add a new or previous version of software I have previously submitted or announced to DOE CODE?" href="/${app_name}/faq#can-i-add-new-or-previous-version-of-software">
+                    Can I add a new or previous version of software I have previously submitted or announced to DOE CODE?
+                </a>
             </li>
             <li>
-                <a title="How can I find out more?" href="/${app_name}/faq#more-info">
-                    <span class="faq-page-anchor">How can I find out more?</span></a>
+                <a class='toc anchor' title="Can I submit a tagged release as an individual record to DOE CODE?" href="/${app_name}/faq#can-i-submit-a-tagged-release-as-an-individual-record-to-doe-code">
+                    Can I submit a tagged release as an individual record to DOE CODE?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="Can I see the status and availability of my submitted/announced records?" href="/${app_name}/faq#can-i-see-the-status-and-availability">
+                    Can I see the status and availability of my submitted/announced records?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="Does DOE CODE archive software?" href="/${app_name}/faq#does-doe-code-archive">
+                    Does DOE CODE archive software?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="Does DOE CODE support the upload of container images as part of the submission/announcement process?" href="/${app_name}/faq#does-doe-code-support-upload-of-container-images">
+                    Does DOE CODE support the upload of container images as part of the submission/announcement process?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="How do I announce CUI, OUO, or ECI software to OSTI" href="/${app_name}/faq#how-do-i-announce-cui-ouo-eci">
+                    How do I announce CUI, OUO, or ECI software to OSTI?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="What is a YAML file? How do I auto populate the YAML file?" href="/${app_name}/faq#what-is-a-yaml">
+                    What is a YAML file? How do I auto populate the YAML file?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="What are the Categories of Software?" href="/${app_name}/faq#what-are-the-categories">
+                    What are the Categories of Software?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="Do I need an account to use DOE CODE?" href="/${app_name}/faq#do-i-need-account">
+                    Do I need an account to use DOE CODE?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="What is a Digital Object Identifier (DOI)?" href="/${app_name}/faq#what-is-a-doi">
+                    What is a Digital Object Identifier (DOI)?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="What are the benefits of getting a DOI for code or software?" href="/${app_name}/faq#what-are-the-benefits">
+                    What are the benefits of getting a DOI for code or software?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="What if I need to have a project removed from DOE CODE?" href="/${app_name}/faq#removal">
+                    What if I need to have a project removed from DOE CODE?
+                </a>
+            </li>
+        </ul>
+        <h2 class='static'>Search FAQs</h2>
+        <ul>
+            <li>
+                <a class='toc anchor' title="How do I search DOE CODE?" href="/${app_name}/faq#search">
+                    How do I search DOE CODE?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="How do I use the Advanced Search?" href="/${app_name}/faq#advanced-search">
+                    How do I use the Advanced Search?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="What information is found on the Full Project page in DOE Code?" href="/${app_name}/faq#information">
+                    What information is found on the Full Project page in DOE Code?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="Can I sort or refine my results?" href="/${app_name}/faq#sort-or-refine">
+                    Can I sort or refine my results?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="Can I save or download the results of a search?" href="/${app_name}/faq#save-or-download">
+                    Can I save or download the results of a search?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="Are there APIs available for DOE CODE?" href="/${app_name}/faq#are-there-apis">
+                    Are there APIs available for DOE CODE?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="Do I need to have cookies enabled to use DOE CODE?" href="/${app_name}/faq#do-i-need-cookies">
+                    Do I need to have cookies enabled to use DOE CODE?
+                </a>
+            </li>
+            <li>
+                <a class='toc anchor' title="How can I find out more?" href="/${app_name}/faq#more-info">
+                    How can I find out more?
+                </a>
             </li>
         </ul>
 
         <br />
-        <h1 class="faq-page-title">General FAQs</h1>
+        <h2 class='static'>General FAQs</h2>
         <div>
             <a name="what-is"></a>
-            <span class="faq-page-subtitle">What is DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <h3 class='static subtitle'>What is DOE CODE?</h3>
+            <blockquote class="answer">
                 <p>
                     DOE CODE is the U.S. Department of Energy's (DOE) new software services platform and search tool for software resulting from DOE-funded research 
                     that provides functionality for collaboration, archiving, and discovery of scientific and business software funded by DOE. DOE CODE replaces the 
@@ -175,9 +223,13 @@
             </blockquote>
         </div>
         <div>
-            <a name="how-is-it-different"></a><span class="faq-page-subtitle">How is the DOE CODE software submission and search tool different from </span>
-            <a title="DOE CODE Github" class="faq-page-subtitle" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode" style="text-decoration:underline;">DOE CODE GitHub</a><a name="how-is-it-different"></a><span class="faq-page-subtitle">?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="how-is-it-different"></a>
+            <h3 class='static subtitle'>
+                How is the DOE CODE software submission and search tool different from 
+                <a title="DOE CODE Github" class="subtitle" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode" style="text-decoration:underline;">DOE CODE GitHub</a>
+                <span class='subtitle'>?</span>
+            </h3>
+            <blockquote class="answer">
                 <p>
                     DOE CODE tool is a platform that provides for the submission and search of software resulting from DOE-funded projects. 
                     The DOE CODE "platform" that runs this site is an open source project available on GitHub. 
@@ -193,8 +245,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="what-does-it-contain"></a><span class="faq-page-subtitle">What does DOE CODE contain?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="what-does-it-contain"></a>
+            <h3 class='static subtitle'>What does DOE CODE contain?</h3>
+            <blockquote class="answer">
                 <p>
                     DOE CODE contains records for DOE-funded scientific and business software and links to the software or code repository. 
                     In addition to the code, the repositories may include manuals, examples, test data, etc.
@@ -202,8 +255,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="is-it-connected-to-codegov"></a><span class="faq-page-subtitle">Is DOE CODE connected to Code.gov?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="is-it-connected-to-codegov"></a>
+            <h3 class='static subtitle'>Is DOE CODE connected to Code.gov?</h3>
+            <blockquote class="answer">
                 <p>
                     To fulfill Departmental requirements to maintain an inventory of all DOE-funded custom-developed software 
                     and to report this inventory to the government-wide Code.gov website, metadata for all scientific 
@@ -215,8 +269,8 @@
         </div>
         <div>
             <a name="what-does-it-provide"></a>
-            <span class="faq-page-subtitle">Does DOE CODE provide repository services?</span>
-            <blockquote class="faq-page-blockquote">
+            <h3 class='static subtitle'>Does DOE CODE provide repository services?</h3>
+            <blockquote class="answer">
                 <p>
                     Yes. DOE CODE provides repository hosting services for the DOE community via <a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode/doecode">GitHub</a>
                     and <a title="Gitlab" target='_blank' rel="noopener noreferrer" href="https://gitlab.osti.gov/users/sign_in">GitLab</a>. GitHub repository services are for those who want typical GitHub open
@@ -237,8 +291,8 @@
         </div>
         <div>
             <a name="what-are-the-types"></a>
-            <span class="faq-page-subtitle">What are the Project Types found in DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <h3 class='static subtitle'>What are the Project Types found in DOE CODE?</h3>
+            <blockquote class="answer">
                 <div>
                     <strong>Open Source, Publicly Available Repository (OS-PAR)</strong>&nbsp;- Software can be freely accessed, used, changed and shared
                     (in modified or unmodified form) by anyone in a public repository. Open Source software is made by many people and distributed
@@ -263,8 +317,8 @@
         </div>
         <div>
             <a name="why-is-uploading-code-required-for-certain-project-types"></a>
-            <span class="faq-page-subtitle">Why is uploading code required for certain Project Types?</span>
-            <blockquote class="faq-page-blockquote">
+            <h3 class='static subtitle'>Why is uploading code required for certain Project Types?</h3>
+            <blockquote class="answer">
                 <p>
                     The source code is required for announcing codes with Project Types OS-NPAR and CS. For Project Type CS, compiled binary may be provided as a 
                     last resort when the code is not available. The code is required for preservation purposes only; i.e., not for distribution by OSTI. (See also 
@@ -279,8 +333,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="are-there-restrictions"></a><span class="faq-page-subtitle">Are there restrictions on the use of the material in DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="are-there-restrictions"></a>
+            <h3 class='static subtitle'>Are there restrictions on the use of the material in DOE CODE?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>There may be restrictions on use of the material based on the associated license(s). Currently, DOE CODE supports the following list of Open Source licenses:</p>
                     <div>
@@ -311,10 +366,11 @@
             </blockquote>
         </div>
         <br />
-        <h1 class="faq-page-title">Submission FAQs</h1>
+        <h2 class='static'>Submission FAQs</h2>
         <div>
-            <a name="how-is-software-submitted"></a><span class="faq-page-subtitle">How is scientific software provided to DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="how-is-software-submitted"></a>
+            <h3 class='static subtitle'>How is scientific software provided to DOE CODE?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>
                         Individual software records and associated metadata are directly provided by the developer or the developing organization to DOE
@@ -347,8 +403,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="what-does-it-mean-to-submit"></a><span class="faq-page-subtitle">What does it mean to submit scientific software to DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="what-does-it-mean-to-submit"></a>
+            <h3 class='static subtitle'>What does it mean to submit scientific software to DOE CODE?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>
                         Users may want to simply submit their scientific software to DOE CODE because submitting offers increased discoverability and the
@@ -401,8 +458,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="what-does-it-mean-to-announce"></a><span class="faq-page-subtitle">What does it mean to announce scientific software to DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="what-does-it-mean-to-announce"></a>
+            <h3 class='static subtitle'>What does it mean to announce scientific software to DOE CODE?</h3>
+            <blockquote class="answer">
                 <div>
 
                     <p>
@@ -498,8 +556,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="how-is-business-software-provided-to-doe-code"></a><span class="faq-page-subtitle">How is business software provided to DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="how-is-business-software-provided-to-doe-code"></a>
+            <h3 class='static subtitle'>How is business software provided to DOE CODE?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>
                         To efficiently fulfill Departmental requirements to maintain an inventory of all DOE-funded custom-developed software and to report 
@@ -519,8 +578,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="what-does-it-mean-to-submit-business-software-to-doe-code"></a><span class="faq-page-subtitle">What does it mean to submit business software to DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="what-does-it-mean-to-submit-business-software-to-doe-code"></a>
+            <h3 class='static subtitle'>What does it mean to submit business software to DOE CODE?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>
                         Users may want to simply submit their business code to DOE CODE. Submitting offers increased discoverability and the option to obtain 
@@ -577,8 +637,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="what-does-it-mean-to-announce-business-software-to-doe-code"></a><span class="faq-page-subtitle">What does it mean to announce business software to DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="what-does-it-mean-to-announce-business-software-to-doe-code"></a>
+            <h3 class='static subtitle'>What does it mean to announce business software to DOE CODE?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>
                         Users may need to announce their business code to the Department of Energy to ensure announcement and dissemination in accordance with 
@@ -636,8 +697,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="can-i-add-new-or-previous-version-of-software"></a><span class="faq-page-subtitle">Can I add a new or previous version of software I have previously submitted or announced to DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="can-i-add-new-or-previous-version-of-software"></a>
+            <h3 class='static subtitle'>Can I add a new or previous version of software I have previously submitted or announced to DOE CODE?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>
                         Yes. DOE CODE has the option to create a DOE CODE record that is a newer or previous version of any DOE CODE record you have already 
@@ -662,8 +724,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="can-i-submit-a-tagged-release-as-an-individual-record-to-doe-code"></a><span class="faq-page-subtitle">Can I submit a tagged release as an individual record to DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="can-i-submit-a-tagged-release-as-an-individual-record-to-doe-code"></a>
+            <h3 class='static subtitle'>Can I submit a tagged release as an individual record to DOE CODE?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>
                         Yes, DOE CODE allows for you to submit a tagged release of software hosted in GitHub as an individual record and 
@@ -681,8 +744,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="can-i-see-the-status-and-availability"></a><span class="faq-page-subtitle">Can I see the status and availability of my submitted/announced records?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="can-i-see-the-status-and-availability"></a>
+            <h3 class='static subtitle'>Can I see the status and availability of my submitted/announced records?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>
                         Yes, after logging in to your account, from the “Manage My Projects” page, you can see the Status and Availability for submitted and 
@@ -730,8 +794,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="does-doe-code-archive"></a><span class="faq-page-subtitle">Does DOE CODE archive software?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="does-doe-code-archive"></a>
+            <h3 class='static subtitle'>Does DOE CODE archive software?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>
                         Yes.  To ensure long-term preservation of DOE-funded scientific and technical information (including software), OSTI employs dark archiving 
@@ -745,8 +810,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="does-doe-code-support-upload-of-container-images"></a><span class="faq-page-subtitle">Does DOE CODE support the upload of container images as part of the submission/announcement process?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="does-doe-code-support-upload-of-container-images"></a>
+            <h3 class='static subtitle'>Does DOE CODE support the upload of container images as part of the submission/announcement process?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>
                         Yes.  DOE CODE allows users to upload container images in the form of binary files. Currently
@@ -759,8 +825,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="how-do-i-announce-cui-ouo-eci"></a><span class="faq-page-subtitle">How do I announce CUI, OUO, or ECI software to OSTI?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="how-do-i-announce-cui-ouo-eci"></a>
+            <h3 class='static subtitle'>How do I announce CUI, OUO, or ECI software to OSTI?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>
                         The current version of DOE CODE is designed to support submission and announcement of DOE-funded unlimited availability 
@@ -773,8 +840,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="what-is-a-yaml"></a><span class="faq-page-subtitle">What is a YAML file? How do I auto populate the YAML file?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="what-is-a-yaml"></a>
+            <h3 class='static subtitle'>What is a YAML file? How do I auto populate the YAML file?</h3>
+            <blockquote class="answer">
                 <p>
                     <a title="YAML" target='_blank' rel="noopener noreferrer" href="http://www.yaml.org/start.html">YAML</a> is a human friendly 
                     data serialization standard for all programming languages. DOE CODE provides functionality to allow users to auto-populate 
@@ -785,8 +853,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="what-are-the-categories"></a><span class="faq-page-subtitle">What are the Categories of Software?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="what-are-the-categories"></a>
+            <h3 class='static subtitle'>What are the Categories of Software?</h3>
+            <blockquote class="answer">
                 <p>Different categories of software have different distribution requirements, limitations, and appropriate distribution channels,
                     which are defined in the <a title="Software Categories" target='_blank' rel="noopener noreferrer" href="https://www.osti.gov/stip/softwarecategories">Software Categories</a>&nbsp;table.
                     The table is not intended to provide an exhaustive list.
@@ -800,8 +869,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="do-i-need-account"></a><span class="faq-page-subtitle">Do I need an account to use DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="do-i-need-account"></a>
+            <h3 class='static subtitle'>Do I need an account to use DOE CODE?</h3>
+            <blockquote class="answer">
                 <p>
                     A DOE CODE account is not needed to search for DOE-funded software, but an account is needed to provide scientific and business 
                     software. Users meeting minimum criteria can directly create a DOE CODE account. All you need is your first and last name, 
@@ -818,8 +888,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="what-is-a-doi"></a><span class="faq-page-subtitle">What is a Digital Object Identifier (DOI)?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="what-is-a-doi"></a>
+            <h3 class='static subtitle'>What is a Digital Object Identifier (DOI)?</h3>
+            <blockquote class="answer">
                 <p>
                     A DOI is a unique persistent identifier that references a digital object and provides long term access; DOIs remain 
                     stable even if the underlying address or URL for the content changes. OSTI is a member of and registering agency 
@@ -831,8 +902,8 @@
         </div>
         <div>
             <a name="what-are-the-benefits"></a>
-            <span class="faq-page-subtitle">What are the benefits of getting a DOI for code or software?</span>
-            <blockquote class="faq-page-blockquote">
+            <h3 class='static subtitle'>What are the benefits of getting a DOI for code or software?</h3>
+            <blockquote class="answer">
                 <div>
                     <ul>
                         <li>Announcing and registering code or software with DOIs enables researchers, especially future researchers, to more easily discover, access, 
@@ -849,18 +920,20 @@
             </blockquote>
         </div>
         <div>
-            <a name="removal"></a><span class="faq-page-subtitle">What if I need to have a project removed from DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="removal"></a>
+            <h3 class='static subtitle'>What if I need to have a project removed from DOE CODE?</h3>
+            <blockquote class="answer">
                 <p>
                     To have a project removed from DOE CODE, please contact&nbsp;<a title="Email doecode@osti.gov" href="mailto:doecode@osti.gov">doecode@osti.gov</a>.
                 </p>
             </blockquote>
         </div>
         <br />
-        <h1 class="faq-page-title">Search FAQs</h1>
+        <h2 class='static'>Search FAQs</h2>
         <div>
-            <a name="search"></a><span class="faq-page-subtitle">How do I search DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="search"></a>
+            <h3 class='static subtitle'>How do I search DOE CODE?</h3>
+            <blockquote class="answer">
                 <div>
                     DOE CODE search works much like a basic Google search, where you can enter your terms into the basic search box to retrieve results. 
                     You can search for a single term or a phrase by putting it in "double quotes." Additionally, DOE CODE supports Boolean and proximity 
@@ -904,11 +977,12 @@
             </blockquote>
         </div>
         <div>
-            <a name="advanced-search"></a><span class="faq-page-subtitle">How do I use the Advanced Search?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="advanced-search"></a>
+            <h3 class='static subtitle'>How do I use the Advanced Search?</h3>
+            <blockquote class="answer">
                 <div>
                     <p>The advanced search will allow you to perform more complex searches and retrieve more specific results, offering you several fields,
-                    such as Title, Developer(s), or Release date to help you refine your search results.</p>
+                        such as Title, Developer(s), or Release date to help you refine your search results.</p>
                     <p>To access the advanced search, select the green drop-down arrow from the search bar, either on the homepage or at the top of any subsequent page.</p>
                     <p>To access all the advanced search features, click on the “More Options” selection at the bottom of the advanced search.</p>
                     <br />
@@ -979,8 +1053,9 @@
             </blockquote>
         </div>
         <div>
-            <a name="information"></a><span class="faq-page-subtitle">What information is found on the Full Project page in DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="information"></a>
+            <h3 class='static subtitle'>What information is found on the Full Project page in DOE CODE?</h3>
+            <blockquote class="answer">
                 <div>
                     The information on the Full Project page is bibliographic metadata/information unique to and descriptive of a particular project.  
                     Basic information includes the Title, Developer(s), and Release Date.  Below is a list of metadata that OSTI collects and 
@@ -1062,38 +1137,43 @@
             </blockquote>
         </div>
         <div>
-            <a name="sort-or-refine"></a><span class="faq-page-subtitle">Can I sort or refine my results?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="sort-or-refine"></a>
+            <h3 class='static subtitle'>Can I sort or refine my results?</h3>
+            <blockquote class="answer">
                 <p>Yes, you may refine your results by Project Type, License, Software Type, Release Date, and Research Organization. 
-                These options are available via the results page on the left-hand side of the screen.  Sort options on the results page 
-                include sorting by relevance and release date.</p>
+                    These options are available via the results page on the left-hand side of the screen.  Sort options on the results page 
+                    include sorting by relevance and release date.</p>
             </blockquote>
         </div>
         <div>
-            <a name="save-or-download"></a><span class="faq-page-subtitle">Can I save or download the results of a search?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="save-or-download"></a>
+            <h3 class='static subtitle'>Can I save or download the results of a search?</h3>
+            <blockquote class="answer">
                 <p>Yes, you can save the bibliographic/metadata information for a set of results as an CSV/Excel or JSON file from the results screen.</p>
                 <p>From an individual Project page you can save the metadata in XML, YAML, or JSON file format.  You also have the option to generate a 
-                citation for the record in various formats, including MLA, APA, Chicago, and BibTex.</p>
+                    citation for the record in various formats, including MLA, APA, Chicago, and BibTex.</p>
             </blockquote>
         </div>
         <div>
-            <a name="are-there-apis"></a><span class="faq-page-subtitle">Are there APIs available for DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="are-there-apis"></a>
+            <h3 class='static subtitle'>Are there APIs available for DOE CODE?</h3>
+            <blockquote class="answer">
                 <p>Yes, there are lots of APIs with stable endpoints. For more information, see the&nbsp;<a title="API Documentation" target='_blank' rel="noopener noreferrer" href="{{api_url}}docs">API
                         documentation</a>.</p>
             </blockquote>
         </div>
         <div>
-            <a name="do-i-need-cookies"></a><span class="faq-page-subtitle">Do I need to have cookies enabled to use DOE CODE?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="do-i-need-cookies"></a>
+            <h3 class='static subtitle'>Do I need to have cookies enabled to use DOE CODE?</h3>
+            <blockquote class="answer">
                 <p>Yes, you must select Accept All Cookies. Please see our&nbsp;<a title="Website Policies / Important Links" target='_blank' rel="noopener noreferrer" href="/disclaim">Website Policies/Important Links</a>&nbsp;for further
                     information.</p>
             </blockquote>
         </div>
         <div>
-            <a name="more-info"></a><span class="faq-page-subtitle">How can I find out more?</span>
-            <blockquote class="faq-page-blockquote">
+            <a name="more-info"></a>
+            <h3 class='static subtitle'>How can I find out more?</h3>
+            <blockquote class="answer">
                 <p>See our <a href='help' title='Help'>Help</a> page for more detailed information about submitting and announcing software to DOE CODE.</p>
                 <p>For additional assistance,&nbsp;<a title="Email doecode@osti.gov" href="mailto:doecode@osti.gov">Contact Us</a>.</p>
             </blockquote>
