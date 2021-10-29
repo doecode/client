@@ -1,51 +1,73 @@
 {{> wrapper/header}}
 <input type="hidden" id="help-page-identifier"/>
-
+<style type='text/css'>
+    div.indented{
+        padding-left:30px;
+    }
+    #access-limitation-table > caption{
+        font-size:1.15em;
+        color:black;
+        font-weight:bold;
+    }
+    #access-limitation-table span.limitation.code{
+        font-size: 1.1em;
+        font-weight: 400;
+    }
+    /* Fix ordered list in access lim table to have ) after the numbers*/
+    #access-limitation-table ol{
+        counter-reset: list;
+        padding-left:0px;
+    }
+    #access-limitation-table ol > li{
+        list-style:none;
+        padding-bottom:5px;
+    }
+    #access-limitation-table ol > li:before{
+        content: counter(list) ") ";
+        counter-increment: list;
+    }
+</style>
 <div class="row not-so-wide-row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-6 col-xs-12 static-content">
-        <h2 class="static-content-title">Help</h2>
-        <br/>
+    <div class="col-lg-3 col-md-1"></div>
+    <div class="col-lg-6 col-md-10 col-xs-12 static-content">
+        <h1 class="static-content-title">Help</h1>
         <br/>
         {{#unless user_data.is_logged_in}}
-            <strong class="help-page-subtitle">Do I need an account to submit or announce software to DOE CODE?</strong>
-            <br/>
-            <br/>
-            <p>Yes, an account is needed to provide scientific and business software to DOE CODE. 
-                Users meeting minimum criteria can directly create a DOE CODE account. All you need 
-                is your first and last name, government email address or valid contract number, 
-                and a password. From the top right of any DOE CODE page, you may register for an account 
-                by clicking <a title="Create Account" href="register">Create Account</a> 
-                (or <a title="Sign In" href="login">Sign In</a> if you already have an account). 
-            </p>
-            <br/>
-        {{/unless}}
-        <strong class="help-page-subtitle">How is Software Submitted?</strong>
-        <br/>
-        <br/>
-        <p>Individual software records are directly submitted by the developer or the developing organization.
-            <br/>
-            <br/>DOE CODE offers two paths for users to provide code. Users can (1)&nbsp;<strong>submit</strong>&nbsp;code to DOE CODE, and (2)
-            <strong>announce</strong>&nbsp;code to the Department of Energy for official review and release through DOE CODE. 
-            <strong>Submitting</strong> software offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, while <strong>Announcing</strong> software ensures 
-            announcement and dissemination in accordance with DOE statutory responsibilities. See the 
-            "<a title="What does it mean to submit code to DOE CODE?" href="faq#what-does-it-mean-to-submit">What does it mean to submit code to DOE CODE?</a>" and 
-            "<a title="What does it mean to announce code to DOE CODE?" href="faq#what-does-it-mean-to-announce">What does it mean to announce code to DOE CODE?</a>"
-            FAQs for more details.
+        <a name="do-i-need-an-account-to-submit-to-doe-code"></a>
+        <h2 class="static">Do I need an account to submit or announce software to DOE CODE?</h2>
+        <p>
+            Yes, an account is needed to submit or announce scientific and business software to DOE CODE. Users meeting minimum criteria can directly create a DOE CODE account. 
+            Your first and last name, government email address or valid contract number, and a password are required. 
+            From the top right of any DOE CODE page, you may register for an account by clicking <a href='/${app_name}/register'>Create Account</a> 
+            (or <a href='/${app_name}/login'>Sign In</a> if you already have an account).
         </p>
-
         <br/>
-        <strong class="help-page-subtitle">Repository Information</strong>
+        {{/unless}}
+        <a name='how-is-software-submitted'></a>
+        <h2 class="static">How is Software Submitted?</h2>
+        <p>
+            Individual software records are directly submitted by the developer or the developing organization.
+            <br/>
+            <br/>
+            DOE CODE offers two paths for users to provide code. Users can (1) <strong>submit</strong> code to DOE CODE, 
+            and (2) <strong>announce</strong> code to the Department of Energy for official review and release through DOE CODE. 
+            <strong>Submitting</strong> software offers increased discoverability and the option to obtain a Digital Object Identifier (DOI) for the code, 
+            while <strong>Announcing</strong> software ensures announcement and dissemination in accordance with DOE statutory responsibilities. 
+            See the FAQs on submitting <a href='/${app_name}/faq#what-does-it-mean-to-submit'>scientific</a> and <a href='/${app_name}/faq#what-does-it-mean-to-submit-business-software-to-doe-code'>business</a> software 
+            or announcing <a href='/${app_name}/faq#what-does-it-mean-to-announce'>scientific</a> and <a href='/${app_name}/faq#what-does-it-mean-to-announce-business-software-to-doe-code'>business</a> software to DOE CODE for more details. 
+            Additionally, see “<a href='TODO: HOW DO I ANNOUNCE'>How do I announce software with an access limitation, such as OUO/CUI, to OSTI</a>?” 
+            for more details on announcing limited software.
+        </p>
         <br/>
-        <br/>
+        <a name='repository-information'></a>
+        <h2 class='static'>Repository Information</h2>
         <strong>Project Type</strong> - Select the appropriate Project Type.
         <br/>
         <br/>
-        <div style="padding-left:30px;">
+        <div class='indented'>
             <div class="row">
                 <div class="col-xs-12">
-                    <strong>Open Source -</strong>&nbsp;
+                    <strong>Open Source - </strong>
                     Software where the source code is distributed under a licensing agreement which grants all the rights to use, change, 
                     and share the software in a modified or unmodified form. 
                     See the <a title="Open Source Initiative" href="https://opensource.org/" target="_blank" rel="noopener noreferrer">Open Source Initiative</a> for more information and definitions.
@@ -54,9 +76,9 @@
             <br/>
             <div class="row">
                 <div class="col-xs-12">
-                    <strong>Closed Source -</strong>&nbsp;
+                    <strong>Closed Source - </strong>
                     Proprietary software distributed under a licensing agreement to authorized users with private modification, copying, and republishing restrictions. 
-                    The source code is not shared with the public for anyone to look at or change.
+                    The source code is not shared with the public for anyone to look at or change. This includes limited availability software.
                 </div>
             </div>
         </div>
@@ -101,7 +123,7 @@
         </div>
         <br/>
         <div class="row">
-            <div class="col-xs-12"><strong>Repository URL -</strong>&nbsp;
+            <div class="col-xs-12"><strong>Repository URL - </strong>
                 If you select Open Source, Publicly Available you must provide a unique URL which leads to the actual code repository. Please ensure you are providing 
                 the direct URL to the actual repository. As an example, the direct Repository URL for DOE CODE is 
                 <a href='https://www.github.com/doecode/doecode' rel="noopener noreferrer" target='_blank'>https://www.github.com/doecode/doecode</a> whereas the 
@@ -124,8 +146,7 @@
         </div>
         <br/>
         <div class="row">
-            <div class="col-xs-12"><strong>Landing Page -</strong>&nbsp;
-                If you select&nbsp;<strong>Open Source</strong>,&nbsp;<strong>No Publicly Available Repository</strong> OR&nbsp;<strong>Closed Source</strong> you 
+            <div class="col-xs-12"><strong>Landing Page - </strong>
                 must provide a unique URL which leads to the landing page of the software. The landing page should provide information regarding how to access the 
                 source code, point of contact, and licensing information.
             </div>
@@ -148,10 +169,10 @@
                 <img src='/${app_name}/images/help/autopopulate.png' alt='Autopopulate from Repository' title='Autopopulate from Repository'/>
             </div>
         </div>
-        <br/><hr>
-        <br/><strong class="help-page-subtitle">Product Description</strong>
         <br/>
-        <br/>
+
+        <a name="product-description"></a>
+        <h2 class="static">Product Description</h2>
         <div class="row">
             <div class="col-xs-12"><strong>Software Title -</strong>&nbsp;
                 The title of the software.
@@ -161,8 +182,7 @@
         <div class="row">
             <div class="col-xs-12"><strong>Description/Abstract -</strong>&nbsp;
                 Provide a clear, concise, and publicly releasable description of the software, including the purpose, function, and capabilities. Text 
-                should be spell checked, limited to 2000 characters and follow input standards for special characters.&nbsp;<strong>DO NOT INCLUDE SENSITIVE 
-                    INFORMATION IN THE DESCRIPTION/ABSTRACT.</strong>
+                should be spell checked, limited to 2000 characters and follow input standards for special characters. <strong>DO NOT INCLUDE SENSITIVE INFORMATION IN THE DESCRIPTION/ABSTRACT.</strong>
             </div>
         </div>
         <br/>
@@ -172,12 +192,12 @@
                 <br/>          
                 <br/>          
             </div>
-            <div style="padding-left:30px;">
+            <div class='indented'>
                 <div class="row">
                     <div class="col-xs-12">
                         <strong>Open Source -</strong>&nbsp;
                         Select the appropriate license from the drop-down menu of available options. Descriptions of Licenses are 
-                        available&nbsp;<a title="Open Source Alphabetical" href="https://opensource.org/licenses/alphabetical" target="_blank" rel="noopener noreferrer">here</a>.
+                        available <a title="Open Source Alphabetical" href="https://opensource.org/licenses/alphabetical" target="_blank" rel="noopener noreferrer">here</a>.
                     </div>
                 </div>
                 <div class="center-text col-xs-12">
@@ -213,7 +233,210 @@
                     <br/>
                     <img src='/${app_name}/images/help/closed-source-license-2.png' alt='Closed Source No License' title='Closed Source No License'/>
                     <br/>
+                    The <a href='TODO: announcing software to doe code'>Announcing Software to DOE CODE</a> flowchart provides licensing requirements in a visual format.
                 </div>
+            </div>
+        </div>
+        <br/>
+        <div class='row'>
+            <div class='col-xs-12'>
+                <storng>Access Limitation - </storng>
+                Access limitation field information will depend upon whether an Open Source project or Closed Source project is being provided. 
+                See "<a href='TODO: what is an access limitation FAQ'>What is an access limitation?</a>" for more details or refer to the list of access limitations and their definitions below.
+                <div class='indented'>
+                    <strong>Open Source - </strong> projects provided as Open Source are assigned Unlimited (UNL) as the default.
+                    <br/>
+                    <br/>
+                    <strong>Closed Source - </strong> an access limitation must be selected for a project announced in DOE CODE as Closed Source. 
+                    The list of access limitations and their definitions are below. Prior to announcing software to DOE CODE, 
+                    it must undergo all appropriate reviews for sensitivity and export control by the originating site and be deemed secure. 
+                    If you are unsure of the software sensitivity, please work with your site's <a href='https://www.osti.gov/stip/about/stip-community#SoftwareContacts' target='_blank' rel='noopener noreferrer'>Software Point of Contact</a>.
+                </div>
+                <br/>
+                The <a href='TODO: Link to announcing flowchart'>Announcing Software to DOE CODE</a> flowchart provides access limitation information requirements in a visual format.
+            </div>
+        </div>
+        <br/>
+
+        <div class='row'>
+            <div class='col-xs-12'>
+                <a href='access-limitations'></a>
+                <table class='table table-bordered' id='access-limitation-table'>
+                    <caption>Access Limitations</caption>
+                    <thead>
+                        <tr>
+                            <th>Access Limitation</th>
+                            <th>Definition</th>
+                            <th>Additional Required Fields</th>
+                            <th>Additional Optional Fields</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class='limitation code'>UNL</span> - Unlimited
+                            </td>
+                            <td>
+                                Unclassified information that is publicly releasable.
+                            </td>
+                            <td>
+                                None
+                            </td>
+                            <td>
+                                None
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class='limitation code'>SBIR/STTR</span> - Small Business Innovation Research and Small Business Technology Transfer Research
+                            </td>
+                            <td>
+                                Data first produced by a grantee that is a small business firm in performance of a small business innovation research grant 
+                                issued under the authority of, which data are not generally known, and which data without obligation to its confidentiality 
+                                have not been made available to others by the grantee or are not already available to the Government.
+                            </td>
+                            <td>
+                                <ol>
+                                    <li>SBIR or STTR checkbox</li>
+                                    <li>Phase</li>
+                                    <li>Contract Start Date</li>
+                                    <li>Contract Release Date</li>
+                                    <li>Business Official (Name, Email, Phone, Organization)</li>
+                                    <li>Principal Investigator (Name, Email, Phone, Organization)</li>
+                                </ol>
+                            </td>
+                            <td>
+                                <ol>
+                                    <li>Previous contract number</li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class='limitation code'>OUO</span> - Official Use Only
+                            </td>
+                            <td>
+                                Information designated as Official Use Only is unclassified information that may be exempt from public release under the Freedom of Information Act.
+                            </td>
+                            <td>
+                                OUO Exemption Number
+                            </td>
+                            <td>
+                                None
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class='limitation code'>OUO;ECI</span> - Official Use Only; Export Controlled Information
+                            </td>
+                            <td>
+                                This is information containing technical data as defined in and controlled by U.S. export control statutes. 
+                                Information designated as ECI is given controlled distribution to prevent unauthorized release to foreign countries, organizations, or individuals.
+                            </td>
+                            <td>
+                                OUO Exemption Number
+                            </td>
+                            <td>
+                                None
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class='limitation code'>OUO;SSI</span> - Official Use Only; Security Sensitive Information
+                            </td>
+                            <td>
+                                Unclassified information of a sensitive nature, that if publicly disclosed could be expected to have a harmful impact on the security 
+                                of Federal operations or assets, the public health or safety of the citizens of the United States or its residents, or the nation's 
+                                long-term economic prosperity; and which describes, discusses, or reflects:  1) the ability of any element of the critical infrastructure of 
+                                the United States to resist intrusion, interference, compromise, theft, or incapacitation by either physical or computer-based attack 
+                                or other similar conduct that violates Federal, State, or local law; harms interstate, international commerce of the United States; 
+                                or, threatens public health or safety; 2) any currently viable assessment, projection, or estimate of the security vulnerability of 
+                                any element of the critical infrastructure of the United States, specifically including, but not limited to vulnerability assessment, 
+                                security testing, risk evaluation, risk-management planning, or risk audit; and 3) any currently applicable operational problem or 
+                                solution regarding the security of any element of the critical infrastructure of the United States, specifically including but not 
+                                limited to the repair, recovery, redesign, reconstruction, relocation, insurance, and continuity of operations of any element.
+                            </td>
+                            <td>
+                                OUO Exemption Number
+                            </td>
+                            <td>
+                                None
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class='limitation code'>OUO;PROT</span> - Official Use Only; Protected Data CRADA/EPACT/OTHER
+                            </td>
+                            <td>
+                                Information produced in the performance of a CRADA (e.g. Energy Policy Act (EPAct)) that is marked as being Protected CRADA Information 
+                                by a party to the agreement and that would have been proprietary information had it been obtained from a non-Federal entity. 
+                                It may be protected for a period up to 5 years from the date it was produced, except as expressly provided for in the CRADA.
+                            </td>
+                            <td>
+                                <ol>
+                                    <li>Release Date</li>
+                                    <li>CRADA, EPACT, or OTHER Checkbox</li>
+                                    <li>OUO Exemption Number</li>
+                                </ol>
+                            </td>
+                            <td>
+                                None
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class='limitation code'>OUO;PAT</span> - Official Use Only; Patent Pending
+                            </td>
+                            <td>
+                                A phrase that often appears on manufactured items, meaning that someone has applied for a patent on an invention that is contained in the manufactured items. Serves as a warning that a patent may issue that would cover the item and that copiers should be careful because they might infringe if the patent issues.
+                            </td>
+                            <td>
+                                <ol>
+                                    <li>OUO Exemption Number</li>
+                                </ol>
+                            </td>
+                            <td>
+                                None
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class='limitation code'>OUO;PROP</span> - Official Use Only; Limited Rights Data
+                            </td>
+                            <td>
+                                Data, other than computer software, that embody trade secrets or are commercial or financial and confidential or privileged, to the extent that such data pertain to items, components, or processes developed at private expense, including minor modifications.
+                            </td>
+                            <td>
+                                <ol>
+                                    <li>OUO Exemption Number</li>
+                                </ol>
+                            </td>
+                            <td>
+                                None
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class='limitation code'>OUO;PDOUO</span> – Official Use Only; Program-Determined Official Use Only
+                            </td>
+                            <td>
+                                This type of Official Use Only information is based on approved guidance as reflected in DOE O 471.3 Chg 1 (Admin Chg) 
+                                Identifying and Protecting Official Use Only Information. CG-SS-4, Classification and UCNI Guide for Safeguards and Security Information, 
+                                dated 1/13/2011, and other  provide one type of program-determined guidance for marking and protecting Official Use Only information.
+                            </td>
+                            <td>
+                                <ol>
+                                    <li>OUO Exemption Number</li>
+                                </ol>
+                            </td>
+                            <td>
+                                <ol>
+                                    <li>Specify DOE Headquarters Program Office and reason for protection</li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <br/>
@@ -241,10 +464,11 @@
             </div>
         </div>
         <br/>
+
         <hr>
-        <br/><strong class="help-page-subtitle">Developers</strong>
-        <br/>
-        <br/>
+
+        <a name='developers'></a>
+        <h2 class="static">Developers</h2>
         <div class="row">
             <div class="col-xs-12"><strong>Developer(s) -</strong>&nbsp;
                 A person concerned with facets of the software development process, including the research, design, programming, and testing of computer 
@@ -260,10 +484,12 @@
                 <img src='/${app_name}/images/help/developer_modal.png' alt='Developer Modal' title='Developer Modal'/>
             </div>
         </div>
-        <br/><hr>
-        <br/><strong class="help-page-subtitle">DOI and Release Date</strong>
         <br/>
-        <br/>
+
+        <hr>
+
+        <a name='doi-and-release-date'></a>
+        <h2 class="static">DOI and Release Date</h2>        
         <div class="row">
             <div class="col-xs-12"><strong>Digital Object Identifier (DOI) -</strong>&nbsp;
                 A unique persistent identifier that references a digital object and provides long-term access; DOIs remain stable even if the underlying 
@@ -305,8 +531,9 @@
             </div>
         </div>
         <br/>
-        <strong class="help-page-subtitle">Supplemental Product Information</strong>
-        <br/>
+
+        <a name='supplemental-product-information'></a>
+        <h2 class="static">Supplemental Product Information</h2>
         <div class='row'>
             <div class="center-text col-xs-12">
                 <br/>
@@ -359,6 +586,7 @@
             <div class="col-xs-12"><strong>Upload Source Code -</strong>&nbsp;
                 If you are submitting Open Source, No Publicly Available Repository or Closed Source code through DOE CODE you will also be required to upload an 
                 archive file containing your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tgz, .tar.gz, and .tar.gz2.
+                The <a href='TODO: Announcing osftware to doe code'>Announcing Software to DOE CODE</a> flowchart provides upload requirements in a visual format.
             </div>
             <div class="center-text col-xs-12">
                 <br/>
@@ -366,10 +594,11 @@
             </div>
         </div>
         <br/>
+
         <hr>
-        <br/><strong class="help-page-subtitle">Organizations</strong>
-        <br/>
-        <br/>
+
+        <a name='organizations'></a>
+        <h2 class="static">Organizations</h2>
         <div class="row">
             <div class="col-xs-12"><strong>Sponsoring Organization(s) -</strong>&nbsp;
                 The sponsoring or funding office of the software product.
@@ -450,11 +679,11 @@
             </div>
         </div>
         <br/>
+
         <hr>
-        <br/>
-        <strong class="help-page-subtitle">Contributors and Contributing Organizations</strong>
-        <br/>
-        <br/>
+
+        <a name='contributors-and-contributing-organizations'></a>
+        <h2 class="static">Contributors and Contributing Organizations</h2>
         <div class="row">
             <div class="col-xs-12"><strong>Contributor(s) -</strong>&nbsp;
                 The name of a person or institution that has contributed to the software (code, documentation, tests, ideas, project guidance, etc.), but is not 
@@ -507,11 +736,11 @@
             </div>
         </div>
         <br/>
+
         <hr>
-        <br/>
-        <strong class="help-page-subtitle">Identifiers</strong>
-        <br/>
-        <br/>
+
+        <a name='identifiers'></a>
+        <h2 class="static">Identifiers</h2>
         <div class="row">
             <div class="col-xs-12">
                 DOI or URL identifiers of related resources. Referencing other documents, datasets, or software that relate to the submitted software allows 
@@ -547,45 +776,11 @@
                 </ul>
             </div>
         </div>
+
         <hr>
-        <br/>
-        <strong class="help-page-subtitle">Awards</strong>
-        <br/>
-        <br/>
-        <div class="row">
-            <div class="col-xs-12">
-                <div>An Award DOI (digital object identifier) is assigned to awards, contracts, equipment, facilities, grants, prizes, salary awards, time awarded, and training grants. If the software/code was produced under multiple awards given by multiple organizations, additional Award DOIs may be entered.</div>
-                <br/>
-                <div><strong>Note:</strong> Award DOIs are different than DOIs assigned to the software/code currently being submitted to DOE CODE or a contract/grant/award number. DO NOT enter these here. Review <a title='FAQs' href='https://www.osti.gov/award-doi-service/faqs'>https://www.osti.gov/award-doi-service/faqs</a> for additional information about Award DOIs.</div>
-            </div>
-            <div class="center-text col-xs-12">
-                <br/>
-                <img src='/${app_name}/images/help/award_dois.png' alt='Award DOIs' title='Award DOIs'/>
-            </div>
-            <div class="center-text col-xs-12">
-                <br/>
-                <img src='/${app_name}/images/help/award_doi_modal.png' alt='Award DOIs Modal' title='Award DOIs Modal' style="padding-bottom: 15px;"/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <ul class='help-page-list'>
-                    <li>
-                        <strong>Award DOI -</strong>&nbsp;
-                        The Award Digital Object Identifier (DOI) under which the work or time was provided. DOIs follow the format: 10.XXXX/XXXXX.
-                    </li>
-                    <li>
-                        <strong>Funder Name -</strong>&nbsp;
-                        The name of the awarding/funding organization.
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <hr>
-        <br/>
-        <strong class="help-page-subtitle">Contact Information</strong>
-        <br/>
-        <br/>
+
+        <a name='contact-information'></a>
+        <h2 class="static">Contact Information</h2>
         <div class="row">
             <div class="col-xs-12"><strong>Contact Information -</strong>&nbsp;
                 Provide the name, email address, phone number and organization of the submitter. This contact information 
@@ -601,11 +796,11 @@
             </div>
         </div>
         <br/>
+
         <hr>
-        <br/>
-        <strong class="help-page-subtitle">Save Your Progress</strong>
-        <br/>
-        <br/>
+
+        <a name='save-your-progress'></a>
+        <h2 class="static">Save Your Progress</h2>
         <div class="row">
             <div class="col-xs-12">
                 At any point, you can Save Your Progress and return to DOE CODE later to complete the software record.
@@ -613,11 +808,11 @@
         </div>
         <!--Manage my projects-->
         <br/>
+
         <hr>
-        <br/>
-        <strong class="help-page-subtitle">Manage My Projects</strong>
-        <br/>
-        <br/>
+
+        <a name='manage-my-projects'></a>
+        <h2 class="static">Manage My Projects</h2>
         <div class="row">
             <div class="col-xs-12">
                 The “Manage My Projects” page allows users to view the status and availability of each project submitted or announced to DOE CODE.  
@@ -626,11 +821,15 @@
                 <br/>
                 <img class="img-responsive" src='/${app_name}/images/help/manage-my-projects.png' alt='Manage My Projects Page' title='Manage My Projects Page'/>
             </div>
+        </div>
+        
+        <hr>
+
+        <a name='status'></a>
+        <h2 class="static">Status</h2>
+        <div class="row">
             <div class='col-xs-12'>
-                <br/>
-                <strong>Status</strong>
-                <br/>
-                <br/>
+                <h3 class='static'>Status</h3>
                 The record Status indicates the state of the submission after it enters and completes the workflow. Statuses include:
                 <br/>
                 <br/>
@@ -651,9 +850,7 @@
                 <strong>SAVED</strong> - The record has entered the workflow, but not all metadata submission has been completed. The filled out metadata is saved until submission or announcement.
                 <br/>
                 <br/>
-                <strong>Availability</strong>
-                <br/>
-                <br/>
+                <h3 class='static'>Availability</h3>
                 The record Availability refers to where the software record is made available. Availability includes:
                 <br/>
                 <br/>
@@ -663,9 +860,7 @@
                 <strong>Announced to DOE CODE and E-Link</strong> - The record was announced with DOI assignment for official software announcement. The record is available in DOE CODE and E-Link, can be updated in DOE CODE, and is discoverable in DOE CODE.
                 <br/>
                 <br/>
-                <strong>Make Version</strong>
-                <br/>
-                <br/>
+                <h3 class='static'>Make Version</h3>
                 <strong>New or Previous Versions of Software</strong> - DOE CODE also has the option to create a DOE CODE record that is a newer or previous version of any DOE CODE record already submitted or announced.  
                 Selecting either of the Make Version buttons, "New" or "Prev," associated with a record will take you to the entry form with most of the metadata fields 
                 already filled. You can also use this option to submit a tagged release of your code by entering the specific URL to the tagged release in 
@@ -680,7 +875,6 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-    </div>
+    <div class="col-lg-3 col-md-1"></div>
 </div>
 {{> wrapper/footer}}
