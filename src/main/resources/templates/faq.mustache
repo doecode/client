@@ -1,18 +1,13 @@
 {{> wrapper/header}}
 <style type="text/css">
-    @media only screen and (max-width:479px) and (min-width: 320px) {
-        .answer {
-            font-size: 14px;
-        }
-    }
-    h3.static.subtitle,a.toc.anchor,.faq-blue{
+    h3.static.subtitle,ul.toc.list > li > a,.faq-blue{
         color: rgb(49, 112, 143);
     }
     h3.static.subtitle {
         font-weight: 400;
         font-size: 19.8833px;
     }
-    a.toc.anchor {
+    ul.toc.list > li > a{
         font-size: 17px;
     }
     blockquote.answer{
@@ -27,188 +22,140 @@
         <h1 class="static-content-title">FAQs</h1>
         <br />
         <h2 class='static'>General FAQs</h2>
-        <ul>
+        <ul class='toc list'>
             <li>
-                <a class='toc anchor' title="What is DOE CODE?" href="/${app_name}/faq#what-is">
+                <a title="What is DOE CODE?" href="#what-is">
                     What is DOE CODE?
                 </a>
             </li>
             <li>
-                <a class='toc anchor' title="How is the DOE CODE software submission and search tool different from DOE CODE Github?" href="/${app_name}/faq#how-is-it-different">
+                <a title="How is the DOE CODE software submission and search tool different from DOE CODE Github?" href="#how-is-it-different">
                     How is the DOE CODE software submission and search tool different from 
                 </a>
                 <a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode" style="text-decoration:underline;">DOE CODE GitHub</a>
-                <a class='toc anchor' title="How is the DOE CODE software submission and search tool different from DOE CODE Github?" href="/${app_name}/faq#how-is-it-different">?</a>
+                <a title="How is the DOE CODE software submission and search tool different from DOE CODE Github?" href="#how-is-it-different">?</a>
             </li>
             <li>
-                <a class='toc anchor' title="What does DOE CODE contain?" href="/${app_name}/faq#what-does-it-contain">
-                    What does DOE CODE contain?
-                </a>
+                <a title="What does DOE CODE contain?" href="#what-does-it-contain">What does DOE CODE contain?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Is DOE CODE connected to Code.gov?" href="/${app_name}/faq#is-it-connected-to-codegov">
-                    Is DOE CODE connected to Code.gov?
-                </a>
+                <a title="Is DOE CODE connected to Code.gov?" href="#is-it-connected-to-codegov">Is DOE CODE connected to Code.gov?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Does DOE CODE provide repository services?" href="/${app_name}/faq#what-does-it-provide">
-                    Does DOE CODE provide repository services?
-                </a>
+                <a title="Does DOE CODE provide repository services?" href="#what-does-it-provide">Does DOE CODE provide repository services?</a>
             </li>
             <li>
-                <a class='toc anchor' title="What are the Project Types found in DOE CODE?" href="/${app_name}/faq#what-are-the-types">
-                    What are the Project Types found in DOE CODE?
-                </a>
+                <a title="What are the Project Types found in DOE CODE?" href="#what-are-the-types">What are the Project Types found in DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Why is uploading code required for certain Project Types?" href="/${app_name}/faq#why-is-uploading-code-required-for-certain-project-types">
-                    Why is uploading code required for certain Project Types?
-                </a>
+                <a title="Why is uploading code required for certain Project Types?" href="#why-is-uploading-code-required-for-certain-project-types">Why is uploading code required for certain Project Types?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Are there restrictions on the use of the material in DOE CODE?" href="/${app_name}/faq#are-there-restrictions">
-                    Are there restrictions on the use of the material in DOE CODE?
-                </a>
+                <a title="Are there restrictions on the use of the material in DOE CODE?" href="#are-there-restrictions">Are there restrictions on the use of the material in DOE CODE?</a>
+            </li>
+            <li>
+                <a title='How do I access the code/software from DOE CODE records?' href='#how-do-i-access-the-code-from-doe-code-records'>How do I access the code/software from DOE CODE records?</a>
             </li>
         </ul>
         <h2 class='static'>Submission FAQs</h2>
-        <ul>
+        <ul class='toc list'>
             <li>
-                <a class='toc anchor' title="How is scientific software provided to DOE CODE?" href="/${app_name}/faq#how-is-software-submitted">
-                    How is scientific software provided to DOE CODE?
-                </a>
+                <a title="How is scientific software provided to DOE CODE?" href="#how-is-software-submitted">How is scientific software provided to DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="What does it mean to submit scientific software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-submit">
-                    What does it mean to submit scientific software to DOE CODE?
-                </a>
+                <a title="What does it mean to submit scientific software to DOE CODE?" href="#what-does-it-mean-to-submit">What does it mean to submit scientific software to DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="What does it mean to announce scientific software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-announce">
-                    What does it mean to announce scientific software to DOE CODE?
-                </a>
+                <a title="What does it mean to announce scientific software to DOE CODE?" href="#what-does-it-mean-to-announce">What does it mean to announce scientific software to DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="How is business software provided to DOE CODE?" href="/${app_name}/faq#how-is-business-software-provided-to-doe-code">
-                    How is business software provided to DOE CODE?
-                </a>
+                <a title="How is business software provided to DOE CODE?" href="#how-is-business-software-provided-to-doe-code">How is business software provided to DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="What does it mean to submit business software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-submit-business-software-to-doe-code">
-                    What does it mean to submit business software to DOE CODE?
-                </a>
+                <a title="What does it mean to submit business software to DOE CODE?" href="#what-does-it-mean-to-submit-business-software-to-doe-code">What does it mean to submit business software to DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="What does it mean to announce business software to DOE CODE?" href="/${app_name}/faq#what-does-it-mean-to-announce-business-software-to-doe-code">
-                    What does it mean to announce business software to DOE CODE?
-                </a>
+                <a title="What does it mean to announce business software to DOE CODE?" href="#what-does-it-mean-to-announce-business-software-to-doe-code">What does it mean to announce business software to DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Can I add a new or previous version of software I have previously submitted or announced to DOE CODE?" href="/${app_name}/faq#can-i-add-new-or-previous-version-of-software">
-                    Can I add a new or previous version of software I have previously submitted or announced to DOE CODE?
-                </a>
+                <a title='Is a license required when providing software to DOE CODE?' href='#is-a-license-required-when-providing-software-to-doe-code'>Is a license required when providing software to DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Can I submit a tagged release as an individual record to DOE CODE?" href="/${app_name}/faq#can-i-submit-a-tagged-release-as-an-individual-record-to-doe-code">
-                    Can I submit a tagged release as an individual record to DOE CODE?
-                </a>
+                <a title='What is a landing page?' href='#what-is-a-landing-page'>What is a landing page?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Can I see the status and availability of my submitted/announced records?" href="/${app_name}/faq#can-i-see-the-status-and-availability">
-                    Can I see the status and availability of my submitted/announced records?
-                </a>
+                <a title="Can I add a new or previous version of software I have previously submitted or announced to DOE CODE?" href="#can-i-add-new-or-previous-version-of-software">Can I add a new or previous version of software I have previously submitted or announced to DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Does DOE CODE archive software?" href="/${app_name}/faq#does-doe-code-archive">
-                    Does DOE CODE archive software?
-                </a>
+                <a title="Can I submit a tagged release as an individual record to DOE CODE?" href="#can-i-submit-a-tagged-release-as-an-individual-record-to-doe-code">Can I submit a tagged release as an individual record to DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Does DOE CODE support the upload of container images as part of the submission/announcement process?" href="/${app_name}/faq#does-doe-code-support-upload-of-container-images">
-                    Does DOE CODE support the upload of container images as part of the submission/announcement process?
-                </a>
+                <a title="Can I see the status and availability of my submitted/announced records?" href="#can-i-see-the-status-and-availability">Can I see the status and availability of my submitted/announced records?</a>
             </li>
             <li>
-                <a class='toc anchor' title="How do I announce CUI, OUO, or ECI software to OSTI" href="/${app_name}/faq#how-do-i-announce-cui-ouo-eci">
-                    How do I announce CUI, OUO, or ECI software to OSTI?
-                </a>
+                <a title="Does DOE CODE archive software?" href="#does-doe-code-archive">Does DOE CODE archive software?</a>
             </li>
             <li>
-                <a class='toc anchor' title="What is a YAML file? How do I auto populate the YAML file?" href="/${app_name}/faq#what-is-a-yaml">
-                    What is a YAML file? How do I auto populate the YAML file?
-                </a>
+                <a title="Does DOE CODE support the upload of container images as part of the submission/announcement process?" href="#does-doe-code-support-upload-of-container-images">Does DOE CODE support the upload of container images as part of the submission/announcement process?</a>
             </li>
             <li>
-                <a class='toc anchor' title="What are the Categories of Software?" href="/${app_name}/faq#what-are-the-categories">
-                    What are the Categories of Software?
-                </a>
+                <a title="What is an access limitation?" href="#what-is-an-access-limitation">What is an access limitation?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Do I need an account to use DOE CODE?" href="/${app_name}/faq#do-i-need-account">
-                    Do I need an account to use DOE CODE?
-                </a>
+                <a title="How do I announce software with an access limitation, such as OUO, to OSTI?" href="#how-do-i-announce-software-with-an-access-limitation-to-osti">How do I announce software with an access limitation, such as OUO, to OSTI?</a>
             </li>
             <li>
-                <a class='toc anchor' title="What is a Digital Object Identifier (DOI)?" href="/${app_name}/faq#what-is-a-doi">
-                    What is a Digital Object Identifier (DOI)?
-                </a>
+                <a title="What if I need to change the access limitation of a project?" href="#what-if-i-need-to-change-the-access-limitation-of-a-project">What if I need to change the access limitation of a project?</a>
             </li>
             <li>
-                <a class='toc anchor' title="What are the benefits of getting a DOI for code or software?" href="/${app_name}/faq#what-are-the-benefits">
-                    What are the benefits of getting a DOI for code or software?
-                </a>
+                <a title="What is a YAML file? How do I auto populate the YAML file?" href="#what-is-a-yaml">What is a YAML file? How do I auto populate the YAML file?</a>
             </li>
             <li>
-                <a class='toc anchor' title="What if I need to have a project removed from DOE CODE?" href="/${app_name}/faq#removal">
-                    What if I need to have a project removed from DOE CODE?
-                </a>
+                <a title="What are the Categories of Software?" href="#what-are-the-categories">What are the Categories of Software?</a>
+            </li>
+            <li>
+                <a title="Do I need an account to use DOE CODE?" href="#do-i-need-account">Do I need an account to use DOE CODE?</a>
+            </li>
+            <li>
+                <a title="What is a Digital Object Identifier (DOI)?" href="#what-is-a-doi">What is a Digital Object Identifier (DOI)?</a>
+            </li>
+            <li>
+                <a title="What are the benefits of getting a DOI for code or software?" href="#what-are-the-benefits">What are the benefits of getting a DOI for code or software?</a>
+            </li>
+            <li>
+                <a title="What if I need to have a project removed from DOE CODE?" href="#removal">What if I need to have a project removed from DOE CODE?</a>
             </li>
         </ul>
         <h2 class='static'>Search FAQs</h2>
-        <ul>
+        <ul class='toc list'>
             <li>
-                <a class='toc anchor' title="How do I search DOE CODE?" href="/${app_name}/faq#search">
-                    How do I search DOE CODE?
-                </a>
+                <a title="How do I search DOE CODE?" href="#search">How do I search DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="How do I use the Advanced Search?" href="/${app_name}/faq#advanced-search">
-                    How do I use the Advanced Search?
-                </a>
+                <a title="How do I use the Advanced Search?" href="#advanced-search">How do I use the Advanced Search?</a>
             </li>
             <li>
-                <a class='toc anchor' title="What information is found on the Full Project page in DOE Code?" href="/${app_name}/faq#information">
-                    What information is found on the Full Project page in DOE Code?
-                </a>
+                <a title="What information is found on the Full Project page in DOE Code?" href="#information">What information is found on the Full Project page in DOE Code?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Can I sort or refine my results?" href="/${app_name}/faq#sort-or-refine">
-                    Can I sort or refine my results?
-                </a>
+                <a title="Can I sort or refine my results?" href="#sort-or-refine">Can I sort or refine my results?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Can I save or download the results of a search?" href="/${app_name}/faq#save-or-download">
-                    Can I save or download the results of a search?
-                </a>
+                <a title="Can I save or download the results of a search?" href="#save-or-download">Can I save or download the results of a search?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Are there APIs available for DOE CODE?" href="/${app_name}/faq#are-there-apis">
-                    Are there APIs available for DOE CODE?
-                </a>
+                <a title="Are there APIs available for DOE CODE?" href="#are-there-apis">Are there APIs available for DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="Do I need to have cookies enabled to use DOE CODE?" href="/${app_name}/faq#do-i-need-cookies">
-                    Do I need to have cookies enabled to use DOE CODE?
-                </a>
+                <a title="Do I need to have cookies enabled to use DOE CODE?" href="#do-i-need-cookies">Do I need to have cookies enabled to use DOE CODE?</a>
             </li>
             <li>
-                <a class='toc anchor' title="How can I find out more?" href="/${app_name}/faq#more-info">
-                    How can I find out more?
-                </a>
+                <a title="How can I find out more?" href="#more-info">How can I find out more?</a>
             </li>
         </ul>
 
         <br />
+        {{!-- General FAQs --}}
         <h2 class='static'>General FAQs</h2>
         <div>
             <a name="what-is"></a>
@@ -226,7 +173,7 @@
             <a name="how-is-it-different"></a>
             <h3 class='static subtitle'>
                 How is the DOE CODE software submission and search tool different from 
-                <a title="DOE CODE Github" class="subtitle" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode" style="text-decoration:underline;">DOE CODE GitHub</a>
+                <a title="DOE CODE Github" target='_blank' rel="noopener noreferrer" href="https://github.com/doecode" style="text-decoration:underline;">DOE CODE GitHub</a>
                 <span class='subtitle'>?</span>
             </h3>
             <blockquote class="answer">
@@ -340,21 +287,45 @@
                     <p>There may be restrictions on use of the material based on the associated license(s). Currently, DOE CODE supports the following list of Open Source licenses:</p>
                     <div>
                         <ul>
-                            <li><a title="Apache License 2.0" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/Apache-2.0">Apache License 2.0</a></li>
-                            <li><a title="GNU General Public License v3.0" target='_blank' rel="noopener noreferrer" href="https://www.gnu.org/licenses/quick-guide-gplv3.html">GNU General Public License v3.0</a></li>
-                            <li><a title="MIT License" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/MIT">MIT License</a></li>
-                            <li><a title="BSD 2-clause &quot;simplified&quot; License" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/BSD-2-Clause">BSD 2-clause "simplified" License</a></li>
-                            <li><a title="BSD 3-clause &quot;New&quot; or &quot;Revised&quot; License" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-clause "New" or
-                                    "Revised" License</a></li>
-                            <li><a title="Eclipse Public License 1.0" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/EPL-1.0">Eclipse Public License 1.0</a></li>
-                            <li><a title="GNU Affero General Public License v3.0" target='_blank' rel="noopener noreferrer" href="https://www.gnu.org/licenses/licenses.html#AGPL">GNU Affero General Public License v3.0</a></li>
-                            <li><a title="GNU General Public License v2.0" target='_blank' rel="noopener noreferrer" href="https://www.gnu.org/licenses/old-licenses/lgpl-2.0.html">GNU General Public License v2.0</a></li>
-                            <li><a title="GNU General Public License v1.0" target='_blank' rel="noopener noreferrer" href="https://www.gnu.org/licenses/old-licenses/gpl-1.0.html">GNU General Public License v1.0</a></li>
-                            <li><a title="GNU Lesser General Public License v2.1" target='_blank' rel="noopener noreferrer" href="https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License
-                                    v2.1</a></li>
-                            <li><a title="GNU Lesser General Public License v3.0" target='_blank' rel="noopener noreferrer" href="https://www.gnu.org/licenses/licenses.html#LGPL">GNU Lesser General Public License v3.0</a></li>
-                            <li><a title="Mozilla Public License 2.0" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/MPL-2.0">Mozilla Public License 2.0</a></li>
-                            <li><a title="The Unlicense" target='_blank' rel="noopener noreferrer" href="http://unlicense.org/">The Unlicense</a></li>
+                            <li>
+                                <a title="Apache License 2.0" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/Apache-2.0">Apache License 2.0</a>
+                            </li>
+                            <li>
+                                <a title="GNU General Public License v3.0" target='_blank' rel="noopener noreferrer" href="https://www.gnu.org/licenses/quick-guide-gplv3.html">GNU General Public License v3.0</a>
+                            </li>
+                            <li>
+                                <a title="MIT License" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/MIT">MIT License</a>
+                            </li>
+                            <li>
+                                <a title="BSD 2-clause &quot;simplified&quot; License" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/BSD-2-Clause">BSD 2-clause "simplified" License</a>
+                            </li>
+                            <li>
+                                <a title="BSD 3-clause &quot;New&quot; or &quot;Revised&quot; License" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-clause "New" or "Revised" License</a>
+                            </li>
+                            <li>
+                                <a title="Eclipse Public License 1.0" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/EPL-1.0">Eclipse Public License 1.0</a>
+                            </li>
+                            <li>
+                                <a title="GNU Affero General Public License v3.0" target='_blank' rel="noopener noreferrer" href="https://www.gnu.org/licenses/licenses.html#AGPL">GNU Affero General Public License v3.0</a>
+                            </li>
+                            <li>
+                                <a title="GNU General Public License v2.0" target='_blank' rel="noopener noreferrer" href="https://www.gnu.org/licenses/old-licenses/lgpl-2.0.html">GNU General Public License v2.0</a>
+                            </li>
+                            <li>
+                                <a title="GNU General Public License v1.0" target='_blank' rel="noopener noreferrer" href="https://www.gnu.org/licenses/old-licenses/gpl-1.0.html">GNU General Public License v1.0</a>
+                            </li>
+                            <li>
+                                <a title="GNU Lesser General Public License v2.1" target='_blank' rel="noopener noreferrer" href="https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License v2.1</a>
+                            </li>
+                            <li>
+                                <a title="GNU Lesser General Public License v3.0" target='_blank' rel="noopener noreferrer" href="https://www.gnu.org/licenses/licenses.html#LGPL">GNU Lesser General Public License v3.0</a>
+                            </li>
+                            <li>
+                                <a title="Mozilla Public License 2.0" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/MPL-2.0">Mozilla Public License 2.0</a>
+                            </li>
+                            <li>
+                                <a title="The Unlicense" target='_blank' rel="noopener noreferrer" href="http://unlicense.org/">The Unlicense</a>
+                            </li>
                         </ul>
                         More information regarding these licenses can also be found at the
                         <a title="Open Source Initiative" target='_blank' rel="noopener noreferrer" href="https://opensource.org/licenses/alphabetical">Open Source Initiative - Licenses by Name</a>.
@@ -365,7 +336,19 @@
                 </div>
             </blockquote>
         </div>
+        <div>
+            <a name="how-do-i-access-the-code-from-doe-code-records"></a>
+            <h3 class='static subtitle'>How do I access the code/software from DOE CODE records?</h3>
+            <blockquote class="answer">
+                <p>
+                    DOE CODE does not directly disseminate software projects. Access to the software/code is provided by the originating site. 
+                    From the DOE CODE software record page, OSTI provides a link directly to a landing page or repository depending on the project type, 
+                    or provides the contact email for users to reach out to the developer or developing organization to request access to the software.
+                </p>
+            </blockquote>
+        </div>
         <br />
+        {{!-- Submission FAQs --}}
         <h2 class='static'>Submission FAQs</h2>
         <div>
             <a name="how-is-software-submitted"></a>
@@ -929,6 +912,7 @@
             </blockquote>
         </div>
         <br />
+        {{!-- Search FAQs --}}
         <h2 class='static'>Search FAQs</h2>
         <div>
             <a name="search"></a>
