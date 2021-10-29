@@ -1,5 +1,6 @@
 package gov.osti.doecode.entity;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import gov.osti.doecode.servlet.Init;
@@ -65,7 +66,7 @@ public class NewsFunctions {
             Elements articles = doc.selectFirst("datasets").selectFirst("data").selectFirst("catalog").select("cd");
 
             //Go through each article, and only add the ones we want
-            HashMap<Integer, ObjectNode> unsorted_articles = new HashMap<Integer, ObjectNode>();
+            HashMap<Integer, ArrayNode> unsorted_articles = new HashMap<Integer, ArrayNode>();
             for (Element article : articles) {
                 boolean meets_criteria = false;
                 //First, ensure that it's a valid DDE article
@@ -153,7 +154,10 @@ public class NewsFunctions {
                     article_data.put("abstract", article.selectFirst("d5").html().trim());
 
                     //Add it to our list of actually approved records
-                    unsorted_articles.put(Integer.parseInt(pub_date.format(ARTICLE_XML_SORT_FORMAT)), article_data);
+                    Integer pub_date_sort = Integer.parseInt(pub_date.format(ARTICLE_XML_SORT_FORMAT));//Make a key that makes the dates easily sortable
+                    ArrayNode list_for_date = unsorted_articles.getOrDefault(pub_date_sort, JsonUtils.createArrayNode());
+                    list_for_date.add(article_data);
+                    unsorted_articles.put(pub_date_sort, list_for_date);
 
                 }
             }
@@ -166,9 +170,14 @@ public class NewsFunctions {
             /*Get a sorted version of the articles key list, then add that sorted list */
             List<Integer> sorted_articles_keys = new ArrayList<Integer>(unsorted_articles.keySet());
             Collections.sort(sorted_articles_keys, Collections.reverseOrder());
-            sorted_articles_keys.forEach((key) -> {
-                sorted_article_data.add(unsorted_articles.get(key));
-            });
+            //Go through each list in our now sorted keyset, and grab the list of articles that belong to that year, month, day combo
+            for (Integer sorted_key : sorted_articles_keys) {
+                ArrayNode articles_for_date = unsorted_articles.get(sorted_key);
+                for (JsonNode art : articles_for_date) {
+                    sorted_article_data.add(art);
+                }
+
+            }
 
             /*Sort out the article types*/
             List<String> sorted_article_type_keys = new ArrayList<String>(article_types_count_map.keySet());

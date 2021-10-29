@@ -49,6 +49,14 @@ public class JsonUtils {
     public static final JsonNodeFactory INSTANCE = JsonNodeFactory.instance;
     public static final ObjectMapper MAPPER = new ObjectMapper();
 
+    public static ObjectNode createObjectNode() {
+        return MAPPER.createObjectNode();
+    }
+
+    public static ArrayNode createArrayNode() {
+        return MAPPER.createArrayNode();
+    }
+
     /*
      Takes a json array, and you pass what key in that array you're comparing to, and what value
      So like, I could be looking for the value "ON" in the availabilities json list, and I want to compare it to the "value" key
