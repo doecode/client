@@ -11,9 +11,13 @@
         <link rel='stylesheet' type='text/css' href='/${app_name}/css/{{.}}.css' />
         {{/each}}
         <link rel='stylesheet' type='text/css' href='/${app_name}/css/doecode-css.${timestamp}.css' />
-        <!--Meta tags-->
-        {{#each meta_tag}}
-        <meta name='{{name}}' content='{{content}}' />
+        
+        {{!-- Meta tags--}}
+        {{#each meta_tag}}<meta name='{{name}}' content='{{content}}' />
+        {{/each}}
+        
+        {{!-- Developer and Contributor Meta tags --}}
+        {{#each author_meta_tag}}<meta name='{{name}}' content='{{content}}' />
         {{/each}}
 
         <!--Google Analytics-->
