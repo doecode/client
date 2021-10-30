@@ -535,7 +535,18 @@ var inputChange = mobx.action("Input Change", function (event) {
     var value = $(this).val();
     if ((event.data.field == "release_date" || event.data.field == "contract_start_date" || event.data.field == "sb_release_date" || event.data.field == "ouo_release_date") && value) {
         value = moment(value, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
-
+    } else if ((['programming_languages', 'licenses', 'access_limitations',
+        'affiliations', 'country_of_origin', 'project_keywords', 'organization_name',
+        'award_numbers', 'br_codes', 'fwp_numbers', 'contributor_type', 'identifier_type', 'relation_type'].indexOf(event.data.field) > -1) && value && Array.isArray(value)) {
+        //Due to a strange bug with chosen js, duplicates can happen in certain scenarios. This is to prevent said duplicates
+        let refined = [];
+        value.forEach(function (item) {
+            if (refined.indexOf(item) < 0) {
+                refined.push(item);
+            }
+        });
+        value = refined;
+    }
     event.data.store.setValue(event.data.field, value);
 });
 
