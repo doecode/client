@@ -129,7 +129,7 @@ var submitPOCChanges = function () {
             poc_emails: email_list
         }];
 
-    doAuthenticatedAjax('POST', API_BASE + 'site/update', function (data) {
+    doAuthenticatedAjax('POST', API_BASE + 'site/edit', function (data) {
         clearPOCListTable();
         $("#site-list").val('');
         $("#site-list option[value='']").trigger('click');
