@@ -21,8 +21,20 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebFilter(servletNames = "UserFilter", urlPatterns = {"/submit", "/form-select", "/announce", "/approve", "/confirm",
-    "/projects", "/pending", "/account", "/user-admin", "/site-admin"})
+@WebFilter(servletNames = "UserFilter", urlPatterns = {
+    /* Input Form Actions/Pages */
+    "/submit",
+    "/form-select",
+    "/announce",
+    "/approve",
+    "/confirm",
+    "/projects",
+    "/pending",
+    /* User-related Actions/Pages */
+    "/account",
+    "/user-admin",
+    "/site-admin"
+})
 public class UserFilter implements Filter {
 
     protected static Logger log = LoggerFactory.getLogger(UserFilter.class.getName());
@@ -56,12 +68,12 @@ public class UserFilter implements Filter {
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 res.sendRedirect(Init.site_url + "forbidden?message=You must be a Site Administrator to access this content.");
                 return;
-                
+
             } else if (StringUtils.equalsAny(remaining, "pending", "approve") && !UserFunctions.hasRole(xsrfToken, accessToken, UserFunctions.APPROVAL_ADMIN_ROLE)) {//Pending Approval Page
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 res.sendRedirect(Init.site_url + "forbidden?message=You must be an Approval Administrator to access this content.");
                 return;
-                
+
             } else if (StringUtils.equals(remaining, "user-admin") && !UserFunctions.hasRole(xsrfToken, accessToken, UserFunctions.USER_ADMIN_ROLE)) {
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 res.sendRedirect(Init.site_url + "forbidden?message=You must be a User Administrator to access this content.");

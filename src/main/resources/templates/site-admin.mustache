@@ -1,99 +1,154 @@
 {{> wrapper/header}}
 <style type='text/css'>
-     .poc-add-new-email{
-	 color:green;
-	 cursor: pointer;
-	 font-size:23px !important;
-	 padding-top:5px;
-     }
+    .poc-add-new-email{
+        color:green;
+        cursor: pointer;
+        font-size:23px !important;
+        padding-top:5px;
+    }
 
-     .poc-remove-email{
-	 color:red;
-	 cursor: pointer;
-	 font-size:23px !important;
-	 padding-top:5px;
-     }
+    .poc-remove-email{
+        color:red;
+        cursor: pointer;
+        font-size:23px !important;
+        padding-top:5px;
+    }
 
-     #poc-admin-email-list thead > tr > th:first-child{
-	 padding-left:0px;
-     }
+    #poc-admin-email-list thead > tr > th:first-child{
+        padding-left:0px;
+    }
 
-     #poc-admin-email-list > tbody > tr > td:first-child{
-	 padding-left:0px;
-     }
+    #poc-admin-email-list > tbody > tr > td:first-child{
+        padding-left:0px;
+    }
 
-     .poc-large-text{
-	 font-size:20px;
-     }
+    .poc-large-text{
+        font-size:20px;
+    }
 </style>
 <input type="hidden" id="site-admin-page-identifier"/>
 <div class="row not-so-wide-row">
-     <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1 col-xs-12">
-	  <div class="center-text">
-	       <h2 class="static-content-title">DOE CODE Site Administration</h2>
-	  </div>
-	  <div>
-	       <div class='row'>
-		    <div class="col-xs-12">
-			 <br/>
-			 <div class="has-feedback center-text">
-			      <label class="control-label normal-weight poc-large-text" id="site-admin-message"></label>
-			 </div>
-		    </div>
-		    <div class='col-lg-6 col-lg-offset-3 col-xs-12 center-text'>
-			 <label for='site-list' id='sites-list-label' class='control-label'>Sites</label>
-			 <br/>
-			 <select id='site-list' class='form-control pure-input-1' >
-			      <option value='' selected></option>
-                              {{#each sites_list}}
-                              <option value='{{site_code}}' data-sitelabname="{{lab}}" title="{{lab}}" >{{lab}} ({{site_code}})</option>
-                              {{/each}}
-			 </select>
-		    </div>
-		    <div class='col-xs-12'>
-			 <hr/>
-		    </div>
-	       </div>
+    <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1 col-xs-12">
+        <h1 class="static">DOE CODE Site Administration</h1>
+        <div>
+            <div class='row'>
+                <!-- Error Message -->
+                <div class="col-xs-12">
+                    <br/>
+                    <div class="has-feedback center-text">
+                        <label class="control-label normal-weight poc-large-text" id="site-admin-message"></label>
+                    </div>
+                </div>
+                <!-- Site Code Dropdown -->
+                <div class='col-lg-6 col-lg-offset-3 col-xs-12 center-text'>
+                    <label for='site-list' id='sites-list-label' class='control-label'>Sites</label>
+                    <br/>
+                    <select id='site-list' class='form-control pure-input-1' >
+                        <option value='NEWSITE'>-- Add New Site Code --</option>
+                        {{#each sites_list}}
+                        <option value='{{site_code}}' data-sitelabname="{{lab}}" title="{{lab}}" >{{lab}} ({{site_code}})</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <!-- Dividing Line -->
+                <div class='col-xs-12'>
+                    <hr/>
+                </div>
+            </div>
 
-	       <div class='row' id='site-list-container' style="display:none;">
-		    <div class="col-xs-12">
-			 <br/>
-			 <div class="has-feedback center-text">
-			      <label class="control-label normal-weight biblio-title" id="poc-message"></label>
-			 </div>
-		    </div>
-		    <div class="col-xs-12">
-			 <label class='control-label poc-large-text' >Site Code: </label><span id="site-code" class="control-label poc-large-text" ></span>
-			 <br/>
-			 <label class='control-label poc-large-text' >Lab Name: </label><span id='lab-name' class='control-label poc-large-text' ></span>
-			 <br/>
-			 <label class='control-label poc-large-text' >Email Domain(s): </label><span id='email-domains' class='control-label poc-large-text' ></span>
-		    </div>
-		    <div class='col-xs-12'>
-			 <br/>
-			 <div class='center-text poc-large-text' >
-			      Point of Contact Email Addresses
-			 </div>
-			 <table id="poc-admin-email-list" class="table table-hover table-striped">
-			      <thead>
-				   <tr>
-					<th>Email Address</th>
-					<th></th>
-				   </tr>
-			      </thead>
-			      <tbody class="center-text">
-				   <tr>
-					<td class=""></td>
-					<td><span class="fa fa-plus-circle poc-add-new-email" title="Add New Email"></span></td>
-				   </tr>
-			      </tbody>
-			 </table>
-		    </div>
-		    <div class="col-xs-12 right-text">
-			 <button id="save-changes-btn" title="Save Entry" type="button" class="pure-button button-success btn-lg pull-right" style='margin-bottom:5px'>Save</button>
-		    </div>
-	       </div>
-	  </div>
-     </div>
+            <div class='row' id='site-list-container'>
+                <!-- Other Message -->
+                <div class="col-xs-12">
+                    <br/>
+                    <div class="has-feedback center-text">
+                        <label class="control-label normal-weight biblio-title" id="poc-message"></label>
+                    </div>
+                </div>
+                <!-- Existing Site Code Immutable Values -->
+                <div class="col-xs-12" id='existing-site-info' style='display:none;'>
+                    <label class='control-label poc-large-text' >Site Code: </label><span id="site-code" class="control-label poc-large-text" ></span>
+                    <br/>
+                    <label class='control-label poc-large-text' >Lab Name: </label><span id='lab-name' class='control-label poc-large-text' ></span>
+                    <br/>
+                    <label class='control-label poc-large-text' >Email Domain(s): </label><span id='email-domains' class='control-label poc-large-text' ></span>
+                    <label class='control-label poc-large-text' >Standard Usage: </label><span id='standard-usage' class='control-label poc-large-text'></span>
+                    <br/>
+                    <label class='control-label poc-large-text' >HQ Usage: </label><span id='hq-usage' class='control-label poc-large-text'></span>
+                </div>
+                <!-- New Site Code Inputs -->
+                <div class='col-xs-12' id='new-site-info'>
+                    <div class='form-horizontal'>
+                        <!-- Site Code -->
+                        <div class='form-group'>
+                            <label class='control-label col-sm-3' for='new-site-code'>Site Code: </label>
+                            <div class='col-sm-8 col-md-4'>
+                                <input type='text' id='new-site-code' class='form-control'/>
+                            </div>
+                        </div>
+                        <!-- Lab Name -->
+                        <div class='form-group'>
+                            <label class='control-label col-sm-3' for='new-lab-name'>Lab Name: </label>
+                            <div class='col-sm-8'>
+                                <input type='text' id='new-lab-name' class='form-control' />
+                            </div>
+                        </div>
+                        <!-- Email Domain -->
+                        <div class='form-group'>
+                            <label class='control-label col-sm-3' for='new-lab-domains'>{{> tooltips/SiteAdminEmailDomain}} Email Domain(s): </label>
+                            <div class='col-sm-8'>
+                                <input type='text' id='new-lab-domains' class='form-control' />
+                            </div>
+                        </div>
+                        <!-- Standard Usage -->
+                        <div class='form-group'>
+                            <div class='col-xs-offset-1 col-xs-9'>
+                                <div class="checkbox">
+                                    <label for='standard-usage'><input type="checkbox" id='standard-usage'> Standard Usage?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- HQ Usage -->
+                        <div class='form-group'>
+                            <div class='col-xs-offset-1 col-xs-9'>
+                                <div class="checkbox">
+                                    <label for='hq-usage'><input type="checkbox" id='hq-usage'> HQ Usage?</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-xs-12'>
+                    <br/>
+                    <br/>
+                    <h2 class='center-text'>Point of Contact Email Addresses</h2>
+                    <div class='form-inline'>
+                        <div class="form-group">
+                            <label class='control-label' for='software-group-email'>Software Group Email: </label>
+                            <input type='text' id='software-group-email' class='form-control' size='40'/>
+                        </div>
+                    </div>
+                    <br/>
+                    <table id="poc-admin-email-list" class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Email Address</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="center-text">
+                            <tr>
+                                <td class=""></td>
+                                <td><span class="fa fa-plus-circle poc-add-new-email" title="Add New Email"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-12 right-text">
+                    <button id="save-new-btn" title="Save New Site" type="button" class="pure-button button-success btn-lg pull-right">Save</button>
+                    <button id="save-changes-btn" title="Save Site Updates" type="button" class="pure-button button-success btn-lg pull-right" style='display:none;'>Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {{> wrapper/footer}}
