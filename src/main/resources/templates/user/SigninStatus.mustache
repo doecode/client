@@ -2,45 +2,45 @@
 <div class="dropdown">
     <button title="{{user_data.display_name}}" class="btn btn-link dropdown-toggle" style="color: white !important;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         <span class='hide-xs'>{{user_data.display_name}}</span>
-        <span style='font-size:20px;' class='hide-sm hide-md hide-lg'><span class='fa fa-user-circle-o signin-icon signin-btn-icon'></span></span>
+        <span style='font-size:20px;' class='hide-sm hide-md hide-lg'><span class='far fa-user-circle signin-icon signin-btn-icon'></span></span>
         &nbsp;<span class="caret"></span>
     </button>
     <ul class="dropdown-menu dropdown-menu-right login-dropdown-text">
         <li>
             <a title='My Projects' href="/${app_name}/projects">
-                <span class='fa fa-code'></span>&nbsp;My Projects
+                <span class='fas fa-code'></span>&nbsp;My Projects
             </a>
         </li>
         <li>
             <a title='Account' href="/${app_name}/account">
-                <span class='fa fa-user-circle'></span>&nbsp;Account
+                <span class='fas fa-user-circle'></span>&nbsp;Account
             </a>
         </li>
         {{#if user_data.has_approval_admin_role}}
         <li>
             <a title='Pending Approval' href="/${app_name}/pending">
-                <span class='fa fa-clock-o'></span>&nbsp;Pending Approval
+                <span class='far fa-clock'></span>&nbsp;Pending Approval
             </a>
         </li>
         {{/if}}
         {{#if user_data.has_user_admin_role}}
         <li>
             <a title='User Admin' href='/${app_name}/user-admin'>
-                <span class='fa fa-user-plus'></span>&nbsp;User Admin
+                <span class='fas fa-user-plus'></span>&nbsp;User Admin
             </a>
         </li>
         {{/if}}
         {{#if user_data.has_site_admin_role}}
         <li>
             <a title='Site Admin' href='/${app_name}/site-admin'>
-                <span class='fa fa-id-card'></span>&nbsp;Site Admin
+                <span class='fas fa-id-card'></span>&nbsp;Site Admin
             </a>
         </li>
         {{/if}}
         <li role="separator" class="divider"></li>
         <li class="clickable">
             <a title='Logout' class="logout-btn">
-                <span class='fa fa-sign-out'></span>&nbsp;Logout
+                <span class='fas fa-sign-out-alt'></span>&nbsp;Logout
             </a>
         </li>
     </ul>
@@ -50,13 +50,13 @@
     <ul class='list-inline' style="margin-bottom: 0px;">
         <li class='signin-btn-container first-signin-text' >
             <a title='Sign In' class="signin-btn" href="/${app_name}/login">
-                <span class=" signin-btn-icon fa fa-user signin-icon"></span>
+                <span class=" signin-btn-icon fas fa-user-alt signin-icon"></span>
                 <span class='signin-text'>&nbsp;Sign In</span>
             </a>
         </li>
         <li class='signin-btn-container' >
             <a title='Create Account' class="signin-btn" href="/${app_name}/register">
-                <span class="signin-btn-icon fa fa-user-plus signin-icon hide-sm hide-lg hide-md"></span>
+                <span class="signin-btn-icon fas fa-user-plus signin-icon hide-sm hide-lg hide-md"></span>
                 <span class='signin-text'>&nbsp;Create Account</span>
             </a>
         </li>

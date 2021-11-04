@@ -63,8 +63,8 @@
                 <!--Container Download-->
                 {{#if biblio_sidebar.has_file_to_download}}
                 <div class="link-content">
-                    <a target='_blank' title='Download Container for {{biblio_sidebar.doi}}' href='/${app_name}/download-repository/container-download/{{biblio_sidebar.code_id}}' rel="noopener noreferrer" class='btn btn-success'><span
-                            class='fa fa-download'></span> Download Container</a>
+                    <a target='_blank' title='Download Container for {{biblio_sidebar.doi}}' href='/${app_name}/download-repository/container-download/{{biblio_sidebar.code_id}}' rel="noopener noreferrer" class='btn btn-success'>
+                        <span class='fas fa-download'></span> Download Container</a>
                 </div>
                 {{/if}}
             </div>
@@ -74,9 +74,8 @@
                 <h4 class='biblio-sidebar-subtitle'>SAVE&nbsp;/&nbsp;SHARE</h4>
                 <div>
                     <span class="dropdown">
-                        <button title="Export Metadata" class="btn btn-link dropdown-toggle no-col-padding-left no-col-padding-right no-btn-padding-bottom no-btn-padding-top" type="button" data-toggle="dropdown"
-                                aria-expanded="false">Export Metadata</button>
-                        <span class="fa fa-angle-down dropdown-toggle-arrow clickable" data-toggle="dropdown"></span>
+                        <button title="Export Metadata" class="btn btn-link dropdown-toggle no-col-padding-left no-col-padding-right no-btn-padding-bottom no-btn-padding-top" type="button" data-toggle="dropdown" aria-expanded="false">Export Metadata</button>
+                        <span class="fas fa-angle-down dropdown-toggle-arrow clickable" data-toggle="dropdown"></span>
                         <ul class="dropdown-menu">
                             <li><a title="Export to XML" href="{{biblio_sidebar.api_url}}search/{{biblio_sidebar.code_id}}?format=xml&export=true" download="{{biblio_sidebar.code_id}}.xml">XML</a></li>
                             <li><a title="Export to YAML" href="{{biblio_sidebar.api_url}}search/{{biblio_sidebar.code_id}}?format=yaml&export=true" download="{{biblio_sidebar.code_id}}.yaml">YAML</a></li>
@@ -90,41 +89,41 @@
                         <ul class="list-inline">
                             <li class='biblio-social-link'>
                                 <a title='Facebook' class="biblio-sharing-link" rel="noopener noreferrer" target='_blank' rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=">
-                                    <span class="fa fa-facebook facebook"></span>
+                                    <span class="fab fa-facebook-f facebook"></span>
                                 </a>
                             </li>
                             <li class='biblio-social-link'>
                                 <a title='Twitter' class="biblio-sharing-link" rel="noopener noreferrer" target='_blank' rel="noopener noreferrer" href='https://twitter.com/home?status=DOE Research from DOE CODE: '>
-                                    <span class="fa fa-twitter twitter"></span>
+                                    <span class="fab fa-twitter twitter"></span>
                                 </a>
                             </li>
                             <li class='biblio-social-link'>
                                 <a title='Email' class="biblio-sharing-link" rel="noopener noreferrer" href="mailto:?subject=Software Project from DOE CODE&body=">
-                                    <span class="fa fa-envelope shareEmail"></span>
+                                    <span class="fas fa-envelope shareEmail"></span>
                                 </a>
                             </li>
                             <li class='biblio-social-link'>
                                 <span class="dropdown">
                                     <button title="Share" class="btn btn-link dropdown-toggle no-col-padding-left no-col-padding-right no-btn-padding-bottom no-btn-padding-top" type="button" data-toggle="dropdown">
-                                        <span class="fa fa-share-alt" style="color: #777;"></span>
+                                        <span class="fas fa-share-alt" style="color: #777;"></span>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-left">
                                         <li>
                                             <a title="LinkedIn" rel="noopener noreferrer" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.osti.gov/${app_name}/biblio/{{biblio_sidebar.code_id}}&amp;title=DOE Research from DOE CODE&amp;summary=&amp;source="
                                                target='_blank' rel="noopener noreferrer" class="pure-menu-link social">
-                                                <span class="fa fa-linkedin linkedin"></span>&nbsp;LinkedIn
+                                                <span class="fab fa-linkedin-in linkedin"></span>&nbsp;LinkedIn
                                             </a>
                                         </li>
                                         <li>
                                             <a title="Pinterest" rel="noopener noreferrer" href="https://pinterest.com/pin/create/button/?url=&amp;media=https://www.osti.gov/${app_name}/biblio/{{biblio_sidebar.code_id}}&amp;description="
                                                target='_blank' rel="noopener noreferrer" class="pure-menu-link social">
-                                                <span class="fa fa-pinterest" style="color: #CD2B32;"></span>&nbsp;Pinterest
+                                                <span class="fab fa-pinterest" style="color: #CD2B32;"></span>&nbsp;Pinterest
                                             </a>
                                         </li>
                                         <li>
                                             <a title="Tumblr" rel="noopener noreferrer" href="http://www.tumblr.com/share?v=3&amp;u=https://www.osti.gov/${app_name}/biblio/{{biblio_sidebar.code_id}}&amp;t="
                                                target='_blank' rel="noopener noreferrer" class="pure-menu-link social">
-                                                <span class="fa fa-tumblr tumblr"></span>&nbsp;Tumblr
+                                                <span class="fab fa-tumblr tumblr"></span>&nbsp;Tumblr
                                             </a>
                                         </li>
                                     </ul>

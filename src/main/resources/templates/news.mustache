@@ -78,19 +78,17 @@
     #featured-container{
         padding-left:30px;
     }
-    
+
     .article-date-and-types{
         height:60px;
     }
 
-    :not(.footer-link) > a:not([href*='osti.gov']):not([href^='#']):not([href^='/']):after {
-        font-family: 'FontAwesome';
-        font-size: 11px;
-        content: " \f08e";
-    }
-
     .element-invisible {
         display: none;
+    }
+    span.fas.fa-external-link-alt{
+        font-size:13px;
+        margin-left:2px;
     }
 
     /*Treat the cards differently on phones*/
@@ -148,8 +146,9 @@
                     <div>
                         <span class="search-sidebar-margin">
                             <label style='font-size:14.45px;'>
-                                <input class='search-checkbox search-article-type' name='article-type-filter' id='article-type-{{art_type_id}}' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}} /> <label title='{{type}}' class='search-input-label' for='article-type-{{art_type_id}}'><span
-                                        style='display:none;'>text</span></label>&nbsp;{{type}}
+                                <input class='search-checkbox search-article-type' name='article-type-filter' id='article-type-{{art_type_id}}' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}} /> <label title='{{type}}' class='search-input-label' for='article-type-{{art_type_id}}'>
+                                    <span class="fas fa-check"></span>
+                                </label>&nbsp;{{type}}
                                 ({{count}})
                             </label>
                         </span>
@@ -165,7 +164,9 @@
                     <div>
                         <span class="search-sidebar-margin">
                             <label style='font-size:14.45px;'>
-                                <input class='search-checkbox search-publication-year' name='publication-date-filter' id='publication_date-{{year}}' value='{{year}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{year}}' class='search-input-label' for='publication_date-{{year}}'><span style='display:none;'>text</span></label>&nbsp;{{year}}
+                                <input class='search-checkbox search-publication-year' name='publication-date-filter' id='publication_date-{{year}}' value='{{year}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{year}}' class='search-input-label' for='publication_date-{{year}}'>
+                                    <span class="fas fa-check"></span>
+                                </label>&nbsp;{{year}}
                                 ({{count}})
                             </label>
                         </span>
@@ -174,7 +175,7 @@
                 </div>
             </form>
         </div>
-        <div class='col-sm-9'>
+        <div class='col-sm-9' id="articles-section">
             <!--Right Side Title-->
             <div class='row'>
                 <div class='col-xs-12'>
@@ -204,19 +205,19 @@
                     <div class='text-muted publication-date'>{{featured.publication_date}}</div>
                     <div class='text-muted article-type hide-xs'>
                         {{!--Comes out like <icon> Type--}}
-                            {{#each featured.article_types}}
-                            {{#if is_news}}
-                            <span class='fa fa-newspaper-o clickable filter-type-icon' data-filter='{{article_type_newspaper}}'></span>
-                            {{else if is_updates_and_tips}}
-                            <span class='fa fa-file-text-o clickable filter-type-icon' data-filter='{{article_type_updates}}'></span>
-                            {{else if is_blog}}
-                            <span class='fa fa-info-circle clickable filter-type-icon' data-filter='{{article_type_blog}}'></span>
-                            {{else if is_event}}
-                            <span class='fa fa-calendar clickable filter-type-icon' data-filter='{{article_type_event}}'></span>
-                            {{/if}}
-                            {{display}}
-                            <br />
-                            {{/each}}
+                        {{#each featured.article_types}}
+                        {{#if is_news}}
+                        <span class='far fa-newspaper clickable filter-type-icon' data-filter='{{article_type_newspaper}}'></span>
+                        {{else if is_updates_and_tips}}
+                        <span class='far fa-file-alt clickable filter-type-icon' data-filter='{{article_type_updates}}'></span>
+                        {{else if is_blog}}
+                        <span class='fas fa-info-circle clickable filter-type-icon' data-filter='{{article_type_blog}}'></span>
+                        {{else if is_event}}
+                        <span class='far fa-calendar-alt clickable filter-type-icon' data-filter='{{article_type_event}}'></span>
+                        {{/if}}
+                        {{display}}
+                        <br />
+                        {{/each}}
                     </div>
                     <br />
                     <a href='{{news_environment_url}}{{featured.link_suffix}}' style='font-size:28px !important;font-weight:300' title='{{featured.title}}' target="_blank" rel="noopener noreferrer">{{featured.title}}</a>
@@ -240,13 +241,13 @@
                         <span class='text-muted article-type hide-xs'>
                             {{#each article_types}}
                             {{#if is_news}}
-                            <span class='fa fa-newspaper-o clickable filter-type-icon' data-filter='{{article_type_newspaper}}'></span>
+                            <span class='far fa-newspaper clickable filter-type-icon' data-filter='{{article_type_newspaper}}'></span>
                             {{else if is_updates_and_tips}}
-                            <span class='fa fa-file-text-o clickable filter-type-icon' data-filter='{{article_type_updates}}'></span>
+                            <span class='far fa-file-alt clickable filter-type-icon' data-filter='{{article_type_updates}}'></span>
                             {{else if is_blog}}
-                            <span class='fa fa-info-circle clickable filter-type-icon' data-filter='{{article_type_blog}}'></span>
+                            <span class='fas fa-info-circle clickable filter-type-icon' data-filter='{{article_type_blog}}'></span>
                             {{else if is_event}}
-                            <span class='fa fa-calendar clickable filter-type-icon' data-filter='{{article_type_event}}'></span>
+                            <span class='far fa-calendar-alt clickable filter-type-icon' data-filter='{{article_type_event}}'></span>
                             {{/if}}
                             {{display}}
                             <br />

@@ -337,8 +337,8 @@ if (document.getElementById('about-page-identifier')) {
 
     /*Toggles sidebar filter on small screens*/
     $(".toggle-sidebar").on('click', {
-        open_name: '<span class="fa fa-caret-right fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search',
-        close_name: '<span class="fa fa-caret-down fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search'
+        open_name: '<span class="fas fa-caret-right fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search',
+        close_name: '<span class="fas fa-caret-down fa-page-caret clickable"></span>&nbsp;&nbsp;Filter Search'
     }, toggleCollapse);
 
     /*Makes the previous and next buttons work*/
@@ -488,7 +488,7 @@ if (document.getElementById('about-page-identifier')) {
     var clipboard = new Clipboard(".clip-cite-bib");
     //Unhighlights the text copied to the clipboard
     clipboard.on('success', function (e) {
-        $(e.trigger).html("<span class='fa fa-check'></span> Copied to clipboard");
+        $(e.trigger).html("<span class='fas fa-check'></span> Copied to clipboard");
         var self = this;
         if (document.selection) {
             document.selection.empty();
@@ -503,7 +503,7 @@ if (document.getElementById('about-page-identifier')) {
         //get id of tab we're working on
         var tab = $(self).attr('href').toString().replace(/#/g, '');
         if (document.getElementById(tab)) {
-            $("#" + tab).find('div.copy-btn-container > button.clip-cite-bib').html('<span class="fa fa-files-o"></span> Copy to clipboard');
+            $("#" + tab).find('div.copy-btn-container > button.clip-cite-bib').html('<span class="far fa-copy mirror-flip"></span> Copy to clipboard');
         }
     });
 

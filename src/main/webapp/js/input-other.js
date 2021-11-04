@@ -30,7 +30,7 @@ var pending_data_table_opts = {
         {name: 'workflow_status', data: 'workflow_status', width: '88px', className: 'text-center'},
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/approve?code_id=' + row.code_id
-                        + '" class="pure-button pure-button-primary btn-sm white"><span class="fa fa-pencil"></span> View for Approval</a>';
+                        + '" class="pure-button pure-button-primary btn-sm white"><span class="fas fa-pencil-alt"></span> View for Approval</a>';
             }, width: '13%', className: 'text-center', orderable: false}
     ]
 };

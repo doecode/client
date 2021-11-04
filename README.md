@@ -18,7 +18,7 @@ This version of the client application uses the following major technologies (No
 - Jackson
 - chosen.js
 - bootstrap
-- fontawesome
+- fontawesome 5
 - maven
 
 <strong>Deployment</strong><br/>

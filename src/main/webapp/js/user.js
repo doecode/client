@@ -167,7 +167,7 @@ var markRegistrationFieldWithStatus = function (condition, element, message) {
             $(element).parent().addClass('has-error');
             if (!$(element).next('span').hasClass('errorCheck')) {
                 //Add check mark
-                $(element).after('<span class="fa fa-times form-control-feedback errorCheck"></span>');
+                $(element).after('<span class="fas fa-times form-control-feedback errorCheck"></span>');
             }
             break;
         case SUCCESS_CONDITION:
@@ -177,7 +177,7 @@ var markRegistrationFieldWithStatus = function (condition, element, message) {
             $(element).parent().addClass('has-success');
             if (!$(element).next('span').hasClass('successCheck')) {
                 //Add check mark
-                $(element).after('<span class="fa fa-check form-control-feedback successCheck"></span>');
+                $(element).after('<span class="fas fa-check form-control-feedback successCheck"></span>');
             }
             break;
         case BLANK_CONDITION:
@@ -202,14 +202,14 @@ var markUserFieldWithStatus = function (condition, element, message) {
         case ERROR_CONDITION:
             $(element).parent().addClass('has-error');
             if (!$(element).next().is('span.errorCheck')) {
-                $(element).after('<span class="fa fa-times form-control-feedback errorCheck errorCheck-account"></span>');
+                $(element).after('<span class="fas fa-times form-control-feedback errorCheck errorCheck-account"></span>');
             }
             break;
         case SUCCESS_CONDITION:
             //Mark container as has-success
             $(element).parent().addClass('has-success');
             if (!$(element).next().is('span.successCheck')) {
-                $(element).after('<span class="fa fa-check form-control-feedback successCheck successCheck-account"></span>');
+                $(element).after('<span class="fas fa-check form-control-feedback successCheck successCheck-account"></span>');
             }
             break;
         case BLANK_CONDITION:
@@ -840,8 +840,8 @@ if (document.getElementById('login-page-identifier')) {
     //If there are any users requesting roles, make the custom toggle work
     if (document.getElementById('requesting-roles-collapse-btn')) {
         $("#requesting-roles-collapse-btn").on('click', {
-            open_name: '<strong><span class="fa fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>',
-            close_name: '<strong><span class="fa fa-caret-down fa-page-caret clickable"></span> Users Requesting Roles</strong>'
+            open_name: '<strong><span class="fas fa-caret-right fa-page-caret clickable"></span> Users Requesting Roles</strong>',
+            close_name: '<strong><span class="fas fa-caret-down fa-page-caret clickable"></span> Users Requesting Roles</strong>'
         }, toggleCollapse);
     }
 }

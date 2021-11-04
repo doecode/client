@@ -151,7 +151,9 @@ public class NewsFunctions {
                     article_data.put("link_suffix", article.selectFirst("d2").html().trim());
 
                     /*Abstract*/
-                    article_data.put("abstract", article.selectFirst("d5").html().trim());
+                    String description = article.selectFirst("d5").html().trim();
+                    description = description.replaceAll("<span class=\"ext\">", "<span class='fas fa-external-link-alt'>").replaceAll("<span class='ext'>", "<span class='fas fa-external-link-alt'>");
+                    article_data.put("abstract", description);
 
                     //Add it to our list of actually approved records
                     Integer pub_date_sort = Integer.parseInt(pub_date.format(ARTICLE_XML_SORT_FORMAT));//Make a key that makes the dates easily sortable

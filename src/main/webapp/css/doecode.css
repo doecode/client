@@ -629,7 +629,6 @@ label {
 .search-checkbox {
     display: none;
 }
-
 .search-checkbox+label {
     background-color: rgb(230, 230, 230);
     border-radius: 0px;
@@ -646,21 +645,19 @@ label {
 .search-checkbox:checked+label:hover {
     background-color: rgb(14, 100, 125);
 }
-
-.search-checkbox:checked+label {
-    background-color: rgb(42, 161, 192);
-    color: white;
+.search-checkbox:checked+label{
+    background-color:#2aa1c0;
 }
-
-.search-checkbox:checked+label:after {
-    font: normal normal normal 14px/1 FontAwesome;
-    content: '\f00c';
-    font-size: 11px;
-    position: absolute;
-    top: 1px;
-    left: 1px;
+.search-checkbox+label > span.fas.fa-check{
+    display:none;
+}
+.search-checkbox:checked+label > span.fas.fa-check{
     color: white;
-    line-height: 14px;
+    font-size: 10px;
+    position: relative;
+    display:inline-block;
+    top: -3px;
+    left: 1.5px;
 }
 
 .adv-search-dropdown {
@@ -726,11 +723,11 @@ label {
 
 .help-question-mark {
     color: #0000EE;
-    font-size: 16px;
+    font-size: 13px;
 }
 
 .small-help-question-mark {
-    font-size: 12px !important;
+    font-size: 11px !important;
 }
 
 .fake-h2 {
@@ -1225,4 +1222,9 @@ td.datatable-vertical-center {
 
 .marginless{
     margin:0px;
+}
+
+/* Flips an element on the X axis. Would flip something like "[" to "]"*/
+.mirror-flip{
+    transform: scaleX(-1);
 }
