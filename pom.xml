@@ -15,6 +15,7 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy.MM.dd.HH.mm.ss</maven.build.timestamp.format>
         <log_level>WARN</log_level>
+        <skip_minify>false</skip_minify>
     </properties>
     <!--
         You will need to add your own profiles into this pom.xml, or use profiles stored in your local settings.xml
@@ -129,6 +130,9 @@
                             </jsSourceFiles>
                             <jsFinalFile>doecode.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <closureCompilationLevel>SIMPLE_OPTIMIZATIONS</closureCompilationLevel>
+                            <skipMinify>${skip_minify}</skipMinify>
                         </configuration>
                         <goals>
                             <goal>minify</goal>
@@ -147,6 +151,9 @@
                             </jsSourceFiles>
                             <jsFinalFile>dissemination.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <closureCompilationLevel>SIMPLE_OPTIMIZATIONS</closureCompilationLevel>
+                            <skipMinify>${skip_minify}</skipMinify>
                         </configuration>
                         <goals>
                             <goal>minify</goal>
@@ -165,6 +172,9 @@
                             </jsSourceFiles>
                             <jsFinalFile>input.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <closureCompilationLevel>SIMPLE_OPTIMIZATIONS</closureCompilationLevel>
+                            <skipMinify>${skip_minify}</skipMinify>
                         </configuration>
                         <goals>
                             <goal>minify</goal>
@@ -183,6 +193,9 @@
                             </jsSourceFiles>
                             <jsFinalFile>input-other.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <closureCompilationLevel>SIMPLE_OPTIMIZATIONS</closureCompilationLevel>
+                            <skipMinify>${skip_minify}</skipMinify>
                         </configuration>
                         <goals>
                             <goal>minify</goal>
@@ -201,6 +214,9 @@
                             </jsSourceFiles>
                             <jsFinalFile>user.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <closureCompilationLevel>SIMPLE_OPTIMIZATIONS</closureCompilationLevel>
+                            <skipMinify>${skip_minify}</skipMinify>
                         </configuration>
                         <goals>
                             <goal>minify</goal>
@@ -219,6 +235,9 @@
                             </jsSourceFiles>
                             <jsFinalFile>utils.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <closureCompilationLevel>SIMPLE_OPTIMIZATIONS</closureCompilationLevel>
+                            <skipMinify>${skip_minify}</skipMinify>
                         </configuration>
                         <goals>
                             <goal>minify</goal>
@@ -237,6 +256,9 @@
                             </jsSourceFiles>
                             <jsFinalFile>other.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <closureCompilationLevel>SIMPLE_OPTIMIZATIONS</closureCompilationLevel>
+                            <skipMinify>${skip_minify}</skipMinify>
                         </configuration>
                         <goals>
                             <goal>minify</goal>
@@ -255,6 +277,9 @@
                             </jsSourceFiles>
                             <jsFinalFile>site.${timestamp}.js</jsFinalFile>
                             <nosuffix>true</nosuffix>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <closureCompilationLevel>SIMPLE_OPTIMIZATIONS</closureCompilationLevel>
+                            <skipMinify>${skip_minify}</skipMinify>
                         </configuration>
                         <goals>
                             <goal>minify</goal>
@@ -277,6 +302,9 @@
                             </cssSourceFiles>
                             <cssFinalFile>doecode-css.${timestamp}.css</cssFinalFile>
                             <nosuffix>true</nosuffix>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <closureCompilationLevel>SIMPLE_OPTIMIZATIONS</closureCompilationLevel>
+                            <skipMinify>${skip_minify}</skipMinify>
                         </configuration>
                         <goals>
                             <goal>minify</goal>
@@ -329,29 +357,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.2.2</version>
                 <configuration>
-                    <!--Any file extensions that you don't want to run the filter on should be added here. Make sure any sort of non-plain-text files are added here-->
-                    <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension>gif</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>bmp</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>jpg</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>png</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>otf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
                     <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
-                    <webResources>
-                        <resource>
-                            <directory>${basedir}/src/main/webapp/</directory>
-                            <filtering>true</filtering>
-                        </resource>
-                    </webResources>
+                    <warSourceExcludes>**/dissemination.js,**/doecode.js,**/input-other.js,**/input.js,**/other.js,**/site.js,**/user.js,**/utils.js,**/doecode.css,**/doecode-media-queries.css</warSourceExcludes>
                 </configuration>
             </plugin>
         </plugins>
