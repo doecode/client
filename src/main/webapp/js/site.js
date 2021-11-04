@@ -1,5 +1,3 @@
-
-
 checkIsAuthenticated();
 if (document.getElementById('site-admin-page-identifier')) {
     const POC_LIST_LOADER_ERROR = {title: 'Error in Site Loading', show_loader: true,
@@ -8,6 +6,10 @@ if (document.getElementById('site-admin-page-identifier')) {
 
     const POC_POST_LOADER_ERROR = {title: 'Error in Updating Site', show_loader: true,
         message_type: MESSAGE_TYPE_ERROR, content: "<br/>Error in updating site information. Site couldn't be updated successfully.",
+        contentClasses: ['center-text'], showClose: true};
+
+    const POC_PUT_LOADER_ERROR = {title: 'Error in Saving New Site', show_loader: true,
+        message_type: MESSAGE_TYPE_ERROR, content: "<br/>Error in creating new site. Site couldn't be created successfully.",
         contentClasses: ['center-text'], showClose: true};
 
     /**
@@ -132,12 +134,9 @@ if (document.getElementById('site-admin-page-identifier')) {
             doAuthenticatedAjax('GET', API_BASE + 'site/info/' + site_code, function (data) {
                 $("#standard-usage").html(data.standard_usage == true ? 'Yes' : 'No');
                 $("#hq-usage").html(data.hq_usage == true ? 'Yes' : 'No');
+                $("#software-group-email").val(data.software_group_email);
                 //Get all of the email domains
-                var email_domains_list = "";
-                data.email_domains.forEach(function (item) {
-                    email_domains_list += (item + '<br/>');
-                });
-                $("#email-domains").html(email_domains_list);
+                $("#email-domains").html(data.email_domains.join(' '));
 
                 //Load all of the emails
                 if (data.poc_emails.length > 0) {
@@ -211,8 +210,12 @@ if (document.getElementById('site-admin-page-identifier')) {
             return;
         }
 
-        //Get the current site code
+        //Get the site code, lab name, domains, and usage data
         let current_site_code = $("#site-list").val();
+        let lab_name = $("#lab-name").html();
+        let email_domains = $("#email-domains").html().split(' ');
+        let is_standard_usage = ($("#standard-usage").text() == 'Yes');
+        let is_hq_usage = ($("#hq-usage").text() == 'Yes');
 
         //Get the POC emails
         let email_list = gatherAllPOCEmails();
@@ -222,8 +225,12 @@ if (document.getElementById('site-admin-page-identifier')) {
 
         let post_data = [{
                 site_code: current_site_code,
+                lab_name: lab_name,
+                email_domains: email_domains,
                 poc_emails: email_list,
-                software_group_email: software_group_email
+                software_group_email: software_group_email,
+                standard_usage: is_standard_usage,
+                hq_usage: is_hq_usage
             }];
 
         //Post teh changes to the server
@@ -238,7 +245,7 @@ if (document.getElementById('site-admin-page-identifier')) {
             setTimeout(function () {
                 window.location.href = '/' + APP_NAME + '/site-admin';
             }, 1000);
-        }, post_data, function () {
+        }, post_data, function (jqxhr, settings) {
             setCommonModalMessage(POC_POST_LOADER_ERROR);
             showCommonModalMessage();
         });
@@ -276,12 +283,17 @@ if (document.getElementById('site-admin-page-identifier')) {
             }
         }
 
+        //Standard usage
+        post_data.standard_usage = document.getElementById('new-standard-usage').checked;
+
+        //hq usage
+        post_data.hq_usage = document.getElementById('new-hq-usage').checked;
+
         //Software Group Email
         post_data.software_group_email = document.getElementById('software-group-email').value.trim();
 
         //POC Emails
         post_data.poc_emails = gatherAllPOCEmails();
-
 
         /* Validate the data. if it's valid, we post it to the server */
         let errors = [];
@@ -299,7 +311,25 @@ if (document.getElementById('site-admin-page-identifier')) {
             showPOCMessage(true, errors.join('<br/>'), 'has-error');
             return;
         } else {
-            console.log('Posting ' + JSON.stringify(post_data));
+            //Put the post data into an array so the server will accept it
+            post_data = [post_data];
+
+            //Do the PUT
+            doAuthenticatedAjax('PUT', API_BASE + 'site/new', function (data) {
+                clearPOCListTable();
+                $("#site-list").val('');
+                $("#site-list option[value='']").trigger('click');
+                $("#site-list").attr('disabled', 'disabled');
+                $("#site-list-container").hide();
+
+                showSiteAdminMessage(true, 'New Site Saved. This page will reload shortly', 'has-success');
+                setTimeout(function () {
+                    window.location.href = '/' + APP_NAME + '/site-admin';
+                }, 1000);
+            }, post_data, function () {
+                setCommonModalMessage(POC_PUT_LOADER_ERROR);
+                showCommonModalMessage();
+            });
         }
     });
 
