@@ -17,8 +17,10 @@
             <div>
                 <span class="search-sidebar-margin">
                     <label>
-                        <input class='search-checkbox' id='availabilitycheck-{{value}}' name='project_type' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{label}}' class='search-input-label'
-                                                                                                                                                                                          for='availabilitycheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
+                        <input class='search-checkbox' id='availabilitycheck-{{value}}' name='project_type' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> 
+                               <label title='{{label}}' class='search-input-label' for='availabilitycheck-{{value}}'>
+                            <span class="fas fa-check"></span>
+                        </label>&nbsp;{{label}}
                     </label>
                 </span>
             </div>
@@ -37,8 +39,10 @@
             <div>
                 <span class="search-sidebar-margin">
                     <label>
-                        <input class='search-checkbox' id='licensescheck-{{value}}' name='licenses' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{label}}' class='search-input-label'
-                                                                                                                                                                                 for='licensescheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
+                        <input class='search-checkbox' id='licensescheck-{{value}}' name='licenses' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> 
+                               <label title='{{label}}' class='search-input-label' for='licensescheck-{{value}}'>
+                            <span class="fas fa-check"></span>
+                        </label>&nbsp;{{label}}
                     </label>
                 </span>
             </div>
@@ -56,8 +60,10 @@
             <div>
                 <span class="search-sidebar-margin">
                     <label>
-                        <input class='search-checkbox' id='softwaretypecheck-{{value}}' name='software_type' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{label}}' class='search-input-label'
-                                                                                                                                                                                          for='softwaretypecheck-{{value}}'><span style='display:none;'>text</span></label>&nbsp;{{label}}
+                        <input class='search-checkbox' id='softwaretypecheck-{{value}}' name='software_type' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> 
+                               <label title='{{label}}' class='search-input-label' for='softwaretypecheck-{{value}}'>
+                            <span class="fas fa-check"></span>
+                        </label>&nbsp;{{label}}
                     </label>
                 </span>
             </div>
@@ -92,7 +98,7 @@
                     <label>
                         <input class='search-checkbox single-val-search-checkbox' id='researchorgcheck-{{value_compressed}}' name='research_organization' value='{{label}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> 
                                <label title='{{label}}' class='search-input-label' for='researchorgcheck-{{value_compressed}}'>
-                            <span style='display:none;'>text</span>
+                            <span class="fas fa-check"></span>
                         </label>&nbsp;{{label}}&nbsp;<span class="facet-item-count">({{value}})</span>
                     </label>
                 </span>
@@ -106,7 +112,7 @@
                         <label>
                             <input class='search-checkbox single-val-search-checkbox' id='researchorgcheck-{{value_compressed}}' name='research_organization' value='{{label}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> 
                                    <label title='{{label}}' class='search-input-label' for='researchorgcheck-{{value_compressed}}'>
-                                <span style='display:none;'>text</span>
+                                <span class="fas fa-check"></span>
                             </label>&nbsp;{{label}}&nbsp;<span class="facet-item-count">({{value}})</span>
                         </label>
                     </span>
