@@ -20,21 +20,25 @@
         flex-direction: column;
     }
 
+    .news-article-card,#results-and-search-for,#show-featured-divider{
+        border-bottom: 1px solid #D6D5D4;
+    }
+
     .news-article-card {
         padding: 25px 15px 20px;
-        border-bottom: 1px solid #D6D5D4;
         min-height: 250px;
         height: 250px;
     }
+    
+    #article-list,#news-header-container,#featured-container,#article-list>div.news-article-card:nth-child(3n+2){
+        border-left: 1px solid #D6D5D4;
+    }
 
     #article-list {
-        /*border-top: 1px solid #D6D5D4;*/
-        border-left: 1px solid #D6D5D4;
         padding-left: 10px;
     }
 
     #article-list>div.news-article-card:nth-child(3n+2) {
-        border-left: 1px solid #D6D5D4;
         border-right: 1px solid #D6D5D4;
     }
 
@@ -49,26 +53,6 @@
     .article-title {
         font-weight: 300;
         font-size: 20px;
-    }
-
-    .month-year-filter {
-        margin-left: 15px;
-        margin-top: 5px;
-    }
-
-    .month-day-year-filter {
-        margin-left: 30px;
-        margin-top: 5px;
-    }
-
-    .hour-filter {
-        margin-left: 45px;
-        margin-top: 5px;
-    }
-
-    .minute-filter {
-        margin-left: 60px;
-        margin-top: 5px;
     }
 
     .filter-type-icon {
@@ -90,12 +74,23 @@
         font-size:13px;
         margin-left:2px;
     }
+    .static-content-title{
+        font-size:34px;
+    }
+    div.search-for-filter-text > form{
+        margin-top: 10px;
+    }
+    div.search-for-filter-text > form > div:first-of-type{
+        margin-top:8px;
+    }
+    div.search-for-filter-text > form > div:first-of-type > div > span.search-sidebar-margin > label:first-of-type{
+        font-size:14.45px;
+    }
 
     /*Treat the cards differently on phones*/
     @media only screen and (max-width:479px) and (min-width: 320px) {
         #article-list>div.news-article-card {
             border-top: 1px solid #D6D5D4;
-            border-bottom: 1px solid #D6D5D4;
             border-left: none;
             border-right: none;
         }
@@ -121,9 +116,9 @@
     <br />
     <div class='row' id='news-article-main-row'>
         <div class='col-sm-3 hide-xs'>
-            <div style='border-bottom: 1px solid #D6D5D4;'>
+            <div id='results-and-search-for'>
                 <br />
-                <div class="static-content-title" style="font-size:34px;">{{total_found}} Result{{#if more_than_one}}s{{/if}}</div>
+                <div class="static-content-title">{{total_found}} Result{{#if more_than_one}}s{{/if}}</div>
                 <br />
                 {{#if has_search_filter}}
                 <div>
@@ -141,11 +136,11 @@
             <br />
             <span class='search-for-filter-text search-for-filter-header'>Article Types</span>
             <form>
-                <div class="search-sidebar-checkbox-text" style='margin-top:8px;'>
+                <div class="search-sidebar-checkbox-text">
                     {{#each article_types}}
                     <div>
                         <span class="search-sidebar-margin">
-                            <label style='font-size:14.45px;'>
+                            <label>
                                 <input class='search-checkbox search-article-type' name='article-type-filter' id='article-type-{{art_type_id}}' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}} /> <label title='{{type}}' class='search-input-label' for='article-type-{{art_type_id}}'>
                                     <span class="fas fa-check"></span>
                                 </label>&nbsp;{{type}}
@@ -159,11 +154,11 @@
             <br />
             <span class='search-for-filter-text search-for-filter-header'>Publication Date</span>
             <form>
-                <div class="search-sidebar-checkbox-text" style='margin-top:8px;'>
+                <div class="search-sidebar-checkbox-text">
                     {{#each publication_years}}
                     <div>
                         <span class="search-sidebar-margin">
-                            <label style='font-size:14.45px;'>
+                            <label>
                                 <input class='search-checkbox search-publication-year' name='publication-date-filter' id='publication_date-{{year}}' value='{{year}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> <label title='{{year}}' class='search-input-label' for='publication_date-{{year}}'>
                                     <span class="fas fa-check"></span>
                                 </label>&nbsp;{{year}}
@@ -185,13 +180,13 @@
                 </div>
                 <br />
             </div>
-            <div class='row hide-xs' style='border-left:1px solid #D6D5D4;'>
+            <div class='row hide-xs' id='news-header-container'>
                 <div class='col-xs-12'>
                     <br />
-                    <div class="static-content-title" style='font-size:34px;'>News</div>
+                    <div class="static-content-title">News</div>
                     {{#if show_featured}}
                     <br/>
-                    <div style="border-bottom:1px solid #D6D5D4;"></div>
+                    <div id='show-featured-divider'></div>
                     {{else}}
                     <br />
                     {{/if}}
@@ -201,7 +196,7 @@
             <!--Latest article-->
             {{#if show_featured}}
             <div class='row'>
-                <div id="featured-container" class='col-xs-12' style='padding-top:20px;border-left:1px solid #D6D5D4;'>
+                <div id="featured-container" class='col-xs-12' style='padding-top:20px;'>
                     <div class='text-muted publication-date'>{{featured.publication_date}}</div>
                     <div class='text-muted article-type hide-xs'>
                         {{!--Comes out like <icon> Type--}}
