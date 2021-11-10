@@ -32,190 +32,160 @@ public class DOECODEJson {
     public static final String RELATION_TYPES_KEY = "relation_types";
     public static final String PROGRAMMING_LANGUAGES_KEY = "programming_languages";
     public static final String PROJECT_KEYWORDS_KEY = "project_keywords";
+    public static final String DOE_CODE_SITES_WITH_SOFTWARE_GROUP_EMAILS_KEY = "doe_code_sites_with_software_group_emails";
 
     // Json Array lists
-    private ArrayNode affiliations_list;
-    private ArrayNode availability_list;
-    private ArrayNode contributor_types;
-    private ArrayNode countries_list;
-    private ArrayNode license_options_list;
-    private ArrayNode access_limitations_list;
-    private ArrayNode phases_list;
-    private ArrayNode protections_list;
-    private ArrayNode research_org_list;
-    private ArrayNode search_sort_options_list;
-    private ArrayNode software_type_list;
-    private ArrayNode sponsor_orgs_list;
-    private ArrayNode states_list;
-    private ArrayNode relation_types_list;
-    private ArrayNode programming_languages_list;
-    private ArrayNode project_keywords_list;
+    private final ArrayNode AFFILIATIONS_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode AVAILABILITY_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode CONTRIBUTOR_TYPES = JsonUtils.createArrayNode();
+    private final ArrayNode COUNTRIES_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode LICENSE_OPTIONS_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode ACCESS_LIMITATIONS_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode PHASES_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode PROTECTIONS_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode RESEARCH_ORG_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode SEARCH_SORT_OPTIONS_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode SOFTWARE_TYPE_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode SPONSOR_ORGS_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode STATES_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode RELATION_TYPES_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode PROGRAMMING_LANGUAGES_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode PROJECT_KEYWORDS_LIST = JsonUtils.createArrayNode();
+    private final ObjectNode DOE_CODE_SITES_WITH_SOFTARE_GROUP_EMAIL_LIST = JsonUtils.createObjectNode();
 
     /**
-     * Initializes all of the json lists DOE CODE Uses. Fills up the lists that
-     * don't pull data from OSTI's ELINK AUthority API
+     * Initializes all of the json lists DOE CODE Uses. Fills up the lists that don't pull data from OSTI's ELINK AUthority API
      */
     public DOECODEJson() {
-        this.affiliations_list = JsonUtils.MAPPER.createArrayNode();
-        this.availability_list = JsonUtils.MAPPER.createArrayNode();
-        this.contributor_types = JsonUtils.MAPPER.createArrayNode();
-        this.countries_list = JsonUtils.MAPPER.createArrayNode();
-        this.license_options_list = JsonUtils.MAPPER.createArrayNode();
-        this.access_limitations_list = JsonUtils.MAPPER.createArrayNode();
-        this.phases_list = JsonUtils.MAPPER.createArrayNode();
-        this.protections_list = JsonUtils.MAPPER.createArrayNode();
-        this.research_org_list = JsonUtils.MAPPER.createArrayNode();
-        this.search_sort_options_list = JsonUtils.MAPPER.createArrayNode();
-        this.software_type_list = JsonUtils.MAPPER.createArrayNode();
-        this.sponsor_orgs_list = JsonUtils.MAPPER.createArrayNode();
-        this.states_list = JsonUtils.MAPPER.createArrayNode();
-        this.relation_types_list = JsonUtils.MAPPER.createArrayNode();
-        this.project_keywords_list = JsonUtils.MAPPER.createArrayNode();
-
         // Since some of the lists have content that isn't pulled from OSTI's Elink
         // Authority API, we'll go ahead and fill those lists up
         // Search Sort Options
-        this.search_sort_options_list.add(makeListObj("Relevance", "score desc", "Relevance"));
-        this.search_sort_options_list.add(
-                makeListObj("Release Date (newest to oldest)", "releaseDate desc", "Release Date (newest to oldest)"));
-        this.search_sort_options_list.add(
-                makeListObj("Release Date (oldest to newest)", "releaseDate asc", "Release Date (oldest to newest)"));
+        this.SEARCH_SORT_OPTIONS_LIST.add(makeListObj("Relevance", "score desc", "Relevance"));
+        this.SEARCH_SORT_OPTIONS_LIST.add(makeListObj("Release Date (newest to oldest)", "releaseDate desc", "Release Date (newest to oldest)"));
+        this.SEARCH_SORT_OPTIONS_LIST.add(makeListObj("Release Date (oldest to newest)", "releaseDate asc", "Release Date (oldest to newest)"));
         // Availability
-        this.availability_list.add(makeListObj("Open Source, Publicly Available Repository", "OS",
-                "Open Source, Publicly Available Repository"));
-        this.availability_list.add(makeListObj("Open Source, No Publicly Available Repository", "ON",
-                "Open Source, No Publicly Available Repository"));
-        this.availability_list.add(makeListObj("Closed Source", "CS", "Closed Source"));
+        this.AVAILABILITY_LIST.add(makeListObj("Open Source, Publicly Available Repository", "OS", "Open Source, Publicly Available Repository"));
+        this.AVAILABILITY_LIST.add(makeListObj("Open Source, No Publicly Available Repository", "ON", "Open Source, No Publicly Available Repository"));
+        this.AVAILABILITY_LIST.add(makeListObj("Closed Source", "CS", "Closed Source"));
         // Contributor Types
-        this.contributor_types.add(makeListObj("Contact Person", "ContactPerson", "Contact Person"));
-        this.contributor_types.add(makeListObj("Data Collector", "DataCollector", "Data Collector"));
-        this.contributor_types.add(makeListObj("Data Curator", "DataCurator", "Data Curator"));
-        this.contributor_types.add(makeListObj("Data Manager", "DataManager", "Data Manager"));
-        this.contributor_types.add(makeListObj("Distributor", "Distributor", "Distributor"));
-        this.contributor_types.add(makeListObj("Editor", "Editor", "Editor"));
-        this.contributor_types.add(makeListObj("Hosting Institution", "HostingInstitution", "Hosting Institution"));
-        this.contributor_types.add(makeListObj("Other", "Other", "Other"));
-        this.contributor_types.add(makeListObj("Producer", "Producer", "Producer"));
-        this.contributor_types.add(makeListObj("Project Leader", "ProjectLeader", "Project Leader"));
-        this.contributor_types.add(makeListObj("Project Manager", "ProjectManager", "Project Manager"));
-        this.contributor_types.add(makeListObj("Project Member", "ProjectMember", "Project Member"));
-        this.contributor_types.add(makeListObj("Registration Agency", "RegistrationAgency", "Registration Agency"));
-        this.contributor_types
-                .add(makeListObj("Registration Authority", "RegistrationAuthority", "Registration Authority"));
-        this.contributor_types.add(makeListObj("Related Person", "RelatedPerson", "Related Person"));
-        this.contributor_types.add(makeListObj("Research Group", "ResearchGroup", "Research Group"));
-        this.contributor_types.add(makeListObj("Researcher", "Researcher", "Researcher"));
-        this.contributor_types.add(makeListObj("Rights Holder", "RightsHolder", "Rights Holder"));
-        this.contributor_types.add(makeListObj("Sponsor", "Sponsor", "Sponsor"));
-        this.contributor_types.add(makeListObj("Supervisor", "Supervisor", "Supervisor"));
-        this.contributor_types.add(makeListObj("Work Package Leader", "WorkPackageLeader", "Work Package Leader"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Contact Person", "ContactPerson", "Contact Person"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Data Collector", "DataCollector", "Data Collector"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Data Curator", "DataCurator", "Data Curator"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Data Manager", "DataManager", "Data Manager"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Distributor", "Distributor", "Distributor"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Editor", "Editor", "Editor"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Hosting Institution", "HostingInstitution", "Hosting Institution"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Other", "Other", "Other"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Producer", "Producer", "Producer"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Project Leader", "ProjectLeader", "Project Leader"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Project Manager", "ProjectManager", "Project Manager"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Project Member", "ProjectMember", "Project Member"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Registration Agency", "RegistrationAgency", "Registration Agency"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Registration Authority", "RegistrationAuthority", "Registration Authority"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Related Person", "RelatedPerson", "Related Person"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Research Group", "ResearchGroup", "Research Group"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Researcher", "Researcher", "Researcher"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Rights Holder", "RightsHolder", "Rights Holder"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Sponsor", "Sponsor", "Sponsor"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Supervisor", "Supervisor", "Supervisor"));
+        this.CONTRIBUTOR_TYPES.add(makeListObj("Work Package Leader", "WorkPackageLeader", "Work Package Leader"));
         // License Options
-        this.license_options_list.add(makeListObj("Other (Commercial or Open-Source)", "Other", "Other"));
-        this.license_options_list.add(makeListObj("Apache License 2.0", "Apache License 2.0", "Apache License 2.0"));
-        this.license_options_list.add(makeListObj("GNU General Public License v3.0", "GNU General Public License v3.0",
-                "GNU General Public License v3.0"));
-        this.license_options_list.add(makeListObj("MIT License", "MIT License", "MIT License"));
-        this.license_options_list.add(makeListObj("BSD 2-clause \"Simplified\" License",
-                "BSD 2-clause \"Simplified\" License", "BSD 2-clause \"Simplified\" License"));
-        this.license_options_list.add(makeListObj("BSD 3-clause \"New\" or \"Revised\" License",
-                "BSD 3-clause \"New\" or \"Revised\" License", "BSD 3-clause \"New\" or \"Revised\" License"));
-        this.license_options_list.add(
-                makeListObj("Eclipse Public License 1.0", "Eclipse Public License 1.0", "Eclipse Public License 1.0"));
-        this.license_options_list.add(makeListObj("GNU Affero General Public License v3.0",
-                "GNU Affero General Public License v3.0", "GNU Affero General Public License v3.0"));
-        this.license_options_list.add(makeListObj("GNU General Public License v2.0", "GNU General Public License v2.0",
-                "GNU General Public License v2.0"));
-        this.license_options_list.add(makeListObj("GNU General Public License v2.1", "GNU General Public License v2.1",
-                "GNU General Public License v2.1"));
-        this.license_options_list.add(makeListObj("GNU Lesser General Public License v2.1",
-                "GNU Lesser General Public License v2.1", "GNU Lesser General Public License v2.1"));
-        this.license_options_list.add(makeListObj("GNU Lesser General Public License v3.0",
-                "GNU Lesser General Public License v3.0", "GNU Lesser General Public License v3.0"));
-        this.license_options_list.add(
-                makeListObj("Mozilla Public License 2.0", "Mozilla Public License 2.0", "Mozilla Public License 2.0"));
-        this.license_options_list.add(makeListObj("The Unlicense", "The Unlicense", "The Unlicense"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("Other (Commercial or Open-Source)", "Other", "Other"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("Apache License 2.0", "Apache License 2.0", "Apache License 2.0"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("GNU General Public License v3.0", "GNU General Public License v3.0", "GNU General Public License v3.0"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("MIT License", "MIT License", "MIT License"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("BSD 2-clause \"Simplified\" License", "BSD 2-clause \"Simplified\" License", "BSD 2-clause \"Simplified\" License"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("BSD 3-clause \"New\" or \"Revised\" License", "BSD 3-clause \"New\" or \"Revised\" License", "BSD 3-clause \"New\" or \"Revised\" License"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("Eclipse Public License 1.0", "Eclipse Public License 1.0", "Eclipse Public License 1.0"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("GNU Affero General Public License v3.0", "GNU Affero General Public License v3.0", "GNU Affero General Public License v3.0"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("GNU General Public License v2.0", "GNU General Public License v2.0", "GNU General Public License v2.0"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("GNU General Public License v2.1", "GNU General Public License v2.1", "GNU General Public License v2.1"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("GNU Lesser General Public License v2.1", "GNU Lesser General Public License v2.1", "GNU Lesser General Public License v2.1"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("GNU Lesser General Public License v3.0", "GNU Lesser General Public License v3.0", "GNU Lesser General Public License v3.0"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("Mozilla Public License 2.0", "Mozilla Public License 2.0", "Mozilla Public License 2.0"));
+        this.LICENSE_OPTIONS_LIST.add(makeListObj("The Unlicense", "The Unlicense", "The Unlicense"));
         // Access Limitations
-        this.access_limitations_list.add(makeListObj("(UNL) Unlimited", "UNL", "Unlimited"));
-        this.access_limitations_list.add(makeListObj("(SBIR) Small Business Innovation Research", "SBIR", "Small Business Innovation Research"));
-        this.access_limitations_list.add(makeListObj("(STTR) Small Business Technology Transfer Research", "STTR", "Small Business Technology Transfer Research"));
-        this.access_limitations_list.add(makeListObj("(OUO) Official Use Only", "OUO", "Official Use Only"));
-        this.access_limitations_list.add(makeListObj("(OUO; ECI) Export Controlled Information", "ECI", "Export Controlled Information"));
-        this.access_limitations_list.add(makeListObj("(OUO; PAT) Patent Pending", "PAT", "Patent Pending"));
-        this.access_limitations_list.add(makeListObj("(OUO; PDOUO) Program-Determined Official Use Only", "PDOUO", "Program-Determined Official Use Only"));
-        this.access_limitations_list.add(makeListObj("(OUO; PROP) Limited Rights Data", "PROP", "Limited Rights Data"));
-        this.access_limitations_list.add(makeListObj("(OUO; PROT) Protected Data CRADA/EPACT/OTHER", "PROT", "Protected Data CRADA/EPACT/OTHER"));
-        this.access_limitations_list.add(makeListObj("(OUO; SSI) Security Sensitive Information", "SSI", "Security Sensitive Information"));
+        this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(UNL) Unlimited", "UNL", "Unlimited"));
+        this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(SBIR) Small Business Innovation Research", "SBIR", "Small Business Innovation Research"));
+        this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(STTR) Small Business Technology Transfer Research", "STTR", "Small Business Technology Transfer Research"));
+        this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO) Official Use Only", "OUO", "Official Use Only"));
+        this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; ECI) Export Controlled Information", "ECI", "Export Controlled Information"));
+        this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; PAT) Patent Pending", "PAT", "Patent Pending"));
+        this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; PDOUO) Program-Determined Official Use Only", "PDOUO", "Program-Determined Official Use Only"));
+        this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; PROP) Limited Rights Data", "PROP", "Limited Rights Data"));
+        this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; PROT) Protected Data CRADA/EPACT/OTHER", "PROT", "Protected Data CRADA/EPACT/OTHER"));
+        this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; SSI) Security Sensitive Information", "SSI", "Security Sensitive Information"));
         // Phases
-        this.phases_list.add(makeListObj("I", "I", "I"));
-        this.phases_list.add(makeListObj("II", "II", "II"));
-        this.phases_list.add(makeListObj("IIA", "IIA", "IIA"));
-        this.phases_list.add(makeListObj("IIB", "IIB", "IIB"));
-        this.phases_list.add(makeListObj("III", "III", "III"));
+        this.PHASES_LIST.add(makeListObj("I", "I", "I"));
+        this.PHASES_LIST.add(makeListObj("II", "II", "II"));
+        this.PHASES_LIST.add(makeListObj("IIA", "IIA", "IIA"));
+        this.PHASES_LIST.add(makeListObj("IIB", "IIB", "IIB"));
+        this.PHASES_LIST.add(makeListObj("III", "III", "III"));
         // Protections
-        this.protections_list.add(makeListObj("CRADA", "CRADA", "CRADA"));
-        this.protections_list.add(makeListObj("EPACT", "EPACT", "EPACT"));
-        this.protections_list.add(makeListObj("Other", "Other", "Other"));
+        this.PROTECTIONS_LIST.add(makeListObj("CRADA", "CRADA", "CRADA"));
+        this.PROTECTIONS_LIST.add(makeListObj("EPACT", "EPACT", "EPACT"));
+        this.PROTECTIONS_LIST.add(makeListObj("Other", "Other", "Other"));
         // Software Type
-        this.software_type_list.add(makeListObj("Business", "B", "Business"));
-        this.software_type_list.add(makeListObj("Scientific", "S", "Scientific"));
+        this.SOFTWARE_TYPE_LIST.add(makeListObj("Business", "B", "Business"));
+        this.SOFTWARE_TYPE_LIST.add(makeListObj("Scientific", "S", "Scientific"));
         // States List
-        this.states_list.add(makeListObj("", "", ""));
-        this.states_list.add(makeListObj("Alabama", "AL", "Alabama"));
-        this.states_list.add(makeListObj("Alaska", "AK", "Alaska"));
-        this.states_list.add(makeListObj("Arizona", "AZ", "Arizona"));
-        this.states_list.add(makeListObj("Arkansas", "AR", "Arkansas"));
-        this.states_list.add(makeListObj("California", "CA", "California"));
-        this.states_list.add(makeListObj("Colorado", "CO", "Colorado"));
-        this.states_list.add(makeListObj("Connecticut", "CT", "Connecticut"));
-        this.states_list.add(makeListObj("Delaware", "DE", "Delaware"));
-        this.states_list.add(makeListObj("District Of Columbia", "DC", "District Of Columbia"));
-        this.states_list.add(makeListObj("Florida", "FL", "Florida"));
-        this.states_list.add(makeListObj("Georgia", "GA", "Georgia"));
-        this.states_list.add(makeListObj("Hawaii", "HI", "Hawaii"));
-        this.states_list.add(makeListObj("Idaho", "ID", "Idaho"));
-        this.states_list.add(makeListObj("Illinois", "IL", "Illinois"));
-        this.states_list.add(makeListObj("Indiana", "IN", "Indiana"));
-        this.states_list.add(makeListObj("Iowa", "IA", "Iowa"));
-        this.states_list.add(makeListObj("Kansas", "KS", "Kansas"));
-        this.states_list.add(makeListObj("Kentucky", "KY", "Kentucky"));
-        this.states_list.add(makeListObj("Louisiana", "LA", "Louisiana"));
-        this.states_list.add(makeListObj("Maine", "ME", "Maine"));
-        this.states_list.add(makeListObj("Maryland", "MD", "Maryland"));
-        this.states_list.add(makeListObj("Massachusetts", "MA", "Massachusetts"));
-        this.states_list.add(makeListObj("Michigan", "MI", "Michigan"));
-        this.states_list.add(makeListObj("Minnesota", "MN", "Minnesota"));
-        this.states_list.add(makeListObj("Mississippi", "MS", "Mississippi"));
-        this.states_list.add(makeListObj("Missouri", "MO", "Missouri"));
-        this.states_list.add(makeListObj("Montana", "MT", "Montana"));
-        this.states_list.add(makeListObj("Nebraska", "NE", "Nebraska"));
-        this.states_list.add(makeListObj("Nevada", "NV", "Nevada"));
-        this.states_list.add(makeListObj("New Hampshire", "NH", "New Hampshire"));
-        this.states_list.add(makeListObj("New Jersey", "NJ", "New Jersey"));
-        this.states_list.add(makeListObj("New Mexico", "NM", "New Mexico"));
-        this.states_list.add(makeListObj("New York", "NY", "New York"));
-        this.states_list.add(makeListObj("North Carolina", "NC", "North Carolina"));
-        this.states_list.add(makeListObj("North Dakota", "ND", "North Dakota"));
-        this.states_list.add(makeListObj("Ohio", "OH", "Ohio"));
-        this.states_list.add(makeListObj("Oklahoma", "OK", "Oklahoma"));
-        this.states_list.add(makeListObj("Oregon", "OR", "Oregon"));
-        this.states_list.add(makeListObj("Pennsylvania", "PA", "Pennsylvania"));
-        this.states_list.add(makeListObj("Rhode Island", "RI", "Rhode Island"));
-        this.states_list.add(makeListObj("South Carolina", "SC", "South Carolina"));
-        this.states_list.add(makeListObj("South Dakota", "SD", "South Dakota"));
-        this.states_list.add(makeListObj("Tennessee", "TN", "Tennessee"));
-        this.states_list.add(makeListObj("Texas", "TX", "Texas"));
-        this.states_list.add(makeListObj("Utah", "UT", "Utah"));
-        this.states_list.add(makeListObj("Vermont", "VT", "Vermont"));
-        this.states_list.add(makeListObj("Virginia", "VA", "Virginia"));
-        this.states_list.add(makeListObj("Washington", "WA", "Washington"));
-        this.states_list.add(makeListObj("West Virginia", "WV", "West Virginia"));
-        this.states_list.add(makeListObj("Wisconsin", "WI", "Wisconsin"));
-        this.states_list.add(makeListObj("Wyoming", "WY", "Wyoming"));
+        this.STATES_LIST.add(makeListObj("", "", ""));
+        this.STATES_LIST.add(makeListObj("Alabama", "AL", "Alabama"));
+        this.STATES_LIST.add(makeListObj("Alaska", "AK", "Alaska"));
+        this.STATES_LIST.add(makeListObj("Arizona", "AZ", "Arizona"));
+        this.STATES_LIST.add(makeListObj("Arkansas", "AR", "Arkansas"));
+        this.STATES_LIST.add(makeListObj("California", "CA", "California"));
+        this.STATES_LIST.add(makeListObj("Colorado", "CO", "Colorado"));
+        this.STATES_LIST.add(makeListObj("Connecticut", "CT", "Connecticut"));
+        this.STATES_LIST.add(makeListObj("Delaware", "DE", "Delaware"));
+        this.STATES_LIST.add(makeListObj("District Of Columbia", "DC", "District Of Columbia"));
+        this.STATES_LIST.add(makeListObj("Florida", "FL", "Florida"));
+        this.STATES_LIST.add(makeListObj("Georgia", "GA", "Georgia"));
+        this.STATES_LIST.add(makeListObj("Hawaii", "HI", "Hawaii"));
+        this.STATES_LIST.add(makeListObj("Idaho", "ID", "Idaho"));
+        this.STATES_LIST.add(makeListObj("Illinois", "IL", "Illinois"));
+        this.STATES_LIST.add(makeListObj("Indiana", "IN", "Indiana"));
+        this.STATES_LIST.add(makeListObj("Iowa", "IA", "Iowa"));
+        this.STATES_LIST.add(makeListObj("Kansas", "KS", "Kansas"));
+        this.STATES_LIST.add(makeListObj("Kentucky", "KY", "Kentucky"));
+        this.STATES_LIST.add(makeListObj("Louisiana", "LA", "Louisiana"));
+        this.STATES_LIST.add(makeListObj("Maine", "ME", "Maine"));
+        this.STATES_LIST.add(makeListObj("Maryland", "MD", "Maryland"));
+        this.STATES_LIST.add(makeListObj("Massachusetts", "MA", "Massachusetts"));
+        this.STATES_LIST.add(makeListObj("Michigan", "MI", "Michigan"));
+        this.STATES_LIST.add(makeListObj("Minnesota", "MN", "Minnesota"));
+        this.STATES_LIST.add(makeListObj("Mississippi", "MS", "Mississippi"));
+        this.STATES_LIST.add(makeListObj("Missouri", "MO", "Missouri"));
+        this.STATES_LIST.add(makeListObj("Montana", "MT", "Montana"));
+        this.STATES_LIST.add(makeListObj("Nebraska", "NE", "Nebraska"));
+        this.STATES_LIST.add(makeListObj("Nevada", "NV", "Nevada"));
+        this.STATES_LIST.add(makeListObj("New Hampshire", "NH", "New Hampshire"));
+        this.STATES_LIST.add(makeListObj("New Jersey", "NJ", "New Jersey"));
+        this.STATES_LIST.add(makeListObj("New Mexico", "NM", "New Mexico"));
+        this.STATES_LIST.add(makeListObj("New York", "NY", "New York"));
+        this.STATES_LIST.add(makeListObj("North Carolina", "NC", "North Carolina"));
+        this.STATES_LIST.add(makeListObj("North Dakota", "ND", "North Dakota"));
+        this.STATES_LIST.add(makeListObj("Ohio", "OH", "Ohio"));
+        this.STATES_LIST.add(makeListObj("Oklahoma", "OK", "Oklahoma"));
+        this.STATES_LIST.add(makeListObj("Oregon", "OR", "Oregon"));
+        this.STATES_LIST.add(makeListObj("Pennsylvania", "PA", "Pennsylvania"));
+        this.STATES_LIST.add(makeListObj("Rhode Island", "RI", "Rhode Island"));
+        this.STATES_LIST.add(makeListObj("South Carolina", "SC", "South Carolina"));
+        this.STATES_LIST.add(makeListObj("South Dakota", "SD", "South Dakota"));
+        this.STATES_LIST.add(makeListObj("Tennessee", "TN", "Tennessee"));
+        this.STATES_LIST.add(makeListObj("Texas", "TX", "Texas"));
+        this.STATES_LIST.add(makeListObj("Utah", "UT", "Utah"));
+        this.STATES_LIST.add(makeListObj("Vermont", "VT", "Vermont"));
+        this.STATES_LIST.add(makeListObj("Virginia", "VA", "Virginia"));
+        this.STATES_LIST.add(makeListObj("Washington", "WA", "Washington"));
+        this.STATES_LIST.add(makeListObj("West Virginia", "WV", "West Virginia"));
+        this.STATES_LIST.add(makeListObj("Wisconsin", "WI", "Wisconsin"));
+        this.STATES_LIST.add(makeListObj("Wyoming", "WY", "Wyoming"));
 
     }
 
     private ObjectNode makeListObj(String label, String value, String title) {
-        ObjectNode on = JsonUtils.MAPPER.createObjectNode();
+        ObjectNode on = JsonUtils.createObjectNode();
         on.put("label", label);
         on.put("value", value);
         on.put("title", title);
@@ -228,19 +198,20 @@ public class DOECODEJson {
         // Countries
         ArrayNode country = getItemFromElinkAuthority(authorityapi_base_url + "simple/countries-list?sort=description");
         if (country.size() > 0) {
-            this.countries_list = translateElinkAuthorityList(country);
+            this.COUNTRIES_LIST.removeAll();
+            this.COUNTRIES_LIST.addAll(translateElinkAuthorityList(country));
         } else {
             log.error("Country Json Array returned empty");
         }
 
         // Sponsoring Orgs
-        ArrayNode sponsoring_orgs = JsonUtils.MAPPER.createArrayNode();
+        ArrayNode sponsoring_orgs = JsonUtils.createArrayNode();
         // These two items have to be added to the top of the sponsoring org list
-        ObjectNode blank = JsonUtils.MAPPER.createObjectNode();
+        ObjectNode blank = JsonUtils.createObjectNode();
         blank.put("name", "");
         blank.put("code", "");
         blank.put("status", "");
-        ObjectNode usdoe = JsonUtils.MAPPER.createObjectNode();
+        ObjectNode usdoe = JsonUtils.createObjectNode();
         blank.put("name", "USDOE");
         blank.put("code", "USDOE");
         blank.put("status", "C");
@@ -256,8 +227,8 @@ public class DOECODEJson {
             for (JsonNode n : sponsor_orgs_api) {
                 org_lists_combined.add(n);
             }
-
-            this.sponsor_orgs_list = org_lists_combined;
+            this.SPONSOR_ORGS_LIST.removeAll();
+            this.SPONSOR_ORGS_LIST.addAll(org_lists_combined);
         } else {
             log.error("Sponsoring Orgs Json Array returned empty");
         }
@@ -265,7 +236,8 @@ public class DOECODEJson {
         // Research Org
         ArrayNode research_orgs = getItemFromElinkAuthority(authorityapi_base_url + "research/orig-research-org-list");
         if (research_orgs.size() > 0) {
-            this.research_org_list = translateElinkAuthorityList(research_orgs);
+            this.RESEARCH_ORG_LIST.removeAll();
+            this.RESEARCH_ORG_LIST.addAll(translateElinkAuthorityList(research_orgs));
         } else {
             log.error("Research Orgs Json Array returned empty");
         }
@@ -273,41 +245,53 @@ public class DOECODEJson {
         // Affiliations
         ArrayNode affiliations = getItemFromElinkAuthority(authorityapi_base_url + "affiliations/affiliations-list");
         if (affiliations.size() > 0) {
-            this.affiliations_list = translateElinkAuthorityList(affiliations);
+            this.AFFILIATIONS_LIST.removeAll();
+            this.AFFILIATIONS_LIST.addAll(translateElinkAuthorityList(affiliations));
         } else {
             log.error("Affiliations Json Array returned empty");
         }
 
         // Relation Types
-        ArrayNode relation_types = getItemFromElinkAuthority(
-                authorityapi_base_url + "simple/relation-types-list?status=C");
+        ArrayNode relation_types = getItemFromElinkAuthority(authorityapi_base_url + "simple/relation-types-list?status=C");
         if (relation_types.size() > 0) {
-            this.relation_types_list = translateElinkAuthorityList(relation_types);
+            this.RELATION_TYPES_LIST.removeAll();
+            this.RELATION_TYPES_LIST.addAll(translateElinkAuthorityList(relation_types));
         } else {
             log.error("Relation Types Json Array returned empty");
         }
 
         // Programming Languages
-        ArrayNode programming_languages = getItemFromElinkAuthority(
-                authorityapi_base_url + "simple/programming-languages-list");
+        ArrayNode programming_languages = getItemFromElinkAuthority(authorityapi_base_url + "simple/programming-languages-list");
         if (programming_languages.size() > 0) {
-            this.programming_languages_list = translateElinkAuthorityList(programming_languages);
+            this.PROGRAMMING_LANGUAGES_LIST.removeAll();
+            this.PROGRAMMING_LANGUAGES_LIST.addAll(translateElinkAuthorityList(programming_languages));
         } else {
             log.error("Programming Languages Json Array returned empty");
         }
 
         // Project Keywords
-        ArrayNode project_keywords = getItemFromElinkAuthority(
-                authorityapi_base_url + "simple/doecode-project-keywords-list");
+        ArrayNode project_keywords = getItemFromElinkAuthority(authorityapi_base_url + "simple/doecode-project-keywords-list");
         if (project_keywords.size() > 0) {
-            this.project_keywords_list = translateElinkAuthorityList(project_keywords);
+            this.PROJECT_KEYWORDS_LIST.removeAll();
+            this.PROJECT_KEYWORDS_LIST.addAll(translateElinkAuthorityList(project_keywords));
         } else {
             log.error("Project Keywords Json Array returned empty");
+        }
+
+        // Sites with software group emails
+        ArrayNode software_group_sites = DOECODEUtils.makeArrayGetRequest(Init.backend_api_url + "site/list");
+        if (!software_group_sites.isEmpty()) {
+            this.DOE_CODE_SITES_WITH_SOFTARE_GROUP_EMAIL_LIST.removeAll();
+            for(JsonNode jn:software_group_sites){
+                this.DOE_CODE_SITES_WITH_SOFTARE_GROUP_EMAIL_LIST.put(jn.findPath("site_code").asText(""),jn.findPath("software_group_email").asText(""));
+            }
+        } else {
+            log.error("DOE Code software sites with software group emails returned empty");
         }
     }
 
     private ArrayNode getItemFromElinkAuthority(String api_url) {
-        ArrayNode arr = JsonUtils.MAPPER.createArrayNode();
+        ArrayNode arr = JsonUtils.createArrayNode();
         try {
             arr = DOECODEUtils.makeArrayGetRequest(api_url);
         } catch (Exception e) {
@@ -317,9 +301,9 @@ public class DOECODEJson {
     }
 
     private ArrayNode translateElinkAuthorityList(ArrayNode original_list) {
-        ArrayNode new_list = JsonUtils.MAPPER.createArrayNode();
+        ArrayNode new_list = JsonUtils.createArrayNode();
         for (JsonNode n : original_list) {
-            ObjectNode new_row = JsonUtils.MAPPER.createObjectNode();
+            ObjectNode new_row = JsonUtils.createObjectNode();
             String name_val = "";
             if (n instanceof TextNode) {
                 name_val = n.asText("");
@@ -339,66 +323,70 @@ public class DOECODEJson {
     }
 
     public ArrayNode getAffiliationsList() {
-        return this.affiliations_list;
+        return this.AFFILIATIONS_LIST;
     }
 
     public ArrayNode getAvailabilityList() {
-        return this.availability_list;
+        return this.AVAILABILITY_LIST;
     }
 
     public ArrayNode getContributorList() {
-        return this.contributor_types;
+        return this.CONTRIBUTOR_TYPES;
     }
 
     public ArrayNode getCountriesList() {
-        return this.countries_list;
+        return this.COUNTRIES_LIST;
     }
 
     public ArrayNode getLicenseOptionsList() {
-        return this.license_options_list;
+        return this.LICENSE_OPTIONS_LIST;
     }
 
     public ArrayNode getAccessLimitationsList() {
-        return this.access_limitations_list;
+        return this.ACCESS_LIMITATIONS_LIST;
     }
 
     public ArrayNode getPhasesList() {
-        return this.phases_list;
+        return this.PHASES_LIST;
     }
 
     public ArrayNode getProtectionsList() {
-        return this.protections_list;
+        return this.PROTECTIONS_LIST;
     }
 
     public ArrayNode getResearchOrgList() {
-        return this.research_org_list;
+        return this.RESEARCH_ORG_LIST;
     }
 
     public ArrayNode getSearchSortOptionsList() {
-        return this.search_sort_options_list;
+        return this.SEARCH_SORT_OPTIONS_LIST;
     }
 
     public ArrayNode getSoftwareTypeList() {
-        return this.software_type_list;
+        return this.SOFTWARE_TYPE_LIST;
     }
 
     public ArrayNode getSponsorOrgsList() {
-        return this.sponsor_orgs_list;
+        return this.SPONSOR_ORGS_LIST;
     }
 
     public ArrayNode getStatesList() {
-        return this.states_list;
+        return this.STATES_LIST;
     }
 
     public ArrayNode getRelationTypesList() {
-        return this.relation_types_list;
+        return this.RELATION_TYPES_LIST;
     }
 
     public ArrayNode getProgrammingLanguagesList() {
-        return this.programming_languages_list;
+        return this.PROGRAMMING_LANGUAGES_LIST;
     }
 
     public ArrayNode getProjectKeywordsList() {
-        return this.project_keywords_list;
+        return this.PROJECT_KEYWORDS_LIST;
+    }
+
+    public ObjectNode getDOESitesWithSoftwareGroupEmails() {
+        return this.DOE_CODE_SITES_WITH_SOFTARE_GROUP_EMAIL_LIST;
     }
 }

@@ -3,7 +3,7 @@
         <div class='row biblio-sidebar-row'>
             <div class='col-xs-12'>
                 <h4 class='biblio-sidebar-subtitle'>RESOURCE</h4>
-                <!--Repository URL-->
+                {{!-- Repository URL --}}
                 {{#if biblio_sidebar.has_repo_link}}
                 <div class='link-content'>
                     <span class='biblio-sidebar-secondary-subtitle'>Publicly Accessible Repository {{> tooltips/Biblio-RepositoryURL}}</span>
@@ -12,7 +12,7 @@
                 </div>
                 {{/if}}
 
-                <!--Landing Page-->
+                {{!-- Landing Page --}}
                 {{#if biblio_sidebar.has_landing_page}}
                 <div class='link-content'>
                     <span class='biblio-sidebar-secondary-subtitle'>Project Landing Page</span>
@@ -20,15 +20,26 @@
                     <a title='Landing Page for Code ID #{{code_id}}' href='{{biblio_sidebar.landing_page}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' data-softwaretype='{{software_type}}' class='biblio-sidebar-traditional-anchor word-break download-link'>{{biblio_sidebar.landing_page}}</a>
                 </div>
                 {{/if}}
+                
+                {{!-- Availability --}}
+                {{#if biblio_sidebar.needs_software_group_email}}
+                  <div class='link-content'>
+                    <span class='biblio-sidebar-secondary-subtitle'>Availability</span>
+                    <br />
+                    <p>
+                        For questions about obtaining this software, please contact <a href='mailto:{{biblio_sidebar.software_group_email}}'>{{biblio_sidebar.software_group_email}}</a>.
+                    </p>
+                </div>
+                {{/if}}
 
-                <!--DOI-->
+                {{!-- DOI --}}
                 {{#if biblio_sidebar.has_doi_and_release}}
                 <div class="link-content">
                     <a title='DOI: {{biblio_sidebar.doi}}' href='https://doi.org/{{biblio_sidebar.doi}}' target='_blank' rel="noopener noreferrer" data-codeid='{{code_id}}' data-softwaretype='{{software_type}}' class='biblio-sidebar-traditional-anchor word-break download-link'>https://doi.org/{{biblio_sidebar.doi}}</a>
                 </div>
                 {{/if}}
 
-                <!--Versions-->
+                {{!-- Versions --}}
                 {{#if biblio_sidebar.has_new_version}}
                 <div class="link-content">
                     <span class="biblio-sidebar-secondary-subtitle">New {{#if biblio_sidebar.more_than_one_new}}Versions{{else}}Version{{/if}}</span>
@@ -51,7 +62,7 @@
                 </div>
                 {{/if}}
 
-                <!--Documentation URL-->
+                {{!-- Documentation URL --}}
                 {{#if biblio_sidebar.has_documentation_url}}
                 <div class='link-content'>
                     <span class="biblio-sidebar-secondary-subtitle">Documentation</span>
@@ -60,7 +71,7 @@
                 </div>
                 {{/if}}
 
-                <!--Container Download-->
+                {{!--  Container Download --}}
                 {{#if biblio_sidebar.has_file_to_download}}
                 <div class="link-content">
                     <a target='_blank' title='Download Container for {{biblio_sidebar.doi}}' href='/${app_name}/download-repository/container-download/{{biblio_sidebar.code_id}}' rel="noopener noreferrer" class='btn btn-success'>
