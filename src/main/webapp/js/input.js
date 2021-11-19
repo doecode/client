@@ -329,6 +329,10 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
     else if (id == "input-landno-btn") {
         metadata.setValue("project_type_landing", false);
         metadata.setValue("landing_page", "");
+        
+        var sge = JSON.parse(localStorage.user_data).software_group_email;    
+        if (sge != null && sge != undefined)
+            metadata.setValue("landing_contact", sge);
     }
 });
 

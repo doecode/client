@@ -100,6 +100,7 @@ public class UserFunctions {
         return_data.put("display_name_lastname_first", user_data.findPath("display_name_lastname_first").asText(""));
         return_data.put("email", user_data.findPath("email").asText(""));
         return_data.put("site", user_data.findPath("site").asText(""));
+        return_data.put("software_group_email", user_data.findPath("software_group_email").asText(""));
         ArrayNode roles = user_data.withArray("roles");
         ArrayNode pending_roles = user_data.withArray("pending_roles");
         //TODO get rejected roles

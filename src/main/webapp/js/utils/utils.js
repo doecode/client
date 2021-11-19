@@ -178,6 +178,7 @@ function setLoggedInAttributes(data) {
     user_data.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
     user_data.roles = data.roles;
     user_data.user_site = data.site;
+    user_data.software_group_email = data.software_group_email;
     user_data.pending_roles = data.pending_roles;
 
     localStorage.user_data = JSON.stringify(user_data);
