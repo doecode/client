@@ -353,6 +353,17 @@ var BaseData = function () {
                 }
             }
 
+            if (field === 'file_name') {
+                var schemaFileCert = this.infoSchema["is_file_certified"];
+                
+                if (data != null && data != undefined && data != "") {
+                    schemaFileCert.required = "sub";
+                }
+                else {
+                    schemaFileCert.required = "";
+                }
+            }
+
             this.validateField(field);
         })
     }, {
@@ -405,7 +416,10 @@ var BaseData = function () {
 
             var value = this.getValue(field);
 
-            if (value === null || value === undefined || value.length === 0) {
+            if (field == "is_file_certified") {
+                info.completed = value;
+            }
+            else if (value === null || value === undefined || value.length === 0) {
                 info.completed = false;
                 info.error = '';
                 if (field == "repository_link")

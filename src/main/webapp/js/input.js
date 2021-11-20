@@ -1652,6 +1652,17 @@ mobx.autorun("Is Migration", function () {
 mobx.autorun("File Upload", function () {
     updateDropzoneStyle(metadata, "file_name", "uploaded-file-name-lbl", "uploaded-file-name");
 
+    if (metadata.getValue("file_name"))
+        $("#cert-zone").show();
+    else
+        $("#cert-zone").hide();
+    
+    //mobx.whyRun();
+});
+
+mobx.autorun("Is Certified", function () {
+    $("#file-is-certified").prop('checked', metadata.getValue("is_file_certified"));
+
     //mobx.whyRun();
 });
 
@@ -3089,6 +3100,10 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#project-is-migration').on('change', {
         store: metadata,
         field: "is_migration"
+    }, checkboxChange);
+    $('#file-is-certified').on('change', {
+        store: metadata,
+        field: "is_file_certified"
     }, checkboxChange);
 
     var dropzone = $("#file-upload-dropzone").dropzone(FILE_UPLOAD_CONFIG);
