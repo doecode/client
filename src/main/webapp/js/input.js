@@ -2486,6 +2486,7 @@ Dropzone.autoDiscover = false;
 //Regex to see if the file is allowed
 const FILE_EXTENSION_REGEX = new RegExp(/[.](?:zip|tgz|tar(?:[.](?:gz|bz2))?)$/);
 var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
+    metadata.setValue("is_file_certified", null);
     metadata.setValue("file_name", "");
     metadata.setValue("files", []);
     form.last_filename = "";
@@ -2524,6 +2525,8 @@ var FILE_UPLOAD_CONFIG = {
             //Make sure that this file is allowed
             var file_extension = FILE_EXTENSION_REGEX.exec(file.name);
             if (file_extension) {
+                metadata.setValue("is_file_certified", false);
+
                 //Unbinding the event on the remove anchor
                 $("#file-upload-dropzone .dz-remove").unbind();
 
