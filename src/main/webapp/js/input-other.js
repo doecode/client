@@ -402,7 +402,7 @@ var parseApprovalPageData = function (data) {
         }
         new_data.push({
             code_id: item.code_id ? item.code_id : '',
-            software_title: item.software_title ? item.software_title : '',
+            software_title: item.software_title ? item.software_title.replace(/</g, "&lt;").replace(/>/g, "&gt;") : '',
             date_record_updated: item.date_record_updated ? item.date_record_updated : '',
             date_record_updated_display: item.date_record_updated ? moment(item.date_record_updated, BACK_END_DATE_FORMAT).format(FRONT_END_DATE_FORMAT) : '',            
             workflow_status: workflow_status
