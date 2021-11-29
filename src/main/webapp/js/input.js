@@ -762,16 +762,20 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
         if (!openSource) {
             var closed_propurl = metadata.getValue('proprietary_url');
             var closed_licensecontact = metadata.getValue('license_contact_email');
+            var override = false;
 
             if (closed_propurl != null && closed_propurl != "")
                 metadata.setValue('license_closedsource_available', true);
-            else
+            else {
                 metadata.setValue('license_closedsource_available', false);
+                override = true;
+            }
 
-            if (closed_licensecontact != null && closed_licensecontact != "")
+            if (override || closed_licensecontact != null && closed_licensecontact != "")
                 metadata.setValue('license_closedsource_contactinfo', false);
-            else
+            else {
                 metadata.setValue('license_closedsource_contactinfo', true);
+            }
         }
 
         trackOpenClosedInfo(project_type);
