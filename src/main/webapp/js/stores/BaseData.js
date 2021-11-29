@@ -432,8 +432,10 @@ var BaseData = function () {
         key: 'validationCallback',
         value: mobx.action("Validation Callback", function validationCallback(field, information, errors) {
             information.error = errors;
-            if (errors)
+            if (errors) {
                 information.completed = false;
+                information.ever_completed = true;
+            }
             else {
                 information.completed = true;
                 information.ever_completed = true;
