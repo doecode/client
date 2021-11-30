@@ -708,8 +708,8 @@ public class SearchFunctions {
         // Repository URL
         String repository_link = search_data.findPath("repository_link").asText("");
         String landing_page = search_data.findPath("landing_page").asText("");
+        String landing_contact = search_data.findPath("landing_contact").asText("");
         String doc_link = search_data.findPath("documentation_url").asText("");
-        String site_code = search_data.findPath("site_ownership_code").asText("");
 
         //SEe if we need to show the repository link
         if (StringUtils.isNotBlank(repository_link)) {
@@ -724,10 +724,9 @@ public class SearchFunctions {
         }
 
         //See if we need to show the software group email
-        ObjectNode software_group_email_sites = DOECODEServletContextListener.getJsonObject(DOECODEJson.DOE_CODE_SITES_WITH_SOFTWARE_GROUP_EMAILS_KEY);
-        if (StringUtils.equals(search_data.findPath("project_type").asText(""), "CS") && StringUtils.isBlank(landing_page) && software_group_email_sites.has(site_code)) {
+        if (StringUtils.equals(search_data.findPath("project_type").asText(""), "CS") && StringUtils.isBlank(landing_page) && !StringUtils.isBlank(landing_contact)) {
             return_data.put("needs_software_group_email", true);
-            return_data.put("software_group_email", software_group_email_sites.findPath(site_code).asText(""));
+            return_data.put("software_group_email", landing_contact);
         }
 
         // Code ID
