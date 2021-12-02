@@ -705,9 +705,11 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
 
     // lock access limitations from being edited, if not RecordAdmin
     checkHasRole("RecordAdmin", function () {
-        $("#access-limitations").prop("disabled", false).trigger("chosen:updated");;
+        $("#access-limitations").prop("disabled", false).trigger("chosen:updated");
+        $("#change-log-zone").show();
     }, function () {
-        $("#access-limitations").prop("disabled", true).trigger("chosen:updated");;
+        $("#access-limitations").prop("disabled", true).trigger("chosen:updated");
+        $("#change-log-zone").hide();
     });
 
     metadata.loadRecordFromServer(data.metadata, page_val);
@@ -983,6 +985,31 @@ var approve = function approve() {
     doAuthenticatedAjax('GET', API_BASE + 'metadata/approve/' + code_id, parseApproveResponse, null, parseErrorResponse);
 };
 
+
+
+var editComment = function editComment() {
+    var code_id = $("#code_id").val();
+    var msg = code_id ? "Project " + code_id : "New Project";
+
+    var commentData = {};
+    var setComment = metadata.getValue("comment");
+    commentData["comment"] = setComment ? setComment : null;
+
+    setCommonModalMessage({
+        title: 'Editing Comment',
+        show_loader: true,
+        message_type: MESSAGE_TYPE_REGULAR,
+        content: "<br/>Editing comment for " + msg + ". Please wait, this may take a moment.",
+        contentClasses: ['center-text'],
+        showClose: false
+    });
+    showCommonModalMessage();
+
+    doAuthenticatedAjax('POST', API_BASE + 'metadata/comment/' + code_id, parseCommentResponse, commentData, parseErrorResponse);
+};
+
+
+
 var parseSaveResponse = mobx.action("Parse Receive Response", function parseSaveResponse(data) {
     metadata.setValue("code_id", data.metadata.code_id);
     hideCommonModalMessage();
@@ -1025,6 +1052,15 @@ var parseAnnounceResponse = function parseAnnounceResponse(data) {
 var parseApproveResponse = function parseApproveResponse(data) {
     hideCommonModalMessage();
     window.location.href = '/' + APP_NAME + '/pending';
+};
+
+
+var parseCommentResponse = function parseApproveResponse(data) {
+    hideCommonModalMessage();
+
+    if (!($("#code_id").val())) {
+        window.location.href = "/" + APP_NAME + "/submit?code_id=" + data.metadata.code_id;
+    }
 };
 
 
@@ -2032,6 +2068,12 @@ mobx.autorun("Submit Button", function () {
 
 mobx.autorun("Announce Button", function () {
     $('#input-announce-btn').prop('disabled', !metadata.validateSchema());
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Edit Comment", function () {
+    updateInputStyle(metadata, "comment", "record-comment-lbl", "record-comment", true);
 
     //mobx.whyRun();
 });
@@ -3135,6 +3177,12 @@ $(document).ready(mobx.action("Document Ready", function () {
         field: "funder_name"
     }, inputChange);
 
+    // Comment Updates
+    $('#record-comment').on('change', {
+        store: metadata,
+        field: "comment"
+    }, inputChange);
+
     //Makes the autopopualte from repository work
     $("#autopopulate-from-repository").on('click', autopopulateFromRepository);
 
@@ -3186,6 +3234,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#input-announce-btn').on('click', announce);
     $('#input-submit-btn').on('click', submit);
     $('#input-approve-btn').on('click', approve);
+    $('#input-comment-btn').on('click', editComment);
 
     if (page_val == 'announce') {
         $('#input-announce-btn').show();

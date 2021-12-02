@@ -77,7 +77,8 @@ var _metadata = mobx.observable({
     "is_file_certified": false,
     "files": [],
     "container_name": '',
-    "containers": []
+    "containers": [],
+    "comment": ''
 });
 
 var _metadataInfoSchema = mobx.observable({
@@ -657,7 +658,17 @@ var _metadataInfoSchema = mobx.observable({
         validations: [],
         panel: "Contact Information",
         error: ''
-    }
+    },
+    "comment": {
+        required: "",
+        label: "Comments",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "",
+        error: ''
+    },
 });
 
 var _panelStatus = mobx.observable({
