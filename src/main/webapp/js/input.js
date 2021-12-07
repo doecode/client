@@ -19,6 +19,7 @@ var contributors_table = null;
 var contributor_orgs_table = null;
 var related_identifiers_table = null;
 var award_dois_table = null;
+var change_log_table = null;
 
 // modal redirect
 var modal_redirect = null;
@@ -224,6 +225,35 @@ var award_dois_tbl_opts = {
         {
             name: 'funder_name',
             data: 'funder_name',
+            'defaultContent': '',
+            className: 'word-break'
+        }
+    ]
+};
+
+var change_log_tbl_opts = {
+    order: [
+        [0, 'desc']
+    ],
+    autoWidth: false,
+    pageLength : 7,
+    lengthMenu: [[7, 25, 50, 100], [7, 25, 50, 100]],
+    columns: [
+        {
+            name: 'change_date',
+            data: 'change_date',
+            'defaultContent': '',
+            width: '15%'
+        },
+        {
+            name: 'changed_by',
+            data: 'changed_by',
+            'defaultContent': '',
+            width: '15%'
+        },
+        {
+            name: 'changes_made',
+            data: 'changes_made',
             'defaultContent': '',
             className: 'word-break'
         }
@@ -1058,9 +1088,7 @@ var parseApproveResponse = function parseApproveResponse(data) {
 var parseCommentResponse = function parseApproveResponse(data) {
     hideCommonModalMessage();
 
-    if (!($("#code_id").val())) {
-        window.location.href = "/" + APP_NAME + "/submit?code_id=" + data.metadata.code_id;
-    }
+    window.location.reload(true);
 };
 
 
@@ -2000,6 +2028,19 @@ mobx.autorun("Award DOIs", function () {
     //mobx.whyRun();
 });
 
+mobx.autorun("Change Log", function () {
+    if (change_log_table) {
+        change_log_table.clear();
+
+        var data = metadata.getValue("change_log").toJS();
+        change_log_table.rows.add(data).draw();
+    }
+
+    updateLabelStyle(metadata, "change_log", "change-log-lbl", true);
+
+    //mobx.whyRun();
+});
+
 
 /*********************
  AWARD DOIS MODAL (action)
@@ -2768,6 +2809,8 @@ $(document).ready(mobx.action("Document Ready", function () {
     contributor_orgs_table = $("#contributor-orgs-data-table").DataTable(contributing_organizations_tbl_opts);
     related_identifiers_table = $("#related-identifiers-data-table").DataTable(related_identifiers_tbl_opts);
     award_dois_table = $("#award-dois-data-table").DataTable(award_dois_tbl_opts);
+    change_log_table = $("#change-log-data-table").DataTable(change_log_tbl_opts);
+
 
     // datatable functionality
     developers_table.on('row-reorder', handleReorderingDevs);

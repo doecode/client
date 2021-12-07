@@ -78,7 +78,8 @@ var _metadata = mobx.observable({
     "files": [],
     "container_name": '',
     "containers": [],
-    "comment": ''
+    "comment": '',
+    "change_log": [],
 });
 
 var _metadataInfoSchema = mobx.observable({
@@ -669,6 +670,16 @@ var _metadataInfoSchema = mobx.observable({
         panel: "",
         error: ''
     },
+    "change_log": {
+        required: "",
+        label: "",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "",
+        error: ''
+    }
 });
 
 var _panelStatus = mobx.observable({
@@ -1525,6 +1536,12 @@ var _userSchema = mobx.observable({
         validations: ["PWMatch"],
         error: ''
     }
+});
+
+var _changeLog = mobx.observable({
+    change_date: '',
+    changed_by: '',
+    changes_made: ''
 });
 
 Object.defineProperty(MetadataStore, "metadata", {
