@@ -1040,7 +1040,7 @@ var editComment = function editComment() {
 
 
 
-var parseSaveResponse = mobx.action("Parse Receive Response", function parseSaveResponse(data) {
+var parseSaveResponse = mobx.action("Parse Save Response", function parseSaveResponse(data) {
     metadata.setValue("code_id", data.metadata.code_id);
     hideCommonModalMessage();
 
