@@ -131,7 +131,11 @@ public class Dissemination extends HttpServlet {
                     output_data = biblio_data;
 
                 } else {
+                    extrasList.add("libraries/clipboard.min");
+                    output_data = biblio_data;
                     output_data.put("is_invalid_code_id", true);
+                    output_data.put("is_tombstone", biblio_data.findPath("is_tombstone").asBoolean(false));
+                    output_data.put("is_restricted", biblio_data.findPath("is_restricted").asBoolean(false));
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
                 }

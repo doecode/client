@@ -1182,20 +1182,93 @@ public class SearchFunctions {
         return return_data;
     }
 
+    private static ObjectNode getTombstoneFormat(ObjectNode biblio_data) {
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        boolean needsSpacing = false;
+
+        // Authors
+        ArrayNode authors_and_contributors = combineAuthorLists((ArrayNode) biblio_data.get("developers"), (ArrayNode) biblio_data.get("contributors"));
+        String author_text = joinWithDelimiters(authors_and_contributors, ", ", ", and ");
+        if (StringUtils.isNotBlank(author_text)) {
+            author_text += (StringUtils.endsWith(author_text, ".") ? "" : ".");
+        }
+        needsSpacing = needsSpacing || StringUtils.isNotBlank(author_text);
+
+        // Release Date
+        String release_date = "";
+        if (StringUtils.isNotBlank(biblio_data.findPath("release_date").asText(""))) {
+            release_date = (needsSpacing ? " " : "")                    + LocalDate.parse(biblio_data.findPath("release_date").asText(""), RELEASE_DATE_FORMAT)                            .format(MLA_DATE_FORMAT);
+        }
+        needsSpacing = needsSpacing || StringUtils.isNotBlank(release_date);
+
+        // Software Title
+        String software_title = "";
+        if (StringUtils.isNotBlank(biblio_data.findPath("software_title").asText(""))) {
+            software_title = (needsSpacing ? " " : "") + biblio_data.findPath("software_title").asText("") + ".";
+        }
+        needsSpacing = needsSpacing || StringUtils.isNotBlank(software_title);
+
+        // Computer Software
+        String computer_software = needsSpacing ? " Computer Software." : "ComputerSoftware.";
+
+        // Sponsor Orgs
+        String sponsor_orgs = "";
+        ArrayNode sponsor_orgs_list = JsonUtils.MAPPER.createArrayNode();
+        for (JsonNode v : (ArrayNode) biblio_data.get("sponsoring_organizations")) {
+            ObjectNode vObj = (ObjectNode) v;
+            sponsor_orgs_list.add(vObj.findPath("organization_name").asText(""));
+        }
+        if (sponsor_orgs_list.size() > 0) {
+            sponsor_orgs = joinWithDelimiters(sponsor_orgs_list, ", ", null);
+            sponsor_orgs = (needsSpacing ? " " : "") + sponsor_orgs                    + (StringUtils.endsWith(sponsor_orgs, ".") ? "" : ".");
+        }
+        needsSpacing = needsSpacing || StringUtils.isNotBlank(sponsor_orgs);
+
+        // DOI
+        String doi = "";
+        if (StringUtils.isNotBlank(biblio_data.findPath("doi").asText(""))) {
+            doi = ((needsSpacing ? " " : "") + "doi:" + biblio_data.findPath("doi").asText("") + ".");
+        }
+
+        return_data.put("show_doi", showDOI(biblio_data.findPath("doi").asText(""), biblio_data.findPath("release_date").asText("")));
+        return_data.put("authorsText", author_text);
+        return_data.put("releaseDate", release_date);
+        return_data.put("softwareTitle", software_title);
+        return_data.put("computer_software", computer_software);
+        return_data.put("sponsorOrgsText", sponsor_orgs);
+        return_data.put("doi", doi);
+        return return_data;
+    }
+
     public static ObjectNode getBiblioData(long code_id) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         ObjectNode biblio_data = JsonUtils.MAPPER.createObjectNode();
+
+        boolean isValidRecord = false;
+        boolean isTombstoneRecord = false;
+        boolean isRestrictedMetadata = false;
 
         // Get the biblio data
         ObjectNode raw_biblio_call = DOECODEUtils.makeGetRequest(Init.backend_api_url + "search/" + code_id);
         if (raw_biblio_call.has("metadata")) {
             biblio_data = (ObjectNode) raw_biblio_call.get("metadata");
-            biblio_data.put("is_valid_record", true);
+            isValidRecord = true;
+            biblio_data.put("is_valid_record", isValidRecord);
+        }
+        else {
+            raw_biblio_call = DOECODEUtils.makeGetRequest(Init.backend_api_url + "search/tombstone/" + code_id);
+            if (raw_biblio_call.has("metadata")) {
+                biblio_data = (ObjectNode) raw_biblio_call.get("metadata");
+                isTombstoneRecord = true;
+                biblio_data.put("is_tombstone_record", isTombstoneRecord);
+
+                isRestrictedMetadata = raw_biblio_call.get("metadata").has("is_restricted_metadata");
+            }  
         }
 
         log.debug(biblio_data.toString());
         // Massage any data that needs it
-        if (biblio_data.findPath("is_valid_record").asBoolean(false)) {
+        if (isValidRecord) {
             ArrayNode meta_tags = JsonUtils.MAPPER.createArrayNode();
             /* Title */
             return_data.put("title", biblio_data.findPath("software_title").asText(""));
@@ -1562,8 +1635,16 @@ public class SearchFunctions {
             }
             return_data.set("author_meta_tag", author_meta_tags);
         }
+        else if (isTombstoneRecord) {
+            return_data.set("doi", biblio_data.get("doi"));
+            if (!isRestrictedMetadata) {
+                return_data.set("tombstone", getTombstoneFormat(biblio_data));
+            }
+        }
 
-        return_data.put("is_valid", biblio_data.findPath("is_valid_record").asBoolean(false));
+        return_data.put("is_valid", isValidRecord);
+        return_data.put("is_tombstone", isTombstoneRecord);
+        return_data.put("is_restricted", isRestrictedMetadata);
 
         log.debug("Biblio data refined: " + return_data.toString());
         return return_data;

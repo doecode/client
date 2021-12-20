@@ -178,12 +178,18 @@
 </style>
 <div class="row not-so-wide-row">
     <div class="col-xs-12">
-        {{#if is_invalid_code_id}}
-        <div class='center-text biblio-title has-error'>
-            <br />
-            <br />
-            <label id='biblio-code-id-not-found' class='control-label normal-weight'>CODE ID Not Found</label>
-        </div>
+        {{#if is_invalid_code_id}}        
+            {{#if is_tombstone}}
+                <!--Tombstone Information-->
+                {{> tombstone}}
+            {{/if}}
+            {{#unless is_tombstone}}
+                <div class='center-text biblio-title has-error'>
+                    <br />
+                    <br />
+                    <label id='biblio-code-id-not-found' class='control-label normal-weight'>CODE ID Not Found</label>
+                </div>
+            {{/unless}}
         {{/if}}
 
         {{#unless is_invalid_code_id}}

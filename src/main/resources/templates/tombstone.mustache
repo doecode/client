@@ -1,0 +1,134 @@
+<style type='text/css'>
+     .tombstone-container {
+	 margin-left: auto;
+	 margin-right: auto;
+	 display: flex;
+     }
+
+     #tombstone-container-left {
+	 width: 314px;
+	 padding-right:10px;
+     }
+     #tombstone-container-center {
+	 width: 314px;
+	 padding-left:10px;
+	 padding-right:10px;
+     }
+     #tombstone-container-right {
+	 width: 314px;
+	 padding-left:10px;
+     }
+     #tombstone-header-container {
+	 padding-left: 25%;
+     }
+     @media only screen and (max-width:1040px) and (min-width: 320px) {
+	 #tombstone-pages-img {
+	     width: 250px;
+	 }
+	 #tombstone-dde-img {
+	     width: 250px;
+	 }
+	 #tombstone-doecode-img {
+	     width: 250px;
+	 }
+	 .tombstone-container {
+	     display: block;
+	 }
+     }
+     @media only screen and (max-width:1520px) and (min-width:1200px) {
+	 #tombstone-header-container {
+	     padding-left: 15%;
+	 }
+     }
+     @media only screen and (max-width:1199px) and (min-width: 992px) {
+	 #tombstone-pages-img {
+	     width: 250px;
+	 }
+	 #tombstone-dde-img {
+	     width: 250px;
+	 }
+	 #tombstone-doecode-img {
+	     width: 250px;
+	 }
+     }
+
+</style>
+<div class="row not-so-wide-row">
+     <div class="col-lg-3 col-md-1">  
+
+     </div>
+     <div class="col-lg-6 col-md-10 col-xs-12 static-content">
+	  <h1 class="static-content-title">DOI Without Content</h1>
+	  <br>
+        The software project, with identifier <a target='_blank' rel="noopener noreferrer" href="https://doi.org/{{doi}}">https://doi.org/{{doi}}</a>{{#unless is_restricted}} and bibliographic citation below{{/unless}}, is no longer available nor attached to any content. If you have questions, or feel you’ve received this message in error, please contact <a title='Email PIDs@osti.gov' href='mailto:PIDs@osti.gov'>PIDs@osti.gov</a>.
+	  <br/>
+	  <br/>
+        {{#unless is_restricted}}
+            <div class='row'>
+                <div id="tomb-clip" class='center-text col-xs-12 citation-format-div'>{{> search/export_formats/tomb}}</div>
+            </div>
+            <br/>
+            <br/>
+        {{/unless}}
+	  Please visit any of the search tools below to find Department of Energy R&D results and more: 
+	  <br/>
+	  <br/>
+     </div>
+     <div class="col-lg-3 col-md-1">
+     </div>
+
+     <div class="no-col-padding-left col-xs-12">
+      <h1 class="center-text static-content-title">Primary Search Tool</h1>
+      <br>
+	  <div class="static-content tombstone-container center-text">
+	       <div class="tombstone-container">
+		    <div class="center-text" id="tombstone-container-center">
+			 <div>
+                <a target='_blank' rel="noopener noreferrer" href="https://www.osti.gov/">
+                    <img title="OSTI.GOV" alt="img" id="tombstone-osti-img" src="/${app_name}/images/tombstone/OSTI250_icon_0_0-min_0.png">
+                </a>
+			 </div>
+             <br>
+             Science, technology, and engineering research information funded by DOE
+		    </div>
+	       </div>
+	  </div>
+        <br/>
+        <br/>
+      <h1 class="center-text static-content-title">Specialized Search Tools for Specific Resources</h1>
+      <br>
+	  <div class="static-content tombstone-container center-text">
+	       <div class="tombstone-container">
+		    <div class="center-text" id="tombstone-container-left">
+			 <div>
+			      <a target='_blank' rel="noopener noreferrer" href="https://www.osti.gov/pages">
+				   <img title="DOE Public Access Gateway" alt="img" id="tombstone-pages-img" src="/${app_name}/images/tombstone/PAGES250px_2019icon-min.png">
+			      </a>
+			 </div>
+             <br>
+             Scholarly scientific publications resulting from DOE-funded research
+		    </div>
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    <div class="center-text" id="tombstone-container-center">
+			 <div>
+                <a target='_blank' rel="noopener noreferrer" href="https://www.osti.gov/dataexplorer">
+                    <img title="DOE Data Explorer" alt="img" id="tombstone-dde-img" src="/${app_name}/images/tombstone/DDEnew_250px_min.png">
+                </a>
+			 </div>
+             <br>
+             Scientific research data resulting from DOE-funded research
+		    </div>
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    <div class="center-text" id="tombstone-container-right">
+			 <div>
+                <a target='_blank' rel="noopener noreferrer" href="https://www.osti.gov/doecode">
+                    <img title="DOE CODE" alt="img" id="tombstone-doecode-img" src="/${app_name}/images/tombstone/DOEcode250_icon-min_0.png">
+                </a>
+			 </div>
+             <br>
+             Open source, submission and search tool for DOE-funded software
+		    </div>
+	       </div>
+	  </div>
+     </div>
+</div>
