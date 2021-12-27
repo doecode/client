@@ -111,7 +111,7 @@
 						<div class="row">
 							<div class="col-xs-12" style="border-top: 1px solid #ddd; padding-top: 10px;">
                                 {{#if should_display_admin_only}}
-                                <label class='control-label' for='project-is-migration'>Is this a migration record? (Optional Field)</label>{{> tooltips/MigrationRecord}}
+                                <label class='control-label req_of' for='project-is-migration'>Is this a migration record?</label>{{> tooltips/MigrationRecord}}
                                 <br />
                                 <input type='checkbox' id='project-is-migration' class='pure-input1' checked title='Migration Record' />
                                 <br /><br />
@@ -145,7 +145,7 @@
 						<div class="row" id="cert-zone">
                             <br />
 							<div class="col-xs-12" style="border-top: 1px solid #ddd; padding-top: 10px;">
-                                <label class='control-label' for='file-is-certified'>I certify that this software has undergone all appropriate reviews for sensitivity and export control by the originating site and has been deemed secure. <span class="error-color">(Required Field)</span></label>
+                                <label class='control-label req req_rf' for='file-is-certified'>I certify that this software has undergone all appropriate reviews for sensitivity and export control by the originating site and has been deemed secure.</label>
                                 <br />
                                 <input type='checkbox' id='file-is-certified' class='pure-input1' checked title='File Certification' />
                                 <br /><br />

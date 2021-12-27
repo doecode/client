@@ -1730,7 +1730,16 @@ mobx.autorun("Accession Number", function () {
 });
 
 mobx.autorun("Is Migration", function () {
-    $("#project-is-migration").prop('checked', metadata.getValue("is_migration"));
+    var isMig = metadata.getValue("is_migration")
+    $("#project-is-migration").prop('checked',isMig);
+
+    var migLabel = $("label[for='project-is-migration']");
+    if (isMig) {
+        migLabel.addClass("success-color");
+    }
+    else {
+        migLabel.removeClass("success-color");
+    }
 
     //mobx.whyRun();
 });
@@ -1747,7 +1756,16 @@ mobx.autorun("File Upload", function () {
 });
 
 mobx.autorun("Is Certified", function () {
-    $("#file-is-certified").prop('checked', metadata.getValue("is_file_certified"));
+    var isCert = metadata.getValue("is_file_certified");
+    $("#file-is-certified").prop('checked',isCert);
+
+    var certLabel = $("label[for='file-is-certified']");
+    if (isCert) {
+        certLabel.removeClass("req req_rf").addClass("success-color");
+    }
+    else {
+        certLabel.removeClass("success-color").addClass("req req_rf");
+    }
 
     //mobx.whyRun();
 });
