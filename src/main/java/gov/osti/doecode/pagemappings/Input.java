@@ -114,7 +114,7 @@ public class Input extends HttpServlet {
                 output_data.put("page_message", "Editing Software Project #" + code_id);
                 output_data.put("code_id", code_id);
             } else {
-                output_data.put("page_message", "Submit a New Software Project");
+                output_data.put("page_message", "Announce a New Software Project");
             }
 
             output_data.set("access_limitations_list", DOECODEServletContextListener.getJsonList(DOECODEJson.ACCESS_LIMITATIONS_KEY));
