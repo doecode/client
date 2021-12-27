@@ -106,7 +106,7 @@ public class Input extends HttpServlet {
             cssFilesList.add("Responsive-2.2.3/css/responsive.dataTables.min");
             cssFilesList.add("RowReorder-1.2.6/css/rowReorder.dataTables.min");
 
-            page_title = "Announce";
+            page_title = "DOE CODE: Announce";
             template = TemplateUtils.TEMPLATE_INPUT_FORM;
             output_data.put("page", "announce");
             output_data.put("page_req_id", "announ");
@@ -134,7 +134,7 @@ public class Input extends HttpServlet {
             cssFilesList.add("Responsive-2.2.3/css/responsive.dataTables.min");
             cssFilesList.add("RowReorder-1.2.6/css/rowReorder.dataTables.min");
 
-            page_title = "Approve";
+            page_title = "DOE CODE: Approve";
             template = TemplateUtils.TEMPLATE_INPUT_FORM;
             output_data.put("page", "approve");
             output_data.put("page_req_id", "announ");
