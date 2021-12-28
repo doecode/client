@@ -74,6 +74,7 @@ public class DisseminationServlet extends HttpServlet {
                     }
                     os.flush();
                     os.close();
+                    input.close();
                     break;
             }
 
