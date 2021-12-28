@@ -2894,6 +2894,11 @@ $(document).ready(mobx.action("Document Ready", function () {
         $(toggle_arrow).removeClass('fa-chevron-right');
         $(toggle_arrow).addClass('fa-chevron-down');
         $(toggle_arrow).attr('title', 'Close');
+
+        var heading = $(this).prev();
+        if (heading.attr("id") != "heading-repository-information") {
+            heading[0].scrollIntoView();
+        }
     });
     //For when the input form collapse items are hidden
     $(".input-panel-collapse").on('hide.bs.collapse', function () {
