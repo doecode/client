@@ -571,7 +571,7 @@ var setRequired = function (label, is_required, exclude_parenthetical_text) {
 
 var inputChange = mobx.action("Input Change", function (event) {
     var value = $(this).val();
-    if ((event.data.field == "release_date" || event.data.field == "contract_start_date" || event.data.field == "sb_release_date" || event.data.field == "ouo_release_date") && value) {
+    if ((event.data.field == "release_date" || event.data.field == "ouo_release_date") && value) {
         value = moment(value, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
     } else if ((['programming_languages', 'licenses', 'access_limitations',
         'affiliations', 'country_of_origin', 'project_keywords', 'organization_name',
@@ -603,7 +603,7 @@ var updateInputStyle = function (store, field, label, input, exclude_parenthetic
     updateLabelStyle(store, field, label, exclude_parenthetical_text);
 
     var value = store.getValue(field);
-    if ((field == "release_date" || field == "contract_start_date" || field == "sb_release_date" || field == "ouo_release_date") && value)
+    if ((field == "release_date" || field == "ouo_release_date") && value)
         value = moment(value, BACK_END_DATE_FORMAT).format(FRONT_END_DATE_FORMAT);
 
     $("#" + input).val(value);
@@ -1396,12 +1396,6 @@ mobx.autorun("Access Limitation(s)", function () {
     updateSelectStyle(metadata, "access_limitations", "access-limitations-lbl", "access-limitations");
 
     var accessLims = metadata.getValue("access_limitations");
-    if (accessLims.includes("SBIR") || accessLims.includes("STTR")) {
-        $("#small-business-zone").show();
-    }
-    else {
-        $("#small-business-zone").hide();
-    }
     if (accessLims.includes("OUO")) {
         $("#official-use-only-zone").show();
     }
@@ -1427,78 +1421,6 @@ mobx.autorun("Access Limitation(s)", function () {
     else {
         $("#unl-notice").hide();
     }
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Phase", function () {
-    updateSelectStyle(metadata, "phase", "phase-lbl", "phase");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Previous Contract Number", function () {
-    updateInputStyle(metadata, "previous_contract_number", "previous-contract-number-lbl", "previous-contract-number");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Contract Start Date", function () {
-    updateInputStyle(metadata, "contract_start_date", "contract-start-date-lbl", "contract-start-date");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Small Business Release Date", function () {
-    updateInputStyle(metadata, "sb_release_date", "sb-release-date-lbl", "sb-release-date");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Business Official Name", function () {
-    updateInputStyle(metadata, "bo_name", "bo-name-lbl", "bo-name");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Business Official Email", function () {
-    updateInputStyle(metadata, "bo_email", "bo-email-lbl", "bo-email");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Business Official Phone", function () {
-    updateInputStyle(metadata, "bo_phone", "bo-phone-lbl", "bo-phone");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Business Official Organization", function () {
-    updateInputStyle(metadata, "bo_org", "bo-org-lbl", "bo-org");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Principal Investigator Name", function () {
-    updateInputStyle(metadata, "pi_name", "pi-name-lbl", "pi-name");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Principal Investigator Email", function () {
-    updateInputStyle(metadata, "pi_email", "pi-email-lbl", "pi-email");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Principal Investigator Phone", function () {
-    updateInputStyle(metadata, "pi_phone", "pi-phone-lbl", "pi-phone");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Principal Investigator Organization", function () {
-    updateInputStyle(metadata, "pi_org", "pi-org-lbl", "pi-org");
 
     //mobx.whyRun();
 });
@@ -2749,7 +2671,7 @@ $(document).ready(mobx.action("Document Ready", function () {
                     cnt++;
                     var value = $(this).val();
 
-                    if (value != 'UNL' && value != 'SBIR' && value != 'STTR') {
+                    if (value != 'UNL') {
                         $('#access-limitations option[value="'+ value +'"]').prop('selected', false);
                     }
                 });
@@ -2762,7 +2684,7 @@ $(document).ready(mobx.action("Document Ready", function () {
                     cnt++;
                     var value = $(this).val();
 
-                    if (value == 'UNL' || value == 'SBIR' || value == 'STTR') {
+                    if (value == 'UNL') {
                         unl++;
                     }
                 });
@@ -2782,8 +2704,6 @@ $(document).ready(mobx.action("Document Ready", function () {
         var chosenElement = $(e.currentTarget.nextSibling);
 
         var isUNL = $('#access-limitations option[value="UNL"]').is(':selected');
-        var isSBIR = $('#access-limitations option[value="SBIR"]').is(':selected');
-        var isSTTR = $('#access-limitations option[value="STTR"]').is(':selected');
         var isOUO = $('#access-limitations option[value="OUO"]').is(':selected');
 
         chosenElement.find('li.active-result').each(function(index) {
@@ -2799,14 +2719,10 @@ $(document).ready(mobx.action("Document Ready", function () {
             var multiCode = codeMatch[2] == ';';
             var isAllowed = true;
 
-            // if UNL selected, only SBIR/STTR allowed
+            // if UNL selected
             if ((isUNL && code == 'OUO')
             // if OUO selected, only UNL not allowed
-            || (isOUO && code == 'UNL')
-            // if SBIR selected, STTR not allowed
-            || (isSBIR && code == 'STTR')
-            // if STTR selected, SBIR not allowed
-            || (isSTTR && code == 'SBIR')) {
+            || (isOUO && code == 'UNL')) {
                 isAllowed = false;
             }
 
@@ -2979,54 +2895,6 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#access-limitations').on('change', {
         store: metadata,
         field: "access_limitations"
-    }, inputChange);
-    $('#phase').on('change', {
-        store: metadata,
-        field: "phase"
-    }, inputChange);
-    $('#previous-contract-number').on('change', {
-        store: metadata,
-        field: "previous_contract_number"
-    }, inputChange);
-    $('#contract-start-date').on('change', {
-        store: metadata,
-        field: "contract_start_date"
-    }, inputChange);
-    $('#sb-release-date').on('change', {
-        store: metadata,
-        field: "sb_release_date"
-    }, inputChange);
-    $('#bo-name').on('change', {
-        store: metadata,
-        field: "bo_name"
-    }, inputChange);
-    $('#bo-email').on('change', {
-        store: metadata,
-        field: "bo_email"
-    }, inputChange);
-    $('#bo-phone').on('change', {
-        store: metadata,
-        field: "bo_phone"
-    }, inputChange);
-    $('#bo-org').on('change', {
-        store: metadata,
-        field: "bo_org"
-    }, inputChange);
-    $('#pi-name').on('change', {
-        store: metadata,
-        field: "pi_name"
-    }, inputChange);
-    $('#pi-email').on('change', {
-        store: metadata,
-        field: "pi_email"
-    }, inputChange);
-    $('#pi-phone').on('change', {
-        store: metadata,
-        field: "pi_phone"
-    }, inputChange);
-    $('#pi-org').on('change', {
-        store: metadata,
-        field: "pi_org"
     }, inputChange);
     $('#exemption-number').on('change', {
         store: metadata,

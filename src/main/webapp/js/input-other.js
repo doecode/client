@@ -129,15 +129,6 @@ var parseConfirmPageData = function (data) {
         });
     }
 
-    //Phases
-    if (data.phases && data.phases.length > 0) {
-        var phases_list = makeDelimitedList(data.phases, ', ');
-        metadata_list.push({
-            title: 'Phases',
-            content: phases_list
-        });
-    }
-
     //Protections
     if (data.protections && data.protections.length > 0) {
         var protections_list = makeDelimitedList(data.protections, ', ');

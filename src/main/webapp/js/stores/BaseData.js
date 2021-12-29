@@ -50,22 +50,6 @@ var BaseData = function () {
 
             if (field === 'access_limitations') {
                 if (data != null) {
-                    if (!(data.includes("SBIR") || data.includes("STTR"))) {
-                        // blank out SBIR/STTR data
-                        this.setValue("phase", null);
-                        this.setValue("previous_contract_number", null);
-                        this.setValue("contract_start_date", null);
-                        this.setValue("sb_release_date", null);
-                        this.setValue("bo_name", null);
-                        this.setValue("bo_email", null);
-                        this.setValue("bo_phone", null);
-                        this.setValue("bo_org", null);
-                        this.setValue("pi_name", null);
-                        this.setValue("pi_email", null);
-                        this.setValue("pi_phone", null);
-                        this.setValue("pi_org", null);
-                    }
-
                     if (!(data.includes("OUO"))) {
                         // blank out OUO data
                         this.setValue("exemption_number", null);
@@ -82,46 +66,6 @@ var BaseData = function () {
                         // blank out PDOUO data
                         this.setValue("program_office", null);
                         this.setValue("protection_reason", null);
-                    }
-
-                    // set reqs
-                    var schemaSbPhase = this.infoSchema["phase"];
-                    var schemaSbContractStartDate = this.infoSchema["contract_start_date"];
-                    var schemaSbReleaseDate = this.infoSchema["sb_release_date"];
-                    var schemaSbBoName = this.infoSchema["bo_name"];
-                    var schemaSbBoEmail = this.infoSchema["bo_email"];
-                    var schemaSbBoPhone = this.infoSchema["bo_phone"];
-                    var schemaSbBoOrg = this.infoSchema["bo_org"];
-                    var schemaSbPiName = this.infoSchema["pi_name"];
-                    var schemaSbPiEmail = this.infoSchema["pi_email"];
-                    var schemaSbPiPhone = this.infoSchema["pi_phone"];
-                    var schemaSbPiOrg = this.infoSchema["pi_org"];
-
-                    if (data.includes("SBIR") || data.includes("STTR")) {
-                        schemaSbPhase.required = "sub";
-                        schemaSbContractStartDate.required = "sub";
-                        schemaSbReleaseDate.required = "sub";
-                        schemaSbBoName.required = "sub";
-                        schemaSbBoEmail.required = "sub";
-                        schemaSbBoPhone.required = "sub";
-                        schemaSbBoOrg.required = "sub";
-                        schemaSbPiName.required = "sub";
-                        schemaSbPiEmail.required = "sub";
-                        schemaSbPiPhone.required = "sub";
-                        schemaSbPiOrg.required = "sub";
-                    }
-                    else {
-                        schemaSbPhase.required = "";
-                        schemaSbContractStartDate.required = "";
-                        schemaSbReleaseDate.required = "";
-                        schemaSbBoName.required = "";
-                        schemaSbBoEmail.required = "";
-                        schemaSbBoPhone.required = "";
-                        schemaSbBoOrg.required = "";
-                        schemaSbPiName.required = "";
-                        schemaSbPiEmail.required = "";
-                        schemaSbPiPhone.required = "";
-                        schemaSbPiOrg.required = "";
                     }
                     
                     var schemaOuoExempt = this.infoSchema["exemption_number"];
@@ -150,10 +94,6 @@ var BaseData = function () {
                         schemaOuoProgramOffice.required = "";
                     }
                 }
-            }
-
-            if (field === 'contract_start_date') {
-                this.setValue("sb_release_date", data);
             }
 
             if (field === 'protection') {

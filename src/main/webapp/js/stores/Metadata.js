@@ -75,7 +75,7 @@ var Metadata = function (_BaseData) {
       for (var field in data) {
 
         // if grouped field, deserialize into metadata
-        if (field === 'official_use_only' || field === 'small_business') {
+        if (field === 'official_use_only') {
             this.deserializeData(data[field]);
         }
 
@@ -90,8 +90,6 @@ var Metadata = function (_BaseData) {
           }
 
           if (field === 'release_date' && data[field]) data[field] = moment(data[field], BACK_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
-          if (field === 'contract_start_date' && data[field]) data[field] = moment(data[field], BACK_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
-          if (field === 'sb_release_date' && data[field]) data[field] = moment(data[field], BACK_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
           if (field === 'ouo_release_date' && data[field]) data[field] = moment(data[field], BACK_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
 
           if (field === 'sponsoring_organizations') this.deserializeSponsoringOrganization(data);
