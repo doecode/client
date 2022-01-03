@@ -982,14 +982,30 @@ public class SearchFunctions {
         if (StringUtils.isNotBlank(doi)) {
             doi = ((needsSpacing ? " " : "") + "https://doi.org/" + doi + ".");
         }
+        boolean showDoi = showDOI(biblio_data.findPath("doi").asText(""), biblio_data.findPath("release_date").asText(""));
 
-        return_data.put("show_doi", showDOI(doi, biblio_data.findPath("release_date").asText("")));
+        // Availability
+        String availability = "";
+        boolean isLimited = biblio_data.findPath("is_limited").asBoolean(false);
+        if (isLimited) {
+            availability = (needsSpacing ? " " : "") + "Availability ";
+            if (StringUtils.isNotBlank(biblio_data.findPath("landing_page").asText(""))) {
+                availability += (biblio_data.findPath("landing_page").asText("") + ".");
+            }
+            else if (StringUtils.isNotBlank(biblio_data.findPath("landing_contact").asText(""))) {
+                availability += (biblio_data.findPath("landing_contact").asText("") + ".");
+            }
+        }
+
+        return_data.put("show_doi", showDoi);
         return_data.put("authors", author_text);
         return_data.put("release_date", release_date);
         return_data.put("software_title", software_title);
         return_data.put("computer_software", computer_software);
         return_data.put("url", url);
         return_data.put("doi", doi);
+        return_data.put("show_availability", isLimited && !showDoi);
+        return_data.put("availability", availability);
 
         return return_data;
     }
@@ -1019,11 +1035,27 @@ public class SearchFunctions {
         String description = "{" + biblio_data.findPath("description").asText("") + "}";
 
         // DOI
-        if (StringUtils.isNotBlank(biblio_data.findPath("doi").asText("")) && StringUtils.isNotBlank(biblio_data.findPath("release_date").asText(""))) {
+        boolean showDoi = showDOI(biblio_data.findPath("doi").asText(""), biblio_data.findPath("release_date").asText(""));
+        boolean isLimited = biblio_data.findPath("is_limited").asBoolean(false);
+        if (showDoi) {
             String doi = biblio_data.findPath("doi").asText("");
             optional_data.add(getOptionalBibtexObj("doi", "{" + doi.replaceAll("_", "{_}") + "}"));
             optional_data.add(getOptionalBibtexObj("url", "{https://doi.org/" + doi + "}"));
             optional_data.add(getOptionalBibtexObj("howpublished", "{[Computer Software] \\url{https://doi.org/" + doi + "}}"));
+        }
+
+        // Availability
+        else if (isLimited) {
+            String availability = "";
+            if (StringUtils.isNotBlank(biblio_data.findPath("landing_page").asText(""))) {
+                availability += (biblio_data.findPath("landing_page").asText("") + ".");
+            }
+            else if (StringUtils.isNotBlank(biblio_data.findPath("landing_contact").asText(""))) {
+                availability += (biblio_data.findPath("landing_contact").asText("") + ".");
+            }
+
+            optional_data.add(getOptionalBibtexObj("availability", "{" + availability.replaceAll("_", "{_}") + "}"));
+            optional_data.add(getOptionalBibtexObj("howpublished", "{[Computer Software]}"));
         }
 
         // Release Date
@@ -1102,13 +1134,29 @@ public class SearchFunctions {
         if (StringUtils.isNotBlank(biblio_data.findPath("doi").asText(""))) {
             doi = ((needsSpacing ? " " : "") + "https://doi.org/" + biblio_data.findPath("doi").asText("") + ".");
         }
+        boolean showDoi = showDOI(biblio_data.findPath("doi").asText(""), biblio_data.findPath("release_date").asText(""));
 
-        return_data.put("show_doi",                showDOI(biblio_data.findPath("doi").asText(""), biblio_data.findPath("release_date").asText("")));
+        // Availability
+        String availability = "";
+        boolean isLimited = biblio_data.findPath("is_limited").asBoolean(false);
+        if (isLimited) {
+            availability = (needsSpacing ? " " : "") + "Availability ";
+            if (StringUtils.isNotBlank(biblio_data.findPath("landing_page").asText(""))) {
+                availability += (biblio_data.findPath("landing_page").asText("") + ".");
+            }
+            else if (StringUtils.isNotBlank(biblio_data.findPath("landing_contact").asText(""))) {
+                availability += (biblio_data.findPath("landing_contact").asText("") + ".");
+            }
+        }
+
+        return_data.put("show_doi", showDoi);
         return_data.put("authors", author_text);
         return_data.put("software_title", software_title);
         return_data.put("release_date", release_date);
         return_data.put("url", url);
         return_data.put("doi", doi);
+        return_data.put("show_availability", isLimited && !showDoi);
+        return_data.put("availability", availability);
         return return_data;
     }
 
@@ -1163,14 +1211,29 @@ public class SearchFunctions {
 
         // Web
         String web = needsSpacing ? "Web." : " Web.";
+        needsSpacing = needsSpacing || StringUtils.isNotBlank(web);
 
         // DOI
         String doi = "";
         if (StringUtils.isNotBlank(biblio_data.findPath("doi").asText(""))) {
             doi = ((needsSpacing ? " " : "") + "doi:" + biblio_data.findPath("doi").asText("") + ".");
         }
+        boolean showDoi = showDOI(biblio_data.findPath("doi").asText(""), biblio_data.findPath("release_date").asText(""));
 
-        return_data.put("show_doi", showDOI(biblio_data.findPath("doi").asText(""), biblio_data.findPath("release_date").asText("")));
+        // Availability
+        String availability = "";
+        boolean isLimited = biblio_data.findPath("is_limited").asBoolean(false);
+        if (isLimited) {
+            availability = (needsSpacing ? " " : "") + "Availability ";
+            if (StringUtils.isNotBlank(biblio_data.findPath("landing_page").asText(""))) {
+                availability += (biblio_data.findPath("landing_page").asText("") + ".");
+            }
+            else if (StringUtils.isNotBlank(biblio_data.findPath("landing_contact").asText(""))) {
+                availability += (biblio_data.findPath("landing_contact").asText("") + ".");
+            }
+        }
+
+        return_data.put("show_doi", showDoi);
         return_data.put("authorsText", author_text);
         return_data.put("softwareTitle", software_title);
         return_data.put("computer_software", computer_software);
@@ -1179,6 +1242,8 @@ public class SearchFunctions {
         return_data.put("releaseDate", release_date);
         return_data.put("web", web);
         return_data.put("doi", doi);
+        return_data.put("show_availability", isLimited && !showDoi);
+        return_data.put("availability", availability);
         return return_data;
     }
 
