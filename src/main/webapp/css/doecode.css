@@ -1165,7 +1165,8 @@ div.Select>div.Select-control input {
 }
 
 .table-msg,
-.upload-msg {
+.upload-msg,
+.notice-msg {
     font-style: italic;
 }
 

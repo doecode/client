@@ -167,6 +167,30 @@ var BaseData = function () {
                 }
             }
 
+            if (field === 'project_type_landing') {
+                var schemaLanding = this.infoSchema["landing_page"];
+                var schemaLandingContact = this.infoSchema["landing_contact"]; 
+                
+                if (data === false) {
+                    schemaLanding.required = "";
+                    schemaLanding.panel = "";
+                    schemaLandingContact.required = "sub";
+                    schemaLandingContact.panel = "Repository Information";
+                }
+                else if (data === true) {
+                    schemaLanding.required = "sub";
+                    schemaLanding.panel = "Repository Information";
+                    schemaLandingContact.required = "";
+                    schemaLandingContact.panel = "";
+                }
+                else {
+                    schemaLanding.required = "";
+                    schemaLanding.panel = "";
+                    schemaLandingContact.required = "";
+                    schemaLandingContact.panel = "";
+                }
+            }
+
             if (field === 'project_type') {
                 var schemaRepo = this.infoSchema["repository_link"];
                 var schemaLanding = this.infoSchema["landing_page"];
@@ -236,10 +260,6 @@ var BaseData = function () {
                     if (data == 'ON') {
                         schemaLanding.required = "sub";
                         schemaLanding.panel = 'Repository Information';
-                    }
-                    else {
-                        schemaLanding.required = "";
-                        schemaLanding.panel = "";
                     }
                     schemaFile.required = this.page == 'announce' && isMigration === false ? "announ" : "";
                     schemaFile.panel = 'Supplemental Product Information';
