@@ -1334,6 +1334,13 @@ mobx.autorun("Access Limitation(s)", function () {
     else {
         $("#official-use-only-pdouo-zone").hide();
     }
+    var hasDoi = metadata.isCompleted("doi");
+    if (!hasDoi && !form.is_limited) {
+        $("#unl-notice").show();
+    }
+    else {
+        $("#unl-notice").hide();
+    }
 
     //mobx.whyRun();
 });
