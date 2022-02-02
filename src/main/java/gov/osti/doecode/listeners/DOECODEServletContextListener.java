@@ -42,6 +42,9 @@ public class DOECODEServletContextListener implements ServletContextListener {
                case DOECODEJson.LICENSE_KEY:
                     return_list = doecode_json_lists.getLicenseOptionsList();
                     break;
+               case DOECODEJson.ACCESS_LIMITATIONS_KEY:
+                    return_list = doecode_json_lists.getAccessLimitationsList();
+                    break;
                case DOECODEJson.RESEARCH_KEY:
                     return_list = doecode_json_lists.getResearchOrgList();
                     break;

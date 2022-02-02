@@ -1,7 +1,7 @@
 var MetadataStore = function MetadataStore() {};
 
 var repo_fields = ["project_type", "repository_link", "landing_page", "landing_contact"];
-var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "license_closedsource_available", "license_closedsource_contactinfo", "licenses", "proprietary_url","license_contact_email"];
+var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "license_closedsource_available", "license_closedsource_contactinfo", "licenses", "access_limitations", "proprietary_url","license_contact_email"];
 var developers_fields = ["developers"];
 var doi_fields = ["doi", "doi_infix", "release_date"];
 var supplemental_fields = ["acronym", "country_of_origin", "keywords", "project_keywords", "site_accession_number", "other_special_requirements", "is_migration", "file_name", "container_name"];
@@ -218,6 +218,16 @@ var _metadataInfoSchema = mobx.observable({
     "licenses": {
         required: "sub",
         label: "Licenses",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: ''
+    },
+    "access_limitations": {
+        required: "sub",
+        label: "Access Limitations",
         completed: false,
         hasError: false,
         ever_completed: false,

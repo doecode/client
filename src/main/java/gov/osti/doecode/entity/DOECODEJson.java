@@ -21,6 +21,7 @@ public class DOECODEJson {
     public static final String CONTRIBUTOR_KEY = "contributor";
     public static final String COUNTRIES_KEY = "countries";
     public static final String LICENSE_KEY = "license";
+    public static final String ACCESS_LIMITATIONS_KEY = "access_limitations";
     public static final String RESEARCH_KEY = "research";
     public static final String SEARCH_SORT_KEY = "search";
     public static final String SOFTWARE_TYPE_KEY = "software";
@@ -36,6 +37,7 @@ public class DOECODEJson {
     private ArrayNode contributor_types;
     private ArrayNode countries_list;
     private ArrayNode license_options_list;
+    private ArrayNode access_limitations_list;
     private ArrayNode research_org_list;
     private ArrayNode search_sort_options_list;
     private ArrayNode software_type_list;
@@ -55,6 +57,7 @@ public class DOECODEJson {
         this.contributor_types = JsonUtils.MAPPER.createArrayNode();
         this.countries_list = JsonUtils.MAPPER.createArrayNode();
         this.license_options_list = JsonUtils.MAPPER.createArrayNode();
+        this.access_limitations_list = JsonUtils.MAPPER.createArrayNode();
         this.research_org_list = JsonUtils.MAPPER.createArrayNode();
         this.search_sort_options_list = JsonUtils.MAPPER.createArrayNode();
         this.software_type_list = JsonUtils.MAPPER.createArrayNode();
@@ -125,6 +128,17 @@ public class DOECODEJson {
         this.license_options_list.add(
                 makeListObj("Mozilla Public License 2.0", "Mozilla Public License 2.0", "Mozilla Public License 2.0"));
         this.license_options_list.add(makeListObj("The Unlicense", "The Unlicense", "The Unlicense"));
+        // Access Limitations
+        this.access_limitations_list.add(makeListObj("(UNL) Unlimited", "UNL", "Unlimited"));
+        this.access_limitations_list.add(makeListObj("(SBIR) Small Business Innovation Research", "SBIR", "Small Business Innovation Research"));
+        this.access_limitations_list.add(makeListObj("(STTR) Small Business Technology Transfer Research", "STTR", "Small Business Technology Transfer Research"));
+        this.access_limitations_list.add(makeListObj("(OUO) Official Use Only", "OUO", "Official Use Only"));
+        this.access_limitations_list.add(makeListObj("(OUO; ECI) Export Controlled Information", "ECI", "Export Controlled Information"));
+        this.access_limitations_list.add(makeListObj("(OUO; PAT) Patent Pending", "PAT", "Patent Pending"));
+        this.access_limitations_list.add(makeListObj("(OUO; PDOUO) Program-Determined Official Use Only", "PDOUO", "Program-Determined Official Use Only"));
+        this.access_limitations_list.add(makeListObj("(OUO; PROP) Limited Rights Data", "PROP", "Limited Rights Data"));
+        this.access_limitations_list.add(makeListObj("(OUO; PROT) Protected Data CRADA/EPACT/OTHER", "PROT", "Protected Data CRADA/EPACT/OTHER"));
+        this.access_limitations_list.add(makeListObj("(OUO; SSI) Security Sensitive Information", "SSI", "Security Sensitive Information"));
         // Software Type
         this.software_type_list.add(makeListObj("Business", "B", "Business"));
         this.software_type_list.add(makeListObj("Scientific", "S", "Scientific"));
@@ -326,6 +340,10 @@ public class DOECODEJson {
 
     public ArrayNode getLicenseOptionsList() {
         return this.license_options_list;
+    }
+
+    public ArrayNode getAccessLimitationsList() {
+        return this.access_limitations_list;
     }
 
     public ArrayNode getResearchOrgList() {

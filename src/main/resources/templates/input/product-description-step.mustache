@@ -136,6 +136,26 @@
 						</div>
 					</div>
 					<br />
+					<div>
+						<div class="row">
+							<div class="col-xs-12">
+								<label id='access-limitations-lbl' for='access-limitations' class='control-label'>[from data store]</label>{{> tooltips/Limitation}}
+							</div>
+							<div class="col-xs-8" id="licence-select-zone">
+								<select class='pure-input-1 doecode-chosen-select' title='Access Limitations' id='access-limitations' data-allowcustom="false" data-placeholder='Select your access limitation(s)' multiple>
+									{{#each access_limitations_list}}
+										<option title='{{title}}' value='{{value}}'>{{label}}</option>
+									{{/each}}
+								</select>
+								<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+								<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+							</div>
+							<div class="col-xs-12">
+								<label id="description-lbl-error" class="control-label errorCheck">Problem</label>
+							</div>
+						</div>
+					</div>
+					<br />
 					<div class="row">
 						<div class="col-xs-12">
 							<label id='programming-languages-lbl' for='programming-languages' class='control-label'>[from data store]</label>{{> tooltips/ProgrammingLanguage}}

@@ -119,6 +119,16 @@ var parseConfirmPageData = function (data) {
             content: licenses_list
         });
     }
+
+    //Access Limitations
+    if (data.access_limitations && data.access_limitations.length > 0) {
+        var access_limitations_list = makeDelimitedList(data.access_limitations, ', ');
+        metadata_list.push({
+            title: 'Access Limitations',
+            content: access_limitations_list
+        });
+    }
+
     //Site accession number
     if (data.site_accession_number) {
         metadata_list.push({

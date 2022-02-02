@@ -40,6 +40,8 @@ form.closed_licensecontact = "";
 form.closedsource_available = null;
 form.closedsource_contactinfo = null;
 
+form.previous_ouo = false;
+
 var datatableCallback = function (settings) {
     var api = this.api();
     var data = api.rows({
@@ -294,6 +296,7 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
             metadata.setValue("project_type", null);
             metadata.setValue("project_type_public", null);
             metadata.setValue("project_type_landing", null);
+            metadata.setValue("access_limitations", ["UNL"]);
         }
 
         metadata.setValue("project_type_opensource", true);
@@ -305,6 +308,7 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
         // if not already CS, blank out some things
         if (openSource || openSource == null) {
             metadata.setValue("project_type", null);
+            metadata.setValue("access_limitations", []);
         }
 
         metadata.setValue("project_type_opensource", false);
@@ -774,6 +778,8 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
         });
     });
 
+    form.previous_ouo = metadata.getValue("access_limitations").includes("OUO");
+
     if (infix) {
         metadata.setValue("doi_infix", infix);
     }
@@ -799,7 +805,7 @@ var parseLoadIdResponse = function (data) {
             });
         }
     }
-    data.metadata.code_id = ''
+    data.metadata.code_id = '';
     data.metadata.workflow_status = '';
     data.metadata.date_record_added = '';
     data.metadata.date_record_updated = '';
@@ -1281,6 +1287,12 @@ mobx.autorun("Licenses", function () {
     } else {
         $("#proprietary-url-zone").hide();
     }
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Access Limitation(s)", function () {
+    updateSelectStyle(metadata, "access_limitations", "access-limitations-lbl", "access-limitations");
 
     //mobx.whyRun();
 });
@@ -2388,6 +2400,88 @@ $(document).ready(mobx.action("Document Ready", function () {
     $(".chosen-container").addClass("selectControl");
 
 
+    $('#access-limitations')
+    .chosen()
+    .on('change', function(e) {
+        var isOUO = $('#access-limitations option[value="OUO"]').is(':selected');
+
+        // if not OUO
+        if (!isOUO) {
+            // remove subtypes
+            if (form.previous_ouo) {
+                $('#access-limitations option:selected').each(function () {
+                    cnt++;
+                    var value = $(this).val();
+
+                    if (value != 'UNL' && value != 'SBIR' && value != 'STTR') {
+                        $('#access-limitations option[value="'+ value +'"]').prop('selected', false);
+                    }
+                });
+            }
+            // add if has OUO subtypes
+            else {
+                var cnt = 0;
+                var unl = 0;
+                $('#access-limitations option:selected').each(function () {
+                    cnt++;
+                    var value = $(this).val();
+
+                    if (value == 'UNL' || value == 'SBIR' || value == 'STTR') {
+                        unl++;
+                    }
+                });
+                if (cnt > unl) {
+                    $('#access-limitations option[value="OUO"]').prop('selected', true);
+                    isOUO = true;
+                }
+            }
+        }
+
+        form.previous_ouo = isOUO;
+    });
+
+    $('#access-limitations')
+    .chosen()
+    .on('chosen:showing_dropdown', function(e) {
+        var chosenElement = $(e.currentTarget.nextSibling);
+
+        var isUNL = $('#access-limitations option[value="UNL"]').is(':selected');
+        var isSBIR = $('#access-limitations option[value="SBIR"]').is(':selected');
+        var isSTTR = $('#access-limitations option[value="STTR"]').is(':selected');
+        var isOUO = $('#access-limitations option[value="OUO"]').is(':selected');
+
+        chosenElement.find('li.active-result').each(function(index) {
+            element = $(this);
+
+            var label = element.text();
+            var codeMatch = label.match(/^.*?([A-Z]+)(;)?/);
+            
+            if (!codeMatch)
+                return;
+
+            var code = codeMatch[1];
+            var multiCode = codeMatch[2] == ';';
+            var isAllowed = true;
+
+            // if UNL selected, only SBIR/STTR allowed
+            if ((isUNL && code == 'OUO')
+            // if OUO selected, only UNL not allowed
+            || (isOUO && code == 'UNL')
+            // if SBIR selected, STTR not allowed
+            || (isSBIR && code == 'STTR')
+            // if STTR selected, SBIR not allowed
+            || (isSTTR && code == 'SBIR')) {
+                isAllowed = false;
+            }
+
+            // not allowed, disable
+            if (!isAllowed) {
+                element.removeClass('highlighted');
+                element.removeClass('active-result');
+                element.addClass('result-selected');
+            }
+        });
+    });
 
     //Datatables declarations
     developers_table = $("#developers-data-table").DataTable(developers_data_tbl_opts);
@@ -2414,6 +2508,7 @@ $(document).ready(mobx.action("Document Ready", function () {
     }
 
     clearChosenList("licenses");
+    clearChosenList("access-limitations");
     clearChosenList("programming-languages");
     clearChosenList("product-keywords");
 
@@ -2535,6 +2630,10 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#licenses').on('change', {
         store: metadata,
         field: "licenses"
+    }, inputChange);
+    $('#access-limitations').on('change', {
+        store: metadata,
+        field: "access_limitations"
     }, inputChange);
     $('#proprietary-url').on('change', {
         store: metadata,
