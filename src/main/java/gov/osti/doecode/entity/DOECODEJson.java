@@ -22,6 +22,8 @@ public class DOECODEJson {
     public static final String COUNTRIES_KEY = "countries";
     public static final String LICENSE_KEY = "license";
     public static final String ACCESS_LIMITATIONS_KEY = "access_limitations";
+    public static final String PHASES_KEY = "phases";
+    public static final String PROTECTIONS_KEY = "protections";
     public static final String RESEARCH_KEY = "research";
     public static final String SEARCH_SORT_KEY = "search";
     public static final String SOFTWARE_TYPE_KEY = "software";
@@ -38,6 +40,8 @@ public class DOECODEJson {
     private ArrayNode countries_list;
     private ArrayNode license_options_list;
     private ArrayNode access_limitations_list;
+    private ArrayNode phases_list;
+    private ArrayNode protections_list;
     private ArrayNode research_org_list;
     private ArrayNode search_sort_options_list;
     private ArrayNode software_type_list;
@@ -58,6 +62,8 @@ public class DOECODEJson {
         this.countries_list = JsonUtils.MAPPER.createArrayNode();
         this.license_options_list = JsonUtils.MAPPER.createArrayNode();
         this.access_limitations_list = JsonUtils.MAPPER.createArrayNode();
+        this.phases_list = JsonUtils.MAPPER.createArrayNode();
+        this.protections_list = JsonUtils.MAPPER.createArrayNode();
         this.research_org_list = JsonUtils.MAPPER.createArrayNode();
         this.search_sort_options_list = JsonUtils.MAPPER.createArrayNode();
         this.software_type_list = JsonUtils.MAPPER.createArrayNode();
@@ -139,6 +145,16 @@ public class DOECODEJson {
         this.access_limitations_list.add(makeListObj("(OUO; PROP) Limited Rights Data", "PROP", "Limited Rights Data"));
         this.access_limitations_list.add(makeListObj("(OUO; PROT) Protected Data CRADA/EPACT/OTHER", "PROT", "Protected Data CRADA/EPACT/OTHER"));
         this.access_limitations_list.add(makeListObj("(OUO; SSI) Security Sensitive Information", "SSI", "Security Sensitive Information"));
+        // Phases
+        this.phases_list.add(makeListObj("I", "I", "I"));
+        this.phases_list.add(makeListObj("II", "II", "II"));
+        this.phases_list.add(makeListObj("IIA", "IIA", "IIA"));
+        this.phases_list.add(makeListObj("IIB", "IIB", "IIB"));
+        this.phases_list.add(makeListObj("III", "III", "III"));
+        // Protections
+        this.protections_list.add(makeListObj("CRADA", "CRADA", "CRADA"));
+        this.protections_list.add(makeListObj("EPACT", "EPACT", "EPACT"));
+        this.protections_list.add(makeListObj("Other", "Other", "Other"));
         // Software Type
         this.software_type_list.add(makeListObj("Business", "B", "Business"));
         this.software_type_list.add(makeListObj("Scientific", "S", "Scientific"));
@@ -344,6 +360,14 @@ public class DOECODEJson {
 
     public ArrayNode getAccessLimitationsList() {
         return this.access_limitations_list;
+    }
+
+    public ArrayNode getPhasesList() {
+        return this.phases_list;
+    }
+
+    public ArrayNode getProtectionsList() {
+        return this.protections_list;
     }
 
     public ArrayNode getResearchOrgList() {

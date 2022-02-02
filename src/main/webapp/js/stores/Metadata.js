@@ -74,6 +74,11 @@ var Metadata = function (_BaseData) {
     value: mobx.action("Deserialize Data", function deserializeData(data) {
       for (var field in data) {
 
+        // if grouped field, deserialize into metadata
+        if (field === 'official_use_only' || field === 'small_business') {
+            this.deserializeData(data[field]);
+        }
+
         if (this.fieldMap[field] !== undefined && data[field] !== undefined && !(Array.isArray(data[field]) && data[field].length === 0)) {
 
           // preserve an ordering ID based on how data was received from server
@@ -85,6 +90,9 @@ var Metadata = function (_BaseData) {
           }
 
           if (field === 'release_date' && data[field]) data[field] = moment(data[field], BACK_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
+          if (field === 'contract_start_date' && data[field]) data[field] = moment(data[field], BACK_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
+          if (field === 'sb_release_date' && data[field]) data[field] = moment(data[field], BACK_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
+          if (field === 'ouo_release_date' && data[field]) data[field] = moment(data[field], BACK_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
 
           if (field === 'sponsoring_organizations') this.deserializeSponsoringOrganization(data);
 

@@ -533,7 +533,7 @@ var setRequired = function (label, is_required, exclude_parenthetical_text) {
 
 var inputChange = mobx.action("Input Change", function (event) {
     var value = $(this).val();
-    if (event.data.field == "release_date" && value)
+    if ((event.data.field == "release_date" || event.data.field == "contract_start_date" || event.data.field == "sb_release_date" || event.data.field == "ouo_release_date") && value) {
         value = moment(value, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
 
     event.data.store.setValue(event.data.field, value);
@@ -554,7 +554,7 @@ var updateInputStyle = function (store, field, label, input, exclude_parenthetic
     updateLabelStyle(store, field, label, exclude_parenthetical_text);
 
     var value = store.getValue(field);
-    if (field == "release_date" && value)
+    if ((field == "release_date" || field == "contract_start_date" || field == "sb_release_date" || field == "ouo_release_date") && value)
         value = moment(value, BACK_END_DATE_FORMAT).format(FRONT_END_DATE_FORMAT);
 
     $("#" + input).val(value);
@@ -1293,6 +1293,148 @@ mobx.autorun("Licenses", function () {
 
 mobx.autorun("Access Limitation(s)", function () {
     updateSelectStyle(metadata, "access_limitations", "access-limitations-lbl", "access-limitations");
+
+    var accessLims = metadata.getValue("access_limitations");
+    if (accessLims.includes("SBIR") || accessLims.includes("STTR")) {
+        $("#small-business-zone").show();
+    }
+    else {
+        $("#small-business-zone").hide();
+    }
+    if (accessLims.includes("OUO")) {
+        $("#official-use-only-zone").show();
+    }
+    else {
+        $("#official-use-only-zone").hide();
+    }
+    if (accessLims.includes("PROT")) {
+        $("#official-use-only-prot-zone").show();
+    }
+    else {
+        $("#official-use-only-prot-zone").hide();
+    }
+    if (accessLims.includes("PDOUO")) {
+        $("#official-use-only-pdouo-zone").show();
+    }
+    else {
+        $("#official-use-only-pdouo-zone").hide();
+    }
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Phase", function () {
+    updateSelectStyle(metadata, "phase", "phase-lbl", "phase");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Previous Contract Number", function () {
+    updateInputStyle(metadata, "previous_contract_number", "previous-contract-number-lbl", "previous-contract-number");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Contract Start Date", function () {
+    updateInputStyle(metadata, "contract_start_date", "contract-start-date-lbl", "contract-start-date");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Small Business Release Date", function () {
+    updateInputStyle(metadata, "sb_release_date", "sb-release-date-lbl", "sb-release-date");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Business Official Name", function () {
+    updateInputStyle(metadata, "bo_name", "bo-name-lbl", "bo-name");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Business Official Email", function () {
+    updateInputStyle(metadata, "bo_email", "bo-email-lbl", "bo-email");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Business Official Phone", function () {
+    updateInputStyle(metadata, "bo_phone", "bo-phone-lbl", "bo-phone");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Business Official Organization", function () {
+    updateInputStyle(metadata, "bo_org", "bo-org-lbl", "bo-org");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Principal Investigator Name", function () {
+    updateInputStyle(metadata, "pi_name", "pi-name-lbl", "pi-name");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Principal Investigator Email", function () {
+    updateInputStyle(metadata, "pi_email", "pi-email-lbl", "pi-email");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Principal Investigator Phone", function () {
+    updateInputStyle(metadata, "pi_phone", "pi-phone-lbl", "pi-phone");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Principal Investigator Organization", function () {
+    updateInputStyle(metadata, "pi_org", "pi-org-lbl", "pi-org");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Exemption Number", function () {
+    updateInputStyle(metadata, "exemption_number", "exemption-number-lbl", "exemption-number");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("OUO Release Date", function () {
+    updateInputStyle(metadata, "ouo_release_date", "ouo-release-date-lbl", "ouo-release-date");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Protection", function () {
+    updateSelectStyle(metadata, "protection", "protection-lbl", "protection");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Protection Other", function () {
+    updateInputStyle(metadata, "protection_other", "protection-other-lbl", "protection-other");
+
+    var protection = metadata.getValue("protection");
+    if (protection != null && protection.includes("Other")) {
+        $("#official-use-only-prot-other-zone").show();
+    }
+    else {
+        $("#official-use-only-prot-other-zone").hide();
+    }
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("DOE Headquarters Program Office", function () {
+    updateInputStyle(metadata, "program_office", "program-office-lbl", "program-office");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Protection Reason", function () {
+    updateInputStyle(metadata, "protection_reason", "protection-reason-lbl", "protection-reason");
 
     //mobx.whyRun();
 });
@@ -2634,6 +2776,78 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#access-limitations').on('change', {
         store: metadata,
         field: "access_limitations"
+    }, inputChange);
+    $('#phase').on('change', {
+        store: metadata,
+        field: "phase"
+    }, inputChange);
+    $('#previous-contract-number').on('change', {
+        store: metadata,
+        field: "previous_contract_number"
+    }, inputChange);
+    $('#contract-start-date').on('change', {
+        store: metadata,
+        field: "contract_start_date"
+    }, inputChange);
+    $('#sb-release-date').on('change', {
+        store: metadata,
+        field: "sb_release_date"
+    }, inputChange);
+    $('#bo-name').on('change', {
+        store: metadata,
+        field: "bo_name"
+    }, inputChange);
+    $('#bo-email').on('change', {
+        store: metadata,
+        field: "bo_email"
+    }, inputChange);
+    $('#bo-phone').on('change', {
+        store: metadata,
+        field: "bo_phone"
+    }, inputChange);
+    $('#bo-org').on('change', {
+        store: metadata,
+        field: "bo_org"
+    }, inputChange);
+    $('#pi-name').on('change', {
+        store: metadata,
+        field: "pi_name"
+    }, inputChange);
+    $('#pi-email').on('change', {
+        store: metadata,
+        field: "pi_email"
+    }, inputChange);
+    $('#pi-phone').on('change', {
+        store: metadata,
+        field: "pi_phone"
+    }, inputChange);
+    $('#pi-org').on('change', {
+        store: metadata,
+        field: "pi_org"
+    }, inputChange);
+    $('#exemption-number').on('change', {
+        store: metadata,
+        field: "exemption_number"
+    }, inputChange);
+    $('#ouo-release-date').on('change', {
+        store: metadata,
+        field: "ouo_release_date"
+    }, inputChange);
+    $('#protection').on('change', {
+        store: metadata,
+        field: "protection"
+    }, inputChange);
+    $('#protection-other').on('change', {
+        store: metadata,
+        field: "protection_other"
+    }, inputChange);
+    $('#program-office').on('change', {
+        store: metadata,
+        field: "program_office"
+    }, inputChange);
+    $('#protection-reason').on('change', {
+        store: metadata,
+        field: "protection_reason"
     }, inputChange);
     $('#proprietary-url').on('change', {
         store: metadata,

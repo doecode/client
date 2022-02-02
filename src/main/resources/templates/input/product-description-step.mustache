@@ -136,25 +136,293 @@
 						</div>
 					</div>
 					<br />
-					<div>
-						<div class="row">
-							<div class="col-xs-12">
-								<label id='access-limitations-lbl' for='access-limitations' class='control-label'>[from data store]</label>{{> tooltips/Limitation}}
-							</div>
-							<div class="col-xs-8" id="licence-select-zone">
-								<select class='pure-input-1 doecode-chosen-select' title='Access Limitations' id='access-limitations' data-allowcustom="false" data-placeholder='Select your access limitation(s)' multiple>
-									{{#each access_limitations_list}}
-										<option title='{{title}}' value='{{value}}'>{{label}}</option>
-									{{/each}}
-								</select>
-								<span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
-								<span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
-							</div>
-							<div class="col-xs-12">
-								<label id="description-lbl-error" class="control-label errorCheck">Problem</label>
-							</div>
-						</div>
-					</div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label id='access-limitations-lbl' for='access-limitations' class='control-label'>[from data store]</label>{{> tooltips/Limitation}}
+                        </div>
+                        <div class="col-xs-8">
+                            <select class='pure-input-1 doecode-chosen-select' title='Access Limitations' id='access-limitations' data-allowcustom="false" data-placeholder='Select your access limitation(s)' multiple>
+                                {{#each access_limitations_list}}
+                                    <option title='{{title}}' value='{{value}}'>{{label}}</option>
+                                {{/each}}
+                            </select>
+                            <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                            <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                        </div>
+                        <div class="col-xs-12">
+                            <label id="description-lbl-error" class="control-label errorCheck">Problem</label>
+                        </div>
+                    </div>
+                    <div id='small-business-zone'>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='phase-lbl' for='phase' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <select class='pure-input-1 doecode-chosen-select' title='Phase' id='phase' data-allowcustom="false" data-issingle='true' data-placeholder='Select your Phase' >
+                                    {{#each phases_list}}
+                                        <option title='{{title}}' value='{{value}}'>{{label}}</option>
+                                    {{/each}}
+                                </select>
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="phase-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='previous-contract-number-lbl' for='previous-contract-number' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type='text' id='previous-contract-number' class='pure-input-1 form-control' title='Previous Contract Number' />
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="previous-contract-number-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='contract-start-date-lbl' for='contract-start-date' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+						        <input type='text' placeholder="MM/DD/YYYY" class='pure-input-1 form-control doecode-datepicker' id='contract-start-date' title="Contract Start Date"/>
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="contract-start-date-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='sb-release-date-lbl' for='sb-release-date' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+						        <input type='text' placeholder="MM/DD/YYYY" class='pure-input-1 form-control doecode-datepicker' id='sb-release-date' title="Calculated from Contract Start Date" disabled />
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="sb-release-date-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='bo-name-lbl' for='bo-name' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type='text' id='bo-name' class='pure-input-1 form-control' title='Business Official Name' />
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="bo-name-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='bo-email-lbl' for='bo-email' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type='text' id='bo-email' class='pure-input-1 form-control' title='Business Official Email' />
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="bo-email-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='bo-phone-lbl' for='bo-phone' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type='text' id='bo-phone' class='pure-input-1 form-control' title='Business Official Phone' />
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="bo-phone-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='bo-org-lbl' for='bo-org' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type='text' id='bo-org' class='pure-input-1 form-control' title='Business Official Organization' />
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="bo-org-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='pi-name-lbl' for='pi-name' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type='text' id='pi-name' class='pure-input-1 form-control' title='Principal Investigator Name' />
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="pi-name-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='pi-email-lbl' for='pi-email' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type='text' id='pi-email' class='pure-input-1 form-control' title='Principal Investigator Email' />
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="pi-email-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='pi-phone-lbl' for='pi-phone' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type='text' id='pi-phone' class='pure-input-1 form-control' title='Principal Investigator Phone' />
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="pi-phone-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='pi-org-lbl' for='pi-org' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type='text' id='pi-org' class='pure-input-1 form-control' title='Principal Investigator Organization' />
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="pi-org-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id='official-use-only-zone'>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label id='exemption-number-lbl' for='exemption-number' class='control-label'>[from data store]</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type='text' id='exemption-number' class='pure-input-1 form-control' title='Exemption Number' />
+                                <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                            </div>
+                            <div class="col-xs-12">
+                                <label id="exemption-number-lbl-error" class="control-label errorCheck">Problem</label>
+                            </div>
+                        </div>
+                        <div id='official-use-only-prot-zone'>
+                            <br />
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label id='ouo-release-date-lbl' for='ouo-release-date' class='control-label'>[from data store]</label>
+                                </div>
+                                <div class="col-xs-8">
+                                    <input type='text' placeholder="MM/DD/YYYY" class='pure-input-1 form-control doecode-datepicker' id='ouo-release-date' title="OUO Release Date"/>
+                                    <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                    <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                                </div>
+                                <div class="col-xs-12">
+                                    <label id="ouo-release-date-lbl-error" class="control-label errorCheck">Problem</label>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label id='protection-lbl' for='protection' class='control-label'>[from data store]</label>
+                                </div>
+                                <div class="col-xs-8">
+                                    <select class='pure-input-1 doecode-chosen-select' title='Protection' id='protection' data-allowcustom="false" data-issingle='true' data-placeholder='Select your Protection' >
+                                        {{#each protections_list}}
+                                            <option title='{{title}}' value='{{value}}'>{{label}}</option>
+                                        {{/each}}
+                                    </select>
+                                    <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                    <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                                </div>
+                                <div class="col-xs-12">
+                                    <label id="description-lbl-error" class="control-label errorCheck">Problem</label>
+                                </div>
+                            </div>
+                            <div id='official-use-only-prot-other-zone'>
+                                <br />
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label id='protection-other-lbl' for='protection-other' class='control-label'>[from data store]</label>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <input type='text' id='protection-other' class='pure-input-1 form-control' title='Protection Other' />
+                                        <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                        <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label id="protection-other-lbl-error" class="control-label errorCheck">Problem</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div id='official-use-only-pdouo-zone'>
+                            <br />
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label id='program-office-lbl' for='program-office' class='control-label'>[from data store]</label>
+                                </div>
+                                <div class="col-xs-8">
+                                    <input type='text' id='program-office' class='pure-input-1 form-control' title='Program Office' />
+                                    <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                    <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                                </div>
+                                <div class="col-xs-12">
+                                    <label id="program-office-lbl-error" class="control-label errorCheck">Problem</label>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label id='protection-reason-lbl' for='protection-reason' class='control-label'>[from data store]</label>
+                                </div>
+                                <div class="col-xs-8">
+                                    <input type='text' id='protection-reason' class='pure-input-1 form-control' title='Protection Reason' />
+                                    <span class="fa fa-check form-control-feedback successCheck" style='display:none'></span>
+                                    <span class="fa fa-times form-control-feedback errorCheck" style='display:none'></span>
+                                </div>
+                                <div class="col-xs-12">
+                                    <label id="protection-reason-lbl-error" class="control-label errorCheck">Problem</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 					<br />
 					<div class="row">
 						<div class="col-xs-12">

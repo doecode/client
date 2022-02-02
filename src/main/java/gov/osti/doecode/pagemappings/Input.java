@@ -86,6 +86,8 @@ public class Input extends HttpServlet {
             }
 
             output_data.set("access_limitations_list", DOECODEServletContextListener.getJsonList(DOECODEJson.ACCESS_LIMITATIONS_KEY));
+            output_data.set("phases_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PHASES_KEY));
+            output_data.set("protections_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROTECTIONS_KEY));
             output_data.set("programming_languages_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
             output_data.set("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
             output_data.set("project_keywords_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_KEYWORDS_KEY));
@@ -112,6 +114,8 @@ public class Input extends HttpServlet {
             }
 
             output_data.set("access_limitations_list", DOECODEServletContextListener.getJsonList(DOECODEJson.ACCESS_LIMITATIONS_KEY));
+            output_data.set("phases_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PHASES_KEY));
+            output_data.set("protections_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROTECTIONS_KEY));
             output_data.set("programming_languages_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
             output_data.set("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
             output_data.set("project_keywords_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_KEYWORDS_KEY));
@@ -138,6 +142,8 @@ public class Input extends HttpServlet {
             }
 
             output_data.set("access_limitations_list", DOECODEServletContextListener.getJsonList(DOECODEJson.ACCESS_LIMITATIONS_KEY));
+            output_data.set("phases_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PHASES_KEY));
+            output_data.set("protections_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROTECTIONS_KEY));
             output_data.set("programming_languages_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROGRAMMING_LANGUAGES_KEY));
             output_data.set("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
             output_data.set("project_keywords_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_KEYWORDS_KEY));

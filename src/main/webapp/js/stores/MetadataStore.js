@@ -1,7 +1,7 @@
 var MetadataStore = function MetadataStore() {};
 
 var repo_fields = ["project_type", "repository_link", "landing_page", "landing_contact"];
-var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "license_closedsource_available", "license_closedsource_contactinfo", "licenses", "access_limitations", "proprietary_url","license_contact_email"];
+var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "license_closedsource_available", "license_closedsource_contactinfo", "licenses", "access_limitations", "phase", "previous_contract_number", "contract_start_date", "sb_release_date", "bo_name", "bo_email", "bo_phone", "bo_org", "pi_name", "pi_email", "pi_phone", "pi_org", "exemption_number", "ouo_release_date", "protection", "protection_other", "program_office", "protection_reason", "proprietary_url","license_contact_email"];
 var developers_fields = ["developers"];
 var doi_fields = ["doi", "doi_infix", "release_date"];
 var supplemental_fields = ["acronym", "country_of_origin", "keywords", "project_keywords", "site_accession_number", "other_special_requirements", "is_migration", "file_name", "container_name"];
@@ -43,6 +43,24 @@ var _metadata = mobx.observable({
     "proprietary_url": [],
     "license_contact_email": '',
     "access_limitations": ["UNL"],
+    "phase": '',
+    "previous_contract_number": '',
+    "contract_start_date": '',
+    "sb_release_date": '',
+    "bo_name": '',
+    "bo_email": '',
+    "bo_phone": '',
+    "bo_org": '',
+    "pi_name": '',
+    "pi_email": '',
+    "pi_phone": '',
+    "pi_org": '',
+    "exemption_number": '',
+    "ouo_release_date": '',
+    "protection": '',
+    "protection_other": '',
+    "program_office": '',
+    "protection_reason": '',
     "developers": [],
     "contributors": [],
     "sponsoring_organizations": [],
@@ -234,6 +252,204 @@ var _metadataInfoSchema = mobx.observable({
         validations: [],
         panel: "Product Description",
         error: ''
+    },
+    "phase": {
+        required: "",
+        label: "Phase",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "small_business"
+    },
+    "previous_contract_number": {
+        required: "",
+        label: "Previous Contract Number",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "small_business"
+    },
+    "contract_start_date": {
+        required: "",
+        label: "Contract Start Date",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "small_business"
+    },
+    "sb_release_date": {
+        required: "",
+        label: "Release Date",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "small_business"
+    },
+    "bo_name": {
+        required: "",
+        label: "Business Official Name",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "small_business"
+    },
+    "bo_email": {
+        required: "",
+        label: "Business Official Email",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: ["email"],
+        panel: "Product Description",
+        error: '',
+        group: "small_business"
+    },
+    "bo_phone": {
+        required: "",
+        label: "Business Official Phone",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: ["phonenumber"],
+        panel: "Product Description",
+        error: '',
+        group: "small_business"
+    },
+    "bo_org": {
+        required: "",
+        label: "Business Official Organization",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "small_business"
+    },
+    "pi_name": {
+        required: "",
+        label: "Principal Investigator Name",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "small_business"
+    },
+    "pi_email": {
+        required: "",
+        label: "Principal Investigator Email",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: ["email"],
+        panel: "Product Description",
+        error: '',
+        group: "small_business"
+    },
+    "pi_phone": {
+        required: "",
+        label: "Principal Investigator Phone",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: ["phonenumber"],
+        panel: "Product Description",
+        error: '',
+        group: "small_business"
+    },
+    "pi_org": {
+        required: "",
+        label: "Principal Investigator Organization",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "small_business"
+    },
+    "exemption_number": {
+        required: "",
+        label: "Exemption Number",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "official_use_only"
+    },
+    "ouo_release_date": {
+        required: "",
+        label: "OUO Release Date",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "official_use_only"
+    },
+    "protection": {
+        required: "",
+        label: "Protection",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "official_use_only"
+    },
+    "protection_other": {
+        required: "",
+        label: "Specify Other Protection",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "official_use_only"
+    },
+    "program_office": {
+        required: "",
+        label: "DOE Headquarters Program Office",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "official_use_only"
+    },
+    "protection_reason": {
+        required: "",
+        label: "Protection Reason",
+        completed: false,
+        hasError: false,
+        ever_completed: false,
+        validations: [],
+        panel: "Product Description",
+        error: '',
+        group: "official_use_only"
     },
     "proprietary_url": {
         required: "",
