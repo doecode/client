@@ -23,7 +23,7 @@ import gov.osti.doecode.servlet.Init;
 import gov.osti.doecode.utils.JsonUtils;
 import gov.osti.doecode.utils.TemplateUtils;
 
-@WebServlet(urlPatterns = {"/submit", "/form-select", "/announce", "/approve", "/confirm", "/projects", "/pending"})
+@WebServlet(urlPatterns = {"/submit", "/form-select", "/access-select", "/announce", "/approve", "/confirm", "/projects", "/pending"})
 public class Input extends HttpServlet {
 
     private static final long serialVersionUID = -557715523485856278L;
@@ -44,6 +44,10 @@ public class Input extends HttpServlet {
 
         // Software type param
         String software_type_param = CleanInput(request.getParameter("software_type"));
+
+        // Limitation type param
+        String limited_param = CleanInput(request.getParameter("is_limited"));
+        boolean is_limited = (limited_param != null && limited_param.equalsIgnoreCase("true"));
 
         // Default, if invalid type
         if (StringUtils.isBlank(software_type_param) || !(software_type_param.equalsIgnoreCase("Scientific") || software_type_param.equalsIgnoreCase("Business"))) {
@@ -209,12 +213,21 @@ public class Input extends HttpServlet {
             current_page = TemplateUtils.PAGE_PROJECTS;
             jsFilesList.add("input-other");
 
+        } else if (remaining.equals("access-select")) {
+            output_data.put("software_param", software_type_param);
+
+            page_title = "DOE CODE: Access Select";
+            template = TemplateUtils.TEMPLATE_ACCESS_SELECT;
+            current_page = TemplateUtils.PAGE_PROJECTS;
+            jsFilesList.add("input-other");
+
         }
 
         // Add all of the hide/shows for the panels
         output_data.put("show_optional_toggle", show_optional_toggle);
 
         output_data.put("software_type", software_type_param.substring(0, 1).toUpperCase());
+        output_data.put("is_limited", is_limited);
 
         // These js files are needed on all input pages
         extraJSList.add("libraries/jquery.dataTables.min");

@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
     /* Input Form Actions/Pages */
     "/submit",
     "/form-select",
+    "/access-select",
     "/announce",
     "/approve",
     "/confirm",

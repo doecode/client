@@ -42,7 +42,7 @@ var _metadata = mobx.observable({
     "licenses": [],
     "proprietary_url": [],
     "license_contact_email": '',
-    "access_limitations": ["UNL"],
+    "access_limitations": [],
     "phase": '',
     "previous_contract_number": '',
     "contract_start_date": '',

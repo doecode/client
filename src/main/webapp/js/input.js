@@ -41,6 +41,7 @@ form.closedsource_available = null;
 form.closedsource_contactinfo = null;
 
 form.previous_ouo = false;
+form.is_limited = $("#is_limited").val() == "true";
 
 var datatableCallback = function (settings) {
     var api = this.api();
@@ -287,6 +288,7 @@ var updateFromOpenClosedInfo = mobx.action("Update From OpenClosed Info", functi
 var projectTypeButtonClick = mobx.action("Project Type Click", function () {
     var project_type = metadata.getValue("project_type");
     var openSource = project_type == null ? null : project_type.charAt(0) == 'O';
+    var accessLims = metadata.getValue("access_limitations");
     trackOpenClosedInfo(project_type);
 
     var id = $(this).attr("id");
@@ -296,7 +298,8 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
             metadata.setValue("project_type", null);
             metadata.setValue("project_type_public", null);
             metadata.setValue("project_type_landing", null);
-            metadata.setValue("access_limitations", ["UNL"]);
+            if (!form.is_limited && accessLims.length == 0)
+                metadata.setValue("access_limitations", ["UNL"]);
         }
 
         metadata.setValue("project_type_opensource", true);
@@ -308,7 +311,8 @@ var projectTypeButtonClick = mobx.action("Project Type Click", function () {
         // if not already CS, blank out some things
         if (openSource || openSource == null) {
             metadata.setValue("project_type", null);
-            metadata.setValue("access_limitations", []);
+            if (!form.is_limited && accessLims.length == 0)
+                metadata.setValue("access_limitations", ["UNL"]);
         }
 
         metadata.setValue("project_type_opensource", false);
@@ -706,6 +710,9 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     if (!software_type_id) {
         metadata.setValue("software_type", $("#software_type").val());
     }
+    
+    form.is_limited = !metadata.getValue("access_limitations").includes("UNL");
+    restrictLimitations();
 
     form.last_filename = "";
     var project_type = metadata.getValue("project_type");
@@ -969,8 +976,12 @@ var parseSaveResponse = mobx.action("Parse Receive Response", function parseSave
     metadata.setValue("code_id", data.metadata.code_id);
     hideCommonModalMessage();
 
+    var target = "submit";
+    if (form.is_limited)
+        target = "announce";
+
     if (!($("#code_id").val())) {
-        window.location.href = "/" + APP_NAME + "/submit?code_id=" + data.metadata.code_id;
+        window.location.href = "/" + APP_NAME + "/" + target + "?code_id=" + data.metadata.code_id;
     }
 });
 
@@ -2433,6 +2444,35 @@ var handleReordering = mobx.action("Reorder Rows", function (e, diff, edit, tabl
 });
 
 
+// restrict Limitations based on expected input
+var restrictLimitations = mobx.action("Restrict Limitations", function () {
+    $('#input-opensource-btn').prop('disabled', form.is_limited);
+    
+    if (form.is_limited) {
+        $('#access-limitations option[value="UNL"]').remove();
+
+        metadata.setValue("project_type_opensource", false);
+    }
+    else {
+        $("#access-limitations").find('option').each(function(index) {
+            element = $(this);
+
+            var label = element.text();
+            var value = element.val();
+            var codeMatch = label.match(/^.*?([A-Z]+)(;)?/);
+            if (!codeMatch)
+                return;
+
+            var code = codeMatch[1];
+
+            if (code == 'OUO')
+                element.remove();
+        });
+    }
+    $("#access-limitations").trigger('chosen:updated');
+});
+
+
 //Keeps the dropzone thing from auto-searching for anything with the dropzone class
 Dropzone.autoDiscover = false;
 
@@ -2578,6 +2618,12 @@ $(document).ready(mobx.action("Document Ready", function () {
     $('#access-limitations')
     .chosen()
     .on('change', function(e) {
+        var accessLims = metadata.getValue("access_limitations");
+
+        if (!form.is_limited) {
+            $('#access-limitations option[value="UNL"]').prop('selected', true);
+        }
+
         var isOUO = $('#access-limitations option[value="OUO"]').is(':selected');
 
         // if not OUO
@@ -2717,6 +2763,8 @@ $(document).ready(mobx.action("Document Ready", function () {
     } else {
         // set software type
         metadata.setValue("software_type", $("#software_type").val());
+        
+        restrictLimitations();
 
         $("#input-save-btn").show();
     }

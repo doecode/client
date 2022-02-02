@@ -1,0 +1,112 @@
+{{> wrapper/header}}
+<style type='text/css'>
+     .access-select-container {
+	 margin-left: auto;
+	 margin-right: auto;
+	 display: flex;
+     }
+
+     #unlimited-access-select-container {
+	 width: 314px;
+	 padding-right:10px;
+     }
+
+     #unlimited-access-select-container a{
+	 background-color:#277091 !important;
+	 padding-left: 50px;
+	 padding-right: 50px;
+	 padding-top: 20px;
+	 padding-bottom: 20px;
+     }
+
+     #or-access-select-container {
+	 text-align: center !important;
+     }
+
+     #limited-access-select-container {
+	 width: 314px;
+	 padding-left:10px;
+     }
+
+     #limited-access-select-container a{
+	 background-color:#277091 !important;
+	 padding-left: 50px;
+	 padding-right: 50px;
+	 padding-top: 20px;
+	 padding-bottom: 20px;
+     }
+     .access-select-btn{
+	 padding-top: 15px;
+	 padding-bottom: 15px;
+	 padding-left: 20px;
+	 padding-right: 20px;
+	 font-size: 30px;
+     }
+</style>
+<div class="row not-so-wide-row">
+     <div class="col-lg-3 col-md-1">  
+
+     </div>
+     <div class="col-lg-6 col-md-10 col-xs-12 static-content center-text">
+	  <h2 class="static-content-title">Submit New Software Project</h2>
+	  <br/>
+     </div>
+     <div class='col-xs-12 center-text'>
+	  <span style='font-weight:300;font-size:22px;'>Which type of access should this {{software_param}} project have?</span>
+	  <br/>
+	  <br/>
+     </div>
+     <div class="col-lg-3 col-md-1">
+     </div>
+     <div class="no-col-padding-left col-xs-12">
+	  <div class="static-content access-select-container center-text">
+	       <div class="access-select-container">
+		    <div class="right-text" id="unlimited-access-select-container">
+			 <div>
+			      <a title='Add New Unlimited {{software_param}} Software Project' href="/${app_name}/submit?software_type={{software_param}}" class="pure-button pure-button-primary white access-select-btn" style='margin-bottom:5px; width: 225px;'>
+				   Unlimited
+			      </a>
+			 </div>
+		    </div>
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    <div id="or-access-select-container">
+			 <span class="hide-xs">
+			      <div style='padding-top:25px;font-size:19px;'>OR</div>
+			 </span>
+			 <span class="hide-sm hide-md hide-lg">
+			      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			      <span class="fake-h2">OR</span>
+			 </span>
+		    </div>
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    <div class="left-text" id="limited-access-select-container">
+			 <div>
+			      <a title='Add New Limited {{software_param}} Software Project' href="/${app_name}/announce?software_type={{software_param}}&is_limited=true" class="pure-button pure-button-primary white access-select-btn" style='margin-bottom:5px; width: 225px;'>
+				   Limited
+			      </a>
+			 </div>
+		    </div>
+	       </div>
+	  </div>
+     </div>
+        <div class="col-xs-12">
+            <br />
+            <br />
+            <div class="col-xs-2"></div>
+            <div class="col-xs-8">
+                <blockquote>
+                    <div>
+                        <strong>Unlimited Software</strong>&nbsp;- Unclassified information that is publicly releasable.
+                        <br />
+                        <br />
+                        <strong>Limited Software</strong>&nbsp;- Controlled Unclassified Information (CUI) that is not publicly 
+                        available and requires safeguarding and dissemination controls mandated by statute or policy. Examples of 
+                        such information within DOE currently include Official Use Only (OUO), Export Controlled Information (ECI), 
+                        and Small Business Innovation Research and Small Business Technology Transfer Research (SBIR/STTR).
+                    </div>
+                </blockquote>
+            </div>
+            <div class="col-xs-2"></div>
+        </div>
+</div>
+{{> wrapper/footer}}

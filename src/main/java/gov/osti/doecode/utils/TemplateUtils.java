@@ -52,6 +52,7 @@ public class TemplateUtils {
     public static final String TEMPLATE_INPUT_FORM = "input-form";
     public static final String TEMPLATE_CONFIRMATION_PAGE = "confirm";
     public static final String TEMPLATE_FORM_SELECT = "input-form-type-selector";
+    public static final String TEMPLATE_ACCESS_SELECT = "input-access-type-selector";
 
     // User
     public static final String TEMPLATE_USER_ACCOUNT = "account";

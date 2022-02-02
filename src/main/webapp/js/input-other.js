@@ -52,9 +52,9 @@ var projects_data_table_opts = {
         {render: function (data, type, row) {
                 var btn_markup = '';
                 if (row.workflow_status && row.workflow_status_value != 'Saved' && row.doi) {
-                    btn_markup = '<a href="/' + APP_NAME + '/submit?load_id=' + row.code_id + '&software_type=' + row.software_type + '&version_type=New'
+                    btn_markup = '<a href="/' + APP_NAME + '/' + row.new_endpoint + '?load_id=' + row.code_id + '&software_type=' + row.software_type + '&version_type=New'
                             + '" class="pure-button button-new-version btn-sm white " title="New Version of ' + row.code_id + '">New</a>&nbsp;&nbsp;'
-                            + '<a href="/' + APP_NAME + '/submit?load_id=' + row.code_id + '&software_type=' + row.software_type + '&version_type=Prev'
+                            + '<a href="/' + APP_NAME + '/' + row.new_endpoint + '?load_id=' + row.code_id + '&software_type=' + row.software_type + '&version_type=Prev'
                             + '" class="pure-button button-new-version btn-sm white " title="Previous Version of ' + row.code_id + '">Prev</a>';
                 }
                 return btn_markup;
@@ -329,6 +329,7 @@ var parseProjectsPageData = function (data) {
         // format Status value
         var current_status = item.workflow_status ? item.workflow_status : '';
         var workflow_status = current_status;
+        var is_limited = !item.access_limitations.includes("UNL");
 
         if (current_status == 'Approved' && item.approved_as)
             workflow_status = item.approved_as;
@@ -377,7 +378,8 @@ var parseProjectsPageData = function (data) {
             workflow_status_value: item.workflow_status,
             system_status: system_status,
             software_type: software_type,
-            edit_endpoint: (item.system_status == 'Announced' || item.workflow_status == 'Announced') ? 'announce' : 'submit',
+            edit_endpoint: (item.system_status == 'Announced' || item.workflow_status == 'Announced' || is_limited) ? 'announce' : 'submit',
+            new_endpoint: is_limited ? 'announce' : 'submit',
             doi: item.doi
         });
     });
