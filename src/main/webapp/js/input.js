@@ -703,6 +703,13 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
         }
     }
 
+    // lock access limitations from being edited, if not RecordAdmin
+    checkHasRole("RecordAdmin", function () {
+        $("#access-limitations").prop("disabled", false).trigger("chosen:updated");;
+    }, function () {
+        $("#access-limitations").prop("disabled", true).trigger("chosen:updated");;
+    });
+
     metadata.loadRecordFromServer(data.metadata, page_val);
 
     // if old record that's not updated, set to default
