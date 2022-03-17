@@ -57,16 +57,19 @@ var Metadata = function (_BaseData) {
       this.validateField(field);
     })
   }, {
-    key: "loadRecordFromServer",
-    value: mobx.action("Load Record from Server", function loadRecordFromServer(data, page) {
-      //deserializeData
+    key: "setPage",
+    value: mobx.action("Set Page Variable", function setPage(page) {
       this.page = page;
+    })
+  }, {
+    key: "loadRecordFromServer",
+    value: mobx.action("Load Record from Server", function loadRecordFromServer(data) {
+      //deserializeData
       this.deserializeData(data);
     })
   }, {
     key: "loadRecordFromSessionStorage",
-    value: mobx.action("Load Record from Session Storage", function loadRecordFromSessionStorage(data, page) {
-      this.page = page;
+    value: mobx.action("Load Record from Session Storage", function loadRecordFromSessionStorage(data) {
       this.loadValues(data);
     })
   }, {

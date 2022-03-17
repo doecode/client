@@ -56,7 +56,7 @@ public class Input extends HttpServlet {
 
         // Some of the option steps, and whether or not we should hide them
         boolean show_optional_toggle = false;
-        if (remaining.equals("submit")) {
+        if (remaining.startsWith("submit")) {
             //Toggle everything to not be shown, since we're on the submit page
             show_optional_toggle = true;
 
@@ -204,13 +204,13 @@ public class Input extends HttpServlet {
             cssFilesList.add("DataTables-1.10.20/css/jquery.dataTables.min");
             cssFilesList.add("Responsive-2.2.3/css/responsive.dataTables.min");
 
-        } else if (remaining.equals("form-select")) {
+        } else if (remaining.startsWith("form-select")) {
             page_title = "DOE CODE: Form Select";
             template = TemplateUtils.TEMPLATE_FORM_SELECT;
             current_page = TemplateUtils.PAGE_PROJECTS;
             jsFilesList.add("input-other");
 
-        } else if (remaining.equals("access-select")) {
+        } else if (remaining.startsWith("access-select")) {
             output_data.put("software_param", software_type_param);
 
             page_title = "DOE CODE: Access Select";

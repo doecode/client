@@ -742,7 +742,7 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
         $("#change-log-zone").hide();
     });
 
-    metadata.loadRecordFromServer(data.metadata, page_val);
+    metadata.loadRecordFromServer(data.metadata);
 
     // if old record that's not updated, set to default
     var software_type_id = metadata.getValue("software_type");
@@ -2503,7 +2503,8 @@ var restrictLimitations = mobx.action("Restrict Limitations", function () {
                 element.remove();
         });
     }
-    $("#access-limitations").trigger('chosen:updated');
+    $("#access-limitations").trigger('chosen:updated');    
+    metadata.setValue("project_type", metadata.getValue("project_type")); // trigger a UI update
 });
 
 
@@ -2756,6 +2757,7 @@ $(document).ready(mobx.action("Document Ready", function () {
             window.location.href  = modal_redirect;
     });
 
+    metadata.setPage(page_val);
 
     if (page_val == 'submit') {
         metadata.requireOnlySubmitFields();
