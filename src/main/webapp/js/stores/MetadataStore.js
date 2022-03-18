@@ -1,6 +1,6 @@
 var MetadataStore = function MetadataStore() {};
 
-var repo_fields = ["project_type", "repository_link", "landing_page", "landing_contact"];
+var repo_fields = ["project_type", "repository_link", "landing_page", "landing_contact", "project_type_opensource", "project_type_public", "project_type_landing"];
 var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "license_closedsource_available", "license_closedsource_contactinfo", "licenses", "access_limitations", "exemption_number", "ouo_release_date", "protection", "protection_other", "program_office", "protection_reason", "proprietary_url","license_contact_email"];
 var developers_fields = ["developers"];
 var doi_fields = ["doi", "doi_infix", "release_date"];
