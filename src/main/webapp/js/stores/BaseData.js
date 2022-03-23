@@ -147,27 +147,29 @@ var BaseData = function () {
 
                 this.setValue("open_source", openSource);
 
-                if (openSource) {
-                    schemaLicenseClosedAvail.required = "";
-                    schemaLicenseClosedAvail.panel = "";
-                    schemaLicenseClosedContact.required = "";
-                    schemaLicenseClosedContact.panel = "";
+                if (openSource != null) {
+                    if (openSource) {
+                        schemaLicenseClosedAvail.required = "";
+                        schemaLicenseClosedAvail.panel = "";
+                        schemaLicenseClosedContact.required = "";
+                        schemaLicenseClosedContact.panel = "";
 
-                    schemaProjectTypePublic.required = "sub";
-                    schemaProjectTypePublic.panel = "Repository Information";
-                    schemaProjectTypeLanding.required = "";
-                    schemaProjectTypeLanding.panel = "";
-                }
-                else {
-                    schemaLicenseClosedAvail.required = "sub";
-                    schemaLicenseClosedAvail.panel = "Product Description";
-                    schemaLicenseClosedContact.required = "sub";
-                    schemaLicenseClosedContact.panel = "Product Description";
+                        schemaProjectTypePublic.required = "sub";
+                        schemaProjectTypePublic.panel = "Repository Information";
+                        schemaProjectTypeLanding.required = "";
+                        schemaProjectTypeLanding.panel = "";
+                    }
+                    else {
+                        schemaLicenseClosedAvail.required = "sub";
+                        schemaLicenseClosedAvail.panel = "Product Description";
+                        schemaLicenseClosedContact.required = "sub";
+                        schemaLicenseClosedContact.panel = "Product Description";
 
-                    schemaProjectTypePublic.required = "";
-                    schemaProjectTypePublic.panel = "";
-                    schemaProjectTypeLanding.required = "sub";
-                    schemaProjectTypeLanding.panel = "Repository Information";
+                        schemaProjectTypePublic.required = "";
+                        schemaProjectTypePublic.panel = "";
+                        schemaProjectTypeLanding.required = "sub";
+                        schemaProjectTypeLanding.panel = "Repository Information";
+                    }
                 }
 
                 if (data == 'OS') {
