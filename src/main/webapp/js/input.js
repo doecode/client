@@ -1183,7 +1183,7 @@ mobx.autorun("Allow Save", function () {
 mobx.autorun("Toggle Software Type", function () {
     if (metadata.getValue("software_type") == "B") {
         $("#organizations-step").show();
-        $('#organizations-step').insertBefore('#doi-step');
+        $('#organizations-step').insertBefore('#supplemental-step');
     }
 
     //mobx.whyRun();
@@ -1342,6 +1342,56 @@ mobx.autorun("Software Title", function () {
 
 mobx.autorun("Description", function () {
     updateInputStyle(metadata, "description", "description-lbl", "description");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("DOI", function () {
+    updateInputStyle(metadata, "doi", "doi-lbl", "doi");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("DOI Infix", function () {
+    updateInputStyle(metadata, "doi_infix", "doi-infix-lbl", "doi-infix");
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("DOI Registration Check", function () {
+    //flag indicating whether DOI has already been registered for this record (not currently being set, but should we?)
+    const registered = metadata.getValue("doi_status") === "REG";
+
+    //flag indicating if doi is already reserved in this session
+    const reserving = metadata.getValue("doi_status") === "RES" || registered;
+
+    if (reserving) {
+        $("#doi-notice").show();
+        $("#reserve-text").text("Clear Reserved DOI");
+        $("#reserve-icon").removeClass("fa-pencil");
+        $("#reserve-icon").addClass("fa-eraser");
+        $("#doi-infix-zone").show();
+    } else {
+        $("#doi-notice").hide();
+        $("#reserve-text").text("Reserve DOI");
+        $("#reserve-icon").addClass("fa-pencil");
+        $("#reserve-icon").removeClass("fa-eraser");
+        $("#doi-infix-zone").hide();
+    }
+
+    $("#doi").prop("disabled", reserving);
+
+    if (registered) {
+        $("#doi-notice").hide();
+        $("#doi-reservation-zone").hide();
+        $("#doi-infix-zone").hide();
+    }
+
+    //mobx.whyRun();
+});
+
+mobx.autorun("Release Date", function () {
+    updateInputStyle(metadata, "release_date", "release-date-lbl", "release-date");
 
     //mobx.whyRun();
 });
@@ -1541,66 +1591,6 @@ mobx.autorun("Developer Affiliations", function () {
 
 mobx.autorun("Developer Modal", function () {
     setModalStatus("developers", developer);
-
-    //mobx.whyRun();
-});
-
-
-/*********************
- DOI PANEL (action)
- *********************/
-mobx.autorun("DOI/Release Date Panel", function () {
-    setPanelStatus("DOI and Release Date", "doi-release-date-panel-anchor", metadata.panelStatus.doi);
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("DOI", function () {
-    updateInputStyle(metadata, "doi", "doi-lbl", "doi");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("DOI Infix", function () {
-    updateInputStyle(metadata, "doi_infix", "doi-infix-lbl", "doi-infix");
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("DOI Registration Check", function () {
-    //flag indicating whether DOI has already been registered for this record (not currently being set, but should we?)
-    const registered = metadata.getValue("doi_status") === "REG";
-
-    //flag indicating if doi is already reserved in this session
-    const reserving = metadata.getValue("doi_status") === "RES" || registered;
-
-    if (reserving) {
-        $("#doi-notice").show();
-        $("#reserve-text").text("Clear Reserved DOI");
-        $("#reserve-icon").removeClass("fa-pencil");
-        $("#reserve-icon").addClass("fa-eraser");
-        $("#doi-infix-zone").show();
-    } else {
-        $("#doi-notice").hide();
-        $("#reserve-text").text("Reserve DOI");
-        $("#reserve-icon").addClass("fa-pencil");
-        $("#reserve-icon").removeClass("fa-eraser");
-        $("#doi-infix-zone").hide();
-    }
-
-    $("#doi").prop("disabled", reserving);
-
-    if (registered) {
-        $("#doi-notice").hide();
-        $("#doi-reservation-zone").hide();
-        $("#doi-infix-zone").hide();
-    }
-
-    //mobx.whyRun();
-});
-
-mobx.autorun("Release Date", function () {
-    updateInputStyle(metadata, "release_date", "release-date-lbl", "release-date");
 
     //mobx.whyRun();
 });

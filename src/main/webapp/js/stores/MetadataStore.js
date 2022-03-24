@@ -1,9 +1,8 @@
 var MetadataStore = function MetadataStore() {};
 
 var repo_fields = ["project_type", "repository_link", "landing_page", "landing_contact", "project_type_opensource", "project_type_public", "project_type_landing"];
-var product_fields = ["software_title", "description", "programming_languages", "version_number", "documentation_url", "license_closedsource_available", "license_closedsource_contactinfo", "licenses", "access_limitations", "exemption_number", "ouo_release_date", "protection", "protection_other", "program_office", "protection_reason", "proprietary_url","license_contact_email"];
+var product_fields = ["software_title", "description", "doi", "doi_infix", "release_date", "programming_languages", "version_number", "documentation_url", "license_closedsource_available", "license_closedsource_contactinfo", "licenses", "access_limitations", "exemption_number", "ouo_release_date", "protection", "protection_other", "program_office", "protection_reason", "proprietary_url","license_contact_email"];
 var developers_fields = ["developers"];
-var doi_fields = ["doi", "doi_infix", "release_date"];
 var supplemental_fields = ["acronym", "country_of_origin", "keywords", "project_keywords", "site_accession_number", "other_special_requirements", "is_migration", "file_name", "is_file_certified", "container_name"];
 var organizations_fields = ["sponsoring_organizations", "research_organizations"];
 var contribs_fields = ["contributors", "contributing_organizations"];
@@ -353,7 +352,7 @@ var _metadataInfoSchema = mobx.observable({
         completed: false,
         ever_completed: false,
         validations: ["doi"],
-        panel: "DOI and Release Date",
+        panel: "Product Description",
         error: ''
     },
     "doi_infix": {
@@ -370,7 +369,7 @@ var _metadataInfoSchema = mobx.observable({
         completed: false,
         ever_completed: false,
         validations: [],
-        panel: "DOI and Release Date",
+        panel: "Product Description",
         error: ''
     },
     "sponsoring_organizations": {
@@ -706,65 +705,6 @@ var _panelStatus = mobx.observable({
 
             for (var i = 0, len = developers_fields.length; i < len; i++) {
                 var field = developers_fields[i];
-                var obj = _metadataInfoSchema[field];
-
-                if (obj.panel && obj.error) {
-                    errors += (errors ? "; " : "") + obj.error;
-                }
-            }
-
-            return errors;
-        }
-    },
-    "doi": {
-        get remainingRequired() {
-            var remainingRequired = 0;
-
-            for (var i = 0, len = doi_fields.length; i < len; i++) {
-                var field = doi_fields[i];
-                var obj = _metadataInfoSchema[field];
-
-                if (obj.panel && obj.required && !obj.completed) {
-                    remainingRequired++;
-                }
-            }
-
-            return remainingRequired;
-        },
-        get completedOptional() {
-            var completedOptional = 0;
-
-            for (var i = 0, len = doi_fields.length; i < len; i++) {
-                var field = doi_fields[i];
-                var obj = _metadataInfoSchema[field];
-
-                if (obj.panel && !obj.required && obj.completed) {
-                    completedOptional++;
-                }
-            }
-
-            return completedOptional;
-        },
-        get hasRequired() {
-            var hasRequired = false;
-
-            for (var i = 0, len = doi_fields.length; i < len; i++) {
-                var field = doi_fields[i];
-                var obj = _metadataInfoSchema[field];
-
-                if (obj.panel && obj.required) {
-                    hasRequired = true;
-                    break;
-                }
-            }
-
-            return hasRequired;
-        },
-        get errors() {
-            var errors = "";
-
-            for (var i = 0, len = doi_fields.length; i < len; i++) {
-                var field = doi_fields[i];
                 var obj = _metadataInfoSchema[field];
 
                 if (obj.panel && obj.error) {

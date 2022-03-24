@@ -227,7 +227,7 @@ var BaseData = function () {
             if (field === 'doi_status') {
                 var schema = this.infoSchema["doi_infix"];
                 if (data == 'RES') {
-                    schema.panel = "DOI and Release Date";
+                    schema.panel = "Product Description";
                     schema.error = "";
                     schema.completed = false;
                 }
