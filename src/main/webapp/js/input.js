@@ -753,6 +753,10 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     form.is_limited = !metadata.getValue("access_limitations").includes("UNL");
     restrictLimitations();
 
+    if (form.is_limited) {
+        $("#doi-input-zone").hide();
+    }
+
     form.last_filename = "";
     var project_type = metadata.getValue("project_type");
     if (project_type != 'OS') {
@@ -2794,7 +2798,9 @@ $(document).ready(mobx.action("Document Ready", function () {
         $("#input-save-btn").show();
     }
 
-
+    if (form.is_limited) {
+        $("#doi-input-zone").hide();
+    }
 
     //For when the input form collapse items are shown
     $(".input-panel-collapse").on('shown.bs.collapse', function () {
