@@ -348,7 +348,7 @@ var parseProjectsPageData = function (data) {
             system_status = '<span class="datatable-altered-text">' + item.system_status + ' to:</span>';
             system_status += '<br>DOE CODE';
             if (item.system_status == 'Announced')
-                system_status += '<br>E-Link';
+                system_status += '<br>' + (is_limited ? 'SRC' : 'E-Link');
         }
 
         // Software Type
