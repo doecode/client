@@ -159,7 +159,7 @@ if (document.getElementById('site-admin-page-identifier')) {
 
     });
 
-    //OnClick for adding a adding a new site email address
+    //OnClick for adding a new site email address
     $("#poc-admin-email-list > tbody tr td span.poc-add-new-email").on('click', function () {
         $("#poc-admin-email-list > tbody > tr:last").before('<tr><td><input id="new-poc-email-address" class="form-control pure-input-1" type="text"/></td>'
                 + '<td><span class="fas fa-minus-circle poc-remove-email" title="Remove Email"></span></td></tr>');
@@ -233,7 +233,7 @@ if (document.getElementById('site-admin-page-identifier')) {
                 hq_usage: is_hq_usage
             }];
 
-        //Post teh changes to the server
+        //Post the changes to the server
         doAuthenticatedAjax('POST', API_BASE + 'site/edit', function (data) {
             clearPOCListTable();
             $("#site-list").val('');
