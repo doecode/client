@@ -246,7 +246,11 @@ if (document.getElementById('site-admin-page-identifier')) {
                 window.location.href = '/' + APP_NAME + '/site-admin';
             }, 1000);
         }, post_data, function (jqxhr, settings) {
-            setCommonModalMessage(POC_POST_LOADER_ERROR);
+            var error = JSON.parse(JSON.stringify(POC_POST_LOADER_ERROR));
+            var errlist = ((jqxhr || {}).responseJSON || {}).errors;
+            if (errlist != null)
+                error.content = error.content + "<br/><br/>" + errlist;
+            setCommonModalMessage(error);
             showCommonModalMessage();
         });
 
@@ -326,8 +330,12 @@ if (document.getElementById('site-admin-page-identifier')) {
                 setTimeout(function () {
                     window.location.href = '/' + APP_NAME + '/site-admin';
                 }, 1000);
-            }, post_data, function () {
-                setCommonModalMessage(POC_PUT_LOADER_ERROR);
+            }, post_data, function (jqxhr, settings) {
+                var error = JSON.parse(JSON.stringify(POC_PUT_LOADER_ERROR));
+                var errlist = ((jqxhr || {}).responseJSON || {}).errors;
+                if (errlist != null)
+                    error.content = error.content + "<br/><br/>" + errlist;
+                setCommonModalMessage(error);
                 showCommonModalMessage();
             });
         }
