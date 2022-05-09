@@ -70,7 +70,7 @@
                     <strong>Open Source - </strong>
                     Software where the source code is distributed under a licensing agreement which grants all the rights to use, change, 
                     and share the software in a modified or unmodified form. 
-                    See the <a title="Open Source Initiative" href="https://opensource.org/" target="_blank" rel="noopener noreferrer">Open Source Initiative</a> for more information and definitions.
+                    Visit the <a title="Open Source Initiative" href="https://opensource.org/" target="_blank" rel="noopener noreferrer">Open Source Initiative</a> for more information and related definitions.
                 </div>
             </div>
             <br/>
@@ -78,7 +78,7 @@
                 <div class="col-xs-12">
                     <strong>Closed Source - </strong>
                     Proprietary software distributed under a licensing agreement to authorized users with private modification, copying, and republishing restrictions. 
-                    The source code is not shared with the public for anyone to look at or change. This includes limited availability software.
+                    The source code is not shared with the public for anyone to view or change. This includes limited availability software.
                 </div>
             </div>
         </div>
@@ -91,7 +91,7 @@
                 <strong>Open Source, Publicly Available Repository -</strong>&nbsp;
                 Software can be freely accessed, used, changed, and shared (in modified or unmodified form) by anyone in a public repository, and 
                 distributed under licenses that comply with the Open Source Definition. 
-                See the <a title="Open Source Initiative" href="https://opensource.org/" target="_blank" rel="noopener noreferrer">Open Source Initiative</a> for more information and definitions.
+                Visit the <a title="Open Source Initiative" href="https://opensource.org/" target="_blank" rel="noopener noreferrer">Open Source Initiative</a> for more information and related definitions.
                 A Repository URL where the source code is available is required for submitting Open Source, Publicly Available Repository code.
             </div>
         </div>
@@ -103,7 +103,7 @@
             <div class="col-xs-12">
                 <strong>Open Source, No Publicly Available Repository -</strong>&nbsp;
                 Code is Open Source, but is not yet available in a public repository. Interested users can contact the developer(s) or responsible parties 
-                for information regarding access and (re)use. A landing page URL is required for submitting Open Source, No Publicly Available Repository code; 
+                for information regarding access and reuse. A landing page URL is required for submitting Open Source, No Publicly Available Repository code; 
                 the URL should provide additional information on how to obtain access to the code.
             </div>
         </div>
@@ -114,12 +114,15 @@
         <div class="row">
             <div class="col-xs-12"><strong>Closed Source -</strong>&nbsp;
                 Software that is not Open Source and for which access must be granted by contacting a licensing official. Software is often Closed Source because 
-                it is proprietary or has otherwise been deemed appropriate for limited distribution only. A landing page URL or a contact email is required for submitting Closed Source; 
-                the URL should provide additional information on how to obtain access to the code.
+                it is proprietary or has otherwise been deemed appropriate for limited distribution only. A landing page URL, providing additional information 
+                about the code, or a valid contact email is required when submitting Closed Source code.
             </div>
         </div>
         <div class="center-text" style='padding-top:25px;'>
-            <img src='/${app_name}/images/help/closed-source.png' alt='Closed Source' title='Closed Source'/>
+            <img src='/${app_name}/images/help/closed-source-1.png' alt='Closed Source Landing Page' title='Closed Source Landing Page'/>
+        </div>
+        <div class="center-text" style='padding-top:25px;'>
+            <img src='/${app_name}/images/help/closed-source-2.png' alt='Closed Source No Landing Page' title='Closed Source No Landing Page'/>
         </div>
         <br/>
         <div class="row">
@@ -132,6 +135,12 @@
                 <a href='https://github.com/doecode/server/releases/tag/v2.0.1' rel="noopener noreferrer" target='_blank'>https://github.com/doecode/server/releases/tag/v2.0.1</a> 
                 can be submitted as a valid Repository URL to DOE CODE.
             </div>
+            <div class="col-xs-12">
+                <br/>
+                <strong>Note:</strong>&nbsp;
+                Currently only Git and SVN-based repositories are supported. Most repositories hosted at GitHub, Bitbucket, SourceForge, and GitLab 
+                support Git and SVN-based repositories.
+            </div>
             <div class="center-text col-xs-12">
                 <br/>
                 <img src='/${app_name}/images/help/repository_url.png' alt='Repository URL' title='Repository URL'/>
@@ -139,16 +148,13 @@
         </div>
         <br/>
         <div class="row">
-            <div class="col-xs-12"><strong>NOTE:</strong>&nbsp;
-                Currently only Git and SVN-based repositories are supported. Most repositories hosted at github.com, bitbucket.org, sourceforge.org, and GitLab 
-                support Git and and SVN-based repositories. 
-            </div>
-        </div>
-        <br/>
-        <div class="row">
             <div class="col-xs-12"><strong>Landing Page - </strong>
-                must provide a unique URL which leads to the landing page of the software. The landing page should provide information regarding how to access the 
-                source code, point of contact, and licensing information.
+                If you select <strong>Open Source, No Publicly Available Repository</strong> OR <strong>Closed Source</strong>, you must provide a 
+                unique URL which leads to the landing page of the software. The landing page should provide information 
+                regarding how to access the source code, point of contact, and licensing information. If you do not 
+                have a landing page for a Closed Source project, you may provide a valid contact email address 
+                instead. If providing a contact email address, we recommend using a general software group email 
+                for your site.
             </div>
             <div class="center-text col-xs-12">
                 <br/>
@@ -158,7 +164,7 @@
         <br/>
         <div class="row">
             <div class="col-xs-12"><strong>Autopopulate from Repository -</strong>&nbsp;
-                If a valid Repository URL is provided this function will attempt to automatically populate metadata fields based on information provided in 
+                If a valid Repository URL is provided, this function will attempt to automatically populate metadata fields based on information provided in 
                 the repository. DOE CODE also provides functionality to allow users to auto-populate metadata by placing a specifically formatted YAML file 
                 in their repository's root main directory. The file must be named "metadata.yml" or "doecode.yml" and the file must be formatted correctly. 
                 For detailed information and an example file please 
@@ -182,13 +188,13 @@
         <div class="row">
             <div class="col-xs-12"><strong>Description/Abstract -</strong>&nbsp;
                 Provide a clear, concise, and publicly releasable description of the software, including the purpose, function, and capabilities. Text 
-                should be spell checked, limited to 2000 characters and follow input standards for special characters. <strong>DO NOT INCLUDE SENSITIVE INFORMATION IN THE DESCRIPTION/ABSTRACT.</strong>
+                should be spell-checked, limited to 2,000 characters, and follow input standards for special characters. <strong>DO NOT INCLUDE SENSITIVE INFORMATION IN THE DESCRIPTION/ABSTRACT.</strong>
             </div>
         </div>
         <br/>
         <div class="row">
-            <div class="col-xs-12"><strong>License(s) -</strong>&nbsp;
-                License field information will depend on whether an Open Source project or Closed Source project is being submitted.
+            <div class="col-xs-12"><strong>Licenses -</strong>&nbsp;
+                License field information is dependent on whether an Open Source or Closed Source project is being provided.
                 <br/>          
                 <br/>          
             </div>
@@ -196,7 +202,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <strong>Open Source -</strong>&nbsp;
-                        Select the appropriate license from the drop-down menu of available options. Descriptions of Licenses are 
+                        Select the appropriate license from the drop-down menu of available options. Descriptions of licenses are 
                         available <a title="Open Source Alphabetical" href="https://opensource.org/licenses/alphabetical" target="_blank" rel="noopener noreferrer">here</a>.
                     </div>
                 </div>
@@ -210,10 +216,12 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <strong>Closed Source -</strong>&nbsp;
-                        Closed Source software submissions require current contact information on how to obtain the source code.  
-                        The best practice would be to use an email address that is a distribution list which has multiple recipients instead of a personal email address.  
-                        This will accommodate for any staff changes that may occur so there will be always be a valid contact available.
-                        <br/>
+                        Closed Source software provided to DOE CODE requires current contact information on how to obtain the source code. 
+                        The best practice is to use a distribution list email address with multiple recipients instead of a personal email address. 
+                        This will accommodate staff changes that may occur so there will always be a valid contact available.
+                    </div>
+                    <div class="col-xs-12">
+                        <br>
                         If the Closed Source software project <em>does</em> have a license, the URL provided to the landing page should have updated contact information.  
                         If the landing page does not have updated contact information, a contact email address will be required.  
                     </div>
@@ -237,6 +245,39 @@
                 </div>
             </div>
         </div>
+        <br/>   
+        <div class="row">
+            <div class="col-xs-12"><strong>Digital Object Identifier (DOI) -</strong>&nbsp;
+                A unique persistent identifier that references a digital object and provides long-term access. DOIs remain stable even if the underlying 
+                address or URL for the content changes. If a DOI has not yet been registered for unlimited distribution software, OSTI will register a persistent identifier, 
+                in the form of a DOI, for the software upon announcement. For the announcement of software with an access limitation other than Unlimited (UNL), OSTI will not assign a DOI.
+            </div>
+            <div class="center-text col-xs-12">
+                <br/>
+                <img src='/${app_name}/images/help/doi.png' alt='DOI' title='DOI'/>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-xs-12"><strong>Reserve DOI (For Unlimited Software only) -</strong>&nbsp;
+                If a DOI has not yet been registered for the software, use Reserve DOI so that OSTI will assign a persistent identifier before you submit. 
+                Please note, your reserved DOI will not be registered with DataCite until a Release Date is provided.
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-xs-12"><strong>DOI Infix -</strong>&nbsp;
+                A DOI contains 3 components: the prefix, which is assigned by the registration agency, begins with 10.xxx; the infix, which can contain 
+                intelligence, such as the name of the journal, repository or project; and the suffix, which is assigned by the allocation agency. 
+                Example: 10.00000/OSTIDOE CODE/170000
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-xs-12"><strong>Release Date -</strong>&nbsp;
+                Select or enter the software release date.
+            </div>
+        </div>
         <br/>
         <div class='row'>
             <div class='col-xs-12'>
@@ -252,14 +293,13 @@
                     <strong>Closed Source - </strong> an access limitation must be selected for a project announced in DOE CODE as Closed Source. 
                     The list of access limitations and their definitions are below. Prior to announcing software to DOE CODE, 
                     it must undergo all appropriate reviews for sensitivity and export control by the originating site and be deemed secure. 
-                    If you are unsure of the software sensitivity, please work with your site's <a href='https://www.osti.gov/stip/about/stip-community#SoftwareContacts' target='_blank' rel='noopener noreferrer'>Software Point of Contact</a>.
+                    If you are unsure of the software sensitivity, please work with your site's <a href='https://www.osti.gov/stip/about/stip-community#SoftwareContacts' target='_blank' rel='noopener noreferrer'>software point of contact</a>.
                 </div>
                 <br/>
                 The <a href='/${app_name}/faq#announcing-software-flowchart'>Announcing Software to DOE CODE</a> flowchart provides access limitation information requirements in a visual format.
             </div>
         </div>
         <br/>
-
         <div class='row'>
             <div class='col-xs-12'>
                 <a name='access-limitations'></a>
@@ -296,7 +336,9 @@
                                 Information designated as Official Use Only is unclassified information that may be exempt from public release under the Freedom of Information Act.
                             </td>
                             <td>
-                                OUO Exemption Number
+                                <ol>
+                                    <li>OUO Exemption Number</li>
+                                </ol>
                             </td>
                             <td>
                                 None
@@ -311,7 +353,9 @@
                                 as ECI is given controlled distribution to prevent unauthorized release to foreign countries, organizations, or individuals. 
                             </td>
                             <td>
-                                OUO Exemption Number
+                                <ol>
+                                    <li>OUO Exemption Number</li>
+                                </ol>
                             </td>
                             <td>
                                 None
@@ -334,7 +378,9 @@
                                 limited to the repair, recovery, redesign, reconstruction, relocation, insurance, and continuity of operations of any element.
                             </td>
                             <td>
-                                OUO Exemption Number
+                                <ol>
+                                    <li>OUO Exemption Number</li>
+                                </ol>
                             </td>
                             <td>
                                 None
@@ -421,16 +467,18 @@
         </div>
         <br/>
         <div class="row">
-            <div class="col-xs-12"><strong>Programming Language -</strong>&nbsp;
-                The specific language or languages in which the code being submitted was written.
+            <div class="col-xs-12"><strong>Programming Languages -</strong>&nbsp;
+                The specific language or languages in which the code being provided was written.
             </div>
         </div>
         <br/>
         <div class="row">
             <div class="col-xs-12"><strong>Version Number -</strong>&nbsp;
-                The given version number for the code being submitted.
-                <strong>Note:</strong> If a tagged release URL is submitted in the Repository URL field, the Version Number field 
-                will autopopulate with the tagged release number, but can still be edited if desired.
+                The given version number for the code being provided.
+                <br>
+                <br>
+                <strong>Note:</strong> If a tagged release URL is provided in the Repository URL field, the Version Number field 
+                will autopopulate with the tagged release number, but can still be edited.
             </div>
         </div>
         <br/>
@@ -450,7 +498,7 @@
         <a name='developers'></a>
         <h2 class="static">Developers</h2>
         <div class="row">
-            <div class="col-xs-12"><strong>Developer(s) -</strong>&nbsp;
+            <div class="col-xs-12"><strong>Developers -</strong>&nbsp;
                 A person concerned with facets of the software development process, including the research, design, programming, and testing of computer 
                 software. When there are multiple developers, the primary software developer should be listed first, then add additional developers. 
                 "NONE" is an option when necessary.
@@ -465,53 +513,7 @@
             </div>
         </div>
         <br/>
-
         <hr>
-
-        <a name='doi-and-release-date'></a>
-        <h2 class="static">DOI and Release Date</h2>        
-        <div class="row">
-            <div class="col-xs-12"><strong>Digital Object Identifier (DOI) -</strong>&nbsp;
-                A unique persistent identifier that references a digital object and provides long-term access; DOIs remain stable even if the underlying 
-                address or URL for the content changes. If a DOI has not yet been minted for the software, OSTI will mint a persistent identifier, 
-                in the form of a DOI, for the software upon submission.
-            </div>
-            <div class="center-text col-xs-12">
-                <br/>
-                <img src='/${app_name}/images/help/doi.png' alt='DOI' title='DOI'/>
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-xs-12"><strong>Reserve DOI -</strong>&nbsp;
-                If a DOI has not yet been minted for the software, use Reserve DOI so that OSTI will assign a persistent identifier before you submit. 
-                Please note, your reserved DOI will not be registered with DataCite until a Release Date is provided.
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-xs-12"><strong>DOI Infix -</strong>&nbsp;
-                A DOI contains 3 components. The prefix, which is assigned by the registration agency, begins with 10.xxx; the infix, which can contain 
-                intelligence, such as the name of the journal, repository or project; the suffix, which is assigned by the allocation agency. 
-                Example: 10.00000/OSTIDOE CODE/170000
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-xs-12"><strong>Release Date -</strong>&nbsp;
-                Select the software release date.
-            </div>
-        </div>
-        <br/>
-        <hr>
-        <br/>
-        <div class='row'>
-            <div class='col-xs-12 ' style="font-size:20px !important;">
-                Fields Listed Under "Show Additional Optional Fields"
-            </div>
-        </div>
-        <br/>
-
         <a name='supplemental-product-information'></a>
         <h2 class="static">Supplemental Product Information</h2>
         <div class='row'>
@@ -529,7 +531,7 @@
         <br/>
         <div class="row">
             <div class="col-xs-12"><strong>Country of Origin -</strong>&nbsp;
-                Identify the country of origin for the software. Default is the United States.
+                Identify the country of origin for the software. This field defaults to United States.
             </div>
         </div>
         <br/>
@@ -564,8 +566,8 @@
         <br/>
         <div class="row">
             <div class="col-xs-12"><strong>Upload Source Code -</strong>&nbsp;
-                If you are submitting Open Source, No Publicly Available Repository or Closed Source code through DOE CODE you will also be required to upload an 
-                archive file containing your source code. This will be used for archiving purposes. Supported file types include: .zip, .tar, .tgz, .tar.gz, and .tar.gz2.
+                If you are announcing Open Source, No Publicly Available Repository or Closed Source code (including code with an access limitation) through DOE CODE, you will also be required to upload an 
+                archive file containing your source code. This will be used for archiving and preservation purposes. Supported file types include: .zip, .tar, .tgz, .tar.gz, and .tar.gz2. 
                 The <a href='/${app_name}/faq#announcing-software-flowchart'>Announcing Software to DOE CODE</a> flowchart provides upload requirements in a visual format.
             </div>
             <div class="center-text col-xs-12">
@@ -580,8 +582,8 @@
         <a name='organizations'></a>
         <h2 class="static">Organizations</h2>
         <div class="row">
-            <div class="col-xs-12"><strong>Sponsoring Organization(s) -</strong>&nbsp;
-                The sponsoring or funding office of the software product.
+            <div class="col-xs-12"><strong>Sponsoring Organizations -</strong>&nbsp;
+                The sponsoring or funding office(s) of the software product.
                 <br/>
                 <div class="center-text col-xs-12">
                     <br/>
@@ -600,12 +602,12 @@
                     <li>
                         <strong>Name -</strong>&nbsp;
                         The name of the sponsoring or funding organization. If the sponsoring or funding organization is from the Department of Energy, 
-                        please choose from the list of DOE organizations. Other sponsoring organization names will be freeform.
+                        please choose from the list of DOE organizations. Other sponsoring organization names will be free-form.
                     </li>
                     <li>
-                        <strong>Primary Contract/Award Number -</strong>&nbsp;
-                        DOE award/contract number that is largely responsible for funding the project. At least one valid entry is required for Submittal of Business 
-                        software and Announcing of Scientific software. The Primary Contract/ format should be either (1) two alphabetic characters and seven digits 
+                        <strong>Primary Award/Contract Award -</strong>&nbsp;
+                        DOE award/contract number that is largely responsible for funding the project. At least one valid entry is required for submittal of business 
+                        software and announcing of scientific software. The Primary Award/Contract format should be either (1) two alphabetic characters and seven digits 
                         (for DOE awards granted since 2007), or (2) two alphabetic characters, two numeric characters, a dash, two-digit year, two alphabetic 
                         characters, and a five digit number (for awards granted prior to 2007).
                         <br/>
@@ -613,18 +615,18 @@
                         Examples: SC0001234; EE0005432; NT0009876; or FG02-03ER83715; FG52-06NA27489; FC07-99ID55444; and AC02-96CH12345.
                     </li>
                     <li>
-                        <strong>Additional Award(s) -</strong>&nbsp;
+                        <strong>Additional Awards -</strong>&nbsp;
                         Other award/contract numbers that represent funding contributed to the project, including other DOE awards or awards from other 
                         government agencies, foundations, etc.
                     </li>
                     <li>
-                        <strong>B&amp;R Code(s) -</strong>&nbsp;
+                        <strong>B&amp;R Codes -</strong>&nbsp;
                         A Budget and Reporting (B&amp;R) code is given to a project by the Department of Energy. The structure of a B&amp;R code parallels 
                         approved DOE PPAs (Program, Project or Activities). The code is used for executing the budget; reporting actual obligations, costs, 
                         and revenues; and controlling and measuring actual versus budgeted performance.
                     </li>
                     <li>
-                        <strong>FWP Number(s) -</strong>&nbsp;
+                        <strong>FWP Numbers -</strong>&nbsp;
                         Field Work Proposal number. A number given to a proposal from a DOE laboratory by the Department of Energy.
                     </li>
                 </ul>
@@ -632,7 +634,7 @@
         </div>
         <br/>
         <div class="row">
-            <div class="col-xs-12"><strong>Research Organization(s) -</strong>&nbsp;
+            <div class="col-xs-12"><strong>Research Organizations -</strong>&nbsp;
                 The research organization, such as a DOE national laboratory or university, which had primary responsibility for developing the software.
                 <br/>
                 <div class="center-text col-xs-12">
@@ -653,7 +655,7 @@
                     <li>
                         <strong>Name -</strong>&nbsp;
                         The name of the research organization. If the research organization is within the Department of Energy, please select from the list of 
-                        DOE organizations. Other research organization names will be freeform.
+                        DOE organizations. Other research organization names will be free-form.
                     </li>
                 </ul>
             </div>
@@ -665,9 +667,9 @@
         <a name='contributors-and-contributing-organizations'></a>
         <h2 class="static">Contributors and Contributing Organizations</h2>
         <div class="row">
-            <div class="col-xs-12"><strong>Contributor(s) -</strong>&nbsp;
-                The name of a person or institution that has contributed to the software (code, documentation, tests, ideas, project guidance, etc.), but is not 
-                listed as a developer. This can include the person or institution responsible for collecting, managing, distributing, or otherwise contributing 
+            <div class="col-xs-12"><strong>Contributors -</strong>&nbsp;
+                The name of the person(s) or institution(s) that has contributed to the software (code, documentation, tests, ideas, project guidance, etc.), but is not 
+                listed as a developer. This can include the person(s) or institution(s) responsible for collecting, managing, distributing, or otherwise contributing 
                 to the development of the software.
             </div>
             <div class="center-text col-xs-12">
@@ -685,8 +687,8 @@
                 <ul>
                     <li>
                         <strong>Contributor Type -</strong>&nbsp;
-                        When adding a contributor, use contributor type to define the role of the contributor. A drop-down menu is provided. For definitions of 
-                        each contributor type, please see&nbsp;<a title="DataCite" href="https://schema.datacite.org/meta/kernel-4.3/" target="_blank" rel="noopener noreferrer">DataCite</a>.
+                        When adding a contributor, use Contributor Type to define the role of the contributor. A drop-down menu is provided. 
+                        For definitions of each contributor type, please see the&nbsp;<a title="DataCite Metadata Schema" href="https://schema.datacite.org/meta/kernel-4.3/" target="_blank" rel="noopener noreferrer">DataCite Metadata Schema</a>.
                     </li>
                 </ul>
             </div>
@@ -709,8 +711,8 @@
                 <ul>
                     <li>
                         <strong>Contributor Type -</strong>&nbsp;
-                        When adding a contributor, use contributor type to define the role of the contributor. A drop-down menu is provided. For definitions 
-                        of each contributor type, please see&nbsp;<a title="DataCite" href="https://schema.datacite.org/meta/kernel-4.3/" target="_blank" rel="noopener noreferrer">DataCite</a>.
+                        When adding a contributor, use Contributor Type to define the role of the contributor. A drop-down menu is provided. 
+                        For definitions of each contributor type, please see the&nbsp;<a title="DataCite Metadata Schema" href="https://schema.datacite.org/meta/kernel-4.3/" target="_blank" rel="noopener noreferrer">DataCite Metadata Schema</a>.
                     </li>
                 </ul>
             </div>
@@ -723,8 +725,8 @@
         <h2 class="static">Identifiers</h2>
         <div class="row">
             <div class="col-xs-12">
-                DOI or URL identifiers of related resources. Referencing other documents, datasets, or software that relate to the submitted software allows 
-                users to follow these vital links and to better understand the scope of your research.
+                DOIs or URLs that reference other documents, datasets, or software that relate to the submitted or announced software identifiers of related resources. 
+                Referencing identifiers that relate to the software provided allows users to follow these vital links and better understand the scope of the research.
             </div>
             <div class="center-text col-xs-12">
                 <br/>
@@ -740,18 +742,53 @@
                 <ul class='help-page-list'>
                     <li>
                         <strong>Identifier Type -</strong>&nbsp;
-                        Identifiers used must be Digital Object Identifiers (DOIs) or URLs.
+                        Select the identifier type from the drop-down menu, either DOI or URL.
                     </li>
                     <li>
                         <strong>Relation Type -</strong>&nbsp;
-                        Provide, with controlled vocabulary, the relationship of the resource being registered and the related resource. The Relation Type 
-                        field also allows you to define how the submitted software is related to the DOI you enter and the document you are submitting. 
-                        For definitions of each relation type controlled vocabulary 
-                        see&nbsp;<a title="DataCite Metadata Kernel" href="https://schema.datacite.org/meta/kernel-4.3/doc/DataCite-MetadataKernel_v4.3.pdf" target="_blank" rel="noopener noreferrer">this</a>.
+                        Select from the drop-down field the relationship of the resource being registered and the related resource. The Relation Type field 
+                        also allows you to define how the provided software is related to the DOI entered and the document you are submitting. For definitions 
+                        of each relation type controlled vocabulary see the&nbsp;<a title="DataCite Metadata Kernel" href="https://schema.datacite.org/meta/kernel-4.3/doc/DataCite-MetadataKernel_v4.3.pdf" target="_blank" rel="noopener noreferrer">DataCite list</a>.
                     </li>
                     <li>
-                        <strong>Identifier -</strong>&nbsp;
-                        Provide the Digital Object Identifier (DOI) or URL for the related item.  
+                        <strong>Identifier(s) -</strong>&nbsp;
+                        Provide the Digital Object Identifier (DOI) or URL for the related item(s). If you are entering a DOI, please do not include the 
+                        protocol or any domain information before the prefix, e.g., only enter 10.11578/dc.XXXXX and not https://doi.org/10.11578/dc.20171031.3XXXXX.  
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+
+        <a name='awards'></a>
+        <h2 class="static">Awards</h2>
+        <div class="row">
+            <div class="col-xs-12">
+                An Award Digital Object Identifier (DOI) is assigned to awards, contracts, equipment, facilities, grants, prizes, salary awards, time 
+                awarded, and training grants. If the software/code was produced under multiple awards given by multiple organizations, multiple Award DOIs may be entered.
+            </div>
+            <div class="col-xs-12">
+                <br/>
+                <strong>Note:</strong>&nbsp;
+                Award DOIs are different than DOIs assigned to the software/code being submitted to DOE CODE and contract/grant/award numbers. DO NOT enter these here. 
+                Review the&nbsp;<a href='/award-doi-service/faqs' title='Award DOI Service FAQs'>Award DOI Service FAQs</a> for additional information about Award DOIs.
+            </div>
+            <div class="center-text col-xs-12">
+                <br/>
+                <img src='/${app_name}/images/help/award_dois.png' alt='Award DOIs' title='Award DOIs'/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class='help-page-list'>
+                    <li>
+                        <strong>Award DOI -</strong>&nbsp;
+                        The Award Digital Object Identifier (DOI) under which the work or time was provided. DOIs follow the format: 10.XXXX/XXXXX.
+                    </li>
+                    <li>
+                        <strong>Funder Name -</strong>&nbsp;
+                        The name of the awarding/funding organization.
                     </li>
                 </ul>
             </div>
@@ -765,8 +802,8 @@
             <div class="col-xs-12"><strong>Contact Information -</strong>&nbsp;
                 Provide the name, email address, phone number, and organization of the submitter; this will serve as 
                 the point of contact for DOE if there are questions about the software provided. 
-                Contact information will not be shared in public output products. The best practice would be to use an 
-                email address that is a distribution list which has multiple recipients instead of a personal email address. 
+                Contact information will not be shared in public output products. The best practice is to use a 
+                distribution list email address with multiple recipients instead of a personal email address. 
                 This will accommodate for any staff changes that may occur so there will always be a valid contact available. 
                 Select "Autopopulate from Account" to use the information associated with your DOE CODE account.
             </div>
@@ -802,11 +839,9 @@
                 <img class="img-responsive" src='/${app_name}/images/help/manage-my-projects.png' alt='Manage My Projects Page' title='Manage My Projects Page'/>
             </div>
         </div>
-        
-        <hr>
 
+        <br/>
         <a name='status'></a>
-        <h2 class="static">Status</h2>
         <div class="row">
             <div class='col-xs-12'>
                 <h3 class='static'>Status</h3>
@@ -817,35 +852,43 @@
                 Approved Submission once the process is completed.
                 <br/>
                 <br/>
-                <strong>PENDING APPROVAL Announcement</strong> - The record has been announced to DOE CODE and E-Link. The record is moving through the metadata quality 
-                controlled/release process and DOI assignment. The Status will be updated to Approved Announcement once the process is completed.
+                <strong>PENDING APPROVAL Announcement</strong> - The record has been announced to DOE CODE and is moving through the metadata quality 
+                control/release process and DOI assignment, if the record is unlimited. The Status will be updated to Approved Announcement once the process is completed.
                 <br/>
                 <br/>
                 <strong>APPROVED Submission</strong> - The record has been approved for Submission and is available for record update and discovery in DOE CODE.
                 <br/>
                 <br/>
-                <strong>APPROVED Announcement</strong> - The record has been approved for Announcement and is available in DOE CODE and E-Link, can be updated in DOE CODE, and is discoverable in DOE CODE.
+                <strong>APPROVED Announcement</strong> - The record has been approved for Announcement and is available for update in DOE CODE. It is now discoverable in DOE CODE and, depending on 
+                access limitation, <a href='https://www.osti.gov/' rel='noopener noreferrer' target='_blank'>OSTI.GOV</a> and <a href='https://www.osti.gov/src/' rel='noopener noreferrer' target='_blank'>Science Research Connection (SRC)</a>.
                 <br/>
                 <br/>
                 <strong>SAVED</strong> - The record has entered the workflow, but not all metadata submission has been completed. The filled out metadata is saved until submission or announcement.
                 <br/>
                 <br/>
                 <h3 class='static'>Availability</h3>
-                The record Availability refers to where the software record is made available. Availability includes:
+                The record Availability refers to where the software record is made available for search and discovery.
+                <br/><br/>Availability includes:
                 <br/>
                 <br/>
-                <strong>Submitted to DOE CODE</strong> - The record was submitted for initial submission and optional DOI registration, and is available for record update and discovery in DOE CODE. 
+                <strong>Submitted to DOE CODE</strong> - The unlimited record was submitted for initial submission and optional DOI registration, and is available for record update and discovery in DOE CODE.
                 <br/>
                 <br/>
-                <strong>Announced to DOE CODE and E-Link</strong> - The record was announced with DOI assignment for official software announcement. The record is available in DOE CODE and E-Link, can be updated in DOE CODE, and is discoverable in DOE CODE.
+                <strong>Announced to DOE CODE and OSTI.GOV</strong> - The unlimited record was announced with DOI assignment for official software announcement. 
+                The record can be updated in DOE CODE and is discoverable in DOE CODE and <a href='https://www.osti.gov/' rel='noopener noreferrer' target='_blank'>OSTI.GOV</a>.
+                <br/>
+                <br/>
+                <strong>Announced to SRC</strong> - The limited record was announced for official software announcement. 
+                The record can be updated in DOE CODE and is discoverable in <a href='https://www.osti.gov/src/' rel='noopener noreferrer' target='_blank'>Science Research Connection (SRC)</a>.
                 <br/>
                 <br/>
                 <h3 class='static'>Make Version</h3>
-                <strong>New or Previous Versions of Software</strong> - DOE CODE also has the option to create a DOE CODE record that is a newer or previous version of any DOE CODE record already submitted or announced.  
+                <strong>New or Previous Versions of Software</strong> - 
+                DOE CODE offers the option to create a DOE CODE record that is a newer or previous version of any DOE CODE record already submitted or announced. 
                 Selecting either of the Make Version buttons, "New" or "Prev," associated with a record will take you to the entry form with most of the metadata fields 
-                already filled. You can also use this option to submit a tagged release of your code by entering the specific URL to the tagged release in 
+                already populated based on metadata from the associated record. You can also use this option to submit a tagged release of your code by entering the specific URL to the tagged release in 
                 GitHub (ex. <a href="https://github.com/doecode/server/releases/tag/v2.0.1" rel="noopener noreferrer" target="_blank">https://github.com/doecode/server/releases/tag/v2.0.1</a>). 
-                The Version Number field will autopopulate with the tagged release number, but can still be edited if desired. 
+                The Version Number field will autopopulate with the tagged release number, but can still be edited if desired.
                 <br/>
                 <br/>
                 Once you have submitted or announced your "New" or "Prev" record, DOE CODE will automatically add metadata to all newer/previous records 
