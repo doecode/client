@@ -346,9 +346,10 @@ var parseProjectsPageData = function (data) {
         var system_status = '';
         if (item.system_status) {
             system_status = '<span class="datatable-altered-text">' + item.system_status + ' to:</span>';
-            system_status += '<br>DOE CODE';
+            if (!is_limited)
+                system_status += '<br>DOE CODE';
             if (item.system_status == 'Announced')
-                system_status += '<br>' + (is_limited ? 'SRC' : 'E-Link');
+                system_status += '<br>' + (is_limited ? 'SRC' : 'OSTI.GOV');
         }
 
         // Software Type
