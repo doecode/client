@@ -1,5 +1,5 @@
 /*Between iphone 5 and right up to ipads*/
-@media only screen and (max-width:767px) and (min-width: 320px) {
+@media only screen and (max-width:767px) and (min-width: 0px) {
     .header-logo-img {
         width: 270px;
     }
@@ -41,11 +41,11 @@
     }
 
     .footer {
-        height: 230px;
+        height: 370px;
     }
 
     .wrapper {
-        min-height: calc(100vh - 230px);
+        min-height: calc(100vh - 370px);
     }
 
     .no-col-padding-right-mobile {
@@ -140,7 +140,11 @@
 }
 
 /*Small Devices, Iphone 5 to like iphone plus*/
-@media only screen and (max-width:479px) and (min-width: 320px) {
+@media only screen and (max-width:479px) and (min-width: 0px) {
+    .imprtant-links {
+        display: none;
+    }
+    
     .nav-menu li {
         border-right: none;
     }
@@ -281,6 +285,10 @@
 
     .footer-homepage {
         height: 195px;
+    }
+
+    footer .footer-link:nth-child(3), footer  .footer-link-homepage:nth-child(3) {
+        border-right: 0px;
     }
 
     .homepage-wrapper {

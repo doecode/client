@@ -129,6 +129,10 @@ html h3 {
     color: black !important;
 }
 
+.d-block {
+    display: block !important;
+}
+
 .mb-1 {
     margin-bottom: 1rem !important;
 }

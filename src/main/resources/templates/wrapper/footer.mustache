@@ -4,7 +4,7 @@
     <div class="container">
         <br />
         <hr class="footer-separator" />
-        <div class="row center-text">
+        <div class="row center-text hide-xs">
             <div class='col-md-3'></div>
             <div class="col-md-6 col-xs-12 center-text">
                 <div class="footer-image-zone mt-3 mb-1 img-responsive center-block">
@@ -13,6 +13,38 @@
                         <a alt="U.S. Department of Energy" title="U.S. Department of Energy" href="https://energy.gov" target='_blank' rel="noopener noreferrer"><div style="position: absolute;left: 0%;top: 0%;width: 39.5%;height: 100%;background-color: rgba(255, 0, 0, 0);"></div></a>
                         <a alt="Office of Science" title="Office of Science" href="https://www.energy.gov/science/office-science" target='_blank' rel="noopener noreferrer"><div style="position: absolute;left: 39.5%;top: 0%;width: 19.5%;height: 100%;background-color: rgba(0, 255, 0, 0);"></div></a>
                         <a alt="Office of Scientific and Technical Information" title="Office of Scientific and Technical Information" href="/" target='_blank' rel="noopener noreferrer"><div style="position: absolute; left: 59%; top: 0%; width: 41%; height: 100%; background-color: rgba(0, 0, 255, 0);"></div></a>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-3'></div>
+        </div>
+        <div class="row center-text hide-md hide-lg hide-sm">
+            <div class='col-md-3'></div>
+            <div class="col-md-6 col-xs-12 center-text">
+                <div class="footer-image-zone mt-3 mb-1 img-responsive center-block">
+                    <div class="footer-image-container center-block">
+                        <div style="margin-bottom:0.5em; width: 153px; height: 44px; overflow:hidden" class="center-block">
+                        <a alt="U.S. Department of Energy" title="U.S. Department of Energy" href="https://energy.gov" target="_blank"
+                            rel="noopener noreferrer">
+                            <img src="{{#unless is_homepage}}/${app_name}/images/DOE_SC_OSTI_666_sm.png{{else}}/${app_name}/images/DOE_SC_OSTI_FFF.png{{/unless}}" style="width: auto; height: 100%" class="footer-image">
+                        </a>
+                        </div>
+                        <div style="margin-bottom:0.5em; width: 61px; height: 44px; overflow:hidden; text-align: cener"
+                            class="center-block">
+
+                        <a alt="Office of Science" title="Office of Science" href="https://www.energy.gov/science/office-science"
+                            target="_blank" rel="noopener noreferrer">
+                            <img src="{{#unless is_homepage}}/${app_name}/images/DOE_SC_OSTI_666_sm.png{{else}}/${app_name}/images/DOE_SC_OSTI_FFF.png{{/unless}}" style="width: auto; height: 100%; position: relative; left:-166px"
+                                class="footer-image">
+                        </a>
+                        </div>
+                        <div style="width: 151px; height: 44px; overflow:hidden; text-align: cener" class="center-block">
+                        <a alt="Office of Scientific and Technical Information" title="Office of Scientific and Technical Information"
+                            href="/" target="_blank" rel="noopener noreferrer">
+                            <img src="{{#unless is_homepage}}/${app_name}/images/DOE_SC_OSTI_666_sm.png{{else}}/${app_name}/images/DOE_SC_OSTI_FFF.png{{/unless}}" style="width: auto; height: 100%; position: relative; left:-244px"
+                                class="footer-image">
+                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,7 +81,7 @@
             </div>
         </div>
         <!--Footer Links-->
-        <div class="row text-center mt-1  white">
+        <div class="row text-center mt-1 white">
             <span class='hide-xs'>
                 <ul class="list-inline">
                     <li class='{{#unless is_homepage}}footer-link{{else}}footer-link-homepage{{/unless}}'>
@@ -64,6 +96,7 @@
                         <a title='Vulnerability Disclosure Program' target="_blank" href="https://doe.responsibledisclosure.com/hc/en-us" rel="noopener noreferrer">
                             Vulnerability Disclosure Program</a>
                     </li>
+                    <li class="d-block hide-md hide-lg mb-1" style="margin-bottom: 16px !important;"></li>
                     <li class='{{#unless is_homepage}}footer-link{{else}}footer-link-homepage{{/unless}}'>
                         <a title='Facebook' target="_blank" href="https://www.facebook.com/ostigov" rel="noopener noreferrer">
                             <span class="fab fa-facebook-f"></span>
@@ -81,8 +114,22 @@
                     </li>
                 </ul>
             </span>
-            <span class='hide-md hide-lg hide-sm'>
+            <span class='hide-md hide-lg hide-sm' style="position: relative; top:calc((44px + 0.5em) * 2)">
                 <ul class="list-inline">
+                    <li class='{{#unless is_homepage}}footer-link{{else}}footer-link-homepage{{/unless}}'>
+                        <a title='Website Policies' href="/disclaim" target='_blank' rel="noopener noreferrer">
+                            <span class="fas fa-university footer-fa-icon"></span>&nbsp;&nbsp;Website Policies<span class="imprtant-links"> / Important Links</span></a>
+                    </li>
+                    <li class='{{#unless is_homepage}}footer-link{{else}}footer-link-homepage{{/unless}}' style="border-right: 0px">
+                        <a title='Contact Us' href="/${app_name}/contact" rel="noopener noreferrer">
+                            <span class="far fa-comments footer-fa-icon"></span>&nbsp;&nbsp;Contact Us</a>
+                    </li>
+                    <li class="d-block mb-1" style="margin-bottom: 16px !important;"></li>
+                    <li class='{{#unless is_homepage}}footer-link{{else}}footer-link-homepage{{/unless}}' style="border-right: 0px">
+                        <a title='Vulnerability Disclosure Program' target="_blank" href="https://doe.responsibledisclosure.com/hc/en-us" rel="noopener noreferrer">
+                            Vulnerability Disclosure Program</a>
+                    </li>
+                    <li class="d-block mb-1" style="margin-bottom: 16px !important;"></li>
                     <li class='{{#unless is_homepage}}footer-link{{else}}footer-link-homepage{{/unless}}'>
                         <a title='Facebook' target="_blank" href="https://www.facebook.com/ostigov" rel="noopener noreferrer">
                             <span class="fab fa-facebook-f"></span>
@@ -99,22 +146,7 @@
                         </a>
                     </li>
                 </ul>
-                <div class='row hide-md hide-lg not-so-wide-row '>
-                    <br />
-                    <div class='col-xs-4 right-text website-policies-mobile'>
-                        <a title='Website Policies' href="/disclaim" target='_blank' class='{{#unless is_homepage}}footer-link{{else}}footer-link-homepage{{/unless}}' rel="noopener noreferrer">
-                            <span class="fas fa-university footer-fa-icon"></span>&nbsp;Website Policies
-                        </a>
-                    </div>
-                    <div class='col-xs-4 center-text website-policies-mobile'>
-                        <a title='Contact Us' href="/${app_name}/contact" class='{{#unless is_homepage}}footer-link{{else}}footer-link-homepage{{/unless}}' rel="noopener noreferrer">
-                            <span class="far fa-comments footer-fa-icon"></span>&nbsp;Contact Us</a>
-                    </div>
-                    <div class='col-xs-4 left-text'>
-                        <a title='Vulnerability Disclosure Program' target="_blank" href="https://doe.responsibledisclosure.com/hc/en-us" class='{{#unless is_homepage}}footer-link{{else}}footer-link-homepage{{/unless}}' rel="noopener noreferrer">
-                            Vulnerability Disclosure Program</a>
-                    </div>
-                </div>
+                <div class='row not-so-wide-row '></div>
             </span>
         </div>
     </div>
