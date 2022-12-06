@@ -58,6 +58,7 @@ public class Other extends HttpServlet {
         }
 
         // Add the common dissemination js file
+        extraJSList.add("libraries/libphonenumber-js.min");
         jsFilesList.add("other");
 
         // Check if they're logged in, and only do something if they're not logged in

@@ -17,6 +17,7 @@ var post_gitlab_form_data = function () {
     submission_data.employment_designation_other_val = $("#employment-designation-other-val").val().trim();
 
     var conditional_required_fields_okay = true;
+    var error_count = 0;
     //Go through and get the value of each field. If there's a value, mark it as successful. If there's no value, yet the field is required, mark it as erroneous. Otherwise, blank it out
     $(".gitlab-signup-input").each(function () {
         var self = this;
@@ -25,6 +26,11 @@ var post_gitlab_form_data = function () {
 
         var is_required = $(this).hasClass('gitlab-signup-required');
         var is_conditional_required = $(this).hasClass('conditional-required');
+        var has_error = $(this).next('.errorCheck:visible').length > 0;
+
+        if (has_error) {
+            error_count++;
+        }
 
         //If it's a required field, but only if a value for another field is selected
         if (is_required && is_conditional_required === true) {
@@ -35,10 +41,10 @@ var post_gitlab_form_data = function () {
             //Get whether we have a value in this field
             var has_value = val != '';
 
-            if (acceptable_vals.indexOf(associated_field_val) > -1 && has_value) {//If this is a required field, and it has a value
+            if (!has_error && acceptable_vals.indexOf(associated_field_val) > -1 && has_value) {//If this is a required field, and it has a value
                 mark_gitlab_form_field(self, SUCCESS_CONDITION);
 
-            } else if (acceptable_vals.indexOf(associated_field_val) > -1 && !has_value) {//If this is a required field, and there is no value in it
+            } else if (has_error || (acceptable_vals.indexOf(associated_field_val) > -1 && !has_value)) {//If this is a required field, and there is no value in it
                 mark_gitlab_form_field(self, ERROR_CONDITION);
                 conditional_required_fields_okay = false;
             } else {
@@ -46,9 +52,17 @@ var post_gitlab_form_data = function () {
             }
 
         } else if (is_required && !is_conditional_required) {
-            if (val) {
+            if (!has_error && val) {
                 mark_gitlab_form_field(self, SUCCESS_CONDITION);
-            } else if (!val && is_required) {
+            } else if (has_error || (!val && is_required)) {
+                mark_gitlab_form_field(self, ERROR_CONDITION);
+            } else {
+                mark_gitlab_form_field(self, BLANK_CONDITION);
+            }
+        } else if (!is_required) {
+            if (!has_error && val) {
+                mark_gitlab_form_field(self, SUCCESS_CONDITION);
+            } else if (has_error) {
                 mark_gitlab_form_field(self, ERROR_CONDITION);
             } else {
                 mark_gitlab_form_field(self, BLANK_CONDITION);
@@ -58,13 +72,15 @@ var post_gitlab_form_data = function () {
 
     //Put up an error if any of the required fields aren't filled out
     if (!submission_data.first_name || !submission_data.last_name
-            || !submission_data.address || !submission_data.city
-            || !submission_data.postal_code || !submission_data.country
-            || !submission_data.email_address || !submission_data.phone_number
-            || !submission_data.job_title || !submission_data.employment_designation
-            || submission_data.employment_designation == ''
-            || !conditional_required_fields_okay || (submission_data.employment_designation == 'Other' && !submission_data.employment_designation_other_val)) {
+        || !submission_data.address || !submission_data.city
+        || !submission_data.postal_code || !submission_data.country
+        || !submission_data.email_address || !submission_data.phone_number
+        || !submission_data.job_title || !submission_data.employment_designation
+        || submission_data.employment_designation == ''
+        || !conditional_required_fields_okay || (submission_data.employment_designation == 'Other' && !submission_data.employment_designation_other_val)) {
         $("#gitlab-signup-error-message").html('You must fill out all required fields');
+    } else if (error_count > 0) {
+        $("#gitlab-signup-error-message").html('Some fields have errors');
     } else {
         $("#gitlab-signup-form").submit();
     }
@@ -168,4 +184,41 @@ if (document.getElementById('gitlab-signup-page-identifier')) {
     $("select.gitlab-signup-input").on('change', gitlab_form_blur_callback_select);
     //Show extra, required fields (conditionally)
     $("#employment-designation").on('change', showRequiredEmploymentDesignationFields);
+    // validate email
+    $("#email").on('blur', function () {
+        var self = this;
+        mark_gitlab_form_field(self, BLANK_CONDITION);
+        var email_val = $(this).val().trim();
+        if (email_val) {
+            $.get(API_BASE + "validation/email?value=" + email_val, function (data) {
+                mark_gitlab_form_field(self, SUCCESS_CONDITION);
+            }, 'json').fail(function () {
+                mark_gitlab_form_field(self, ERROR_CONDITION);
+            });
+        }
+    });
+    // validate phone
+    $("#phone-number").on('blur', function () {
+        var self = this;
+        mark_gitlab_form_field(self, BLANK_CONDITION);
+        var phone_val = $(this).val().trim();
+
+        if (phone_val) {
+            // errors = validation.validatePhone(phone_val);
+            var isValid = false;
+            try {
+              var numberObj = libphonenumber.parse(phone_val, "US");
+              isValid = libphonenumber.isValidNumber(numberObj);
+            } catch (e) {
+              // silent error
+            }
+
+            if (isValid) {
+                mark_gitlab_form_field(self, SUCCESS_CONDITION);
+            }
+            else {
+                mark_gitlab_form_field(self, ERROR_CONDITION);
+            };
+        }
+    });
 }
