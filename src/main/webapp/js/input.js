@@ -1657,6 +1657,9 @@ mobx.autorun("Is Migration", function () {
         migLabel.removeClass("success-color");
     }
 
+    // no contract required for migrations
+    sponsor_org.infoSchema["primary_award"].required = !isMig;
+
     //mobx.whyRun();
 });
 
