@@ -106,7 +106,7 @@ var parseConfirmPageData = function (data) {
             }
         });
         metadata_list.push({
-            title: 'Code Availability',
+            title: 'Project Type',
             content: display_val
         });
     }
