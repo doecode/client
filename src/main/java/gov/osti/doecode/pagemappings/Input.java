@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
+import org.jsoup.safety.Safelist;
 
 import gov.osti.doecode.entity.DOECODEJson;
 import gov.osti.doecode.entity.InputFunctions;
@@ -281,7 +281,7 @@ public class Input extends HttpServlet {
         String str = input;
 
         if (!StringUtils.isBlank(str))
-            str = Jsoup.clean(str, Whitelist.basic());
+            str = Jsoup.clean(str, Safelist.basic());
 
         return str;
     }
