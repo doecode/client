@@ -17,7 +17,8 @@ public class InputFunctions {
       return_data.set("countries_list", DOECODEServletContextListener.getJsonList(DOECODEJson.COUNTRIES_KEY));
       return_data.set("sponsoring_orgs_list", DOECODEServletContextListener.getJsonList(DOECODEJson.SPONSOR_ORG_KEY));
       return_data.set("research_orgs_list", DOECODEServletContextListener.getJsonList(DOECODEJson.RESEARCH_KEY));
-      return_data.set("contributor_type_list", DOECODEServletContextListener.getJsonList(DOECODEJson.CONTRIBUTOR_KEY));
+      return_data.set("contributor_personal_type_list", DOECODEServletContextListener.getJsonList(DOECODEJson.CONTRIBUTOR_PERSONAL_KEY));
+      return_data.set("contributor_org_type_list", DOECODEServletContextListener.getJsonList(DOECODEJson.CONTRIBUTOR_ORG_KEY));
       return return_data;
    }
 

@@ -350,10 +350,10 @@ public class ReportFunctions {
             if (StringUtils.isNotBlank(affiliations_str)) {
                 other_parts.add("Affiliations: " + affiliations_str);
             }
-            String contributor_type = row.findPath("contributor_type").asText("");
-            if (StringUtils.isNotBlank(contributor_type)) {
-                contributor_type = DOECODEUtils.getDisplayVersionOfValue(DOECODEServletContextListener.getJsonList(DOECODEJson.CONTRIBUTOR_KEY), contributor_type);
-                other_parts.add("Contributor Type: " + contributor_type);
+            String contributor_type_per = row.findPath("contributor_type").asText("");
+            if (StringUtils.isNotBlank(contributor_type_per)) {
+                contributor_type_per = DOECODEUtils.getDisplayVersionOfValue(DOECODEServletContextListener.getJsonList(DOECODEJson.CONTRIBUTOR_PERSONAL_KEY), contributor_type_per);
+                other_parts.add("Contributor Type: " + contributor_type_per);
             }
             String other_parts_str = DOECODEUtils.makeTokenSeparatedList(other_parts, ", ");
 
@@ -362,17 +362,20 @@ public class ReportFunctions {
                 display += " (" + other_parts_str + ")";
             }
             contributors_list.add(display);
+            String contributor_type_org = row.findPath("contributor_type").asText("");
+            contributor_type_org = DOECODEUtils.getDisplayVersionOfValue(DOECODEServletContextListener.getJsonList(DOECODEJson.CONTRIBUTOR_ORG_KEY), contributor_type_org);
         }
         return_data.put("contributors", DOECODEUtils.makeTokenSeparatedList(contributors_list, "; "));
 
         // Contributing Orgs
         ArrayNode contributing_orgs_list = JsonUtils.MAPPER.createArrayNode();
+        
         for (JsonNode j : (ArrayNode) docs.get("contributing_organizations")) {
             ObjectNode row = (ObjectNode) j;
             String name = row.findPath("organization_name").asText("");
-            String contributor_type = row.findPath("contributor_type").asText("");
+            String contributor_type_org = row.findPath("contributor_type").asText("");
             boolean is_doe = row.findPath("DOE").asBoolean(false);
-            contributing_orgs_list.add(name + " (DOE Organization: " + (is_doe ? "Y" : "N") + ", Contributor Type: " + contributor_type + ")");
+            contributing_orgs_list.add(name + " (DOE Organization: " + (is_doe ? "Y" : "N") + ", Contributor Type: " + contributor_type_org + ")");
         }
         return_data.put("contributing_orgs", DOECODEUtils.makeTokenSeparatedList(contributing_orgs_list, "; "));
 

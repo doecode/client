@@ -18,7 +18,8 @@ public class DOECODEJson {
 
     public static final String AFFILIATIONS_KEY = "affiliations";
     public static final String AVAILABILITY_KEY = "availability";
-    public static final String CONTRIBUTOR_KEY = "contributor";
+    public static final String CONTRIBUTOR_PERSONAL_KEY = "contributor_personal";
+    public static final String CONTRIBUTOR_ORG_KEY = "contributor_org";
     public static final String COUNTRIES_KEY = "countries";
     public static final String LICENSE_KEY = "license";
     public static final String ACCESS_LIMITATIONS_KEY = "access_limitations";
@@ -36,7 +37,8 @@ public class DOECODEJson {
     // Json Array lists
     private final ArrayNode AFFILIATIONS_LIST = JsonUtils.createArrayNode();
     private final ArrayNode AVAILABILITY_LIST = JsonUtils.createArrayNode();
-    private final ArrayNode CONTRIBUTOR_TYPES = JsonUtils.createArrayNode();
+    private final ArrayNode CONTRIBUTOR_TYPES_PERSONAL = JsonUtils.createArrayNode();
+    private final ArrayNode CONTRIBUTOR_TYPES_ORG = JsonUtils.createArrayNode();
     private final ArrayNode COUNTRIES_LIST = JsonUtils.createArrayNode();
     private final ArrayNode LICENSE_OPTIONS_LIST = JsonUtils.createArrayNode();
     private final ArrayNode ACCESS_LIMITATIONS_LIST = JsonUtils.createArrayNode();
@@ -66,27 +68,36 @@ public class DOECODEJson {
         this.AVAILABILITY_LIST.add(makeListObj("Open Source, No Publicly Available Repository", "ON", "Open Source, No Publicly Available Repository"));
         this.AVAILABILITY_LIST.add(makeListObj("Closed Source", "CS", "Closed Source"));
         // Contributor Types
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Contact Person", "ContactPerson", "Contact Person"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Data Collector", "DataCollector", "Data Collector"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Data Curator", "DataCurator", "Data Curator"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Data Manager", "DataManager", "Data Manager"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Distributor", "Distributor", "Distributor"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Editor", "Editor", "Editor"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Hosting Institution", "HostingInstitution", "Hosting Institution"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Other", "Other", "Other"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Producer", "Producer", "Producer"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Project Leader", "ProjectLeader", "Project Leader"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Project Manager", "ProjectManager", "Project Manager"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Project Member", "ProjectMember", "Project Member"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Registration Agency", "RegistrationAgency", "Registration Agency"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Registration Authority", "RegistrationAuthority", "Registration Authority"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Related Person", "RelatedPerson", "Related Person"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Research Group", "ResearchGroup", "Research Group"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Researcher", "Researcher", "Researcher"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Rights Holder", "RightsHolder", "Rights Holder"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Sponsor", "Sponsor", "Sponsor"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Supervisor", "Supervisor", "Supervisor"));
-        this.CONTRIBUTOR_TYPES.add(makeListObj("Work Package Leader", "WorkPackageLeader", "Work Package Leader"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Contact Person", "ContactPerson", "Contact Person"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Data Collector", "DataCollector", "Data Collector"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Data Curator", "DataCurator", "Data Curator"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Data Manager", "DataManager", "Data Manager"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Editor", "Editor", "Editor"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Other", "Other", "Other"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Producer", "Producer", "Producer"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Project Leader", "ProjectLeader", "Project Leader"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Project Manager", "ProjectManager", "Project Manager"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Project Member", "ProjectMember", "Project Member"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Related Person", "RelatedPerson", "Related Person"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Researcher", "Researcher", "Researcher"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Rights Holder", "RightsHolder", "Rights Holder"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Sponsor", "Sponsor", "Sponsor"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Supervisor", "Supervisor", "Supervisor"));
+        this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Work Package Leader", "WorkPackageLeader", "Work Package Leader"));
+        // Contributor Types
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Contact Person", "ContactPerson", "Contact Person"));
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Data Collector", "DataCollector", "Data Collector"));
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Data Curator", "DataCurator", "Data Curator"));
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Data Manager", "DataManager", "Data Manager"));
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Distributor", "Distributor", "Distributor"));
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Hosting Institution", "HostingInstitution", "Hosting Institution"));
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Other", "Other", "Other"));
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Producer", "Producer", "Producer"));
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Registration Agency", "RegistrationAgency", "Registration Agency"));
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Registration Authority", "RegistrationAuthority", "Registration Authority"));
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Research Group", "ResearchGroup", "Research Group"));
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Rights Holder", "RightsHolder", "Rights Holder"));
+        this.CONTRIBUTOR_TYPES_ORG.add(makeListObj("Sponsor", "Sponsor", "Sponsor"));
         // License Options
         this.LICENSE_OPTIONS_LIST.add(makeListObj("Other (Commercial or Open-Source)", "Other", "Other"));
         this.LICENSE_OPTIONS_LIST.add(makeListObj("Apache License 2.0", "Apache License 2.0", "Apache License 2.0"));
@@ -320,8 +331,12 @@ public class DOECODEJson {
         return this.AVAILABILITY_LIST;
     }
 
-    public ArrayNode getContributorList() {
-        return this.CONTRIBUTOR_TYPES;
+    public ArrayNode getContributorPersonalList() {
+        return this.CONTRIBUTOR_TYPES_PERSONAL;
+    }
+
+    public ArrayNode getContributorOrgList() {
+        return this.CONTRIBUTOR_TYPES_ORG;
     }
 
     public ArrayNode getCountriesList() {

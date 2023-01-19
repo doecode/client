@@ -195,7 +195,7 @@
                             <div class="col-xs-12">
                                 <select class='pure-input-1 form-control' title='Contributor Type' id='contributor-edit-contribtype'>
                                     <option title="Select an Option" value="">Select an Option</option>
-                                    {{#each contributor_type_list}}
+                                    {{#each contributor_personal_type_list}}
                                     <option title="{{title}}" value="{{value}}">{{label}}</option>
                                     {{/each}}
                                 </select>
@@ -263,7 +263,7 @@
                             <div class="col-xs-12">
                                 <select class='pure-input-1 form-control' title='Contributor Type' id='contributing-organization-edit-contribtype' data-placeholder='Select your Options'>
                                     <option title="Select an Option" value="">Select an Option</option>
-                                    {{#each contributor_type_list}}
+                                    {{#each contributor_org_type_list}}
                                     <option title="{{title}}" value="{{value}}">{{label}}</option>
                                     {{/each}}
                                 </select>
