@@ -24,7 +24,7 @@ import org.jsoup.safety.Safelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet(urlPatterns = {"/Index", "/repository-services", "/about", "/policy", "/resources", "/news", "/faq",
+@WebServlet(urlPatterns = {"/Index", "/repository-services", "/about", "/policy", "/resources", "/news", "/FAQs",
     "/results", "/search", "/biblio/*", "/forbidden", "/security-hosting", "/contact"})
 public class Dissemination extends HttpServlet {
 
@@ -88,8 +88,8 @@ public class Dissemination extends HttpServlet {
             String year_query = StringUtils.defaultIfBlank(request.getParameter("year"), "");
             output_data = NewsFunctions.getNewsPageJson(article_type_query, year_query);
 
-        } else if (remaining.equals("/faq")) {
-            page_title = "DOE CODE: FAQ's";
+        } else if (remaining.equals("/FAQs")) {
+            page_title = "DOE CODE: FAQs";
             template = TemplateUtils.TEMPLATE_FAQ_PAGE;
             current_page = TemplateUtils.PAGE_FAQ;
             output_data.put("api_url", Init.public_api_url);
