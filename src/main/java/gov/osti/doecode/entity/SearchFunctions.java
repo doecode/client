@@ -849,6 +849,32 @@ public class SearchFunctions {
         return return_data;
     }
 
+    public static ObjectNode getContributingOrganizations(ArrayNode contributing_orgs) {
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        ArrayNode list = JsonUtils.MAPPER.createArrayNode();
+
+        for (int i = 0; i < contributing_orgs.size(); i++) {
+            ObjectNode contributingOrgRow = (ObjectNode) contributing_orgs.get(i);
+            ObjectNode refinedContributingOrgRow = JsonUtils.MAPPER.createObjectNode();
+
+            refinedContributingOrgRow.put("org_name", contributingOrgRow.findPath("organization_name").asText(""));
+
+            // Primary Award
+            String contributor_type = contributingOrgRow.findPath("contributor_type").asText("");
+            refinedContributingOrgRow.put("contributor_type", contributor_type);
+
+            // If this is the last row, note it, because that affects the UI of the template
+            if ((i + 1) == contributing_orgs.size()) {
+                refinedContributingOrgRow.put("is_last", true);
+            }
+            list.add(refinedContributingOrgRow);
+        }
+
+        return_data.set("list", list);
+        return_data.put("has_contributing_org", list.size() > 0);
+        return return_data;
+    }
+
     public static ArrayNode getResearchOrganizations(ArrayNode researchOrgs) {
         ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
         for (JsonNode v : researchOrgs) {
@@ -1532,6 +1558,17 @@ public class SearchFunctions {
                 contributors_obj.put("has_affiliations", distinct_contrib_affiliations.size() > 0);
             }
             return_data.set("contributors_obj", contributors_obj);
+
+            /* Contributing Orgs */
+            ObjectNode contributing_orgs = getContributingOrganizations((ArrayNode) biblio_data.get("contributing_organizations"));
+            return_data.set("contributing_orgs", contributing_orgs);
+            return_data.put("has_contributing_org", contributing_orgs.findPath("has_contributing_org").asBoolean(false));
+            ArrayNode contributingorgslist = JsonUtils.MAPPER.createArrayNode();
+            for (JsonNode v : (ArrayNode) contributing_orgs.get("list")) {
+                ObjectNode vObj = (ObjectNode) v;
+                contributingorgslist.add(vObj.findPath("org_name").asText(""));
+            }
+            meta_tags.add(makeMetaTag("contributing_org", DOECODEUtils.makeSpaceSeparatedList(contributingorgslist)));
 
             // Release Date
             return_data.put("release_date", biblio_data.findPath("release_date").asText(""));
