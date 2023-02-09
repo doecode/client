@@ -7,7 +7,7 @@ const DATEPICKER_OPTS = {
 var toggleSearchDropdown = function () {
     var dropdownElement = $(this).next('div.adv-search-dropdown');
     $('#homepage-adv-dropdown-btn').click(function () {
-        $(dropdownElement).toggle(display);
+        $(dropdownElement).toggle();
     })
 
     if ($(dropdownElement).is(':visible')) {
@@ -322,8 +322,11 @@ var modal_id = (document.getElementById('index-indicator')) ? 'homepage-adv-drop
 $(document).mouseup(function (e) {
     var container = $("#" + modal_id);
     var datepicker_container = $("#ui-datepicker-div");
-    // Check to see if the item clicked on was in the advanced search, or in the datepicker in the advanced search modal
-    if (!container.is(e.target) && container.has(e.target).length === 0 && !datepicker_container.is(e.target) && $(datepicker_container).has(e.target).length === 0) {
+    var dropdown_button = $(".adv-search-button");
+    // Check to see if the item clicked on was in the advanced search, datepicker in the advanced search modal, 
+    // or dropdown button (otherwise this code will toggle the dropdown and the button will toggle it again)
+    if (!container.is(e.target) && container.has(e.target).length === 0 && !datepicker_container.is(e.target) 
+        && $(datepicker_container).has(e.target).length === 0 && !dropdown_button.is(e.target) && dropdown_button.has(e.target).length === 0 ) {
         container.hide();
     }
 });
