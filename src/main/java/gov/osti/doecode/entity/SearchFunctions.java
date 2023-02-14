@@ -859,8 +859,7 @@ public class SearchFunctions {
 
             refinedContributingOrgRow.put("org_name", contributingOrgRow.findPath("organization_name").asText(""));
 
-            // Primary Award
-            String contributor_type = contributingOrgRow.findPath("contributor_type").asText("");
+            String contributor_type = StringUtils.defaultIfBlank(DOECODEUtils.CONTRIBUTORS_MAP.get(contributingOrgRow.findPath("contributor_type").asText("")), "Unknown");
             refinedContributingOrgRow.put("contributor_type", contributor_type);
 
             // If this is the last row, note it, because that affects the UI of the template
