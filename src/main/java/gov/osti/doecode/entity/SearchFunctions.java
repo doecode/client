@@ -1580,7 +1580,7 @@ public class SearchFunctions {
             ObjectNode availabilityObj = JsonUtils.getJsonListItem(availabilityList, "value", biblio_data.findPath("project_type").asText(""));
             return_data.put("availability", availabilityObj.findPath("label").asText(""));
             return_data.put("has_availability", StringUtils.isNotBlank(biblio_data.findPath("project_type").asText("")));
-            meta_tags.add(makeMetaTag("availability", availabilityObj.findPath("label").asText("")));
+            meta_tags.add(makeMetaTag("project_type", availabilityObj.findPath("label").asText("")));
 
             /* Software Type */
             ArrayNode softwareTypeList = DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY);
