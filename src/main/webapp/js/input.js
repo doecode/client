@@ -87,11 +87,13 @@ var developers_data_tbl_opts = {
         {
             name: 'first_name',
             data: 'first_name',
+            render: $.fn.dataTable.render.text(),
             'defaultContent': ''
         },
         {
             name: 'last_name',
             data: 'last_name',
+            render: $.fn.dataTable.render.text(),
             'defaultContent': ''
         },
         {
@@ -120,6 +122,7 @@ var sponsoring_org_tbl_opts = {
         {
             name: 'primary_award',
             data: 'primary_award',
+            render: $.fn.dataTable.render.text(),
             'defaultContent': ''
         }
     ]
@@ -153,11 +156,13 @@ var contributors_org_tbl_opts = {
         {
             name: 'first_name',
             data: 'first_name',
+            render: $.fn.dataTable.render.text(),
             'defaultContent': ''
         },
         {
             name: 'last_name',
             data: 'last_name',
+            render: $.fn.dataTable.render.text(),
             'defaultContent': ''
         },
         {
@@ -175,6 +180,7 @@ var contributing_organizations_tbl_opts = {
     columns: [{
             name: 'organization_name',
             data: 'organization_name',
+            render: $.fn.dataTable.render.text(),
             'defaultContent': ''
         },
         {
@@ -205,6 +211,7 @@ var related_identifiers_tbl_opts = {
         {
             name: 'identifier_value',
             data: 'identifier_value',
+            render: $.fn.dataTable.render.text(),
             'defaultContent': '',
             className: 'word-break'
         }
@@ -225,6 +232,7 @@ var award_dois_tbl_opts = {
         {
             name: 'funder_name',
             data: 'funder_name',
+            render: $.fn.dataTable.render.text(),
             'defaultContent': '',
             className: 'word-break'
         }

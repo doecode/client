@@ -63,6 +63,16 @@ var projects_data_table_opts = {
     ]
 };
 
+var htmlEncode = function(input) {
+    const textArea = document.createElement('textarea');
+    textArea.innerText = input;
+    return textArea.innerHTML;
+}
+
+var htmlEncodeList = function(list) {
+    return list.map(x => htmlEncode(x));
+}
+
 var parseConfirmPageData = function (data) {
     data = data.metadata;
     var availabilities_list = JSON.parse($("#availabilities-list-json").val());
@@ -73,7 +83,7 @@ var parseConfirmPageData = function (data) {
     if (data.software_title) {
         metadata_list.push({
             title: 'Software Title',
-            content: data.software_title
+            content: htmlEncode(data.software_title)
         });
     }
 
@@ -81,7 +91,7 @@ var parseConfirmPageData = function (data) {
     if (data.developers && data.developers.length > 0) {
         var developer_list_refined = [];
         data.developers.forEach(function (item) {
-            developer_list_refined.push(item.first_name + ' ' + item.last_name + ' ' + makeDelimitedList(item.affiliations, ', '));
+            developer_list_refined.push(htmlEncode(item.first_name) + ' ' + htmlEncode(item.last_name) + ' ' + makeDelimitedList(htmlEncodeList(item.affiliations), ', '));
         });
         var developer_list_string = makeDelimitedList(developer_list_refined, '<br/>');
         metadata_list.push({
@@ -142,7 +152,7 @@ var parseConfirmPageData = function (data) {
     if (data.site_accession_number) {
         metadata_list.push({
             title: 'Site Accession Number',
-            content: data.site_accession_number
+            content: htmlEncode(data.site_accession_number)
         });
     }
     //Research Orgs
@@ -153,7 +163,7 @@ var parseConfirmPageData = function (data) {
         });
         metadata_list.push({
             title: 'Research Organizations',
-            content: makeDelimitedList(research_org_list, ', ')
+            content: makeDelimitedList(htmlEncodeList(research_org_list), ', ')
         });
     }
 
@@ -161,7 +171,7 @@ var parseConfirmPageData = function (data) {
     if (data.contributors && data.contributors.length > 0) {
         var contributor_list_refined = [];
         data.contributors.forEach(function (item) {
-            contributor_list_refined.push(item.first_name + ' ' + item.last_name + ' ' + makeDelimitedList(item.affiliations, ', '));
+            contributor_list_refined.push(htmlEncode(item.first_name) + ' ' + htmlEncode(item.last_name) + ' ' + makeDelimitedList(htmlEncodeList(item.affiliations), ', '));
         });
         var contributor_list_string = makeDelimitedList(contributor_list_refined, '<br/>');
         metadata_list.push({
@@ -177,7 +187,7 @@ var parseConfirmPageData = function (data) {
         });
         metadata_list.push({
             title: 'Contributing Organizations',
-            content: makeDelimitedList(contributing_org_list, ', ')
+            content: makeDelimitedList(htmlEncodeList(contributing_org_list), ', ')
         });
     }
 
@@ -189,7 +199,7 @@ var parseConfirmPageData = function (data) {
             var sponsor_extra_info = makeSponsorOrgExtraInfoRow(data.sponsoring_organizations);
             sponsoring_org_items_list.push('<div class="row">'
                     + '<div class="col-md-6 col-xs-12">'
-                    + item.organization_name
+                    + htmlEncode(item.organization_name)
                     + '</div>'
                     + '<div class="col-md-6 col-xs-12">'
                     + sponsor_extra_info
@@ -212,14 +222,14 @@ var parseConfirmPageData = function (data) {
     if (data.other_special_requirements) {
         metadata_list.push({
             title: 'Other Special Requirements',
-            content: data.other_special_requirements
+            content: htmlEncode(data.other_special_requirements)
         });
     }
     //Keywords
     if (data.keywords) {
         metadata_list.push({
             title: 'Keywords',
-            content: data.keywords
+            content: htmlEncode(data.keywords)
         });
     }
     //Landing Page
@@ -255,7 +265,7 @@ var makeSponsorOrgExtraInfoRow = function (data) {
         html += "<div class='row'>";
         html + "<div class='col-md-1'></div>";
         html += "<div class='col-md-5 col-xs-12'>Primary Award/Contract Number:</div>";
-        html += "<div class='col-md-6 col-xs-12'>" + data.primary_award + "</div>";
+        html += "<div class='col-md-6 col-xs-12'>" + htmlEncode(data.primary_award) + "</div>";
         html += "</div>";
     }
 
@@ -265,7 +275,7 @@ var makeSponsorOrgExtraInfoRow = function (data) {
         html += "<div class='col-md-1'></div>";
         html += "<div class='col-md-5 col-xs-12'>Other Award/Contract Number:</div>";
         html += "<div class='col-md-6 col-xs-12'>";
-        html += makeDelimitedList(data.award_numbers, '<br/>');
+        html += makeDelimitedList(htmlEncodeList(data.award_numbers), '<br/>');
         html += "</div>";
         html += "</div>";
     }
@@ -276,7 +286,7 @@ var makeSponsorOrgExtraInfoRow = function (data) {
         html += "<div class='col-md-1'></div>";
         html += "<div class='col-md-3 col-xs-12'>FWP Number:</div>";
         html += "<div class='col-md-8 col-xs-12'>";
-        html += makeDelimitedList(data.fwp_numbers, '<br/>');
+        html += makeDelimitedList(htmlEncodeList(data.fwp_numbers), '<br/>');
         html += "</div>";
         html += "</div>";
     }
