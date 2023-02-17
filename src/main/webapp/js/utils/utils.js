@@ -301,7 +301,7 @@ var populateSelectWithCustomData = function (select, data) {
         data = [data];
     }
     data.forEach(function (item) {
-        var length = $("#" + select + " option:contains(" + item + ")").length;
+        var length = $("#" + select + " option[value='" + item + "']").length;
         if (length == 0) {
             var newOption = $('<option>', {
                 value: item,
