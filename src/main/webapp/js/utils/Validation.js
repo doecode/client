@@ -23,6 +23,12 @@ var Validation = function () {
           errors += this.validateBR(value);
         } else if (validations[i] === "developers") {
           errors += this.validateDevs(value);
+        } else if (validations[i] === "affiliations") {
+          errors += this.validateAffiliations(value);
+        } else if (validations[i] === "validateName50") {
+          errors += this.validateName50(value);
+        } else if (validations[i] === "validateName60") {
+          errors += this.validateName60(value);
         }
       }
 
@@ -132,6 +138,36 @@ var Validation = function () {
       if (badDevs.length > 0) {
         errors = "The following Developers are incomplete (first & last name required) : " + badDevs.join("; ");
       }
+      return errors;
+    }
+  }, {
+    key: "validateAffiliations",
+    value: function validateAffiliations(value) {
+      var affiliations = value;
+      var errors = "";
+      var affiliationCharCount = 0;
+
+      for (var i = 0; i < affiliations.length; i++) {
+        affiliationCharCount += affiliations[i].length;
+      }
+
+      if (affiliationCharCount > 900) {
+        errors = "Affiliations must be 900 characters or less in total length.";
+      }
+      return errors;
+    }
+  }, {
+    key: "validateName50",
+    value: function validateName50(value) {
+      var errors = "";
+      if (value.length > 50) errors += "Must be 50 characters or less.";
+      return errors;
+    }
+  }, {
+    key: "validateName60",
+    value: function validateName60(value) {
+      var errors = "";
+      if (value.length > 60) errors += "Must be 60 characters or less.";
       return errors;
     }
   }]);

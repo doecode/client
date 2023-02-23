@@ -20,12 +20,12 @@ var Developer = function (_BaseData) {
         };
 
         var defaultDeveloperInfoSchema = {
-            "first_name": { required: true, completed: false, ever_completed: false, validations: [""], error: '' },
-            "middle_name": { required: false, completed: false, ever_completed: false, validations: [], error: '' },
-            "last_name": { required: true, completed: false, ever_completed: false, validations: [], error: '' },
+            "first_name": { required: true, completed: false, ever_completed: false, validations: ["validateName50"], error: '' },
+            "middle_name": { required: false, completed: false, ever_completed: false, validations: ["validateName50"], error: '' },
+            "last_name": { required: true, completed: false, ever_completed: false, validations: ["validateName60"], error: '' },
             "email": { required: false, completed: false, ever_completed: false, validations: ["email"], error: '' },
             "orcid": { required: false, completed: false, ever_completed: false, validations: ["orcid"], error: '' },
-            "affiliations": { required: false, completed: false, ever_completed: false, validations: [], error: '' }
+            "affiliations": { required: false, completed: false, ever_completed: false, validations: ["affiliations"], error: '' }
         };
         var props = { fieldMap: MetadataStore.developer, infoSchema: MetadataStore.developerInfoSchema, fieldMapSnapshot: defaultDeveloper, infoSchemaSnapshot: defaultDeveloperInfoSchema };
         return _possibleConstructorReturn(this, (Developer.__proto__ || Object.getPrototypeOf(Developer)).call(this, props));
