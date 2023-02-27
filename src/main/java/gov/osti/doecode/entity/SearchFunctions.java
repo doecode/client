@@ -849,6 +849,28 @@ public class SearchFunctions {
         return return_data;
     }
 
+    public static ObjectNode getAwardDois(ArrayNode award_dois) {
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+        ArrayNode list = JsonUtils.MAPPER.createArrayNode();
+        for (int i = 0; i < award_dois.size(); i++) {
+            ObjectNode awardDoisRow = (ObjectNode) award_dois.get(i);
+            ObjectNode refinedAwardDoisRow = JsonUtils.MAPPER.createObjectNode();
+
+            refinedAwardDoisRow.put("funder_name", awardDoisRow.findPath("funder_name").asText(""));
+            refinedAwardDoisRow.put("award_doi", awardDoisRow.findPath("award_doi").asText(""));
+
+            // If this is the last row, note it, because that affects the UI of the template
+            if ((i + 1) == award_dois.size()) {
+                refinedAwardDoisRow.put("is_last", true);
+            }
+            list.add(refinedAwardDoisRow);
+        }
+
+        return_data.set("list", list);
+        return_data.put("has_award_dois", list.size() > 0);
+        return return_data;
+    }
+
     public static ObjectNode getContributingOrganizations(ArrayNode contributing_orgs) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         ArrayNode list = JsonUtils.MAPPER.createArrayNode();
@@ -1587,6 +1609,17 @@ public class SearchFunctions {
             ObjectNode softwareTypeObj = JsonUtils.getJsonListItem(softwareTypeList, "value", biblio_data.findPath("software_type").asText(""));
             return_data.put("software_type", softwareTypeObj.findPath("label").asText(""));
             meta_tags.add(makeMetaTag("software_type", softwareTypeObj.findPath("label").asText("")));
+
+            /* Award DOI */
+            ObjectNode award_dois = getAwardDois((ArrayNode) biblio_data.get("award_dois"));
+            return_data.set("award_dois", award_dois);
+            return_data.put("has_award_dois", award_dois.findPath("has_award_dois").asBoolean(false));
+            ArrayNode award_doislist = JsonUtils.MAPPER.createArrayNode();
+            for (JsonNode v : (ArrayNode) award_dois.get("list")) {
+                ObjectNode vObj = (ObjectNode) v;
+                award_doislist.add(vObj.findPath("funder_name").asText(""));
+            }
+            meta_tags.add(makeMetaTag("award_dois", DOECODEUtils.makeSpaceSeparatedList(award_doislist)));
 
             /* Licenses */
             ArrayNode licenses = (ArrayNode) biblio_data.get("licenses");

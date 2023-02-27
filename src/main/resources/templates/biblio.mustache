@@ -126,6 +126,20 @@
         margin-bottom:20px;
     }
 
+    #award-doi-table td {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        {{! padding-right: 3px; }}
+    }
+    #award-doi-table td:first-child {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-right: 0px;
+    }
+    #award-doi-table tr:nth-child(2n+3) td {
+        padding-top: 25px;
+    }
+
     #contributors-table > tbody > tr > td:nth-child(1){
         white-space:nowrap;
         vertical-align:top;
@@ -403,6 +417,34 @@
                                                     <dl class='row'>
                                                         <dt class='col-md-3 col-xs-12 biblio-field-header'>Project Type:</dt>
                                                         <dd class='col-md-9 col-xs-12 biblio-field-value'>{{availability}}</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                            {{/if}}
+                                             <!--Award DOIs -->
+                                            {{#if award_dois.has_award_dois}}
+                                            <div class='biblio-row'>
+                                                <div class='col-xs-12'>
+                                                    <dl class='row'>
+                                                        <dt class='col-md-3 col-xs-12 biblio-field-header'>Award DOI:</dt>
+                                                        <dd class='col-md-9 col-xs-12 biblio-field-value'>
+                                                            <div>
+                                                                <table id="award-doi-table">
+                                                                    <tbody>
+                                                                        {{#each award_dois.list}}
+                                                                        <tr>
+                                                                            <td><a>{{award_doi}}</a></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <span data-authorname='{{funder_name}}' title='{{funder_name}}'>Awarding Organization: {{funder_name}}</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        {{/each}}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </dd>
                                                     </dl>
                                                 </div>
                                             </div>
