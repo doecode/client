@@ -852,18 +852,20 @@ public class SearchFunctions {
     public static ObjectNode getAwardDois(ArrayNode award_dois) {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         ArrayNode list = JsonUtils.MAPPER.createArrayNode();
-        for (int i = 0; i < award_dois.size(); i++) {
-            ObjectNode awardDoisRow = (ObjectNode) award_dois.get(i);
-            ObjectNode refinedAwardDoisRow = JsonUtils.MAPPER.createObjectNode();
-
-            refinedAwardDoisRow.put("funder_name", awardDoisRow.findPath("funder_name").asText(""));
-            refinedAwardDoisRow.put("award_doi", awardDoisRow.findPath("award_doi").asText(""));
-
-            // If this is the last row, note it, because that affects the UI of the template
-            if ((i + 1) == award_dois.size()) {
-                refinedAwardDoisRow.put("is_last", true);
+        if(award_dois != null) {
+            for (int i = 0; i < award_dois.size(); i++) {
+                ObjectNode awardDoisRow = (ObjectNode) award_dois.get(i);
+                ObjectNode refinedAwardDoisRow = JsonUtils.MAPPER.createObjectNode();
+                
+                refinedAwardDoisRow.put("funder_name", awardDoisRow.findPath("funder_name").asText(""));
+                refinedAwardDoisRow.put("award_doi", awardDoisRow.findPath("award_doi").asText(""));
+                
+                // If this is the last row, note it, because that affects the UI of the template
+                if ((i + 1) == award_dois.size()) {
+                    refinedAwardDoisRow.put("is_last", true);
+                }
+                list.add(refinedAwardDoisRow);
             }
-            list.add(refinedAwardDoisRow);
         }
 
         return_data.set("list", list);
