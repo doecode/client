@@ -92,9 +92,6 @@ var Metadata = function (_BaseData) {
             }
           }
 
-          if (field === 'release_date' && data[field]) data[field] = moment(data[field], BACK_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
-          if (field === 'ouo_release_date' && data[field]) data[field] = moment(data[field], BACK_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT);
-
           if (field === 'sponsoring_organizations') this.deserializeSponsoringOrganization(data);
 
           this.setValue(field, data[field]);

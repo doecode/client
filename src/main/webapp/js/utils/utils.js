@@ -23,6 +23,65 @@ var NON_CHARACTER_KEYCODES = [
     16, /*shift*/
     9 /*tab*/];
 
+function parseBackendDate(dateString) {
+    const timeStrings = dateString.split('-');
+    const timeValues = timeStrings.map(Number);
+    
+    return new Date(Date.UTC(timeValues[0], timeValues[1]-1, timeValues[2]+1))
+}
+    
+function parseFrontendDate(dateString) {
+    const timeStrings = dateString.split('/');
+    const timeValues = timeStrings.map(Number); 
+
+    return new Date(Date.UTC(timeValues[2], timeValues[0]-1, timeValues[1]+1))
+}
+
+// const LOGIN_EXPIRATION_DATE_FORMAT = "YYYY-MM-DD HH:mm" Date format used to for the moment object that determines if you've been inactive for 45 minutes or not
+function formatExpirationDate(date) {
+    let p = new Intl.DateTimeFormat('en',{
+        year:'numeric',
+        month:'2-digit',
+        day:'2-digit',
+        hour:'2-digit',
+        minute:'2-digit',
+        hour12: true
+    }).formatToParts(date).reduce((acc, part) => {
+        acc[part.type] = part.value;
+        return acc;
+    }, {});
+    
+    return `${p.month}-${p.day}-${p.year} ${p.hour}:${p.minute}`; 
+}
+
+// Backend Date Format - YYYY-MM-DD
+function formatBackendDate(date) {
+    let p = new Intl.DateTimeFormat('en',{
+        year:'numeric',
+        month:'2-digit',
+        day:'2-digit',
+    }).formatToParts(date).reduce((acc, part) => {
+        acc[part.type] = part.value;
+        return acc;
+    }, {});
+    
+    return `${p.year}-${p.month}-${p.day}`; 
+}
+
+// Frontend Date Format - MM/DD/YYYY
+function formatFrontendDate(date) {
+    let p = new Intl.DateTimeFormat('en',{
+        year:'numeric',
+        month:'2-digit',
+        day:'2-digit',
+    }).formatToParts(date).reduce((acc, part) => {
+        acc[part.type] = part.value;
+        return acc;
+    }, {});
+    
+    return `${p.month}/${p.day}/${p.year}`; 
+}
+
 function doAjax(methodType, url, successCallback, data, errorCallback, dataType, contentType) {
     var errorCall = errorCallback;
     if (errorCall === undefined) {
@@ -125,7 +184,8 @@ function doAuthenicatedFileDownloadAjax(url, successCallback, errorCallback) {
 function checkIsAuthenticated() {
     var successCallback = function successCallback() {
         var user_data = JSON.parse(localStorage.user_data);
-        user_data.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
+        const d = new Date();
+        user_data.token_expiration = formatExpirationDate(d.setMinutes(d.getMinutes() + SESSION_TIMEOUT));
         localStorage.user_data = JSON.stringify(user_data);
     };
 
@@ -143,7 +203,8 @@ function checkIsAuthenticated() {
 
 function handleAuthenticatedSuccess(data, callback) {
     var user_data = JSON.parse(localStorage.user_data);
-    user_data.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
+    const d = new Date();
+    user_data.token_expiration = formatExpirationDate(d.setMinutes(d.getMinutes() + SESSION_TIMEOUT));
     localStorage.user_data = JSON.stringify(user_data);
     callback(data);
 }
@@ -168,6 +229,7 @@ function clearLoginLocalstorage() {
 
 function setLoggedInAttributes(data) {
     var user_data = {};
+    const d = new Date();
 
     user_data.xsrfToken = data.xsrfToken;
     user_data.user_email = data.email;
@@ -175,7 +237,7 @@ function setLoggedInAttributes(data) {
     user_data.last_name = data.last_name;
     user_data.display_name = data.display_name;
     user_data.display_name_lastname_first = data.display_name_lastname_first;
-    user_data.token_expiration = moment().add(SESSION_TIMEOUT, 'minutes').format(LOGIN_EXPIRATION_DATE_FORMAT);
+    user_data.token_expiration = formatExpirationDate(d.setMinutes(d.getMinutes() + SESSION_TIMEOUT));
     user_data.roles = data.roles;
     user_data.user_site = data.site;
     user_data.software_group_email = data.software_group_email;
@@ -563,7 +625,7 @@ var populateAdvancedSearchForm = function (id_prefix) {
             });
         } else if (item_val && (item_name == 'date_latest' || item_name == 'date_earliest')) {//If it's a date
             var no_t_date = item_val.substr(0, item_val.indexOf('T'));
-            $("#" + id_prefix + item_name).val(moment(no_t_date, BACK_END_DATE_FORMAT).format(FRONT_END_DATE_FORMAT));
+            $("#" + id_prefix + item_name).val(formatFrontendDate(parseBackendDate(no_t_date)));
 
         } else {//If it's anything else
             $("#" + id_prefix + item.name).val(item_val);

@@ -41,12 +41,12 @@ var triggerAdvancedSearch = function () {
     //Release Date Start 
     var date_earliest = $("#advanced-search-date_earliest").val();
     if (date_earliest) {
-        $("#search-date_earliest").val(moment(date_earliest, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT) + "T05:00:01.000Z");
+        $("#search-date_earliest").val(formatBackendDate(parseFrontendDate(date_earliest)) + "T05:00:01.000Z");
     }
     //Release Date End
     var date_latest = $("#advanced-search-date_latest").val();
     if (date_latest) {
-        $("#search-date_latest").val(moment(date_latest, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT) + "T23:59:59.001Z");
+        $("#search-date_latest").val(formatBackendDate(parseFrontendDate(date_latest)) + "T23:59:59.001Z");
     }
 
     //Project Type
@@ -119,13 +119,13 @@ var triggerDropdownAdvancedSearch = function () {
     //Release Date Start 
     var date_earliest = $(name_prefix + "-date_earliest").val();
     if (date_earliest) {
-        $("#search-date_earliest").val(moment(date_earliest, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT) + "T05:00:01.000Z");
+        $("#search-date_earliest").val(formatBackendDate(parseFrontendDate(date_earliest)) + "T05:00:01.000Z");
     }
 
     //Release Date End
     var date_latest = $(name_prefix + "-date_latest").val();
     if (date_latest) {
-        $("#search-date_latest").val(moment(date_latest, FRONT_END_DATE_FORMAT).format(BACK_END_DATE_FORMAT) + "T23:59:59.001Z");
+        $("#search-date_latest").val(formatBackendDate(parseFrontendDate(date_latest)) + "T23:59:59.001Z");
     }
 
     //Project Type

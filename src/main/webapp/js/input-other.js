@@ -103,7 +103,7 @@ var parseConfirmPageData = function (data) {
     if (data.release_date) {
         metadata_list.push({
             title: 'Release Date',
-            content: moment(data.release_date, BACK_END_DATE_FORMAT).format(FRONT_END_DATE_FORMAT)
+            content: formatFrontendDate(parseBackendDate(data.release_date))
         });
     }
     //Project Type
@@ -406,7 +406,7 @@ var parseApprovalPageData = function (data) {
             code_id: item.code_id ? item.code_id : '',
             software_title: item.software_title ? item.software_title.replace(/</g, "&lt;").replace(/>/g, "&gt;") : '',
             date_record_updated: item.date_record_updated ? item.date_record_updated : '',
-            date_record_updated_display: item.date_record_updated ? moment(item.date_record_updated, BACK_END_DATE_FORMAT).format(FRONT_END_DATE_FORMAT) : '',            
+            date_record_updated_display: item.date_record_updated ? formatFrontendDate(parseBackendDate(item.date_record_updated)) : '',            
             workflow_status: workflow_status
         });
     });
