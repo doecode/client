@@ -579,9 +579,7 @@ var setRequired = function (label, is_required, exclude_parenthetical_text) {
 
 var inputChange = mobx.action("Input Change", function (event) {
     var value = $(this).val();
-    if ((event.data.field == "release_date" || event.data.field == "ouo_release_date") && value) {
-        value = formatBackendDate(parseFrontendDate(value));
-    } else if ((['programming_languages', 'licenses', 'access_limitations',
+    if ((['programming_languages', 'licenses', 'access_limitations',
         'affiliations', 'country_of_origin', 'project_keywords', 'organization_name',
         'award_numbers', 'br_codes', 'fwp_numbers', 'contributor_type', 'identifier_type', 'relation_type'].indexOf(event.data.field) > -1) && value && Array.isArray(value)) {
         //Due to a strange bug with chosen js, duplicates can happen in certain scenarios. This is to prevent said duplicates
@@ -611,8 +609,6 @@ var updateInputStyle = function (store, field, label, input, exclude_parenthetic
     updateLabelStyle(store, field, label, exclude_parenthetical_text);
 
     var value = store.getValue(field);
-    if ((field == "release_date" || field == "ouo_release_date") && value)
-        value = formatFrontendDate(parseBackendDate(value));
 
     $("#" + input).val(value);
 };

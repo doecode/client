@@ -23,6 +23,7 @@ var NON_CHARACTER_KEYCODES = [
     16, /*shift*/
     9 /*tab*/];
 
+// Backend Date Format - YYYY-MM-DD
 function parseBackendDate(dateString) {
     const timeStrings = dateString.split('-');
     const timeValues = timeStrings.map(Number);
@@ -30,11 +31,14 @@ function parseBackendDate(dateString) {
     return new Date(Date.UTC(timeValues[0], timeValues[1]-1, timeValues[2]+1))
 }
     
+// Frontend Date Format 
+// <input type='date'> returns values as YYYY-MM-DD
+// and Displays as MM/DD/YYYY
 function parseFrontendDate(dateString) {
-    const timeStrings = dateString.split('/');
+    const timeStrings = dateString.split('-');
     const timeValues = timeStrings.map(Number); 
 
-    return new Date(Date.UTC(timeValues[2], timeValues[0]-1, timeValues[1]+1))
+    return new Date(Date.UTC(timeValues[0], timeValues[1]-1, timeValues[2]+1))
 }
 
 // const LOGIN_EXPIRATION_DATE_FORMAT = "YYYY-MM-DD HH:mm" Date format used to for the moment object that determines if you've been inactive for 45 minutes or not
