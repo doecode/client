@@ -12,23 +12,28 @@ var Validation = function () {
     value: mobx.action("Validate", function validate(field, value, validationObj, validationCallback) {
       var errors = "";
       var validations = validationObj.validations;
+      // regex to capture substring within "()" and separate the text before it. 
+      // "valueLength(50)" -> found = ["valueLength(50)", "valueLength", "50"]
+      // "valueLength" -> null
+      // fails to match on "valuelength"
+      const regex = /^(\w+)\((.+)\)$/;
 
       var valLength = validations.length;
       for (var i = 0; i < valLength; i++) {
-        if (validations[i] === "phonenumber") {
+        const parsedValidations = validations[i].match(regex);
+        const validation = parsedValidations == null ? validations[i] : parsedValidations[1];
+        if (validation === "phonenumber") {
           errors += this.validatePhone(value);
-        } else if (validations[i] === "email") {
+        } else if (validation === "email") {
           errors += this.validateEmail(value);
-        } else if (validations[i] === "BR") {
+        } else if (validation === "BR") {
           errors += this.validateBR(value);
-        } else if (validations[i] === "developers") {
+        } else if (validation === "developers") {
           errors += this.validateDevs(value);
-        } else if (validations[i] === "affiliations") {
+        } else if (validation === "affiliations") {
           errors += this.validateAffiliations(value);
-        } else if (validations[i] === "validateName50") {
-          errors += this.validateName50(value);
-        } else if (validations[i] === "validateName60") {
-          errors += this.validateName60(value);
+        } else if (validation === "validateLength") {
+          errors += this.validateLength(value, Number(parsedValidations[2]));
         }
       }
 
@@ -157,17 +162,12 @@ var Validation = function () {
       return errors;
     }
   }, {
-    key: "validateName50",
-    value: function validateName50(value) {
+    key: "validateLength",
+    value: function validateLength(str, maxLength) {
       var errors = "";
-      if (value.length > 50) errors += "Must be 50 characters or less.";
-      return errors;
-    }
-  }, {
-    key: "validateName60",
-    value: function validateName60(value) {
-      var errors = "";
-      if (value.length > 60) errors += "Must be 60 characters or less.";
+      if (str.length > maxLength) {
+        errors += "Must be " + maxLength + " characters or less.";
+      }
       return errors;
     }
   }]);

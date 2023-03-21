@@ -20,9 +20,9 @@ var Developer = function (_BaseData) {
         };
 
         var defaultDeveloperInfoSchema = {
-            "first_name": { required: true, completed: false, ever_completed: false, validations: ["validateName50"], error: '' },
-            "middle_name": { required: false, completed: false, ever_completed: false, validations: ["validateName50"], error: '' },
-            "last_name": { required: true, completed: false, ever_completed: false, validations: ["validateName60"], error: '' },
+            "first_name": { required: true, completed: false, ever_completed: false, validations: ["validateLength(50)"], error: '' },
+            "middle_name": { required: false, completed: false, ever_completed: false, validations: ["validateLength(50)"], error: '' },
+            "last_name": { required: true, completed: false, ever_completed: false, validations: ["validateLength(60)"], error: '' },
             "email": { required: false, completed: false, ever_completed: false, validations: ["email"], error: '' },
             "orcid": { required: false, completed: false, ever_completed: false, validations: ["orcid"], error: '' },
             "affiliations": { required: false, completed: false, ever_completed: false, validations: ["affiliations"], error: '' }

@@ -1085,19 +1085,19 @@ var _developerInfoSchema = mobx.observable({
     "first_name": {
         required: true,
         completed: false,
-        validations: ["validateName50"],
+        validations: ["validateLength(50)"],
         error: ''
     },
     "middle_name": {
         required: false,
         completed: false,
-        validations: ["validateName50"],
+        validations: ["validateLength(50)"],
         error: ''
     },
     "last_name": {
         required: true,
         completed: false,
-        validations: ["validateName60"],
+        validations: ["validateLength(60)"],
         error: ''
     },
     "email": {
@@ -1136,19 +1136,19 @@ var _contributorInfoSchema = mobx.observable({
     "first_name": {
         required: true,
         completed: false,
-        validations: ["validateName50"],
+        validations: ["validateLength(50)"],
         error: ''
     },
     "middle_name": {
         required: false,
         completed: false,
-        validations: ["validateName50"],
+        validations: ["validateLength(50)"],
         error: ''
     },
     "last_name": {
         required: true,
         completed: false,
-        validations: ["validateName60"],
+        validations: ["validateLength(60)"],
         error: ''
     },
     "email": {
