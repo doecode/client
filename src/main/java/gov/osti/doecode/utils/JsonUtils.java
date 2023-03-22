@@ -23,27 +23,6 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class JsonUtils {
 
-    public static final String AFFILIATIONS_LIST_JSON = "affiliationsList.json";
-    public static final String AFFILIATIONS_LIST_JSON_KEY = "affiliations";
-    public static final String AVAILABILITIES_LIST_JSON = "availabilityList.json";
-    public static final String AVAILABILITIES_LIST_JSON_KEY = "availabilities";
-    public static final String CONTRIBUTOR_TYPES_LIST_JSON = "contributorTypes.json";
-    public static final String CONTRIBUTOR_TYPES_LIST_JSON_KEY = "contributorTypes";
-    public static final String COUNTRIES_LIST_JSON = "countriesList.json";
-    public static final String COUNTRIES_LIST_JSON_KEY = "countries";
-    public static final String LICENSE_JLIST_SON_KEY = "licenseOptions";
-    public static final String LICENSE_OPTIONS_LIST_JSON = "licenseOptionsList.json";
-    public static final String RESEARCH_ORG_LIST_JSON = "researchOrgList.json";
-    public static final String RESEARCH_ORG_LIST_JSON_KEY = "researchOrgs";
-    public static final String SEARCH_SORT_LIST_JSON_KEY = "searchSortOptions";
-    public static final String SEARCH_SORT_OPTIONS_LIST_JSON = "searchSortOptionsList.json";
-    public static final String SOFTWARE_TYPES_LIST_JSON = "softwareTypeList.json";
-    public static final String SOFTWARE_TYPES_LIST_JSON_KEY = "softwareTypes";
-    public static final String SPONSOR_ORG_LIST_JSON = "sponsorOrgsList.json";
-    public static final String SPONSOR_ORG_LIST_JSON_KEY = "sponsorOrgs";
-    public static final String STATE_LIST_JSON = "statesList.json";
-    public static final String STATE_LIST_JSON_KEY = "states";
-
     private static Logger log = LoggerFactory.getLogger(JsonUtils.class.getName());
 
     public static final JsonNodeFactory INSTANCE = JsonNodeFactory.instance;
