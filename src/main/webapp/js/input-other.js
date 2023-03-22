@@ -16,6 +16,10 @@ const LOADING_PENDING_PROJECTS_ERROR_OPTS = {title: 'Error in Loading Pending Pr
     contentClasses: ['center-text'], showClose: true};
 
 var pending_data_table_opts = {
+    columnDefs: [{
+        "defaultContent": "",
+        "targets": "_all"
+        }],
     order: [[2, 'asc']],
     autoWidth: false,
     responsive: true,
@@ -36,6 +40,10 @@ var pending_data_table_opts = {
 };
 
 var projects_data_table_opts = {
+    columnDefs: [{
+                "defaultContent": "",
+                "targets": "_all"
+                }],
     order: [[0, 'asc']],
     autoWidth: false,
     responsive: true,

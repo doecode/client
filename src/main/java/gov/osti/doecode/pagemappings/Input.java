@@ -64,9 +64,9 @@ public class Input extends HttpServlet {
             String load_id = CleanInput(request.getParameter("load_id"));
             String version_type = CleanInput(request.getParameter("version_type"));
             output_data = InputFunctions.getInputFormLists(getServletContext());
-            cssFilesList.add("DataTables-1.10.20/css/jquery.dataTables.min");
-            cssFilesList.add("Responsive-2.2.3/css/responsive.dataTables.min");
-            cssFilesList.add("RowReorder-1.2.6/css/rowReorder.dataTables.min");
+            cssFilesList.add("DataTables-1.13.4/css/jquery.dataTables.min");
+            cssFilesList.add("Responsive-2.4.1/css/responsive.dataTables.min");
+            cssFilesList.add("RowReorder-1.3.3/css/rowReorder.dataTables.min");
 
             page_title = "DOE CODE: Submit";
             template = TemplateUtils.TEMPLATE_INPUT_FORM;
@@ -101,9 +101,9 @@ public class Input extends HttpServlet {
         } else if (remaining.startsWith("announce")) {
             String code_id = CleanInput(request.getParameter("code_id"));
             output_data = InputFunctions.getInputFormLists(getServletContext());
-            cssFilesList.add("DataTables-1.10.20/css/jquery.dataTables.min");
-            cssFilesList.add("Responsive-2.2.3/css/responsive.dataTables.min");
-            cssFilesList.add("RowReorder-1.2.6/css/rowReorder.dataTables.min");
+            cssFilesList.add("DataTables-1.13.4/css/jquery.dataTables.min");
+            cssFilesList.add("Responsive-2.4.1/css/responsive.dataTables.min");
+            cssFilesList.add("RowReorder-1.3.3/css/rowReorder.dataTables.min");
 
             page_title = "DOE CODE: Announce";
             template = TemplateUtils.TEMPLATE_INPUT_FORM;
@@ -128,9 +128,9 @@ public class Input extends HttpServlet {
         } else if (remaining.startsWith("approve")) {
             String code_id = CleanInput(request.getParameter("code_id"));
             output_data = InputFunctions.getInputFormLists(getServletContext());
-            cssFilesList.add("DataTables-1.10.20/css/jquery.dataTables.min");
-            cssFilesList.add("Responsive-2.2.3/css/responsive.dataTables.min");
-            cssFilesList.add("RowReorder-1.2.6/css/rowReorder.dataTables.min");
+            cssFilesList.add("DataTables-1.13.4/css/jquery.dataTables.min");
+            cssFilesList.add("Responsive-2.4.1/css/responsive.dataTables.min");
+            cssFilesList.add("RowReorder-1.3.3/css/rowReorder.dataTables.min");
 
             page_title = "DOE CODE: Approve";
             template = TemplateUtils.TEMPLATE_INPUT_FORM;
@@ -193,17 +193,16 @@ public class Input extends HttpServlet {
             template = TemplateUtils.TEMPLATE_MY_PROJECTS;
             current_page = TemplateUtils.PAGE_PROJECTS;
             jsFilesList.add("input-other");
-            cssFilesList.add("DataTables-1.10.20/css/jquery.dataTables.min");
-            cssFilesList.add("Responsive-2.2.3/css/responsive.dataTables.min");
+            cssFilesList.add("DataTables-1.13.4/css/jquery.dataTables.min");
+            cssFilesList.add("Responsive-2.4.1/css/responsive.dataTables.min");
 
         } else if (remaining.startsWith("pending")) {
             page_title = "DOE CODE: Pending";
             template = TemplateUtils.TEMPLATE_PENDING_APPROVAL;
             current_page = TemplateUtils.PAGE_PROJECTS;
             jsFilesList.add("input-other");
-            cssFilesList.add("DataTables-1.10.20/css/jquery.dataTables.min");
-            cssFilesList.add("Responsive-2.2.3/css/responsive.dataTables.min");
-
+            cssFilesList.add("DataTables-1.13.4/css/jquery.dataTables.min");
+            cssFilesList.add("Responsive-2.4.1/css/responsive.dataTables.min");
         } else if (remaining.startsWith("form-select")) {
             page_title = "DOE CODE: Form Select";
             template = TemplateUtils.TEMPLATE_FORM_SELECT;
