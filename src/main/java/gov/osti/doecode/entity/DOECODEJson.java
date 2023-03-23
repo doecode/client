@@ -119,7 +119,7 @@ public class DOECODEJson {
         this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; ECI) Export Controlled Information", "ECI", "Export Controlled Information"));
         this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; PAT) Patent Pending", "PAT", "Patent Pending"));
         this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; PDOUO) Program-Determined Official Use Only", "PDOUO", "Program-Determined Official Use Only"));
-        this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; PROP) Limited Rights Data", "PROP", "Limited Rights Data"));
+        this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; LRD) Limited Rights Data (Proprietary/Trade Secret)", "LRD", "Limited Rights Data (Proprietary/Trade Secret)"));
         this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; PROT) Protected Data CRADA/EPACT/OTHER", "PROT", "Protected Data CRADA/EPACT/OTHER"));
         this.ACCESS_LIMITATIONS_LIST.add(makeListObj("(OUO; SSI) Security Sensitive Information", "SSI", "Security Sensitive Information"));
         // Protections
