@@ -38,7 +38,7 @@ public class JsonUtils {
 
     /*
      Takes a json array, and you pass what key in that array you're comparing to, and what value
-     So like, I could be looking for the value "ON" in the availabilities json list, and I want to compare it to the "value" key
+     So like, I could be looking for the value "ON" in the project type json list, and I want to compare it to the "value" key
      If we do that, it's like getJsonListItem(list,"value",val);
      */
     public static ObjectNode getJsonListItem(ArrayNode array, String key, String value) {

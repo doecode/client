@@ -11,7 +11,7 @@ public class InputFunctions {
 
    public static ObjectNode getInputFormLists(ServletContext context) {
       ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
-      return_data.set("availabilities_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY));
+      return_data.set("project_type_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_TYPE_KEY));
       return_data.set("licenses_list", DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY));
       return_data.set("affiliations_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AFFILIATIONS_KEY));
       return_data.set("countries_list", DOECODEServletContextListener.getJsonList(DOECODEJson.COUNTRIES_KEY));

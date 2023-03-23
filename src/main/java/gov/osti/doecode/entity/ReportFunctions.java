@@ -163,7 +163,7 @@ public class ReportFunctions {
 
         // Project Type
         String project_type = docs.findPath("project_type").asText("");
-        ArrayNode project_types = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
+        ArrayNode project_types = DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_TYPE_KEY);
         return_data.put("project_type", DOECODEUtils.getDisplayVersionOfValue(project_types, project_type));
 
         // Repository/Landing Page Link

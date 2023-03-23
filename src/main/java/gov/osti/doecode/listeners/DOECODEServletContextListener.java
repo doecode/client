@@ -31,8 +31,8 @@ public class DOECODEServletContextListener implements ServletContextListener {
             case DOECODEJson.AFFILIATIONS_KEY:
                 return_list = doecode_json_lists.getAffiliationsList();
                 break;
-            case DOECODEJson.AVAILABILITY_KEY:
-                return_list = doecode_json_lists.getAvailabilityList();
+            case DOECODEJson.PROJECT_TYPE_KEY:
+                return_list = doecode_json_lists.getProjectTypeList();
                 break;
             case DOECODEJson.CONTRIBUTOR_PERSONAL_KEY:
                 return_list = doecode_json_lists.getContributorPersonalList();

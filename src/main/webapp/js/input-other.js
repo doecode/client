@@ -83,7 +83,7 @@ var htmlEncodeList = function(list) {
 
 var parseConfirmPageData = function (data) {
     data = data.metadata;
-    var availabilities_list = JSON.parse($("#availabilities-list-json").val());
+    var project_type_list = JSON.parse($("#project-type-list-json").val());
     //Now, go through, grab the values
     var metadata_list = [];
 
@@ -117,7 +117,7 @@ var parseConfirmPageData = function (data) {
     //Project Type
     if (data.project_type) {
         var display_val = "";
-        availabilities_list.forEach(function (item) {
+        project_type_list.forEach(function (item) {
             if (data.project_type === item.value) {
                 display_val = item.label;
                 return true;

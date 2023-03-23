@@ -17,7 +17,7 @@ public class DOECODEJson {
     private final Logger log = LoggerFactory.getLogger(DOECODEJson.class.getName());
 
     public static final String AFFILIATIONS_KEY = "affiliations";
-    public static final String AVAILABILITY_KEY = "availability";
+    public static final String PROJECT_TYPE_KEY = "project_type";
     public static final String CONTRIBUTOR_PERSONAL_KEY = "contributor_personal";
     public static final String CONTRIBUTOR_ORG_KEY = "contributor_org";
     public static final String COUNTRIES_KEY = "countries";
@@ -36,7 +36,7 @@ public class DOECODEJson {
 
     // Json Array lists
     private final ArrayNode AFFILIATIONS_LIST = JsonUtils.createArrayNode();
-    private final ArrayNode AVAILABILITY_LIST = JsonUtils.createArrayNode();
+    private final ArrayNode PROJECT_TYPE_LIST = JsonUtils.createArrayNode();
     private final ArrayNode CONTRIBUTOR_TYPES_PERSONAL = JsonUtils.createArrayNode();
     private final ArrayNode CONTRIBUTOR_TYPES_ORG = JsonUtils.createArrayNode();
     private final ArrayNode COUNTRIES_LIST = JsonUtils.createArrayNode();
@@ -63,10 +63,10 @@ public class DOECODEJson {
         this.SEARCH_SORT_OPTIONS_LIST.add(makeListObj("Relevance", "score desc", "Relevance"));
         this.SEARCH_SORT_OPTIONS_LIST.add(makeListObj("Release Date (newest to oldest)", "releaseDate desc", "Release Date (newest to oldest)"));
         this.SEARCH_SORT_OPTIONS_LIST.add(makeListObj("Release Date (oldest to newest)", "releaseDate asc", "Release Date (oldest to newest)"));
-        // Availability
-        this.AVAILABILITY_LIST.add(makeListObj("Open Source, Publicly Available Repository", "OS", "Open Source, Publicly Available Repository"));
-        this.AVAILABILITY_LIST.add(makeListObj("Open Source, No Publicly Available Repository", "ON", "Open Source, No Publicly Available Repository"));
-        this.AVAILABILITY_LIST.add(makeListObj("Closed Source", "CS", "Closed Source"));
+        // Project Type
+        this.PROJECT_TYPE_LIST.add(makeListObj("Open Source, Publicly Available Repository", "OS", "Open Source, Publicly Available Repository"));
+        this.PROJECT_TYPE_LIST.add(makeListObj("Open Source, No Publicly Available Repository", "ON", "Open Source, No Publicly Available Repository"));
+        this.PROJECT_TYPE_LIST.add(makeListObj("Closed Source", "CS", "Closed Source"));
         // Contributor Types
         this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Contact Person", "ContactPerson", "Contact Person"));
         this.CONTRIBUTOR_TYPES_PERSONAL.add(makeListObj("Data Collector", "DataCollector", "Data Collector"));
@@ -327,8 +327,8 @@ public class DOECODEJson {
         return this.AFFILIATIONS_LIST;
     }
 
-    public ArrayNode getAvailabilityList() {
-        return this.AVAILABILITY_LIST;
+    public ArrayNode getProjectTypeList() {
+        return this.PROJECT_TYPE_LIST;
     }
 
     public ArrayNode getContributorPersonalList() {

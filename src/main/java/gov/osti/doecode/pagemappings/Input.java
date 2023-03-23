@@ -182,8 +182,8 @@ public class Input extends HttpServlet {
             output_data.put("has_minted_doi", StringUtils.isNotBlank(minted_doi));
 
             // Get some json for the page
-            ArrayNode availabilityList = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
-            output_data.put("availabilities_list_json", availabilityList.toString());
+            ArrayNode projectTypeList = DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_TYPE_KEY);
+            output_data.put("project_type_list_json", projectTypeList.toString());
 
             output_data.set("relation_type", DOECODEServletContextListener.getJsonList(DOECODEJson.RELATION_TYPES_KEY));
 

@@ -135,7 +135,7 @@ public class SearchFunctions {
         return_data.set("pagination_btn", getPaginationData(search_form_data, num_found));
         return_data.set("breadcrumbTrailItem", getSearchBreadcrumbTrailList(post_data, num_found));
         return_data.set("search_sort_dropdown", sort_dropdownOptions(post_data.findPath("sort").asText("")));
-        return_data.set("availabilities_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY), handleRequestArray(request.getParameter("project_type"))));
+        return_data.set("project_type_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_TYPE_KEY), handleRequestArray(request.getParameter("project_type"))));
         return_data.set("license_options_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY), handleRequestArray(request.getParameter("licenses"))));
         return_data.set("software_type_options_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY), handleRequestArray(request.getParameter("software_type"))));
         return_data.set("search_description", getSearchResultsDescription(post_data));
@@ -289,9 +289,9 @@ public class SearchFunctions {
         String project_type_array = post_data.findPath("project_type").asText("");
         if (StringUtils.isNotBlank(project_type_array) && JsonUtils.parseArrayNode(project_type_array).size() > 0) {
             // Get the project_type array so we can get some display values
-            ArrayNode accessiblity_display_vals = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
+            ArrayNode project_type_display_vals = DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_TYPE_KEY);
 
-            search_description_list.add(makeSearchDescriptionObjectArray("Project Type", JsonUtils.parseArrayNode(project_type_array), "project_type", accessiblity_display_vals));
+            search_description_list.add(makeSearchDescriptionObjectArray("Project Type", JsonUtils.parseArrayNode(project_type_array), "project_type", project_type_display_vals));
         }
 
         // Software Type
@@ -647,7 +647,7 @@ public class SearchFunctions {
 
     public static ObjectNode getAdvancedSearchPageLists() {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
-        return_data.set("availabilities_list", DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY));
+        return_data.set("project_type_list", DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_TYPE_KEY));
         return_data.set("licenses_list", DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY));
         return_data.set("software_type", DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY));
         return_data.set("sort_list", DOECODEServletContextListener.getJsonList(DOECODEJson.SEARCH_SORT_KEY));
@@ -1538,13 +1538,13 @@ public class SearchFunctions {
             return_data.put("has_release_date", StringUtils.isNotBlank(biblio_data.findPath("release_date").asText("")));
             meta_tags.add(makeMetaTag("release_date", biblio_data.findPath("release_date").asText("")));
 
-            /* Code Availability */
-            ArrayNode availabilityList = DOECODEServletContextListener.getJsonList(DOECODEJson.AVAILABILITY_KEY);
+            /* Project Type */
+            ArrayNode projectTypeList = DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_TYPE_KEY);
 
-            ObjectNode availabilityObj = JsonUtils.getJsonListItem(availabilityList, "value", biblio_data.findPath("project_type").asText(""));
-            return_data.put("availability", availabilityObj.findPath("label").asText(""));
-            return_data.put("has_availability", StringUtils.isNotBlank(biblio_data.findPath("project_type").asText("")));
-            meta_tags.add(makeMetaTag("project_type", availabilityObj.findPath("label").asText("")));
+            ObjectNode projectTypeObj = JsonUtils.getJsonListItem(projectTypeList, "value", biblio_data.findPath("project_type").asText(""));
+            return_data.put("project_type", projectTypeObj.findPath("label").asText(""));
+            return_data.put("has_project_type", StringUtils.isNotBlank(biblio_data.findPath("project_type").asText("")));
+            meta_tags.add(makeMetaTag("project_type", projectTypeObj.findPath("label").asText("")));
 
             /* Software Type */
             ArrayNode softwareTypeList = DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY);

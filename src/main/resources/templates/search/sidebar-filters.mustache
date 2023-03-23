@@ -13,12 +13,12 @@
         <h4 class="search-sidebar-filter-title">REFINE BY:</h4>
         <span class='search-for-filter-text search-for-filter-header'>Project Type</span>
         <div class="search-sidebar-checkbox-text">
-            {{#each availabilities_list}}
+            {{#each project_type_list}}
             <div>
                 <span class="search-sidebar-margin">
                     <label>
-                        <input class='search-checkbox' id='availabilitycheck-{{value}}' name='project_type' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> 
-                               <label title='{{label}}' class='search-input-label' for='availabilitycheck-{{value}}'>
+                        <input class='search-checkbox' id='projecttype-check-{{value}}' name='project_type' value='{{value}}' type='checkbox' {{#if is_checked}} checked{{/if}}/> 
+                               <label title='{{label}}' class='search-input-label' for='projecttype-check-{{value}}'>
                             <span class="fas fa-check"></span>
                         </label>&nbsp;{{label}}
                     </label>
