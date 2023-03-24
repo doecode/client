@@ -1179,6 +1179,10 @@ div.Select>div.Select-control input {
 }
 
 /**Datatable overrides**/
+.min-size {
+    min-width: 75px;
+}
+
 #projects-datatable_filter,
 #pending-datatable_filter {
     padding-bottom: 5px;

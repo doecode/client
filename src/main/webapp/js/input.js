@@ -88,13 +88,15 @@ var developers_data_tbl_opts = {
             name: 'first_name',
             data: 'first_name',
             render: $.fn.dataTable.render.text(),
-            'defaultContent': ''
+            'defaultContent': '',
+            className: 'word-break'
         },
         {
             name: 'last_name',
             data: 'last_name',
             render: $.fn.dataTable.render.text(),
-            'defaultContent': ''
+            'defaultContent': '',
+            className: 'word-break'
         },
         {
             name: 'affiliations',
@@ -103,7 +105,8 @@ var developers_data_tbl_opts = {
             render: function (data, type, row) {
                 var affiliations = data ? data.join(', ') : '';
                 return affiliations;
-            }
+            },
+            className: 'word-break'
         }
     ],
     // Disable search bar for Developers datatable
@@ -117,7 +120,8 @@ var sponsoring_org_tbl_opts = {
     columns: [{
             name: 'organization_name',
             data: 'organization_name',
-            'defaultContent': ''
+            'defaultContent': '',
+            className: 'word-break'
         },
         {
             name: 'primary_award',
@@ -135,7 +139,8 @@ var research_org_tbl_opts = {
     columns: [{
         name: 'organization_name',
         data: 'organization_name',
-        'defaultContent': ''
+        'defaultContent': '',
+        className: 'word-break'
     }]
 };
 
@@ -157,13 +162,15 @@ var contributors_org_tbl_opts = {
             name: 'first_name',
             data: 'first_name',
             render: $.fn.dataTable.render.text(),
-            'defaultContent': ''
+            'defaultContent': '',
+            className: 'word-break'
         },
         {
             name: 'last_name',
             data: 'last_name',
             render: $.fn.dataTable.render.text(),
-            'defaultContent': ''
+            'defaultContent': '',
+            className: 'word-break'
         },
         {
             name: 'contributor_type',
@@ -181,7 +188,8 @@ var contributing_organizations_tbl_opts = {
             name: 'organization_name',
             data: 'organization_name',
             render: $.fn.dataTable.render.text(),
-            'defaultContent': ''
+            'defaultContent': '',
+            className: 'word-break'
         },
         {
             name: 'contributor_type',
@@ -227,7 +235,8 @@ var award_dois_tbl_opts = {
         {
             name: 'award_doi',
             data: 'award_doi',
-            'defaultContent': ''
+            'defaultContent': '',
+            className: 'word-break'
         },
         {
             name: 'funder_name',

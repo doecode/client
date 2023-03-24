@@ -25,7 +25,7 @@ var pending_data_table_opts = {
     responsive: true,
     columns: [
         {name: 'code_id', data: 'code_id', width: '88px', className: 'text-center'},
-        {name: 'software_title', data: 'software_title'},
+        {name: 'software_title', data: 'software_title', className: 'word-break min-size'},
         {name: 'date_record_updated', data: null, render: {
             "_": "date_record_updated",
             "filter": "date_record_updated_display",
@@ -49,7 +49,7 @@ var projects_data_table_opts = {
     responsive: true,
     columns: [
         {name: 'code_id', data: 'code_id', width: '88px', className: 'text-center'},
-        {name: 'software_title', data: 'software_title'},
+        {name: 'software_title', data: 'software_title', className: 'word-break min-size'},
         {render: function (data, type, row) {
                 return '<a href="/' + APP_NAME + '/' + row.edit_endpoint + '?code_id=' + row.code_id
                         + '" class="pure-button button-success btn-sm white " title="Update Metadata for ' + row.code_id + '">Update Metadata</a>';
