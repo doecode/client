@@ -550,7 +550,7 @@ var setSuccess = function (label, is_completed, error_msg) {
         $("#" + label).removeClass("has-success");
         $("#" + label).parent().parent().addClass("has-error");
         $("#" + label).parent().parent().removeClass("has-success");
-        $("#" + label + "-error").html(error_msg);
+        $("#" + label + "-error").text(error_msg);
         $("#" + label).parent().parent().find(".errorCheck").show();
         $("#" + label).parent().parent().find(".successCheck").hide();
     } else if (is_completed) {
