@@ -200,7 +200,7 @@ var _metadataInfoSchema = mobx.observable({
         label: "Version Number",
         completed: false,
         ever_completed: false,
-        validations: [],
+        validations: ["validateLength(50)"],
         panel: "Product Description",
         error: ''
     },
@@ -209,7 +209,7 @@ var _metadataInfoSchema = mobx.observable({
         label: "Documentation URL",
         completed: false,
         ever_completed: false,
-        validations: ["url"],
+        validations: ["url", "validateLength(255)"],
         panel: "Product Description",
         error: ''
     },
@@ -416,7 +416,7 @@ var _metadataInfoSchema = mobx.observable({
         required: "",
         completed: false,
         ever_completed: false,
-        validations: [],
+        validations: ["validateLength(255)"],
         panel: "Supplemental Product Information",
         error: ''
     },
@@ -433,7 +433,7 @@ var _metadataInfoSchema = mobx.observable({
         required: "",
         completed: false,
         ever_completed: false,
-        validations: [],
+        validations: ["validateLength(500)"],
         panel: "Supplemental Product Information",
         error: ''
     },
@@ -449,7 +449,7 @@ var _metadataInfoSchema = mobx.observable({
         required: "",
         completed: false,
         ever_completed: false,
-        validations: [],
+        validations: ["validateLength(25)"],
         panel: "Supplemental Product Information",
         error: ''
     },
@@ -457,7 +457,7 @@ var _metadataInfoSchema = mobx.observable({
         required: "",
         completed: false,
         ever_completed: false,
-        validations: [],
+        validations: ["validateLength(255)"],
         panel: "Supplemental Product Information",
         error: ''
     },
@@ -484,7 +484,7 @@ var _metadataInfoSchema = mobx.observable({
         label: "Name",
         completed: false,
         ever_completed: false,
-        validations: [],
+        validations: ["validateLength(255)"],
         panel: "Contact Information",
         error: ''
     },
@@ -511,7 +511,7 @@ var _metadataInfoSchema = mobx.observable({
         label: "Organization",
         completed: false,
         ever_completed: false,
-        validations: [],
+        validations: ["validateLength(255)"],
         panel: "Contact Information",
         error: ''
     },
@@ -1247,7 +1247,7 @@ var _contributingOrganizationInfoSchema = mobx.observable({
     "organization_name": {
         required: true,
         completed: false,
-        validations: [],
+        validations: ["validateLength(1000)"],
         error: ''
     },
     "contributor_type": {
@@ -1302,7 +1302,7 @@ var _awardDOIInfoSchema = mobx.observable({
     "funder_name": {
         required: true,
         completed: false,
-        validations: [],
+        validations: ["validateLength(255)"],
         error: ''
     }
 });

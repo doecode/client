@@ -236,7 +236,8 @@ var award_dois_tbl_opts = {
             name: 'award_doi',
             data: 'award_doi',
             'defaultContent': '',
-            className: 'word-break'
+            className: 'word-break',
+            width: '15%'
         },
         {
             name: 'funder_name',
