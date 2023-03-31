@@ -25,7 +25,7 @@ var SponsoringOrganization = function (_BaseData) {
     };
 
     var defaultSponsoringOrganizationSchema = {
-      "organization_name": { required: true, completed: false, ever_completed: false, validations: [], error: '' },
+      "organization_name": { required: true, completed: false, ever_completed: false, validations: ["validateLength(1000)"], error: '' },
       "primary_award": { required: true, completed: false, ever_completed: false, validations: ["awardnumber"], error: '' },
       "award_numbers": { required: false, completed: false, ever_completed: false, validations: [], error: '' },
       "br_codes": { required: false, completed: false, ever_completed: false, validations: ["BR"], error: '' },

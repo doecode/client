@@ -1192,7 +1192,7 @@ var _sponsoringOrganizationInfoSchema = mobx.observable({
     "organization_name": {
         required: true,
         completed: false,
-        validations: [],
+        validations: ["validateLength(1000)"],
         error: ''
     },
     "primary_award": {
@@ -1231,7 +1231,7 @@ var _researchOrganizationInfoSchema = mobx.observable({
     "organization_name": {
         required: true,
         completed: false,
-        validations: [],
+        validations: ["validateLength(1000)"],
         error: ''
     }
 });

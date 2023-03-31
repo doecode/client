@@ -18,7 +18,7 @@ var ResearchOrganization = function (_BaseData) {
 
         var defaultResearchOrganizationSchema = {
 
-            "organization_name": { required: true, completed: false, ever_completed: false, validations: [""], error: '' }
+            "organization_name": { required: true, completed: false, ever_completed: false, validations: ["validateLength(1000)"], error: '' }
         };
 
         var props = { fieldMap: MetadataStore.researchOrganization, infoSchema: MetadataStore.researchOrganizationInfoSchema, fieldMapSnapshot: defaultResearchOrganization, infoSchemaSnapshot: defaultResearchOrganizationSchema };

@@ -18,7 +18,7 @@ var ContributingOrganization = function (_BaseData) {
     };
 
     var defaultContributingOrganizationSchema = {
-      "organization_name": { required: true, completed: false, ever_completed: false, validations: [""], error: '' },
+      "organization_name": { required: true, completed: false, ever_completed: false, validations: ["validateLength(1000)"], error: '' },
       "contributor_type": { required: true, completed: false, ever_completed: false, validations: [], error: '' }
     };
 
