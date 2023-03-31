@@ -32,6 +32,7 @@ var form = mobx.observable({
     "workflowStatus": ""
 });
 form.last_filename = "";
+form.last_files = [];
 
 form.open_licenses = [];
 form.open_propurl = "";
@@ -772,10 +773,13 @@ var parseSearchResponse = mobx.action("Parse Search Response", function parseSea
     }
 
     form.last_filename = "";
+    form.last_files = [];
     var project_type = metadata.getValue("project_type");
     if (project_type != 'OS') {
-        var orig_file = metadata.getValue("file_name");
-        form.last_filename = orig_file ? orig_file : form.last_filename;
+        var orig_file_name = metadata.getValue("file_name");
+        var orig_files = metadata.getValue("files");
+        form.last_filename = orig_file_name ? orig_file_name : form.last_filename;
+        form.last_files = orig_files ? orig_files : form.last_files; 
     }
 
     if (project_type != null) {
@@ -1274,6 +1278,7 @@ mobx.autorun("Project Type", function () {
 
     if (project_type != 'OS') {
         metadata.setValue("file_name", form.last_filename);
+        metadata.setValue("files", form.last_files);
     }
 
     //mobx.whyRun();
@@ -2529,6 +2534,7 @@ var removeFileUploadInfo = mobx.action("Remove File Drop", function () {
     metadata.setValue("file_name", "");
     metadata.setValue("files", []);
     form.last_filename = "";
+    form.last_files = [];
 
     // if dropzone has a file associated, remove it via click event
     var existingFile = $("#file-upload-dropzone .dz-remove")[0];
@@ -2573,6 +2579,7 @@ var FILE_UPLOAD_CONFIG = {
                 metadata.setValue("file_name", file.name);
                 metadata.setValue("files", [file]);
                 form.last_filename = file.name;
+                form.last_files = metadata.getValue("files");
 
                 //Make the remove button included hide the right content
                 $("#file-upload-dropzone .dz-remove").on('click', function () {
