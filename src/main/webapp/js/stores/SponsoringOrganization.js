@@ -54,7 +54,7 @@ var SponsoringOrganization = function (_BaseData) {
     value: function setValue(field, data) {
     	if (field == "DOE") {
 	      if (data) {
-	        this.infoSchema["primary_award"].required = true;
+	        this.infoSchema["primary_award"].required = metadata.getValue("is_migration") ? false : true;
 	        this.infoSchema["primary_award"].validations = ["awardnumber"];
 	      }
 	      else {
