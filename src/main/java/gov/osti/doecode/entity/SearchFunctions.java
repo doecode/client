@@ -531,9 +531,14 @@ public class SearchFunctions {
                 // Combine the names
                 String combined_name = last_name + ", " + first_name;
 
+                // Allow "last name only" for Group names
+                if (StringUtils.equalsIgnoreCase(first_name, "none") && !StringUtils.equalsIgnoreCase(last_name, "none")) {
+                    combined_name = last_name;
+                }
+
                 // If we still had anything left over, we'll assume we have a properly combined
                 // name
-                if (StringUtils.isNotBlank(combined_name.replaceAll(" ", "").replaceAll(",", "")) && !first_name.equalsIgnoreCase("none") && !last_name.equalsIgnoreCase("none")) {
+                if (StringUtils.isNotBlank(combined_name.replaceAll(" ", "").replaceAll(",", "")) && !last_name.equalsIgnoreCase("none")) {
                     row.put("combined_name", combined_name);
                     row.put("author_type", "developer");
                     return_data.add(row);
@@ -552,9 +557,14 @@ public class SearchFunctions {
                 // Combine the names
                 String combined_name = last_name + ", " + first_name;
 
+                // Allow "last name only" for Group names
+                if (StringUtils.equalsIgnoreCase(first_name, "none") && !StringUtils.equalsIgnoreCase(last_name, "none")) {
+                    combined_name = last_name;
+                }
+
                 // If we still had anything left over, we'll assume we have a properly combined
                 // name
-                if (StringUtils.isNotBlank(combined_name.replaceAll(" ", "").replaceAll(",", "")) && !first_name.equalsIgnoreCase("none") && !last_name.equalsIgnoreCase("none")) {
+                if (StringUtils.isNotBlank(combined_name.replaceAll(" ", "").replaceAll(",", "")) && !last_name.equalsIgnoreCase("none")) {
                     row.put("combined_name", combined_name);
                     row.put("author_type", "contributor");
                     return_data.add(row);
@@ -916,8 +926,7 @@ public class SearchFunctions {
             String middle_name = row.findPath("middle_name").asText("");
             String last_name = row.findPath("last_name").asText("");
             // Make sure they're not a "none" entry
-            if (!first_name.equalsIgnoreCase("none") && !middle_name.equalsIgnoreCase("none")
-                    && !last_name.equalsIgnoreCase("none")) {
+            if (!last_name.equalsIgnoreCase("none")) {
                 String combinedName = combineName(first_name, middle_name, last_name);
 
                 if (StringUtils.isNotBlank(combinedName)) {
@@ -932,8 +941,7 @@ public class SearchFunctions {
             String middle_name = row.findPath("middle_name").asText("");
             String last_name = row.findPath("last_name").asText("");
 
-            if (!first_name.equalsIgnoreCase("none") && !middle_name.equalsIgnoreCase("none")
-                    && !last_name.equalsIgnoreCase("none")) {
+            if (!last_name.equalsIgnoreCase("none")) {
                 String combinedName = combineName(first_name, middle_name, last_name);
 
                 if (StringUtils.isNotBlank(combinedName)) {
@@ -946,7 +954,17 @@ public class SearchFunctions {
     }
 
     private static String combineName(String first_name, String middle_name, String last_name) {
+        boolean showLastNameOnly = first_name.equalsIgnoreCase("none");
+        boolean ignoreMiddleName = middle_name.equalsIgnoreCase("none");
         String fullname = "";
+
+        if (showLastNameOnly) {
+            first_name = "";
+        }
+
+        if (showLastNameOnly || ignoreMiddleName) {
+            middle_name = "";
+        }
 
         if (StringUtils.isNotBlank(last_name)) {
             fullname += last_name;
@@ -1347,8 +1365,12 @@ public class SearchFunctions {
                 String first_name = developer.findPath("first_name").asText("").trim();
                 String last_name = developer.findPath("last_name").asText("").trim();
                 String name = last_name + ", " + first_name;
+                // Allow "last name only" for Group names
+                if (StringUtils.equalsIgnoreCase(first_name, "none") && !StringUtils.equalsIgnoreCase(last_name, "none")) {
+                    name = last_name;
+                }
                 //See if the name isn't blank or a "none, none" situation. If it isn't, then we'll add them to the object that shows on the biblio page
-                if (StringUtils.isNotBlank(name.replaceAll(" ", "").replaceAll(",", "")) && !StringUtils.equalsIgnoreCase(first_name, "none") && !StringUtils.equalsIgnoreCase(last_name, "none")) {
+                if (StringUtils.isNotBlank(name.replaceAll(" ", "").replaceAll(",", "")) && !StringUtils.equalsIgnoreCase(last_name, "none")) {
                     row.put("name", name);
                     developers_meta_list.addAll(makeDeveloperContributorMetaTag("developer", developer, developers_meta_list.toString()));
 
@@ -1426,9 +1448,12 @@ public class SearchFunctions {
                 // Name
                 String last_name = contributor.findPath("last_name").asText("");
                 String first_name = contributor.findPath("first_name").asText("");
-
                 String name = last_name + ", " + first_name;
-                if (StringUtils.isNotBlank(name.replaceAll(" ", "").replaceAll(",", "")) && !StringUtils.equalsIgnoreCase(first_name, "none") && !StringUtils.equalsIgnoreCase(last_name, "none")) {
+                // Allow "last name only" for Group names
+                if (StringUtils.equalsIgnoreCase(first_name, "none") && !StringUtils.equalsIgnoreCase(last_name, "none")) {
+                    name = last_name;
+                }
+                if (StringUtils.isNotBlank(name.replaceAll(" ", "").replaceAll(",", "")) && !StringUtils.equalsIgnoreCase(last_name, "none")) {
                     row.put("name", name);
                     contributor_meta_list.addAll(makeDeveloperContributorMetaTag("contributor", contributor, contributor_meta_list.toString()));
                     // Orcid
