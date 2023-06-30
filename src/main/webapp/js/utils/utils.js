@@ -4,6 +4,7 @@ const AUTHORITY_API_BASE = $("#authority-api-base").val(); //The url to the OSTI
 const SESSION_TIMEOUT = parseInt($("#session-timeout").val()); //Amount of time until session expires (in minutes)
 const APP_NAME = $("#app-name").val(); //Name of application. doecode by default, but can be changed if paralell deployments on the same tomcat are needed
 const GOOGLE_ANALYTICS_ID = $("#google-analytics-id").val();//ID used for google analytics tracking
+const GOOGLE_ANALYTICS_4_ID = $("#google-analytics-4-id").val();//ID used for google analytics 4 tracking
 const GOOGLE_ANALYTICS_DOMAIN = $("#google-analytics-domain").val();//Domain used for google analytics tracking
 
 /*Normal static values*/

@@ -316,9 +316,17 @@ var pushDownloadMetric = function () {
     var code_id = $(this).data('codeid');
     var software_type = $(this).data('softwaretype');
     var href = $(this).attr('href');
+    var title = $(this).attr('title');
     var ga_link = '/' + APP_NAME + "/downloads/" + code_id + "/" + href;
     _gaq.push(['_setCustomVar', 1, 'Software Type', software_type, 3]);
     _gaq.push(['_trackPageview', ga_link]);
+
+    if ( window.gtag ) {
+        gtag('event', 'page_view', {
+            page_title: title,
+            page_location: ga_link
+        });
+    }
 };
 
 //If we're on the about page....

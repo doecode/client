@@ -39,6 +39,16 @@
                 s.parentNode.insertBefore(ga, s);
             })();
         </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{google_analytics_4_id}}"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '{{google_analytics_4_id}}'{{#if software_type}}, {'Software Type': '{{software_type}}'}{{/if}});
+        
+        </script>
 
         <!--Font inclusion-->
         <style type='text/css'>
@@ -62,6 +72,7 @@
     <input type='hidden' id='session-timeout' value='{{session_timeout}}'/>
     <input type='hidden' id='app-name' value='${app_name}'/>
     <input type='hidden' id='google-analytics-id' value='{{google_analytics_id}}'/>
+    <input type='hidden' id='google-analytics-4-id' value='{{google_analytics_4_id}}'/>
     <input type='hidden' id='google-analytics-domain' value='{{ga_domain}}'/>
 </head>
 

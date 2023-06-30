@@ -28,6 +28,7 @@ public class Init extends HttpServlet {
     public static Handlebars handlebarsSearch;
     public static String app_name; //The actual name of the application build. This can be different, based on some switches with maven
     public static String google_analytics_id; //The ID your google analytics account has for this application
+    public static String google_analytics_4_id; //The ID your google analytics 4 account has for this application
     public static String google_analytics_domain; //The domain of the application, specifically for google analytics. Needs to match your domain, or your google analytics counts might not work
     public static String public_api_url; //The front-end, usually proxied URL to the DOE CODE API
     public static String backend_api_url; //The back-end, usually un-proxied URL to the DOE CODE API
@@ -63,6 +64,7 @@ public class Init extends HttpServlet {
 
             // Google analytics info
             google_analytics_id = PROPS.getProperty("ga_id");
+            google_analytics_4_id = PROPS.getProperty("ga4_id");
             google_analytics_domain = PROPS.getProperty("ga_domain");
 
             // Set the container upload directory
