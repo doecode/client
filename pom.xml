@@ -37,9 +37,7 @@
                 <gitlab_from_email>The email address gitlab submissions are from</gitlab_from_email>
                 <gitlab_recaptcha_site_key>The public key attached to recaptcha instances</gitlab_recaptcha_site_key>
                 <gitlab_recaptcha_secret_key>The private key attached to recaptcha submissions</gitlab_recaptcha_secret_key>
-                <google_analytics_id>The public ID used for google analytics submissions</google_analytics_id>
                 <google_analytics_4_id>The public ID used for google analytics 4 submissions</google_analytics_4_id>
-                <google_analytics_domain>The domain used for google analytics. Needs to match the environment (If your url is "www.site.com", make sure this is "www.site.com" minus the ")</google_analytics_domain>
                 <log_level>The level of log for a particular build. Could be debug, info, warn, error, etc</log_level>
             </properties>
         </profile>
