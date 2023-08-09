@@ -15,6 +15,9 @@ var post_gitlab_form_data = function () {
     submission_data.job_title = $("#job-title").val();
     submission_data.employment_designation = $("#employment-designation").val();
     submission_data.employment_designation_other_val = $("#employment-designation-other-val").val().trim();
+    submission_data.contact_name = $("#contact-name").val();
+    submission_data.title = $("#title").val();
+    submission_data.contact_email_address = $("#contact-email-address").val();
 
     var conditional_required_fields_okay = true;
     var error_count = 0;
@@ -142,20 +145,26 @@ var showRequiredEmploymentDesignationFields = function () {
     $("#contracting-organization").parent().hide();
     $("#employment-designation-other-val").parent().hide();
     $("#employment-designation-other-val").parent().prev('div').hide();
+    $("#contact-name").parent().parent().hide();
 
     clearField('contract-number');
     clearField('contracting-organization');
     clearField('employment-designation-other-val');
+    clearField('contact-name');
+    clearField('title');
+    clearField('contact-email-address');
 
     switch (val) {
         case "DOE Prime Contractor":
         case "DOE Sub-Contractor":
             $("#contract-number").parent().show();
             $("#contracting-organization").parent().show();
+            $("#contact-name").parent().parent().show();
             break;
         case "Other":
             $("#employment-designation-other-val").parent().show();
             $("#employment-designation-other-val").parent().prev('div').show();
+            $("#contact-name").parent().parent().show();
             break;
     }
 };
@@ -186,6 +195,19 @@ if (document.getElementById('gitlab-signup-page-identifier')) {
     $("#employment-designation").on('change', showRequiredEmploymentDesignationFields);
     // validate email
     $("#email").on('blur', function () {
+        var self = this;
+        mark_gitlab_form_field(self, BLANK_CONDITION);
+        var email_val = $(this).val().trim();
+        if (email_val) {
+            $.get(API_BASE + "validation/email?value=" + email_val, function (data) {
+                mark_gitlab_form_field(self, SUCCESS_CONDITION);
+            }, 'json').fail(function () {
+                mark_gitlab_form_field(self, ERROR_CONDITION);
+            });
+        }
+    });
+    // validate contact email
+    $("#contact-email-address").on('blur', function () {
         var self = this;
         mark_gitlab_form_field(self, BLANK_CONDITION);
         var email_val = $(this).val().trim();

@@ -71,6 +71,9 @@ public class OtherFunctions {
                     request.getParameter("contracting_organization"));
             requested_data.put("employment_designation_other_value",
                     request.getParameter("employment_designation_other_value"));
+            requested_data.put("contact_name", request.getParameter("contact_name"));
+            requested_data.put("title", request.getParameter("title"));
+            requested_data.put("contact_email_address", request.getParameter("contact_email_address"));
             return_data = sendGitlabSubmissionEmail(request.getServletContext(), requested_data);
 
             // if no error, mark success
@@ -207,7 +210,20 @@ public class OtherFunctions {
             // Contracting Organization
             email_message.append(request_data.findPath("contracting_organization").asText(""));
         }
-
+        
+        /* DOE Contact Info */
+        email_message.append("\n\n");
+        email_message.append("----- Contact at DOE (DOE Collaborator who can verify collaboration with DOE) ----- \n");
+        // Name
+        email_message.append(request_data.findPath("contact_name").asText(""));
+        email_message.append("\n");
+        // Title
+        email_message.append(request_data.findPath("title").asText(""));
+        email_message.append("\n");
+        // Email Address
+        email_message.append(request_data.findPath("contact_email_address").asText(""));
+        email_message.append("\n");
+        
         HtmlEmail email = new HtmlEmail();
         email.setHostName(Init.smtp_host);
         try {

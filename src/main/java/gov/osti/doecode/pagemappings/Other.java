@@ -43,14 +43,14 @@ public class Other extends HttpServlet {
                 session.removeAttribute("gitlab_requested");
                 String gitlab_token = RandomStringUtils.randomAscii(30);
                 session.setAttribute("gitlab-token", gitlab_token);
-                page_title = "DOECODE: Gitlab Signup";
+                page_title = "DOE CODE GitLab Repository Service Access Request";
                 template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP;
                 output_data = OtherFunctions.getOtherLists(context);
                 output_data.put("recaptcha_sitekey", Init.recaptcha_sitekey);
                 output_data.put("gitlab_token", gitlab_token);
                 break;
             case "gitlab-signup-result":
-                page_title = "DOECODE: DOE CODE Repositories Services Access Request";
+                page_title = "DOE CODE GitLab Repository Service Access Request";
                 template = TemplateUtils.TEMPLATE_GITLAB_SIGNUP_RESULT;
                 output_data = OtherFunctions.handleGitlabSubmissionForm(request);
                 session.removeAttribute("gitlab-token");
