@@ -11,7 +11,7 @@ const ABOUT_IMG_URLS = [
 
 const ABOUT_TOP_URLS = [
     '/' + APP_NAME + '/images/about/Discover-min.png', '/' + APP_NAME + '/images/about/Discover_hover-min.png',
-    '/' + APP_NAME + '/images/about/Create-min.png', '/' + APP_NAME + '/images/about/Create_hover-min.png',
+    '/' + APP_NAME + '/images/about/Develop-min.png', '/' + APP_NAME + '/images/about/Develop_hover-min.png',
     '/' + APP_NAME + '/images/about/Submit-min.png', '/' + APP_NAME + '/images/about/Submit_hover-min.png'
 ];
 
@@ -25,17 +25,6 @@ var handleAboutTopMouseEnter = function () {
 var handleAboutTopMouseLeave = function () {
     var dataNoHover = $(this).data('nohover');
     $(this).attr('src', ABOUT_TOP_URLS[parseInt(dataNoHover)]);
-};
-
-/*Handles the silly image in the center of the about page*/
-var handleAboutMouseEnter = function () {
-    var dataHover = $(this).data('hover');
-    $("#about-doecode-features").attr('src', ABOUT_IMG_URLS[parseInt(dataHover)]);
-};
-
-/*Turns about page image back to normal when you are no longer hovering over*/
-var handleAboutMouseLeave = function () {
-    $("#about-doecode-features").attr('src', ABOUT_IMG_URLS[0]);
 };
 
 /*Closes and Opens the more/less with the descriptions on the search results page*/
@@ -333,7 +322,6 @@ var pushDownloadMetric = function () {
 if (document.getElementById('about-page-identifier')) {
     /*Make the top 3 image hovers work*/
     $(".about-top-img").hover(handleAboutTopMouseEnter, handleAboutTopMouseLeave);
-    $(".about-urls-area").hover(handleAboutMouseEnter, handleAboutMouseLeave);
     /*Had to add false href's to these to pass 508 compliance. This is here to prevent the clicking from doing anything*/
     $(".about-urls-area").on('click', function (event) {
         event.preventDefault();
