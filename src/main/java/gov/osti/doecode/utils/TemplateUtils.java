@@ -29,7 +29,7 @@ public class TemplateUtils {
     // Dissemination
     public static final String TEMPLATE_HOMEPAGE = "index";
     public static final String TEMPLATE_PROJECTS_PAGE = "projects";
-    public static final String TEMPLATE_REPOSITORY_SERVICES_PAGE = "repository-service";
+    public static final String TEMPLATE_REPOSITORY_SERVICE_PAGE = "repository-service";
     public static final String TEMPLATE_ABOUT_PAGE = "about";
     public static final String TEMPLATE_POLICY_PAGE = "policy";
     public static final String TEMPLATE_RESOURCES_PAGE = "resources";
@@ -76,7 +76,7 @@ public class TemplateUtils {
 
     // Deals with the navbar
     public static final String PAGE_PROJECTS = "projects";
-    public static final String PAGE_REPOSITORY_SERVICES = "repository-service";
+    public static final String PAGE_REPOSITORY_SERVICE = "repository-service";
     public static final String PAGE_ABOUT = "about";
     public static final String PAGE_POLICY = "policy";
     public static final String PAGE_RESOURCES = "resources";
@@ -140,7 +140,7 @@ public class TemplateUtils {
                 projects.put("anchor", "nav-menu-item active-menu-item-text");
                 projects.put("span", "active-menu-item-text");
                 break;
-            case PAGE_REPOSITORY_SERVICES:
+            case PAGE_REPOSITORY_SERVICE:
                 repositoryServices.put("list_item", "nav-menu-item-special active-menu-item");
                 repositoryServices.put("anchor", "nav-menu-item active-menu-item-text");
                 repositoryServices.put("span", "active-menu-item-text");

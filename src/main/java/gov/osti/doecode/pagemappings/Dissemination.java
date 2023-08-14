@@ -60,8 +60,8 @@ public class Dissemination extends HttpServlet {
 
         } else if (remaining.equals("/repository-service")) {
             page_title = "DOE CODE: Repository Service";
-            template = TemplateUtils.TEMPLATE_REPOSITORY_SERVICES_PAGE;
-            current_page = TemplateUtils.PAGE_REPOSITORY_SERVICES;
+            template = TemplateUtils.TEMPLATE_REPOSITORY_SERVICE_PAGE;
+            current_page = TemplateUtils.PAGE_REPOSITORY_SERVICE;
 
         } else if (remaining.equals("/about")) {
             page_title = "DOE CODE: About";
