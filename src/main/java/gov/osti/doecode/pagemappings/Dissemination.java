@@ -24,7 +24,7 @@ import org.jsoup.safety.Safelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet(urlPatterns = {"/Index", "/repository-services", "/about", "/policy", "/resources", "/news", "/FAQs",
+@WebServlet(urlPatterns = {"/Index", "/repository-service", "/about", "/policy", "/resources", "/news", "/FAQs",
     "/results", "/search", "/biblio/*", "/forbidden", "/security-hosting", "/contact"})
 public class Dissemination extends HttpServlet {
 
@@ -58,8 +58,8 @@ public class Dissemination extends HttpServlet {
             template = TemplateUtils.TEMPLATE_PROJECTS_PAGE;
             current_page = TemplateUtils.PAGE_PROJECTS;
 
-        } else if (remaining.equals("/repository-services")) {
-            page_title = "DOE CODE: Repository Services";
+        } else if (remaining.equals("/repository-service")) {
+            page_title = "DOE CODE: Repository Service";
             template = TemplateUtils.TEMPLATE_REPOSITORY_SERVICES_PAGE;
             current_page = TemplateUtils.PAGE_REPOSITORY_SERVICES;
 

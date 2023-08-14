@@ -29,7 +29,7 @@ public class TemplateUtils {
     // Dissemination
     public static final String TEMPLATE_HOMEPAGE = "index";
     public static final String TEMPLATE_PROJECTS_PAGE = "projects";
-    public static final String TEMPLATE_REPOSITORY_SERVICES_PAGE = "repository-services";
+    public static final String TEMPLATE_REPOSITORY_SERVICES_PAGE = "repository-service";
     public static final String TEMPLATE_ABOUT_PAGE = "about";
     public static final String TEMPLATE_POLICY_PAGE = "policy";
     public static final String TEMPLATE_RESOURCES_PAGE = "resources";
@@ -76,7 +76,7 @@ public class TemplateUtils {
 
     // Deals with the navbar
     public static final String PAGE_PROJECTS = "projects";
-    public static final String PAGE_REPOSITORY_SERVICES = "repository-services";
+    public static final String PAGE_REPOSITORY_SERVICES = "repository-service";
     public static final String PAGE_ABOUT = "about";
     public static final String PAGE_POLICY = "policy";
     public static final String PAGE_RESOURCES = "resources";
@@ -173,7 +173,7 @@ public class TemplateUtils {
         }
 
         return_data.set("projects", projects);
-        return_data.set("repository_services", repositoryServices);
+        return_data.set("repository_service", repositoryServices);
         return_data.set("about", about);
         return_data.set("policy", policy);
         return_data.set("resources", resources);
