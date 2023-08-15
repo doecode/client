@@ -590,6 +590,12 @@ var setRequired = function (label, is_required, exclude_parenthetical_text) {
 
 var inputChange = mobx.action("Input Change", function (event) {
     var value = $(this).val();
+    if(Array.isArray(value)) {
+        value = value.map((x) => (typeof x === 'string' || x instanceof String) ? x.trim() : x)
+    }else{
+        // varibles can be type string or type object with class String, so have to check both.
+        value = (typeof value === 'string' || value instanceof String) ? value.trim() : value
+    }
     if ((['programming_languages', 'licenses', 'access_limitations',
         'affiliations', 'country_of_origin', 'project_keywords', 'organization_name',
         'award_numbers', 'br_codes', 'fwp_numbers', 'contributor_type', 'identifier_type', 'relation_type'].indexOf(event.data.field) > -1) && value && Array.isArray(value)) {
