@@ -59,32 +59,6 @@ public class SearchFunctions {
     public static ObjectNode createPostDataObj(HttpServletRequest request, long start, long rows) {
         // Get all of the data into a postable object
         ObjectNode post_data = JsonUtils.MAPPER.createObjectNode();
-        post_data.put("all_fields", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("all_fields"), ""), Safelist.basic()));
-        post_data.put("software_title", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("software_title"), ""), Safelist.basic()));
-        post_data.put("developers_contributors", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("developers_contributors"), ""), Safelist.basic()));
-        post_data.put("biblio_data", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("biblio_data"), ""), Safelist.basic()));
-        post_data.put("doi", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("doi"), ""), Safelist.basic()));
-        post_data.put("identifiers", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("identifier_numbers"), ""), Safelist.basic()));
-        post_data.put("date_earliest", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("date_earliest"), ""), Safelist.basic()));
-        post_data.put("date_latest", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("date_latest"), ""), Safelist.basic()));
-        post_data.put("start", start);
-        post_data.put("rows", rows);
-        post_data.put("sort", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("sort"), ""), Safelist.basic()));
-        post_data.put("orcid", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("orcid"), ""), Safelist.basic()));
-
-        post_data.set("project_type", handleRequestArray(request.getParameter("project_type")));
-        post_data.set("licenses", handleRequestArray(request.getParameter("licenses")));
-        post_data.put("programming_languages", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("programming_languages"), ""), Safelist.basic()));
-        post_data.put("research_organization", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("research_organization"), ""), Safelist.basic()));
-        post_data.put("sponsoring_organization", Jsoup.clean(StringUtils.defaultIfBlank(request.getParameter("sponsoring_organization"), ""), Safelist.basic()));
-        post_data.set("software_type", handleRequestArray(request.getParameter("software_type")));
-        post_data.put("show_facets", true);
-        return post_data;
-    }
-
-    public static ObjectNode createDisplayDataObj(HttpServletRequest request, long start, long rows) {
-        // Get all of the data into a postable object
-        ObjectNode post_data = JsonUtils.MAPPER.createObjectNode();
         post_data.put("all_fields", StringUtils.defaultIfBlank(request.getParameter("all_fields"), ""));
         post_data.put("software_title", StringUtils.defaultIfBlank(request.getParameter("software_title"), ""));
         post_data.put("developers_contributors", StringUtils.defaultIfBlank(request.getParameter("developers_contributors"), ""));
@@ -118,7 +92,6 @@ public class SearchFunctions {
         long rows = Long.parseLong(StringUtils.defaultIfBlank(request.getParameter("rows"), "10"));
 
         ObjectNode post_data = createPostDataObj(request, start, rows);
-        ObjectNode display_data = createDisplayDataObj(request, start, rows);
 
         ObjectNode search_result_data = JsonUtils.MAPPER.createObjectNode();
         try {
@@ -165,7 +138,7 @@ public class SearchFunctions {
         return_data.set("project_type_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_TYPE_KEY), handleRequestArray(request.getParameter("project_type"))));
         return_data.set("license_options_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY), handleRequestArray(request.getParameter("licenses"))));
         return_data.set("software_type_options_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.SOFTWARE_TYPE_KEY), handleRequestArray(request.getParameter("software_type"))));
-        return_data.set("search_description", getSearchResultsDescription(display_data));
+        return_data.set("search_description", getSearchResultsDescription(post_data));
 
         // If the search was valid, and had no errors, pull out the facet data
         if (!invalid_search_data) {
