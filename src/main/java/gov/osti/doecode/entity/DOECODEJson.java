@@ -207,16 +207,11 @@ public class DOECODEJson {
 
         // Sponsoring Orgs
         ArrayNode sponsoring_orgs = JsonUtils.createArrayNode();
-        // These two items have to be added to the top of the sponsoring org list
-        ObjectNode blank = JsonUtils.createObjectNode();
-        blank.put("name", "");
-        blank.put("code", "");
-        blank.put("status", "");
+        // This item needs added to the top of the sponsoring org list
         ObjectNode usdoe = JsonUtils.createObjectNode();
-        blank.put("name", "USDOE");
-        blank.put("code", "USDOE");
-        blank.put("status", "C");
-        sponsoring_orgs.add(blank);
+        usdoe.put("name", "USDOE");
+        usdoe.put("code", "USDOE");
+        usdoe.put("status", "C");
         sponsoring_orgs.add(usdoe);
         // Get the rest of the sponsoring org items
         ArrayNode sponsor_orgs_api = getItemFromElinkAuthority(authorityapi_base_url + "sponsor/sponsor-org-list");
