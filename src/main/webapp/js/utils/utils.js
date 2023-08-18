@@ -297,7 +297,6 @@ var modifyChosenSelectForCustomEntry = function (event) {
             if (val != null && val.trim() != "") {
                 if (!document.getElementById(related_select_id + "-custom-option")) {
                     $(related_select).prepend("<option id=" + related_select_id + "-custom-option" + " value='" + val + "'>Add: " + val + "</option>");
-
                 } else {
                     $("#" + related_select_id + "-custom-option").val(val);
                     $("#" + related_select_id + "-custom-option").html("Add: " + val);
@@ -338,7 +337,7 @@ var modifyChosenSelectForCustomEntrySingle = function (event) {
             //If we don't have an index for this in the underlying select, make it so
             if (val != null && val.trim() != "") {
                 if (!document.getElementById(related_select_id + "-custom-option")) {
-                    $(related_select).prepend("<option id=" + related_select_id + "-custom-option" + " value='" + val + "'>Add: " + val + "</option>");
+                    $(related_select).prepend("<option id=" + related_select_id + "-custom-option" + " data-iscustom='true' value='" + val + "'>Add: " + val + "</option>");
                 } else {
                     $("#" + related_select_id + "-custom-option").val(val);
                     $("#" + related_select_id + "-custom-option").html("Add: " + val);
@@ -423,9 +422,9 @@ var isSelectOption = function (select, option) {
 $("select.doecode-chosen-select:not([data-issingle=true])").each(function () {
     var self = this;
     var self_id = $(this).attr('id');
-    var allows_custom_text = ($(self).data('allowcustom') == false) ? 'No match found for:' : 'Add:';
+    var allows_custom_text = ($(self).data('allowcustom') == false) ? 'No match found for:' : '';
     //Initialize all chosen selects
-    $(this).chosen({
+    $(self).chosen({
         width: '100%',
         no_results_text: allows_custom_text,
         search_contains: true
@@ -447,8 +446,8 @@ $("select.doecode-chosen-select:not([data-issingle=true])").each(function () {
             var items_to_remove = $(self).find("option[data-iscustom='true']");
             $(items_to_remove).each(function () {
                 var item = this;
-                if (this_selects_values.indexOf($(item).val()) < 0) {
-                    var item_val = $(item).val();
+                var item_val = $(item).val();
+                if (this_selects_values.indexOf(item_val) < 0) {
                     $("#" + self_id + " option[data-iscustom='true'][value='" + item_val + "']").remove();
                 }
             });
@@ -465,26 +464,47 @@ $("select.doecode-chosen-select:not([data-issingle=true])").each(function () {
 //Chosen selects for single inputs
 $("select.doecode-chosen-select[data-issingle=true]").each(function () {
     var self = this;
+    var self_id = $(this).attr('id');
     var allows_custom_text = ($(self).data('allowcustom') == false) ? 'No match found for:' : '';
     var allow_single_deselect = $(self).data('allowsingledeselect') == true;
+    //Initialize all chosen selects
     $(self).chosen({
         width: '100%',
         no_results_text: allows_custom_text,
         search_contains: true,
         allow_single_deselect: allow_single_deselect
     });
+
+    // Chosen Select singles are not triggering OnChange on inital entry without a blank entry, for some reason
+    $(self).prepend("<option value='' title=''></option>");
+
+    //On change, if the option that was selected is the value in the custom option at the top, remove it from the custom option at the top, 
     if ($(self).data('allowcustom') == true) {
         $(self).on('change', function () {
             var custom_field = $("#" + $(self).attr('id') + "-custom-option");
             var custom_field_val = $(custom_field).val();
-            var chosen_val = $(self).val();
 
-            if (custom_field_val != chosen_val) {
-                $(custom_field).remove();
-            } else {
-                $(custom_field).html($(custom_field).val());
-                $(self).trigger('chosen:updated');
+            var chosen_val = $(self).val();
+            //If the value in the custom option field is in the array of options associated with this select, add a new option to the bottom of the list.
+            if (chosen_val == custom_field_val) {
+                $(self).append("<option value='" + custom_field_val + "' title='" + custom_field_val + "' data-iscustom='true' selected>" + custom_field_val + "</option>");
             }
+
+            //If there is an option in this select that is custom, and is no longer in this select's array of values, remove that item entirely
+            var items_to_remove = $(self).find("option[data-iscustom='true']");
+            $(items_to_remove).each(function () {
+                var item = this;
+                var item_val = $(item).val();
+                if (chosen_val != item_val) {
+                    $("#" + self_id + " option[data-iscustom='true'][value='" + item_val + "']").remove();
+                }
+            });
+
+            //Clear out the custom field and update
+            $(custom_field).val('');
+            $(custom_field).html('');
+            $(custom_field).prop('selected', false);
+            $(self).trigger('chosen:updated');
         });
     }
 });
