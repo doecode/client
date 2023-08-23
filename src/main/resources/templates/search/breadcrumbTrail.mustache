@@ -1,5 +1,5 @@
 <div class="breadcrumbTrail">
-     {{#each breadcrumbTrailItem}}
-     <span class="text-muted">{{{.}}}</span>
-     {{/each}}
+     <span class="text-muted">{{{breadcrumbTrail.homepage}}}</span>
+     <span class="text-muted">{{breadcrumbTrail.searchTerm}}{{{breadcrumbTrail.filterText}}}</span>
+     {{#breadcrumbTrail.pages}}<span class="text-muted">{{{breadcrumbTrail.pages}}}</span>{{/breadcrumbTrail.pages}}
 </div>

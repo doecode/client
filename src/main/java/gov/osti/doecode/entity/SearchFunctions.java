@@ -133,7 +133,7 @@ public class SearchFunctions {
         return_data.set("search_form_data", search_form_data);
         return_data.set("search_results_list", search_results_list);
         return_data.set("pagination_btn", getPaginationData(search_form_data, num_found));
-        return_data.set("breadcrumbTrailItem", getSearchBreadcrumbTrailList(post_data, num_found));
+        return_data.set("breadcrumbTrail", getSearchBreadcrumbTrailList(post_data, num_found));
         return_data.set("search_sort_dropdown", sort_dropdownOptions(post_data.findPath("sort").asText("")));
         return_data.set("project_type_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.PROJECT_TYPE_KEY), handleRequestArray(request.getParameter("project_type"))));
         return_data.set("license_options_list", getSearchDropdownList(DOECODEServletContextListener.getJsonList(DOECODEJson.LICENSE_KEY), handleRequestArray(request.getParameter("licenses"))));
@@ -351,7 +351,7 @@ public class SearchFunctions {
         ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
         return_data.put("displayField", displayField);
 
-        ArrayNode values_to_show = values;
+        ArrayNode values_to_show = values; 
         // If we have a display vals array, we'll through there and grab the display
         // values we actually want to show
         if (display_vals_array != null) {
@@ -665,14 +665,16 @@ public class SearchFunctions {
         return return_data;
     }
 
-    public static ArrayNode getSearchBreadcrumbTrailList(ObjectNode search_form_data, long num_found) {
-        ArrayNode return_data = JsonUtils.MAPPER.createArrayNode();
-        return_data.add("<a title='DOE CODE Homepage' href='/" + Init.app_name
+    public static ObjectNode getSearchBreadcrumbTrailList(ObjectNode search_form_data, long num_found) {
+        ObjectNode return_data = JsonUtils.MAPPER.createObjectNode();
+
+        return_data.put("homepage", "<a title='DOE CODE Homepage' href='/" + Init.app_name
                 + "/'> DOE CODE</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;");
 
         String all_fields_text = "Search for " + (StringUtils.isNotBlank(search_form_data.findPath("all_fields").asText("")) ? search_form_data.findPath("all_fields").asText("") : "All Projects");
         String filter_suffix = (getWasAnythingFilteredFor(search_form_data)) ? "<span class='search-for-filter-crumb'>&nbsp;(filtered)</span>" : "";
-        return_data.add(all_fields_text + filter_suffix);
+        return_data.put("searchTerm", all_fields_text);
+        return_data.put("filterText", filter_suffix);
 
         if (num_found > 0) {
             long start = search_form_data.findPath("start").asLong(0);
@@ -682,7 +684,7 @@ public class SearchFunctions {
             long max_pages = ((int) java.lang.Math.ceil(num_found / (double) rows));
 
             if (max_pages > 1) {
-                return_data.add("&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Page&nbsp;" + Long.toString(page) + "&nbsp;of&nbsp;" + Long.toString(max_pages) + "&nbsp;");
+                return_data.put("pages", "&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Page&nbsp;" + Long.toString(page) + "&nbsp;of&nbsp;" + Long.toString(max_pages) + "&nbsp;");
             }
         }
 
