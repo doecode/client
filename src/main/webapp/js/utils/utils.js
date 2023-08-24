@@ -475,11 +475,11 @@ $("select.doecode-chosen-select[data-issingle=true]").each(function () {
         allow_single_deselect: allow_single_deselect
     });
 
-    // Chosen Select singles are not triggering OnChange on inital entry without a blank entry, for some reason
-    $(self).prepend("<option value='' title=''></option>");
-
-    //On change, if the option that was selected is the value in the custom option at the top, remove it from the custom option at the top, 
+    // On change, if the option that was selected is the value in the custom option at the top, remove it from the custom option at the top, 
     if ($(self).data('allowcustom') == true) {
+        // Chosen Select singles are not triggering OnChange on inital entry without a blank entry, for some reason
+        $(self).prepend("<option value='' title=''></option>");
+
         $(self).on('change', function () {
             var custom_field = $("#" + $(self).attr('id') + "-custom-option");
             var custom_field_val = $(custom_field).val();
