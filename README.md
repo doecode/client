@@ -1,3 +1,8 @@
+# NOTICE:
+
+**This repository has been archived and is no longer actively maintained. Please visit [DOE CODE](https://www.osti.gov/doecode/) for more information, or for any questions, please contact [doecoderepositories@osti.gov](mailto:doecoderepositories@osti.gov).**
+
+# Client
 <p>
   This application is designed to be an optional frontend or "client" for the Department of Energy "DOE CODE" software record search and submission API. DOE sites wishing to submit data to the DOE CODE API without using the client can find documentation and information at the following link: https://www.osti.gov/doecodeapi/services/docs.
   </p>
